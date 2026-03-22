@@ -414,15 +414,17 @@ class Character:
             )
         )
 
-        # Total AC: 10 + dex_contribution + pool bonuses
-        # (armour, shield, natural, deflection, etc. go into "ac" pool)
+        # Total AC: 10 + dex_contribution + size + pool
         g.register_node(
             StatNode(
                 key="ac",
                 inputs=["ac_dex_contribution"],
                 pool_keys=["ac"],
                 compute=lambda inputs, bt: (
-                    10 + inputs["ac_dex_contribution"] + bt
+                    10
+                    + inputs["ac_dex_contribution"]
+                    + self._compute_size_mod_attack()
+                    + bt
                 ),
                 description="Armour Class",
             )

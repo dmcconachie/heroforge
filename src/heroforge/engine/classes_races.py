@@ -358,9 +358,10 @@ def apply_race(defn: RaceDefinition, character: "Character") -> None:
         pool.set_source(_RACE_SOURCE_KEY, [entry])
         character._graph.invalidate_pool(pool_key)
 
+    # --- Size ------------------------------------------------------------
+    character._race_size = defn.size
+
     # --- Base speed ------------------------------------------------------
-    # Store the race's base speed on the character for the speed node's
-    # compute delegate to pick up.
     character._race_base_speed = defn.base_speed
     character._graph.invalidate_pool("speed")
     character._graph.invalidate("speed")
@@ -376,11 +377,29 @@ def apply_race(defn: RaceDefinition, character: "Character") -> None:
             existing_subs.append(sub)
     character._race_subtypes = existing_subs
 
+    # Invalidate size-dependent stats
+    character._graph.invalidate("ac")
+    character._graph.invalidate("attack_melee")
+    character._graph.invalidate("attack_ranged")
+
     # Notify affected stats
     affected = {
-        f"{ab}_score" for ab in ("str", "dex", "con", "int", "wis", "cha")
+        f"{ab}_score"
+        for ab in (
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha",
+        )
     }
-    affected.add("speed")
+    affected |= {
+        "speed",
+        "ac",
+        "attack_melee",
+        "attack_ranged",
+    }
     character._notify(affected)
 
 
@@ -396,7 +415,8 @@ def remove_race(defn: RaceDefinition, character: "Character") -> None:
             pool.clear_source(_RACE_SOURCE_KEY)
             character._graph.invalidate_pool(pool_key)
 
-    character._race_base_speed = 30  # reset to default
+    character._race_base_speed = 30
+    character._race_size = "Medium"
     character._graph.invalidate("speed")
     character.race = ""
 

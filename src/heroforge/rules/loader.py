@@ -183,10 +183,13 @@ def _strategy_max_dex_bonus(
 
 def _strategy_ac_total(
     _decl: dict,
-    _char_ref: Character | None,
+    char_ref: Character | None,
 ) -> Callable:
     def compute(inputs: dict[str, int], bonus_total: int) -> int:
-        return 10 + inputs.get("ac_dex_contribution", 0) + bonus_total
+        size_mod = char_ref._compute_size_mod_attack() if char_ref else 0
+        return (
+            10 + inputs.get("ac_dex_contribution", 0) + size_mod + bonus_total
+        )
 
     return compute
 

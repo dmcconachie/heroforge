@@ -230,6 +230,11 @@ class SheetClass(QWidget):
             self._skill_table.setItem(i, 3, tot_item)
         self._skill_table.blockSignals(False)
 
+    def hideEvent(self, event: object) -> None:
+        """Close combo popup when tab switches."""
+        self._class_combo.hidePopup()
+        super().hideEvent(event)  # type: ignore[arg-type]
+
     def refresh(
         self,
         changed_keys: set[str] | None = None,
