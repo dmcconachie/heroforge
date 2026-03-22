@@ -96,22 +96,28 @@ def main() -> None:
     window = MainWindow()
     window.show()
 
-    # Ctrl+C handling: first Ctrl+C triggers the normal close flow (with
-    # the "unsaved changes" dialog if needed).  A second Ctrl+C within 2
-    # seconds force-terminates.
+    # Ctrl+C handling: first press schedules a close
+    # on the Qt event loop; second press within 2s
+    # force-terminates via os._exit (bypasses Qt).
     _last_sigint = [0.0]
 
     def _sigint_handler(
         signum: int,
         frame: FrameType | None,
     ) -> None:
+        import os
+
         now = time.monotonic()
         if now - _last_sigint[0] < 2.0:
             print("\nForce quit.", file=sys.stderr)
-            sys.exit(1)
+            os._exit(1)
         _last_sigint[0] = now
-        print("\nClosing… press Ctrl+C again to force quit.", file=sys.stderr)
-        window.close()
+        print(
+            "\nClosing… press Ctrl+C again to force quit.",
+            file=sys.stderr,
+        )
+        # Schedule close on the Qt event loop
+        QTimer.singleShot(0, app.quit)
 
     signal.signal(signal.SIGINT, _sigint_handler)
 

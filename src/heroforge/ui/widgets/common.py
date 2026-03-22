@@ -16,6 +16,7 @@ from __future__ import annotations
 
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtWidgets import (
+    QComboBox,
     QFrame,
     QHBoxLayout,
     QLabel,
@@ -273,3 +274,22 @@ class ToolTipButton(QPushButton):
 
     def _show_tip(self) -> None:
         QToolTip.showText(self.mapToGlobal(self.rect().bottomLeft()), self._tip)
+
+
+# ---------------------------------------------------------------------------
+# AutoCloseCombo
+# ---------------------------------------------------------------------------
+
+
+class AutoCloseCombo(QComboBox):
+    """
+    QComboBox that hides its popup on focus loss.
+
+    Standard QComboBox popups can stay open when the
+    user clicks another widget on the same tab.  This
+    subclass listens for focusOut and hides the popup.
+    """
+
+    def focusOutEvent(self, event: object) -> None:
+        self.hidePopup()
+        super().focusOutEvent(event)  # type: ignore[arg-type]

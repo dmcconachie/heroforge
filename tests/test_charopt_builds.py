@@ -764,3 +764,446 @@ class TestSkillPointBudgets:
         # Wizard: 2 skills/lvl + INT mod(4)
         # Level 2: 2+4 = 6 (no x4, not human)
         assert c.skill_points_for_level(2) == 6
+
+
+# ===================================================
+# Build 9: Half-Dragon (Red) Human Fighter 6
+# Full template: type change, +8 STR, +4 nat armor
+# ===================================================
+
+
+class TestHalfDragonFighter6:
+    """
+    Human Fighter 6 with Half-Dragon (Red) template.
+
+    Base: STR 16 DEX 12 CON 14 INT 10 WIS 10 CHA 8
+    Half-Dragon (Red): STR+8 CON+2 INT+2 CHA+2,
+      natural armor +4, type→Dragon.
+
+    Final scores: STR 24 DEX 12 CON 16 INT 12
+                  WIS 10 CHA 10
+    Expected:
+      BAB: 6
+      Fort: 5 + CON mod(3) = 8
+      Ref: 2 + DEX mod(1) = 3
+      Will: 2 + WIS mod(0) = 2
+      AC: 10 + DEX(1) + natural(4) = 15
+      HP: 6*10 + 6*CON mod(3) = 78
+      Melee: BAB(6) + STR mod(7) = 13
+    """
+
+    def setup_method(self) -> None:
+        self.state = make_state()
+        self.c = build_char(
+            self.state,
+            race="Human",
+            abilities={
+                "str": 16,
+                "dex": 12,
+                "con": 14,
+                "int": 10,
+                "wis": 10,
+                "cha": 8,
+            },
+            class_levels=[("Fighter", 6)],
+        )
+        from heroforge.engine.templates import (
+            apply_template,
+        )
+
+        tpl = self.state.template_registry.require("Half-Dragon (Red)")
+        apply_template(tpl, self.c)
+
+    def test_str_with_template(self) -> None:
+        # 16 + 8 = 24
+        assert self.c.str_score == 24
+
+    def test_con_with_template(self) -> None:
+        # 14 + 2 = 16
+        assert self.c.con_score == 16
+
+    def test_int_with_template(self) -> None:
+        # 10 + 2 = 12
+        assert self.c.int_score == 12
+
+    def test_cha_with_template(self) -> None:
+        # 8 + 2 = 10
+        assert self.c.cha_score == 10
+
+    def test_type_change(self) -> None:
+        from heroforge.engine.templates import (
+            effective_type,
+        )
+
+        assert effective_type(self.c) == "Dragon"
+
+    def test_bab(self) -> None:
+        assert self.c.bab == 6
+
+    def test_fort(self) -> None:
+        # Good Fort(6) = 5, + CON mod(3) = 8
+        assert self.c.fort == 8
+
+    def test_ac_with_natural_armor(self) -> None:
+        # 10 + DEX(1) + natural armor(4) = 15
+        assert self.c.ac == 15
+
+    def test_hp(self) -> None:
+        # 6*10 + 6*3 = 78
+        assert self.c.hp_max == 78
+
+    def test_attack_melee(self) -> None:
+        # BAB(6) + STR mod(7) = 13
+        assert self.c.get("attack_melee") == 13
+
+    def test_iteratives(self) -> None:
+        # BAB 6 → +13/+8
+        iters = self.c.attack_iteratives(melee=True)
+        assert iters == [13, 8]
+
+
+# ===================================================
+# Build 10: Vampire Human Rogue 8
+# Type change, granted feats, big stat bonuses
+# ===================================================
+
+
+class TestVampireRogue8:
+    """
+    Human Rogue 8 with Vampire template.
+
+    Base: STR 10 DEX 16 CON 12 INT 14 WIS 10 CHA 14
+    Vampire: STR+6 DEX+4 INT+2 WIS+2 CHA+4,
+      natural armor +6, type→Undead,
+      grants: Alertness, Combat Reflexes, Dodge,
+              Improved Initiative, Lightning Reflexes.
+
+    Final: STR 16 DEX 20 CON 12 INT 16 WIS 12 CHA 18
+    Expected:
+      BAB: 6
+      Fort: 2 + CON mod(1) = 3
+      Ref: 6 + DEX mod(5) = 11
+      Will: 2 + WIS mod(1) = 3
+      AC: 10 + DEX(5) + natural(6) = 21
+      HP: 8*6 + 8*CON mod(1) = 56
+      Melee: BAB(6) + STR mod(3) = 9
+    """
+
+    def setup_method(self) -> None:
+        self.state = make_state()
+        self.c = build_char(
+            self.state,
+            race="Human",
+            abilities={
+                "str": 10,
+                "dex": 16,
+                "con": 12,
+                "int": 14,
+                "wis": 10,
+                "cha": 14,
+            },
+            class_levels=[("Rogue", 8)],
+        )
+        from heroforge.engine.templates import (
+            apply_template,
+        )
+
+        tpl = self.state.template_registry.require("Vampire")
+        apply_template(tpl, self.c)
+
+    def test_str(self) -> None:
+        assert self.c.str_score == 16  # 10 + 6
+
+    def test_dex(self) -> None:
+        assert self.c.dex_score == 20  # 16 + 4
+
+    def test_cha(self) -> None:
+        assert self.c.cha_score == 18  # 14 + 4
+
+    def test_type_change(self) -> None:
+        from heroforge.engine.templates import (
+            effective_type,
+        )
+
+        assert effective_type(self.c) == "Undead"
+
+    def test_bab(self) -> None:
+        assert self.c.bab == 6
+
+    def test_ref(self) -> None:
+        # Rogue 8 Ref(good) = 6, + DEX mod(5)
+        # + Lightning Reflexes(+2) = 13
+        assert self.c.ref == 13
+
+    def test_ac(self) -> None:
+        # 10 + DEX(5) + natural(6) = 21
+        assert self.c.ac == 21
+
+    def test_hp(self) -> None:
+        # 8*6 + 8*1 = 56
+        assert self.c.hp_max == 56
+
+    def test_attack_melee(self) -> None:
+        # BAB(6) + STR mod(3) = 9
+        assert self.c.get("attack_melee") == 9
+
+    def test_granted_feats_present(self) -> None:
+        names = {f["name"] for f in self.c.feats}
+        for feat in (
+            "Alertness",
+            "Combat Reflexes",
+            "Dodge",
+            "Improved Initiative",
+            "Lightning Reflexes",
+        ):
+            assert feat in names, f"{feat} should be granted"
+
+    def test_granted_feat_source(self) -> None:
+        dodge = next(f for f in self.c.feats if f["name"] == "Dodge")
+        assert dodge.get("source") == "Vampire"
+
+    def test_improved_init_always_on(self) -> None:
+        # Improved Initiative is always-on: +4 init
+        # DEX mod(5) + 4 = 9
+        assert self.c.get("initiative") == 9
+
+    def test_lightning_reflexes_always_on(self) -> None:
+        # Lightning Reflexes: +2 Ref (always-on)
+        # Rogue 8 Ref(6) + DEX(5) + 2 = 13
+        assert self.c.ref == 13
+
+
+# ===================================================
+# Build 11: Lycanthrope (Werewolf) at levels 1-3
+# Partial template with scaling bonuses
+# ===================================================
+
+
+class TestLycanthropePartialLevels:
+    """
+    Human Fighter 4 with Lycanthrope (Werewolf)
+    at partial levels 1, 2, and 3 (max_level=3).
+
+    Base: STR 16 DEX 12 CON 14 INT 10 WIS 12 CHA 8
+    Werewolf: STR+2 CON+4 WIS+2, natural armor+2.
+
+    Scaling: int(base * level / max_level)
+      Level 1: STR+0 CON+1 WIS+0 nat+0
+      Level 2: STR+1 CON+2 WIS+1 nat+1
+      Level 3: STR+2 CON+4 WIS+2 nat+2
+    """
+
+    def _build(self, level: int) -> Character:
+        state = make_state()
+        c = build_char(
+            state,
+            race="Human",
+            abilities={
+                "str": 16,
+                "dex": 12,
+                "con": 14,
+                "int": 10,
+                "wis": 12,
+                "cha": 8,
+            },
+            class_levels=[("Fighter", 4)],
+        )
+        from heroforge.engine.templates import (
+            apply_template,
+        )
+
+        tpl = state.template_registry.require("Lycanthrope (Werewolf)")
+        apply_template(tpl, c, level=level)
+        return c
+
+    # --- Level 1: int(2*1/3)=0, int(4*1/3)=1 ---
+
+    def test_level_1_str(self) -> None:
+        c = self._build(1)
+        # int(2 * 1/3) = 0
+        assert c.str_score == 16
+
+    def test_level_1_con(self) -> None:
+        c = self._build(1)
+        # int(4 * 1/3) = 1
+        assert c.con_score == 15
+
+    def test_level_1_wis(self) -> None:
+        c = self._build(1)
+        # int(2 * 1/3) = 0
+        assert c.wis_score == 12
+
+    def test_level_1_ac(self) -> None:
+        c = self._build(1)
+        # int(2 * 1/3) = 0 natural armor
+        # 10 + DEX(1) = 11
+        assert c.ac == 11
+
+    def test_level_1_hp(self) -> None:
+        c = self._build(1)
+        # CON 15 → mod 2, 4*10 + 4*2 = 48
+        assert c.hp_max == 48
+
+    # --- Level 2: int(2*2/3)=1, int(4*2/3)=2 ---
+
+    def test_level_2_str(self) -> None:
+        c = self._build(2)
+        # int(2 * 2/3) = 1
+        assert c.str_score == 17
+
+    def test_level_2_con(self) -> None:
+        c = self._build(2)
+        # int(4 * 2/3) = 2
+        assert c.con_score == 16
+
+    def test_level_2_wis(self) -> None:
+        c = self._build(2)
+        # int(2 * 2/3) = 1
+        assert c.wis_score == 13
+
+    def test_level_2_ac(self) -> None:
+        c = self._build(2)
+        # int(2 * 2/3) = 1 natural armor
+        # 10 + DEX(1) + nat(1) = 12
+        assert c.ac == 12
+
+    def test_level_2_hp(self) -> None:
+        c = self._build(2)
+        # CON 16 → mod 3, 4*10 + 4*3 = 52
+        assert c.hp_max == 52
+
+    # --- Level 3: full bonuses ---
+
+    def test_level_3_str(self) -> None:
+        c = self._build(3)
+        assert c.str_score == 18  # +2
+
+    def test_level_3_con(self) -> None:
+        c = self._build(3)
+        assert c.con_score == 18  # +4
+
+    def test_level_3_wis(self) -> None:
+        c = self._build(3)
+        assert c.wis_score == 14  # +2
+
+    def test_level_3_ac(self) -> None:
+        c = self._build(3)
+        # 10 + DEX(1) + nat(2) = 13
+        assert c.ac == 13
+
+    def test_level_3_hp(self) -> None:
+        c = self._build(3)
+        # CON 18 → mod 4, 4*10 + 4*4 = 56
+        assert c.hp_max == 56
+
+    def test_level_3_fort(self) -> None:
+        c = self._build(3)
+        # Fighter 4 Fort(good) = 4, + CON mod(4) = 8
+        assert c.fort == 8
+
+    def test_iron_will_granted(self) -> None:
+        c = self._build(1)
+        # Granted feats apply at all levels
+        names = {f["name"] for f in c.feats}
+        assert "Iron Will" in names
+
+    def test_iron_will_will_bonus(self) -> None:
+        c = self._build(3)
+        # Fighter 4 Will(poor) = 1
+        # WIS mod(2) + Iron Will(+2) = 5
+        assert c.will == 5
+
+    def test_template_application_level(self) -> None:
+        c = self._build(2)
+        assert len(c.templates) == 1
+        assert c.templates[0].level == 2
+
+
+# ===================================================
+# Build 12: Half-Celestial Cleric 6
+# Template + class stat stacking
+# ===================================================
+
+
+class TestHalfCelestialCleric6:
+    """
+    Human Cleric 6 with Half-Celestial template.
+
+    Base: STR 14 DEX 10 CON 12 INT 10 WIS 16 CHA 14
+    Half-Celestial: STR+4 DEX+2 CON+4 INT+2 WIS+4
+                    CHA+4, natural armor+1.
+
+    Final: STR 18 DEX 12 CON 16 INT 12 WIS 20 CHA 18
+    Expected:
+      BAB: 4 (medium, 6 levels)
+      Fort: 5 + CON mod(3) = 8
+      Ref: 2 + DEX mod(1) = 3
+      Will: 5 + WIS mod(5) = 10
+      AC: 10 + DEX(1) + natural(1) = 12
+      HP: 8*6 + 6*CON mod(3) = 66
+      Melee: BAB(4) + STR mod(4) = 8
+    """
+
+    def setup_method(self) -> None:
+        self.state = make_state()
+        self.c = build_char(
+            self.state,
+            race="Human",
+            abilities={
+                "str": 14,
+                "dex": 10,
+                "con": 12,
+                "int": 10,
+                "wis": 16,
+                "cha": 14,
+            },
+            class_levels=[("Cleric", 6)],
+        )
+        from heroforge.engine.templates import (
+            apply_template,
+        )
+
+        tpl = self.state.template_registry.require("Half-Celestial")
+        apply_template(tpl, self.c)
+
+    def test_str(self) -> None:
+        assert self.c.str_score == 18
+
+    def test_wis(self) -> None:
+        assert self.c.wis_score == 20
+
+    def test_cha(self) -> None:
+        assert self.c.cha_score == 18
+
+    def test_con(self) -> None:
+        assert self.c.con_score == 16
+
+    def test_bab(self) -> None:
+        assert self.c.bab == 4
+
+    def test_fort(self) -> None:
+        assert self.c.fort == 8
+
+    def test_will(self) -> None:
+        # Cleric 6 Will(good) = 5, + WIS mod(5) = 10
+        assert self.c.will == 10
+
+    def test_ac(self) -> None:
+        # 10 + DEX(1) + natural(1) = 12
+        assert self.c.ac == 12
+
+    def test_hp(self) -> None:
+        # 6*8 + 6*3 = 66
+        assert self.c.hp_max == 66
+
+    def test_attack_melee(self) -> None:
+        assert self.c.get("attack_melee") == 8
+
+    def test_subtypes(self) -> None:
+        from heroforge.engine.templates import (
+            effective_subtypes,
+        )
+
+        subs = effective_subtypes(self.c)
+        assert "Good" in subs
+        assert "Extraplanar" in subs

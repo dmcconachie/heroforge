@@ -12,7 +12,6 @@ from typing import TYPE_CHECKING
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QComboBox,
     QGroupBox,
     QHBoxLayout,
     QHeaderView,
@@ -23,6 +22,10 @@ from PyQt6.QtWidgets import (
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
+)
+
+from heroforge.ui.widgets.common import (
+    AutoCloseCombo,
 )
 
 if TYPE_CHECKING:
@@ -67,7 +70,7 @@ class SheetClass(QWidget):
 
         # Add / Remove buttons
         btn_row = QHBoxLayout()
-        self._class_combo = QComboBox()
+        self._class_combo = AutoCloseCombo()
         self._class_combo.setMinimumWidth(120)
         self._hp_spin = QSpinBox()
         self._hp_spin.setRange(1, 12)
@@ -229,11 +232,6 @@ class SheetClass(QWidget):
             tot_item.setFlags(Qt.ItemFlag.ItemIsEnabled)
             self._skill_table.setItem(i, 3, tot_item)
         self._skill_table.blockSignals(False)
-
-    def hideEvent(self, event: object) -> None:
-        """Close combo popup when tab switches."""
-        self._class_combo.hidePopup()
-        super().hideEvent(event)  # type: ignore[arg-type]
 
     def refresh(
         self,

@@ -282,10 +282,15 @@ def apply_template(
         character._template_subtypes = existing
 
     # --- Granted feats ---------------------------------------------------
-    existing_feat_names = {f.get("name", "") for f in character.feats}
     for feat_name in defn.grants_feats:
-        if feat_name not in existing_feat_names:
-            character.feats.append({"name": feat_name, "source": defn.name})
+        # Use add_feat so always-on effects apply
+        feat_reg = getattr(character, "_feat_registry_ref", None)
+        feat_defn = feat_reg.get(feat_name) if feat_reg else None
+        character.add_feat(
+            feat_name,
+            feat_defn,
+            source=defn.name,
+        )
 
     # --- Record application ----------------------------------------------
     existing_apps = [
@@ -360,13 +365,10 @@ def remove_template(
     character._template_subtypes = existing
 
     # --- Granted feats ---------------------------------------------------
-    character.feats = [
-        f
-        for f in character.feats
-        if not (
-            f.get("source") == defn.name and f.get("name") in defn.grants_feats
-        )
-    ]
+    feat_reg = getattr(character, "_feat_registry_ref", None)
+    for feat_name in defn.grants_feats:
+        feat_defn = feat_reg.get(feat_name) if feat_reg else None
+        character.remove_feat(feat_name, feat_defn)
 
     # --- Update application list -----------------------------------------
     character.templates = [

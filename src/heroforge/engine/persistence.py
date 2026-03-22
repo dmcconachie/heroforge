@@ -199,6 +199,7 @@ def load_character(
 
     c = Character()
     c._class_registry_ref = app_state.class_registry
+    c._feat_registry_ref = app_state.feat_registry
 
     # Register skills before anything else
     register_skills_on_character(app_state.skill_registry, c)

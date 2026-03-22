@@ -113,6 +113,7 @@ class AppState:
         """Wire registries onto the character."""
         if self._loaded:
             self.character._class_registry_ref = self.class_registry
+            self.character._feat_registry_ref = self.feat_registry
             register_skills_on_character(self.skill_registry, self.character)
 
     # ------------------------------------------------------------------

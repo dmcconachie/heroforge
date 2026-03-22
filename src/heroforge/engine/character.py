@@ -212,6 +212,7 @@ class Character:
         self.levels: list[CharacterLevel] = []
         self._cached_class_levels: list[ClassLevel] = []
         self._class_registry_ref: Any = None
+        self._feat_registry_ref: Any = None
         self.race: str = ""
         self.alignment: str = ""
         self.deity: str = ""
