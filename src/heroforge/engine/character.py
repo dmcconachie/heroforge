@@ -514,6 +514,22 @@ class Character:
             )
         )
 
+        # ---- Grapple modifier ----------------------------
+        g.register_node(
+            StatNode(
+                key="grapple",
+                inputs=["bab", "str_mod"],
+                pool_keys=["grapple"],
+                compute=lambda inputs, bt: (
+                    inputs["bab"]
+                    + inputs["str_mod"]
+                    + self._compute_size_mod_grapple()
+                    + bt
+                ),
+                description="Grapple modifier",
+            )
+        )
+
         # ---- Damage (unarmed baseline — weapon damage computed in combat.py)
         g.register_node(
             StatNode(
@@ -589,6 +605,110 @@ class Character:
             "Colossal": -8,
         }
         return SIZE_ATK_MOD.get(self.size, 0)
+
+    def _compute_size_mod_grapple(self) -> int:
+        SIZE_GRAPPLE_MOD = {
+            "Fine": -16,
+            "Diminutive": -12,
+            "Tiny": -8,
+            "Small": -4,
+            "Medium": 0,
+            "Large": 4,
+            "Huge": 8,
+            "Gargantuan": 12,
+            "Colossal": 16,
+        }
+        return SIZE_GRAPPLE_MOD.get(self.size, 0)
+
+    def _compute_size_mod_hide(self) -> int:
+        SIZE_HIDE_MOD = {
+            "Fine": 16,
+            "Diminutive": 12,
+            "Tiny": 8,
+            "Small": 4,
+            "Medium": 0,
+            "Large": -4,
+            "Huge": -8,
+            "Gargantuan": -12,
+            "Colossal": -16,
+        }
+        return SIZE_HIDE_MOD.get(self.size, 0)
+
+    def carrying_capacity(
+        self,
+    ) -> tuple[int, int, int]:
+        """
+        Return (light, medium, heavy) load in lbs.
+
+        Uses the SRD Table 9-1 for STR-based carrying
+        capacity, with size multipliers for non-Medium
+        creatures.
+        """
+        # SRD carrying capacity by STR score (1-29)
+        _TABLE: list[tuple[int, int, int]] = [
+            (0, 0, 0),  # STR 0 (placeholder)
+            (3, 6, 10),  # STR 1
+            (6, 13, 20),  # STR 2
+            (10, 20, 30),  # STR 3
+            (13, 26, 40),  # STR 4
+            (16, 33, 50),  # STR 5
+            (20, 40, 60),  # STR 6
+            (23, 46, 70),  # STR 7
+            (26, 53, 80),  # STR 8
+            (30, 60, 90),  # STR 9
+            (33, 66, 100),  # STR 10
+            (38, 76, 115),  # STR 11
+            (43, 86, 130),  # STR 12
+            (50, 100, 150),  # STR 13
+            (58, 116, 175),  # STR 14
+            (66, 133, 200),  # STR 15
+            (76, 153, 230),  # STR 16
+            (86, 173, 260),  # STR 17
+            (100, 200, 300),  # STR 18
+            (116, 233, 350),  # STR 19
+            (133, 266, 400),  # STR 20
+            (153, 306, 460),  # STR 21
+            (173, 346, 520),  # STR 22
+            (200, 400, 600),  # STR 23
+            (233, 466, 700),  # STR 24
+            (266, 533, 800),  # STR 25
+            (306, 613, 920),  # STR 26
+            (346, 693, 1040),  # STR 27
+            (400, 800, 1200),  # STR 28
+            (466, 933, 1400),  # STR 29
+        ]
+        _SIZE_MULT = {
+            "Fine": 1 / 8,
+            "Diminutive": 1 / 4,
+            "Tiny": 1 / 2,
+            "Small": 3 / 4,
+            "Medium": 1,
+            "Large": 2,
+            "Huge": 4,
+            "Gargantuan": 8,
+            "Colossal": 16,
+        }
+        str_score = self.get("str_score")
+        if str_score <= 0:
+            return (0, 0, 0)
+        if str_score < len(_TABLE):
+            light, med, heavy = _TABLE[str_score]
+        else:
+            # STR > 29: ×4 per 10 above 20
+            base_idx = 20 + (str_score - 20) % 10
+            if base_idx >= len(_TABLE):
+                base_idx = 29
+            light, med, heavy = _TABLE[base_idx]
+            mult = 4 ** ((str_score - 20) // 10)
+            light *= mult
+            med *= mult
+            heavy *= mult
+        size_mult = _SIZE_MULT.get(self.size, 1)
+        return (
+            int(light * size_mult),
+            int(med * size_mult),
+            int(heavy * size_mult),
+        )
 
     # -----------------------------------------------------------------------
     # Public properties
