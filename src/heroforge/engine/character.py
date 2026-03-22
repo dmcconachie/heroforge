@@ -38,6 +38,7 @@ if TYPE_CHECKING:
     from typing import Any, Callable
 
     from heroforge.engine.bonus import BonusEntry
+    from heroforge.engine.effects import BuffDefinition
     from heroforge.engine.feats import FeatDefinition
 
 from heroforge.engine.bonus import BonusPool
@@ -73,17 +74,39 @@ ABILITY_TO_SAVE = {
 
 @dataclass
 class ClassLevel:
-    """One class entry in the character's class list."""
+    """
+    One class entry in the character's class list.
+
+    Legacy model: stores cumulative levels per class.
+    Kept for backward compatibility; new code should
+    use CharacterLevel and Character.levels instead.
+    """
 
     class_name: str
     level: int
     hp_rolls: list[int] = field(default_factory=list)
-    # bab_per_level and save_progressions are looked up from rules data;
-    # stored here as cached values once the rules registry is wired up.
-    bab_contribution: int = 0  # total BAB from this class entry
+    bab_contribution: int = 0
     fort_contribution: int = 0
     ref_contribution: int = 0
     will_contribution: int = 0
+
+
+@dataclass
+class CharacterLevel:
+    """
+    One character level (e.g. level 3 = Rogue).
+
+    Per-character-level model: each entry represents
+    exactly one level taken in a specific class.
+    """
+
+    character_level: int  # 1-based
+    class_name: str
+    hp_roll: int = 0
+    skill_ranks: dict[str, int] = field(default_factory=dict)
+    # skill_ranks stores skill points SPENT at this
+    # level (not ranks gained). For class skills
+    # 1 point = 1 rank; for cross-class 2 pts = 1 rank.
 
 
 @dataclass
@@ -186,7 +209,9 @@ class Character:
             "wis": 10,
             "cha": 10,
         }
-        self.class_levels: list[ClassLevel] = []
+        self.levels: list[CharacterLevel] = []
+        self._cached_class_levels: list[ClassLevel] = []
+        self._class_registry_ref: Any = None
         self.race: str = ""
         self.alignment: str = ""
         self.deity: str = ""
@@ -210,6 +235,7 @@ class Character:
         self._race_subtypes: list = []
 
         self.enabled_sources: list[str] = ["PHB"]
+        self.notes: str = ""
 
         # --- Equipment (simplified for now) --------------------------------
         self.equipment: dict[str, Any] = {}
@@ -502,25 +528,43 @@ class Character:
     # -----------------------------------------------------------------------
 
     def _compute_bab(self) -> int:
-        return sum(cl.bab_contribution for cl in self.class_levels)
+        reg = self._class_registry_ref
+        if reg is not None:
+            total = 0
+            for cn, lvl in self.class_level_map.items():
+                defn = reg.get(cn)
+                if defn is not None:
+                    total += defn.bab_contribution(lvl)
+            return total
+        # Fallback: use cached ClassLevel contributions
+        cached = getattr(self, "_cached_class_levels", [])
+        return sum(cl.bab_contribution for cl in cached)
 
     def _compute_base_save(self, save: str) -> int:
+        reg = self._class_registry_ref
+        method = f"{save}_contribution"
+        if reg is not None:
+            total = 0
+            for cn, lvl in self.class_level_map.items():
+                defn = reg.get(cn)
+                if defn is not None:
+                    total += getattr(defn, method)(lvl)
+            return total
         attr = f"{save}_contribution"
-        return sum(getattr(cl, attr, 0) for cl in self.class_levels)
+        cached = getattr(self, "_cached_class_levels", [])
+        return sum(getattr(cl, attr, 0) for cl in cached)
 
     def _compute_max_dex_bonus(self) -> int:
         """
-        Returns the maximum DEX bonus allowed by equipped armour.
-        -1 means no cap.  Lowest value among all equipped items wins.
-        """
+        Returns the max DEX bonus allowed by armour.
+        -1 means no cap."""
         armor_item = self.equipment.get("armor")
         if armor_item is None:
             return -1
-        cap = armor_item.get("max_dex_bonus", -1)
-        return cap
+        return armor_item.get("max_dex_bonus", -1)
 
     def _compute_hp_from_rolls(self) -> int:
-        return sum(sum(cl.hp_rolls) for cl in self.class_levels)
+        return sum(lv.hp_roll for lv in self.levels)
 
     def _compute_base_speed(self) -> int:
         # Returns the race's base speed (set by apply_race()).
@@ -549,7 +593,68 @@ class Character:
 
     @property
     def total_level(self) -> int:
-        return sum(cl.level for cl in self.class_levels)
+        return len(self.levels)
+
+    @property
+    def class_level_map(self) -> dict[str, int]:
+        """{'Fighter': 5, 'Rogue': 3} cumulative."""
+        counts: dict[str, int] = {}
+        for lv in self.levels:
+            counts[lv.class_name] = counts.get(lv.class_name, 0) + 1
+        return counts
+
+    @property
+    def class_levels(self) -> list[ClassLevel]:
+        """
+        Legacy compat: aggregate levels into
+        cumulative ClassLevel objects."""
+        counts: dict[str, int] = {}
+        hp_map: dict[str, list[int]] = {}
+        for lv in self.levels:
+            cn = lv.class_name
+            counts[cn] = counts.get(cn, 0) + 1
+            hp_map.setdefault(cn, []).append(lv.hp_roll)
+        result: list[ClassLevel] = []
+        reg = self._class_registry_ref
+        for cn, lvl in counts.items():
+            cl = ClassLevel(
+                class_name=cn,
+                level=lvl,
+                hp_rolls=hp_map.get(cn, []),
+            )
+            if reg is not None:
+                defn = reg.get(cn)
+                if defn is not None:
+                    cl.bab_contribution = defn.bab_contribution(lvl)
+                    cl.fort_contribution = defn.fort_contribution(lvl)
+                    cl.ref_contribution = defn.ref_contribution(lvl)
+                    cl.will_contribution = defn.will_contribution(lvl)
+            result.append(cl)
+        return result
+
+    @class_levels.setter
+    def class_levels(self, value: list[ClassLevel]) -> None:
+        """
+        Legacy compat: set levels from ClassLevel
+        objects (expands into per-level entries).
+        Also caches the original ClassLevel data for
+        fallback BAB/save computation without registry.
+        """
+        self._cached_class_levels = list(value)
+        new_levels: list[CharacterLevel] = []
+        idx = 1
+        for cl in value:
+            for i in range(cl.level):
+                hp = cl.hp_rolls[i] if i < len(cl.hp_rolls) else 0
+                new_levels.append(
+                    CharacterLevel(
+                        character_level=idx,
+                        class_name=cl.class_name,
+                        hp_roll=hp,
+                    )
+                )
+                idx += 1
+        self.levels = new_levels
 
     @property
     def size(self) -> str:
@@ -560,6 +665,61 @@ class Character:
     def _base_size(self) -> str:
         """Base size from race.  Defaults to Medium until race is loaded."""
         return getattr(self, "_race_size", "Medium")
+
+    def attack_iteratives(self, melee: bool = True) -> list[int]:
+        """
+        Compute iterative attack bonuses.
+
+        In 3.5e, you get extra attacks at -5 each
+        when BAB reaches +6, +11, +16.
+        Returns list like [+11, +6, +1].
+        """
+        key = "attack_melee" if melee else "attack_ranged"
+        base = self.get(key)
+        bab = self.bab
+        attacks = [base]
+        extra_bab = bab - 5
+        while extra_bab >= 1:
+            attacks.append(base - (bab - extra_bab))
+            extra_bab -= 5
+        return attacks
+
+    def multiclass_xp_penalty(self) -> bool:
+        """
+        Check if character has multiclass XP penalty.
+
+        In 3.5e, if any two non-favored, non-prestige
+        classes differ by more than 1 level, there is
+        an XP penalty.
+        """
+        clm = self.class_level_map
+        if len(clm) <= 1:
+            return False
+        # Determine favored class
+        favored: str | None = None
+        reg = self._class_registry_ref
+        if reg:
+            for cn in clm:
+                defn = reg.get(cn)
+                if defn and self.race in getattr(defn, "favored_by", []):
+                    favored = cn
+                    break
+        # "any" favored class = highest level
+        if favored is None and self.race == "Human":
+            favored = max(clm, key=lambda c: clm[c])
+        # Check non-favored, non-prestige levels
+        levels = []
+        for cn, lvl in clm.items():
+            if cn == favored:
+                continue
+            if reg:
+                defn = reg.get(cn)
+                if defn and defn.is_prestige:
+                    continue
+            levels.append(lvl)
+        if len(levels) <= 1:
+            return False
+        return max(levels) - min(levels) > 1
 
     # -----------------------------------------------------------------------
     # Ability score mutation
@@ -732,6 +892,63 @@ class Character:
     # Feat management
     # -----------------------------------------------------------------------
 
+    def _apply_feat_pool_bonuses(
+        self,
+        feat_name: str,
+        buff_defn: "BuffDefinition",
+    ) -> None:
+        """Apply an always-on feat directly to pools."""
+        pairs = buff_defn.pool_entries(0, self)
+        source_key = f"feat:{feat_name}"
+        affected: set[str] = set()
+        pool_map: dict[str, list] = {}
+        for pool_key, entry in pairs:
+            pool_map.setdefault(pool_key, []).append(entry)
+        for pool_key, entries in pool_map.items():
+            p = self._pools.get(pool_key)
+            if p is None:
+                continue
+            p.set_source(source_key, entries)
+            affected.add(pool_key)
+        invalidated: set[str] = set()
+        for pk in affected:
+            self._graph.invalidate_pool(pk)
+            for node in self._graph._nodes.values():
+                if pk in node.pool_keys:
+                    invalidated.add(node.key)
+                    invalidated.update(self._graph.dependents_of(node.key))
+        if invalidated:
+            self._notify(invalidated)
+
+    def _remove_feat_pool_bonuses(
+        self,
+        feat_name: str,
+        buff_defn: "BuffDefinition",
+    ) -> None:
+        """Remove an always-on feat's bonuses."""
+        pairs = buff_defn.pool_entries(0, self)
+        source_key = f"feat:{feat_name}"
+        affected: set[str] = set()
+        seen: set[str] = set()
+        for pool_key, _entry in pairs:
+            if pool_key in seen:
+                continue
+            seen.add(pool_key)
+            p = self._pools.get(pool_key)
+            if p is None:
+                continue
+            p.clear_source(source_key)
+            affected.add(pool_key)
+        invalidated: set[str] = set()
+        for pk in affected:
+            self._graph.invalidate_pool(pk)
+            for node in self._graph._nodes.values():
+                if pk in node.pool_keys:
+                    invalidated.add(node.key)
+                    invalidated.update(self._graph.dependents_of(node.key))
+        if invalidated:
+            self._notify(invalidated)
+
     def add_feat(
         self,
         feat_name: str,
@@ -742,17 +959,20 @@ class Character:
         """
         Add a feat to this character.
 
-        For always_on feats: immediately applies the feat's stat effects
-        as an auto-active buff (never shown in the Buffs panel).
+        For always_on feats: immediately applies the feat's
+        stat effects directly to the relevant pools (never
+        shown in the Buffs panel).
 
-        For conditional feats: registers the buff definition so it can
-        be toggled via toggle_buff().  Does NOT activate it — the user
-        does that via the Buffs panel.
+        For conditional feats: registers the buff definition
+        so it can be toggled via toggle_buff().  Does NOT
+        activate it — the user does that via the Buffs panel.
 
-        For passive feats: records the feat name only; no pool effects.
+        For passive feats: records the feat name only; no
+        pool effects.
 
-        defn: the FeatDefinition (from FeatsLoader).  If None, the feat
-              is recorded but no effects are applied.
+        defn: the FeatDefinition (from FeatsLoader).  If
+              None, the feat is recorded but no effects are
+              applied.
         """
         # Avoid duplicate feat entries
         existing = {f.get("name") for f in self.feats}
@@ -776,12 +996,7 @@ class Character:
             kind_val = kind_val.value
 
         if kind_val == "always_on" and defn.buff_definition is not None:
-            from heroforge.engine.effects import apply_buff
-
-            apply_buff(defn.buff_definition, self)
-            # Mark it as auto — not user-toggled
-            if feat_name in self._buff_states:
-                self._buff_states[feat_name].note = "auto:feat"
+            self._apply_feat_pool_bonuses(feat_name, defn.buff_definition)
 
         elif kind_val == "conditional" and defn.buff_definition is not None:
             # Register but do NOT activate — user toggles from Buffs panel
@@ -801,8 +1016,8 @@ class Character:
         """
         Remove a feat from this character.
 
-        Reverses always_on stat effects and deactivates any conditional
-        buff that was active.
+        Reverses always_on stat effects and deactivates
+        any conditional buff that was active.
         """
         self.feats = [f for f in self.feats if f.get("name") != feat_name]
 
@@ -813,12 +1028,10 @@ class Character:
         if hasattr(kind_val, "value"):
             kind_val = kind_val.value
 
-        if (
-            kind_val in ("always_on", "conditional")
-            and feat_name in self._buff_states
-        ):
+        if kind_val == "always_on" and defn.buff_definition is not None:
+            self._remove_feat_pool_bonuses(feat_name, defn.buff_definition)
+        elif kind_val == "conditional" and feat_name in self._buff_states:
             self.toggle_buff(feat_name, False)
-            # Clean up registration
             del self._buff_states[feat_name]
             self._buff_entries.pop(feat_name, None)
 
@@ -840,11 +1053,16 @@ class Character:
 
     def set_class_levels(self, levels: list[ClassLevel]) -> None:
         """
-        Replace the class level list and invalidate all derived stats.
-        Called by the character builder and rules loader.
+        Replace class levels (legacy API).
+
+        Expands ClassLevel objects into per-character-level
+        CharacterLevel entries via the class_levels setter.
         """
         self.class_levels = levels
-        # BAB, saves, and hp_max all depend on class levels
+        self._invalidate_class_stats()
+
+    def _invalidate_class_stats(self) -> None:
+        """Invalidate all stats derived from class levels."""
         self._graph.invalidate("bab")
         self._graph.invalidate("fort_save")
         self._graph.invalidate("ref_save")
@@ -861,6 +1079,78 @@ class Character:
                 "attack_ranged",
             }
         )
+
+    def add_level(self, class_name: str, hp_roll: int) -> None:
+        """Append a new character level."""
+        idx = len(self.levels) + 1
+        self.levels.append(
+            CharacterLevel(
+                character_level=idx,
+                class_name=class_name,
+                hp_roll=hp_roll,
+            )
+        )
+        self._invalidate_class_stats()
+
+    def remove_last_level(self) -> None:
+        """Remove the most recent character level."""
+        if not self.levels:
+            return
+        self.levels.pop()
+        self._invalidate_class_stats()
+
+    def set_level_class(self, char_level: int, class_name: str) -> None:
+        """Change which class a specific level uses."""
+        idx = char_level - 1
+        if 0 <= idx < len(self.levels):
+            self.levels[idx].class_name = class_name
+            self._invalidate_class_stats()
+
+    def set_level_hp(self, char_level: int, hp_roll: int) -> None:
+        """Change the HP roll for a specific level."""
+        idx = char_level - 1
+        if 0 <= idx < len(self.levels):
+            self.levels[idx].hp_roll = hp_roll
+            self._graph.invalidate("hp_max")
+            self._notify({"hp_max"})
+
+    def set_level_skill_ranks(
+        self,
+        char_level: int,
+        skill_ranks: dict[str, int],
+    ) -> None:
+        """Set skill point allocation for one level."""
+        idx = char_level - 1
+        if 0 <= idx < len(self.levels):
+            self.levels[idx].skill_ranks = skill_ranks
+            self._notify({"skills"})
+
+    def skill_points_for_level(self, char_level: int) -> int:
+        """
+        Compute skill point budget at a level.
+
+        Formula: (skills_per_level + INT_mod),
+        x4 at level 1, +1 for humans, min 1.
+        """
+        idx = char_level - 1
+        if idx < 0 or idx >= len(self.levels):
+            return 0
+        lv = self.levels[idx]
+        reg = self._class_registry_ref
+        base = 2  # default
+        if reg is not None:
+            defn = reg.get(lv.class_name)
+            if defn is not None:
+                base = defn.skills_per_level
+        int_mod = (self._ability_scores["int"] - 10) // 2
+        pts = base + int_mod
+        # Humans get +1 skill point per level
+        if self.race == "Human":
+            pts += 1
+        pts = max(pts, 1)
+        if char_level == 1:
+            pts *= 4
+        return pts
 
     # -----------------------------------------------------------------------
     # DM overrides
@@ -964,6 +1254,35 @@ class Character:
     @property
     def hp_max(self) -> int:
         return self.get("hp_max")
+
+    def validate(self) -> list[str]:
+        """
+        Check character legality.
+
+        Returns a list of issues (empty = valid).
+        """
+        issues: list[str] = []
+        if not self.race:
+            issues.append("No race selected")
+        if not self.levels:
+            issues.append("No class levels")
+        if self.multiclass_xp_penalty():
+            issues.append(
+                "Multiclass XP penalty: class levels differ by more than 1"
+            )
+        # Check skill rank caps
+        from heroforge.engine.skills import (
+            max_skill_ranks,
+        )
+
+        for skill_name, ranks in self.skills.items():
+            # Use total_level for max rank check
+            cap = max_skill_ranks(self.total_level, True)
+            if ranks > cap:
+                issues.append(
+                    f"{skill_name}: {ranks} ranks exceeds max {int(cap)}"
+                )
+        return issues
 
     def __repr__(self) -> str:
         lvl = self.total_level

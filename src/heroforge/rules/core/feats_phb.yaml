@@ -4,13 +4,16 @@
 #
 # Three feat kinds (the `kind` field):
 #
-#   always_on   : Applied automatically when the feat is taken. Never appears
-#                 in the Buffs panel — it just silently contributes to pools.
-#                 Examples: Toughness, Dodge, Lightning Reflexes.
+#   always_on   : Applied automatically when the feat is taken.
+#                 Never appears in the Buffs panel — bonuses go
+#                 directly to pools.
+#                 Examples: Toughness, Lightning Reflexes.
 #
-#   conditional : Appears in the Buffs panel alongside spells. The user
-#                 toggles it on/off per encounter or per round.
-#                 Examples: Power Attack, Combat Expertise.
+#   conditional : Appears in the Buffs panel alongside spells.
+#                 The user toggles it on/off per encounter or
+#                 per round.
+#                 Examples: Power Attack, Combat Expertise,
+#                 Dodge.
 #
 #   passive     : No stat effects at all. Exists only to open up prerequisites
 #                 (feat chains) or to gate prestige classes.
@@ -57,9 +60,9 @@ feats:
         source_label: "Toughness"
 
   - name: "Dodge"
-    kind: always_on
+    kind: conditional
     source_book: PHB
-    note: "+1 dodge bonus to AC"
+    note: "+1 dodge bonus to AC vs one opponent"
     prerequisites:
       ability: {key: dex_score, min: 13}
     effects:

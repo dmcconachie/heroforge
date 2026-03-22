@@ -18,6 +18,7 @@ from typing import TYPE_CHECKING
 from PyQt6.QtWidgets import (
     QGroupBox,
     QHBoxLayout,
+    QLabel,
     QVBoxLayout,
     QWidget,
 )
@@ -118,6 +119,12 @@ class Sheet1Summary(QWidget):
         atk_layout.addWidget(self._ranged_field)
         atk_layout.addWidget(self._damage_field)
         center.addWidget(atk_box)
+
+        # Warnings / validation
+        self._warnings = QLabel("")
+        self._warnings.setWordWrap(True)
+        self._warnings.setStyleSheet("color: #b71c1c; font-size: 11px;")
+        center.addWidget(self._warnings)
         center.addStretch()
 
         # ── Right column — Buffs ─────────────────────────────────────────
@@ -169,10 +176,20 @@ class Sheet1Summary(QWidget):
         # Combat
         self._combat.refresh(c)
 
-        # Attacks
-        self._melee_field.value = _signed(c.get("attack_melee"))
-        self._ranged_field.value = _signed(c.get("attack_ranged"))
+        # Attacks (with iteratives)
+        iters = c.attack_iteratives(melee=True)
+        self._melee_field.value = "/".join(_signed(a) for a in iters)
+        iters_r = c.attack_iteratives(melee=False)
+        self._ranged_field.value = "/".join(_signed(a) for a in iters_r)
         self._damage_field.value = _signed(c.get("damage_str_bonus"))
+
+        # Warnings
+        warnings = c.validate()
+        chk = self._state.prereq_checker
+        if chk is not None:
+            for prc, _details in chk.ongoing_violations(c):
+                warnings.append(f"{prc}: ongoing prereq unmet")
+        self._warnings.setText("\n".join(warnings) if warnings else "")
 
     # ------------------------------------------------------------------
     # Slots

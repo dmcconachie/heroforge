@@ -494,10 +494,11 @@ class TestFeatsLoader:
         assert "Power Attack" in names
         assert "Toughness" in names
 
-    def test_always_on_feats_have_buff_definition(self) -> None:
+    def test_always_on_feats_have_buff_definition(
+        self,
+    ) -> None:
         feat_reg, _, _ = loaded_registries()
         for feat_name in (
-            "Dodge",
             "Toughness",
             "Iron Will",
             "Lightning Reflexes",
@@ -552,11 +553,10 @@ class TestFeatsLoader:
         avail, _ = prereq_chk.feat_availability("Precise Shot", c)
         assert avail == FeatAvailability.AVAILABLE
 
-    def test_always_on_buffs_registered_in_buff_registry(self) -> None:
+    def test_always_on_feats_not_in_buff_registry(self) -> None:
         _, _, buff_reg = loaded_registries()
-        assert "Dodge" in buff_reg
-        assert "Toughness" in buff_reg
-        assert "Iron Will" in buff_reg
+        assert "Toughness" not in buff_reg
+        assert "Iron Will" not in buff_reg
 
     def test_conditional_buffs_registered_in_buff_registry(self) -> None:
         _, _, buff_reg = loaded_registries()
@@ -601,10 +601,10 @@ class TestCharacterAddRemoveFeat:
 
     def test_add_always_on_feat_applies_bonus(self) -> None:
         c = fresh_char()
-        base_ac = c.ac
+        base_will = c.will
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Dodge", feat_reg.require("Dodge"))
-        assert c.ac == base_ac + 1
+        c.add_feat("Iron Will", feat_reg.require("Iron Will"))
+        assert c.will == base_will + 2
 
     def test_add_toughness_increases_hp(self) -> None:
         c = fighter(4)
@@ -631,12 +631,12 @@ class TestCharacterAddRemoveFeat:
 
     def test_add_always_on_feat_twice_no_duplicate(self) -> None:
         c = fresh_char()
-        base_ac = c.ac
+        base_will = c.will
         feat_reg, _, _ = loaded_registries()
-        defn = feat_reg.require("Dodge")
-        c.add_feat("Dodge", defn)
-        c.add_feat("Dodge", defn)  # second add should be no-op
-        assert c.ac == base_ac + 1
+        defn = feat_reg.require("Iron Will")
+        c.add_feat("Iron Will", defn)
+        c.add_feat("Iron Will", defn)  # no-op
+        assert c.will == base_will + 2
 
     def test_add_conditional_feat_registers_buff_not_activated(self) -> None:
         c = fighter(6)
@@ -647,13 +647,13 @@ class TestCharacterAddRemoveFeat:
 
     def test_remove_always_on_feat_reverts_bonus(self) -> None:
         c = fresh_char()
-        base_ac = c.ac
+        base_will = c.will
         feat_reg, _, _ = loaded_registries()
-        defn = feat_reg.require("Dodge")
-        c.add_feat("Dodge", defn)
-        assert c.ac == base_ac + 1
-        c.remove_feat("Dodge", defn)
-        assert c.ac == base_ac
+        defn = feat_reg.require("Iron Will")
+        c.add_feat("Iron Will", defn)
+        assert c.will == base_will + 2
+        c.remove_feat("Iron Will", defn)
+        assert c.will == base_will
 
     def test_remove_toughness_reverts_hp(self) -> None:
         c = fighter(4)
@@ -664,7 +664,61 @@ class TestCharacterAddRemoveFeat:
         c.remove_feat("Toughness", defn)
         assert c.hp_max == base_hp
 
-    def test_remove_feat_removes_from_feats_list(self) -> None:
+    def test_always_on_feat_not_in_buff_states(self) -> None:
+        c = fresh_char()
+        feat_reg, _, _ = loaded_registries()
+        defn = feat_reg.require("Iron Will")
+        c.add_feat("Iron Will", defn)
+        assert "Iron Will" not in c._buff_states
+
+    def test_always_on_feat_uses_pool_source(self) -> None:
+        c = fresh_char()
+        feat_reg, _, _ = loaded_registries()
+        defn = feat_reg.require("Iron Will")
+        c.add_feat("Iron Will", defn)
+        pool = c.get_pool("will_save")
+        assert pool is not None
+        assert "feat:Iron Will" in pool._sources
+
+    def test_remove_always_on_clears_pool_source(
+        self,
+    ) -> None:
+        c = fresh_char()
+        feat_reg, _, _ = loaded_registries()
+        defn = feat_reg.require("Iron Will")
+        c.add_feat("Iron Will", defn)
+        c.remove_feat("Iron Will", defn)
+        pool = c.get_pool("will_save")
+        assert pool is not None
+        assert "feat:Iron Will" not in pool._sources
+
+    def test_dodge_is_conditional(self) -> None:
+        feat_reg, _, _ = loaded_registries()
+        defn = feat_reg.require("Dodge")
+        assert defn.kind == FeatKind.CONDITIONAL
+
+    def test_dodge_requires_toggle_for_bonus(self) -> None:
+        c = fresh_char()
+        base_ac = c.ac
+        feat_reg, _, _ = loaded_registries()
+        defn = feat_reg.require("Dodge")
+        c.add_feat("Dodge", defn)
+        # Not activated yet — AC unchanged
+        assert c.ac == base_ac
+        # Toggle on
+        c.toggle_buff("Dodge", True)
+        assert c.ac == base_ac + 1
+        # Toggle off
+        c.toggle_buff("Dodge", False)
+        assert c.ac == base_ac
+
+    def test_dodge_in_buff_registry(self) -> None:
+        _, _, buff_reg = loaded_registries()
+        assert "Dodge" in buff_reg
+
+    def test_remove_feat_removes_from_feats_list(
+        self,
+    ) -> None:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Point Blank Shot")
@@ -821,8 +875,8 @@ class TestMultipleAlwaysOnFeats:
         assert c.fort == base_fort + 2
         assert c.ref == base_ref + 2
 
-    def test_two_dodge_feats_stack(self) -> None:
-        """Dodge and Improved Initiative are untyped — both apply."""
+    def test_dodge_and_improved_initiative(self) -> None:
+        """Dodge (conditional) + Improved Init (always-on)."""
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         base_ac = c.ac
@@ -830,11 +884,17 @@ class TestMultipleAlwaysOnFeats:
 
         c.add_feat("Dodge", feat_reg.require("Dodge"))
         c.add_feat(
-            "Improved Initiative", feat_reg.require("Improved Initiative")
+            "Improved Initiative",
+            feat_reg.require("Improved Initiative"),
         )
 
-        assert c.ac == base_ac + 1
+        # Dodge not toggled — AC unchanged
+        assert c.ac == base_ac
+        # Improved Initiative always-on — +4
         assert c.get("initiative") == base_init + 4
+        # Toggle Dodge on
+        c.toggle_buff("Dodge", True)
+        assert c.ac == base_ac + 1
 
     def test_three_toughness_feats_stack(self) -> None:
         """Three Toughness feats (different sources) — untyped HP all stack."""

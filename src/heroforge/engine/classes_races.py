@@ -32,7 +32,12 @@ from typing import TYPE_CHECKING
 from heroforge.engine.bonus import BonusEntry, BonusType
 
 if TYPE_CHECKING:
-    from heroforge.engine.character import Character, ClassLevel
+    from typing import Any
+
+    from heroforge.engine.character import (
+        Character,
+        ClassLevel,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -143,6 +148,11 @@ class ClassDefinition:
     spellcasting: SpellcastingInfo | None = None
     class_features: list[ClassFeature] = field(default_factory=list)
     favored_by: list[str] = field(default_factory=list)
+    # Prestige class fields
+    max_level: int = 20
+    is_prestige: bool = False
+    entry_prerequisites: Any = None
+    ongoing_prerequisites: Any = None
 
     def bab_contribution(self, level: int) -> int:
         return bab_at_level(self.bab_progression, level)
@@ -450,6 +460,8 @@ def build_class_from_yaml(decl: dict) -> ClassDefinition:
         spellcasting=spellcasting,
         class_features=features,
         favored_by=decl.get("favored_by", []),
+        max_level=int(decl.get("max_level", 20)),
+        is_prestige=bool(decl.get("is_prestige", False)),
     )
 
 

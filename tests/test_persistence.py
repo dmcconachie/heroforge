@@ -78,8 +78,8 @@ def fighter_char(app_state: AppState) -> Character:
     c.set_ability_score("cha", 8)
 
     # Add a feat
-    dodge_defn = app_state.feat_registry.require("Dodge")
-    c.add_feat("Dodge", dodge_defn)
+    iw_defn = app_state.feat_registry.require("Iron Will")
+    c.add_feat("Iron Will", iw_defn)
 
     # Set some skills
     set_skill_ranks(c, "Climb", 6)
@@ -277,11 +277,14 @@ class TestLoadCharacter:
     def test_always_on_feat_effect_restored(self, tmp_path: Path) -> None:
         state = make_app_state()
         c = state.character
-        c.add_feat("Dodge", state.feat_registry.require("Dodge"))
-        base_ac = c.ac
+        c.add_feat(
+            "Iron Will",
+            state.feat_registry.require("Iron Will"),
+        )
+        will_with_feat = c.will
         loaded, new_state = self._save_and_load(tmp_path, c)
-        # Dodge (+1 dodge AC) should be re-applied
-        assert loaded.ac == base_ac
+        # Iron Will (+2 will) should be re-applied
+        assert loaded.will == will_with_feat
 
     def test_skill_ranks_restored(self, tmp_path: Path) -> None:
         state = make_app_state()
@@ -347,7 +350,7 @@ class TestLoadCharacter:
         """Unknown race name sets race but doesn't crash."""
         path = tmp_path / "unknown_race.char.yaml"
         path.write_text(
-            "meta:\n  version: '1'\n"
+            "meta:\n  version: '2'\n"
             "identity:\n  name: Test\n"
             "  race: Githzerai\n"
             "  alignment: ''\n  deity: ''\n"
@@ -367,7 +370,7 @@ class TestLoadCharacter:
         """A buff from a splatbook not loaded should round-trip cleanly."""
         path = tmp_path / "splatbook.char.yaml"
         path.write_text(
-            "meta:\n  version: '1'\n"
+            "meta:\n  version: '2'\n"
             "identity:\n  name: X\n"
             "  race: Human\n"
             "  alignment: ''\n  deity: ''\n"

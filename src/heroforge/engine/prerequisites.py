@@ -204,11 +204,7 @@ class ClassLevelPrereq(Prerequisite):
         character: Character,
         checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
-        have = sum(
-            cl.level
-            for cl in character.class_levels
-            if cl.class_name == self.class_name
-        )
+        have = character.class_level_map.get(self.class_name, 0)
         if have >= self.min_level:
             return PrereqResult.MET, []
         return PrereqResult.UNMET, [
@@ -592,7 +588,7 @@ class CapabilityChecker:
           2. Martial weapon → martial classes, or racial familiarity
           3. Exotic weapon → EWP feat, racial familiarity, or class grant
         """
-        class_names = {cl.class_name for cl in character.class_levels}
+        class_names = set(character.class_level_map)
         race = getattr(character, "race", "")
         feat_names = {
             f.get("name", "") for f in getattr(character, "feats", [])
@@ -667,10 +663,8 @@ class CapabilityChecker:
         PARTIAL_ARCANE = {"Beguiler", "Dread Necromancer"}
         PARTIAL_DIVINE = {"Paladin", "Ranger", "Blackguard"}
 
-        class_names = {cl.class_name for cl in character.class_levels}
-        class_level_map = {
-            cl.class_name: cl.level for cl in character.class_levels
-        }
+        class_level_map = character.class_level_map
+        class_names = set(class_level_map)
 
         def highest_spell_level(
             caster_class: str, partial: bool = False
@@ -742,9 +736,7 @@ class CapabilityChecker:
         Feature presence is derived from class levels.  The min_value
         string is used for graduated features (e.g. sneak_attack "2d6").
         """
-        class_level_map = {
-            cl.class_name: cl.level for cl in character.class_levels
-        }
+        class_level_map = character.class_level_map
 
         if feature == "sneak_attack":
             # Rogue: 1d6 at level 1, +1d6 every 2 levels
@@ -761,9 +753,8 @@ class CapabilityChecker:
                 return sneak_dice >= 1
 
         if feature == "turn_undead":
-            return any(
-                cl.class_name in {"Cleric", "Paladin", "Favored Soul"}
-                for cl in character.class_levels
+            return bool(
+                class_level_map.keys() & {"Cleric", "Paladin", "Favored Soul"}
             )
 
         if feature == "wild_shape":
@@ -995,9 +986,7 @@ class PrerequisiteChecker:
             return FeatAvailability.OVERRIDE, []
 
         # Already entered?
-        already_in = any(
-            cl.class_name == prc_name for cl in character.class_levels
-        )
+        already_in = prc_name in character.class_level_map
         if already_in:
             return FeatAvailability.TAKEN, []
 
@@ -1039,10 +1028,7 @@ class PrerequisiteChecker:
         for prc_name, (_, ongoing) in self._prc_prereqs.items():
             if ongoing is None:
                 continue
-            already_in = any(
-                cl.class_name == prc_name for cl in character.class_levels
-            )
-            if not already_in:
+            if prc_name not in character.class_level_map:
                 continue
             result, details = self.check(ongoing, character, prc_name)
             if result == PrereqResult.UNMET:
@@ -1142,7 +1128,11 @@ def build_prereq_from_yaml(decl: dict[str, Any]) -> Prerequisite | None:
 
     if "skill" in decl:
         s = decl["skill"]
-        return SkillPrereq(skill_name=s["name"], min_ranks=s["min_ranks"])
+        min_ranks = s.get("min_ranks", s.get("min", 0))
+        return SkillPrereq(
+            skill_name=s["name"],
+            min_ranks=min_ranks,
+        )
 
     if "class_level" in decl:
         c = decl["class_level"]

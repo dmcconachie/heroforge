@@ -238,11 +238,10 @@ def gather(character: "Character", app_state: "AppState") -> SheetData:
 
 
 def _class_summary(character: "Character") -> str:
-    if not character.class_levels:
+    clm = character.class_level_map
+    if not clm:
         return "—"
-    return " / ".join(
-        f"{cl.class_name} {cl.level}" for cl in character.class_levels
-    )
+    return " / ".join(f"{cn} {lvl}" for cn, lvl in clm.items())
 
 
 def _race_size(character: "Character", app_state: "AppState") -> str:
@@ -255,8 +254,8 @@ def _class_skill_names(
     app_state: "AppState",
 ) -> set[str]:
     names: set[str] = set()
-    for cl in character.class_levels:
-        defn = app_state.class_registry.get(cl.class_name)
+    for cn in character.class_level_map:
+        defn = app_state.class_registry.get(cn)
         if defn:
             names.update(defn.class_skills)
     return names

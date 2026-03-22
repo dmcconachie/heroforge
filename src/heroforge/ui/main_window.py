@@ -7,8 +7,8 @@ Tabs:
   1. Summary  — abilities, combat stats, identity, buffs
   2. Skills   — full skill table
   3. Feats    — taken feats, feat picker
-  (4. Spells  — future)
-  (5. Equipment — future)
+  4. Spells   — spell buff toggles
+  5. Equipment — equipment slots table
 
 The MainWindow owns an AppState and passes it to each sheet.  When the
 character's ChangeNotifier fires, MainWindow routes the changed keys to
@@ -21,11 +21,9 @@ import contextlib
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QKeySequence
 from PyQt6.QtWidgets import (
     QFileDialog,
-    QLabel,
     QMainWindow,
     QMessageBox,
     QStatusBar,
@@ -38,6 +36,11 @@ from heroforge.ui.app_state import AppState
 from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
 from heroforge.ui.sheets.sheet2_skills import Sheet2Skills
 from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
+from heroforge.ui.sheets.sheet_class import SheetClass
+from heroforge.ui.sheets.sheet_equipment import SheetEquipment
+from heroforge.ui.sheets.sheet_notes import SheetNotes
+from heroforge.ui.sheets.sheet_race import SheetRace
+from heroforge.ui.sheets.sheet_spells import SheetSpells
 
 if TYPE_CHECKING:
     from PyQt6.QtGui import QCloseEvent
@@ -132,17 +135,6 @@ class MainWindow(QMainWindow):
         quit_action.triggered.connect(self.close)
         file_menu.addAction(quit_action)
 
-        # ── Character ───────────────────────────────────────────────────
-        char_menu = menubar.addMenu("&Character")
-
-        race_action = QAction("Set &Race…", self)
-        race_action.triggered.connect(self._on_set_race)
-        char_menu.addAction(race_action)
-
-        class_action = QAction("Set &Class Levels…", self)
-        class_action.triggered.connect(self._on_set_class_levels)
-        char_menu.addAction(class_action)
-
     # ------------------------------------------------------------------
     # UI
     # ------------------------------------------------------------------
@@ -157,20 +149,30 @@ class MainWindow(QMainWindow):
         self._tabs.setTabPosition(QTabWidget.TabPosition.North)
         self._tabs.setDocumentMode(True)
 
+        # Tab 0
         self._sheet1 = Sheet1Summary(self._state)
         self._tabs.addTab(self._sheet1, "Summary")
-
+        # Tab 1
+        self._race_tab = SheetRace(self._state)
+        self._tabs.addTab(self._race_tab, "Race")
+        # Tab 2
+        self._class_tab = SheetClass(self._state)
+        self._tabs.addTab(self._class_tab, "Class")
+        # Tab 3
         self._sheet2 = Sheet2Skills(self._state)
         self._tabs.addTab(self._sheet2, "Skills")
-
+        # Tab 4
         self._sheet3 = Sheet3Feats(self._state)
         self._tabs.addTab(self._sheet3, "Feats")
-
-        for name in ("Spells", "Equipment", "Notes"):
-            placeholder = QLabel(f"{name} — coming soon")
-            placeholder.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            placeholder.setStyleSheet("color: #aaa; font-size: 14px;")
-            self._tabs.addTab(placeholder, name)
+        # Tab 5
+        self._spells_tab = SheetSpells(self._state)
+        self._tabs.addTab(self._spells_tab, "Spells")
+        # Tab 6
+        self._equipment_tab = SheetEquipment(self._state)
+        self._tabs.addTab(self._equipment_tab, "Equipment")
+        # Tab 7
+        self._notes_tab = SheetNotes(self._state)
+        self._tabs.addTab(self._notes_tab, "Notes")
 
         layout.addWidget(self._tabs)
         self._tabs.currentChanged.connect(self._on_tab_changed)
@@ -190,6 +192,10 @@ class MainWindow(QMainWindow):
         if current == 0:
             self._sheet1.refresh()
         elif current == 1:
+            self._race_tab.refresh(changed_keys)
+        elif current == 2:
+            self._class_tab.refresh(changed_keys)
+        elif current == 3:
             ability_keys = {
                 k
                 for k in changed_keys
@@ -199,7 +205,7 @@ class MainWindow(QMainWindow):
                 k.startswith("skill_") for k in changed_keys
             ):
                 self._sheet2.refresh_totals()
-        elif current == 2:
+        elif current == 4:
             self._sheet3.refresh()
 
     # ------------------------------------------------------------------
@@ -210,9 +216,19 @@ class MainWindow(QMainWindow):
         if index == 0:
             self._sheet1.refresh()
         elif index == 1:
-            self._sheet2.refresh()
+            self._race_tab.refresh()
         elif index == 2:
+            self._class_tab.refresh()
+        elif index == 3:
+            self._sheet2.refresh()
+        elif index == 4:
             self._sheet3.refresh()
+        elif index == 5:
+            self._spells_tab.refresh()
+        elif index == 6:
+            self._equipment_tab.refresh()
+        elif index == 7:
+            self._notes_tab.refresh()
 
     # ------------------------------------------------------------------
     # File menu handlers
@@ -292,35 +308,6 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(self, "Save Failed", str(exc))
 
     # ------------------------------------------------------------------
-    # Character menu handlers
-    # ------------------------------------------------------------------
-
-    def _on_set_race(self) -> None:
-        from heroforge.ui.dialogs.race_dialog import RaceDialog
-
-        dlg = RaceDialog(self._state, self)
-        if dlg.exec():
-            self._sheet1.refresh()
-            self._sheet2.refresh_totals()
-            self._mark_modified()
-            self._update_title()
-            self._status.showMessage(
-                f"Race set to {self._state.character.race}", 3000
-            )
-
-    def _on_set_class_levels(self) -> None:
-        from heroforge.ui.dialogs.class_dialog import ClassDialog
-
-        dlg = ClassDialog(self._state, self)
-        if dlg.exec():
-            self._sheet1.refresh()
-            self._sheet2.refresh()
-            self._sheet3.refresh()
-            self._mark_modified()
-            self._update_title()
-            self._status.showMessage("Class levels updated", 3000)
-
-    # ------------------------------------------------------------------
     # Close guard
     # ------------------------------------------------------------------
 
@@ -373,9 +360,13 @@ class MainWindow(QMainWindow):
             self._state.character.on_change.unsubscribe(self._on_stats_changed)
 
     def _rebuild_sheets(self) -> None:
-        """Rebuild buff panel (holds character ref) and refresh all sheets."""
-        # Replace buff panel in sheet1 with new character reference
+        """Refresh all sheet tabs after character change."""
         self._sheet1._buff_panel.refresh(self._state.character)
         self._sheet1.refresh()
+        self._race_tab.refresh()
+        self._class_tab.refresh()
         self._sheet2.refresh()
         self._sheet3.refresh()
+        self._spells_tab.refresh()
+        self._equipment_tab.refresh()
+        self._notes_tab.refresh()

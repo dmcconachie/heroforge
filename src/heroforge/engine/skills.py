@@ -28,6 +28,9 @@ if TYPE_CHECKING:
     from typing import Callable
 
     from heroforge.engine.character import Character
+    from heroforge.engine.classes_races import (
+        ClassDefinition,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -236,6 +239,128 @@ def set_skill_ranks(
 
     character._graph.invalidate_pool(defn.key)
     character._notify({defn.key})
+
+
+def compute_skill_budget(
+    skills_per_level: int,
+    int_mod: int,
+    char_level: int,
+    is_human: bool = False,
+) -> int:
+    """
+    Compute skill points available at a level.
+
+    Formula: (skills_per_level + INT_mod + human_bonus),
+    x4 at character level 1, min 1.
+    """
+    pts = skills_per_level + int_mod
+    if is_human:
+        pts += 1
+    pts = max(pts, 1)
+    if char_level == 1:
+        pts *= 4
+    return pts
+
+
+def max_skill_ranks(char_level: int, is_class_skill: bool) -> float:
+    """
+    Max ranks in a skill at a given character level.
+
+    Class skill: char_level + 3.
+    Cross-class: (char_level + 3) / 2.
+    """
+    cap = char_level + 3
+    if not is_class_skill:
+        return cap / 2.0
+    return float(cap)
+
+
+def validate_skill_allocation(
+    character: "Character",
+    char_level: int,
+    skill_ranks: dict[str, int],
+    class_defn: "ClassDefinition | None" = None,
+) -> list[str]:
+    """
+    Validate skill point spending for one level.
+
+    Returns a list of error strings (empty = valid).
+    """
+    errors: list[str] = []
+    # Compute budget
+    reg = character._class_registry_ref
+    lv = character.levels[char_level - 1]
+    spl = 2
+    if class_defn is not None:
+        spl = class_defn.skills_per_level
+    elif reg is not None:
+        defn = reg.get(lv.class_name)
+        if defn is not None:
+            spl = defn.skills_per_level
+    int_mod = (character._ability_scores["int"] - 10) // 2
+    is_human = character.race == "Human"
+    budget = compute_skill_budget(spl, int_mod, char_level, is_human)
+    spent = sum(skill_ranks.values())
+    if spent > budget:
+        errors.append(f"Spent {spent} of {budget} points")
+    # Check max ranks per skill
+    class_skills: set[str] = set()
+    if class_defn is not None:
+        class_skills = set(class_defn.class_skills)
+    elif reg is not None:
+        defn = reg.get(lv.class_name)
+        if defn is not None:
+            class_skills = set(defn.class_skills)
+    for skill_name, pts in skill_ranks.items():
+        is_cs = skill_name in class_skills
+        cap = max_skill_ranks(char_level, is_cs)
+        # Compute total ranks up to this level
+        total = pts
+        for prev_lv in character.levels[: char_level - 1]:
+            total += prev_lv.skill_ranks.get(skill_name, 0)
+        if not is_cs:
+            total = total / 2.0
+        if total > cap:
+            errors.append(f"{skill_name}: {total} exceeds max {cap}")
+    return errors
+
+
+def recompute_skills_from_levels(
+    character: "Character",
+) -> None:
+    """
+    Recompute character.skills from all levels.
+
+    Sums skill_ranks across all CharacterLevel entries,
+    applying class/cross-class conversion, and updates
+    the skill pools accordingly.
+    """
+    totals: dict[str, int] = {}
+    for lv in character.levels:
+        for skill_name, pts in lv.skill_ranks.items():
+            totals[skill_name] = totals.get(skill_name, 0) + pts
+    # Update character.skills and pools
+    skill_reg: SkillRegistry | None = getattr(
+        character, "_skill_registry", None
+    )
+    character.skills = {}
+    for skill_name, pts in totals.items():
+        character.skills[skill_name] = pts
+        if skill_reg is not None:
+            defn = skill_reg.get(skill_name)
+            if defn is not None:
+                pool = character.get_pool(defn.key)
+                if pool is not None:
+                    if pts > 0:
+                        entry = BonusEntry(
+                            value=pts,
+                            bonus_type=BonusType.UNTYPED,
+                            source=f"{skill_name} (ranks)",
+                        )
+                        pool.set_source("ranks", [entry])
+                    else:
+                        pool.clear_source("ranks")
+                    character._graph.invalidate_pool(defn.key)
 
 
 def compute_skill_total(

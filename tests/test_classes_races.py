@@ -395,7 +395,7 @@ class TestClassesLoader:
 
         with open(RULES_DIR / "core" / "classes.yaml") as f:
             data = yaml.safe_load(f)
-        expected = len(data["classes"])
+        expected = len(data["classes"]) + len(data.get("prestige_classes", []))
         reg = ClassRegistry()
         ClassesLoader(RULES_DIR).load(reg)
         assert len(reg) == expected

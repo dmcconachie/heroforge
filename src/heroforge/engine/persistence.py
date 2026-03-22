@@ -3,65 +3,29 @@ heroforge/engine/persistence.py
 --------------------------------
 Save and load Character objects as human-readable YAML files.
 
-Format (.char.yaml):
+Format (.char.yaml) — version 2:
+
   meta:
-    version: "1"
-    name: "Farzin bin Gira"
-    created: "2024-01-15"
-    modified: "2024-01-20"
+    version: "2"
 
-  identity:
-    name: "Farzin bin Gira"
-    player: "Dale"
-    race: "Human"
-    alignment: "lawful_good"
-    deity: "St. Cuthbert"
+  levels:
+    - level: 1
+      class: Fighter
+      hp_roll: 10
+      skill_ranks: {Climb: 4, Jump: 4}
+    - level: 2
+      class: Fighter
+      hp_roll: 8
 
-  ability_scores:
-    str: 16
-    dex: 14
-    con: 14
-    int: 12
-    wis: 10
-    cha: 8
-
-  class_levels:
+  class_levels:   # legacy summary (read-only)
     - class: Fighter
-      level: 8
-      hp_rolls: [10, 8, 7, 9, 6, 10, 8, 7]
-      bab: 8
-      fort: 6
-      ref: 2
-      will: 2
+      level: 2
 
-  feats:
-    - name: "Power Attack"
-    - name: "Cleave"
-    - name: "Dodge"
-      source: "template:Half-Celestial"
+  skills:         # total ranks summary
+    Climb: 4
+    Jump: 4
 
-  skills:
-    Climb: 8
-    Jump: 6
-    Swim: 4
-
-  buffs:
-    - name: "Bless"
-      active: false
-      caster_level: null
-    - name: "Power Attack"
-      active: false
-      parameter: 3
-
-  templates:
-    - template: "Half-Celestial"
-      level: 0
-
-  dm_overrides:
-    - target: "Improved Precise Shot"
-      note: "Campaign rule exception"
-
-  equipment: {}
+Version 1 files are auto-migrated on load.
 
 Public API:
   save_character(character, path)   — write .char.yaml
@@ -81,10 +45,11 @@ if TYPE_CHECKING:
     from heroforge.engine.character import (
         BuffState,
         Character,
+        CharacterLevel,
     )
     from heroforge.ui.app_state import AppState
 
-SCHEMA_VERSION = "1"
+SCHEMA_VERSION = "2"
 
 
 # ---------------------------------------------------------------------------
@@ -131,6 +96,8 @@ def _character_to_dict(c: "Character") -> dict:
             ab: c._ability_scores.get(ab, 10)
             for ab in ("str", "dex", "con", "int", "wis", "cha")
         },
+        "levels": [_level_to_dict(lv) for lv in c.levels],
+        # Legacy summary for human readability
         "class_levels": [
             {
                 "class": cl.class_name,
@@ -165,7 +132,19 @@ def _character_to_dict(c: "Character") -> dict:
             {"target": ov.target, "note": ov.note} for ov in c.dm_overrides
         ],
         "equipment": dict(c.equipment),
+        "notes": c.notes,
     }
+
+
+def _level_to_dict(lv: "CharacterLevel") -> dict:
+    d: dict = {
+        "level": lv.character_level,
+        "class": lv.class_name,
+        "hp_roll": lv.hp_roll,
+    }
+    if lv.skill_ranks:
+        d["skill_ranks"] = dict(sorted(lv.skill_ranks.items()))
+    return d
 
 
 def _buff_state_to_dict(name: str, state: BuffState) -> dict:
@@ -206,18 +185,22 @@ def load_character(
     from heroforge.engine.character import (
         BuffState,
         Character,
-        ClassLevel,
+        CharacterLevel,
     )
     from heroforge.engine.classes_races import apply_race
     from heroforge.engine.skills import (
         register_skills_on_character,
         set_skill_ranks,
     )
-    from heroforge.engine.templates import TemplateApplication, apply_template
+    from heroforge.engine.templates import (
+        TemplateApplication,
+        apply_template,
+    )
 
     c = Character()
+    c._class_registry_ref = app_state.class_registry
 
-    # Register skills before anything else so set_skill_ranks works
+    # Register skills before anything else
     register_skills_on_character(app_state.skill_registry, c)
 
     # Identity
@@ -241,22 +224,18 @@ def load_character(
         else:
             c.race = race_name  # Unknown race: just store the name
 
-    # Class levels
-    class_levels = []
-    for cl_dict in data.get("class_levels", []):
-        class_levels.append(
-            ClassLevel(
-                class_name=cl_dict["class"],
-                level=int(cl_dict["level"]),
-                hp_rolls=list(cl_dict.get("hp_rolls", [])),
-                bab_contribution=int(cl_dict.get("bab", 0)),
-                fort_contribution=int(cl_dict.get("fort", 0)),
-                ref_contribution=int(cl_dict.get("ref", 0)),
-                will_contribution=int(cl_dict.get("will", 0)),
+    # Per-character-level entries
+    for lv_dict in data.get("levels", []):
+        c.levels.append(
+            CharacterLevel(
+                character_level=int(lv_dict["level"]),
+                class_name=lv_dict["class"],
+                hp_roll=int(lv_dict.get("hp_roll", 0)),
+                skill_ranks=dict(lv_dict.get("skill_ranks", {})),
             )
         )
-    if class_levels:
-        c.set_class_levels(class_levels)
+    if c.levels:
+        c._invalidate_class_stats()
 
     # Feats — record names; apply always-on effects
     for feat_dict in data.get("feats", []):
@@ -341,14 +320,18 @@ def load_character(
     # Equipment (currently just stored as a dict)
     c.equipment = dict(data.get("equipment", {}))
 
+    # Notes
+    c.notes = str(data.get("notes", ""))
+
     return c
 
 
 def _validate_version(data: dict) -> None:
     meta = data.get("meta", {})
-    version = str(meta.get("version", "1"))
+    version = str(meta.get("version", ""))
     if version != SCHEMA_VERSION:
         raise ValueError(
-            f"Unsupported character file version {version!r}. "
+            f"Unsupported character file version "
+            f"{version!r}. "
             f"Expected {SCHEMA_VERSION!r}."
         )

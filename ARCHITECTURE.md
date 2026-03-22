@@ -1,9 +1,10 @@
 # HeroForge Anew — Architecture
 
-A PyQt6 desktop application for D&D 3.5e character management. Clean separation
-between the **rules engine** (pure Python, no GUI), the **data layer** (YAML
-rulebook definitions), the **export layer** (PDF via ReportLab), and the
-**presentation layer** (PyQt6 widgets).
+A PyQt6 desktop application for D&D 3.5e character management.
+Clean separation between the **rules engine** (pure Python, no
+GUI), the **data layer** (YAML rulebook definitions), the
+**export layer** (PDF via ReportLab), and the **presentation
+layer** (PyQt6 widgets).
 
 ---
 
@@ -11,20 +12,29 @@ rulebook definitions), the **export layer** (PDF via ReportLab), and the
 
 ```
 src/heroforge/
-├── engine/                 # Pure Python, zero GUI dependencies
-│   ├── bonus.py            # BonusType enum, BonusEntry, BonusPool, aggregate()
-│   ├── stat.py             # StatNode, StatGraph: reactive lazy-eval DAG
-│   ├── character.py        # Character, ChangeNotifier, ClassLevel, BuffState
-│   ├── effects.py          # BuffDefinition, BuffCategory, formula evaluation
-│   ├── classes_races.py    # ClassDefinition, RaceDefinition, apply_race()
-│   ├── skills.py           # SkillDefinition, register_skills_on_character()
-│   ├── feats.py            # FeatDefinition, FeatKind, FeatRegistry
-│   ├── prerequisites.py    # PrerequisiteChecker, FeatAvailability
-│   ├── templates.py        # TemplateDefinition, apply_template()
+├── engine/                 # Pure Python, zero GUI deps
+│   ├── bonus.py            # BonusType, BonusEntry, BonusPool
+│   ├── stat.py             # StatNode, StatGraph: lazy DAG
+│   ├── character.py        # Character, ChangeNotifier,
+│   │                       #   CharacterLevel, ClassLevel,
+│   │                       #   BuffState, DmOverride
+│   ├── effects.py          # BuffDefinition, BuffCategory,
+│   │                       #   formula evaluation
+│   ├── classes_races.py    # ClassDefinition, RaceDefinition,
+│   │                       #   SpellcastingInfo, apply_race()
+│   ├── skills.py           # SkillDefinition,
+│   │                       #   register_skills_on_character()
+│   ├── feats.py            # FeatDefinition, FeatKind,
+│   │                       #   FeatRegistry
+│   ├── prerequisites.py    # PrerequisiteChecker,
+│   │                       #   FeatAvailability, PrC infra
+│   ├── templates.py        # TemplateDefinition,
+│   │                       #   apply_template()
 │   └── persistence.py      # save/load character YAML
 │
 ├── rules/
-│   ├── loader.py           # StatsLoader, SpellsLoader, FeatsLoader, etc.
+│   ├── loader.py           # StatsLoader, SpellsLoader,
+│   │                       #   FeatsLoader, etc.
 │   └── core/               # One YAML file per data domain
 │       ├── stats.yaml
 │       ├── skills.yaml
@@ -36,33 +46,42 @@ src/heroforge/
 │
 ├── export/
 │   ├── sheet_data.py       # gather(): Character → SheetData
-│   └── renderer.py         # render_pdf(): SheetData → PDF via ReportLab
+│   └── renderer.py         # render_pdf(): SheetData → PDF
 │
-└── ui/                     # PyQt6 — never imported by engine/ or export/
-    ├── app.py              # QApplication entry point, Ctrl+C handling
-    ├── app_state.py        # AppState: holds all registries + active Character
-    ├── main_window.py      # MainWindow: tabs, menus, file I/O
+└── ui/                     # PyQt6 — never imported by
+    │                       #   engine/ or export/
+    ├── app.py              # QApplication entry point,
+    │                       #   Ctrl+C handling
+    ├── app_state.py        # AppState: registries + Character
+    ├── main_window.py      # MainWindow: tabs, menus, I/O
     ├── sheets/
-    │   ├── sheet1_summary.py   # Identity, abilities, combat stats, buffs
+    │   ├── sheet1_summary.py   # Identity, abilities, combat
+    │   ├── sheet_race.py       # Race selection tab
+    │   ├── sheet_class.py      # Per-level class tab
     │   ├── sheet2_skills.py    # Full skill table
-    │   └── sheet3_feats.py     # Taken feats + feat picker
+    │   ├── sheet3_feats.py     # Taken feats + feat picker
+    │   ├── sheet_spells.py     # Spell buff toggles
+    │   ├── sheet_equipment.py  # Equipment slots table
+    │   └── sheet_notes.py      # Free-form notes
     ├── dialogs/
-    │   ├── class_dialog.py     # Class/level selection
-    │   └── race_dialog.py      # Race selection
+    │   ├── class_dialog.py     # Legacy class dialog
+    │   └── race_dialog.py      # Legacy race dialog
     └── widgets/
-        ├── common.py           # LabeledField, StatDisplay, SectionHeader, etc.
+        ├── common.py           # LabeledField, StatDisplay,
+        │                       #   SectionHeader, etc.
         ├── ability_block.py    # Six ability score rows
-        ├── combat_stats.py     # AC, saves, BAB, HP, initiative, speed
+        ├── combat_stats.py     # AC, saves, BAB, HP, init
         └── buff_panel.py       # Scrollable buff toggle list
 
 tests/
-├── conftest.py             # QT_QPA_PLATFORM=offscreen, qapp fixture
+├── conftest.py             # QT_QPA_PLATFORM=offscreen, qapp
 ├── test_bonus.py
 ├── test_stat.py
 ├── test_character.py
 ├── test_effects.py
 ├── test_classes_races.py
 ├── test_skills.py
+├── test_skill_allocation.py # Per-level skill budget/ranks
 ├── test_feats.py
 ├── test_prerequisites.py
 ├── test_templates.py
@@ -77,127 +96,200 @@ tests/
 
 ## Layer 1: Bonus system (`engine/bonus.py`)
 
-`BonusType` enum covers all 3.5e bonus types. `BonusEntry` is a frozen value
-object (value, type, source, optional condition lambda). `BonusPool` collects
-entries keyed by source name — `set_source` / `clear_source` are idempotent.
+`BonusType` enum covers all 3.5e bonus types. `BonusEntry` is
+a frozen value object (value, type, source, optional condition
+lambda). `BonusPool` collects entries keyed by source name —
+`set_source` / `clear_source` are idempotent.
 
-`aggregate()` implements the core stacking rules: dodge, racial, and untyped
-always stack; all other types take highest only; penalties always stack.
+`aggregate()` implements the core stacking rules: dodge,
+racial, and untyped always stack; all other types take highest
+only; penalties always stack.
 
 ## Layer 2: Stat graph (`engine/stat.py`)
 
-`StatNode` is a single computable stat (key, base value, input dependencies,
-pool keys, compute function). `StatGraph` is the DAG registry with lazy
-evaluation and dirty-cascade invalidation. Nodes are computed on first access
-after invalidation.
+`StatNode` is a single computable stat (key, base value, input
+dependencies, pool keys, compute function). `StatGraph` is the
+DAG registry with lazy evaluation and dirty-cascade
+invalidation. Nodes are computed on first access after
+invalidation.
 
-Helper compute functions: `compute_ability_modifier`, `compute_sum`,
-`compute_capped_dex`, `compute_save`.
+Helper compute functions: `compute_ability_modifier`,
+`compute_sum`, `compute_capped_dex`, `compute_save`.
 
 ## Layer 3: Character (`engine/character.py`)
 
-The central mutable object. Holds identity fields, raw ability scores, class
-levels, race, feats, skills, equipment, buff states, and DM overrides. Owns a
-`StatGraph` and a dict of `BonusPool`s.
+The central mutable object. Holds identity fields, raw ability
+scores, class levels, race, feats, skills, buff states, and
+DM overrides. Owns a `StatGraph` and a dict of `BonusPool`s.
 
-`_bootstrap_stat_graph()` wires up all standard 3.5e stat nodes (ability
-scores → modifiers → saves/attacks/AC/HP/etc.).
+Supporting dataclasses:
 
-All mutations go through public methods (`set_ability_score`, `toggle_buff`,
-`set_class_levels`, `add_feat`, etc.) which handle pool updates, stat
-invalidation, and change notification via `ChangeNotifier`.
+- `CharacterLevel` — one per-character-level entry
+  (e.g. level 3 = Rogue). Stores class name, HP roll,
+  and per-level skill point allocation.
+- `ClassLevel` — legacy cumulative model, now a computed
+  property that aggregates `CharacterLevel` entries.
+- `BuffState` — per-buff persistent state: active flag,
+  optional caster level, optional parameter value.
+- `DmOverride` — a DM-granted override: target name + note.
 
-`ChangeNotifier` is a simple observer list — the UI subscribes callbacks; the
-Character calls `notify(changed_keys)` on mutation. Keeps the engine decoupled
-from Qt signals.
+Per-level methods: `add_level()`, `remove_last_level()`,
+`set_level_class()`, `set_level_hp()`,
+`set_level_skill_ranks()`, `skill_points_for_level()`.
+
+Computed properties: `class_level_map` (cumulative levels
+per class), `total_level`, `attack_iteratives()`,
+`multiclass_xp_penalty()`, `validate()`.
+
+Placeholder fields (defined but not yet wired to logic):
+`hp_current`, `familiar`, `animal_companion`.
+
+`_bootstrap_stat_graph()` wires up all standard 3.5e stat
+nodes (ability scores → modifiers → saves/attacks/AC/HP/etc.).
+
+All mutations go through public methods (`set_ability_score`,
+`toggle_buff`, `set_class_levels`, `add_feat`, etc.) which
+handle pool updates, stat invalidation, and change
+notification via `ChangeNotifier`.
+
+`ChangeNotifier` is a simple observer list — the UI subscribes
+callbacks; the Character calls `notify(changed_keys)` on
+mutation. Keeps the engine decoupled from Qt signals.
 
 ## Layer 4: Effects (`engine/effects.py`)
 
-`BuffDefinition` models any source of stat bonuses: spells, feats, conditions,
-items. Each has a list of `BonusEffect` (target pool, bonus type, value or
-CL-scaling formula string, optional condition). `BuffCategory` enum tags the
-source kind.
+`BuffDefinition` models any source of stat bonuses: spells,
+feats, conditions, items. Each has a list of `BonusEffect`
+(target pool, bonus type, value or CL-scaling formula string,
+optional condition). `BuffCategory` enum tags the source kind.
+Optional `ongoing_condition` lambda allows buffs to be
+conditionally active based on character state.
 
-`evaluate_formula()` safely evaluates CL-scaling expressions like
-`"2 + caster_level // 6"` in a restricted namespace.
+`evaluate_formula()` safely evaluates CL-scaling expressions
+like `"2 + caster_level // 6"` in a restricted namespace.
 
 `BuffRegistry` provides name-based lookup.
 
 ## Layer 5: Classes and races (`engine/classes_races.py`)
 
-`ClassDefinition` holds BAB/save progressions, hit die, class skills, features,
-and optional spellcasting info. `RaceDefinition` holds ability modifiers, size,
-speed, subtypes, and racial features.
+`ClassDefinition` holds BAB/save progressions, hit die,
+class skills, `skills_per_level`, optional spellcasting
+info, and prestige class fields (`max_level`,
+`is_prestige`, `entry_prerequisites`,
+`ongoing_prerequisites`). `SpellcastingInfo` records cast
+type (arcane/divine), key ability, preparation mode, max
+spell level, and starting level. `ClassFeature` records a
+feature gained at a specific class level.
 
-`apply_race()` wires racial ability bonuses into the Character's pools.
-`bab_at_level()` and `save_at_level()` compute progression values.
+`RaceDefinition` holds ability modifiers, size, speed,
+subtypes, and racial features.
 
-`ClassRegistry` and `RaceRegistry` provide name-based lookup.
+`apply_race()` wires racial ability bonuses into the
+Character's pools. `bab_at_level()` and `save_at_level()`
+compute progression values.
+
+`ClassRegistry` and `RaceRegistry` provide name-based
+lookup. Both base and prestige classes live in the same
+`ClassRegistry`.
 
 ## Layer 6: Skills (`engine/skills.py`)
 
-`SkillDefinition` holds ability key, trained-only flag, armor check penalty
-flag, and synergy declarations. `register_skills_on_character()` creates a
-pool and stat node per skill on the Character. `set_skill_ranks()` updates
-ranks. `compute_skill_total()` returns a full breakdown.
+`SkillDefinition` holds ability key, trained-only flag,
+armor check penalty flag, and synergy declarations.
+`register_skills_on_character()` creates a pool and stat
+node per skill. `set_skill_ranks()` updates ranks.
+`compute_skill_total()` returns a full breakdown.
+
+Per-level helpers: `compute_skill_budget()` computes
+points per level (skills_per_level + INT mod, x4 at
+level 1, +1 for humans, min 1). `max_skill_ranks()`
+returns the cap (class skill: N+3, cross-class:
+(N+3)/2). `validate_skill_allocation()` checks budget
+and rank caps. `recompute_skills_from_levels()`
+rebuilds total ranks from all `CharacterLevel` entries.
 
 ## Layer 7: Feats (`engine/feats.py`)
 
-`FeatDefinition` has a `FeatKind` (ALWAYS_ON, CONDITIONAL, PASSIVE), optional
-prerequisites, optional `BuffDefinition` for stat effects, and optional
-`FeatParameterSpec` for parameterized feats (e.g. Power Attack amount).
+`FeatDefinition` has a `FeatKind` (ALWAYS_ON, CONDITIONAL,
+PASSIVE), optional prerequisites, optional `BuffDefinition`
+for stat effects, and optional `FeatParameterSpec` for
+parameterized feats (e.g. Power Attack amount).
 
-Always-on feats auto-apply their buff on `Character.add_feat()`. Conditional
-feats register their buff for user toggling via the buffs panel.
+Always-on feats apply bonuses directly to the relevant
+pools via `_apply_feat_pool_bonuses()` using source key
+`"feat:<name>"` — they never appear in the buff panel.
+Conditional feats register their buff for user toggling
+via the buffs panel. Dodge is conditional (per 3.5e rules
+the player designates one opponent per action).
 
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 
-Prerequisite types: `StatPrereq`, `AbilityPrereq`, `FeatPrereq`, `SkillPrereq`,
-plus compound `all_of` / `any_of` / `none_of`.
+Prerequisite types: `StatPrereq`, `AbilityPrereq`,
+`FeatPrereq`, `SkillPrereq`, `ClassLevelPrereq`,
+`SpellcastingPrereq`, `ClassFeaturePrereq`,
+`CreatureTypePrereq`, plus compound `all_of` / `any_of` /
+`none_of`.
 
-`PrerequisiteChecker` evaluates prereqs against a Character and classifies each
-feat as one of `FeatAvailability`: AVAILABLE, TAKEN, OVERRIDE, UNAVAILABLE, or
-CHAIN_PARTIAL. DM overrides short-circuit to OVERRIDE.
+`PrerequisiteChecker` evaluates prereqs against a Character
+and classifies each feat as one of `FeatAvailability`:
+AVAILABLE, TAKEN, OVERRIDE, UNAVAILABLE, or CHAIN_PARTIAL.
+DM overrides short-circuit to OVERRIDE.
+
+Prestige class support: `register_prc()` registers a
+prestige class with entry and ongoing prerequisites;
+`prc_availability()` checks whether a character qualifies
+to enter; `ongoing_violations()` checks whether a
+character in a PrC still meets ongoing requirements.
+PrCs are loaded from `classes.yaml` by `ClassesLoader`
+and registered with the checker automatically.
 
 ## Layer 9: Templates (`engine/templates.py`)
 
-`TemplateDefinition` models creature templates (Half-Celestial, etc.) with
-ability modifiers, type/subtype changes, natural armor, granted feats, and
-partial-application support.
+`TemplateDefinition` models creature templates (Half-Celestial,
+etc.) with ability modifiers, type/subtype changes, natural
+armor, granted feats, partial-application support, and an
+optional `ongoing_prereq`.
 
-`apply_template()` / `remove_template()` wire effects into the Character.
-`effective_type()` and `effective_subtypes()` resolve the final creature type
-after all template layers.
+`apply_template()` / `remove_template()` wire effects into the
+Character. `effective_type()` and `effective_subtypes()` resolve
+the final creature type after all template layers.
 
 ## Layer 10: Persistence (`engine/persistence.py`)
 
-`save_character()` serializes to `.char.yaml`. `load_character()` deserializes
-and re-applies race, class, template, and feat effects through the normal
-engine methods so all derived stats recompute correctly. Schema version checked
-on load.
+`save_character()` serializes to `.char.yaml` (version 2).
+The `levels:` key stores per-character-level entries with
+class name, HP roll, and skill point allocation.
+`load_character()` deserializes and re-applies race,
+template, and feat effects through the normal engine
+methods so all derived stats recompute correctly.
 
 ---
 
 ## Rules layer (`rules/`)
 
-`rules/loader.py` contains one Loader class per data domain (StatsLoader,
-SpellsLoader, FeatsLoader, SkillsLoader, TemplatesLoader, ClassesLoader,
-RacesLoader). Each reads its YAML file, builds engine objects via the
-`build_*_from_yaml()` functions, and populates the corresponding registry.
+`rules/loader.py` contains one Loader class per data domain
+(StatsLoader, SpellsLoader, FeatsLoader, SkillsLoader,
+TemplatesLoader, ClassesLoader, RacesLoader). Each reads its
+YAML file, builds engine objects via `build_*_from_yaml()`
+functions, and populates the corresponding registry.
 
-YAML files under `rules/core/` contain all PHB data. The design supports
-additional sourcebook directories (e.g. `rules/spell_compendium/`) with
-override semantics, though only core is currently populated.
+YAML files under `rules/core/` contain PHB data (11 base
+classes, 14 SRD prestige classes, 7 races, skills, feats,
+spells, templates). `classes.yaml` has both `classes:` and
+`prestige_classes:` sections. The design supports additional
+sourcebook directories with override semantics.
 
 ---
 
 ## Export layer (`export/`)
 
-`sheet_data.py` defines `SheetData` and component dataclasses (`IdentityData`,
-`AbilityData`, `CombatData`, `SkillRow`, `FeatRow`, `BuffRow`). `gather()`
-extracts a complete display-ready snapshot from a Character.
+`sheet_data.py` defines `SheetData` and component dataclasses
+(`IdentityData`, `AbilityData`, `CombatData`, `SkillRow`,
+`FeatRow`, `BuffRow`). `gather()` extracts a complete
+display-ready snapshot from a Character.
 
-`renderer.py` takes a `SheetData` and writes a PDF via ReportLab.
+`renderer.py` takes a `SheetData` and writes a PDF via
+ReportLab.
 
 ---
 
@@ -205,58 +297,81 @@ extracts a complete display-ready snapshot from a Character.
 
 ### AppState (`app_state.py`)
 
-Single object holding all registries and the active `Character`. Created by
-`MainWindow`. Methods: `load_rules()`, `new_character()`,
-`set_character()`, `skill_total()`.
+Single object holding all registries and the active
+`Character`. Created by `MainWindow`. Methods: `load_rules()`,
+`new_character()`, `set_character()`, `skill_total()`.
 
 ### MainWindow (`main_window.py`)
 
-Top-level `QMainWindow` with a tab widget (Sheet1, Sheet2, Sheet3, plus
-placeholder tabs for Spells, Equipment, Notes). Owns the `AppState`. Subscribes
-to `character.on_change` and routes notifications to the active sheet tab.
+Top-level `QMainWindow` with a tab widget. Owns the
+`AppState`. Subscribes to `character.on_change` and routes
+notifications to the active sheet tab.
 
-File menu: New, Open, Save, Save As, Export PDF. Character menu: Change Race,
-Change Class.
+Tabs: Summary, Race, Class, Skills, Feats, Spells,
+Equipment, Notes.
+
+File menu: New, Open, Save, Save As, Export PDF.
 
 `closeEvent` prompts to save if modified.
 
 ### Sheets
 
-Each sheet takes an `AppState` reference. A `_building` flag suppresses signal
-feedback during construction.
+Each sheet takes an `AppState` reference. A `_building` flag
+suppresses signal feedback during construction.
 
-- **Sheet1Summary** — three-column layout: identity fields, ability block +
-  combat stats, buff panel. Ability changes cascade through the stat graph.
-- **Sheet2Skills** — table widget with columns for class-skill marker, name,
-  ability, ranks (editable), misc, total.
-- **Sheet3Feats** — splitter with taken-feats list (left) and filterable
-  available-feats picker (right) with color-coded availability.
+- **Sheet1Summary** — three-column layout: identity
+  fields, ability block + combat stats + validation
+  warnings, buff panel. Shows iterative attack bonuses.
+- **SheetRace** — race selection tab: filterable list
+  (left) + detail panel (right). Immediate apply.
+- **SheetClass** — per-level class tab: level
+  progression table, add/remove level buttons, class
+  combo (base + prestige with availability), HP roll
+  spinbox, per-level skill allocation panel.
+- **Sheet2Skills** — table widget with columns for
+  class-skill marker, name, ability, ranks, misc, total.
+- **Sheet3Feats** — splitter with taken-feats list
+  (left) and filterable available-feats picker (right)
+  with color-coded availability.
+- **SheetSpells** — spell buff toggles with CL spinbox.
+- **SheetEquipment** — table of equipment slots with
+  editable Item Name and Notes columns.
+- **SheetNotes** — free-form text editor bound to
+  `character.notes`.
+
+### Dialogs (legacy, unused)
+
+- **ClassDialog** — set class levels via combo + spinbox.
+- **RaceDialog** — pick a race from a filterable list.
 
 ### Widgets
 
-Reusable components in `widgets/`: `LabeledField`, `StatDisplay`,
-`CompactSpinBox`, `ModifierLabel`, `SectionHeader`, `HRule`, `AbilityBlock`,
-`CombatStats`, `BuffPanel`.
+Reusable components in `widgets/`: `LabeledField`,
+`StatDisplay`, `CompactSpinBox`, `ModifierLabel`,
+`SectionHeader`, `HRule`, `AbilityBlock`, `CombatStats`,
+`BuffPanel`.
 
 ---
 
 ## Key design constraints
 
-- `engine/` has **zero imports from `ui/`**. The engine is testable headlessly.
-- `export/` has **zero imports from `ui/`**. PDF output matches UI display
-  because both use the same Character data.
-- YAML data files contain **no Python code**. Formulas are strings evaluated
-  in a sandboxed context.
-- Adding a new sourcebook = adding YAML files. No Python changes unless the
-  book introduces a genuinely new kind of mechanic.
+- `engine/` has **zero imports from `ui/`**. The engine is
+  testable headlessly.
+- `export/` has **zero imports from `ui/`**. PDF output
+  matches UI display because both use the same Character data.
+- YAML data files contain **no Python code**. Formulas are
+  strings evaluated in a sandboxed context.
+- Adding a new sourcebook = adding YAML files. No Python
+  changes unless the book introduces a genuinely new kind of
+  mechanic.
 
 ---
 
 ## Not yet implemented
 
-- Spells tab, Equipment tab, Notes tab (placeholder tabs exist)
-- Companion/familiar sub-objects
-- Combat iteratives and TWF
+- Companion/familiar sub-objects (placeholder fields
+  exist on Character but no logic)
+- Two-weapon fighting penalty tables
 - Splatbook YAML files beyond core
-- Ongoing prerequisite checking (snapshot only currently)
-- Character validation / legality report
+- Equipment items with stat effects (YAML + pool wiring)
+- Spell slots / spells known tracking per class level

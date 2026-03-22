@@ -562,3 +562,621 @@ classes:
       - {level: 15, feature: bonus_feat_wizard_15, description: "Bonus wizard feat"}
       - {level: 20, feature: bonus_feat_wizard_20, description: "Bonus wizard feat"}
     favored_by: [Gnome]
+
+# -------------------------------------------------------
+# Prestige classes (SRD / DMG)
+# -------------------------------------------------------
+
+prestige_classes:
+
+  - name: "Arcane Archer"
+    source_book: DMG
+    hit_die: d8
+    max_level: 10
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: good
+      will: poor
+    skills_per_level: 4
+    class_skills:
+      - Craft
+      - Hide
+      - Listen
+      - Move Silently
+      - Ride
+      - Spot
+      - Survival
+      - Use Rope
+    entry_prerequisites:
+      all_of:
+        - stat: {key: bab, min: 6, label: BAB}
+        - feat: "Point Blank Shot"
+        - feat: "Precise Shot"
+        - feat: "Weapon Focus"
+    class_features:
+      - {level: 1, feature: enhance_arrows_1,
+         description: "+1 enhancement bonus"}
+      - {level: 3, feature: enhance_arrows_2,
+         description: "+2 enhancement bonus"}
+      - {level: 5, feature: enhance_arrows_3,
+         description: "+3 enhancement bonus"}
+      - {level: 7, feature: enhance_arrows_4,
+         description: "+4 enhancement bonus"}
+      - {level: 9, feature: enhance_arrows_5,
+         description: "+5 enhancement bonus"}
+      - {level: 2, feature: imbue_arrow,
+         description: "Place spell on arrow"}
+      - {level: 4, feature: seeker_arrow,
+         description: "Arrow ignores cover"}
+      - {level: 6, feature: phase_arrow,
+         description: "Arrow phases through walls"}
+      - {level: 8, feature: hail_of_arrows,
+         description: "One arrow per enemy"}
+      - {level: 10, feature: death_arrow,
+         description: "Arrow of death 1/day"}
+
+  - name: "Assassin"
+    source_book: DMG
+    hit_die: d6
+    max_level: 10
+    bab_progression: medium
+    save_progressions:
+      fort: poor
+      ref: good
+      will: poor
+    skills_per_level: 4
+    class_skills:
+      - Balance
+      - Bluff
+      - Climb
+      - Craft
+      - Decipher Script
+      - Diplomacy
+      - Disable Device
+      - Disguise
+      - Escape Artist
+      - Forgery
+      - Gather Information
+      - Hide
+      - Intimidate
+      - Jump
+      - Listen
+      - Move Silently
+      - Open Lock
+      - Search
+      - Sense Motive
+      - Sleight of Hand
+      - Spot
+      - Swim
+      - Tumble
+      - Use Magic Device
+      - Use Rope
+    entry_prerequisites:
+      all_of:
+        - skill: {name: Disguise, min: 4}
+        - skill: {name: Hide, min: 8}
+        - skill: {name: Move Silently, min: 8}
+    class_features:
+      - {level: 1, feature: sneak_attack_1d6,
+         description: "+1d6 sneak attack"}
+      - {level: 1, feature: death_attack,
+         description: "Study + kill"}
+      - {level: 1, feature: poison_use,
+         description: "Never poison self"}
+      - {level: 2, feature: uncanny_dodge,
+         description: "Never flat-footed"}
+      - {level: 3, feature: sneak_attack_2d6,
+         description: "+2d6 sneak attack"}
+      - {level: 5, feature: sneak_attack_3d6,
+         description: "+3d6 sneak attack"}
+      - {level: 5, feature: improved_uncanny_dodge,
+         description: "Cannot be flanked"}
+      - {level: 7, feature: sneak_attack_4d6,
+         description: "+4d6 sneak attack"}
+      - {level: 8, feature: hide_in_plain_sight,
+         description: "Hide while observed"}
+      - {level: 9, feature: sneak_attack_5d6,
+         description: "+5d6 sneak attack"}
+
+  - name: "Duelist"
+    source_book: DMG
+    hit_die: d10
+    max_level: 10
+    bab_progression: full
+    save_progressions:
+      fort: poor
+      ref: good
+      will: poor
+    skills_per_level: 4
+    class_skills:
+      - Balance
+      - Bluff
+      - Escape Artist
+      - Jump
+      - Listen
+      - Perform
+      - Sense Motive
+      - Spot
+      - Tumble
+    entry_prerequisites:
+      all_of:
+        - stat: {key: bab, min: 6, label: BAB}
+        - feat: "Dodge"
+        - feat: "Mobility"
+        - skill: {name: Tumble, min: 5}
+        - skill: {name: Perform, min: 3}
+    class_features:
+      - {level: 1, feature: canny_defense,
+         description: "INT to AC (unarmored)"}
+      - {level: 2, feature: improved_reaction,
+         description: "+2 initiative"}
+      - {level: 2, feature: enhanced_mobility,
+         description: "+4 AC vs AoO"}
+      - {level: 3, feature: precise_strike,
+         description: "+1d6 damage (light)"}
+      - {level: 4, feature: grace,
+         description: "+2 Reflex saves"}
+      - {level: 5, feature: acrobatic_charge,
+         description: "Charge in difficult terrain"}
+      - {level: 9, feature: deflect_arrows,
+         description: "Deflect one ranged/round"}
+      - {level: 10, feature: crippling_critical,
+         description: "Critical hit debuff"}
+
+  - name: "Eldritch Knight"
+    source_book: DMG
+    hit_die: d6
+    max_level: 10
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: poor
+      will: poor
+    skills_per_level: 2
+    class_skills:
+      - Concentration
+      - Craft
+      - Decipher Script
+      - Jump
+      - Knowledge (Arcana)
+      - Ride
+      - Sense Motive
+      - Spellcraft
+      - Swim
+    entry_prerequisites:
+      all_of:
+        - spellcasting:
+            type: arcane
+            min_level: 3
+        - proficient_with: {weapon: martial}
+    class_features:
+      - {level: 1, feature: bonus_feat,
+         description: "Bonus fighter feat"}
+
+  - name: "Mystic Theurge"
+    source_book: DMG
+    hit_die: d4
+    max_level: 10
+    bab_progression: poor
+    save_progressions:
+      fort: poor
+      ref: poor
+      will: good
+    skills_per_level: 2
+    class_skills:
+      - Concentration
+      - Craft
+      - Decipher Script
+      - Knowledge (Arcana)
+      - Knowledge (Religion)
+      - Profession
+      - Sense Motive
+      - Spellcraft
+    entry_prerequisites:
+      all_of:
+        - spellcasting:
+            type: arcane
+            min_level: 2
+        - spellcasting:
+            type: divine
+            min_level: 2
+    class_features: []
+
+  - name: "Shadowdancer"
+    source_book: DMG
+    hit_die: d8
+    max_level: 10
+    bab_progression: medium
+    save_progressions:
+      fort: poor
+      ref: good
+      will: poor
+    skills_per_level: 6
+    class_skills:
+      - Balance
+      - Bluff
+      - Decipher Script
+      - Diplomacy
+      - Disguise
+      - Escape Artist
+      - Hide
+      - Jump
+      - Listen
+      - Move Silently
+      - Perform
+      - Profession
+      - Search
+      - Sleight of Hand
+      - Spot
+      - Tumble
+    entry_prerequisites:
+      all_of:
+        - skill: {name: Move Silently, min: 8}
+        - skill: {name: Hide, min: 10}
+        - skill: {name: Perform, min: 5}
+        - feat: "Dodge"
+        - feat: "Mobility"
+        - feat: "Combat Reflexes"
+    class_features:
+      - {level: 1, feature: hide_in_plain_sight,
+         description: "Hide while observed"}
+      - {level: 2, feature: evasion,
+         description: "No damage on Ref save"}
+      - {level: 2, feature: darkvision,
+         description: "Darkvision 60 ft"}
+      - {level: 2, feature: uncanny_dodge,
+         description: "Never flat-footed"}
+      - {level: 3, feature: shadow_illusion,
+         description: "Silent image 1/day"}
+      - {level: 3, feature: summon_shadow,
+         description: "Summon shadow companion"}
+      - {level: 4, feature: shadow_jump_20,
+         description: "Teleport 20 ft/day"}
+      - {level: 5, feature: defensive_roll,
+         description: "Avoid lethal blow"}
+      - {level: 5, feature: improved_uncanny_dodge,
+         description: "Cannot be flanked"}
+      - {level: 7, feature: slippery_mind,
+         description: "Re-roll enchantment save"}
+      - {level: 10, feature: improved_evasion,
+         description: "Half damage on failed save"}
+
+  - name: "Blackguard"
+    source_book: DMG
+    hit_die: d10
+    max_level: 10
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: poor
+      will: poor
+    skills_per_level: 2
+    class_skills:
+      - Concentration
+      - Craft
+      - Diplomacy
+      - Handle Animal
+      - Heal
+      - Hide
+      - Intimidate
+      - Knowledge (Religion)
+      - Profession
+      - Ride
+    spellcasting:
+      type: divine
+      stat: cha
+      preparation: prepared
+      max_spell_level: 4
+      starts_at_level: 1
+    entry_prerequisites:
+      all_of:
+        - stat: {key: bab, min: 6, label: BAB}
+        - skill:
+            {name: Knowledge (Religion), min: 2}
+        - skill: {name: Hide, min: 5}
+    class_features:
+      - {level: 1, feature: aura_of_evil,
+         description: "Strong evil aura"}
+      - {level: 1, feature: detect_good,
+         description: "Detect good at will"}
+      - {level: 2, feature: dark_blessing,
+         description: "CHA bonus to saves"}
+      - {level: 2, feature: smite_good,
+         description: "Smite good 1/day"}
+      - {level: 3, feature: aura_of_despair,
+         description: "-2 saves to enemies"}
+      - {level: 3, feature: command_undead,
+         description: "Command/rebuke undead"}
+      - {level: 4, feature: sneak_attack_1d6,
+         description: "+1d6 sneak attack"}
+      - {level: 5, feature: fiendish_servant,
+         description: "Fiendish mount"}
+      - {level: 7, feature: sneak_attack_2d6,
+         description: "+2d6 sneak attack"}
+      - {level: 10, feature: sneak_attack_3d6,
+         description: "+3d6 sneak attack"}
+
+  - name: "Arcane Trickster"
+    source_book: DMG
+    hit_die: d4
+    max_level: 10
+    bab_progression: poor
+    save_progressions:
+      fort: poor
+      ref: good
+      will: good
+    skills_per_level: 4
+    class_skills:
+      - Appraise
+      - Balance
+      - Bluff
+      - Climb
+      - Concentration
+      - Craft
+      - Decipher Script
+      - Diplomacy
+      - Disable Device
+      - Disguise
+      - Escape Artist
+      - Gather Information
+      - Hide
+      - Jump
+      - Knowledge (all)
+      - Listen
+      - Move Silently
+      - Open Lock
+      - Profession
+      - Search
+      - Sense Motive
+      - Sleight of Hand
+      - Speak Language
+      - Spellcraft
+      - Spot
+      - Swim
+      - Tumble
+      - Use Rope
+    entry_prerequisites:
+      all_of:
+        - skill: {name: Decipher Script, min: 7}
+        - skill: {name: Disable Device, min: 7}
+        - skill: {name: Escape Artist, min: 7}
+        - skill:
+            {name: Knowledge (Arcana), min: 4}
+        - spellcasting:
+            type: arcane
+            min_level: 3
+    class_features:
+      - {level: 1, feature: ranged_legerdemain,
+         description: "Ranged sleight of hand"}
+      - {level: 2, feature: sneak_attack_1d6,
+         description: "+1d6 sneak attack"}
+      - {level: 4, feature: sneak_attack_2d6,
+         description: "+2d6 sneak attack"}
+      - {level: 6, feature: sneak_attack_3d6,
+         description: "+3d6 sneak attack"}
+      - {level: 8, feature: sneak_attack_4d6,
+         description: "+4d6 sneak attack"}
+      - {level: 10, feature: sneak_attack_5d6,
+         description: "+5d6 sneak attack"}
+
+  - name: "Dragon Disciple"
+    source_book: DMG
+    hit_die: d12
+    max_level: 10
+    bab_progression: medium
+    save_progressions:
+      fort: good
+      ref: poor
+      will: good
+    skills_per_level: 2
+    class_skills:
+      - Concentration
+      - Craft
+      - Diplomacy
+      - Escape Artist
+      - Gather Information
+      - Knowledge (all)
+      - Listen
+      - Profession
+      - Search
+      - Speak Language
+      - Spellcraft
+      - Spot
+    entry_prerequisites:
+      all_of:
+        - spellcasting:
+            type: arcane
+            min_level: 1
+    class_features:
+      - {level: 1, feature: natural_armor_1,
+         description: "+1 natural armor"}
+      - {level: 2, feature: str_increase_2,
+         description: "+2 STR"}
+      - {level: 2, feature: claws_and_bite,
+         description: "Natural weapons"}
+      - {level: 4, feature: str_increase_4,
+         description: "+2 STR (cumulative)"}
+      - {level: 4, feature: natural_armor_4,
+         description: "+2 natural armor"}
+      - {level: 5, feature: blindsense,
+         description: "Blindsense 30 ft"}
+      - {level: 7, feature: natural_armor_7,
+         description: "+3 natural armor"}
+      - {level: 9, feature: wings,
+         description: "Fly speed 30 ft"}
+      - {level: 10, feature: dragon_apotheosis,
+         description: "Become half-dragon"}
+
+  - name: "Dwarven Defender"
+    source_book: DMG
+    hit_die: d12
+    max_level: 10
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: poor
+      will: good
+    skills_per_level: 2
+    class_skills:
+      - Craft
+      - Listen
+      - Sense Motive
+      - Spot
+    entry_prerequisites:
+      all_of:
+        - stat: {key: bab, min: 7, label: BAB}
+        - feat: "Dodge"
+        - feat: "Toughness"
+    class_features:
+      - {level: 1, feature: defensive_stance,
+         description: "+2 STR/CON, +2 saves, +4 AC"}
+      - {level: 2, feature: uncanny_dodge,
+         description: "Never flat-footed"}
+      - {level: 3, feature: trap_sense_1,
+         description: "+1 vs traps"}
+      - {level: 4, feature: damage_reduction_1,
+         description: "DR 3/—"}
+      - {level: 6, feature: damage_reduction_2,
+         description: "DR 6/—"}
+      - {level: 6, feature: improved_uncanny_dodge,
+         description: "Cannot be flanked"}
+      - {level: 8, feature: damage_reduction_3,
+         description: "DR 9/—"}
+      - {level: 10, feature: mobile_defense,
+         description: "Move 5 ft in stance"}
+
+  - name: "Hierophant"
+    source_book: DMG
+    hit_die: d8
+    max_level: 5
+    bab_progression: poor
+    save_progressions:
+      fort: poor
+      ref: poor
+      will: good
+    skills_per_level: 2
+    class_skills:
+      - Concentration
+      - Craft
+      - Diplomacy
+      - Heal
+      - Knowledge (Arcana)
+      - Knowledge (Religion)
+      - Profession
+      - Spellcraft
+    entry_prerequisites:
+      all_of:
+        - spellcasting:
+            type: divine
+            min_level: 7
+    class_features:
+      - {level: 1, feature: special_ability,
+         description: "Choose hierophant ability"}
+
+  - name: "Horizon Walker"
+    source_book: DMG
+    hit_die: d8
+    max_level: 10
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: poor
+      will: poor
+    skills_per_level: 4
+    class_skills:
+      - Balance
+      - Climb
+      - Diplomacy
+      - Handle Animal
+      - Hide
+      - Knowledge (Geography)
+      - Listen
+      - Move Silently
+      - Profession
+      - Ride
+      - Speak Language
+      - Spot
+      - Survival
+      - Swim
+    entry_prerequisites:
+      all_of:
+        - skill: {name: Knowledge (Geography), min: 8}
+        - feat: "Endurance"
+    class_features:
+      - {level: 1, feature: terrain_mastery,
+         description: "Choose terrain mastery"}
+
+  - name: "Loremaster"
+    source_book: DMG
+    hit_die: d4
+    max_level: 10
+    bab_progression: poor
+    save_progressions:
+      fort: poor
+      ref: poor
+      will: good
+    skills_per_level: 4
+    class_skills:
+      - Appraise
+      - Concentration
+      - Craft
+      - Decipher Script
+      - Gather Information
+      - Handle Animal
+      - Heal
+      - Knowledge (all)
+      - Perform
+      - Profession
+      - Speak Language
+      - Spellcraft
+      - Use Magic Device
+    entry_prerequisites:
+      all_of:
+        - spellcasting:
+            type: arcane
+            min_level: 7
+        - skill:
+            {name: Knowledge (Arcana), min: 10}
+    class_features:
+      - {level: 1, feature: secret,
+         description: "Choose lore secret"}
+      - {level: 2, feature: lore,
+         description: "Lore check (like bard)"}
+
+  - name: "Thaumaturgist"
+    source_book: DMG
+    hit_die: d4
+    max_level: 5
+    bab_progression: poor
+    save_progressions:
+      fort: poor
+      ref: poor
+      will: good
+    skills_per_level: 2
+    class_skills:
+      - Concentration
+      - Craft
+      - Diplomacy
+      - Knowledge (Religion)
+      - Knowledge (The Planes)
+      - Profession
+      - Sense Motive
+      - Speak Language
+      - Spellcraft
+    entry_prerequisites:
+      all_of:
+        - spellcasting:
+            type: divine
+            min_level: 3
+    class_features:
+      - {level: 1, feature: improved_ally,
+         description: "Better planar ally"}
+      - {level: 2, feature: augment_summoning,
+         description: "Augment Summoning feat"}
+      - {level: 3, feature: extended_summoning,
+         description: "Double duration"}
+      - {level: 4, feature: contingent_conjuration,
+         description: "Contingency on summon"}
+      - {level: 5, feature: planar_cohort,
+         description: "Outsider cohort"}

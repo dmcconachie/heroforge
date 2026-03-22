@@ -84,7 +84,10 @@ class AppState:
         )
         SkillsLoader(rd).load(self.skill_registry)
         TemplatesLoader(rd).load(self.template_registry)
-        ClassesLoader(rd).load(self.class_registry)
+        ClassesLoader(rd).load(
+            self.class_registry,
+            prereq_checker=prereq_checker,
+        )
         RacesLoader(rd).load(self.race_registry)
 
         # Store prereq checker for UI access
@@ -107,8 +110,9 @@ class AppState:
         self._wire_character()
 
     def _wire_character(self) -> None:
-        """Register skills and apply always-on feat effects on a character."""
+        """Wire registries onto the character."""
         if self._loaded:
+            self.character._class_registry_ref = self.class_registry
             register_skills_on_character(self.skill_registry, self.character)
 
     # ------------------------------------------------------------------

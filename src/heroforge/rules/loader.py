@@ -43,6 +43,7 @@ if TYPE_CHECKING:
     from heroforge.engine.effects import BuffRegistry
     from heroforge.engine.feats import FeatRegistry
     from heroforge.engine.prerequisites import (
+        Prerequisite,
         PrerequisiteChecker,
     )
     from heroforge.engine.skills import SkillRegistry
@@ -832,10 +833,18 @@ class FeatsLoader:
                 )
 
             # Register buff definitions with BuffRegistry
-            if buff_registry is not None and defn.buff_definition is not None:
+            # (only conditional feats — always-on feats
+            # apply directly to pools via Character)
+            kind_val = getattr(defn.kind, "value", defn.kind)
+            if (
+                buff_registry is not None
+                and defn.buff_definition is not None
+                and kind_val == "conditional"
+            ):
                 with contextlib.suppress(ValueError):
                     buff_registry.register(
-                        defn.buff_definition, overwrite=overwrite
+                        defn.buff_definition,
+                        overwrite=overwrite,
                     )
 
             registered.append(name)
@@ -911,6 +920,7 @@ class ClassesLoader:
         registry: ClassRegistry,
         relative_path: str = "core/classes.yaml",
         overwrite: bool = False,
+        prereq_checker: PrerequisiteChecker | None = None,
     ) -> list[str]:
         from heroforge.engine.classes_races import (
             build_class_from_yaml,
@@ -933,14 +943,49 @@ class ClassesLoader:
         for decl in data["classes"]:
             name = decl.get("name")
             if not name:
-                raise LoaderError(f"Class declaration missing 'name': {decl}")
+                raise LoaderError(f"Class missing 'name': {decl}")
             try:
                 defn = build_class_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
                 registered.append(name)
             except (KeyError, ValueError) as e:
                 raise LoaderError(f"Failed to load class {name!r}: {e}") from e
+
+        # Prestige classes
+        for decl in data.get("prestige_classes", []):
+            name = decl.get("name")
+            if not name:
+                raise LoaderError(f"PrC missing 'name': {decl}")
+            decl["is_prestige"] = True
+            try:
+                defn = build_class_from_yaml(decl)
+                registry.register(defn, overwrite=overwrite)
+                registered.append(name)
+            except (KeyError, ValueError) as e:
+                raise LoaderError(f"Failed to load PrC {name!r}: {e}") from e
+            if prereq_checker is not None:
+                entry_prereq = self._build_prereq(
+                    decl.get("entry_prerequisites")
+                )
+                ongoing_prereq = self._build_prereq(
+                    decl.get("ongoing_prerequisites")
+                )
+                prereq_checker.register_prc(
+                    name,
+                    entry_prereq,
+                    ongoing_prereq,
+                )
+
         return registered
+
+    def _build_prereq(self, decl: dict | None) -> "Prerequisite | None":
+        if decl is None:
+            return None
+        from heroforge.engine.prerequisites import (
+            build_prereq_from_yaml,
+        )
+
+        return build_prereq_from_yaml(decl)
 
     def validate_yaml(
         self, relative_path: str = "core/classes.yaml"
