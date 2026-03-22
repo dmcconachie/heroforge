@@ -1,0 +1,386 @@
+# rules/core/spells_srd_7_9.yaml
+#
+# SRD spell compendium entries.
+# Minimal metadata: name + class levels.
+# Buff spells with stat effects are in
+# spells_phb.yaml and spells_srd_buffs.yaml.
+
+spell_compendium:
+
+  - name: "Animate Plants"
+    level: {Druid: 7}
+
+  - name: "Arcane Sight (Greater)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Blasphemy"
+    level: {Cleric: 7}
+
+  - name: "Changestaff"
+    level: {Druid: 7}
+
+  - name: "Control Undead"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Control Weather"
+    level: {Cleric: 7, Druid: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Creeping Doom"
+    level: {Druid: 7}
+
+  - name: "Cure Serious Wounds (Mass)"
+    level: {Cleric: 7, Druid: 8}
+
+  - name: "Delayed Blast Fireball"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Destruction"
+    level: {Cleric: 7}
+
+  - name: "Dictum"
+    level: {Cleric: 7}
+
+  - name: "Ethereal Jaunt"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Finger of Death"
+    level: {Druid: 8, Sorcerer: 7, Wizard: 7}
+
+  - name: "Fire Storm"
+    level: {Cleric: 8, Druid: 7}
+
+  - name: "Forcecage"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Grasping Hand"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Hold Person (Mass)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Holy Word"
+    level: {Cleric: 7}
+
+  - name: "Inflict Serious Wounds (Mass)"
+    level: {Cleric: 7}
+
+  - name: "Insanity"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Instant Summons"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Invisibility (Mass)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Limited Wish"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Mage's Magnificent Mansion"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Mage's Sword"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Phase Door"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Power Word Blind"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Prismatic Spray"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Refuge"
+    level: {Cleric: 7, Sorcerer: 9, Wizard: 9}
+
+  - name: "Regenerate"
+    level: {Cleric: 7, Druid: 9}
+
+  - name: "Restoration (Greater)"
+    level: {Cleric: 7}
+
+  - name: "Resurrection"
+    level: {Cleric: 7}
+
+  - name: "Reverse Gravity"
+    level: {Druid: 8, Sorcerer: 7, Wizard: 7}
+
+  - name: "Sequester"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Shadow Conjuration (Greater)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Simulacrum"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Spell Turning"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Statue"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Summon Monster VII"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Summon Nature's Ally VII"
+    level: {Druid: 7}
+
+  - name: "Sunbeam"
+    level: {Druid: 7}
+
+  - name: "Symbol of Stunning"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Symbol of Weakness"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Teleport (Greater)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Teleport Object"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Transmute Metal to Wood"
+    level: {Druid: 7}
+
+  - name: "Vision"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Waves of Exhaustion"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Word of Chaos"
+    level: {Cleric: 7}
+
+  - name: "Animal Shapes"
+    level: {Druid: 8}
+
+  - name: "Antipathy"
+    level: {Druid: 9, Sorcerer: 8, Wizard: 8}
+
+  - name: "Binding"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Clenched Fist"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Cloak of Chaos"
+    level: {Cleric: 8}
+
+  - name: "Clone"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Control Plants"
+    level: {Druid: 8}
+
+  - name: "Create Greater Undead"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Cure Critical Wounds (Mass)"
+    level: {Cleric: 8, Druid: 9}
+
+  - name: "Demand"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Dimensional Lock"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Discern Location"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Earthquake"
+    level: {Cleric: 8, Druid: 8}
+
+  - name: "Holy Aura"
+    level: {Cleric: 8}
+
+  - name: "Horrid Wilting"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Incendiary Cloud"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Inflict Critical Wounds (Mass)"
+    level: {Cleric: 8}
+
+  - name: "Iron Body"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Maze"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Mind Blank"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Moment of Prescience"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Planar Ally (Greater)"
+    level: {Cleric: 8}
+
+  - name: "Planar Binding (Greater)"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Polar Ray"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Polymorph Any Object"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Power Word Stun"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Prismatic Wall"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Protection from Spells"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Prying Eyes (Greater)"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Repel Metal or Stone"
+    level: {Druid: 8}
+
+  - name: "Scintillating Pattern"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Screen"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Shadow Evocation (Greater)"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Shield of Law"
+    level: {Cleric: 8}
+
+  - name: "Spell Immunity (Greater)"
+    level: {Cleric: 8}
+
+  - name: "Summon Monster VIII"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Summon Nature's Ally VIII"
+    level: {Druid: 8}
+
+  - name: "Sunburst"
+    level: {Druid: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Symbol of Death"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Symbol of Insanity"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Sympathy"
+    level: {Druid: 9, Sorcerer: 8, Wizard: 8}
+
+  - name: "Telekinetic Sphere"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Temporal Stasis"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Trap the Soul"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Unholy Aura"
+    level: {Cleric: 8}
+
+  - name: "Whirlwind"
+    level: {Druid: 8}
+
+  - name: "Astral Projection"
+    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Crushing Hand"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Dominate Monster"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Elemental Swarm"
+    level: {Druid: 9}
+
+  - name: "Energy Drain"
+    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Etherealness"
+    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Foresight"
+    level: {Druid: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Freedom"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Gate"
+    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Heal (Mass)"
+    level: {Cleric: 9}
+
+  - name: "Hold Monster (Mass)"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Implosion"
+    level: {Cleric: 9}
+
+  - name: "Imprisonment"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Mage's Disjunction"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Meteor Swarm"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Miracle"
+    level: {Cleric: 9}
+
+  - name: "Power Word Kill"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Prismatic Sphere"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Shades"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Shambler"
+    level: {Druid: 9}
+
+  - name: "Shapechange"
+    level: {Druid: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Soul Bind"
+    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Storm of Vengeance"
+    level: {Cleric: 9, Druid: 9}
+
+  - name: "Summon Monster IX"
+    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
+
+  - name: "Summon Nature's Ally IX"
+    level: {Druid: 9}
+
+  - name: "Teleportation Circle"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Time Stop"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "True Resurrection"
+    level: {Cleric: 9}
+
+  - name: "Wail of the Banshee"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Weird"
+    level: {Sorcerer: 9, Wizard: 9}
+
+  - name: "Wish"
+    level: {Sorcerer: 9, Wizard: 9}

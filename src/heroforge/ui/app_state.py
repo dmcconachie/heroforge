@@ -23,6 +23,7 @@ from heroforge.engine.classes_races import (
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.feats import FeatRegistry
 from heroforge.engine.skills import SkillRegistry, register_skills_on_character
+from heroforge.engine.spells import SpellCompendium
 from heroforge.engine.templates import TemplateRegistry
 
 RULES_DIR = Path(__file__).parent.parent / "rules"
@@ -45,6 +46,7 @@ class AppState:
 
     def __init__(self) -> None:
         self.spell_registry = BuffRegistry()
+        self.spell_compendium = SpellCompendium()
         self.feat_registry = FeatRegistry()
         self.skill_registry = SkillRegistry()
         self.template_registry = TemplateRegistry()
@@ -72,6 +74,7 @@ class AppState:
             FeatsLoader,
             RacesLoader,
             SkillsLoader,
+            SpellCompendiumLoader,
             SpellsLoader,
             TemplatesLoader,
         )
@@ -82,6 +85,10 @@ class AppState:
         SpellsLoader(rd).load(
             self.spell_registry,
             "core/conditions_srd.yaml",
+        )
+        SpellsLoader(rd).load(
+            self.spell_registry,
+            "core/spells_srd_buffs.yaml",
         )
         FeatsLoader(rd).load(
             self.feat_registry,
@@ -101,6 +108,17 @@ class AppState:
             prereq_checker=prereq_checker,
         )
         RacesLoader(rd).load(self.race_registry)
+
+        # Load spell compendium (all spells)
+        scl = SpellCompendiumLoader(rd)
+        for sp_file in (
+            "core/spells_srd_0_3.yaml",
+            "core/spells_srd_4_6.yaml",
+            "core/spells_srd_7_9.yaml",
+        ):
+            sp_path = rd / sp_file
+            if sp_path.exists():
+                scl.load(self.spell_compendium, sp_file)
 
         # Store prereq checker for UI access
         self.prereq_checker = prereq_checker

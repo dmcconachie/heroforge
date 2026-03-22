@@ -47,6 +47,7 @@ if TYPE_CHECKING:
         PrerequisiteChecker,
     )
     from heroforge.engine.skills import SkillRegistry
+    from heroforge.engine.spells import SpellCompendium
     from heroforge.engine.stat import StatGraph
     from heroforge.engine.templates import TemplateRegistry
 
@@ -1208,3 +1209,87 @@ class SkillsLoader:
                 errors.append(f"{name!r}: key must start with 'skill_'")
 
         return errors
+
+
+# -----------------------------------------------------------
+# Spell compendium loader (all spells, not just buffs)
+# -----------------------------------------------------------
+
+
+class SpellCompendiumLoader:
+    """
+    Reads spell compendium YAML files containing metadata
+    for all spells (including non-buff spells).
+
+    YAML schema:
+      spell_compendium:
+        - name: "Fireball"
+          school: Evocation
+          descriptor: Fire
+          level: {Sorcerer: 3, Wizard: 3}
+          casting_time: "1 standard action"
+          range: "Long (400 ft. + 40 ft./level)"
+          duration: Instantaneous
+          saving_throw: "Reflex half"
+          spell_resistance: "Yes"
+          description: "..."
+          has_buff_effects: false
+    """
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load(
+        self,
+        compendium: "SpellCompendium",
+        relative_path: str = ("core/spells_srd_0_3.yaml"),
+    ) -> list[str]:
+        from heroforge.engine.spells import SpellEntry
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Spell compendium file not found: {path}")
+
+        try:
+            with open(path) as f:
+                data = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            raise LoaderError(f"YAML parse error in {path}: {e}") from e
+
+        key = "spell_compendium"
+        if not isinstance(data, dict) or key not in data:
+            raise LoaderError(f"{path} must have a top-level '{key}' key.")
+
+        registered: list[str] = []
+        for decl in data[key]:
+            name = decl.get("name")
+            if not name:
+                raise LoaderError(
+                    f"Spell compendium entry missing 'name': {decl}"
+                )
+
+            level_raw = decl.get("level", {})
+            if isinstance(level_raw, dict):
+                level = {str(k): int(v) for k, v in level_raw.items()}
+            else:
+                level = {}
+
+            entry = SpellEntry(
+                name=name,
+                school=decl.get("school", ""),
+                subschool=decl.get("subschool", ""),
+                descriptor=decl.get("descriptor", ""),
+                level=level,
+                casting_time=decl.get("casting_time", ""),
+                range=decl.get("range", ""),
+                duration=decl.get("duration", ""),
+                saving_throw=decl.get("saving_throw", ""),
+                spell_resistance=decl.get("spell_resistance", ""),
+                description=decl.get("description", ""),
+                source_book=decl.get("source_book", "SRD"),
+                has_buff_effects=bool(decl.get("has_buff_effects", False)),
+            )
+            compendium.register(entry)
+            registered.append(name)
+
+        return registered

@@ -1,0 +1,584 @@
+# rules/core/spells_srd_4_6.yaml
+#
+# SRD spell compendium entries.
+# Minimal metadata: name + class levels.
+# Buff spells with stat effects are in
+# spells_phb.yaml and spells_srd_buffs.yaml.
+
+spell_compendium:
+
+  - name: "Air Walk"
+    level: {Cleric: 4, Druid: 4}
+
+  - name: "Animal Growth"
+    level: {Druid: 5, Ranger: 4, Sorcerer: 5, Wizard: 5}
+
+  - name: "Antiplant Shell"
+    level: {Druid: 4}
+
+  - name: "Arcane Eye"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Black Tentacles"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Blight"
+    level: {Druid: 4, Sorcerer: 5, Wizard: 5}
+
+  - name: "Break Enchantment"
+    level: {Bard: 4, Cleric: 5, Paladin: 4, Sorcerer: 5, Wizard: 5}
+
+  - name: "Commune with Nature"
+    level: {Druid: 5, Ranger: 4}
+
+  - name: "Control Water"
+    level: {Cleric: 4, Druid: 4, Sorcerer: 6, Wizard: 6}
+
+  - name: "Cure Critical Wounds"
+    level: {Bard: 4, Cleric: 4, Druid: 5}
+
+  - name: "Death Ward"
+    level: {Cleric: 4, Druid: 5, Paladin: 4}
+
+  - name: "Detect Scrying"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Dimension Door"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Dimensional Anchor"
+    level: {Cleric: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Dismissal"
+    level: {Cleric: 4, Sorcerer: 5, Wizard: 5}
+
+  - name: "Dispel Chaos"
+    level: {Cleric: 5, Paladin: 4}
+
+  - name: "Dispel Evil"
+    level: {Cleric: 5, Paladin: 4}
+
+  - name: "Divination"
+    level: {Cleric: 4}
+
+  - name: "Divine Power"
+    level: {Cleric: 4}
+
+  - name: "Dominate Person"
+    level: {Bard: 4, Sorcerer: 5, Wizard: 5}
+
+  - name: "Enervation"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Enlarge Person (Mass)"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Fire Shield"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Flame Strike"
+    level: {Cleric: 5, Druid: 4}
+
+  - name: "Freedom of Movement"
+    level: {Bard: 4, Cleric: 4, Druid: 4, Ranger: 4}
+
+  - name: "Giant Vermin"
+    level: {Cleric: 4, Druid: 4}
+
+  - name: "Globe of Invulnerability (Lesser)"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Hallucinatory Terrain"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Hold Monster"
+    level: {Bard: 4, Sorcerer: 5, Wizard: 5}
+
+  - name: "Holy Sword"
+    level: {Paladin: 4}
+
+  - name: "Ice Storm"
+    level: {Druid: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Illusory Wall"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Imbue with Spell Ability"
+    level: {Cleric: 4}
+
+  - name: "Inflict Critical Wounds"
+    level: {Cleric: 4}
+
+  - name: "Invisibility (Greater)"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Legend Lore"
+    level: {Bard: 4, Sorcerer: 6, Wizard: 6}
+
+  - name: "Locate Creature"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Mark of Justice"
+    level: {Cleric: 5, Paladin: 4}
+
+  - name: "Minor Creation"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Mnemonic Enhancer"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Modify Memory"
+    level: {Bard: 4}
+
+  - name: "Phantasmal Killer"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Planar Ally (Lesser)"
+    level: {Cleric: 4}
+
+  - name: "Polymorph"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Rainbow Pattern"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Reduce Person (Mass)"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Reincarnate"
+    level: {Druid: 4}
+
+  - name: "Resilient Sphere"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Restoration"
+    level: {Cleric: 4, Paladin: 4}
+
+  - name: "Rusting Grasp"
+    level: {Druid: 4}
+
+  - name: "Secure Shelter"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Sending"
+    level: {Cleric: 4, Sorcerer: 5, Wizard: 5}
+
+  - name: "Shadow Conjuration"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Shout"
+    level: {Bard: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Solid Fog"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Spell Immunity"
+    level: {Cleric: 4}
+
+  - name: "Spike Stones"
+    level: {Druid: 4}
+
+  - name: "Stoneskin"
+    level: {Druid: 5, Sorcerer: 4, Wizard: 4}
+
+  - name: "Summon Monster IV"
+    level: {Bard: 4, Cleric: 4, Sorcerer: 4, Wizard: 4}
+
+  - name: "Summon Nature's Ally IV"
+    level: {Druid: 4, Ranger: 4}
+
+  - name: "Tree Stride"
+    level: {Druid: 5, Ranger: 4}
+
+  - name: "Wall of Fire"
+    level: {Druid: 5, Sorcerer: 4, Wizard: 4}
+
+  - name: "Wall of Ice"
+    level: {Sorcerer: 4, Wizard: 4}
+
+  - name: "Zone of Silence"
+    level: {Bard: 4}
+
+  - name: "Atonement"
+    level: {Cleric: 5, Druid: 5}
+
+  - name: "Awaken"
+    level: {Druid: 5}
+
+  - name: "Baleful Polymorph"
+    level: {Druid: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Call Lightning Storm"
+    level: {Druid: 5}
+
+  - name: "Cloudkill"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Command (Greater)"
+    level: {Cleric: 5}
+
+  - name: "Commune"
+    level: {Cleric: 5}
+
+  - name: "Cone of Cold"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Contact Other Plane"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Control Winds"
+    level: {Druid: 5}
+
+  - name: "Cure Light Wounds (Mass)"
+    level: {Bard: 5, Cleric: 5, Druid: 6}
+
+  - name: "Dispel Good"
+    level: {Cleric: 5}
+
+  - name: "Dispel Law"
+    level: {Cleric: 5}
+
+  - name: "Dispel Magic (Greater)"
+    level: {Bard: 5, Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Disrupting Weapon"
+    level: {Cleric: 5}
+
+  - name: "Dream"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Fabricate"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "False Vision"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Feeblemind"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Hallow"
+    level: {Cleric: 5, Druid: 5}
+
+  - name: "Heroism (Greater)"
+    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
+
+  - name: "Inflict Light Wounds (Mass)"
+    level: {Cleric: 5}
+
+  - name: "Insect Plague"
+    level: {Cleric: 5, Druid: 5}
+
+  - name: "Interposing Hand"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Mage's Faithful Hound"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Mage's Private Sanctum"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Magic Jar"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Major Creation"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Mind Fog"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Mirage Arcana"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Mislead"
+    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
+
+  - name: "Nightmare"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Overland Flight"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Passwall"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Permanency"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Persistent Image"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Planar Binding (Lesser)"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Plane Shift"
+    level: {Cleric: 5, Sorcerer: 7, Wizard: 7}
+
+  - name: "Prying Eyes"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Raise Dead"
+    level: {Cleric: 5}
+
+  - name: "Righteous Might"
+    level: {Cleric: 5}
+
+  - name: "Secret Chest"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Seeming"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Shadow Evocation"
+    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Shadow Walk"
+    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
+
+  - name: "Slay Living"
+    level: {Cleric: 5}
+
+  - name: "Song of Discord"
+    level: {Bard: 5}
+
+  - name: "Spell Resistance"
+    level: {Cleric: 5}
+
+  - name: "Suggestion (Mass)"
+    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
+
+  - name: "Summon Monster V"
+    level: {Bard: 5, Cleric: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Summon Nature's Ally V"
+    level: {Druid: 5}
+
+  - name: "Symbol of Pain"
+    level: {Cleric: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Symbol of Sleep"
+    level: {Cleric: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Telekinesis"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Telepathic Bond"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Teleport"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Transmute Mud to Rock"
+    level: {Druid: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "Transmute Rock to Mud"
+    level: {Druid: 5, Sorcerer: 5, Wizard: 5}
+
+  - name: "True Seeing"
+    level: {Cleric: 5, Druid: 7, Sorcerer: 6, Wizard: 6}
+
+  - name: "Unhallow"
+    level: {Cleric: 5, Druid: 5}
+
+  - name: "Wall of Force"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Wall of Stone"
+    level: {Cleric: 5, Druid: 6, Sorcerer: 5, Wizard: 5}
+
+  - name: "Wall of Thorns"
+    level: {Druid: 5}
+
+  - name: "Waves of Fatigue"
+    level: {Sorcerer: 5, Wizard: 5}
+
+  - name: "Acid Fog"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Analyze Dweomer"
+    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Animate Objects"
+    level: {Bard: 6, Cleric: 6}
+
+  - name: "Antilife Shell"
+    level: {Cleric: 6, Druid: 6}
+
+  - name: "Antimagic Field"
+    level: {Cleric: 8, Sorcerer: 6, Wizard: 6}
+
+  - name: "Banishment"
+    level: {Cleric: 6, Sorcerer: 7, Wizard: 7}
+
+  - name: "Bear's Endurance (Mass)"
+    level: {Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Blade Barrier"
+    level: {Cleric: 6}
+
+  - name: "Bull's Strength (Mass)"
+    level: {Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Cat's Grace (Mass)"
+    level: {Bard: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Chain Lightning"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Charm Monster (Mass)"
+    level: {Bard: 6, Sorcerer: 8, Wizard: 8}
+
+  - name: "Circle of Death"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Contingency"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Create Undead"
+    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Cure Moderate Wounds (Mass)"
+    level: {Bard: 6, Cleric: 6, Druid: 7}
+
+  - name: "Disintegrate"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Eagle's Splendor (Mass)"
+    level: {Bard: 6, Cleric: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Eyebite"
+    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Find the Path"
+    level: {Bard: 6, Cleric: 6, Druid: 6}
+
+  - name: "Fire Seeds"
+    level: {Druid: 6}
+
+  - name: "Flesh to Stone"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Forbiddance"
+    level: {Cleric: 6}
+
+  - name: "Forceful Hand"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Fox's Cunning (Mass)"
+    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Freezing Sphere"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Geas/Quest"
+    level: {Bard: 6, Cleric: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Globe of Invulnerability"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Glyph of Warding (Greater)"
+    level: {Cleric: 6}
+
+  - name: "Guards and Wards"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Harm"
+    level: {Cleric: 6}
+
+  - name: "Heal"
+    level: {Cleric: 6, Druid: 7}
+
+  - name: "Heroes' Feast"
+    level: {Bard: 6, Cleric: 6}
+
+  - name: "Inflict Moderate Wounds (Mass)"
+    level: {Cleric: 6}
+
+  - name: "Ironwood"
+    level: {Druid: 6}
+
+  - name: "Irresistible Dance"
+    level: {Bard: 6, Sorcerer: 8, Wizard: 8}
+
+  - name: "Liveoak"
+    level: {Druid: 6}
+
+  - name: "Mage's Lucubration"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Move Earth"
+    level: {Druid: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Owl's Wisdom (Mass)"
+    level: {Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Permanent Image"
+    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Planar Ally"
+    level: {Cleric: 6}
+
+  - name: "Planar Binding"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Programmed Image"
+    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Project Image"
+    level: {Bard: 6, Sorcerer: 7, Wizard: 7}
+
+  - name: "Repel Wood"
+    level: {Druid: 6}
+
+  - name: "Repulsion"
+    level: {Cleric: 7, Sorcerer: 6, Wizard: 6}
+
+  - name: "Scrying (Greater)"
+    level: {Bard: 6, Cleric: 7, Druid: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Shout (Greater)"
+    level: {Bard: 6, Sorcerer: 8, Wizard: 8}
+
+  - name: "Spellstaff"
+    level: {Druid: 6}
+
+  - name: "Stone Tell"
+    level: {Druid: 6}
+
+  - name: "Stone to Flesh"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Summon Monster VI"
+    level: {Bard: 6, Cleric: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Summon Nature's Ally VI"
+    level: {Druid: 6}
+
+  - name: "Symbol of Fear"
+    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Symbol of Persuasion"
+    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Sympathetic Vibration"
+    level: {Bard: 6}
+
+  - name: "Transformation"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Transport via Plants"
+    level: {Druid: 6}
+
+  - name: "Undeath to Death"
+    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Veil"
+    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
+
+  - name: "Wall of Iron"
+    level: {Sorcerer: 6, Wizard: 6}
+
+  - name: "Wind Walk"
+    level: {Cleric: 6, Druid: 7}
+
+  - name: "Word of Recall"
+    level: {Cleric: 6, Druid: 8}
