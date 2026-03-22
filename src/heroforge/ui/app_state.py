@@ -84,7 +84,15 @@ class AppState:
             "core/conditions_srd.yaml",
         )
         FeatsLoader(rd).load(
-            self.feat_registry, prereq_checker, self.spell_registry
+            self.feat_registry,
+            prereq_checker,
+            self.spell_registry,
+        )
+        FeatsLoader(rd).load(
+            self.feat_registry,
+            prereq_checker,
+            self.spell_registry,
+            "core/feats_srd.yaml",
         )
         SkillsLoader(rd).load(self.skill_registry)
         TemplatesLoader(rd).load(self.template_registry)

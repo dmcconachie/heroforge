@@ -1,0 +1,353 @@
+# rules/core/feats_srd.yaml
+#
+# SRD feats not already in feats_phb.yaml.
+# See feats_phb.yaml header for schema documentation.
+
+feats:
+
+  # =========================================================
+  # ALWAYS-ON FEATS
+  # =========================================================
+
+  - name: "Weapon Finesse"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Use DEX modifier instead of STR on
+      attack rolls with light weapons,
+      rapier, whip, or spiked chain
+    prerequisites:
+      stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  - name: "Skill Focus"
+    kind: passive
+    source_book: SRD
+    note: >-
+      +3 bonus on all checks with chosen
+      skill; may be taken multiple times
+      for different skills
+    prerequisites: null
+    effects: []
+
+  # =========================================================
+  # COMBAT FEATS (passive — no direct stat bonuses)
+  # =========================================================
+
+  - name: "Combat Reflexes"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Additional attacks of opportunity
+      equal to DEX bonus; may make AoOs
+      while flat-footed
+    prerequisites: null
+    effects: []
+
+  - name: "Improved Critical"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Double threat range with chosen
+      weapon type; does not stack with
+      other threat-range expansions
+      (e.g. keen)
+    prerequisites:
+      all_of:
+        - stat:
+            key: bab
+            min: 8
+            label: BAB
+    effects: []
+
+  - name: "Improved Disarm"
+    kind: passive
+    source_book: SRD
+    note: >-
+      No AoO when disarming; +4 on
+      opposed attack roll to disarm
+    prerequisites:
+      all_of:
+        - ability: {key: int_score, min: 13}
+        - feat: "Combat Expertise"
+    effects: []
+
+  - name: "Improved Feint"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Feint in combat as a move action
+      instead of a standard action
+    prerequisites:
+      all_of:
+        - ability: {key: int_score, min: 13}
+        - feat: "Combat Expertise"
+    effects: []
+
+  - name: "Improved Grapple"
+    kind: passive
+    source_book: SRD
+    note: >-
+      No AoO when starting a grapple;
+      +4 bonus on all grapple checks
+    prerequisites:
+      all_of:
+        - ability: {key: dex_score, min: 13}
+        - feat: "Improved Unarmed Strike"
+    effects: []
+
+  - name: "Improved Shield Bash"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Keep shield bonus to AC when
+      performing a shield bash
+    prerequisites:
+      feat: "Shield Proficiency"
+    effects: []
+
+  - name: "Improved Trip"
+    kind: passive
+    source_book: SRD
+    note: >-
+      No AoO when tripping; +4 on STR
+      check to trip; free melee attack
+      on successful trip
+    prerequisites:
+      all_of:
+        - ability: {key: int_score, min: 13}
+        - feat: "Combat Expertise"
+    effects: []
+
+  - name: "Quick Draw"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Draw a weapon as a free action;
+      draw hidden weapon as move action
+    prerequisites:
+      stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  - name: "Rapid Reload"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Reload chosen crossbow type faster:
+      hand/light as free action, heavy
+      as move action
+    prerequisites: null
+    effects: []
+
+  # =========================================================
+  # PROFICIENCY FEATS (passive)
+  # =========================================================
+
+  - name: "Simple Weapon Proficiency"
+    kind: passive
+    source_book: SRD
+    note: >-
+      No penalty on attack rolls with
+      simple weapons
+    prerequisites: null
+    effects: []
+
+  - name: "Martial Weapon Proficiency"
+    kind: passive
+    source_book: SRD
+    note: >-
+      No penalty on attack rolls with
+      chosen martial weapon type
+    prerequisites: null
+    effects: []
+
+  - name: "Exotic Weapon Proficiency"
+    kind: passive
+    source_book: SRD
+    note: >-
+      No penalty on attack rolls with
+      chosen exotic weapon type
+    prerequisites:
+      stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  # =========================================================
+  # ITEM CREATION FEATS (passive)
+  # =========================================================
+
+  - name: "Brew Potion"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Create potions of 3rd-level or
+      lower spells you know
+    prerequisites:
+      can_cast: {spell_level: 1, type: either}
+    effects: []
+
+  - name: "Craft Magic Arms and Armor"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Create magic weapons, armor, and
+      shields
+    prerequisites:
+      can_cast: {spell_level: 3, type: either}
+    effects: []
+
+  - name: "Craft Rod"
+    kind: passive
+    source_book: SRD
+    note: "Create rods"
+    prerequisites:
+      can_cast: {spell_level: 5, type: either}
+    effects: []
+
+  - name: "Craft Staff"
+    kind: passive
+    source_book: SRD
+    note: "Create staves"
+    prerequisites:
+      can_cast: {spell_level: 6, type: either}
+    effects: []
+
+  - name: "Craft Wand"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Create wands of 4th-level or lower
+      spells you know
+    prerequisites:
+      can_cast: {spell_level: 3, type: either}
+    effects: []
+
+  - name: "Craft Wondrous Item"
+    kind: passive
+    source_book: SRD
+    note: "Create wondrous items"
+    prerequisites:
+      can_cast: {spell_level: 1, type: either}
+    effects: []
+
+  - name: "Forge Ring"
+    kind: passive
+    source_book: SRD
+    note: "Create magic rings"
+    prerequisites:
+      can_cast: {spell_level: 6, type: either}
+    effects: []
+
+  - name: "Scribe Scroll"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Create scrolls of spells you know
+    prerequisites:
+      can_cast: {spell_level: 1, type: either}
+    effects: []
+
+  # =========================================================
+  # GENERAL / SPECIAL FEATS (passive)
+  # =========================================================
+
+  - name: "Augment Summoning"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Summoned creatures gain +4
+      enhancement to STR and CON
+    prerequisites:
+      feat: "Spell Focus"
+    effects: []
+
+  - name: "Eschew Materials"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Cast spells without material
+      components costing 1 gp or less
+    prerequisites: null
+    effects: []
+
+  - name: "Extra Turning"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Turn or rebuke 4 additional times
+      per day; may be taken multiple times
+    prerequisites: null
+    effects: []
+
+  - name: "Improved Counterspell"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Counterspell with a spell of the
+      same school one or more levels higher
+    prerequisites: null
+    effects: []
+
+  - name: "Improved Familiar"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Access expanded familiar list
+      based on alignment and level
+    prerequisites: null
+    effects: []
+
+  - name: "Improved Turning"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Turn or rebuke as if one level
+      higher in the granting class
+    prerequisites: null
+    effects: []
+
+  - name: "Leadership"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Attract a cohort and followers;
+      Leadership score = level + CHA mod
+    prerequisites:
+      stat:
+        key: character_level
+        min: 6
+        label: "character level"
+    effects: []
+
+  - name: "Natural Spell"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Cast spells while in wild shape
+      form
+    prerequisites:
+      all_of:
+        - ability: {key: wis_score, min: 13}
+        - has_class_feature:
+            feature: wild_shape
+    effects: []
+
+  - name: "Spell Mastery"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Prepare chosen spells (INT mod
+      count) without a spellbook
+    prerequisites:
+      class_level:
+        class: Wizard
+        min: 1
+    effects: []
+
+  - name: "Track"
+    kind: passive
+    source_book: SRD
+    note: >-
+      Use Survival skill to find and
+      follow tracks; DC varies by surface
+    prerequisites: null
+    effects: []
