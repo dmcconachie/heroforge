@@ -41,6 +41,10 @@ if TYPE_CHECKING:
         RaceRegistry,
     )
     from heroforge.engine.effects import BuffRegistry
+    from heroforge.engine.equipment import (
+        ArmorRegistry,
+        WeaponRegistry,
+    )
     from heroforge.engine.feats import FeatRegistry
     from heroforge.engine.prerequisites import (
         Prerequisite,
@@ -1209,6 +1213,106 @@ class SkillsLoader:
                 errors.append(f"{name!r}: key must start with 'skill_'")
 
         return errors
+
+
+# -----------------------------------------------------------
+# Equipment loader
+# -----------------------------------------------------------
+
+
+class EquipmentLoader:
+    """
+    Reads armor.yaml and weapons.yaml, populates
+    ArmorRegistry and WeaponRegistry.
+    """
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load_armor(
+        self,
+        registry: "ArmorRegistry",
+        relative_path: str = "core/armor.yaml",
+    ) -> list[str]:
+        from heroforge.engine.equipment import (
+            ArmorCategory,
+            ArmorDefinition,
+        )
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Armor file not found: {path}")
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict) or "armor" not in data:
+            raise LoaderError(f"{path}: missing 'armor' key")
+
+        cat_map = {c.value: c for c in ArmorCategory}
+        registered: list[str] = []
+        for decl in data["armor"]:
+            name = decl["name"]
+            cat_str = decl.get("category", "light")
+            cat = cat_map.get(cat_str)
+            if cat is None:
+                raise LoaderError(f"{name!r}: unknown category {cat_str!r}")
+            defn = ArmorDefinition(
+                name=name,
+                category=cat,
+                armor_bonus=decl.get("armor_bonus", 0),
+                max_dex_bonus=decl.get("max_dex_bonus", -1),
+                armor_check_penalty=decl.get("armor_check_penalty", 0),
+                arcane_spell_failure=decl.get("arcane_spell_failure", 0),
+                speed_30=decl.get("speed_30", 30),
+                speed_20=decl.get("speed_20", 20),
+                weight=float(decl.get("weight", 0)),
+                cost_gp=decl.get("cost_gp", 0),
+            )
+            registry.register(defn)
+            registered.append(name)
+        return registered
+
+    def load_weapons(
+        self,
+        registry: "WeaponRegistry",
+        relative_path: str = "core/weapons.yaml",
+    ) -> list[str]:
+        from heroforge.engine.equipment import (
+            WeaponCategory,
+            WeaponDefinition,
+        )
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Weapons file not found: {path}")
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict) or "weapons" not in data:
+            raise LoaderError(f"{path}: missing 'weapons' key")
+
+        cat_map = {c.value: c for c in WeaponCategory}
+        registered: list[str] = []
+        for decl in data["weapons"]:
+            name = decl["name"]
+            cat_str = decl.get("category", "simple")
+            cat = cat_map.get(cat_str)
+            if cat is None:
+                raise LoaderError(f"{name!r}: unknown category {cat_str!r}")
+            defn = WeaponDefinition(
+                name=name,
+                category=cat,
+                damage_dice=decl.get("damage_dice", "1d4"),
+                critical_range=decl.get("critical_range", 20),
+                critical_multiplier=decl.get("critical_multiplier", 2),
+                damage_type=decl.get("damage_type", ""),
+                range_increment=decl.get("range_increment", 0),
+                weight=float(decl.get("weight", 0)),
+                cost_gp=decl.get("cost_gp", 0),
+                is_ranged=bool(decl.get("is_ranged", False)),
+                special=decl.get("special", ""),
+            )
+            registry.register(defn)
+            registered.append(name)
+        return registered
 
 
 # -----------------------------------------------------------

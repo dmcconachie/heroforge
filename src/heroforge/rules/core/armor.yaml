@@ -1,0 +1,214 @@
+# rules/core/armor.yaml
+#
+# SRD armor and shield definitions.
+#
+# Fields:
+#   name, category (light/medium/heavy/shield),
+#   armor_bonus, max_dex_bonus (-1 = no cap),
+#   armor_check_penalty (0 or negative),
+#   arcane_spell_failure (0-100),
+#   speed_30, speed_20, weight, cost_gp
+
+armor:
+
+  # Light armor
+  - name: Padded
+    category: light
+    armor_bonus: 1
+    max_dex_bonus: 8
+    armor_check_penalty: 0
+    arcane_spell_failure: 5
+    speed_30: 30
+    speed_20: 20
+    weight: 10
+    cost_gp: 5
+
+  - name: Leather
+    category: light
+    armor_bonus: 2
+    max_dex_bonus: 6
+    armor_check_penalty: 0
+    arcane_spell_failure: 10
+    speed_30: 30
+    speed_20: 20
+    weight: 15
+    cost_gp: 10
+
+  - name: "Studded Leather"
+    category: light
+    armor_bonus: 3
+    max_dex_bonus: 5
+    armor_check_penalty: -1
+    arcane_spell_failure: 15
+    speed_30: 30
+    speed_20: 20
+    weight: 20
+    cost_gp: 25
+
+  - name: "Chain Shirt"
+    category: light
+    armor_bonus: 4
+    max_dex_bonus: 4
+    armor_check_penalty: -2
+    arcane_spell_failure: 20
+    speed_30: 30
+    speed_20: 20
+    weight: 25
+    cost_gp: 100
+
+  # Medium armor
+  - name: Hide
+    category: medium
+    armor_bonus: 3
+    max_dex_bonus: 4
+    armor_check_penalty: -3
+    arcane_spell_failure: 20
+    speed_30: 20
+    speed_20: 15
+    weight: 25
+    cost_gp: 15
+
+  - name: "Scale Mail"
+    category: medium
+    armor_bonus: 4
+    max_dex_bonus: 3
+    armor_check_penalty: -4
+    arcane_spell_failure: 25
+    speed_30: 20
+    speed_20: 15
+    weight: 30
+    cost_gp: 50
+
+  - name: Chainmail
+    category: medium
+    armor_bonus: 5
+    max_dex_bonus: 2
+    armor_check_penalty: -5
+    arcane_spell_failure: 30
+    speed_30: 20
+    speed_20: 15
+    weight: 40
+    cost_gp: 150
+
+  - name: Breastplate
+    category: medium
+    armor_bonus: 5
+    max_dex_bonus: 3
+    armor_check_penalty: -4
+    arcane_spell_failure: 25
+    speed_30: 20
+    speed_20: 15
+    weight: 30
+    cost_gp: 200
+
+  # Heavy armor
+  - name: "Splint Mail"
+    category: heavy
+    armor_bonus: 6
+    max_dex_bonus: 0
+    armor_check_penalty: -7
+    arcane_spell_failure: 40
+    speed_30: 20
+    speed_20: 15
+    weight: 45
+    cost_gp: 200
+
+  - name: "Banded Mail"
+    category: heavy
+    armor_bonus: 6
+    max_dex_bonus: 1
+    armor_check_penalty: -6
+    arcane_spell_failure: 35
+    speed_30: 20
+    speed_20: 15
+    weight: 35
+    cost_gp: 250
+
+  - name: "Half-Plate"
+    category: heavy
+    armor_bonus: 7
+    max_dex_bonus: 0
+    armor_check_penalty: -7
+    arcane_spell_failure: 40
+    speed_30: 20
+    speed_20: 15
+    weight: 50
+    cost_gp: 600
+
+  - name: "Full Plate"
+    category: heavy
+    armor_bonus: 8
+    max_dex_bonus: 1
+    armor_check_penalty: -6
+    arcane_spell_failure: 35
+    speed_30: 20
+    speed_20: 15
+    weight: 50
+    cost_gp: 1500
+
+  # Shields
+  - name: Buckler
+    category: shield
+    armor_bonus: 1
+    max_dex_bonus: -1
+    armor_check_penalty: -1
+    arcane_spell_failure: 5
+    speed_30: 0
+    speed_20: 0
+    weight: 5
+    cost_gp: 15
+
+  - name: "Light Wooden Shield"
+    category: shield
+    armor_bonus: 1
+    max_dex_bonus: -1
+    armor_check_penalty: -1
+    arcane_spell_failure: 5
+    speed_30: 0
+    speed_20: 0
+    weight: 5
+    cost_gp: 3
+
+  - name: "Light Steel Shield"
+    category: shield
+    armor_bonus: 1
+    max_dex_bonus: -1
+    armor_check_penalty: -1
+    arcane_spell_failure: 5
+    speed_30: 0
+    speed_20: 0
+    weight: 6
+    cost_gp: 9
+
+  - name: "Heavy Wooden Shield"
+    category: shield
+    armor_bonus: 2
+    max_dex_bonus: -1
+    armor_check_penalty: -2
+    arcane_spell_failure: 15
+    speed_30: 0
+    speed_20: 0
+    weight: 10
+    cost_gp: 7
+
+  - name: "Heavy Steel Shield"
+    category: shield
+    armor_bonus: 2
+    max_dex_bonus: -1
+    armor_check_penalty: -2
+    arcane_spell_failure: 15
+    speed_30: 0
+    speed_20: 0
+    weight: 15
+    cost_gp: 20
+
+  - name: "Tower Shield"
+    category: shield
+    armor_bonus: 4
+    max_dex_bonus: 2
+    armor_check_penalty: -10
+    arcane_spell_failure: 50
+    speed_30: 0
+    speed_20: 0
+    weight: 45
+    cost_gp: 30

@@ -21,8 +21,15 @@ from heroforge.engine.classes_races import (
     RaceRegistry,
 )
 from heroforge.engine.effects import BuffRegistry
+from heroforge.engine.equipment import (
+    ArmorRegistry,
+    WeaponRegistry,
+)
 from heroforge.engine.feats import FeatRegistry
-from heroforge.engine.skills import SkillRegistry, register_skills_on_character
+from heroforge.engine.skills import (
+    SkillRegistry,
+    register_skills_on_character,
+)
 from heroforge.engine.spells import SpellCompendium
 from heroforge.engine.templates import TemplateRegistry
 
@@ -48,6 +55,8 @@ class AppState:
         self.spell_registry = BuffRegistry()
         self.spell_compendium = SpellCompendium()
         self.feat_registry = FeatRegistry()
+        self.armor_registry = ArmorRegistry()
+        self.weapon_registry = WeaponRegistry()
         self.skill_registry = SkillRegistry()
         self.template_registry = TemplateRegistry()
         self.class_registry = ClassRegistry()
@@ -71,6 +80,7 @@ class AppState:
         from heroforge.engine.prerequisites import PrerequisiteChecker
         from heroforge.rules.loader import (
             ClassesLoader,
+            EquipmentLoader,
             FeatsLoader,
             RacesLoader,
             SkillsLoader,
@@ -108,6 +118,11 @@ class AppState:
             prereq_checker=prereq_checker,
         )
         RacesLoader(rd).load(self.race_registry)
+
+        # Load equipment
+        eq_loader = EquipmentLoader(rd)
+        eq_loader.load_armor(self.armor_registry)
+        eq_loader.load_weapons(self.weapon_registry)
 
         # Load spell compendium (all spells)
         scl = SpellCompendiumLoader(rd)
