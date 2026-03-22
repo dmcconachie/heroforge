@@ -79,6 +79,10 @@ class AppState:
         prereq_checker = PrerequisiteChecker()
 
         SpellsLoader(rd).load(self.spell_registry)
+        SpellsLoader(rd).load(
+            self.spell_registry,
+            "core/conditions_srd.yaml",
+        )
         FeatsLoader(rd).load(
             self.feat_registry, prereq_checker, self.spell_registry
         )

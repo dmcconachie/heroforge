@@ -1,0 +1,246 @@
+# rules/core/conditions_srd.yaml
+#
+# Additional conditions from the SRD not already in
+# spells_phb.yaml. Each is a toggleable condition on the
+# Buffs tab.
+#
+# Already defined in spells_phb.yaml (do NOT duplicate):
+#   Bane, Blinded, Crushing Despair, Dazzled, Entangled,
+#   Exhausted, Fatigued, Frightened, Panicked, Shaken,
+#   Sickened, Slowed, Stunned
+
+spells:
+
+  # =====================================================
+  # Conditions with stat-affecting penalties
+  # =====================================================
+
+  - name: "Cowering"
+    category: condition
+    source_book: SRD
+    note: >-
+      -2 AC, lose Dex bonus to AC;
+      no actions possible
+    effects:
+      - target: ac
+        bonus_type: untyped
+        value: -2
+
+  - name: "Deafened"
+    category: condition
+    source_book: SRD
+    note: >-
+      -4 initiative; automatically fails
+      Listen checks; 20% arcane spell failure
+      (verbal components)
+    effects:
+      - target: initiative
+        bonus_type: untyped
+        value: -4
+
+  - name: "Energy Drained (1 level)"
+    category: condition
+    source_book: SRD
+    note: >-
+      -1 on attack rolls, saving throws,
+      skill checks, ability checks; -5 HP;
+      -1 effective level; lose one highest
+      spell slot
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -1
+      - target: fort_save
+        bonus_type: untyped
+        value: -1
+      - target: ref_save
+        bonus_type: untyped
+        value: -1
+      - target: will_save
+        bonus_type: untyped
+        value: -1
+      - target: hp_bonus
+        bonus_type: untyped
+        value: -5
+
+  - name: "Energy Drained (2 levels)"
+    category: condition
+    source_book: SRD
+    note: >-
+      -2 on attack rolls, saving throws,
+      skill checks, ability checks; -10 HP;
+      -2 effective levels; lose two highest
+      spell slots
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -2
+      - target: fort_save
+        bonus_type: untyped
+        value: -2
+      - target: ref_save
+        bonus_type: untyped
+        value: -2
+      - target: will_save
+        bonus_type: untyped
+        value: -2
+      - target: hp_bonus
+        bonus_type: untyped
+        value: -10
+
+  - name: "Energy Drained (3 levels)"
+    category: condition
+    source_book: SRD
+    note: >-
+      -3 on attack rolls, saving throws,
+      skill checks, ability checks; -15 HP;
+      -3 effective levels
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -3
+      - target: fort_save
+        bonus_type: untyped
+        value: -3
+      - target: ref_save
+        bonus_type: untyped
+        value: -3
+      - target: will_save
+        bonus_type: untyped
+        value: -3
+      - target: hp_bonus
+        bonus_type: untyped
+        value: -15
+
+  - name: "Invisible"
+    category: condition
+    source_book: SRD
+    note: >-
+      +2 on attack rolls; ignore opponent
+      Dex bonus to AC; 50% miss chance for
+      attackers
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 2
+
+  - name: "Prone"
+    category: condition
+    source_book: SRD
+    note: >-
+      -4 melee attack penalty; cannot use
+      ranged weapons (except crossbow);
+      +4 AC vs ranged, -4 AC vs melee
+    effects:
+      - target: attack_melee
+        bonus_type: untyped
+        value: -4
+
+  # =====================================================
+  # Conditions without direct stat effects
+  # (note-only; useful as toggleable reminders)
+  # =====================================================
+
+  - name: "Confused"
+    category: condition
+    source_book: SRD
+    note: >-
+      Each round roll d%%: 01-10 attack
+      caster, 11-20 act normally, 21-50
+      babble, 51-70 flee, 71-100 attack
+      nearest creature
+
+  - name: "Dazed"
+    category: condition
+    source_book: SRD
+    note: >-
+      Cannot take actions; no AC penalty;
+      typically lasts 1 round
+
+  - name: "Disabled"
+    category: condition
+    source_book: SRD
+    note: >-
+      At exactly 0 HP; single move or
+      standard action per round (not both);
+      standard actions deal 1 HP damage
+
+  - name: "Dying"
+    category: condition
+    source_book: SRD
+    note: >-
+      At -1 to -9 HP; unconscious; 10%%
+      chance to stabilize each round;
+      -10 HP = dead
+
+  - name: "Fascinated"
+    category: condition
+    source_book: SRD
+    note: >-
+      -4 penalty on reactive skill checks
+      (Spot, Listen, Sense Motive); cannot
+      take actions except pay attention
+
+  - name: "Flat-Footed"
+    category: condition
+    source_book: SRD
+    note: >-
+      Lose Dex bonus to AC; cannot make
+      attacks of opportunity
+
+  - name: "Grappling"
+    category: condition
+    source_book: SRD
+    note: >-
+      Lose Dex bonus to AC against
+      opponents not in the grapple; does
+      not threaten adjacent squares;
+      limited actions
+
+  - name: "Helpless"
+    category: condition
+    source_book: SRD
+    note: >-
+      Effective Dex 0 (-5 modifier);
+      melee attackers gain +4 bonus;
+      susceptible to coup de grace and
+      sneak attack
+
+  - name: "Nauseated"
+    category: condition
+    source_book: SRD
+    note: >-
+      Cannot attack, cast spells,
+      concentrate, or do anything requiring
+      attention; single move action only
+
+  - name: "Paralyzed"
+    category: condition
+    source_book: SRD
+    note: >-
+      Effective Str and Dex of 0; helpless;
+      can take purely mental actions only
+
+  - name: "Petrified"
+    category: condition
+    source_book: SRD
+    note: >-
+      Turned to stone; considered
+      unconscious; if broken while
+      petrified, missing pieces when
+      restored
+
+  - name: "Staggered"
+    category: condition
+    source_book: SRD
+    note: >-
+      Single move or standard action per
+      round (not both); no full-round
+      actions
+
+  - name: "Turned"
+    category: condition
+    source_book: SRD
+    note: >-
+      Must flee from the turner for 10
+      rounds; if unable to flee, cowers
