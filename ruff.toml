@@ -1,0 +1,48 @@
+line-length = 80
+indent-width = 4
+target-version = "py312"
+unsafe-fixes = false
+
+[format]
+quote-style = "double"
+indent-style = "space"
+
+[lint]
+select = [
+    # pycodestyle (Errors, Warnings)
+    "E",
+    "W",
+    # Pyflakes
+    "F",
+    # flake8-builtins
+    "A",
+    # flake8-bugbear
+    "B",
+    # flake8-bandit
+    "S110",
+    "S112",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # pydocstyle: multi-line docstring summary should start at the second line
+    "D213",
+    # Check the presence of type hints.
+    "ANN",
+]
+# B905: zip() without explicit strict= should not be auto-fixed.
+# Developers must explicitly choose strict=True or strict=False based on intent.
+# See: https://github.com/LBMCo/orochi/issues/2202
+unfixable = ["B905"]
+
+[lint.isort]
+known-first-party = [
+    "heroforge",
+]
+
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+]

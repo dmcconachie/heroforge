@@ -1,0 +1,228 @@
+# rules/core/races.yaml
+#
+# Core race definitions for D&D 3.5e (PHB).
+#
+# Schema per entry:
+#   name            : Unique race name
+#   source_book     : PHB | MM | etc.
+#   creature_type   : Humanoid (most races)
+#   subtypes        : list of subtypes (e.g. [Human], [Elf], [Dwarf])
+#   size            : Small | Medium | Large
+#   base_speed      : int (ft per round)
+#   ability_modifiers:
+#     - ability: str|dex|con|int|wis|cha
+#       value: int (positive or negative)
+#       bonus_type: untyped (racial ability mods are always untyped)
+#   favored_class   : class name or "any"
+#   la              : Level Adjustment (0 for standard races)
+#   racial_traits   : list of trait names (for display; effects modelled separately)
+#   languages       : {automatic: [], bonus: []}
+#   weapon_familiarity: list of weapons treated as martial
+#   low_light_vision : bool
+#   darkvision      : int (feet; 0 = none)
+
+races:
+
+  # =========================================================================
+  # Human
+  # =========================================================================
+  - name: Human
+    source_book: PHB
+    creature_type: Humanoid
+    subtypes: [Human]
+    size: Medium
+    base_speed: 30
+    ability_modifiers: []   # No adjustments — bonus feat and skill point instead
+    favored_class: any
+    la: 0
+    racial_traits:
+      - "Medium size: no size bonuses or penalties"
+      - "Speed 30 ft"
+      - "1 extra feat at 1st level"
+      - "4 extra skill points at 1st level, +1 per level thereafter"
+      - "Bonus languages: any (except secret)"
+    languages:
+      automatic: [Common]
+      bonus: [any]
+    weapon_familiarity: []
+    low_light_vision: false
+    darkvision: 0
+
+  # =========================================================================
+  # Dwarf
+  # =========================================================================
+  - name: Dwarf
+    source_book: PHB
+    creature_type: Humanoid
+    subtypes: [Dwarf]
+    size: Medium
+    base_speed: 20
+    ability_modifiers:
+      - {ability: con, value:  2, bonus_type: untyped}
+      - {ability: cha, value: -2, bonus_type: untyped}
+    favored_class: Fighter
+    la: 0
+    racial_traits:
+      - "+2 CON, -2 CHA"
+      - "Medium size"
+      - "Speed 20 ft (not slowed by medium/heavy armor or heavy loads)"
+      - "Darkvision 60 ft"
+      - "+2 racial bonus on saves vs poison"
+      - "+2 racial bonus on saves vs spells and spell-like abilities"
+      - "+1 attack bonus vs orcs and goblinoids"
+      - "+4 dodge bonus to AC vs giants"
+      - "+2 racial bonus on Appraise and Craft checks related to stone or metal"
+      - "Stonecunning: +2 Search to notice unusual stonework, auto-check within 10 ft"
+      - "Weapon Familiarity: dwarven waraxe and dwarven urgrosh as martial weapons"
+      - "Stability: +4 bonus vs bull rush/trip when standing on ground"
+    languages:
+      automatic: [Common, Dwarven]
+      bonus: [Giant, Gnome, Goblin, Orc, Terran, Undercommon]
+    weapon_familiarity: [Dwarven Waraxe, Dwarven Urgrosh]
+    low_light_vision: false
+    darkvision: 60
+
+  # =========================================================================
+  # Elf
+  # =========================================================================
+  - name: Elf
+    source_book: PHB
+    creature_type: Humanoid
+    subtypes: [Elf]
+    size: Medium
+    base_speed: 30
+    ability_modifiers:
+      - {ability: dex, value:  2, bonus_type: untyped}
+      - {ability: con, value: -2, bonus_type: untyped}
+    favored_class: Wizard
+    la: 0
+    racial_traits:
+      - "+2 DEX, -2 CON"
+      - "Medium size"
+      - "Speed 30 ft"
+      - "Low-light vision"
+      - "Immunity to magic sleep effects"
+      - "+2 racial bonus on saves vs enchantment spells and effects"
+      - "+2 racial bonus on Listen, Search, and Spot checks"
+      - "Auto Search check when within 5 ft of secret door"
+      - "Weapon Familiarity: longsword, rapier, longbow, shortbow as martial weapons"
+    languages:
+      automatic: [Common, Elven]
+      bonus: [Draconic, Gnoll, Gnome, Goblin, Orc, Sylvan]
+    weapon_familiarity: [Longsword, Rapier, Longbow, Longbow, Composite, Shortbow, Shortbow, Composite]
+    low_light_vision: true
+    darkvision: 0
+
+  # =========================================================================
+  # Gnome
+  # =========================================================================
+  - name: Gnome
+    source_book: PHB
+    creature_type: Humanoid
+    subtypes: [Gnome]
+    size: Small
+    base_speed: 20
+    ability_modifiers:
+      - {ability: con, value:  2, bonus_type: untyped}
+      - {ability: str, value: -2, bonus_type: untyped}
+    favored_class: Bard
+    la: 0
+    racial_traits:
+      - "+2 CON, -2 STR"
+      - "Small size: +1 attack, +1 AC, -4 grapple, +4 Hide, −1 carrying capacity"
+      - "Speed 20 ft"
+      - "Low-light vision"
+      - "+2 save vs illusions"
+      - "+1 attack vs kobolds and goblinoids"
+      - "+4 dodge bonus vs giants"
+      - "+2 Listen checks; +2 Craft (alchemy) checks"
+      - "Speak with animals (burrowing mammals only) 1/day each; spell-like abilities vs illusions"
+      - "Weapon Familiarity: gnome hooked hammer as martial weapon"
+    languages:
+      automatic: [Common, Gnome]
+      bonus: [Draconic, Dwarven, Elven, Giant, Goblin, Orc]
+    weapon_familiarity: [Gnome Hooked Hammer]
+    low_light_vision: true
+    darkvision: 0
+
+  # =========================================================================
+  # Half-Elf
+  # =========================================================================
+  - name: Half-Elf
+    source_book: PHB
+    creature_type: Humanoid
+    subtypes: [Elf]
+    size: Medium
+    base_speed: 30
+    ability_modifiers: []   # No adjustments
+    favored_class: any
+    la: 0
+    racial_traits:
+      - "Medium size; Speed 30 ft"
+      - "Low-light vision"
+      - "Immunity to magic sleep effects"
+      - "+2 racial bonus on saves vs enchantment"
+      - "+1 racial bonus on Listen, Search, Spot checks"
+      - "Elven blood: subject to effects targeting elves"
+      - "+2 racial bonus on Diplomacy and Gather Information checks"
+    languages:
+      automatic: [Common, Elven]
+      bonus: [any]
+    weapon_familiarity: [Longsword, Rapier, Longbow, Longbow, Composite, Shortbow, Shortbow, Composite]
+    low_light_vision: true
+    darkvision: 0
+
+  # =========================================================================
+  # Half-Orc
+  # =========================================================================
+  - name: Half-Orc
+    source_book: PHB
+    creature_type: Humanoid
+    subtypes: [Orc]
+    size: Medium
+    base_speed: 30
+    ability_modifiers:
+      - {ability: str, value:  2, bonus_type: untyped}
+      - {ability: int, value: -2, bonus_type: untyped}
+      - {ability: cha, value: -2, bonus_type: untyped}
+    favored_class: Barbarian
+    la: 0
+    racial_traits:
+      - "+2 STR, -2 INT, -2 CHA"
+      - "Medium size; Speed 30 ft"
+      - "Darkvision 60 ft"
+      - "Orc blood: subject to effects targeting orcs"
+    languages:
+      automatic: [Common, Orc]
+      bonus: [Draconic, Giant, Gnoll, Goblin, Abyssal]
+    weapon_familiarity: []
+    low_light_vision: false
+    darkvision: 60
+
+  # =========================================================================
+  # Halfling
+  # =========================================================================
+  - name: Halfling
+    source_book: PHB
+    creature_type: Humanoid
+    subtypes: [Halfling]
+    size: Small
+    base_speed: 20
+    ability_modifiers:
+      - {ability: dex, value:  2, bonus_type: untyped}
+      - {ability: str, value: -2, bonus_type: untyped}
+    favored_class: Rogue
+    la: 0
+    racial_traits:
+      - "+2 DEX, -2 STR"
+      - "Small size: +1 attack, +1 AC, -4 grapple, +4 Hide"
+      - "Speed 20 ft"
+      - "+2 save vs fear"
+      - "+1 attack with thrown weapons and slings"
+      - "+2 Listen, Climb, Jump, Move Silently checks"
+    languages:
+      automatic: [Common, Halfling]
+      bonus: [Dwarven, Elven, Gnome, Goblin, Orc]
+    weapon_familiarity: []
+    low_light_vision: false
+    darkvision: 0

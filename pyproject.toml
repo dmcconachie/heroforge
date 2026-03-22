@@ -1,0 +1,36 @@
+[build-system]
+requires = ["uv_build>=0.8.6"]
+build-backend = "uv_build"
+
+[project]
+name = "heroforge"
+version = "0.1.0"
+description = "HeroForge Anew — D&D 3.5e character sheet"
+requires-python = "==3.12.*"
+dependencies = [
+    "pyqt6>=6.10.2",
+    "pyyaml>=6.0.3",
+    "reportlab>=4.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-xdist>=3.8.0",
+]
+
+[project.scripts]
+app = "heroforge.ui.app:main"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-n=auto",                  # Automatic amount of parallelization
+    "--dist=loadgroup",         # Respect xdist_group markers (Qt tests)
+    "--import-mode=importlib",  # Safer imports with src/ layout
+    "--strict-markers",         # Fail on unknown @pytest.mark
+    "--strict-config",          # Fail on unknown ini keys
+    "-ra",                      # Show summary of skipped/failed/etc.
+]
+markers = [
+    "xdist_group: group tests to run in the same xdist worker process",
+]

@@ -1,0 +1,1045 @@
+# rules/core/feats_phb.yaml
+#
+# Feats from the Player's Handbook (PHB).
+#
+# Three feat kinds (the `kind` field):
+#
+#   always_on   : Applied automatically when the feat is taken. Never appears
+#                 in the Buffs panel — it just silently contributes to pools.
+#                 Examples: Toughness, Dodge, Lightning Reflexes.
+#
+#   conditional : Appears in the Buffs panel alongside spells. The user
+#                 toggles it on/off per encounter or per round.
+#                 Examples: Power Attack, Combat Expertise.
+#
+#   passive     : No stat effects at all. Exists only to open up prerequisites
+#                 (feat chains) or to gate prestige classes.
+#                 Examples: Point Blank Shot, Weapon Focus (chain opener).
+#
+# For conditional feats, an optional `parameter` block describes the integer
+# input the user supplies at activation time:
+#
+#   parameter:
+#     name       : Display label shown in the buff panel (e.g. "Points traded")
+#     min        : Minimum value (usually 1)
+#     max_formula: Formula for the maximum (e.g. "bab" for Power Attack)
+#     default    : Default value when first activated
+#
+# When a conditional feat has a parameter, the effect values reference
+# "$parameter" which the engine substitutes at activation time.
+#
+# Prerequisites use the same vocabulary as the prereq system:
+#   stat, ability, feat, skill, class_level, race, alignment,
+#   proficient_with, can_cast, has_class_feature, creature_type_is,
+#   all_of, any_of, none_of.
+#
+# Effects use the same schema as spells:
+#   target, bonus_type, value (int or formula), condition_key, source_label.
+
+feats:
+
+  # =========================================================================
+  # ALWAYS-ON FEATS
+  # Applied automatically when taken; never in the Buffs panel.
+  # =========================================================================
+
+  # --- Combat ---------------------------------------------------------------
+
+  - name: "Toughness"
+    kind: always_on
+    source_book: PHB
+    note: "+3 hit points"
+    prerequisites: null
+    effects:
+      - target: hp_bonus
+        bonus_type: untyped
+        value: 3
+        source_label: "Toughness"
+
+  - name: "Dodge"
+    kind: always_on
+    source_book: PHB
+    note: "+1 dodge bonus to AC"
+    prerequisites:
+      ability: {key: dex_score, min: 13}
+    effects:
+      - target: ac
+        bonus_type: dodge
+        value: 1
+        source_label: "Dodge"
+
+  - name: "Weapon Focus"
+    kind: always_on
+    source_book: PHB
+    note: "+1 attack with chosen weapon (applied as untyped to attack_all for simplicity)"
+    prerequisites:
+      all_of:
+        - stat: {key: bab, min: 1, label: BAB}
+        - proficient_with: {weapon: "$weapon"}
+    parameterized_selection:
+      name: weapon
+      label: "Weapon"
+      type: weapon_list
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 1
+        source_label: "Weapon Focus"
+
+  - name: "Greater Weapon Focus"
+    kind: always_on
+    source_book: PHB
+    note: "+1 additional attack with chosen weapon (stacks with Weapon Focus)"
+    prerequisites:
+      all_of:
+        - feat: "Weapon Focus"
+        - class_level: {class: Fighter, min: 8}
+    parameterized_selection:
+      name: weapon
+      label: "Weapon"
+      type: weapon_list
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 1
+        source_label: "Greater Weapon Focus"
+
+  - name: "Weapon Specialization"
+    kind: always_on
+    source_book: PHB
+    note: "+2 damage with chosen weapon"
+    prerequisites:
+      all_of:
+        - feat: "Weapon Focus"
+        - class_level: {class: Fighter, min: 4}
+    parameterized_selection:
+      name: weapon
+      label: "Weapon"
+      type: weapon_list
+    effects:
+      - target: damage_all
+        bonus_type: untyped
+        value: 2
+        source_label: "Weapon Specialization"
+
+  - name: "Greater Weapon Specialization"
+    kind: always_on
+    source_book: PHB
+    note: "+2 additional damage with chosen weapon (stacks)"
+    prerequisites:
+      all_of:
+        - feat: "Weapon Specialization"
+        - feat: "Greater Weapon Focus"
+        - class_level: {class: Fighter, min: 12}
+    parameterized_selection:
+      name: weapon
+      label: "Weapon"
+      type: weapon_list
+    effects:
+      - target: damage_all
+        bonus_type: untyped
+        value: 2
+        source_label: "Greater Weapon Specialization"
+
+  - name: "Melee Weapon Mastery"
+    kind: always_on
+    source_book: PHB
+    note: "+2 attack and damage with chosen damage type (slashing/piercing/bludgeoning)"
+    prerequisites:
+      all_of:
+        - feat: "Weapon Focus"
+        - feat: "Weapon Specialization"
+        - stat: {key: bab, min: 8, label: BAB}
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 2
+        source_label: "Melee Weapon Mastery (atk)"
+      - target: damage_all
+        bonus_type: untyped
+        value: 2
+        source_label: "Melee Weapon Mastery (dmg)"
+
+  # --- Saving throws --------------------------------------------------------
+
+  - name: "Iron Will"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Will saving throws"
+    prerequisites: null
+    effects:
+      - target: will_save
+        bonus_type: untyped
+        value: 2
+        source_label: "Iron Will"
+
+  - name: "Lightning Reflexes"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Reflex saving throws"
+    prerequisites: null
+    effects:
+      - target: ref_save
+        bonus_type: untyped
+        value: 2
+        source_label: "Lightning Reflexes"
+
+  - name: "Great Fortitude"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Fortitude saving throws"
+    prerequisites: null
+    effects:
+      - target: fort_save
+        bonus_type: untyped
+        value: 2
+        source_label: "Great Fortitude"
+
+  # --- Initiative -----------------------------------------------------------
+
+  - name: "Improved Initiative"
+    kind: always_on
+    source_book: PHB
+    note: "+4 on initiative checks"
+    prerequisites: null
+    effects:
+      - target: initiative
+        bonus_type: untyped
+        value: 4
+        source_label: "Improved Initiative"
+
+  # --- AC -------------------------------------------------------------------
+
+  - name: "Armor Proficiency (Light)"
+    kind: passive
+    source_book: PHB
+    note: "Proficiency with light armor"
+    prerequisites: null
+    effects: []
+
+  - name: "Armor Proficiency (Medium)"
+    kind: passive
+    source_book: PHB
+    note: "Proficiency with medium armor"
+    prerequisites:
+      feat: "Armor Proficiency (Light)"
+    effects: []
+
+  - name: "Armor Proficiency (Heavy)"
+    kind: passive
+    source_book: PHB
+    note: "Proficiency with heavy armor"
+    prerequisites:
+      feat: "Armor Proficiency (Medium)"
+    effects: []
+
+  - name: "Shield Proficiency"
+    kind: passive
+    source_book: PHB
+    note: "Proficiency with shields"
+    prerequisites: null
+    effects: []
+
+  - name: "Tower Shield Proficiency"
+    kind: passive
+    source_book: PHB
+    note: "Proficiency with tower shields"
+    prerequisites:
+      feat: "Shield Proficiency"
+    effects: []
+
+  # --- Other always-on ------------------------------------------------------
+
+  - name: "Alertness"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Listen and Spot checks"
+    prerequisites: null
+    effects:
+      - target: skill_listen
+        bonus_type: untyped
+        value: 2
+        source_label: "Alertness"
+      - target: skill_spot
+        bonus_type: untyped
+        value: 2
+        source_label: "Alertness"
+
+  - name: "Blind-Fight"
+    kind: passive
+    source_book: PHB
+    note: "Reroll miss chance for concealment; no bonus to pools"
+    prerequisites: null
+    effects: []
+
+  - name: "Combat Casting"
+    kind: passive
+    source_book: PHB
+    note: "+4 Concentration when casting defensively; no pool bonus"
+    prerequisites: null
+    effects:
+      - target: skill_concentration
+        bonus_type: circumstance
+        value: 4
+        source_label: "Combat Casting"
+
+  - name: "Endurance"
+    kind: passive
+    source_book: PHB
+    note: "+4 on various checks to avoid nonlethal damage; no pool bonus"
+    prerequisites: null
+    effects: []
+
+  - name: "Run"
+    kind: passive
+    source_book: PHB
+    note: "Run at 5× speed; no pool bonus"
+    prerequisites: null
+    effects: []
+
+  - name: "Diehard"
+    kind: passive
+    source_book: PHB
+    note: "Automatically stabilize when dying; requires Endurance"
+    prerequisites:
+      feat: "Endurance"
+    effects: []
+
+  # =========================================================================
+  # PASSIVE CHAIN FEATS
+  # No stat effects; exist purely as prerequisites for other feats or PrCs.
+  # =========================================================================
+
+  - name: "Point Blank Shot"
+    kind: passive
+    source_book: PHB
+    note: "+1 attack and damage within 30 ft. (modelled in ranged weapon attack)"
+    prerequisites: null
+    effects: []
+
+  - name: "Precise Shot"
+    kind: passive
+    source_book: PHB
+    note: "No -4 penalty when shooting into melee"
+    prerequisites:
+      feat: "Point Blank Shot"
+    effects: []
+
+  - name: "Rapid Shot"
+    kind: passive
+    source_book: PHB
+    note: "Extra ranged attack at highest BAB with -2 to all ranged attacks"
+    prerequisites:
+      all_of:
+        - feat: "Point Blank Shot"
+        - stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  - name: "Many Shot"
+    kind: passive
+    source_book: PHB
+    note: "Fire multiple arrows in one attack action"
+    prerequisites:
+      all_of:
+        - feat: "Point Blank Shot"
+        - feat: "Rapid Shot"
+        - stat: {key: bab, min: 6, label: BAB}
+        - ability: {key: dex_score, min: 17}
+    effects: []
+
+  - name: "Shot on the Run"
+    kind: passive
+    source_book: PHB
+    note: "Move, shoot, continue moving"
+    prerequisites:
+      all_of:
+        - feat: "Point Blank Shot"
+        - feat: "Dodge"
+        - feat: "Mobility"
+        - stat: {key: bab, min: 4, label: BAB}
+    effects: []
+
+  - name: "Mobility"
+    kind: passive
+    source_book: PHB
+    note: "+4 AC against attacks of opportunity from movement"
+    prerequisites:
+      ability: {key: dex_score, min: 13}
+    effects: []
+
+  - name: "Spring Attack"
+    kind: passive
+    source_book: PHB
+    note: "Move, attack, continue moving without AoO"
+    prerequisites:
+      all_of:
+        - feat: "Dodge"
+        - feat: "Mobility"
+        - stat: {key: bab, min: 4, label: BAB}
+    effects: []
+
+  - name: "Whirlwind Attack"
+    kind: passive
+    source_book: PHB
+    note: "Attack all adjacent opponents"
+    prerequisites:
+      all_of:
+        - feat: "Combat Expertise"
+        - feat: "Dodge"
+        - feat: "Mobility"
+        - feat: "Spring Attack"
+        - stat: {key: bab, min: 4, label: BAB}
+        - ability: {key: dex_score, min: 13}
+        - ability: {key: int_score, min: 13}
+    effects: []
+
+  - name: "Power Attack"
+    kind: conditional
+    source_book: PHB
+    note: "Trade attack bonus for damage bonus (1-for-1; 2-for-1 with two-hander)"
+    prerequisites:
+      stat: {key: bab, min: 1, label: BAB}
+    parameter:
+      name: points
+      label: "Points traded"
+      min: 1
+      max_formula: "bab"
+      default: 1
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: "-$parameter"
+        source_label: "Power Attack (penalty)"
+      - target: damage_all
+        bonus_type: untyped
+        value: "$parameter"
+        source_label: "Power Attack (bonus)"
+
+  - name: "Cleave"
+    kind: passive
+    source_book: PHB
+    note: "Extra attack after dropping an opponent"
+    prerequisites:
+      all_of:
+        - feat: "Power Attack"
+        - stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  - name: "Great Cleave"
+    kind: passive
+    source_book: PHB
+    note: "Unlimited extra attacks after dropping opponents"
+    prerequisites:
+      all_of:
+        - feat: "Cleave"
+        - stat: {key: bab, min: 4, label: BAB}
+    effects: []
+
+  - name: "Improved Bull Rush"
+    kind: passive
+    source_book: PHB
+    note: "No AoO on bull rush; +4 to bull rush check"
+    prerequisites:
+      all_of:
+        - feat: "Power Attack"
+        - stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  - name: "Improved Sunder"
+    kind: passive
+    source_book: PHB
+    note: "No AoO on sunder; +4 to sunder check"
+    prerequisites:
+      all_of:
+        - feat: "Power Attack"
+        - stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  - name: "Improved Overrun"
+    kind: passive
+    source_book: PHB
+    note: "No AoO on overrun; opponents cannot avoid"
+    prerequisites:
+      all_of:
+        - feat: "Power Attack"
+        - stat: {key: bab, min: 1, label: BAB}
+    effects: []
+
+  - name: "Two-Weapon Fighting"
+    kind: passive
+    source_book: PHB
+    note: "Reduced penalties when fighting with two weapons"
+    prerequisites:
+      ability: {key: dex_score, min: 15}
+    effects: []
+
+  - name: "Improved Two-Weapon Fighting"
+    kind: passive
+    source_book: PHB
+    note: "Additional off-hand attack at -5"
+    prerequisites:
+      all_of:
+        - feat: "Two-Weapon Fighting"
+        - ability: {key: dex_score, min: 17}
+        - stat: {key: bab, min: 6, label: BAB}
+    effects: []
+
+  - name: "Greater Two-Weapon Fighting"
+    kind: passive
+    source_book: PHB
+    note: "Third off-hand attack at -10"
+    prerequisites:
+      all_of:
+        - feat: "Improved Two-Weapon Fighting"
+        - ability: {key: dex_score, min: 19}
+        - stat: {key: bab, min: 11, label: BAB}
+    effects: []
+
+  - name: "Two-Weapon Defense"
+    kind: passive
+    source_book: PHB
+    note: "+1 shield AC when wielding two weapons"
+    prerequisites:
+      feat: "Two-Weapon Fighting"
+    effects: []
+
+  - name: "Improved Unarmed Strike"
+    kind: passive
+    source_book: PHB
+    note: "Unarmed strikes deal lethal damage; no AoO"
+    prerequisites: null
+    effects: []
+
+  - name: "Stunning Fist"
+    kind: passive
+    source_book: PHB
+    note: "Stun on unarmed hit (Fort DC)"
+    prerequisites:
+      all_of:
+        - feat: "Improved Unarmed Strike"
+        - ability: {key: dex_score, min: 13}
+        - ability: {key: wis_score, min: 13}
+        - stat: {key: bab, min: 8, label: BAB}
+    effects: []
+
+  - name: "Deflect Arrows"
+    kind: passive
+    source_book: PHB
+    note: "Deflect one ranged attack per round"
+    prerequisites:
+      all_of:
+        - feat: "Improved Unarmed Strike"
+        - ability: {key: dex_score, min: 13}
+    effects: []
+
+  - name: "Snatch Arrows"
+    kind: passive
+    source_book: PHB
+    note: "Catch deflected arrows"
+    prerequisites:
+      all_of:
+        - feat: "Deflect Arrows"
+        - ability: {key: dex_score, min: 15}
+    effects: []
+
+  - name: "Mounted Combat"
+    kind: passive
+    source_book: PHB
+    note: "Negate hit on mount once per round with Ride check"
+    prerequisites:
+      skill: {name: Ride, min_ranks: 1}
+    effects: []
+
+  - name: "Mounted Archery"
+    kind: passive
+    source_book: PHB
+    note: "Halved penalty on ranged attacks from horseback"
+    prerequisites:
+      all_of:
+        - feat: "Mounted Combat"
+        - skill: {name: Ride, min_ranks: 1}
+    effects: []
+
+  - name: "Ride-By Attack"
+    kind: passive
+    source_book: PHB
+    note: "Move and attack in one action from horseback"
+    prerequisites:
+      all_of:
+        - feat: "Mounted Combat"
+        - skill: {name: Ride, min_ranks: 1}
+    effects: []
+
+  - name: "Spirited Charge"
+    kind: passive
+    source_book: PHB
+    note: "Double damage (triple with lance) on mounted charge"
+    prerequisites:
+      all_of:
+        - feat: "Mounted Combat"
+        - feat: "Ride-By Attack"
+        - skill: {name: Ride, min_ranks: 1}
+    effects: []
+
+  - name: "Trample"
+    kind: passive
+    source_book: PHB
+    note: "Overrun always succeeds; hoof attack as free action"
+    prerequisites:
+      all_of:
+        - feat: "Mounted Combat"
+        - skill: {name: Ride, min_ranks: 1}
+    effects: []
+
+  - name: "Improved Precise Shot"
+    kind: passive
+    source_book: PHB
+    note: "Ignore concealment less than total cover on ranged attacks"
+    prerequisites:
+      all_of:
+        - feat: "Point Blank Shot"
+        - feat: "Precise Shot"
+        - ability: {key: dex_score, min: 19}
+        - stat: {key: bab, min: 11, label: BAB}
+    effects: []
+
+  - name: "Far Shot"
+    kind: passive
+    source_book: PHB
+    note: "Increase range increment by 50% (projectile) or double (thrown)"
+    prerequisites:
+      feat: "Point Blank Shot"
+    effects: []
+
+  # =========================================================================
+  # CONDITIONAL FEATS
+  # These appear in the Buffs panel; user toggles per encounter/round.
+  # =========================================================================
+
+  - name: "Combat Expertise"
+    kind: conditional
+    source_book: PHB
+    note: "Trade attack bonus for AC bonus (1-for-1, max 5)"
+    prerequisites:
+      ability: {key: int_score, min: 13}
+    parameter:
+      name: points
+      label: "Points traded"
+      min: 1
+      max_formula: "min(5, bab)"
+      default: 1
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: "-$parameter"
+        source_label: "Combat Expertise (penalty)"
+      - target: ac
+        bonus_type: dodge
+        value: "$parameter"
+        source_label: "Combat Expertise (bonus)"
+
+  - name: "Defensive Fighting"
+    kind: conditional
+    source_book: PHB
+    note: "-4 attack, +2 dodge AC (full-round action)"
+    prerequisites: null
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -4
+        source_label: "Defensive Fighting (penalty)"
+      - target: ac
+        bonus_type: dodge
+        value: 2
+        source_label: "Defensive Fighting (bonus)"
+
+  - name: "Total Defense"
+    kind: conditional
+    source_book: PHB
+    note: "+4 dodge AC, no attacks allowed"
+    prerequisites: null
+    effects:
+      - target: ac
+        bonus_type: dodge
+        value: 4
+        source_label: "Total Defense"
+
+  - name: "Fighting Defensively"
+    kind: conditional
+    source_book: PHB
+    note: "-4 attack, +2 dodge AC (standard action)"
+    prerequisites: null
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -4
+        source_label: "Fighting Defensively (penalty)"
+      - target: ac
+        bonus_type: dodge
+        value: 2
+        source_label: "Fighting Defensively (bonus)"
+
+  - name: "Expertise (Total)"
+    kind: conditional
+    source_book: PHB
+    note: "-5 attack, +5 dodge AC (via Combat Expertise at max)"
+    prerequisites:
+      feat: "Combat Expertise"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -5
+        source_label: "Expertise Total (penalty)"
+      - target: ac
+        bonus_type: dodge
+        value: 5
+        source_label: "Expertise Total (bonus)"
+
+  - name: "Reckless Offense"
+    kind: conditional
+    source_book: PHB
+    note: "+2 attack, -4 AC"
+    prerequisites:
+      stat: {key: bab, min: 1, label: BAB}
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 2
+        source_label: "Reckless Offense (bonus)"
+      - target: ac
+        bonus_type: untyped
+        value: -4
+        source_label: "Reckless Offense (penalty)"
+
+  - name: "Rapid Strike"
+    kind: conditional
+    source_book: PHB
+    note: "+2 attack on full attack when using light weapon in off-hand"
+    prerequisites:
+      all_of:
+        - feat: "Two-Weapon Fighting"
+        - stat: {key: bab, min: 6, label: BAB}
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 2
+        source_label: "Rapid Strike"
+
+  # =========================================================================
+  # METAMAGIC / SPELLCASTING (passive chain only)
+  # No pool effects; exist for PrC prereq gating.
+  # =========================================================================
+
+  - name: "Spell Focus"
+    kind: passive
+    source_book: PHB
+    note: "+1 to spell save DCs for chosen school; no pool bonus (spell-specific)"
+    prerequisites: null
+    effects: []
+
+  - name: "Greater Spell Focus"
+    kind: passive
+    source_book: PHB
+    note: "+1 additional spell save DC for chosen school"
+    prerequisites:
+      feat: "Spell Focus"
+    effects: []
+
+  - name: "Spell Penetration"
+    kind: passive
+    source_book: PHB
+    note: "+2 on caster level checks to overcome SR"
+    prerequisites: null
+    effects: []
+
+  - name: "Greater Spell Penetration"
+    kind: passive
+    source_book: PHB
+    note: "+2 additional on caster level checks to overcome SR"
+    prerequisites:
+      feat: "Spell Penetration"
+    effects: []
+
+  - name: "Empower Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: +50% to numeric effects (+2 spell slot)"
+    prerequisites: null
+    effects: []
+
+  - name: "Enlarge Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: double range (+1 spell slot)"
+    prerequisites: null
+    effects: []
+
+  - name: "Extend Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: double duration (+1 spell slot)"
+    prerequisites: null
+    effects: []
+
+  - name: "Heighten Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: treat spell as higher level"
+    prerequisites: null
+    effects: []
+
+  - name: "Maximize Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: maximize all numeric effects (+3 spell slot)"
+    prerequisites: null
+    effects: []
+
+  - name: "Quicken Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: cast as swift action (+4 spell slot)"
+    prerequisites: null
+    effects: []
+
+  - name: "Silent Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: cast without verbal component (+1 spell slot)"
+    prerequisites: null
+    effects: []
+
+  - name: "Still Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: cast without somatic component (+1 spell slot)"
+    prerequisites: null
+    effects: []
+
+  - name: "Widen Spell"
+    kind: passive
+    source_book: PHB
+    note: "Metamagic: double area (+3 spell slot)"
+    prerequisites: null
+    effects: []
+
+  # =========================================================================
+  # SKILL FEATS (passive or always-on)
+  # =========================================================================
+
+  - name: "Acrobatic"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Jump and Tumble checks"
+    prerequisites: null
+    effects:
+      - target: skill_jump
+        bonus_type: untyped
+        value: 2
+        source_label: "Acrobatic"
+      - target: skill_tumble
+        bonus_type: untyped
+        value: 2
+        source_label: "Acrobatic"
+
+  - name: "Agile"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Balance and Escape Artist checks"
+    prerequisites: null
+    effects:
+      - target: skill_balance
+        bonus_type: untyped
+        value: 2
+        source_label: "Agile"
+      - target: skill_escape_artist
+        bonus_type: untyped
+        value: 2
+        source_label: "Agile"
+
+  - name: "Animal Affinity"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Handle Animal and Ride checks"
+    prerequisites: null
+    effects:
+      - target: skill_handle_animal
+        bonus_type: untyped
+        value: 2
+        source_label: "Animal Affinity"
+      - target: skill_ride
+        bonus_type: untyped
+        value: 2
+        source_label: "Animal Affinity"
+
+  - name: "Athletic"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Climb and Swim checks"
+    prerequisites: null
+    effects:
+      - target: skill_climb
+        bonus_type: untyped
+        value: 2
+        source_label: "Athletic"
+      - target: skill_swim
+        bonus_type: untyped
+        value: 2
+        source_label: "Athletic"
+
+  - name: "Deceitful"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Disguise and Forgery checks"
+    prerequisites: null
+    effects:
+      - target: skill_disguise
+        bonus_type: untyped
+        value: 2
+        source_label: "Deceitful"
+      - target: skill_forgery
+        bonus_type: untyped
+        value: 2
+        source_label: "Deceitful"
+
+  - name: "Deft Hands"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Sleight of Hand and Use Rope checks"
+    prerequisites: null
+    effects:
+      - target: skill_sleight_of_hand
+        bonus_type: untyped
+        value: 2
+        source_label: "Deft Hands"
+      - target: skill_use_rope
+        bonus_type: untyped
+        value: 2
+        source_label: "Deft Hands"
+
+  - name: "Diligent"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Appraise and Decipher Script checks"
+    prerequisites: null
+    effects:
+      - target: skill_appraise
+        bonus_type: untyped
+        value: 2
+        source_label: "Diligent"
+      - target: skill_decipher_script
+        bonus_type: untyped
+        value: 2
+        source_label: "Diligent"
+
+  - name: "Investigator"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Gather Information and Search checks"
+    prerequisites: null
+    effects:
+      - target: skill_gather_information
+        bonus_type: untyped
+        value: 2
+        source_label: "Investigator"
+      - target: skill_search
+        bonus_type: untyped
+        value: 2
+        source_label: "Investigator"
+
+  - name: "Magical Aptitude"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Spellcraft and Use Magic Device checks"
+    prerequisites: null
+    effects:
+      - target: skill_spellcraft
+        bonus_type: untyped
+        value: 2
+        source_label: "Magical Aptitude"
+      - target: skill_use_magic_device
+        bonus_type: untyped
+        value: 2
+        source_label: "Magical Aptitude"
+
+  - name: "Negotiator"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Diplomacy and Sense Motive checks"
+    prerequisites: null
+    effects:
+      - target: skill_diplomacy
+        bonus_type: untyped
+        value: 2
+        source_label: "Negotiator"
+      - target: skill_sense_motive
+        bonus_type: untyped
+        value: 2
+        source_label: "Negotiator"
+
+  - name: "Nimble Fingers"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Disable Device and Open Lock checks"
+    prerequisites: null
+    effects:
+      - target: skill_disable_device
+        bonus_type: untyped
+        value: 2
+        source_label: "Nimble Fingers"
+      - target: skill_open_lock
+        bonus_type: untyped
+        value: 2
+        source_label: "Nimble Fingers"
+
+  - name: "Persuasive"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Bluff and Intimidate checks"
+    prerequisites: null
+    effects:
+      - target: skill_bluff
+        bonus_type: untyped
+        value: 2
+        source_label: "Persuasive"
+      - target: skill_intimidate
+        bonus_type: untyped
+        value: 2
+        source_label: "Persuasive"
+
+  - name: "Self-Sufficient"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Heal and Survival checks"
+    prerequisites: null
+    effects:
+      - target: skill_heal
+        bonus_type: untyped
+        value: 2
+        source_label: "Self-Sufficient"
+      - target: skill_survival
+        bonus_type: untyped
+        value: 2
+        source_label: "Self-Sufficient"
+
+  - name: "Stealthy"
+    kind: always_on
+    source_book: PHB
+    note: "+2 on Hide and Move Silently checks"
+    prerequisites: null
+    effects:
+      - target: skill_hide
+        bonus_type: untyped
+        value: 2
+        source_label: "Stealthy"
+      - target: skill_move_silently
+        bonus_type: untyped
+        value: 2
+        source_label: "Stealthy"
+
+  - name: "Trackless Step"
+    kind: passive
+    source_book: PHB
+    note: "Cannot be tracked in natural surroundings"
+    prerequisites: null
+    effects: []

@@ -1,0 +1,821 @@
+# rules/core/spells_phb.yaml
+#
+# Buff spells from the Player's Handbook (PHB) that appear on the Buffs tab.
+# These are the spells whose effects feed into BonusPools on the character.
+#
+# Schema per entry:
+#   name                  : Unique spell name (key for BuffRegistry)
+#   category              : spell | class | condition | racial | feat | item
+#   source_book           : PHB
+#   requires_caster_level : true if any effect uses a formula (auto-detected
+#                           by the loader, but explicit here for documentation)
+#   mutually_exclusive_with: list of buff names that cannot be active simultaneously
+#   note                  : hint shown in the buff panel UI
+#   effects               : list of BonusEffects
+#     - target     : pool key (attack_melee, attack_ranged, attack_all,
+#                    damage_melee, damage_ranged, damage_all, ac, fort_save,
+#                    ref_save, will_save, str_score, dex_score, con_score,
+#                    int_score, wis_score, cha_score, initiative, speed,
+#                    hp_bonus, sr)
+#       bonus_type : enhancement | morale | luck | deflection | resistance |
+#                    competence | circumstance | sacred | profane | insight |
+#                    alchemical | armor | shield | natural_armor | size |
+#                    dodge | racial | untyped
+#       value      : integer OR formula string
+#                    Formula variables: caster_level, character_level,
+#                    str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod,
+#                    bab, abs, max, min, floor, ceil, int, round
+#       condition  : null (Python-side conditions set by loader for
+#                    race/type checks like Enlarge Person humanoid-only)
+#       source_label: optional display label; defaults to spell name
+#
+# Conditional effects (e.g. Enlarge Person humanoid-only) are flagged with
+# condition_key — the loader looks this up in a conditions registry and
+# attaches the appropriate Python callable.
+#
+# Spell level headers are comments only; the engine doesn't use spell level
+# for buff purposes (it affects slot consumption, not what the buff does).
+
+spells:
+
+  # =========================================================================
+  # 0-Level
+  # =========================================================================
+
+  - name: "Resistance"
+    category: spell
+    source_book: PHB
+    note: "+1 resistance bonus on saving throws"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 1
+      - target: ref_save
+        bonus_type: resistance
+        value: 1
+      - target: will_save
+        bonus_type: resistance
+        value: 1
+
+  # =========================================================================
+  # 1st Level
+  # =========================================================================
+
+  - name: "Bless"
+    category: spell
+    source_book: PHB
+    note: "+1 morale bonus on attack rolls and saves vs. fear"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 1
+
+  - name: "Camouflage"
+    category: spell
+    source_book: PHB
+    note: "+10 circumstance bonus on Hide checks"
+    effects:
+      - target: skill_hide
+        bonus_type: circumstance
+        value: 10
+
+  - name: "Combat Readiness"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Insight bonus on attack rolls; scales with CL"
+    effects:
+      - target: attack_all
+        bonus_type: insight
+        value: "min(max(1, caster_level // 3), 6)"
+
+  - name: "Conviction"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Morale bonus on saves; scales with CL"
+    effects:
+      - target: fort_save
+        bonus_type: morale
+        value: "max(2, 2 + caster_level // 6)"
+      - target: ref_save
+        bonus_type: morale
+        value: "max(2, 2 + caster_level // 6)"
+      - target: will_save
+        bonus_type: morale
+        value: "max(2, 2 + caster_level // 6)"
+
+  - name: "Divine Favor"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Luck bonus on attack and damage; scales with CL (max +3)"
+    effects:
+      - target: attack_all
+        bonus_type: luck
+        value: "max(1, caster_level // 3)"
+      - target: damage_all
+        bonus_type: luck
+        value: "max(1, caster_level // 3)"
+
+  - name: "Enlarge Person"
+    category: spell
+    source_book: PHB
+    note: "+2 STR, -2 DEX (humanoids only; size change handled separately)"
+    condition_key: humanoid_only
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+        condition_key: humanoid_only
+      - target: dex_score
+        bonus_type: enhancement
+        value: -2
+        condition_key: humanoid_only
+
+  - name: "Mage Armor"
+    category: spell
+    source_book: PHB
+    note: "+4 armor bonus to AC (or +6 with Armored Mage class feature)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 4
+
+  - name: "Nerveskitter"
+    category: spell
+    source_book: PHB
+    note: "+5 insight bonus on initiative"
+    effects:
+      - target: initiative
+        bonus_type: insight
+        value: 5
+
+  - name: "Nightshield"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Resistance bonus on saves; scales with CL"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: "int(caster_level >= 1) + int(caster_level >= 6) + int(caster_level >= 9)"
+      - target: ref_save
+        bonus_type: resistance
+        value: "int(caster_level >= 1) + int(caster_level >= 6) + int(caster_level >= 9)"
+      - target: will_save
+        bonus_type: resistance
+        value: "int(caster_level >= 1) + int(caster_level >= 6) + int(caster_level >= 9)"
+
+  - name: "Ram's Might"
+    category: spell
+    source_book: PHB
+    note: "+2 enhancement bonus to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Reduce Person"
+    category: spell
+    source_book: PHB
+    note: "-2 STR, +2 DEX (humanoids only; size change handled separately)"
+    condition_key: humanoid_only
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: -2
+        condition_key: humanoid_only
+      - target: dex_score
+        bonus_type: enhancement
+        value: 2
+        condition_key: humanoid_only
+
+  - name: "Shield"
+    category: spell
+    source_book: PHB
+    note: "+4 shield bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: shield
+        value: 4
+
+  - name: "Shield of Faith"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Deflection bonus to AC; scales with CL"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: "2 + caster_level // 6"
+
+  # =========================================================================
+  # 2nd Level
+  # =========================================================================
+
+  - name: "Aid"
+    category: spell
+    source_book: PHB
+    note: "+1 morale on attack/saves vs fear; +1d8+CL temporary HP"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 1
+
+  - name: "Animalistic Power"
+    category: spell
+    source_book: PHB
+    note: "+2 enhancement to STR, DEX, CON"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+      - target: dex_score
+        bonus_type: enhancement
+        value: 2
+      - target: con_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Barkskin"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Enhancement bonus to natural armor; scales with CL"
+    effects:
+      - target: ac
+        bonus_type: natural_armor
+        value: "max(2, 1 + caster_level // 3)"
+
+  - name: "Bear's Endurance"
+    category: spell
+    source_book: PHB
+    note: "+4 enhancement to CON"
+    effects:
+      - target: con_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Bull's Strength"
+    category: spell
+    source_book: PHB
+    note: "+4 enhancement to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Cat's Grace"
+    category: spell
+    source_book: PHB
+    note: "+4 enhancement to DEX"
+    effects:
+      - target: dex_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Eagle's Splendor"
+    category: spell
+    source_book: PHB
+    note: "+4 enhancement to CHA"
+    effects:
+      - target: cha_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Fox's Cunning"
+    category: spell
+    source_book: PHB
+    note: "+4 enhancement to INT"
+    effects:
+      - target: int_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Owl's Wisdom"
+    category: spell
+    source_book: PHB
+    note: "+4 enhancement to WIS"
+    effects:
+      - target: wis_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "False Life"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Temporary hit points: 1d10 + CL (max +10)"
+    effects:
+      - target: hp_bonus
+        bonus_type: untyped
+        value: "min(caster_level, 10)"
+        source_label: "False Life (temp HP)"
+
+  - name: "Prayer"
+    category: spell
+    source_book: PHB
+    note: "+1 luck on attack, damage, saves, skill checks"
+    effects:
+      - target: attack_all
+        bonus_type: luck
+        value: 1
+      - target: damage_all
+        bonus_type: luck
+        value: 1
+      - target: fort_save
+        bonus_type: luck
+        value: 1
+      - target: ref_save
+        bonus_type: luck
+        value: 1
+      - target: will_save
+        bonus_type: luck
+        value: 1
+
+  # =========================================================================
+  # 3rd Level
+  # =========================================================================
+
+  - name: "Haste"
+    category: spell
+    source_book: PHB
+    note: "+1 untyped attack, +1 dodge AC, +1 Reflex, speed bonus"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 1
+      - target: ac
+        bonus_type: dodge
+        value: 1
+      - target: ref_save
+        bonus_type: untyped
+        value: 1
+
+  - name: "Heroism"
+    category: spell
+    source_book: PHB
+    note: "+2 morale on attack, saves, skill checks"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 2
+      - target: fort_save
+        bonus_type: morale
+        value: 2
+      - target: ref_save
+        bonus_type: morale
+        value: 2
+      - target: will_save
+        bonus_type: morale
+        value: 2
+
+  - name: "Magic Vestment"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Enhancement bonus to armor/shield; scales with CL"
+    effects:
+      - target: ac
+        bonus_type: enhancement
+        value: "max(1, caster_level // 4)"
+
+  - name: "Greater Magic Weapon"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Enhancement bonus to attack and damage; scales with CL"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: "max(1, caster_level // 4)"
+      - target: damage_all
+        bonus_type: enhancement
+        value: "max(1, caster_level // 4)"
+
+  - name: "Rage"
+    category: spell
+    source_book: PHB
+    note: "+2 morale to STR and CON, -2 AC"
+    effects:
+      - target: str_score
+        bonus_type: morale
+        value: 2
+      - target: con_score
+        bonus_type: morale
+        value: 2
+      - target: ac
+        bonus_type: untyped
+        value: -2
+
+  - name: "Recitation"
+    category: spell
+    source_book: PHB
+    requires_caster_level: false
+    note: "+2 luck on AC, attacks, saves (+3 if same deity)"
+    effects:
+      - target: ac
+        bonus_type: luck
+        value: 2
+      - target: attack_all
+        bonus_type: luck
+        value: 2
+      - target: fort_save
+        bonus_type: luck
+        value: 2
+      - target: ref_save
+        bonus_type: luck
+        value: 2
+      - target: will_save
+        bonus_type: luck
+        value: 2
+
+  # =========================================================================
+  # 4th Level
+  # =========================================================================
+
+  - name: "Divine Power"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "+6 enhancement to STR, BAB = full cleric level (modelled as +CL to BAB pool)"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 6
+
+  - name: "Greater Resistance"
+    category: spell
+    source_book: PHB
+    note: "+3 resistance on all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 3
+      - target: ref_save
+        bonus_type: resistance
+        value: 3
+      - target: will_save
+        bonus_type: resistance
+        value: 3
+
+  - name: "Righteous Might"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "+4 STR, +2 CON, natural armor; size increase handled separately"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 4
+      - target: con_score
+        bonus_type: enhancement
+        value: 2
+
+  # =========================================================================
+  # 5th Level
+  # =========================================================================
+
+  - name: "Divine Agility"
+    category: spell
+    source_book: PHB
+    note: "+10 enhancement to DEX"
+    effects:
+      - target: dex_score
+        bonus_type: enhancement
+        value: 10
+
+  - name: "Draconic Might"
+    category: spell
+    source_book: PHB
+    note: "+4 enhancement to all ability scores"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 4
+      - target: dex_score
+        bonus_type: enhancement
+        value: 4
+      - target: con_score
+        bonus_type: enhancement
+        value: 4
+      - target: int_score
+        bonus_type: enhancement
+        value: 4
+      - target: wis_score
+        bonus_type: enhancement
+        value: 4
+      - target: cha_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Owl's Insight"
+    category: spell
+    source_book: PHB
+    requires_caster_level: true
+    note: "Enhancement bonus to WIS score equal to half CL"
+    effects:
+      - target: wis_score
+        bonus_type: enhancement
+        value: "floor(caster_level / 2)"
+
+  # =========================================================================
+  # 6th Level
+  # =========================================================================
+
+  - name: "Greater Heroism"
+    category: spell
+    source_book: PHB
+    note: "+4 morale on attack, saves, skill checks; +1 temp HP/level"
+    mutually_exclusive_with: ["Heroism"]
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 4
+      - target: fort_save
+        bonus_type: morale
+        value: 4
+      - target: ref_save
+        bonus_type: morale
+        value: 4
+      - target: will_save
+        bonus_type: morale
+        value: 4
+
+  - name: "Superior Resistance"
+    category: spell
+    source_book: PHB
+    note: "+6 resistance on all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 6
+      - target: ref_save
+        bonus_type: resistance
+        value: 6
+      - target: will_save
+        bonus_type: resistance
+        value: 6
+
+  # =========================================================================
+  # 8th Level
+  # =========================================================================
+
+  - name: "Cloak of Chaos"
+    category: spell
+    source_book: PHB
+    note: "+4 deflection to AC, +4 resistance on saves (chaotic characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Holy Aura"
+    category: spell
+    source_book: PHB
+    note: "+4 deflection to AC, +4 resistance on saves (good characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Shield of Law"
+    category: spell
+    source_book: PHB
+    note: "+4 deflection to AC, +4 resistance on saves (lawful characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Unholy Aura"
+    category: spell
+    source_book: PHB
+    note: "+4 deflection to AC, +4 resistance on saves (evil characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  # =========================================================================
+  # Conditional Penalties (from the Buffs sheet "Conditional Penalties" section)
+  # =========================================================================
+
+  - name: "Bane"
+    category: condition
+    source_book: PHB
+    note: "-1 morale on attack rolls and saves vs. fear"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: -1
+
+  - name: "Blinded"
+    category: condition
+    source_book: PHB
+    note: "-2 penalty on attack rolls"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -2
+
+  - name: "Crushing Despair"
+    category: condition
+    source_book: PHB
+    note: "-2 morale on attacks, damage, saves, skill checks"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: -2
+      - target: damage_all
+        bonus_type: morale
+        value: -2
+      - target: fort_save
+        bonus_type: morale
+        value: -2
+      - target: ref_save
+        bonus_type: morale
+        value: -2
+      - target: will_save
+        bonus_type: morale
+        value: -2
+
+  - name: "Dazzled"
+    category: condition
+    source_book: PHB
+    note: "-1 on attack rolls"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -1
+
+  - name: "Entangled"
+    category: condition
+    source_book: PHB
+    note: "-2 on attack rolls, -4 on DEX"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -2
+      - target: dex_score
+        bonus_type: untyped
+        value: -4
+
+  - name: "Exhausted"
+    category: condition
+    source_book: PHB
+    note: "-6 STR and DEX"
+    mutually_exclusive_with: ["Fatigued"]
+    effects:
+      - target: str_score
+        bonus_type: untyped
+        value: -6
+      - target: dex_score
+        bonus_type: untyped
+        value: -6
+
+  - name: "Fatigued"
+    category: condition
+    source_book: PHB
+    note: "-2 STR and DEX"
+    mutually_exclusive_with: ["Exhausted"]
+    effects:
+      - target: str_score
+        bonus_type: untyped
+        value: -2
+      - target: dex_score
+        bonus_type: untyped
+        value: -2
+
+  - name: "Frightened"
+    category: condition
+    source_book: PHB
+    note: "-2 morale on attacks, saves, checks"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: -2
+      - target: fort_save
+        bonus_type: morale
+        value: -2
+      - target: ref_save
+        bonus_type: morale
+        value: -2
+      - target: will_save
+        bonus_type: morale
+        value: -2
+
+  - name: "Panicked"
+    category: condition
+    source_book: PHB
+    note: "-2 morale on saves"
+    effects:
+      - target: fort_save
+        bonus_type: morale
+        value: -2
+      - target: ref_save
+        bonus_type: morale
+        value: -2
+      - target: will_save
+        bonus_type: morale
+        value: -2
+
+  - name: "Shaken"
+    category: condition
+    source_book: PHB
+    note: "-2 morale on attacks, saves, skill checks"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: -2
+      - target: fort_save
+        bonus_type: morale
+        value: -2
+      - target: ref_save
+        bonus_type: morale
+        value: -2
+      - target: will_save
+        bonus_type: morale
+        value: -2
+
+  - name: "Sickened"
+    category: condition
+    source_book: PHB
+    note: "-2 on attack, damage, saves, skill checks"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: -2
+      - target: damage_all
+        bonus_type: morale
+        value: -2
+      - target: fort_save
+        bonus_type: morale
+        value: -2
+      - target: ref_save
+        bonus_type: morale
+        value: -2
+      - target: will_save
+        bonus_type: morale
+        value: -2
+
+  - name: "Slowed"
+    category: condition
+    source_book: PHB
+    note: "-1 untyped on attack rolls, AC, Reflex saves"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: -1
+      - target: ac
+        bonus_type: untyped
+        value: -1
+      - target: ref_save
+        bonus_type: untyped
+        value: -1
+
+  - name: "Stunned"
+    category: condition
+    source_book: PHB
+    note: "-2 AC"
+    effects:
+      - target: ac
+        bonus_type: untyped
+        value: -2

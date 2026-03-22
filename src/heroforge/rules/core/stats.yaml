@@ -1,0 +1,321 @@
+# rules/core/stats.yaml
+#
+# Canonical stat graph definition for D&D 3.5e.
+#
+# This file declares every standard stat node: its key, dependencies,
+# bonus pools, compute strategy, and display metadata.  The rules loader
+# reads this file and builds the StatGraph from it — no stat topology is
+# hardcoded in Python.
+#
+# Compute strategies (the `compute` field):
+#   base_plus_bonus     : base + sum(pools)  [default if omitted]
+#   ability_modifier    : floor((input - 10) / 2)  [single input required]
+#   sum                 : sum(all inputs) + sum(pools)
+#   max_zero            : max(0, sum(all inputs) + sum(pools))
+#   capped_dex          : min(dex_mod, max_dex_bonus); floors at 0
+#   bab                 : delegates to character._compute_bab()
+#   base_save           : delegates to character._compute_base_save(save_name)
+#   hp_max              : delegates to character._compute_hp_max()
+#   base_speed          : delegates to character._compute_base_speed()
+#   size_attack         : delegates to character._compute_size_mod_attack()
+#   ac_total            : 10 + ac_dex_contribution + sum(pools)
+#   attack_melee_total  : bab + str_mod + size_attack + sum(pools)
+#   attack_ranged_total : bab + dex_mod + size_attack + sum(pools)
+#
+# Pool keys reference entries in bonus_pools.yaml.
+# Dependency ordering matters: each node's inputs must be declared above it.
+#
+# Fields:
+#   key         : unique string identifier used throughout the engine
+#   compute     : strategy name (see above)
+#   base        : optional integer base value
+#   inputs      : list of stat keys this node reads
+#   pools       : list of BonusPool keys that feed into this node
+#   save_name   : for base_save compute only — "fort", "ref", or "will"
+#   description : human-readable label for UI and PDF export
+#   sheet       : which character sheet tab primarily displays this stat
+#                 (1-5, "familiar", "companion"; omit if internal/derived)
+
+stats:
+
+  # =========================================================================
+  # Ability Scores
+  # Compute: base value from character._ability_scores dict + pool bonuses.
+  # The Python bootstrap handles these specially (the base is always read
+  # from the live dict, not a fixed YAML value), so `base` is omitted here.
+  # =========================================================================
+
+  - key: str_score
+    compute: base_plus_bonus
+    pools: [str_score]
+    description: "Strength score"
+    sheet: 1
+
+  - key: dex_score
+    compute: base_plus_bonus
+    pools: [dex_score]
+    description: "Dexterity score"
+    sheet: 1
+
+  - key: con_score
+    compute: base_plus_bonus
+    pools: [con_score]
+    description: "Constitution score"
+    sheet: 1
+
+  - key: int_score
+    compute: base_plus_bonus
+    pools: [int_score]
+    description: "Intelligence score"
+    sheet: 1
+
+  - key: wis_score
+    compute: base_plus_bonus
+    pools: [wis_score]
+    description: "Wisdom score"
+    sheet: 1
+
+  - key: cha_score
+    compute: base_plus_bonus
+    pools: [cha_score]
+    description: "Charisma score"
+    sheet: 1
+
+  # =========================================================================
+  # Ability Modifiers
+  # Compute: floor((score - 10) / 2)
+  # No pools — modifiers are purely derived from their score.
+  # =========================================================================
+
+  - key: str_mod
+    compute: ability_modifier
+    inputs: [str_score]
+    description: "Strength modifier"
+
+  - key: dex_mod
+    compute: ability_modifier
+    inputs: [dex_score]
+    description: "Dexterity modifier"
+
+  - key: con_mod
+    compute: ability_modifier
+    inputs: [con_score]
+    description: "Constitution modifier"
+
+  - key: int_mod
+    compute: ability_modifier
+    inputs: [int_score]
+    description: "Intelligence modifier"
+
+  - key: wis_mod
+    compute: ability_modifier
+    inputs: [wis_score]
+    description: "Wisdom modifier"
+
+  - key: cha_mod
+    compute: ability_modifier
+    inputs: [cha_score]
+    description: "Charisma modifier"
+
+  # =========================================================================
+  # Base Attack Bonus
+  # Delegates to character._compute_bab() which sums class contributions.
+  # bab_misc pool handles rare flat bonuses to BAB (e.g. some feats/items).
+  # =========================================================================
+
+  - key: bab
+    compute: bab
+    pools: [bab_misc]
+    description: "Base Attack Bonus"
+    sheet: 1
+
+  # =========================================================================
+  # Saving Throws
+  # Compute: base_save(name) + ability_mod + pool bonuses.
+  # Base save progression is summed from ClassLevel objects by the engine.
+  # =========================================================================
+
+  - key: fort_save
+    compute: base_save
+    save_name: fort
+    inputs: [con_mod]
+    pools: [fort_save]
+    description: "Fortitude save"
+    sheet: 1
+
+  - key: ref_save
+    compute: base_save
+    save_name: ref
+    inputs: [dex_mod]
+    pools: [ref_save]
+    description: "Reflex save"
+    sheet: 1
+
+  - key: will_save
+    compute: base_save
+    save_name: will
+    inputs: [wis_mod]
+    pools: [will_save]
+    description: "Will save"
+    sheet: 1
+
+  # =========================================================================
+  # Armour Class
+  # max_dex_bonus: -1 means uncapped; set by equipped armour.
+  # ac_dex_contribution: min(dex_mod, max_dex_bonus), floored at 0.
+  # ac: 10 + ac_dex_contribution + pool bonuses.
+  #
+  # AC pool receives: armor, shield, natural armor, deflection, size,
+  # sacred/profane, circumstance, and misc bonuses.
+  # Dodge and untyped bonuses also go here (they stack normally).
+  #
+  # Touch AC and Flat-footed AC are computed properties on Character,
+  # not separate nodes — they reuse the ac pool with type filters.
+  # =========================================================================
+
+  - key: max_dex_bonus
+    compute: max_dex_bonus      # delegates to character._compute_max_dex_bonus()
+    description: "Maximum DEX bonus to AC from armour; -1 = uncapped"
+
+  - key: ac_dex_contribution
+    compute: capped_dex
+    inputs: [dex_mod, max_dex_bonus]
+    description: "DEX contribution to AC (capped by armour max dex)"
+
+  - key: ac
+    compute: ac_total
+    inputs: [ac_dex_contribution]
+    pools: [ac]
+    description: "Armour Class"
+    sheet: 1
+
+  # =========================================================================
+  # Initiative
+  # = DEX modifier + misc bonuses (Improved Initiative feat, etc.)
+  # =========================================================================
+
+  - key: initiative
+    compute: sum
+    inputs: [dex_mod]
+    pools: [initiative]
+    description: "Initiative modifier"
+    sheet: 1
+
+  # =========================================================================
+  # Movement Speed
+  # Base speed comes from race (set by race loader).
+  # Armour speed penalties and buff speed bonuses (Haste, etc.) go in pool.
+  # =========================================================================
+
+  - key: speed
+    compute: base_speed
+    pools: [speed]
+    description: "Land speed (ft)"
+    sheet: 1
+
+  # Additional movement types — populated when race/template grants them.
+  # Not registered by default; added dynamically when relevant.
+  #
+  # - key: fly_speed
+  # - key: swim_speed
+  # - key: climb_speed
+  # - key: burrow_speed
+
+  # =========================================================================
+  # Hit Points
+  # hp_max delegates to character method that sums class HP rolls.
+  # con_mod × total_level is handled inside the compute delegate.
+  # hp_bonus pool: Toughness feat, Bear's Endurance (temp HP), Aid, etc.
+  # =========================================================================
+
+  - key: hp_max
+    compute: hp_max
+    inputs: [con_mod]
+    pools: [hp_bonus]
+    description: "Maximum hit points"
+    sheet: 1
+
+  # =========================================================================
+  # Spell Resistance
+  # =========================================================================
+
+  - key: sr
+    compute: sum
+    pools: [sr]
+    description: "Spell Resistance"
+    sheet: 1
+
+  # =========================================================================
+  # Attack Bonuses (primary attack; iterative strings in combat.py)
+  #
+  # attack_melee  = BAB + STR mod + size mod + pools(attack_melee, attack_all)
+  # attack_ranged = BAB + DEX mod + size mod + pools(attack_ranged, attack_all)
+  #
+  # attack_all pool: bonuses that apply to all attacks regardless of type
+  # (e.g. Haste +1, Prayer luck, Bless morale).
+  # attack_melee / attack_ranged pools: type-specific bonuses.
+  #
+  # Note: weapon-specific bonuses (Weapon Focus, enhancement bonus) are
+  # applied per-weapon in combat.py, not here.  These nodes give the
+  # character's general attack bonus before weapon modifiers.
+  # =========================================================================
+
+  - key: attack_melee
+    compute: attack_melee_total
+    inputs: [bab, str_mod]
+    pools: [attack_melee, attack_all]
+    description: "Primary melee attack bonus (before weapon modifiers)"
+    sheet: 1
+
+  - key: attack_ranged
+    compute: attack_ranged_total
+    inputs: [bab, dex_mod]
+    pools: [attack_ranged, attack_all]
+    description: "Primary ranged attack bonus (before weapon modifiers)"
+    sheet: 1
+
+  # =========================================================================
+  # Damage Bonus (strength-based; weapon dice and enhancement in combat.py)
+  # =========================================================================
+
+  - key: damage_str_bonus
+    compute: sum
+    inputs: [str_mod]
+    pools: [damage_melee, damage_all]
+    description: "STR bonus to melee damage"
+    sheet: 1
+
+  # =========================================================================
+  # Combat Manoeuvre Bonus / Defence (3.5e: grapple check)
+  # CMB = BAB + STR mod + size mod (opposite sign from attack)
+  # CMD = 10 + BAB + STR mod + DEX mod + size mod
+  # These use the same inputs as attack but different size modifier sign.
+  # Registered in combat.py when that module is initialised.
+  # =========================================================================
+
+  # - key: cmb   (registered by combat.py)
+  # - key: cmd   (registered by combat.py)
+
+  # =========================================================================
+  # Skill check totals
+  # Individual skill nodes are registered dynamically by skills.py.
+  # They follow the pattern:
+  #   key: skill_<name>
+  #   compute: sum
+  #   inputs: [<ability>_mod]
+  #   pools: [skill_<name>]
+  #   description: "<Skill Name>"
+  #   sheet: 1 or 2 (depending on which sheet shows skills)
+  # =========================================================================
+
+  # =========================================================================
+  # Spellcasting
+  # Caster level, spell save DC, and slots-per-day are managed by spells.py.
+  # DC = 10 + spell_level + ability_mod + pool bonuses
+  # These are registered dynamically per spellcasting class.
+  # =========================================================================
+
+  # =========================================================================
+  # Psionic
+  # Manifester level and power points are managed by psionics.py (future).
+  # =========================================================================
