@@ -20,7 +20,6 @@
 #   class_skills    : list of skill names
 #   spellcasting    : null or {type: arcane|divine, stat: int|wis|cha, ...}
 #   class_features  : list of {level: N, feature: name, description: str}
-#   favored_by      : list of race names that get this as favored class
 #
 # BAB per level (cumulative):
 #   full:   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
@@ -80,7 +79,6 @@ classes:
       - {level: 19, feature: rage_7,               description: "Rage 7/day"}
       - {level: 19, feature: damage_reduction_5,   description: "DR 5/—"}
       - {level: 20, feature: mighty_rage,          description: "+8 STR/CON, +4 Will, -2 AC"}
-    favored_by: [Half-Orc]
 
   # =========================================================================
   # Bard
@@ -140,7 +138,6 @@ classes:
       - {level: 15, feature: inspire_heroics,    description: "+4 AC and saves for one creature"}
       - {level: 18, feature: mass_suggestion,    description: "Suggestion to all fascinated"}
       - {level: 20, feature: inspire_courage_4,  description: "+4 morale bonus attacks/saves vs fear"}
-    favored_by: [Human]
 
   # =========================================================================
   # Cleric
@@ -174,7 +171,6 @@ classes:
       - {level: 1, feature: turn_undead,          description: "Turn or rebuke undead"}
       - {level: 1, feature: spontaneous_casting,  description: "Convert prepared spells to cure/inflict"}
       - {level: 1, feature: domains,              description: "Two domains granting bonus spells and powers"}
-    favored_by: [Human]
 
   # =========================================================================
   # Druid
@@ -225,7 +221,6 @@ classes:
       - {level: 13, feature: a_thousand_faces,    description: "Alter self at will"}
       - {level: 15, feature: timeless_body,       description: "No penalties for aging"}
       - {level: 20, feature: wild_shape_at_will,  description: "Wild Shape at will"}
-    favored_by: [Human]
 
   # =========================================================================
   # Fighter
@@ -261,7 +256,6 @@ classes:
       - {level: 16, feature: bonus_feat_16, description: "Bonus fighter feat"}
       - {level: 18, feature: bonus_feat_18, description: "Bonus fighter feat"}
       - {level: 20, feature: bonus_feat_20, description: "Bonus fighter feat"}
-    favored_by: [Dwarf]
 
   # =========================================================================
   # Monk
@@ -320,7 +314,6 @@ classes:
       - {level: 17, feature: tongue_of_sun_moon,    description: "Speak with any living creature"}
       - {level: 19, feature: empty_body,            description: "Etherealness 1 min/day per Monk level"}
       - {level: 20, feature: perfect_self,          description: "Outsider type; DR 10/magic"}
-    favored_by: [Human]
 
   # =========================================================================
   # Paladin
@@ -372,7 +365,6 @@ classes:
       - {level: 17, feature: smite_evil_6,         description: "Smite evil 6/day"}
       - {level: 18, feature: remove_disease_5,     description: "Remove disease 5/week"}
       - {level: 20, feature: smite_evil_7,         description: "Smite evil 7/day"}
-    favored_by: [Human]
 
   # =========================================================================
   # Ranger
@@ -430,7 +422,6 @@ classes:
       - {level: 15, feature: favored_enemy_4,      description: "Favored enemy 4"}
       - {level: 17, feature: hide_in_plain_sight,  description: "Hide while observed in natural terrain"}
       - {level: 20, feature: favored_enemy_5,      description: "Favored enemy 5"}
-    favored_by: [Elf]
 
   # =========================================================================
   # Rogue
@@ -500,7 +491,6 @@ classes:
       - {level: 18, feature: trap_sense_6,         description: "+6 Reflex and AC vs traps"}
       - {level: 19, feature: sneak_attack_10d6,    description: "Sneak attack +10d6"}
       - {level: 20, feature: special_ability_4,    description: "Rogue special ability"}
-    favored_by: [Halfling]
 
   # =========================================================================
   # Sorcerer
@@ -528,7 +518,6 @@ classes:
       max_spell_level: 9
     class_features:
       - {level: 1, feature: summon_familiar, description: "Summon a familiar"}
-    favored_by: [Human]
 
   # =========================================================================
   # Wizard
@@ -561,7 +550,6 @@ classes:
       - {level: 10, feature: bonus_feat_wizard_10, description: "Bonus wizard feat"}
       - {level: 15, feature: bonus_feat_wizard_15, description: "Bonus wizard feat"}
       - {level: 20, feature: bonus_feat_wizard_20, description: "Bonus wizard feat"}
-    favored_by: [Gnome]
 
   # =======================================================
   # NPC Classes (SRD)

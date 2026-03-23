@@ -151,7 +151,6 @@ class ClassDefinition:
     class_skills: list[str] = field(default_factory=list)
     spellcasting: SpellcastingInfo | None = None
     class_features: list[ClassFeature] = field(default_factory=list)
-    favored_by: list[str] = field(default_factory=list)
     # Prestige class fields
     max_level: int = 20
     is_prestige: bool = False
@@ -381,6 +380,9 @@ def apply_race(defn: RaceDefinition, character: "Character") -> None:
             existing_subs.append(sub)
     character._race_subtypes = existing_subs
 
+    # --- Favored class ---------------------------------------------------
+    character._race_favored_class = defn.favored_class
+
     # Invalidate size-dependent stats
     character._graph.invalidate("ac")
     character._graph.invalidate("attack_melee")
@@ -483,7 +485,6 @@ def build_class_from_yaml(decl: dict) -> ClassDefinition:
         class_skills=decl.get("class_skills", []),
         spellcasting=spellcasting,
         class_features=features,
-        favored_by=decl.get("favored_by", []),
         max_level=int(decl.get("max_level", 20)),
         is_prestige=bool(decl.get("is_prestige", False)),
     )

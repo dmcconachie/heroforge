@@ -234,6 +234,7 @@ class Character:
         self._race_base_speed: int = 30
         self._race_creature_type: str = "Humanoid"
         self._race_subtypes: list = []
+        self._race_favored_class: str = "any"
 
         self.enabled_sources: list[str] = ["PHB"]
         self.notes: str = ""
@@ -818,19 +819,17 @@ class Character:
         clm = self.class_level_map
         if len(clm) <= 1:
             return False
-        # Determine favored class
-        favored: str | None = None
-        reg = self._class_registry_ref
-        if reg:
-            for cn in clm:
-                defn = reg.get(cn)
-                if defn and self.race in getattr(defn, "favored_by", []):
-                    favored = cn
-                    break
-        # "any" favored class = highest level
-        if favored is None and self.race == "Human":
+        # Determine favored class from race
+        fav = self._race_favored_class
+        if fav == "any":
+            # "any" = highest-level class is favored
             favored = max(clm, key=lambda c: clm[c])
+        elif fav in clm:
+            favored = fav
+        else:
+            favored = None
         # Check non-favored, non-prestige levels
+        reg = self._class_registry_ref
         levels = []
         for cn, lvl in clm.items():
             if cn == favored:
