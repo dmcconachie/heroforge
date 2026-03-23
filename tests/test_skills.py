@@ -66,12 +66,6 @@ def char_with_skills() -> tuple[Character, SkillRegistry]:
 
 
 class TestSkillsYaml:
-    def test_validate_no_errors(self) -> None:
-        from heroforge.rules.loader import SkillsLoader
-
-        errors = SkillsLoader(RULES_DIR).validate_yaml()
-        assert errors == [], "skills.yaml errors:\n" + "\n".join(errors)
-
     def test_no_duplicate_names(self) -> None:
         import yaml
 

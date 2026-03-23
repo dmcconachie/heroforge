@@ -89,121 +89,6 @@ _STAT_KEYS = (
     },
 )
 
-_SPELL_KEYS = (
-    {"name"},
-    {
-        "category",
-        "source_book",
-        "note",
-        "effects",
-        "requires_caster_level",
-        "mutually_exclusive_with",
-        "condition_key",
-    },
-)
-
-_SPELL_EFFECT_KEYS = (
-    {"target"},
-    {"bonus_type", "value", "condition_key", "source_label"},
-)
-
-_FEAT_KEYS = (
-    {"name", "kind"},
-    {
-        "source_book",
-        "note",
-        "prerequisites",
-        "effects",
-        "parameter",
-        "snapshot",
-        "parameterized_selection",
-    },
-)
-
-_CLASS_KEYS = (
-    {"name"},
-    {
-        "source_book",
-        "hit_die",
-        "bab_progression",
-        "save_progressions",
-        "skills_per_level",
-        "class_skills",
-        "spellcasting",
-        "class_features",
-        "max_level",
-        "is_prestige",
-        "entry_prerequisites",
-        "ongoing_prerequisites",
-    },
-)
-
-_CLASS_FEATURE_KEYS = (
-    {"level", "feature", "description"},
-    set(),
-)
-
-_RACE_KEYS = (
-    {"name"},
-    {
-        "source_book",
-        "creature_type",
-        "subtypes",
-        "size",
-        "base_speed",
-        "ability_modifiers",
-        "favored_class",
-        "la",
-        "racial_traits",
-        "languages_auto",
-        "languages_bonus",
-        "weapon_familiarity",
-        "low_light_vision",
-        "darkvision",
-    },
-)
-
-_RACE_ABILITY_MOD_KEYS = (
-    {"ability", "value"},
-    {"bonus_type"},
-)
-
-_SKILL_KEYS = (
-    {"name", "key", "ability"},
-    {
-        "trained_only",
-        "armor_check",
-        "synergies",
-        "description",
-    },
-)
-
-_TEMPLATE_KEYS = (
-    {"name"},
-    {
-        "source_book",
-        "cr_adjustment",
-        "la_adjustment",
-        "type_change",
-        "subtype_add",
-        "subtype_remove",
-        "ability_modifiers",
-        "natural_armor_bonus",
-        "natural_armor_bonus_type",
-        "special_qualities",
-        "grants_feats",
-        "partially_applicable",
-        "note",
-        "ongoing_prereq",
-        "max_level",
-    },
-)
-
-_TEMPLATE_ABILITY_MOD_KEYS = (
-    {"ability", "value"},
-    {"bonus_type"},
-)
-
 
 def _check_keys(
     decl: dict,
@@ -524,82 +409,6 @@ class StatsLoader:
 
         return registered
 
-    def validate_yaml(self) -> list[str]:
-        """
-        Parse stats.yaml and return a list of validation errors (empty = OK).
-        Does not modify any graph — used for CI checks on the rules data.
-        """
-        errors: list[str] = []
-        stats_path = self.rules_dir / "core" / "stats.yaml"
-
-        try:
-            with open(stats_path) as f:
-                data = yaml.safe_load(f)
-        except Exception as e:
-            return [f"YAML parse error: {e}"]
-
-        if not isinstance(data, dict) or "stats" not in data:
-            return ["Missing top-level 'stats' key"]
-
-        seen_keys: set[str] = set()
-        declared_keys: set[str] = set()
-
-        for decl in data["stats"]:
-            key = decl.get("key", "<missing>")
-
-            if not decl.get("key"):
-                errors.append(f"Declaration missing 'key': {decl}")
-                continue
-
-            if key in seen_keys:
-                errors.append(f"Duplicate key: {key!r}")
-            seen_keys.add(key)
-            declared_keys.add(key)
-
-            errors.extend(_check_keys(decl, _STAT_KEYS, f"stat {key!r}"))
-
-            strategy = decl.get("compute", "base_plus_bonus")
-            if strategy not in COMPUTE_STRATEGIES:
-                errors.append(f"{key!r}: unknown compute strategy {strategy!r}")
-
-            # Check inputs reference declared keys (or are known bootstrap keys)
-            bootstrap_keys = {
-                "str_score",
-                "dex_score",
-                "con_score",
-                "int_score",
-                "wis_score",
-                "cha_score",
-                "str_mod",
-                "dex_mod",
-                "con_mod",
-                "int_mod",
-                "wis_mod",
-                "cha_mod",
-                "bab",
-                "fort_save",
-                "ref_save",
-                "will_save",
-                "ac",
-                "initiative",
-                "speed",
-                "hp_max",
-                "sr",
-                "attack_melee",
-                "attack_ranged",
-                "damage_str_bonus",
-                "max_dex_bonus",
-                "ac_dex_contribution",
-            }
-            for inp in decl.get("inputs", []):
-                if inp not in declared_keys and inp not in bootstrap_keys:
-                    errors.append(
-                        f"{key!r}: input {inp!r} not yet declared "
-                        f"(ordering issue or typo)"
-                    )
-
-        return errors
-
 
 # ---------------------------------------------------------------------------
 # SpellsLoader
@@ -809,68 +618,6 @@ class SpellsLoader:
 
         return registered
 
-    def validate_yaml(
-        self, relative_path: str = "core/spells_phb.yaml"
-    ) -> list[str]:
-        """
-        Parse and validate a spell YAML file without touching any registry.
-        Returns a list of error strings (empty = OK).
-        """
-        from heroforge.engine.bonus import BonusType
-
-        errors: list[str] = []
-        path = self.rules_dir / relative_path
-
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except Exception as e:
-            return [f"YAML parse error: {e}"]
-
-        if not isinstance(data, dict) or "spells" not in data:
-            return ["Missing top-level 'spells' key"]
-
-        valid_bonus_types = {bt.value for bt in BonusType}
-        valid_categories = set(_CATEGORY_MAP.keys())
-        seen_names: set[str] = set()
-
-        for decl in data["spells"]:
-            name = decl.get("name", "<missing>")
-            if not decl.get("name"):
-                errors.append(f"Declaration missing 'name': {decl}")
-                continue
-
-            if name in seen_names:
-                errors.append(f"Duplicate name: {name!r}")
-            seen_names.add(name)
-
-            errors.extend(_check_keys(decl, _SPELL_KEYS, name))
-
-            cat = decl.get("category", "spell")
-            if cat not in valid_categories:
-                errors.append(f"{name!r}: unknown category {cat!r}")
-
-            for eff in decl.get("effects", []):
-                if not eff.get("target"):
-                    errors.append(f"{name!r}: effect missing 'target'")
-                errors.extend(
-                    _check_keys(
-                        eff,
-                        _SPELL_EFFECT_KEYS,
-                        f"{name!r} effect",
-                    )
-                )
-                bt = eff.get("bonus_type", "untyped")
-                if bt not in valid_bonus_types:
-                    errors.append(f"{name!r}: unknown bonus_type {bt!r}")
-                cond_key = eff.get("condition_key")
-                if cond_key and cond_key not in CONDITION_REGISTRY:
-                    errors.append(
-                        f"{name!r}: unknown condition_key {cond_key!r}"
-                    )
-
-        return errors
-
 
 # ---------------------------------------------------------------------------
 # TemplatesLoader
@@ -934,58 +681,6 @@ class TemplatesLoader:
                 ) from e
 
         return registered
-
-    def validate_yaml(
-        self, relative_path: str = "core/templates.yaml"
-    ) -> list[str]:
-        """Parse and validate without touching a registry."""
-        errors: list[str] = []
-        path = self.rules_dir / relative_path
-
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except Exception as e:
-            return [f"YAML parse error: {e}"]
-
-        if not isinstance(data, dict) or "templates" not in data:
-            return ["Missing top-level 'templates' key"]
-
-        valid_abilities = {"str", "dex", "con", "int", "wis", "cha"}
-        from heroforge.engine.bonus import BonusType as _BT
-
-        valid_bonus_types = {bt.value for bt in _BT}
-        seen_names: set[str] = set()
-
-        for decl in data["templates"]:
-            name = decl.get("name", "<missing>")
-            if not decl.get("name"):
-                errors.append(f"Declaration missing 'name': {decl}")
-                continue
-
-            if name in seen_names:
-                errors.append(f"Duplicate template name: {name!r}")
-            seen_names.add(name)
-
-            errors.extend(
-                _check_keys(
-                    decl,
-                    _TEMPLATE_KEYS,
-                    decl.get("name", "?"),
-                )
-            )
-
-            for amod in decl.get("ability_modifiers", []):
-                ab = amod.get("ability", "")
-                if ab not in valid_abilities:
-                    errors.append(f"{name!r}: unknown ability {ab!r}")
-                bt = amod.get("bonus_type", "untyped")
-                if bt not in valid_bonus_types:
-                    errors.append(f"{name!r}: unknown bonus_type {bt!r}")
-                if "value" not in amod:
-                    errors.append(f"{name!r}: ability modifier missing 'value'")
-
-        return errors
 
 
 # ---------------------------------------------------------------------------
@@ -1086,53 +781,6 @@ class FeatsLoader:
 
         return registered
 
-    def validate_yaml(
-        self, relative_path: str = "core/feats_phb.yaml"
-    ) -> list[str]:
-        """Parse and validate without touching any registry."""
-        from heroforge.engine.bonus import BonusType
-
-        errors: list[str] = []
-        path = self.rules_dir / relative_path
-
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except Exception as e:
-            return [f"YAML parse error: {e}"]
-
-        if not isinstance(data, dict) or "feats" not in data:
-            return ["Missing top-level 'feats' key"]
-
-        valid_kinds = {"always_on", "conditional", "passive"}
-        valid_bt = {bt.value for bt in BonusType}
-        seen: set[str] = set()
-
-        for decl in data["feats"]:
-            name = decl.get("name", "<missing>")
-            if not decl.get("name"):
-                errors.append(f"Declaration missing 'name': {decl}")
-                continue
-
-            if name in seen:
-                errors.append(f"Duplicate feat name: {name!r}")
-            seen.add(name)
-
-            errors.extend(_check_keys(decl, _FEAT_KEYS, name))
-
-            kind = decl.get("kind", "passive")
-            if kind not in valid_kinds:
-                errors.append(f"{name!r}: unknown kind {kind!r}")
-
-            for eff in decl.get("effects", []):
-                if not eff.get("target"):
-                    errors.append(f"{name!r}: effect missing 'target'")
-                bt = eff.get("bonus_type", "untyped")
-                if bt not in valid_bt:
-                    errors.append(f"{name!r}: unknown bonus_type {bt!r}")
-
-        return errors
-
 
 # ---------------------------------------------------------------------------
 # ClassesLoader
@@ -1225,56 +873,6 @@ class ClassesLoader:
 
         return build_prereq_from_yaml(decl)
 
-    def validate_yaml(
-        self, relative_path: str = "core/classes.yaml"
-    ) -> list[str]:
-        errors: list[str] = []
-        path = self.rules_dir / relative_path
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except Exception as e:
-            return [f"YAML parse error: {e}"]
-
-        if not isinstance(data, dict) or "classes" not in data:
-            return ["Missing top-level 'classes' key"]
-
-        valid_bab = {"full", "medium", "poor"}
-        valid_save = {"good", "poor"}
-        seen: set[str] = set()
-
-        for decl in data["classes"]:
-            name = decl.get("name", "<missing>")
-            if not decl.get("name"):
-                errors.append(f"Missing 'name': {decl}")
-                continue
-            if name in seen:
-                errors.append(f"Duplicate class: {name!r}")
-            seen.add(name)
-
-            errors.extend(_check_keys(decl, _CLASS_KEYS, name))
-            for feat in decl.get("class_features", []):
-                errors.extend(
-                    _check_keys(
-                        feat,
-                        _CLASS_FEATURE_KEYS,
-                        f"{name!r} feature",
-                    )
-                )
-
-            bab = decl.get("bab_progression", "")
-            if bab not in valid_bab:
-                errors.append(f"{name!r}: unknown bab_progression {bab!r}")
-
-            for save_name in ("fort", "ref", "will"):
-                s = decl.get("save_progressions", {}).get(save_name, "")
-                if s not in valid_save:
-                    errors.append(
-                        f"{name!r}: unknown {save_name} progression {s!r}"
-                    )
-
-        return errors
-
 
 # ---------------------------------------------------------------------------
 # RacesLoader
@@ -1332,54 +930,6 @@ class RacesLoader:
                 raise LoaderError(f"Failed to load race {name!r}: {e}") from e
         return registered
 
-    def validate_yaml(
-        self, relative_path: str = "core/races.yaml"
-    ) -> list[str]:
-        errors: list[str] = []
-        path = self.rules_dir / relative_path
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except Exception as e:
-            return [f"YAML parse error: {e}"]
-
-        if not isinstance(data, dict) or "races" not in data:
-            return ["Missing top-level 'races' key"]
-
-        valid_sizes = {"Small", "Medium", "Large"}
-        valid_abilities = {"str", "dex", "con", "int", "wis", "cha"}
-        seen: set[str] = set()
-
-        for decl in data["races"]:
-            name = decl.get("name", "<missing>")
-            if not decl.get("name"):
-                errors.append(f"Missing 'name': {decl}")
-                continue
-            if name in seen:
-                errors.append(f"Duplicate race: {name!r}")
-            seen.add(name)
-
-            errors.extend(_check_keys(decl, _RACE_KEYS, name))
-            for amod in decl.get("ability_modifiers", []):
-                errors.extend(
-                    _check_keys(
-                        amod,
-                        _RACE_ABILITY_MOD_KEYS,
-                        f"{name!r} ability_modifier",
-                    )
-                )
-
-            size = decl.get("size", "Medium")
-            if size not in valid_sizes:
-                errors.append(f"{name!r}: unknown size {size!r}")
-
-            for amod in decl.get("ability_modifiers", []):
-                ab = amod.get("ability", "")
-                if ab not in valid_abilities:
-                    errors.append(f"{name!r}: unknown ability {ab!r}")
-
-        return errors
-
 
 # ---------------------------------------------------------------------------
 # SkillsLoader
@@ -1435,40 +985,6 @@ class SkillsLoader:
             except Exception as e:
                 raise LoaderError(f"Failed to load skill {name!r}: {e}") from e
         return registered
-
-    def validate_yaml(
-        self, relative_path: str = "core/skills.yaml"
-    ) -> list[str]:
-        errors: list[str] = []
-        path = self.rules_dir / relative_path
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except Exception as e:
-            return [f"YAML parse error: {e}"]
-
-        if not isinstance(data, dict) or "skills" not in data:
-            return ["Missing top-level 'skills' key"]
-
-        valid_abilities = {"str", "dex", "con", "int", "wis", "cha"}
-        seen: set[str] = set()
-
-        for decl in data["skills"]:
-            name = decl.get("name", "<missing>")
-            if not decl.get("name"):
-                errors.append(f"Missing 'name': {decl}")
-                continue
-            if name in seen:
-                errors.append(f"Duplicate skill: {name!r}")
-            seen.add(name)
-            errors.extend(_check_keys(decl, _SKILL_KEYS, name))
-            ab = decl.get("ability", "")
-            if ab not in valid_abilities:
-                errors.append(f"{name!r}: unknown ability {ab!r}")
-            if not decl.get("key", "").startswith("skill_"):
-                errors.append(f"{name!r}: key must start with 'skill_'")
-
-        return errors
 
 
 # -----------------------------------------------------------

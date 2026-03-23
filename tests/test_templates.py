@@ -661,13 +661,6 @@ class TestBuildTemplateFromYaml:
 class TestTemplatesLoader:
     from heroforge.rules.loader import TemplatesLoader
 
-    def test_validate_yaml_no_errors(self) -> None:
-        from heroforge.rules.loader import TemplatesLoader
-
-        loader = TemplatesLoader(RULES_DIR)
-        errors = loader.validate_yaml()
-        assert errors == [], "templates.yaml errors:\n" + "\n".join(errors)
-
     def test_load_registers_all_templates(self) -> None:
         import yaml
 

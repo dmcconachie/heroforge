@@ -438,12 +438,6 @@ class TestBuildFeatFromYaml:
 
 
 class TestFeatsYamlStructure:
-    def test_validate_yaml_no_errors(self) -> None:
-        from heroforge.rules.loader import FeatsLoader
-
-        errors = FeatsLoader(RULES_DIR).validate_yaml()
-        assert errors == [], "feats_phb.yaml errors:\n" + "\n".join(errors)
-
     def test_no_duplicate_names(self) -> None:
         import yaml
 

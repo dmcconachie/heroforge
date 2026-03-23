@@ -70,13 +70,6 @@ def fresh_char(**kwargs: object) -> Character:
 
 
 class TestYamlStructure:
-    def test_validate_yaml_no_errors(self) -> None:
-        loader = SpellsLoader(RULES_DIR)
-        errors = loader.validate_yaml()
-        assert errors == [], "spells_phb.yaml validation errors:\n" + "\n".join(
-            errors
-        )
-
     def test_no_duplicate_names(self) -> None:
         import yaml
 

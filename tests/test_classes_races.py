@@ -385,12 +385,6 @@ class TestApplyRace:
 
 
 class TestClassesLoader:
-    def test_validate_yaml_no_errors(self) -> None:
-        from heroforge.rules.loader import ClassesLoader
-
-        errors = ClassesLoader(RULES_DIR).validate_yaml()
-        assert errors == [], "classes.yaml errors:\n" + "\n".join(errors)
-
     def test_load_registers_all_classes(self) -> None:
         import yaml
 
@@ -517,12 +511,6 @@ class TestClassesLoader:
 
 
 class TestRacesLoader:
-    def test_validate_yaml_no_errors(self) -> None:
-        from heroforge.rules.loader import RacesLoader
-
-        errors = RacesLoader(RULES_DIR).validate_yaml()
-        assert errors == [], "races.yaml errors:\n" + "\n".join(errors)
-
     def test_load_registers_all_races(self) -> None:
         import yaml
 

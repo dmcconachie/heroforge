@@ -57,14 +57,6 @@ def fighter(n: int) -> list[ClassLevel]:
 
 
 class TestYamlStructure:
-    def test_validate_yaml_returns_no_errors(self) -> None:
-        """The shipped stats.yaml must pass all validation checks."""
-        loader = StatsLoader(RULES_DIR)
-        errors = loader.validate_yaml()
-        assert errors == [], "stats.yaml validation errors:\n" + "\n".join(
-            errors
-        )
-
     def test_all_compute_strategies_referenced_are_known(self) -> None:
         """
         Every compute strategy name used in stats.yaml must exist in
