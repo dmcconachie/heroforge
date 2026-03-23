@@ -36,7 +36,8 @@ Design notes:
   ─────────────────────────────────────────────────────────────────────────
 
 Public API:
-  BuffCategory       — enum: SPELL, CLASS, FEAT, ITEM, CONDITION
+  BuffCategory       — enum: SPELL, CLASS, FEAT, ITEM,
+                       CONDITION, RACIAL, TEMPLATE
   BonusEffect        — one stat contribution from a buff (value + type + target)
   BuffDefinition     — complete description of a buff's effects
   BuffRegistry       — lookup and registration of BuffDefinitions

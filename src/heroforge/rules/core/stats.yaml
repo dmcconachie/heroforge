@@ -246,7 +246,7 @@ stats:
     sheet: 1
 
   # =========================================================================
-  # Attack Bonuses (primary attack; iterative strings in combat.py)
+  # Attack Bonuses (primary attack)
   #
   # attack_melee  = BAB + STR mod + size mod + pools(attack_melee, attack_all)
   # attack_ranged = BAB + DEX mod + size mod + pools(attack_ranged, attack_all)
@@ -255,9 +255,10 @@ stats:
   # (e.g. Haste +1, Prayer luck, Bless morale).
   # attack_melee / attack_ranged pools: type-specific bonuses.
   #
-  # Note: weapon-specific bonuses (Weapon Focus, enhancement bonus) are
-  # applied per-weapon in combat.py, not here.  These nodes give the
-  # character's general attack bonus before weapon modifiers.
+  # Weapon-specific bonuses (Weapon Focus, enhancement) go through the
+  # attack_all or attack_melee/attack_ranged pools.  These nodes give the
+  # character's total attack bonus.  Iterative attacks are computed by
+  # Character.attack_iteratives().
   # =========================================================================
 
   - key: attack_melee
@@ -275,7 +276,7 @@ stats:
     sheet: 1
 
   # =========================================================================
-  # Damage Bonus (strength-based; weapon dice and enhancement in combat.py)
+  # Damage Bonus (STR-based; weapon dice handled by equipment system)
   # =========================================================================
 
   - key: damage_str_bonus
@@ -286,15 +287,11 @@ stats:
     sheet: 1
 
   # =========================================================================
-  # Combat Manoeuvre Bonus / Defence (3.5e: grapple check)
-  # CMB = BAB + STR mod + size mod (opposite sign from attack)
-  # CMD = 10 + BAB + STR mod + DEX mod + size mod
-  # These use the same inputs as attack but different size modifier sign.
-  # Registered in combat.py when that module is initialised.
-  # =========================================================================
-
-  # - key: cmb   (registered by combat.py)
-  # - key: cmd   (registered by combat.py)
+  # Grapple modifier
+  # Registered by Character._bootstrap_stat_graph() as the "grapple" node.
+  # grapple = BAB + STR mod + size grapple modifier
+  # (size grapple uses opposite sign from attack size mod)
+  #=========================================================================
 
   # =========================================================================
   # Skill check totals
@@ -316,6 +313,6 @@ stats:
   # =========================================================================
 
   # =========================================================================
-  # Psionic
-  # Manifester level and power points are managed by psionics.py (future).
+  # Psionic (not yet implemented)
+  # Manifester level and power points would go here.
   # =========================================================================

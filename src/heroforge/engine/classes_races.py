@@ -1,25 +1,29 @@
 """
 engine/classes_races.py
 -----------------------
-ClassDefinition and RaceDefinition data models, plus helper functions
-for computing BAB/save progressions from class data.
+ClassDefinition, RaceDefinition, and DomainDefinition
+data models, plus helper functions for computing BAB/save
+progressions from class data.
 
-These models are populated by ClassesLoader and RacesLoader (in loader.py)
-and used by the Character to set up class levels and racial bonuses.
+These models are populated by ClassesLoader, RacesLoader,
+and DomainsLoader (in loader.py) and used by the Character
+to set up class levels, racial bonuses, and domain spells.
 
 Public API:
   BABProgression        — enum: FULL / MEDIUM / POOR
   SaveProgression       — enum: GOOD / POOR
-  ClassFeature          — one feature granted at a specific level
+  ClassFeature          — one feature at a specific level
   SpellcastingInfo      — spellcasting metadata for a class
   ClassDefinition       — complete class description
   ClassRegistry         — lookup by name
   RaceDefinition        — complete race description
   RaceRegistry          — lookup by name
-  bab_at_level()        — compute BAB for a class at a given level
-  save_at_level()       — compute base save bonus at a given level
-  apply_race()          — wire racial ability bonuses into Character
-  remove_race()         — undo racial ability bonuses
+  DomainDefinition      — cleric domain with spells
+  DomainRegistry        — lookup by name
+  bab_at_level()        — compute BAB at a given level
+  save_at_level()       — compute base save at a level
+  apply_race()          — wire racial bonuses into Character
+  remove_race()         — undo racial bonuses
 """
 
 from __future__ import annotations

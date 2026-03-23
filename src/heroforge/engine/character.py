@@ -15,7 +15,7 @@ Responsibilities:
 
 What this module does NOT do:
   - No GUI imports
-  - No YAML serialisation (that lives in persistence.py, not yet written)
+  - No YAML serialisation (that lives in persistence.py)
   - No rules data loading (that lives in the rules registry)
   - No prerequisite checking (engine/prerequisites.py)
 
@@ -481,9 +481,9 @@ class Character:
             )
         )
 
-        # ---- Melee attack (primary, no iteratives) -------------------------
-        # Full iterative attack strings are computed in combat.py;
-        # this node gives the primary attack bonus.
+        # ---- Melee attack (primary) -----------------------
+        # Iterative attacks are computed by attack_iteratives().
+        # This node gives the primary attack bonus.
         g.register_node(
             StatNode(
                 key="attack_melee",
@@ -530,7 +530,7 @@ class Character:
             )
         )
 
-        # ---- Damage (unarmed baseline — weapon damage computed in combat.py)
+        # ---- Damage (STR bonus; weapon dice handled by equipment)
         g.register_node(
             StatNode(
                 key="damage_str_bonus",

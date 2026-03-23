@@ -1,6 +1,6 @@
 # rules/core/classes.yaml
 #
-# Core character class definitions for D&D 3.5e (PHB + DMG).
+# Character class definitions for D&D 3.5e (PHB + DMG + SRD NPC).
 #
 # Schema per entry:
 #   name            : Unique class name

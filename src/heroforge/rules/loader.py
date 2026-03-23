@@ -1,20 +1,31 @@
 """
 rules/loader.py
 ---------------
-Loads rules YAML files and applies them to a Character's stat graph.
+Loads rules YAML files and populates engine registries.
 
-The loader is the bridge between the declarative YAML data layer and the
-imperative engine layer.  It reads stats.yaml (and later feats.yaml,
-spells.yaml, etc.) and translates declarations into StatNode registrations,
-BonusPool registrations, and buff definitions.
+The loader is the bridge between the declarative YAML
+data layer and the imperative engine layer.  It reads
+YAML files and translates declarations into engine
+objects (stat nodes, buff definitions, feat definitions,
+class/race definitions, equipment, domains, spell
+compendium entries).
 
 The engine (engine/) has zero knowledge of YAML structure.
 The YAML files have zero Python code.
 This module is the only place where those two meet.
 
 Public API:
-  StatsLoader        — reads stats.yaml and builds/validates the stat graph
-  LoaderError        — raised on malformed YAML or unknown compute strategies
+  LoaderError            — raised on malformed YAML
+  StatsLoader            — stats.yaml → stat graph
+  SpellsLoader           — spell/condition/item YAML
+  FeatsLoader            — feat YAML → FeatRegistry
+  TemplatesLoader        — templates YAML
+  ClassesLoader          — classes YAML
+  RacesLoader            — races YAML
+  SkillsLoader           — skills YAML
+  DomainsLoader          — domains YAML
+  EquipmentLoader        — armor/weapons YAML
+  SpellCompendiumLoader  — spell compendium YAML
 """
 
 from __future__ import annotations
@@ -1360,7 +1371,7 @@ class EquipmentLoader:
 
 
 # -----------------------------------------------------------
-# Spell compendium loader (all spells, not just buffs)
+# Spell compendium loader (spell metadata for all SRD spells)
 # -----------------------------------------------------------
 
 

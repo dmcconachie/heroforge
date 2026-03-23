@@ -43,13 +43,18 @@ class AppState:
 
     Attributes
     ----------
-    spell_registry    : BuffRegistry  — spells and conditions as BuffDefinitions
-    feat_registry     : FeatRegistry  — feat definitions
-    skill_registry    : SkillRegistry — skill metadata
-    template_registry : TemplateRegistry
-    class_registry    : ClassRegistry
-    race_registry     : RaceRegistry
-    character         : Character     — the currently active character
+    spell_registry     : BuffRegistry — buff spells, conditions, items
+    spell_compendium   : SpellCompendium — all 601 SRD spells
+    feat_registry      : FeatRegistry
+    armor_registry     : ArmorRegistry
+    weapon_registry    : WeaponRegistry
+    domain_registry    : DomainRegistry
+    skill_registry     : SkillRegistry
+    template_registry  : TemplateRegistry
+    class_registry     : ClassRegistry
+    race_registry      : RaceRegistry
+    prereq_checker     : PrerequisiteChecker
+    character          : Character — the active character
     """
 
     def __init__(self) -> None:
