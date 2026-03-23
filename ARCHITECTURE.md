@@ -17,11 +17,13 @@ src/heroforge/
 │   ├── stat.py             # StatNode, StatGraph: lazy DAG
 │   ├── character.py        # Character, ChangeNotifier,
 │   │                       #   CharacterLevel, ClassLevel,
-│   │                       #   BuffState, DmOverride
+│   │                       #   BuffState, DmOverride,
+│   │                       #   grapple, carrying capacity
 │   ├── effects.py          # BuffDefinition, BuffCategory,
 │   │                       #   formula evaluation
 │   ├── classes_races.py    # ClassDefinition, RaceDefinition,
-│   │                       #   SpellcastingInfo, apply_race()
+│   │                       #   SpellcastingInfo, apply_race(),
+│   │                       #   DomainDefinition, DomainRegistry
 │   ├── skills.py           # SkillDefinition,
 │   │                       #   register_skills_on_character()
 │   ├── feats.py            # FeatDefinition, FeatKind,
@@ -30,19 +32,44 @@ src/heroforge/
 │   │                       #   FeatAvailability, PrC infra
 │   ├── templates.py        # TemplateDefinition,
 │   │                       #   apply_template()
-│   └── persistence.py      # save/load character YAML
+│   ├── persistence.py      # save/load character YAML
+│   ├── equipment.py        # ArmorDefinition,
+│   │                       #   WeaponDefinition,
+│   │                       #   equip/unequip helpers
+│   ├── spellcasting.py     # Spell slot tables, bonus
+│   │                       #   spells, DCs, spells known
+│   ├── spells.py           # SpellEntry, SpellCompendium
+│   │                       #   (metadata for all spells)
+│   └── resources.py        # ResourceTracker (uses/day)
 │
 ├── rules/
 │   ├── loader.py           # StatsLoader, SpellsLoader,
-│   │                       #   FeatsLoader, etc.
-│   └── core/               # One YAML file per data domain
+│   │                       #   FeatsLoader, ClassesLoader,
+│   │                       #   RacesLoader, SkillsLoader,
+│   │                       #   TemplatesLoader,
+│   │                       #   EquipmentLoader,
+│   │                       #   DomainsLoader,
+│   │                       #   SpellCompendiumLoader
+│   └── core/               # YAML data files
 │       ├── stats.yaml
 │       ├── skills.yaml
-│       ├── classes.yaml
-│       ├── races.yaml
-│       ├── feats_phb.yaml
-│       ├── spells_phb.yaml
-│       └── templates.yaml
+│       ├── classes.yaml      # 16 base + 15 prestige
+│       ├── races.yaml        # 7 core races
+│       ├── feats_phb.yaml    # 86 PHB feats
+│       ├── feats_srd.yaml    # 32 additional SRD feats
+│       ├── spells_phb.yaml   # PHB buff spells
+│       ├── spells_srd_buffs.yaml  # SRD buff spells
+│       ├── spells_srd_0_3.yaml    # Spell compendium
+│       ├── spells_srd_4_6.yaml    #   (601 spells total
+│       ├── spells_srd_7_9.yaml    #   across 3 files)
+│       ├── spell_lists.yaml  # Class spell lists
+│       ├── conditions_srd.yaml  # 20 conditions
+│       ├── class_buffs.yaml  # Class feature buffs
+│       ├── templates.yaml    # 12 creature templates
+│       ├── domains.yaml      # 22 cleric domains
+│       ├── armor.yaml        # 18 armor/shields
+│       ├── weapons.yaml      # 63 weapons
+│       └── magic_items.yaml  # ~70 magic items
 │
 ├── export/
 │   ├── sheet_data.py       # gather(): Character → SheetData
@@ -89,7 +116,16 @@ tests/
 ├── test_stats_yaml.py
 ├── test_spells_yaml.py
 ├── test_export.py
-└── test_ui_smoke.py
+├── test_ui_smoke.py
+├── test_combat.py          # Grapple, carrying capacity
+├── test_equipment.py       # Armor, shields, weapons
+├── test_spellcasting.py    # Spell slots, DCs
+├── test_domains.py         # Cleric domains
+├── test_class_features.py  # Rage, inspire courage, etc.
+├── test_magic_items.py     # Magic item buffs
+├── test_conditions_srd_yaml.py
+├── test_feats_srd_yaml.py
+└── test_spells_srd_yaml.py
 ```
 
 ---
@@ -141,11 +177,17 @@ Computed properties: `class_level_map` (cumulative levels
 per class), `total_level`, `attack_iteratives()`,
 `multiclass_xp_penalty()`, `validate()`.
 
+Combat helpers: `_compute_size_mod_grapple()`,
+`_compute_size_mod_hide()`, `carrying_capacity()`.
+
+Grapple stat node: BAB + STR mod + size grapple modifier.
+
 Placeholder fields (defined but not yet wired to logic):
 `hp_current`, `familiar`, `animal_companion`.
 
 `_bootstrap_stat_graph()` wires up all standard 3.5e stat
-nodes (ability scores → modifiers → saves/attacks/AC/HP/etc.).
+nodes (ability scores → modifiers → saves/attacks/AC/HP/
+grapple/etc.).
 
 All mutations go through public methods (`set_ability_score`,
 `toggle_buff`, `set_class_levels`, `add_feat`, etc.) which
@@ -159,11 +201,11 @@ mutation. Keeps the engine decoupled from Qt signals.
 ## Layer 4: Effects (`engine/effects.py`)
 
 `BuffDefinition` models any source of stat bonuses: spells,
-feats, conditions, items. Each has a list of `BonusEffect`
-(target pool, bonus type, value or CL-scaling formula string,
-optional condition). `BuffCategory` enum tags the source kind.
-Optional `ongoing_condition` lambda allows buffs to be
-conditionally active based on character state.
+feats, conditions, items, class features. Each has a list of
+`BonusEffect` (target pool, bonus type, value or CL-scaling
+formula string, optional condition). `BuffCategory` enum tags
+the source kind (SPELL, CLASS, FEAT, ITEM, CONDITION, RACIAL,
+TEMPLATE).
 
 `evaluate_formula()` safely evaluates CL-scaling expressions
 like `"2 + caster_level // 6"` in a restricted namespace.
@@ -183,6 +225,10 @@ feature gained at a specific class level.
 
 `RaceDefinition` holds ability modifiers, size, speed,
 subtypes, and racial features.
+
+`DomainDefinition` holds name, granted power text, and
+domain spells (levels 1-9). `DomainRegistry` provides
+name-based lookup for all 22 SRD cleric domains.
 
 `apply_race()` wires racial ability bonuses into the
 Character's pools. `bab_at_level()` and `save_at_level()`
@@ -263,21 +309,66 @@ class name, HP roll, and skill point allocation.
 template, and feat effects through the normal engine
 methods so all derived stats recompute correctly.
 
+## Layer 11: Equipment (`engine/equipment.py`)
+
+`ArmorDefinition` and `WeaponDefinition` are frozen
+dataclasses with all SRD stats. `ArmorRegistry` and
+`WeaponRegistry` provide name-based lookup.
+
+`equip_armor()` / `equip_shield()` push armor/shield
+bonuses into AC pool and armor check penalties into
+skill pools. `unequip_armor()` / `unequip_shield()`
+reverse these. Source keys (`"equip:armor"`,
+`"equip:shield"`) keep equipment bonuses separate from
+buff bonuses.
+
+## Layer 12: Spellcasting (`engine/spellcasting.py`)
+
+Complete spell slot tables for all 7 casting classes
+(Wizard, Sorcerer, Cleric, Druid, Bard, Paladin,
+Ranger). `base_slots_per_day()`, `bonus_spells()`,
+`slots_per_day()`, `spells_known()`, `spell_save_dc()`.
+
+## Layer 13: Spell compendium (`engine/spells.py`)
+
+`SpellEntry` holds metadata for any SRD spell (name,
+school, level dict, duration, etc.). `SpellCompendium`
+is a registry of all 601 non-epic SRD spells, loaded
+from three YAML files. Provides `by_class()`,
+`by_class_and_level()` queries.
+
+## Layer 14: Resources (`engine/resources.py`)
+
+`ResourceTracker` for uses-per-day class abilities
+(Rage, Turn Undead, Bardic Music, Wild Shape). Tracks
+max uses (formula), current uses, use/reset/exhaust.
+
 ---
 
 ## Rules layer (`rules/`)
 
 `rules/loader.py` contains one Loader class per data domain
 (StatsLoader, SpellsLoader, FeatsLoader, SkillsLoader,
-TemplatesLoader, ClassesLoader, RacesLoader). Each reads its
-YAML file, builds engine objects via `build_*_from_yaml()`
+TemplatesLoader, ClassesLoader, RacesLoader, EquipmentLoader,
+DomainsLoader, SpellCompendiumLoader). Each reads its YAML
+file, builds engine objects via `build_*_from_yaml()`
 functions, and populates the corresponding registry.
 
-YAML files under `rules/core/` contain PHB data (11 base
-classes, 14 SRD prestige classes, 7 races, skills, feats,
-spells, templates). `classes.yaml` has both `classes:` and
-`prestige_classes:` sections. The design supports additional
-sourcebook directories with override semantics.
+YAML files under `rules/core/` contain full SRD data:
+- 16 base classes (11 PHB + 5 NPC) + 15 prestige classes
+- 7 races, 36 skills
+- 118 feats (86 PHB + 32 SRD)
+- ~100 buff spells/conditions + 601 spell compendium entries
+- Class spell lists for 7 casting classes
+- 22 cleric domains
+- 18 armor/shields, 63 weapons
+- ~70 magic items
+- 12 creature templates
+- ~15 class feature buffs (rage, inspire courage, etc.)
+
+`classes.yaml` has both `classes:` and `prestige_classes:`
+sections. The design supports additional sourcebook
+directories with override semantics.
 
 ---
 
@@ -300,6 +391,17 @@ ReportLab.
 Single object holding all registries and the active
 `Character`. Created by `MainWindow`. Methods: `load_rules()`,
 `new_character()`, `set_character()`, `skill_total()`.
+
+Registries: `spell_registry` (BuffRegistry),
+`spell_compendium` (SpellCompendium),
+`feat_registry` (FeatRegistry),
+`armor_registry` (ArmorRegistry),
+`weapon_registry` (WeaponRegistry),
+`domain_registry` (DomainRegistry),
+`skill_registry` (SkillRegistry),
+`template_registry` (TemplateRegistry),
+`class_registry` (ClassRegistry),
+`race_registry` (RaceRegistry).
 
 ### MainWindow (`main_window.py`)
 
@@ -372,6 +474,6 @@ Reusable components in `widgets/`: `LabeledField`,
 - Companion/familiar sub-objects (placeholder fields
   exist on Character but no logic)
 - Two-weapon fighting penalty tables
-- Splatbook YAML files beyond core
-- Equipment items with stat effects (YAML + pool wiring)
-- Spell slots / spells known tracking per class level
+- Splatbook YAML files beyond SRD core
+- Equipment persistence (equip/unequip saves)
+- Wild Shape form mechanics
