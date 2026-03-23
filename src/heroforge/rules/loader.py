@@ -1200,8 +1200,9 @@ class ClassesLoader:
         prereq_checker: PrerequisiteChecker | None = None,
     ) -> list[str]:
         from heroforge.engine.classes_races import (
-            build_class_from_yaml,
+            ClassDefinition,
         )
+        from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -1221,22 +1222,11 @@ class ClassesLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"Class missing 'name': {decl}")
-            key_errs = _check_keys(decl, _CLASS_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
-            for feat in decl.get("class_features", []):
-                cf_errs = _check_keys(
-                    feat,
-                    _CLASS_FEATURE_KEYS,
-                    f"{name!r} feature",
-                )
-                if cf_errs:
-                    raise LoaderError("; ".join(cf_errs))
             try:
-                defn = build_class_from_yaml(decl)
+                defn = converter.structure(decl, ClassDefinition)
                 registry.register(defn, overwrite=overwrite)
                 registered.append(name)
-            except (KeyError, ValueError) as e:
+            except Exception as e:
                 raise LoaderError(f"Failed to load class {name!r}: {e}") from e
 
         # Prestige classes
@@ -1244,20 +1234,9 @@ class ClassesLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"PrC missing 'name': {decl}")
-            key_errs = _check_keys(decl, _CLASS_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
-            for feat in decl.get("class_features", []):
-                cf_errs = _check_keys(
-                    feat,
-                    _CLASS_FEATURE_KEYS,
-                    f"{name!r} feature",
-                )
-                if cf_errs:
-                    raise LoaderError("; ".join(cf_errs))
             decl["is_prestige"] = True
             try:
-                defn = build_class_from_yaml(decl)
+                defn = converter.structure(decl, ClassDefinition)
                 registry.register(defn, overwrite=overwrite)
                 registered.append(name)
             except (KeyError, ValueError) as e:
