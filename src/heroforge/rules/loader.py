@@ -204,58 +204,6 @@ _TEMPLATE_ABILITY_MOD_KEYS = (
     {"bonus_type"},
 )
 
-_DOMAIN_KEYS = (
-    {"name"},
-    {"granted_power", "domain_spells"},
-)
-
-_ARMOR_KEYS = (
-    {"name", "category"},
-    {
-        "armor_bonus",
-        "max_dex_bonus",
-        "armor_check_penalty",
-        "arcane_spell_failure",
-        "speed_30",
-        "speed_20",
-        "weight",
-        "cost_gp",
-        "special",
-    },
-)
-
-_WEAPON_KEYS = (
-    {"name", "category", "damage_dice"},
-    {
-        "critical_range",
-        "critical_multiplier",
-        "damage_type",
-        "range_increment",
-        "weight",
-        "cost_gp",
-        "is_ranged",
-        "special",
-    },
-)
-
-_SPELL_COMPENDIUM_KEYS = (
-    {"name"},
-    {
-        "school",
-        "subschool",
-        "descriptor",
-        "level",
-        "casting_time",
-        "range",
-        "duration",
-        "saving_throw",
-        "spell_resistance",
-        "description",
-        "source_book",
-        "has_buff_effects",
-    },
-)
-
 
 def _check_keys(
     decl: dict,
