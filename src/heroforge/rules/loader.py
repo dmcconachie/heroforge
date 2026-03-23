@@ -73,6 +73,214 @@ class LoaderError(Exception):
 
 
 # ---------------------------------------------------------------------------
+# Schema key definitions: (required_keys, optional_keys)
+# ---------------------------------------------------------------------------
+
+_STAT_KEYS = (
+    {"key"},
+    {
+        "compute",
+        "base",
+        "inputs",
+        "pools",
+        "description",
+        "sheet",
+        "save_name",
+    },
+)
+
+_SPELL_KEYS = (
+    {"name"},
+    {
+        "category",
+        "source_book",
+        "note",
+        "effects",
+        "requires_caster_level",
+        "mutually_exclusive_with",
+        "condition_key",
+    },
+)
+
+_SPELL_EFFECT_KEYS = (
+    {"target"},
+    {"bonus_type", "value", "condition_key", "source_label"},
+)
+
+_FEAT_KEYS = (
+    {"name", "kind"},
+    {
+        "source_book",
+        "note",
+        "prerequisites",
+        "effects",
+        "parameter",
+        "snapshot",
+        "parameterized_selection",
+    },
+)
+
+_CLASS_KEYS = (
+    {"name"},
+    {
+        "source_book",
+        "hit_die",
+        "bab_progression",
+        "save_progressions",
+        "skills_per_level",
+        "class_skills",
+        "spellcasting",
+        "class_features",
+        "max_level",
+        "is_prestige",
+        "entry_prerequisites",
+        "ongoing_prerequisites",
+    },
+)
+
+_CLASS_FEATURE_KEYS = (
+    {"level", "feature", "description"},
+    set(),
+)
+
+_RACE_KEYS = (
+    {"name"},
+    {
+        "source_book",
+        "creature_type",
+        "subtypes",
+        "size",
+        "base_speed",
+        "ability_modifiers",
+        "favored_class",
+        "la",
+        "racial_traits",
+        "languages",
+        "weapon_familiarity",
+        "low_light_vision",
+        "darkvision",
+    },
+)
+
+_RACE_ABILITY_MOD_KEYS = (
+    {"ability", "value"},
+    {"bonus_type"},
+)
+
+_SKILL_KEYS = (
+    {"name", "key", "ability"},
+    {
+        "trained_only",
+        "armor_check",
+        "synergies",
+        "description",
+    },
+)
+
+_TEMPLATE_KEYS = (
+    {"name"},
+    {
+        "source_book",
+        "cr_adjustment",
+        "la_adjustment",
+        "type_change",
+        "subtype_add",
+        "subtype_remove",
+        "ability_modifiers",
+        "natural_armor_bonus",
+        "natural_armor_bonus_type",
+        "special_qualities",
+        "grants_feats",
+        "partially_applicable",
+        "note",
+        "ongoing_prereq",
+        "max_level",
+    },
+)
+
+_TEMPLATE_ABILITY_MOD_KEYS = (
+    {"ability", "value"},
+    {"bonus_type"},
+)
+
+_DOMAIN_KEYS = (
+    {"name"},
+    {"granted_power", "domain_spells"},
+)
+
+_ARMOR_KEYS = (
+    {"name", "category"},
+    {
+        "armor_bonus",
+        "max_dex_bonus",
+        "armor_check_penalty",
+        "arcane_spell_failure",
+        "speed_30",
+        "speed_20",
+        "weight",
+        "cost_gp",
+        "special",
+    },
+)
+
+_WEAPON_KEYS = (
+    {"name", "category", "damage_dice"},
+    {
+        "critical_range",
+        "critical_multiplier",
+        "damage_type",
+        "range_increment",
+        "weight",
+        "cost_gp",
+        "is_ranged",
+        "special",
+    },
+)
+
+_SPELL_COMPENDIUM_KEYS = (
+    {"name"},
+    {
+        "school",
+        "subschool",
+        "descriptor",
+        "level",
+        "casting_time",
+        "range",
+        "duration",
+        "saving_throw",
+        "spell_resistance",
+        "description",
+        "source_book",
+        "has_buff_effects",
+    },
+)
+
+
+def _check_keys(
+    decl: dict,
+    schema: tuple[set[str], set[str]],
+    label: str,
+) -> list[str]:
+    """
+    Validate keys in *decl* against *schema*.
+
+    *schema* is (required, optional).  Returns a list
+    of error strings (empty = OK).
+    """
+    required, optional = schema
+    allowed = required | optional
+    errors: list[str] = []
+    name = decl.get("name", label)
+    for key in required:
+        if key not in decl:
+            errors.append(f"{name!r}: missing required key {key!r}")
+    for key in decl:
+        if key not in allowed:
+            errors.append(f"{name!r}: unknown key {key!r}")
+    return errors
+
+
+# ---------------------------------------------------------------------------
 # Compute strategy registry
 # ---------------------------------------------------------------------------
 # Maps strategy name strings (from YAML) to factory functions.
@@ -316,6 +524,10 @@ class StatsLoader:
             if not key:
                 raise LoaderError(f"Stat declaration missing 'key': {decl}")
 
+            key_errs = _check_keys(decl, _STAT_KEYS, f"stat {key!r}")
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
+
             # Duplicate check within the YAML itself
             if key in seen_keys:
                 raise LoaderError(f"Duplicate stat key {key!r} in stats.yaml")
@@ -394,6 +606,8 @@ class StatsLoader:
                 errors.append(f"Duplicate key: {key!r}")
             seen_keys.add(key)
             declared_keys.add(key)
+
+            errors.extend(_check_keys(decl, _STAT_KEYS, f"stat {key!r}"))
 
             strategy = decl.get("compute", "base_plus_bonus")
             if strategy not in COMPUTE_STRATEGIES:
@@ -543,6 +757,10 @@ class SpellsLoader:
             if not name:
                 raise LoaderError(f"Spell declaration missing 'name': {decl}")
 
+            key_errs = _check_keys(decl, _SPELL_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
+
             category_str = decl.get("category", "spell")
             category = _CATEGORY_MAP.get(category_str)
             if category is None:
@@ -558,6 +776,14 @@ class SpellsLoader:
                     raise LoaderError(
                         f"{name!r}: effect missing 'target': {eff_decl}"
                     )
+
+                eff_errs = _check_keys(
+                    eff_decl,
+                    _SPELL_EFFECT_KEYS,
+                    f"{name!r} effect",
+                )
+                if eff_errs:
+                    raise LoaderError("; ".join(eff_errs))
 
                 bt_str = eff_decl.get("bonus_type", "untyped")
                 bonus_type = bonus_type_map.get(bt_str)
@@ -646,6 +872,8 @@ class SpellsLoader:
                 errors.append(f"Duplicate name: {name!r}")
             seen_names.add(name)
 
+            errors.extend(_check_keys(decl, _SPELL_KEYS, name))
+
             cat = decl.get("category", "spell")
             if cat not in valid_categories:
                 errors.append(f"{name!r}: unknown category {cat!r}")
@@ -653,6 +881,13 @@ class SpellsLoader:
             for eff in decl.get("effects", []):
                 if not eff.get("target"):
                     errors.append(f"{name!r}: effect missing 'target'")
+                errors.extend(
+                    _check_keys(
+                        eff,
+                        _SPELL_EFFECT_KEYS,
+                        f"{name!r} effect",
+                    )
+                )
                 bt = eff.get("bonus_type", "untyped")
                 if bt not in valid_bonus_types:
                     errors.append(f"{name!r}: unknown bonus_type {bt!r}")
@@ -717,6 +952,13 @@ class TemplatesLoader:
                 raise LoaderError(
                     f"Template declaration missing 'name': {decl}"
                 )
+            key_errs = _check_keys(
+                decl,
+                _TEMPLATE_KEYS,
+                decl.get("name", "?"),
+            )
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
             try:
                 defn = build_template_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
@@ -759,6 +1001,14 @@ class TemplatesLoader:
             if name in seen_names:
                 errors.append(f"Duplicate template name: {name!r}")
             seen_names.add(name)
+
+            errors.extend(
+                _check_keys(
+                    decl,
+                    _TEMPLATE_KEYS,
+                    decl.get("name", "?"),
+                )
+            )
 
             for amod in decl.get("ability_modifiers", []):
                 ab = amod.get("ability", "")
@@ -833,6 +1083,10 @@ class FeatsLoader:
             if not name:
                 raise LoaderError(f"Feat declaration missing 'name': {decl}")
 
+            key_errs = _check_keys(decl, _FEAT_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
+
             try:
                 defn = build_feat_from_yaml(decl)
             except Exception as e:
@@ -903,6 +1157,8 @@ class FeatsLoader:
                 errors.append(f"Duplicate feat name: {name!r}")
             seen.add(name)
 
+            errors.extend(_check_keys(decl, _FEAT_KEYS, name))
+
             kind = decl.get("kind", "passive")
             if kind not in valid_kinds:
                 errors.append(f"{name!r}: unknown kind {kind!r}")
@@ -964,6 +1220,17 @@ class ClassesLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"Class missing 'name': {decl}")
+            key_errs = _check_keys(decl, _CLASS_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
+            for feat in decl.get("class_features", []):
+                cf_errs = _check_keys(
+                    feat,
+                    _CLASS_FEATURE_KEYS,
+                    f"{name!r} feature",
+                )
+                if cf_errs:
+                    raise LoaderError("; ".join(cf_errs))
             try:
                 defn = build_class_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
@@ -976,6 +1243,17 @@ class ClassesLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"PrC missing 'name': {decl}")
+            key_errs = _check_keys(decl, _CLASS_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
+            for feat in decl.get("class_features", []):
+                cf_errs = _check_keys(
+                    feat,
+                    _CLASS_FEATURE_KEYS,
+                    f"{name!r} feature",
+                )
+                if cf_errs:
+                    raise LoaderError("; ".join(cf_errs))
             decl["is_prestige"] = True
             try:
                 defn = build_class_from_yaml(decl)
@@ -1033,6 +1311,16 @@ class ClassesLoader:
             if name in seen:
                 errors.append(f"Duplicate class: {name!r}")
             seen.add(name)
+
+            errors.extend(_check_keys(decl, _CLASS_KEYS, name))
+            for feat in decl.get("class_features", []):
+                errors.extend(
+                    _check_keys(
+                        feat,
+                        _CLASS_FEATURE_KEYS,
+                        f"{name!r} feature",
+                    )
+                )
 
             bab = decl.get("bab_progression", "")
             if bab not in valid_bab:
@@ -1094,6 +1382,17 @@ class RacesLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"Race declaration missing 'name': {decl}")
+            key_errs = _check_keys(decl, _RACE_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
+            for amod in decl.get("ability_modifiers", []):
+                am_errs = _check_keys(
+                    amod,
+                    _RACE_ABILITY_MOD_KEYS,
+                    f"{name!r} ability_modifier",
+                )
+                if am_errs:
+                    raise LoaderError("; ".join(am_errs))
             try:
                 defn = build_race_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
@@ -1128,6 +1427,16 @@ class RacesLoader:
             if name in seen:
                 errors.append(f"Duplicate race: {name!r}")
             seen.add(name)
+
+            errors.extend(_check_keys(decl, _RACE_KEYS, name))
+            for amod in decl.get("ability_modifiers", []):
+                errors.extend(
+                    _check_keys(
+                        amod,
+                        _RACE_ABILITY_MOD_KEYS,
+                        f"{name!r} ability_modifier",
+                    )
+                )
 
             size = decl.get("size", "Medium")
             if size not in valid_sizes:
@@ -1185,6 +1494,9 @@ class SkillsLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"Skill declaration missing 'name': {decl}")
+            key_errs = _check_keys(decl, _SKILL_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
             try:
                 defn = build_skill_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
@@ -1218,6 +1530,7 @@ class SkillsLoader:
             if name in seen:
                 errors.append(f"Duplicate skill: {name!r}")
             seen.add(name)
+            errors.extend(_check_keys(decl, _SKILL_KEYS, name))
             ab = decl.get("ability", "")
             if ab not in valid_abilities:
                 errors.append(f"{name!r}: unknown ability {ab!r}")
@@ -1258,6 +1571,9 @@ class DomainsLoader:
         registered: list[str] = []
         for decl in data["domains"]:
             name = decl["name"]
+            key_errs = _check_keys(decl, _DOMAIN_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
             spells_raw = decl.get("domain_spells", {})
             domain_spells = {int(k): str(v) for k, v in spells_raw.items()}
             defn = DomainDefinition(
@@ -1306,6 +1622,9 @@ class EquipmentLoader:
         registered: list[str] = []
         for decl in data["armor"]:
             name = decl["name"]
+            key_errs = _check_keys(decl, _ARMOR_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
             cat_str = decl.get("category", "light")
             cat = cat_map.get(cat_str)
             if cat is None:
@@ -1348,6 +1667,9 @@ class EquipmentLoader:
         registered: list[str] = []
         for decl in data["weapons"]:
             name = decl["name"]
+            key_errs = _check_keys(decl, _WEAPON_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
             cat_str = decl.get("category", "simple")
             cat = cat_map.get(cat_str)
             if cat is None:
@@ -1426,6 +1748,10 @@ class SpellCompendiumLoader:
                 raise LoaderError(
                     f"Spell compendium entry missing 'name': {decl}"
                 )
+
+            key_errs = _check_keys(decl, _SPELL_COMPENDIUM_KEYS, name)
+            if key_errs:
+                raise LoaderError("; ".join(key_errs))
 
             level_raw = decl.get("level", {})
             if isinstance(level_raw, dict):
