@@ -18,6 +18,7 @@ from pathlib import Path
 from heroforge.engine.character import Character
 from heroforge.engine.classes_races import (
     ClassRegistry,
+    DomainRegistry,
     RaceRegistry,
 )
 from heroforge.engine.effects import BuffRegistry
@@ -57,6 +58,7 @@ class AppState:
         self.feat_registry = FeatRegistry()
         self.armor_registry = ArmorRegistry()
         self.weapon_registry = WeaponRegistry()
+        self.domain_registry = DomainRegistry()
         self.skill_registry = SkillRegistry()
         self.template_registry = TemplateRegistry()
         self.class_registry = ClassRegistry()
@@ -80,6 +82,7 @@ class AppState:
         from heroforge.engine.prerequisites import PrerequisiteChecker
         from heroforge.rules.loader import (
             ClassesLoader,
+            DomainsLoader,
             EquipmentLoader,
             FeatsLoader,
             RacesLoader,
@@ -118,6 +121,9 @@ class AppState:
             prereq_checker=prereq_checker,
         )
         RacesLoader(rd).load(self.race_registry)
+
+        # Load domains
+        DomainsLoader(rd).load(self.domain_registry)
 
         # Load equipment
         eq_loader = EquipmentLoader(rd)

@@ -38,6 +38,7 @@ if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.engine.classes_races import (
         ClassRegistry,
+        DomainRegistry,
         RaceRegistry,
     )
     from heroforge.engine.effects import BuffRegistry
@@ -1213,6 +1214,49 @@ class SkillsLoader:
                 errors.append(f"{name!r}: key must start with 'skill_'")
 
         return errors
+
+
+# -----------------------------------------------------------
+# Domains loader
+# -----------------------------------------------------------
+
+
+class DomainsLoader:
+    """Reads domains.yaml and populates a DomainRegistry."""
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load(
+        self,
+        registry: "DomainRegistry",
+        relative_path: str = "core/domains.yaml",
+    ) -> list[str]:
+        from heroforge.engine.classes_races import (
+            DomainDefinition,
+        )
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Domains file not found: {path}")
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict) or "domains" not in data:
+            raise LoaderError(f"{path}: missing 'domains' key")
+
+        registered: list[str] = []
+        for decl in data["domains"]:
+            name = decl["name"]
+            spells_raw = decl.get("domain_spells", {})
+            domain_spells = {int(k): str(v) for k, v in spells_raw.items()}
+            defn = DomainDefinition(
+                name=name,
+                granted_power=decl.get("granted_power", ""),
+                domain_spells=domain_spells,
+            )
+            registry.register(defn)
+            registered.append(name)
+        return registered
 
 
 # -----------------------------------------------------------
