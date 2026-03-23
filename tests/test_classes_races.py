@@ -35,6 +35,7 @@ from heroforge.engine.classes_races import (
     RaceDefinition,
     RaceRegistry,
     SaveProgression,
+    SaveProgressions,
     apply_race,
     bab_at_level,
     remove_race,
@@ -165,9 +166,11 @@ class TestClassDefinition:
             name="Fighter",
             hit_die=10,
             bab_progression=BABProgression.FULL,
-            fort_progression=SaveProgression.GOOD,
-            ref_progression=SaveProgression.POOR,
-            will_progression=SaveProgression.POOR,
+            save_progressions=SaveProgressions(
+                fort=SaveProgression.GOOD,
+                ref=SaveProgression.POOR,
+                will=SaveProgression.POOR,
+            ),
         )
 
     def test_bab_contribution(self) -> None:
@@ -425,8 +428,8 @@ class TestClassesLoader:
     def test_fighter_good_fort(self) -> None:
         reg = loaded_class_registry()
         f = reg.require("Fighter")
-        assert f.fort_progression == SaveProgression.GOOD
-        assert f.will_progression == SaveProgression.POOR
+        assert f.save_progressions.fort == SaveProgression.GOOD
+        assert f.save_progressions.will == SaveProgression.POOR
 
     def test_wizard_poor_bab(self) -> None:
         reg = loaded_class_registry()
@@ -436,7 +439,7 @@ class TestClassesLoader:
     def test_wizard_good_will(self) -> None:
         reg = loaded_class_registry()
         w = reg.require("Wizard")
-        assert w.will_progression == SaveProgression.GOOD
+        assert w.save_progressions.will == SaveProgression.GOOD
 
     def test_rogue_medium_bab(self) -> None:
         reg = loaded_class_registry()
@@ -446,7 +449,7 @@ class TestClassesLoader:
     def test_rogue_good_ref(self) -> None:
         reg = loaded_class_registry()
         r = reg.require("Rogue")
-        assert r.ref_progression == SaveProgression.GOOD
+        assert r.save_progressions.ref == SaveProgression.GOOD
 
     def test_cleric_has_spellcasting(self) -> None:
         reg = loaded_class_registry()

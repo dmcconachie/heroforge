@@ -132,21 +132,31 @@ class SpellcastingInfo:
 
 
 @dataclass
+class SaveProgressions:
+    """Fort/Ref/Will save progression bundle."""
+
+    fort: SaveProgression = SaveProgression.POOR
+    ref: SaveProgression = SaveProgression.POOR
+    will: SaveProgression = SaveProgression.POOR
+
+
+@dataclass
 class ClassDefinition:
     """
     Complete description of a character class.
 
-    Used by the character loader to populate ClassLevel contributions
-    (BAB, save bonuses) from just the class name and level.
+    Used by the character loader to populate ClassLevel
+    contributions (BAB, save bonuses) from just the class
+    name and level.
     """
 
     name: str
     source_book: str = "PHB"
     hit_die: int = 8  # numeric die size
     bab_progression: BABProgression = BABProgression.MEDIUM
-    fort_progression: SaveProgression = SaveProgression.POOR
-    ref_progression: SaveProgression = SaveProgression.POOR
-    will_progression: SaveProgression = SaveProgression.POOR
+    save_progressions: SaveProgressions = field(
+        default_factory=SaveProgressions
+    )
     skills_per_level: int = 2
     class_skills: list[str] = field(default_factory=list)
     spellcasting: SpellcastingInfo | None = None
@@ -161,13 +171,13 @@ class ClassDefinition:
         return bab_at_level(self.bab_progression, level)
 
     def fort_contribution(self, level: int) -> int:
-        return save_at_level(self.fort_progression, level)
+        return save_at_level(self.save_progressions.fort, level)
 
     def ref_contribution(self, level: int) -> int:
-        return save_at_level(self.ref_progression, level)
+        return save_at_level(self.save_progressions.ref, level)
 
     def will_contribution(self, level: int) -> int:
-        return save_at_level(self.will_progression, level)
+        return save_at_level(self.save_progressions.will, level)
 
     def make_class_level(
         self, level: int, hp_rolls: list[int] | None = None
@@ -438,26 +448,25 @@ def remove_race(defn: RaceDefinition, character: "Character") -> None:
 # ---------------------------------------------------------------------------
 
 
-def build_class_from_yaml(decl: dict) -> ClassDefinition:
-    """Build a ClassDefinition from a YAML-parsed dict."""
-
-    # Parse hit die: "d8" → 8
-    hit_die_str = str(decl.get("hit_die", "d8"))
-    hit_die = int(hit_die_str.replace("d", "").strip())
-
+def build_class_from_yaml(
+    decl: dict,
+) -> ClassDefinition:
+    """Build a ClassDefinition from a YAML dict."""
     bab_str = decl.get("bab_progression", "medium")
     bab = BABProgression(bab_str)
 
     saves = decl.get("save_progressions", {})
-    fort = SaveProgression(saves.get("fort", "poor"))
-    ref = SaveProgression(saves.get("ref", "poor"))
-    will = SaveProgression(saves.get("will", "poor"))
+    sp = SaveProgressions(
+        fort=SaveProgression(saves.get("fort", "poor")),
+        ref=SaveProgression(saves.get("ref", "poor")),
+        will=SaveProgression(saves.get("will", "poor")),
+    )
 
     spellcasting = None
     sc = decl.get("spellcasting")
     if sc:
         spellcasting = SpellcastingInfo(
-            cast_type=sc.get("type", "arcane"),
+            cast_type=sc.get("cast_type", "arcane"),
             stat=sc.get("stat", "int"),
             preparation=sc.get("preparation", "prepared"),
             max_spell_level=int(sc.get("max_spell_level", 9)),
@@ -476,11 +485,9 @@ def build_class_from_yaml(decl: dict) -> ClassDefinition:
     return ClassDefinition(
         name=decl["name"],
         source_book=decl.get("source_book", "PHB"),
-        hit_die=hit_die,
+        hit_die=int(decl.get("hit_die", 8)),
         bab_progression=bab,
-        fort_progression=fort,
-        ref_progression=ref,
-        will_progression=will,
+        save_progressions=sp,
         skills_per_level=int(decl.get("skills_per_level", 2)),
         class_skills=decl.get("class_skills", []),
         spellcasting=spellcasting,
@@ -508,8 +515,6 @@ def build_race_from_yaml(decl: dict) -> RaceDefinition:
             )
         )
 
-    languages = decl.get("languages", {})
-
     return RaceDefinition(
         name=decl["name"],
         source_book=decl.get("source_book", "PHB"),
@@ -521,8 +526,8 @@ def build_race_from_yaml(decl: dict) -> RaceDefinition:
         favored_class=decl.get("favored_class", "any"),
         la=int(decl.get("la", 0)),
         racial_traits=decl.get("racial_traits", []),
-        languages_auto=languages.get("automatic", []),
-        languages_bonus=languages.get("bonus", []),
+        languages_auto=decl.get("languages_auto", []),
+        languages_bonus=decl.get("languages_bonus", []),
         weapon_familiarity=decl.get("weapon_familiarity", []),
         low_light_vision=bool(decl.get("low_light_vision", False)),
         darkvision=int(decl.get("darkvision", 0)),

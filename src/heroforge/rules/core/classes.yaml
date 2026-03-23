@@ -5,7 +5,7 @@
 # Schema per entry:
 #   name            : Unique class name
 #   source_book     : PHB | DMG | etc.
-#   hit_die         : d4 | d6 | d8 | d10 | d12
+#   hit_die         : 4 | 6 | 8 | 10 | 12
 #   bab_progression : full | medium | poor
 #                     full   = 1 per level (Fighter, Paladin, Ranger, ...)
 #                     medium = 3/4 per level (Cleric, Rogue, ...)
@@ -18,7 +18,7 @@
 #     poor save base = floor(level/3)
 #   skills_per_level: int (before INT modifier)
 #   class_skills    : list of skill names
-#   spellcasting    : null or {type: arcane|divine, stat: int|wis|cha, ...}
+#   spellcasting    : null or {cast_type: arcane|divine, stat: int|wis|cha, ...}
 #   class_features  : list of {level: N, feature: name, description: str}
 #
 # BAB per level (cumulative):
@@ -36,7 +36,7 @@ classes:
   # =========================================================================
   - name: Barbarian
     source_book: PHB
-    hit_die: d12
+    hit_die: 12
     bab_progression: full
     save_progressions:
       fort: good
@@ -118,7 +118,7 @@ classes:
   # =========================================================================
   - name: Bard
     source_book: PHB
-    hit_die: d6
+    hit_die: 6
     bab_progression: medium
     save_progressions:
       fort: poor
@@ -152,7 +152,7 @@ classes:
       - Tumble
       - Use Magic Device
     spellcasting:
-      type: arcane
+      cast_type: arcane
       stat: cha
       preparation: spontaneous
       max_spell_level: 6
@@ -205,7 +205,7 @@ classes:
   # =========================================================================
   - name: Cleric
     source_book: PHB
-    hit_die: d8
+    hit_die: 8
     bab_progression: medium
     save_progressions:
       fort: good
@@ -224,7 +224,7 @@ classes:
       - Profession
       - Spellcraft
     spellcasting:
-      type: divine
+      cast_type: divine
       stat: wis
       preparation: prepared
       max_spell_level: 9
@@ -244,7 +244,7 @@ classes:
   # =========================================================================
   - name: Druid
     source_book: PHB
-    hit_die: d8
+    hit_die: 8
     bab_progression: medium
     save_progressions:
       fort: good
@@ -266,7 +266,7 @@ classes:
       - Survival
       - Swim
     spellcasting:
-      type: divine
+      cast_type: divine
       stat: wis
       preparation: prepared
       max_spell_level: 9
@@ -328,7 +328,7 @@ classes:
   # =========================================================================
   - name: Fighter
     source_book: PHB
-    hit_die: d10
+    hit_die: 10
     bab_progression: full
     save_progressions:
       fort: good
@@ -363,7 +363,7 @@ classes:
   # =========================================================================
   - name: Monk
     source_book: PHB
-    hit_die: d8
+    hit_die: 8
     bab_progression: medium
     save_progressions:
       fort: good
@@ -472,7 +472,7 @@ classes:
   # =========================================================================
   - name: Paladin
     source_book: PHB
-    hit_die: d10
+    hit_die: 10
     bab_progression: full
     save_progressions:
       fort: good
@@ -491,7 +491,7 @@ classes:
       - Ride
       - Sense Motive
     spellcasting:
-      type: divine
+      cast_type: divine
       stat: wis
       preparation: prepared
       max_spell_level: 4
@@ -563,7 +563,7 @@ classes:
   # =========================================================================
   - name: Ranger
     source_book: PHB
-    hit_die: d8
+    hit_die: 8
     bab_progression: full
     save_progressions:
       fort: good
@@ -591,7 +591,7 @@ classes:
       - Swim
       - Use Rope
     spellcasting:
-      type: divine
+      cast_type: divine
       stat: wis
       preparation: prepared
       max_spell_level: 4
@@ -654,7 +654,7 @@ classes:
   # =========================================================================
   - name: Rogue
     source_book: PHB
-    hit_die: d6
+    hit_die: 6
     bab_progression: medium
     save_progressions:
       fort: poor
@@ -771,7 +771,7 @@ classes:
   # =========================================================================
   - name: Sorcerer
     source_book: PHB
-    hit_die: d4
+    hit_die: 4
     bab_progression: poor
     save_progressions:
       fort: poor
@@ -786,7 +786,7 @@ classes:
       - Profession
       - Spellcraft
     spellcasting:
-      type: arcane
+      cast_type: arcane
       stat: cha
       preparation: spontaneous
       max_spell_level: 9
@@ -798,7 +798,7 @@ classes:
   # =========================================================================
   - name: Wizard
     source_book: PHB
-    hit_die: d4
+    hit_die: 4
     bab_progression: poor
     save_progressions:
       fort: poor
@@ -813,7 +813,7 @@ classes:
       - Profession
       - Spellcraft
     spellcasting:
-      type: arcane
+      cast_type: arcane
       stat: int
       preparation: prepared
       max_spell_level: 9
@@ -843,7 +843,7 @@ classes:
 
   - name: Adept
     source_book: SRD
-    hit_die: d6
+    hit_die: 6
     bab_progression: poor
     save_progressions:
       fort: poor
@@ -869,7 +869,7 @@ classes:
       - Spellcraft
       - Survival
     spellcasting:
-      type: divine
+      cast_type: divine
       stat: wis
       preparation: prepared
       max_spell_level: 5
@@ -881,7 +881,7 @@ classes:
 
   - name: Aristocrat
     source_book: SRD
-    hit_die: d8
+    hit_die: 8
     bab_progression: medium
     save_progressions:
       fort: poor
@@ -920,7 +920,7 @@ classes:
 
   - name: Commoner
     source_book: SRD
-    hit_die: d4
+    hit_die: 4
     bab_progression: poor
     save_progressions:
       fort: poor
@@ -943,7 +943,7 @@ classes:
 
   - name: Expert
     source_book: SRD
-    hit_die: d6
+    hit_die: 6
     bab_progression: medium
     save_progressions:
       fort: poor
@@ -1001,7 +1001,7 @@ classes:
 
   - name: Warrior
     source_book: SRD
-    hit_die: d8
+    hit_die: 8
     bab_progression: full
     save_progressions:
       fort: good
@@ -1026,7 +1026,7 @@ prestige_classes:
 
   - name: "Arcane Archer"
     source_book: DMG
-    hit_die: d8
+    hit_die: 8
     max_level: 10
     bab_progression: full
     save_progressions:
@@ -1083,7 +1083,7 @@ prestige_classes:
 
   - name: "Assassin"
     source_book: DMG
-    hit_die: d6
+    hit_die: 6
     max_level: 10
     bab_progression: medium
     save_progressions:
@@ -1156,7 +1156,7 @@ prestige_classes:
 
   - name: "Duelist"
     source_book: DMG
-    hit_die: d10
+    hit_die: 10
     max_level: 10
     bab_progression: full
     save_progressions:
@@ -1209,7 +1209,7 @@ prestige_classes:
 
   - name: "Eldritch Knight"
     source_book: DMG
-    hit_die: d6
+    hit_die: 6
     max_level: 10
     bab_progression: full
     save_progressions:
@@ -1230,7 +1230,7 @@ prestige_classes:
     entry_prerequisites:
       all_of:
         - spellcasting:
-            type: arcane
+            cast_type: arcane
             min_level: 3
         - proficient_with: {weapon: martial}
     class_features:
@@ -1240,7 +1240,7 @@ prestige_classes:
 
   - name: "Mystic Theurge"
     source_book: DMG
-    hit_die: d4
+    hit_die: 4
     max_level: 10
     bab_progression: poor
     save_progressions:
@@ -1260,16 +1260,16 @@ prestige_classes:
     entry_prerequisites:
       all_of:
         - spellcasting:
-            type: arcane
+            cast_type: arcane
             min_level: 2
         - spellcasting:
-            type: divine
+            cast_type: divine
             min_level: 2
     class_features: []
 
   - name: "Shadowdancer"
     source_book: DMG
-    hit_die: d8
+    hit_die: 8
     max_level: 10
     bab_progression: medium
     save_progressions:
@@ -1339,7 +1339,7 @@ prestige_classes:
 
   - name: "Blackguard"
     source_book: DMG
-    hit_die: d10
+    hit_die: 10
     max_level: 10
     bab_progression: full
     save_progressions:
@@ -1359,7 +1359,7 @@ prestige_classes:
       - Profession
       - Ride
     spellcasting:
-      type: divine
+      cast_type: divine
       stat: cha
       preparation: prepared
       max_spell_level: 4
@@ -1404,7 +1404,7 @@ prestige_classes:
 
   - name: "Arcane Trickster"
     source_book: DMG
-    hit_die: d4
+    hit_die: 4
     max_level: 10
     bab_progression: poor
     save_progressions:
@@ -1449,7 +1449,7 @@ prestige_classes:
         - skill:
             {name: Knowledge (Arcana), min: 4}
         - spellcasting:
-            type: arcane
+            cast_type: arcane
             min_level: 3
     class_features:
       - level: 1
@@ -1473,7 +1473,7 @@ prestige_classes:
 
   - name: "Dragon Disciple"
     source_book: DMG
-    hit_die: d12
+    hit_die: 12
     max_level: 10
     bab_progression: medium
     save_progressions:
@@ -1497,7 +1497,7 @@ prestige_classes:
     entry_prerequisites:
       all_of:
         - spellcasting:
-            type: arcane
+            cast_type: arcane
             min_level: 1
     class_features:
       - level: 1
@@ -1530,7 +1530,7 @@ prestige_classes:
 
   - name: "Dwarven Defender"
     source_book: DMG
-    hit_die: d12
+    hit_die: 12
     max_level: 10
     bab_progression: full
     save_progressions:
@@ -1576,7 +1576,7 @@ prestige_classes:
 
   - name: "Hierophant"
     source_book: DMG
-    hit_die: d8
+    hit_die: 8
     max_level: 5
     bab_progression: poor
     save_progressions:
@@ -1596,7 +1596,7 @@ prestige_classes:
     entry_prerequisites:
       all_of:
         - spellcasting:
-            type: divine
+            cast_type: divine
             min_level: 7
     class_features:
       - level: 1
@@ -1605,7 +1605,7 @@ prestige_classes:
 
   - name: "Horizon Walker"
     source_book: DMG
-    hit_die: d8
+    hit_die: 8
     max_level: 10
     bab_progression: full
     save_progressions:
@@ -1639,7 +1639,7 @@ prestige_classes:
 
   - name: "Loremaster"
     source_book: DMG
-    hit_die: d4
+    hit_die: 4
     max_level: 10
     bab_progression: poor
     save_progressions:
@@ -1664,7 +1664,7 @@ prestige_classes:
     entry_prerequisites:
       all_of:
         - spellcasting:
-            type: arcane
+            cast_type: arcane
             min_level: 7
         - skill:
             {name: Knowledge (Arcana), min: 10}
@@ -1678,7 +1678,7 @@ prestige_classes:
 
   - name: "Thaumaturgist"
     source_book: DMG
-    hit_die: d4
+    hit_die: 4
     max_level: 5
     bab_progression: poor
     save_progressions:
@@ -1699,7 +1699,7 @@ prestige_classes:
     entry_prerequisites:
       all_of:
         - spellcasting:
-            type: divine
+            cast_type: divine
             min_level: 3
     class_features:
       - level: 1
@@ -1723,7 +1723,7 @@ prestige_classes:
   # =======================================================
   - name: "Archmage"
     source_book: DMG
-    hit_die: d4
+    hit_die: 4
     max_level: 5
     bab_progression: poor
     save_progressions:
@@ -1754,7 +1754,7 @@ prestige_classes:
         - skill: {name: Spellcraft, min: 15}
         - feat: "Skill Focus"
         - spellcasting:
-            type: arcane
+            cast_type: arcane
             min_level: 7
     class_features:
       - level: 1

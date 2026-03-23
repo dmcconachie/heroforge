@@ -155,7 +155,8 @@ _RACE_KEYS = (
         "favored_class",
         "la",
         "racial_traits",
-        "languages",
+        "languages_auto",
+        "languages_bonus",
         "weapon_familiarity",
         "low_light_vision",
         "darkvision",
@@ -1693,7 +1694,7 @@ class EquipmentLoader:
 
 
 # -----------------------------------------------------------
-# Spell compendium loader (spell metadata for all SRD spells)
+# Spell compendium loader
 # -----------------------------------------------------------
 
 

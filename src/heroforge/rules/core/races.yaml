@@ -14,6 +14,8 @@
 #       value: int (positive or negative)
 #       bonus_type: untyped (racial ability mods are always untyped)
 #   favored_class   : class name or "any"
+#   languages_auto  : list of automatic languages
+#   languages_bonus : list of bonus language choices
 #   la              : Level Adjustment (0 for standard races)
 #   racial_traits   : list of trait names
 #                     (for display; effects modelled separately)
@@ -43,9 +45,8 @@ races:
       - "1 extra feat at 1st level"
       - "4 extra skill points at 1st level, +1 per level thereafter"
       - "Bonus languages: any (except secret)"
-    languages:
-      automatic: [Common]
-      bonus: [any]
+    languages_auto: [Common]
+    languages_bonus: [any]
     weapon_familiarity: []
     low_light_vision: false
     darkvision: 0
@@ -84,9 +85,8 @@ races:
         Weapon Familiarity: dwarven waraxe
         and dwarven urgrosh as martial weapons
       - "Stability: +4 bonus vs bull rush/trip when standing on ground"
-    languages:
-      automatic: [Common, Dwarven]
-      bonus: [Giant, Gnome, Goblin, Orc, Terran, Undercommon]
+    languages_auto: [Common, Dwarven]
+    languages_bonus: [Giant, Gnome, Goblin, Orc, Terran, Undercommon]
     weapon_familiarity: [Dwarven Waraxe, Dwarven Urgrosh]
     low_light_vision: false
     darkvision: 60
@@ -117,9 +117,8 @@ races:
       - >-
         Weapon Familiarity: longsword, rapier,
         longbow, shortbow as martial weapons
-    languages:
-      automatic: [Common, Elven]
-      bonus: [Draconic, Gnoll, Gnome, Goblin, Orc, Sylvan]
+    languages_auto: [Common, Elven]
+    languages_bonus: [Draconic, Gnoll, Gnome, Goblin, Orc, Sylvan]
     weapon_familiarity:
       - Longsword
       - Rapier
@@ -163,9 +162,8 @@ races:
         only) 1/day each; spell-like abilities
         vs illusions
       - "Weapon Familiarity: gnome hooked hammer as martial weapon"
-    languages:
-      automatic: [Common, Gnome]
-      bonus: [Draconic, Dwarven, Elven, Giant, Goblin, Orc]
+    languages_auto: [Common, Gnome]
+    languages_bonus: [Draconic, Dwarven, Elven, Giant, Goblin, Orc]
     weapon_familiarity: [Gnome Hooked Hammer]
     low_light_vision: true
     darkvision: 0
@@ -190,9 +188,8 @@ races:
       - "+1 racial bonus on Listen, Search, Spot checks"
       - "Elven blood: subject to effects targeting elves"
       - "+2 racial bonus on Diplomacy and Gather Information checks"
-    languages:
-      automatic: [Common, Elven]
-      bonus: [any]
+    languages_auto: [Common, Elven]
+    languages_bonus: [any]
     weapon_familiarity:
       - Longsword
       - Rapier
@@ -225,9 +222,8 @@ races:
       - "Medium size; Speed 30 ft"
       - "Darkvision 60 ft"
       - "Orc blood: subject to effects targeting orcs"
-    languages:
-      automatic: [Common, Orc]
-      bonus: [Draconic, Giant, Gnoll, Goblin, Abyssal]
+    languages_auto: [Common, Orc]
+    languages_bonus: [Draconic, Giant, Gnoll, Goblin, Abyssal]
     weapon_familiarity: []
     low_light_vision: false
     darkvision: 60
@@ -253,9 +249,8 @@ races:
       - "+2 save vs fear"
       - "+1 attack with thrown weapons and slings"
       - "+2 Listen, Climb, Jump, Move Silently checks"
-    languages:
-      automatic: [Common, Halfling]
-      bonus: [Dwarven, Elven, Gnome, Goblin, Orc]
+    languages_auto: [Common, Halfling]
+    languages_bonus: [Dwarven, Elven, Gnome, Goblin, Orc]
     weapon_familiarity: []
     low_light_vision: false
     darkvision: 0

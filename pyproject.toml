@@ -8,6 +8,7 @@ version = "0.1.0"
 description = "HeroForge Anew — D&D 3.5e character sheet"
 requires-python = "==3.12.*"
 dependencies = [
+    "cattrs>=26.1.0",
     "pyqt6>=6.10.2",
     "pyyaml>=6.0.3",
     "reportlab>=4.0",
