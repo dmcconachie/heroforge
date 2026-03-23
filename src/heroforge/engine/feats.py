@@ -111,31 +111,35 @@ class FeatDefinition:
 
     Attributes
     ----------
-    name            : Unique feat name (key for FeatRegistry)
+    name            : Unique feat name
     kind            : ALWAYS_ON / CONDITIONAL / PASSIVE
     source_book     : e.g. "PHB"
     note            : Display hint
-    prerequisites   : The prereq tree root (Prerequisite | None)
-    parameter_spec  : For parameterized feats; None for fixed feats
-    raw_effects     : The raw effect declarations from YAML (list of dicts)
-                      Kept so that $parameter can be substituted at runtime.
-    buff_definition : Pre-built BuffDefinition for non-parameterized feats.
-                      None for parameterized (built at activation time) and
-                      None for passive feats.
+    prerequisites   : Prereq tree root (or None)
+    parameter        : For parameterized feats
+    effects         : Raw effect dicts from YAML
+    snapshot        : Prereqs checked at acquisition only
+    parameterized_selection : Weapon/skill choice metadata
+    buff_definition : (derived, init=False) Pre-built
+                      BuffDefinition for non-parameterized
+                      feats.
     """
 
     name: str
     kind: FeatKind
     source_book: str = "PHB"
     note: str = ""
-    prerequisites: Any | None = None  # Prerequisite
-    parameter_spec: FeatParameterSpec | None = None
-    raw_effects: list[dict] = field(default_factory=list)
-    buff_definition: BuffDefinition | None = None
+    prerequisites: Any | None = None
+    parameter: FeatParameterSpec | None = None
+    effects: list[dict] = field(default_factory=list)
+    snapshot: bool = False
+    parameterized_selection: dict | None = None
+    # Derived (not from YAML):
+    buff_definition: BuffDefinition | None = field(default=None, init=False)
 
     @property
     def is_parameterized(self) -> bool:
-        return self.parameter_spec is not None
+        return self.parameter is not None
 
     def build_buff_definition(
         self,
@@ -156,7 +160,7 @@ class FeatDefinition:
             return self.buff_definition
 
         # Parameterized: build fresh with substituted values
-        effects = resolve_feat_effects(self.raw_effects, parameter or 1)
+        effects = resolve_feat_effects(self.effects, parameter or 1)
         category = (
             BuffCategory.FEAT
             if self.kind == FeatKind.ALWAYS_ON
@@ -286,27 +290,10 @@ def resolve_feat_effects(
 # ---------------------------------------------------------------------------
 
 
-_FEAT_ALLOWED_KEYS = {
-    "name",
-    "kind",
-    "source_book",
-    "note",
-    "prerequisites",
-    "effects",
-    "parameter",
-    "snapshot",
-    "parameterized_selection",
-}
-
-
 def build_feat_from_yaml(
     decl: dict,
 ) -> FeatDefinition:
-    """
-    Build a FeatDefinition from a YAML-parsed dict.
-    Uses build_prereq_from_yaml for the
-    prerequisites tree.
-    """
+    """Build a FeatDefinition from a YAML dict."""
     from heroforge.engine.prerequisites import (
         build_prereq_from_yaml,
     )
@@ -316,7 +303,7 @@ def build_feat_from_yaml(
 
     _forbid_extra(
         decl,
-        _FEAT_ALLOWED_KEYS,
+        FeatDefinition,
         decl.get("name", "?"),
     )
     name = decl["name"]
@@ -341,26 +328,28 @@ def build_feat_from_yaml(
 
     raw_effects = decl.get("effects", [])
 
-    # Build BuffDefinition for non-parameterized feats with effects
-    buff_defn: BuffDefinition | None = None
-    if kind != FeatKind.PASSIVE and raw_effects and param_spec is None:
-        effects = resolve_feat_effects(raw_effects)
-        category = BuffCategory.FEAT
-        buff_defn = BuffDefinition(
-            name=name,
-            category=category,
-            source_book=decl.get("source_book", "PHB"),
-            effects=effects,
-            note=decl.get("note", ""),
-        )
-
-    return FeatDefinition(
+    defn = FeatDefinition(
         name=name,
         kind=kind,
         source_book=decl.get("source_book", "PHB"),
         note=decl.get("note", ""),
         prerequisites=prereq,
-        parameter_spec=param_spec,
-        raw_effects=raw_effects,
-        buff_definition=buff_defn,
+        parameter=param_spec,
+        effects=raw_effects,
+        snapshot=bool(decl.get("snapshot", False)),
+        parameterized_selection=decl.get("parameterized_selection"),
     )
+
+    # Build BuffDefinition for non-parameterized
+    # feats with effects (derived, not from YAML)
+    if kind != FeatKind.PASSIVE and raw_effects and param_spec is None:
+        resolved = resolve_feat_effects(raw_effects)
+        defn.buff_definition = BuffDefinition(
+            name=name,
+            category=BuffCategory.FEAT,
+            source_book=decl.get("source_book", "PHB"),
+            effects=resolved,
+            note=decl.get("note", ""),
+        )
+
+    return defn

@@ -198,8 +198,10 @@ class BonusEffect:
     target: str
     bonus_type: BonusType
     value: int | str  # int = static; str = formula
-    condition: Callable | None = None
+    condition_key: str = ""
     source_label: str = ""
+    # Derived (set by loader from condition_key):
+    condition: Callable | None = field(default=None, init=False)
 
     def is_formula(self) -> bool:
         return isinstance(self.value, str)
@@ -283,7 +285,9 @@ class BuffDefinition:
     requires_caster_level: bool = False
     mutually_exclusive_with: list[str] = field(default_factory=list)
     note: str = ""
-    ongoing_condition: Callable | None = None
+    condition_key: str = ""
+    # Derived (set by loader from condition_key):
+    ongoing_condition: Callable | None = field(default=None, init=False)
 
     def __post_init__(self) -> None:
         # Auto-detect whether CL is needed from formula effects

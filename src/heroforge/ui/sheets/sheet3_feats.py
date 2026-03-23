@@ -281,8 +281,8 @@ class Sheet3Feats(QWidget):
                 "passive": "Passive / chain feat (no direct stat bonus)",
             }.get(defn.kind.value, defn.kind.value)
             lines.append(f"Kind: {kind_label}")
-            if defn.parameter_spec:
-                spec = defn.parameter_spec
+            if defn.parameter:
+                spec = defn.parameter
                 lines.append(
                     f"Parameter: {spec.label} ({spec.min}–{spec.max_formula})"
                 )

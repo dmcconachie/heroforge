@@ -46,12 +46,34 @@ converter = cattrs.Converter(
 )
 
 
+def _fields_of(cls: type) -> set[str]:
+    """
+    Return init field names for a dataclass.
+
+    Only fields with ``init=True`` are included —
+    derived fields (``init=False``) are excluded
+    since they don't come from YAML.
+    """
+    from dataclasses import fields
+
+    return {f.name for f in fields(cls) if f.init}
+
+
 def _forbid_extra(
     val: dict,
-    allowed: set[str],
+    cls_or_keys: type | set[str],
     label: str,
 ) -> None:
-    """Raise if *val* has keys not in *allowed*."""
+    """
+    Raise if *val* has keys not in the dataclass.
+
+    *cls_or_keys* is either a dataclass type (fields
+    are extracted automatically) or an explicit set.
+    """
+    if isinstance(cls_or_keys, set):
+        allowed = cls_or_keys
+    else:
+        allowed = _fields_of(cls_or_keys)
     extra = set(val) - allowed
     if extra:
         msg = f"{label}: unknown keys {sorted(extra)}"
@@ -138,22 +160,11 @@ converter.register_structure_hook(
 # -------------------------------------------------------
 # ClassFeature: straightforward frozen dataclass
 # -------------------------------------------------------
-_CLASS_FEATURE_KEYS = {
-    "level",
-    "feature",
-    "description",
-}
-
-
 def _structure_class_feature(val: object, _: type) -> ClassFeature:
     if isinstance(val, ClassFeature):
         return val
     if isinstance(val, dict):
-        _forbid_extra(
-            val,
-            _CLASS_FEATURE_KEYS,
-            "class_feature",
-        )
+        _forbid_extra(val, ClassFeature, "class_feature")
         return ClassFeature(
             level=val["level"],
             feature=val["feature"],
@@ -168,33 +179,17 @@ converter.register_structure_hook(
     _structure_class_feature,
 )
 
-
 # -------------------------------------------------------
 # ClassDefinition: custom hook to handle prerequisites
 # (which are Any-typed and should pass through as-is)
 # -------------------------------------------------------
-_CLASS_KEYS = {
-    "name",
-    "source_book",
-    "hit_die",
-    "bab_progression",
-    "save_progressions",
-    "skills_per_level",
-    "class_skills",
-    "spellcasting",
-    "class_features",
-    "max_level",
-    "is_prestige",
-    "entry_prerequisites",
-    "ongoing_prerequisites",
-}
 
 
 def _structure_class_definition(val: object, _: type) -> ClassDefinition:
     if not isinstance(val, dict):
         msg = f"Cannot structure {type(val)} as ClassDefinition"
         raise TypeError(msg)
-    _forbid_extra(val, _CLASS_KEYS, val.get("name", "?"))
+    _forbid_extra(val, ClassDefinition, val.get("name", "?"))
     return ClassDefinition(
         name=val["name"],
         source_book=val.get("source_book", "PHB"),
@@ -258,30 +253,16 @@ converter.register_structure_hook(
     _structure_domain_definition,
 )
 
-
 # -------------------------------------------------------
 # ArmorDefinition: weight needs float coercion
 # -------------------------------------------------------
-_ARMOR_KEYS = {
-    "name",
-    "category",
-    "armor_bonus",
-    "max_dex_bonus",
-    "armor_check_penalty",
-    "arcane_spell_failure",
-    "speed_30",
-    "speed_20",
-    "weight",
-    "cost_gp",
-    "special",
-}
 
 
 def _structure_armor_definition(val: object, _: type) -> ArmorDefinition:
     if not isinstance(val, dict):
         msg = f"Cannot structure {type(val)} as ArmorDefinition"
         raise TypeError(msg)
-    _forbid_extra(val, _ARMOR_KEYS, val.get("name", "?"))
+    _forbid_extra(val, ArmorDefinition, val.get("name", "?"))
     return ArmorDefinition(
         name=val["name"],
         category=converter.structure(
@@ -305,30 +286,16 @@ converter.register_structure_hook(
     _structure_armor_definition,
 )
 
-
 # -------------------------------------------------------
 # WeaponDefinition: weight float, is_ranged bool
 # -------------------------------------------------------
-_WEAPON_KEYS = {
-    "name",
-    "category",
-    "damage_dice",
-    "critical_range",
-    "critical_multiplier",
-    "damage_type",
-    "range_increment",
-    "weight",
-    "cost_gp",
-    "is_ranged",
-    "special",
-}
 
 
 def _structure_weapon_definition(val: object, _: type) -> WeaponDefinition:
     if not isinstance(val, dict):
         msg = f"Cannot structure {type(val)} as WeaponDefinition"
         raise TypeError(msg)
-    _forbid_extra(val, _WEAPON_KEYS, val.get("name", "?"))
+    _forbid_extra(val, WeaponDefinition, val.get("name", "?"))
     return WeaponDefinition(
         name=val["name"],
         category=converter.structure(
@@ -352,26 +319,16 @@ converter.register_structure_hook(
     _structure_weapon_definition,
 )
 
-
 # -------------------------------------------------------
 # SkillDefinition: straightforward frozen dataclass
 # -------------------------------------------------------
-_SKILL_KEYS = {
-    "name",
-    "key",
-    "ability",
-    "trained_only",
-    "armor_check",
-    "synergies",
-    "description",
-}
 
 
 def _structure_skill_definition(val: object, _: type) -> SkillDefinition:
     if not isinstance(val, dict):
         msg = f"Cannot structure {type(val)} as SkillDefinition"
         raise TypeError(msg)
-    _forbid_extra(val, _SKILL_KEYS, val.get("name", "?"))
+    _forbid_extra(val, SkillDefinition, val.get("name", "?"))
     return SkillDefinition(
         name=val["name"],
         key=val["key"],
@@ -388,32 +345,16 @@ converter.register_structure_hook(
     _structure_skill_definition,
 )
 
-
 # -------------------------------------------------------
 # SpellEntry: straightforward frozen dataclass
 # -------------------------------------------------------
-_SPELL_ENTRY_KEYS = {
-    "name",
-    "school",
-    "subschool",
-    "descriptor",
-    "level",
-    "casting_time",
-    "range",
-    "duration",
-    "saving_throw",
-    "spell_resistance",
-    "description",
-    "source_book",
-    "has_buff_effects",
-}
 
 
 def _structure_spell_entry(val: object, _: type) -> SpellEntry:
     if not isinstance(val, dict):
         msg = f"Cannot structure {type(val)} as SpellEntry"
         raise TypeError(msg)
-    _forbid_extra(val, _SPELL_ENTRY_KEYS, val.get("name", "?"))
+    _forbid_extra(val, SpellEntry, val.get("name", "?"))
     level_raw = val.get("level", {})
     if isinstance(level_raw, dict):
         level = {str(k): int(v) for k, v in level_raw.items()}
@@ -441,11 +382,9 @@ converter.register_structure_hook(
     _structure_spell_entry,
 )
 
-
 # -------------------------------------------------------
 # RaceAbilityMod: {ability, value, bonus_type}
 # -------------------------------------------------------
-_RACE_AMOD_KEYS = {"ability", "value", "bonus_type"}
 
 
 def _structure_race_ability_mod(val: object, _: type) -> RaceAbilityMod:
@@ -454,7 +393,7 @@ def _structure_race_ability_mod(val: object, _: type) -> RaceAbilityMod:
     if not isinstance(val, dict):
         msg = f"Expected dict for RaceAbilityMod, got {type(val)}"
         raise TypeError(msg)
-    _forbid_extra(val, _RACE_AMOD_KEYS, "ability_modifier")
+    _forbid_extra(val, RaceAbilityMod, "ability_modifier")
     bt_str = val.get("bonus_type", "untyped")
     try:
         bt = BonusType(bt_str)
@@ -472,34 +411,16 @@ converter.register_structure_hook(
     _structure_race_ability_mod,
 )
 
-
 # -------------------------------------------------------
 # RaceDefinition
 # -------------------------------------------------------
-_RACE_KEYS = {
-    "name",
-    "source_book",
-    "creature_type",
-    "subtypes",
-    "size",
-    "base_speed",
-    "ability_modifiers",
-    "favored_class",
-    "la",
-    "racial_traits",
-    "languages_auto",
-    "languages_bonus",
-    "weapon_familiarity",
-    "low_light_vision",
-    "darkvision",
-}
 
 
 def _structure_race_definition(val: object, _: type) -> RaceDefinition:
     if not isinstance(val, dict):
         msg = f"Expected dict for RaceDefinition, got {type(val)}"
         raise TypeError(msg)
-    _forbid_extra(val, _RACE_KEYS, val.get("name", "?"))
+    _forbid_extra(val, RaceDefinition, val.get("name", "?"))
     return RaceDefinition(
         name=val["name"],
         source_book=val.get("source_book", "PHB"),

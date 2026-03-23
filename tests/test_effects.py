@@ -67,13 +67,25 @@ def simple_effect(
     condition: Callable | None = None,
     label: str = "",
 ) -> BonusEffect:
-    return BonusEffect(
+    eff = BonusEffect(
         target=target,
         bonus_type=btype,
         value=value,
-        condition=condition,
         source_label=label,
     )
+    eff.condition = condition
+    return eff
+
+
+def _cond_effect() -> BonusEffect:
+    """BonusEffect with a humanoid-only condition."""
+    eff = BonusEffect(
+        target="str_score",
+        bonus_type=BonusType.ENHANCEMENT,
+        value=2,
+    )
+    eff.condition = lambda char: getattr(char, "_race_type", "") == "Humanoid"
+    return eff
 
 
 def simple_buff(
@@ -281,8 +293,8 @@ class TestBonusEffect:
             target="str_score",
             bonus_type=BonusType.ENHANCEMENT,
             value=2,
-            condition=cond,
         )
+        e.condition = cond
         entry = e.to_bonus_entry("Enlarge Person")
         assert entry.condition is cond
 
@@ -596,16 +608,7 @@ class TestApplyRemoveBuff:
         b = BuffDefinition(
             name="Enlarge Person",
             category=BuffCategory.SPELL,
-            effects=[
-                BonusEffect(
-                    target="str_score",
-                    bonus_type=BonusType.ENHANCEMENT,
-                    value=2,
-                    condition=lambda char: (
-                        getattr(char, "_race_type", "") == "Humanoid"
-                    ),
-                )
-            ],
+            effects=[_cond_effect()],
         )
         apply_buff(b, c)
         assert c.str_score == 14
@@ -618,16 +621,7 @@ class TestApplyRemoveBuff:
         b = BuffDefinition(
             name="Enlarge Person",
             category=BuffCategory.SPELL,
-            effects=[
-                BonusEffect(
-                    target="str_score",
-                    bonus_type=BonusType.ENHANCEMENT,
-                    value=2,
-                    condition=lambda char: (
-                        getattr(char, "_race_type", "") == "Humanoid"
-                    ),
-                )
-            ],
+            effects=[_cond_effect()],
         )
         apply_buff(b, c)
         assert c.str_score == 12  # condition False → +2 not applied

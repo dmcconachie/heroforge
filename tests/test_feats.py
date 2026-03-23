@@ -219,20 +219,21 @@ class TestFeatDefinition:
             category=BuffCategory.FEAT,
             effects=[BonusEffect("ac", BonusType.DODGE, 1)],
         )
-        return FeatDefinition(
+        defn = FeatDefinition(
             name="Dodge",
             kind=FeatKind.ALWAYS_ON,
-            buff_definition=buff,
         )
+        defn.buff_definition = buff
+        return defn
 
     def _conditional_parameterized(self) -> FeatDefinition:
         return FeatDefinition(
             name="Power Attack",
             kind=FeatKind.CONDITIONAL,
-            parameter_spec=FeatParameterSpec(
+            parameter=FeatParameterSpec(
                 "points", "Points traded", min=1, max_formula="bab"
             ),
-            raw_effects=[
+            effects=[
                 {
                     "target": "attack_all",
                     "bonus_type": "untyped",
@@ -378,7 +379,7 @@ class TestBuildFeatFromYaml:
             }
         )
         assert defn.kind == FeatKind.CONDITIONAL
-        assert defn.parameter_spec is None
+        assert defn.parameter is None
         assert defn.buff_definition is not None
 
     def test_conditional_with_parameter(self) -> None:
@@ -412,7 +413,7 @@ class TestBuildFeatFromYaml:
         )
         assert defn.kind == FeatKind.CONDITIONAL
         assert defn.is_parameterized
-        assert defn.parameter_spec.max_formula == "bab"
+        assert defn.parameter.max_formula == "bab"
         assert defn.buff_definition is None  # built at activation time
 
     def test_prereqs_built(self) -> None:
@@ -514,19 +515,19 @@ class TestFeatsLoader:
         ):
             defn = feat_reg.require(feat_name)
             assert defn.kind == FeatKind.CONDITIONAL
-            assert len(defn.raw_effects) > 0, f"{feat_name} should have effects"
+            assert len(defn.effects) > 0, f"{feat_name} should have effects"
 
     def test_power_attack_is_parameterized(self) -> None:
         feat_reg, _, _ = loaded_registries()
         pa = feat_reg.require("Power Attack")
         assert pa.is_parameterized
-        assert pa.parameter_spec.max_formula == "bab"
+        assert pa.parameter.max_formula == "bab"
 
     def test_combat_expertise_is_parameterized(self) -> None:
         feat_reg, _, _ = loaded_registries()
         ce = feat_reg.require("Combat Expertise")
         assert ce.is_parameterized
-        assert "min" in ce.parameter_spec.max_formula
+        assert "min" in ce.parameter.max_formula
 
     def test_passive_feats_have_no_buff(self) -> None:
         feat_reg, _, _ = loaded_registries()

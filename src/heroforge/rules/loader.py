@@ -453,31 +453,28 @@ def _init_category_map() -> None:
     }
 
 
-_SPELL_ALLOWED = {
-    "name",
-    "category",
-    "source_book",
-    "note",
-    "effects",
-    "requires_caster_level",
-    "mutually_exclusive_with",
-    "condition_key",
-}
+def _forbid_extra_spell(val: dict, label: str) -> None:
+    """Reject unknown spell keys."""
+    from heroforge.engine.effects import (
+        BuffDefinition as _BD,
+    )
+    from heroforge.rules.schema import (
+        _forbid_extra,
+    )
 
-_SPELL_EFFECT_ALLOWED = {
-    "target",
-    "bonus_type",
-    "value",
-    "condition_key",
-    "source_label",
-}
+    _forbid_extra(val, _BD, label)
 
 
-def _forbid_extra_spell(val: dict, allowed: set[str], label: str) -> None:
-    """Reject unknown keys — replaces _check_keys."""
-    extra = set(val) - allowed
-    if extra:
-        raise LoaderError(f"{label!r}: unknown keys {sorted(extra)}")
+def _forbid_extra_effect(val: dict, label: str) -> None:
+    """Reject unknown effect keys."""
+    from heroforge.engine.effects import (
+        BonusEffect as _BE,
+    )
+    from heroforge.rules.schema import (
+        _forbid_extra,
+    )
+
+    _forbid_extra(val, _BE, label)
 
 
 class SpellsLoader:
@@ -542,7 +539,7 @@ class SpellsLoader:
             if not name:
                 raise LoaderError(f"Spell declaration missing 'name': {decl}")
 
-            _forbid_extra_spell(decl, _SPELL_ALLOWED, name)
+            _forbid_extra_spell(decl, name)
 
             category_str = decl.get("category", "spell")
             category = _CATEGORY_MAP.get(category_str)
@@ -560,9 +557,8 @@ class SpellsLoader:
                         f"{name!r}: effect missing 'target': {eff_decl}"
                     )
 
-                _forbid_extra_spell(
+                _forbid_extra_effect(
                     eff_decl,
-                    _SPELL_EFFECT_ALLOWED,
                     f"{name!r} effect",
                 )
 
@@ -579,26 +575,26 @@ class SpellsLoader:
                 if isinstance(raw_value, bool):
                     raw_value = int(raw_value)
 
-                # Resolve condition_key to a callable
-                condition = None
-                cond_key = eff_decl.get("condition_key")
-                if cond_key:
-                    condition = CONDITION_REGISTRY.get(cond_key)
-                    if condition is None:
-                        raise LoaderError(
-                            f"{name!r}: unknown condition_key {cond_key!r}. "
-                            f"Known keys: {sorted(CONDITION_REGISTRY)}"
-                        )
-
-                effects.append(
-                    BonusEffect(
-                        target=target,
-                        bonus_type=bonus_type,
-                        value=raw_value,
-                        condition=condition,
-                        source_label=eff_decl.get("source_label", ""),
-                    )
+                cond_key = eff_decl.get("condition_key", "")
+                eff = BonusEffect(
+                    target=target,
+                    bonus_type=bonus_type,
+                    value=raw_value,
+                    condition_key=cond_key,
+                    source_label=eff_decl.get("source_label", ""),
                 )
+                # Resolve condition_key → callable
+                if cond_key:
+                    resolved = CONDITION_REGISTRY.get(cond_key)
+                    if resolved is None:
+                        raise LoaderError(
+                            f"{name!r}: unknown "
+                            f"condition_key "
+                            f"{cond_key!r}. Known: "
+                            f"{sorted(CONDITION_REGISTRY)}"
+                        )
+                    eff.condition = resolved
+                effects.append(eff)
 
             defn = BuffDefinition(
                 name=name,
@@ -755,11 +751,10 @@ class FeatsLoader:
 
             # Register prerequisites with PrerequisiteChecker
             if prereq_checker is not None:
-                snapshot = decl.get("snapshot", False)
                 prereq_checker.register_feat(
                     name,
                     defn.prerequisites,
-                    snapshot=snapshot,
+                    snapshot=defn.snapshot,
                 )
 
             # Register buff definitions with BuffRegistry
