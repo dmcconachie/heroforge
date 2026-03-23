@@ -76,7 +76,9 @@ def loaded_registries() -> tuple[
     feat_reg = FeatRegistry()
     prereq_chk = PrerequisiteChecker()
     buff_reg = BuffRegistry()
-    FeatsLoader(RULES_DIR).load(feat_reg, prereq_chk, buff_reg)
+    FeatsLoader(RULES_DIR).load(
+        feat_reg, "core/feats_phb.yaml", prereq_chk, buff_reg
+    )
     return feat_reg, prereq_chk, buff_reg
 
 
@@ -477,14 +479,18 @@ class TestFeatsLoader:
         expected = len(data["feats"])
 
         feat_reg = FeatRegistry()
-        FeatsLoader(RULES_DIR).load(feat_reg)
+        FeatsLoader(RULES_DIR).load(
+            feat_reg, relative_path="core/feats_phb.yaml"
+        )
         assert len(feat_reg) == expected
 
     def test_load_returns_names(self) -> None:
         from heroforge.rules.loader import FeatsLoader
 
         feat_reg = FeatRegistry()
-        names = FeatsLoader(RULES_DIR).load(feat_reg)
+        names = FeatsLoader(RULES_DIR).load(
+            feat_reg, relative_path="core/feats_phb.yaml"
+        )
         assert "Dodge" in names
         assert "Power Attack" in names
         assert "Toughness" in names
@@ -562,7 +568,9 @@ class TestFeatsLoader:
         from heroforge.rules.loader import FeatsLoader, LoaderError
 
         with pytest.raises(LoaderError, match="not found"):
-            FeatsLoader(tmp_path).load(FeatRegistry())
+            FeatsLoader(tmp_path).load(
+                FeatRegistry(), relative_path="core/feats_phb.yaml"
+            )
 
     def test_load_raises_on_missing_feats_key(self, tmp_path: Path) -> None:
         from heroforge.rules.loader import FeatsLoader, LoaderError
@@ -571,7 +579,9 @@ class TestFeatsLoader:
         core.mkdir()
         (core / "feats_phb.yaml").write_text("not_feats: []\n")
         with pytest.raises(LoaderError, match="top-level 'feats' key"):
-            FeatsLoader(tmp_path).load(FeatRegistry())
+            FeatsLoader(tmp_path).load(
+                FeatRegistry(), relative_path="core/feats_phb.yaml"
+            )
 
 
 # ===========================================================================

@@ -68,12 +68,12 @@ class TestFeatsSrdYaml:
         buff_reg = BuffRegistry()
         loader = FeatsLoader(RULES_DIR)
         # Load PHB first (some SRD feats prereq PHB)
-        loader.load(feat_reg, prereq, buff_reg)
+        loader.load(feat_reg, "core/feats_phb.yaml", prereq, buff_reg)
         names = loader.load(
             feat_reg,
+            "core/feats_srd.yaml",
             prereq,
             buff_reg,
-            "core/feats_srd.yaml",
         )
         assert len(names) > 0
 

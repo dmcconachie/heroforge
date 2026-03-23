@@ -99,7 +99,10 @@ class AppState:
 
         prereq_checker = PrerequisiteChecker()
 
-        SpellsLoader(rd).load(self.spell_registry)
+        SpellsLoader(rd).load(
+            self.spell_registry,
+            "core/spells_phb.yaml",
+        )
         SpellsLoader(rd).load(
             self.spell_registry,
             "core/conditions_srd.yaml",
@@ -118,30 +121,50 @@ class AppState:
         )
         FeatsLoader(rd).load(
             self.feat_registry,
+            "core/feats_phb.yaml",
             prereq_checker,
             self.spell_registry,
         )
         FeatsLoader(rd).load(
             self.feat_registry,
+            "core/feats_srd.yaml",
             prereq_checker,
             self.spell_registry,
-            "core/feats_srd.yaml",
         )
-        SkillsLoader(rd).load(self.skill_registry)
-        TemplatesLoader(rd).load(self.template_registry)
+        SkillsLoader(rd).load(
+            self.skill_registry,
+            "core/skills.yaml",
+        )
+        TemplatesLoader(rd).load(
+            self.template_registry,
+            "core/templates.yaml",
+        )
         ClassesLoader(rd).load(
             self.class_registry,
+            "core/classes.yaml",
             prereq_checker=prereq_checker,
         )
-        RacesLoader(rd).load(self.race_registry)
+        RacesLoader(rd).load(
+            self.race_registry,
+            "core/races.yaml",
+        )
 
         # Load domains
-        DomainsLoader(rd).load(self.domain_registry)
+        DomainsLoader(rd).load(
+            self.domain_registry,
+            "core/domains.yaml",
+        )
 
         # Load equipment
         eq_loader = EquipmentLoader(rd)
-        eq_loader.load_armor(self.armor_registry)
-        eq_loader.load_weapons(self.weapon_registry)
+        eq_loader.load_armor(
+            self.armor_registry,
+            "core/armor.yaml",
+        )
+        eq_loader.load_weapons(
+            self.weapon_registry,
+            "core/weapons.yaml",
+        )
 
         # Load spell compendium (all spells)
         scl = SpellCompendiumLoader(rd)

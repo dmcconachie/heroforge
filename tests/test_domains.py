@@ -18,12 +18,12 @@ class TestDomainsLoader:
     def test_load_all_domains(self) -> None:
         reg = DomainRegistry()
         loader = DomainsLoader(RULES_DIR)
-        names = loader.load(reg)
+        names = loader.load(reg, "core/domains.yaml")
         assert len(names) == 22
 
     def test_war_domain(self) -> None:
         reg = DomainRegistry()
-        DomainsLoader(RULES_DIR).load(reg)
+        DomainsLoader(RULES_DIR).load(reg, "core/domains.yaml")
         war = reg.get("War")
         assert war is not None
         assert war.domain_spells[1] == "Magic Weapon"
@@ -32,14 +32,14 @@ class TestDomainsLoader:
 
     def test_all_have_9_spells(self) -> None:
         reg = DomainRegistry()
-        DomainsLoader(RULES_DIR).load(reg)
+        DomainsLoader(RULES_DIR).load(reg, "core/domains.yaml")
         for d in reg.all_domains():
             for lvl in range(1, 10):
                 assert lvl in d.domain_spells, f"{d.name}: missing level {lvl}"
 
     def test_names_sorted(self) -> None:
         reg = DomainRegistry()
-        DomainsLoader(RULES_DIR).load(reg)
+        DomainsLoader(RULES_DIR).load(reg, "core/domains.yaml")
         names = reg.names()
         assert names == sorted(names)
         assert "Air" in names

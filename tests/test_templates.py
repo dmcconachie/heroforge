@@ -672,7 +672,7 @@ class TestTemplatesLoader:
         expected_count = len(data["templates"])
 
         reg = TemplateRegistry()
-        TemplatesLoader(RULES_DIR).load(reg)
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         assert len(reg) == expected_count
 
     def test_load_returns_registered_names(self) -> None:
@@ -680,7 +680,7 @@ class TestTemplatesLoader:
         from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
-        names = TemplatesLoader(RULES_DIR).load(reg)
+        names = TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         assert "Half-Celestial" in names
         assert "Half-Dragon (Red)" in names
         assert "Vampire" in names
@@ -690,7 +690,7 @@ class TestTemplatesLoader:
         from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
-        TemplatesLoader(RULES_DIR).load(reg)
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         hc = reg.require("Half-Celestial")
         abilities = {m.ability: m.value for m in hc.ability_modifiers}
         assert abilities["str"] == 4
@@ -701,7 +701,7 @@ class TestTemplatesLoader:
         from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
-        TemplatesLoader(RULES_DIR).load(reg)
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         hd = reg.require("Half-Dragon (Red)")
         assert hd.type_change == "Dragon"
 
@@ -710,7 +710,7 @@ class TestTemplatesLoader:
         from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
-        TemplatesLoader(RULES_DIR).load(reg)
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         ww = reg.require("Lycanthrope (Werewolf)")
         assert ww.partially_applicable is True
         assert ww.max_level == 3
@@ -720,7 +720,7 @@ class TestTemplatesLoader:
         from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
-        TemplatesLoader(RULES_DIR).load(reg)
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         vamp = reg.require("Vampire")
         assert "Alertness" in vamp.grants_feats
         assert "Dodge" in vamp.grants_feats
@@ -730,7 +730,9 @@ class TestTemplatesLoader:
         from heroforge.rules.loader import LoaderError, TemplatesLoader
 
         with pytest.raises(LoaderError, match="not found"):
-            TemplatesLoader(tmp_path).load(TemplateRegistry())
+            TemplatesLoader(tmp_path).load(
+                TemplateRegistry(), "core/templates.yaml"
+            )
 
     def test_load_raises_on_missing_templates_key(self, tmp_path: Path) -> None:
         from heroforge.engine.templates import TemplateRegistry
@@ -740,7 +742,9 @@ class TestTemplatesLoader:
         core.mkdir()
         (core / "templates.yaml").write_text("not_templates: []\n")
         with pytest.raises(LoaderError, match="top-level 'templates' key"):
-            TemplatesLoader(tmp_path).load(TemplateRegistry())
+            TemplatesLoader(tmp_path).load(
+                TemplateRegistry(), "core/templates.yaml"
+            )
 
     def test_no_duplicate_names_in_yaml(self) -> None:
         import yaml
@@ -759,7 +763,7 @@ class TestTemplatesLoader:
         from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
-        TemplatesLoader(RULES_DIR).load(reg)
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
 
         c = fresh_char("Human")
         c.set_ability_score("str", 14)

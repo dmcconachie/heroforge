@@ -42,7 +42,7 @@ RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 def loaded_registry() -> BuffRegistry:
     reg = BuffRegistry()
     loader = SpellsLoader(RULES_DIR)
-    loader.load(reg)
+    loader.load(reg, "core/spells_phb.yaml")
     return reg
 
 
@@ -140,7 +140,7 @@ class TestSpellsLoader:
         loader = SpellsLoader(tmp_path)
         reg = BuffRegistry()
         with pytest.raises(LoaderError, match="not found"):
-            loader.load(reg)
+            loader.load(reg, "core/spells_phb.yaml")
 
     def test_loader_raises_on_missing_spells_key(self, tmp_path: Path) -> None:
         core = tmp_path / "core"
@@ -148,7 +148,7 @@ class TestSpellsLoader:
         (core / "spells_phb.yaml").write_text("not_spells: []\n")
         loader = SpellsLoader(tmp_path)
         with pytest.raises(LoaderError, match="top-level 'spells' key"):
-            loader.load(BuffRegistry())
+            loader.load(BuffRegistry(), "core/spells_phb.yaml")
 
     def test_loader_raises_on_unknown_bonus_type(self, tmp_path: Path) -> None:
         core = tmp_path / "core"
@@ -164,7 +164,7 @@ class TestSpellsLoader:
             "        value: 4\n"
         )
         with pytest.raises(LoaderError, match="unknown bonus_type"):
-            SpellsLoader(tmp_path).load(BuffRegistry())
+            SpellsLoader(tmp_path).load(BuffRegistry(), "core/spells_phb.yaml")
 
     def test_loader_raises_on_unknown_condition_key(
         self,
@@ -184,7 +184,7 @@ class TestSpellsLoader:
             "        condition_key: totally_made_up\n"
         )
         with pytest.raises(LoaderError, match="unknown condition_key"):
-            SpellsLoader(tmp_path).load(BuffRegistry())
+            SpellsLoader(tmp_path).load(BuffRegistry(), "core/spells_phb.yaml")
 
     def test_loader_raises_on_duplicate_name(self, tmp_path: Path) -> None:
         core = tmp_path / "core"
@@ -205,7 +205,7 @@ class TestSpellsLoader:
             "        value: 1\n"
         )
         with pytest.raises(LoaderError, match="already registered"):
-            SpellsLoader(tmp_path).load(BuffRegistry())
+            SpellsLoader(tmp_path).load(BuffRegistry(), "core/spells_phb.yaml")
 
     def test_loader_overwrite_replaces_definition(self, tmp_path: Path) -> None:
         core = tmp_path / "core"
@@ -233,14 +233,14 @@ class TestSpellsLoader:
             )
         )
         # Load SpC override
-        SpellsLoader(tmp_path).load(reg, overwrite=True)
+        SpellsLoader(tmp_path).load(reg, "core/spells_phb.yaml", overwrite=True)
         assert reg.require("Bless").source_book == "SpC"
         assert reg.require("Bless").effects[0].value == 2
 
     def test_load_returns_registered_names(self) -> None:
         reg = BuffRegistry()
         loader = SpellsLoader(RULES_DIR)
-        names = loader.load(reg)
+        names = loader.load(reg, "core/spells_phb.yaml")
         assert len(names) > 0
         assert "Bless" in names
         assert "Haste" in names
@@ -250,7 +250,7 @@ class TestSpellsLoader:
         loaded_registry()
         loader = SpellsLoader(RULES_DIR)
         reg2 = BuffRegistry()
-        names = loader.load(reg2)
+        names = loader.load(reg2, "core/spells_phb.yaml")
         for name in names:
             assert name in reg2
 

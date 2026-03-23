@@ -127,7 +127,7 @@ class TestEquipmentLoader:
     def test_load_armor(self) -> None:
         reg = ArmorRegistry()
         loader = EquipmentLoader(RULES_DIR)
-        names = loader.load_armor(reg)
+        names = loader.load_armor(reg, "core/armor.yaml")
         assert len(names) >= 16
         fp = reg.get("Full Plate")
         assert fp is not None
@@ -136,7 +136,7 @@ class TestEquipmentLoader:
     def test_load_weapons(self) -> None:
         reg = WeaponRegistry()
         loader = EquipmentLoader(RULES_DIR)
-        names = loader.load_weapons(reg)
+        names = loader.load_weapons(reg, "core/weapons.yaml")
         assert len(names) >= 40
         ls = reg.get("Longsword")
         assert ls is not None
@@ -146,6 +146,6 @@ class TestEquipmentLoader:
     def test_all_armor_categories(self) -> None:
         reg = ArmorRegistry()
         loader = EquipmentLoader(RULES_DIR)
-        loader.load_armor(reg)
+        loader.load_armor(reg, "core/armor.yaml")
         assert len(reg.all_armor()) >= 12
         assert len(reg.all_shields()) >= 4

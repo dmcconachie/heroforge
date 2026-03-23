@@ -438,7 +438,7 @@ class SpellsLoader:
     def load(
         self,
         registry: BuffRegistry,
-        relative_path: str = "core/spells_phb.yaml",
+        relative_path: str,
         overwrite: bool = False,
     ) -> list[str]:
         """
@@ -486,8 +486,7 @@ class SpellsLoader:
                 category = BuffCategory(category_str)
             except ValueError as e:
                 raise LoaderError(
-                    f"{name!r}: unknown category "
-                    f"{category_str!r}"
+                    f"{name!r}: unknown category {category_str!r}"
                 ) from e
 
             # Parse effects
@@ -578,7 +577,7 @@ class TemplatesLoader:
     def load(
         self,
         registry: TemplateRegistry,
-        relative_path: str = "core/templates.yaml",
+        relative_path: str,
         overwrite: bool = False,
     ) -> list[str]:
         """
@@ -647,9 +646,9 @@ class FeatsLoader:
     def load(
         self,
         feat_registry: FeatRegistry,
+        relative_path: str,
         prereq_checker: PrerequisiteChecker | None = None,
         buff_registry: BuffRegistry | None = None,
-        relative_path: str = "core/feats_phb.yaml",
         overwrite: bool = False,
     ) -> list[str]:
         """
@@ -740,7 +739,7 @@ class ClassesLoader:
     def load(
         self,
         registry: ClassRegistry,
-        relative_path: str = "core/classes.yaml",
+        relative_path: str,
         overwrite: bool = False,
         prereq_checker: PrerequisiteChecker | None = None,
     ) -> list[str]:
@@ -832,7 +831,7 @@ class RacesLoader:
     def load(
         self,
         registry: RaceRegistry,
-        relative_path: str = "core/races.yaml",
+        relative_path: str,
         overwrite: bool = False,
     ) -> list[str]:
 
@@ -889,7 +888,7 @@ class SkillsLoader:
     def load(
         self,
         registry: SkillRegistry,
-        relative_path: str = "core/skills.yaml",
+        relative_path: str,
         overwrite: bool = False,
     ) -> list[str]:
         from heroforge.engine.skills import (
@@ -938,7 +937,7 @@ class DomainsLoader:
     def load(
         self,
         registry: "DomainRegistry",
-        relative_path: str = "core/domains.yaml",
+        relative_path: str,
     ) -> list[str]:
         from heroforge.engine.classes_races import (
             DomainDefinition,
@@ -984,7 +983,7 @@ class EquipmentLoader:
     def load_armor(
         self,
         registry: "ArmorRegistry",
-        relative_path: str = "core/armor.yaml",
+        relative_path: str,
     ) -> list[str]:
         from heroforge.engine.equipment import (
             ArmorDefinition,
@@ -1015,7 +1014,7 @@ class EquipmentLoader:
     def load_weapons(
         self,
         registry: "WeaponRegistry",
-        relative_path: str = "core/weapons.yaml",
+        relative_path: str,
     ) -> list[str]:
         from heroforge.engine.equipment import (
             WeaponDefinition,
@@ -1075,7 +1074,7 @@ class SpellCompendiumLoader:
     def load(
         self,
         compendium: "SpellCompendium",
-        relative_path: str = ("core/spells_srd_0_3.yaml"),
+        relative_path: str,
     ) -> list[str]:
         from heroforge.engine.spells import SpellEntry
         from heroforge.rules.schema import converter

@@ -48,7 +48,7 @@ def loaded_skill_registry() -> SkillRegistry:
     from heroforge.rules.loader import SkillsLoader
 
     reg = SkillRegistry()
-    SkillsLoader(RULES_DIR).load(reg)
+    SkillsLoader(RULES_DIR).load(reg, "core/skills.yaml")
     return reg
 
 
@@ -379,7 +379,7 @@ class TestSkillsLoader:
             data = yaml.safe_load(f)
         expected = len(data["skills"])
         reg = SkillRegistry()
-        SkillsLoader(RULES_DIR).load(reg)
+        SkillsLoader(RULES_DIR).load(reg, "core/skills.yaml")
         assert len(reg) == expected
 
     def test_hide_skill_properties(self) -> None:
@@ -413,7 +413,7 @@ class TestSkillsLoader:
         from heroforge.rules.loader import LoaderError, SkillsLoader
 
         with pytest.raises(LoaderError, match="not found"):
-            SkillsLoader(tmp_path).load(SkillRegistry())
+            SkillsLoader(tmp_path).load(SkillRegistry(), "core/skills.yaml")
 
 
 # ===========================================================================

@@ -407,9 +407,7 @@ class TestBonusPoolIntegration:
             BonusEntry(2, BonusType.MORALE, "Rage"),
         )
         g.register_pool(p)
-        g.register_node(
-            simple_node("str_score", base=14, pools=["str_pool"])
-        )
+        g.register_node(simple_node("str_score", base=14, pools=["str_pool"]))
         # 14 base + 4 enhancement + 2 morale = 20
         assert g.resolve("str_score") == 20
 
@@ -422,9 +420,7 @@ class TestBonusPoolIntegration:
             BonusEntry(2, BonusType.ENHANCEMENT, "Gauntlets"),
         )
         g.register_pool(p)
-        g.register_node(
-            simple_node("str_score", base=10, pools=["str_pool"])
-        )
+        g.register_node(simple_node("str_score", base=10, pools=["str_pool"]))
         assert g.resolve("str_score") == 14  # 10 + 4
 
     def test_conditional_bonus_excluded_without_character(self) -> None:
@@ -439,9 +435,7 @@ class TestBonusPoolIntegration:
             ],
         )
         g.register_pool(p)
-        g.register_node(
-            simple_node("con_score", base=12, pools=["con_pool"])
-        )
+        g.register_node(simple_node("con_score", base=12, pools=["con_pool"]))
         # No character → condition can't evaluate → excluded
         assert g.resolve("con_score", character=None) == 12
 
@@ -457,9 +451,7 @@ class TestBonusPoolIntegration:
             ],
         )
         g.register_pool(p)
-        g.register_node(
-            simple_node("con_score", base=12, pools=["con_pool"])
-        )
+        g.register_node(simple_node("con_score", base=12, pools=["con_pool"]))
 
         char = MockCharacter(is_raging=True)
         assert g.resolve("con_score", character=char) == 16
@@ -476,9 +468,7 @@ class TestBonusPoolIntegration:
             ],
         )
         g.register_pool(p)
-        g.register_node(
-            simple_node("con_score", base=12, pools=["con_pool"])
-        )
+        g.register_node(simple_node("con_score", base=12, pools=["con_pool"]))
 
         char = MockCharacter(is_raging=False)
         assert g.resolve("con_score", character=char) == 12
@@ -490,9 +480,7 @@ class TestBonusPoolIntegration:
         g.register_pool(p1)
         g.register_pool(p2)
         g.register_node(
-            simple_node(
-                "attack_base", base=5, pools=["atk_feats", "atk_buffs"]
-            )
+            simple_node("attack_base", base=5, pools=["atk_feats", "atk_buffs"])
         )
         assert g.resolve("attack_base") == 7
 

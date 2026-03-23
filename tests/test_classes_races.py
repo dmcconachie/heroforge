@@ -54,7 +54,7 @@ def loaded_class_registry() -> ClassRegistry:
     from heroforge.rules.loader import ClassesLoader
 
     reg = ClassRegistry()
-    ClassesLoader(RULES_DIR).load(reg)
+    ClassesLoader(RULES_DIR).load(reg, "core/classes.yaml")
     return reg
 
 
@@ -62,7 +62,7 @@ def loaded_race_registry() -> RaceRegistry:
     from heroforge.rules.loader import RacesLoader
 
     reg = RaceRegistry()
-    RacesLoader(RULES_DIR).load(reg)
+    RacesLoader(RULES_DIR).load(reg, "core/races.yaml")
     return reg
 
 
@@ -394,7 +394,7 @@ class TestClassesLoader:
             data = yaml.safe_load(f)
         expected = len(data["classes"]) + len(data.get("prestige_classes", []))
         reg = ClassRegistry()
-        ClassesLoader(RULES_DIR).load(reg)
+        ClassesLoader(RULES_DIR).load(reg, "core/classes.yaml")
         assert len(reg) == expected
 
     def test_all_phb_classes_present(self) -> None:
@@ -502,7 +502,7 @@ class TestClassesLoader:
         from heroforge.rules.loader import ClassesLoader, LoaderError
 
         with pytest.raises(LoaderError, match="not found"):
-            ClassesLoader(tmp_path).load(ClassRegistry())
+            ClassesLoader(tmp_path).load(ClassRegistry(), "core/classes.yaml")
 
 
 # ===========================================================================
@@ -520,7 +520,7 @@ class TestRacesLoader:
             data = yaml.safe_load(f)
         expected = len(data["races"])
         reg = RaceRegistry()
-        RacesLoader(RULES_DIR).load(reg)
+        RacesLoader(RULES_DIR).load(reg, "core/races.yaml")
         assert len(reg) == expected
 
     def test_all_phb_races_present(self) -> None:
@@ -624,7 +624,7 @@ class TestRacesLoader:
         from heroforge.rules.loader import LoaderError, RacesLoader
 
         with pytest.raises(LoaderError, match="not found"):
-            RacesLoader(tmp_path).load(RaceRegistry())
+            RacesLoader(tmp_path).load(RaceRegistry(), "core/races.yaml")
 
 
 # ===========================================================================
