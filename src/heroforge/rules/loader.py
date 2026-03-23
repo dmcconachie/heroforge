@@ -392,32 +392,6 @@ CONDITION_REGISTRY: dict[str, object] = {
     # "same_deity":    lambda char: ...,
 }
 
-# Maps YAML category strings to BuffCategory enum values.
-_CATEGORY_MAP = {
-    "spell": None,  # resolved after import
-    "class": None,
-    "condition": None,
-    "racial": None,
-    "feat": None,
-    "item": None,
-    "template": None,
-}
-
-
-def _init_category_map() -> None:
-    from heroforge.engine.effects import BuffCategory
-
-    global _CATEGORY_MAP
-    _CATEGORY_MAP = {
-        "spell": BuffCategory.SPELL,
-        "class": BuffCategory.CLASS,
-        "condition": BuffCategory.CONDITION,
-        "racial": BuffCategory.RACIAL,
-        "feat": BuffCategory.FEAT,
-        "item": BuffCategory.ITEM,
-        "template": BuffCategory.TEMPLATE,
-    }
-
 
 def _forbid_extra_spell(val: dict, label: str) -> None:
     """Reject unknown spell keys."""
@@ -460,7 +434,6 @@ class SpellsLoader:
 
     def __init__(self, rules_dir: Path | str) -> None:
         self.rules_dir = Path(rules_dir)
-        _init_category_map()
 
     def load(
         self,
@@ -477,6 +450,7 @@ class SpellsLoader:
         from heroforge.engine.bonus import BonusType
         from heroforge.engine.effects import (
             BonusEffect,
+            BuffCategory,
             BuffDefinition,
         )
 
@@ -508,11 +482,13 @@ class SpellsLoader:
             _forbid_extra_spell(decl, name)
 
             category_str = decl.get("category", "spell")
-            category = _CATEGORY_MAP.get(category_str)
-            if category is None:
+            try:
+                category = BuffCategory(category_str)
+            except ValueError as e:
                 raise LoaderError(
-                    f"{name!r}: unknown category {category_str!r}"
-                )
+                    f"{name!r}: unknown category "
+                    f"{category_str!r}"
+                ) from e
 
             # Parse effects
             effects: list[BonusEffect] = []
