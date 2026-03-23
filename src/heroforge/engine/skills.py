@@ -185,7 +185,7 @@ def register_skills_on_character(
             key=key,
             base=None,
             inputs=[f"{skill_def.ability}_mod"],
-            pool_keys=[key],
+            pools=[key],
             compute=compute_fn,
             description=skill_def.name,
         )

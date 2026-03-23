@@ -59,7 +59,7 @@ class StatNode:
                   Receives resolved values of all declared inputs, plus the
                   pre-aggregated total of all attached BonusPools.
                   Default: base + bonus_total (simple accumulator).
-    pool_keys   : Keys of BonusPools (looked up in StatGraph.pools) that
+    pools   : Keys of BonusPools (looked up in StatGraph.pools) that
                   feed into this node's bonus_total.
     description : Human-readable description for UI tooltips.
     """
@@ -67,11 +67,13 @@ class StatNode:
     key: str
     base: int | None = None
     inputs: list[str] = field(default_factory=list)
-    compute: Callable[[dict[str, int], int], int] | None = field(
+    compute: str | Callable[[dict[str, int], int], int] | None = field(
         default=None, repr=False
     )
-    pool_keys: list[str] = field(default_factory=list)
+    pools: list[str] = field(default_factory=list)
     description: str = ""
+    sheet: int = 0
+    save_name: str = ""
 
     # Runtime state — not part of identity
     _cache: int | None = field(
@@ -154,7 +156,7 @@ class StatGraph:
     def register_pool(self, pool: "BonusPool") -> None:
         """
         Register a BonusPool.  The pool's stat_key is used to look it up
-        when nodes declare it in their pool_keys.
+        when nodes declare it in their pools.
         """
         self._pools[pool.stat_key] = pool
 
@@ -209,7 +211,7 @@ class StatGraph:
         # Sum bonus pools.
         bonus_total = sum(
             self._pools[pk].total(character)
-            for pk in node.pool_keys
+            for pk in node.pools
             if pk in self._pools
         )
 
@@ -252,11 +254,11 @@ class StatGraph:
 
     def invalidate_pool(self, pool_key: str) -> None:
         """
-        Invalidate all nodes that have `pool_key` in their pool_keys,
+        Invalidate all nodes that have `pool_key` in their pools,
         then cascade.  Called when a BonusPool's contents change.
         """
         for node in self._nodes.values():
-            if pool_key in node.pool_keys:
+            if pool_key in node.pools:
                 self.invalidate(node.key)
 
     # ------------------------------------------------------------------

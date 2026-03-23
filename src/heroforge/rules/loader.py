@@ -76,44 +76,6 @@ class LoaderError(Exception):
 # Schema key definitions: (required_keys, optional_keys)
 # ---------------------------------------------------------------------------
 
-_STAT_KEYS = (
-    {"key"},
-    {
-        "compute",
-        "base",
-        "inputs",
-        "pools",
-        "description",
-        "sheet",
-        "save_name",
-    },
-)
-
-
-def _check_keys(
-    decl: dict,
-    schema: tuple[set[str], set[str]],
-    label: str,
-) -> list[str]:
-    """
-    Validate keys in *decl* against *schema*.
-
-    *schema* is (required, optional).  Returns a list
-    of error strings (empty = OK).
-    """
-    required, optional = schema
-    allowed = required | optional
-    errors: list[str] = []
-    name = decl.get("name", label)
-    for key in required:
-        if key not in decl:
-            errors.append(f"{name!r}: missing required key {key!r}")
-    for key in decl:
-        if key not in allowed:
-            errors.append(f"{name!r}: unknown key {key!r}")
-    return errors
-
-
 # ---------------------------------------------------------------------------
 # Compute strategy registry
 # ---------------------------------------------------------------------------
@@ -353,14 +315,16 @@ class StatsLoader:
         registered: list[str] = []
         seen_keys: set[str] = set()
 
+        from heroforge.rules.schema import (
+            _forbid_extra,
+        )
+
         for decl in data["stats"]:
             key = decl.get("key")
             if not key:
                 raise LoaderError(f"Stat declaration missing 'key': {decl}")
 
-            key_errs = _check_keys(decl, _STAT_KEYS, f"stat {key!r}")
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
+            _forbid_extra(decl, StatNode, f"stat {key!r}")
 
             # Duplicate check within the YAML itself
             if key in seen_keys:
@@ -371,9 +335,10 @@ class StatsLoader:
             if graph.has_node(key):
                 continue
 
-            # Ensure all pools this node references exist
-            pool_keys = decl.get("pools", [])
-            for pk in pool_keys:
+            # Ensure all pools this node references
+            # exist
+            pools = decl.get("pools", [])
+            for pk in pools:
                 if not graph.has_pool(pk):
                     pool = BonusPool(pk)
                     graph.register_pool(pool)
@@ -383,9 +348,10 @@ class StatsLoader:
             strategy_factory = COMPUTE_STRATEGIES.get(strategy_name)
             if strategy_factory is None:
                 raise LoaderError(
-                    f"Unknown compute strategy {strategy_name!r} "
-                    f"for stat {key!r}. "
-                    f"Known strategies: {sorted(COMPUTE_STRATEGIES)}"
+                    f"Unknown compute strategy "
+                    f"{strategy_name!r} for stat "
+                    f"{key!r}. Known strategies: "
+                    f"{sorted(COMPUTE_STRATEGIES)}"
                 )
             compute_fn = strategy_factory(decl, character)
 
@@ -393,8 +359,8 @@ class StatsLoader:
                 key=key,
                 base=decl.get("base"),
                 inputs=decl.get("inputs", []),
-                pool_keys=pool_keys,
                 compute=compute_fn,
+                pools=pools,
                 description=decl.get("description", ""),
             )
 

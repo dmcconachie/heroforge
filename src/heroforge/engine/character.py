@@ -292,7 +292,7 @@ class Character:
         g = self._graph
 
         # ---- Pools ---------------------------------------------------------
-        pool_keys = [
+        pools = [
             # Ability score pools (buffs like Bull's Strength go here)
             "str_score",
             "dex_score",
@@ -326,7 +326,7 @@ class Character:
             "sr",  # spell resistance
             "bab_misc",  # miscellaneous BAB bonuses (rare)
         ]
-        for pk in pool_keys:
+        for pk in pools:
             pool = BonusPool(pk)
             self._pools[pk] = pool
             g.register_pool(pool)
@@ -349,7 +349,7 @@ class Character:
                 StatNode(
                     key=f"{ab}_score",
                     base=base,
-                    pool_keys=[pool_key],
+                    pools=[pool_key],
                     compute=make_score_compute(ab),
                     description=f"{ab.upper()} score",
                 )
@@ -373,7 +373,7 @@ class Character:
         g.register_node(
             StatNode(
                 key="bab",
-                pool_keys=["bab_misc"],
+                pools=["bab_misc"],
                 compute=lambda inputs, bt: self._compute_bab() + bt,
                 description="Base Attack Bonus",
             )
@@ -387,7 +387,7 @@ class Character:
                 StatNode(
                     key=f"{save}_save",
                     inputs=[f"{ab}_mod"],
-                    pool_keys=[pool_key],
+                    pools=[pool_key],
                     compute=lambda inputs, bt, s=save: (
                         self._compute_base_save(s)
                         + inputs[f"{ABILITY_TO_SAVE[s]}_mod"]
@@ -421,7 +421,7 @@ class Character:
             StatNode(
                 key="ac",
                 inputs=["ac_dex_contribution"],
-                pool_keys=["ac"],
+                pools=["ac"],
                 compute=lambda inputs, bt: (
                     10
                     + inputs["ac_dex_contribution"]
@@ -441,7 +441,7 @@ class Character:
             StatNode(
                 key="initiative",
                 inputs=["dex_mod"],
-                pool_keys=["initiative"],
+                pools=["initiative"],
                 compute=compute_sum,
                 description="Initiative modifier",
             )
@@ -451,7 +451,7 @@ class Character:
         g.register_node(
             StatNode(
                 key="speed",
-                pool_keys=["speed"],
+                pools=["speed"],
                 compute=lambda inputs, bt: self._compute_base_speed() + bt,
                 description="Movement speed (ft)",
             )
@@ -462,7 +462,7 @@ class Character:
             StatNode(
                 key="hp_max",
                 inputs=["con_mod"],
-                pool_keys=["hp_bonus"],
+                pools=["hp_bonus"],
                 compute=lambda inputs, bt: (
                     self._compute_hp_from_rolls()
                     + inputs["con_mod"] * self.total_level
@@ -476,7 +476,7 @@ class Character:
         g.register_node(
             StatNode(
                 key="sr",
-                pool_keys=["sr"],
+                pools=["sr"],
                 compute=compute_sum,
                 description="Spell Resistance",
             )
@@ -489,7 +489,7 @@ class Character:
             StatNode(
                 key="attack_melee",
                 inputs=["bab", "str_mod"],
-                pool_keys=["attack_melee", "attack_all"],
+                pools=["attack_melee", "attack_all"],
                 compute=lambda inputs, bt: (
                     inputs["bab"]
                     + inputs["str_mod"]
@@ -504,7 +504,7 @@ class Character:
             StatNode(
                 key="attack_ranged",
                 inputs=["bab", "dex_mod"],
-                pool_keys=["attack_ranged", "attack_all"],
+                pools=["attack_ranged", "attack_all"],
                 compute=lambda inputs, bt: (
                     inputs["bab"]
                     + inputs["dex_mod"]
@@ -520,7 +520,7 @@ class Character:
             StatNode(
                 key="grapple",
                 inputs=["bab", "str_mod"],
-                pool_keys=["grapple"],
+                pools=["grapple"],
                 compute=lambda inputs, bt: (
                     inputs["bab"]
                     + inputs["str_mod"]
@@ -536,7 +536,7 @@ class Character:
             StatNode(
                 key="damage_str_bonus",
                 inputs=["str_mod"],
-                pool_keys=["damage_melee", "damage_all"],
+                pools=["damage_melee", "damage_all"],
                 compute=compute_sum,
                 description="STR bonus to melee damage",
             )
@@ -989,7 +989,7 @@ class Character:
         for pk in affected_pools:
             self._graph.invalidate_pool(pk)
             for node in self._graph._nodes.values():
-                if pk in node.pool_keys:
+                if pk in node.pools:
                     invalidated.add(node.key)
                     invalidated.update(self._graph.dependents_of(node.key))
 
@@ -1036,7 +1036,7 @@ class Character:
         for pk in affected:
             self._graph.invalidate_pool(pk)
             for node in self._graph._nodes.values():
-                if pk in node.pool_keys:
+                if pk in node.pools:
                     invalidated.add(node.key)
                     invalidated.update(self._graph.dependents_of(node.key))
         if invalidated:
@@ -1065,7 +1065,7 @@ class Character:
         for pk in affected:
             self._graph.invalidate_pool(pk)
             for node in self._graph._nodes.values():
-                if pk in node.pool_keys:
+                if pk in node.pools:
                     invalidated.add(node.key)
                     invalidated.update(self._graph.dependents_of(node.key))
         if invalidated:

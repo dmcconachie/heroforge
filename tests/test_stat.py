@@ -44,14 +44,14 @@ def simple_node(
     key: str,
     base: int = 0,
     inputs: list[str] | None = None,
-    pool_keys: list[str] | None = None,
+    pools: list[str] | None = None,
     compute: Callable | None = None,
 ) -> StatNode:
     return StatNode(
         key=key,
         base=base,
         inputs=inputs or [],
-        pool_keys=pool_keys or [],
+        pools=pools or [],
         compute=compute,
     )
 
@@ -97,7 +97,7 @@ class TestStatNodeConstruction:
         g = StatGraph()
         p = make_pool("hp_bonus", bonus(5))
         g.register_pool(p)
-        g.register_node(simple_node("hp", base=10, pool_keys=["hp_bonus"]))
+        g.register_node(simple_node("hp", base=10, pools=["hp_bonus"]))
         assert g.resolve("hp") == 15
 
     def test_node_with_custom_compute(self) -> None:
@@ -183,15 +183,15 @@ class TestStatGraphRegistration:
         g = StatGraph()
         p = make_pool("shared", bonus(2))
         g.register_pool(p)
-        g.register_node(simple_node("x", pool_keys=["shared"]))
-        g.register_node(simple_node("y", base=10, pool_keys=["shared"]))
+        g.register_node(simple_node("x", pools=["shared"]))
+        g.register_node(simple_node("y", base=10, pools=["shared"]))
         assert g.resolve("x") == 2
         assert g.resolve("y") == 12
 
     def test_unknown_pool_key_is_silently_zero(self) -> None:
         """Unregistered pool key contributes 0."""
         g = StatGraph()
-        g.register_node(simple_node("x", pool_keys=["nonexistent"]))
+        g.register_node(simple_node("x", pools=["nonexistent"]))
         assert g.resolve("x") == 0
 
     def test_resolve_unknown_key_raises(self) -> None:
@@ -249,7 +249,7 @@ class TestLazyEvaluation:
         g = StatGraph()
         p = BonusPool("p")
         g.register_pool(p)
-        g.register_node(simple_node("x", base=10, pool_keys=["p"]))
+        g.register_node(simple_node("x", base=10, pools=["p"]))
 
         assert g.resolve("x") == 10
 
@@ -337,7 +337,7 @@ class TestDirtyCascade:
         g = StatGraph()
         p = BonusPool("a_pool")
         g.register_pool(p)
-        g.register_node(simple_node("a", base=10, pool_keys=["a_pool"]))
+        g.register_node(simple_node("a", base=10, pools=["a_pool"]))
         g.register_node(
             StatNode("b", inputs=["a"], compute=lambda inp, bt: inp["a"] + bt)
         )
@@ -382,8 +382,8 @@ class TestDirtyCascade:
         p2 = BonusPool("p2")
         g.register_pool(p1)
         g.register_pool(p2)
-        g.register_node(simple_node("uses_p1", pool_keys=["p1"]))
-        g.register_node(simple_node("uses_p2", pool_keys=["p2"]))
+        g.register_node(simple_node("uses_p1", pools=["p1"]))
+        g.register_node(simple_node("uses_p2", pools=["p2"]))
 
         g.resolve("uses_p1")
         g.resolve("uses_p2")
@@ -408,7 +408,7 @@ class TestBonusPoolIntegration:
         )
         g.register_pool(p)
         g.register_node(
-            simple_node("str_score", base=14, pool_keys=["str_pool"])
+            simple_node("str_score", base=14, pools=["str_pool"])
         )
         # 14 base + 4 enhancement + 2 morale = 20
         assert g.resolve("str_score") == 20
@@ -423,7 +423,7 @@ class TestBonusPoolIntegration:
         )
         g.register_pool(p)
         g.register_node(
-            simple_node("str_score", base=10, pool_keys=["str_pool"])
+            simple_node("str_score", base=10, pools=["str_pool"])
         )
         assert g.resolve("str_score") == 14  # 10 + 4
 
@@ -440,7 +440,7 @@ class TestBonusPoolIntegration:
         )
         g.register_pool(p)
         g.register_node(
-            simple_node("con_score", base=12, pool_keys=["con_pool"])
+            simple_node("con_score", base=12, pools=["con_pool"])
         )
         # No character → condition can't evaluate → excluded
         assert g.resolve("con_score", character=None) == 12
@@ -458,7 +458,7 @@ class TestBonusPoolIntegration:
         )
         g.register_pool(p)
         g.register_node(
-            simple_node("con_score", base=12, pool_keys=["con_pool"])
+            simple_node("con_score", base=12, pools=["con_pool"])
         )
 
         char = MockCharacter(is_raging=True)
@@ -477,7 +477,7 @@ class TestBonusPoolIntegration:
         )
         g.register_pool(p)
         g.register_node(
-            simple_node("con_score", base=12, pool_keys=["con_pool"])
+            simple_node("con_score", base=12, pools=["con_pool"])
         )
 
         char = MockCharacter(is_raging=False)
@@ -491,7 +491,7 @@ class TestBonusPoolIntegration:
         g.register_pool(p2)
         g.register_node(
             simple_node(
-                "attack_base", base=5, pool_keys=["atk_feats", "atk_buffs"]
+                "attack_base", base=5, pools=["atk_feats", "atk_buffs"]
             )
         )
         assert g.resolve("attack_base") == 7
@@ -619,7 +619,7 @@ class TestRealStatChains:
             StatNode(
                 key="str_score",
                 base=base_str,
-                pool_keys=["str_score"],
+                pools=["str_score"],
                 compute=lambda inputs, bt: base_str + bt,
             )
         )
@@ -634,7 +634,7 @@ class TestRealStatChains:
             StatNode(
                 key="attack_melee",
                 inputs=["str_mod"],
-                pool_keys=["attack_melee"],
+                pools=["attack_melee"],
                 compute=compute_sum,
             )
         )
@@ -732,7 +732,7 @@ class TestRealStatChains:
             StatNode(
                 "dex_score",
                 base=16,
-                pool_keys=["dex_score"],
+                pools=["dex_score"],
                 compute=lambda inp, bt: 16 + bt,
             )
         )
@@ -758,7 +758,7 @@ class TestRealStatChains:
                 "ac",
                 base=10,
                 inputs=["ac_dex"],
-                pool_keys=["ac"],
+                pools=["ac"],
                 compute=lambda inp, bt: 10 + inp["ac_dex"] + bt,
             )
         )
@@ -831,7 +831,7 @@ class TestRealStatChains:
             StatNode(
                 "will_save",
                 inputs=["wis_mod"],
-                pool_keys=["will_save"],
+                pools=["will_save"],
                 compute=lambda inp, bt: 5 + inp["wis_mod"] + bt,
             )
         )
