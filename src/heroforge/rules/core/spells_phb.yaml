@@ -9,7 +9,8 @@
 #   source_book           : PHB
 #   requires_caster_level : true if any effect uses a formula (auto-detected
 #                           by the loader, but explicit here for documentation)
-#   mutually_exclusive_with: list of buff names that cannot be active simultaneously
+#   mutually_exclusive_with: list of buff names that
+#                           cannot be active simultaneously
 #   note                  : hint shown in the buff panel UI
 #   effects               : list of BonusEffects
 #     - target     : pool key (attack_melee, attack_ranged, attack_all,
@@ -159,13 +160,22 @@ spells:
     effects:
       - target: fort_save
         bonus_type: resistance
-        value: "int(caster_level >= 1) + int(caster_level >= 6) + int(caster_level >= 9)"
+        value: >-
+          int(caster_level >= 1)
+          + int(caster_level >= 6)
+          + int(caster_level >= 9)
       - target: ref_save
         bonus_type: resistance
-        value: "int(caster_level >= 1) + int(caster_level >= 6) + int(caster_level >= 9)"
+        value: >-
+          int(caster_level >= 1)
+          + int(caster_level >= 6)
+          + int(caster_level >= 9)
       - target: will_save
         bonus_type: resistance
-        value: "int(caster_level >= 1) + int(caster_level >= 6) + int(caster_level >= 9)"
+        value: >-
+          int(caster_level >= 1)
+          + int(caster_level >= 6)
+          + int(caster_level >= 9)
 
   - name: "Ram's Might"
     category: spell
@@ -439,7 +449,10 @@ spells:
     category: spell
     source_book: PHB
     requires_caster_level: true
-    note: "+6 enhancement to STR, BAB = full cleric level (modelled as +CL to BAB pool)"
+    note: >-
+      +6 enhancement to STR, BAB = full
+      cleric level (modelled as +CL to
+      BAB pool)
     effects:
       - target: str_score
         bonus_type: enhancement

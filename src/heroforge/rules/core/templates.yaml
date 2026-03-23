@@ -67,7 +67,9 @@ templates:
       - "Lay on hands (as paladin of character level)"
       - "+4 racial bonus on saving throws vs. poison"
     grants_feats: []
-    note: "Outsider heritage; retains base type but gains Good and Extraplanar subtypes"
+    note: >-
+      Outsider heritage; retains base type
+      but gains Good and Extraplanar subtypes
 
   # =========================================================================
   # Half-Fiend
@@ -108,7 +110,9 @@ templates:
       - "Spell resistance: character level + 11"
       - "Smite good 1/day (as blackguard)"
     grants_feats: []
-    note: "Fiendish heritage; retains base type but gains Evil and Extraplanar subtypes"
+    note: >-
+      Fiendish heritage; retains base type
+      but gains Evil and Extraplanar subtypes
 
   # =========================================================================
   # Half-Dragon

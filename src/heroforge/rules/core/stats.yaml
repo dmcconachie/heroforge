@@ -174,7 +174,8 @@ stats:
   # =========================================================================
 
   - key: max_dex_bonus
-    compute: max_dex_bonus      # delegates to character._compute_max_dex_bonus()
+    # delegates to character._compute_max_dex_bonus()
+    compute: max_dex_bonus
     description: "Maximum DEX bonus to AC from armour; -1 = uncapped"
 
   - key: ac_dex_contribution

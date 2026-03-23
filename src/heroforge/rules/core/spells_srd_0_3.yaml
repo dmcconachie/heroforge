@@ -77,7 +77,14 @@ spell_compendium:
     level: {Sorcerer: 0, Wizard: 0}
 
   - name: "Read Magic"
-    level: {Bard: 0, Cleric: 0, Druid: 0, Paladin: 1, Ranger: 1, Sorcerer: 0, Wizard: 0}
+    level:
+      Bard: 0
+      Cleric: 0
+      Druid: 0
+      Paladin: 1
+      Ranger: 1
+      Sorcerer: 0
+      Wizard: 0
 
   - name: "Resistance"
     level: {Bard: 0, Cleric: 0, Druid: 0, Paladin: 1, Sorcerer: 0, Wizard: 0}

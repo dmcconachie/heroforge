@@ -22,9 +22,12 @@
 #   class_features  : list of {level: N, feature: name, description: str}
 #
 # BAB per level (cumulative):
-#   full:   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-#   medium: 0, 1, 2, 3, 3, 4, 5, 6, 6,  7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15
-#   poor:   0, 1, 1, 2, 2, 3, 3, 4, 4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10
+#   full:   1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+#           11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+#   medium: 0, 1, 2, 3, 3, 4, 5, 6, 6,  7,
+#            8,  9,  9, 10, 11, 12, 12, 13, 14, 15
+#   poor:   0, 1, 1, 2, 2, 3, 3, 4, 4,  5,
+#            5,  6,  6,  7,  7,  8,  8,  9,  9, 10
 
 classes:
 
@@ -53,32 +56,62 @@ classes:
       - Wilderness Lore
     spellcasting: null
     class_features:
-      - {level: 1, feature: fast_movement,        description: "+10 ft speed (not in medium/heavy armor)"}
-      - {level: 1, feature: illiteracy,            description: "Cannot read unless spending 2 skill points"}
-      - {level: 1, feature: rage,                  description: "+4 STR/CON, +2 Will, -2 AC; 1/day"}
-      - {level: 2, feature: uncanny_dodge,         description: "Retain DEX bonus to AC when flat-footed"}
-      - {level: 3, feature: trap_sense_1,          description: "+1 Reflex and AC vs traps"}
+      - level: 1
+        feature: fast_movement
+        description: "+10 ft speed (not in medium/heavy armor)"
+      - level: 1
+        feature: illiteracy
+        description: "Cannot read unless spending 2 skill points"
+      - level: 1
+        feature: rage
+        description: "+4 STR/CON, +2 Will, -2 AC; 1/day"
+      - level: 2
+        feature: uncanny_dodge
+        description: "Retain DEX bonus to AC when flat-footed"
+      - level: 3
+        feature: trap_sense_1
+        description: "+1 Reflex and AC vs traps"
       - {level: 4, feature: rage_2,                description: "Rage 2/day"}
-      - {level: 5, feature: improved_uncanny_dodge,description: "Cannot be flanked"}
-      - {level: 6, feature: trap_sense_2,          description: "+2 Reflex and AC vs traps"}
+      - level: 5
+        feature: improved_uncanny_dodge
+        description: "Cannot be flanked"
+      - level: 6
+        feature: trap_sense_2
+        description: "+2 Reflex and AC vs traps"
       - {level: 7, feature: damage_reduction_1,    description: "DR 1/—"}
       - {level: 7, feature: rage_3,                description: "Rage 3/day"}
-      - {level: 9, feature: trap_sense_3,          description: "+3 Reflex and AC vs traps"}
+      - level: 9
+        feature: trap_sense_3
+        description: "+3 Reflex and AC vs traps"
       - {level: 10, feature: rage_4,               description: "Rage 4/day"}
       - {level: 10, feature: damage_reduction_2,   description: "DR 2/—"}
-      - {level: 11, feature: greater_rage,         description: "+6 STR/CON, +3 Will, -2 AC"}
-      - {level: 12, feature: trap_sense_4,         description: "+4 Reflex and AC vs traps"}
+      - level: 11
+        feature: greater_rage
+        description: "+6 STR/CON, +3 Will, -2 AC"
+      - level: 12
+        feature: trap_sense_4
+        description: "+4 Reflex and AC vs traps"
       - {level: 13, feature: rage_5,               description: "Rage 5/day"}
       - {level: 13, feature: damage_reduction_3,   description: "DR 3/—"}
-      - {level: 14, feature: indomitable_will,     description: "+4 Will vs enchantments while raging"}
-      - {level: 15, feature: trap_sense_5,         description: "+5 Reflex and AC vs traps"}
+      - level: 14
+        feature: indomitable_will
+        description: "+4 Will vs enchantments while raging"
+      - level: 15
+        feature: trap_sense_5
+        description: "+5 Reflex and AC vs traps"
       - {level: 16, feature: rage_6,               description: "Rage 6/day"}
       - {level: 16, feature: damage_reduction_4,   description: "DR 4/—"}
-      - {level: 17, feature: tireless_rage,        description: "No longer fatigued after rage"}
-      - {level: 18, feature: trap_sense_6,         description: "+6 Reflex and AC vs traps"}
+      - level: 17
+        feature: tireless_rage
+        description: "No longer fatigued after rage"
+      - level: 18
+        feature: trap_sense_6
+        description: "+6 Reflex and AC vs traps"
       - {level: 19, feature: rage_7,               description: "Rage 7/day"}
       - {level: 19, feature: damage_reduction_5,   description: "DR 5/—"}
-      - {level: 20, feature: mighty_rage,          description: "+8 STR/CON, +4 Will, -2 AC"}
+      - level: 20
+        feature: mighty_rage
+        description: "+8 STR/CON, +4 Will, -2 AC"
 
   # =========================================================================
   # Bard
@@ -124,20 +157,48 @@ classes:
       preparation: spontaneous
       max_spell_level: 6
     class_features:
-      - {level: 1, feature: bardic_music,         description: "Bardic music abilities; uses/day = Bard level"}
-      - {level: 1, feature: bardic_knowledge,     description: "Bardic knowledge check (Bard level + INT)"}
-      - {level: 1, feature: countersong,          description: "Counter sonic/language-dependent magic"}
-      - {level: 1, feature: fascinate,            description: "Fascinate creatures with Perform check"}
-      - {level: 1, feature: inspire_courage_1,   description: "+1 morale bonus attacks/saves vs fear"}
-      - {level: 5, feature: inspire_competence,  description: "+2 competence bonus on skill checks"}
-      - {level: 6, feature: suggestion,          description: "Suggestion via fascinate"}
-      - {level: 8, feature: inspire_courage_2,   description: "+2 morale bonus attacks/saves vs fear"}
-      - {level: 9, feature: inspire_greatness,   description: "+2 HD, +2 attack, +1 Fort"}
-      - {level: 12, feature: song_of_freedom,    description: "Break enchantment via music"}
-      - {level: 14, feature: inspire_courage_3,  description: "+3 morale bonus attacks/saves vs fear"}
-      - {level: 15, feature: inspire_heroics,    description: "+4 AC and saves for one creature"}
-      - {level: 18, feature: mass_suggestion,    description: "Suggestion to all fascinated"}
-      - {level: 20, feature: inspire_courage_4,  description: "+4 morale bonus attacks/saves vs fear"}
+      - level: 1
+        feature: bardic_music
+        description: "Bardic music abilities; uses/day = Bard level"
+      - level: 1
+        feature: bardic_knowledge
+        description: "Bardic knowledge check (Bard level + INT)"
+      - level: 1
+        feature: countersong
+        description: "Counter sonic/language-dependent magic"
+      - level: 1
+        feature: fascinate
+        description: "Fascinate creatures with Perform check"
+      - level: 1
+        feature: inspire_courage_1
+        description: "+1 morale bonus attacks/saves vs fear"
+      - level: 5
+        feature: inspire_competence
+        description: "+2 competence bonus on skill checks"
+      - level: 6
+        feature: suggestion
+        description: "Suggestion via fascinate"
+      - level: 8
+        feature: inspire_courage_2
+        description: "+2 morale bonus attacks/saves vs fear"
+      - level: 9
+        feature: inspire_greatness
+        description: "+2 HD, +2 attack, +1 Fort"
+      - level: 12
+        feature: song_of_freedom
+        description: "Break enchantment via music"
+      - level: 14
+        feature: inspire_courage_3
+        description: "+3 morale bonus attacks/saves vs fear"
+      - level: 15
+        feature: inspire_heroics
+        description: "+4 AC and saves for one creature"
+      - level: 18
+        feature: mass_suggestion
+        description: "Suggestion to all fascinated"
+      - level: 20
+        feature: inspire_courage_4
+        description: "+4 morale bonus attacks/saves vs fear"
 
   # =========================================================================
   # Cleric
@@ -168,9 +229,15 @@ classes:
       preparation: prepared
       max_spell_level: 9
     class_features:
-      - {level: 1, feature: turn_undead,          description: "Turn or rebuke undead"}
-      - {level: 1, feature: spontaneous_casting,  description: "Convert prepared spells to cure/inflict"}
-      - {level: 1, feature: domains,              description: "Two domains granting bonus spells and powers"}
+      - level: 1
+        feature: turn_undead
+        description: "Turn or rebuke undead"
+      - level: 1
+        feature: spontaneous_casting
+        description: "Convert prepared spells to cure/inflict"
+      - level: 1
+        feature: domains
+        description: "Two domains granting bonus spells and powers"
 
   # =========================================================================
   # Druid
@@ -204,23 +271,57 @@ classes:
       preparation: prepared
       max_spell_level: 9
     class_features:
-      - {level: 1, feature: animal_companion,     description: "Special animal companion"}
-      - {level: 1, feature: nature_sense,         description: "+2 Knowledge (Nature) and Survival"}
-      - {level: 1, feature: wild_empathy,         description: "Improve attitude of animals"}
-      - {level: 2, feature: woodland_stride,      description: "Move through natural undergrowth at full speed"}
-      - {level: 3, feature: trackless_step,       description: "Leave no trail in natural surroundings"}
-      - {level: 4, feature: resist_natures_lure,  description: "+4 saves vs fey spell-like abilities"}
-      - {level: 4, feature: wild_shape_1,         description: "Wild Shape 1/day (Small or Medium animal)"}
-      - {level: 5, feature: wild_shape_2,         description: "Wild Shape 2/day"}
-      - {level: 6, feature: wild_shape_3,         description: "Wild Shape 3/day; Large animal"}
-      - {level: 7, feature: wild_shape_4,         description: "Wild Shape 4/day; Tiny animal"}
-      - {level: 8, feature: wild_shape_5,         description: "Wild Shape 5/day; plant form"}
-      - {level: 9, feature: venom_immunity,       description: "Immune to all natural poisons"}
-      - {level: 10, feature: wild_shape_6,        description: "Wild Shape 6/day; elemental form"}
-      - {level: 11, feature: wild_shape_huge,     description: "Wild Shape: Huge animal"}
-      - {level: 13, feature: a_thousand_faces,    description: "Alter self at will"}
-      - {level: 15, feature: timeless_body,       description: "No penalties for aging"}
-      - {level: 20, feature: wild_shape_at_will,  description: "Wild Shape at will"}
+      - level: 1
+        feature: animal_companion
+        description: "Special animal companion"
+      - level: 1
+        feature: nature_sense
+        description: "+2 Knowledge (Nature) and Survival"
+      - level: 1
+        feature: wild_empathy
+        description: "Improve attitude of animals"
+      - level: 2
+        feature: woodland_stride
+        description: "Move through natural undergrowth at full speed"
+      - level: 3
+        feature: trackless_step
+        description: "Leave no trail in natural surroundings"
+      - level: 4
+        feature: resist_natures_lure
+        description: "+4 saves vs fey spell-like abilities"
+      - level: 4
+        feature: wild_shape_1
+        description: "Wild Shape 1/day (Small or Medium animal)"
+      - level: 5
+        feature: wild_shape_2
+        description: "Wild Shape 2/day"
+      - level: 6
+        feature: wild_shape_3
+        description: "Wild Shape 3/day; Large animal"
+      - level: 7
+        feature: wild_shape_4
+        description: "Wild Shape 4/day; Tiny animal"
+      - level: 8
+        feature: wild_shape_5
+        description: "Wild Shape 5/day; plant form"
+      - level: 9
+        feature: venom_immunity
+        description: "Immune to all natural poisons"
+      - level: 10
+        feature: wild_shape_6
+        description: "Wild Shape 6/day; elemental form"
+      - level: 11
+        feature: wild_shape_huge
+        description: "Wild Shape: Huge animal"
+      - level: 13
+        feature: a_thousand_faces
+        description: "Alter self at will"
+      - level: 15
+        feature: timeless_body
+        description: "No penalties for aging"
+      - level: 20
+        feature: wild_shape_at_will
+        description: "Wild Shape at will"
 
   # =========================================================================
   # Fighter
@@ -290,30 +391,81 @@ classes:
       - Tumble
     spellcasting: null
     class_features:
-      - {level: 1,  feature: flurry_of_blows,      description: "Extra attack with -2 to all attacks"}
-      - {level: 1,  feature: unarmed_strike,        description: "Unarmed deals 1d6; increases per level"}
-      - {level: 1,  feature: bonus_feat_monk_1,     description: "Improved Unarmed Strike + one of: Combat Reflexes, Deflect Arrows, Improved Grapple"}
-      - {level: 2,  feature: evasion,              description: "No damage on successful Reflex saves"}
-      - {level: 2,  feature: bonus_feat_monk_2,     description: "Combat Reflexes, Deflect Arrows, or Improved Trip"}
-      - {level: 3,  feature: still_mind,           description: "+2 saves vs enchantments"}
-      - {level: 4,  feature: ki_strike_magic,       description: "Unarmed strike treated as magic"}
-      - {level: 4,  feature: slow_fall_20,          description: "Slow fall up to 20 ft"}
-      - {level: 5,  feature: purity_of_body,        description: "Immune to natural disease"}
-      - {level: 5,  feature: slow_fall_30,          description: "Slow fall up to 30 ft"}
-      - {level: 6,  feature: bonus_feat_monk_3,     description: "Improved Disarm, Improved Trip, or Stunning Fist"}
-      - {level: 7,  feature: wholeness_of_body,     description: "Heal own HP equal to 2× Monk level/day"}
-      - {level: 8,  feature: slow_fall_50,          description: "Slow fall up to 50 ft"}
-      - {level: 9,  feature: improved_evasion,      description: "Half damage on failed Reflex saves"}
-      - {level: 10, feature: ki_strike_lawful,      description: "Unarmed strike treated as lawful-aligned"}
-      - {level: 11, feature: diamond_body,          description: "Immune to all poisons"}
-      - {level: 12, feature: abundant_step,         description: "Dimension door 1/day"}
-      - {level: 13, feature: diamond_soul,          description: "SR 10 + Monk level"}
-      - {level: 15, feature: quivering_palm,        description: "Set lethal vibrations in target"}
-      - {level: 16, feature: ki_strike_adamantine,  description: "Unarmed strike bypasses DR/adamantine"}
-      - {level: 17, feature: timeless_body,         description: "No aging penalties"}
-      - {level: 17, feature: tongue_of_sun_moon,    description: "Speak with any living creature"}
-      - {level: 19, feature: empty_body,            description: "Etherealness 1 min/day per Monk level"}
-      - {level: 20, feature: perfect_self,          description: "Outsider type; DR 10/magic"}
+      - level: 1
+        feature: flurry_of_blows
+        description: "Extra attack with -2 to all attacks"
+      - level: 1
+        feature: unarmed_strike
+        description: "Unarmed deals 1d6; increases per level"
+      - level: 1
+        feature: bonus_feat_monk_1
+        description: >-
+          Improved Unarmed Strike + one of:
+          Combat Reflexes, Deflect Arrows,
+          Improved Grapple
+      - level: 2
+        feature: evasion
+        description: "No damage on successful Reflex saves"
+      - level: 2
+        feature: bonus_feat_monk_2
+        description: "Combat Reflexes, Deflect Arrows, or Improved Trip"
+      - level: 3
+        feature: still_mind
+        description: "+2 saves vs enchantments"
+      - level: 4
+        feature: ki_strike_magic
+        description: "Unarmed strike treated as magic"
+      - level: 4
+        feature: slow_fall_20
+        description: "Slow fall up to 20 ft"
+      - level: 5
+        feature: purity_of_body
+        description: "Immune to natural disease"
+      - level: 5
+        feature: slow_fall_30
+        description: "Slow fall up to 30 ft"
+      - level: 6
+        feature: bonus_feat_monk_3
+        description: "Improved Disarm, Improved Trip, or Stunning Fist"
+      - level: 7
+        feature: wholeness_of_body
+        description: "Heal own HP equal to 2× Monk level/day"
+      - level: 8
+        feature: slow_fall_50
+        description: "Slow fall up to 50 ft"
+      - level: 9
+        feature: improved_evasion
+        description: "Half damage on failed Reflex saves"
+      - level: 10
+        feature: ki_strike_lawful
+        description: "Unarmed strike treated as lawful-aligned"
+      - level: 11
+        feature: diamond_body
+        description: "Immune to all poisons"
+      - level: 12
+        feature: abundant_step
+        description: "Dimension door 1/day"
+      - level: 13
+        feature: diamond_soul
+        description: "SR 10 + Monk level"
+      - level: 15
+        feature: quivering_palm
+        description: "Set lethal vibrations in target"
+      - level: 16
+        feature: ki_strike_adamantine
+        description: "Unarmed strike bypasses DR/adamantine"
+      - level: 17
+        feature: timeless_body
+        description: "No aging penalties"
+      - level: 17
+        feature: tongue_of_sun_moon
+        description: "Speak with any living creature"
+      - level: 19
+        feature: empty_body
+        description: "Etherealness 1 min/day per Monk level"
+      - level: 20
+        feature: perfect_self
+        description: "Outsider type; DR 10/magic"
 
   # =========================================================================
   # Paladin
@@ -345,26 +497,66 @@ classes:
       max_spell_level: 4
       starts_at_level: 4
     class_features:
-      - {level: 1,  feature: aura_of_good,         description: "Aura of good (equal to Paladin level)"}
-      - {level: 1,  feature: detect_evil,          description: "Detect evil at will"}
-      - {level: 1,  feature: smite_evil_1,         description: "Smite evil 1/day (+CHA to attack, +level to damage)"}
-      - {level: 2,  feature: divine_grace,         description: "+CHA modifier to all saves"}
-      - {level: 2,  feature: lay_on_hands,         description: "Heal HP per day = Paladin level × CHA modifier"}
-      - {level: 3,  feature: aura_of_courage,      description: "Immune to fear; allies +4 morale vs fear"}
-      - {level: 3,  feature: divine_health,        description: "Immune to all diseases"}
-      - {level: 4,  feature: turn_undead,          description: "Turn undead as Cleric of (Paladin level - 3)"}
-      - {level: 5,  feature: smite_evil_2,         description: "Smite evil 2/day"}
-      - {level: 5,  feature: special_mount,        description: "Celestial heavy warhorse or pony"}
-      - {level: 6,  feature: remove_disease_1,     description: "Remove disease 1/week"}
-      - {level: 8,  feature: smite_evil_3,         description: "Smite evil 3/day"}
-      - {level: 9,  feature: remove_disease_2,     description: "Remove disease 2/week"}
-      - {level: 11, feature: smite_evil_4,         description: "Smite evil 4/day"}
-      - {level: 12, feature: remove_disease_3,     description: "Remove disease 3/week"}
-      - {level: 14, feature: smite_evil_5,         description: "Smite evil 5/day"}
-      - {level: 15, feature: remove_disease_4,     description: "Remove disease 4/week"}
-      - {level: 17, feature: smite_evil_6,         description: "Smite evil 6/day"}
-      - {level: 18, feature: remove_disease_5,     description: "Remove disease 5/week"}
-      - {level: 20, feature: smite_evil_7,         description: "Smite evil 7/day"}
+      - level: 1
+        feature: aura_of_good
+        description: "Aura of good (equal to Paladin level)"
+      - level: 1
+        feature: detect_evil
+        description: "Detect evil at will"
+      - level: 1
+        feature: smite_evil_1
+        description: "Smite evil 1/day (+CHA to attack, +level to damage)"
+      - level: 2
+        feature: divine_grace
+        description: "+CHA modifier to all saves"
+      - level: 2
+        feature: lay_on_hands
+        description: "Heal HP per day = Paladin level × CHA modifier"
+      - level: 3
+        feature: aura_of_courage
+        description: "Immune to fear; allies +4 morale vs fear"
+      - level: 3
+        feature: divine_health
+        description: "Immune to all diseases"
+      - level: 4
+        feature: turn_undead
+        description: "Turn undead as Cleric of (Paladin level - 3)"
+      - level: 5
+        feature: smite_evil_2
+        description: "Smite evil 2/day"
+      - level: 5
+        feature: special_mount
+        description: "Celestial heavy warhorse or pony"
+      - level: 6
+        feature: remove_disease_1
+        description: "Remove disease 1/week"
+      - level: 8
+        feature: smite_evil_3
+        description: "Smite evil 3/day"
+      - level: 9
+        feature: remove_disease_2
+        description: "Remove disease 2/week"
+      - level: 11
+        feature: smite_evil_4
+        description: "Smite evil 4/day"
+      - level: 12
+        feature: remove_disease_3
+        description: "Remove disease 3/week"
+      - level: 14
+        feature: smite_evil_5
+        description: "Smite evil 5/day"
+      - level: 15
+        feature: remove_disease_4
+        description: "Remove disease 4/week"
+      - level: 17
+        feature: smite_evil_6
+        description: "Smite evil 6/day"
+      - level: 18
+        feature: remove_disease_5
+        description: "Remove disease 5/week"
+      - level: 20
+        feature: smite_evil_7
+        description: "Smite evil 7/day"
 
   # =========================================================================
   # Ranger
@@ -405,23 +597,57 @@ classes:
       max_spell_level: 4
       starts_at_level: 4
     class_features:
-      - {level: 1,  feature: favored_enemy_1,      description: "Favored enemy 1: +2 attack and damage vs type"}
-      - {level: 1,  feature: track,                description: "Track feat for free"}
-      - {level: 1,  feature: wild_empathy,         description: "Improve attitude of animals"}
-      - {level: 2,  feature: combat_style_archery, description: "Rapid Shot or Two-Weapon Fighting (no prereq)"}
-      - {level: 3,  feature: endurance,            description: "Endurance feat for free"}
-      - {level: 4,  feature: animal_companion,     description: "Special animal companion"}
-      - {level: 5,  feature: favored_enemy_2,      description: "Favored enemy 2; +4 to first choice"}
-      - {level: 6,  feature: improved_combat_style,description: "Manyshot or Improved Two-Weapon Fighting"}
-      - {level: 7,  feature: woodland_stride,      description: "Move through natural undergrowth at full speed"}
-      - {level: 8,  feature: swift_tracker,        description: "Track at full speed without penalty"}
-      - {level: 9,  feature: evasion,              description: "No damage on successful Reflex save"}
-      - {level: 10, feature: favored_enemy_3,      description: "Favored enemy 3; +6/+4 to earlier choices"}
-      - {level: 11, feature: combat_style_mastery, description: "Improved Precise Shot or Greater Two-Weapon Fighting"}
-      - {level: 12, feature: camouflage,           description: "Hide in natural terrain without cover"}
-      - {level: 15, feature: favored_enemy_4,      description: "Favored enemy 4"}
-      - {level: 17, feature: hide_in_plain_sight,  description: "Hide while observed in natural terrain"}
-      - {level: 20, feature: favored_enemy_5,      description: "Favored enemy 5"}
+      - level: 1
+        feature: favored_enemy_1
+        description: "Favored enemy 1: +2 attack and damage vs type"
+      - level: 1
+        feature: track
+        description: "Track feat for free"
+      - level: 1
+        feature: wild_empathy
+        description: "Improve attitude of animals"
+      - level: 2
+        feature: combat_style_archery
+        description: "Rapid Shot or Two-Weapon Fighting (no prereq)"
+      - level: 3
+        feature: endurance
+        description: "Endurance feat for free"
+      - level: 4
+        feature: animal_companion
+        description: "Special animal companion"
+      - level: 5
+        feature: favored_enemy_2
+        description: "Favored enemy 2; +4 to first choice"
+      - level: 6
+        feature: improved_combat_style
+        description: "Manyshot or Improved Two-Weapon Fighting"
+      - level: 7
+        feature: woodland_stride
+        description: "Move through natural undergrowth at full speed"
+      - level: 8
+        feature: swift_tracker
+        description: "Track at full speed without penalty"
+      - level: 9
+        feature: evasion
+        description: "No damage on successful Reflex save"
+      - level: 10
+        feature: favored_enemy_3
+        description: "Favored enemy 3; +6/+4 to earlier choices"
+      - level: 11
+        feature: combat_style_mastery
+        description: "Improved Precise Shot or Greater Two-Weapon Fighting"
+      - level: 12
+        feature: camouflage
+        description: "Hide in natural terrain without cover"
+      - level: 15
+        feature: favored_enemy_4
+        description: "Favored enemy 4"
+      - level: 17
+        feature: hide_in_plain_sight
+        description: "Hide while observed in natural terrain"
+      - level: 20
+        feature: favored_enemy_5
+        description: "Favored enemy 5"
 
   # =========================================================================
   # Rogue
@@ -467,30 +693,78 @@ classes:
       - Use Rope
     spellcasting: null
     class_features:
-      - {level: 1,  feature: sneak_attack_1d6,     description: "Sneak attack +1d6"}
-      - {level: 1,  feature: trapfinding,           description: "Find and disable magical traps"}
-      - {level: 2,  feature: evasion,              description: "No damage on successful Reflex save"}
-      - {level: 3,  feature: sneak_attack_2d6,     description: "Sneak attack +2d6"}
-      - {level: 3,  feature: trap_sense_1,         description: "+1 Reflex and AC vs traps"}
-      - {level: 4,  feature: uncanny_dodge,        description: "Retain DEX bonus to AC when flat-footed"}
-      - {level: 5,  feature: sneak_attack_3d6,     description: "Sneak attack +3d6"}
-      - {level: 6,  feature: trap_sense_2,         description: "+2 Reflex and AC vs traps"}
-      - {level: 7,  feature: sneak_attack_4d6,     description: "Sneak attack +4d6"}
-      - {level: 8,  feature: improved_uncanny_dodge, description: "Cannot be flanked"}
-      - {level: 9,  feature: sneak_attack_5d6,     description: "Sneak attack +5d6"}
-      - {level: 9,  feature: trap_sense_3,         description: "+3 Reflex and AC vs traps"}
-      - {level: 10, feature: special_ability,       description: "Rogue special ability (crippling strike, etc.)"}
-      - {level: 11, feature: sneak_attack_6d6,     description: "Sneak attack +6d6"}
-      - {level: 12, feature: trap_sense_4,         description: "+4 Reflex and AC vs traps"}
-      - {level: 13, feature: sneak_attack_7d6,     description: "Sneak attack +7d6"}
-      - {level: 14, feature: special_ability_2,    description: "Rogue special ability"}
-      - {level: 15, feature: sneak_attack_8d6,     description: "Sneak attack +8d6"}
-      - {level: 15, feature: trap_sense_5,         description: "+5 Reflex and AC vs traps"}
-      - {level: 16, feature: special_ability_3,    description: "Rogue special ability"}
-      - {level: 17, feature: sneak_attack_9d6,     description: "Sneak attack +9d6"}
-      - {level: 18, feature: trap_sense_6,         description: "+6 Reflex and AC vs traps"}
-      - {level: 19, feature: sneak_attack_10d6,    description: "Sneak attack +10d6"}
-      - {level: 20, feature: special_ability_4,    description: "Rogue special ability"}
+      - level: 1
+        feature: sneak_attack_1d6
+        description: "Sneak attack +1d6"
+      - level: 1
+        feature: trapfinding
+        description: "Find and disable magical traps"
+      - level: 2
+        feature: evasion
+        description: "No damage on successful Reflex save"
+      - level: 3
+        feature: sneak_attack_2d6
+        description: "Sneak attack +2d6"
+      - level: 3
+        feature: trap_sense_1
+        description: "+1 Reflex and AC vs traps"
+      - level: 4
+        feature: uncanny_dodge
+        description: "Retain DEX bonus to AC when flat-footed"
+      - level: 5
+        feature: sneak_attack_3d6
+        description: "Sneak attack +3d6"
+      - level: 6
+        feature: trap_sense_2
+        description: "+2 Reflex and AC vs traps"
+      - level: 7
+        feature: sneak_attack_4d6
+        description: "Sneak attack +4d6"
+      - level: 8
+        feature: improved_uncanny_dodge
+        description: "Cannot be flanked"
+      - level: 9
+        feature: sneak_attack_5d6
+        description: "Sneak attack +5d6"
+      - level: 9
+        feature: trap_sense_3
+        description: "+3 Reflex and AC vs traps"
+      - level: 10
+        feature: special_ability
+        description: "Rogue special ability (crippling strike, etc.)"
+      - level: 11
+        feature: sneak_attack_6d6
+        description: "Sneak attack +6d6"
+      - level: 12
+        feature: trap_sense_4
+        description: "+4 Reflex and AC vs traps"
+      - level: 13
+        feature: sneak_attack_7d6
+        description: "Sneak attack +7d6"
+      - level: 14
+        feature: special_ability_2
+        description: "Rogue special ability"
+      - level: 15
+        feature: sneak_attack_8d6
+        description: "Sneak attack +8d6"
+      - level: 15
+        feature: trap_sense_5
+        description: "+5 Reflex and AC vs traps"
+      - level: 16
+        feature: special_ability_3
+        description: "Rogue special ability"
+      - level: 17
+        feature: sneak_attack_9d6
+        description: "Sneak attack +9d6"
+      - level: 18
+        feature: trap_sense_6
+        description: "+6 Reflex and AC vs traps"
+      - level: 19
+        feature: sneak_attack_10d6
+        description: "Sneak attack +10d6"
+      - level: 20
+        feature: special_ability_4
+        description: "Rogue special ability"
 
   # =========================================================================
   # Sorcerer
@@ -544,12 +818,24 @@ classes:
       preparation: prepared
       max_spell_level: 9
     class_features:
-      - {level: 1, feature: summon_familiar,     description: "Summon a familiar"}
-      - {level: 1, feature: scribe_scroll,       description: "Scribe scroll feat for free"}
-      - {level: 5, feature: bonus_feat_wizard_5, description: "Bonus wizard feat (Item Creation or Metamagic)"}
-      - {level: 10, feature: bonus_feat_wizard_10, description: "Bonus wizard feat"}
-      - {level: 15, feature: bonus_feat_wizard_15, description: "Bonus wizard feat"}
-      - {level: 20, feature: bonus_feat_wizard_20, description: "Bonus wizard feat"}
+      - level: 1
+        feature: summon_familiar
+        description: "Summon a familiar"
+      - level: 1
+        feature: scribe_scroll
+        description: "Scribe scroll feat for free"
+      - level: 5
+        feature: bonus_feat_wizard_5
+        description: "Bonus wizard feat (Item Creation or Metamagic)"
+      - level: 10
+        feature: bonus_feat_wizard_10
+        description: "Bonus wizard feat"
+      - level: 15
+        feature: bonus_feat_wizard_15
+        description: "Bonus wizard feat"
+      - level: 20
+        feature: bonus_feat_wizard_20
+        description: "Bonus wizard feat"
 
   # =======================================================
   # NPC Classes (SRD)
@@ -589,8 +875,9 @@ classes:
       max_spell_level: 5
       starts_at_level: 1
     class_features:
-      - {level: 2, feature: summon_familiar,
-         description: "Summon a familiar"}
+      - level: 2
+        feature: summon_familiar
+        description: "Summon a familiar"
 
   - name: Aristocrat
     source_book: SRD
@@ -763,26 +1050,36 @@ prestige_classes:
         - feat: "Precise Shot"
         - feat: "Weapon Focus"
     class_features:
-      - {level: 1, feature: enhance_arrows_1,
-         description: "+1 enhancement bonus"}
-      - {level: 3, feature: enhance_arrows_2,
-         description: "+2 enhancement bonus"}
-      - {level: 5, feature: enhance_arrows_3,
-         description: "+3 enhancement bonus"}
-      - {level: 7, feature: enhance_arrows_4,
-         description: "+4 enhancement bonus"}
-      - {level: 9, feature: enhance_arrows_5,
-         description: "+5 enhancement bonus"}
-      - {level: 2, feature: imbue_arrow,
-         description: "Place spell on arrow"}
-      - {level: 4, feature: seeker_arrow,
-         description: "Arrow ignores cover"}
-      - {level: 6, feature: phase_arrow,
-         description: "Arrow phases through walls"}
-      - {level: 8, feature: hail_of_arrows,
-         description: "One arrow per enemy"}
-      - {level: 10, feature: death_arrow,
-         description: "Arrow of death 1/day"}
+      - level: 1
+        feature: enhance_arrows_1
+        description: "+1 enhancement bonus"
+      - level: 3
+        feature: enhance_arrows_2
+        description: "+2 enhancement bonus"
+      - level: 5
+        feature: enhance_arrows_3
+        description: "+3 enhancement bonus"
+      - level: 7
+        feature: enhance_arrows_4
+        description: "+4 enhancement bonus"
+      - level: 9
+        feature: enhance_arrows_5
+        description: "+5 enhancement bonus"
+      - level: 2
+        feature: imbue_arrow
+        description: "Place spell on arrow"
+      - level: 4
+        feature: seeker_arrow
+        description: "Arrow ignores cover"
+      - level: 6
+        feature: phase_arrow
+        description: "Arrow phases through walls"
+      - level: 8
+        feature: hail_of_arrows
+        description: "One arrow per enemy"
+      - level: 10
+        feature: death_arrow
+        description: "Arrow of death 1/day"
 
   - name: "Assassin"
     source_book: DMG
@@ -826,26 +1123,36 @@ prestige_classes:
         - skill: {name: Hide, min: 8}
         - skill: {name: Move Silently, min: 8}
     class_features:
-      - {level: 1, feature: sneak_attack_1d6,
-         description: "+1d6 sneak attack"}
-      - {level: 1, feature: death_attack,
-         description: "Study + kill"}
-      - {level: 1, feature: poison_use,
-         description: "Never poison self"}
-      - {level: 2, feature: uncanny_dodge,
-         description: "Never flat-footed"}
-      - {level: 3, feature: sneak_attack_2d6,
-         description: "+2d6 sneak attack"}
-      - {level: 5, feature: sneak_attack_3d6,
-         description: "+3d6 sneak attack"}
-      - {level: 5, feature: improved_uncanny_dodge,
-         description: "Cannot be flanked"}
-      - {level: 7, feature: sneak_attack_4d6,
-         description: "+4d6 sneak attack"}
-      - {level: 8, feature: hide_in_plain_sight,
-         description: "Hide while observed"}
-      - {level: 9, feature: sneak_attack_5d6,
-         description: "+5d6 sneak attack"}
+      - level: 1
+        feature: sneak_attack_1d6
+        description: "+1d6 sneak attack"
+      - level: 1
+        feature: death_attack
+        description: "Study + kill"
+      - level: 1
+        feature: poison_use
+        description: "Never poison self"
+      - level: 2
+        feature: uncanny_dodge
+        description: "Never flat-footed"
+      - level: 3
+        feature: sneak_attack_2d6
+        description: "+2d6 sneak attack"
+      - level: 5
+        feature: sneak_attack_3d6
+        description: "+3d6 sneak attack"
+      - level: 5
+        feature: improved_uncanny_dodge
+        description: "Cannot be flanked"
+      - level: 7
+        feature: sneak_attack_4d6
+        description: "+4d6 sneak attack"
+      - level: 8
+        feature: hide_in_plain_sight
+        description: "Hide while observed"
+      - level: 9
+        feature: sneak_attack_5d6
+        description: "+5d6 sneak attack"
 
   - name: "Duelist"
     source_book: DMG
@@ -875,22 +1182,30 @@ prestige_classes:
         - skill: {name: Tumble, min: 5}
         - skill: {name: Perform, min: 3}
     class_features:
-      - {level: 1, feature: canny_defense,
-         description: "INT to AC (unarmored)"}
-      - {level: 2, feature: improved_reaction,
-         description: "+2 initiative"}
-      - {level: 2, feature: enhanced_mobility,
-         description: "+4 AC vs AoO"}
-      - {level: 3, feature: precise_strike,
-         description: "+1d6 damage (light)"}
-      - {level: 4, feature: grace,
-         description: "+2 Reflex saves"}
-      - {level: 5, feature: acrobatic_charge,
-         description: "Charge in difficult terrain"}
-      - {level: 9, feature: deflect_arrows,
-         description: "Deflect one ranged/round"}
-      - {level: 10, feature: crippling_critical,
-         description: "Critical hit debuff"}
+      - level: 1
+        feature: canny_defense
+        description: "INT to AC (unarmored)"
+      - level: 2
+        feature: improved_reaction
+        description: "+2 initiative"
+      - level: 2
+        feature: enhanced_mobility
+        description: "+4 AC vs AoO"
+      - level: 3
+        feature: precise_strike
+        description: "+1d6 damage (light)"
+      - level: 4
+        feature: grace
+        description: "+2 Reflex saves"
+      - level: 5
+        feature: acrobatic_charge
+        description: "Charge in difficult terrain"
+      - level: 9
+        feature: deflect_arrows
+        description: "Deflect one ranged/round"
+      - level: 10
+        feature: crippling_critical
+        description: "Critical hit debuff"
 
   - name: "Eldritch Knight"
     source_book: DMG
@@ -919,8 +1234,9 @@ prestige_classes:
             min_level: 3
         - proficient_with: {weapon: martial}
     class_features:
-      - {level: 1, feature: bonus_feat,
-         description: "Bonus fighter feat"}
+      - level: 1
+        feature: bonus_feat
+        description: "Bonus fighter feat"
 
   - name: "Mystic Theurge"
     source_book: DMG
@@ -987,28 +1303,39 @@ prestige_classes:
         - feat: "Mobility"
         - feat: "Combat Reflexes"
     class_features:
-      - {level: 1, feature: hide_in_plain_sight,
-         description: "Hide while observed"}
-      - {level: 2, feature: evasion,
-         description: "No damage on Ref save"}
-      - {level: 2, feature: darkvision,
-         description: "Darkvision 60 ft"}
-      - {level: 2, feature: uncanny_dodge,
-         description: "Never flat-footed"}
-      - {level: 3, feature: shadow_illusion,
-         description: "Silent image 1/day"}
-      - {level: 3, feature: summon_shadow,
-         description: "Summon shadow companion"}
-      - {level: 4, feature: shadow_jump_20,
-         description: "Teleport 20 ft/day"}
-      - {level: 5, feature: defensive_roll,
-         description: "Avoid lethal blow"}
-      - {level: 5, feature: improved_uncanny_dodge,
-         description: "Cannot be flanked"}
-      - {level: 7, feature: slippery_mind,
-         description: "Re-roll enchantment save"}
-      - {level: 10, feature: improved_evasion,
-         description: "Half damage on failed save"}
+      - level: 1
+        feature: hide_in_plain_sight
+        description: "Hide while observed"
+      - level: 2
+        feature: evasion
+        description: "No damage on Ref save"
+      - level: 2
+        feature: darkvision
+        description: "Darkvision 60 ft"
+      - level: 2
+        feature: uncanny_dodge
+        description: "Never flat-footed"
+      - level: 3
+        feature: shadow_illusion
+        description: "Silent image 1/day"
+      - level: 3
+        feature: summon_shadow
+        description: "Summon shadow companion"
+      - level: 4
+        feature: shadow_jump_20
+        description: "Teleport 20 ft/day"
+      - level: 5
+        feature: defensive_roll
+        description: "Avoid lethal blow"
+      - level: 5
+        feature: improved_uncanny_dodge
+        description: "Cannot be flanked"
+      - level: 7
+        feature: slippery_mind
+        description: "Re-roll enchantment save"
+      - level: 10
+        feature: improved_evasion
+        description: "Half damage on failed save"
 
   - name: "Blackguard"
     source_book: DMG
@@ -1044,26 +1371,36 @@ prestige_classes:
             {name: Knowledge (Religion), min: 2}
         - skill: {name: Hide, min: 5}
     class_features:
-      - {level: 1, feature: aura_of_evil,
-         description: "Strong evil aura"}
-      - {level: 1, feature: detect_good,
-         description: "Detect good at will"}
-      - {level: 2, feature: dark_blessing,
-         description: "CHA bonus to saves"}
-      - {level: 2, feature: smite_good,
-         description: "Smite good 1/day"}
-      - {level: 3, feature: aura_of_despair,
-         description: "-2 saves to enemies"}
-      - {level: 3, feature: command_undead,
-         description: "Command/rebuke undead"}
-      - {level: 4, feature: sneak_attack_1d6,
-         description: "+1d6 sneak attack"}
-      - {level: 5, feature: fiendish_servant,
-         description: "Fiendish mount"}
-      - {level: 7, feature: sneak_attack_2d6,
-         description: "+2d6 sneak attack"}
-      - {level: 10, feature: sneak_attack_3d6,
-         description: "+3d6 sneak attack"}
+      - level: 1
+        feature: aura_of_evil
+        description: "Strong evil aura"
+      - level: 1
+        feature: detect_good
+        description: "Detect good at will"
+      - level: 2
+        feature: dark_blessing
+        description: "CHA bonus to saves"
+      - level: 2
+        feature: smite_good
+        description: "Smite good 1/day"
+      - level: 3
+        feature: aura_of_despair
+        description: "-2 saves to enemies"
+      - level: 3
+        feature: command_undead
+        description: "Command/rebuke undead"
+      - level: 4
+        feature: sneak_attack_1d6
+        description: "+1d6 sneak attack"
+      - level: 5
+        feature: fiendish_servant
+        description: "Fiendish mount"
+      - level: 7
+        feature: sneak_attack_2d6
+        description: "+2d6 sneak attack"
+      - level: 10
+        feature: sneak_attack_3d6
+        description: "+3d6 sneak attack"
 
   - name: "Arcane Trickster"
     source_book: DMG
@@ -1115,18 +1452,24 @@ prestige_classes:
             type: arcane
             min_level: 3
     class_features:
-      - {level: 1, feature: ranged_legerdemain,
-         description: "Ranged sleight of hand"}
-      - {level: 2, feature: sneak_attack_1d6,
-         description: "+1d6 sneak attack"}
-      - {level: 4, feature: sneak_attack_2d6,
-         description: "+2d6 sneak attack"}
-      - {level: 6, feature: sneak_attack_3d6,
-         description: "+3d6 sneak attack"}
-      - {level: 8, feature: sneak_attack_4d6,
-         description: "+4d6 sneak attack"}
-      - {level: 10, feature: sneak_attack_5d6,
-         description: "+5d6 sneak attack"}
+      - level: 1
+        feature: ranged_legerdemain
+        description: "Ranged sleight of hand"
+      - level: 2
+        feature: sneak_attack_1d6
+        description: "+1d6 sneak attack"
+      - level: 4
+        feature: sneak_attack_2d6
+        description: "+2d6 sneak attack"
+      - level: 6
+        feature: sneak_attack_3d6
+        description: "+3d6 sneak attack"
+      - level: 8
+        feature: sneak_attack_4d6
+        description: "+4d6 sneak attack"
+      - level: 10
+        feature: sneak_attack_5d6
+        description: "+5d6 sneak attack"
 
   - name: "Dragon Disciple"
     source_book: DMG
@@ -1157,24 +1500,33 @@ prestige_classes:
             type: arcane
             min_level: 1
     class_features:
-      - {level: 1, feature: natural_armor_1,
-         description: "+1 natural armor"}
-      - {level: 2, feature: str_increase_2,
-         description: "+2 STR"}
-      - {level: 2, feature: claws_and_bite,
-         description: "Natural weapons"}
-      - {level: 4, feature: str_increase_4,
-         description: "+2 STR (cumulative)"}
-      - {level: 4, feature: natural_armor_4,
-         description: "+2 natural armor"}
-      - {level: 5, feature: blindsense,
-         description: "Blindsense 30 ft"}
-      - {level: 7, feature: natural_armor_7,
-         description: "+3 natural armor"}
-      - {level: 9, feature: wings,
-         description: "Fly speed 30 ft"}
-      - {level: 10, feature: dragon_apotheosis,
-         description: "Become half-dragon"}
+      - level: 1
+        feature: natural_armor_1
+        description: "+1 natural armor"
+      - level: 2
+        feature: str_increase_2
+        description: "+2 STR"
+      - level: 2
+        feature: claws_and_bite
+        description: "Natural weapons"
+      - level: 4
+        feature: str_increase_4
+        description: "+2 STR (cumulative)"
+      - level: 4
+        feature: natural_armor_4
+        description: "+2 natural armor"
+      - level: 5
+        feature: blindsense
+        description: "Blindsense 30 ft"
+      - level: 7
+        feature: natural_armor_7
+        description: "+3 natural armor"
+      - level: 9
+        feature: wings
+        description: "Fly speed 30 ft"
+      - level: 10
+        feature: dragon_apotheosis
+        description: "Become half-dragon"
 
   - name: "Dwarven Defender"
     source_book: DMG
@@ -1197,22 +1549,30 @@ prestige_classes:
         - feat: "Dodge"
         - feat: "Toughness"
     class_features:
-      - {level: 1, feature: defensive_stance,
-         description: "+2 STR/CON, +2 saves, +4 AC"}
-      - {level: 2, feature: uncanny_dodge,
-         description: "Never flat-footed"}
-      - {level: 3, feature: trap_sense_1,
-         description: "+1 vs traps"}
-      - {level: 4, feature: damage_reduction_1,
-         description: "DR 3/—"}
-      - {level: 6, feature: damage_reduction_2,
-         description: "DR 6/—"}
-      - {level: 6, feature: improved_uncanny_dodge,
-         description: "Cannot be flanked"}
-      - {level: 8, feature: damage_reduction_3,
-         description: "DR 9/—"}
-      - {level: 10, feature: mobile_defense,
-         description: "Move 5 ft in stance"}
+      - level: 1
+        feature: defensive_stance
+        description: "+2 STR/CON, +2 saves, +4 AC"
+      - level: 2
+        feature: uncanny_dodge
+        description: "Never flat-footed"
+      - level: 3
+        feature: trap_sense_1
+        description: "+1 vs traps"
+      - level: 4
+        feature: damage_reduction_1
+        description: "DR 3/—"
+      - level: 6
+        feature: damage_reduction_2
+        description: "DR 6/—"
+      - level: 6
+        feature: improved_uncanny_dodge
+        description: "Cannot be flanked"
+      - level: 8
+        feature: damage_reduction_3
+        description: "DR 9/—"
+      - level: 10
+        feature: mobile_defense
+        description: "Move 5 ft in stance"
 
   - name: "Hierophant"
     source_book: DMG
@@ -1239,8 +1599,9 @@ prestige_classes:
             type: divine
             min_level: 7
     class_features:
-      - {level: 1, feature: special_ability,
-         description: "Choose hierophant ability"}
+      - level: 1
+        feature: special_ability
+        description: "Choose hierophant ability"
 
   - name: "Horizon Walker"
     source_book: DMG
@@ -1272,8 +1633,9 @@ prestige_classes:
         - skill: {name: Knowledge (Geography), min: 8}
         - feat: "Endurance"
     class_features:
-      - {level: 1, feature: terrain_mastery,
-         description: "Choose terrain mastery"}
+      - level: 1
+        feature: terrain_mastery
+        description: "Choose terrain mastery"
 
   - name: "Loremaster"
     source_book: DMG
@@ -1307,10 +1669,12 @@ prestige_classes:
         - skill:
             {name: Knowledge (Arcana), min: 10}
     class_features:
-      - {level: 1, feature: secret,
-         description: "Choose lore secret"}
-      - {level: 2, feature: lore,
-         description: "Lore check (like bard)"}
+      - level: 1
+        feature: secret
+        description: "Choose lore secret"
+      - level: 2
+        feature: lore
+        description: "Lore check (like bard)"
 
   - name: "Thaumaturgist"
     source_book: DMG
@@ -1338,16 +1702,21 @@ prestige_classes:
             type: divine
             min_level: 3
     class_features:
-      - {level: 1, feature: improved_ally,
-         description: "Better planar ally"}
-      - {level: 2, feature: augment_summoning,
-         description: "Augment Summoning feat"}
-      - {level: 3, feature: extended_summoning,
-         description: "Double duration"}
-      - {level: 4, feature: contingent_conjuration,
-         description: "Contingency on summon"}
-      - {level: 5, feature: planar_cohort,
-         description: "Outsider cohort"}
+      - level: 1
+        feature: improved_ally
+        description: "Better planar ally"
+      - level: 2
+        feature: augment_summoning
+        description: "Augment Summoning feat"
+      - level: 3
+        feature: extended_summoning
+        description: "Double duration"
+      - level: 4
+        feature: contingent_conjuration
+        description: "Contingency on summon"
+      - level: 5
+        feature: planar_cohort
+        description: "Outsider cohort"
 
   # =======================================================
   # Archmage
@@ -1388,13 +1757,18 @@ prestige_classes:
             type: arcane
             min_level: 7
     class_features:
-      - {level: 1, feature: high_arcana_1,
-         description: "High arcana ability"}
-      - {level: 2, feature: high_arcana_2,
-         description: "High arcana ability"}
-      - {level: 3, feature: high_arcana_3,
-         description: "High arcana ability"}
-      - {level: 4, feature: high_arcana_4,
-         description: "High arcana ability"}
-      - {level: 5, feature: high_arcana_5,
-         description: "High arcana ability"}
+      - level: 1
+        feature: high_arcana_1
+        description: "High arcana ability"
+      - level: 2
+        feature: high_arcana_2
+        description: "High arcana ability"
+      - level: 3
+        feature: high_arcana_3
+        description: "High arcana ability"
+      - level: 4
+        feature: high_arcana_4
+        description: "High arcana ability"
+      - level: 5
+        feature: high_arcana_5
+        description: "High arcana ability"

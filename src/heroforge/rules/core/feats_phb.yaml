@@ -74,7 +74,10 @@ feats:
   - name: "Weapon Focus"
     kind: always_on
     source_book: PHB
-    note: "+1 attack with chosen weapon (applied as untyped to attack_all for simplicity)"
+    note: >-
+      +1 attack with chosen weapon
+      (applied as untyped to attack_all
+      for simplicity)
     prerequisites:
       all_of:
         - stat: {key: bab, min: 1, label: BAB}
@@ -147,7 +150,9 @@ feats:
   - name: "Melee Weapon Mastery"
     kind: always_on
     source_book: PHB
-    note: "+2 attack and damage with chosen damage type (slashing/piercing/bludgeoning)"
+    note: >-
+      +2 attack and damage with chosen
+      damage type (slashing/piercing/bludgeoning)
     prerequisites:
       all_of:
         - feat: "Weapon Focus"
@@ -316,7 +321,9 @@ feats:
   - name: "Point Blank Shot"
     kind: passive
     source_book: PHB
-    note: "+1 attack and damage within 30 ft. (modelled in ranged weapon attack)"
+    note: >-
+      +1 attack and damage within 30 ft.
+      (modelled in ranged weapon attack)
     prerequisites: null
     effects: []
 
@@ -399,7 +406,9 @@ feats:
   - name: "Power Attack"
     kind: conditional
     source_book: PHB
-    note: "Trade attack bonus for damage bonus (1-for-1; 2-for-1 with two-hander)"
+    note: >-
+      Trade attack bonus for damage bonus
+      (1-for-1; 2-for-1 with two-hander)
     prerequisites:
       stat: {key: bab, min: 1, label: BAB}
     parameter:
@@ -736,7 +745,9 @@ feats:
   - name: "Spell Focus"
     kind: passive
     source_book: PHB
-    note: "+1 to spell save DCs for chosen school; no pool bonus (spell-specific)"
+    note: >-
+      +1 to spell save DCs for chosen
+      school; no pool bonus (spell-specific)
     prerequisites: null
     effects: []
 

@@ -15,7 +15,8 @@
 #       bonus_type: untyped (racial ability mods are always untyped)
 #   favored_class   : class name or "any"
 #   la              : Level Adjustment (0 for standard races)
-#   racial_traits   : list of trait names (for display; effects modelled separately)
+#   racial_traits   : list of trait names
+#                     (for display; effects modelled separately)
 #   languages       : {automatic: [], bonus: []}
 #   weapon_familiarity: list of weapons treated as martial
 #   low_light_vision : bool
@@ -32,7 +33,8 @@ races:
     subtypes: [Human]
     size: Medium
     base_speed: 30
-    ability_modifiers: []   # No adjustments — bonus feat and skill point instead
+    # No adjustments -- bonus feat and skill point
+    ability_modifiers: []
     favored_class: any
     la: 0
     racial_traits:
@@ -71,9 +73,16 @@ races:
       - "+2 racial bonus on saves vs spells and spell-like abilities"
       - "+1 attack bonus vs orcs and goblinoids"
       - "+4 dodge bonus to AC vs giants"
-      - "+2 racial bonus on Appraise and Craft checks related to stone or metal"
-      - "Stonecunning: +2 Search to notice unusual stonework, auto-check within 10 ft"
-      - "Weapon Familiarity: dwarven waraxe and dwarven urgrosh as martial weapons"
+      - >-
+        +2 racial bonus on Appraise and
+        Craft checks related to stone or metal
+      - >-
+        Stonecunning: +2 Search to notice
+        unusual stonework, auto-check within
+        10 ft
+      - >-
+        Weapon Familiarity: dwarven waraxe
+        and dwarven urgrosh as martial weapons
       - "Stability: +4 bonus vs bull rush/trip when standing on ground"
     languages:
       automatic: [Common, Dwarven]
@@ -105,11 +114,21 @@ races:
       - "+2 racial bonus on saves vs enchantment spells and effects"
       - "+2 racial bonus on Listen, Search, and Spot checks"
       - "Auto Search check when within 5 ft of secret door"
-      - "Weapon Familiarity: longsword, rapier, longbow, shortbow as martial weapons"
+      - >-
+        Weapon Familiarity: longsword, rapier,
+        longbow, shortbow as martial weapons
     languages:
       automatic: [Common, Elven]
       bonus: [Draconic, Gnoll, Gnome, Goblin, Orc, Sylvan]
-    weapon_familiarity: [Longsword, Rapier, Longbow, Longbow, Composite, Shortbow, Shortbow, Composite]
+    weapon_familiarity:
+      - Longsword
+      - Rapier
+      - Longbow
+      - Longbow
+      - Composite
+      - Shortbow
+      - Shortbow
+      - Composite
     low_light_vision: true
     darkvision: 0
 
@@ -129,14 +148,20 @@ races:
     la: 0
     racial_traits:
       - "+2 CON, -2 STR"
-      - "Small size: +1 attack, +1 AC, -4 grapple, +4 Hide, −1 carrying capacity"
+      - >-
+        Small size: +1 attack, +1 AC,
+        -4 grapple, +4 Hide, -1 carrying
+        capacity
       - "Speed 20 ft"
       - "Low-light vision"
       - "+2 save vs illusions"
       - "+1 attack vs kobolds and goblinoids"
       - "+4 dodge bonus vs giants"
       - "+2 Listen checks; +2 Craft (alchemy) checks"
-      - "Speak with animals (burrowing mammals only) 1/day each; spell-like abilities vs illusions"
+      - >-
+        Speak with animals (burrowing mammals
+        only) 1/day each; spell-like abilities
+        vs illusions
       - "Weapon Familiarity: gnome hooked hammer as martial weapon"
     languages:
       automatic: [Common, Gnome]
@@ -168,7 +193,15 @@ races:
     languages:
       automatic: [Common, Elven]
       bonus: [any]
-    weapon_familiarity: [Longsword, Rapier, Longbow, Longbow, Composite, Shortbow, Shortbow, Composite]
+    weapon_familiarity:
+      - Longsword
+      - Rapier
+      - Longbow
+      - Longbow
+      - Composite
+      - Shortbow
+      - Shortbow
+      - Composite
     low_light_vision: true
     darkvision: 0
 
