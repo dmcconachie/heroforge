@@ -103,6 +103,10 @@ class AppState:
             self.spell_registry,
             "core/spells_srd_buffs.yaml",
         )
+        SpellsLoader(rd).load(
+            self.spell_registry,
+            "core/class_buffs.yaml",
+        )
         FeatsLoader(rd).load(
             self.feat_registry,
             prereq_checker,
