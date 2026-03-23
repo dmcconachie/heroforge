@@ -766,3 +766,353 @@ spells:
       - target: damage_all
         bonus_type: enhancement
         value: 5
+
+  # =====================================================
+  # Rings (skill bonuses)
+  # =====================================================
+
+  - name: "Ring of Climbing"
+    category: item
+    source_book: SRD
+    note: "+5 competence on Climb checks"
+    effects:
+      - target: skill_climb
+        bonus_type: competence
+        value: 5
+
+  - name: "Ring of Climbing, Improved"
+    category: item
+    source_book: SRD
+    note: "+10 competence on Climb checks"
+    effects:
+      - target: skill_climb
+        bonus_type: competence
+        value: 10
+
+  - name: "Ring of Jumping"
+    category: item
+    source_book: SRD
+    note: "+5 competence on Jump checks"
+    effects:
+      - target: skill_jump
+        bonus_type: competence
+        value: 5
+
+  - name: "Ring of Jumping, Improved"
+    category: item
+    source_book: SRD
+    note: "+10 competence on Jump checks"
+    effects:
+      - target: skill_jump
+        bonus_type: competence
+        value: 10
+
+  - name: "Ring of Swimming"
+    category: item
+    source_book: SRD
+    note: "+5 competence on Swim checks"
+    effects:
+      - target: skill_swim
+        bonus_type: competence
+        value: 5
+
+  - name: "Ring of Swimming, Improved"
+    category: item
+    source_book: SRD
+    note: "+10 competence on Swim checks"
+    effects:
+      - target: skill_swim
+        bonus_type: competence
+        value: 10
+
+  - name: "Ring of Chameleon Power"
+    category: item
+    source_book: SRD
+    note: "+10 competence on Hide checks"
+    effects:
+      - target: skill_hide
+        bonus_type: competence
+        value: 10
+
+  - name: "Ring of Force Shield"
+    category: item
+    source_book: SRD
+    note: "+2 shield bonus to AC (no penalties)"
+    effects:
+      - target: ac
+        bonus_type: shield
+        value: 2
+
+  # =====================================================
+  # Ioun Stones
+  # =====================================================
+
+  - name: "Ioun Stone (Deep Red Sphere)"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to DEX"
+    effects:
+      - target: dex_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Ioun Stone (Incandescent Blue)"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to WIS"
+    effects:
+      - target: wis_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Ioun Stone (Pale Blue Rhomboid)"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Ioun Stone (Pink and Green)"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to CHA"
+    effects:
+      - target: cha_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Ioun Stone (Pink Rhomboid)"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to CON"
+    effects:
+      - target: con_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Ioun Stone (Scarlet and Blue)"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to INT"
+    effects:
+      - target: int_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Ioun Stone (Pale Green Prism)"
+    category: item
+    source_book: SRD
+    note: >-
+      +1 competence to attack, saves,
+      skill checks, and ability checks
+    effects:
+      - target: attack_all
+        bonus_type: competence
+        value: 1
+      - target: fort_save
+        bonus_type: competence
+        value: 1
+      - target: ref_save
+        bonus_type: competence
+        value: 1
+      - target: will_save
+        bonus_type: competence
+        value: 1
+
+  # =====================================================
+  # Additional wondrous items
+  # =====================================================
+
+  - name: "Stone of Good Luck (Luckstone)"
+    category: item
+    source_book: SRD
+    note: >-
+      +1 luck bonus on saves, ability
+      checks, and skill checks
+    effects:
+      - target: fort_save
+        bonus_type: luck
+        value: 1
+      - target: ref_save
+        bonus_type: luck
+        value: 1
+      - target: will_save
+        bonus_type: luck
+        value: 1
+
+  - name: "Goggles of Minute Seeing"
+    category: item
+    source_book: SRD
+    note: "+5 competence on Search checks"
+    effects:
+      - target: skill_search
+        bonus_type: competence
+        value: 5
+
+  - name: "Vest of Escape"
+    category: item
+    source_book: SRD
+    note: >-
+      +6 competence on Escape Artist,
+      +4 competence on Open Lock
+    effects:
+      - target: skill_escape_artist
+        bonus_type: competence
+        value: 6
+      - target: skill_open_lock
+        bonus_type: competence
+        value: 4
+
+  - name: "Amulet of Mighty Fists +1"
+    category: item
+    source_book: SRD
+    note: >-
+      +1 enhancement to unarmed and
+      natural weapon attacks and damage
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 1
+      - target: damage_all
+        bonus_type: enhancement
+        value: 1
+
+  - name: "Amulet of Mighty Fists +2"
+    category: item
+    source_book: SRD
+    note: >-
+      +2 enhancement to unarmed and
+      natural weapon attacks and damage
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 2
+      - target: damage_all
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Amulet of Mighty Fists +3"
+    category: item
+    source_book: SRD
+    note: >-
+      +3 enhancement to unarmed and
+      natural weapon attacks and damage
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 3
+      - target: damage_all
+        bonus_type: enhancement
+        value: 3
+
+  - name: "Amulet of Mighty Fists +4"
+    category: item
+    source_book: SRD
+    note: >-
+      +4 enhancement to unarmed and
+      natural weapon attacks and damage
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 4
+      - target: damage_all
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Amulet of Mighty Fists +5"
+    category: item
+    source_book: SRD
+    note: >-
+      +5 enhancement to unarmed and
+      natural weapon attacks and damage
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 5
+      - target: damage_all
+        bonus_type: enhancement
+        value: 5
+
+  - name: "Belt of Dwarvenkind"
+    category: item
+    source_book: SRD
+    note: >-
+      +2 enhancement to CON; darkvision
+      60 ft; dwarven language; +2 CHA
+      toward dwarves
+    effects:
+      - target: con_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Robe of the Archmagi"
+    category: item
+    source_book: SRD
+    note: >-
+      +5 armor AC, SR 18, +4 resistance
+      saves (requires matching alignment)
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 5
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+      - target: sr
+        bonus_type: untyped
+        value: 18
+
+  - name: "Scarab of Protection"
+    category: item
+    source_book: SRD
+    note: >-
+      +3 resistance to saves; absorbs 12
+      energy drain or death effects
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 3
+      - target: ref_save
+        bonus_type: resistance
+        value: 3
+      - target: will_save
+        bonus_type: resistance
+        value: 3
+
+  - name: "Candle of Invocation"
+    category: item
+    source_book: SRD
+    note: >-
+      +2 morale to attack, saves, and
+      skill checks for same-alignment
+      creatures within 30 ft
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 2
+      - target: fort_save
+        bonus_type: morale
+        value: 2
+      - target: ref_save
+        bonus_type: morale
+        value: 2
+      - target: will_save
+        bonus_type: morale
+        value: 2
+
+  - name: "Robe of Stars"
+    category: item
+    source_book: SRD
+    note: "+4 deflection to AC"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
