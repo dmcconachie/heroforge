@@ -429,9 +429,31 @@ def effective_subtypes(character: "Character") -> list[str]:
 # ---------------------------------------------------------------------------
 
 
-def build_template_from_yaml(decl: dict) -> TemplateDefinition:
+_TEMPLATE_ALLOWED_KEYS = {
+    "name",
+    "source_book",
+    "cr_adjustment",
+    "la_adjustment",
+    "type_change",
+    "subtype_add",
+    "subtype_remove",
+    "ability_modifiers",
+    "natural_armor_bonus",
+    "natural_armor_bonus_type",
+    "special_qualities",
+    "grants_feats",
+    "partially_applicable",
+    "note",
+    "ongoing_prereq",
+    "max_level",
+}
+
+
+def build_template_from_yaml(
+    decl: dict,
+) -> TemplateDefinition:
     """
-    Build a TemplateDefinition from a YAML-parsed dict.
+    Build a TemplateDefinition from a YAML dict.
 
     Expected structure:
       name: "Half-Celestial"
@@ -450,6 +472,15 @@ def build_template_from_yaml(decl: dict) -> TemplateDefinition:
       grants_feats: [...]
       note: "..."
     """
+    from heroforge.rules.schema import (
+        _forbid_extra,
+    )
+
+    _forbid_extra(
+        decl,
+        _TEMPLATE_ALLOWED_KEYS,
+        decl.get("name", "?"),
+    )
     ability_mods = []
     for amod in decl.get("ability_modifiers", []):
         bt_str = amod.get("bonus_type", "untyped")

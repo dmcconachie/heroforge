@@ -696,6 +696,33 @@ def _init_category_map() -> None:
     }
 
 
+_SPELL_ALLOWED = {
+    "name",
+    "category",
+    "source_book",
+    "note",
+    "effects",
+    "requires_caster_level",
+    "mutually_exclusive_with",
+    "condition_key",
+}
+
+_SPELL_EFFECT_ALLOWED = {
+    "target",
+    "bonus_type",
+    "value",
+    "condition_key",
+    "source_label",
+}
+
+
+def _forbid_extra_spell(val: dict, allowed: set[str], label: str) -> None:
+    """Reject unknown keys — replaces _check_keys."""
+    extra = set(val) - allowed
+    if extra:
+        raise LoaderError(f"{label!r}: unknown keys {sorted(extra)}")
+
+
 class SpellsLoader:
     """
     Reads rules/core/spells_phb.yaml (and other spell/buff YAML files)
@@ -758,9 +785,7 @@ class SpellsLoader:
             if not name:
                 raise LoaderError(f"Spell declaration missing 'name': {decl}")
 
-            key_errs = _check_keys(decl, _SPELL_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
+            _forbid_extra_spell(decl, _SPELL_ALLOWED, name)
 
             category_str = decl.get("category", "spell")
             category = _CATEGORY_MAP.get(category_str)
@@ -778,13 +803,11 @@ class SpellsLoader:
                         f"{name!r}: effect missing 'target': {eff_decl}"
                     )
 
-                eff_errs = _check_keys(
+                _forbid_extra_spell(
                     eff_decl,
-                    _SPELL_EFFECT_KEYS,
+                    _SPELL_EFFECT_ALLOWED,
                     f"{name!r} effect",
                 )
-                if eff_errs:
-                    raise LoaderError("; ".join(eff_errs))
 
                 bt_str = eff_decl.get("bonus_type", "untyped")
                 bonus_type = bonus_type_map.get(bt_str)
@@ -953,13 +976,6 @@ class TemplatesLoader:
                 raise LoaderError(
                     f"Template declaration missing 'name': {decl}"
                 )
-            key_errs = _check_keys(
-                decl,
-                _TEMPLATE_KEYS,
-                decl.get("name", "?"),
-            )
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
             try:
                 defn = build_template_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
@@ -1083,10 +1099,6 @@ class FeatsLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"Feat declaration missing 'name': {decl}")
-
-            key_errs = _check_keys(decl, _FEAT_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
 
             try:
                 defn = build_feat_from_yaml(decl)
@@ -1340,9 +1352,6 @@ class RacesLoader:
         relative_path: str = "core/races.yaml",
         overwrite: bool = False,
     ) -> list[str]:
-        from heroforge.engine.classes_races import (
-            build_race_from_yaml,
-        )
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -1357,27 +1366,21 @@ class RacesLoader:
         if not isinstance(data, dict) or "races" not in data:
             raise LoaderError(f"{path} must have a top-level 'races' key.")
 
+        from heroforge.engine.classes_races import (
+            RaceDefinition,
+        )
+        from heroforge.rules.schema import converter
+
         registered: list[str] = []
         for decl in data["races"]:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"Race declaration missing 'name': {decl}")
-            key_errs = _check_keys(decl, _RACE_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
-            for amod in decl.get("ability_modifiers", []):
-                am_errs = _check_keys(
-                    amod,
-                    _RACE_ABILITY_MOD_KEYS,
-                    f"{name!r} ability_modifier",
-                )
-                if am_errs:
-                    raise LoaderError("; ".join(am_errs))
             try:
-                defn = build_race_from_yaml(decl)
+                defn = converter.structure(decl, RaceDefinition)
                 registry.register(defn, overwrite=overwrite)
                 registered.append(name)
-            except (KeyError, ValueError) as e:
+            except Exception as e:
                 raise LoaderError(f"Failed to load race {name!r}: {e}") from e
         return registered
 
@@ -1454,7 +1457,10 @@ class SkillsLoader:
         relative_path: str = "core/skills.yaml",
         overwrite: bool = False,
     ) -> list[str]:
-        from heroforge.engine.skills import build_skill_from_yaml
+        from heroforge.engine.skills import (
+            SkillDefinition,
+        )
+        from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -1474,14 +1480,11 @@ class SkillsLoader:
             name = decl.get("name")
             if not name:
                 raise LoaderError(f"Skill declaration missing 'name': {decl}")
-            key_errs = _check_keys(decl, _SKILL_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
             try:
-                defn = build_skill_from_yaml(decl)
+                defn = converter.structure(decl, SkillDefinition)
                 registry.register(defn, overwrite=overwrite)
                 registered.append(name)
-            except (KeyError, ValueError) as e:
+            except Exception as e:
                 raise LoaderError(f"Failed to load skill {name!r}: {e}") from e
         return registered
 
@@ -1539,6 +1542,7 @@ class DomainsLoader:
         from heroforge.engine.classes_races import (
             DomainDefinition,
         )
+        from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -1550,17 +1554,13 @@ class DomainsLoader:
 
         registered: list[str] = []
         for decl in data["domains"]:
-            name = decl["name"]
-            key_errs = _check_keys(decl, _DOMAIN_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
-            spells_raw = decl.get("domain_spells", {})
-            domain_spells = {int(k): str(v) for k, v in spells_raw.items()}
-            defn = DomainDefinition(
-                name=name,
-                granted_power=decl.get("granted_power", ""),
-                domain_spells=domain_spells,
-            )
+            name = decl.get("name")
+            if not name:
+                raise LoaderError(f"Domain missing 'name': {decl}")
+            try:
+                defn = converter.structure(decl, DomainDefinition)
+            except Exception as e:
+                raise LoaderError(f"Failed to load domain {name!r}: {e}") from e
             registry.register(defn)
             registered.append(name)
         return registered
@@ -1586,9 +1586,9 @@ class EquipmentLoader:
         relative_path: str = "core/armor.yaml",
     ) -> list[str]:
         from heroforge.engine.equipment import (
-            ArmorCategory,
             ArmorDefinition,
         )
+        from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -1598,29 +1598,15 @@ class EquipmentLoader:
         if not isinstance(data, dict) or "armor" not in data:
             raise LoaderError(f"{path}: missing 'armor' key")
 
-        cat_map = {c.value: c for c in ArmorCategory}
         registered: list[str] = []
         for decl in data["armor"]:
-            name = decl["name"]
-            key_errs = _check_keys(decl, _ARMOR_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
-            cat_str = decl.get("category", "light")
-            cat = cat_map.get(cat_str)
-            if cat is None:
-                raise LoaderError(f"{name!r}: unknown category {cat_str!r}")
-            defn = ArmorDefinition(
-                name=name,
-                category=cat,
-                armor_bonus=decl.get("armor_bonus", 0),
-                max_dex_bonus=decl.get("max_dex_bonus", -1),
-                armor_check_penalty=decl.get("armor_check_penalty", 0),
-                arcane_spell_failure=decl.get("arcane_spell_failure", 0),
-                speed_30=decl.get("speed_30", 30),
-                speed_20=decl.get("speed_20", 20),
-                weight=float(decl.get("weight", 0)),
-                cost_gp=decl.get("cost_gp", 0),
-            )
+            name = decl.get("name")
+            if not name:
+                raise LoaderError(f"Armor missing 'name': {decl}")
+            try:
+                defn = converter.structure(decl, ArmorDefinition)
+            except Exception as e:
+                raise LoaderError(f"Failed to load armor {name!r}: {e}") from e
             registry.register(defn)
             registered.append(name)
         return registered
@@ -1631,9 +1617,9 @@ class EquipmentLoader:
         relative_path: str = "core/weapons.yaml",
     ) -> list[str]:
         from heroforge.engine.equipment import (
-            WeaponCategory,
             WeaponDefinition,
         )
+        from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -1643,30 +1629,15 @@ class EquipmentLoader:
         if not isinstance(data, dict) or "weapons" not in data:
             raise LoaderError(f"{path}: missing 'weapons' key")
 
-        cat_map = {c.value: c for c in WeaponCategory}
         registered: list[str] = []
         for decl in data["weapons"]:
-            name = decl["name"]
-            key_errs = _check_keys(decl, _WEAPON_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
-            cat_str = decl.get("category", "simple")
-            cat = cat_map.get(cat_str)
-            if cat is None:
-                raise LoaderError(f"{name!r}: unknown category {cat_str!r}")
-            defn = WeaponDefinition(
-                name=name,
-                category=cat,
-                damage_dice=decl.get("damage_dice", "1d4"),
-                critical_range=decl.get("critical_range", 20),
-                critical_multiplier=decl.get("critical_multiplier", 2),
-                damage_type=decl.get("damage_type", ""),
-                range_increment=decl.get("range_increment", 0),
-                weight=float(decl.get("weight", 0)),
-                cost_gp=decl.get("cost_gp", 0),
-                is_ranged=bool(decl.get("is_ranged", False)),
-                special=decl.get("special", ""),
-            )
+            name = decl.get("name")
+            if not name:
+                raise LoaderError(f"Weapon missing 'name': {decl}")
+            try:
+                defn = converter.structure(decl, WeaponDefinition)
+            except Exception as e:
+                raise LoaderError(f"Failed to load weapon {name!r}: {e}") from e
             registry.register(defn)
             registered.append(name)
         return registered
@@ -1706,6 +1677,7 @@ class SpellCompendiumLoader:
         relative_path: str = ("core/spells_srd_0_3.yaml"),
     ) -> list[str]:
         from heroforge.engine.spells import SpellEntry
+        from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -1729,31 +1701,12 @@ class SpellCompendiumLoader:
                     f"Spell compendium entry missing 'name': {decl}"
                 )
 
-            key_errs = _check_keys(decl, _SPELL_COMPENDIUM_KEYS, name)
-            if key_errs:
-                raise LoaderError("; ".join(key_errs))
-
-            level_raw = decl.get("level", {})
-            if isinstance(level_raw, dict):
-                level = {str(k): int(v) for k, v in level_raw.items()}
-            else:
-                level = {}
-
-            entry = SpellEntry(
-                name=name,
-                school=decl.get("school", ""),
-                subschool=decl.get("subschool", ""),
-                descriptor=decl.get("descriptor", ""),
-                level=level,
-                casting_time=decl.get("casting_time", ""),
-                range=decl.get("range", ""),
-                duration=decl.get("duration", ""),
-                saving_throw=decl.get("saving_throw", ""),
-                spell_resistance=decl.get("spell_resistance", ""),
-                description=decl.get("description", ""),
-                source_book=decl.get("source_book", "SRD"),
-                has_buff_effects=bool(decl.get("has_buff_effects", False)),
-            )
+            try:
+                entry = converter.structure(decl, SpellEntry)
+            except Exception as e:
+                raise LoaderError(
+                    f"Failed to load spell entry {name!r}: {e}"
+                ) from e
             compendium.register(entry)
             registered.append(name)
 

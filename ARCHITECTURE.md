@@ -43,6 +43,7 @@ src/heroforge/
 │   └── resources.py        # ResourceTracker (uses/day)
 │
 ├── rules/
+│   ├── schema.py           # cattrs Converter + hooks
 │   ├── loader.py           # StatsLoader, SpellsLoader,
 │   │                       #   FeatsLoader, ClassesLoader,
 │   │                       #   RacesLoader, SkillsLoader,
@@ -347,12 +348,24 @@ max uses (formula), current uses, use/reset/exhaust.
 
 ## Rules layer (`rules/`)
 
+`rules/schema.py` defines a pre-configured `cattrs.Converter`
+with `forbid_extra_keys=True` and custom structure hooks for
+all enums plus frozen dataclasses that need type coercion
+(ClassDefinition, DomainDefinition, ArmorDefinition,
+WeaponDefinition, SkillDefinition, SpellEntry). Also exports
+`_forbid_extra()` for manual key validation in complex
+builder functions.
+
 `rules/loader.py` contains one Loader class per data domain
 (StatsLoader, SpellsLoader, FeatsLoader, SkillsLoader,
 TemplatesLoader, ClassesLoader, RacesLoader, EquipmentLoader,
 DomainsLoader, SpellCompendiumLoader). Each reads its YAML
-file, builds engine objects via `build_*_from_yaml()`
-functions, and populates the corresponding registry.
+file and populates the corresponding registry. Simple loaders
+(Classes, Skills, Domains, Equipment, SpellCompendium) use
+`converter.structure(decl, DataClass)` for declarative
+YAML-to-dataclass mapping. Complex loaders (Spells, Feats,
+Templates) still use `build_*_from_yaml()` builders but
+delegate key validation to `_forbid_extra()`.
 
 YAML files under `rules/core/` contain full SRD data:
 - 16 base classes (11 PHB + 5 NPC) + 15 prestige classes

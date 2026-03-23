@@ -286,13 +286,39 @@ def resolve_feat_effects(
 # ---------------------------------------------------------------------------
 
 
-def build_feat_from_yaml(decl: dict) -> FeatDefinition:
+_FEAT_ALLOWED_KEYS = {
+    "name",
+    "kind",
+    "source_book",
+    "note",
+    "prerequisites",
+    "effects",
+    "parameter",
+    "snapshot",
+    "parameterized_selection",
+}
+
+
+def build_feat_from_yaml(
+    decl: dict,
+) -> FeatDefinition:
     """
     Build a FeatDefinition from a YAML-parsed dict.
-    Uses build_prereq_from_yaml for the prerequisites tree.
+    Uses build_prereq_from_yaml for the
+    prerequisites tree.
     """
-    from heroforge.engine.prerequisites import build_prereq_from_yaml
+    from heroforge.engine.prerequisites import (
+        build_prereq_from_yaml,
+    )
+    from heroforge.rules.schema import (
+        _forbid_extra,
+    )
 
+    _forbid_extra(
+        decl,
+        _FEAT_ALLOWED_KEYS,
+        decl.get("name", "?"),
+    )
     name = decl["name"]
     kind_str = decl.get("kind", "passive")
     kind = FeatKind(kind_str)
