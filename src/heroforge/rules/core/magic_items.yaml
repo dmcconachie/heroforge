@@ -1,0 +1,768 @@
+# rules/core/magic_items.yaml
+#
+# SRD magic items that grant stat bonuses.
+# Loaded via SpellsLoader as category "item".
+#
+# Items are modeled as buff definitions — when
+# equipped (toggled on), their effects feed into
+# the character's BonusPools.
+#
+# Items without numeric effects are listed with
+# note-only entries for reference.
+
+spells:
+
+  # =====================================================
+  # Rings
+  # =====================================================
+
+  - name: "Ring of Protection +1"
+    category: item
+    source_book: SRD
+    note: "+1 deflection bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 1
+
+  - name: "Ring of Protection +2"
+    category: item
+    source_book: SRD
+    note: "+2 deflection bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+
+  - name: "Ring of Protection +3"
+    category: item
+    source_book: SRD
+    note: "+3 deflection bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 3
+
+  - name: "Ring of Protection +4"
+    category: item
+    source_book: SRD
+    note: "+4 deflection bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+
+  - name: "Ring of Protection +5"
+    category: item
+    source_book: SRD
+    note: "+5 deflection bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 5
+
+  # =====================================================
+  # Amulets / Necklaces
+  # =====================================================
+
+  - name: "Amulet of Natural Armor +1"
+    category: item
+    source_book: SRD
+    note: "+1 enhancement to natural armor"
+    effects:
+      - target: ac
+        bonus_type: natural_armor
+        value: 1
+
+  - name: "Amulet of Natural Armor +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to natural armor"
+    effects:
+      - target: ac
+        bonus_type: natural_armor
+        value: 2
+
+  - name: "Amulet of Natural Armor +3"
+    category: item
+    source_book: SRD
+    note: "+3 enhancement to natural armor"
+    effects:
+      - target: ac
+        bonus_type: natural_armor
+        value: 3
+
+  - name: "Amulet of Natural Armor +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to natural armor"
+    effects:
+      - target: ac
+        bonus_type: natural_armor
+        value: 4
+
+  - name: "Amulet of Natural Armor +5"
+    category: item
+    source_book: SRD
+    note: "+5 enhancement to natural armor"
+    effects:
+      - target: ac
+        bonus_type: natural_armor
+        value: 5
+
+  - name: "Amulet of Health +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to CON"
+    effects:
+      - target: con_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Amulet of Health +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to CON"
+    effects:
+      - target: con_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Amulet of Health +6"
+    category: item
+    source_book: SRD
+    note: "+6 enhancement to CON"
+    effects:
+      - target: con_score
+        bonus_type: enhancement
+        value: 6
+
+  - name: "Periapt of Wisdom +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to WIS"
+    effects:
+      - target: wis_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Periapt of Wisdom +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to WIS"
+    effects:
+      - target: wis_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Periapt of Wisdom +6"
+    category: item
+    source_book: SRD
+    note: "+6 enhancement to WIS"
+    effects:
+      - target: wis_score
+        bonus_type: enhancement
+        value: 6
+
+  # =====================================================
+  # Cloaks
+  # =====================================================
+
+  - name: "Cloak of Resistance +1"
+    category: item
+    source_book: SRD
+    note: "+1 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 1
+      - target: ref_save
+        bonus_type: resistance
+        value: 1
+      - target: will_save
+        bonus_type: resistance
+        value: 1
+
+  - name: "Cloak of Resistance +2"
+    category: item
+    source_book: SRD
+    note: "+2 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
+
+  - name: "Cloak of Resistance +3"
+    category: item
+    source_book: SRD
+    note: "+3 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 3
+      - target: ref_save
+        bonus_type: resistance
+        value: 3
+      - target: will_save
+        bonus_type: resistance
+        value: 3
+
+  - name: "Cloak of Resistance +4"
+    category: item
+    source_book: SRD
+    note: "+4 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Cloak of Resistance +5"
+    category: item
+    source_book: SRD
+    note: "+5 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 5
+      - target: ref_save
+        bonus_type: resistance
+        value: 5
+      - target: will_save
+        bonus_type: resistance
+        value: 5
+
+  - name: "Cloak of Charisma +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to CHA"
+    effects:
+      - target: cha_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Cloak of Charisma +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to CHA"
+    effects:
+      - target: cha_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Cloak of Charisma +6"
+    category: item
+    source_book: SRD
+    note: "+6 enhancement to CHA"
+    effects:
+      - target: cha_score
+        bonus_type: enhancement
+        value: 6
+
+  # =====================================================
+  # Belts / Gauntlets (STR / DEX)
+  # =====================================================
+
+  - name: "Belt of Giant Strength +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Belt of Giant Strength +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Belt of Giant Strength +6"
+    category: item
+    source_book: SRD
+    note: "+6 enhancement to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 6
+
+  - name: "Gloves of Dexterity +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to DEX"
+    effects:
+      - target: dex_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Gloves of Dexterity +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to DEX"
+    effects:
+      - target: dex_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Gloves of Dexterity +6"
+    category: item
+    source_book: SRD
+    note: "+6 enhancement to DEX"
+    effects:
+      - target: dex_score
+        bonus_type: enhancement
+        value: 6
+
+  # =====================================================
+  # Headbands (INT)
+  # =====================================================
+
+  - name: "Headband of Intellect +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to INT"
+    effects:
+      - target: int_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Headband of Intellect +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to INT"
+    effects:
+      - target: int_score
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Headband of Intellect +6"
+    category: item
+    source_book: SRD
+    note: "+6 enhancement to INT"
+    effects:
+      - target: int_score
+        bonus_type: enhancement
+        value: 6
+
+  # =====================================================
+  # Bracers
+  # =====================================================
+
+  - name: "Bracers of Armor +1"
+    category: item
+    source_book: SRD
+    note: "+1 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 1
+
+  - name: "Bracers of Armor +2"
+    category: item
+    source_book: SRD
+    note: "+2 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 2
+
+  - name: "Bracers of Armor +3"
+    category: item
+    source_book: SRD
+    note: "+3 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 3
+
+  - name: "Bracers of Armor +4"
+    category: item
+    source_book: SRD
+    note: "+4 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 4
+
+  - name: "Bracers of Armor +5"
+    category: item
+    source_book: SRD
+    note: "+5 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 5
+
+  - name: "Bracers of Armor +6"
+    category: item
+    source_book: SRD
+    note: "+6 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 6
+
+  - name: "Bracers of Armor +7"
+    category: item
+    source_book: SRD
+    note: "+7 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 7
+
+  - name: "Bracers of Armor +8"
+    category: item
+    source_book: SRD
+    note: "+8 armor bonus to AC (no max DEX)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 8
+
+  # =====================================================
+  # Boots
+  # =====================================================
+
+  - name: "Boots of Speed"
+    category: item
+    source_book: SRD
+    note: >-
+      Haste for 10 rounds/day (free
+      action to activate): +1 attack,
+      +1 dodge AC, +1 Ref, +30 ft speed
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 1
+      - target: ac
+        bonus_type: dodge
+        value: 1
+      - target: ref_save
+        bonus_type: dodge
+        value: 1
+      - target: speed
+        bonus_type: enhancement
+        value: 30
+
+  - name: "Boots of Elvenkind"
+    category: item
+    source_book: SRD
+    note: "+5 competence on Move Silently"
+    effects:
+      - target: skill_move_silently
+        bonus_type: competence
+        value: 5
+
+  - name: "Boots of Striding and Springing"
+    category: item
+    source_book: SRD
+    note: >-
+      +10 ft enhancement speed, +5
+      competence on Jump
+    effects:
+      - target: speed
+        bonus_type: enhancement
+        value: 10
+      - target: skill_jump
+        bonus_type: competence
+        value: 5
+
+  # =====================================================
+  # Miscellaneous Wondrous Items
+  # =====================================================
+
+  - name: "Ioun Stone (Dusty Rose Prism)"
+    category: item
+    source_book: SRD
+    note: "+1 insight bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: insight
+        value: 1
+
+  - name: "Cloak of Elvenkind"
+    category: item
+    source_book: SRD
+    note: "+5 competence on Hide checks"
+    effects:
+      - target: skill_hide
+        bonus_type: competence
+        value: 5
+
+  - name: "Eyes of the Eagle"
+    category: item
+    source_book: SRD
+    note: "+5 competence on Spot checks"
+    effects:
+      - target: skill_spot
+        bonus_type: competence
+        value: 5
+
+  - name: "Vest of Resistance +1"
+    category: item
+    source_book: SRD
+    note: "+1 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 1
+      - target: ref_save
+        bonus_type: resistance
+        value: 1
+      - target: will_save
+        bonus_type: resistance
+        value: 1
+
+  - name: "Vest of Resistance +2"
+    category: item
+    source_book: SRD
+    note: "+2 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
+
+  - name: "Vest of Resistance +3"
+    category: item
+    source_book: SRD
+    note: "+3 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 3
+      - target: ref_save
+        bonus_type: resistance
+        value: 3
+      - target: will_save
+        bonus_type: resistance
+        value: 3
+
+  - name: "Vest of Resistance +4"
+    category: item
+    source_book: SRD
+    note: "+4 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Vest of Resistance +5"
+    category: item
+    source_book: SRD
+    note: "+5 resistance to all saves"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 5
+      - target: ref_save
+        bonus_type: resistance
+        value: 5
+      - target: will_save
+        bonus_type: resistance
+        value: 5
+
+  - name: "Monk's Belt"
+    category: item
+    source_book: SRD
+    note: >-
+      AC bonus as 5th-level monk (+1);
+      effective monk level +5 for unarmed
+      damage if already a monk
+    effects:
+      - target: ac
+        bonus_type: untyped
+        value: 1
+
+  - name: "Bracers of Archery (Greater)"
+    category: item
+    source_book: SRD
+    note: >-
+      +2 competence on attack rolls,
+      +1 competence on damage with bows
+    effects:
+      - target: attack_ranged
+        bonus_type: competence
+        value: 2
+      - target: damage_ranged
+        bonus_type: competence
+        value: 1
+
+  - name: "Bracers of Archery (Lesser)"
+    category: item
+    source_book: SRD
+    note: >-
+      +1 competence on attack rolls
+      with bows
+    effects:
+      - target: attack_ranged
+        bonus_type: competence
+        value: 1
+
+  - name: "Circlet of Persuasion"
+    category: item
+    source_book: SRD
+    note: >-
+      +3 competence on CHA-based checks
+      (note only — applies to specific
+      skill checks)
+
+  - name: "Gauntlets of Ogre Power"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Helm of Brilliance"
+    category: item
+    source_book: SRD
+    note: >-
+      Various gem-powered spell effects;
+      +1 resistance to fire, various
+      offensive abilities (note only)
+
+  - name: "Mantle of Spell Resistance"
+    category: item
+    source_book: SRD
+    note: "SR 21"
+    effects:
+      - target: sr
+        bonus_type: untyped
+        value: 21
+
+  - name: "Manual of Bodily Health +1"
+    category: item
+    source_book: SRD
+    note: >-
+      Inherent +1 CON (permanent, read
+      once, stacks up to +5 total
+      inherent)
+
+  - name: "Manual of Gainful Exercise +1"
+    category: item
+    source_book: SRD
+    note: >-
+      Inherent +1 STR (permanent, read
+      once)
+
+  - name: "Manual of Quickness of Action +1"
+    category: item
+    source_book: SRD
+    note: >-
+      Inherent +1 DEX (permanent, read
+      once)
+
+  - name: "Tome of Clear Thought +1"
+    category: item
+    source_book: SRD
+    note: >-
+      Inherent +1 INT (permanent, read
+      once)
+
+  - name: "Tome of Leadership +1"
+    category: item
+    source_book: SRD
+    note: >-
+      Inherent +1 CHA (permanent, read
+      once)
+
+  - name: "Tome of Understanding +1"
+    category: item
+    source_book: SRD
+    note: >-
+      Inherent +1 WIS (permanent, read
+      once)
+
+  # =====================================================
+  # Weapon Enhancements (as item buffs)
+  # =====================================================
+
+  - name: "Weapon Enhancement +1"
+    category: item
+    source_book: SRD
+    note: "+1 enhancement to attack and damage"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 1
+      - target: damage_all
+        bonus_type: enhancement
+        value: 1
+
+  - name: "Weapon Enhancement +2"
+    category: item
+    source_book: SRD
+    note: "+2 enhancement to attack and damage"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 2
+      - target: damage_all
+        bonus_type: enhancement
+        value: 2
+
+  - name: "Weapon Enhancement +3"
+    category: item
+    source_book: SRD
+    note: "+3 enhancement to attack and damage"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 3
+      - target: damage_all
+        bonus_type: enhancement
+        value: 3
+
+  - name: "Weapon Enhancement +4"
+    category: item
+    source_book: SRD
+    note: "+4 enhancement to attack and damage"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 4
+      - target: damage_all
+        bonus_type: enhancement
+        value: 4
+
+  - name: "Weapon Enhancement +5"
+    category: item
+    source_book: SRD
+    note: "+5 enhancement to attack and damage"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 5
+      - target: damage_all
+        bonus_type: enhancement
+        value: 5
