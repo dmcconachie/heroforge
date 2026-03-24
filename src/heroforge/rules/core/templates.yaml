@@ -269,8 +269,8 @@ templates:
       - ability: cha
         value: 4
         bonus_type: untyped
-      # CON becomes — (undead have no CON score); modelled as 0 delta here
-      # The actual CON removal is handled by type_change to Undead
+        # CON: undead have no CON score;
+        # modelled as 0 delta here.
     natural_armor_bonus: 6
     partially_applicable: false
     special_qualities:

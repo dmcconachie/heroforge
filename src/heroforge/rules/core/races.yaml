@@ -61,7 +61,7 @@ races:
     size: Medium
     base_speed: 20
     ability_modifiers:
-      - {ability: con, value:  2, bonus_type: untyped}
+      - {ability: con, value: 2, bonus_type: untyped}
       - {ability: cha, value: -2, bonus_type: untyped}
     favored_class: Fighter
     la: 0
@@ -101,7 +101,7 @@ races:
     size: Medium
     base_speed: 30
     ability_modifiers:
-      - {ability: dex, value:  2, bonus_type: untyped}
+      - {ability: dex, value: 2, bonus_type: untyped}
       - {ability: con, value: -2, bonus_type: untyped}
     favored_class: Wizard
     la: 0
@@ -141,7 +141,7 @@ races:
     size: Small
     base_speed: 20
     ability_modifiers:
-      - {ability: con, value:  2, bonus_type: untyped}
+      - {ability: con, value: 2, bonus_type: untyped}
       - {ability: str, value: -2, bonus_type: untyped}
     favored_class: Bard
     la: 0
@@ -212,7 +212,7 @@ races:
     size: Medium
     base_speed: 30
     ability_modifiers:
-      - {ability: str, value:  2, bonus_type: untyped}
+      - {ability: str, value: 2, bonus_type: untyped}
       - {ability: int, value: -2, bonus_type: untyped}
       - {ability: cha, value: -2, bonus_type: untyped}
     favored_class: Barbarian
@@ -238,7 +238,7 @@ races:
     size: Small
     base_speed: 20
     ability_modifiers:
-      - {ability: dex, value:  2, bonus_type: untyped}
+      - {ability: dex, value: 2, bonus_type: untyped}
       - {ability: str, value: -2, bonus_type: untyped}
     favored_class: Rogue
     la: 0

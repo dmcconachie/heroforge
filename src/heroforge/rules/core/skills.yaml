@@ -33,10 +33,10 @@ skills:
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Diplomacy,     bonus: 2}
-      - {skill: Intimidate,    bonus: 2}
+      - {skill: Diplomacy, bonus: 2}
+      - {skill: Intimidate, bonus: 2}
       - {skill: Sleight of Hand, bonus: 2}
-      - {skill: Disguise,      bonus: 2}
+      - {skill: Disguise, bonus: 2}
     description: "Lie convincingly; feint in combat"
 
   - name: Climb
@@ -319,7 +319,7 @@ skills:
     armor_check: false
     synergies:
       - {skill: Knowledge (Arcana), bonus: 2}
-      - {skill: Use Magic Device,   bonus: 2}
+      - {skill: Use Magic Device, bonus: 2}
     description: "Identify spells; decipher magic writing"
 
   - name: Spot
@@ -351,8 +351,8 @@ skills:
     trained_only: true
     armor_check: true
     synergies:
-      - {skill: Balance,  bonus: 2}
-      - {skill: Jump,     bonus: 2}
+      - {skill: Balance, bonus: 2}
+      - {skill: Jump, bonus: 2}
     description: "Fall safely; move through threatened squares"
 
   - name: Use Magic Device
@@ -370,6 +370,6 @@ skills:
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Climb,         bonus: 2}
+      - {skill: Climb, bonus: 2}
       - {skill: Escape Artist, bonus: 2}
     description: "Bind, splice, and tie with rope"

@@ -22,17 +22,26 @@ from heroforge.engine.classes_races import (
     RaceRegistry,
 )
 from heroforge.engine.effects import BuffRegistry
-from heroforge.engine.equipment import (
-    ArmorRegistry,
-    WeaponRegistry,
-)
+from heroforge.engine.equipment import ArmorRegistry, WeaponRegistry
 from heroforge.engine.feats import FeatRegistry
+from heroforge.engine.prerequisites import PrerequisiteChecker
 from heroforge.engine.skills import (
     SkillRegistry,
     register_skills_on_character,
 )
 from heroforge.engine.spells import SpellCompendium
 from heroforge.engine.templates import TemplateRegistry
+from heroforge.rules.loader import (
+    ClassesLoader,
+    DomainsLoader,
+    EquipmentLoader,
+    FeatsLoader,
+    RacesLoader,
+    SkillsLoader,
+    SpellCompendiumLoader,
+    SpellsLoader,
+    TemplatesLoader,
+)
 
 RULES_DIR = Path(__file__).parent.parent / "rules"
 
@@ -84,41 +93,14 @@ class AppState:
             return
 
         rd = rules_dir or RULES_DIR
-        from heroforge.engine.prerequisites import PrerequisiteChecker
-        from heroforge.rules.loader import (
-            ClassesLoader,
-            DomainsLoader,
-            EquipmentLoader,
-            FeatsLoader,
-            RacesLoader,
-            SkillsLoader,
-            SpellCompendiumLoader,
-            SpellsLoader,
-            TemplatesLoader,
-        )
 
         prereq_checker = PrerequisiteChecker()
 
-        SpellsLoader(rd).load(
-            self.spell_registry,
-            "core/spells_phb.yaml",
-        )
-        SpellsLoader(rd).load(
-            self.spell_registry,
-            "core/conditions_srd.yaml",
-        )
-        SpellsLoader(rd).load(
-            self.spell_registry,
-            "core/spells_srd_buffs.yaml",
-        )
-        SpellsLoader(rd).load(
-            self.spell_registry,
-            "core/class_buffs.yaml",
-        )
-        SpellsLoader(rd).load(
-            self.spell_registry,
-            "core/magic_items.yaml",
-        )
+        SpellsLoader(rd).load(self.spell_registry, "core/spells_phb.yaml")
+        SpellsLoader(rd).load(self.spell_registry, "core/conditions_srd.yaml")
+        SpellsLoader(rd).load(self.spell_registry, "core/spells_srd_buffs.yaml")
+        SpellsLoader(rd).load(self.spell_registry, "core/class_buffs.yaml")
+        SpellsLoader(rd).load(self.spell_registry, "core/magic_items.yaml")
         FeatsLoader(rd).load(
             self.feat_registry,
             "core/feats_phb.yaml",
@@ -131,40 +113,22 @@ class AppState:
             prereq_checker,
             self.spell_registry,
         )
-        SkillsLoader(rd).load(
-            self.skill_registry,
-            "core/skills.yaml",
-        )
-        TemplatesLoader(rd).load(
-            self.template_registry,
-            "core/templates.yaml",
-        )
+        SkillsLoader(rd).load(self.skill_registry, "core/skills.yaml")
+        TemplatesLoader(rd).load(self.template_registry, "core/templates.yaml")
         ClassesLoader(rd).load(
             self.class_registry,
             "core/classes.yaml",
             prereq_checker=prereq_checker,
         )
-        RacesLoader(rd).load(
-            self.race_registry,
-            "core/races.yaml",
-        )
+        RacesLoader(rd).load(self.race_registry, "core/races.yaml")
 
         # Load domains
-        DomainsLoader(rd).load(
-            self.domain_registry,
-            "core/domains.yaml",
-        )
+        DomainsLoader(rd).load(self.domain_registry, "core/domains.yaml")
 
         # Load equipment
         eq_loader = EquipmentLoader(rd)
-        eq_loader.load_armor(
-            self.armor_registry,
-            "core/armor.yaml",
-        )
-        eq_loader.load_weapons(
-            self.weapon_registry,
-            "core/weapons.yaml",
-        )
+        eq_loader.load_armor(self.armor_registry, "core/armor.yaml")
+        eq_loader.load_weapons(self.weapon_registry, "core/weapons.yaml")
 
         # Load spell compendium (all spells)
         scl = SpellCompendiumLoader(rd)

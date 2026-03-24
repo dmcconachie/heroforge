@@ -288,13 +288,6 @@ stats:
     sheet: 1
 
   # =========================================================================
-  # Grapple modifier
-  # Registered by Character._bootstrap_stat_graph() as the "grapple" node.
-  # grapple = BAB + STR mod + size grapple modifier
-  # (size grapple uses opposite sign from attack size mod)
-  #=========================================================================
-
-  # =========================================================================
   # Skill check totals
   # Individual skill nodes are registered dynamically by skills.py.
   # They follow the pattern:
