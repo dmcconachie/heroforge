@@ -65,6 +65,27 @@ classes:
       - level: 1
         feature: rage
         description: "+4 STR/CON, +2 Will, -2 AC; 1/day"
+        buff_name: "Barbarian Rage"
+        note: >-
+          +4 STR, +4 CON, +2 morale on Will
+          saves, -2 AC; cannot use skills
+          requiring patience/concentration
+        mutually_exclusive_with:
+          - "Greater Rage"
+          - "Mighty Rage"
+        effects:
+          - target: str_score
+            bonus_type: morale
+            value: 4
+          - target: con_score
+            bonus_type: morale
+            value: 4
+          - target: will_save
+            bonus_type: morale
+            value: 2
+          - target: ac
+            bonus_type: untyped
+            value: -2
       - level: 2
         feature: uncanny_dodge
         description: "Retain DEX bonus to AC when flat-footed"
@@ -88,6 +109,26 @@ classes:
       - level: 11
         feature: greater_rage
         description: "+6 STR/CON, +3 Will, -2 AC"
+        buff_name: "Greater Rage"
+        note: >-
+          +6 STR, +6 CON, +3 morale on Will
+          saves, -2 AC
+        mutually_exclusive_with:
+          - "Barbarian Rage"
+          - "Mighty Rage"
+        effects:
+          - target: str_score
+            bonus_type: morale
+            value: 6
+          - target: con_score
+            bonus_type: morale
+            value: 6
+          - target: will_save
+            bonus_type: morale
+            value: 3
+          - target: ac
+            bonus_type: untyped
+            value: -2
       - level: 12
         feature: trap_sense_4
         description: "+4 Reflex and AC vs traps"
@@ -112,6 +153,26 @@ classes:
       - level: 20
         feature: mighty_rage
         description: "+8 STR/CON, +4 Will, -2 AC"
+        buff_name: "Mighty Rage"
+        note: >-
+          +8 STR, +8 CON, +4 morale on Will
+          saves, -2 AC
+        mutually_exclusive_with:
+          - "Barbarian Rage"
+          - "Greater Rage"
+        effects:
+          - target: str_score
+            bonus_type: morale
+            value: 8
+          - target: con_score
+            bonus_type: morale
+            value: 8
+          - target: will_save
+            bonus_type: morale
+            value: 4
+          - target: ac
+            bonus_type: untyped
+            value: -2
 
   # =========================================================================
   # Bard
@@ -172,6 +233,24 @@ classes:
       - level: 1
         feature: inspire_courage_1
         description: "+1 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +1"
+        note: >-
+          +1 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +2"
+          - "Inspire Courage +3"
+          - "Inspire Courage +4"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 1
+          - target: damage_all
+            bonus_type: morale
+            value: 1
+          - target: will_save
+            bonus_type: morale
+            value: 1
       - level: 5
         feature: inspire_competence
         description: "+2 competence bonus on skill checks"
@@ -181,15 +260,65 @@ classes:
       - level: 8
         feature: inspire_courage_2
         description: "+2 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +2"
+        note: >-
+          +2 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +1"
+          - "Inspire Courage +3"
+          - "Inspire Courage +4"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 2
+          - target: damage_all
+            bonus_type: morale
+            value: 2
+          - target: will_save
+            bonus_type: morale
+            value: 2
       - level: 9
         feature: inspire_greatness
         description: "+2 HD, +2 attack, +1 Fort"
+        buff_name: "Inspire Greatness"
+        note: >-
+          +2 bonus HD (2d10), +2 competence
+          on attack, +1 competence on Fort
+        effects:
+          - target: attack_all
+            bonus_type: competence
+            value: 2
+          - target: fort_save
+            bonus_type: competence
+            value: 1
+          - target: hp_bonus
+            bonus_type: untyped
+            value: 20
       - level: 12
         feature: song_of_freedom
         description: "Break enchantment via music"
       - level: 14
         feature: inspire_courage_3
         description: "+3 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +3"
+        note: >-
+          +3 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +1"
+          - "Inspire Courage +2"
+          - "Inspire Courage +4"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 3
+          - target: damage_all
+            bonus_type: morale
+            value: 3
+          - target: will_save
+            bonus_type: morale
+            value: 3
       - level: 15
         feature: inspire_heroics
         description: "+4 AC and saves for one creature"
@@ -199,6 +328,24 @@ classes:
       - level: 20
         feature: inspire_courage_4
         description: "+4 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +4"
+        note: >-
+          +4 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +1"
+          - "Inspire Courage +2"
+          - "Inspire Courage +3"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 4
+          - target: damage_all
+            bonus_type: morale
+            value: 4
+          - target: will_save
+            bonus_type: morale
+            value: 4
 
   # =========================================================================
   # Cleric
@@ -394,6 +541,15 @@ classes:
       - level: 1
         feature: flurry_of_blows
         description: "Extra attack with -2 to all attacks"
+        buff_name: "Flurry of Blows"
+        note: >-
+          Extra attack at highest BAB; -2
+          penalty on all attacks during flurry
+          (removed at monk level 5)
+        effects:
+          - target: attack_all
+            bonus_type: untyped
+            value: -2
       - level: 1
         feature: unarmed_strike
         description: "Unarmed deals 1d6; increases per level"
@@ -505,7 +661,19 @@ classes:
         description: "Detect evil at will"
       - level: 1
         feature: smite_evil_1
-        description: "Smite evil 1/day (+CHA to attack, +level to damage)"
+        description: "Smite evil 1/day"
+        buff_name: "Smite Evil"
+        note: >-
+          Add CHA mod to attack roll, paladin
+          level to damage against evil target
+          (one attack)
+        effects:
+          - target: attack_all
+            bonus_type: untyped
+            value: "cha_mod"
+          - target: damage_all
+            bonus_type: untyped
+            value: "character_level"
       - level: 2
         feature: divine_grace
         description: "+CHA modifier to all saves"
@@ -599,7 +767,19 @@ classes:
     class_features:
       - level: 1
         feature: favored_enemy_1
-        description: "Favored enemy 1: +2 attack and damage vs type"
+        description: "Favored enemy 1: +2 vs type"
+        buff_name: "Favored Enemy +2"
+        note: >-
+          +2 on Bluff, Listen, Sense Motive,
+          Spot, Survival checks and weapon
+          damage against favored enemy type
+        mutually_exclusive_with:
+          - "Favored Enemy +4"
+          - "Favored Enemy +6"
+        effects:
+          - target: damage_all
+            bonus_type: untyped
+            value: 2
       - level: 1
         feature: track
         description: "Track feat for free"
@@ -617,7 +797,18 @@ classes:
         description: "Special animal companion"
       - level: 5
         feature: favored_enemy_2
-        description: "Favored enemy 2; +4 to first choice"
+        description: "Favored enemy 2; +4 vs type"
+        buff_name: "Favored Enemy +4"
+        note: >-
+          +4 on checks and damage against
+          favored enemy type
+        mutually_exclusive_with:
+          - "Favored Enemy +2"
+          - "Favored Enemy +6"
+        effects:
+          - target: damage_all
+            bonus_type: untyped
+            value: 4
       - level: 6
         feature: improved_combat_style
         description: "Manyshot or Improved Two-Weapon Fighting"
@@ -632,7 +823,18 @@ classes:
         description: "No damage on successful Reflex save"
       - level: 10
         feature: favored_enemy_3
-        description: "Favored enemy 3; +6/+4 to earlier choices"
+        description: "Favored enemy 3; +6 vs type"
+        buff_name: "Favored Enemy +6"
+        note: >-
+          +6 on checks and damage against
+          favored enemy type
+        mutually_exclusive_with:
+          - "Favored Enemy +2"
+          - "Favored Enemy +4"
+        effects:
+          - target: damage_all
+            bonus_type: untyped
+            value: 6
       - level: 11
         feature: combat_style_mastery
         description: "Improved Precise Shot or Greater Two-Weapon Fighting"

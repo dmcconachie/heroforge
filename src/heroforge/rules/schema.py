@@ -167,10 +167,16 @@ def _structure_class_feature(val: object, _: type) -> ClassFeature:
         return val
     if isinstance(val, dict):
         _forbid_extra(val, ClassFeature, "class_feature")
+        me_raw = val.get("mutually_exclusive_with", [])
         return ClassFeature(
             level=val["level"],
             feature=val["feature"],
             description=val.get("description", ""),
+            buff_name=val.get("buff_name", ""),
+            effects=tuple(val.get("effects", [])),
+            note=val.get("note", ""),
+            requires_caster_level=bool(val.get("requires_caster_level", False)),
+            mutually_exclusive_with=tuple(me_raw),
         )
     msg = f"Cannot structure {val!r} as ClassFeature"
     raise cattrs.ClassValidationError(msg, [], ClassFeature)

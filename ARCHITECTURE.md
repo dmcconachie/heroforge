@@ -71,7 +71,6 @@ src/heroforge/
 │       ├── spells_srd_7_9.yaml    #   across 3 files)
 │       ├── spell_lists.yaml  # Class spell lists
 │       ├── conditions_srd.yaml  # 20 conditions
-│       ├── class_buffs.yaml  # Class feature buffs
 │       ├── templates.yaml    # 12 creature templates
 │       ├── domains.yaml      # 22 cleric domains
 │       ├── armor.yaml        # 18 armor/shields

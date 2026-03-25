@@ -8,6 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from heroforge.engine.character import Character
+from heroforge.engine.classes_races import ClassRegistry
 from heroforge.engine.effects import (
     BuffRegistry,
     apply_buff,
@@ -16,14 +17,19 @@ from heroforge.engine.effects import (
 from heroforge.engine.resources import (
     ResourceTracker,
 )
-from heroforge.rules.loader import SpellsLoader
+from heroforge.rules.loader import ClassesLoader
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
 
 def _load_class_buffs() -> BuffRegistry:
     reg = BuffRegistry()
-    SpellsLoader(RULES_DIR).load(reg, "core/class_buffs.yaml")
+    cr = ClassRegistry()
+    ClassesLoader(RULES_DIR).load(
+        cr,
+        "core/classes.yaml",
+        buff_registry=reg,
+    )
     return reg
 
 

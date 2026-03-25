@@ -50,6 +50,7 @@ if TYPE_CHECKING:
 
     from heroforge.engine.character import Character
     from heroforge.engine.classes_races import (
+        ClassDefinition,
         ClassRegistry,
         DomainRegistry,
         RaceRegistry,
@@ -979,6 +980,7 @@ class ClassesLoader:
         relative_path: str,
         overwrite: bool = False,
         prereq_checker: PrerequisiteChecker | None = None,
+        buff_registry: BuffRegistry | None = None,
     ) -> list[str]:
         from heroforge.engine.classes_races import (
             ClassDefinition,
@@ -1009,6 +1011,8 @@ class ClassesLoader:
                 registered.append(name)
             except Exception as e:
                 raise LoaderError(f"Failed to load class {name!r}: {e}") from e
+            if buff_registry is not None:
+                self._register_feature_buffs(defn, buff_registry)
 
         # Prestige classes
         for decl in data.get("prestige_classes", []):
@@ -1034,8 +1038,38 @@ class ClassesLoader:
                     entry_prereq,
                     ongoing_prereq,
                 )
+            if buff_registry is not None:
+                self._register_feature_buffs(defn, buff_registry)
 
         return registered
+
+    @staticmethod
+    def _register_feature_buffs(
+        defn: "ClassDefinition",
+        buff_registry: "BuffRegistry",
+    ) -> None:
+        """Register BuffDefinitions for features with effects."""
+        from heroforge.engine.effects import (
+            BuffCategory,
+            build_buff_from_effects,
+        )
+
+        for feat in defn.class_features:
+            if not feat.effects:
+                continue
+            buff_name = feat.buff_name or (f"{defn.name} {feat.feature}")
+            buff = build_buff_from_effects(
+                name=buff_name,
+                category=BuffCategory.CLASS,
+                effects_raw=list(feat.effects),
+                source_book=defn.source_book,
+                note=feat.note,
+                requires_caster_level=(feat.requires_caster_level),
+                mutually_exclusive_with=list(feat.mutually_exclusive_with),
+            )
+            if buff is not None:
+                with contextlib.suppress(ValueError):
+                    buff_registry.register(buff)
 
     def _build_prereq(self, decl: dict | None) -> "Prerequisite | None":
         if decl is None:

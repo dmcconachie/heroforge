@@ -108,6 +108,11 @@ class ClassFeature:
     level: int
     feature: str  # machine key (e.g. "sneak_attack")
     description: str  # human-readable display text
+    buff_name: str = ""  # BuffRegistry key
+    effects: tuple[dict, ...] = ()  # raw effect dicts
+    note: str = ""
+    requires_caster_level: bool = False
+    mutually_exclusive_with: tuple[str, ...] = ()
 
 
 # ---------------------------------------------------------------------------

@@ -118,10 +118,6 @@ class AppState:
             self.buff_registry,
             "core/spells_srd_buffs.yaml",
         )
-        SpellsLoader(rd).load(
-            self.buff_registry,
-            "core/class_buffs.yaml",
-        )
         MagicItemLoader(rd).load(
             self.magic_item_registry,
             self.buff_registry,
@@ -145,6 +141,7 @@ class AppState:
             self.class_registry,
             "core/classes.yaml",
             prereq_checker=prereq_checker,
+            buff_registry=self.buff_registry,
         )
         RacesLoader(rd).load(self.race_registry, "core/races.yaml")
 
