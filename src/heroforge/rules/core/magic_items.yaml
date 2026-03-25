@@ -1,7 +1,7 @@
 # rules/core/magic_items.yaml
 #
 # SRD magic items that grant stat bonuses.
-# Loaded via SpellsLoader as category "item".
+# Loaded via MagicItemLoader.
 #
 # Items are modeled as buff definitions — when
 # equipped (toggled on), their effects feed into
@@ -10,15 +10,14 @@
 # Items without numeric effects are listed with
 # note-only entries for reference.
 
-spells:
+magic_items:
 
   # ==========================================================================
   # Rings
   # ==========================================================================
 
   - name: "Ring of Protection +1"
-    category: item
-    source_book: SRD
+
     note: "+1 deflection bonus to AC"
     effects:
       - target: ac
@@ -26,8 +25,7 @@ spells:
         value: 1
 
   - name: "Ring of Protection +2"
-    category: item
-    source_book: SRD
+
     note: "+2 deflection bonus to AC"
     effects:
       - target: ac
@@ -35,8 +33,7 @@ spells:
         value: 2
 
   - name: "Ring of Protection +3"
-    category: item
-    source_book: SRD
+
     note: "+3 deflection bonus to AC"
     effects:
       - target: ac
@@ -44,8 +41,7 @@ spells:
         value: 3
 
   - name: "Ring of Protection +4"
-    category: item
-    source_book: SRD
+
     note: "+4 deflection bonus to AC"
     effects:
       - target: ac
@@ -53,8 +49,7 @@ spells:
         value: 4
 
   - name: "Ring of Protection +5"
-    category: item
-    source_book: SRD
+
     note: "+5 deflection bonus to AC"
     effects:
       - target: ac
@@ -66,8 +61,7 @@ spells:
   # ==========================================================================
 
   - name: "Amulet of Natural Armor +1"
-    category: item
-    source_book: SRD
+
     note: "+1 enhancement to natural armor"
     effects:
       - target: ac
@@ -75,8 +69,7 @@ spells:
         value: 1
 
   - name: "Amulet of Natural Armor +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to natural armor"
     effects:
       - target: ac
@@ -84,8 +77,7 @@ spells:
         value: 2
 
   - name: "Amulet of Natural Armor +3"
-    category: item
-    source_book: SRD
+
     note: "+3 enhancement to natural armor"
     effects:
       - target: ac
@@ -93,8 +85,7 @@ spells:
         value: 3
 
   - name: "Amulet of Natural Armor +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to natural armor"
     effects:
       - target: ac
@@ -102,8 +93,7 @@ spells:
         value: 4
 
   - name: "Amulet of Natural Armor +5"
-    category: item
-    source_book: SRD
+
     note: "+5 enhancement to natural armor"
     effects:
       - target: ac
@@ -111,8 +101,7 @@ spells:
         value: 5
 
   - name: "Amulet of Health +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to CON"
     effects:
       - target: con_score
@@ -120,8 +109,7 @@ spells:
         value: 2
 
   - name: "Amulet of Health +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to CON"
     effects:
       - target: con_score
@@ -129,8 +117,7 @@ spells:
         value: 4
 
   - name: "Amulet of Health +6"
-    category: item
-    source_book: SRD
+
     note: "+6 enhancement to CON"
     effects:
       - target: con_score
@@ -138,8 +125,7 @@ spells:
         value: 6
 
   - name: "Periapt of Wisdom +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to WIS"
     effects:
       - target: wis_score
@@ -147,8 +133,7 @@ spells:
         value: 2
 
   - name: "Periapt of Wisdom +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to WIS"
     effects:
       - target: wis_score
@@ -156,8 +141,7 @@ spells:
         value: 4
 
   - name: "Periapt of Wisdom +6"
-    category: item
-    source_book: SRD
+
     note: "+6 enhancement to WIS"
     effects:
       - target: wis_score
@@ -169,8 +153,7 @@ spells:
   # ==========================================================================
 
   - name: "Cloak of Resistance +1"
-    category: item
-    source_book: SRD
+
     note: "+1 resistance to all saves"
     effects:
       - target: fort_save
@@ -184,8 +167,7 @@ spells:
         value: 1
 
   - name: "Cloak of Resistance +2"
-    category: item
-    source_book: SRD
+
     note: "+2 resistance to all saves"
     effects:
       - target: fort_save
@@ -199,8 +181,7 @@ spells:
         value: 2
 
   - name: "Cloak of Resistance +3"
-    category: item
-    source_book: SRD
+
     note: "+3 resistance to all saves"
     effects:
       - target: fort_save
@@ -214,8 +195,7 @@ spells:
         value: 3
 
   - name: "Cloak of Resistance +4"
-    category: item
-    source_book: SRD
+
     note: "+4 resistance to all saves"
     effects:
       - target: fort_save
@@ -229,8 +209,7 @@ spells:
         value: 4
 
   - name: "Cloak of Resistance +5"
-    category: item
-    source_book: SRD
+
     note: "+5 resistance to all saves"
     effects:
       - target: fort_save
@@ -244,8 +223,7 @@ spells:
         value: 5
 
   - name: "Cloak of Charisma +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to CHA"
     effects:
       - target: cha_score
@@ -253,8 +231,7 @@ spells:
         value: 2
 
   - name: "Cloak of Charisma +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to CHA"
     effects:
       - target: cha_score
@@ -262,8 +239,7 @@ spells:
         value: 4
 
   - name: "Cloak of Charisma +6"
-    category: item
-    source_book: SRD
+
     note: "+6 enhancement to CHA"
     effects:
       - target: cha_score
@@ -275,8 +251,7 @@ spells:
   # ==========================================================================
 
   - name: "Belt of Giant Strength +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to STR"
     effects:
       - target: str_score
@@ -284,8 +259,7 @@ spells:
         value: 2
 
   - name: "Belt of Giant Strength +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to STR"
     effects:
       - target: str_score
@@ -293,8 +267,7 @@ spells:
         value: 4
 
   - name: "Belt of Giant Strength +6"
-    category: item
-    source_book: SRD
+
     note: "+6 enhancement to STR"
     effects:
       - target: str_score
@@ -302,8 +275,7 @@ spells:
         value: 6
 
   - name: "Gloves of Dexterity +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to DEX"
     effects:
       - target: dex_score
@@ -311,8 +283,7 @@ spells:
         value: 2
 
   - name: "Gloves of Dexterity +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to DEX"
     effects:
       - target: dex_score
@@ -320,8 +291,7 @@ spells:
         value: 4
 
   - name: "Gloves of Dexterity +6"
-    category: item
-    source_book: SRD
+
     note: "+6 enhancement to DEX"
     effects:
       - target: dex_score
@@ -333,8 +303,7 @@ spells:
   # ==========================================================================
 
   - name: "Headband of Intellect +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to INT"
     effects:
       - target: int_score
@@ -342,8 +311,7 @@ spells:
         value: 2
 
   - name: "Headband of Intellect +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to INT"
     effects:
       - target: int_score
@@ -351,8 +319,7 @@ spells:
         value: 4
 
   - name: "Headband of Intellect +6"
-    category: item
-    source_book: SRD
+
     note: "+6 enhancement to INT"
     effects:
       - target: int_score
@@ -364,8 +331,7 @@ spells:
   # ==========================================================================
 
   - name: "Bracers of Armor +1"
-    category: item
-    source_book: SRD
+
     note: "+1 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -373,8 +339,7 @@ spells:
         value: 1
 
   - name: "Bracers of Armor +2"
-    category: item
-    source_book: SRD
+
     note: "+2 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -382,8 +347,7 @@ spells:
         value: 2
 
   - name: "Bracers of Armor +3"
-    category: item
-    source_book: SRD
+
     note: "+3 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -391,8 +355,7 @@ spells:
         value: 3
 
   - name: "Bracers of Armor +4"
-    category: item
-    source_book: SRD
+
     note: "+4 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -400,8 +363,7 @@ spells:
         value: 4
 
   - name: "Bracers of Armor +5"
-    category: item
-    source_book: SRD
+
     note: "+5 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -409,8 +371,7 @@ spells:
         value: 5
 
   - name: "Bracers of Armor +6"
-    category: item
-    source_book: SRD
+
     note: "+6 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -418,8 +379,7 @@ spells:
         value: 6
 
   - name: "Bracers of Armor +7"
-    category: item
-    source_book: SRD
+
     note: "+7 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -427,8 +387,7 @@ spells:
         value: 7
 
   - name: "Bracers of Armor +8"
-    category: item
-    source_book: SRD
+
     note: "+8 armor bonus to AC (no max DEX)"
     effects:
       - target: ac
@@ -440,8 +399,7 @@ spells:
   # ==========================================================================
 
   - name: "Boots of Speed"
-    category: item
-    source_book: SRD
+
     note: >-
       Haste for 10 rounds/day (free
       action to activate): +1 attack,
@@ -461,8 +419,7 @@ spells:
         value: 30
 
   - name: "Boots of Elvenkind"
-    category: item
-    source_book: SRD
+
     note: "+5 competence on Move Silently"
     effects:
       - target: skill_move_silently
@@ -470,8 +427,7 @@ spells:
         value: 5
 
   - name: "Boots of Striding and Springing"
-    category: item
-    source_book: SRD
+
     note: >-
       +10 ft enhancement speed, +5
       competence on Jump
@@ -488,8 +444,7 @@ spells:
   # ==========================================================================
 
   - name: "Ioun Stone (Dusty Rose Prism)"
-    category: item
-    source_book: SRD
+
     note: "+1 insight bonus to AC"
     effects:
       - target: ac
@@ -497,8 +452,7 @@ spells:
         value: 1
 
   - name: "Cloak of Elvenkind"
-    category: item
-    source_book: SRD
+
     note: "+5 competence on Hide checks"
     effects:
       - target: skill_hide
@@ -506,8 +460,7 @@ spells:
         value: 5
 
   - name: "Eyes of the Eagle"
-    category: item
-    source_book: SRD
+
     note: "+5 competence on Spot checks"
     effects:
       - target: skill_spot
@@ -515,8 +468,7 @@ spells:
         value: 5
 
   - name: "Vest of Resistance +1"
-    category: item
-    source_book: SRD
+
     note: "+1 resistance to all saves"
     effects:
       - target: fort_save
@@ -530,8 +482,7 @@ spells:
         value: 1
 
   - name: "Vest of Resistance +2"
-    category: item
-    source_book: SRD
+
     note: "+2 resistance to all saves"
     effects:
       - target: fort_save
@@ -545,8 +496,7 @@ spells:
         value: 2
 
   - name: "Vest of Resistance +3"
-    category: item
-    source_book: SRD
+
     note: "+3 resistance to all saves"
     effects:
       - target: fort_save
@@ -560,8 +510,7 @@ spells:
         value: 3
 
   - name: "Vest of Resistance +4"
-    category: item
-    source_book: SRD
+
     note: "+4 resistance to all saves"
     effects:
       - target: fort_save
@@ -575,8 +524,7 @@ spells:
         value: 4
 
   - name: "Vest of Resistance +5"
-    category: item
-    source_book: SRD
+
     note: "+5 resistance to all saves"
     effects:
       - target: fort_save
@@ -590,8 +538,7 @@ spells:
         value: 5
 
   - name: "Monk's Belt"
-    category: item
-    source_book: SRD
+
     note: >-
       AC bonus as 5th-level monk (+1);
       effective monk level +5 for unarmed
@@ -602,8 +549,7 @@ spells:
         value: 1
 
   - name: "Bracers of Archery (Greater)"
-    category: item
-    source_book: SRD
+
     note: >-
       +2 competence on attack rolls,
       +1 competence on damage with bows
@@ -616,8 +562,7 @@ spells:
         value: 1
 
   - name: "Bracers of Archery (Lesser)"
-    category: item
-    source_book: SRD
+
     note: >-
       +1 competence on attack rolls
       with bows
@@ -627,16 +572,14 @@ spells:
         value: 1
 
   - name: "Circlet of Persuasion"
-    category: item
-    source_book: SRD
+
     note: >-
       +3 competence on CHA-based checks
       (note only — applies to specific
       skill checks)
 
   - name: "Gauntlets of Ogre Power"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to STR"
     effects:
       - target: str_score
@@ -644,16 +587,14 @@ spells:
         value: 2
 
   - name: "Helm of Brilliance"
-    category: item
-    source_book: SRD
+
     note: >-
       Various gem-powered spell effects;
       +1 resistance to fire, various
       offensive abilities (note only)
 
   - name: "Mantle of Spell Resistance"
-    category: item
-    source_book: SRD
+
     note: "SR 21"
     effects:
       - target: sr
@@ -661,44 +602,38 @@ spells:
         value: 21
 
   - name: "Manual of Bodily Health +1"
-    category: item
-    source_book: SRD
+
     note: >-
       Inherent +1 CON (permanent, read
       once, stacks up to +5 total
       inherent)
 
   - name: "Manual of Gainful Exercise +1"
-    category: item
-    source_book: SRD
+
     note: >-
       Inherent +1 STR (permanent, read
       once)
 
   - name: "Manual of Quickness of Action +1"
-    category: item
-    source_book: SRD
+
     note: >-
       Inherent +1 DEX (permanent, read
       once)
 
   - name: "Tome of Clear Thought +1"
-    category: item
-    source_book: SRD
+
     note: >-
       Inherent +1 INT (permanent, read
       once)
 
   - name: "Tome of Leadership +1"
-    category: item
-    source_book: SRD
+
     note: >-
       Inherent +1 CHA (permanent, read
       once)
 
   - name: "Tome of Understanding +1"
-    category: item
-    source_book: SRD
+
     note: >-
       Inherent +1 WIS (permanent, read
       once)
@@ -708,8 +643,7 @@ spells:
   # ==========================================================================
 
   - name: "Weapon Enhancement +1"
-    category: item
-    source_book: SRD
+
     note: "+1 enhancement to attack and damage"
     effects:
       - target: attack_all
@@ -720,8 +654,7 @@ spells:
         value: 1
 
   - name: "Weapon Enhancement +2"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to attack and damage"
     effects:
       - target: attack_all
@@ -732,8 +665,7 @@ spells:
         value: 2
 
   - name: "Weapon Enhancement +3"
-    category: item
-    source_book: SRD
+
     note: "+3 enhancement to attack and damage"
     effects:
       - target: attack_all
@@ -744,8 +676,7 @@ spells:
         value: 3
 
   - name: "Weapon Enhancement +4"
-    category: item
-    source_book: SRD
+
     note: "+4 enhancement to attack and damage"
     effects:
       - target: attack_all
@@ -756,8 +687,7 @@ spells:
         value: 4
 
   - name: "Weapon Enhancement +5"
-    category: item
-    source_book: SRD
+
     note: "+5 enhancement to attack and damage"
     effects:
       - target: attack_all
@@ -772,8 +702,7 @@ spells:
   # ==========================================================================
 
   - name: "Ring of Climbing"
-    category: item
-    source_book: SRD
+
     note: "+5 competence on Climb checks"
     effects:
       - target: skill_climb
@@ -781,8 +710,7 @@ spells:
         value: 5
 
   - name: "Ring of Climbing, Improved"
-    category: item
-    source_book: SRD
+
     note: "+10 competence on Climb checks"
     effects:
       - target: skill_climb
@@ -790,8 +718,7 @@ spells:
         value: 10
 
   - name: "Ring of Jumping"
-    category: item
-    source_book: SRD
+
     note: "+5 competence on Jump checks"
     effects:
       - target: skill_jump
@@ -799,8 +726,7 @@ spells:
         value: 5
 
   - name: "Ring of Jumping, Improved"
-    category: item
-    source_book: SRD
+
     note: "+10 competence on Jump checks"
     effects:
       - target: skill_jump
@@ -808,8 +734,7 @@ spells:
         value: 10
 
   - name: "Ring of Swimming"
-    category: item
-    source_book: SRD
+
     note: "+5 competence on Swim checks"
     effects:
       - target: skill_swim
@@ -817,8 +742,7 @@ spells:
         value: 5
 
   - name: "Ring of Swimming, Improved"
-    category: item
-    source_book: SRD
+
     note: "+10 competence on Swim checks"
     effects:
       - target: skill_swim
@@ -826,8 +750,7 @@ spells:
         value: 10
 
   - name: "Ring of Chameleon Power"
-    category: item
-    source_book: SRD
+
     note: "+10 competence on Hide checks"
     effects:
       - target: skill_hide
@@ -835,8 +758,7 @@ spells:
         value: 10
 
   - name: "Ring of Force Shield"
-    category: item
-    source_book: SRD
+
     note: "+2 shield bonus to AC (no penalties)"
     effects:
       - target: ac
@@ -848,8 +770,7 @@ spells:
   # ==========================================================================
 
   - name: "Ioun Stone (Deep Red Sphere)"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to DEX"
     effects:
       - target: dex_score
@@ -857,8 +778,7 @@ spells:
         value: 2
 
   - name: "Ioun Stone (Incandescent Blue)"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to WIS"
     effects:
       - target: wis_score
@@ -866,8 +786,7 @@ spells:
         value: 2
 
   - name: "Ioun Stone (Pale Blue Rhomboid)"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to STR"
     effects:
       - target: str_score
@@ -875,8 +794,7 @@ spells:
         value: 2
 
   - name: "Ioun Stone (Pink and Green)"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to CHA"
     effects:
       - target: cha_score
@@ -884,8 +802,7 @@ spells:
         value: 2
 
   - name: "Ioun Stone (Pink Rhomboid)"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to CON"
     effects:
       - target: con_score
@@ -893,8 +810,7 @@ spells:
         value: 2
 
   - name: "Ioun Stone (Scarlet and Blue)"
-    category: item
-    source_book: SRD
+
     note: "+2 enhancement to INT"
     effects:
       - target: int_score
@@ -902,8 +818,7 @@ spells:
         value: 2
 
   - name: "Ioun Stone (Pale Green Prism)"
-    category: item
-    source_book: SRD
+
     note: >-
       +1 competence to attack, saves,
       skill checks, and ability checks
@@ -926,8 +841,7 @@ spells:
   # ==========================================================================
 
   - name: "Stone of Good Luck (Luckstone)"
-    category: item
-    source_book: SRD
+
     note: >-
       +1 luck bonus on saves, ability
       checks, and skill checks
@@ -943,8 +857,7 @@ spells:
         value: 1
 
   - name: "Goggles of Minute Seeing"
-    category: item
-    source_book: SRD
+
     note: "+5 competence on Search checks"
     effects:
       - target: skill_search
@@ -952,8 +865,7 @@ spells:
         value: 5
 
   - name: "Vest of Escape"
-    category: item
-    source_book: SRD
+
     note: >-
       +6 competence on Escape Artist,
       +4 competence on Open Lock
@@ -966,8 +878,7 @@ spells:
         value: 4
 
   - name: "Amulet of Mighty Fists +1"
-    category: item
-    source_book: SRD
+
     note: >-
       +1 enhancement to unarmed and
       natural weapon attacks and damage
@@ -980,8 +891,7 @@ spells:
         value: 1
 
   - name: "Amulet of Mighty Fists +2"
-    category: item
-    source_book: SRD
+
     note: >-
       +2 enhancement to unarmed and
       natural weapon attacks and damage
@@ -994,8 +904,7 @@ spells:
         value: 2
 
   - name: "Amulet of Mighty Fists +3"
-    category: item
-    source_book: SRD
+
     note: >-
       +3 enhancement to unarmed and
       natural weapon attacks and damage
@@ -1008,8 +917,7 @@ spells:
         value: 3
 
   - name: "Amulet of Mighty Fists +4"
-    category: item
-    source_book: SRD
+
     note: >-
       +4 enhancement to unarmed and
       natural weapon attacks and damage
@@ -1022,8 +930,7 @@ spells:
         value: 4
 
   - name: "Amulet of Mighty Fists +5"
-    category: item
-    source_book: SRD
+
     note: >-
       +5 enhancement to unarmed and
       natural weapon attacks and damage
@@ -1036,8 +943,7 @@ spells:
         value: 5
 
   - name: "Belt of Dwarvenkind"
-    category: item
-    source_book: SRD
+
     note: >-
       +2 enhancement to CON; darkvision
       60 ft; dwarven language; +2 CHA
@@ -1048,8 +954,7 @@ spells:
         value: 2
 
   - name: "Robe of the Archmagi"
-    category: item
-    source_book: SRD
+
     note: >-
       +5 armor AC, SR 18, +4 resistance
       saves (requires matching alignment)
@@ -1071,8 +976,7 @@ spells:
         value: 18
 
   - name: "Scarab of Protection"
-    category: item
-    source_book: SRD
+
     note: >-
       +3 resistance to saves; absorbs 12
       energy drain or death effects
@@ -1088,8 +992,7 @@ spells:
         value: 3
 
   - name: "Candle of Invocation"
-    category: item
-    source_book: SRD
+
     note: >-
       +2 morale to attack, saves, and
       skill checks for same-alignment
@@ -1109,8 +1012,7 @@ spells:
         value: 2
 
   - name: "Robe of Stars"
-    category: item
-    source_book: SRD
+
     note: "+4 deflection to AC"
     effects:
       - target: ac

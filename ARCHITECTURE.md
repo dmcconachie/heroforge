@@ -42,12 +42,15 @@ src/heroforge/
 │   │                       #   (metadata for all spells)
 │   ├── conditions.py       # ConditionDefinition,
 │   │                       #   ConditionRegistry
+│   ├── magic_items.py      # MagicItemDefinition,
+│   │                       #   MagicItemRegistry
 │   └── resources.py        # ResourceTracker (uses/day)
 │
 ├── rules/
 │   ├── schema.py           # cattrs Converter + hooks
 │   ├── loader.py           # StatsLoader, SpellsLoader,
 │   │                       #   ConditionLoader,
+│   │                       #   MagicItemLoader,
 │   │                       #   FeatsLoader, ClassesLoader,
 │   │                       #   RacesLoader, SkillsLoader,
 │   │                       #   TemplatesLoader,
@@ -380,6 +383,16 @@ also registers a `BuffDefinition` in the `BuffRegistry`
 via `build_buff_from_effects()` so the buff-toggle UI
 keeps working.
 
+Magic items have their own domain:
+`MagicItemDefinition` and `MagicItemRegistry` live in
+`engine/magic_items.py`. The `MagicItemLoader` reads
+`magic_items.yaml` (which uses a `magic_items:`
+top-level key), structures each entry as a
+`MagicItemDefinition`, and also registers a
+`BuffDefinition` in the `BuffRegistry` via
+`build_buff_from_effects()` so the buff-toggle UI
+keeps working.
+
 YAML files under `rules/core/` contain full SRD data:
 - 16 base classes (11 PHB + 5 NPC) + 15 prestige classes
 - 7 races, 36 skills
@@ -420,6 +433,7 @@ Single object holding all registries and the active
 
 Registries: `buff_registry` (BuffRegistry),
 `condition_registry` (ConditionRegistry),
+`magic_item_registry` (MagicItemRegistry),
 `spell_compendium` (SpellCompendium),
 `feat_registry` (FeatRegistry),
 `armor_registry` (ArmorRegistry),

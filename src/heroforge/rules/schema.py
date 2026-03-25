@@ -39,6 +39,7 @@ from heroforge.engine.equipment import (
     WeaponDefinition,
 )
 from heroforge.engine.feats import FeatKind
+from heroforge.engine.magic_items import MagicItemDefinition
 from heroforge.engine.skills import SkillDefinition
 from heroforge.engine.spells import SpellEntry
 
@@ -477,4 +478,36 @@ def _structure_condition_definition(
 converter.register_structure_hook(
     ConditionDefinition,
     _structure_condition_definition,
+)
+
+# -------------------------------------------------------
+# MagicItemDefinition: frozen dataclass
+# -------------------------------------------------------
+
+
+def _structure_magic_item_definition(
+    val: object,
+    _: type,
+) -> MagicItemDefinition:
+    if not isinstance(val, dict):
+        msg = f"Cannot structure {type(val)} as MagicItemDefinition"
+        raise TypeError(msg)
+    _forbid_extra(
+        val,
+        MagicItemDefinition,
+        val.get("name", "?"),
+    )
+    return MagicItemDefinition(
+        name=val["name"],
+        note=val.get("note", ""),
+        effects=val.get("effects", []),
+        source_book=val.get("source_book", "SRD"),
+        slot=val.get("slot", ""),
+        cost_gp=int(val.get("cost_gp", 0)),
+    )
+
+
+converter.register_structure_hook(
+    MagicItemDefinition,
+    _structure_magic_item_definition,
 )

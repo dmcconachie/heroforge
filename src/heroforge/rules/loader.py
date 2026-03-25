@@ -19,6 +19,7 @@ Public API:
   StatsLoader            — stats.yaml → stat graph
   SpellsLoader           — spell/item YAML
   ConditionLoader        — condition YAML
+  MagicItemLoader        — magic item YAML
   FeatsLoader            — feat YAML → FeatRegistry
   TemplatesLoader        — templates YAML
   ClassesLoader          — classes YAML
@@ -62,6 +63,9 @@ if TYPE_CHECKING:
         WeaponRegistry,
     )
     from heroforge.engine.feats import FeatRegistry
+    from heroforge.engine.magic_items import (
+        MagicItemRegistry,
+    )
     from heroforge.engine.prerequisites import (
         Prerequisite,
         PrerequisiteChecker,
@@ -662,6 +666,120 @@ class ConditionLoader:
                 note_buff = BuffDefinition(
                     name=defn.name,
                     category=BuffCategory.CONDITION,
+                    source_book=defn.source_book,
+                    note=defn.note,
+                )
+                try:
+                    buff_registry.register(note_buff)
+                except ValueError as e:
+                    raise LoaderError(str(e)) from e
+
+            registered.append(name)
+
+        return registered
+
+
+# ---------------------------------------------------------------------------
+# MagicItemLoader
+# ---------------------------------------------------------------------------
+
+
+class MagicItemLoader:
+    """
+    Reads magic_items.yaml and populates both a
+    MagicItemRegistry and a BuffRegistry.
+
+    Each item is stored as a MagicItemDefinition
+    (the canonical domain object) and also converted
+    into a BuffDefinition so the buff-toggle UI keeps
+    working.
+
+    Usage:
+        item_reg = MagicItemRegistry()
+        buff_reg = BuffRegistry()
+        loader = MagicItemLoader(rules_dir)
+        loader.load(
+            item_reg, buff_reg,
+            "core/magic_items.yaml",
+        )
+    """
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load(
+        self,
+        registry: "MagicItemRegistry",
+        buff_registry: "BuffRegistry",
+        relative_path: str,
+    ) -> list[str]:
+        """
+        Load a magic items YAML file.
+
+        Returns list of item names registered.
+        """
+        from heroforge.engine.effects import (
+            BuffCategory,
+            BuffDefinition,
+            build_buff_from_effects,
+        )
+        from heroforge.engine.magic_items import (
+            MagicItemDefinition,
+        )
+        from heroforge.rules.schema import converter
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Magic items file not found: {path}")
+
+        try:
+            with open(path) as f:
+                data = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            raise LoaderError(f"YAML parse error in {path}: {e}") from e
+
+        if not isinstance(data, dict) or "magic_items" not in data:
+            raise LoaderError(
+                f"{path} must have a top-level 'magic_items' key."
+            )
+
+        registered: list[str] = []
+
+        for decl in data["magic_items"]:
+            name = decl.get("name")
+            if not name:
+                raise LoaderError(f"Magic item missing 'name': {decl}")
+
+            try:
+                defn = converter.structure(decl, MagicItemDefinition)
+            except Exception as e:
+                raise LoaderError(
+                    f"Failed to load magic item {name!r}: {e}"
+                ) from e
+
+            registry.register(defn)
+
+            # Also register as a buff so the toggle
+            # UI keeps working.
+            buff = build_buff_from_effects(
+                name=defn.name,
+                category=BuffCategory.ITEM,
+                effects_raw=defn.effects,
+                source_book=defn.source_book,
+                note=defn.note,
+            )
+            if buff is not None:
+                try:
+                    buff_registry.register(buff)
+                except ValueError as e:
+                    raise LoaderError(str(e)) from e
+            elif defn.note:
+                # Note-only item (no stat effects);
+                # still needs a buff entry for the
+                # toggle UI.
+                note_buff = BuffDefinition(
+                    name=defn.name,
+                    category=BuffCategory.ITEM,
                     source_book=defn.source_book,
                     note=defn.note,
                 )

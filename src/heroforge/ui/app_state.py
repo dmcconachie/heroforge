@@ -28,6 +28,7 @@ from heroforge.engine.equipment import (
     WeaponRegistry,
 )
 from heroforge.engine.feats import FeatRegistry
+from heroforge.engine.magic_items import MagicItemRegistry
 from heroforge.engine.prerequisites import (
     PrerequisiteChecker,
 )
@@ -43,6 +44,7 @@ from heroforge.rules.loader import (
     DomainsLoader,
     EquipmentLoader,
     FeatsLoader,
+    MagicItemLoader,
     RacesLoader,
     SkillsLoader,
     SpellCompendiumLoader,
@@ -59,7 +61,8 @@ class AppState:
 
     Attributes
     ----------
-    buff_registry     : BuffRegistry — buff spells, conditions, items
+    buff_registry      : BuffRegistry — buff spells, conditions, items
+    magic_item_registry: MagicItemRegistry
     spell_compendium   : SpellCompendium — all 601 SRD spells
     feat_registry      : FeatRegistry
     armor_registry     : ArmorRegistry
@@ -76,6 +79,7 @@ class AppState:
     def __init__(self) -> None:
         self.buff_registry = BuffRegistry()
         self.condition_registry = ConditionRegistry()
+        self.magic_item_registry = MagicItemRegistry()
         self.spell_compendium = SpellCompendium()
         self.feat_registry = FeatRegistry()
         self.armor_registry = ArmorRegistry()
@@ -118,7 +122,8 @@ class AppState:
             self.buff_registry,
             "core/class_buffs.yaml",
         )
-        SpellsLoader(rd).load(
+        MagicItemLoader(rd).load(
+            self.magic_item_registry,
             self.buff_registry,
             "core/magic_items.yaml",
         )
