@@ -368,6 +368,7 @@ def _structure_spell_entry(val: object, _: type) -> SpellEntry:
         level = {str(k): int(v) for k, v in level_raw.items()}
     else:
         level = {}
+    mew = val.get("mutually_exclusive_with", [])
     return SpellEntry(
         name=val["name"],
         school=val.get("school", ""),
@@ -381,7 +382,12 @@ def _structure_spell_entry(val: object, _: type) -> SpellEntry:
         spell_resistance=val.get("spell_resistance", ""),
         description=val.get("description", ""),
         source_book=val.get("source_book", "SRD"),
-        has_buff_effects=bool(val.get("has_buff_effects", False)),
+        effects=val.get("effects", []),
+        note=val.get("note", ""),
+        requires_caster_level=bool(val.get("requires_caster_level", False)),
+        mutually_exclusive_with=mew,
+        condition_key=val.get("condition_key", ""),
+        applies_condition=val.get("applies_condition", ""),
     )
 
 

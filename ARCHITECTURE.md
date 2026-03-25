@@ -48,7 +48,7 @@ src/heroforge/
 │
 ├── rules/
 │   ├── schema.py           # cattrs Converter + hooks
-│   ├── loader.py           # StatsLoader, SpellsLoader,
+│   ├── loader.py           # StatsLoader,
 │   │                       #   ConditionLoader,
 │   │                       #   MagicItemLoader,
 │   │                       #   FeatsLoader, ClassesLoader,
@@ -64,8 +64,6 @@ src/heroforge/
 │       ├── races.yaml        # 7 core races
 │       ├── feats_phb.yaml    # 86 PHB feats
 │       ├── feats_srd.yaml    # 32 additional SRD feats
-│       ├── spells_phb.yaml   # PHB buff spells
-│       ├── spells_srd_buffs.yaml  # SRD buff spells
 │       ├── spells_srd_0_3.yaml    # Spell compendium
 │       ├── spells_srd_4_6.yaml    #   (601 spells total
 │       ├── spells_srd_7_9.yaml    #   across 3 files)
@@ -362,14 +360,14 @@ WeaponDefinition, SkillDefinition, SpellEntry). Also exports
 builder functions.
 
 `rules/loader.py` contains one Loader class per data domain
-(StatsLoader, SpellsLoader, ConditionLoader, FeatsLoader,
+(StatsLoader, ConditionLoader, FeatsLoader,
 SkillsLoader, TemplatesLoader, ClassesLoader, RacesLoader,
 EquipmentLoader, DomainsLoader, SpellCompendiumLoader).
 Each reads its YAML file and populates the corresponding
 registry. Simple loaders (Classes, Skills, Domains,
 Equipment, SpellCompendium, Conditions) use
 `converter.structure(decl, DataClass)` for declarative
-YAML-to-dataclass mapping. Complex loaders (Spells, Feats,
+YAML-to-dataclass mapping. Complex loaders (Feats,
 Templates) still use `build_*_from_yaml()` builders but
 delegate key validation to `_forbid_extra()`.
 
@@ -396,7 +394,7 @@ YAML files under `rules/core/` contain full SRD data:
 - 16 base classes (11 PHB + 5 NPC) + 15 prestige classes
 - 7 races, 36 skills
 - 118 feats (86 PHB + 32 SRD)
-- ~100 buff spells/conditions + 601 spell compendium entries
+- 601 spell compendium entries (with inline buff effects)
 - Class spell lists for 7 casting classes
 - 22 cleric domains
 - 18 armor/shields, 63 weapons

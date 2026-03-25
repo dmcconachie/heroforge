@@ -1,9 +1,9 @@
 # rules/core/spells_srd_0_3.yaml
 #
 # SRD spell compendium entries.
-# Minimal metadata: name + class levels.
-# Buff spells with stat effects are in
-# spells_phb.yaml and spells_srd_buffs.yaml.
+#
+# Spells with stat effects include
+# inline effects: entries.
 
 spell_compendium:
 
@@ -42,6 +42,20 @@ spell_compendium:
 
   - name: "Guidance"
     level: {Cleric: 0, Druid: 0}
+    note: "+1 competence on one attack roll, saving throw, or skill check"
+    effects:
+      - target: attack_all
+        bonus_type: competence
+        value: 1
+      - target: fort_save
+        bonus_type: competence
+        value: 1
+      - target: ref_save
+        bonus_type: competence
+        value: 1
+      - target: will_save
+        bonus_type: competence
+        value: 1
 
   - name: "Inflict Minor Wounds"
     level: {Cleric: 0}
@@ -88,6 +102,17 @@ spell_compendium:
 
   - name: "Resistance"
     level: {Bard: 0, Cleric: 0, Druid: 0, Paladin: 1, Sorcerer: 0, Wizard: 0}
+    note: "+1 resistance bonus on saving throws"
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: 1
+      - target: ref_save
+        bonus_type: resistance
+        value: 1
+      - target: will_save
+        bonus_type: resistance
+        value: 1
 
   - name: "Summon Instrument"
     level: {Bard: 0}
@@ -97,6 +122,11 @@ spell_compendium:
 
   - name: "Virtue"
     level: {Cleric: 0, Druid: 0, Paladin: 1}
+    note: "+1 temporary hit point"
+    effects:
+      - target: hp_bonus
+        bonus_type: untyped
+        value: 1
 
   - name: "Alarm"
     level: {Bard: 1, Ranger: 1, Sorcerer: 1, Wizard: 1}
@@ -112,12 +142,25 @@ spell_compendium:
 
   - name: "Bless"
     level: {Cleric: 1, Paladin: 1}
+    note: "+1 morale bonus on attack rolls and saves vs. fear"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 1
 
   - name: "Bless Water"
     level: {Cleric: 1, Paladin: 1}
 
   - name: "Bless Weapon"
     level: {Paladin: 1}
+    note: "Weapon is +1 enhancement and good- aligned for overcoming DR"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 1
+      - target: damage_all
+        bonus_type: enhancement
+        value: 1
 
   - name: "Burning Hands"
     level: {Sorcerer: 1, Wizard: 1}
@@ -190,27 +233,68 @@ spell_compendium:
 
   - name: "Divine Favor"
     level: {Cleric: 1, Paladin: 1}
+    note: "Luck bonus on attack and damage; scales with CL (max +3)"
+    requires_caster_level: true
+    effects:
+      - target: attack_all
+        bonus_type: luck
+        value: "max(1, caster_level // 3)"
+      - target: damage_all
+        bonus_type: luck
+        value: "max(1, caster_level // 3)"
 
   - name: "Doom"
     level: {Cleric: 1}
+    note: >-
+      Target is shaken: -2 on attacks, saves, skill checks, ability checks
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: -2
+      - target: fort_save
+        bonus_type: morale
+        value: -2
+      - target: ref_save
+        bonus_type: morale
+        value: -2
+      - target: will_save
+        bonus_type: morale
+        value: -2
 
   - name: "Endure Elements"
     level: {Cleric: 1, Druid: 1, Paladin: 1, Ranger: 1, Sorcerer: 1, Wizard: 1}
 
   - name: "Enlarge Person"
     level: {Sorcerer: 1, Wizard: 1}
+    note: "+2 STR, -2 DEX (humanoids only; size change handled separately)"
+    condition_key: "humanoid_only"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+        condition_key: humanoid_only
+      - target: dex_score
+        bonus_type: enhancement
+        value: -2
+        condition_key: humanoid_only
 
   - name: "Entangle"
     level: {Druid: 1, Ranger: 1}
 
   - name: "Entropic Shield"
     level: {Cleric: 1}
+    note: "20%% miss chance on ranged attacks against you (note only)"
 
   - name: "Erase"
     level: {Bard: 1, Sorcerer: 1, Wizard: 1}
 
   - name: "Expeditious Retreat"
     level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+    note: "+30 ft. enhancement to speed"
+    effects:
+      - target: speed
+        bonus_type: enhancement
+        value: 30
 
   - name: "Faerie Fire"
     level: {Druid: 1}
@@ -250,12 +334,28 @@ spell_compendium:
 
   - name: "Jump"
     level: {Druid: 1, Ranger: 1, Sorcerer: 1, Wizard: 1}
+    note: "+10 enhancement on Jump checks (+20 at CL 5, +30 at CL 9)"
+    requires_caster_level: true
+    effects:
+      - target: skill_jump
+        bonus_type: enhancement
+        value: "10 + 10 * min(2, (caster_level - 1) // 4)"
 
   - name: "Longstrider"
     level: {Druid: 1, Ranger: 1}
+    note: "+10 ft. enhancement to speed"
+    effects:
+      - target: speed
+        bonus_type: enhancement
+        value: 10
 
   - name: "Mage Armor"
     level: {Sorcerer: 1, Wizard: 1}
+    note: "+4 armor bonus to AC (or +6 with Armored Mage class feature)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 4
 
   - name: "Magic Aura"
     level: {Bard: 1, Sorcerer: 1, Wizard: 1}
@@ -274,6 +374,14 @@ spell_compendium:
 
   - name: "Magic Weapon"
     level: {Cleric: 1, Paladin: 1, Sorcerer: 1, Wizard: 1}
+    note: "+1 enhancement to attack and damage"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 1
+      - target: damage_all
+        bonus_type: enhancement
+        value: 1
 
   - name: "Mount"
     level: {Sorcerer: 1, Wizard: 1}
@@ -292,27 +400,102 @@ spell_compendium:
 
   - name: "Protection from Chaos"
     level: {Cleric: 1, Paladin: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs chaotic creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Protection from Evil"
     level: {Cleric: 1, Paladin: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs evil creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Protection from Good"
     level: {Cleric: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs good creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Protection from Law"
     level: {Cleric: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs lawful creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Ray of Enfeeblement"
     level: {Sorcerer: 1, Wizard: 1}
+    note: >-
+      -1d6+1 per 2 CL (max -5) STR penalty (use parameter for rolled value)
+    requires_caster_level: true
+    effects:
+      - target: str_score
+        bonus_type: untyped
+        value: "-(1 + min(5, caster_level // 2))"
 
   - name: "Reduce Person"
     level: {Sorcerer: 1, Wizard: 1}
+    note: "-2 STR, +2 DEX (humanoids only; size change handled separately)"
+    condition_key: "humanoid_only"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: -2
+        condition_key: humanoid_only
+      - target: dex_score
+        bonus_type: enhancement
+        value: 2
+        condition_key: humanoid_only
 
   - name: "Remove Fear"
     level: {Bard: 1, Cleric: 1}
 
   - name: "Resist Energy"
     level: {Cleric: 2, Druid: 2, Paladin: 2, Ranger: 1, Sorcerer: 2, Wizard: 2}
+    note: "Resist 10 points of chosen energy type per attack (note only)"
 
   - name: "Restoration (Lesser)"
     level: {Cleric: 2, Druid: 2, Paladin: 1}
@@ -322,9 +505,20 @@ spell_compendium:
 
   - name: "Shield"
     level: {Sorcerer: 1, Wizard: 1}
+    note: "+4 shield bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: shield
+        value: 4
 
   - name: "Shield of Faith"
     level: {Cleric: 1}
+    note: "Deflection bonus to AC; scales with CL"
+    requires_caster_level: true
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: "2 + caster_level // 6"
 
   - name: "Shillelagh"
     level: {Druid: 1}
@@ -364,6 +558,11 @@ spell_compendium:
 
   - name: "Aid"
     level: {Cleric: 2}
+    note: "+1 morale on attack/saves vs fear; +1d8+CL temporary HP"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 1
 
   - name: "Align Weapon"
     level: {Cleric: 2}
@@ -382,24 +581,46 @@ spell_compendium:
 
   - name: "Barkskin"
     level: {Druid: 2, Ranger: 2}
+    note: "Enhancement bonus to natural armor; scales with CL"
+    requires_caster_level: true
+    effects:
+      - target: ac
+        bonus_type: natural_armor
+        value: "max(2, 1 + caster_level // 3)"
 
   - name: "Bear's Endurance"
     level: {Cleric: 2, Druid: 2, Ranger: 2, Sorcerer: 2, Wizard: 2}
+    note: "+4 enhancement to CON"
+    effects:
+      - target: con_score
+        bonus_type: enhancement
+        value: 4
 
   - name: "Blindness/Deafness"
     level: {Bard: 2, Cleric: 3, Sorcerer: 2, Wizard: 2}
 
   - name: "Blur"
     level: {Bard: 2, Sorcerer: 2, Wizard: 2}
+    note: "20%% miss chance for attacks against you (note only)"
 
   - name: "Bull's Strength"
     level: {Cleric: 2, Druid: 2, Paladin: 2, Sorcerer: 2, Wizard: 2}
+    note: "+4 enhancement to STR"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 4
 
   - name: "Calm Emotions"
     level: {Bard: 2, Cleric: 2}
 
   - name: "Cat's Grace"
     level: {Bard: 2, Druid: 2, Ranger: 2, Sorcerer: 2, Wizard: 2}
+    note: "+4 enhancement to DEX"
+    effects:
+      - target: dex_score
+        bonus_type: enhancement
+        value: 4
 
   - name: "Chill Metal"
     level: {Druid: 2}
@@ -436,12 +657,24 @@ spell_compendium:
 
   - name: "Eagle's Splendor"
     level: {Bard: 2, Cleric: 2, Paladin: 2, Sorcerer: 2, Wizard: 2}
+    note: "+4 enhancement to CHA"
+    effects:
+      - target: cha_score
+        bonus_type: enhancement
+        value: 4
 
   - name: "Enthrall"
     level: {Bard: 2, Cleric: 2}
 
   - name: "False Life"
     level: {Sorcerer: 2, Wizard: 2}
+    note: "Temporary hit points: 1d10 + CL (max +10)"
+    requires_caster_level: true
+    effects:
+      - target: hp_bonus
+        bonus_type: untyped
+        value: "min(caster_level, 10)"
+        source_label: "False Life (temp HP)"
 
   - name: "Find Traps"
     level: {Cleric: 2}
@@ -460,6 +693,11 @@ spell_compendium:
 
   - name: "Fox's Cunning"
     level: {Bard: 2, Sorcerer: 2, Wizard: 2}
+    note: "+4 enhancement to INT"
+    effects:
+      - target: int_score
+        bonus_type: enhancement
+        value: 4
 
   - name: "Gentle Repose"
     level: {Cleric: 2, Sorcerer: 3, Wizard: 3}
@@ -478,6 +716,20 @@ spell_compendium:
 
   - name: "Heroism"
     level: {Bard: 2, Sorcerer: 3, Wizard: 3}
+    note: "+2 morale on attack, saves, skill checks"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 2
+      - target: fort_save
+        bonus_type: morale
+        value: 2
+      - target: ref_save
+        bonus_type: morale
+        value: 2
+      - target: will_save
+        bonus_type: morale
+        value: 2
 
   - name: "Hold Animal"
     level: {Druid: 2, Ranger: 2}
@@ -493,6 +745,11 @@ spell_compendium:
 
   - name: "Invisibility"
     level: {Bard: 2, Sorcerer: 2, Wizard: 2}
+    note: "Invisible; +2 attack vs sighted foes; broken by attacking"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 2
 
   - name: "Knock"
     level: {Sorcerer: 2, Wizard: 2}
@@ -517,6 +774,11 @@ spell_compendium:
 
   - name: "Owl's Wisdom"
     level: {Cleric: 2, Druid: 2, Paladin: 2, Ranger: 2, Sorcerer: 2, Wizard: 2}
+    note: "+4 enhancement to WIS"
+    effects:
+      - target: wis_score
+        bonus_type: enhancement
+        value: 4
 
   - name: "Phantom Trap"
     level: {Sorcerer: 2, Wizard: 2}
@@ -532,6 +794,17 @@ spell_compendium:
 
   - name: "Rage"
     level: {Bard: 2, Sorcerer: 3, Wizard: 3}
+    note: "+2 morale to STR and CON, -2 AC"
+    effects:
+      - target: str_score
+        bonus_type: morale
+        value: 2
+      - target: con_score
+        bonus_type: morale
+        value: 2
+      - target: ac
+        bonus_type: untyped
+        value: -2
 
   - name: "Reduce Animal"
     level: {Druid: 2, Ranger: 3}
@@ -577,6 +850,7 @@ spell_compendium:
 
   - name: "Spider Climb"
     level: {Druid: 2, Sorcerer: 2, Wizard: 2}
+    note: "Climb speed 20 ft.; +8 racial bonus on Climb checks (note only)"
 
   - name: "Spike Growth"
     level: {Druid: 3, Ranger: 2}
@@ -604,6 +878,17 @@ spell_compendium:
 
   - name: "Touch of Idiocy"
     level: {Sorcerer: 2, Wizard: 2}
+    note: "-1d6 INT, WIS, CHA (min 1)"
+    effects:
+      - target: int_score
+        bonus_type: untyped
+        value: -4
+      - target: wis_score
+        bonus_type: untyped
+        value: -4
+      - target: cha_score
+        bonus_type: untyped
+        value: -4
 
   - name: "Tree Shape"
     level: {Druid: 2, Ranger: 3}
@@ -685,6 +970,7 @@ spell_compendium:
 
   - name: "Displacement"
     level: {Bard: 3, Sorcerer: 3, Wizard: 3}
+    note: "50%% miss chance for attacks against you (note only)"
 
   - name: "Dominate Animal"
     level: {Druid: 3}
@@ -718,12 +1004,41 @@ spell_compendium:
 
   - name: "Good Hope"
     level: {Bard: 3}
+    note: >-
+      +2 morale on attack rolls, damage, saves, skill checks, ability checks
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 2
+      - target: damage_all
+        bonus_type: morale
+        value: 2
+      - target: fort_save
+        bonus_type: morale
+        value: 2
+      - target: ref_save
+        bonus_type: morale
+        value: 2
+      - target: will_save
+        bonus_type: morale
+        value: 2
 
   - name: "Halt Undead"
     level: {Sorcerer: 3, Wizard: 3}
 
   - name: "Haste"
     level: {Bard: 3, Sorcerer: 3, Wizard: 3}
+    note: "+1 untyped attack, +1 dodge AC, +1 Reflex, speed bonus"
+    effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: 1
+      - target: ac
+        bonus_type: dodge
+        value: 1
+      - target: ref_save
+        bonus_type: untyped
+        value: 1
 
   - name: "Heal Mount"
     level: {Paladin: 3}
@@ -751,24 +1066,95 @@ spell_compendium:
 
   - name: "Magic Circle against Chaos"
     level: {Cleric: 3, Paladin: 3, Sorcerer: 3, Wizard: 3}
+    note: "+2 deflection AC, +2 resistance saves vs chaotic; 10 ft. radius"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Magic Circle against Evil"
     level: {Cleric: 3, Paladin: 3, Sorcerer: 3, Wizard: 3}
+    note: "+2 deflection AC, +2 resistance saves vs evil; 10 ft. radius"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Magic Circle against Good"
     level: {Cleric: 3, Sorcerer: 3, Wizard: 3}
+    note: "+2 deflection AC, +2 resistance saves vs good; 10 ft. radius"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Magic Circle against Law"
     level: {Cleric: 3, Sorcerer: 3, Wizard: 3}
+    note: "+2 deflection AC, +2 resistance saves vs lawful; 10 ft. radius"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
 
   - name: "Magic Fang (Greater)"
     level: {Druid: 3, Ranger: 3}
 
   - name: "Magic Vestment"
     level: {Cleric: 3}
+    note: "Enhancement bonus to armor/shield; scales with CL"
+    requires_caster_level: true
+    effects:
+      - target: ac
+        bonus_type: enhancement
+        value: "max(1, caster_level // 4)"
 
   - name: "Magic Weapon (Greater)"
     level: {Cleric: 4, Paladin: 3, Sorcerer: 3, Wizard: 3}
+    note: "Enhancement bonus to attack and damage; scales with CL"
+    requires_caster_level: true
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: "max(1, caster_level // 4)"
+      - target: damage_all
+        bonus_type: enhancement
+        value: "max(1, caster_level // 4)"
 
   - name: "Major Image"
     level: {Bard: 3, Sorcerer: 3, Wizard: 3}
@@ -793,6 +1179,23 @@ spell_compendium:
 
   - name: "Prayer"
     level: {Cleric: 3, Paladin: 3}
+    note: "+1 luck on attack, damage, saves, skill checks"
+    effects:
+      - target: attack_all
+        bonus_type: luck
+        value: 1
+      - target: damage_all
+        bonus_type: luck
+        value: 1
+      - target: fort_save
+        bonus_type: luck
+        value: 1
+      - target: ref_save
+        bonus_type: luck
+        value: 1
+      - target: will_save
+        bonus_type: luck
+        value: 1
 
   - name: "Quench"
     level: {Druid: 3}

@@ -48,7 +48,6 @@ from heroforge.rules.loader import (
     RacesLoader,
     SkillsLoader,
     SpellCompendiumLoader,
-    SpellsLoader,
     TemplatesLoader,
 )
 
@@ -108,15 +107,10 @@ class AppState:
 
         prereq_checker = PrerequisiteChecker()
 
-        SpellsLoader(rd).load(self.buff_registry, "core/spells_phb.yaml")
         ConditionLoader(rd).load(
             self.condition_registry,
             self.buff_registry,
             "core/conditions_srd.yaml",
-        )
-        SpellsLoader(rd).load(
-            self.buff_registry,
-            "core/spells_srd_buffs.yaml",
         )
         MagicItemLoader(rd).load(
             self.magic_item_registry,
@@ -153,7 +147,8 @@ class AppState:
         eq_loader.load_armor(self.armor_registry, "core/armor.yaml")
         eq_loader.load_weapons(self.weapon_registry, "core/weapons.yaml")
 
-        # Load spell compendium (all spells)
+        # Load spell compendium (all spells, with
+        # dual registration of buff effects)
         scl = SpellCompendiumLoader(rd)
         for sp_file in (
             "core/spells_srd_0_3.yaml",
@@ -162,7 +157,11 @@ class AppState:
         ):
             sp_path = rd / sp_file
             if sp_path.exists():
-                scl.load(self.spell_compendium, sp_file)
+                scl.load(
+                    self.spell_compendium,
+                    sp_file,
+                    buff_registry=(self.buff_registry),
+                )
 
         # Store prereq checker for UI access
         self.prereq_checker = prereq_checker

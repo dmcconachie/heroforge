@@ -1,9 +1,9 @@
 # rules/core/spells_srd_7_9.yaml
 #
 # SRD spell compendium entries.
-# Minimal metadata: name + class levels.
-# Buff spells with stat effects are in
-# spells_phb.yaml and spells_srd_buffs.yaml.
+#
+# Spells with stat effects include
+# inline effects: entries.
 
 spell_compendium:
 
@@ -168,6 +168,20 @@ spell_compendium:
 
   - name: "Cloak of Chaos"
     level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (chaotic characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
 
   - name: "Clone"
     level: {Sorcerer: 8, Wizard: 8}
@@ -195,6 +209,20 @@ spell_compendium:
 
   - name: "Holy Aura"
     level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (good characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
 
   - name: "Horrid Wilting"
     level: {Sorcerer: 8, Wizard: 8}
@@ -207,15 +235,36 @@ spell_compendium:
 
   - name: "Iron Body"
     level: {Sorcerer: 8, Wizard: 8}
+    note: >-
+      +6 enhancement STR; DR 15/adamantine; immune to blindness, critical
+      hits, ability damage, disease, drowning, electricity, poison, stunning;
+      -6 DEX (min 1); half speed
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 6
+      - target: dex_score
+        bonus_type: untyped
+        value: -6
 
   - name: "Maze"
     level: {Sorcerer: 8, Wizard: 8}
 
   - name: "Mind Blank"
     level: {Sorcerer: 8, Wizard: 8}
+    note: >-
+      Immune to divination and mental effects; +8 resistance vs mind-
+      affecting (note only)
 
   - name: "Moment of Prescience"
     level: {Sorcerer: 8, Wizard: 8}
+    note: >-
+      +1/CL insight bonus (max +25) to one attack, check, or save (one use)
+    requires_caster_level: true
+    effects:
+      - target: attack_all
+        bonus_type: insight
+        value: "min(25, caster_level)"
 
   - name: "Planar Ally (Greater)"
     level: {Cleric: 8}
@@ -255,6 +304,20 @@ spell_compendium:
 
   - name: "Shield of Law"
     level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (lawful characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
 
   - name: "Spell Immunity (Greater)"
     level: {Cleric: 8}
@@ -288,6 +351,20 @@ spell_compendium:
 
   - name: "Unholy Aura"
     level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (evil characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
 
   - name: "Whirlwind"
     level: {Druid: 8}
@@ -312,6 +389,14 @@ spell_compendium:
 
   - name: "Foresight"
     level: {Druid: 9, Sorcerer: 9, Wizard: 9}
+    note: "Never surprised or flat-footed; +2 insight to AC and Reflex saves"
+    effects:
+      - target: ac
+        bonus_type: insight
+        value: 2
+      - target: ref_save
+        bonus_type: insight
+        value: 2
 
   - name: "Freedom"
     level: {Sorcerer: 9, Wizard: 9}

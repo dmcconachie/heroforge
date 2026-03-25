@@ -1,22 +1,22 @@
 """
 engine/spells.py
 ----------------
-Spell compendium: metadata for all SRD spells regardless
-of whether they have stat-modifying effects.
+Spell compendium: the single source of truth for all
+spells.
 
-Buff spells (those with BonusEffects) are still loaded
-into the BuffRegistry via SpellsLoader.  This module
-provides a parallel registry for *all* spells, including
-those with no stat effects (damage spells, utility spells,
-summons, etc.).
+Each SpellEntry holds metadata (school, level, duration)
+and optionally inline stat effects.  The spell loader
+registers every spell in the SpellCompendium, and those
+with effects also get a BuffDefinition in the
+BuffRegistry.
 
-This is used by:
-  - Class spell list validation
-  - Spell slot/prepared spell tracking
-  - UI spell browsing (future)
+Spells that simply apply a standard condition (e.g.
+Doom → Shaken) use ``applies_condition`` instead of
+``effects`` — the condition is what appears in the
+buff panel, not the spell.
 
 Public API:
-  SpellEntry       — metadata for one spell
+  SpellEntry       — metadata + optional effects
   SpellCompendium  — registry of SpellEntry objects
 """
 
@@ -27,15 +27,13 @@ from dataclasses import dataclass, field
 
 @dataclass(frozen=True)
 class SpellEntry:
-    """Metadata for a single spell."""
+    """Single source of truth for one spell."""
 
     name: str
     school: str = ""
     subschool: str = ""
     descriptor: str = ""
-    level: dict[str, int] = field(
-        default_factory=dict
-    )  # e.g. {"Wizard": 3, "Cleric": 4}
+    level: dict[str, int] = field(default_factory=dict)
     casting_time: str = ""
     range: str = ""
     duration: str = ""
@@ -43,7 +41,15 @@ class SpellEntry:
     spell_resistance: str = ""
     description: str = ""
     source_book: str = "SRD"
-    has_buff_effects: bool = False
+    # Buff effects (registered in BuffRegistry):
+    effects: list[dict] = field(default_factory=list)
+    note: str = ""
+    requires_caster_level: bool = False
+    mutually_exclusive_with: list[str] = field(default_factory=list)
+    condition_key: str = ""
+    # If the spell just applies a condition, name it
+    # here instead of using effects:
+    applies_condition: str = ""
 
 
 class SpellCompendium:

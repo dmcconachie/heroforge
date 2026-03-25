@@ -367,7 +367,7 @@ class TestLoadCharacter:
         assert loaded.race == "Githzerai"  # stored even if unknown
 
     def test_unknown_buff_round_trips(self, tmp_path: Path) -> None:
-        """A buff from a splatbook not loaded should round-trip cleanly."""
+        """Unknown buff should round-trip cleanly."""
         path = tmp_path / "splatbook.char.yaml"
         path.write_text(
             "meta:\n  version: '2'\n"
@@ -380,7 +380,7 @@ class TestLoadCharacter:
             "class_levels: []\nfeats: []\n"
             "skills: {}\n"
             "buffs:\n"
-            "  - name: 'Conviction (SpC)'\n"
+            "  - name: 'Homebrew Buff'\n"
             "    active: true\n"
             "    caster_level: 8\n"
             "templates: []\n"
@@ -389,7 +389,7 @@ class TestLoadCharacter:
         state = make_app_state()
         loaded = load_character(path, state)
         # Should not crash; buff state preserved
-        state_obj = loaded.get_buff_state("Conviction (SpC)")
+        state_obj = loaded.get_buff_state("Homebrew Buff")
         assert state_obj is not None
 
 

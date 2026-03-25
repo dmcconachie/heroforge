@@ -1,5 +1,6 @@
 """
-Tests for SRD spell files: compendium and buff spells.
+Tests for SRD spell compendium files and dual
+registration of buff effects.
 """
 
 from __future__ import annotations
@@ -10,10 +11,7 @@ import yaml
 
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.spells import SpellCompendium
-from heroforge.rules.loader import (
-    SpellCompendiumLoader,
-    SpellsLoader,
-)
+from heroforge.rules.loader import SpellCompendiumLoader
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
@@ -63,37 +61,58 @@ class TestSpellCompendium:
         assert "Prestidigitation" in names
 
 
-class TestSpellsSrdBuffs:
-    def test_loader_accepts_file(self) -> None:
-        reg = BuffRegistry()
-        loader = SpellsLoader(RULES_DIR)
-        names = loader.load(reg, "core/spells_srd_buffs.yaml")
-        assert len(names) >= 20
+class TestCompendiumBuffRegistration:
+    """
+    Spells with effects in compendium YAML also
+    register in BuffRegistry via dual registration."""
 
-    def test_no_duplicates_with_phb(self) -> None:
-        phb_path = RULES_DIR / "core" / "spells_phb.yaml"
-        with open(phb_path) as f:
-            phb = yaml.safe_load(f)
-        phb_names = {d["name"] for d in phb["spells"]}
-
-        srd_path = RULES_DIR / "core" / "spells_srd_buffs.yaml"
-        with open(srd_path) as f:
-            srd = yaml.safe_load(f)
-        for d in srd["spells"]:
-            assert d["name"] not in phb_names, (
-                f"{d['name']!r} duplicates spells_phb.yaml"
+    def setup_method(self) -> None:
+        self.comp = SpellCompendium()
+        self.reg = BuffRegistry()
+        loader = SpellCompendiumLoader(RULES_DIR)
+        for f in (
+            "core/spells_srd_0_3.yaml",
+            "core/spells_srd_4_6.yaml",
+            "core/spells_srd_7_9.yaml",
+        ):
+            loader.load(
+                self.comp,
+                f,
+                buff_registry=self.reg,
             )
+
+    def test_buff_count_at_least_twenty(
+        self,
+    ) -> None:
+        assert len(self.reg) >= 20
+
+    def test_bless_registered(self) -> None:
+        assert "Bless" in self.reg
+
+    def test_shield_of_faith_registered(
+        self,
+    ) -> None:
+        assert "Shield of Faith" in self.reg
 
     def test_protection_from_evil_effects(
         self,
     ) -> None:
-        reg = BuffRegistry()
-        loader = SpellsLoader(RULES_DIR)
-        loader.load(reg, "core/spells_srd_buffs.yaml")
-        defn = reg.get("Protection from Evil")
+        defn = self.reg.get("Protection from Evil")
         assert defn is not None
         targets = {e.target for e in defn.effects}
         assert "ac" in targets
+
+    def test_barkskin_is_formula(self) -> None:
+        defn = self.reg.require("Barkskin")
+        assert defn.requires_caster_level is True
+        assert defn.effects[0].is_formula()
+
+    def test_haste_registered(self) -> None:
+        assert "Haste" in self.reg
+
+    def test_fireball_not_registered(self) -> None:
+        """No stat effects -> no buff."""
+        assert "Fireball" not in self.reg
 
 
 class TestSpellListsYaml:

@@ -1,13 +1,7 @@
 # rules/core/conditions_srd.yaml
 #
-# Additional conditions from the SRD not already in
-# spells_phb.yaml. Each is a toggleable condition on the
-# Buffs tab.
-#
-# Already defined in spells_phb.yaml (do NOT duplicate):
-#   Bane, Blinded, Crushing Despair, Dazzled, Entangled,
-#   Exhausted, Fatigued, Frightened, Panicked, Shaken,
-#   Sickened, Slowed, Stunned
+# SRD conditions. Each is a toggleable condition
+# on the Buffs tab.
 
 conditions:
 

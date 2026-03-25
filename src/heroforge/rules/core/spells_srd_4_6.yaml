@@ -1,9 +1,9 @@
 # rules/core/spells_srd_4_6.yaml
 #
 # SRD spell compendium entries.
-# Minimal metadata: name + class levels.
-# Buff spells with stat effects are in
-# spells_phb.yaml and spells_srd_buffs.yaml.
+#
+# Spells with stat effects include
+# inline effects: entries.
 
 spell_compendium:
 
@@ -39,6 +39,9 @@ spell_compendium:
 
   - name: "Death Ward"
     level: {Cleric: 4, Druid: 5, Paladin: 4}
+    note: >-
+      Immune to death effects, energy drain, negative energy effects (note
+      only)
 
   - name: "Detect Scrying"
     level: {Bard: 4, Sorcerer: 4, Wizard: 4}
@@ -63,6 +66,14 @@ spell_compendium:
 
   - name: "Divine Power"
     level: {Cleric: 4}
+    note: >-
+      +6 enhancement to STR, BAB = full cleric level (modelled as +CL to BAB
+      pool)
+    requires_caster_level: true
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 6
 
   - name: "Dominate Person"
     level: {Bard: 4, Sorcerer: 5, Wizard: 5}
@@ -75,12 +86,18 @@ spell_compendium:
 
   - name: "Fire Shield"
     level: {Sorcerer: 4, Wizard: 4}
+    note: >-
+      Warm shield: resist cold 10, deal 1d6+1/CL fire to melee attackers.
+      Chill shield: resist fire 10, deal 1d6+1/CL cold. Note only.
 
   - name: "Flame Strike"
     level: {Cleric: 5, Druid: 4}
 
   - name: "Freedom of Movement"
     level: {Bard: 4, Cleric: 4, Druid: 4, Ranger: 4}
+    note: >-
+      Move and attack normally despite impediments (grapple, web, slow,
+      paralysis, etc.); note only
 
   - name: "Giant Vermin"
     level: {Cleric: 4, Druid: 4}
@@ -174,12 +191,14 @@ spell_compendium:
 
   - name: "Spell Immunity"
     level: {Cleric: 4}
+    note: "Immune to 1 spell per 4 CL (note only)"
 
   - name: "Spike Stones"
     level: {Druid: 4}
 
   - name: "Stoneskin"
     level: {Druid: 5, Sorcerer: 4, Wizard: 4}
+    note: "DR 10/adamantine (max 10 points per CL absorbed); note only"
 
   - name: "Summon Monster IV"
     level: {Bard: 4, Cleric: 4, Sorcerer: 4, Wizard: 4}
@@ -261,6 +280,22 @@ spell_compendium:
 
   - name: "Heroism (Greater)"
     level: {Bard: 5, Sorcerer: 6, Wizard: 6}
+    note: "+4 morale on attack, saves, skill checks; +1 temp HP/level"
+    mutually_exclusive_with:
+      - "Heroism"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 4
+      - target: fort_save
+        bonus_type: morale
+        value: 4
+      - target: ref_save
+        bonus_type: morale
+        value: 4
+      - target: will_save
+        bonus_type: morale
+        value: 4
 
   - name: "Inflict Light Wounds (Mass)"
     level: {Cleric: 5}
@@ -297,6 +332,7 @@ spell_compendium:
 
   - name: "Overland Flight"
     level: {Sorcerer: 5, Wizard: 5}
+    note: "Fly speed 40 ft. (good maneuverability); note only"
 
   - name: "Passwall"
     level: {Sorcerer: 5, Wizard: 5}
@@ -321,6 +357,15 @@ spell_compendium:
 
   - name: "Righteous Might"
     level: {Cleric: 5}
+    note: "+4 STR, +2 CON, natural armor; size increase handled separately"
+    requires_caster_level: true
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 4
+      - target: con_score
+        bonus_type: enhancement
+        value: 2
 
   - name: "Secret Chest"
     level: {Sorcerer: 5, Wizard: 5}
@@ -342,6 +387,12 @@ spell_compendium:
 
   - name: "Spell Resistance"
     level: {Cleric: 5}
+    note: "SR = 12 + caster level"
+    requires_caster_level: true
+    effects:
+      - target: sr
+        bonus_type: untyped
+        value: "12 + caster_level"
 
   - name: "Suggestion (Mass)"
     level: {Bard: 5, Sorcerer: 6, Wizard: 6}
@@ -564,6 +615,22 @@ spell_compendium:
 
   - name: "Transformation"
     level: {Sorcerer: 6, Wizard: 6}
+    note: >-
+      +4 enhancement STR, DEX, CON; +4 natural armor AC; full BAB; cannot
+      cast spells
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 4
+      - target: dex_score
+        bonus_type: enhancement
+        value: 4
+      - target: con_score
+        bonus_type: enhancement
+        value: 4
+      - target: ac
+        bonus_type: natural_armor
+        value: 4
 
   - name: "Transport via Plants"
     level: {Druid: 6}

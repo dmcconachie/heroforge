@@ -17,7 +17,6 @@ This module is the only place where those two meet.
 Public API:
   LoaderError            — raised on malformed YAML
   StatsLoader            — stats.yaml → stat graph
-  SpellsLoader           — spell/item YAML
   ConditionLoader        — condition YAML
   MagicItemLoader        — magic item YAML
   FeatsLoader            — feat YAML → FeatRegistry
@@ -381,186 +380,6 @@ class StatsLoader:
                 ) from e
 
             registered.append(key)
-
-        return registered
-
-
-# ---------------------------------------------------------------------------
-# SpellsLoader
-# ---------------------------------------------------------------------------
-
-# Condition keys referenced in YAML map to Python callables.
-# The loader attaches these to BonusEffect.condition at load time.
-# New condition keys can be added here when new splatbooks need them.
-CONDITION_REGISTRY: dict[str, object] = {
-    "humanoid_only": lambda char: (
-        getattr(char, "_race_type", "Humanoid") == "Humanoid"
-    ),
-    # Future:
-    # "elf_only":      lambda char: ...,
-    # "same_deity":    lambda char: ...,
-}
-
-
-def _forbid_extra_spell(val: dict, label: str) -> None:
-    """Reject unknown spell keys."""
-    from heroforge.engine.effects import (
-        BuffDefinition as _BD,
-    )
-    from heroforge.rules.schema import (
-        _forbid_extra,
-    )
-
-    _forbid_extra(val, _BD, label)
-
-
-def _forbid_extra_effect(val: dict, label: str) -> None:
-    """Reject unknown effect keys."""
-    from heroforge.engine.effects import (
-        BonusEffect as _BE,
-    )
-    from heroforge.rules.schema import (
-        _forbid_extra,
-    )
-
-    _forbid_extra(val, _BE, label)
-
-
-class SpellsLoader:
-    """
-    Reads rules/core/spells_phb.yaml (and other spell/buff YAML files)
-    and populates a BuffRegistry with BuffDefinition objects.
-
-    Usage:
-        registry = BuffRegistry()
-        loader = SpellsLoader(rules_dir)
-        loader.load(registry)           # loads PHB spells
-        loader.load(registry, "spell_compendium/spells.yaml", overwrite=True)
-
-    condition_key entries in effect declarations are resolved against
-    CONDITION_REGISTRY to attach Python callables.
-    """
-
-    def __init__(self, rules_dir: Path | str) -> None:
-        self.rules_dir = Path(rules_dir)
-
-    def load(
-        self,
-        registry: BuffRegistry,
-        relative_path: str,
-        overwrite: bool = False,
-    ) -> list[str]:
-        """
-        Load a spell YAML file into the registry.
-
-        Returns a list of buff names that were registered.
-        Raises LoaderError on unknown bonus types, strategies, or bad YAML.
-        """
-        from heroforge.engine.bonus import BonusType
-        from heroforge.engine.effects import (
-            BonusEffect,
-            BuffCategory,
-            BuffDefinition,
-        )
-
-        path = self.rules_dir / relative_path
-        if not path.exists():
-            raise LoaderError(f"Spell file not found: {path}")
-
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except yaml.YAMLError as e:
-            raise LoaderError(f"YAML parse error in {path}: {e}") from e
-
-        if not isinstance(data, dict) or "spells" not in data:
-            raise LoaderError(f"{path} must have a top-level 'spells' key.")
-
-        # Build BonusType lookup once
-        bonus_type_map: dict[str, BonusType] = {
-            bt.value: bt for bt in BonusType
-        }
-
-        registered: list[str] = []
-
-        for decl in data["spells"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Spell declaration missing 'name': {decl}")
-
-            _forbid_extra_spell(decl, name)
-
-            category_str = decl.get("category", "spell")
-            try:
-                category = BuffCategory(category_str)
-            except ValueError as e:
-                raise LoaderError(
-                    f"{name!r}: unknown category {category_str!r}"
-                ) from e
-
-            # Parse effects
-            effects: list[BonusEffect] = []
-            for eff_decl in decl.get("effects", []):
-                target = eff_decl.get("target")
-                if not target:
-                    raise LoaderError(
-                        f"{name!r}: effect missing 'target': {eff_decl}"
-                    )
-
-                _forbid_extra_effect(
-                    eff_decl,
-                    f"{name!r} effect",
-                )
-
-                bt_str = eff_decl.get("bonus_type", "untyped")
-                bonus_type = bonus_type_map.get(bt_str)
-                if bonus_type is None:
-                    raise LoaderError(
-                        f"{name!r}: unknown bonus_type {bt_str!r}"
-                    )
-
-                raw_value = eff_decl.get("value", 0)
-                # YAML may parse small formulas as ints automatically;
-                # ensure formula strings stay as strings
-                if isinstance(raw_value, bool):
-                    raw_value = int(raw_value)
-
-                cond_key = eff_decl.get("condition_key", "")
-                eff = BonusEffect(
-                    target=target,
-                    bonus_type=bonus_type,
-                    value=raw_value,
-                    condition_key=cond_key,
-                    source_label=eff_decl.get("source_label", ""),
-                )
-                # Resolve condition_key → callable
-                if cond_key:
-                    resolved = CONDITION_REGISTRY.get(cond_key)
-                    if resolved is None:
-                        raise LoaderError(
-                            f"{name!r}: unknown "
-                            f"condition_key "
-                            f"{cond_key!r}. Known: "
-                            f"{sorted(CONDITION_REGISTRY)}"
-                        )
-                    eff.condition = resolved
-                effects.append(eff)
-
-            defn = BuffDefinition(
-                name=name,
-                category=category,
-                source_book=decl.get("source_book", "PHB"),
-                effects=effects,
-                requires_caster_level=decl.get("requires_caster_level", False),
-                mutually_exclusive_with=decl.get("mutually_exclusive_with", []),
-                note=decl.get("note", ""),
-            )
-
-            try:
-                registry.register(defn, overwrite=overwrite)
-                registered.append(name)
-            except ValueError as e:
-                raise LoaderError(str(e)) from e
 
         return registered
 
@@ -1346,8 +1165,20 @@ class SpellCompendiumLoader:
         self,
         compendium: "SpellCompendium",
         relative_path: str,
+        buff_registry: "BuffRegistry | None" = None,
     ) -> list[str]:
-        from heroforge.engine.spells import SpellEntry
+        """
+        Load spells into compendium and optionally
+        register buff definitions for spells with
+        effects.
+        """
+        from heroforge.engine.effects import (
+            BuffCategory,
+            build_buff_from_effects,
+        )
+        from heroforge.engine.spells import (
+            SpellEntry,
+        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1380,5 +1211,22 @@ class SpellCompendiumLoader:
                 ) from e
             compendium.register(entry)
             registered.append(name)
+
+            # Dual registration: if the spell has
+            # effects, also register a buff.
+            if buff_registry is not None and entry.effects:
+                buff = build_buff_from_effects(
+                    name=name,
+                    category=BuffCategory.SPELL,
+                    effects_raw=entry.effects,
+                    source_book=entry.source_book,
+                    note=entry.note,
+                    requires_caster_level=(entry.requires_caster_level),
+                    mutually_exclusive_with=(entry.mutually_exclusive_with),
+                    condition_key=(entry.condition_key),
+                )
+                if buff is not None:
+                    with contextlib.suppress(ValueError):
+                        buff_registry.register(buff)
 
         return registered

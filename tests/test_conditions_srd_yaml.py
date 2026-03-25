@@ -1,8 +1,9 @@
 """
 Tests for rules/core/conditions_srd.yaml.
 
-Validates structure, no duplicates with spells_phb.yaml,
-and that conditions with effects have valid bonus types.
+Validates structure, no duplicates with compendium
+buff spells, and that conditions with effects have
+valid bonus types.
 """
 
 from __future__ import annotations
@@ -15,17 +16,30 @@ import yaml
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.conditions import ConditionRegistry
 from heroforge.engine.effects import BuffRegistry
-from heroforge.rules.loader import ConditionLoader
+from heroforge.engine.spells import SpellCompendium
+from heroforge.rules.loader import (
+    ConditionLoader,
+    SpellCompendiumLoader,
+)
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
 
 @pytest.fixture()
-def phb_names() -> set[str]:
-    path = RULES_DIR / "core" / "spells_phb.yaml"
-    with open(path) as f:
-        data = yaml.safe_load(f)
-    return {d["name"] for d in data["spells"]}
+def compendium_buff_names() -> set[str]:
+    """
+    Names registered in BuffRegistry via
+    SpellCompendiumLoader dual registration."""
+    comp = SpellCompendium()
+    reg = BuffRegistry()
+    loader = SpellCompendiumLoader(RULES_DIR)
+    for f in (
+        "core/spells_srd_0_3.yaml",
+        "core/spells_srd_4_6.yaml",
+        "core/spells_srd_7_9.yaml",
+    ):
+        loader.load(comp, f, buff_registry=reg)
+    return set(reg.all_names())
 
 
 @pytest.fixture()
@@ -45,14 +59,14 @@ class TestConditionsSrdYaml:
         names = [d["name"] for d in srd_data]
         assert len(names) == len(set(names))
 
-    def test_no_duplicates_with_phb(
+    def test_no_duplicates_with_compendium_buffs(
         self,
         srd_data: list[dict],
-        phb_names: set[str],
+        compendium_buff_names: set[str],
     ) -> None:
         for d in srd_data:
-            assert d["name"] not in phb_names, (
-                f"{d['name']!r} duplicates spells_phb.yaml"
+            assert d["name"] not in compendium_buff_names, (
+                f"{d['name']!r} duplicates a compendium buff spell"
             )
 
     def test_no_category_field(self, srd_data: list[dict]) -> None:
