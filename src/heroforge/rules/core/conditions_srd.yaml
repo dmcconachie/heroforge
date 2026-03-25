@@ -28,73 +28,31 @@ conditions:
         bonus_type: untyped
         value: -4
 
-  - name: "Energy Drained (1 level)"
+  - name: "Energy Drained"
+    requires_caster_level: true
     note: >-
-      -1 on attack rolls, saving throws,
-      skill checks, ability checks; -5 HP;
-      -1 effective level; lose one highest
-      spell slot
+      Per negative level: -1 on attack
+      rolls, saving throws, skill checks,
+      ability checks; -5 HP; -1 effective
+      level; lose one highest spell slot.
+      Set caster level to number of
+      negative levels.
     effects:
       - target: attack_all
         bonus_type: untyped
-        value: -1
+        value: "-caster_level"
       - target: fort_save
         bonus_type: untyped
-        value: -1
+        value: "-caster_level"
       - target: ref_save
         bonus_type: untyped
-        value: -1
+        value: "-caster_level"
       - target: will_save
         bonus_type: untyped
-        value: -1
+        value: "-caster_level"
       - target: hp_bonus
         bonus_type: untyped
-        value: -5
-
-  - name: "Energy Drained (2 levels)"
-    note: >-
-      -2 on attack rolls, saving throws,
-      skill checks, ability checks; -10 HP;
-      -2 effective levels; lose two highest
-      spell slots
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: -2
-      - target: fort_save
-        bonus_type: untyped
-        value: -2
-      - target: ref_save
-        bonus_type: untyped
-        value: -2
-      - target: will_save
-        bonus_type: untyped
-        value: -2
-      - target: hp_bonus
-        bonus_type: untyped
-        value: -10
-
-  - name: "Energy Drained (3 levels)"
-    note: >-
-      -3 on attack rolls, saving throws,
-      skill checks, ability checks; -15 HP;
-      -3 effective levels
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: -3
-      - target: fort_save
-        bonus_type: untyped
-        value: -3
-      - target: ref_save
-        bonus_type: untyped
-        value: -3
-      - target: will_save
-        bonus_type: untyped
-        value: -3
-      - target: hp_bonus
-        bonus_type: untyped
-        value: -15
+        value: "-5 * caster_level"
 
   - name: "Invisible"
     note: >-

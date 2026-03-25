@@ -39,6 +39,7 @@ class ConditionDefinition:
     note: str = ""
     effects: list[dict] = field(default_factory=list)
     source_book: str = "SRD"
+    requires_caster_level: bool = False
 
 
 class ConditionRegistry:

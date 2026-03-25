@@ -484,6 +484,7 @@ def _structure_condition_definition(
         note=val.get("note", ""),
         effects=val.get("effects", []),
         source_book=val.get("source_book", "SRD"),
+        requires_caster_level=bool(val.get("requires_caster_level", False)),
     )
 
 

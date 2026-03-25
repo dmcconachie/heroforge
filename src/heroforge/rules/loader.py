@@ -469,6 +469,7 @@ class ConditionLoader:
                 effects_raw=defn.effects,
                 source_book=defn.source_book,
                 note=defn.note,
+                requires_caster_level=(defn.requires_caster_level),
             )
             if buff is not None:
                 try:
