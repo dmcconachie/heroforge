@@ -40,11 +40,14 @@ src/heroforge/
 │   │                       #   spells, DCs, spells known
 │   ├── spells.py           # SpellEntry, SpellCompendium
 │   │                       #   (metadata for all spells)
+│   ├── conditions.py       # ConditionDefinition,
+│   │                       #   ConditionRegistry
 │   └── resources.py        # ResourceTracker (uses/day)
 │
 ├── rules/
 │   ├── schema.py           # cattrs Converter + hooks
 │   ├── loader.py           # StatsLoader, SpellsLoader,
+│   │                       #   ConditionLoader,
 │   │                       #   FeatsLoader, ClassesLoader,
 │   │                       #   RacesLoader, SkillsLoader,
 │   │                       #   TemplatesLoader,
@@ -357,15 +360,25 @@ WeaponDefinition, SkillDefinition, SpellEntry). Also exports
 builder functions.
 
 `rules/loader.py` contains one Loader class per data domain
-(StatsLoader, SpellsLoader, FeatsLoader, SkillsLoader,
-TemplatesLoader, ClassesLoader, RacesLoader, EquipmentLoader,
-DomainsLoader, SpellCompendiumLoader). Each reads its YAML
-file and populates the corresponding registry. Simple loaders
-(Classes, Skills, Domains, Equipment, SpellCompendium) use
+(StatsLoader, SpellsLoader, ConditionLoader, FeatsLoader,
+SkillsLoader, TemplatesLoader, ClassesLoader, RacesLoader,
+EquipmentLoader, DomainsLoader, SpellCompendiumLoader).
+Each reads its YAML file and populates the corresponding
+registry. Simple loaders (Classes, Skills, Domains,
+Equipment, SpellCompendium, Conditions) use
 `converter.structure(decl, DataClass)` for declarative
 YAML-to-dataclass mapping. Complex loaders (Spells, Feats,
 Templates) still use `build_*_from_yaml()` builders but
 delegate key validation to `_forbid_extra()`.
+
+Conditions have their own domain: `ConditionDefinition`
+and `ConditionRegistry` live in `engine/conditions.py`.
+The `ConditionLoader` reads `conditions_srd.yaml` (which
+uses a `conditions:` top-level key, not `spells:`),
+structures each entry as a `ConditionDefinition`, and
+also registers a `BuffDefinition` in the `BuffRegistry`
+via `build_buff_from_effects()` so the buff-toggle UI
+keeps working.
 
 YAML files under `rules/core/` contain full SRD data:
 - 16 base classes (11 PHB + 5 NPC) + 15 prestige classes
@@ -405,7 +418,8 @@ Single object holding all registries and the active
 `Character`. Created by `MainWindow`. Methods: `load_rules()`,
 `new_character()`, `set_character()`, `skill_total()`.
 
-Registries: `spell_registry` (BuffRegistry),
+Registries: `buff_registry` (BuffRegistry),
+`condition_registry` (ConditionRegistry),
 `spell_compendium` (SpellCompendium),
 `feat_registry` (FeatRegistry),
 `armor_registry` (ArmorRegistry),

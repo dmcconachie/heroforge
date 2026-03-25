@@ -17,7 +17,8 @@ This module is the only place where those two meet.
 Public API:
   LoaderError            — raised on malformed YAML
   StatsLoader            — stats.yaml → stat graph
-  SpellsLoader           — spell/condition/item YAML
+  SpellsLoader           — spell/item YAML
+  ConditionLoader        — condition YAML
   FeatsLoader            — feat YAML → FeatRegistry
   TemplatesLoader        — templates YAML
   ClassesLoader          — classes YAML
@@ -51,6 +52,9 @@ if TYPE_CHECKING:
         ClassRegistry,
         DomainRegistry,
         RaceRegistry,
+    )
+    from heroforge.engine.conditions import (
+        ConditionRegistry,
     )
     from heroforge.engine.effects import BuffRegistry
     from heroforge.engine.equipment import (
@@ -552,6 +556,121 @@ class SpellsLoader:
                 registered.append(name)
             except ValueError as e:
                 raise LoaderError(str(e)) from e
+
+        return registered
+
+
+# ---------------------------------------------------------------------------
+# ConditionLoader
+# ---------------------------------------------------------------------------
+
+
+class ConditionLoader:
+    """
+    Reads conditions_srd.yaml and populates both a
+    ConditionRegistry and a BuffRegistry.
+
+    Each condition is stored as a ConditionDefinition
+    (the canonical domain object) and also converted
+    into a BuffDefinition so the buff-toggle UI keeps
+    working.
+
+    Usage:
+        cond_reg = ConditionRegistry()
+        buff_reg = BuffRegistry()
+        loader = ConditionLoader(rules_dir)
+        loader.load(
+            cond_reg, buff_reg,
+            "core/conditions_srd.yaml",
+        )
+    """
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load(
+        self,
+        registry: "ConditionRegistry",
+        buff_registry: "BuffRegistry",
+        relative_path: str,
+    ) -> list[str]:
+        """
+        Load a conditions YAML file.
+
+        Returns list of condition names registered.
+        """
+        from heroforge.engine.conditions import (
+            ConditionDefinition,
+        )
+        from heroforge.engine.effects import (
+            BuffCategory,
+            build_buff_from_effects,
+        )
+        from heroforge.rules.schema import converter
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Conditions file not found: {path}")
+
+        try:
+            with open(path) as f:
+                data = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            raise LoaderError(f"YAML parse error in {path}: {e}") from e
+
+        if not isinstance(data, dict) or "conditions" not in data:
+            raise LoaderError(f"{path} must have a top-level 'conditions' key.")
+
+        registered: list[str] = []
+
+        for decl in data["conditions"]:
+            name = decl.get("name")
+            if not name:
+                raise LoaderError(f"Condition missing 'name': {decl}")
+
+            try:
+                defn = converter.structure(decl, ConditionDefinition)
+            except Exception as e:
+                raise LoaderError(
+                    f"Failed to load condition {name!r}: {e}"
+                ) from e
+
+            registry.register(defn)
+
+            # Also register as a buff so the toggle
+            # UI keeps working.
+            buff = build_buff_from_effects(
+                name=defn.name,
+                category=BuffCategory.CONDITION,
+                effects_raw=defn.effects,
+                source_book=defn.source_book,
+                note=defn.note,
+            )
+            if buff is not None:
+                try:
+                    buff_registry.register(buff)
+                except ValueError as e:
+                    raise LoaderError(str(e)) from e
+            elif defn.note:
+                # Note-only condition (no stat
+                # effects); still needs a buff
+                # entry for the toggle UI.
+                from heroforge.engine.effects import (
+                    BuffDefinition,
+                )
+
+                note_buff = BuffDefinition(
+                    name=defn.name,
+                    category=BuffCategory.CONDITION,
+                    source_book=defn.source_book,
+                    note=defn.note,
+                )
+                try:
+                    buff_registry.register(note_buff)
+                except ValueError as e:
+                    raise LoaderError(str(e)) from e
+
+            registered.append(name)
 
         return registered
 

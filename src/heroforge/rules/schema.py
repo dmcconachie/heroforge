@@ -31,6 +31,7 @@ from heroforge.engine.classes_races import (
     SaveProgressions,
     SpellcastingInfo,
 )
+from heroforge.engine.conditions import ConditionDefinition
 from heroforge.engine.equipment import (
     ArmorCategory,
     ArmorDefinition,
@@ -446,4 +447,34 @@ def _structure_race_definition(val: object, _: type) -> RaceDefinition:
 converter.register_structure_hook(
     RaceDefinition,
     _structure_race_definition,
+)
+
+# -------------------------------------------------------
+# ConditionDefinition: frozen dataclass
+# -------------------------------------------------------
+
+
+def _structure_condition_definition(
+    val: object,
+    _: type,
+) -> ConditionDefinition:
+    if not isinstance(val, dict):
+        msg = f"Cannot structure {type(val)} as ConditionDefinition"
+        raise TypeError(msg)
+    _forbid_extra(
+        val,
+        ConditionDefinition,
+        val.get("name", "?"),
+    )
+    return ConditionDefinition(
+        name=val["name"],
+        note=val.get("note", ""),
+        effects=val.get("effects", []),
+        source_book=val.get("source_book", "SRD"),
+    )
+
+
+converter.register_structure_hook(
+    ConditionDefinition,
+    _structure_condition_definition,
 )

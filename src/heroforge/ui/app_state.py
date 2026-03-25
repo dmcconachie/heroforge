@@ -21,10 +21,16 @@ from heroforge.engine.classes_races import (
     DomainRegistry,
     RaceRegistry,
 )
+from heroforge.engine.conditions import ConditionRegistry
 from heroforge.engine.effects import BuffRegistry
-from heroforge.engine.equipment import ArmorRegistry, WeaponRegistry
+from heroforge.engine.equipment import (
+    ArmorRegistry,
+    WeaponRegistry,
+)
 from heroforge.engine.feats import FeatRegistry
-from heroforge.engine.prerequisites import PrerequisiteChecker
+from heroforge.engine.prerequisites import (
+    PrerequisiteChecker,
+)
 from heroforge.engine.skills import (
     SkillRegistry,
     register_skills_on_character,
@@ -33,6 +39,7 @@ from heroforge.engine.spells import SpellCompendium
 from heroforge.engine.templates import TemplateRegistry
 from heroforge.rules.loader import (
     ClassesLoader,
+    ConditionLoader,
     DomainsLoader,
     EquipmentLoader,
     FeatsLoader,
@@ -68,6 +75,7 @@ class AppState:
 
     def __init__(self) -> None:
         self.buff_registry = BuffRegistry()
+        self.condition_registry = ConditionRegistry()
         self.spell_compendium = SpellCompendium()
         self.feat_registry = FeatRegistry()
         self.armor_registry = ArmorRegistry()
@@ -97,10 +105,23 @@ class AppState:
         prereq_checker = PrerequisiteChecker()
 
         SpellsLoader(rd).load(self.buff_registry, "core/spells_phb.yaml")
-        SpellsLoader(rd).load(self.buff_registry, "core/conditions_srd.yaml")
-        SpellsLoader(rd).load(self.buff_registry, "core/spells_srd_buffs.yaml")
-        SpellsLoader(rd).load(self.buff_registry, "core/class_buffs.yaml")
-        SpellsLoader(rd).load(self.buff_registry, "core/magic_items.yaml")
+        ConditionLoader(rd).load(
+            self.condition_registry,
+            self.buff_registry,
+            "core/conditions_srd.yaml",
+        )
+        SpellsLoader(rd).load(
+            self.buff_registry,
+            "core/spells_srd_buffs.yaml",
+        )
+        SpellsLoader(rd).load(
+            self.buff_registry,
+            "core/class_buffs.yaml",
+        )
+        SpellsLoader(rd).load(
+            self.buff_registry,
+            "core/magic_items.yaml",
+        )
         FeatsLoader(rd).load(
             self.feat_registry,
             "core/feats_phb.yaml",
