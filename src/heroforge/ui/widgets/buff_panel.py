@@ -158,12 +158,12 @@ class BuffPanel(QWidget):
 
     def __init__(
         self,
-        spell_registry: BuffRegistry,
+        buff_registry: BuffRegistry,
         character: Character,
         parent: QWidget | None = None,
     ) -> None:
         super().__init__(parent)
-        self._registry = spell_registry
+        self._registry = buff_registry
         self._character = character
         self._rows: dict[str, _BuffRow] = {}
 

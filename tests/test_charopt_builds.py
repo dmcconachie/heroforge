@@ -607,7 +607,7 @@ class TestCleric8WithBuffs:
         from heroforge.engine.effects import apply_buff
 
         base_atk = self.c.get("attack_melee")
-        bless = self.state.spell_registry.require("Bless")
+        bless = self.state.buff_registry.require("Bless")
         apply_buff(bless, self.c, caster_level=8)
         # Bless: +1 morale to attack
         assert self.c.get("attack_melee") == base_atk + 1
@@ -615,7 +615,7 @@ class TestCleric8WithBuffs:
     def test_bulls_strength_str_cascade(self) -> None:
         from heroforge.engine.effects import apply_buff
 
-        bulls = self.state.spell_registry.require("Bull's Strength")
+        bulls = self.state.buff_registry.require("Bull's Strength")
         apply_buff(bulls, self.c, caster_level=8)
         # +4 enhancement to STR → STR 18 → mod 4
         assert self.c.str_score == 18

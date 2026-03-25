@@ -134,7 +134,7 @@ class Sheet1Summary(QWidget):
         right.addWidget(HRule())
 
         self._buff_panel = BuffPanel(
-            app_state.spell_registry,
+            app_state.buff_registry,
             app_state.character,
         )
         self._buff_panel.buffs_changed.connect(self._on_buffs_changed)

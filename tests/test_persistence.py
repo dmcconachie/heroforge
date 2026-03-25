@@ -86,7 +86,7 @@ def fighter_char(app_state: AppState) -> Character:
     set_skill_ranks(c, "Swim", 4)
 
     # Activate Bless (CL 5)
-    bless = app_state.spell_registry.require("Bless")
+    bless = app_state.buff_registry.require("Bless")
     apply_buff(bless, c, caster_level=5)
 
     return c
@@ -162,7 +162,7 @@ class TestSaveCharacter:
 
     def test_active_buff_saved_with_cl(self, tmp_path: Path) -> None:
         state = make_app_state()
-        bless = state.spell_registry.require("Bless")
+        bless = state.buff_registry.require("Bless")
         apply_buff(bless, state.character, caster_level=7)
         path = tmp_path / "c.char.yaml"
         save_character(state.character, path)
@@ -306,7 +306,7 @@ class TestLoadCharacter:
 
     def test_active_buff_restored(self, tmp_path: Path) -> None:
         state = make_app_state()
-        apply_buff(state.spell_registry.require("Bless"), state.character)
+        apply_buff(state.buff_registry.require("Bless"), state.character)
         loaded, _ = self._save_and_load(tmp_path, state.character)
         assert loaded.is_buff_active("Bless")
 
@@ -314,7 +314,7 @@ class TestLoadCharacter:
         state = make_app_state()
         c = state.character
         # Register Bless but don't activate it
-        bless = state.spell_registry.require("Bless")
+        bless = state.buff_registry.require("Bless")
         pairs = bless.pool_entries(0, c)
         c.register_buff_definition("Bless", pairs)
         # Don't toggle it
@@ -323,7 +323,7 @@ class TestLoadCharacter:
 
     def test_buff_caster_level_preserved(self, tmp_path: Path) -> None:
         state = make_app_state()
-        sof = state.spell_registry.require("Shield of Faith")
+        sof = state.buff_registry.require("Shield of Faith")
         apply_buff(sof, state.character, caster_level=12)
         loaded, _ = self._save_and_load(tmp_path, state.character)
         state_obj = loaded.get_buff_state("Shield of Faith")
@@ -332,7 +332,7 @@ class TestLoadCharacter:
 
     def test_buff_value_correct_after_load(self, tmp_path: Path) -> None:
         state = make_app_state()
-        sof = state.spell_registry.require("Shield of Faith")
+        sof = state.buff_registry.require("Shield of Faith")
         apply_buff(sof, state.character, caster_level=12)
         loaded, _ = self._save_and_load(tmp_path, state.character)
         # Shield of Faith CL12 = 2 + 12//6 = 4 deflection

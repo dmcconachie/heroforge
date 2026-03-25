@@ -52,7 +52,7 @@ class AppState:
 
     Attributes
     ----------
-    spell_registry     : BuffRegistry — buff spells, conditions, items
+    buff_registry     : BuffRegistry — buff spells, conditions, items
     spell_compendium   : SpellCompendium — all 601 SRD spells
     feat_registry      : FeatRegistry
     armor_registry     : ArmorRegistry
@@ -67,7 +67,7 @@ class AppState:
     """
 
     def __init__(self) -> None:
-        self.spell_registry = BuffRegistry()
+        self.buff_registry = BuffRegistry()
         self.spell_compendium = SpellCompendium()
         self.feat_registry = FeatRegistry()
         self.armor_registry = ArmorRegistry()
@@ -96,22 +96,22 @@ class AppState:
 
         prereq_checker = PrerequisiteChecker()
 
-        SpellsLoader(rd).load(self.spell_registry, "core/spells_phb.yaml")
-        SpellsLoader(rd).load(self.spell_registry, "core/conditions_srd.yaml")
-        SpellsLoader(rd).load(self.spell_registry, "core/spells_srd_buffs.yaml")
-        SpellsLoader(rd).load(self.spell_registry, "core/class_buffs.yaml")
-        SpellsLoader(rd).load(self.spell_registry, "core/magic_items.yaml")
+        SpellsLoader(rd).load(self.buff_registry, "core/spells_phb.yaml")
+        SpellsLoader(rd).load(self.buff_registry, "core/conditions_srd.yaml")
+        SpellsLoader(rd).load(self.buff_registry, "core/spells_srd_buffs.yaml")
+        SpellsLoader(rd).load(self.buff_registry, "core/class_buffs.yaml")
+        SpellsLoader(rd).load(self.buff_registry, "core/magic_items.yaml")
         FeatsLoader(rd).load(
             self.feat_registry,
             "core/feats_phb.yaml",
             prereq_checker,
-            self.spell_registry,
+            self.buff_registry,
         )
         FeatsLoader(rd).load(
             self.feat_registry,
             "core/feats_srd.yaml",
             prereq_checker,
-            self.spell_registry,
+            self.buff_registry,
         )
         SkillsLoader(rd).load(self.skill_registry, "core/skills.yaml")
         TemplatesLoader(rd).load(self.template_registry, "core/templates.yaml")

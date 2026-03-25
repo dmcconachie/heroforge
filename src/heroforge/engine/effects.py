@@ -383,6 +383,106 @@ class BuffRegistry:
 
 
 # ---------------------------------------------------------------------------
+# build_buff_from_effects — shared by all domain loaders
+# ---------------------------------------------------------------------------
+
+# Condition keys map to Python callables.
+# The builder attaches these to BonusEffect.condition.
+CONDITION_REGISTRY: dict[str, object] = {
+    "humanoid_only": lambda char: (
+        getattr(char, "_race_type", "Humanoid") == "Humanoid"
+    ),
+}
+
+
+def build_buff_from_effects(
+    name: str,
+    category: BuffCategory,
+    effects_raw: list[dict],
+    source_book: str = "SRD",
+    note: str = "",
+    requires_caster_level: bool = False,
+    mutually_exclusive_with: (list[str] | None) = None,
+    condition_key: str = "",
+) -> BuffDefinition | None:
+    """
+    Build a BuffDefinition from raw effect dicts.
+
+    Returns None if *effects_raw* is empty.
+    Resolves BonusType enums and condition_keys.
+    Raises ValueError on unknown bonus_type or
+    condition_key.
+    """
+    if not effects_raw:
+        return None
+
+    from heroforge.engine.bonus import BonusType
+
+    bt_map: dict[str, BonusType] = {bt.value: bt for bt in BonusType}
+
+    effects: list[BonusEffect] = []
+    for eff_decl in effects_raw:
+        target = eff_decl.get("target")
+        if not target:
+            msg = f"{name!r}: effect missing 'target': {eff_decl}"
+            raise ValueError(msg)
+
+        bt_str = eff_decl.get("bonus_type", "untyped")
+        bonus_type = bt_map.get(bt_str)
+        if bonus_type is None:
+            msg = f"{name!r}: unknown bonus_type {bt_str!r}"
+            raise ValueError(msg)
+
+        raw_value = eff_decl.get("value", 0)
+        if isinstance(raw_value, bool):
+            raw_value = int(raw_value)
+
+        cond_key = eff_decl.get("condition_key", "")
+        eff = BonusEffect(
+            target=target,
+            bonus_type=bonus_type,
+            value=raw_value,
+            condition_key=cond_key,
+            source_label=eff_decl.get("source_label", ""),
+        )
+        if cond_key:
+            resolved = CONDITION_REGISTRY.get(cond_key)
+            if resolved is None:
+                msg = (
+                    f"{name!r}: unknown "
+                    f"condition_key {cond_key!r}. "
+                    f"Known: "
+                    f"{sorted(CONDITION_REGISTRY)}"
+                )
+                raise ValueError(msg)
+            eff.condition = resolved
+        effects.append(eff)
+
+    # Resolve spell-level condition_key too
+    ongoing = None
+    if condition_key:
+        resolved = CONDITION_REGISTRY.get(condition_key)
+        if resolved is None:
+            msg = f"{name!r}: unknown condition_key {condition_key!r}"
+            raise ValueError(msg)
+        ongoing = resolved
+
+    defn = BuffDefinition(
+        name=name,
+        category=category,
+        source_book=source_book,
+        effects=effects,
+        requires_caster_level=requires_caster_level,
+        mutually_exclusive_with=(mutually_exclusive_with or []),
+        note=note,
+        condition_key=condition_key,
+    )
+    if ongoing is not None:
+        defn.ongoing_condition = ongoing
+    return defn
+
+
+# ---------------------------------------------------------------------------
 # apply_buff / remove_buff
 # ---------------------------------------------------------------------------
 

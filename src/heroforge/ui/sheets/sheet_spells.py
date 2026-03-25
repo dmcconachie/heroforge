@@ -113,7 +113,7 @@ class SheetSpells(QWidget):
     Spells tab.
 
     Displays all SPELL-category BuffDefinitions from the
-    spell_registry as a scrollable checklist with toggle
+    buff_registry as a scrollable checklist with toggle
     checkboxes and optional caster-level spinboxes.
     """
 
@@ -166,7 +166,7 @@ class SheetSpells(QWidget):
         """Build spell rows grouped by source book."""
         from heroforge.engine.effects import BuffCategory
 
-        spells = self._state.spell_registry.by_category(BuffCategory.SPELL)
+        spells = self._state.buff_registry.by_category(BuffCategory.SPELL)
         spells.sort(key=lambda d: d.name)
 
         # Group by source book

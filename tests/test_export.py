@@ -78,7 +78,7 @@ def full_char(state: AppState) -> Character:
     set_skill_ranks(c, "Intimidate", 4)
 
     # Active buff
-    apply_buff(state.spell_registry.require("Bless"), c, caster_level=5)
+    apply_buff(state.buff_registry.require("Bless"), c, caster_level=5)
 
     return c
 
@@ -311,7 +311,7 @@ class TestGatherBuffs:
     def test_inactive_buffs_not_in_active(self) -> None:
         state = make_state()
         # Register Bless but don't activate
-        bless = state.spell_registry.require("Bless")
+        bless = state.buff_registry.require("Bless")
         pairs = bless.pool_entries(0, state.character)
         state.character.register_buff_definition("Bless", pairs)
         data = gather(state.character, state)
@@ -320,7 +320,7 @@ class TestGatherBuffs:
 
     def test_all_buffs_includes_inactive(self) -> None:
         state = make_state()
-        bless = state.spell_registry.require("Bless")
+        bless = state.buff_registry.require("Bless")
         pairs = bless.pool_entries(0, state.character)
         state.character.register_buff_definition("Bless", pairs)
         data = gather(state.character, state)
@@ -330,7 +330,7 @@ class TestGatherBuffs:
     def test_buff_caster_level_preserved(self) -> None:
         state = make_state()
         apply_buff(
-            state.spell_registry.require("Shield of Faith"),
+            state.buff_registry.require("Shield of Faith"),
             state.character,
             caster_level=12,
         )

@@ -263,7 +263,7 @@ def load_character(
         note = buff_dict.get("note", "")
 
         # Look up definition and register if present
-        buff_defn = app_state.spell_registry.get(buff_name)
+        buff_defn = app_state.buff_registry.get(buff_name)
         if buff_defn is not None:
             cl_val = int(caster_level) if caster_level is not None else 0
             pairs = buff_defn.pool_entries(cl_val, c)
