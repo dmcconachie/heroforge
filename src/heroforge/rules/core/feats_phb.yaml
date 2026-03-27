@@ -147,27 +147,6 @@ feats:
         value: 2
         source_label: "Greater Weapon Specialization"
 
-  - name: "Melee Weapon Mastery"
-    kind: always_on
-    source_book: PHB
-    note: >-
-      +2 attack and damage with chosen
-      damage type (slashing/piercing/bludgeoning)
-    prerequisites:
-      all_of:
-        - feat: "Weapon Focus"
-        - feat: "Weapon Specialization"
-        - stat: {key: bab, min: 8, label: BAB}
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: 2
-        source_label: "Melee Weapon Mastery (atk)"
-      - target: damage_all
-        bonus_type: untyped
-        value: 2
-        source_label: "Melee Weapon Mastery (dmg)"
-
   # --- Saving throws --------------------------------------------------------
 
   - name: "Iron Will"
@@ -650,93 +629,6 @@ feats:
         value: "$parameter"
         source_label: "Combat Expertise (bonus)"
 
-  - name: "Defensive Fighting"
-    kind: conditional
-    source_book: PHB
-    note: "-4 attack, +2 dodge AC (full-round action)"
-    prerequisites: null
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: -4
-        source_label: "Defensive Fighting (penalty)"
-      - target: ac
-        bonus_type: dodge
-        value: 2
-        source_label: "Defensive Fighting (bonus)"
-
-  - name: "Total Defense"
-    kind: conditional
-    source_book: PHB
-    note: "+4 dodge AC, no attacks allowed"
-    prerequisites: null
-    effects:
-      - target: ac
-        bonus_type: dodge
-        value: 4
-        source_label: "Total Defense"
-
-  - name: "Fighting Defensively"
-    kind: conditional
-    source_book: PHB
-    note: "-4 attack, +2 dodge AC (standard action)"
-    prerequisites: null
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: -4
-        source_label: "Fighting Defensively (penalty)"
-      - target: ac
-        bonus_type: dodge
-        value: 2
-        source_label: "Fighting Defensively (bonus)"
-
-  - name: "Expertise (Total)"
-    kind: conditional
-    source_book: PHB
-    note: "-5 attack, +5 dodge AC (via Combat Expertise at max)"
-    prerequisites:
-      feat: "Combat Expertise"
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: -5
-        source_label: "Expertise Total (penalty)"
-      - target: ac
-        bonus_type: dodge
-        value: 5
-        source_label: "Expertise Total (bonus)"
-
-  - name: "Reckless Offense"
-    kind: conditional
-    source_book: PHB
-    note: "+2 attack, -4 AC"
-    prerequisites:
-      stat: {key: bab, min: 1, label: BAB}
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: 2
-        source_label: "Reckless Offense (bonus)"
-      - target: ac
-        bonus_type: untyped
-        value: -4
-        source_label: "Reckless Offense (penalty)"
-
-  - name: "Rapid Strike"
-    kind: conditional
-    source_book: PHB
-    note: "+2 attack on full attack when using light weapon in off-hand"
-    prerequisites:
-      all_of:
-        - feat: "Two-Weapon Fighting"
-        - stat: {key: bab, min: 6, label: BAB}
-    effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: 2
-        source_label: "Rapid Strike"
-
   # =========================================================================
   # METAMAGIC / SPELLCASTING (passive chain only)
   # No pool effects; exist for PrC prereq gating.
@@ -1050,10 +942,3 @@ feats:
         bonus_type: untyped
         value: 2
         source_label: "Stealthy"
-
-  - name: "Trackless Step"
-    kind: passive
-    source_book: PHB
-    note: "Cannot be tracked in natural surroundings"
-    prerequisites: null
-    effects: []

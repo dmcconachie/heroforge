@@ -367,16 +367,15 @@ class TestBuildFeatFromYaml:
     def test_conditional_no_parameter(self) -> None:
         defn = build_feat_from_yaml(
             {
-                "name": "Defensive Fighting",
+                "name": "Dodge",
                 "kind": "conditional",
                 "prerequisites": None,
                 "effects": [
                     {
-                        "target": "attack_all",
-                        "bonus_type": "untyped",
-                        "value": -4,
+                        "target": "ac",
+                        "bonus_type": "dodge",
+                        "value": 1,
                     },
-                    {"target": "ac", "bonus_type": "dodge", "value": 2},
                 ],
             }
         )
@@ -515,9 +514,8 @@ class TestFeatsLoader:
         feat_reg, _, _ = loaded_registries()
         for feat_name in (
             "Combat Expertise",
-            "Defensive Fighting",
-            "Total Defense",
-            "Fighting Defensively",
+            "Dodge",
+            "Power Attack",
         ):
             defn = feat_reg.require(feat_name)
             assert defn.kind == FeatKind.CONDITIONAL
@@ -559,10 +557,11 @@ class TestFeatsLoader:
         assert "Toughness" not in buff_reg
         assert "Iron Will" not in buff_reg
 
-    def test_conditional_buffs_registered_in_buff_registry(self) -> None:
+    def test_conditional_buffs_registered_in_buff_registry(
+        self,
+    ) -> None:
         _, _, buff_reg = loaded_registries()
-        assert "Defensive Fighting" in buff_reg
-        assert "Total Defense" in buff_reg
+        assert "Dodge" in buff_reg
 
     def test_load_raises_on_missing_file(self, tmp_path: Path) -> None:
         from heroforge.rules.loader import FeatsLoader, LoaderError
@@ -643,12 +642,14 @@ class TestCharacterAddRemoveFeat:
         c.add_feat("Iron Will", defn)  # no-op
         assert c.will == base_will + 2
 
-    def test_add_conditional_feat_registers_buff_not_activated(self) -> None:
-        c = fighter(6)
+    def test_add_conditional_feat_registers_buff_not_activated(
+        self,
+    ) -> None:
+        c = fresh_char()
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Defensive Fighting", feat_reg.require("Defensive Fighting"))
-        assert any(f["name"] == "Defensive Fighting" for f in c.feats)
-        assert not c.is_buff_active("Defensive Fighting")
+        c.add_feat("Dodge", feat_reg.require("Dodge"))
+        assert any(f["name"] == "Dodge" for f in c.feats)
+        assert not c.is_buff_active("Dodge")
 
     def test_remove_always_on_feat_reverts_bonus(self) -> None:
         c = fresh_char()
@@ -738,32 +739,22 @@ class TestCharacterAddRemoveFeat:
 
 
 class TestConditionalFeatActivation:
-    def test_toggle_defensive_fighting_on(self) -> None:
-        c = fighter(6)
-        base_atk = c.get("attack_melee")
-        base_ac = c.ac
-        feat_reg, _, _ = loaded_registries()
-        c.add_feat("Defensive Fighting", feat_reg.require("Defensive Fighting"))
-        c.toggle_buff("Defensive Fighting", True)
-        assert c.get("attack_melee") == base_atk - 4
-        assert c.ac == base_ac + 2
-
-    def test_toggle_defensive_fighting_off_reverts(self) -> None:
-        c = fighter(6)
-        base_atk = c.get("attack_melee")
-        feat_reg, _, _ = loaded_registries()
-        c.add_feat("Defensive Fighting", feat_reg.require("Defensive Fighting"))
-        c.toggle_buff("Defensive Fighting", True)
-        c.toggle_buff("Defensive Fighting", False)
-        assert c.get("attack_melee") == base_atk
-
-    def test_total_defense_ac_bonus(self) -> None:
+    def test_toggle_dodge_on(self) -> None:
         c = fresh_char()
         base_ac = c.ac
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Total Defense", feat_reg.require("Total Defense"))
-        c.toggle_buff("Total Defense", True)
-        assert c.ac == base_ac + 4
+        c.add_feat("Dodge", feat_reg.require("Dodge"))
+        c.toggle_buff("Dodge", True)
+        assert c.ac == base_ac + 1
+
+    def test_toggle_dodge_off_reverts(self) -> None:
+        c = fresh_char()
+        base_ac = c.ac
+        feat_reg, _, _ = loaded_registries()
+        c.add_feat("Dodge", feat_reg.require("Dodge"))
+        c.toggle_buff("Dodge", True)
+        c.toggle_buff("Dodge", False)
+        assert c.ac == base_ac
 
     def test_power_attack_with_parameter_3(self) -> None:
         """
