@@ -97,7 +97,11 @@ class TestSkillsYaml:
     def test_all_abilities_valid(self) -> None:
         import yaml
 
-        valid = {"str", "dex", "con", "int", "wis", "cha"}
+        valid = {
+            "str", "dex", "con",
+            "int", "wis", "cha",
+            "none",
+        }
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
         bad = [

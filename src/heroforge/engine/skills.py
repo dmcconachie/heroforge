@@ -181,10 +181,15 @@ def register_skills_on_character(
 
         compute_fn = _make_skill_compute(skill_def.ability, key)
 
+        if skill_def.ability == "none":
+            inputs: list[str] = []
+        else:
+            inputs = [f"{skill_def.ability}_mod"]
+
         node = StatNode(
             key=key,
             base=None,
-            inputs=[f"{skill_def.ability}_mod"],
+            inputs=inputs,
             pools=[key],
             compute=compute_fn,
             description=skill_def.name,
@@ -375,7 +380,10 @@ def compute_skill_total(
                          and character is wearing armor.
     """
     ranks = character.skills.get(skill_def.name, 0)
-    ability_mod = character.get_ability_modifier(skill_def.ability)
+    if skill_def.ability == "none":
+        ability_mod = 0
+    else:
+        ability_mod = character.get_ability_modifier(skill_def.ability)
 
     # Pool total includes ranks + feat bonuses + item bonuses
     pool = character.get_pool(skill_def.key)

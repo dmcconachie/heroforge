@@ -312,6 +312,15 @@ skills:
       - {skill: Bluff, bonus: 2}
     description: "Palm objects; pick pockets; conceal weapons"
 
+  - name: Speak Language
+    key: skill_speak_language
+    ability: none
+    trained_only: true
+    armor_check: false
+    description: >-
+      Each rank grants one new language;
+      no checks, no ability modifier
+
   - name: Spellcraft
     key: skill_spellcraft
     ability: int
