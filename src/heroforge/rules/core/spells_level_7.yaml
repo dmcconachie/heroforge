@@ -1,0 +1,155 @@
+# spells_level_7.yaml
+#
+# SRD spell compendium entries.
+#
+# Spells with stat effects include
+# inline effects: entries.
+
+spell_compendium:
+
+  - name: "Animate Plants"
+    level: {Druid: 7}
+
+  - name: "Arcane Sight (Greater)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Blasphemy"
+    level: {Cleric: 7}
+
+  - name: "Changestaff"
+    level: {Druid: 7}
+
+  - name: "Control Undead"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Control Weather"
+    level: {Cleric: 7, Druid: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Creeping Doom"
+    level: {Druid: 7}
+
+  - name: "Cure Serious Wounds (Mass)"
+    level: {Cleric: 7, Druid: 8}
+
+  - name: "Delayed Blast Fireball"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Destruction"
+    level: {Cleric: 7}
+
+  - name: "Dictum"
+    level: {Cleric: 7}
+
+  - name: "Ethereal Jaunt"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Finger of Death"
+    level: {Druid: 8, Sorcerer: 7, Wizard: 7}
+
+  - name: "Fire Storm"
+    level: {Cleric: 8, Druid: 7}
+
+  - name: "Forcecage"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Grasping Hand"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Hold Person (Mass)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Holy Word"
+    level: {Cleric: 7}
+
+  - name: "Inflict Serious Wounds (Mass)"
+    level: {Cleric: 7}
+
+  - name: "Insanity"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Instant Summons"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Invisibility (Mass)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Limited Wish"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Mage's Magnificent Mansion"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Mage's Sword"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Phase Door"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Power Word Blind"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Prismatic Spray"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Refuge"
+    level: {Cleric: 7, Sorcerer: 9, Wizard: 9}
+
+  - name: "Regenerate"
+    level: {Cleric: 7, Druid: 9}
+
+  - name: "Restoration (Greater)"
+    level: {Cleric: 7}
+
+  - name: "Resurrection"
+    level: {Cleric: 7}
+
+  - name: "Reverse Gravity"
+    level: {Druid: 8, Sorcerer: 7, Wizard: 7}
+
+  - name: "Sequester"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Shadow Conjuration (Greater)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Simulacrum"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Spell Turning"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Statue"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Summon Monster VII"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Summon Nature's Ally VII"
+    level: {Druid: 7}
+
+  - name: "Sunbeam"
+    level: {Druid: 7}
+
+  - name: "Symbol of Stunning"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Symbol of Weakness"
+    level: {Cleric: 7, Sorcerer: 7, Wizard: 7}
+
+  - name: "Teleport (Greater)"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Teleport Object"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Transmute Metal to Wood"
+    level: {Druid: 7}
+
+  - name: "Vision"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Waves of Exhaustion"
+    level: {Sorcerer: 7, Wizard: 7}
+
+  - name: "Word of Chaos"
+    level: {Cleric: 7}

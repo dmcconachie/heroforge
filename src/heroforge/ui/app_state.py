@@ -150,18 +150,13 @@ class AppState:
         # Load spell compendium (all spells, with
         # dual registration of buff effects)
         scl = SpellCompendiumLoader(rd)
-        for sp_file in (
-            "core/spells_srd_0_3.yaml",
-            "core/spells_srd_4_6.yaml",
-            "core/spells_srd_7_9.yaml",
-        ):
-            sp_path = rd / sp_file
-            if sp_path.exists():
-                scl.load(
-                    self.spell_compendium,
-                    sp_file,
-                    buff_registry=(self.buff_registry),
-                )
+        for lvl in range(10):
+            sp_file = f"core/spells_level_{lvl}.yaml"
+            scl.load(
+                self.spell_compendium,
+                sp_file,
+                buff_registry=self.buff_registry,
+            )
 
         # Store prereq checker for UI access
         self.prereq_checker = prereq_checker

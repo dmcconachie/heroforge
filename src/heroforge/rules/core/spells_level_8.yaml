@@ -1,0 +1,223 @@
+# spells_level_8.yaml
+#
+# SRD spell compendium entries.
+#
+# Spells with stat effects include
+# inline effects: entries.
+
+spell_compendium:
+
+  - name: "Animal Shapes"
+    level: {Druid: 8}
+
+  - name: "Antipathy"
+    level: {Druid: 9, Sorcerer: 8, Wizard: 8}
+
+  - name: "Binding"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Clenched Fist"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Cloak of Chaos"
+    level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (chaotic characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Clone"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Control Plants"
+    level: {Druid: 8}
+
+  - name: "Create Greater Undead"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Cure Critical Wounds (Mass)"
+    level: {Cleric: 8, Druid: 9}
+
+  - name: "Demand"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Dimensional Lock"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Discern Location"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Earthquake"
+    level: {Cleric: 8, Druid: 8}
+
+  - name: "Holy Aura"
+    level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (good characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Horrid Wilting"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Incendiary Cloud"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Inflict Critical Wounds (Mass)"
+    level: {Cleric: 8}
+
+  - name: "Iron Body"
+    level: {Sorcerer: 8, Wizard: 8}
+    note: >-
+      +6 enhancement STR; DR 15/adamantine; immune to blindness, critical
+      hits, ability damage, disease, drowning, electricity, poison, stunning;
+      -6 DEX (min 1); half speed
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 6
+      - target: dex_score
+        bonus_type: untyped
+        value: -6
+
+  - name: "Maze"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Mind Blank"
+    level: {Sorcerer: 8, Wizard: 8}
+    note: >-
+      Immune to divination and mental effects; +8 resistance vs mind-
+      affecting (note only)
+
+  - name: "Moment of Prescience"
+    level: {Sorcerer: 8, Wizard: 8}
+    note: >-
+      +1/CL insight bonus (max +25) to one attack, check, or save (one use)
+    requires_caster_level: true
+    effects:
+      - target: attack_all
+        bonus_type: insight
+        value: "min(25, caster_level)"
+
+  - name: "Planar Ally (Greater)"
+    level: {Cleric: 8}
+
+  - name: "Planar Binding (Greater)"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Polar Ray"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Polymorph Any Object"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Power Word Stun"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Prismatic Wall"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Protection from Spells"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Prying Eyes (Greater)"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Repel Metal or Stone"
+    level: {Druid: 8}
+
+  - name: "Scintillating Pattern"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Screen"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Shadow Evocation (Greater)"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Shield of Law"
+    level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (lawful characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Spell Immunity (Greater)"
+    level: {Cleric: 8}
+
+  - name: "Summon Monster VIII"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Summon Nature's Ally VIII"
+    level: {Druid: 8}
+
+  - name: "Sunburst"
+    level: {Druid: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Symbol of Death"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Symbol of Insanity"
+    level: {Cleric: 8, Sorcerer: 8, Wizard: 8}
+
+  - name: "Sympathy"
+    level: {Druid: 9, Sorcerer: 8, Wizard: 8}
+
+  - name: "Telekinetic Sphere"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Temporal Stasis"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Trap the Soul"
+    level: {Sorcerer: 8, Wizard: 8}
+
+  - name: "Unholy Aura"
+    level: {Cleric: 8}
+    note: "+4 deflection to AC, +4 resistance on saves (evil characters)"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 4
+      - target: fort_save
+        bonus_type: resistance
+        value: 4
+      - target: ref_save
+        bonus_type: resistance
+        value: 4
+      - target: will_save
+        bonus_type: resistance
+        value: 4
+
+  - name: "Whirlwind"
+    level: {Druid: 8}

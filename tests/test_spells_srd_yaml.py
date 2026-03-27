@@ -15,37 +15,37 @@ from heroforge.rules.loader import SpellCompendiumLoader
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
+_SPELL_FILES = [f"core/spells_level_{i}.yaml" for i in range(10)]
+
+
+def _load_all(
+    comp: SpellCompendium | None = None,
+    reg: BuffRegistry | None = None,
+) -> SpellCompendium:
+    if comp is None:
+        comp = SpellCompendium()
+    loader = SpellCompendiumLoader(RULES_DIR)
+    for f in _SPELL_FILES:
+        loader.load(comp, f, buff_registry=reg)
+    return comp
+
 
 class TestSpellCompendium:
-    def test_load_all_three_files(self) -> None:
-        comp = SpellCompendium()
-        loader = SpellCompendiumLoader(RULES_DIR)
-        for f in (
-            "core/spells_srd_0_3.yaml",
-            "core/spells_srd_4_6.yaml",
-            "core/spells_srd_7_9.yaml",
-        ):
-            loader.load(comp, f)
+    def test_load_all_files(self) -> None:
+        comp = _load_all()
         assert len(comp) >= 500
 
     def test_all_entries_have_levels(
         self,
     ) -> None:
-        comp = SpellCompendium()
-        loader = SpellCompendiumLoader(RULES_DIR)
-        for f in (
-            "core/spells_srd_0_3.yaml",
-            "core/spells_srd_4_6.yaml",
-            "core/spells_srd_7_9.yaml",
-        ):
-            loader.load(comp, f)
+        comp = _load_all()
         for entry in comp.all_entries():
-            assert len(entry.level) > 0, f"{entry.name!r} has no level info"
+            assert len(entry.level) > 0, f"{entry.name!r} has no level"
 
     def test_fireball_is_wiz3(self) -> None:
         comp = SpellCompendium()
         loader = SpellCompendiumLoader(RULES_DIR)
-        loader.load(comp, "core/spells_srd_0_3.yaml")
+        loader.load(comp, "core/spells_level_3.yaml")
         fb = comp.get("Fireball")
         assert fb is not None
         assert fb.level.get("Sorcerer") == 3
@@ -54,7 +54,7 @@ class TestSpellCompendium:
     def test_by_class_and_level(self) -> None:
         comp = SpellCompendium()
         loader = SpellCompendiumLoader(RULES_DIR)
-        loader.load(comp, "core/spells_srd_0_3.yaml")
+        loader.load(comp, "core/spells_level_0.yaml")
         wiz0 = comp.by_class_and_level("Wizard", 0)
         names = {s.name for s in wiz0}
         assert "Detect Magic" in names
@@ -67,19 +67,8 @@ class TestCompendiumBuffRegistration:
     register in BuffRegistry via dual registration."""
 
     def setup_method(self) -> None:
-        self.comp = SpellCompendium()
         self.reg = BuffRegistry()
-        loader = SpellCompendiumLoader(RULES_DIR)
-        for f in (
-            "core/spells_srd_0_3.yaml",
-            "core/spells_srd_4_6.yaml",
-            "core/spells_srd_7_9.yaml",
-        ):
-            loader.load(
-                self.comp,
-                f,
-                buff_registry=self.reg,
-            )
+        self.comp = _load_all(reg=self.reg)
 
     def test_buff_count_at_least_twenty(
         self,

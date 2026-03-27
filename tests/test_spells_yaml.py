@@ -32,11 +32,7 @@ from heroforge.rules.loader import SpellCompendiumLoader
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
-COMPENDIUM_FILES = (
-    "core/spells_srd_0_3.yaml",
-    "core/spells_srd_4_6.yaml",
-    "core/spells_srd_7_9.yaml",
-)
+COMPENDIUM_FILES = tuple(f"core/spells_level_{i}.yaml" for i in range(10))
 
 
 # ===========================================================

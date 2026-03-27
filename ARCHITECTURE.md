@@ -64,9 +64,9 @@ src/heroforge/
 │       ├── races.yaml        # 7 core races
 │       ├── feats_phb.yaml    # 86 PHB feats
 │       ├── feats_srd.yaml    # 32 additional SRD feats
-│       ├── spells_srd_0_3.yaml    # Spell compendium
-│       ├── spells_srd_4_6.yaml    #   (601 spells total
-│       ├── spells_srd_7_9.yaml    #   across 3 files)
+│       ├── spells_level_0..9.yaml  # Spell compendium
+│       │                           #   (601 spells, 1
+│       │                           #   file per level)
 │       ├── spell_lists.yaml  # Class spell lists
 │       ├── conditions_srd.yaml  # 20 conditions
 │       ├── templates.yaml    # 12 creature templates

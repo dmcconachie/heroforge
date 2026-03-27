@@ -1,0 +1,445 @@
+# spells_level_1.yaml
+#
+# SRD spell compendium entries.
+#
+# Spells with stat effects include
+# inline effects: entries.
+
+spell_compendium:
+
+  - name: "Alarm"
+    level: {Bard: 1, Ranger: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Animal Messenger"
+    level: {Bard: 2, Druid: 2, Ranger: 1}
+
+  - name: "Animate Rope"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Bane"
+    level: {Cleric: 1}
+
+  - name: "Bless"
+    level: {Cleric: 1, Paladin: 1}
+    note: "+1 morale bonus on attack rolls and saves vs. fear"
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: 1
+
+  - name: "Bless Water"
+    level: {Cleric: 1, Paladin: 1}
+
+  - name: "Bless Weapon"
+    level: {Paladin: 1}
+    note: "Weapon is +1 enhancement and good- aligned for overcoming DR"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 1
+      - target: damage_all
+        bonus_type: enhancement
+        value: 1
+
+  - name: "Burning Hands"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Calm Animals"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Cause Fear"
+    level: {Bard: 1, Cleric: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Charm Animal"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Charm Person"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Chill Touch"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Color Spray"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Command"
+    level: {Cleric: 1}
+
+  - name: "Comprehend Languages"
+    level: {Bard: 1, Cleric: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Confusion (Lesser)"
+    level: {Bard: 1}
+
+  - name: "Cure Light Wounds"
+    level: {Bard: 1, Cleric: 1, Druid: 1, Paladin: 1, Ranger: 2}
+
+  - name: "Curse Water"
+    level: {Cleric: 1}
+
+  - name: "Deathwatch"
+    level: {Cleric: 1}
+
+  - name: "Delay Poison"
+    level: {Bard: 2, Cleric: 2, Druid: 2, Paladin: 2, Ranger: 1}
+
+  - name: "Detect Animals or Plants"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Detect Chaos"
+    level: {Cleric: 1}
+
+  - name: "Detect Evil"
+    level: {Cleric: 1}
+
+  - name: "Detect Good"
+    level: {Cleric: 1}
+
+  - name: "Detect Law"
+    level: {Cleric: 1}
+
+  - name: "Detect Secret Doors"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Detect Snares and Pits"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Detect Undead"
+    level: {Cleric: 1, Paladin: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Disguise Self"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Divine Favor"
+    level: {Cleric: 1, Paladin: 1}
+    note: "Luck bonus on attack and damage; scales with CL (max +3)"
+    requires_caster_level: true
+    effects:
+      - target: attack_all
+        bonus_type: luck
+        value: "max(1, caster_level // 3)"
+      - target: damage_all
+        bonus_type: luck
+        value: "max(1, caster_level // 3)"
+
+  - name: "Doom"
+    level: {Cleric: 1}
+    note: >-
+      Target is shaken: -2 on attacks, saves, skill checks, ability checks
+    effects:
+      - target: attack_all
+        bonus_type: morale
+        value: -2
+      - target: fort_save
+        bonus_type: morale
+        value: -2
+      - target: ref_save
+        bonus_type: morale
+        value: -2
+      - target: will_save
+        bonus_type: morale
+        value: -2
+
+  - name: "Endure Elements"
+    level:
+      Cleric: 1
+      Druid: 1
+      Paladin: 1
+      Ranger: 1
+      Sorcerer: 1
+      Wizard: 1
+
+  - name: "Enlarge Person"
+    level: {Sorcerer: 1, Wizard: 1}
+    note: "+2 STR, -2 DEX (humanoids only; size change handled separately)"
+    condition_key: "humanoid_only"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: 2
+        condition_key: humanoid_only
+      - target: dex_score
+        bonus_type: enhancement
+        value: -2
+        condition_key: humanoid_only
+
+  - name: "Entangle"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Entropic Shield"
+    level: {Cleric: 1}
+    note: "20%% miss chance on ranged attacks against you (note only)"
+
+  - name: "Erase"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Expeditious Retreat"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+    note: "+30 ft. enhancement to speed"
+    effects:
+      - target: speed
+        bonus_type: enhancement
+        value: 30
+
+  - name: "Faerie Fire"
+    level: {Druid: 1}
+
+  - name: "Feather Fall"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Floating Disk"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Goodberry"
+    level: {Druid: 1}
+
+  - name: "Grease"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Hide from Animals"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Hide from Undead"
+    level: {Cleric: 1}
+
+  - name: "Hideous Laughter"
+    level: {Bard: 1, Sorcerer: 2, Wizard: 2}
+
+  - name: "Hold Portal"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Hypnotism"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Identify"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Inflict Light Wounds"
+    level: {Cleric: 1}
+
+  - name: "Jump"
+    level: {Druid: 1, Ranger: 1, Sorcerer: 1, Wizard: 1}
+    note: "+10 enhancement on Jump checks (+20 at CL 5, +30 at CL 9)"
+    requires_caster_level: true
+    effects:
+      - target: skill_jump
+        bonus_type: enhancement
+        value: "10 + 10 * min(2, (caster_level - 1) // 4)"
+
+  - name: "Longstrider"
+    level: {Druid: 1, Ranger: 1}
+    note: "+10 ft. enhancement to speed"
+    effects:
+      - target: speed
+        bonus_type: enhancement
+        value: 10
+
+  - name: "Mage Armor"
+    level: {Sorcerer: 1, Wizard: 1}
+    note: "+4 armor bonus to AC (or +6 with Armored Mage class feature)"
+    effects:
+      - target: ac
+        bonus_type: armor
+        value: 4
+
+  - name: "Magic Aura"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Magic Fang"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Magic Missile"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Magic Mouth"
+    level: {Bard: 1, Sorcerer: 2, Wizard: 2}
+
+  - name: "Magic Stone"
+    level: {Cleric: 1, Druid: 1}
+
+  - name: "Magic Weapon"
+    level: {Cleric: 1, Paladin: 1, Sorcerer: 1, Wizard: 1}
+    note: "+1 enhancement to attack and damage"
+    effects:
+      - target: attack_all
+        bonus_type: enhancement
+        value: 1
+      - target: damage_all
+        bonus_type: enhancement
+        value: 1
+
+  - name: "Mount"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Obscure Object"
+    level: {Bard: 1, Cleric: 3, Sorcerer: 2, Wizard: 2}
+
+  - name: "Obscuring Mist"
+    level: {Cleric: 1, Druid: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Pass without Trace"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "Produce Flame"
+    level: {Druid: 1}
+
+  - name: "Protection from Chaos"
+    level: {Cleric: 1, Paladin: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs chaotic creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
+
+  - name: "Protection from Evil"
+    level: {Cleric: 1, Paladin: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs evil creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
+
+  - name: "Protection from Good"
+    level: {Cleric: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs good creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
+
+  - name: "Protection from Law"
+    level: {Cleric: 1, Sorcerer: 1, Wizard: 1}
+    note: "+2 deflection AC, +2 resistance on saves vs lawful creatures"
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: 2
+      - target: fort_save
+        bonus_type: resistance
+        value: 2
+      - target: ref_save
+        bonus_type: resistance
+        value: 2
+      - target: will_save
+        bonus_type: resistance
+        value: 2
+
+  - name: "Ray of Enfeeblement"
+    level: {Sorcerer: 1, Wizard: 1}
+    note: >-
+      -1d6+1 per 2 CL (max -5) STR penalty (use parameter for rolled value)
+    requires_caster_level: true
+    effects:
+      - target: str_score
+        bonus_type: untyped
+        value: "-(1 + min(5, caster_level // 2))"
+
+  - name: "Reduce Person"
+    level: {Sorcerer: 1, Wizard: 1}
+    note: "-2 STR, +2 DEX (humanoids only; size change handled separately)"
+    condition_key: "humanoid_only"
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: -2
+        condition_key: humanoid_only
+      - target: dex_score
+        bonus_type: enhancement
+        value: 2
+        condition_key: humanoid_only
+
+  - name: "Remove Fear"
+    level: {Bard: 1, Cleric: 1}
+
+  - name: "Resist Energy"
+    level:
+      Cleric: 2
+      Druid: 2
+      Paladin: 2
+      Ranger: 1
+      Sorcerer: 2
+      Wizard: 2
+    note: "Resist 10 points of chosen energy type per attack (note only)"
+
+  - name: "Restoration (Lesser)"
+    level: {Cleric: 2, Druid: 2, Paladin: 1}
+
+  - name: "Sanctuary"
+    level: {Cleric: 1}
+
+  - name: "Shield"
+    level: {Sorcerer: 1, Wizard: 1}
+    note: "+4 shield bonus to AC"
+    effects:
+      - target: ac
+        bonus_type: shield
+        value: 4
+
+  - name: "Shield of Faith"
+    level: {Cleric: 1}
+    note: "Deflection bonus to AC; scales with CL"
+    requires_caster_level: true
+    effects:
+      - target: ac
+        bonus_type: deflection
+        value: "2 + caster_level // 6"
+
+  - name: "Shillelagh"
+    level: {Druid: 1}
+
+  - name: "Shocking Grasp"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Silent Image"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Sleep"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Speak with Animals"
+    level: {Bard: 3, Druid: 1, Ranger: 1}
+
+  - name: "Summon Monster I"
+    level: {Bard: 1, Cleric: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Summon Nature's Ally I"
+    level: {Druid: 1, Ranger: 1}
+
+  - name: "True Strike"
+    level: {Sorcerer: 1, Wizard: 1}
+
+  - name: "Undetectable Alignment"
+    level: {Bard: 1, Cleric: 2, Paladin: 2}
+
+  - name: "Unseen Servant"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}
+
+  - name: "Ventriloquism"
+    level: {Bard: 1, Sorcerer: 1, Wizard: 1}

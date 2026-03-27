@@ -33,12 +33,12 @@ def compendium_buff_names() -> set[str]:
     comp = SpellCompendium()
     reg = BuffRegistry()
     loader = SpellCompendiumLoader(RULES_DIR)
-    for f in (
-        "core/spells_srd_0_3.yaml",
-        "core/spells_srd_4_6.yaml",
-        "core/spells_srd_7_9.yaml",
-    ):
-        loader.load(comp, f, buff_registry=reg)
+    for i in range(10):
+        loader.load(
+            comp,
+            f"core/spells_level_{i}.yaml",
+            buff_registry=reg,
+        )
     return set(reg.all_names())
 
 
