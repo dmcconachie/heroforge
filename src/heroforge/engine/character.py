@@ -1291,6 +1291,7 @@ class Character:
 
     def _invalidate_class_stats(self) -> None:
         """Invalidate all stats derived from class levels."""
+        self._apply_class_feature_effects()
         self._graph.invalidate("bab")
         self._graph.invalidate("fort_save")
         self._graph.invalidate("ref_save")
@@ -1307,6 +1308,69 @@ class Character:
                 "attack_ranged",
             }
         )
+
+    def _apply_class_feature_effects(self) -> None:
+        """
+        Auto-apply always-on class feature effects
+        based on current class levels.
+
+        Called whenever class levels change. Clears
+        stale features and applies current ones.
+        """
+        from heroforge.engine.effects import (
+            BuffCategory,
+            build_buff_from_effects,
+        )
+
+        reg = self._class_registry_ref
+        if reg is None:
+            return
+
+        # Track which feature keys are currently valid
+        active_keys: set[str] = set()
+
+        for cn, lvl in self.class_level_map.items():
+            defn = reg.get(cn)
+            if defn is None:
+                continue
+            for feat in defn.class_features:
+                if feat.level > lvl:
+                    continue
+                if not feat.effects:
+                    continue
+                # Skip toggleable features (have a
+                # buff_name) — those are user-activated
+                if feat.buff_name:
+                    continue
+                src = f"classfeature:{cn}:{feat.feature}"
+                active_keys.add(src)
+                buff = build_buff_from_effects(
+                    name=src,
+                    category=BuffCategory.CLASS,
+                    effects_raw=list(feat.effects),
+                )
+                if buff is None:
+                    continue
+                pairs = buff.pool_entries(0, self)
+                pool_map: dict[str, list] = {}
+                for pk, entry in pairs:
+                    pool_map.setdefault(pk, []).append(entry)
+                for pk, entries in pool_map.items():
+                    p = self._pools.get(pk)
+                    if p is None:
+                        continue
+                    p.set_source(src, entries)
+                    self._graph.invalidate_pool(pk)
+
+        # Clear features that no longer apply
+        prefix = "classfeature:"
+        for pool in self._pools.values():
+            for sk in pool.source_keys():
+                if (
+                    sk.startswith(prefix)
+                    and sk not in active_keys
+                ):
+                    pool.clear_source(sk)
 
     def add_level(self, class_name: str, hp_roll: int) -> None:
         """Append a new character level."""

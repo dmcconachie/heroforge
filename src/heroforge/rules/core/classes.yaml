@@ -59,6 +59,10 @@ classes:
       - level: 1
         feature: fast_movement
         description: "+10 ft speed (not in medium/heavy armor)"
+        effects:
+          - target: speed
+            bonus_type: untyped
+            value: 10
       - level: 1
         feature: illiteracy
         description: "Cannot read unless spending 2 skill points"

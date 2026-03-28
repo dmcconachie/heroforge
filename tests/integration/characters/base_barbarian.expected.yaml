@@ -10,16 +10,18 @@ abilities:
   STR:
     base: 18
     racial: 2
-    score: 20
-    mod: 5
+    morale: 4
+    score: 24
+    mod: 7
   DEX:
     base: 14
     score: 14
     mod: 2
   CON:
     base: 14
-    score: 14
-    mod: 2
+    morale: 4
+    score: 18
+    mod: 4
   INT:
     base: 8
     racial: -2
@@ -38,13 +40,14 @@ combat:
   ac:
     base: 10
     dex: 2
-    total: 12
-  touch_ac: 12
-  flatfooted_ac: 10
+    untyped: -2
+    total: 10
+  touch_ac: 10
+  flatfooted_ac: 8
   hp_max:
     hit_dice: 52
-    con: 12
-    total: 64
+    con: 24
+    total: 76
   bab:
     base: 6
     total: 6
@@ -53,12 +56,13 @@ combat:
     total: 2
   speed:
     base: 30
-    total: 30
+    untyped: 10
+    total: 40
   sr: 0
   fort:
     base: 5
-    con: 2
-    total: 7
+    con: 4
+    total: 9
   ref:
     base: 2
     dex: 2
@@ -66,26 +70,27 @@ combat:
   will:
     base: 2
     wis: 1
-    total: 3
+    morale: 2
+    total: 5
   attack_melee:
     bab: 6
-    str: 5
-    total: 11
+    str: 7
+    total: 13
   attack_ranged:
     bab: 6
     dex: 2
     total: 8
   damage_melee:
-    str: 5
-    total: 5
+    str: 7
+    total: 7
   grapple:
     bab: 6
-    str: 5
-    total: 11
+    str: 7
+    total: 13
 attack_iteratives:
   melee:
-  - 11
-  - 6
+  - 13
+  - 8
   ranged:
   - 8
   - 3
@@ -96,16 +101,16 @@ skills:
     total: -1
   Climb:
     ranks: 7
-    ability_mod: 5
-    total: 12
+    ability_mod: 7
+    total: 14
   Intimidate:
     ranks: 6
     ability_mod: -3
     total: 3
   Jump:
     ranks: 6
-    ability_mod: 5
-    total: 11
+    ability_mod: 7
+    total: 13
   Listen:
     ranks: 3
     ability_mod: 1
@@ -116,16 +121,16 @@ skills:
     total: 4
   Swim:
     ranks: 2
-    ability_mod: 5
-    total: 7
+    ability_mod: 7
+    total: 9
   Tumble:
     ability_mod: 2
     synergy: 2
     total: 4
 carrying_capacity:
-  light: 133
-  medium: 266
-  heavy: 400
+  light: 233
+  medium: 466
+  heavy: 700
 feats:
 - Power Attack
 - Cleave
