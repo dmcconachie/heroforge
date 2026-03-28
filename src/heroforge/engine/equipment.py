@@ -45,6 +45,7 @@ class ArmorCategory(enum.Enum):
     MEDIUM = "medium"
     HEAVY = "heavy"
     SHIELD = "shield"
+    TOWER_SHIELD = "tower_shield"
 
 
 class WeaponCategory(enum.Enum):
@@ -93,18 +94,21 @@ class ArmorRegistry:
     def get(self, name: str) -> ArmorDefinition | None:
         return self._entries.get(name)
 
+    _SHIELD_CATS = {
+        ArmorCategory.SHIELD,
+        ArmorCategory.TOWER_SHIELD,
+    }
+
     def all_armor(self) -> list[ArmorDefinition]:
         return [
             d
             for d in self._entries.values()
-            if d.category != ArmorCategory.SHIELD
+            if d.category not in self._SHIELD_CATS
         ]
 
     def all_shields(self) -> list[ArmorDefinition]:
         return [
-            d
-            for d in self._entries.values()
-            if d.category == ArmorCategory.SHIELD
+            d for d in self._entries.values() if d.category in self._SHIELD_CATS
         ]
 
     def __len__(self) -> int:

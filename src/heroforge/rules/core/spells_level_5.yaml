@@ -1,232 +1,306 @@
 # spells_level_5.yaml
 #
-# SRD spell compendium entries.
-#
-# Spells with stat effects include
-# inline effects: entries.
+# Map keyed by spell name.
+# See spells_level_0.yaml for field schema.
 
 spell_compendium:
-
-  - name: "Atonement"
-    level: {Cleric: 5, Druid: 5}
-
-  - name: "Awaken"
-    level: {Druid: 5}
-
-  - name: "Baleful Polymorph"
-    level: {Druid: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Call Lightning Storm"
-    level: {Druid: 5}
-
-  - name: "Cloudkill"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Command (Greater)"
-    level: {Cleric: 5}
-
-  - name: "Commune"
-    level: {Cleric: 5}
-
-  - name: "Cone of Cold"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Contact Other Plane"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Control Winds"
-    level: {Druid: 5}
-
-  - name: "Cure Light Wounds (Mass)"
-    level: {Bard: 5, Cleric: 5, Druid: 6}
-
-  - name: "Dispel Good"
-    level: {Cleric: 5}
-
-  - name: "Dispel Law"
-    level: {Cleric: 5}
-
-  - name: "Dispel Magic (Greater)"
-    level: {Bard: 5, Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Disrupting Weapon"
-    level: {Cleric: 5}
-
-  - name: "Dream"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Fabricate"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "False Vision"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Feeblemind"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Hallow"
-    level: {Cleric: 5, Druid: 5}
-
-  - name: "Heroism (Greater)"
-    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
-    note: "+4 morale on attack, saves, skill checks; +1 temp HP/level"
+  Atonement:
+    level:
+      Cleric: 5
+      Druid: 5
+  Awaken:
+    level:
+      Druid: 5
+  Baleful Polymorph:
+    level:
+      Druid: 5
+      Sorcerer: 5
+      Wizard: 5
+  Call Lightning Storm:
+    level:
+      Druid: 5
+  Cloudkill:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Command (Greater):
+    level:
+      Cleric: 5
+  Commune:
+    level:
+      Cleric: 5
+  Cone of Cold:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Contact Other Plane:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Control Winds:
+    level:
+      Druid: 5
+  Cure Light Wounds (Mass):
+    level:
+      Bard: 5
+      Cleric: 5
+      Druid: 6
+  Dispel Good:
+    level:
+      Cleric: 5
+  Dispel Law:
+    level:
+      Cleric: 5
+  Dispel Magic (Greater):
+    level:
+      Bard: 5
+      Cleric: 6
+      Druid: 6
+      Sorcerer: 6
+      Wizard: 6
+  Disrupting Weapon:
+    level:
+      Cleric: 5
+  Dream:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Fabricate:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  False Vision:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Feeblemind:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Hallow:
+    level:
+      Cleric: 5
+      Druid: 5
+  Heroism (Greater):
+    level:
+      Bard: 5
+      Sorcerer: 6
+      Wizard: 6
+    note: +4 morale on attack, saves, skill checks; +1 temp HP/level
     mutually_exclusive_with:
-      - "Heroism"
+    - Heroism
     effects:
-      - target: attack_all
-        bonus_type: morale
-        value: 4
-      - target: fort_save
-        bonus_type: morale
-        value: 4
-      - target: ref_save
-        bonus_type: morale
-        value: 4
-      - target: will_save
-        bonus_type: morale
-        value: 4
-
-  - name: "Inflict Light Wounds (Mass)"
-    level: {Cleric: 5}
-
-  - name: "Insect Plague"
-    level: {Cleric: 5, Druid: 5}
-
-  - name: "Interposing Hand"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Mage's Faithful Hound"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Mage's Private Sanctum"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Magic Jar"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Major Creation"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Mind Fog"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Mirage Arcana"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Mislead"
-    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
-
-  - name: "Nightmare"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Overland Flight"
-    level: {Sorcerer: 5, Wizard: 5}
-    note: "Fly speed 40 ft. (good maneuverability); note only"
-
-  - name: "Passwall"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Permanency"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Persistent Image"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Planar Binding (Lesser)"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Plane Shift"
-    level: {Cleric: 5, Sorcerer: 7, Wizard: 7}
-
-  - name: "Prying Eyes"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Raise Dead"
-    level: {Cleric: 5}
-
-  - name: "Righteous Might"
-    level: {Cleric: 5}
-    note: "+4 STR, +2 CON, natural armor; size increase handled separately"
+    - target: attack_all
+      bonus_type: morale
+      value: 4
+    - target: fort_save
+      bonus_type: morale
+      value: 4
+    - target: ref_save
+      bonus_type: morale
+      value: 4
+    - target: will_save
+      bonus_type: morale
+      value: 4
+  Inflict Light Wounds (Mass):
+    level:
+      Cleric: 5
+  Insect Plague:
+    level:
+      Cleric: 5
+      Druid: 5
+  Interposing Hand:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Mage's Faithful Hound:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Mage's Private Sanctum:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Magic Jar:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Major Creation:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Mind Fog:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Mirage Arcana:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Mislead:
+    level:
+      Bard: 5
+      Sorcerer: 6
+      Wizard: 6
+  Nightmare:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Overland Flight:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+    note: Fly speed 40 ft. (good maneuverability); note only
+  Passwall:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Permanency:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Persistent Image:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Planar Binding (Lesser):
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Plane Shift:
+    level:
+      Cleric: 5
+      Sorcerer: 7
+      Wizard: 7
+  Prying Eyes:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Raise Dead:
+    level:
+      Cleric: 5
+  Righteous Might:
+    level:
+      Cleric: 5
+    note: +4 STR, +2 CON, natural armor; size increase handled separately
     requires_caster_level: true
     effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 4
-      - target: con_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Secret Chest"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Seeming"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Shadow Evocation"
-    level: {Bard: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Shadow Walk"
-    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
-
-  - name: "Slay Living"
-    level: {Cleric: 5}
-
-  - name: "Song of Discord"
-    level: {Bard: 5}
-
-  - name: "Spell Resistance"
-    level: {Cleric: 5}
-    note: "SR = 12 + caster level"
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+  Secret Chest:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Seeming:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Shadow Evocation:
+    level:
+      Bard: 5
+      Sorcerer: 5
+      Wizard: 5
+  Shadow Walk:
+    level:
+      Bard: 5
+      Sorcerer: 6
+      Wizard: 6
+  Slay Living:
+    level:
+      Cleric: 5
+  Song of Discord:
+    level:
+      Bard: 5
+  Spell Resistance:
+    level:
+      Cleric: 5
+    note: SR = 12 + caster level
     requires_caster_level: true
     effects:
-      - target: sr
-        bonus_type: untyped
-        value: "12 + caster_level"
-
-  - name: "Suggestion (Mass)"
-    level: {Bard: 5, Sorcerer: 6, Wizard: 6}
-
-  - name: "Summon Monster V"
-    level: {Bard: 5, Cleric: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Summon Nature's Ally V"
-    level: {Druid: 5}
-
-  - name: "Symbol of Pain"
-    level: {Cleric: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Symbol of Sleep"
-    level: {Cleric: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Telekinesis"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Telepathic Bond"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Teleport"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Transmute Mud to Rock"
-    level: {Druid: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "Transmute Rock to Mud"
-    level: {Druid: 5, Sorcerer: 5, Wizard: 5}
-
-  - name: "True Seeing"
-    level: {Cleric: 5, Druid: 7, Sorcerer: 6, Wizard: 6}
-
-  - name: "Unhallow"
-    level: {Cleric: 5, Druid: 5}
-
-  - name: "Wall of Force"
-    level: {Sorcerer: 5, Wizard: 5}
-
-  - name: "Wall of Stone"
-    level: {Cleric: 5, Druid: 6, Sorcerer: 5, Wizard: 5}
-
-  - name: "Wall of Thorns"
-    level: {Druid: 5}
-
-  - name: "Waves of Fatigue"
-    level: {Sorcerer: 5, Wizard: 5}
+    - target: sr
+      bonus_type: untyped
+      value: 12 + caster_level
+  Suggestion (Mass):
+    level:
+      Bard: 5
+      Sorcerer: 6
+      Wizard: 6
+  Summon Monster V:
+    level:
+      Bard: 5
+      Cleric: 5
+      Sorcerer: 5
+      Wizard: 5
+  Summon Nature's Ally V:
+    level:
+      Druid: 5
+  Symbol of Pain:
+    level:
+      Cleric: 5
+      Sorcerer: 5
+      Wizard: 5
+  Symbol of Sleep:
+    level:
+      Cleric: 5
+      Sorcerer: 5
+      Wizard: 5
+  Telekinesis:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Telepathic Bond:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Teleport:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Transmute Mud to Rock:
+    level:
+      Druid: 5
+      Sorcerer: 5
+      Wizard: 5
+  Transmute Rock to Mud:
+    level:
+      Druid: 5
+      Sorcerer: 5
+      Wizard: 5
+  True Seeing:
+    level:
+      Cleric: 5
+      Druid: 7
+      Sorcerer: 6
+      Wizard: 6
+  Unhallow:
+    level:
+      Cleric: 5
+      Druid: 5
+  Wall of Force:
+    level:
+      Sorcerer: 5
+      Wizard: 5
+  Wall of Stone:
+    level:
+      Cleric: 5
+      Druid: 6
+      Sorcerer: 5
+      Wizard: 5
+  Wall of Thorns:
+    level:
+      Druid: 5
+  Waves of Fatigue:
+    level:
+      Sorcerer: 5
+      Wizard: 5

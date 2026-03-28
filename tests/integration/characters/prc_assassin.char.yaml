@@ -229,7 +229,7 @@ levels:
       - name: "Combat Reflexes"
         source: character
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

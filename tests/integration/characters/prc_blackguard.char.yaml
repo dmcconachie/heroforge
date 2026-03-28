@@ -173,7 +173,7 @@ levels:
       Intimidate: 1
       Knowledge (Religion): 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

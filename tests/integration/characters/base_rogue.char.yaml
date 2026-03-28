@@ -358,7 +358,7 @@ levels:
       Bluff: 1
       Gather Information: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

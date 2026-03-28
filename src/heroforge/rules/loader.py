@@ -447,10 +447,8 @@ class ConditionLoader:
 
         registered: list[str] = []
 
-        for decl in data["conditions"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Condition missing 'name': {decl}")
+        for name, decl in data["conditions"].items():
+            decl["name"] = name
 
             try:
                 defn = converter.structure(decl, ConditionDefinition)
@@ -566,10 +564,8 @@ class MagicItemLoader:
 
         registered: list[str] = []
 
-        for decl in data["magic_items"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Magic item missing 'name': {decl}")
+        for name, decl in data["magic_items"].items():
+            decl["name"] = name
 
             try:
                 defn = converter.structure(decl, MagicItemDefinition)
@@ -661,11 +657,8 @@ class TemplatesLoader:
 
         registered: list[str] = []
 
-        for decl in data["templates"]:
-            if not decl.get("name"):
-                raise LoaderError(
-                    f"Template declaration missing 'name': {decl}"
-                )
+        for name, decl in data["templates"].items():
+            decl["name"] = name
             try:
                 defn = build_template_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
@@ -733,10 +726,8 @@ class FeatsLoader:
 
         registered: list[str] = []
 
-        for decl in data["feats"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Feat declaration missing 'name': {decl}")
+        for name, decl in data["feats"].items():
+            decl["name"] = name
 
             try:
                 defn = build_feat_from_yaml(decl)
@@ -827,10 +818,8 @@ class ClassesLoader:
             if not isinstance(data, dict):
                 raise LoaderError(f"{path}: expected a dict")
 
-            for decl in data.get("classes", []):
-                name = decl.get("name")
-                if not name:
-                    raise LoaderError(f"Class missing 'name' in {path}: {decl}")
+            for name, decl in data.get("classes", {}).items():
+                decl["name"] = name
                 try:
                     defn = converter.structure(decl, ClassDefinition)
                     registry.register(defn, overwrite=overwrite)
@@ -842,10 +831,8 @@ class ClassesLoader:
                 if buff_registry is not None:
                     self._register_feature_buffs(defn, buff_registry)
 
-            for decl in data.get("prestige_classes", []):
-                name = decl.get("name")
-                if not name:
-                    raise LoaderError(f"PrC missing 'name' in {path}: {decl}")
+            for name, decl in data.get("prestige_classes", {}).items():
+                decl["name"] = name
                 decl["is_prestige"] = True
                 try:
                     defn = converter.structure(decl, ClassDefinition)
@@ -954,10 +941,8 @@ class RacesLoader:
         from heroforge.rules.schema import converter
 
         registered: list[str] = []
-        for decl in data["races"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Race declaration missing 'name': {decl}")
+        for name, decl in data["races"].items():
+            decl["name"] = name
             try:
                 defn = converter.structure(decl, RaceDefinition)
                 registry.register(defn, overwrite=overwrite)
@@ -1010,10 +995,8 @@ class SkillsLoader:
             raise LoaderError(f"{path} must have a top-level 'skills' key.")
 
         registered: list[str] = []
-        for decl in data["skills"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Skill declaration missing 'name': {decl}")
+        for name, decl in data["skills"].items():
+            decl["name"] = name
             try:
                 defn = converter.structure(decl, SkillDefinition)
                 registry.register(defn, overwrite=overwrite)
@@ -1053,10 +1036,8 @@ class DomainsLoader:
             raise LoaderError(f"{path}: missing 'domains' key")
 
         registered: list[str] = []
-        for decl in data["domains"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Domain missing 'name': {decl}")
+        for name, decl in data["domains"].items():
+            decl["name"] = name
             try:
                 defn = converter.structure(decl, DomainDefinition)
             except Exception as e:
@@ -1099,10 +1080,8 @@ class EquipmentLoader:
             raise LoaderError(f"{path}: missing 'armor' key")
 
         registered: list[str] = []
-        for decl in data["armor"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Armor missing 'name': {decl}")
+        for name, decl in data["armor"].items():
+            decl["name"] = name
             try:
                 defn = converter.structure(decl, ArmorDefinition)
             except Exception as e:
@@ -1130,10 +1109,8 @@ class EquipmentLoader:
             raise LoaderError(f"{path}: missing 'weapons' key")
 
         registered: list[str] = []
-        for decl in data["weapons"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Weapon missing 'name': {decl}")
+        for name, decl in data["weapons"].items():
+            decl["name"] = name
             try:
                 defn = converter.structure(decl, WeaponDefinition)
             except Exception as e:
@@ -1206,12 +1183,8 @@ class SpellCompendiumLoader:
             raise LoaderError(f"{path} must have a top-level '{key}' key.")
 
         registered: list[str] = []
-        for decl in data[key]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(
-                    f"Spell compendium entry missing 'name': {decl}"
-                )
+        for name, decl in data[key].items():
+            decl["name"] = name
 
             try:
                 entry = converter.structure(decl, SpellEntry)

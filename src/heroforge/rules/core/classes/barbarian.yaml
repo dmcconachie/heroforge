@@ -1,6 +1,5 @@
 classes:
-
-  - name: Barbarian
+  Barbarian:
     source_book: PHB
     hit_die: 12
     bab_progression: full
@@ -10,136 +9,154 @@ classes:
       will: poor
     skills_per_level: 4
     class_skills:
-      - Climb
-      - Craft
-      - Handle Animal
-      - Intimidate
-      - Jump
-      - Listen
-      - Ride
-      - Survival
-      - Swim
-      - Wilderness Lore
+    - Climb
+    - Craft
+    - Handle Animal
+    - Intimidate
+    - Jump
+    - Listen
+    - Ride
+    - Survival
+    - Swim
+    - Wilderness Lore
     spellcasting: null
     class_features:
-      - level: 1
-        feature: fast_movement
-        description: "+10 ft speed (not in medium/heavy armor)"
-        effects:
-          - target: speed
-            bonus_type: untyped
-            value: 10
-      - level: 1
-        feature: illiteracy
-        description: "Cannot read unless spending 2 skill points"
-      - level: 1
-        feature: rage
-        description: "+4 STR/CON, +2 Will, -2 AC; 1/day"
-        buff_name: "Barbarian Rage"
-        note: >-
-          +4 STR, +4 CON, +2 morale on Will
-          saves, -2 AC; cannot use skills
-          requiring patience/concentration
-        mutually_exclusive_with:
-          - "Greater Rage"
-          - "Mighty Rage"
-        effects:
-          - target: str_score
-            bonus_type: morale
-            value: 4
-          - target: con_score
-            bonus_type: morale
-            value: 4
-          - target: will_save
-            bonus_type: morale
-            value: 2
-          - target: ac
-            bonus_type: untyped
-            value: -2
-      - level: 2
-        feature: uncanny_dodge
-        description: "Retain DEX bonus to AC when flat-footed"
-      - level: 3
-        feature: trap_sense_1
-        description: "+1 Reflex and AC vs traps"
-      - {level: 4, feature: rage_2, description: "Rage 2/day"}
-      - level: 5
-        feature: improved_uncanny_dodge
-        description: "Cannot be flanked"
-      - level: 6
-        feature: trap_sense_2
-        description: "+2 Reflex and AC vs traps"
-      - {level: 7, feature: damage_reduction_1, description: "DR 1/—"}
-      - {level: 7, feature: rage_3, description: "Rage 3/day"}
-      - level: 9
-        feature: trap_sense_3
-        description: "+3 Reflex and AC vs traps"
-      - {level: 10, feature: rage_4, description: "Rage 4/day"}
-      - {level: 10, feature: damage_reduction_2, description: "DR 2/—"}
-      - level: 11
-        feature: greater_rage
-        description: "+6 STR/CON, +3 Will, -2 AC"
-        buff_name: "Greater Rage"
-        note: >-
-          +6 STR, +6 CON, +3 morale on Will
-          saves, -2 AC
-        mutually_exclusive_with:
-          - "Barbarian Rage"
-          - "Mighty Rage"
-        effects:
-          - target: str_score
-            bonus_type: morale
-            value: 6
-          - target: con_score
-            bonus_type: morale
-            value: 6
-          - target: will_save
-            bonus_type: morale
-            value: 3
-          - target: ac
-            bonus_type: untyped
-            value: -2
-      - level: 12
-        feature: trap_sense_4
-        description: "+4 Reflex and AC vs traps"
-      - {level: 13, feature: rage_5, description: "Rage 5/day"}
-      - {level: 13, feature: damage_reduction_3, description: "DR 3/—"}
-      - level: 14
-        feature: indomitable_will
-        description: "+4 Will vs enchantments while raging"
-      - level: 15
-        feature: trap_sense_5
-        description: "+5 Reflex and AC vs traps"
-      - {level: 16, feature: rage_6, description: "Rage 6/day"}
-      - {level: 16, feature: damage_reduction_4, description: "DR 4/—"}
-      - level: 17
-        feature: tireless_rage
-        description: "No longer fatigued after rage"
-      - level: 18
-        feature: trap_sense_6
-        description: "+6 Reflex and AC vs traps"
-      - {level: 19, feature: rage_7, description: "Rage 7/day"}
-      - {level: 19, feature: damage_reduction_5, description: "DR 5/—"}
-      - level: 20
-        feature: mighty_rage
-        description: "+8 STR/CON, +4 Will, -2 AC"
-        buff_name: "Mighty Rage"
-        note: >-
-          +8 STR, +8 CON, +4 morale on Will
-          saves, -2 AC
-        mutually_exclusive_with:
-          - "Barbarian Rage"
-          - "Greater Rage"
-        effects:
-          - target: str_score
-            bonus_type: morale
-            value: 8
-          - target: con_score
-            bonus_type: morale
-            value: 8
-          - target: will_save
-            bonus_type: morale
-            value: 4
-          - target: ac
-            bonus_type: untyped
-            value: -2
+    - level: 1
+      feature: fast_movement
+      description: +10 ft speed (not in medium/heavy armor)
+      effects:
+      - target: speed
+        bonus_type: untyped
+        value: 10
+    - level: 1
+      feature: illiteracy
+      description: Cannot read unless spending 2 skill points
+    - level: 1
+      feature: rage
+      description: +4 STR/CON, +2 Will, -2 AC; 1/day
+      buff_name: Barbarian Rage
+      note: >-
+        +4 STR, +4 CON, +2 morale on Will saves, -2 AC; cannot use skills
+        requiring
+        patience/concentration
+      mutually_exclusive_with:
+      - Greater Rage
+      - Mighty Rage
+      effects:
+      - target: str_score
+        bonus_type: morale
+        value: 4
+      - target: con_score
+        bonus_type: morale
+        value: 4
+      - target: will_save
+        bonus_type: morale
+        value: 2
+      - target: ac
+        bonus_type: untyped
+        value: -2
+    - level: 2
+      feature: uncanny_dodge
+      description: Retain DEX bonus to AC when flat-footed
+    - level: 3
+      feature: trap_sense_1
+      description: +1 Reflex and AC vs traps
+    - level: 4
+      feature: rage_2
+      description: Rage 2/day
+    - level: 5
+      feature: improved_uncanny_dodge
+      description: Cannot be flanked
+    - level: 6
+      feature: trap_sense_2
+      description: +2 Reflex and AC vs traps
+    - level: 7
+      feature: damage_reduction_1
+      description: DR 1/—
+    - level: 7
+      feature: rage_3
+      description: Rage 3/day
+    - level: 9
+      feature: trap_sense_3
+      description: +3 Reflex and AC vs traps
+    - level: 10
+      feature: rage_4
+      description: Rage 4/day
+    - level: 10
+      feature: damage_reduction_2
+      description: DR 2/—
+    - level: 11
+      feature: greater_rage
+      description: +6 STR/CON, +3 Will, -2 AC
+      buff_name: Greater Rage
+      note: +6 STR, +6 CON, +3 morale on Will saves, -2 AC
+      mutually_exclusive_with:
+      - Barbarian Rage
+      - Mighty Rage
+      effects:
+      - target: str_score
+        bonus_type: morale
+        value: 6
+      - target: con_score
+        bonus_type: morale
+        value: 6
+      - target: will_save
+        bonus_type: morale
+        value: 3
+      - target: ac
+        bonus_type: untyped
+        value: -2
+    - level: 12
+      feature: trap_sense_4
+      description: +4 Reflex and AC vs traps
+    - level: 13
+      feature: rage_5
+      description: Rage 5/day
+    - level: 13
+      feature: damage_reduction_3
+      description: DR 3/—
+    - level: 14
+      feature: indomitable_will
+      description: +4 Will vs enchantments while raging
+    - level: 15
+      feature: trap_sense_5
+      description: +5 Reflex and AC vs traps
+    - level: 16
+      feature: rage_6
+      description: Rage 6/day
+    - level: 16
+      feature: damage_reduction_4
+      description: DR 4/—
+    - level: 17
+      feature: tireless_rage
+      description: No longer fatigued after rage
+    - level: 18
+      feature: trap_sense_6
+      description: +6 Reflex and AC vs traps
+    - level: 19
+      feature: rage_7
+      description: Rage 7/day
+    - level: 19
+      feature: damage_reduction_5
+      description: DR 5/—
+    - level: 20
+      feature: mighty_rage
+      description: +8 STR/CON, +4 Will, -2 AC
+      buff_name: Mighty Rage
+      note: +8 STR, +8 CON, +4 morale on Will saves, -2 AC
+      mutually_exclusive_with:
+      - Barbarian Rage
+      - Greater Rage
+      effects:
+      - target: str_score
+        bonus_type: morale
+        value: 8
+      - target: con_score
+        bonus_type: morale
+        value: 8
+      - target: will_save
+        bonus_type: morale
+        value: 4
+      - target: ac
+        bonus_type: untyped
+        value: -2

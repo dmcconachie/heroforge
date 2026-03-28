@@ -1,6 +1,5 @@
 prestige_classes:
-
-  - name: "Hierophant"
+  Hierophant:
     source_book: DMG
     hit_die: 8
     max_level: 5
@@ -11,20 +10,20 @@ prestige_classes:
       will: good
     skills_per_level: 2
     class_skills:
-      - Concentration
-      - Craft
-      - Diplomacy
-      - Heal
-      - Knowledge (Arcana)
-      - Knowledge (Religion)
-      - Profession
-      - Spellcraft
+    - Concentration
+    - Craft
+    - Diplomacy
+    - Heal
+    - Knowledge (Arcana)
+    - Knowledge (Religion)
+    - Profession
+    - Spellcraft
     entry_prerequisites:
       all_of:
-        - spellcasting:
-            cast_type: divine
-            min_level: 7
+      - spellcasting:
+          cast_type: divine
+          min_level: 7
     class_features:
-      - level: 1
-        feature: special_ability
-        description: "Choose hierophant ability"
+    - level: 1
+      feature: special_ability
+      description: Choose hierophant ability

@@ -205,7 +205,7 @@ levels:
       Spot: 1
       Listen: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

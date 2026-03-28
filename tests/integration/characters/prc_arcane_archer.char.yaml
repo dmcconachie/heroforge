@@ -191,7 +191,7 @@ levels:
       Move Silently: 1
       Survival: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

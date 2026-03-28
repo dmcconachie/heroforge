@@ -1,6 +1,5 @@
 classes:
-
-  - name: Commoner
+  Commoner:
     source_book: SRD
     hit_die: 4
     bab_progression: poor
@@ -10,15 +9,15 @@ classes:
       will: poor
     skills_per_level: 2
     class_skills:
-      - Climb
-      - Craft
-      - Handle Animal
-      - Jump
-      - Listen
-      - Profession
-      - Ride
-      - Spot
-      - Swim
-      - Use Rope
+    - Climb
+    - Craft
+    - Handle Animal
+    - Jump
+    - Listen
+    - Profession
+    - Ride
+    - Spot
+    - Swim
+    - Use Rope
     spellcasting: null
     class_features: []

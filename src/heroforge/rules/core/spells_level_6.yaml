@@ -1,216 +1,300 @@
 # spells_level_6.yaml
 #
-# SRD spell compendium entries.
-#
-# Spells with stat effects include
-# inline effects: entries.
+# Map keyed by spell name.
+# See spells_level_0.yaml for field schema.
 
 spell_compendium:
-
-  - name: "Acid Fog"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Analyze Dweomer"
-    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Animate Objects"
-    level: {Bard: 6, Cleric: 6}
-
-  - name: "Antilife Shell"
-    level: {Cleric: 6, Druid: 6}
-
-  - name: "Antimagic Field"
-    level: {Cleric: 8, Sorcerer: 6, Wizard: 6}
-
-  - name: "Banishment"
-    level: {Cleric: 6, Sorcerer: 7, Wizard: 7}
-
-  - name: "Bear's Endurance (Mass)"
-    level: {Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Blade Barrier"
-    level: {Cleric: 6}
-
-  - name: "Bull's Strength (Mass)"
-    level: {Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Cat's Grace (Mass)"
-    level: {Bard: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Chain Lightning"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Charm Monster (Mass)"
-    level: {Bard: 6, Sorcerer: 8, Wizard: 8}
-
-  - name: "Circle of Death"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Contingency"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Create Undead"
-    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Cure Moderate Wounds (Mass)"
-    level: {Bard: 6, Cleric: 6, Druid: 7}
-
-  - name: "Disintegrate"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Eagle's Splendor (Mass)"
-    level: {Bard: 6, Cleric: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Eyebite"
-    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Find the Path"
-    level: {Bard: 6, Cleric: 6, Druid: 6}
-
-  - name: "Fire Seeds"
-    level: {Druid: 6}
-
-  - name: "Flesh to Stone"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Forbiddance"
-    level: {Cleric: 6}
-
-  - name: "Forceful Hand"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Fox's Cunning (Mass)"
-    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Freezing Sphere"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Geas/Quest"
-    level: {Bard: 6, Cleric: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Globe of Invulnerability"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Glyph of Warding (Greater)"
-    level: {Cleric: 6}
-
-  - name: "Guards and Wards"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Harm"
-    level: {Cleric: 6}
-
-  - name: "Heal"
-    level: {Cleric: 6, Druid: 7}
-
-  - name: "Heroes' Feast"
-    level: {Bard: 6, Cleric: 6}
-
-  - name: "Inflict Moderate Wounds (Mass)"
-    level: {Cleric: 6}
-
-  - name: "Ironwood"
-    level: {Druid: 6}
-
-  - name: "Irresistible Dance"
-    level: {Bard: 6, Sorcerer: 8, Wizard: 8}
-
-  - name: "Liveoak"
-    level: {Druid: 6}
-
-  - name: "Mage's Lucubration"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Move Earth"
-    level: {Druid: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Owl's Wisdom (Mass)"
-    level: {Cleric: 6, Druid: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Permanent Image"
-    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Planar Ally"
-    level: {Cleric: 6}
-
-  - name: "Planar Binding"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Programmed Image"
-    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Project Image"
-    level: {Bard: 6, Sorcerer: 7, Wizard: 7}
-
-  - name: "Repel Wood"
-    level: {Druid: 6}
-
-  - name: "Repulsion"
-    level: {Cleric: 7, Sorcerer: 6, Wizard: 6}
-
-  - name: "Scrying (Greater)"
-    level: {Bard: 6, Cleric: 7, Druid: 7, Sorcerer: 7, Wizard: 7}
-
-  - name: "Shout (Greater)"
-    level: {Bard: 6, Sorcerer: 8, Wizard: 8}
-
-  - name: "Spellstaff"
-    level: {Druid: 6}
-
-  - name: "Stone Tell"
-    level: {Druid: 6}
-
-  - name: "Stone to Flesh"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Summon Monster VI"
-    level: {Bard: 6, Cleric: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Summon Nature's Ally VI"
-    level: {Druid: 6}
-
-  - name: "Symbol of Fear"
-    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Symbol of Persuasion"
-    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Sympathetic Vibration"
-    level: {Bard: 6}
-
-  - name: "Transformation"
-    level: {Sorcerer: 6, Wizard: 6}
+  Acid Fog:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Analyze Dweomer:
+    level:
+      Bard: 6
+      Sorcerer: 6
+      Wizard: 6
+  Animate Objects:
+    level:
+      Bard: 6
+      Cleric: 6
+  Antilife Shell:
+    level:
+      Cleric: 6
+      Druid: 6
+  Antimagic Field:
+    level:
+      Cleric: 8
+      Sorcerer: 6
+      Wizard: 6
+  Banishment:
+    level:
+      Cleric: 6
+      Sorcerer: 7
+      Wizard: 7
+  Bear's Endurance (Mass):
+    level:
+      Cleric: 6
+      Druid: 6
+      Sorcerer: 6
+      Wizard: 6
+  Blade Barrier:
+    level:
+      Cleric: 6
+  Bull's Strength (Mass):
+    level:
+      Cleric: 6
+      Druid: 6
+      Sorcerer: 6
+      Wizard: 6
+  Cat's Grace (Mass):
+    level:
+      Bard: 6
+      Druid: 6
+      Sorcerer: 6
+      Wizard: 6
+  Chain Lightning:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Charm Monster (Mass):
+    level:
+      Bard: 6
+      Sorcerer: 8
+      Wizard: 8
+  Circle of Death:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Contingency:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Create Undead:
+    level:
+      Cleric: 6
+      Sorcerer: 6
+      Wizard: 6
+  Cure Moderate Wounds (Mass):
+    level:
+      Bard: 6
+      Cleric: 6
+      Druid: 7
+  Disintegrate:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Eagle's Splendor (Mass):
+    level:
+      Bard: 6
+      Cleric: 6
+      Sorcerer: 6
+      Wizard: 6
+  Eyebite:
+    level:
+      Bard: 6
+      Sorcerer: 6
+      Wizard: 6
+  Find the Path:
+    level:
+      Bard: 6
+      Cleric: 6
+      Druid: 6
+  Fire Seeds:
+    level:
+      Druid: 6
+  Flesh to Stone:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Forbiddance:
+    level:
+      Cleric: 6
+  Forceful Hand:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Fox's Cunning (Mass):
+    level:
+      Bard: 6
+      Sorcerer: 6
+      Wizard: 6
+  Freezing Sphere:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Geas/Quest:
+    level:
+      Bard: 6
+      Cleric: 6
+      Sorcerer: 6
+      Wizard: 6
+  Globe of Invulnerability:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Glyph of Warding (Greater):
+    level:
+      Cleric: 6
+  Guards and Wards:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Harm:
+    level:
+      Cleric: 6
+  Heal:
+    level:
+      Cleric: 6
+      Druid: 7
+  Heroes' Feast:
+    level:
+      Bard: 6
+      Cleric: 6
+  Inflict Moderate Wounds (Mass):
+    level:
+      Cleric: 6
+  Ironwood:
+    level:
+      Druid: 6
+  Irresistible Dance:
+    level:
+      Bard: 6
+      Sorcerer: 8
+      Wizard: 8
+  Liveoak:
+    level:
+      Druid: 6
+  Mage's Lucubration:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Move Earth:
+    level:
+      Druid: 6
+      Sorcerer: 6
+      Wizard: 6
+  Owl's Wisdom (Mass):
+    level:
+      Cleric: 6
+      Druid: 6
+      Sorcerer: 6
+      Wizard: 6
+  Permanent Image:
+    level:
+      Bard: 6
+      Sorcerer: 6
+      Wizard: 6
+  Planar Ally:
+    level:
+      Cleric: 6
+  Planar Binding:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Programmed Image:
+    level:
+      Bard: 6
+      Sorcerer: 6
+      Wizard: 6
+  Project Image:
+    level:
+      Bard: 6
+      Sorcerer: 7
+      Wizard: 7
+  Repel Wood:
+    level:
+      Druid: 6
+  Repulsion:
+    level:
+      Cleric: 7
+      Sorcerer: 6
+      Wizard: 6
+  Scrying (Greater):
+    level:
+      Bard: 6
+      Cleric: 7
+      Druid: 7
+      Sorcerer: 7
+      Wizard: 7
+  Shout (Greater):
+    level:
+      Bard: 6
+      Sorcerer: 8
+      Wizard: 8
+  Spellstaff:
+    level:
+      Druid: 6
+  Stone Tell:
+    level:
+      Druid: 6
+  Stone to Flesh:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Summon Monster VI:
+    level:
+      Bard: 6
+      Cleric: 6
+      Sorcerer: 6
+      Wizard: 6
+  Summon Nature's Ally VI:
+    level:
+      Druid: 6
+  Symbol of Fear:
+    level:
+      Cleric: 6
+      Sorcerer: 6
+      Wizard: 6
+  Symbol of Persuasion:
+    level:
+      Cleric: 6
+      Sorcerer: 6
+      Wizard: 6
+  Sympathetic Vibration:
+    level:
+      Bard: 6
+  Transformation:
+    level:
+      Sorcerer: 6
+      Wizard: 6
     note: >-
-      +4 enhancement STR, DEX, CON; +4 natural armor AC; full BAB; cannot
-      cast spells
+      +4 enhancement STR, DEX, CON; +4 natural armor AC; full BAB; cannot cast
+      spells
     effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 4
-      - target: dex_score
-        bonus_type: enhancement
-        value: 4
-      - target: con_score
-        bonus_type: enhancement
-        value: 4
-      - target: ac
-        bonus_type: natural_armor
-        value: 4
-
-  - name: "Transport via Plants"
-    level: {Druid: 6}
-
-  - name: "Undeath to Death"
-    level: {Cleric: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Veil"
-    level: {Bard: 6, Sorcerer: 6, Wizard: 6}
-
-  - name: "Wall of Iron"
-    level: {Sorcerer: 6, Wizard: 6}
-
-  - name: "Wind Walk"
-    level: {Cleric: 6, Druid: 7}
-
-  - name: "Word of Recall"
-    level: {Cleric: 6, Druid: 8}
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
+    - target: ac
+      bonus_type: natural_armor
+      value: 4
+  Transport via Plants:
+    level:
+      Druid: 6
+  Undeath to Death:
+    level:
+      Cleric: 6
+      Sorcerer: 6
+      Wizard: 6
+  Veil:
+    level:
+      Bard: 6
+      Sorcerer: 6
+      Wizard: 6
+  Wall of Iron:
+    level:
+      Sorcerer: 6
+      Wizard: 6
+  Wind Walk:
+    level:
+      Cleric: 6
+      Druid: 7
+  Word of Recall:
+    level:
+      Cleric: 6
+      Druid: 8

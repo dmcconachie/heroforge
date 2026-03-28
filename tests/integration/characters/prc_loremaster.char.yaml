@@ -347,7 +347,7 @@ levels:
       Gather Information: 1
       Appraise: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

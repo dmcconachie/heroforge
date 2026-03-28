@@ -98,10 +98,10 @@ def _character_to_dict(c: "Character") -> dict:
             )
         },
         "levels": [_level_to_dict(lv) for lv in c.levels],
-        "buffs": [
-            _buff_state_to_dict(name, state)
+        "buffs": {
+            name: _buff_state_to_dict(state)
             for name, state in sorted(c._buff_states.items())
-        ],
+        },
         "templates": [
             {
                 "template": app.template_name,
@@ -137,8 +137,8 @@ def _level_to_dict(lv: "CharacterLevel") -> dict:
     return d
 
 
-def _buff_state_to_dict(name: str, state: BuffState) -> dict:
-    d: dict = {"name": name, "active": state.active}
+def _buff_state_to_dict(state: "BuffState") -> dict:
+    d: dict = {"active": state.active}
     if state.caster_level is not None:
         d["caster_level"] = state.caster_level
     if state.parameter is not None:
@@ -258,10 +258,7 @@ def load_character(
             )
 
     # Buffs — restore states and re-register definitions
-    for buff_dict in data.get("buffs", []):
-        buff_name = buff_dict.get("name", "")
-        if not buff_name:
-            continue
+    for buff_name, buff_dict in data.get("buffs", {}).items():
         active = bool(buff_dict.get("active", False))
         caster_level = buff_dict.get("caster_level")
         parameter = buff_dict.get("parameter")

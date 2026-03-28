@@ -1,6 +1,5 @@
 classes:
-
-  - name: Paladin
+  Paladin:
     source_book: PHB
     hit_die: 10
     bab_progression: full
@@ -10,16 +9,16 @@ classes:
       will: poor
     skills_per_level: 2
     class_skills:
-      - Concentration
-      - Craft
-      - Diplomacy
-      - Handle Animal
-      - Heal
-      - Knowledge (Nobility)
-      - Knowledge (Religion)
-      - Profession
-      - Ride
-      - Sense Motive
+    - Concentration
+    - Craft
+    - Diplomacy
+    - Handle Animal
+    - Heal
+    - Knowledge (Nobility)
+    - Knowledge (Religion)
+    - Profession
+    - Ride
+    - Sense Motive
     spellcasting:
       cast_type: divine
       stat: wis
@@ -27,85 +26,84 @@ classes:
       max_spell_level: 4
       starts_at_level: 4
     class_features:
-      - level: 1
-        feature: aura_of_good
-        description: "Aura of good (equal to Paladin level)"
-      - level: 1
-        feature: detect_evil
-        description: "Detect evil at will"
-      - level: 1
-        feature: smite_evil_1
-        description: "Smite evil 1/day"
-        buff_name: "Smite Evil"
-        note: >-
-          Add CHA mod to attack roll, paladin
-          level to damage against evil target
-          (one attack)
-        effects:
-          - target: attack_all
-            bonus_type: untyped
-            value: "cha_mod"
-          - target: damage_all
-            bonus_type: untyped
-            value: "character_level"
-      - level: 2
-        feature: divine_grace
-        description: "+CHA modifier to all saves"
-        effects:
-          - target: fort_save
-            bonus_type: untyped
-            value: "cha_mod"
-          - target: ref_save
-            bonus_type: untyped
-            value: "cha_mod"
-          - target: will_save
-            bonus_type: untyped
-            value: "cha_mod"
-      - level: 2
-        feature: lay_on_hands
-        description: "Heal HP per day = Paladin level × CHA modifier"
-      - level: 3
-        feature: aura_of_courage
-        description: "Immune to fear; allies +4 morale vs fear"
-      - level: 3
-        feature: divine_health
-        description: "Immune to all diseases"
-      - level: 4
-        feature: turn_undead
-        description: "Turn undead as Cleric of (Paladin level - 3)"
-      - level: 5
-        feature: smite_evil_2
-        description: "Smite evil 2/day"
-      - level: 5
-        feature: special_mount
-        description: "Celestial heavy warhorse or pony"
-      - level: 6
-        feature: remove_disease_1
-        description: "Remove disease 1/week"
-      - level: 8
-        feature: smite_evil_3
-        description: "Smite evil 3/day"
-      - level: 9
-        feature: remove_disease_2
-        description: "Remove disease 2/week"
-      - level: 11
-        feature: smite_evil_4
-        description: "Smite evil 4/day"
-      - level: 12
-        feature: remove_disease_3
-        description: "Remove disease 3/week"
-      - level: 14
-        feature: smite_evil_5
-        description: "Smite evil 5/day"
-      - level: 15
-        feature: remove_disease_4
-        description: "Remove disease 4/week"
-      - level: 17
-        feature: smite_evil_6
-        description: "Smite evil 6/day"
-      - level: 18
-        feature: remove_disease_5
-        description: "Remove disease 5/week"
-      - level: 20
-        feature: smite_evil_7
-        description: "Smite evil 7/day"
+    - level: 1
+      feature: aura_of_good
+      description: Aura of good (equal to Paladin level)
+    - level: 1
+      feature: detect_evil
+      description: Detect evil at will
+    - level: 1
+      feature: smite_evil_1
+      description: Smite evil 1/day
+      buff_name: Smite Evil
+      note: >-
+        Add CHA mod to attack roll, paladin level to damage against evil target
+        (one attack)
+      effects:
+      - target: attack_all
+        bonus_type: untyped
+        value: cha_mod
+      - target: damage_all
+        bonus_type: untyped
+        value: character_level
+    - level: 2
+      feature: divine_grace
+      description: +CHA modifier to all saves
+      effects:
+      - target: fort_save
+        bonus_type: untyped
+        value: cha_mod
+      - target: ref_save
+        bonus_type: untyped
+        value: cha_mod
+      - target: will_save
+        bonus_type: untyped
+        value: cha_mod
+    - level: 2
+      feature: lay_on_hands
+      description: Heal HP per day = Paladin level × CHA modifier
+    - level: 3
+      feature: aura_of_courage
+      description: Immune to fear; allies +4 morale vs fear
+    - level: 3
+      feature: divine_health
+      description: Immune to all diseases
+    - level: 4
+      feature: turn_undead
+      description: Turn undead as Cleric of (Paladin level - 3)
+    - level: 5
+      feature: smite_evil_2
+      description: Smite evil 2/day
+    - level: 5
+      feature: special_mount
+      description: Celestial heavy warhorse or pony
+    - level: 6
+      feature: remove_disease_1
+      description: Remove disease 1/week
+    - level: 8
+      feature: smite_evil_3
+      description: Smite evil 3/day
+    - level: 9
+      feature: remove_disease_2
+      description: Remove disease 2/week
+    - level: 11
+      feature: smite_evil_4
+      description: Smite evil 4/day
+    - level: 12
+      feature: remove_disease_3
+      description: Remove disease 3/week
+    - level: 14
+      feature: smite_evil_5
+      description: Smite evil 5/day
+    - level: 15
+      feature: remove_disease_4
+      description: Remove disease 4/week
+    - level: 17
+      feature: smite_evil_6
+      description: Smite evil 6/day
+    - level: 18
+      feature: remove_disease_5
+      description: Remove disease 5/week
+    - level: 20
+      feature: smite_evil_7
+      description: Smite evil 7/day

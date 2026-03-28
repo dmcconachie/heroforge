@@ -318,7 +318,7 @@ levels:
       9:
         - "Time Stop"
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

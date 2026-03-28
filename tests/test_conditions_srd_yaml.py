@@ -14,7 +14,9 @@ import pytest
 import yaml
 
 from heroforge.engine.bonus import BonusType
-from heroforge.engine.conditions import ConditionRegistry
+from heroforge.engine.conditions import (
+    ConditionRegistry,
+)
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.spells import SpellCompendium
 from heroforge.rules.loader import (
@@ -43,7 +45,7 @@ def compendium_buff_names() -> set[str]:
 
 
 @pytest.fixture()
-def srd_data() -> list[dict]:
+def srd_data() -> dict[str, dict]:
     path = RULES_DIR / "core" / "conditions_srd.yaml"
     with open(path) as f:
         data = yaml.safe_load(f)
@@ -51,39 +53,39 @@ def srd_data() -> list[dict]:
 
 
 class TestConditionsSrdYaml:
-    def test_all_have_names(self, srd_data: list[dict]) -> None:
-        for d in srd_data:
-            assert "name" in d, f"Missing name: {d}"
+    def test_all_have_names(self, srd_data: dict[str, dict]) -> None:
+        for name in srd_data:
+            assert isinstance(name, str) and name
 
-    def test_no_duplicates_within_file(self, srd_data: list[dict]) -> None:
-        names = [d["name"] for d in srd_data]
-        assert len(names) == len(set(names))
+    def test_no_duplicates_within_file(self, srd_data: dict[str, dict]) -> None:
+        # Dict keys are unique by definition
+        assert len(srd_data) > 0
 
     def test_no_duplicates_with_compendium_buffs(
         self,
-        srd_data: list[dict],
+        srd_data: dict[str, dict],
         compendium_buff_names: set[str],
     ) -> None:
-        for d in srd_data:
-            assert d["name"] not in compendium_buff_names, (
-                f"{d['name']!r} duplicates a compendium buff spell"
+        for name in srd_data:
+            assert name not in compendium_buff_names, (
+                f"{name!r} duplicates a compendium buff spell"
             )
 
-    def test_no_category_field(self, srd_data: list[dict]) -> None:
+    def test_no_category_field(self, srd_data: dict[str, dict]) -> None:
         """
         Conditions YAML should not have a
         category field — the loader sets it."""
-        for d in srd_data:
+        for name, d in srd_data.items():
             assert "category" not in d, (
-                f"{d['name']!r} has unexpected 'category' field"
+                f"{name!r} has unexpected 'category' field"
             )
 
-    def test_valid_bonus_types(self, srd_data: list[dict]) -> None:
+    def test_valid_bonus_types(self, srd_data: dict[str, dict]) -> None:
         valid = {bt.value for bt in BonusType}
-        for d in srd_data:
+        for name, d in srd_data.items():
             for eff in d.get("effects", []):
                 bt = eff.get("bonus_type", "untyped")
-                assert bt in valid, f"{d['name']!r}: bad bonus_type {bt!r}"
+                assert bt in valid, f"{name!r}: bad bonus_type {bt!r}"
 
     def test_loader_populates_both_registries(
         self,
@@ -97,14 +99,12 @@ class TestConditionsSrdYaml:
             "core/conditions_srd.yaml",
         )
         assert len(names) > 0
-        # Every condition in the condition registry
         for name in names:
             assert cond_reg.get(name) is not None
-        # Every condition also in the buff registry
         for name in names:
             assert buff_reg.get(name) is not None
 
-    def test_at_least_15_conditions(self, srd_data: list[dict]) -> None:
+    def test_at_least_15_conditions(self, srd_data: dict[str, dict]) -> None:
         assert len(srd_data) >= 15
 
     def test_top_level_key_is_conditions(

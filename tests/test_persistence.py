@@ -194,9 +194,7 @@ class TestSaveCharacter:
         save_character(state.character, path)
         with open(path) as f:
             data = yaml.safe_load(f)
-        bless_data = next(
-            (b for b in data["buffs"] if b["name"] == "Bless"), None
-        )
+        bless_data = data["buffs"].get("Bless")
         assert bless_data is not None
         assert bless_data["active"] is True
 
@@ -427,7 +425,7 @@ class TestLoadCharacter:
             "ability_scores:"
             " {str: 10, dex: 10, con: 10,"
             " int: 10, wis: 10, cha: 10}\n"
-            "levels: []\nbuffs: []\n"
+            "levels: []\nbuffs: {}\n"
             "templates: []\n"
             "dm_overrides: []\nequipment: {}\n"
         )
@@ -447,7 +445,7 @@ class TestLoadCharacter:
             " int: 10, wis: 10, cha: 10}\n"
             "levels: []\n"
             "buffs:\n"
-            "  - name: 'Homebrew Buff'\n"
+            "  Homebrew Buff:\n"
             "    active: true\n"
             "    caster_level: 8\n"
             "templates: []\n"

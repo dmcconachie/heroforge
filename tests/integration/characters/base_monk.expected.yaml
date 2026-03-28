@@ -143,8 +143,8 @@ feats:
 class_features:
 - 'flurry_of_blows: Extra attack with -2 to all attacks'
 - 'unarmed_strike: Unarmed deals 1d6; increases per level'
-- 'bonus_feat_monk_1: Improved Unarmed Strike + one of: Combat Reflexes, Deflect Arrows,
-  Improved Grapple'
+- 'bonus_feat_monk_1: ''Improved Unarmed Strike + one of: Combat Reflexes, Deflect
+  Arrows, Improved Grapple'''
 - 'evasion: No damage on successful Reflex saves'
 - 'bonus_feat_monk_2: Combat Reflexes, Deflect Arrows, or Improved Trip'
 - 'still_mind: +2 saves vs enchantments'

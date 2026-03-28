@@ -1,6 +1,5 @@
 classes:
-
-  - name: Adept
+  Adept:
     source_book: SRD
     hit_die: 6
     bab_progression: poor
@@ -10,23 +9,23 @@ classes:
       will: good
     skills_per_level: 2
     class_skills:
-      - Concentration
-      - Craft
-      - Handle Animal
-      - Heal
-      - Knowledge (Arcana)
-      - Knowledge (Architecture)
-      - Knowledge (Dungeoneering)
-      - Knowledge (Geography)
-      - Knowledge (History)
-      - Knowledge (Local)
-      - Knowledge (Nature)
-      - Knowledge (Nobility)
-      - Knowledge (Religion)
-      - Knowledge (The Planes)
-      - Profession
-      - Spellcraft
-      - Survival
+    - Concentration
+    - Craft
+    - Handle Animal
+    - Heal
+    - Knowledge (Arcana)
+    - Knowledge (Architecture)
+    - Knowledge (Dungeoneering)
+    - Knowledge (Geography)
+    - Knowledge (History)
+    - Knowledge (Local)
+    - Knowledge (Nature)
+    - Knowledge (Nobility)
+    - Knowledge (Religion)
+    - Knowledge (The Planes)
+    - Profession
+    - Spellcraft
+    - Survival
     spellcasting:
       cast_type: divine
       stat: wis
@@ -34,6 +33,6 @@ classes:
       max_spell_level: 5
       starts_at_level: 1
     class_features:
-      - level: 2
-        feature: summon_familiar
-        description: "Summon a familiar"
+    - level: 2
+      feature: summon_familiar
+      description: Summon a familiar

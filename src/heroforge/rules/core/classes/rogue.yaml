@@ -1,6 +1,5 @@
 classes:
-
-  - name: Rogue
+  Rogue:
     source_book: PHB
     hit_die: 6
     bab_progression: medium
@@ -10,106 +9,106 @@ classes:
       will: poor
     skills_per_level: 8
     class_skills:
-      - Appraise
-      - Balance
-      - Bluff
-      - Climb
-      - Craft
-      - Decipher Script
-      - Diplomacy
-      - Disable Device
-      - Disguise
-      - Escape Artist
-      - Forgery
-      - Gather Information
-      - Hide
-      - Intimidate
-      - Jump
-      - Knowledge (Local)
-      - Listen
-      - Move Silently
-      - Open Lock
-      - Perform
-      - Profession
-      - Search
-      - Sense Motive
-      - Sleight of Hand
-      - Spot
-      - Swim
-      - Tumble
-      - Use Magic Device
-      - Use Rope
+    - Appraise
+    - Balance
+    - Bluff
+    - Climb
+    - Craft
+    - Decipher Script
+    - Diplomacy
+    - Disable Device
+    - Disguise
+    - Escape Artist
+    - Forgery
+    - Gather Information
+    - Hide
+    - Intimidate
+    - Jump
+    - Knowledge (Local)
+    - Listen
+    - Move Silently
+    - Open Lock
+    - Perform
+    - Profession
+    - Search
+    - Sense Motive
+    - Sleight of Hand
+    - Spot
+    - Swim
+    - Tumble
+    - Use Magic Device
+    - Use Rope
     spellcasting: null
     class_features:
-      - level: 1
-        feature: sneak_attack_1d6
-        description: "Sneak attack +1d6"
-      - level: 1
-        feature: trapfinding
-        description: "Find and disable magical traps"
-      - level: 2
-        feature: evasion
-        description: "No damage on successful Reflex save"
-      - level: 3
-        feature: sneak_attack_2d6
-        description: "Sneak attack +2d6"
-      - level: 3
-        feature: trap_sense_1
-        description: "+1 Reflex and AC vs traps"
-      - level: 4
-        feature: uncanny_dodge
-        description: "Retain DEX bonus to AC when flat-footed"
-      - level: 5
-        feature: sneak_attack_3d6
-        description: "Sneak attack +3d6"
-      - level: 6
-        feature: trap_sense_2
-        description: "+2 Reflex and AC vs traps"
-      - level: 7
-        feature: sneak_attack_4d6
-        description: "Sneak attack +4d6"
-      - level: 8
-        feature: improved_uncanny_dodge
-        description: "Cannot be flanked"
-      - level: 9
-        feature: sneak_attack_5d6
-        description: "Sneak attack +5d6"
-      - level: 9
-        feature: trap_sense_3
-        description: "+3 Reflex and AC vs traps"
-      - level: 10
-        feature: special_ability
-        description: "Rogue special ability (crippling strike, etc.)"
-      - level: 11
-        feature: sneak_attack_6d6
-        description: "Sneak attack +6d6"
-      - level: 12
-        feature: trap_sense_4
-        description: "+4 Reflex and AC vs traps"
-      - level: 13
-        feature: sneak_attack_7d6
-        description: "Sneak attack +7d6"
-      - level: 14
-        feature: special_ability_2
-        description: "Rogue special ability"
-      - level: 15
-        feature: sneak_attack_8d6
-        description: "Sneak attack +8d6"
-      - level: 15
-        feature: trap_sense_5
-        description: "+5 Reflex and AC vs traps"
-      - level: 16
-        feature: special_ability_3
-        description: "Rogue special ability"
-      - level: 17
-        feature: sneak_attack_9d6
-        description: "Sneak attack +9d6"
-      - level: 18
-        feature: trap_sense_6
-        description: "+6 Reflex and AC vs traps"
-      - level: 19
-        feature: sneak_attack_10d6
-        description: "Sneak attack +10d6"
-      - level: 20
-        feature: special_ability_4
-        description: "Rogue special ability"
+    - level: 1
+      feature: sneak_attack_1d6
+      description: Sneak attack +1d6
+    - level: 1
+      feature: trapfinding
+      description: Find and disable magical traps
+    - level: 2
+      feature: evasion
+      description: No damage on successful Reflex save
+    - level: 3
+      feature: sneak_attack_2d6
+      description: Sneak attack +2d6
+    - level: 3
+      feature: trap_sense_1
+      description: +1 Reflex and AC vs traps
+    - level: 4
+      feature: uncanny_dodge
+      description: Retain DEX bonus to AC when flat-footed
+    - level: 5
+      feature: sneak_attack_3d6
+      description: Sneak attack +3d6
+    - level: 6
+      feature: trap_sense_2
+      description: +2 Reflex and AC vs traps
+    - level: 7
+      feature: sneak_attack_4d6
+      description: Sneak attack +4d6
+    - level: 8
+      feature: improved_uncanny_dodge
+      description: Cannot be flanked
+    - level: 9
+      feature: sneak_attack_5d6
+      description: Sneak attack +5d6
+    - level: 9
+      feature: trap_sense_3
+      description: +3 Reflex and AC vs traps
+    - level: 10
+      feature: special_ability
+      description: Rogue special ability (crippling strike, etc.)
+    - level: 11
+      feature: sneak_attack_6d6
+      description: Sneak attack +6d6
+    - level: 12
+      feature: trap_sense_4
+      description: +4 Reflex and AC vs traps
+    - level: 13
+      feature: sneak_attack_7d6
+      description: Sneak attack +7d6
+    - level: 14
+      feature: special_ability_2
+      description: Rogue special ability
+    - level: 15
+      feature: sneak_attack_8d6
+      description: Sneak attack +8d6
+    - level: 15
+      feature: trap_sense_5
+      description: +5 Reflex and AC vs traps
+    - level: 16
+      feature: special_ability_3
+      description: Rogue special ability
+    - level: 17
+      feature: sneak_attack_9d6
+      description: Sneak attack +9d6
+    - level: 18
+      feature: trap_sense_6
+      description: +6 Reflex and AC vs traps
+    - level: 19
+      feature: sneak_attack_10d6
+      description: Sneak attack +10d6
+    - level: 20
+      feature: special_ability_4
+      description: Rogue special ability

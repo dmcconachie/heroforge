@@ -208,7 +208,7 @@ levels:
       Decipher Script: 1
       Sense Motive: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

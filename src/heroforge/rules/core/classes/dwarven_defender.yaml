@@ -1,6 +1,5 @@
 prestige_classes:
-
-  - name: "Dwarven Defender"
+  Dwarven Defender:
     source_book: DMG
     hit_die: 12
     max_level: 10
@@ -11,57 +10,60 @@ prestige_classes:
       will: good
     skills_per_level: 2
     class_skills:
-      - Craft
-      - Listen
-      - Sense Motive
-      - Spot
+    - Craft
+    - Listen
+    - Sense Motive
+    - Spot
     entry_prerequisites:
       all_of:
-        - stat: {key: bab, min: 7, label: BAB}
-        - feat: "Dodge"
-        - feat: "Toughness"
+      - stat:
+          key: bab
+          min: 7
+          label: BAB
+      - feat: Dodge
+      - feat: Toughness
     class_features:
-      - level: 1
-        feature: defensive_stance
-        description: "+2 STR/CON, +2 saves, +4 AC"
-        buff_name: "Defensive Stance"
-        effects:
-          - target: str_score
-            bonus_type: morale
-            value: 2
-          - target: con_score
-            bonus_type: morale
-            value: 2
-          - target: fort_save
-            bonus_type: morale
-            value: 2
-          - target: ref_save
-            bonus_type: morale
-            value: 2
-          - target: will_save
-            bonus_type: morale
-            value: 2
-          - target: ac
-            bonus_type: dodge
-            value: 4
-      - level: 2
-        feature: uncanny_dodge
-        description: "Never flat-footed"
-      - level: 3
-        feature: trap_sense_1
-        description: "+1 vs traps"
-      - level: 4
-        feature: damage_reduction_1
-        description: "DR 3/—"
-      - level: 6
-        feature: damage_reduction_2
-        description: "DR 6/—"
-      - level: 6
-        feature: improved_uncanny_dodge
-        description: "Cannot be flanked"
-      - level: 8
-        feature: damage_reduction_3
-        description: "DR 9/—"
-      - level: 10
-        feature: mobile_defense
-        description: "Move 5 ft in stance"
+    - level: 1
+      feature: defensive_stance
+      description: +2 STR/CON, +2 saves, +4 AC
+      buff_name: Defensive Stance
+      effects:
+      - target: str_score
+        bonus_type: morale
+        value: 2
+      - target: con_score
+        bonus_type: morale
+        value: 2
+      - target: fort_save
+        bonus_type: morale
+        value: 2
+      - target: ref_save
+        bonus_type: morale
+        value: 2
+      - target: will_save
+        bonus_type: morale
+        value: 2
+      - target: ac
+        bonus_type: dodge
+        value: 4
+    - level: 2
+      feature: uncanny_dodge
+      description: Never flat-footed
+    - level: 3
+      feature: trap_sense_1
+      description: +1 vs traps
+    - level: 4
+      feature: damage_reduction_1
+      description: DR 3/—
+    - level: 6
+      feature: damage_reduction_2
+      description: DR 6/—
+    - level: 6
+      feature: improved_uncanny_dodge
+      description: Cannot be flanked
+    - level: 8
+      feature: damage_reduction_3
+      description: DR 9/—
+    - level: 10
+      feature: mobile_defense
+      description: Move 5 ft in stance

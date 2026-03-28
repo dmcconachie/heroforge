@@ -205,7 +205,7 @@ levels:
       Swim: 1
       Ride: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

@@ -1,6 +1,5 @@
 prestige_classes:
-
-  - name: "Blackguard"
+  Blackguard:
     source_book: DMG
     hit_die: 10
     max_level: 10
@@ -11,16 +10,16 @@ prestige_classes:
       will: poor
     skills_per_level: 2
     class_skills:
-      - Concentration
-      - Craft
-      - Diplomacy
-      - Handle Animal
-      - Heal
-      - Hide
-      - Intimidate
-      - Knowledge (Religion)
-      - Profession
-      - Ride
+    - Concentration
+    - Craft
+    - Diplomacy
+    - Handle Animal
+    - Heal
+    - Hide
+    - Intimidate
+    - Knowledge (Religion)
+    - Profession
+    - Ride
     spellcasting:
       cast_type: divine
       stat: cha
@@ -29,48 +28,54 @@ prestige_classes:
       starts_at_level: 1
     entry_prerequisites:
       all_of:
-        - stat: {key: bab, min: 6, label: BAB}
-        - skill:
-            {name: Knowledge (Religion), min: 2}
-        - skill: {name: Hide, min: 5}
+      - stat:
+          key: bab
+          min: 6
+          label: BAB
+      - skill:
+          name: Knowledge (Religion)
+          min: 2
+      - skill:
+          name: Hide
+          min: 5
     class_features:
-      - level: 1
-        feature: aura_of_evil
-        description: "Strong evil aura"
-      - level: 1
-        feature: detect_good
-        description: "Detect good at will"
-      - level: 2
-        feature: dark_blessing
-        description: "CHA bonus to saves"
-        effects:
-          - target: fort_save
-            bonus_type: untyped
-            value: "cha_mod"
-          - target: ref_save
-            bonus_type: untyped
-            value: "cha_mod"
-          - target: will_save
-            bonus_type: untyped
-            value: "cha_mod"
-      - level: 2
-        feature: smite_good
-        description: "Smite good 1/day"
-      - level: 3
-        feature: aura_of_despair
-        description: "-2 saves to enemies"
-      - level: 3
-        feature: command_undead
-        description: "Command/rebuke undead"
-      - level: 4
-        feature: sneak_attack_1d6
-        description: "+1d6 sneak attack"
-      - level: 5
-        feature: fiendish_servant
-        description: "Fiendish mount"
-      - level: 7
-        feature: sneak_attack_2d6
-        description: "+2d6 sneak attack"
-      - level: 10
-        feature: sneak_attack_3d6
-        description: "+3d6 sneak attack"
+    - level: 1
+      feature: aura_of_evil
+      description: Strong evil aura
+    - level: 1
+      feature: detect_good
+      description: Detect good at will
+    - level: 2
+      feature: dark_blessing
+      description: CHA bonus to saves
+      effects:
+      - target: fort_save
+        bonus_type: untyped
+        value: cha_mod
+      - target: ref_save
+        bonus_type: untyped
+        value: cha_mod
+      - target: will_save
+        bonus_type: untyped
+        value: cha_mod
+    - level: 2
+      feature: smite_good
+      description: Smite good 1/day
+    - level: 3
+      feature: aura_of_despair
+      description: -2 saves to enemies
+    - level: 3
+      feature: command_undead
+      description: Command/rebuke undead
+    - level: 4
+      feature: sneak_attack_1d6
+      description: +1d6 sneak attack
+    - level: 5
+      feature: fiendish_servant
+      description: Fiendish mount
+    - level: 7
+      feature: sneak_attack_2d6
+      description: +2d6 sneak attack
+    - level: 10
+      feature: sneak_attack_3d6
+      description: +3d6 sneak attack

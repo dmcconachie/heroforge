@@ -23,7 +23,7 @@ RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 FEATS_PATH = RULES_DIR / "core" / "feats.yaml"
 
 
-def _load_feats() -> list[dict]:
+def _load_feats() -> dict[str, dict]:
     with open(FEATS_PATH) as f:
         data = yaml.safe_load(f)
     return data["feats"]
@@ -31,21 +31,22 @@ def _load_feats() -> list[dict]:
 
 class TestFeatsYaml:
     def test_all_have_names(self) -> None:
-        for d in _load_feats():
-            assert "name" in d
+        for name in _load_feats():
+            assert isinstance(name, str) and name
 
     def test_no_duplicate_names(self) -> None:
-        names = [d["name"] for d in _load_feats()]
+        # Dict keys are unique by definition; just verify count.
+        names = list(_load_feats().keys())
         assert len(names) == len(set(names))
 
     def test_valid_kinds(self) -> None:
         valid = {"always_on", "conditional", "passive"}
-        for d in _load_feats():
-            assert d.get("kind") in valid, f"{d['name']!r}: bad kind"
+        for name, d in _load_feats().items():
+            assert d.get("kind") in valid, f"{name!r}: bad kind"
 
     def test_alphabetical_order(self) -> None:
         """Feats must be sorted alphabetically."""
-        names = [d["name"] for d in _load_feats()]
+        names = list(_load_feats().keys())
         sorted_names = sorted(names, key=lambda n: n.lower())
         for i, (actual, expected) in enumerate(
             zip(names, sorted_names, strict=True)

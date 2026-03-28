@@ -110,7 +110,7 @@ levels:
       Spellcraft: 1
       Knowledge (The Planes): 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

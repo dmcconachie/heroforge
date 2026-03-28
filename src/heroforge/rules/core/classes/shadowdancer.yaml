@@ -1,6 +1,5 @@
 prestige_classes:
-
-  - name: "Shadowdancer"
+  Shadowdancer:
     source_book: DMG
     hit_die: 8
     max_level: 10
@@ -11,61 +10,67 @@ prestige_classes:
       will: poor
     skills_per_level: 6
     class_skills:
-      - Balance
-      - Bluff
-      - Decipher Script
-      - Diplomacy
-      - Disguise
-      - Escape Artist
-      - Hide
-      - Jump
-      - Listen
-      - Move Silently
-      - Perform
-      - Profession
-      - Search
-      - Sleight of Hand
-      - Spot
-      - Tumble
+    - Balance
+    - Bluff
+    - Decipher Script
+    - Diplomacy
+    - Disguise
+    - Escape Artist
+    - Hide
+    - Jump
+    - Listen
+    - Move Silently
+    - Perform
+    - Profession
+    - Search
+    - Sleight of Hand
+    - Spot
+    - Tumble
     entry_prerequisites:
       all_of:
-        - skill: {name: Move Silently, min: 8}
-        - skill: {name: Hide, min: 10}
-        - skill: {name: Perform, min: 5}
-        - feat: "Dodge"
-        - feat: "Mobility"
-        - feat: "Combat Reflexes"
+      - skill:
+          name: Move Silently
+          min: 8
+      - skill:
+          name: Hide
+          min: 10
+      - skill:
+          name: Perform
+          min: 5
+      - feat: Dodge
+      - feat: Mobility
+      - feat: Combat Reflexes
     class_features:
-      - level: 1
-        feature: hide_in_plain_sight
-        description: "Hide while observed"
-      - level: 2
-        feature: evasion
-        description: "No damage on Ref save"
-      - level: 2
-        feature: darkvision
-        description: "Darkvision 60 ft"
-      - level: 2
-        feature: uncanny_dodge
-        description: "Never flat-footed"
-      - level: 3
-        feature: shadow_illusion
-        description: "Silent image 1/day"
-      - level: 3
-        feature: summon_shadow
-        description: "Summon shadow companion"
-      - level: 4
-        feature: shadow_jump_20
-        description: "Teleport 20 ft/day"
-      - level: 5
-        feature: defensive_roll
-        description: "Avoid lethal blow"
-      - level: 5
-        feature: improved_uncanny_dodge
-        description: "Cannot be flanked"
-      - level: 7
-        feature: slippery_mind
-        description: "Re-roll enchantment save"
-      - level: 10
-        feature: improved_evasion
-        description: "Half damage on failed save"
+    - level: 1
+      feature: hide_in_plain_sight
+      description: Hide while observed
+    - level: 2
+      feature: evasion
+      description: No damage on Ref save
+    - level: 2
+      feature: darkvision
+      description: Darkvision 60 ft
+    - level: 2
+      feature: uncanny_dodge
+      description: Never flat-footed
+    - level: 3
+      feature: shadow_illusion
+      description: Silent image 1/day
+    - level: 3
+      feature: summon_shadow
+      description: Summon shadow companion
+    - level: 4
+      feature: shadow_jump_20
+      description: Teleport 20 ft/day
+    - level: 5
+      feature: defensive_roll
+      description: Avoid lethal blow
+    - level: 5
+      feature: improved_uncanny_dodge
+      description: Cannot be flanked
+    - level: 7
+      feature: slippery_mind
+      description: Re-roll enchantment save
+    - level: 10
+      feature: improved_evasion
+      description: Half damage on failed save

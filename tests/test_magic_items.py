@@ -101,3 +101,56 @@ class TestMagicItemEffects:
         belt = buff_reg.get("Belt of Giant Strength +4")
         apply_buff(belt, c)
         assert c.get("str_score") == 18
+
+
+SLOT_ORDER = [
+    "head",
+    "eyes",
+    "neck",
+    "shoulders",
+    "body",
+    "torso",
+    "arms",
+    "hands",
+    "ring",
+    "waist",
+    "feet",
+    "slotless",
+]
+
+
+class TestMagicItemsSort:
+    """Items must be sorted by slot then by name."""
+
+    def _items(self) -> list[tuple[str, dict]]:
+        import yaml
+
+        path = RULES_DIR / "core" / "magic_items.yaml"
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        return list(data["magic_items"].items())
+
+    def test_all_have_slot(self) -> None:
+        for name, item in self._items():
+            assert "slot" in item, f"{name!r} missing slot"
+
+    def test_valid_slots(self) -> None:
+        for name, item in self._items():
+            assert item.get("slot") in SLOT_ORDER, (
+                f"{name!r}: unknown slot {item.get('slot')!r}"
+            )
+
+    def test_sorted_by_slot_then_name(self) -> None:
+        items = self._items()
+        keys = [(SLOT_ORDER.index(v["slot"]), n) for n, v in items]
+        sorted_keys = sorted(keys, key=lambda k: (k[0], k[1].lower()))
+        for i, (actual, expected) in enumerate(
+            zip(keys, sorted_keys, strict=True)
+        ):
+            assert actual == expected, (
+                f"Item at index {i}: "
+                f"({actual[1]!r}, slot "
+                f"{SLOT_ORDER[actual[0]]!r}) should "
+                f"be ({expected[1]!r}, slot "
+                f"{SLOT_ORDER[expected[0]]!r})"
+            )

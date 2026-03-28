@@ -80,7 +80,7 @@ levels:
       - name: "Improved Bull Rush"
         source: fighter_bonus
 
-buffs: []
+buffs: {}
 templates:
   - template: "Half-Dragon (Red)"
     level: 5

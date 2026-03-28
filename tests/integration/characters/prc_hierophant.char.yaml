@@ -182,7 +182,7 @@ levels:
       - name: "Quicken Spell"
         source: character
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

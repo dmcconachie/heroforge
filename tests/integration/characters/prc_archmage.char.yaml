@@ -291,7 +291,7 @@ levels:
       Knowledge (Religion): 1
       Search: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

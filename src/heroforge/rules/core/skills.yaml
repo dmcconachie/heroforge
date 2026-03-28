@@ -1,9 +1,9 @@
 # rules/core/skills.yaml
 #
+# Map keyed by skill name.
 # All D&D 3.5e skills (PHB).
 #
-# Schema per entry:
-#   name         : Canonical skill name
+# Fields per entry:
 #   key          : pool key used in BonusPool (skill_<snake_case>)
 #   ability      : str | dex | con | int | wis | cha
 #   trained_only : true if requires at least 1 rank to use
@@ -12,373 +12,357 @@
 #   description  : Brief description
 
 skills:
-
-  - name: Appraise
+  Appraise:
     key: skill_appraise
     ability: int
     trained_only: false
     armor_check: false
-    description: "Determine value of items"
-
-  - name: Balance
+    description: Determine value of items
+  Balance:
     key: skill_balance
     ability: dex
     trained_only: false
     armor_check: true
-    description: "Walk on narrow/slippery surfaces"
-
-  - name: Bluff
+    description: Walk on narrow/slippery surfaces
+  Bluff:
     key: skill_bluff
     ability: cha
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Diplomacy, bonus: 2}
-      - {skill: Intimidate, bonus: 2}
-      - {skill: Sleight of Hand, bonus: 2}
-      - {skill: Disguise, bonus: 2}
-    description: "Lie convincingly; feint in combat"
-
-  - name: Climb
+    - skill: Diplomacy
+      bonus: 2
+    - skill: Intimidate
+      bonus: 2
+    - skill: Sleight of Hand
+      bonus: 2
+    - skill: Disguise
+      bonus: 2
+    description: Lie convincingly; feint in combat
+  Climb:
     key: skill_climb
     ability: str
     trained_only: false
     armor_check: true
-    description: "Climb walls, ropes, etc."
-
-  - name: Concentration
+    description: Climb walls, ropes, etc.
+  Concentration:
     key: skill_concentration
     ability: con
     trained_only: false
     armor_check: false
-    description: "Maintain spells while threatened or injured"
-
-  - name: Craft
+    description: Maintain spells while threatened or injured
+  Craft:
     key: skill_craft
     ability: int
     trained_only: false
     armor_check: false
-    description: "Create items (each Craft is a separate skill)"
-
-  - name: Decipher Script
+    description: Create items (each Craft is a separate skill)
+  Decipher Script:
     key: skill_decipher_script
     ability: int
     trained_only: true
     armor_check: false
-    description: "Read unfamiliar languages and magical writing"
-
-  - name: Diplomacy
+    description: Read unfamiliar languages and magical writing
+  Diplomacy:
     key: skill_diplomacy
     ability: cha
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Sense Motive, bonus: 2}
-      - {skill: Knowledge (Nobility), bonus: 2}
-    description: "Influence attitudes and negotiate"
-
-  - name: Disable Device
+    - skill: Sense Motive
+      bonus: 2
+    - skill: Knowledge (Nobility)
+      bonus: 2
+    description: Influence attitudes and negotiate
+  Disable Device:
     key: skill_disable_device
     ability: int
     trained_only: true
     armor_check: false
-    description: "Sabotage traps and mechanical devices"
-
-  - name: Disguise
+    description: Sabotage traps and mechanical devices
+  Disguise:
     key: skill_disguise
     ability: cha
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Bluff, bonus: 2}
-    description: "Change appearance to impersonate another"
-
-  - name: Escape Artist
+    - skill: Bluff
+      bonus: 2
+    description: Change appearance to impersonate another
+  Escape Artist:
     key: skill_escape_artist
     ability: dex
     trained_only: false
     armor_check: true
     synergies:
-      - {skill: Use Rope, bonus: 2}
-    description: "Escape grapples, bonds, and tight spaces"
-
-  - name: Forgery
+    - skill: Use Rope
+      bonus: 2
+    description: Escape grapples, bonds, and tight spaces
+  Forgery:
     key: skill_forgery
     ability: int
     trained_only: false
     armor_check: false
-    description: "Fake documents and signatures"
-
-  - name: Gather Information
+    description: Fake documents and signatures
+  Gather Information:
     key: skill_gather_information
     ability: cha
     trained_only: false
     armor_check: false
-    description: "Research rumors and information in a settlement"
-
-  - name: Handle Animal
+    description: Research rumors and information in a settlement
+  Handle Animal:
     key: skill_handle_animal
     ability: cha
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Diplomacy, bonus: 2}
-    description: "Train, manage, and work with animals"
-
-  - name: Heal
+    - skill: Diplomacy
+      bonus: 2
+    description: Train, manage, and work with animals
+  Heal:
     key: skill_heal
     ability: wis
     trained_only: false
     armor_check: false
-    description: "Provide first aid and long-term care"
-
-  - name: Hide
+    description: Provide first aid and long-term care
+  Hide:
     key: skill_hide
     ability: dex
     trained_only: false
     armor_check: true
     synergies:
-      - {skill: Move Silently, bonus: 2}
-    description: "Conceal yourself from observers"
-
-  - name: Intimidate
+    - skill: Move Silently
+      bonus: 2
+    description: Conceal yourself from observers
+  Intimidate:
     key: skill_intimidate
     ability: cha
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Bluff, bonus: 2}
-    description: "Coerce or frighten others"
-
-  - name: Jump
+    - skill: Bluff
+      bonus: 2
+    description: Coerce or frighten others
+  Jump:
     key: skill_jump
     ability: str
     trained_only: false
     armor_check: true
     synergies:
-      - {skill: Tumble, bonus: 2}
-    description: "Leap, vault, and spring"
-
-  - name: Knowledge (Arcana)
+    - skill: Tumble
+      bonus: 2
+    description: Leap, vault, and spring
+  Knowledge (Arcana):
     key: skill_knowledge_arcana
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Spellcraft, bonus: 2}
-    description: "Magic, ancient mysteries, spells, magic traditions"
-
-  - name: Knowledge (Architecture and Engineering)
+    - skill: Spellcraft
+      bonus: 2
+    description: Magic, ancient mysteries, spells, magic traditions
+  Knowledge (Architecture and Engineering):
     key: skill_knowledge_architecture
     ability: int
     trained_only: true
     armor_check: false
-    description: "Buildings, aqueducts, bridges, fortifications"
-
-  - name: Knowledge (Dungeoneering)
+    description: Buildings, aqueducts, bridges, fortifications
+  Knowledge (Dungeoneering):
     key: skill_knowledge_dungeoneering
     ability: int
     trained_only: true
     armor_check: false
-    description: "Aberrations, caverns, oozes, spelunking"
-
-  - name: Knowledge (Geography)
+    description: Aberrations, caverns, oozes, spelunking
+  Knowledge (Geography):
     key: skill_knowledge_geography
     ability: int
     trained_only: true
     armor_check: false
-    description: "Lands, terrain, climate, people"
-
-  - name: Knowledge (History)
+    description: Lands, terrain, climate, people
+  Knowledge (History):
     key: skill_knowledge_history
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Bardic Knowledge, bonus: 2}
-    description: "Royalty, wars, colonies, migrations, founding of cities"
-
-  - name: Knowledge (Local)
+    - skill: Bardic Knowledge
+      bonus: 2
+    description: Royalty, wars, colonies, migrations, founding of cities
+  Knowledge (Local):
     key: skill_knowledge_local
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Gather Information, bonus: 2}
-    description: "Legends, personalities, inhabitants, laws, customs"
-
-  - name: Knowledge (Nature)
+    - skill: Gather Information
+      bonus: 2
+    description: Legends, personalities, inhabitants, laws, customs
+  Knowledge (Nature):
     key: skill_knowledge_nature
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Survival, bonus: 2}
-    description: "Animals, fey, giants, monstrous humanoids, plants, seasons"
-
-  - name: Knowledge (Nobility and Royalty)
+    - skill: Survival
+      bonus: 2
+    description: Animals, fey, giants, monstrous humanoids, plants, seasons
+  Knowledge (Nobility and Royalty):
     key: skill_knowledge_nobility
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Diplomacy, bonus: 2}
-    description: "Lineages, heraldry, family trees, mottoes, personalities"
-
-  - name: Knowledge (Religion)
+    - skill: Diplomacy
+      bonus: 2
+    description: Lineages, heraldry, family trees, mottoes, personalities
+  Knowledge (Religion):
     key: skill_knowledge_religion
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Turn Undead, bonus: 2}
-    description: "Gods and goddesses, mythic history, ecclesiastic tradition"
-
-  - name: Knowledge (The Planes)
+    - skill: Turn Undead
+      bonus: 2
+    description: Gods and goddesses, mythic history, ecclesiastic tradition
+  Knowledge (The Planes):
     key: skill_knowledge_planes
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Survival, bonus: 2}
-    description: "The Inner Planes, Outer Planes, Astral Plane, Ethereal Plane"
-
-  - name: Listen
+    - skill: Survival
+      bonus: 2
+    description: The Inner Planes, Outer Planes, Astral Plane, Ethereal Plane
+  Listen:
     key: skill_listen
     ability: wis
     trained_only: false
     armor_check: false
-    description: "Detect sounds and overhear conversations"
-
-  - name: Move Silently
+    description: Detect sounds and overhear conversations
+  Move Silently:
     key: skill_move_silently
     ability: dex
     trained_only: false
     armor_check: true
-    description: "Move without making noise"
-
-  - name: Open Lock
+    description: Move without making noise
+  Open Lock:
     key: skill_open_lock
     ability: dex
     trained_only: true
     armor_check: false
-    description: "Pick locks and defeat mechanical fastenings"
-
-  - name: Perform
+    description: Pick locks and defeat mechanical fastenings
+  Perform:
     key: skill_perform
     ability: cha
     trained_only: false
     armor_check: false
-    description: "Entertain audiences (each Perform is a separate skill)"
-
-  - name: Profession
+    description: Entertain audiences (each Perform is a separate skill)
+  Profession:
     key: skill_profession
     ability: wis
     trained_only: true
     armor_check: false
-    description: "Work a non-adventuring job to earn money"
-
-  - name: Ride
+    description: Work a non-adventuring job to earn money
+  Ride:
     key: skill_ride
     ability: dex
     trained_only: false
     armor_check: false
-    description: "Guide, control, and care for a mount"
-
-  - name: Search
+    description: Guide, control, and care for a mount
+  Search:
     key: skill_search
     ability: int
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Survival, bonus: 2}
-    description: "Find secret doors, traps, and concealed items"
-
-  - name: Sense Motive
+    - skill: Survival
+      bonus: 2
+    description: Find secret doors, traps, and concealed items
+  Sense Motive:
     key: skill_sense_motive
     ability: wis
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Diplomacy, bonus: 2}
-    description: "Sense deception; get a hunch"
-
-  - name: Sleight of Hand
+    - skill: Diplomacy
+      bonus: 2
+    description: Sense deception; get a hunch
+  Sleight of Hand:
     key: skill_sleight_of_hand
     ability: dex
     trained_only: true
     armor_check: true
     synergies:
-      - {skill: Bluff, bonus: 2}
-    description: "Palm objects; pick pockets; conceal weapons"
-
-  - name: Speak Language
+    - skill: Bluff
+      bonus: 2
+    description: Palm objects; pick pockets; conceal weapons
+  Speak Language:
     key: skill_speak_language
     ability: none
     trained_only: true
     armor_check: false
     description: >-
-      Each rank grants one new language;
-      no checks, no ability modifier
-
-  - name: Spellcraft
+      Each rank grants one new language; no checks, no ability modifier
+  Spellcraft:
     key: skill_spellcraft
     ability: int
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Knowledge (Arcana), bonus: 2}
-      - {skill: Use Magic Device, bonus: 2}
-    description: "Identify spells; decipher magic writing"
-
-  - name: Spot
+    - skill: Knowledge (Arcana)
+      bonus: 2
+    - skill: Use Magic Device
+      bonus: 2
+    description: Identify spells; decipher magic writing
+  Spot:
     key: skill_spot
     ability: wis
     trained_only: false
     armor_check: false
-    description: "Notice things; detect approaching creatures"
-
-  - name: Survival
+    description: Notice things; detect approaching creatures
+  Survival:
     key: skill_survival
     ability: wis
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Knowledge (Nature), bonus: 2}
-    description: "Track, find food and shelter, handle weather"
-
-  - name: Swim
+    - skill: Knowledge (Nature)
+      bonus: 2
+    description: Track, find food and shelter, handle weather
+  Swim:
     key: skill_swim
     ability: str
     trained_only: false
     armor_check: true
-    description: "Move through water; avoid drowning"
-
-  - name: Tumble
+    description: Move through water; avoid drowning
+  Tumble:
     key: skill_tumble
     ability: dex
     trained_only: true
     armor_check: true
     synergies:
-      - {skill: Balance, bonus: 2}
-      - {skill: Jump, bonus: 2}
-    description: "Fall safely; move through threatened squares"
-
-  - name: Use Magic Device
+    - skill: Balance
+      bonus: 2
+    - skill: Jump
+      bonus: 2
+    description: Fall safely; move through threatened squares
+  Use Magic Device:
     key: skill_use_magic_device
     ability: cha
     trained_only: true
     armor_check: false
     synergies:
-      - {skill: Spellcraft, bonus: 2}
-    description: "Use magic items regardless of class or alignment"
-
-  - name: Use Rope
+    - skill: Spellcraft
+      bonus: 2
+    description: Use magic items regardless of class or alignment
+  Use Rope:
     key: skill_use_rope
     ability: dex
     trained_only: false
     armor_check: false
     synergies:
-      - {skill: Climb, bonus: 2}
-      - {skill: Escape Artist, bonus: 2}
-    description: "Bind, splice, and tie with rope"
+    - skill: Climb
+      bonus: 2
+    - skill: Escape Artist
+      bonus: 2
+    description: Bind, splice, and tie with rope

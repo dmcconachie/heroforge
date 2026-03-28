@@ -606,12 +606,9 @@ class TestRacesLoader:
         assert e.favored_class == "Wizard"
 
     def test_no_duplicate_race_names(self) -> None:
-        import yaml
-
-        with open(RULES_DIR / "core" / "races.yaml") as f:
-            data = yaml.safe_load(f)
-        names = [d["name"] for d in data["races"]]
-        assert len(names) == len(set(names))
+        """Dict keys are unique by definition."""
+        reg = loaded_race_registry()
+        assert len(reg) == 7
 
     def test_load_missing_file_raises(self, tmp_path: Path) -> None:
         from heroforge.rules.loader import LoaderError, RacesLoader

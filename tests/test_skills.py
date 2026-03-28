@@ -71,7 +71,8 @@ class TestSkillsYaml:
 
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
-        names = [d["name"] for d in data["skills"]]
+        # Dict keys are unique by definition.
+        names = list(data["skills"].keys())
         assert len(names) == len(set(names))
 
     def test_no_duplicate_keys(self) -> None:
@@ -79,7 +80,7 @@ class TestSkillsYaml:
 
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
-        keys = [d["key"] for d in data["skills"]]
+        keys = [d["key"] for d in data["skills"].values()]
         assert len(keys) == len(set(keys))
 
     def test_all_keys_start_with_skill_(self) -> None:
@@ -89,7 +90,7 @@ class TestSkillsYaml:
             data = yaml.safe_load(f)
         bad = [
             d["key"]
-            for d in data["skills"]
+            for d in data["skills"].values()
             if not d.get("key", "").startswith("skill_")
         ]
         assert bad == []
@@ -109,7 +110,9 @@ class TestSkillsYaml:
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
         bad = [
-            d["name"] for d in data["skills"] if d.get("ability") not in valid
+            name
+            for name, d in data["skills"].items()
+            if d.get("ability") not in valid
         ]
         assert bad == []
 

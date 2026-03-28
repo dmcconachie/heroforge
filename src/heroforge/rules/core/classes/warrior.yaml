@@ -1,6 +1,5 @@
 classes:
-
-  - name: Warrior
+  Warrior:
     source_book: SRD
     hit_die: 8
     bab_progression: full
@@ -10,11 +9,11 @@ classes:
       will: poor
     skills_per_level: 2
     class_skills:
-      - Climb
-      - Handle Animal
-      - Intimidate
-      - Jump
-      - Ride
-      - Swim
+    - Climb
+    - Handle Animal
+    - Intimidate
+    - Jump
+    - Ride
+    - Swim
     spellcasting: null
     class_features: []

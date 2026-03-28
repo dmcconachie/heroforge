@@ -547,6 +547,9 @@ Reusable components in `widgets/`: `LabeledField`,
   (ResourceTracker not yet wired to Character)
 - Companion/familiar sub-objects (placeholder fields
   exist on Character but no logic)
+- Armor/shield/weapon proficiency checks (nonproficiency
+  attack penalties not applied; tower shield proficiency
+  not distinguished from regular shield proficiency)
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
 - Equipment persistence (equip/unequip saves)

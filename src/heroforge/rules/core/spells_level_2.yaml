@@ -1,232 +1,311 @@
 # spells_level_2.yaml
 #
-# SRD spell compendium entries.
-#
-# Spells with stat effects include
-# inline effects: entries.
+# Map keyed by spell name.
+# See spells_level_0.yaml for field schema.
 
 spell_compendium:
-
-  - name: "Acid Arrow"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Aid"
-    level: {Cleric: 2}
-    note: "+1 morale on attack/saves vs fear; +1d8+CL temporary HP"
+  Acid Arrow:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Aid:
+    level:
+      Cleric: 2
+    note: +1 morale on attack/saves vs fear; +1d8+CL temporary HP
     effects:
-      - target: attack_all
-        bonus_type: morale
-        value: 1
-
-  - name: "Align Weapon"
-    level: {Cleric: 2}
-
-  - name: "Alter Self"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Animal Trance"
-    level: {Bard: 2, Druid: 2}
-
-  - name: "Arcane Lock"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Augury"
-    level: {Cleric: 2}
-
-  - name: "Barkskin"
-    level: {Druid: 2, Ranger: 2}
-    note: "Enhancement bonus to natural armor; scales with CL"
+    - target: attack_all
+      bonus_type: morale
+      value: 1
+  Align Weapon:
+    level:
+      Cleric: 2
+  Alter Self:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Animal Trance:
+    level:
+      Bard: 2
+      Druid: 2
+  Arcane Lock:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Augury:
+    level:
+      Cleric: 2
+  Barkskin:
+    level:
+      Druid: 2
+      Ranger: 2
+    note: Enhancement bonus to natural armor; scales with CL
     requires_caster_level: true
     effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: "max(2, 1 + caster_level // 3)"
-
-  - name: "Bear's Endurance"
-    level: {Cleric: 2, Druid: 2, Ranger: 2, Sorcerer: 2, Wizard: 2}
-    note: "+4 enhancement to CON"
+    - target: ac
+      bonus_type: natural_armor
+      value: max(2, 1 + caster_level // 3)
+  Bear's Endurance:
+    level:
+      Cleric: 2
+      Druid: 2
+      Ranger: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: +4 enhancement to CON
     effects:
-      - target: con_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Blindness/Deafness"
-    level: {Bard: 2, Cleric: 3, Sorcerer: 2, Wizard: 2}
-
-  - name: "Blur"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-    note: "20%% miss chance for attacks against you (note only)"
-
-  - name: "Bull's Strength"
-    level: {Cleric: 2, Druid: 2, Paladin: 2, Sorcerer: 2, Wizard: 2}
-    note: "+4 enhancement to STR"
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
+  Blindness/Deafness:
+    level:
+      Bard: 2
+      Cleric: 3
+      Sorcerer: 2
+      Wizard: 2
+  Blur:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: 20%% miss chance for attacks against you (note only)
+  Bull's Strength:
+    level:
+      Cleric: 2
+      Druid: 2
+      Paladin: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: +4 enhancement to STR
     effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Calm Emotions"
-    level: {Bard: 2, Cleric: 2}
-
-  - name: "Cat's Grace"
-    level: {Bard: 2, Druid: 2, Ranger: 2, Sorcerer: 2, Wizard: 2}
-    note: "+4 enhancement to DEX"
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+  Calm Emotions:
+    level:
+      Bard: 2
+      Cleric: 2
+  Cat's Grace:
+    level:
+      Bard: 2
+      Druid: 2
+      Ranger: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: +4 enhancement to DEX
     effects:
-      - target: dex_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Chill Metal"
-    level: {Druid: 2}
-
-  - name: "Command Undead"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Consecrate"
-    level: {Cleric: 2}
-
-  - name: "Continual Flame"
-    level: {Cleric: 3, Sorcerer: 2, Wizard: 2}
-
-  - name: "Cure Moderate Wounds"
-    level: {Bard: 2, Cleric: 2, Druid: 3, Paladin: 3, Ranger: 3}
-
-  - name: "Darkness"
-    level: {Bard: 2, Cleric: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Darkvision"
-    level: {Ranger: 3, Sorcerer: 2, Wizard: 2}
-
-  - name: "Daze Monster"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Death Knell"
-    level: {Cleric: 2}
-
-  - name: "Desecrate"
-    level: {Cleric: 2}
-
-  - name: "Detect Thoughts"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Eagle's Splendor"
-    level: {Bard: 2, Cleric: 2, Paladin: 2, Sorcerer: 2, Wizard: 2}
-    note: "+4 enhancement to CHA"
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
+  Chill Metal:
+    level:
+      Druid: 2
+  Command Undead:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Consecrate:
+    level:
+      Cleric: 2
+  Continual Flame:
+    level:
+      Cleric: 3
+      Sorcerer: 2
+      Wizard: 2
+  Cure Moderate Wounds:
+    level:
+      Bard: 2
+      Cleric: 2
+      Druid: 3
+      Paladin: 3
+      Ranger: 3
+  Darkness:
+    level:
+      Bard: 2
+      Cleric: 2
+      Sorcerer: 2
+      Wizard: 2
+  Darkvision:
+    level:
+      Ranger: 3
+      Sorcerer: 2
+      Wizard: 2
+  Daze Monster:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Death Knell:
+    level:
+      Cleric: 2
+  Desecrate:
+    level:
+      Cleric: 2
+  Detect Thoughts:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Eagle's Splendor:
+    level:
+      Bard: 2
+      Cleric: 2
+      Paladin: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: +4 enhancement to CHA
     effects:
-      - target: cha_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Enthrall"
-    level: {Bard: 2, Cleric: 2}
-
-  - name: "False Life"
-    level: {Sorcerer: 2, Wizard: 2}
-    note: "Temporary hit points: 1d10 + CL (max +10)"
+    - target: cha_score
+      bonus_type: enhancement
+      value: 4
+  Enthrall:
+    level:
+      Bard: 2
+      Cleric: 2
+  False Life:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+    note: 'Temporary hit points: 1d10 + CL (max +10)'
     requires_caster_level: true
     effects:
-      - target: hp_bonus
-        bonus_type: untyped
-        value: "min(caster_level, 10)"
-        source_label: "False Life (temp HP)"
-
-  - name: "Find Traps"
-    level: {Cleric: 2}
-
-  - name: "Fire Trap"
-    level: {Druid: 2, Sorcerer: 4, Wizard: 4}
-
-  - name: "Flame Blade"
-    level: {Druid: 2}
-
-  - name: "Flaming Sphere"
-    level: {Druid: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Fog Cloud"
-    level: {Druid: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Fox's Cunning"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-    note: "+4 enhancement to INT"
+    - target: hp_bonus
+      bonus_type: untyped
+      value: min(caster_level, 10)
+      source_label: False Life (temp HP)
+  Find Traps:
+    level:
+      Cleric: 2
+  Fire Trap:
+    level:
+      Druid: 2
+      Sorcerer: 4
+      Wizard: 4
+  Flame Blade:
+    level:
+      Druid: 2
+  Flaming Sphere:
+    level:
+      Druid: 2
+      Sorcerer: 2
+      Wizard: 2
+  Fog Cloud:
+    level:
+      Druid: 2
+      Sorcerer: 2
+      Wizard: 2
+  Fox's Cunning:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: +4 enhancement to INT
     effects:
-      - target: int_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Gentle Repose"
-    level: {Cleric: 2, Sorcerer: 3, Wizard: 3}
-
-  - name: "Ghoul Touch"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Glitterdust"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Gust of Wind"
-    level: {Druid: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Heat Metal"
-    level: {Druid: 2}
-
-  - name: "Heroism"
-    level: {Bard: 2, Sorcerer: 3, Wizard: 3}
-    note: "+2 morale on attack, saves, skill checks"
+    - target: int_score
+      bonus_type: enhancement
+      value: 4
+  Gentle Repose:
+    level:
+      Cleric: 2
+      Sorcerer: 3
+      Wizard: 3
+  Ghoul Touch:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Glitterdust:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Gust of Wind:
+    level:
+      Druid: 2
+      Sorcerer: 2
+      Wizard: 2
+  Heat Metal:
+    level:
+      Druid: 2
+  Heroism:
+    level:
+      Bard: 2
+      Sorcerer: 3
+      Wizard: 3
+    note: +2 morale on attack, saves, skill checks
     effects:
-      - target: attack_all
-        bonus_type: morale
-        value: 2
-      - target: fort_save
-        bonus_type: morale
-        value: 2
-      - target: ref_save
-        bonus_type: morale
-        value: 2
-      - target: will_save
-        bonus_type: morale
-        value: 2
-
-  - name: "Hold Animal"
-    level: {Druid: 2, Ranger: 2}
-
-  - name: "Hold Person"
-    level: {Bard: 2, Cleric: 2, Sorcerer: 3, Wizard: 3}
-
-  - name: "Hypnotic Pattern"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Inflict Moderate Wounds"
-    level: {Cleric: 2}
-
-  - name: "Invisibility"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-    note: "Invisible; +2 attack vs sighted foes; broken by attacking"
+    - target: attack_all
+      bonus_type: morale
+      value: 2
+    - target: fort_save
+      bonus_type: morale
+      value: 2
+    - target: ref_save
+      bonus_type: morale
+      value: 2
+    - target: will_save
+      bonus_type: morale
+      value: 2
+  Hold Animal:
+    level:
+      Druid: 2
+      Ranger: 2
+  Hold Person:
+    level:
+      Bard: 2
+      Cleric: 2
+      Sorcerer: 3
+      Wizard: 3
+  Hypnotic Pattern:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Inflict Moderate Wounds:
+    level:
+      Cleric: 2
+  Invisibility:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: Invisible; +2 attack vs sighted foes; broken by attacking
     effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: 2
-
-  - name: "Knock"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Levitate"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Locate Object"
-    level: {Bard: 2, Cleric: 3, Sorcerer: 2, Wizard: 2}
-
-  - name: "Make Whole"
-    level: {Cleric: 2}
-
-  - name: "Minor Image"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Mirror Image"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Misdirection"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Owl's Wisdom"
+    - target: attack_all
+      bonus_type: untyped
+      value: 2
+  Knock:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Levitate:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Locate Object:
+    level:
+      Bard: 2
+      Cleric: 3
+      Sorcerer: 2
+      Wizard: 2
+  Make Whole:
+    level:
+      Cleric: 2
+  Minor Image:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Mirror Image:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Misdirection:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Owl's Wisdom:
     level:
       Cleric: 2
       Druid: 2
@@ -234,139 +313,192 @@ spell_compendium:
       Ranger: 2
       Sorcerer: 2
       Wizard: 2
-    note: "+4 enhancement to WIS"
+    note: +4 enhancement to WIS
     effects:
-      - target: wis_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Phantom Trap"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Protection from Arrows"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Protection from Energy"
-    level: {Cleric: 3, Druid: 3, Ranger: 2, Sorcerer: 3, Wizard: 3}
-
-  - name: "Pyrotechnics"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Rage"
-    level: {Bard: 2, Sorcerer: 3, Wizard: 3}
-    note: "+2 morale to STR and CON, -2 AC"
+    - target: wis_score
+      bonus_type: enhancement
+      value: 4
+  Phantom Trap:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Protection from Arrows:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Protection from Energy:
+    level:
+      Cleric: 3
+      Druid: 3
+      Ranger: 2
+      Sorcerer: 3
+      Wizard: 3
+  Pyrotechnics:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Rage:
+    level:
+      Bard: 2
+      Sorcerer: 3
+      Wizard: 3
+    note: +2 morale to STR and CON, -2 AC
     effects:
-      - target: str_score
-        bonus_type: morale
-        value: 2
-      - target: con_score
-        bonus_type: morale
-        value: 2
-      - target: ac
-        bonus_type: untyped
-        value: -2
-
-  - name: "Reduce Animal"
-    level: {Druid: 2, Ranger: 3}
-
-  - name: "Remove Paralysis"
-    level: {Cleric: 2, Paladin: 2}
-
-  - name: "Rope Trick"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Scare"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Scorching Ray"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "See Invisibility"
-    level: {Bard: 3, Sorcerer: 2, Wizard: 2}
-
-  - name: "Shatter"
-    level: {Bard: 2, Cleric: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Shield Other"
-    level: {Cleric: 2, Paladin: 2}
-
-  - name: "Silence"
-    level: {Bard: 2, Cleric: 2}
-
-  - name: "Snare"
-    level: {Druid: 3, Ranger: 2}
-
-  - name: "Soften Earth and Stone"
-    level: {Druid: 2}
-
-  - name: "Sound Burst"
-    level: {Bard: 2, Cleric: 2}
-
-  - name: "Speak with Plants"
-    level: {Bard: 4, Druid: 3, Ranger: 2}
-
-  - name: "Spectral Hand"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Spider Climb"
-    level: {Druid: 2, Sorcerer: 2, Wizard: 2}
-    note: "Climb speed 20 ft.; +8 racial bonus on Climb checks (note only)"
-
-  - name: "Spike Growth"
-    level: {Druid: 3, Ranger: 2}
-
-  - name: "Spiritual Weapon"
-    level: {Cleric: 2}
-
-  - name: "Status"
-    level: {Cleric: 2}
-
-  - name: "Suggestion"
-    level: {Bard: 2, Sorcerer: 3, Wizard: 3}
-
-  - name: "Summon Monster II"
-    level: {Bard: 2, Cleric: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Summon Nature's Ally II"
-    level: {Druid: 2, Ranger: 2}
-
-  - name: "Summon Swarm"
-    level: {Bard: 2, Druid: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Tongues"
-    level: {Bard: 2, Cleric: 4, Sorcerer: 3, Wizard: 3}
-
-  - name: "Touch of Idiocy"
-    level: {Sorcerer: 2, Wizard: 2}
-    note: "-1d6 INT, WIS, CHA (min 1)"
+    - target: str_score
+      bonus_type: morale
+      value: 2
+    - target: con_score
+      bonus_type: morale
+      value: 2
+    - target: ac
+      bonus_type: untyped
+      value: -2
+  Reduce Animal:
+    level:
+      Druid: 2
+      Ranger: 3
+  Remove Paralysis:
+    level:
+      Cleric: 2
+      Paladin: 2
+  Rope Trick:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Scare:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Scorching Ray:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  See Invisibility:
+    level:
+      Bard: 3
+      Sorcerer: 2
+      Wizard: 2
+  Shatter:
+    level:
+      Bard: 2
+      Cleric: 2
+      Sorcerer: 2
+      Wizard: 2
+  Shield Other:
+    level:
+      Cleric: 2
+      Paladin: 2
+  Silence:
+    level:
+      Bard: 2
+      Cleric: 2
+  Snare:
+    level:
+      Druid: 3
+      Ranger: 2
+  Soften Earth and Stone:
+    level:
+      Druid: 2
+  Sound Burst:
+    level:
+      Bard: 2
+      Cleric: 2
+  Speak with Plants:
+    level:
+      Bard: 4
+      Druid: 3
+      Ranger: 2
+  Spectral Hand:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Spider Climb:
+    level:
+      Druid: 2
+      Sorcerer: 2
+      Wizard: 2
+    note: Climb speed 20 ft.; +8 racial bonus on Climb checks (note only)
+  Spike Growth:
+    level:
+      Druid: 3
+      Ranger: 2
+  Spiritual Weapon:
+    level:
+      Cleric: 2
+  Status:
+    level:
+      Cleric: 2
+  Suggestion:
+    level:
+      Bard: 2
+      Sorcerer: 3
+      Wizard: 3
+  Summon Monster II:
+    level:
+      Bard: 2
+      Cleric: 2
+      Sorcerer: 2
+      Wizard: 2
+  Summon Nature's Ally II:
+    level:
+      Druid: 2
+      Ranger: 2
+  Summon Swarm:
+    level:
+      Bard: 2
+      Druid: 2
+      Sorcerer: 2
+      Wizard: 2
+  Tongues:
+    level:
+      Bard: 2
+      Cleric: 4
+      Sorcerer: 3
+      Wizard: 3
+  Touch of Idiocy:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+    note: -1d6 INT, WIS, CHA (min 1)
     effects:
-      - target: int_score
-        bonus_type: untyped
-        value: -4
-      - target: wis_score
-        bonus_type: untyped
-        value: -4
-      - target: cha_score
-        bonus_type: untyped
-        value: -4
-
-  - name: "Tree Shape"
-    level: {Druid: 2, Ranger: 3}
-
-  - name: "Warp Wood"
-    level: {Druid: 2}
-
-  - name: "Web"
-    level: {Sorcerer: 2, Wizard: 2}
-
-  - name: "Whispering Wind"
-    level: {Bard: 2, Sorcerer: 2, Wizard: 2}
-
-  - name: "Wind Wall"
-    level: {Cleric: 3, Druid: 3, Ranger: 2, Sorcerer: 3, Wizard: 3}
-
-  - name: "Wood Shape"
-    level: {Druid: 2}
-
-  - name: "Zone of Truth"
-    level: {Cleric: 2, Paladin: 2}
+    - target: int_score
+      bonus_type: untyped
+      value: -4
+    - target: wis_score
+      bonus_type: untyped
+      value: -4
+    - target: cha_score
+      bonus_type: untyped
+      value: -4
+  Tree Shape:
+    level:
+      Druid: 2
+      Ranger: 3
+  Warp Wood:
+    level:
+      Druid: 2
+  Web:
+    level:
+      Sorcerer: 2
+      Wizard: 2
+  Whispering Wind:
+    level:
+      Bard: 2
+      Sorcerer: 2
+      Wizard: 2
+  Wind Wall:
+    level:
+      Cleric: 3
+      Druid: 3
+      Ranger: 2
+      Sorcerer: 3
+      Wizard: 3
+  Wood Shape:
+    level:
+      Druid: 2
+  Zone of Truth:
+    level:
+      Cleric: 2
+      Paladin: 2

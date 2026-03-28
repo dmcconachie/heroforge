@@ -1,158 +1,108 @@
 # rules/core/conditions_srd.yaml
 #
-# SRD conditions. Each is a toggleable condition
-# on the Buffs tab.
+# Map keyed by condition name.
+# Fields per entry:
+#   note              : description text
+#   requires_caster_level : bool
+#   effects           : list of {target, bonus_type, value}
 
 conditions:
-
-  # ====================================================
-  # Conditions with stat-affecting penalties
-  # ====================================================
-
-  - name: "Cowering"
-    note: >-
-      -2 AC, lose Dex bonus to AC;
-      no actions possible
+  Cowering:
+    note: -2 AC, lose Dex bonus to AC; no actions possible
     effects:
-      - target: ac
-        bonus_type: untyped
-        value: -2
-
-  - name: "Deafened"
+    - target: ac
+      bonus_type: untyped
+      value: -2
+  Deafened:
     note: >-
-      -4 initiative; automatically fails
-      Listen checks; 20% arcane spell failure
+      -4 initiative; automatically fails Listen checks; 20% arcane spell failure
       (verbal components)
     effects:
-      - target: initiative
-        bonus_type: untyped
-        value: -4
-
-  - name: "Energy Drained"
+    - target: initiative
+      bonus_type: untyped
+      value: -4
+  Energy Drained:
     requires_caster_level: true
     note: >-
-      Per negative level: -1 on attack
-      rolls, saving throws, skill checks,
-      ability checks; -5 HP; -1 effective
-      level; lose one highest spell slot.
-      Set caster level to number of
-      negative levels.
+      Per negative level: -1 on attack rolls,
+      saving throws, skill checks, ability
+      checks; -5 HP; -1 effective level; lose
+      one highest spell slot. Set caster level
+      to number of negative levels.
     effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: "-caster_level"
-      - target: fort_save
-        bonus_type: untyped
-        value: "-caster_level"
-      - target: ref_save
-        bonus_type: untyped
-        value: "-caster_level"
-      - target: will_save
-        bonus_type: untyped
-        value: "-caster_level"
-      - target: hp_bonus
-        bonus_type: untyped
-        value: "-5 * caster_level"
-
-  - name: "Invisible"
+    - target: attack_all
+      bonus_type: untyped
+      value: -caster_level
+    - target: fort_save
+      bonus_type: untyped
+      value: -caster_level
+    - target: ref_save
+      bonus_type: untyped
+      value: -caster_level
+    - target: will_save
+      bonus_type: untyped
+      value: -caster_level
+    - target: hp_bonus
+      bonus_type: untyped
+      value: -5 * caster_level
+  Invisible:
     note: >-
-      +2 on attack rolls; ignore opponent
-      Dex bonus to AC; 50% miss chance for
+      +2 on attack rolls; ignore opponent Dex bonus to AC; 50% miss chance for
       attackers
     effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: 2
-
-  - name: "Prone"
-    note: >-
-      -4 melee attack penalty; cannot use
-      ranged weapons (except crossbow);
+    - target: attack_all
+      bonus_type: untyped
+      value: 2
+  Prone:
+    note: -4 melee attack penalty; cannot use ranged weapons (except crossbow);
       +4 AC vs ranged, -4 AC vs melee
     effects:
-      - target: attack_melee
-        bonus_type: untyped
-        value: -4
-
-  # ====================================================
-  # Conditions without direct stat effects
-  # (note-only; useful as toggleable reminders)
-  # ====================================================
-
-  - name: "Confused"
+    - target: attack_melee
+      bonus_type: untyped
+      value: -4
+  Confused:
     note: >-
-      Each round roll d%%: 01-10 attack
-      caster, 11-20 act normally, 21-50
-      babble, 51-70 flee, 71-100 attack
-      nearest creature
-
-  - name: "Dazed"
-    note: >-
-      Cannot take actions; no AC penalty;
-      typically lasts 1 round
-
-  - name: "Disabled"
-    note: >-
-      At exactly 0 HP; single move or
-      standard action per round (not both);
+      'Each round roll d%%: 01-10 attack caster, 11-20 act normally, 21-50
+      babble,
+      51-70 flee, 71-100 attack nearest creature'
+  Dazed:
+    note: Cannot take actions; no AC penalty; typically lasts 1 round
+  Disabled:
+    note: At exactly 0 HP; single move or standard action per round (not both);
       standard actions deal 1 HP damage
-
-  - name: "Dying"
+  Dying:
+    note: At -1 to -9 HP; unconscious; 10%% chance to stabilize each round; -10
+      HP = dead
+  Fascinated:
     note: >-
-      At -1 to -9 HP; unconscious; 10%%
-      chance to stabilize each round;
-      -10 HP = dead
-
-  - name: "Fascinated"
-    note: >-
-      -4 penalty on reactive skill checks
-      (Spot, Listen, Sense Motive); cannot
+      -4 penalty on reactive skill checks (Spot, Listen, Sense Motive); cannot
       take actions except pay attention
-
-  - name: "Flat-Footed"
+  Flat-Footed:
+    note: Lose Dex bonus to AC; cannot make attacks of opportunity
+  Grappling:
     note: >-
-      Lose Dex bonus to AC; cannot make
-      attacks of opportunity
-
-  - name: "Grappling"
+      Lose Dex bonus to AC against opponents not in the grapple; does not
+      threaten
+      adjacent squares; limited actions
+  Helpless:
     note: >-
-      Lose Dex bonus to AC against
-      opponents not in the grapple; does
-      not threaten adjacent squares;
-      limited actions
-
-  - name: "Helpless"
+      Effective Dex 0 (-5 modifier); melee attackers gain +4 bonus; susceptible
+      to coup de grace and sneak attack
+  Nauseated:
     note: >-
-      Effective Dex 0 (-5 modifier);
-      melee attackers gain +4 bonus;
-      susceptible to coup de grace and
-      sneak attack
-
-  - name: "Nauseated"
+      Cannot attack, cast spells, concentrate, or do anything requiring
+      attention;
+      single move action only
+  Paralyzed:
     note: >-
-      Cannot attack, cast spells,
-      concentrate, or do anything requiring
-      attention; single move action only
-
-  - name: "Paralyzed"
+      Effective Str and Dex of 0; helpless; can take purely mental actions only
+  Petrified:
     note: >-
-      Effective Str and Dex of 0; helpless;
-      can take purely mental actions only
-
-  - name: "Petrified"
+      Turned to stone; considered unconscious; if broken while petrified,
+      missing
+      pieces when restored
+  Staggered:
     note: >-
-      Turned to stone; considered
-      unconscious; if broken while
-      petrified, missing pieces when
-      restored
-
-  - name: "Staggered"
-    note: >-
-      Single move or standard action per
-      round (not both); no full-round
-      actions
-
-  - name: "Turned"
-    note: >-
-      Must flee from the turner for 10
-      rounds; if unable to flee, cowers
+      Single move or standard action per round (not both); no full-round actions
+  Turned:
+    note: Must flee from the turner for 10 rounds; if unable to flee, cowers

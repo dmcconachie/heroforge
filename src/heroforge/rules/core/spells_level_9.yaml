@@ -1,109 +1,139 @@
 # spells_level_9.yaml
 #
-# SRD spell compendium entries.
-#
-# Spells with stat effects include
-# inline effects: entries.
+# Map keyed by spell name.
+# See spells_level_0.yaml for field schema.
 
 spell_compendium:
-
-  - name: "Astral Projection"
-    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
-
-  - name: "Crushing Hand"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Dominate Monster"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Elemental Swarm"
-    level: {Druid: 9}
-
-  - name: "Energy Drain"
-    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
-
-  - name: "Etherealness"
-    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
-
-  - name: "Foresight"
-    level: {Druid: 9, Sorcerer: 9, Wizard: 9}
-    note: "Never surprised or flat-footed; +2 insight to AC and Reflex saves"
+  Astral Projection:
+    level:
+      Cleric: 9
+      Sorcerer: 9
+      Wizard: 9
+  Crushing Hand:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Dominate Monster:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Elemental Swarm:
+    level:
+      Druid: 9
+  Energy Drain:
+    level:
+      Cleric: 9
+      Sorcerer: 9
+      Wizard: 9
+  Etherealness:
+    level:
+      Cleric: 9
+      Sorcerer: 9
+      Wizard: 9
+  Foresight:
+    level:
+      Druid: 9
+      Sorcerer: 9
+      Wizard: 9
+    note: Never surprised or flat-footed; +2 insight to AC and Reflex saves
     effects:
-      - target: ac
-        bonus_type: insight
-        value: 2
-      - target: ref_save
-        bonus_type: insight
-        value: 2
-
-  - name: "Freedom"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Gate"
-    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
-
-  - name: "Heal (Mass)"
-    level: {Cleric: 9}
-
-  - name: "Hold Monster (Mass)"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Implosion"
-    level: {Cleric: 9}
-
-  - name: "Imprisonment"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Mage's Disjunction"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Meteor Swarm"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Miracle"
-    level: {Cleric: 9}
-
-  - name: "Power Word Kill"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Prismatic Sphere"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Shades"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Shambler"
-    level: {Druid: 9}
-
-  - name: "Shapechange"
-    level: {Druid: 9, Sorcerer: 9, Wizard: 9}
-
-  - name: "Soul Bind"
-    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
-
-  - name: "Storm of Vengeance"
-    level: {Cleric: 9, Druid: 9}
-
-  - name: "Summon Monster IX"
-    level: {Cleric: 9, Sorcerer: 9, Wizard: 9}
-
-  - name: "Summon Nature's Ally IX"
-    level: {Druid: 9}
-
-  - name: "Teleportation Circle"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Time Stop"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "True Resurrection"
-    level: {Cleric: 9}
-
-  - name: "Wail of the Banshee"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Weird"
-    level: {Sorcerer: 9, Wizard: 9}
-
-  - name: "Wish"
-    level: {Sorcerer: 9, Wizard: 9}
+    - target: ac
+      bonus_type: insight
+      value: 2
+    - target: ref_save
+      bonus_type: insight
+      value: 2
+  Freedom:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Gate:
+    level:
+      Cleric: 9
+      Sorcerer: 9
+      Wizard: 9
+  Heal (Mass):
+    level:
+      Cleric: 9
+  Hold Monster (Mass):
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Implosion:
+    level:
+      Cleric: 9
+  Imprisonment:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Mage's Disjunction:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Meteor Swarm:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Miracle:
+    level:
+      Cleric: 9
+  Power Word Kill:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Prismatic Sphere:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Shades:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Shambler:
+    level:
+      Druid: 9
+  Shapechange:
+    level:
+      Druid: 9
+      Sorcerer: 9
+      Wizard: 9
+  Soul Bind:
+    level:
+      Cleric: 9
+      Sorcerer: 9
+      Wizard: 9
+  Storm of Vengeance:
+    level:
+      Cleric: 9
+      Druid: 9
+  Summon Monster IX:
+    level:
+      Cleric: 9
+      Sorcerer: 9
+      Wizard: 9
+  Summon Nature's Ally IX:
+    level:
+      Druid: 9
+  Teleportation Circle:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Time Stop:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  True Resurrection:
+    level:
+      Cleric: 9
+  Wail of the Banshee:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Weird:
+    level:
+      Sorcerer: 9
+      Wizard: 9
+  Wish:
+    level:
+      Sorcerer: 9
+      Wizard: 9

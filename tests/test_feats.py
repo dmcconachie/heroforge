@@ -445,7 +445,8 @@ class TestFeatsYamlStructure:
 
         with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
-        names = [d["name"] for d in data["feats"] if "name" in d]
+        # Dict keys are unique by definition.
+        names = list(data["feats"].keys())
         assert len(names) == len(set(names))
 
     def test_all_kinds_valid(self) -> None:
@@ -455,8 +456,8 @@ class TestFeatsYamlStructure:
         with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
         bad = [
-            d["name"]
-            for d in data["feats"]
+            name
+            for name, d in data["feats"].items()
             if d.get("kind", "passive") not in valid
         ]
         assert bad == []
@@ -475,7 +476,7 @@ class TestFeatsLoader:
 
         with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
-        expected = len(data["feats"])
+        expected = len(data["feats"])  # dict length
 
         feat_reg = FeatRegistry()
         FeatsLoader(RULES_DIR).load(feat_reg, relative_path="core/feats.yaml")

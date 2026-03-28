@@ -269,7 +269,7 @@ levels:
       - name: "Craft Wondrous Item"
         source: wizard_bonus
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

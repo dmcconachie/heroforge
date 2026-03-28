@@ -262,7 +262,7 @@ levels:
       Search: 1
       Balance: 1
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

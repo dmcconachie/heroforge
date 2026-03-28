@@ -1,6 +1,5 @@
 prestige_classes:
-
-  - name: "Mystic Theurge"
+  Mystic Theurge:
     source_book: DMG
     hit_die: 4
     max_level: 10
@@ -11,20 +10,20 @@ prestige_classes:
       will: good
     skills_per_level: 2
     class_skills:
-      - Concentration
-      - Craft
-      - Decipher Script
-      - Knowledge (Arcana)
-      - Knowledge (Religion)
-      - Profession
-      - Sense Motive
-      - Spellcraft
+    - Concentration
+    - Craft
+    - Decipher Script
+    - Knowledge (Arcana)
+    - Knowledge (Religion)
+    - Profession
+    - Sense Motive
+    - Spellcraft
     entry_prerequisites:
       all_of:
-        - spellcasting:
-            cast_type: arcane
-            min_level: 2
-        - spellcasting:
-            cast_type: divine
-            min_level: 2
+      - spellcasting:
+          cast_type: arcane
+          min_level: 2
+      - spellcasting:
+          cast_type: divine
+          min_level: 2
     class_features: []

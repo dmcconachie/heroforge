@@ -327,7 +327,7 @@ levels:
     spells_learned:
       5: ["Nightmare"]
 
-buffs: []
+buffs: {}
 templates: []
 dm_overrides: []
 

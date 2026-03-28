@@ -1,1020 +1,783 @@
 # rules/core/magic_items.yaml
 #
+# Map keyed by item name.
 # SRD magic items that grant stat bonuses.
 # Loaded via MagicItemLoader.
 #
-# Items are modeled as buff definitions — when
+# Items are modeled as buff definitions -- when
 # equipped (toggled on), their effects feed into
 # the character's BonusPools.
 #
-# Items without numeric effects are listed with
-# note-only entries for reference.
+# Sorted by slot, then alphabetically.
+# Slot order: head, eyes, neck, shoulders, body,
+# torso, arms, hands, ring, waist, feet, slotless.
 
 magic_items:
-
-  # ==========================================================================
-  # Rings
-  # ==========================================================================
-
-  - name: "Ring of Protection +1"
-
-    note: "+1 deflection bonus to AC"
+  Headband of Intellect +2:
+    slot: head
+    note: +2 enhancement to INT
     effects:
-      - target: ac
-        bonus_type: deflection
-        value: 1
-
-  - name: "Ring of Protection +2"
-
-    note: "+2 deflection bonus to AC"
+    - target: int_score
+      bonus_type: enhancement
+      value: 2
+  Headband of Intellect +4:
+    slot: head
+    note: +4 enhancement to INT
     effects:
-      - target: ac
-        bonus_type: deflection
-        value: 2
-
-  - name: "Ring of Protection +3"
-
-    note: "+3 deflection bonus to AC"
+    - target: int_score
+      bonus_type: enhancement
+      value: 4
+  Headband of Intellect +6:
+    slot: head
+    note: +6 enhancement to INT
     effects:
-      - target: ac
-        bonus_type: deflection
-        value: 3
-
-  - name: "Ring of Protection +4"
-
-    note: "+4 deflection bonus to AC"
-    effects:
-      - target: ac
-        bonus_type: deflection
-        value: 4
-
-  - name: "Ring of Protection +5"
-
-    note: "+5 deflection bonus to AC"
-    effects:
-      - target: ac
-        bonus_type: deflection
-        value: 5
-
-  # ==========================================================================
-  # Amulets / Necklaces
-  # ==========================================================================
-
-  - name: "Amulet of Natural Armor +1"
-
-    note: "+1 enhancement to natural armor"
-    effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 1
-
-  - name: "Amulet of Natural Armor +2"
-
-    note: "+2 enhancement to natural armor"
-    effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 2
-
-  - name: "Amulet of Natural Armor +3"
-
-    note: "+3 enhancement to natural armor"
-    effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 3
-
-  - name: "Amulet of Natural Armor +4"
-
-    note: "+4 enhancement to natural armor"
-    effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 4
-
-  - name: "Amulet of Natural Armor +5"
-
-    note: "+5 enhancement to natural armor"
-    effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 5
-
-  - name: "Amulet of Health +2"
-
-    note: "+2 enhancement to CON"
-    effects:
-      - target: con_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Amulet of Health +4"
-
-    note: "+4 enhancement to CON"
-    effects:
-      - target: con_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Amulet of Health +6"
-
-    note: "+6 enhancement to CON"
-    effects:
-      - target: con_score
-        bonus_type: enhancement
-        value: 6
-
-  - name: "Periapt of Wisdom +2"
-
-    note: "+2 enhancement to WIS"
-    effects:
-      - target: wis_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Periapt of Wisdom +4"
-
-    note: "+4 enhancement to WIS"
-    effects:
-      - target: wis_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Periapt of Wisdom +6"
-
-    note: "+6 enhancement to WIS"
-    effects:
-      - target: wis_score
-        bonus_type: enhancement
-        value: 6
-
-  # ==========================================================================
-  # Cloaks
-  # ==========================================================================
-
-  - name: "Cloak of Resistance +1"
-
-    note: "+1 resistance to all saves"
-    effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 1
-      - target: ref_save
-        bonus_type: resistance
-        value: 1
-      - target: will_save
-        bonus_type: resistance
-        value: 1
-
-  - name: "Cloak of Resistance +2"
-
-    note: "+2 resistance to all saves"
-    effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 2
-      - target: ref_save
-        bonus_type: resistance
-        value: 2
-      - target: will_save
-        bonus_type: resistance
-        value: 2
-
-  - name: "Cloak of Resistance +3"
-
-    note: "+3 resistance to all saves"
-    effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 3
-      - target: ref_save
-        bonus_type: resistance
-        value: 3
-      - target: will_save
-        bonus_type: resistance
-        value: 3
-
-  - name: "Cloak of Resistance +4"
-
-    note: "+4 resistance to all saves"
-    effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 4
-      - target: ref_save
-        bonus_type: resistance
-        value: 4
-      - target: will_save
-        bonus_type: resistance
-        value: 4
-
-  - name: "Cloak of Resistance +5"
-
-    note: "+5 resistance to all saves"
-    effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 5
-      - target: ref_save
-        bonus_type: resistance
-        value: 5
-      - target: will_save
-        bonus_type: resistance
-        value: 5
-
-  - name: "Cloak of Charisma +2"
-
-    note: "+2 enhancement to CHA"
-    effects:
-      - target: cha_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Cloak of Charisma +4"
-
-    note: "+4 enhancement to CHA"
-    effects:
-      - target: cha_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Cloak of Charisma +6"
-
-    note: "+6 enhancement to CHA"
-    effects:
-      - target: cha_score
-        bonus_type: enhancement
-        value: 6
-
-  # ==========================================================================
-  # Belts / Gauntlets (STR / DEX)
-  # ==========================================================================
-
-  - name: "Belt of Giant Strength +2"
-
-    note: "+2 enhancement to STR"
-    effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Belt of Giant Strength +4"
-
-    note: "+4 enhancement to STR"
-    effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Belt of Giant Strength +6"
-
-    note: "+6 enhancement to STR"
-    effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 6
-
-  - name: "Gloves of Dexterity +2"
-
-    note: "+2 enhancement to DEX"
-    effects:
-      - target: dex_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Gloves of Dexterity +4"
-
-    note: "+4 enhancement to DEX"
-    effects:
-      - target: dex_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Gloves of Dexterity +6"
-
-    note: "+6 enhancement to DEX"
-    effects:
-      - target: dex_score
-        bonus_type: enhancement
-        value: 6
-
-  # ==========================================================================
-  # Headbands (INT)
-  # ==========================================================================
-
-  - name: "Headband of Intellect +2"
-
-    note: "+2 enhancement to INT"
-    effects:
-      - target: int_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Headband of Intellect +4"
-
-    note: "+4 enhancement to INT"
-    effects:
-      - target: int_score
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Headband of Intellect +6"
-
-    note: "+6 enhancement to INT"
-    effects:
-      - target: int_score
-        bonus_type: enhancement
-        value: 6
-
-  # ==========================================================================
-  # Bracers
-  # ==========================================================================
-
-  - name: "Bracers of Armor +1"
-
-    note: "+1 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 1
-
-  - name: "Bracers of Armor +2"
-
-    note: "+2 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 2
-
-  - name: "Bracers of Armor +3"
-
-    note: "+3 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 3
-
-  - name: "Bracers of Armor +4"
-
-    note: "+4 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 4
-
-  - name: "Bracers of Armor +5"
-
-    note: "+5 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 5
-
-  - name: "Bracers of Armor +6"
-
-    note: "+6 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 6
-
-  - name: "Bracers of Armor +7"
-
-    note: "+7 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 7
-
-  - name: "Bracers of Armor +8"
-
-    note: "+8 armor bonus to AC (no max DEX)"
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 8
-
-  # ==========================================================================
-  # Boots
-  # ==========================================================================
-
-  - name: "Boots of Speed"
-
+    - target: int_score
+      bonus_type: enhancement
+      value: 6
+  Helm of Brilliance:
+    slot: head
     note: >-
-      Haste for 10 rounds/day (free
-      action to activate): +1 attack,
-      +1 dodge AC, +1 Ref, +30 ft speed
+      Various gem-powered spell effects; +1 resistance to fire, various
+      offensive
+      abilities (note only)
+  Eyes of the Eagle:
+    slot: eyes
+    note: +5 competence on Spot checks
     effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: 1
-      - target: ac
-        bonus_type: dodge
-        value: 1
-      - target: ref_save
-        bonus_type: dodge
-        value: 1
-      - target: speed
-        bonus_type: enhancement
-        value: 30
-
-  - name: "Boots of Elvenkind"
-
-    note: "+5 competence on Move Silently"
+    - target: skill_spot
+      bonus_type: competence
+      value: 5
+  Goggles of Minute Seeing:
+    slot: eyes
+    note: +5 competence on Search checks
     effects:
-      - target: skill_move_silently
-        bonus_type: competence
-        value: 5
-
-  - name: "Boots of Striding and Springing"
-
+    - target: skill_search
+      bonus_type: competence
+      value: 5
+  Amulet of Health +2:
+    slot: neck
+    note: +2 enhancement to CON
+    effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+  Amulet of Health +4:
+    slot: neck
+    note: +4 enhancement to CON
+    effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
+  Amulet of Health +6:
+    slot: neck
+    note: +6 enhancement to CON
+    effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 6
+  Amulet of Mighty Fists +1:
+    slot: neck
+    note: +1 enhancement to unarmed and natural weapon attacks and damage
+    effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 1
+    - target: damage_all
+      bonus_type: enhancement
+      value: 1
+  Amulet of Mighty Fists +2:
+    slot: neck
+    note: +2 enhancement to unarmed and natural weapon attacks and damage
+    effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 2
+    - target: damage_all
+      bonus_type: enhancement
+      value: 2
+  Amulet of Mighty Fists +3:
+    slot: neck
+    note: +3 enhancement to unarmed and natural weapon attacks and damage
+    effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 3
+    - target: damage_all
+      bonus_type: enhancement
+      value: 3
+  Amulet of Mighty Fists +4:
+    slot: neck
+    note: +4 enhancement to unarmed and natural weapon attacks and damage
+    effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 4
+    - target: damage_all
+      bonus_type: enhancement
+      value: 4
+  Amulet of Mighty Fists +5:
+    slot: neck
+    note: +5 enhancement to unarmed and natural weapon attacks and damage
+    effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 5
+    - target: damage_all
+      bonus_type: enhancement
+      value: 5
+  Amulet of Natural Armor +1:
+    slot: neck
+    note: +1 enhancement to natural armor
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 1
+  Amulet of Natural Armor +2:
+    slot: neck
+    note: +2 enhancement to natural armor
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 2
+  Amulet of Natural Armor +3:
+    slot: neck
+    note: +3 enhancement to natural armor
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 3
+  Amulet of Natural Armor +4:
+    slot: neck
+    note: +4 enhancement to natural armor
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 4
+  Amulet of Natural Armor +5:
+    slot: neck
+    note: +5 enhancement to natural armor
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 5
+  Periapt of Wisdom +2:
+    slot: neck
+    note: +2 enhancement to WIS
+    effects:
+    - target: wis_score
+      bonus_type: enhancement
+      value: 2
+  Periapt of Wisdom +4:
+    slot: neck
+    note: +4 enhancement to WIS
+    effects:
+    - target: wis_score
+      bonus_type: enhancement
+      value: 4
+  Periapt of Wisdom +6:
+    slot: neck
+    note: +6 enhancement to WIS
+    effects:
+    - target: wis_score
+      bonus_type: enhancement
+      value: 6
+  Scarab of Protection:
+    slot: neck
+    note: +3 resistance to saves; absorbs 12 energy drain or death effects
+    effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+  Cloak of Charisma +2:
+    slot: shoulders
+    note: +2 enhancement to CHA
+    effects:
+    - target: cha_score
+      bonus_type: enhancement
+      value: 2
+  Cloak of Charisma +4:
+    slot: shoulders
+    note: +4 enhancement to CHA
+    effects:
+    - target: cha_score
+      bonus_type: enhancement
+      value: 4
+  Cloak of Charisma +6:
+    slot: shoulders
+    note: +6 enhancement to CHA
+    effects:
+    - target: cha_score
+      bonus_type: enhancement
+      value: 6
+  Cloak of Elvenkind:
+    slot: shoulders
+    note: +5 competence on Hide checks
+    effects:
+    - target: skill_hide
+      bonus_type: competence
+      value: 5
+  Cloak of Resistance +1:
+    slot: shoulders
+    note: +1 resistance to all saves
+    effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+  Cloak of Resistance +2:
+    slot: shoulders
+    note: +2 resistance to all saves
+    effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+  Cloak of Resistance +3:
+    slot: shoulders
+    note: +3 resistance to all saves
+    effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+  Cloak of Resistance +4:
+    slot: shoulders
+    note: +4 resistance to all saves
+    effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+  Cloak of Resistance +5:
+    slot: shoulders
+    note: +5 resistance to all saves
+    effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5
+  Robe of Stars:
+    slot: body
+    note: +4 deflection to AC
+    effects:
+    - target: ac
+      bonus_type: deflection
+      value: 4
+  Robe of the Archmagi:
+    slot: body
+    note: +5 armor AC, SR 18, +4 resistance saves (requires matching alignment)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 5
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+    - target: sr
+      bonus_type: untyped
+      value: 18
+  Monk's Belt:
+    slot: torso
     note: >-
-      +10 ft enhancement speed, +5
-      competence on Jump
+      AC bonus as 5th-level monk (+1); effective monk level +5 for unarmed
+      damage
+      if already a monk
     effects:
-      - target: speed
-        bonus_type: enhancement
-        value: 10
-      - target: skill_jump
-        bonus_type: competence
-        value: 5
-
-  # ==========================================================================
-  # Miscellaneous Wondrous Items
-  # ==========================================================================
-
-  - name: "Ioun Stone (Dusty Rose Prism)"
-
-    note: "+1 insight bonus to AC"
+    - target: ac
+      bonus_type: untyped
+      value: 1
+  Vest of Escape:
+    slot: torso
+    note: +6 competence on Escape Artist, +4 competence on Open Lock
     effects:
-      - target: ac
-        bonus_type: insight
-        value: 1
-
-  - name: "Cloak of Elvenkind"
-
-    note: "+5 competence on Hide checks"
+    - target: skill_escape_artist
+      bonus_type: competence
+      value: 6
+    - target: skill_open_lock
+      bonus_type: competence
+      value: 4
+  Vest of Resistance +1:
+    slot: torso
+    note: +1 resistance to all saves
     effects:
-      - target: skill_hide
-        bonus_type: competence
-        value: 5
-
-  - name: "Eyes of the Eagle"
-
-    note: "+5 competence on Spot checks"
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+  Vest of Resistance +2:
+    slot: torso
+    note: +2 resistance to all saves
     effects:
-      - target: skill_spot
-        bonus_type: competence
-        value: 5
-
-  - name: "Vest of Resistance +1"
-
-    note: "+1 resistance to all saves"
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+  Vest of Resistance +3:
+    slot: torso
+    note: +3 resistance to all saves
     effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 1
-      - target: ref_save
-        bonus_type: resistance
-        value: 1
-      - target: will_save
-        bonus_type: resistance
-        value: 1
-
-  - name: "Vest of Resistance +2"
-
-    note: "+2 resistance to all saves"
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+  Vest of Resistance +4:
+    slot: torso
+    note: +4 resistance to all saves
     effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 2
-      - target: ref_save
-        bonus_type: resistance
-        value: 2
-      - target: will_save
-        bonus_type: resistance
-        value: 2
-
-  - name: "Vest of Resistance +3"
-
-    note: "+3 resistance to all saves"
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+  Vest of Resistance +5:
+    slot: torso
+    note: +5 resistance to all saves
     effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 3
-      - target: ref_save
-        bonus_type: resistance
-        value: 3
-      - target: will_save
-        bonus_type: resistance
-        value: 3
-
-  - name: "Vest of Resistance +4"
-
-    note: "+4 resistance to all saves"
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5
+  Bracers of Archery (Greater):
+    slot: arms
+    note: +2 competence on attack rolls, +1 competence on damage with bows
     effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 4
-      - target: ref_save
-        bonus_type: resistance
-        value: 4
-      - target: will_save
-        bonus_type: resistance
-        value: 4
-
-  - name: "Vest of Resistance +5"
-
-    note: "+5 resistance to all saves"
+    - target: attack_ranged
+      bonus_type: competence
+      value: 2
+    - target: damage_ranged
+      bonus_type: competence
+      value: 1
+  Bracers of Archery (Lesser):
+    slot: arms
+    note: +1 competence on attack rolls with bows
     effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 5
-      - target: ref_save
-        bonus_type: resistance
-        value: 5
-      - target: will_save
-        bonus_type: resistance
-        value: 5
-
-  - name: "Monk's Belt"
-
+    - target: attack_ranged
+      bonus_type: competence
+      value: 1
+  Bracers of Armor +1:
+    slot: arms
+    note: +1 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 1
+  Bracers of Armor +2:
+    slot: arms
+    note: +2 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 2
+  Bracers of Armor +3:
+    slot: arms
+    note: +3 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 3
+  Bracers of Armor +4:
+    slot: arms
+    note: +4 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 4
+  Bracers of Armor +5:
+    slot: arms
+    note: +5 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 5
+  Bracers of Armor +6:
+    slot: arms
+    note: +6 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 6
+  Bracers of Armor +7:
+    slot: arms
+    note: +7 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 7
+  Bracers of Armor +8:
+    slot: arms
+    note: +8 armor bonus to AC (no max DEX)
+    effects:
+    - target: ac
+      bonus_type: armor
+      value: 8
+  Gauntlets of Ogre Power:
+    slot: hands
+    note: +2 enhancement to STR
+    effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+  Gloves of Dexterity +2:
+    slot: hands
+    note: +2 enhancement to DEX
+    effects:
+    - target: dex_score
+      bonus_type: enhancement
+      value: 2
+  Gloves of Dexterity +4:
+    slot: hands
+    note: +4 enhancement to DEX
+    effects:
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
+  Gloves of Dexterity +6:
+    slot: hands
+    note: +6 enhancement to DEX
+    effects:
+    - target: dex_score
+      bonus_type: enhancement
+      value: 6
+  Ring of Chameleon Power:
+    slot: ring
+    note: +10 competence on Hide checks
+    effects:
+    - target: skill_hide
+      bonus_type: competence
+      value: 10
+  Ring of Climbing:
+    slot: ring
+    note: +5 competence on Climb checks
+    effects:
+    - target: skill_climb
+      bonus_type: competence
+      value: 5
+  Ring of Climbing, Improved:
+    slot: ring
+    note: +10 competence on Climb checks
+    effects:
+    - target: skill_climb
+      bonus_type: competence
+      value: 10
+  Ring of Force Shield:
+    slot: ring
+    note: +2 shield bonus to AC (no penalties)
+    effects:
+    - target: ac
+      bonus_type: shield
+      value: 2
+  Ring of Jumping:
+    slot: ring
+    note: +5 competence on Jump checks
+    effects:
+    - target: skill_jump
+      bonus_type: competence
+      value: 5
+  Ring of Jumping, Improved:
+    slot: ring
+    note: +10 competence on Jump checks
+    effects:
+    - target: skill_jump
+      bonus_type: competence
+      value: 10
+  Ring of Protection +1:
+    slot: ring
+    note: +1 deflection bonus to AC
+    effects:
+    - target: ac
+      bonus_type: deflection
+      value: 1
+  Ring of Protection +2:
+    slot: ring
+    note: +2 deflection bonus to AC
+    effects:
+    - target: ac
+      bonus_type: deflection
+      value: 2
+  Ring of Protection +3:
+    slot: ring
+    note: +3 deflection bonus to AC
+    effects:
+    - target: ac
+      bonus_type: deflection
+      value: 3
+  Ring of Protection +4:
+    slot: ring
+    note: +4 deflection bonus to AC
+    effects:
+    - target: ac
+      bonus_type: deflection
+      value: 4
+  Ring of Protection +5:
+    slot: ring
+    note: +5 deflection bonus to AC
+    effects:
+    - target: ac
+      bonus_type: deflection
+      value: 5
+  Ring of Swimming:
+    slot: ring
+    note: +5 competence on Swim checks
+    effects:
+    - target: skill_swim
+      bonus_type: competence
+      value: 5
+  Ring of Swimming, Improved:
+    slot: ring
+    note: +10 competence on Swim checks
+    effects:
+    - target: skill_swim
+      bonus_type: competence
+      value: 10
+  Belt of Dwarvenkind:
+    slot: waist
     note: >-
-      AC bonus as 5th-level monk (+1);
-      effective monk level +5 for unarmed
-      damage if already a monk
+      +2 enhancement to CON; darkvision 60 ft; dwarven language; +2 CHA toward
+      dwarves
     effects:
-      - target: ac
-        bonus_type: untyped
-        value: 1
-
-  - name: "Bracers of Archery (Greater)"
-
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+  Belt of Giant Strength +2:
+    slot: waist
+    note: +2 enhancement to STR
+    effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+  Belt of Giant Strength +4:
+    slot: waist
+    note: +4 enhancement to STR
+    effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+  Belt of Giant Strength +6:
+    slot: waist
+    note: +6 enhancement to STR
+    effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 6
+  Boots of Elvenkind:
+    slot: feet
+    note: +5 competence on Move Silently
+    effects:
+    - target: skill_move_silently
+      bonus_type: competence
+      value: 5
+  Boots of Speed:
+    slot: feet
     note: >-
-      +2 competence on attack rolls,
-      +1 competence on damage with bows
+      'Haste for 10 rounds/day (free action to activate): +1 attack, +1 dodge
+      AC, +1 Ref, +30 ft speed'
     effects:
-      - target: attack_ranged
-        bonus_type: competence
-        value: 2
-      - target: damage_ranged
-        bonus_type: competence
-        value: 1
-
-  - name: "Bracers of Archery (Lesser)"
-
+    - target: attack_all
+      bonus_type: untyped
+      value: 1
+    - target: ac
+      bonus_type: dodge
+      value: 1
+    - target: ref_save
+      bonus_type: dodge
+      value: 1
+    - target: speed
+      bonus_type: enhancement
+      value: 30
+  Boots of Striding and Springing:
+    slot: feet
+    note: +10 ft enhancement speed, +5 competence on Jump
+    effects:
+    - target: speed
+      bonus_type: enhancement
+      value: 10
+    - target: skill_jump
+      bonus_type: competence
+      value: 5
+  Candle of Invocation:
+    slot: slotless
     note: >-
-      +1 competence on attack rolls
-      with bows
+      +2 morale to attack, saves, and skill checks for same-alignment creatures
+      within 30 ft
     effects:
-      - target: attack_ranged
-        bonus_type: competence
-        value: 1
-
-  - name: "Circlet of Persuasion"
-
+    - target: attack_all
+      bonus_type: morale
+      value: 2
+    - target: fort_save
+      bonus_type: morale
+      value: 2
+    - target: ref_save
+      bonus_type: morale
+      value: 2
+    - target: will_save
+      bonus_type: morale
+      value: 2
+  Circlet of Persuasion:
+    slot: slotless
     note: >-
-      +3 competence on CHA-based checks
-      (note only — applies to specific
-      skill checks)
-
-  - name: "Gauntlets of Ogre Power"
-
-    note: "+2 enhancement to STR"
+      +3 competence on CHA-based checks (note only — applies to specific skill
+      checks)
+  Ioun Stone (Deep Red Sphere):
+    slot: slotless
+    note: +2 enhancement to DEX
     effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Helm of Brilliance"
-
-    note: >-
-      Various gem-powered spell effects;
-      +1 resistance to fire, various
-      offensive abilities (note only)
-
-  - name: "Mantle of Spell Resistance"
-
-    note: "SR 21"
+    - target: dex_score
+      bonus_type: enhancement
+      value: 2
+  Ioun Stone (Dusty Rose Prism):
+    slot: slotless
+    note: +1 insight bonus to AC
     effects:
-      - target: sr
-        bonus_type: untyped
-        value: 21
-
-  - name: "Manual of Bodily Health +1"
-
-    note: >-
-      Inherent +1 CON (permanent, read
-      once, stacks up to +5 total
-      inherent)
-
-  - name: "Manual of Gainful Exercise +1"
-
-    note: >-
-      Inherent +1 STR (permanent, read
-      once)
-
-  - name: "Manual of Quickness of Action +1"
-
-    note: >-
-      Inherent +1 DEX (permanent, read
-      once)
-
-  - name: "Tome of Clear Thought +1"
-
-    note: >-
-      Inherent +1 INT (permanent, read
-      once)
-
-  - name: "Tome of Leadership +1"
-
-    note: >-
-      Inherent +1 CHA (permanent, read
-      once)
-
-  - name: "Tome of Understanding +1"
-
-    note: >-
-      Inherent +1 WIS (permanent, read
-      once)
-
-  # ==========================================================================
-  # Weapon Enhancements (as item buffs)
-  # ==========================================================================
-
-  - name: "Weapon Enhancement +1"
-
-    note: "+1 enhancement to attack and damage"
+    - target: ac
+      bonus_type: insight
+      value: 1
+  Ioun Stone (Incandescent Blue):
+    slot: slotless
+    note: +2 enhancement to WIS
     effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 1
-      - target: damage_all
-        bonus_type: enhancement
-        value: 1
-
-  - name: "Weapon Enhancement +2"
-
-    note: "+2 enhancement to attack and damage"
+    - target: wis_score
+      bonus_type: enhancement
+      value: 2
+  Ioun Stone (Pale Blue Rhomboid):
+    slot: slotless
+    note: +2 enhancement to STR
     effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 2
-      - target: damage_all
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Weapon Enhancement +3"
-
-    note: "+3 enhancement to attack and damage"
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+  Ioun Stone (Pale Green Prism):
+    slot: slotless
+    note: +1 competence to attack, saves, skill checks, and ability checks
     effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 3
-      - target: damage_all
-        bonus_type: enhancement
-        value: 3
-
-  - name: "Weapon Enhancement +4"
-
-    note: "+4 enhancement to attack and damage"
+    - target: attack_all
+      bonus_type: competence
+      value: 1
+    - target: fort_save
+      bonus_type: competence
+      value: 1
+    - target: ref_save
+      bonus_type: competence
+      value: 1
+    - target: will_save
+      bonus_type: competence
+      value: 1
+  Ioun Stone (Pink and Green):
+    slot: slotless
+    note: +2 enhancement to CHA
     effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 4
-      - target: damage_all
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Weapon Enhancement +5"
-
-    note: "+5 enhancement to attack and damage"
+    - target: cha_score
+      bonus_type: enhancement
+      value: 2
+  Ioun Stone (Pink Rhomboid):
+    slot: slotless
+    note: +2 enhancement to CON
     effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 5
-      - target: damage_all
-        bonus_type: enhancement
-        value: 5
-
-  # ==========================================================================
-  # Rings (skill bonuses)
-  # ==========================================================================
-
-  - name: "Ring of Climbing"
-
-    note: "+5 competence on Climb checks"
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+  Ioun Stone (Scarlet and Blue):
+    slot: slotless
+    note: +2 enhancement to INT
     effects:
-      - target: skill_climb
-        bonus_type: competence
-        value: 5
-
-  - name: "Ring of Climbing, Improved"
-
-    note: "+10 competence on Climb checks"
+    - target: int_score
+      bonus_type: enhancement
+      value: 2
+  Mantle of Spell Resistance:
+    slot: slotless
+    note: SR 21
     effects:
-      - target: skill_climb
-        bonus_type: competence
-        value: 10
-
-  - name: "Ring of Jumping"
-
-    note: "+5 competence on Jump checks"
+    - target: sr
+      bonus_type: untyped
+      value: 21
+  Manual of Bodily Health +1:
+    slot: slotless
+    note: Inherent +1 CON (permanent, read once, stacks up to +5 total inherent)
+  Manual of Gainful Exercise +1:
+    slot: slotless
+    note: Inherent +1 STR (permanent, read once)
+  Manual of Quickness of Action +1:
+    slot: slotless
+    note: Inherent +1 DEX (permanent, read once)
+  Stone of Good Luck (Luckstone):
+    slot: slotless
+    note: +1 luck bonus on saves, ability checks, and skill checks
     effects:
-      - target: skill_jump
-        bonus_type: competence
-        value: 5
-
-  - name: "Ring of Jumping, Improved"
-
-    note: "+10 competence on Jump checks"
-    effects:
-      - target: skill_jump
-        bonus_type: competence
-        value: 10
-
-  - name: "Ring of Swimming"
-
-    note: "+5 competence on Swim checks"
-    effects:
-      - target: skill_swim
-        bonus_type: competence
-        value: 5
-
-  - name: "Ring of Swimming, Improved"
-
-    note: "+10 competence on Swim checks"
-    effects:
-      - target: skill_swim
-        bonus_type: competence
-        value: 10
-
-  - name: "Ring of Chameleon Power"
-
-    note: "+10 competence on Hide checks"
-    effects:
-      - target: skill_hide
-        bonus_type: competence
-        value: 10
-
-  - name: "Ring of Force Shield"
-
-    note: "+2 shield bonus to AC (no penalties)"
-    effects:
-      - target: ac
-        bonus_type: shield
-        value: 2
-
-  # ==========================================================================
-  # Ioun Stones
-  # ==========================================================================
-
-  - name: "Ioun Stone (Deep Red Sphere)"
-
-    note: "+2 enhancement to DEX"
-    effects:
-      - target: dex_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Ioun Stone (Incandescent Blue)"
-
-    note: "+2 enhancement to WIS"
-    effects:
-      - target: wis_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Ioun Stone (Pale Blue Rhomboid)"
-
-    note: "+2 enhancement to STR"
-    effects:
-      - target: str_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Ioun Stone (Pink and Green)"
-
-    note: "+2 enhancement to CHA"
-    effects:
-      - target: cha_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Ioun Stone (Pink Rhomboid)"
-
-    note: "+2 enhancement to CON"
-    effects:
-      - target: con_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Ioun Stone (Scarlet and Blue)"
-
-    note: "+2 enhancement to INT"
-    effects:
-      - target: int_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Ioun Stone (Pale Green Prism)"
-
-    note: >-
-      +1 competence to attack, saves,
-      skill checks, and ability checks
-    effects:
-      - target: attack_all
-        bonus_type: competence
-        value: 1
-      - target: fort_save
-        bonus_type: competence
-        value: 1
-      - target: ref_save
-        bonus_type: competence
-        value: 1
-      - target: will_save
-        bonus_type: competence
-        value: 1
-
-  # ==========================================================================
-  # Additional wondrous items
-  # ==========================================================================
-
-  - name: "Stone of Good Luck (Luckstone)"
-
-    note: >-
-      +1 luck bonus on saves, ability
-      checks, and skill checks
-    effects:
-      - target: fort_save
-        bonus_type: luck
-        value: 1
-      - target: ref_save
-        bonus_type: luck
-        value: 1
-      - target: will_save
-        bonus_type: luck
-        value: 1
-
-  - name: "Goggles of Minute Seeing"
-
-    note: "+5 competence on Search checks"
-    effects:
-      - target: skill_search
-        bonus_type: competence
-        value: 5
-
-  - name: "Vest of Escape"
-
-    note: >-
-      +6 competence on Escape Artist,
-      +4 competence on Open Lock
-    effects:
-      - target: skill_escape_artist
-        bonus_type: competence
-        value: 6
-      - target: skill_open_lock
-        bonus_type: competence
-        value: 4
-
-  - name: "Amulet of Mighty Fists +1"
-
-    note: >-
-      +1 enhancement to unarmed and
-      natural weapon attacks and damage
-    effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 1
-      - target: damage_all
-        bonus_type: enhancement
-        value: 1
-
-  - name: "Amulet of Mighty Fists +2"
-
-    note: >-
-      +2 enhancement to unarmed and
-      natural weapon attacks and damage
-    effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 2
-      - target: damage_all
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Amulet of Mighty Fists +3"
-
-    note: >-
-      +3 enhancement to unarmed and
-      natural weapon attacks and damage
-    effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 3
-      - target: damage_all
-        bonus_type: enhancement
-        value: 3
-
-  - name: "Amulet of Mighty Fists +4"
-
-    note: >-
-      +4 enhancement to unarmed and
-      natural weapon attacks and damage
-    effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 4
-      - target: damage_all
-        bonus_type: enhancement
-        value: 4
-
-  - name: "Amulet of Mighty Fists +5"
-
-    note: >-
-      +5 enhancement to unarmed and
-      natural weapon attacks and damage
-    effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: 5
-      - target: damage_all
-        bonus_type: enhancement
-        value: 5
-
-  - name: "Belt of Dwarvenkind"
-
-    note: >-
-      +2 enhancement to CON; darkvision
-      60 ft; dwarven language; +2 CHA
-      toward dwarves
-    effects:
-      - target: con_score
-        bonus_type: enhancement
-        value: 2
-
-  - name: "Robe of the Archmagi"
-
-    note: >-
-      +5 armor AC, SR 18, +4 resistance
-      saves (requires matching alignment)
-    effects:
-      - target: ac
-        bonus_type: armor
-        value: 5
-      - target: fort_save
-        bonus_type: resistance
-        value: 4
-      - target: ref_save
-        bonus_type: resistance
-        value: 4
-      - target: will_save
-        bonus_type: resistance
-        value: 4
-      - target: sr
-        bonus_type: untyped
-        value: 18
-
-  - name: "Scarab of Protection"
-
-    note: >-
-      +3 resistance to saves; absorbs 12
-      energy drain or death effects
-    effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 3
-      - target: ref_save
-        bonus_type: resistance
-        value: 3
-      - target: will_save
-        bonus_type: resistance
-        value: 3
-
-  - name: "Candle of Invocation"
-
-    note: >-
-      +2 morale to attack, saves, and
-      skill checks for same-alignment
-      creatures within 30 ft
-    effects:
-      - target: attack_all
-        bonus_type: morale
-        value: 2
-      - target: fort_save
-        bonus_type: morale
-        value: 2
-      - target: ref_save
-        bonus_type: morale
-        value: 2
-      - target: will_save
-        bonus_type: morale
-        value: 2
-
-  - name: "Robe of Stars"
-
-    note: "+4 deflection to AC"
-    effects:
-      - target: ac
-        bonus_type: deflection
-        value: 4
+    - target: fort_save
+      bonus_type: luck
+      value: 1
+    - target: ref_save
+      bonus_type: luck
+      value: 1
+    - target: will_save
+      bonus_type: luck
+      value: 1
+  Tome of Clear Thought +1:
+    slot: slotless
+    note: Inherent +1 INT (permanent, read once)
+  Tome of Leadership +1:
+    slot: slotless
+    note: Inherent +1 CHA (permanent, read once)
+  Tome of Understanding +1:
+    slot: slotless
+    note: Inherent +1 WIS (permanent, read once)

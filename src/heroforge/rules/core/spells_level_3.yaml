@@ -1,363 +1,485 @@
 # spells_level_3.yaml
 #
-# SRD spell compendium entries.
-#
-# Spells with stat effects include
-# inline effects: entries.
+# Map keyed by spell name.
+# See spells_level_0.yaml for field schema.
 
 spell_compendium:
-
-  - name: "Animate Dead"
-    level: {Cleric: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Arcane Sight"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Bestow Curse"
-    level: {Cleric: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Blink"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Call Lightning"
-    level: {Druid: 3}
-
-  - name: "Charm Monster"
-    level: {Bard: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Clairaudience/Clairvoyance"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Command Plants"
-    level: {Druid: 4, Ranger: 3}
-
-  - name: "Confusion"
-    level: {Bard: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Contagion"
-    level: {Cleric: 3, Druid: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Create Food and Water"
-    level: {Cleric: 3}
-
-  - name: "Crushing Despair"
-    level: {Bard: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Cure Serious Wounds"
-    level: {Bard: 3, Cleric: 3, Druid: 4, Paladin: 4, Ranger: 4}
-
-  - name: "Daylight"
-    level: {Bard: 3, Cleric: 3, Druid: 3, Paladin: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Deep Slumber"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Deeper Darkness"
-    level: {Cleric: 3}
-
-  - name: "Diminish Plants"
-    level: {Druid: 3, Ranger: 3}
-
-  - name: "Discern Lies"
-    level: {Cleric: 4, Paladin: 3}
-
-  - name: "Dispel Magic"
-    level: {Bard: 3, Cleric: 3, Druid: 4, Paladin: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Displacement"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-    note: "50%% miss chance for attacks against you (note only)"
-
-  - name: "Dominate Animal"
-    level: {Druid: 3}
-
-  - name: "Explosive Runes"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Fear"
-    level: {Bard: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Fireball"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Flame Arrow"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Fly"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Gaseous Form"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Geas (Lesser)"
-    level: {Bard: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Glibness"
-    level: {Bard: 3}
-
-  - name: "Glyph of Warding"
-    level: {Cleric: 3}
-
-  - name: "Good Hope"
-    level: {Bard: 3}
-    note: >-
-      +2 morale on attack rolls, damage, saves, skill checks, ability checks
+  Animate Dead:
+    level:
+      Cleric: 3
+      Sorcerer: 4
+      Wizard: 4
+  Arcane Sight:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Bestow Curse:
+    level:
+      Cleric: 3
+      Sorcerer: 4
+      Wizard: 4
+  Blink:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Call Lightning:
+    level:
+      Druid: 3
+  Charm Monster:
+    level:
+      Bard: 3
+      Sorcerer: 4
+      Wizard: 4
+  Clairaudience/Clairvoyance:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Command Plants:
+    level:
+      Druid: 4
+      Ranger: 3
+  Confusion:
+    level:
+      Bard: 3
+      Sorcerer: 4
+      Wizard: 4
+  Contagion:
+    level:
+      Cleric: 3
+      Druid: 3
+      Sorcerer: 4
+      Wizard: 4
+  Create Food and Water:
+    level:
+      Cleric: 3
+  Crushing Despair:
+    level:
+      Bard: 3
+      Sorcerer: 4
+      Wizard: 4
+  Cure Serious Wounds:
+    level:
+      Bard: 3
+      Cleric: 3
+      Druid: 4
+      Paladin: 4
+      Ranger: 4
+  Daylight:
+    level:
+      Bard: 3
+      Cleric: 3
+      Druid: 3
+      Paladin: 3
+      Sorcerer: 3
+      Wizard: 3
+  Deep Slumber:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Deeper Darkness:
+    level:
+      Cleric: 3
+  Diminish Plants:
+    level:
+      Druid: 3
+      Ranger: 3
+  Discern Lies:
+    level:
+      Cleric: 4
+      Paladin: 3
+  Dispel Magic:
+    level:
+      Bard: 3
+      Cleric: 3
+      Druid: 4
+      Paladin: 3
+      Sorcerer: 3
+      Wizard: 3
+  Displacement:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+    note: 50%% miss chance for attacks against you (note only)
+  Dominate Animal:
+    level:
+      Druid: 3
+  Explosive Runes:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Fear:
+    level:
+      Bard: 3
+      Sorcerer: 4
+      Wizard: 4
+  Fireball:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Flame Arrow:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Fly:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Gaseous Form:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Geas (Lesser):
+    level:
+      Bard: 3
+      Sorcerer: 4
+      Wizard: 4
+  Glibness:
+    level:
+      Bard: 3
+  Glyph of Warding:
+    level:
+      Cleric: 3
+  Good Hope:
+    level:
+      Bard: 3
+    note: +2 morale on attack rolls, damage, saves, skill checks, ability checks
     effects:
-      - target: attack_all
-        bonus_type: morale
-        value: 2
-      - target: damage_all
-        bonus_type: morale
-        value: 2
-      - target: fort_save
-        bonus_type: morale
-        value: 2
-      - target: ref_save
-        bonus_type: morale
-        value: 2
-      - target: will_save
-        bonus_type: morale
-        value: 2
-
-  - name: "Halt Undead"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Haste"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-    note: "+1 untyped attack, +1 dodge AC, +1 Reflex, speed bonus"
+    - target: attack_all
+      bonus_type: morale
+      value: 2
+    - target: damage_all
+      bonus_type: morale
+      value: 2
+    - target: fort_save
+      bonus_type: morale
+      value: 2
+    - target: ref_save
+      bonus_type: morale
+      value: 2
+    - target: will_save
+      bonus_type: morale
+      value: 2
+  Halt Undead:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Haste:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+    note: +1 untyped attack, +1 dodge AC, +1 Reflex, speed bonus
     effects:
-      - target: attack_all
-        bonus_type: untyped
-        value: 1
-      - target: ac
-        bonus_type: dodge
-        value: 1
-      - target: ref_save
-        bonus_type: untyped
-        value: 1
-
-  - name: "Heal Mount"
-    level: {Paladin: 3}
-
-  - name: "Helping Hand"
-    level: {Cleric: 3}
-
-  - name: "Illusory Script"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Inflict Serious Wounds"
-    level: {Cleric: 3}
-
-  - name: "Invisibility Purge"
-    level: {Cleric: 3}
-
-  - name: "Invisibility Sphere"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Keen Edge"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Lightning Bolt"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Magic Circle against Chaos"
-    level: {Cleric: 3, Paladin: 3, Sorcerer: 3, Wizard: 3}
-    note: "+2 deflection AC, +2 resistance saves vs chaotic; 10 ft. radius"
+    - target: attack_all
+      bonus_type: untyped
+      value: 1
+    - target: ac
+      bonus_type: dodge
+      value: 1
+    - target: ref_save
+      bonus_type: untyped
+      value: 1
+  Heal Mount:
+    level:
+      Paladin: 3
+  Helping Hand:
+    level:
+      Cleric: 3
+  Illusory Script:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Inflict Serious Wounds:
+    level:
+      Cleric: 3
+  Invisibility Purge:
+    level:
+      Cleric: 3
+  Invisibility Sphere:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Keen Edge:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Lightning Bolt:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Magic Circle against Chaos:
+    level:
+      Cleric: 3
+      Paladin: 3
+      Sorcerer: 3
+      Wizard: 3
+    note: +2 deflection AC, +2 resistance saves vs chaotic; 10 ft. radius
     effects:
-      - target: ac
-        bonus_type: deflection
-        value: 2
-      - target: fort_save
-        bonus_type: resistance
-        value: 2
-      - target: ref_save
-        bonus_type: resistance
-        value: 2
-      - target: will_save
-        bonus_type: resistance
-        value: 2
-
-  - name: "Magic Circle against Evil"
-    level: {Cleric: 3, Paladin: 3, Sorcerer: 3, Wizard: 3}
-    note: "+2 deflection AC, +2 resistance saves vs evil; 10 ft. radius"
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+  Magic Circle against Evil:
+    level:
+      Cleric: 3
+      Paladin: 3
+      Sorcerer: 3
+      Wizard: 3
+    note: +2 deflection AC, +2 resistance saves vs evil; 10 ft. radius
     effects:
-      - target: ac
-        bonus_type: deflection
-        value: 2
-      - target: fort_save
-        bonus_type: resistance
-        value: 2
-      - target: ref_save
-        bonus_type: resistance
-        value: 2
-      - target: will_save
-        bonus_type: resistance
-        value: 2
-
-  - name: "Magic Circle against Good"
-    level: {Cleric: 3, Sorcerer: 3, Wizard: 3}
-    note: "+2 deflection AC, +2 resistance saves vs good; 10 ft. radius"
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+  Magic Circle against Good:
+    level:
+      Cleric: 3
+      Sorcerer: 3
+      Wizard: 3
+    note: +2 deflection AC, +2 resistance saves vs good; 10 ft. radius
     effects:
-      - target: ac
-        bonus_type: deflection
-        value: 2
-      - target: fort_save
-        bonus_type: resistance
-        value: 2
-      - target: ref_save
-        bonus_type: resistance
-        value: 2
-      - target: will_save
-        bonus_type: resistance
-        value: 2
-
-  - name: "Magic Circle against Law"
-    level: {Cleric: 3, Sorcerer: 3, Wizard: 3}
-    note: "+2 deflection AC, +2 resistance saves vs lawful; 10 ft. radius"
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+  Magic Circle against Law:
+    level:
+      Cleric: 3
+      Sorcerer: 3
+      Wizard: 3
+    note: +2 deflection AC, +2 resistance saves vs lawful; 10 ft. radius
     effects:
-      - target: ac
-        bonus_type: deflection
-        value: 2
-      - target: fort_save
-        bonus_type: resistance
-        value: 2
-      - target: ref_save
-        bonus_type: resistance
-        value: 2
-      - target: will_save
-        bonus_type: resistance
-        value: 2
-
-  - name: "Magic Fang (Greater)"
-    level: {Druid: 3, Ranger: 3}
-
-  - name: "Magic Vestment"
-    level: {Cleric: 3}
-    note: "Enhancement bonus to armor/shield; scales with CL"
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+  Magic Fang (Greater):
+    level:
+      Druid: 3
+      Ranger: 3
+  Magic Vestment:
+    level:
+      Cleric: 3
+    note: Enhancement bonus to armor/shield; scales with CL
     requires_caster_level: true
     effects:
-      - target: ac
-        bonus_type: enhancement
-        value: "max(1, caster_level // 4)"
-
-  - name: "Magic Weapon (Greater)"
-    level: {Cleric: 4, Paladin: 3, Sorcerer: 3, Wizard: 3}
-    note: "Enhancement bonus to attack and damage; scales with CL"
+    - target: ac
+      bonus_type: enhancement
+      value: max(1, caster_level // 4)
+  Magic Weapon (Greater):
+    level:
+      Cleric: 4
+      Paladin: 3
+      Sorcerer: 3
+      Wizard: 3
+    note: Enhancement bonus to attack and damage; scales with CL
     requires_caster_level: true
     effects:
-      - target: attack_all
-        bonus_type: enhancement
-        value: "max(1, caster_level // 4)"
-      - target: damage_all
-        bonus_type: enhancement
-        value: "max(1, caster_level // 4)"
-
-  - name: "Major Image"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Meld into Stone"
-    level: {Cleric: 3, Druid: 3}
-
-  - name: "Neutralize Poison"
-    level: {Bard: 4, Cleric: 4, Druid: 3, Paladin: 4, Ranger: 3}
-
-  - name: "Nondetection"
-    level: {Ranger: 4, Sorcerer: 3, Wizard: 3}
-
-  - name: "Phantom Steed"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Plant Growth"
-    level: {Druid: 3, Ranger: 3}
-
-  - name: "Poison"
-    level: {Cleric: 4, Druid: 3}
-
-  - name: "Prayer"
-    level: {Cleric: 3, Paladin: 3}
-    note: "+1 luck on attack, damage, saves, skill checks"
+    - target: attack_all
+      bonus_type: enhancement
+      value: max(1, caster_level // 4)
+    - target: damage_all
+      bonus_type: enhancement
+      value: max(1, caster_level // 4)
+  Major Image:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Meld into Stone:
+    level:
+      Cleric: 3
+      Druid: 3
+  Neutralize Poison:
+    level:
+      Bard: 4
+      Cleric: 4
+      Druid: 3
+      Paladin: 4
+      Ranger: 3
+  Nondetection:
+    level:
+      Ranger: 4
+      Sorcerer: 3
+      Wizard: 3
+  Phantom Steed:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Plant Growth:
+    level:
+      Druid: 3
+      Ranger: 3
+  Poison:
+    level:
+      Cleric: 4
+      Druid: 3
+  Prayer:
+    level:
+      Cleric: 3
+      Paladin: 3
+    note: +1 luck on attack, damage, saves, skill checks
     effects:
-      - target: attack_all
-        bonus_type: luck
-        value: 1
-      - target: damage_all
-        bonus_type: luck
-        value: 1
-      - target: fort_save
-        bonus_type: luck
-        value: 1
-      - target: ref_save
-        bonus_type: luck
-        value: 1
-      - target: will_save
-        bonus_type: luck
-        value: 1
-
-  - name: "Quench"
-    level: {Druid: 3}
-
-  - name: "Ray of Exhaustion"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Remove Blindness/Deafness"
-    level: {Cleric: 3, Paladin: 3}
-
-  - name: "Remove Curse"
-    level: {Bard: 3, Cleric: 3, Paladin: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Remove Disease"
-    level: {Cleric: 3, Druid: 3, Ranger: 3}
-
-  - name: "Repel Vermin"
-    level: {Bard: 4, Cleric: 4, Druid: 4, Ranger: 3}
-
-  - name: "Scrying"
-    level: {Bard: 3, Cleric: 5, Druid: 4, Sorcerer: 4, Wizard: 4}
-
-  - name: "Sculpt Sound"
-    level: {Bard: 3}
-
-  - name: "Searing Light"
-    level: {Cleric: 3}
-
-  - name: "Secret Page"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Sepia Snake Sigil"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Shrink Item"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Sleet Storm"
-    level: {Druid: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Slow"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Speak with Dead"
-    level: {Cleric: 3}
-
-  - name: "Stinking Cloud"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Stone Shape"
-    level: {Cleric: 3, Druid: 3, Sorcerer: 4, Wizard: 4}
-
-  - name: "Summon Monster III"
-    level: {Bard: 3, Cleric: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Summon Nature's Ally III"
-    level: {Druid: 3, Ranger: 3}
-
-  - name: "Tiny Hut"
-    level: {Bard: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Vampiric Touch"
-    level: {Sorcerer: 3, Wizard: 3}
-
-  - name: "Water Breathing"
-    level: {Cleric: 3, Druid: 3, Sorcerer: 3, Wizard: 3}
-
-  - name: "Water Walk"
-    level: {Cleric: 3, Ranger: 3}
+    - target: attack_all
+      bonus_type: luck
+      value: 1
+    - target: damage_all
+      bonus_type: luck
+      value: 1
+    - target: fort_save
+      bonus_type: luck
+      value: 1
+    - target: ref_save
+      bonus_type: luck
+      value: 1
+    - target: will_save
+      bonus_type: luck
+      value: 1
+  Quench:
+    level:
+      Druid: 3
+  Ray of Exhaustion:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Remove Blindness/Deafness:
+    level:
+      Cleric: 3
+      Paladin: 3
+  Remove Curse:
+    level:
+      Bard: 3
+      Cleric: 3
+      Paladin: 3
+      Sorcerer: 4
+      Wizard: 4
+  Remove Disease:
+    level:
+      Cleric: 3
+      Druid: 3
+      Ranger: 3
+  Repel Vermin:
+    level:
+      Bard: 4
+      Cleric: 4
+      Druid: 4
+      Ranger: 3
+  Scrying:
+    level:
+      Bard: 3
+      Cleric: 5
+      Druid: 4
+      Sorcerer: 4
+      Wizard: 4
+  Sculpt Sound:
+    level:
+      Bard: 3
+  Searing Light:
+    level:
+      Cleric: 3
+  Secret Page:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Sepia Snake Sigil:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Shrink Item:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Sleet Storm:
+    level:
+      Druid: 3
+      Sorcerer: 3
+      Wizard: 3
+  Slow:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Speak with Dead:
+    level:
+      Cleric: 3
+  Stinking Cloud:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Stone Shape:
+    level:
+      Cleric: 3
+      Druid: 3
+      Sorcerer: 4
+      Wizard: 4
+  Summon Monster III:
+    level:
+      Bard: 3
+      Cleric: 3
+      Sorcerer: 3
+      Wizard: 3
+  Summon Nature's Ally III:
+    level:
+      Druid: 3
+      Ranger: 3
+  Tiny Hut:
+    level:
+      Bard: 3
+      Sorcerer: 3
+      Wizard: 3
+  Vampiric Touch:
+    level:
+      Sorcerer: 3
+      Wizard: 3
+  Water Breathing:
+    level:
+      Cleric: 3
+      Druid: 3
+      Sorcerer: 3
+      Wizard: 3
+  Water Walk:
+    level:
+      Cleric: 3
+      Ranger: 3

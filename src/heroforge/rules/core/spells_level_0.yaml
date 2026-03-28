@@ -1,34 +1,48 @@
 # spells_level_0.yaml
 #
-# SRD spell compendium entries.
-#
-# Spells with stat effects include
-# inline effects: entries.
+# Map keyed by spell name.
+# Fields per entry:
+#   school, level (dict of class -> int),
+#   duration, range, components, save,
+#   spell_resistance, description,
+#   effects (optional: list of stat effects)
 
 spell_compendium:
-
-  - name: "Acid Splash"
-    level: {Sorcerer: 0, Wizard: 0}
-
-  - name: "Arcane Mark"
-    level: {Sorcerer: 0, Wizard: 0}
-
-  - name: "Create Water"
-    level: {Cleric: 0, Druid: 0, Paladin: 1}
-
-  - name: "Cure Minor Wounds"
-    level: {Cleric: 0, Druid: 0}
-
-  - name: "Dancing Lights"
-    level: {Bard: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Daze"
-    level: {Bard: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Detect Magic"
-    level: {Bard: 0, Cleric: 0, Druid: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Detect Poison"
+  Acid Splash:
+    level:
+      Sorcerer: 0
+      Wizard: 0
+  Arcane Mark:
+    level:
+      Sorcerer: 0
+      Wizard: 0
+  Create Water:
+    level:
+      Cleric: 0
+      Druid: 0
+      Paladin: 1
+  Cure Minor Wounds:
+    level:
+      Cleric: 0
+      Druid: 0
+  Dancing Lights:
+    level:
+      Bard: 0
+      Sorcerer: 0
+      Wizard: 0
+  Daze:
+    level:
+      Bard: 0
+      Sorcerer: 0
+      Wizard: 0
+  Detect Magic:
+    level:
+      Bard: 0
+      Cleric: 0
+      Druid: 0
+      Sorcerer: 0
+      Wizard: 0
+  Detect Poison:
     level:
       Cleric: 0
       Druid: 0
@@ -36,67 +50,92 @@ spell_compendium:
       Ranger: 1
       Sorcerer: 0
       Wizard: 0
-
-  - name: "Disrupt Undead"
-    level: {Sorcerer: 0, Wizard: 0}
-
-  - name: "Flare"
-    level: {Bard: 0, Druid: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Ghost Sound"
-    level: {Bard: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Guidance"
-    level: {Cleric: 0, Druid: 0}
-    note: "+1 competence on one attack roll, saving throw, or skill check"
+  Disrupt Undead:
+    level:
+      Sorcerer: 0
+      Wizard: 0
+  Flare:
+    level:
+      Bard: 0
+      Druid: 0
+      Sorcerer: 0
+      Wizard: 0
+  Ghost Sound:
+    level:
+      Bard: 0
+      Sorcerer: 0
+      Wizard: 0
+  Guidance:
+    level:
+      Cleric: 0
+      Druid: 0
+    note: +1 competence on one attack roll, saving throw, or skill check
     effects:
-      - target: attack_all
-        bonus_type: competence
-        value: 1
-      - target: fort_save
-        bonus_type: competence
-        value: 1
-      - target: ref_save
-        bonus_type: competence
-        value: 1
-      - target: will_save
-        bonus_type: competence
-        value: 1
-
-  - name: "Inflict Minor Wounds"
-    level: {Cleric: 0}
-
-  - name: "Know Direction"
-    level: {Bard: 0, Druid: 0}
-
-  - name: "Light"
-    level: {Bard: 0, Cleric: 0, Druid: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Lullaby"
-    level: {Bard: 0}
-
-  - name: "Mage Hand"
-    level: {Bard: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Mending"
-    level: {Bard: 0, Cleric: 0, Druid: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Message"
-    level: {Bard: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Open/Close"
-    level: {Bard: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Prestidigitation"
-    level: {Bard: 0, Sorcerer: 0, Wizard: 0}
-
-  - name: "Purify Food and Drink"
-    level: {Cleric: 0, Druid: 0}
-
-  - name: "Ray of Frost"
-    level: {Sorcerer: 0, Wizard: 0}
-
-  - name: "Read Magic"
+    - target: attack_all
+      bonus_type: competence
+      value: 1
+    - target: fort_save
+      bonus_type: competence
+      value: 1
+    - target: ref_save
+      bonus_type: competence
+      value: 1
+    - target: will_save
+      bonus_type: competence
+      value: 1
+  Inflict Minor Wounds:
+    level:
+      Cleric: 0
+  Know Direction:
+    level:
+      Bard: 0
+      Druid: 0
+  Light:
+    level:
+      Bard: 0
+      Cleric: 0
+      Druid: 0
+      Sorcerer: 0
+      Wizard: 0
+  Lullaby:
+    level:
+      Bard: 0
+  Mage Hand:
+    level:
+      Bard: 0
+      Sorcerer: 0
+      Wizard: 0
+  Mending:
+    level:
+      Bard: 0
+      Cleric: 0
+      Druid: 0
+      Sorcerer: 0
+      Wizard: 0
+  Message:
+    level:
+      Bard: 0
+      Sorcerer: 0
+      Wizard: 0
+  Open/Close:
+    level:
+      Bard: 0
+      Sorcerer: 0
+      Wizard: 0
+  Prestidigitation:
+    level:
+      Bard: 0
+      Sorcerer: 0
+      Wizard: 0
+  Purify Food and Drink:
+    level:
+      Cleric: 0
+      Druid: 0
+  Ray of Frost:
+    level:
+      Sorcerer: 0
+      Wizard: 0
+  Read Magic:
     level:
       Bard: 0
       Cleric: 0
@@ -105,31 +144,39 @@ spell_compendium:
       Ranger: 1
       Sorcerer: 0
       Wizard: 0
-
-  - name: "Resistance"
-    level: {Bard: 0, Cleric: 0, Druid: 0, Paladin: 1, Sorcerer: 0, Wizard: 0}
-    note: "+1 resistance bonus on saving throws"
+  Resistance:
+    level:
+      Bard: 0
+      Cleric: 0
+      Druid: 0
+      Paladin: 1
+      Sorcerer: 0
+      Wizard: 0
+    note: +1 resistance bonus on saving throws
     effects:
-      - target: fort_save
-        bonus_type: resistance
-        value: 1
-      - target: ref_save
-        bonus_type: resistance
-        value: 1
-      - target: will_save
-        bonus_type: resistance
-        value: 1
-
-  - name: "Summon Instrument"
-    level: {Bard: 0}
-
-  - name: "Touch of Fatigue"
-    level: {Sorcerer: 0, Wizard: 0}
-
-  - name: "Virtue"
-    level: {Cleric: 0, Druid: 0, Paladin: 1}
-    note: "+1 temporary hit point"
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+  Summon Instrument:
+    level:
+      Bard: 0
+  Touch of Fatigue:
+    level:
+      Sorcerer: 0
+      Wizard: 0
+  Virtue:
+    level:
+      Cleric: 0
+      Druid: 0
+      Paladin: 1
+    note: +1 temporary hit point
     effects:
-      - target: hp_bonus
-        bonus_type: untyped
-        value: 1
+    - target: hp_bonus
+      bonus_type: untyped
+      value: 1
