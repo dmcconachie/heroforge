@@ -7,8 +7,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import yaml
-
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.spells import SpellCompendium
 from heroforge.rules.loader import SpellCompendiumLoader
@@ -102,45 +100,3 @@ class TestCompendiumBuffRegistration:
     def test_fireball_not_registered(self) -> None:
         """No stat effects -> no buff."""
         assert "Fireball" not in self.reg
-
-
-class TestSpellListsYaml:
-    def test_structure(self) -> None:
-        path = RULES_DIR / "core" / "spell_lists.yaml"
-        with open(path) as f:
-            data = yaml.safe_load(f)
-        assert "spell_lists" in data
-        for cls in [
-            "Bard",
-            "Cleric",
-            "Druid",
-            "Paladin",
-            "Ranger",
-            "Sorcerer",
-            "Wizard",
-        ]:
-            assert cls in data["spell_lists"], f"Missing class: {cls}"
-
-    def test_wizard_has_9_levels(self) -> None:
-        path = RULES_DIR / "core" / "spell_lists.yaml"
-        with open(path) as f:
-            data = yaml.safe_load(f)
-        wiz = data["spell_lists"]["Wizard"]
-        assert 0 in wiz
-        assert 9 in wiz
-
-    def test_bard_max_level_6(self) -> None:
-        path = RULES_DIR / "core" / "spell_lists.yaml"
-        with open(path) as f:
-            data = yaml.safe_load(f)
-        bard = data["spell_lists"]["Bard"]
-        assert 6 in bard
-        assert 7 not in bard
-
-    def test_paladin_starts_at_1(self) -> None:
-        path = RULES_DIR / "core" / "spell_lists.yaml"
-        with open(path) as f:
-            data = yaml.safe_load(f)
-        pal = data["spell_lists"]["Paladin"]
-        assert 0 not in pal
-        assert 1 in pal

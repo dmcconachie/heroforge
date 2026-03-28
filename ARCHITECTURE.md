@@ -70,7 +70,6 @@ src/heroforge/
 │       ├── spells_level_0..9.yaml  # Spell compendium
 │       │                           #   (601 spells, 1
 │       │                           #   file per level)
-│       ├── spell_lists.yaml  # Class spell lists
 │       ├── conditions_srd.yaml  # 20 conditions
 │       ├── templates.yaml    # 12 creature templates
 │       ├── domains.yaml      # 22 cleric domains
@@ -428,7 +427,6 @@ YAML files under `rules/core/` contain full SRD data:
 - 7 races, 36 skills
 - 118 feats (86 PHB + 32 SRD)
 - 601 spell compendium entries (with inline buff effects)
-- Class spell lists for 7 casting classes
 - 22 cleric domains
 - 18 armor/shields, 63 weapons
 - ~70 magic items
