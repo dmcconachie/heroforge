@@ -317,8 +317,8 @@ class StatsLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in stats.yaml: {e}") from e
 
-        if not isinstance(data, dict) or "stats" not in data:
-            raise LoaderError("stats.yaml must have a top-level 'stats' key.")
+        if not isinstance(data, list):
+            raise LoaderError("stats.yaml must be a YAML list.")
 
         registered: list[str] = []
         seen_keys: set[str] = set()
@@ -327,7 +327,7 @@ class StatsLoader:
             _forbid_extra,
         )
 
-        for decl in data["stats"]:
+        for decl in data:
             key = decl.get("key")
             if not key:
                 raise LoaderError(f"Stat declaration missing 'key': {decl}")
@@ -442,12 +442,12 @@ class ConditionLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        if not isinstance(data, dict) or "conditions" not in data:
-            raise LoaderError(f"{path} must have a top-level 'conditions' key.")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
 
-        for name, decl in data["conditions"].items():
+        for name, decl in data.items():
             decl["name"] = name
 
             try:
@@ -557,14 +557,12 @@ class MagicItemLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        if not isinstance(data, dict) or "magic_items" not in data:
-            raise LoaderError(
-                f"{path} must have a top-level 'magic_items' key."
-            )
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
 
-        for name, decl in data["magic_items"].items():
+        for name, decl in data.items():
             decl["name"] = name
 
             try:
@@ -652,12 +650,12 @@ class TemplatesLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        if not isinstance(data, dict) or "templates" not in data:
-            raise LoaderError(f"{path} must have a top-level 'templates' key.")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
 
-        for name, decl in data["templates"].items():
+        for name, decl in data.items():
             decl["name"] = name
             try:
                 defn = build_template_from_yaml(decl)
@@ -721,12 +719,12 @@ class FeatsLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        if not isinstance(data, dict) or "feats" not in data:
-            raise LoaderError(f"{path} must have a top-level 'feats' key.")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
 
-        for name, decl in data["feats"].items():
+        for name, decl in data.items():
             decl["name"] = name
 
             try:
@@ -818,8 +816,9 @@ class ClassesLoader:
             if not isinstance(data, dict):
                 raise LoaderError(f"{path}: expected a dict")
 
-            for name, decl in data.get("classes", {}).items():
+            for name, decl in data.items():
                 decl["name"] = name
+                is_prc = decl.get("is_prestige", False)
                 try:
                     defn = converter.structure(decl, ClassDefinition)
                     registry.register(defn, overwrite=overwrite)
@@ -828,21 +827,7 @@ class ClassesLoader:
                     raise LoaderError(
                         f"Failed to load class {name!r} from {path}: {e}"
                     ) from e
-                if buff_registry is not None:
-                    self._register_feature_buffs(defn, buff_registry)
-
-            for name, decl in data.get("prestige_classes", {}).items():
-                decl["name"] = name
-                decl["is_prestige"] = True
-                try:
-                    defn = converter.structure(decl, ClassDefinition)
-                    registry.register(defn, overwrite=overwrite)
-                    registered.append(name)
-                except (KeyError, ValueError) as e:
-                    raise LoaderError(
-                        f"Failed to load PrC {name!r} from {path}: {e}"
-                    ) from e
-                if prereq_checker is not None:
+                if is_prc and prereq_checker is not None:
                     entry_prereq = self._build_prereq(
                         decl.get("entry_prerequisites")
                     )
@@ -932,8 +917,8 @@ class RacesLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        if not isinstance(data, dict) or "races" not in data:
-            raise LoaderError(f"{path} must have a top-level 'races' key.")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         from heroforge.engine.classes_races import (
             RaceDefinition,
@@ -941,7 +926,7 @@ class RacesLoader:
         from heroforge.rules.schema import converter
 
         registered: list[str] = []
-        for name, decl in data["races"].items():
+        for name, decl in data.items():
             decl["name"] = name
             try:
                 defn = converter.structure(decl, RaceDefinition)
@@ -991,11 +976,11 @@ class SkillsLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        if not isinstance(data, dict) or "skills" not in data:
-            raise LoaderError(f"{path} must have a top-level 'skills' key.")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
-        for name, decl in data["skills"].items():
+        for name, decl in data.items():
             decl["name"] = name
             try:
                 defn = converter.structure(decl, SkillDefinition)
@@ -1032,11 +1017,11 @@ class DomainsLoader:
             raise LoaderError(f"Domains file not found: {path}")
         with open(path) as f:
             data = yaml.safe_load(f)
-        if not isinstance(data, dict) or "domains" not in data:
-            raise LoaderError(f"{path}: missing 'domains' key")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
-        for name, decl in data["domains"].items():
+        for name, decl in data.items():
             decl["name"] = name
             try:
                 defn = converter.structure(decl, DomainDefinition)
@@ -1076,11 +1061,11 @@ class EquipmentLoader:
             raise LoaderError(f"Armor file not found: {path}")
         with open(path) as f:
             data = yaml.safe_load(f)
-        if not isinstance(data, dict) or "armor" not in data:
-            raise LoaderError(f"{path}: missing 'armor' key")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
-        for name, decl in data["armor"].items():
+        for name, decl in data.items():
             decl["name"] = name
             try:
                 defn = converter.structure(decl, ArmorDefinition)
@@ -1105,11 +1090,11 @@ class EquipmentLoader:
             raise LoaderError(f"Weapons file not found: {path}")
         with open(path) as f:
             data = yaml.safe_load(f)
-        if not isinstance(data, dict) or "weapons" not in data:
-            raise LoaderError(f"{path}: missing 'weapons' key")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
-        for name, decl in data["weapons"].items():
+        for name, decl in data.items():
             decl["name"] = name
             try:
                 defn = converter.structure(decl, WeaponDefinition)
@@ -1178,12 +1163,11 @@ class SpellCompendiumLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        key = "spell_compendium"
-        if not isinstance(data, dict) or key not in data:
-            raise LoaderError(f"{path} must have a top-level '{key}' key.")
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
 
         registered: list[str] = []
-        for name, decl in data[key].items():
+        for name, decl in data.items():
             decl["name"] = name
 
             try:

@@ -1,77 +1,77 @@
-prestige_classes:
-  Dragon Disciple:
-    source_book: DMG
-    hit_die: 12
-    max_level: 10
-    bab_progression: medium
-    save_progressions:
-      fort: good
-      ref: poor
-      will: good
-    skills_per_level: 2
-    class_skills:
-    - Concentration
-    - Craft
-    - Diplomacy
-    - Escape Artist
-    - Gather Information
-    - Knowledge (all)
-    - Listen
-    - Profession
-    - Search
-    - Speak Language
-    - Spellcraft
-    - Spot
-    entry_prerequisites:
-      all_of:
-      - spellcasting:
-          cast_type: arcane
-          min_level: 1
-    class_features:
-    - level: 1
-      feature: natural_armor_1
-      description: +1 natural armor
-      effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 1
-    - level: 2
-      feature: str_increase_2
-      description: +2 STR
-      effects:
-      - target: str_score
-        bonus_type: untyped
-        value: 2
-    - level: 2
-      feature: claws_and_bite
-      description: Natural weapons
-    - level: 4
-      feature: str_increase_4
-      description: +2 STR (cumulative)
-      effects:
-      - target: str_score
-        bonus_type: untyped
-        value: 2
-    - level: 4
-      feature: natural_armor_4
-      description: +3 natural armor (cumulative)
-      effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 3
-    - level: 5
-      feature: blindsense
-      description: Blindsense 30 ft
-    - level: 7
-      feature: natural_armor_7
-      description: +6 natural armor (cumulative)
-      effects:
-      - target: ac
-        bonus_type: natural_armor
-        value: 6
-    - level: 9
-      feature: wings
-      description: Fly speed 30 ft
-    - level: 10
-      feature: dragon_apotheosis
-      description: Become half-dragon
+Dragon Disciple:
+  source_book: DMG
+  hit_die: 12
+  max_level: 10
+  bab_progression: medium
+  save_progressions:
+    fort: good
+    ref: poor
+    will: good
+  skills_per_level: 2
+  class_skills:
+  - Concentration
+  - Craft
+  - Diplomacy
+  - Escape Artist
+  - Gather Information
+  - Knowledge (all)
+  - Listen
+  - Profession
+  - Search
+  - Speak Language
+  - Spellcraft
+  - Spot
+  entry_prerequisites:
+    all_of:
+    - spellcasting:
+        cast_type: arcane
+        min_level: 1
+  class_features:
+  - level: 1
+    feature: natural_armor_1
+    description: +1 natural armor
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 1
+  - level: 2
+    feature: str_increase_2
+    description: +2 STR
+    effects:
+    - target: str_score
+      bonus_type: untyped
+      value: 2
+  - level: 2
+    feature: claws_and_bite
+    description: Natural weapons
+  - level: 4
+    feature: str_increase_4
+    description: +2 STR (cumulative)
+    effects:
+    - target: str_score
+      bonus_type: untyped
+      value: 2
+  - level: 4
+    feature: natural_armor_4
+    description: +3 natural armor (cumulative)
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 3
+  - level: 5
+    feature: blindsense
+    description: Blindsense 30 ft
+  - level: 7
+    feature: natural_armor_7
+    description: +6 natural armor (cumulative)
+    effects:
+    - target: ac
+      bonus_type: natural_armor
+      value: 6
+  - level: 9
+    feature: wings
+    description: Fly speed 30 ft
+  - level: 10
+    feature: dragon_apotheosis
+    description: Become half-dragon
+  is_prestige: true

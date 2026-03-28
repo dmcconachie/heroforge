@@ -511,7 +511,7 @@ class TestRacesLoader:
 
         with open(RULES_DIR / "core" / "races.yaml") as f:
             data = yaml.safe_load(f)
-        expected = len(data["races"])
+        expected = len(data)
         reg = RaceRegistry()
         RacesLoader(RULES_DIR).load(reg, "core/races.yaml")
         assert len(reg) == expected

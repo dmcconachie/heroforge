@@ -1,55 +1,55 @@
-prestige_classes:
-  Archmage:
-    source_book: DMG
-    hit_die: 4
-    max_level: 5
-    bab_progression: poor
-    save_progressions:
-      fort: poor
-      ref: poor
-      will: good
-    skills_per_level: 2
-    class_skills:
-    - Concentration
-    - Craft
-    - Knowledge (Arcana)
-    - Knowledge (Architecture)
-    - Knowledge (Dungeoneering)
-    - Knowledge (Geography)
-    - Knowledge (History)
-    - Knowledge (Local)
-    - Knowledge (Nature)
-    - Knowledge (Nobility)
-    - Knowledge (Religion)
-    - Knowledge (The Planes)
-    - Profession
-    - Search
-    - Spellcraft
-    entry_prerequisites:
-      all_of:
-      - skill:
-          name: Knowledge (Arcana)
-          min: 15
-      - skill:
-          name: Spellcraft
-          min: 15
-      - feat: Skill Focus
-      - spellcasting:
-          cast_type: arcane
-          min_level: 7
-    class_features:
-    - level: 1
-      feature: high_arcana_1
-      description: High arcana ability
-    - level: 2
-      feature: high_arcana_2
-      description: High arcana ability
-    - level: 3
-      feature: high_arcana_3
-      description: High arcana ability
-    - level: 4
-      feature: high_arcana_4
-      description: High arcana ability
-    - level: 5
-      feature: high_arcana_5
-      description: High arcana ability
+Archmage:
+  source_book: DMG
+  hit_die: 4
+  max_level: 5
+  bab_progression: poor
+  save_progressions:
+    fort: poor
+    ref: poor
+    will: good
+  skills_per_level: 2
+  class_skills:
+  - Concentration
+  - Craft
+  - Knowledge (Arcana)
+  - Knowledge (Architecture)
+  - Knowledge (Dungeoneering)
+  - Knowledge (Geography)
+  - Knowledge (History)
+  - Knowledge (Local)
+  - Knowledge (Nature)
+  - Knowledge (Nobility)
+  - Knowledge (Religion)
+  - Knowledge (The Planes)
+  - Profession
+  - Search
+  - Spellcraft
+  entry_prerequisites:
+    all_of:
+    - skill:
+        name: Knowledge (Arcana)
+        min: 15
+    - skill:
+        name: Spellcraft
+        min: 15
+    - feat: Skill Focus
+    - spellcasting:
+        cast_type: arcane
+        min_level: 7
+  class_features:
+  - level: 1
+    feature: high_arcana_1
+    description: High arcana ability
+  - level: 2
+    feature: high_arcana_2
+    description: High arcana ability
+  - level: 3
+    feature: high_arcana_3
+    description: High arcana ability
+  - level: 4
+    feature: high_arcana_4
+    description: High arcana ability
+  - level: 5
+    feature: high_arcana_5
+    description: High arcana ability
+  is_prestige: true

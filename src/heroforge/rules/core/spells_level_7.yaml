@@ -3,195 +3,194 @@
 # Map keyed by spell name.
 # See spells_level_0.yaml for field schema.
 
-spell_compendium:
-  Animate Plants:
-    level:
-      Druid: 7
-  Arcane Sight (Greater):
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Blasphemy:
-    level:
-      Cleric: 7
-  Changestaff:
-    level:
-      Druid: 7
-  Control Undead:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Control Weather:
-    level:
-      Cleric: 7
-      Druid: 7
-      Sorcerer: 7
-      Wizard: 7
-  Creeping Doom:
-    level:
-      Druid: 7
-  Cure Serious Wounds (Mass):
-    level:
-      Cleric: 7
-      Druid: 8
-  Delayed Blast Fireball:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Destruction:
-    level:
-      Cleric: 7
-  Dictum:
-    level:
-      Cleric: 7
-  Ethereal Jaunt:
-    level:
-      Cleric: 7
-      Sorcerer: 7
-      Wizard: 7
-  Finger of Death:
-    level:
-      Druid: 8
-      Sorcerer: 7
-      Wizard: 7
-  Fire Storm:
-    level:
-      Cleric: 8
-      Druid: 7
-  Forcecage:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Grasping Hand:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Hold Person (Mass):
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Holy Word:
-    level:
-      Cleric: 7
-  Inflict Serious Wounds (Mass):
-    level:
-      Cleric: 7
-  Insanity:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Instant Summons:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Invisibility (Mass):
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Limited Wish:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Mage's Magnificent Mansion:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Mage's Sword:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Phase Door:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Power Word Blind:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Prismatic Spray:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Refuge:
-    level:
-      Cleric: 7
-      Sorcerer: 9
-      Wizard: 9
-  Regenerate:
-    level:
-      Cleric: 7
-      Druid: 9
-  Restoration (Greater):
-    level:
-      Cleric: 7
-  Resurrection:
-    level:
-      Cleric: 7
-  Reverse Gravity:
-    level:
-      Druid: 8
-      Sorcerer: 7
-      Wizard: 7
-  Sequester:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Shadow Conjuration (Greater):
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Simulacrum:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Spell Turning:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Statue:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Summon Monster VII:
-    level:
-      Cleric: 7
-      Sorcerer: 7
-      Wizard: 7
-  Summon Nature's Ally VII:
-    level:
-      Druid: 7
-  Sunbeam:
-    level:
-      Druid: 7
-  Symbol of Stunning:
-    level:
-      Cleric: 7
-      Sorcerer: 7
-      Wizard: 7
-  Symbol of Weakness:
-    level:
-      Cleric: 7
-      Sorcerer: 7
-      Wizard: 7
-  Teleport (Greater):
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Teleport Object:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Transmute Metal to Wood:
-    level:
-      Druid: 7
-  Vision:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Waves of Exhaustion:
-    level:
-      Sorcerer: 7
-      Wizard: 7
-  Word of Chaos:
-    level:
-      Cleric: 7
+Animate Plants:
+  level:
+    Druid: 7
+Arcane Sight (Greater):
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Blasphemy:
+  level:
+    Cleric: 7
+Changestaff:
+  level:
+    Druid: 7
+Control Undead:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Control Weather:
+  level:
+    Cleric: 7
+    Druid: 7
+    Sorcerer: 7
+    Wizard: 7
+Creeping Doom:
+  level:
+    Druid: 7
+Cure Serious Wounds (Mass):
+  level:
+    Cleric: 7
+    Druid: 8
+Delayed Blast Fireball:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Destruction:
+  level:
+    Cleric: 7
+Dictum:
+  level:
+    Cleric: 7
+Ethereal Jaunt:
+  level:
+    Cleric: 7
+    Sorcerer: 7
+    Wizard: 7
+Finger of Death:
+  level:
+    Druid: 8
+    Sorcerer: 7
+    Wizard: 7
+Fire Storm:
+  level:
+    Cleric: 8
+    Druid: 7
+Forcecage:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Grasping Hand:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Hold Person (Mass):
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Holy Word:
+  level:
+    Cleric: 7
+Inflict Serious Wounds (Mass):
+  level:
+    Cleric: 7
+Insanity:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Instant Summons:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Invisibility (Mass):
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Limited Wish:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Mage's Magnificent Mansion:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Mage's Sword:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Phase Door:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Power Word Blind:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Prismatic Spray:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Refuge:
+  level:
+    Cleric: 7
+    Sorcerer: 9
+    Wizard: 9
+Regenerate:
+  level:
+    Cleric: 7
+    Druid: 9
+Restoration (Greater):
+  level:
+    Cleric: 7
+Resurrection:
+  level:
+    Cleric: 7
+Reverse Gravity:
+  level:
+    Druid: 8
+    Sorcerer: 7
+    Wizard: 7
+Sequester:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Shadow Conjuration (Greater):
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Simulacrum:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Spell Turning:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Statue:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Summon Monster VII:
+  level:
+    Cleric: 7
+    Sorcerer: 7
+    Wizard: 7
+Summon Nature's Ally VII:
+  level:
+    Druid: 7
+Sunbeam:
+  level:
+    Druid: 7
+Symbol of Stunning:
+  level:
+    Cleric: 7
+    Sorcerer: 7
+    Wizard: 7
+Symbol of Weakness:
+  level:
+    Cleric: 7
+    Sorcerer: 7
+    Wizard: 7
+Teleport (Greater):
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Teleport Object:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Transmute Metal to Wood:
+  level:
+    Druid: 7
+Vision:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Waves of Exhaustion:
+  level:
+    Sorcerer: 7
+    Wizard: 7
+Word of Chaos:
+  level:
+    Cleric: 7

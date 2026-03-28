@@ -3,263 +3,261 @@
 # Map keyed by spell name.
 # See spells_level_0.yaml for field schema.
 
-spell_compendium:
-  Animal Shapes:
-    level:
-      Druid: 8
-  Antipathy:
-    level:
-      Druid: 9
-      Sorcerer: 8
-      Wizard: 8
-  Binding:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Clenched Fist:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Cloak of Chaos:
-    level:
-      Cleric: 8
-    note: +4 deflection to AC, +4 resistance on saves (chaotic characters)
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 4
-    - target: fort_save
-      bonus_type: resistance
-      value: 4
-    - target: ref_save
-      bonus_type: resistance
-      value: 4
-    - target: will_save
-      bonus_type: resistance
-      value: 4
-  Clone:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Control Plants:
-    level:
-      Druid: 8
-  Create Greater Undead:
-    level:
-      Cleric: 8
-      Sorcerer: 8
-      Wizard: 8
-  Cure Critical Wounds (Mass):
-    level:
-      Cleric: 8
-      Druid: 9
-  Demand:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Dimensional Lock:
-    level:
-      Cleric: 8
-      Sorcerer: 8
-      Wizard: 8
-  Discern Location:
-    level:
-      Cleric: 8
-      Sorcerer: 8
-      Wizard: 8
-  Earthquake:
-    level:
-      Cleric: 8
-      Druid: 8
-  Holy Aura:
-    level:
-      Cleric: 8
-    note: +4 deflection to AC, +4 resistance on saves (good characters)
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 4
-    - target: fort_save
-      bonus_type: resistance
-      value: 4
-    - target: ref_save
-      bonus_type: resistance
-      value: 4
-    - target: will_save
-      bonus_type: resistance
-      value: 4
-  Horrid Wilting:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Incendiary Cloud:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Inflict Critical Wounds (Mass):
-    level:
-      Cleric: 8
-  Iron Body:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-    note: >-
-      +6 enhancement STR; DR 15/adamantine;
-      immune to blindness, critical hits,
-      ability damage, disease, drowning,
-      electricity, poison, stunning;
-      -6 DEX (min 1); half speed
-    effects:
-    - target: str_score
-      bonus_type: enhancement
-      value: 6
-    - target: dex_score
-      bonus_type: untyped
-      value: -6
-  Maze:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Mind Blank:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-    note: >-
-      Immune to divination and mental effects; +8 resistance vs mind- affecting
-      (note only)
-  Moment of Prescience:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-    note: +1/CL insight bonus (max +25) to one attack, check, or save (one use)
-    requires_caster_level: true
-    effects:
-    - target: attack_all
-      bonus_type: insight
-      value: min(25, caster_level)
-  Planar Ally (Greater):
-    level:
-      Cleric: 8
-  Planar Binding (Greater):
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Polar Ray:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Polymorph Any Object:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Power Word Stun:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Prismatic Wall:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Protection from Spells:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Prying Eyes (Greater):
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Repel Metal or Stone:
-    level:
-      Druid: 8
-  Scintillating Pattern:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Screen:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Shadow Evocation (Greater):
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Shield of Law:
-    level:
-      Cleric: 8
-    note: +4 deflection to AC, +4 resistance on saves (lawful characters)
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 4
-    - target: fort_save
-      bonus_type: resistance
-      value: 4
-    - target: ref_save
-      bonus_type: resistance
-      value: 4
-    - target: will_save
-      bonus_type: resistance
-      value: 4
-  Spell Immunity (Greater):
-    level:
-      Cleric: 8
-  Summon Monster VIII:
-    level:
-      Cleric: 8
-      Sorcerer: 8
-      Wizard: 8
-  Summon Nature's Ally VIII:
-    level:
-      Druid: 8
-  Sunburst:
-    level:
-      Druid: 8
-      Sorcerer: 8
-      Wizard: 8
-  Symbol of Death:
-    level:
-      Cleric: 8
-      Sorcerer: 8
-      Wizard: 8
-  Symbol of Insanity:
-    level:
-      Cleric: 8
-      Sorcerer: 8
-      Wizard: 8
-  Sympathy:
-    level:
-      Druid: 9
-      Sorcerer: 8
-      Wizard: 8
-  Telekinetic Sphere:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Temporal Stasis:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Trap the Soul:
-    level:
-      Sorcerer: 8
-      Wizard: 8
-  Unholy Aura:
-    level:
-      Cleric: 8
-    note: +4 deflection to AC, +4 resistance on saves (evil characters)
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 4
-    - target: fort_save
-      bonus_type: resistance
-      value: 4
-    - target: ref_save
-      bonus_type: resistance
-      value: 4
-    - target: will_save
-      bonus_type: resistance
-      value: 4
-  Whirlwind:
-    level:
-      Druid: 8
+Animal Shapes:
+  level:
+    Druid: 8
+Antipathy:
+  level:
+    Druid: 9
+    Sorcerer: 8
+    Wizard: 8
+Binding:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Clenched Fist:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Cloak of Chaos:
+  level:
+    Cleric: 8
+  note: +4 deflection to AC, +4 resistance on saves (chaotic characters)
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 4
+  - target: fort_save
+    bonus_type: resistance
+    value: 4
+  - target: ref_save
+    bonus_type: resistance
+    value: 4
+  - target: will_save
+    bonus_type: resistance
+    value: 4
+Clone:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Control Plants:
+  level:
+    Druid: 8
+Create Greater Undead:
+  level:
+    Cleric: 8
+    Sorcerer: 8
+    Wizard: 8
+Cure Critical Wounds (Mass):
+  level:
+    Cleric: 8
+    Druid: 9
+Demand:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Dimensional Lock:
+  level:
+    Cleric: 8
+    Sorcerer: 8
+    Wizard: 8
+Discern Location:
+  level:
+    Cleric: 8
+    Sorcerer: 8
+    Wizard: 8
+Earthquake:
+  level:
+    Cleric: 8
+    Druid: 8
+Holy Aura:
+  level:
+    Cleric: 8
+  note: +4 deflection to AC, +4 resistance on saves (good characters)
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 4
+  - target: fort_save
+    bonus_type: resistance
+    value: 4
+  - target: ref_save
+    bonus_type: resistance
+    value: 4
+  - target: will_save
+    bonus_type: resistance
+    value: 4
+Horrid Wilting:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Incendiary Cloud:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Inflict Critical Wounds (Mass):
+  level:
+    Cleric: 8
+Iron Body:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+  note: >-
+    +6 enhancement STR; DR 15/adamantine; immune to blindness, critical hits,
+    ability damage, disease, drowning, electricity, poison, stunning; -6 DEX
+    (min
+    1); half speed
+  effects:
+  - target: str_score
+    bonus_type: enhancement
+    value: 6
+  - target: dex_score
+    bonus_type: untyped
+    value: -6
+Maze:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Mind Blank:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+  note: >-
+    Immune to divination and mental effects; +8 resistance vs mind- affecting
+    (note only)
+Moment of Prescience:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+  note: +1/CL insight bonus (max +25) to one attack, check, or save (one use)
+  requires_caster_level: true
+  effects:
+  - target: attack_all
+    bonus_type: insight
+    value: min(25, caster_level)
+Planar Ally (Greater):
+  level:
+    Cleric: 8
+Planar Binding (Greater):
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Polar Ray:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Polymorph Any Object:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Power Word Stun:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Prismatic Wall:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Protection from Spells:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Prying Eyes (Greater):
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Repel Metal or Stone:
+  level:
+    Druid: 8
+Scintillating Pattern:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Screen:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Shadow Evocation (Greater):
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Shield of Law:
+  level:
+    Cleric: 8
+  note: +4 deflection to AC, +4 resistance on saves (lawful characters)
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 4
+  - target: fort_save
+    bonus_type: resistance
+    value: 4
+  - target: ref_save
+    bonus_type: resistance
+    value: 4
+  - target: will_save
+    bonus_type: resistance
+    value: 4
+Spell Immunity (Greater):
+  level:
+    Cleric: 8
+Summon Monster VIII:
+  level:
+    Cleric: 8
+    Sorcerer: 8
+    Wizard: 8
+Summon Nature's Ally VIII:
+  level:
+    Druid: 8
+Sunburst:
+  level:
+    Druid: 8
+    Sorcerer: 8
+    Wizard: 8
+Symbol of Death:
+  level:
+    Cleric: 8
+    Sorcerer: 8
+    Wizard: 8
+Symbol of Insanity:
+  level:
+    Cleric: 8
+    Sorcerer: 8
+    Wizard: 8
+Sympathy:
+  level:
+    Druid: 9
+    Sorcerer: 8
+    Wizard: 8
+Telekinetic Sphere:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Temporal Stasis:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Trap the Soul:
+  level:
+    Sorcerer: 8
+    Wizard: 8
+Unholy Aura:
+  level:
+    Cleric: 8
+  note: +4 deflection to AC, +4 resistance on saves (evil characters)
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 4
+  - target: fort_save
+    bonus_type: resistance
+    value: 4
+  - target: ref_save
+    bonus_type: resistance
+    value: 4
+  - target: will_save
+    bonus_type: resistance
+    value: 4
+Whirlwind:
+  level:
+    Druid: 8

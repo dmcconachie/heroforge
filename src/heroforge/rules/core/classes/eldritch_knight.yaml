@@ -1,32 +1,32 @@
-prestige_classes:
-  Eldritch Knight:
-    source_book: DMG
-    hit_die: 6
-    max_level: 10
-    bab_progression: full
-    save_progressions:
-      fort: good
-      ref: poor
-      will: poor
-    skills_per_level: 2
-    class_skills:
-    - Concentration
-    - Craft
-    - Decipher Script
-    - Jump
-    - Knowledge (Arcana)
-    - Ride
-    - Sense Motive
-    - Spellcraft
-    - Swim
-    entry_prerequisites:
-      all_of:
-      - spellcasting:
-          cast_type: arcane
-          min_level: 3
-      - proficient_with:
-          weapon: martial
-    class_features:
-    - level: 1
-      feature: bonus_feat
-      description: Bonus fighter feat
+Eldritch Knight:
+  source_book: DMG
+  hit_die: 6
+  max_level: 10
+  bab_progression: full
+  save_progressions:
+    fort: good
+    ref: poor
+    will: poor
+  skills_per_level: 2
+  class_skills:
+  - Concentration
+  - Craft
+  - Decipher Script
+  - Jump
+  - Knowledge (Arcana)
+  - Ride
+  - Sense Motive
+  - Spellcraft
+  - Swim
+  entry_prerequisites:
+    all_of:
+    - spellcasting:
+        cast_type: arcane
+        min_level: 3
+    - proficient_with:
+        weapon: martial
+  class_features:
+  - level: 1
+    feature: bonus_feat
+    description: Bonus fighter feat
+  is_prestige: true

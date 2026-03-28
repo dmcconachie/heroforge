@@ -49,7 +49,7 @@ def srd_data() -> dict[str, dict]:
     path = RULES_DIR / "core" / "conditions_srd.yaml"
     with open(path) as f:
         data = yaml.safe_load(f)
-    return data["conditions"]
+    return data
 
 
 class TestConditionsSrdYaml:
@@ -107,14 +107,11 @@ class TestConditionsSrdYaml:
     def test_at_least_15_conditions(self, srd_data: dict[str, dict]) -> None:
         assert len(srd_data) >= 15
 
-    def test_top_level_key_is_conditions(
+    def test_top_level_is_mapping(
         self,
     ) -> None:
-        """
-        The YAML file must use 'conditions:'
-        as its top-level key."""
+        """The YAML file must be a flat mapping."""
         path = RULES_DIR / "core" / "conditions_srd.yaml"
         with open(path) as f:
             data = yaml.safe_load(f)
-        assert "conditions" in data
-        assert "spells" not in data
+        assert isinstance(data, dict)

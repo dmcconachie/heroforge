@@ -1,81 +1,80 @@
-classes:
-  Druid:
-    source_book: PHB
-    hit_die: 8
-    bab_progression: medium
-    save_progressions:
-      fort: good
-      ref: poor
-      will: good
-    skills_per_level: 4
-    class_skills:
-    - Concentration
-    - Craft
-    - Diplomacy
-    - Handle Animal
-    - Heal
-    - Knowledge (Nature)
-    - Listen
-    - Profession
-    - Ride
-    - Spellcraft
-    - Spot
-    - Survival
-    - Swim
-    spellcasting:
-      cast_type: divine
-      stat: wis
-      preparation: prepared
-      max_spell_level: 9
-    class_features:
-    - level: 1
-      feature: animal_companion
-      description: Special animal companion
-    - level: 1
-      feature: nature_sense
-      description: +2 Knowledge (Nature) and Survival
-    - level: 1
-      feature: wild_empathy
-      description: Improve attitude of animals
-    - level: 2
-      feature: woodland_stride
-      description: Move through natural undergrowth at full speed
-    - level: 3
-      feature: trackless_step
-      description: Leave no trail in natural surroundings
-    - level: 4
-      feature: resist_natures_lure
-      description: +4 saves vs fey spell-like abilities
-    - level: 4
-      feature: wild_shape_1
-      description: Wild Shape 1/day (Small or Medium animal)
-    - level: 5
-      feature: wild_shape_2
-      description: Wild Shape 2/day
-    - level: 6
-      feature: wild_shape_3
-      description: Wild Shape 3/day; Large animal
-    - level: 7
-      feature: wild_shape_4
-      description: Wild Shape 4/day; Tiny animal
-    - level: 8
-      feature: wild_shape_5
-      description: Wild Shape 5/day; plant form
-    - level: 9
-      feature: venom_immunity
-      description: Immune to all natural poisons
-    - level: 10
-      feature: wild_shape_6
-      description: Wild Shape 6/day; elemental form
-    - level: 11
-      feature: wild_shape_huge
-      description: 'Wild Shape: Huge animal'
-    - level: 13
-      feature: a_thousand_faces
-      description: Alter self at will
-    - level: 15
-      feature: timeless_body
-      description: No penalties for aging
-    - level: 20
-      feature: wild_shape_at_will
-      description: Wild Shape at will
+Druid:
+  source_book: PHB
+  hit_die: 8
+  bab_progression: medium
+  save_progressions:
+    fort: good
+    ref: poor
+    will: good
+  skills_per_level: 4
+  class_skills:
+  - Concentration
+  - Craft
+  - Diplomacy
+  - Handle Animal
+  - Heal
+  - Knowledge (Nature)
+  - Listen
+  - Profession
+  - Ride
+  - Spellcraft
+  - Spot
+  - Survival
+  - Swim
+  spellcasting:
+    cast_type: divine
+    stat: wis
+    preparation: prepared
+    max_spell_level: 9
+  class_features:
+  - level: 1
+    feature: animal_companion
+    description: Special animal companion
+  - level: 1
+    feature: nature_sense
+    description: +2 Knowledge (Nature) and Survival
+  - level: 1
+    feature: wild_empathy
+    description: Improve attitude of animals
+  - level: 2
+    feature: woodland_stride
+    description: Move through natural undergrowth at full speed
+  - level: 3
+    feature: trackless_step
+    description: Leave no trail in natural surroundings
+  - level: 4
+    feature: resist_natures_lure
+    description: +4 saves vs fey spell-like abilities
+  - level: 4
+    feature: wild_shape_1
+    description: Wild Shape 1/day (Small or Medium animal)
+  - level: 5
+    feature: wild_shape_2
+    description: Wild Shape 2/day
+  - level: 6
+    feature: wild_shape_3
+    description: Wild Shape 3/day; Large animal
+  - level: 7
+    feature: wild_shape_4
+    description: Wild Shape 4/day; Tiny animal
+  - level: 8
+    feature: wild_shape_5
+    description: Wild Shape 5/day; plant form
+  - level: 9
+    feature: venom_immunity
+    description: Immune to all natural poisons
+  - level: 10
+    feature: wild_shape_6
+    description: Wild Shape 6/day; elemental form
+  - level: 11
+    feature: wild_shape_huge
+    description: 'Wild Shape: Huge animal'
+  - level: 13
+    feature: a_thousand_faces
+    description: Alter self at will
+  - level: 15
+    feature: timeless_body
+    description: No penalties for aging
+  - level: 20
+    feature: wild_shape_at_will
+    description: Wild Shape at will

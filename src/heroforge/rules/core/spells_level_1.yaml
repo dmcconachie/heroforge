@@ -3,553 +3,552 @@
 # Map keyed by spell name.
 # See spells_level_0.yaml for field schema.
 
-spell_compendium:
-  Alarm:
-    level:
-      Bard: 1
-      Ranger: 1
-      Sorcerer: 1
-      Wizard: 1
-  Animal Messenger:
-    level:
-      Bard: 2
-      Druid: 2
-      Ranger: 1
-  Animate Rope:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Bane:
-    level:
-      Cleric: 1
-  Bless:
-    level:
-      Cleric: 1
-      Paladin: 1
-    note: +1 morale bonus on attack rolls and saves vs. fear
-    effects:
-    - target: attack_all
-      bonus_type: morale
-      value: 1
-  Bless Water:
-    level:
-      Cleric: 1
-      Paladin: 1
-  Bless Weapon:
-    level:
-      Paladin: 1
-    note: Weapon is +1 enhancement and good- aligned for overcoming DR
-    effects:
-    - target: attack_all
-      bonus_type: enhancement
-      value: 1
-    - target: damage_all
-      bonus_type: enhancement
-      value: 1
-  Burning Hands:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Calm Animals:
-    level:
-      Druid: 1
-      Ranger: 1
-  Cause Fear:
-    level:
-      Bard: 1
-      Cleric: 1
-      Sorcerer: 1
-      Wizard: 1
-  Charm Animal:
-    level:
-      Druid: 1
-      Ranger: 1
-  Charm Person:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Chill Touch:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Color Spray:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Command:
-    level:
-      Cleric: 1
-  Comprehend Languages:
-    level:
-      Bard: 1
-      Cleric: 1
-      Sorcerer: 1
-      Wizard: 1
-  Confusion (Lesser):
-    level:
-      Bard: 1
-  Cure Light Wounds:
-    level:
-      Bard: 1
-      Cleric: 1
-      Druid: 1
-      Paladin: 1
-      Ranger: 2
-  Curse Water:
-    level:
-      Cleric: 1
-  Deathwatch:
-    level:
-      Cleric: 1
-  Delay Poison:
-    level:
-      Bard: 2
-      Cleric: 2
-      Druid: 2
-      Paladin: 2
-      Ranger: 1
-  Detect Animals or Plants:
-    level:
-      Druid: 1
-      Ranger: 1
-  Detect Chaos:
-    level:
-      Cleric: 1
-  Detect Evil:
-    level:
-      Cleric: 1
-  Detect Good:
-    level:
-      Cleric: 1
-  Detect Law:
-    level:
-      Cleric: 1
-  Detect Secret Doors:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Detect Snares and Pits:
-    level:
-      Druid: 1
-      Ranger: 1
-  Detect Undead:
-    level:
-      Cleric: 1
-      Paladin: 1
-      Sorcerer: 1
-      Wizard: 1
-  Disguise Self:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Divine Favor:
-    level:
-      Cleric: 1
-      Paladin: 1
-    note: Luck bonus on attack and damage; scales with CL (max +3)
-    requires_caster_level: true
-    effects:
-    - target: attack_all
-      bonus_type: luck
-      value: max(1, caster_level // 3)
-    - target: damage_all
-      bonus_type: luck
-      value: max(1, caster_level // 3)
-  Doom:
-    level:
-      Cleric: 1
-    note: 'Target is shaken: -2 on attacks, saves, skill checks, ability checks'
-    effects:
-    - target: attack_all
-      bonus_type: morale
-      value: -2
-    - target: fort_save
-      bonus_type: morale
-      value: -2
-    - target: ref_save
-      bonus_type: morale
-      value: -2
-    - target: will_save
-      bonus_type: morale
-      value: -2
-  Endure Elements:
-    level:
-      Cleric: 1
-      Druid: 1
-      Paladin: 1
-      Ranger: 1
-      Sorcerer: 1
-      Wizard: 1
-  Enlarge Person:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-    note: +2 STR, -2 DEX (humanoids only; size change handled separately)
+Alarm:
+  level:
+    Bard: 1
+    Ranger: 1
+    Sorcerer: 1
+    Wizard: 1
+Animal Messenger:
+  level:
+    Bard: 2
+    Druid: 2
+    Ranger: 1
+Animate Rope:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Bane:
+  level:
+    Cleric: 1
+Bless:
+  level:
+    Cleric: 1
+    Paladin: 1
+  note: +1 morale bonus on attack rolls and saves vs. fear
+  effects:
+  - target: attack_all
+    bonus_type: morale
+    value: 1
+Bless Water:
+  level:
+    Cleric: 1
+    Paladin: 1
+Bless Weapon:
+  level:
+    Paladin: 1
+  note: Weapon is +1 enhancement and good- aligned for overcoming DR
+  effects:
+  - target: attack_all
+    bonus_type: enhancement
+    value: 1
+  - target: damage_all
+    bonus_type: enhancement
+    value: 1
+Burning Hands:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Calm Animals:
+  level:
+    Druid: 1
+    Ranger: 1
+Cause Fear:
+  level:
+    Bard: 1
+    Cleric: 1
+    Sorcerer: 1
+    Wizard: 1
+Charm Animal:
+  level:
+    Druid: 1
+    Ranger: 1
+Charm Person:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Chill Touch:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Color Spray:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Command:
+  level:
+    Cleric: 1
+Comprehend Languages:
+  level:
+    Bard: 1
+    Cleric: 1
+    Sorcerer: 1
+    Wizard: 1
+Confusion (Lesser):
+  level:
+    Bard: 1
+Cure Light Wounds:
+  level:
+    Bard: 1
+    Cleric: 1
+    Druid: 1
+    Paladin: 1
+    Ranger: 2
+Curse Water:
+  level:
+    Cleric: 1
+Deathwatch:
+  level:
+    Cleric: 1
+Delay Poison:
+  level:
+    Bard: 2
+    Cleric: 2
+    Druid: 2
+    Paladin: 2
+    Ranger: 1
+Detect Animals or Plants:
+  level:
+    Druid: 1
+    Ranger: 1
+Detect Chaos:
+  level:
+    Cleric: 1
+Detect Evil:
+  level:
+    Cleric: 1
+Detect Good:
+  level:
+    Cleric: 1
+Detect Law:
+  level:
+    Cleric: 1
+Detect Secret Doors:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Detect Snares and Pits:
+  level:
+    Druid: 1
+    Ranger: 1
+Detect Undead:
+  level:
+    Cleric: 1
+    Paladin: 1
+    Sorcerer: 1
+    Wizard: 1
+Disguise Self:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Divine Favor:
+  level:
+    Cleric: 1
+    Paladin: 1
+  note: Luck bonus on attack and damage; scales with CL (max +3)
+  requires_caster_level: true
+  effects:
+  - target: attack_all
+    bonus_type: luck
+    value: max(1, caster_level // 3)
+  - target: damage_all
+    bonus_type: luck
+    value: max(1, caster_level // 3)
+Doom:
+  level:
+    Cleric: 1
+  note: 'Target is shaken: -2 on attacks, saves, skill checks, ability checks'
+  effects:
+  - target: attack_all
+    bonus_type: morale
+    value: -2
+  - target: fort_save
+    bonus_type: morale
+    value: -2
+  - target: ref_save
+    bonus_type: morale
+    value: -2
+  - target: will_save
+    bonus_type: morale
+    value: -2
+Endure Elements:
+  level:
+    Cleric: 1
+    Druid: 1
+    Paladin: 1
+    Ranger: 1
+    Sorcerer: 1
+    Wizard: 1
+Enlarge Person:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+  note: +2 STR, -2 DEX (humanoids only; size change handled separately)
+  condition_key: humanoid_only
+  effects:
+  - target: str_score
+    bonus_type: enhancement
+    value: 2
     condition_key: humanoid_only
-    effects:
-    - target: str_score
-      bonus_type: enhancement
-      value: 2
-      condition_key: humanoid_only
-    - target: dex_score
-      bonus_type: enhancement
-      value: -2
-      condition_key: humanoid_only
-  Entangle:
-    level:
-      Druid: 1
-      Ranger: 1
-  Entropic Shield:
-    level:
-      Cleric: 1
-    note: 20%% miss chance on ranged attacks against you (note only)
-  Erase:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Expeditious Retreat:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-    note: +30 ft. enhancement to speed
-    effects:
-    - target: speed
-      bonus_type: enhancement
-      value: 30
-  Faerie Fire:
-    level:
-      Druid: 1
-  Feather Fall:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Floating Disk:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Goodberry:
-    level:
-      Druid: 1
-  Grease:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Hide from Animals:
-    level:
-      Druid: 1
-      Ranger: 1
-  Hide from Undead:
-    level:
-      Cleric: 1
-  Hideous Laughter:
-    level:
-      Bard: 1
-      Sorcerer: 2
-      Wizard: 2
-  Hold Portal:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Hypnotism:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Identify:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Inflict Light Wounds:
-    level:
-      Cleric: 1
-  Jump:
-    level:
-      Druid: 1
-      Ranger: 1
-      Sorcerer: 1
-      Wizard: 1
-    note: +10 enhancement on Jump checks (+20 at CL 5, +30 at CL 9)
-    requires_caster_level: true
-    effects:
-    - target: skill_jump
-      bonus_type: enhancement
-      value: 10 + 10 * min(2, (caster_level - 1) // 4)
-  Longstrider:
-    level:
-      Druid: 1
-      Ranger: 1
-    note: +10 ft. enhancement to speed
-    effects:
-    - target: speed
-      bonus_type: enhancement
-      value: 10
-  Mage Armor:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-    note: +4 armor bonus to AC (or +6 with Armored Mage class feature)
-    effects:
-    - target: ac
-      bonus_type: armor
-      value: 4
-  Magic Aura:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Magic Fang:
-    level:
-      Druid: 1
-      Ranger: 1
-  Magic Missile:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Magic Mouth:
-    level:
-      Bard: 1
-      Sorcerer: 2
-      Wizard: 2
-  Magic Stone:
-    level:
-      Cleric: 1
-      Druid: 1
-  Magic Weapon:
-    level:
-      Cleric: 1
-      Paladin: 1
-      Sorcerer: 1
-      Wizard: 1
-    note: +1 enhancement to attack and damage
-    effects:
-    - target: attack_all
-      bonus_type: enhancement
-      value: 1
-    - target: damage_all
-      bonus_type: enhancement
-      value: 1
-  Mount:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Obscure Object:
-    level:
-      Bard: 1
-      Cleric: 3
-      Sorcerer: 2
-      Wizard: 2
-  Obscuring Mist:
-    level:
-      Cleric: 1
-      Druid: 1
-      Sorcerer: 1
-      Wizard: 1
-  Pass without Trace:
-    level:
-      Druid: 1
-      Ranger: 1
-  Produce Flame:
-    level:
-      Druid: 1
-  Protection from Chaos:
-    level:
-      Cleric: 1
-      Paladin: 1
-      Sorcerer: 1
-      Wizard: 1
-    note: +2 deflection AC, +2 resistance on saves vs chaotic creatures
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
-  Protection from Evil:
-    level:
-      Cleric: 1
-      Paladin: 1
-      Sorcerer: 1
-      Wizard: 1
-    note: +2 deflection AC, +2 resistance on saves vs evil creatures
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
-  Protection from Good:
-    level:
-      Cleric: 1
-      Sorcerer: 1
-      Wizard: 1
-    note: +2 deflection AC, +2 resistance on saves vs good creatures
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
-  Protection from Law:
-    level:
-      Cleric: 1
-      Sorcerer: 1
-      Wizard: 1
-    note: +2 deflection AC, +2 resistance on saves vs lawful creatures
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
-  Ray of Enfeeblement:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-    note: -1d6+1 per 2 CL (max -5) STR penalty (use parameter for rolled value)
-    requires_caster_level: true
-    effects:
-    - target: str_score
-      bonus_type: untyped
-      value: -(1 + min(5, caster_level // 2))
-  Reduce Person:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-    note: -2 STR, +2 DEX (humanoids only; size change handled separately)
+  - target: dex_score
+    bonus_type: enhancement
+    value: -2
     condition_key: humanoid_only
-    effects:
-    - target: str_score
-      bonus_type: enhancement
-      value: -2
-      condition_key: humanoid_only
-    - target: dex_score
-      bonus_type: enhancement
-      value: 2
-      condition_key: humanoid_only
-  Remove Fear:
-    level:
-      Bard: 1
-      Cleric: 1
-  Resist Energy:
-    level:
-      Cleric: 2
-      Druid: 2
-      Paladin: 2
-      Ranger: 1
-      Sorcerer: 2
-      Wizard: 2
-    note: Resist 10 points of chosen energy type per attack (note only)
-  Restoration (Lesser):
-    level:
-      Cleric: 2
-      Druid: 2
-      Paladin: 1
-  Sanctuary:
-    level:
-      Cleric: 1
-  Shield:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-    note: +4 shield bonus to AC
-    effects:
-    - target: ac
-      bonus_type: shield
-      value: 4
-  Shield of Faith:
-    level:
-      Cleric: 1
-    note: Deflection bonus to AC; scales with CL
-    requires_caster_level: true
-    effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2 + caster_level // 6
-  Shillelagh:
-    level:
-      Druid: 1
-  Shocking Grasp:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Silent Image:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Sleep:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Speak with Animals:
-    level:
-      Bard: 3
-      Druid: 1
-      Ranger: 1
-  Summon Monster I:
-    level:
-      Bard: 1
-      Cleric: 1
-      Sorcerer: 1
-      Wizard: 1
-  Summon Nature's Ally I:
-    level:
-      Druid: 1
-      Ranger: 1
-  True Strike:
-    level:
-      Sorcerer: 1
-      Wizard: 1
-  Undetectable Alignment:
-    level:
-      Bard: 1
-      Cleric: 2
-      Paladin: 2
-  Unseen Servant:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
-  Ventriloquism:
-    level:
-      Bard: 1
-      Sorcerer: 1
-      Wizard: 1
+Entangle:
+  level:
+    Druid: 1
+    Ranger: 1
+Entropic Shield:
+  level:
+    Cleric: 1
+  note: 20%% miss chance on ranged attacks against you (note only)
+Erase:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Expeditious Retreat:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+  note: +30 ft. enhancement to speed
+  effects:
+  - target: speed
+    bonus_type: enhancement
+    value: 30
+Faerie Fire:
+  level:
+    Druid: 1
+Feather Fall:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Floating Disk:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Goodberry:
+  level:
+    Druid: 1
+Grease:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Hide from Animals:
+  level:
+    Druid: 1
+    Ranger: 1
+Hide from Undead:
+  level:
+    Cleric: 1
+Hideous Laughter:
+  level:
+    Bard: 1
+    Sorcerer: 2
+    Wizard: 2
+Hold Portal:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Hypnotism:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Identify:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Inflict Light Wounds:
+  level:
+    Cleric: 1
+Jump:
+  level:
+    Druid: 1
+    Ranger: 1
+    Sorcerer: 1
+    Wizard: 1
+  note: +10 enhancement on Jump checks (+20 at CL 5, +30 at CL 9)
+  requires_caster_level: true
+  effects:
+  - target: skill_jump
+    bonus_type: enhancement
+    value: 10 + 10 * min(2, (caster_level - 1) // 4)
+Longstrider:
+  level:
+    Druid: 1
+    Ranger: 1
+  note: +10 ft. enhancement to speed
+  effects:
+  - target: speed
+    bonus_type: enhancement
+    value: 10
+Mage Armor:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+  note: +4 armor bonus to AC (or +6 with Armored Mage class feature)
+  effects:
+  - target: ac
+    bonus_type: armor
+    value: 4
+Magic Aura:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Magic Fang:
+  level:
+    Druid: 1
+    Ranger: 1
+Magic Missile:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Magic Mouth:
+  level:
+    Bard: 1
+    Sorcerer: 2
+    Wizard: 2
+Magic Stone:
+  level:
+    Cleric: 1
+    Druid: 1
+Magic Weapon:
+  level:
+    Cleric: 1
+    Paladin: 1
+    Sorcerer: 1
+    Wizard: 1
+  note: +1 enhancement to attack and damage
+  effects:
+  - target: attack_all
+    bonus_type: enhancement
+    value: 1
+  - target: damage_all
+    bonus_type: enhancement
+    value: 1
+Mount:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Obscure Object:
+  level:
+    Bard: 1
+    Cleric: 3
+    Sorcerer: 2
+    Wizard: 2
+Obscuring Mist:
+  level:
+    Cleric: 1
+    Druid: 1
+    Sorcerer: 1
+    Wizard: 1
+Pass without Trace:
+  level:
+    Druid: 1
+    Ranger: 1
+Produce Flame:
+  level:
+    Druid: 1
+Protection from Chaos:
+  level:
+    Cleric: 1
+    Paladin: 1
+    Sorcerer: 1
+    Wizard: 1
+  note: +2 deflection AC, +2 resistance on saves vs chaotic creatures
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 2
+  - target: fort_save
+    bonus_type: resistance
+    value: 2
+  - target: ref_save
+    bonus_type: resistance
+    value: 2
+  - target: will_save
+    bonus_type: resistance
+    value: 2
+Protection from Evil:
+  level:
+    Cleric: 1
+    Paladin: 1
+    Sorcerer: 1
+    Wizard: 1
+  note: +2 deflection AC, +2 resistance on saves vs evil creatures
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 2
+  - target: fort_save
+    bonus_type: resistance
+    value: 2
+  - target: ref_save
+    bonus_type: resistance
+    value: 2
+  - target: will_save
+    bonus_type: resistance
+    value: 2
+Protection from Good:
+  level:
+    Cleric: 1
+    Sorcerer: 1
+    Wizard: 1
+  note: +2 deflection AC, +2 resistance on saves vs good creatures
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 2
+  - target: fort_save
+    bonus_type: resistance
+    value: 2
+  - target: ref_save
+    bonus_type: resistance
+    value: 2
+  - target: will_save
+    bonus_type: resistance
+    value: 2
+Protection from Law:
+  level:
+    Cleric: 1
+    Sorcerer: 1
+    Wizard: 1
+  note: +2 deflection AC, +2 resistance on saves vs lawful creatures
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 2
+  - target: fort_save
+    bonus_type: resistance
+    value: 2
+  - target: ref_save
+    bonus_type: resistance
+    value: 2
+  - target: will_save
+    bonus_type: resistance
+    value: 2
+Ray of Enfeeblement:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+  note: -1d6+1 per 2 CL (max -5) STR penalty (use parameter for rolled value)
+  requires_caster_level: true
+  effects:
+  - target: str_score
+    bonus_type: untyped
+    value: -(1 + min(5, caster_level // 2))
+Reduce Person:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+  note: -2 STR, +2 DEX (humanoids only; size change handled separately)
+  condition_key: humanoid_only
+  effects:
+  - target: str_score
+    bonus_type: enhancement
+    value: -2
+    condition_key: humanoid_only
+  - target: dex_score
+    bonus_type: enhancement
+    value: 2
+    condition_key: humanoid_only
+Remove Fear:
+  level:
+    Bard: 1
+    Cleric: 1
+Resist Energy:
+  level:
+    Cleric: 2
+    Druid: 2
+    Paladin: 2
+    Ranger: 1
+    Sorcerer: 2
+    Wizard: 2
+  note: Resist 10 points of chosen energy type per attack (note only)
+Restoration (Lesser):
+  level:
+    Cleric: 2
+    Druid: 2
+    Paladin: 1
+Sanctuary:
+  level:
+    Cleric: 1
+Shield:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+  note: +4 shield bonus to AC
+  effects:
+  - target: ac
+    bonus_type: shield
+    value: 4
+Shield of Faith:
+  level:
+    Cleric: 1
+  note: Deflection bonus to AC; scales with CL
+  requires_caster_level: true
+  effects:
+  - target: ac
+    bonus_type: deflection
+    value: 2 + caster_level // 6
+Shillelagh:
+  level:
+    Druid: 1
+Shocking Grasp:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Silent Image:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Sleep:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Speak with Animals:
+  level:
+    Bard: 3
+    Druid: 1
+    Ranger: 1
+Summon Monster I:
+  level:
+    Bard: 1
+    Cleric: 1
+    Sorcerer: 1
+    Wizard: 1
+Summon Nature's Ally I:
+  level:
+    Druid: 1
+    Ranger: 1
+True Strike:
+  level:
+    Sorcerer: 1
+    Wizard: 1
+Undetectable Alignment:
+  level:
+    Bard: 1
+    Cleric: 2
+    Paladin: 2
+Unseen Servant:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1
+Ventriloquism:
+  level:
+    Bard: 1
+    Sorcerer: 1
+    Wizard: 1

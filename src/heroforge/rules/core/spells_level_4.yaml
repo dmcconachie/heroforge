@@ -3,297 +3,295 @@
 # Map keyed by spell name.
 # See spells_level_0.yaml for field schema.
 
-spell_compendium:
-  Air Walk:
-    level:
-      Cleric: 4
-      Druid: 4
-  Animal Growth:
-    level:
-      Druid: 5
-      Ranger: 4
-      Sorcerer: 5
-      Wizard: 5
-  Antiplant Shell:
-    level:
-      Druid: 4
-  Arcane Eye:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Black Tentacles:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Blight:
-    level:
-      Druid: 4
-      Sorcerer: 5
-      Wizard: 5
-  Break Enchantment:
-    level:
-      Bard: 4
-      Cleric: 5
-      Paladin: 4
-      Sorcerer: 5
-      Wizard: 5
-  Commune with Nature:
-    level:
-      Druid: 5
-      Ranger: 4
-  Control Water:
-    level:
-      Cleric: 4
-      Druid: 4
-      Sorcerer: 6
-      Wizard: 6
-  Cure Critical Wounds:
-    level:
-      Bard: 4
-      Cleric: 4
-      Druid: 5
-  Death Ward:
-    level:
-      Cleric: 4
-      Druid: 5
-      Paladin: 4
-    note: >-
-      Immune to death effects, energy drain, negative energy effects (note only)
-  Detect Scrying:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Dimension Door:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Dimensional Anchor:
-    level:
-      Cleric: 4
-      Sorcerer: 4
-      Wizard: 4
-  Dismissal:
-    level:
-      Cleric: 4
-      Sorcerer: 5
-      Wizard: 5
-  Dispel Chaos:
-    level:
-      Cleric: 5
-      Paladin: 4
-  Dispel Evil:
-    level:
-      Cleric: 5
-      Paladin: 4
-  Divination:
-    level:
-      Cleric: 4
-  Divine Power:
-    level:
-      Cleric: 4
-    note: +6 enhancement to STR, BAB = full cleric level (modelled as +CL to BAB
-      pool)
-    requires_caster_level: true
-    effects:
-    - target: str_score
-      bonus_type: enhancement
-      value: 6
-  Dominate Person:
-    level:
-      Bard: 4
-      Sorcerer: 5
-      Wizard: 5
-  Enervation:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Enlarge Person (Mass):
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Fire Shield:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-    note: >-
-      'Warm shield: resist cold 10, deal 1d6+1/CL fire to melee attackers. Chill
-      shield: resist fire 10, deal 1d6+1/CL cold. Note only.'
-  Flame Strike:
-    level:
-      Cleric: 5
-      Druid: 4
-  Freedom of Movement:
-    level:
-      Bard: 4
-      Cleric: 4
-      Druid: 4
-      Ranger: 4
-    note: >-
-      Move and attack normally despite impediments (grapple, web, slow,
-      paralysis,
-      etc.); note only
-  Giant Vermin:
-    level:
-      Cleric: 4
-      Druid: 4
-  Globe of Invulnerability (Lesser):
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Hallucinatory Terrain:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Hold Monster:
-    level:
-      Bard: 4
-      Sorcerer: 5
-      Wizard: 5
-  Holy Sword:
-    level:
-      Paladin: 4
-  Ice Storm:
-    level:
-      Druid: 4
-      Sorcerer: 4
-      Wizard: 4
-  Illusory Wall:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Imbue with Spell Ability:
-    level:
-      Cleric: 4
-  Inflict Critical Wounds:
-    level:
-      Cleric: 4
-  Invisibility (Greater):
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Legend Lore:
-    level:
-      Bard: 4
-      Sorcerer: 6
-      Wizard: 6
-  Locate Creature:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Mark of Justice:
-    level:
-      Cleric: 5
-      Paladin: 4
-  Minor Creation:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Mnemonic Enhancer:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Modify Memory:
-    level:
-      Bard: 4
-  Phantasmal Killer:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Planar Ally (Lesser):
-    level:
-      Cleric: 4
-  Polymorph:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Rainbow Pattern:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Reduce Person (Mass):
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Reincarnate:
-    level:
-      Druid: 4
-  Resilient Sphere:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Restoration:
-    level:
-      Cleric: 4
-      Paladin: 4
-  Rusting Grasp:
-    level:
-      Druid: 4
-  Secure Shelter:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Sending:
-    level:
-      Cleric: 4
-      Sorcerer: 5
-      Wizard: 5
-  Shadow Conjuration:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Shout:
-    level:
-      Bard: 4
-      Sorcerer: 4
-      Wizard: 4
-  Solid Fog:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Spell Immunity:
-    level:
-      Cleric: 4
-    note: Immune to 1 spell per 4 CL (note only)
-  Spike Stones:
-    level:
-      Druid: 4
-  Stoneskin:
-    level:
-      Druid: 5
-      Sorcerer: 4
-      Wizard: 4
-    note: DR 10/adamantine (max 10 points per CL absorbed); note only
-  Summon Monster IV:
-    level:
-      Bard: 4
-      Cleric: 4
-      Sorcerer: 4
-      Wizard: 4
-  Summon Nature's Ally IV:
-    level:
-      Druid: 4
-      Ranger: 4
-  Tree Stride:
-    level:
-      Druid: 5
-      Ranger: 4
-  Wall of Fire:
-    level:
-      Druid: 5
-      Sorcerer: 4
-      Wizard: 4
-  Wall of Ice:
-    level:
-      Sorcerer: 4
-      Wizard: 4
-  Zone of Silence:
-    level:
-      Bard: 4
+Air Walk:
+  level:
+    Cleric: 4
+    Druid: 4
+Animal Growth:
+  level:
+    Druid: 5
+    Ranger: 4
+    Sorcerer: 5
+    Wizard: 5
+Antiplant Shell:
+  level:
+    Druid: 4
+Arcane Eye:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Black Tentacles:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Blight:
+  level:
+    Druid: 4
+    Sorcerer: 5
+    Wizard: 5
+Break Enchantment:
+  level:
+    Bard: 4
+    Cleric: 5
+    Paladin: 4
+    Sorcerer: 5
+    Wizard: 5
+Commune with Nature:
+  level:
+    Druid: 5
+    Ranger: 4
+Control Water:
+  level:
+    Cleric: 4
+    Druid: 4
+    Sorcerer: 6
+    Wizard: 6
+Cure Critical Wounds:
+  level:
+    Bard: 4
+    Cleric: 4
+    Druid: 5
+Death Ward:
+  level:
+    Cleric: 4
+    Druid: 5
+    Paladin: 4
+  note: >-
+    Immune to death effects, energy drain, negative energy effects (note only)
+Detect Scrying:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Dimension Door:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Dimensional Anchor:
+  level:
+    Cleric: 4
+    Sorcerer: 4
+    Wizard: 4
+Dismissal:
+  level:
+    Cleric: 4
+    Sorcerer: 5
+    Wizard: 5
+Dispel Chaos:
+  level:
+    Cleric: 5
+    Paladin: 4
+Dispel Evil:
+  level:
+    Cleric: 5
+    Paladin: 4
+Divination:
+  level:
+    Cleric: 4
+Divine Power:
+  level:
+    Cleric: 4
+  note: >-
+    +6 enhancement to STR, BAB = full cleric level (modelled as +CL to BAB pool)
+  requires_caster_level: true
+  effects:
+  - target: str_score
+    bonus_type: enhancement
+    value: 6
+Dominate Person:
+  level:
+    Bard: 4
+    Sorcerer: 5
+    Wizard: 5
+Enervation:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Enlarge Person (Mass):
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Fire Shield:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+  note: >-
+    '''Warm shield: resist cold 10, deal 1d6+1/CL fire to melee attackers. Chill
+    shield: resist fire 10, deal 1d6+1/CL cold. Note only.'''
+Flame Strike:
+  level:
+    Cleric: 5
+    Druid: 4
+Freedom of Movement:
+  level:
+    Bard: 4
+    Cleric: 4
+    Druid: 4
+    Ranger: 4
+  note: >-
+    Move and attack normally despite impediments (grapple, web, slow, paralysis,
+    etc.); note only
+Giant Vermin:
+  level:
+    Cleric: 4
+    Druid: 4
+Globe of Invulnerability (Lesser):
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Hallucinatory Terrain:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Hold Monster:
+  level:
+    Bard: 4
+    Sorcerer: 5
+    Wizard: 5
+Holy Sword:
+  level:
+    Paladin: 4
+Ice Storm:
+  level:
+    Druid: 4
+    Sorcerer: 4
+    Wizard: 4
+Illusory Wall:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Imbue with Spell Ability:
+  level:
+    Cleric: 4
+Inflict Critical Wounds:
+  level:
+    Cleric: 4
+Invisibility (Greater):
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Legend Lore:
+  level:
+    Bard: 4
+    Sorcerer: 6
+    Wizard: 6
+Locate Creature:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Mark of Justice:
+  level:
+    Cleric: 5
+    Paladin: 4
+Minor Creation:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Mnemonic Enhancer:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Modify Memory:
+  level:
+    Bard: 4
+Phantasmal Killer:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Planar Ally (Lesser):
+  level:
+    Cleric: 4
+Polymorph:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Rainbow Pattern:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Reduce Person (Mass):
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Reincarnate:
+  level:
+    Druid: 4
+Resilient Sphere:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Restoration:
+  level:
+    Cleric: 4
+    Paladin: 4
+Rusting Grasp:
+  level:
+    Druid: 4
+Secure Shelter:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Sending:
+  level:
+    Cleric: 4
+    Sorcerer: 5
+    Wizard: 5
+Shadow Conjuration:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Shout:
+  level:
+    Bard: 4
+    Sorcerer: 4
+    Wizard: 4
+Solid Fog:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Spell Immunity:
+  level:
+    Cleric: 4
+  note: Immune to 1 spell per 4 CL (note only)
+Spike Stones:
+  level:
+    Druid: 4
+Stoneskin:
+  level:
+    Druid: 5
+    Sorcerer: 4
+    Wizard: 4
+  note: DR 10/adamantine (max 10 points per CL absorbed); note only
+Summon Monster IV:
+  level:
+    Bard: 4
+    Cleric: 4
+    Sorcerer: 4
+    Wizard: 4
+Summon Nature's Ally IV:
+  level:
+    Druid: 4
+    Ranger: 4
+Tree Stride:
+  level:
+    Druid: 5
+    Ranger: 4
+Wall of Fire:
+  level:
+    Druid: 5
+    Sorcerer: 4
+    Wizard: 4
+Wall of Ice:
+  level:
+    Sorcerer: 4
+    Wizard: 4
+Zone of Silence:
+  level:
+    Bard: 4

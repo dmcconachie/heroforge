@@ -446,7 +446,7 @@ class TestFeatsYamlStructure:
         with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
         # Dict keys are unique by definition.
-        names = list(data["feats"].keys())
+        names = list(data.keys())
         assert len(names) == len(set(names))
 
     def test_all_kinds_valid(self) -> None:
@@ -457,7 +457,7 @@ class TestFeatsYamlStructure:
             data = yaml.safe_load(f)
         bad = [
             name
-            for name, d in data["feats"].items()
+            for name, d in data.items()
             if d.get("kind", "passive") not in valid
         ]
         assert bad == []
@@ -476,7 +476,7 @@ class TestFeatsLoader:
 
         with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
-        expected = len(data["feats"])  # dict length
+        expected = len(data)  # dict length
 
         feat_reg = FeatRegistry()
         FeatsLoader(RULES_DIR).load(feat_reg, relative_path="core/feats.yaml")
@@ -570,15 +570,19 @@ class TestFeatsLoader:
                 FeatRegistry(), relative_path="core/feats.yaml"
             )
 
-    def test_load_raises_on_missing_feats_key(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import FeatsLoader, LoaderError
+    def test_load_raises_on_bad_yaml(self, tmp_path: Path) -> None:
+        from heroforge.rules.loader import (
+            FeatsLoader,
+            LoaderError,
+        )
 
         core = tmp_path / "core"
         core.mkdir()
-        (core / "feats.yaml").write_text("not_feats: []\n")
-        with pytest.raises(LoaderError, match="top-level 'feats' key"):
+        (core / "feats.yaml").write_text("- a list\n")
+        with pytest.raises(LoaderError, match="YAML mapping"):
             FeatsLoader(tmp_path).load(
-                FeatRegistry(), relative_path="core/feats.yaml"
+                FeatRegistry(),
+                relative_path="core/feats.yaml",
             )
 
 

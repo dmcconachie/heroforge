@@ -1,42 +1,42 @@
-prestige_classes:
-  Thaumaturgist:
-    source_book: DMG
-    hit_die: 4
-    max_level: 5
-    bab_progression: poor
-    save_progressions:
-      fort: poor
-      ref: poor
-      will: good
-    skills_per_level: 2
-    class_skills:
-    - Concentration
-    - Craft
-    - Diplomacy
-    - Knowledge (Religion)
-    - Knowledge (The Planes)
-    - Profession
-    - Sense Motive
-    - Speak Language
-    - Spellcraft
-    entry_prerequisites:
-      all_of:
-      - spellcasting:
-          cast_type: divine
-          min_level: 3
-    class_features:
-    - level: 1
-      feature: improved_ally
-      description: Better planar ally
-    - level: 2
-      feature: augment_summoning
-      description: Augment Summoning feat
-    - level: 3
-      feature: extended_summoning
-      description: Double duration
-    - level: 4
-      feature: contingent_conjuration
-      description: Contingency on summon
-    - level: 5
-      feature: planar_cohort
-      description: Outsider cohort
+Thaumaturgist:
+  source_book: DMG
+  hit_die: 4
+  max_level: 5
+  bab_progression: poor
+  save_progressions:
+    fort: poor
+    ref: poor
+    will: good
+  skills_per_level: 2
+  class_skills:
+  - Concentration
+  - Craft
+  - Diplomacy
+  - Knowledge (Religion)
+  - Knowledge (The Planes)
+  - Profession
+  - Sense Motive
+  - Speak Language
+  - Spellcraft
+  entry_prerequisites:
+    all_of:
+    - spellcasting:
+        cast_type: divine
+        min_level: 3
+  class_features:
+  - level: 1
+    feature: improved_ally
+    description: Better planar ally
+  - level: 2
+    feature: augment_summoning
+    description: Augment Summoning feat
+  - level: 3
+    feature: extended_summoning
+    description: Double duration
+  - level: 4
+    feature: contingent_conjuration
+    description: Contingency on summon
+  - level: 5
+    feature: planar_cohort
+    description: Outsider cohort
+  is_prestige: true

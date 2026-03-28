@@ -1,26 +1,25 @@
-classes:
-  Sorcerer:
-    source_book: PHB
-    hit_die: 4
-    bab_progression: poor
-    save_progressions:
-      fort: poor
-      ref: poor
-      will: good
-    skills_per_level: 2
-    class_skills:
-    - Bluff
-    - Concentration
-    - Craft
-    - Knowledge (Arcana)
-    - Profession
-    - Spellcraft
-    spellcasting:
-      cast_type: arcane
-      stat: cha
-      preparation: spontaneous
-      max_spell_level: 9
-    class_features:
-    - level: 1
-      feature: summon_familiar
-      description: Summon a familiar
+Sorcerer:
+  source_book: PHB
+  hit_die: 4
+  bab_progression: poor
+  save_progressions:
+    fort: poor
+    ref: poor
+    will: good
+  skills_per_level: 2
+  class_skills:
+  - Bluff
+  - Concentration
+  - Craft
+  - Knowledge (Arcana)
+  - Profession
+  - Spellcraft
+  spellcasting:
+    cast_type: arcane
+    stat: cha
+    preparation: spontaneous
+    max_spell_level: 9
+  class_features:
+  - level: 1
+    feature: summon_familiar
+    description: Summon a familiar

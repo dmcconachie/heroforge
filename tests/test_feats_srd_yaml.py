@@ -26,7 +26,7 @@ FEATS_PATH = RULES_DIR / "core" / "feats.yaml"
 def _load_feats() -> dict[str, dict]:
     with open(FEATS_PATH) as f:
         data = yaml.safe_load(f)
-    return data["feats"]
+    return data
 
 
 class TestFeatsYaml:

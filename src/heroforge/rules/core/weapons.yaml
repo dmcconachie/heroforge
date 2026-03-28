@@ -9,546 +9,545 @@
 #   range_increment (0=melee), is_ranged,
 #   weight, cost_gp
 
-weapons:
-  Gauntlet:
-    category: simple
-    damage_dice: 1d3
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 1
-    cost_gp: 2
-  Unarmed Strike:
-    category: simple
-    damage_dice: 1d3
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 0
-    cost_gp: 0
-  Dagger:
-    category: simple
-    damage_dice: 1d4
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 10
-    weight: 1
-    cost_gp: 2
-  Punching Dagger:
-    category: simple
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    weight: 1
-    cost_gp: 2
-  Spiked Gauntlet:
-    category: simple
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    weight: 1
-    cost_gp: 5
-  Light Mace:
-    category: simple
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 4
-    cost_gp: 5
-  Sickle:
-    category: simple
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 2
-    cost_gp: 6
-  Club:
-    category: simple
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    range_increment: 10
-    weight: 3
-    cost_gp: 0
-  Heavy Mace:
-    category: simple
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 8
-    cost_gp: 12
-  Morningstar:
-    category: simple
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning and piercing
-    weight: 6
-    cost_gp: 8
-  Shortspear:
-    category: simple
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 20
-    weight: 3
-    cost_gp: 1
-  Longspear:
-    category: simple
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    weight: 9
-    cost_gp: 5
-  Quarterstaff:
-    category: simple
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 4
-    cost_gp: 0
-  Spear:
-    category: simple
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    range_increment: 20
-    weight: 6
-    cost_gp: 2
-  Heavy Crossbow:
-    category: simple
-    damage_dice: 1d10
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 120
-    is_ranged: true
-    weight: 8
-    cost_gp: 50
-  Light Crossbow:
-    category: simple
-    damage_dice: 1d8
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 80
-    is_ranged: true
-    weight: 4
-    cost_gp: 35
-  Dart:
-    category: simple
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 20
-    is_ranged: true
-    weight: 0.5
-    cost_gp: 0
-  Javelin:
-    category: simple
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 30
-    is_ranged: true
-    weight: 2
-    cost_gp: 1
-  Sling:
-    category: simple
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    range_increment: 50
-    is_ranged: true
-    weight: 0
-    cost_gp: 0
-  Throwing Axe:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: slashing
-    range_increment: 10
-    weight: 2
-    cost_gp: 8
-  Light Hammer:
-    category: martial
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    range_increment: 20
-    weight: 2
-    cost_gp: 1
-  Handaxe:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: slashing
-    weight: 3
-    cost_gp: 6
-  Kukri:
-    category: martial
-    damage_dice: 1d4
-    critical_range: 18
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 2
-    cost_gp: 8
-  Light Pick:
-    category: martial
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 4
-    damage_type: piercing
-    weight: 3
-    cost_gp: 4
-  Sap:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 2
-    cost_gp: 1
-  Short Sword:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: piercing
-    weight: 2
-    cost_gp: 10
-  Battleaxe:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: slashing
-    weight: 6
-    cost_gp: 10
-  Flail:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 5
-    cost_gp: 8
-  Longsword:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 4
-    cost_gp: 15
-  Heavy Pick:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 4
-    damage_type: piercing
-    weight: 6
-    cost_gp: 8
-  Rapier:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 18
-    critical_multiplier: 2
-    damage_type: piercing
-    weight: 2
-    cost_gp: 20
-  Scimitar:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 18
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 4
-    cost_gp: 15
-  Trident:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 10
-    weight: 4
-    cost_gp: 15
-  Warhammer:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: bludgeoning
-    weight: 5
-    cost_gp: 12
-  Falchion:
-    category: martial
-    damage_dice: 2d4
-    critical_range: 18
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 8
-    cost_gp: 75
-  Glaive:
-    category: martial
-    damage_dice: 1d10
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: slashing
-    weight: 10
-    cost_gp: 8
-  Greataxe:
-    category: martial
-    damage_dice: 1d12
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: slashing
-    weight: 12
-    cost_gp: 20
-  Greatclub:
-    category: martial
-    damage_dice: 1d10
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 8
-    cost_gp: 5
-  Heavy Flail:
-    category: martial
-    damage_dice: 1d10
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 10
-    cost_gp: 15
-  Greatsword:
-    category: martial
-    damage_dice: 2d6
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 8
-    cost_gp: 50
-  Guisarme:
-    category: martial
-    damage_dice: 2d4
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: slashing
-    weight: 12
-    cost_gp: 9
-  Halberd:
-    category: martial
-    damage_dice: 1d10
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing or slashing
-    weight: 12
-    cost_gp: 10
-  Lance:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    weight: 10
-    cost_gp: 10
-  Ranseur:
-    category: martial
-    damage_dice: 2d4
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    weight: 12
-    cost_gp: 10
-  Scythe:
-    category: martial
-    damage_dice: 2d4
-    critical_range: 20
-    critical_multiplier: 4
-    damage_type: piercing or slashing
-    weight: 10
-    cost_gp: 18
-  Longbow:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    range_increment: 100
-    is_ranged: true
-    weight: 3
-    cost_gp: 75
-  Composite Longbow:
-    category: martial
-    damage_dice: 1d8
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    range_increment: 110
-    is_ranged: true
-    weight: 3
-    cost_gp: 100
-  Shortbow:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    range_increment: 60
-    is_ranged: true
-    weight: 2
-    cost_gp: 30
-  Composite Shortbow:
-    category: martial
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: piercing
-    range_increment: 70
-    is_ranged: true
-    weight: 2
-    cost_gp: 75
-  Kama:
-    category: exotic
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 2
-    cost_gp: 2
-  Nunchaku:
-    category: exotic
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    weight: 2
-    cost_gp: 2
-  Sai:
-    category: exotic
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    range_increment: 10
-    weight: 1
-    cost_gp: 1
-  Siangham:
-    category: exotic
-    damage_dice: 1d6
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    weight: 1
-    cost_gp: 3
-  Bastard Sword:
-    category: exotic
-    damage_dice: 1d10
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 6
-    cost_gp: 35
-  Dwarven Waraxe:
-    category: exotic
-    damage_dice: 1d10
-    critical_range: 20
-    critical_multiplier: 3
-    damage_type: slashing
-    weight: 8
-    cost_gp: 30
-  Whip:
-    category: exotic
-    damage_dice: 1d3
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: slashing
-    weight: 2
-    cost_gp: 1
-  Spiked Chain:
-    category: exotic
-    damage_dice: 2d4
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    weight: 10
-    cost_gp: 25
-  Hand Crossbow:
-    category: exotic
-    damage_dice: 1d4
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 30
-    is_ranged: true
-    weight: 2
-    cost_gp: 100
-  Repeating Heavy Crossbow:
-    category: exotic
-    damage_dice: 1d10
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 120
-    is_ranged: true
-    weight: 12
-    cost_gp: 400
-  Repeating Light Crossbow:
-    category: exotic
-    damage_dice: 1d8
-    critical_range: 19
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 80
-    is_ranged: true
-    weight: 6
-    cost_gp: 250
-  Net:
-    category: exotic
-    damage_dice: '0'
-    critical_range: 20
-    critical_multiplier: 2
-    range_increment: 10
-    is_ranged: true
-    weight: 6
-    cost_gp: 20
-    special: entangle
-  Shuriken:
-    category: exotic
-    damage_dice: 1d2
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: piercing
-    range_increment: 10
-    is_ranged: true
-    weight: 0.1
-    cost_gp: 0
-  Bolas:
-    category: exotic
-    damage_dice: 1d4
-    critical_range: 20
-    critical_multiplier: 2
-    damage_type: bludgeoning
-    range_increment: 10
-    is_ranged: true
-    weight: 2
-    cost_gp: 5
+Gauntlet:
+  category: simple
+  damage_dice: 1d3
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 1
+  cost_gp: 2
+Unarmed Strike:
+  category: simple
+  damage_dice: 1d3
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 0
+  cost_gp: 0
+Dagger:
+  category: simple
+  damage_dice: 1d4
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 10
+  weight: 1
+  cost_gp: 2
+Punching Dagger:
+  category: simple
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  weight: 1
+  cost_gp: 2
+Spiked Gauntlet:
+  category: simple
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  weight: 1
+  cost_gp: 5
+Light Mace:
+  category: simple
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 4
+  cost_gp: 5
+Sickle:
+  category: simple
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 2
+  cost_gp: 6
+Club:
+  category: simple
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  range_increment: 10
+  weight: 3
+  cost_gp: 0
+Heavy Mace:
+  category: simple
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 8
+  cost_gp: 12
+Morningstar:
+  category: simple
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning and piercing
+  weight: 6
+  cost_gp: 8
+Shortspear:
+  category: simple
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 20
+  weight: 3
+  cost_gp: 1
+Longspear:
+  category: simple
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  weight: 9
+  cost_gp: 5
+Quarterstaff:
+  category: simple
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 4
+  cost_gp: 0
+Spear:
+  category: simple
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  range_increment: 20
+  weight: 6
+  cost_gp: 2
+Heavy Crossbow:
+  category: simple
+  damage_dice: 1d10
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 120
+  is_ranged: true
+  weight: 8
+  cost_gp: 50
+Light Crossbow:
+  category: simple
+  damage_dice: 1d8
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 80
+  is_ranged: true
+  weight: 4
+  cost_gp: 35
+Dart:
+  category: simple
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 20
+  is_ranged: true
+  weight: 0.5
+  cost_gp: 0
+Javelin:
+  category: simple
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 30
+  is_ranged: true
+  weight: 2
+  cost_gp: 1
+Sling:
+  category: simple
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  range_increment: 50
+  is_ranged: true
+  weight: 0
+  cost_gp: 0
+Throwing Axe:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: slashing
+  range_increment: 10
+  weight: 2
+  cost_gp: 8
+Light Hammer:
+  category: martial
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  range_increment: 20
+  weight: 2
+  cost_gp: 1
+Handaxe:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 3
+  cost_gp: 6
+Kukri:
+  category: martial
+  damage_dice: 1d4
+  critical_range: 18
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 2
+  cost_gp: 8
+Light Pick:
+  category: martial
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 4
+  damage_type: piercing
+  weight: 3
+  cost_gp: 4
+Sap:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 2
+  cost_gp: 1
+Short Sword:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: piercing
+  weight: 2
+  cost_gp: 10
+Battleaxe:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 6
+  cost_gp: 10
+Flail:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 5
+  cost_gp: 8
+Longsword:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 4
+  cost_gp: 15
+Heavy Pick:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 4
+  damage_type: piercing
+  weight: 6
+  cost_gp: 8
+Rapier:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 18
+  critical_multiplier: 2
+  damage_type: piercing
+  weight: 2
+  cost_gp: 20
+Scimitar:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 18
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 4
+  cost_gp: 15
+Trident:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 10
+  weight: 4
+  cost_gp: 15
+Warhammer:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: bludgeoning
+  weight: 5
+  cost_gp: 12
+Falchion:
+  category: martial
+  damage_dice: 2d4
+  critical_range: 18
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 8
+  cost_gp: 75
+Glaive:
+  category: martial
+  damage_dice: 1d10
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 10
+  cost_gp: 8
+Greataxe:
+  category: martial
+  damage_dice: 1d12
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 12
+  cost_gp: 20
+Greatclub:
+  category: martial
+  damage_dice: 1d10
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 8
+  cost_gp: 5
+Heavy Flail:
+  category: martial
+  damage_dice: 1d10
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 10
+  cost_gp: 15
+Greatsword:
+  category: martial
+  damage_dice: 2d6
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 8
+  cost_gp: 50
+Guisarme:
+  category: martial
+  damage_dice: 2d4
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 12
+  cost_gp: 9
+Halberd:
+  category: martial
+  damage_dice: 1d10
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing or slashing
+  weight: 12
+  cost_gp: 10
+Lance:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  weight: 10
+  cost_gp: 10
+Ranseur:
+  category: martial
+  damage_dice: 2d4
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  weight: 12
+  cost_gp: 10
+Scythe:
+  category: martial
+  damage_dice: 2d4
+  critical_range: 20
+  critical_multiplier: 4
+  damage_type: piercing or slashing
+  weight: 10
+  cost_gp: 18
+Longbow:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  range_increment: 100
+  is_ranged: true
+  weight: 3
+  cost_gp: 75
+Composite Longbow:
+  category: martial
+  damage_dice: 1d8
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  range_increment: 110
+  is_ranged: true
+  weight: 3
+  cost_gp: 100
+Shortbow:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  range_increment: 60
+  is_ranged: true
+  weight: 2
+  cost_gp: 30
+Composite Shortbow:
+  category: martial
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: piercing
+  range_increment: 70
+  is_ranged: true
+  weight: 2
+  cost_gp: 75
+Kama:
+  category: exotic
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 2
+  cost_gp: 2
+Nunchaku:
+  category: exotic
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 2
+  cost_gp: 2
+Sai:
+  category: exotic
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  range_increment: 10
+  weight: 1
+  cost_gp: 1
+Siangham:
+  category: exotic
+  damage_dice: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  weight: 1
+  cost_gp: 3
+Bastard Sword:
+  category: exotic
+  damage_dice: 1d10
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 6
+  cost_gp: 35
+Dwarven Waraxe:
+  category: exotic
+  damage_dice: 1d10
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 8
+  cost_gp: 30
+Whip:
+  category: exotic
+  damage_dice: 1d3
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 2
+  cost_gp: 1
+Spiked Chain:
+  category: exotic
+  damage_dice: 2d4
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  weight: 10
+  cost_gp: 25
+Hand Crossbow:
+  category: exotic
+  damage_dice: 1d4
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 30
+  is_ranged: true
+  weight: 2
+  cost_gp: 100
+Repeating Heavy Crossbow:
+  category: exotic
+  damage_dice: 1d10
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 120
+  is_ranged: true
+  weight: 12
+  cost_gp: 400
+Repeating Light Crossbow:
+  category: exotic
+  damage_dice: 1d8
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 80
+  is_ranged: true
+  weight: 6
+  cost_gp: 250
+Net:
+  category: exotic
+  damage_dice: '0'
+  critical_range: 20
+  critical_multiplier: 2
+  range_increment: 10
+  is_ranged: true
+  weight: 6
+  cost_gp: 20
+  special: entangle
+Shuriken:
+  category: exotic
+  damage_dice: 1d2
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: piercing
+  range_increment: 10
+  is_ranged: true
+  weight: 0.1
+  cost_gp: 0
+Bolas:
+  category: exotic
+  damage_dice: 1d4
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  range_increment: 10
+  is_ranged: true
+  weight: 2
+  cost_gp: 5

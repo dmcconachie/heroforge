@@ -128,7 +128,7 @@ class TestMagicItemsSort:
         path = RULES_DIR / "core" / "magic_items.yaml"
         with open(path) as f:
             data = yaml.safe_load(f)
-        return list(data["magic_items"].items())
+        return list(data.items())
 
     def test_all_have_slot(self) -> None:
         for name, item in self._items():

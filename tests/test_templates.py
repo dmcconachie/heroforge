@@ -669,7 +669,7 @@ class TestTemplatesLoader:
 
         with open(RULES_DIR / "core" / "templates.yaml") as f:
             data = yaml.safe_load(f)
-        expected_count = len(data["templates"])
+        expected_count = len(data)
 
         reg = TemplateRegistry()
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
@@ -734,16 +734,22 @@ class TestTemplatesLoader:
                 TemplateRegistry(), "core/templates.yaml"
             )
 
-    def test_load_raises_on_missing_templates_key(self, tmp_path: Path) -> None:
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import LoaderError, TemplatesLoader
+    def test_load_raises_on_bad_yaml(self, tmp_path: Path) -> None:
+        from heroforge.engine.templates import (
+            TemplateRegistry,
+        )
+        from heroforge.rules.loader import (
+            LoaderError,
+            TemplatesLoader,
+        )
 
         core = tmp_path / "core"
         core.mkdir()
-        (core / "templates.yaml").write_text("not_templates: []\n")
-        with pytest.raises(LoaderError, match="top-level 'templates' key"):
+        (core / "templates.yaml").write_text("- a list\n")
+        with pytest.raises(LoaderError, match="YAML mapping"):
             TemplatesLoader(tmp_path).load(
-                TemplateRegistry(), "core/templates.yaml"
+                TemplateRegistry(),
+                "core/templates.yaml",
             )
 
     def test_no_duplicate_names_in_yaml(self) -> None:
@@ -751,7 +757,7 @@ class TestTemplatesLoader:
 
         with open(RULES_DIR / "core" / "templates.yaml") as f:
             data = yaml.safe_load(f)
-        names = [d["name"] for d in data["templates"] if "name" in d]
+        names = [d["name"] for d in data if "name" in d]
         assert len(names) == len(set(names)), (
             "Duplicate template names: "
             f"{[n for n in names if names.count(n) > 1]}"

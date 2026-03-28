@@ -1,36 +1,36 @@
-prestige_classes:
-  Horizon Walker:
-    source_book: DMG
-    hit_die: 8
-    max_level: 10
-    bab_progression: full
-    save_progressions:
-      fort: good
-      ref: poor
-      will: poor
-    skills_per_level: 4
-    class_skills:
-    - Balance
-    - Climb
-    - Diplomacy
-    - Handle Animal
-    - Hide
-    - Knowledge (Geography)
-    - Listen
-    - Move Silently
-    - Profession
-    - Ride
-    - Speak Language
-    - Spot
-    - Survival
-    - Swim
-    entry_prerequisites:
-      all_of:
-      - skill:
-          name: Knowledge (Geography)
-          min: 8
-      - feat: Endurance
-    class_features:
-    - level: 1
-      feature: terrain_mastery
-      description: Choose terrain mastery
+Horizon Walker:
+  source_book: DMG
+  hit_die: 8
+  max_level: 10
+  bab_progression: full
+  save_progressions:
+    fort: good
+    ref: poor
+    will: poor
+  skills_per_level: 4
+  class_skills:
+  - Balance
+  - Climb
+  - Diplomacy
+  - Handle Animal
+  - Hide
+  - Knowledge (Geography)
+  - Listen
+  - Move Silently
+  - Profession
+  - Ride
+  - Speak Language
+  - Spot
+  - Survival
+  - Swim
+  entry_prerequisites:
+    all_of:
+    - skill:
+        name: Knowledge (Geography)
+        min: 8
+    - feat: Endurance
+  class_features:
+  - level: 1
+    feature: terrain_mastery
+    description: Choose terrain mastery
+  is_prestige: true

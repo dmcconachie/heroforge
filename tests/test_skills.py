@@ -72,7 +72,7 @@ class TestSkillsYaml:
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
         # Dict keys are unique by definition.
-        names = list(data["skills"].keys())
+        names = list(data.keys())
         assert len(names) == len(set(names))
 
     def test_no_duplicate_keys(self) -> None:
@@ -80,7 +80,7 @@ class TestSkillsYaml:
 
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
-        keys = [d["key"] for d in data["skills"].values()]
+        keys = [d["key"] for d in data.values()]
         assert len(keys) == len(set(keys))
 
     def test_all_keys_start_with_skill_(self) -> None:
@@ -90,7 +90,7 @@ class TestSkillsYaml:
             data = yaml.safe_load(f)
         bad = [
             d["key"]
-            for d in data["skills"].values()
+            for d in data.values()
             if not d.get("key", "").startswith("skill_")
         ]
         assert bad == []
@@ -110,9 +110,7 @@ class TestSkillsYaml:
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
         bad = [
-            name
-            for name, d in data["skills"].items()
-            if d.get("ability") not in valid
+            name for name, d in data.items() if d.get("ability") not in valid
         ]
         assert bad == []
 
@@ -388,7 +386,7 @@ class TestSkillsLoader:
 
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
-        expected = len(data["skills"])
+        expected = len(data)
         reg = SkillRegistry()
         SkillsLoader(RULES_DIR).load(reg, "core/skills.yaml")
         assert len(reg) == expected

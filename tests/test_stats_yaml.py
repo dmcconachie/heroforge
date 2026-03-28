@@ -67,7 +67,7 @@ class TestYamlStructure:
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
         unknown = []
-        for decl in data["stats"]:
+        for decl in data:
             strategy = decl.get("compute", "base_plus_bonus")
             if strategy not in COMPUTE_STRATEGIES:
                 unknown.append(f"{decl.get('key')!r}: {strategy!r}")
@@ -78,7 +78,7 @@ class TestYamlStructure:
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
-        keys = [d["key"] for d in data["stats"] if "key" in d]
+        keys = [d["key"] for d in data if "key" in d]
         assert len(keys) == len(set(keys)), (
             f"Duplicate keys: {[k for k in keys if keys.count(k) > 1]}"
         )
@@ -88,7 +88,7 @@ class TestYamlStructure:
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
-        for decl in data["stats"]:
+        for decl in data:
             assert "key" in decl, f"Declaration missing 'key': {decl}"
 
     def test_every_declaration_has_a_description(self) -> None:
@@ -96,7 +96,7 @@ class TestYamlStructure:
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
-        missing = [d["key"] for d in data["stats"] if not d.get("description")]
+        missing = [d["key"] for d in data if not d.get("description")]
         assert missing == [], f"Missing descriptions: {missing}"
 
 
@@ -124,7 +124,8 @@ class TestLoader:
         loader = StatsLoader(tmp_path)
         g = fresh_graph()
         with pytest.raises(
-            LoaderError, match="YAML parse error|top-level 'stats' key"
+            LoaderError,
+            match="YAML parse error|YAML list",
         ):
             loader.load(g)
 
@@ -132,10 +133,7 @@ class TestLoader:
         core = tmp_path / "core"
         core.mkdir()
         (core / "stats.yaml").write_text(
-            "stats:\n"
-            "  - key: x\n"
-            "    compute: totally_unknown\n"
-            "    description: X\n"
+            "- key: x\n  compute: totally_unknown\n  description: X\n"
         )
         loader = StatsLoader(tmp_path)
         g = fresh_graph()
@@ -146,9 +144,10 @@ class TestLoader:
         core = tmp_path / "core"
         core.mkdir()
         (core / "stats.yaml").write_text(
-            "stats:\n"
-            "  - key: x\n    compute: sum\n    description: X\n"
-            "  - key: x\n    compute: sum\n    description: X again\n"
+            "- key: x\n  compute: sum\n"
+            "  description: X\n"
+            "- key: x\n  compute: sum\n"
+            "  description: X again\n"
         )
         loader = StatsLoader(tmp_path)
         g = fresh_graph()
@@ -233,11 +232,10 @@ class TestLoader:
         core = tmp_path / "core"
         core.mkdir()
         (core / "stats.yaml").write_text(
-            "stats:\n"
-            "  - key: test_stat\n"
-            "    compute: sum\n"
-            "    pools: [new_pool]\n"
-            "    description: Test\n"
+            "- key: test_stat\n"
+            "  compute: sum\n"
+            "  pools: [new_pool]\n"
+            "  description: Test\n"
         )
         loader = StatsLoader(tmp_path)
         g = fresh_graph()
@@ -343,7 +341,7 @@ class TestYamlCoverage:
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
-        return {d["key"] for d in data["stats"]}
+        return {d["key"] for d in data}
 
     def test_all_six_ability_scores_declared(self) -> None:
         keys = self._get_keys()

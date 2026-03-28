@@ -1,39 +1,38 @@
-classes:
-  Aristocrat:
-    source_book: SRD
-    hit_die: 8
-    bab_progression: medium
-    save_progressions:
-      fort: poor
-      ref: poor
-      will: good
-    skills_per_level: 4
-    class_skills:
-    - Appraise
-    - Bluff
-    - Diplomacy
-    - Disguise
-    - Forgery
-    - Gather Information
-    - Handle Animal
-    - Intimidate
-    - Knowledge (Arcana)
-    - Knowledge (Architecture)
-    - Knowledge (Dungeoneering)
-    - Knowledge (Geography)
-    - Knowledge (History)
-    - Knowledge (Local)
-    - Knowledge (Nature)
-    - Knowledge (Nobility)
-    - Knowledge (Religion)
-    - Knowledge (The Planes)
-    - Listen
-    - Perform
-    - Ride
-    - Sense Motive
-    - Speak Language
-    - Spot
-    - Survival
-    - Swim
-    spellcasting: null
-    class_features: []
+Aristocrat:
+  source_book: SRD
+  hit_die: 8
+  bab_progression: medium
+  save_progressions:
+    fort: poor
+    ref: poor
+    will: good
+  skills_per_level: 4
+  class_skills:
+  - Appraise
+  - Bluff
+  - Diplomacy
+  - Disguise
+  - Forgery
+  - Gather Information
+  - Handle Animal
+  - Intimidate
+  - Knowledge (Arcana)
+  - Knowledge (Architecture)
+  - Knowledge (Dungeoneering)
+  - Knowledge (Geography)
+  - Knowledge (History)
+  - Knowledge (Local)
+  - Knowledge (Nature)
+  - Knowledge (Nobility)
+  - Knowledge (Religion)
+  - Knowledge (The Planes)
+  - Listen
+  - Perform
+  - Ride
+  - Sense Motive
+  - Speak Language
+  - Spot
+  - Survival
+  - Swim
+  spellcasting: null
+  class_features: []

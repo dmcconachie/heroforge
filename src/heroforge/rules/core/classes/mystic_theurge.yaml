@@ -1,29 +1,29 @@
-prestige_classes:
-  Mystic Theurge:
-    source_book: DMG
-    hit_die: 4
-    max_level: 10
-    bab_progression: poor
-    save_progressions:
-      fort: poor
-      ref: poor
-      will: good
-    skills_per_level: 2
-    class_skills:
-    - Concentration
-    - Craft
-    - Decipher Script
-    - Knowledge (Arcana)
-    - Knowledge (Religion)
-    - Profession
-    - Sense Motive
-    - Spellcraft
-    entry_prerequisites:
-      all_of:
-      - spellcasting:
-          cast_type: arcane
-          min_level: 2
-      - spellcasting:
-          cast_type: divine
-          min_level: 2
-    class_features: []
+Mystic Theurge:
+  source_book: DMG
+  hit_die: 4
+  max_level: 10
+  bab_progression: poor
+  save_progressions:
+    fort: poor
+    ref: poor
+    will: good
+  skills_per_level: 2
+  class_skills:
+  - Concentration
+  - Craft
+  - Decipher Script
+  - Knowledge (Arcana)
+  - Knowledge (Religion)
+  - Profession
+  - Sense Motive
+  - Spellcraft
+  entry_prerequisites:
+    all_of:
+    - spellcasting:
+        cast_type: arcane
+        min_level: 2
+    - spellcasting:
+        cast_type: divine
+        min_level: 2
+  class_features: []
+  is_prestige: true
