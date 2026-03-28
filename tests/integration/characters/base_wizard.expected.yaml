@@ -1,8 +1,8 @@
 identity:
   name: Aelindra Starweave
   race: Elf
-  class_str: Wizard 6
-  level: 6
+  class_str: Wizard 20
+  level: 20
   alignment: neutral_good
   deity: ''
   size: Medium
@@ -41,12 +41,12 @@ combat:
   touch_ac: 13
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 19
-    con: -6
-    total: 13
+    hit_dice: 61
+    con: -20
+    total: 41
   bab:
-    base: 3
-    total: 3
+    base: 10
+    total: 10
   initiative:
     dex: 3
     total: 3
@@ -55,68 +55,71 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 2
+    base: 6
     con: -1
-    total: 1
-  ref:
-    base: 2
-    dex: 3
     total: 5
-  will:
-    base: 5
-    wis: 1
-    total: 6
-  attack_melee:
-    bab: 3
-    str: -1
-    total: 2
-  attack_ranged:
-    bab: 3
+  ref:
+    base: 6
     dex: 3
-    total: 6
+    total: 9
+  will:
+    base: 12
+    wis: 1
+    untyped: 2
+    total: 15
+  attack_melee:
+    bab: 10
+    str: -1
+    total: 9
+  attack_ranged:
+    bab: 10
+    dex: 3
+    total: 13
   damage_melee:
     str: -1
     total: -1
   grapple:
-    bab: 3
+    bab: 10
     str: -1
-    total: 2
+    total: 9
 attack_iteratives:
   melee:
-  - 2
+  - 9
+  - 4
   ranged:
-  - 6
+  - 13
+  - 8
 skills:
   Concentration:
-    ranks: 9
+    ranks: 23
     ability_mod: -1
-    total: 8
+    total: 22
   Decipher Script:
-    ranks: 6
+    ranks: 13
     ability_mod: 4
-    total: 10
+    total: 17
   Knowledge (Arcana):
-    ranks: 9
+    ranks: 23
     ability_mod: 4
     synergy: 2
-    total: 15
+    total: 29
   Knowledge (Nature):
-    ranks: 5
+    ranks: 19
     ability_mod: 4
-    total: 9
+    total: 23
   Knowledge (Religion):
-    ranks: 7
+    ranks: 14
     ability_mod: 4
-    total: 11
+    total: 18
   Knowledge (The Planes):
-    ranks: 9
+    ranks: 23
     ability_mod: 4
-    total: 13
+    total: 27
   Spellcraft:
-    ranks: 9
+    ranks: 23
     ability_mod: 4
     synergy: 2
-    total: 15
+    total: 29
   Survival:
     ability_mod: 1
     synergy: 4
@@ -135,24 +138,46 @@ feats:
 - Spell Penetration
 - Extend Spell
 - Greater Spell Focus
+- Greater Spell Penetration
+- Empower Spell
+- Iron Will
+- Spell Mastery
+- Maximize Spell
+- Quicken Spell
+- Craft Wondrous Item
 class_features:
 - 'summon_familiar: Summon a familiar'
 - 'scribe_scroll: Scribe scroll feat for free'
 - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+- 'bonus_feat_wizard_10: Bonus wizard feat'
+- 'bonus_feat_wizard_15: Bonus wizard feat'
+- 'bonus_feat_wizard_20: Bonus wizard feat'
 spellcasting:
   Wizard:
-    caster_level: 6
+    caster_level: 20
     key_ability: int
     cast_type: arcane
     preparation: prepared
     slots_per_day:
     - 4
+    - 5
+    - 5
+    - 5
+    - 5
     - 4
     - 4
-    - 3
+    - 4
+    - 4
+    - 4
     spell_save_dc:
       0: 14
       1: 15
       2: 16
       3: 17
+      4: 18
+      5: 19
+      6: 20
+      7: 21
+      8: 22
+      9: 23
 resources: {}

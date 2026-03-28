@@ -1,16 +1,17 @@
 identity:
   name: Kael Wyrmsong
   race: Human
-  class_str: Sorcerer 2 / Dragon Disciple 1
-  level: 3
+  class_str: Sorcerer 2 / Dragon Disciple 10
+  level: 12
   alignment: chaotic_good
   deity: ''
   size: Medium
 abilities:
   STR:
     base: 14
-    score: 14
-    mod: 2
+    untyped: 4
+    score: 18
+    mod: 4
   DEX:
     base: 12
     score: 12
@@ -35,18 +36,18 @@ combat:
   ac:
     base: 10
     dex: 1
-    natural_armor: 1
-    total: 12
+    natural_armor: 6
+    total: 17
   touch_ac: 11
-  flatfooted_ac: 11
+  flatfooted_ac: 16
   hp_max:
-    hit_dice: 17
-    con: 6
+    hit_dice: 89
+    con: 24
     untyped: 3
-    total: 26
+    total: 116
   bab:
-    base: 1
-    total: 1
+    base: 8
+    total: 8
   initiative:
     dex: 1
     total: 1
@@ -55,70 +56,89 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 2
+    base: 7
     con: 2
-    total: 4
+    untyped: 2
+    total: 11
   ref:
-    base: 0
+    base: 3
     dex: 1
-    total: 1
+    total: 4
   will:
-    base: 5
-    total: 5
+    base: 10
+    untyped: 2
+    total: 12
   attack_melee:
-    bab: 1
-    str: 2
-    total: 3
+    bab: 8
+    str: 4
+    total: 12
   attack_ranged:
-    bab: 1
+    bab: 8
     dex: 1
-    total: 2
+    total: 9
   damage_melee:
-    str: 2
-    total: 2
+    str: 4
+    total: 4
   grapple:
-    bab: 1
-    str: 2
-    total: 3
+    bab: 8
+    str: 4
+    total: 12
 attack_iteratives:
   melee:
-  - 3
+  - 12
+  - 7
   ranged:
-  - 2
+  - 9
+  - 4
 skills:
   Concentration:
-    ranks: 6
+    ranks: 15
     ability_mod: 2
-    total: 8
+    total: 17
   Knowledge (Arcana):
-    ranks: 6
+    ranks: 9
     ability_mod: 0
     synergy: 2
-    total: 8
-  Spellcraft:
+    total: 11
+  Listen:
     ranks: 5
     ability_mod: 0
-    synergy: 2
-    total: 7
-  Spot:
-    ranks: 1
+    total: 5
+  Spellcraft:
+    ranks: 11
     ability_mod: 0
-    total: 1
+    synergy: 2
+    total: 13
+  Spot:
+    ranks: 5
+    ability_mod: 0
+    total: 5
   Use Magic Device:
     ability_mod: 3
     synergy: 2
     total: 5
 carrying_capacity:
-  light: 58
-  medium: 116
-  heavy: 175
+  light: 100
+  medium: 200
+  heavy: 300
 feats:
 - Dodge
 - Toughness
 - Combat Casting
+- Iron Will
+- Great Fortitude
+- Blind-Fight
 class_features:
 - 'summon_familiar: Summon a familiar'
 - 'natural_armor_1: +1 natural armor'
+- 'str_increase_2: +2 STR'
+- 'claws_and_bite: Natural weapons'
+- 'str_increase_4: +2 STR (cumulative)'
+- 'natural_armor_4: +3 natural armor (cumulative)'
+- 'blindsense: Blindsense 30 ft'
+- 'natural_armor_7: +6 natural armor (cumulative)'
+- 'wings: Fly speed 30 ft'
+- 'dragon_apotheosis: Become half-dragon'
 spellcasting:
   Sorcerer:
     caster_level: 2

@@ -1,8 +1,8 @@
 identity:
   name: Vaelith the Learned
   race: Human
-  class_str: Wizard 13 / Loremaster 1
-  level: 14
+  class_str: Wizard 13 / Loremaster 10
+  level: 23
   alignment: neutral
   deity: ''
   size: Medium
@@ -39,13 +39,13 @@ combat:
   touch_ac: 11
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 43
-    con: 28
+    hit_dice: 70
+    con: 46
     untyped: 3
-    total: 74
+    total: 119
   bab:
-    base: 6
-    total: 6
+    base: 11
+    total: 11
   initiative:
     dex: 1
     total: 1
@@ -54,77 +54,79 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 4
+    base: 7
     con: 2
-    total: 6
+    total: 9
   ref:
-    base: 4
+    base: 7
     dex: 1
-    total: 5
+    total: 8
   will:
-    base: 10
-    total: 10
+    base: 15
+    total: 15
   attack_melee:
-    bab: 6
+    bab: 11
     str: -1
-    total: 5
+    total: 10
   attack_ranged:
-    bab: 6
+    bab: 11
     dex: 1
-    total: 7
+    total: 12
   damage_melee:
     str: -1
     total: -1
   grapple:
-    bab: 6
+    bab: 11
     str: -1
-    total: 5
+    total: 10
 attack_iteratives:
   melee:
+  - 10
   - 5
   - 0
   ranged:
+  - 12
   - 7
   - 2
 skills:
   Appraise:
-    ranks: 1
+    ranks: 10
     ability_mod: 4
-    total: 5
+    total: 14
   Concentration:
-    ranks: 17
+    ranks: 26
     ability_mod: 2
-    total: 19
+    total: 28
   Decipher Script:
-    ranks: 17
+    ranks: 26
     ability_mod: 4
-    total: 21
+    total: 30
   Gather Information:
-    ranks: 1
+    ranks: 10
     ability_mod: -1
-    total: 0
+    total: 9
   Knowledge (Arcana):
-    ranks: 17
+    ranks: 26
     ability_mod: 4
     synergy: 2
-    total: 23
+    total: 32
   Knowledge (History):
-    ranks: 17
+    ranks: 26
     ability_mod: 4
-    total: 21
+    total: 30
   Knowledge (Religion):
-    ranks: 17
+    ranks: 26
     ability_mod: 4
-    total: 21
+    total: 30
   Knowledge (The Planes):
-    ranks: 17
+    ranks: 26
     ability_mod: 4
-    total: 21
+    total: 30
   Spellcraft:
-    ranks: 17
+    ranks: 26
     ability_mod: 4
     synergy: 2
-    total: 23
+    total: 32
   Survival:
     ability_mod: 0
     synergy: 2
@@ -147,12 +149,16 @@ feats:
 - Greater Spell Focus
 - Empower Spell
 - Augment Summoning
+- Maximize Spell
+- Quicken Spell
+- Heighten Spell
 class_features:
 - 'summon_familiar: Summon a familiar'
 - 'scribe_scroll: Scribe scroll feat for free'
 - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
 - 'bonus_feat_wizard_10: Bonus wizard feat'
 - 'secret: Choose lore secret'
+- 'lore: Lore check (like bard)'
 spellcasting:
   Wizard:
     caster_level: 13

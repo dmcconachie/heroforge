@@ -111,6 +111,123 @@ levels:
     feats:
       - name: "Spring Attack"
         source: character
+  # Assassin 2 — total 7
+  - level: 7
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+  # Assassin 3 — total 8
+  - level: 8
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+  # Assassin 4 — total 9; character feat at L9
+  - level: 9
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+    feats:
+      - name: "Weapon Finesse"
+        source: character
+  # Assassin 5 — total 10
+  - level: 10
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+  # Assassin 6 — total 11
+  - level: 11
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+  # Assassin 7 — total 12; character feat at L12
+  - level: 12
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+    feats:
+      - name: "Blind-Fight"
+        source: character
+  # Assassin 8 — total 13
+  - level: 13
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+  # Assassin 9 — total 14
+  - level: 14
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+  # Assassin 10 — total 15; character feat at L15
+  - level: 15
+    class: Assassin
+    hp_roll: 4
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+    feats:
+      - name: "Combat Reflexes"
+        source: character
 
 buffs: []
 templates: []

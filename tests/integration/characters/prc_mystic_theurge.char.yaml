@@ -98,6 +98,115 @@ levels:
       Knowledge (Religion): 1
       Decipher Script: 1
       Sense Motive: 1
+  # MT 2 — total 8
+  - level: 8
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+  # MT 3 — total 9; character feat at L9
+  - level: 9
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+    feats:
+      - name: "Spell Penetration"
+        source: character
+  # MT 4 — total 10
+  - level: 10
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+  # MT 5 — total 11
+  - level: 11
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+  # MT 6 — total 12; character feat at L12
+  - level: 12
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+    feats:
+      - name: "Greater Spell Focus"
+        source: character
+        parameter: Conjuration
+  # MT 7 — total 13
+  - level: 13
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+  # MT 8 — total 14
+  - level: 14
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+  # MT 9 — total 15; character feat at L15
+  - level: 15
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
+    feats:
+      - name: "Greater Spell Penetration"
+        source: character
+  # MT 10 — total 16
+  - level: 16
+    class: "Mystic Theurge"
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Sense Motive: 1
 
 buffs: []
 templates: []

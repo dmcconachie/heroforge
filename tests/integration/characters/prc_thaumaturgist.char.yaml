@@ -74,6 +74,41 @@ levels:
     feats:
       - name: "Extend Spell"
         source: character
+  # Thaumaturgist 2 — total 7
+  - level: 7
+    class: Thaumaturgist
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+  # Thaumaturgist 3 — total 8
+  - level: 8
+    class: Thaumaturgist
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (The Planes): 1
+  # Thaumaturgist 4 — total 9; character feat L9
+  - level: 9
+    class: Thaumaturgist
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Religion): 1
+    feats:
+      - name: "Spell Penetration"
+        source: character
+  # Thaumaturgist 5 — total 10
+  - level: 10
+    class: Thaumaturgist
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (The Planes): 1
 
 buffs: []
 templates: []

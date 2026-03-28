@@ -101,6 +101,114 @@ levels:
       Sense Motive: 1
       Escape Artist: 1
       Balance: 1
+  # Duelist 2 — total 9; character feat at L9
+  - level: 9
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Perform: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Balance: 1
+    feats:
+      - name: "Whirlwind Attack"
+        source: character
+  # Duelist 3 — total 10
+  - level: 10
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Spot: 1
+      Balance: 1
+  # Duelist 4 — total 11
+  - level: 11
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Perform: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Balance: 1
+  # Duelist 5 — total 12; character feat at L12
+  - level: 12
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Spot: 1
+      Balance: 1
+    feats:
+      - name: "Improved Critical"
+        source: character
+  # Duelist 6 — total 13
+  - level: 13
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Perform: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Balance: 1
+  # Duelist 7 — total 14
+  - level: 14
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Spot: 1
+      Balance: 1
+  # Duelist 8 — total 15; character feat at L15
+  - level: 15
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Perform: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Balance: 1
+    feats:
+      - name: "Lightning Reflexes"
+        source: character
+  # Duelist 9 — total 16
+  - level: 16
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Spot: 1
+      Balance: 1
+  # Duelist 10 — total 17
+  - level: 17
+    class: Duelist
+    hp_roll: 7
+    skill_ranks:
+      Tumble: 1
+      Perform: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Balance: 1
 
 buffs: []
 templates: []

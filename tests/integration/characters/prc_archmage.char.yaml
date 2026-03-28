@@ -239,6 +239,57 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
       Search: 1
+  # Archmage 2 — total 17
+  - level: 17
+    class: Archmage
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Search: 1
+  # Archmage 3 — total 18; character feat L18
+  - level: 18
+    class: Archmage
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Search: 1
+    feats:
+      - name: "Widen Spell"
+        source: character
+  # Archmage 4 — total 19
+  - level: 19
+    class: Archmage
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Search: 1
+  # Archmage 5 — total 20
+  - level: 20
+    class: Archmage
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Search: 1
 
 buffs: []
 templates: []

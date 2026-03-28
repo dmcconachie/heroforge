@@ -107,6 +107,216 @@ levels:
         - "Invisibility"
       3:
         - "Fireball"
+  # L7: 3 skill pts
+  # Spells known delta: 0/+1/+1/+1
+  - level: 7
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    spells_learned:
+      1:
+        - "Enlarge Person"
+      2:
+        - "Web"
+      3:
+        - "Haste"
+  # L8: 3 skill pts
+  # Spells known delta: +1/0/0/0/+1
+  - level: 8
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    spells_learned:
+      0:
+        - "Ghost Sound"
+      4:
+        - "Dimension Door"
+  # L9: 3 skill pts
+  # Spells known delta: 0/0/+1/+1/+1
+  - level: 9
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    feats:
+      - name: "Greater Spell Focus"
+        source: character
+    spells_learned:
+      2:
+        - "Glitterdust"
+      3:
+        - "Lightning Bolt"
+      4:
+        - "Stoneskin"
+  # L10: 3 skill pts
+  # Spells known delta: +1/0/0/0/0/+1
+  - level: 10
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    spells_learned:
+      0:
+        - "Acid Splash"
+      5:
+        - "Teleport"
+  # L11: 3 skill pts
+  # Spells known delta: 0/0/+1/+1/+1/+1
+  - level: 11
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    spells_learned:
+      2:
+        - "See Invisibility"
+      3:
+        - "Fly"
+      4:
+        - "Greater Invisibility"
+      5:
+        - "Cone of Cold"
+  # L12: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/0/+1
+  - level: 12
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    feats:
+      - name: "Greater Spell Penetration"
+        source: character
+    spells_learned:
+      6:
+        - "Disintegrate"
+  # L13: 3 skill pts
+  # Spells known delta: 0/0/0/0/+1/+1/+1
+  - level: 13
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    spells_learned:
+      4:
+        - "Ice Storm"
+      5:
+        - "Wall of Force"
+      6:
+        - "Chain Lightning"
+  # L14: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/0/0/+1
+  - level: 14
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    spells_learned:
+      7:
+        - "Finger of Death"
+  # L15: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/+1/+1/+1
+  - level: 15
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    feats:
+      - name: "Iron Will"
+        source: character
+    spells_learned:
+      5:
+        - "Dominate Person"
+      6:
+        - "Greater Dispel Magic"
+      7:
+        - "Prismatic Spray"
+  # L16: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/0/0/0/+1
+  - level: 16
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    spells_learned:
+      8:
+        - "Horrid Wilting"
+  # L17: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/0/0/+1/+1
+  - level: 17
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    spells_learned:
+      7:
+        - "Limited Wish"
+      8:
+        - "Polar Ray"
+  # L18: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/0/0/0/0/+1
+  - level: 18
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    feats:
+      - name: "Empower Spell"
+        source: character
+    spells_learned:
+      9:
+        - "Wish"
+  # L19: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/0/0/0/+1/+1
+  - level: 19
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    spells_learned:
+      8:
+        - "Greater Shout"
+      9:
+        - "Meteor Swarm"
+  # L20: 3 skill pts
+  # Spells known delta: 0/0/0/0/0/0/0/0/0/+1
+  - level: 20
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    spells_learned:
+      9:
+        - "Time Stop"
 
 buffs: []
 templates: []

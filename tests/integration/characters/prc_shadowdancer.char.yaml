@@ -135,6 +135,132 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
+  # SD 2 — total 9; character feat at L9
+  - level: 9
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+    feats:
+      - name: "Spring Attack"
+        source: character
+  # SD 3 — total 10
+  - level: 10
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+  # SD 4 — total 11
+  - level: 11
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+  # SD 5 — total 12; character feat at L12
+  - level: 12
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+    feats:
+      - name: "Blind-Fight"
+        source: character
+  # SD 6 — total 13
+  - level: 13
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+  # SD 7 — total 14
+  - level: 14
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+  # SD 8 — total 15; character feat at L15
+  - level: 15
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+    feats:
+      - name: "Lightning Reflexes"
+        source: character
+  # SD 9 — total 16
+  - level: 16
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
+  # SD 10 — total 17
+  - level: 17
+    class: Shadowdancer
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Perform: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Search: 1
+      Balance: 1
 
 buffs: []
 templates: []

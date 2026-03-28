@@ -143,6 +143,44 @@ levels:
       Concentration: 1
       Spellcraft: 1
       Knowledge (Religion): 1
+  # Hierophant 2 — total 15; character feat L15
+  - level: 15
+    class: Hierophant
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Religion): 1
+    feats:
+      - name: "Empower Spell"
+        source: character
+  # Hierophant 3 — total 16
+  - level: 16
+    class: Hierophant
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Knowledge (Religion): 1
+  # Hierophant 4 — total 17
+  - level: 17
+    class: Hierophant
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Diplomacy: 1
+  # Hierophant 5 — total 18; character feat L18
+  - level: 18
+    class: Hierophant
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Spellcraft: 1
+    feats:
+      - name: "Quicken Spell"
+        source: character
 
 buffs: []
 templates: []

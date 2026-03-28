@@ -211,6 +211,141 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
+  # LM 2 — total 15; character feat at L15
+  - level: 15
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+    feats:
+      - name: "Maximize Spell"
+        source: character
+  # LM 3 — total 16
+  - level: 16
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+  # LM 4 — total 17
+  - level: 17
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+  # LM 5 — total 18; character feat at L18
+  - level: 18
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+    feats:
+      - name: "Quicken Spell"
+        source: character
+  # LM 6 — total 19
+  - level: 19
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+  # LM 7 — total 20
+  - level: 20
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+  # LM 8 — total 21; character feat at L21
+  - level: 21
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+    feats:
+      - name: "Heighten Spell"
+        source: character
+  # LM 9 — total 22
+  - level: 22
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
+  # LM 10 — total 23
+  - level: 23
+    class: Loremaster
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Gather Information: 1
+      Appraise: 1
 
 buffs: []
 templates: []

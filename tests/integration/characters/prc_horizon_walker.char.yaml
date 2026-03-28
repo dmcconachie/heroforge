@@ -145,6 +145,114 @@ levels:
     feats:
       - name: "Toughness"
         source: character
+  # HW 2 — total 10
+  - level: 10
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Hide: 1
+  # HW 3 — total 11
+  - level: 11
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Hide: 1
+  # HW 4 — total 12; character feat at L12
+  - level: 12
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Hide: 1
+    feats:
+      - name: "Great Fortitude"
+        source: character
+  # HW 5 — total 13
+  - level: 13
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Move Silently: 1
+  # HW 6 — total 14
+  - level: 14
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Hide: 1
+  # HW 7 — total 15; character feat at L15
+  - level: 15
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Move Silently: 1
+    feats:
+      - name: "Diehard"
+        source: character
+  # HW 8 — total 16
+  - level: 16
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Hide: 1
+  # HW 9 — total 17
+  - level: 17
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Move Silently: 1
+  # HW 10 — total 18; character feat at L18
+  - level: 18
+    class: Horizon Walker
+    hp_roll: 6
+    skill_ranks:
+      Knowledge (Geography): 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Hide: 1
+    feats:
+      - name: "Lightning Reflexes"
+        source: character
 
 buffs: []
 templates: []

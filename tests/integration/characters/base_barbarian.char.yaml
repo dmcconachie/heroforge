@@ -65,9 +65,119 @@ levels:
     feats:
       - name: "Great Cleave"
         source: character
+  - level: 7
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 8
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 9
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: "Improved Bull Rush"
+        source: character
+  - level: 10
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 11
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 12
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+    feats:
+      - name: "Improved Sunder"
+        source: character
+  - level: 13
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 14
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 15
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: "Blind-Fight"
+        source: character
+  - level: 16
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 17
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 18
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+    feats:
+      - name: "Toughness"
+        source: character
+  - level: 19
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 20
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
 
 buffs:
-  - name: "Barbarian Rage"
+  - name: "Mighty Rage"
     active: true
 templates: []
 dm_overrides: []

@@ -1,8 +1,8 @@
 identity:
   name: Davan Lightcaller
   race: Human
-  class_str: Cleric 13 / Hierophant 1
-  level: 14
+  class_str: Cleric 13 / Hierophant 5
+  level: 18
   alignment: neutral_good
   deity: Pelor
   size: Medium
@@ -38,12 +38,12 @@ combat:
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 86
-    con: 28
-    total: 114
+    hit_dice: 110
+    con: 36
+    total: 146
   bab:
-    base: 9
-    total: 9
+    base: 11
+    total: 11
   initiative:
     total: 0
   speed:
@@ -51,63 +51,65 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 8
+    base: 9
     con: 2
-    total: 10
+    total: 11
   ref:
-    base: 4
-    total: 4
+    base: 5
+    total: 5
   will:
-    base: 10
+    base: 12
     wis: 4
-    total: 14
+    total: 16
   attack_melee:
-    bab: 9
-    total: 9
+    bab: 11
+    total: 11
   attack_ranged:
-    bab: 9
-    total: 9
+    bab: 11
+    total: 11
   damage_melee:
     total: 0
   grapple:
-    bab: 9
-    total: 9
+    bab: 11
+    total: 11
 attack_iteratives:
   melee:
-  - 9
-  - 4
+  - 11
+  - 6
+  - 1
   ranged:
-  - 9
-  - 4
+  - 11
+  - 6
+  - 1
 skills:
   Concentration:
-    ranks: 17
+    ranks: 21
     ability_mod: 2
-    total: 19
+    total: 23
   Diplomacy:
-    ranks: 3
+    ranks: 4
     ability_mod: 1
-    total: 4
+    total: 5
   Heal:
-    ranks: 10
+    ranks: 12
     ability_mod: 4
-    total: 14
+    total: 16
   Knowledge (Arcana):
     ability_mod: 0
     synergy: 2
     total: 2
   Knowledge (Religion):
-    ranks: 8
+    ranks: 10
     ability_mod: 0
-    total: 8
+    total: 10
   Knowledge (The Planes):
     ranks: 4
     ability_mod: 0
     total: 4
   Spellcraft:
-    ranks: 9
+    ranks: 12
     ability_mod: 0
-    total: 9
+    total: 12
   Use Magic Device:
     ability_mod: 1
     synergy: 2
@@ -123,6 +125,8 @@ feats:
 - Spell Penetration
 - Augment Summoning
 - Greater Spell Penetration
+- Empower Spell
+- Quicken Spell
 class_features:
 - 'turn_undead: Turn or rebuke undead'
 - 'spontaneous_casting: Convert prepared spells to cure/inflict'

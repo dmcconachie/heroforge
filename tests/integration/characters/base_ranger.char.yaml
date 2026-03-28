@@ -99,6 +99,175 @@ levels:
       - name: "Weapon Focus"
         source: character
         parameter: Longbow
+  - level: 7
+    class: Ranger
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Search: 1
+      Heal: 1
+  - level: 8
+    class: Ranger
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Heal: 1
+  - level: 9
+    class: Ranger
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Search: 1
+      Climb: 1
+    feats:
+      - name: "Far Shot"
+        source: character
+  - level: 10
+    class: Ranger
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Heal: 1
+      Search: 1
+  - level: 11
+    class: Ranger
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Heal: 1
+    feats:
+      - name: "Improved Precise Shot"
+        source: "class:Ranger"
+  - level: 12
+    class: Ranger
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Search: 1
+      Climb: 1
+    feats:
+      - name: "Dodge"
+        source: character
+  - level: 13
+    class: Ranger
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Heal: 1
+      Search: 1
+  - level: 14
+    class: Ranger
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Heal: 1
+  - level: 15
+    class: Ranger
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Search: 1
+      Climb: 1
+    feats:
+      - name: "Mobility"
+        source: character
+  - level: 16
+    class: Ranger
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Heal: 1
+      Search: 1
+  - level: 17
+    class: Ranger
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Heal: 1
+  - level: 18
+    class: Ranger
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Search: 1
+      Climb: 1
+    feats:
+      - name: "Self-Sufficient"
+        source: character
+  - level: 19
+    class: Ranger
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Heal: 1
+      Search: 1
+  - level: 20
+    class: Ranger
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Move Silently: 1
+      Spot: 1
+      Survival: 1
+      Climb: 1
+      Heal: 1
 
 buffs: []
 templates: []

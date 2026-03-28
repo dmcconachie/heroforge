@@ -1,8 +1,8 @@
 identity:
   name: Sorel Dawnmantle
   race: Human
-  class_str: Cleric 3 / Wizard 3 / Mystic Theurge 1
-  level: 7
+  class_str: Cleric 3 / Wizard 3 / Mystic Theurge 10
+  level: 16
   alignment: neutral_good
   deity: Pelor
   size: Medium
@@ -38,12 +38,12 @@ combat:
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 33
-    con: 14
-    total: 47
+    hit_dice: 60
+    con: 32
+    total: 92
   bab:
-    base: 3
-    total: 3
+    base: 8
+    total: 8
   initiative:
     total: 0
   speed:
@@ -51,72 +51,75 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 4
+    base: 7
     con: 2
-    total: 6
+    total: 9
   ref:
-    base: 2
-    total: 2
+    base: 5
+    total: 5
   will:
-    base: 8
+    base: 13
     wis: 3
-    total: 11
+    total: 16
   attack_melee:
-    bab: 3
-    total: 3
+    bab: 8
+    total: 8
   attack_ranged:
-    bab: 3
-    total: 3
+    bab: 8
+    total: 8
   damage_melee:
     total: 0
   grapple:
-    bab: 3
-    total: 3
+    bab: 8
+    total: 8
 attack_iteratives:
   melee:
+  - 8
   - 3
   ranged:
+  - 8
   - 3
 skills:
   Concentration:
-    ranks: 10
+    ranks: 19
     ability_mod: 2
-    total: 12
+    total: 21
   Decipher Script:
-    ranks: 5
+    ranks: 14
     ability_mod: 3
-    total: 8
+    total: 17
   Diplomacy:
     ranks: 6
     ability_mod: -1
-    total: 5
+    synergy: 2
+    total: 7
   Heal:
     ranks: 6
     ability_mod: 3
     total: 9
   Knowledge (Arcana):
-    ranks: 10
+    ranks: 19
     ability_mod: 3
     synergy: 2
-    total: 15
+    total: 24
   Knowledge (Religion):
-    ranks: 9
+    ranks: 18
     ability_mod: 3
-    total: 12
+    total: 21
   Knowledge (The Planes):
     ranks: 3
     ability_mod: 3
     total: 6
   Sense Motive:
-    ranks: 1
-    ability_mod: 3
-    synergy: 2
-    total: 6
-  Spellcraft:
     ranks: 10
     ability_mod: 3
     synergy: 2
     total: 15
+  Spellcraft:
+    ranks: 19
+    ability_mod: 3
+    synergy: 2
+    total: 24
   Use Magic Device:
     ability_mod: -1
     synergy: 2
@@ -131,6 +134,9 @@ feats:
 - Augment Summoning
 - Scribe Scroll
 - Extend Spell
+- Spell Penetration
+- Greater Spell Focus
+- Greater Spell Penetration
 class_features:
 - 'turn_undead: Turn or rebuke undead'
 - 'spontaneous_casting: Convert prepared spells to cure/inflict'

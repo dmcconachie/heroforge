@@ -1,8 +1,8 @@
 identity:
   name: Gareth Spellblade
   race: Human
-  class_str: Fighter 1 / Wizard 5 / Eldritch Knight 1
-  level: 7
+  class_str: Fighter 1 / Wizard 5 / Eldritch Knight 10
+  level: 16
   alignment: neutral
   deity: ''
   size: Medium
@@ -39,61 +39,67 @@ combat:
   touch_ac: 11
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 31
-    con: 14
-    total: 45
+    hit_dice: 67
+    con: 32
+    untyped: 3
+    total: 102
   bab:
-    base: 4
-    total: 4
+    base: 13
+    total: 13
   initiative:
     dex: 1
-    total: 1
+    untyped: 4
+    total: 5
   speed:
     base: 30
     total: 30
   sr: 0
   fort:
-    base: 5
+    base: 10
     con: 2
-    total: 7
+    total: 12
   ref:
-    base: 1
-    dex: 1
-    total: 2
-  will:
     base: 4
-    total: 4
+    dex: 1
+    total: 5
+  will:
+    base: 7
+    total: 7
   attack_melee:
-    bab: 4
+    bab: 13
     str: 2
     untyped: 1
-    total: 7
+    total: 16
   attack_ranged:
-    bab: 4
+    bab: 13
     dex: 1
     untyped: 1
-    total: 6
+    total: 15
   damage_melee:
     str: 2
     total: 2
   grapple:
-    bab: 4
+    bab: 13
     str: 2
-    total: 6
+    total: 15
 attack_iteratives:
   melee:
-  - 7
-  ranged:
+  - 16
+  - 11
   - 6
+  ranged:
+  - 15
+  - 10
+  - 5
 skills:
   Climb:
     ranks: 4
     ability_mod: 2
     total: 6
   Concentration:
-    ranks: 9
+    ranks: 18
     ability_mod: 2
-    total: 11
+    total: 20
   Decipher Script:
     ranks: 6
     ability_mod: 3
@@ -107,14 +113,14 @@ skills:
     ability_mod: -1
     total: 3
   Jump:
-    ranks: 5
+    ranks: 14
     ability_mod: 2
-    total: 7
+    total: 16
   Knowledge (Arcana):
-    ranks: 5
+    ranks: 14
     ability_mod: 3
     synergy: 2
-    total: 10
+    total: 19
   Knowledge (Religion):
     ranks: 4
     ability_mod: 3
@@ -124,18 +130,18 @@ skills:
     ability_mod: 3
     total: 5
   Ride:
-    ranks: 5
+    ranks: 14
     ability_mod: 1
-    total: 6
+    total: 15
   Spellcraft:
-    ranks: 7
+    ranks: 16
     ability_mod: 3
     synergy: 2
-    total: 12
+    total: 21
   Swim:
-    ranks: 5
+    ranks: 14
     ability_mod: 2
-    total: 7
+    total: 16
   Tumble:
     ability_mod: 1
     synergy: 2
@@ -156,6 +162,9 @@ feats:
 - Dodge
 - Mobility
 - Extend Spell
+- Spring Attack
+- Improved Initiative
+- Toughness
 class_features:
 - 'bonus_feat_1: Bonus fighter feat'
 - 'summon_familiar: Summon a familiar'

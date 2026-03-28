@@ -1,8 +1,8 @@
 identity:
   name: Brother Callum
   race: Human
-  class_str: Cleric 5 / Thaumaturgist 1
-  level: 6
+  class_str: Cleric 5 / Thaumaturgist 5
+  level: 10
   alignment: lawful_neutral
   deity: St. Cuthbert
   size: Medium
@@ -38,12 +38,12 @@ combat:
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 35
-    con: 12
-    total: 47
+    hit_dice: 47
+    con: 20
+    total: 67
   bab:
-    base: 3
-    total: 3
+    base: 5
+    total: 5
   initiative:
     total: 0
   speed:
@@ -51,53 +51,53 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 4
+    base: 5
     con: 2
-    total: 6
+    total: 7
   ref:
-    base: 1
-    total: 1
+    base: 2
+    total: 2
   will:
-    base: 6
+    base: 8
     wis: 3
-    total: 9
+    total: 11
   attack_melee:
-    bab: 3
-    total: 3
+    bab: 5
+    total: 5
   attack_ranged:
-    bab: 3
-    total: 3
+    bab: 5
+    total: 5
   damage_melee:
     total: 0
   grapple:
-    bab: 3
-    total: 3
+    bab: 5
+    total: 5
 attack_iteratives:
   melee:
-  - 3
+  - 5
   ranged:
-  - 3
+  - 5
 skills:
   Concentration:
-    ranks: 9
+    ranks: 13
     ability_mod: 2
-    total: 11
+    total: 15
   Knowledge (Arcana):
     ability_mod: 0
     synergy: 2
     total: 2
   Knowledge (Religion):
-    ranks: 6
+    ranks: 8
     ability_mod: 0
-    total: 6
+    total: 8
   Knowledge (The Planes):
-    ranks: 7
+    ranks: 10
     ability_mod: 0
-    total: 7
+    total: 10
   Spellcraft:
-    ranks: 5
+    ranks: 8
     ability_mod: 0
-    total: 5
+    total: 8
   Survival:
     ability_mod: 3
     synergy: 2
@@ -115,11 +115,16 @@ feats:
 - Augment Summoning
 - Combat Casting
 - Extend Spell
+- Spell Penetration
 class_features:
 - 'turn_undead: Turn or rebuke undead'
 - 'spontaneous_casting: Convert prepared spells to cure/inflict'
 - 'domains: Two domains granting bonus spells and powers'
 - 'improved_ally: Better planar ally'
+- 'augment_summoning: Augment Summoning feat'
+- 'extended_summoning: Double duration'
+- 'contingent_conjuration: Contingency on summon'
+- 'planar_cohort: Outsider cohort'
 spellcasting:
   Cleric:
     caster_level: 5

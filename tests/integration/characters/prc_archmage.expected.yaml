@@ -1,8 +1,8 @@
 identity:
   name: Meridius the Exalted
   race: Human
-  class_str: Wizard 15 / Archmage 1
-  level: 16
+  class_str: Wizard 15 / Archmage 5
+  level: 20
   alignment: neutral
   deity: ''
   size: Medium
@@ -39,12 +39,12 @@ combat:
   touch_ac: 11
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 49
-    con: 32
-    total: 81
+    hit_dice: 61
+    con: 40
+    total: 101
   bab:
-    base: 7
-    total: 7
+    base: 9
+    total: 9
   initiative:
     dex: 1
     total: 1
@@ -53,77 +53,77 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 5
+    base: 6
     con: 2
-    total: 7
-  ref:
-    base: 5
-    dex: 1
-    total: 6
-  will:
-    base: 11
-    total: 11
-  attack_melee:
-    bab: 7
-    str: -1
-    total: 6
-  attack_ranged:
-    bab: 7
-    dex: 1
     total: 8
+  ref:
+    base: 6
+    dex: 1
+    total: 7
+  will:
+    base: 13
+    total: 13
+  attack_melee:
+    bab: 9
+    str: -1
+    total: 8
+  attack_ranged:
+    bab: 9
+    dex: 1
+    total: 10
   damage_melee:
     str: -1
     total: -1
   grapple:
-    bab: 7
+    bab: 9
     str: -1
-    total: 6
+    total: 8
 attack_iteratives:
   melee:
-  - 6
-  - 1
-  ranged:
   - 8
   - 3
+  ranged:
+  - 10
+  - 5
 skills:
   Concentration:
-    ranks: 19
+    ranks: 23
     ability_mod: 2
-    total: 21
+    total: 25
   Decipher Script:
     ranks: 18
     ability_mod: 4
     total: 22
   Knowledge (Arcana):
-    ranks: 19
+    ranks: 23
     ability_mod: 4
     synergy: 2
-    total: 25
+    total: 29
   Knowledge (History):
-    ranks: 19
+    ranks: 23
     ability_mod: 4
-    total: 23
+    total: 27
   Knowledge (Religion):
-    ranks: 19
+    ranks: 23
     ability_mod: 4
-    total: 23
+    total: 27
   Knowledge (The Planes):
-    ranks: 19
+    ranks: 23
     ability_mod: 4
-    total: 23
+    total: 27
   Search:
-    ranks: 1
+    ranks: 5
     ability_mod: 4
-    total: 5
+    total: 9
   Spellcraft:
-    ranks: 19
+    ranks: 23
     ability_mod: 4
     synergy: 2
-    total: 25
+    total: 29
   Survival:
     ability_mod: 0
-    synergy: 2
-    total: 2
+    synergy: 4
+    total: 4
   Use Magic Device:
     ability_mod: -1
     synergy: 2
@@ -144,6 +144,7 @@ feats:
 - Greater Spell Penetration
 - Maximize Spell
 - Quicken Spell
+- Widen Spell
 class_features:
 - 'summon_familiar: Summon a familiar'
 - 'scribe_scroll: Scribe scroll feat for free'
@@ -151,6 +152,10 @@ class_features:
 - 'bonus_feat_wizard_10: Bonus wizard feat'
 - 'bonus_feat_wizard_15: Bonus wizard feat'
 - 'high_arcana_1: High arcana ability'
+- 'high_arcana_2: High arcana ability'
+- 'high_arcana_3: High arcana ability'
+- 'high_arcana_4: High arcana ability'
+- 'high_arcana_5: High arcana ability'
 spellcasting:
   Wizard:
     caster_level: 15

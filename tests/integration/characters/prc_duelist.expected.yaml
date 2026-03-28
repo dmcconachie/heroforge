@@ -1,8 +1,8 @@
 identity:
   name: Caelith Bladesong
   race: Elf
-  class_str: Fighter 6 / Rogue 1 / Duelist 1
-  level: 8
+  class_str: Fighter 6 / Rogue 1 / Duelist 10
+  level: 17
   alignment: chaotic_neutral
   deity: ''
   size: Medium
@@ -42,61 +42,67 @@ combat:
   touch_ac: 15
   flatfooted_ac: 12
   hp_max:
-    hit_dice: 63
-    con: 8
-    total: 71
+    hit_dice: 126
+    con: 17
+    total: 143
   bab:
-    base: 7
-    total: 7
+    base: 16
+    total: 16
   initiative:
     dex: 3
-    untyped: 4
-    total: 7
+    untyped: 6
+    total: 9
   speed:
     base: 30
     total: 30
   sr: 0
   fort:
-    base: 5
+    base: 8
     con: 1
-    total: 6
-  ref:
-    base: 6
-    dex: 3
     total: 9
+  ref:
+    base: 11
+    dex: 3
+    untyped: 2
+    competence: 2
+    total: 18
   will:
-    base: 2
-    total: 2
+    base: 5
+    total: 5
   attack_melee:
-    bab: 7
+    bab: 16
     str: 2
     untyped: 1
-    total: 10
+    total: 19
   attack_ranged:
-    bab: 7
+    bab: 16
     dex: 3
     untyped: 1
-    total: 11
+    total: 20
   damage_melee:
     str: 2
     total: 2
   grapple:
-    bab: 7
+    bab: 16
     str: 2
-    total: 9
+    total: 18
 attack_iteratives:
   melee:
+  - 19
+  - 14
+  - 9
+  - 4
+  ranged:
+  - 20
+  - 15
   - 10
   - 5
-  ranged:
-  - 11
-  - 6
 skills:
   Balance:
-    ranks: 1
+    ranks: 10
     ability_mod: 3
     synergy: 2
-    total: 6
+    total: 15
   Bluff:
     ranks: 1
     ability_mod: -1
@@ -105,10 +111,14 @@ skills:
     ranks: 8
     ability_mod: 2
     total: 10
+  Diplomacy:
+    ability_mod: -1
+    synergy: 2
+    total: 1
   Escape Artist:
-    ranks: 1
+    ranks: 10
     ability_mod: 3
-    total: 4
+    total: 13
   Hide:
     ranks: 1
     ability_mod: 3
@@ -123,38 +133,42 @@ skills:
     synergy: 2
     total: 12
   Listen:
-    ranks: 2
+    ranks: 11
     ability_mod: 0
-    total: 2
+    total: 11
   Move Silently:
     ranks: 1
     ability_mod: 3
     total: 4
   Perform:
-    ranks: 5
+    ranks: 10
     ability_mod: -1
-    total: 4
+    total: 9
   Search:
     ranks: 1
     ability_mod: 2
     total: 3
   Sense Motive:
-    ranks: 2
+    ranks: 11
     ability_mod: 0
-    total: 2
+    total: 11
   Spot:
-    ranks: 1
+    ranks: 5
     ability_mod: 0
-    total: 1
+    total: 5
   Swim:
     ranks: 4
     ability_mod: 2
     total: 6
   Tumble:
-    ranks: 6
+    ranks: 15
     ability_mod: 3
     synergy: 2
-    total: 11
+    total: 20
+  Use Rope:
+    ability_mod: 3
+    synergy: 2
+    total: 5
 carrying_capacity:
   light: 58
   medium: 116
@@ -167,6 +181,9 @@ feats:
 - Improved Initiative
 - Weapon Finesse
 - Spring Attack
+- Whirlwind Attack
+- Improved Critical
+- Lightning Reflexes
 class_features:
 - 'bonus_feat_1: Bonus fighter feat'
 - 'bonus_feat_2: Bonus fighter feat'
@@ -175,4 +192,11 @@ class_features:
 - 'sneak_attack_1d6: Sneak attack +1d6'
 - 'trapfinding: Find and disable magical traps'
 - 'canny_defense: INT to AC (unarmored)'
+- 'improved_reaction: +2 initiative'
+- 'enhanced_mobility: +4 AC vs AoO'
+- 'precise_strike: +1d6 damage (light)'
+- 'grace: +2 Reflex saves'
+- 'acrobatic_charge: Charge in difficult terrain'
+- 'deflect_arrows: Deflect one ranged/round'
+- 'crippling_critical: Critical hit debuff'
 resources: {}

@@ -1,8 +1,8 @@
 identity:
   name: Lyris Silverveil
   race: Half-Elf
-  class_str: Bard 6
-  level: 6
+  class_str: Bard 20
+  level: 20
   alignment: chaotic_good
   deity: ''
   size: Medium
@@ -39,12 +39,12 @@ combat:
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 26
-    con: 6
-    total: 32
+    hit_dice: 82
+    con: 20
+    total: 102
   bab:
-    base: 4
-    total: 4
+    base: 15
+    total: 15
   initiative:
     dex: 2
     total: 2
@@ -53,59 +53,63 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 2
+    base: 6
     con: 1
-    total: 3
-  ref:
-    base: 5
-    dex: 2
     total: 7
-  will:
-    base: 5
-    total: 5
-  attack_melee:
-    bab: 4
-    total: 4
-  attack_ranged:
-    bab: 4
+  ref:
+    base: 12
     dex: 2
-    total: 6
+    total: 14
+  will:
+    base: 12
+    total: 12
+  attack_melee:
+    bab: 15
+    total: 15
+  attack_ranged:
+    bab: 15
+    dex: 2
+    total: 17
   damage_melee:
     total: 0
   grapple:
-    bab: 4
-    total: 4
+    bab: 15
+    total: 15
 attack_iteratives:
   melee:
-  - 4
+  - 15
+  - 10
+  - 5
   ranged:
-  - 6
+  - 17
+  - 12
+  - 7
 skills:
   Balance:
     ability_mod: 2
     synergy: 2
     total: 4
   Bluff:
-    ranks: 9
+    ranks: 23
     ability_mod: 3
-    total: 12
+    total: 26
   Concentration:
-    ranks: 9
+    ranks: 23
     ability_mod: 1
-    total: 10
+    total: 24
   Diplomacy:
-    ranks: 9
+    ranks: 23
     ability_mod: 3
     synergy: 2
-    total: 14
+    total: 28
   Disguise:
     ability_mod: 3
     synergy: 2
     total: 5
   Gather Information:
-    ranks: 2
+    ranks: 9
     ability_mod: 3
-    total: 5
+    total: 12
   Intimidate:
     ability_mod: 3
     synergy: 2
@@ -115,18 +119,18 @@ skills:
     synergy: 2
     total: 2
   Knowledge (Arcana):
-    ranks: 9
+    ranks: 23
     ability_mod: 2
     synergy: 2
-    total: 13
+    total: 27
   Listen:
-    ranks: 3
+    ranks: 10
     ability_mod: 0
-    total: 3
+    total: 10
   Perform:
-    ranks: 9
+    ranks: 23
     ability_mod: 3
-    total: 12
+    total: 26
   Sense Motive:
     ability_mod: 0
     synergy: 2
@@ -136,14 +140,14 @@ skills:
     synergy: 2
     total: 4
   Spellcraft:
-    ranks: 9
+    ranks: 23
     ability_mod: 2
     synergy: 2
-    total: 13
+    total: 27
   Tumble:
-    ranks: 9
+    ranks: 23
     ability_mod: 2
-    total: 11
+    total: 25
   Use Magic Device:
     ranks: 4
     ability_mod: 3
@@ -157,6 +161,10 @@ feats:
 - Dodge
 - Combat Casting
 - Spell Focus
+- Greater Spell Focus
+- Spell Penetration
+- Mobility
+- Greater Spell Penetration
 class_features:
 - 'bardic_music: Bardic music abilities; uses/day = Bard level'
 - 'bardic_knowledge: Bardic knowledge check (Bard level + INT)'
@@ -165,24 +173,43 @@ class_features:
 - 'inspire_courage_1: +1 morale bonus attacks/saves vs fear'
 - 'inspire_competence: +2 competence bonus on skill checks'
 - 'suggestion: Suggestion via fascinate'
+- 'inspire_courage_2: +2 morale bonus attacks/saves vs fear'
+- 'inspire_greatness: +2 HD, +2 attack, +1 Fort'
+- 'song_of_freedom: Break enchantment via music'
+- 'inspire_courage_3: +3 morale bonus attacks/saves vs fear'
+- 'inspire_heroics: +4 AC and saves for one creature'
+- 'mass_suggestion: Suggestion to all fascinated'
+- 'inspire_courage_4: +4 morale bonus attacks/saves vs fear'
 spellcasting:
   Bard:
-    caster_level: 6
+    caster_level: 20
     key_ability: cha
     cast_type: arcane
     preparation: spontaneous
     slots_per_day:
-    - 3
     - 4
-    - 3
+    - 5
+    - 5
+    - 5
+    - 4
+    - 4
+    - 4
     spell_save_dc:
       0: 13
       1: 14
       2: 15
+      3: 16
+      4: 17
+      5: 18
+      6: 19
     spells_known_count:
     - 6
+    - 5
+    - 5
+    - 5
+    - 5
+    - 5
     - 4
-    - 3
     spells_known:
       0:
       - Detect Magic
@@ -197,8 +224,34 @@ spellcasting:
       - Cure Light Wounds
       - Hideous Laughter
       - Feather Fall
+      - Silent Image
       2:
       - Invisibility
       - Cure Moderate Wounds
       - Eagle's Splendor
+      - Mirror Image
+      - Silence
+      3:
+      - Haste
+      - Charm Monster
+      - Cure Serious Wounds
+      - Dispel Magic
+      - Good Hope
+      4:
+      - Cure Critical Wounds
+      - Freedom of Movement
+      - Greater Invisibility
+      - Break Enchantment
+      - Locate Creature
+      5:
+      - Greater Heroism
+      - Mass Cure Light Wounds
+      - Song of Discord
+      - Mislead
+      - Nightmare
+      6:
+      - Mass Charm Monster
+      - Mass Suggestion
+      - Otto's Irresistible Dance
+      - Geas/Quest
 resources: {}

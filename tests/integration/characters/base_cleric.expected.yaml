@@ -1,8 +1,8 @@
 identity:
   name: Brother Aldric
   race: Human
-  class_str: Cleric 6
-  level: 6
+  class_str: Cleric 20
+  level: 20
   alignment: lawful_good
   deity: Pelor
   size: Medium
@@ -38,12 +38,12 @@ combat:
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 36
-    con: 12
-    total: 48
+    hit_dice: 113
+    con: 40
+    total: 153
   bab:
-    base: 4
-    total: 4
+    base: 15
+    total: 15
   initiative:
     total: 0
   speed:
@@ -51,55 +51,71 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 5
+    base: 12
     con: 2
-    total: 7
+    total: 14
   ref:
-    base: 2
-    total: 2
-  will:
-    base: 5
-    wis: 3
-    total: 8
-  attack_melee:
-    bab: 4
-    str: 2
+    base: 6
     total: 6
+  will:
+    base: 12
+    wis: 3
+    total: 15
+  attack_melee:
+    bab: 15
+    str: 2
+    total: 17
   attack_ranged:
-    bab: 4
-    total: 4
+    bab: 15
+    total: 15
   damage_melee:
     str: 2
     total: 2
   grapple:
-    bab: 4
+    bab: 15
     str: 2
-    total: 6
+    total: 17
 attack_iteratives:
   melee:
-  - 6
+  - 17
+  - 12
+  - 7
   ranged:
-  - 4
+  - 15
+  - 10
+  - 5
 skills:
   Concentration:
-    ranks: 9
+    ranks: 23
     ability_mod: 2
-    total: 11
+    total: 25
   Diplomacy:
-    ranks: 2
+    ranks: 9
     ability_mod: 1
-    total: 3
-  Heal:
-    ranks: 7
-    ability_mod: 3
     total: 10
+  Heal:
+    ranks: 14
+    ability_mod: 3
+    total: 17
+  Knowledge (Arcana):
+    ability_mod: 0
+    synergy: 2
+    total: 2
   Knowledge (Religion):
-    ranks: 6
+    ranks: 13
     ability_mod: 0
-    total: 6
+    total: 13
+  Sense Motive:
+    ability_mod: 3
+    synergy: 2
+    total: 5
   Spellcraft:
-    ranks: 3
+    ranks: 10
     ability_mod: 0
+    total: 10
+  Use Magic Device:
+    ability_mod: 1
+    synergy: 2
     total: 3
 carrying_capacity:
   light: 58
@@ -110,24 +126,40 @@ feats:
 - Extra Turning
 - Improved Turning
 - Spell Focus
+- Augment Summoning
+- Spell Penetration
+- Greater Spell Focus
+- Greater Spell Penetration
 class_features:
 - 'turn_undead: Turn or rebuke undead'
 - 'spontaneous_casting: Convert prepared spells to cure/inflict'
 - 'domains: Two domains granting bonus spells and powers'
 spellcasting:
   Cleric:
-    caster_level: 6
+    caster_level: 20
     key_ability: wis
     cast_type: divine
     preparation: prepared
     slots_per_day:
+    - 6
+    - 6
+    - 6
+    - 6
+    - 5
     - 5
     - 4
     - 4
-    - 3
+    - 4
+    - 4
     spell_save_dc:
       0: 13
       1: 14
       2: 15
       3: 16
+      4: 17
+      5: 18
+      6: 19
+      7: 20
+      8: 21
+      9: 22
 resources: {}

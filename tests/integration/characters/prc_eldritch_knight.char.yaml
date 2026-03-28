@@ -96,6 +96,114 @@ levels:
       Ride: 1
       Knowledge (Arcana): 1
       Swim: 1
+  # EK 2 — total 8
+  - level: 8
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+  # EK 3 — total 9; character feat at L9
+  - level: 9
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+    feats:
+      - name: "Spring Attack"
+        source: character
+  # EK 4 — total 10
+  - level: 10
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+  # EK 5 — total 11
+  - level: 11
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+  # EK 6 — total 12; character feat at L12
+  - level: 12
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+    feats:
+      - name: "Improved Initiative"
+        source: character
+  # EK 7 — total 13
+  - level: 13
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+  # EK 8 — total 14
+  - level: 14
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+  # EK 9 — total 15; character feat at L15
+  - level: 15
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
+    feats:
+      - name: "Toughness"
+        source: character
+  # EK 10 — total 16
+  - level: 16
+    class: "Eldritch Knight"
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+      Ride: 1
 
 buffs: []
 templates: []

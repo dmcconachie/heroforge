@@ -68,6 +68,116 @@ levels:
     feats:
       - name: "Extra Turning"
         source: character
+  - level: 7
+    class: Paladin
+    hp_roll: 7
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Heal: 1
+  - level: 8
+    class: Paladin
+    hp_roll: 6
+    skill_ranks:
+      Ride: 1
+      Sense Motive: 1
+      Heal: 1
+  - level: 9
+    class: Paladin
+    hp_roll: 7
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Ride: 1
+    feats:
+      - name: "Improved Bull Rush"
+        source: character
+  - level: 10
+    class: Paladin
+    hp_roll: 6
+    skill_ranks:
+      Heal: 1
+      Sense Motive: 1
+      Diplomacy: 1
+  - level: 11
+    class: Paladin
+    hp_roll: 7
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Heal: 1
+  - level: 12
+    class: Paladin
+    hp_roll: 6
+    skill_ranks:
+      Ride: 1
+      Sense Motive: 1
+      Heal: 1
+    feats:
+      - name: "Mounted Combat"
+        source: character
+  - level: 13
+    class: Paladin
+    hp_roll: 7
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Heal: 1
+  - level: 14
+    class: Paladin
+    hp_roll: 6
+    skill_ranks:
+      Ride: 1
+      Sense Motive: 1
+      Heal: 1
+  - level: 15
+    class: Paladin
+    hp_roll: 7
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Ride: 1
+    feats:
+      - name: "Ride-By Attack"
+        source: character
+  - level: 16
+    class: Paladin
+    hp_roll: 6
+    skill_ranks:
+      Heal: 1
+      Sense Motive: 1
+      Diplomacy: 1
+  - level: 17
+    class: Paladin
+    hp_roll: 7
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Heal: 1
+  - level: 18
+    class: Paladin
+    hp_roll: 6
+    skill_ranks:
+      Ride: 1
+      Sense Motive: 1
+      Heal: 1
+    feats:
+      - name: "Spirited Charge"
+        source: character
+  - level: 19
+    class: Paladin
+    hp_roll: 7
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Heal: 1
+  - level: 20
+    class: Paladin
+    hp_roll: 6
+    skill_ranks:
+      Ride: 1
+      Sense Motive: 1
+      Heal: 1
 
 buffs: []
 templates: []

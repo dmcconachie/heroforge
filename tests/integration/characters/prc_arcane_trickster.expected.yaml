@@ -1,8 +1,8 @@
 identity:
   name: Zephira Luckblade
   race: Human
-  class_str: Rogue 3 / Wizard 5 / Arcane Trickster 1
-  level: 9
+  class_str: Rogue 3 / Wizard 5 / Arcane Trickster 10
+  level: 18
   alignment: chaotic_neutral
   deity: ''
   size: Medium
@@ -39,12 +39,12 @@ combat:
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 32
-    con: 9
-    total: 41
+    hit_dice: 59
+    con: 18
+    total: 77
   bab:
-    base: 4
-    total: 4
+    base: 9
+    total: 9
   initiative:
     dex: 2
     untyped: 4
@@ -54,35 +54,37 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 2
+    base: 5
     con: 1
-    total: 3
-  ref:
-    base: 6
-    dex: 2
-    total: 8
-  will:
-    base: 7
-    total: 7
-  attack_melee:
-    bab: 4
-    str: -1
-    total: 3
-  attack_ranged:
-    bab: 4
-    dex: 2
     total: 6
+  ref:
+    base: 11
+    dex: 2
+    total: 13
+  will:
+    base: 12
+    total: 12
+  attack_melee:
+    bab: 9
+    str: -1
+    total: 8
+  attack_ranged:
+    bab: 9
+    dex: 2
+    total: 11
   damage_melee:
     str: -1
     total: -1
   grapple:
-    bab: 4
+    bab: 9
     str: -1
-    total: 3
+    total: 8
 attack_iteratives:
   melee:
+  - 8
   - 3
   ranged:
+  - 11
   - 6
 skills:
   Balance:
@@ -107,25 +109,25 @@ skills:
     synergy: 2
     total: 2
   Disable Device:
-    ranks: 8
+    ranks: 17
     ability_mod: 4
-    total: 12
+    total: 21
   Disguise:
     ability_mod: 0
     synergy: 2
     total: 2
   Escape Artist:
-    ranks: 8
+    ranks: 17
     ability_mod: 2
-    total: 10
+    total: 19
   Gather Information:
     ability_mod: 0
     synergy: 2
     total: 2
   Hide:
-    ranks: 7
+    ranks: 16
     ability_mod: 2
-    total: 9
+    total: 18
   Intimidate:
     ability_mod: 0
     synergy: 2
@@ -156,22 +158,22 @@ skills:
     ability_mod: 4
     total: 8
   Listen:
-    ranks: 7
+    ranks: 16
     ability_mod: 0
-    total: 7
+    total: 16
   Move Silently:
-    ranks: 7
+    ranks: 16
     ability_mod: 2
     synergy: 2
-    total: 11
+    total: 20
   Open Lock:
-    ranks: 7
+    ranks: 16
     ability_mod: 2
-    total: 9
+    total: 18
   Search:
-    ranks: 7
+    ranks: 16
     ability_mod: 4
-    total: 11
+    total: 20
   Sleight of Hand:
     ranks: 6
     ability_mod: 2
@@ -183,17 +185,17 @@ skills:
     synergy: 2
     total: 11
   Spot:
-    ranks: 7
+    ranks: 16
     ability_mod: 0
-    total: 7
+    total: 16
   Survival:
     ability_mod: 0
     synergy: 2
     total: 2
   Tumble:
-    ranks: 7
+    ranks: 16
     ability_mod: 2
-    total: 9
+    total: 18
   Use Magic Device:
     ability_mod: 0
     synergy: 2
@@ -214,6 +216,9 @@ feats:
 - Spell Focus
 - Still Spell
 - Mobility
+- Extend Spell
+- Empower Spell
+- Silent Spell
 class_features:
 - 'sneak_attack_1d6: Sneak attack +1d6'
 - 'trapfinding: Find and disable magical traps'
@@ -224,6 +229,11 @@ class_features:
 - 'scribe_scroll: Scribe scroll feat for free'
 - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
 - 'ranged_legerdemain: Ranged sleight of hand'
+- 'sneak_attack_1d6: +1d6 sneak attack'
+- 'sneak_attack_2d6: +2d6 sneak attack'
+- 'sneak_attack_3d6: +3d6 sneak attack'
+- 'sneak_attack_4d6: +4d6 sneak attack'
+- 'sneak_attack_5d6: +5d6 sneak attack'
 spellcasting:
   Wizard:
     caster_level: 5

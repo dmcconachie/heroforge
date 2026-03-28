@@ -152,6 +152,141 @@ levels:
     feats:
       - name: "Mobility"
         source: character
+  # AT 2 — total 10
+  - level: 10
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+  # AT 3 — total 11
+  - level: 11
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+  # AT 4 — total 12; character feat at L12
+  - level: 12
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+    feats:
+      - name: "Extend Spell"
+        source: character
+  # AT 5 — total 13
+  - level: 13
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+  # AT 6 — total 14
+  - level: 14
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+  # AT 7 — total 15; character feat at L15
+  - level: 15
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+    feats:
+      - name: "Empower Spell"
+        source: character
+  # AT 8 — total 16
+  - level: 16
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+  # AT 9 — total 17
+  - level: 17
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+  # AT 10 — total 18; character feat at L18
+  - level: 18
+    class: Arcane Trickster
+    hp_roll: 3
+    skill_ranks:
+      Disable Device: 1
+      Escape Artist: 1
+      Hide: 1
+      Move Silently: 1
+      Tumble: 1
+      Search: 1
+      Open Lock: 1
+      Spot: 1
+      Listen: 1
+    feats:
+      - name: "Silent Spell"
+        source: character
 
 buffs: []
 templates: []

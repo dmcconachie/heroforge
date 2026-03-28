@@ -121,6 +121,242 @@ levels:
     feats:
       - name: "Combat Reflexes"
         source: character
+  # L7: 11 skill pts
+  - level: 7
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Sense Motive: 1
+      Use Magic Device: 1
+      Escape Artist: 1
+  # L8: 11 skill pts
+  - level: 8
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Bluff: 1
+      Diplomacy: 1
+      Gather Information: 1
+  # L9: 11 skill pts
+  - level: 9
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Sense Motive: 1
+      Use Magic Device: 1
+      Escape Artist: 1
+    feats:
+      - name: "Spring Attack"
+        source: character
+  # L10: 11 skill pts
+  - level: 10
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Bluff: 1
+      Sleight of Hand: 1
+      Gather Information: 1
+  # L11: 11 skill pts
+  - level: 11
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Diplomacy: 1
+      Sense Motive: 1
+      Use Magic Device: 1
+  # L12: 11 skill pts
+  - level: 12
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Bluff: 1
+      Escape Artist: 1
+      Gather Information: 1
+    feats:
+      - name: "Weapon Finesse"
+        source: character
+  # L13: 11 skill pts
+  - level: 13
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Diplomacy: 1
+      Sense Motive: 1
+      Use Magic Device: 1
+  # L14: 11 skill pts
+  - level: 14
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Bluff: 1
+      Sleight of Hand: 1
+      Gather Information: 1
+  # L15: 11 skill pts
+  - level: 15
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Diplomacy: 1
+      Sense Motive: 1
+      Use Magic Device: 1
+    feats:
+      - name: "Stealthy"
+        source: character
+  # L16: 11 skill pts
+  - level: 16
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Bluff: 1
+      Escape Artist: 1
+      Gather Information: 1
+  # L17: 11 skill pts
+  - level: 17
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Diplomacy: 1
+      Sense Motive: 1
+      Use Magic Device: 1
+  # L18: 11 skill pts
+  - level: 18
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Bluff: 1
+      Sleight of Hand: 1
+      Gather Information: 1
+    feats:
+      - name: "Nimble Fingers"
+        source: character
+  # L19: 11 skill pts
+  - level: 19
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Diplomacy: 1
+      Sense Motive: 1
+      Escape Artist: 1
+  # L20: 11 skill pts
+  - level: 20
+    class: Rogue
+    hp_roll: 4
+    skill_ranks:
+      Disable Device: 1
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Spot: 1
+      Listen: 1
+      Tumble: 1
+      Use Magic Device: 1
+      Bluff: 1
+      Gather Information: 1
 
 buffs: []
 templates: []

@@ -1,8 +1,8 @@
 identity:
   name: Malachar Dreadborn
   race: Human
-  class_str: Fighter 7 / Blackguard 1
-  level: 8
+  class_str: Fighter 7 / Blackguard 10
+  level: 17
   alignment: neutral_evil
   deity: ''
   size: Medium
@@ -39,12 +39,12 @@ combat:
   touch_ac: 11
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 66
-    con: 16
-    total: 82
+    hit_dice: 129
+    con: 34
+    total: 163
   bab:
-    base: 8
-    total: 8
+    base: 17
+    total: 17
   initiative:
     dex: 1
     untyped: 4
@@ -54,41 +54,48 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 7
+    base: 12
     con: 2
-    total: 9
+    untyped: 2
+    total: 16
   ref:
-    base: 2
+    base: 5
     dex: 1
-    total: 3
+    untyped: 2
+    total: 8
   will:
-    base: 2
-    total: 2
+    base: 5
+    untyped: 4
+    total: 9
   attack_melee:
-    bab: 8
+    bab: 17
     str: 3
     untyped: 1
-    total: 12
+    total: 21
   attack_ranged:
-    bab: 8
+    bab: 17
     dex: 1
     untyped: 1
-    total: 10
+    total: 19
   damage_melee:
     str: 3
     untyped: 2
     total: 5
   grapple:
-    bab: 8
+    bab: 17
     str: 3
-    total: 11
+    total: 20
 attack_iteratives:
   melee:
-  - 12
-  - 7
+  - 21
+  - 16
+  - 11
+  - 6
   ranged:
-  - 10
-  - 5
+  - 19
+  - 14
+  - 9
+  - 4
 skills:
   Bluff:
     ability_mod: 2
@@ -99,21 +106,21 @@ skills:
     ability_mod: 3
     total: 7
   Hide:
-    ranks: 6
+    ranks: 15
     ability_mod: 1
-    total: 7
+    total: 16
   Intimidate:
-    ranks: 10
+    ranks: 19
     ability_mod: 2
-    total: 12
+    total: 21
   Jump:
     ranks: 3
     ability_mod: 3
     total: 6
   Knowledge (Religion):
-    ranks: 3
+    ranks: 12
     ability_mod: 0
-    total: 3
+    total: 12
   Move Silently:
     ability_mod: 1
     synergy: 2
@@ -131,6 +138,9 @@ feats:
 - Blind-Fight
 - Great Cleave
 - Weapon Specialization
+- Iron Will
+- Improved Bull Rush
+- Improved Sunder
 class_features:
 - 'bonus_feat_1: Bonus fighter feat'
 - 'bonus_feat_2: Bonus fighter feat'
@@ -138,9 +148,17 @@ class_features:
 - 'bonus_feat_6: Bonus fighter feat'
 - 'aura_of_evil: Strong evil aura'
 - 'detect_good: Detect good at will'
+- 'dark_blessing: CHA bonus to saves'
+- 'smite_good: Smite good 1/day'
+- 'aura_of_despair: -2 saves to enemies'
+- 'command_undead: Command/rebuke undead'
+- 'sneak_attack_1d6: +1d6 sneak attack'
+- 'fiendish_servant: Fiendish mount'
+- 'sneak_attack_2d6: +2d6 sneak attack'
+- 'sneak_attack_3d6: +3d6 sneak attack'
 spellcasting:
   Blackguard:
-    caster_level: 1
+    caster_level: 10
     key_ability: cha
     cast_type: divine
     preparation: prepared

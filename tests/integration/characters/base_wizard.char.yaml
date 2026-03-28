@@ -94,6 +94,180 @@ levels:
     feats:
       - name: "Greater Spell Focus"
         source: character
+  # L7: 6 skill pts
+  - level: 7
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+  # L8: 6 skill pts
+  - level: 8
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+  # L9: 6 skill pts
+  - level: 9
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+    feats:
+      - name: "Greater Spell Penetration"
+        source: character
+  # L10: 6 skill pts
+  - level: 10
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+    feats:
+      - name: "Empower Spell"
+        source: wizard_bonus
+  # L11: 6 skill pts
+  - level: 11
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+  # L12: 6 skill pts
+  - level: 12
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+    feats:
+      - name: "Iron Will"
+        source: character
+  # L13: 6 skill pts
+  - level: 13
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+  # L14: 6 skill pts
+  - level: 14
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+  # L15: 6 skill pts
+  - level: 15
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+    feats:
+      - name: "Spell Mastery"
+        source: character
+      - name: "Maximize Spell"
+        source: wizard_bonus
+  # L16: 6 skill pts
+  - level: 16
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+  # L17: 6 skill pts
+  - level: 17
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+  # L18: 6 skill pts
+  - level: 18
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+    feats:
+      - name: "Quicken Spell"
+        source: character
+  # L19: 6 skill pts
+  - level: 19
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+  # L20: 6 skill pts
+  - level: 20
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+    feats:
+      - name: "Craft Wondrous Item"
+        source: wizard_bonus
 
 buffs: []
 templates: []

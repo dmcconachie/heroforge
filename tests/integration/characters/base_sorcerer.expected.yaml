@@ -1,8 +1,8 @@
 identity:
   name: Kael Firebrand
   race: Human
-  class_str: Sorcerer 6
-  level: 6
+  class_str: Sorcerer 20
+  level: 20
   alignment: chaotic_good
   deity: ''
   size: Medium
@@ -39,13 +39,13 @@ combat:
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 19
-    con: 12
+    hit_dice: 61
+    con: 40
     untyped: 3
-    total: 34
+    total: 104
   bab:
-    base: 3
-    total: 3
+    base: 10
+    total: 10
   initiative:
     dex: 2
     total: 2
@@ -54,45 +54,48 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 2
+    base: 6
     con: 2
-    total: 4
+    total: 8
   ref:
-    base: 2
+    base: 6
     dex: 2
-    total: 4
+    total: 8
   will:
-    base: 5
-    total: 5
+    base: 12
+    untyped: 2
+    total: 14
   attack_melee:
-    bab: 3
+    bab: 10
     str: -1
-    total: 2
+    total: 9
   attack_ranged:
-    bab: 3
+    bab: 10
     dex: 2
-    total: 5
+    total: 12
   damage_melee:
     str: -1
     total: -1
   grapple:
-    bab: 3
+    bab: 10
     str: -1
-    total: 2
+    total: 9
 attack_iteratives:
   melee:
-  - 2
+  - 9
+  - 4
   ranged:
-  - 5
+  - 12
+  - 7
 skills:
   Bluff:
-    ranks: 6
+    ranks: 13
     ability_mod: 4
-    total: 10
+    total: 17
   Concentration:
-    ranks: 9
+    ranks: 23
     ability_mod: 2
-    total: 11
+    total: 25
   Diplomacy:
     ability_mod: 4
     synergy: 2
@@ -106,18 +109,19 @@ skills:
     synergy: 2
     total: 6
   Knowledge (Arcana):
-    ranks: 3
+    ranks: 10
     ability_mod: 0
     synergy: 2
-    total: 5
+    total: 12
   Sleight of Hand:
     ability_mod: 2
     synergy: 2
     total: 4
   Spellcraft:
-    ranks: 9
+    ranks: 23
     ability_mod: 0
-    total: 9
+    synergy: 2
+    total: 25
   Use Magic Device:
     ability_mod: 4
     synergy: 2
@@ -131,29 +135,51 @@ feats:
 - Combat Casting
 - Spell Focus
 - Spell Penetration
+- Greater Spell Focus
+- Greater Spell Penetration
+- Iron Will
+- Empower Spell
 class_features:
 - 'summon_familiar: Summon a familiar'
 spellcasting:
   Sorcerer:
-    caster_level: 6
+    caster_level: 20
     key_ability: cha
     cast_type: arcane
     preparation: spontaneous
     slots_per_day:
     - 6
     - 7
+    - 7
+    - 7
+    - 7
     - 6
-    - 4
+    - 6
+    - 6
+    - 6
+    - 6
     spell_save_dc:
       0: 14
       1: 15
       2: 16
       3: 17
+      4: 18
+      5: 19
+      6: 20
+      7: 21
+      8: 22
+      9: 23
     spells_known_count:
-    - 7
+    - 9
+    - 5
+    - 5
     - 4
-    - 2
-    - 1
+    - 4
+    - 4
+    - 3
+    - 3
+    - 3
+    - 3
     spells_known:
       0:
       - Detect Magic
@@ -163,16 +189,51 @@ spellcasting:
       - Prestidigitation
       - Ray of Frost
       - Resistance
+      - Ghost Sound
+      - Acid Splash
       1:
       - Magic Missile
       - Shield
       - Mage Armor
       - Grease
       - Burning Hands
+      - Enlarge Person
       2:
       - Scorching Ray
       - Mirror Image
       - Invisibility
+      - Web
+      - Glitterdust
+      - See Invisibility
       3:
       - Fireball
+      - Haste
+      - Lightning Bolt
+      - Fly
+      4:
+      - Dimension Door
+      - Stoneskin
+      - Greater Invisibility
+      - Ice Storm
+      5:
+      - Teleport
+      - Cone of Cold
+      - Wall of Force
+      - Dominate Person
+      6:
+      - Disintegrate
+      - Chain Lightning
+      - Greater Dispel Magic
+      7:
+      - Finger of Death
+      - Prismatic Spray
+      - Limited Wish
+      8:
+      - Horrid Wilting
+      - Polar Ray
+      - Greater Shout
+      9:
+      - Wish
+      - Meteor Swarm
+      - Time Stop
 resources: {}

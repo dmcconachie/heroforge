@@ -78,6 +78,145 @@ levels:
     feats:
       - name: "Natural Spell"
         source: character
+  - level: 7
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Nature): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+  - level: 8
+    class: Druid
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Handle Animal: 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+  - level: 9
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Nature): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+    feats:
+      - name: "Spell Penetration"
+        source: character
+  - level: 10
+    class: Druid
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Handle Animal: 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+  - level: 11
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Nature): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+  - level: 12
+    class: Druid
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Handle Animal: 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+    feats:
+      - name: "Greater Spell Focus"
+        source: character
+        parameter: Conjuration
+  - level: 13
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Nature): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+  - level: 14
+    class: Druid
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Handle Animal: 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+  - level: 15
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Nature): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+    feats:
+      - name: "Greater Spell Penetration"
+        source: character
+  - level: 16
+    class: Druid
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Handle Animal: 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+  - level: 17
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Nature): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+  - level: 18
+    class: Druid
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Handle Animal: 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
+    feats:
+      - name: "Combat Casting"
+        source: character
+  - level: 19
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Nature): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+  - level: 20
+    class: Druid
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Handle Animal: 1
+      Listen: 1
+      Spot: 1
+      Survival: 1
 
 buffs: []
 templates: []

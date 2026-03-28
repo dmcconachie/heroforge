@@ -91,6 +91,105 @@ levels:
     skill_ranks:
       Hide: 3
       Listen: 2
+  # AA 2 — total 9; character feat at L9
+  - level: 9
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+    feats:
+      - name: "Shot on the Run"
+        source: character
+  # AA 3 — total 10
+  - level: 10
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+  # AA 4 — total 11
+  - level: 11
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+  # AA 5 — total 12; character feat at L12
+  - level: 12
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+    feats:
+      - name: "Improved Critical"
+        source: character
+  # AA 6 — total 13
+  - level: 13
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+  # AA 7 — total 14
+  - level: 14
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+  # AA 8 — total 15; character feat at L15
+  - level: 15
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+    feats:
+      - name: "Improved Precise Shot"
+        source: character
+  # AA 9 — total 16
+  - level: 16
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
+  # AA 10 — total 17
+  - level: 17
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Listen: 1
+      Spot: 1
+      Move Silently: 1
+      Survival: 1
 
 buffs: []
 templates: []

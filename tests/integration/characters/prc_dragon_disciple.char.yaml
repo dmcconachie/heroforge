@@ -49,6 +49,87 @@ levels:
     feats:
       - name: "Combat Casting"
         source: character
+  # DD 2 — total 4
+  - level: 4
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Arcana): 1
+      Listen: 1
+  # DD 3 — total 5
+  - level: 5
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Arcana): 1
+      Spot: 1
+  # DD 4 — total 6; character feat at L6
+  - level: 6
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Arcana): 1
+      Listen: 1
+    feats:
+      - name: "Iron Will"
+        source: character
+  # DD 5 — total 7
+  - level: 7
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Spot: 1
+  # DD 6 — total 8
+  - level: 8
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Listen: 1
+  # DD 7 — total 9; character feat at L9
+  - level: 9
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Spot: 1
+    feats:
+      - name: "Great Fortitude"
+        source: character
+  # DD 8 — total 10
+  - level: 10
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Listen: 1
+  # DD 9 — total 11
+  - level: 11
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Spot: 1
+  # DD 10 — total 12; character feat at L12
+  - level: 12
+    class: Dragon Disciple
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Listen: 1
+    feats:
+      - name: "Blind-Fight"
+        source: character
 
 buffs: []
 templates: []

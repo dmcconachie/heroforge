@@ -1,8 +1,8 @@
 identity:
   name: Grukk Skullcrusher
   race: Half-Orc
-  class_str: Barbarian 6
-  level: 6
+  class_str: Barbarian 20
+  level: 20
   alignment: chaotic_neutral
   deity: ''
   size: Medium
@@ -10,18 +10,18 @@ abilities:
   STR:
     base: 18
     racial: 2
-    morale: 4
-    score: 24
-    mod: 7
+    morale: 8
+    score: 28
+    mod: 9
   DEX:
     base: 14
     score: 14
     mod: 2
   CON:
     base: 14
-    morale: 4
-    score: 18
-    mod: 4
+    morale: 8
+    score: 22
+    mod: 6
   INT:
     base: 8
     racial: -2
@@ -45,12 +45,13 @@ combat:
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 52
-    con: 24
-    total: 76
+    hit_dice: 164
+    con: 120
+    untyped: 3
+    total: 287
   bab:
-    base: 6
-    total: 6
+    base: 20
+    total: 20
   initiative:
     dex: 2
     total: 2
@@ -60,81 +61,93 @@ combat:
     total: 40
   sr: 0
   fort:
-    base: 5
-    con: 4
-    total: 9
+    base: 12
+    con: 6
+    total: 18
   ref:
-    base: 2
-    dex: 2
-    total: 4
-  will:
-    base: 2
-    wis: 1
-    morale: 2
-    total: 5
-  attack_melee:
-    bab: 6
-    str: 7
-    total: 13
-  attack_ranged:
-    bab: 6
+    base: 6
     dex: 2
     total: 8
+  will:
+    base: 6
+    wis: 1
+    morale: 4
+    total: 11
+  attack_melee:
+    bab: 20
+    str: 9
+    total: 29
+  attack_ranged:
+    bab: 20
+    dex: 2
+    total: 22
   damage_melee:
-    str: 7
-    total: 7
+    str: 9
+    total: 9
   grapple:
-    bab: 6
-    str: 7
-    total: 13
+    bab: 20
+    str: 9
+    total: 29
 attack_iteratives:
   melee:
-  - 13
-  - 8
+  - 29
+  - 24
+  - 19
+  - 14
   ranged:
-  - 8
-  - 3
+  - 22
+  - 17
+  - 12
+  - 7
 skills:
   Bluff:
     ability_mod: -3
     synergy: 2
     total: -1
   Climb:
-    ranks: 7
-    ability_mod: 7
-    total: 14
+    ranks: 14
+    ability_mod: 9
+    total: 23
   Intimidate:
-    ranks: 6
+    ranks: 13
     ability_mod: -3
-    total: 3
+    total: 10
   Jump:
-    ranks: 6
-    ability_mod: 7
-    total: 13
+    ranks: 13
+    ability_mod: 9
+    total: 22
+  Knowledge (Nature):
+    ability_mod: -2
+    synergy: 2
+    total: 0
   Listen:
-    ranks: 3
+    ranks: 10
     ability_mod: 1
-    total: 4
+    total: 11
   Survival:
-    ranks: 3
+    ranks: 10
     ability_mod: 1
-    total: 4
+    total: 11
   Swim:
-    ranks: 2
-    ability_mod: 7
-    total: 9
+    ranks: 9
+    ability_mod: 9
+    total: 18
   Tumble:
     ability_mod: 2
     synergy: 2
     total: 4
 carrying_capacity:
-  light: 233
-  medium: 466
-  heavy: 700
+  light: 400
+  medium: 800
+  heavy: 1200
 feats:
 - Power Attack
 - Cleave
 - Great Cleave
+- Improved Bull Rush
+- Improved Sunder
+- Blind-Fight
+- Toughness
 class_features:
 - 'fast_movement: +10 ft speed (not in medium/heavy armor)'
 - 'illiteracy: Cannot read unless spending 2 skill points'
@@ -144,4 +157,22 @@ class_features:
 - 'rage_2: Rage 2/day'
 - 'improved_uncanny_dodge: Cannot be flanked'
 - 'trap_sense_2: +2 Reflex and AC vs traps'
+- 'damage_reduction_1: DR 1/—'
+- 'rage_3: Rage 3/day'
+- 'trap_sense_3: +3 Reflex and AC vs traps'
+- 'rage_4: Rage 4/day'
+- 'damage_reduction_2: DR 2/—'
+- 'greater_rage: +6 STR/CON, +3 Will, -2 AC'
+- 'trap_sense_4: +4 Reflex and AC vs traps'
+- 'rage_5: Rage 5/day'
+- 'damage_reduction_3: DR 3/—'
+- 'indomitable_will: +4 Will vs enchantments while raging'
+- 'trap_sense_5: +5 Reflex and AC vs traps'
+- 'rage_6: Rage 6/day'
+- 'damage_reduction_4: DR 4/—'
+- 'tireless_rage: No longer fatigued after rage'
+- 'trap_sense_6: +6 Reflex and AC vs traps'
+- 'rage_7: Rage 7/day'
+- 'damage_reduction_5: DR 5/—'
+- 'mighty_rage: +8 STR/CON, +4 Will, -2 AC'
 resources: {}

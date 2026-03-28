@@ -1,8 +1,8 @@
 identity:
   name: Gundrik Ironshield
   race: Dwarf
-  class_str: Fighter 6
-  level: 6
+  class_str: Fighter 20
+  level: 20
   alignment: lawful_neutral
   deity: ''
   size: Medium
@@ -41,78 +41,90 @@ combat:
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 45
-    con: 24
-    total: 69
+    hit_dice: 137
+    con: 80
+    untyped: 3
+    total: 220
   bab:
-    base: 6
-    total: 6
+    base: 20
+    total: 20
   initiative:
     dex: 2
-    total: 2
+    untyped: 4
+    total: 6
   speed:
     base: 20
     total: 20
   sr: 0
   fort:
-    base: 5
+    base: 12
     con: 4
     untyped: 2
-    total: 11
+    total: 18
   ref:
-    base: 2
+    base: 6
     dex: 2
-    total: 4
-  will:
-    base: 2
-    wis: 1
-    total: 3
-  attack_melee:
-    bab: 6
-    str: 3
-    untyped: 1
+    untyped: 2
     total: 10
-  attack_ranged:
-    bab: 6
-    dex: 2
-    untyped: 1
+  will:
+    base: 6
+    wis: 1
+    untyped: 2
     total: 9
-  damage_melee:
+  attack_melee:
+    bab: 20
     str: 3
     untyped: 2
-    total: 5
-  grapple:
-    bab: 6
+    total: 25
+  attack_ranged:
+    bab: 20
+    dex: 2
+    untyped: 2
+    total: 24
+  damage_melee:
     str: 3
-    total: 9
+    untyped: 4
+    total: 7
+  grapple:
+    bab: 20
+    str: 3
+    total: 23
 attack_iteratives:
   melee:
+  - 25
+  - 20
+  - 15
   - 10
-  - 5
   ranged:
+  - 24
+  - 19
+  - 14
   - 9
-  - 4
 skills:
   Bluff:
     ability_mod: -2
     synergy: 2
     total: 0
   Climb:
-    ranks: 7
+    ranks: 14
     ability_mod: 3
-    total: 10
+    total: 17
   Intimidate:
-    ranks: 7
+    ranks: 14
     ability_mod: -2
-    total: 5
+    total: 12
   Jump:
-    ranks: 2
+    ranks: 9
     ability_mod: 3
-    total: 5
+    total: 12
   Swim:
-    ranks: 2
+    ranks: 9
     ability_mod: 3
-    total: 5
+    total: 12
+  Tumble:
+    ability_mod: 2
+    synergy: 2
+    total: 4
 carrying_capacity:
   light: 76
   medium: 153
@@ -125,9 +137,27 @@ feats:
 - Weapon Specialization
 - Improved Bull Rush
 - Great Cleave
+- Greater Weapon Focus
+- Improved Sunder
+- Improved Initiative
+- Blind-Fight
+- Greater Weapon Specialization
+- Improved Overrun
+- Iron Will
+- Improved Critical
+- Toughness
+- Lightning Reflexes
+- Quick Draw
 class_features:
 - 'bonus_feat_1: Bonus fighter feat'
 - 'bonus_feat_2: Bonus fighter feat'
 - 'bonus_feat_4: Bonus fighter feat'
 - 'bonus_feat_6: Bonus fighter feat'
+- 'bonus_feat_8: Bonus fighter feat'
+- 'bonus_feat_10: Bonus fighter feat'
+- 'bonus_feat_12: Bonus fighter feat'
+- 'bonus_feat_14: Bonus fighter feat'
+- 'bonus_feat_16: Bonus fighter feat'
+- 'bonus_feat_18: Bonus fighter feat'
+- 'bonus_feat_20: Bonus fighter feat'
 resources: {}

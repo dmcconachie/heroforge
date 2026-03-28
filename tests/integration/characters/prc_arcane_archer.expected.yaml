@@ -1,8 +1,8 @@
 identity:
   name: Thaelin Swiftarrow
   race: Elf
-  class_str: Fighter 6 / Wizard 1 / Arcane Archer 1
-  level: 8
+  class_str: Fighter 6 / Wizard 1 / Arcane Archer 10
+  level: 17
   alignment: chaotic_good
   deity: ''
   size: Medium
@@ -41,12 +41,12 @@ combat:
   touch_ac: 13
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 60
-    con: 8
-    total: 68
+    hit_dice: 114
+    con: 17
+    total: 131
   bab:
-    base: 7
-    total: 7
+    base: 16
+    total: 16
   initiative:
     dex: 3
     untyped: 4
@@ -56,40 +56,44 @@ combat:
     total: 30
   sr: 0
   fort:
-    base: 7
+    base: 12
     con: 1
-    total: 8
+    total: 13
   ref:
-    base: 4
+    base: 9
     dex: 3
-    total: 7
+    total: 12
   will:
-    base: 4
-    total: 4
+    base: 7
+    total: 7
   attack_melee:
-    bab: 7
+    bab: 16
     str: 2
     untyped: 1
-    total: 10
+    total: 19
   attack_ranged:
-    bab: 7
+    bab: 16
     dex: 3
     untyped: 1
-    total: 11
+    total: 20
   damage_melee:
     str: 2
     total: 2
   grapple:
-    bab: 7
+    bab: 16
     str: 2
-    total: 9
+    total: 18
 attack_iteratives:
   melee:
+  - 19
+  - 14
+  - 9
+  - 4
+  ranged:
+  - 20
+  - 15
   - 10
   - 5
-  ranged:
-  - 11
-  - 6
 skills:
   Climb:
     ranks: 9
@@ -100,21 +104,38 @@ skills:
     ability_mod: 1
     total: 3
   Hide:
-    ranks: 3
+    ranks: 12
     ability_mod: 3
-    total: 6
+    total: 15
   Jump:
     ranks: 9
     ability_mod: 2
     total: 11
+  Knowledge (Nature):
+    ability_mod: 1
+    synergy: 2
+    total: 3
   Listen:
-    ranks: 2
+    ranks: 11
     ability_mod: 0
-    total: 2
+    total: 11
+  Move Silently:
+    ranks: 9
+    ability_mod: 3
+    synergy: 2
+    total: 14
   Spellcraft:
     ranks: 1
     ability_mod: 1
     total: 2
+  Spot:
+    ranks: 9
+    ability_mod: 0
+    total: 9
+  Survival:
+    ranks: 9
+    ability_mod: 0
+    total: 9
   Swim:
     ranks: 9
     ability_mod: 2
@@ -136,6 +157,9 @@ feats:
 - Manyshot
 - Far Shot
 - Scribe Scroll
+- Shot on the Run
+- Improved Critical
+- Improved Precise Shot
 class_features:
 - 'bonus_feat_1: Bonus fighter feat'
 - 'bonus_feat_2: Bonus fighter feat'
@@ -144,6 +168,15 @@ class_features:
 - 'summon_familiar: Summon a familiar'
 - 'scribe_scroll: Scribe scroll feat for free'
 - 'enhance_arrows_1: +1 enhancement bonus'
+- 'enhance_arrows_2: +2 enhancement bonus'
+- 'enhance_arrows_3: +3 enhancement bonus'
+- 'enhance_arrows_4: +4 enhancement bonus'
+- 'enhance_arrows_5: +5 enhancement bonus'
+- 'imbue_arrow: Place spell on arrow'
+- 'seeker_arrow: Arrow ignores cover'
+- 'phase_arrow: Arrow phases through walls'
+- 'hail_of_arrows: One arrow per enemy'
+- 'death_arrow: Arrow of death 1/day'
 spellcasting:
   Wizard:
     caster_level: 1

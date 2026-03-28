@@ -83,6 +83,78 @@ levels:
     skill_ranks:
       Listen: 1
       Spot: 1
+  # DwDef 2 — total 9; character feat at L9
+  - level: 9
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Spot: 1
+    feats:
+      - name: "Great Fortitude"
+        source: character
+  # DwDef 3 — total 10
+  - level: 10
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Spot: 1
+  # DwDef 4 — total 11
+  - level: 11
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Sense Motive: 1
+  # DwDef 5 — total 12; character feat at L12
+  - level: 12
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Spot: 1
+    feats:
+      - name: "Iron Will"
+        source: character
+  # DwDef 6 — total 13
+  - level: 13
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Sense Motive: 1
+  # DwDef 7 — total 14
+  - level: 14
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Spot: 1
+  # DwDef 8 — total 15; character feat at L15
+  - level: 15
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Sense Motive: 1
+    feats:
+      - name: "Great Cleave"
+        source: character
+  # DwDef 9 — total 16
+  - level: 16
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Spot: 1
+  # DwDef 10 — total 17
+  - level: 17
+    class: Dwarven Defender
+    hp_roll: 8
+    skill_ranks:
+      Listen: 1
+      Sense Motive: 1
 
 buffs: []
 templates: []
