@@ -63,10 +63,10 @@ src/heroforge/
 │   └── core/               # YAML data files
 │       ├── stats.yaml
 │       ├── skills.yaml
-│       ├── classes.yaml      # 16 base + 15 prestige
+│       ├── classes/           # 1 YAML per class
+│       │                     #   (16 base + 15 prestige)
 │       ├── races.yaml        # 7 core races
-│       ├── feats_phb.yaml    # 86 PHB feats
-│       ├── feats_srd.yaml    # 32 additional SRD feats
+│       ├── feats.yaml        # 110 feats (alphabetical)
 │       ├── spells_level_0..9.yaml  # Spell compendium
 │       │                           #   (601 spells, 1
 │       │                           #   file per level)
@@ -425,7 +425,7 @@ keeps working.
 YAML files under `rules/core/` contain full SRD data:
 - 16 base classes (11 PHB + 5 NPC) + 15 prestige classes
 - 7 races, 36 skills
-- 118 feats (86 PHB + 32 SRD)
+- 110 feats (alphabetically sorted in feats.yaml)
 - 601 spell compendium entries (with inline buff effects)
 - 22 cleric domains
 - 18 armor/shields, 63 weapons
@@ -433,9 +433,10 @@ YAML files under `rules/core/` contain full SRD data:
 - 12 creature templates
 - ~15 class feature buffs (rage, inspire courage, etc.)
 
-`classes.yaml` has both `classes:` and `prestige_classes:`
-sections. The design supports additional sourcebook
-directories with override semantics.
+`classes/` directory has one YAML per class. Base/NPC
+classes use a `classes:` key; prestige classes use
+`prestige_classes:`. The design supports additional
+sourcebook directories with override semantics.
 
 ---
 

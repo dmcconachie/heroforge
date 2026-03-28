@@ -1,0 +1,123 @@
+classes:
+
+  - name: Ranger
+    source_book: PHB
+    hit_die: 8
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: good
+      will: poor
+    skills_per_level: 6
+    class_skills:
+      - Climb
+      - Concentration
+      - Craft
+      - Handle Animal
+      - Heal
+      - Hide
+      - Jump
+      - Knowledge (Dungeoneering)
+      - Knowledge (Geography)
+      - Knowledge (Nature)
+      - Listen
+      - Move Silently
+      - Profession
+      - Ride
+      - Search
+      - Spot
+      - Survival
+      - Swim
+      - Use Rope
+    spellcasting:
+      cast_type: divine
+      stat: wis
+      preparation: prepared
+      max_spell_level: 4
+      starts_at_level: 4
+    class_features:
+      - level: 1
+        feature: favored_enemy_1
+        description: "Favored enemy 1: +2 vs type"
+        buff_name: "Favored Enemy +2"
+        note: >-
+          +2 on Bluff, Listen, Sense Motive,
+          Spot, Survival checks and weapon
+          damage against favored enemy type
+        mutually_exclusive_with:
+          - "Favored Enemy +4"
+          - "Favored Enemy +6"
+        effects:
+          - target: damage_all
+            bonus_type: untyped
+            value: 2
+      - level: 1
+        feature: track
+        description: "Track feat for free"
+      - level: 1
+        feature: wild_empathy
+        description: "Improve attitude of animals"
+      - level: 2
+        feature: combat_style_archery
+        description: "Rapid Shot or Two-Weapon Fighting (no prereq)"
+      - level: 3
+        feature: endurance
+        description: "Endurance feat for free"
+      - level: 4
+        feature: animal_companion
+        description: "Special animal companion"
+      - level: 5
+        feature: favored_enemy_2
+        description: "Favored enemy 2; +4 vs type"
+        buff_name: "Favored Enemy +4"
+        note: >-
+          +4 on checks and damage against
+          favored enemy type
+        mutually_exclusive_with:
+          - "Favored Enemy +2"
+          - "Favored Enemy +6"
+        effects:
+          - target: damage_all
+            bonus_type: untyped
+            value: 4
+      - level: 6
+        feature: improved_combat_style
+        description: "Manyshot or Improved Two-Weapon Fighting"
+      - level: 7
+        feature: woodland_stride
+        description: "Move through natural undergrowth at full speed"
+      - level: 8
+        feature: swift_tracker
+        description: "Track at full speed without penalty"
+      - level: 9
+        feature: evasion
+        description: "No damage on successful Reflex save"
+      - level: 10
+        feature: favored_enemy_3
+        description: "Favored enemy 3; +6 vs type"
+        buff_name: "Favored Enemy +6"
+        note: >-
+          +6 on checks and damage against
+          favored enemy type
+        mutually_exclusive_with:
+          - "Favored Enemy +2"
+          - "Favored Enemy +4"
+        effects:
+          - target: damage_all
+            bonus_type: untyped
+            value: 6
+      - level: 11
+        feature: combat_style_mastery
+        description: "Improved Precise Shot or Greater Two-Weapon Fighting"
+      - level: 12
+        feature: camouflage
+        description: "Hide in natural terrain without cover"
+      - level: 15
+        feature: favored_enemy_4
+        description: "Favored enemy 4"
+      - level: 17
+        feature: hide_in_plain_sight
+        description: "Hide while observed in natural terrain"
+      - level: 20
+        feature: favored_enemy_5
+        description: "Favored enemy 5"

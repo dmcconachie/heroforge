@@ -1,0 +1,171 @@
+classes:
+
+  - name: Bard
+    source_book: PHB
+    hit_die: 6
+    bab_progression: medium
+    save_progressions:
+      fort: poor
+      ref: good
+      will: good
+    skills_per_level: 6
+    class_skills:
+      - Appraise
+      - Balance
+      - Bluff
+      - Climb
+      - Concentration
+      - Craft
+      - Decipher Script
+      - Diplomacy
+      - Disguise
+      - Escape Artist
+      - Gather Information
+      - Hide
+      - Jump
+      - Knowledge (all)
+      - Listen
+      - Move Silently
+      - Perform
+      - Profession
+      - Sense Motive
+      - Sleight of Hand
+      - Speak Language
+      - Spellcraft
+      - Swim
+      - Tumble
+      - Use Magic Device
+    spellcasting:
+      cast_type: arcane
+      stat: cha
+      preparation: spontaneous
+      max_spell_level: 6
+    class_features:
+      - level: 1
+        feature: bardic_music
+        description: "Bardic music abilities; uses/day = Bard level"
+      - level: 1
+        feature: bardic_knowledge
+        description: "Bardic knowledge check (Bard level + INT)"
+      - level: 1
+        feature: countersong
+        description: "Counter sonic/language-dependent magic"
+      - level: 1
+        feature: fascinate
+        description: "Fascinate creatures with Perform check"
+      - level: 1
+        feature: inspire_courage_1
+        description: "+1 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +1"
+        note: >-
+          +1 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +2"
+          - "Inspire Courage +3"
+          - "Inspire Courage +4"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 1
+          - target: damage_all
+            bonus_type: morale
+            value: 1
+          - target: will_save
+            bonus_type: morale
+            value: 1
+      - level: 5
+        feature: inspire_competence
+        description: "+2 competence bonus on skill checks"
+      - level: 6
+        feature: suggestion
+        description: "Suggestion via fascinate"
+      - level: 8
+        feature: inspire_courage_2
+        description: "+2 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +2"
+        note: >-
+          +2 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +1"
+          - "Inspire Courage +3"
+          - "Inspire Courage +4"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 2
+          - target: damage_all
+            bonus_type: morale
+            value: 2
+          - target: will_save
+            bonus_type: morale
+            value: 2
+      - level: 9
+        feature: inspire_greatness
+        description: "+2 HD, +2 attack, +1 Fort"
+        buff_name: "Inspire Greatness"
+        note: >-
+          +2 bonus HD (2d10), +2 competence
+          on attack, +1 competence on Fort
+        effects:
+          - target: attack_all
+            bonus_type: competence
+            value: 2
+          - target: fort_save
+            bonus_type: competence
+            value: 1
+          - target: hp_bonus
+            bonus_type: untyped
+            value: 20
+      - level: 12
+        feature: song_of_freedom
+        description: "Break enchantment via music"
+      - level: 14
+        feature: inspire_courage_3
+        description: "+3 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +3"
+        note: >-
+          +3 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +1"
+          - "Inspire Courage +2"
+          - "Inspire Courage +4"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 3
+          - target: damage_all
+            bonus_type: morale
+            value: 3
+          - target: will_save
+            bonus_type: morale
+            value: 3
+      - level: 15
+        feature: inspire_heroics
+        description: "+4 AC and saves for one creature"
+      - level: 18
+        feature: mass_suggestion
+        description: "Suggestion to all fascinated"
+      - level: 20
+        feature: inspire_courage_4
+        description: "+4 morale bonus attacks/saves vs fear"
+        buff_name: "Inspire Courage +4"
+        note: >-
+          +4 morale on attack rolls, weapon
+          damage, saves vs charm/fear
+        mutually_exclusive_with:
+          - "Inspire Courage +1"
+          - "Inspire Courage +2"
+          - "Inspire Courage +3"
+        effects:
+          - target: attack_all
+            bonus_type: morale
+            value: 4
+          - target: damage_all
+            bonus_type: morale
+            value: 4
+          - target: will_save
+            bonus_type: morale
+            value: 4

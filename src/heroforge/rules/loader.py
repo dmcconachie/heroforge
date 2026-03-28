@@ -783,12 +783,17 @@ class FeatsLoader:
 
 class ClassesLoader:
     """
-    Reads rules/core/classes.yaml and populates a ClassRegistry.
+    Reads per-class YAML files from a directory and
+    populates a ClassRegistry.
+
+    Each file has either a `classes:` or
+    `prestige_classes:` top-level key with a
+    single-element list.
 
     Usage:
         registry = ClassRegistry()
         loader = ClassesLoader(rules_dir)
-        loader.load(registry)
+        loader.load(registry, "core/classes")
     """
 
     def __init__(self, rules_dir: Path | str) -> None:
@@ -799,7 +804,7 @@ class ClassesLoader:
         registry: ClassRegistry,
         relative_path: str,
         overwrite: bool = False,
-        prereq_checker: PrerequisiteChecker | None = None,
+        prereq_checker: (PrerequisiteChecker | None) = None,
         buff_registry: BuffRegistry | None = None,
     ) -> list[str]:
         from heroforge.engine.classes_races import (
@@ -807,59 +812,63 @@ class ClassesLoader:
         )
         from heroforge.rules.schema import converter
 
-        path = self.rules_dir / relative_path
-        if not path.exists():
-            raise LoaderError(f"Classes file not found: {path}")
-
-        try:
-            with open(path) as f:
-                data = yaml.safe_load(f)
-        except yaml.YAMLError as e:
-            raise LoaderError(f"YAML parse error in {path}: {e}") from e
-
-        if not isinstance(data, dict) or "classes" not in data:
-            raise LoaderError(f"{path} must have a top-level 'classes' key.")
+        dir_path = self.rules_dir / relative_path
+        if not dir_path.is_dir():
+            raise LoaderError(f"Classes dir not found: {dir_path}")
 
         registered: list[str] = []
-        for decl in data["classes"]:
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"Class missing 'name': {decl}")
+        for path in sorted(dir_path.glob("*.yaml")):
             try:
-                defn = converter.structure(decl, ClassDefinition)
-                registry.register(defn, overwrite=overwrite)
-                registered.append(name)
-            except Exception as e:
-                raise LoaderError(f"Failed to load class {name!r}: {e}") from e
-            if buff_registry is not None:
-                self._register_feature_buffs(defn, buff_registry)
+                with open(path) as f:
+                    data = yaml.safe_load(f)
+            except yaml.YAMLError as e:
+                raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
-        # Prestige classes
-        for decl in data.get("prestige_classes", []):
-            name = decl.get("name")
-            if not name:
-                raise LoaderError(f"PrC missing 'name': {decl}")
-            decl["is_prestige"] = True
-            try:
-                defn = converter.structure(decl, ClassDefinition)
-                registry.register(defn, overwrite=overwrite)
-                registered.append(name)
-            except (KeyError, ValueError) as e:
-                raise LoaderError(f"Failed to load PrC {name!r}: {e}") from e
-            if prereq_checker is not None:
-                entry_prereq = self._build_prereq(
-                    decl.get("entry_prerequisites")
-                )
-                ongoing_prereq = self._build_prereq(
-                    decl.get("ongoing_prerequisites")
-                )
-                prereq_checker.register_prc(
-                    name,
-                    entry_prereq,
-                    ongoing_prereq,
-                )
-            if buff_registry is not None:
-                self._register_feature_buffs(defn, buff_registry)
+            if not isinstance(data, dict):
+                raise LoaderError(f"{path}: expected a dict")
+
+            for decl in data.get("classes", []):
+                name = decl.get("name")
+                if not name:
+                    raise LoaderError(f"Class missing 'name' in {path}: {decl}")
+                try:
+                    defn = converter.structure(decl, ClassDefinition)
+                    registry.register(defn, overwrite=overwrite)
+                    registered.append(name)
+                except Exception as e:
+                    raise LoaderError(
+                        f"Failed to load class {name!r} from {path}: {e}"
+                    ) from e
+                if buff_registry is not None:
+                    self._register_feature_buffs(defn, buff_registry)
+
+            for decl in data.get("prestige_classes", []):
+                name = decl.get("name")
+                if not name:
+                    raise LoaderError(f"PrC missing 'name' in {path}: {decl}")
+                decl["is_prestige"] = True
+                try:
+                    defn = converter.structure(decl, ClassDefinition)
+                    registry.register(defn, overwrite=overwrite)
+                    registered.append(name)
+                except (KeyError, ValueError) as e:
+                    raise LoaderError(
+                        f"Failed to load PrC {name!r} from {path}: {e}"
+                    ) from e
+                if prereq_checker is not None:
+                    entry_prereq = self._build_prereq(
+                        decl.get("entry_prerequisites")
+                    )
+                    ongoing_prereq = self._build_prereq(
+                        decl.get("ongoing_prerequisites")
+                    )
+                    prereq_checker.register_prc(
+                        name,
+                        entry_prereq,
+                        ongoing_prereq,
+                    )
+                if buff_registry is not None:
+                    self._register_feature_buffs(defn, buff_registry)
 
         return registered
 

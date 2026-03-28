@@ -119,13 +119,7 @@ class AppState:
         )
         FeatsLoader(rd).load(
             self.feat_registry,
-            "core/feats_phb.yaml",
-            prereq_checker,
-            self.buff_registry,
-        )
-        FeatsLoader(rd).load(
-            self.feat_registry,
-            "core/feats_srd.yaml",
+            "core/feats.yaml",
             prereq_checker,
             self.buff_registry,
         )
@@ -133,7 +127,7 @@ class AppState:
         TemplatesLoader(rd).load(self.template_registry, "core/templates.yaml")
         ClassesLoader(rd).load(
             self.class_registry,
-            "core/classes.yaml",
+            "core/classes",
             prereq_checker=prereq_checker,
             buff_registry=self.buff_registry,
         )

@@ -147,7 +147,7 @@ armor:
     cost_gp: 1500
 
   # Shields
-  - name: Buckler
+  - name: "Buckler"
     category: shield
     armor_bonus: 1
     max_dex_bonus: -1

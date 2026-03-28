@@ -54,7 +54,7 @@ def loaded_class_registry() -> ClassRegistry:
     from heroforge.rules.loader import ClassesLoader
 
     reg = ClassRegistry()
-    ClassesLoader(RULES_DIR).load(reg, "core/classes.yaml")
+    ClassesLoader(RULES_DIR).load(reg, "core/classes")
     return reg
 
 
@@ -386,16 +386,12 @@ class TestApplyRace:
 
 class TestClassesLoader:
     def test_load_registers_all_classes(self) -> None:
-        import yaml
-
         from heroforge.rules.loader import ClassesLoader
 
-        with open(RULES_DIR / "core" / "classes.yaml") as f:
-            data = yaml.safe_load(f)
-        expected = len(data["classes"]) + len(data.get("prestige_classes", []))
         reg = ClassRegistry()
-        ClassesLoader(RULES_DIR).load(reg, "core/classes.yaml")
-        assert len(reg) == expected
+        ClassesLoader(RULES_DIR).load(reg, "core/classes")
+        # 11 PHB + 5 NPC + 15 prestige = 31
+        assert len(reg) == 31
 
     def test_all_phb_classes_present(self) -> None:
         reg = loaded_class_registry()
@@ -491,18 +487,15 @@ class TestClassesLoader:
         assert cl.fort_contribution == 4  # good: 2 + 5//2
 
     def test_no_duplicate_class_names(self) -> None:
-        import yaml
-
-        with open(RULES_DIR / "core" / "classes.yaml") as f:
-            data = yaml.safe_load(f)
-        names = [d["name"] for d in data["classes"]]
-        assert len(names) == len(set(names))
+        """Loading with overwrite=False would raise on dups."""
+        reg = loaded_class_registry()
+        assert len(reg) == 31
 
     def test_load_missing_file_raises(self, tmp_path: Path) -> None:
         from heroforge.rules.loader import ClassesLoader, LoaderError
 
         with pytest.raises(LoaderError, match="not found"):
-            ClassesLoader(tmp_path).load(ClassRegistry(), "core/classes.yaml")
+            ClassesLoader(tmp_path).load(ClassRegistry(), "core/classes")
 
 
 # ===========================================================================

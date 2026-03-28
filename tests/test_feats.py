@@ -1,7 +1,7 @@
 """
 tests/test_feats.py
 -------------------
-Test suite for engine/feats.py, rules/core/feats_phb.yaml, and FeatsLoader.
+Test suite for engine/feats.py, rules/core/feats.yaml, and FeatsLoader.
 
 Covers:
   - FeatParameterSpec: resolve_max(), clamp()
@@ -77,7 +77,7 @@ def loaded_registries() -> tuple[
     prereq_chk = PrerequisiteChecker()
     buff_reg = BuffRegistry()
     FeatsLoader(RULES_DIR).load(
-        feat_reg, "core/feats_phb.yaml", prereq_chk, buff_reg
+        feat_reg, "core/feats.yaml", prereq_chk, buff_reg
     )
     return feat_reg, prereq_chk, buff_reg
 
@@ -443,7 +443,7 @@ class TestFeatsYamlStructure:
     def test_no_duplicate_names(self) -> None:
         import yaml
 
-        with open(RULES_DIR / "core" / "feats_phb.yaml") as f:
+        with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
         names = [d["name"] for d in data["feats"] if "name" in d]
         assert len(names) == len(set(names))
@@ -452,7 +452,7 @@ class TestFeatsYamlStructure:
         import yaml
 
         valid = {"always_on", "conditional", "passive"}
-        with open(RULES_DIR / "core" / "feats_phb.yaml") as f:
+        with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
         bad = [
             d["name"]
@@ -473,14 +473,12 @@ class TestFeatsLoader:
 
         from heroforge.rules.loader import FeatsLoader
 
-        with open(RULES_DIR / "core" / "feats_phb.yaml") as f:
+        with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
         expected = len(data["feats"])
 
         feat_reg = FeatRegistry()
-        FeatsLoader(RULES_DIR).load(
-            feat_reg, relative_path="core/feats_phb.yaml"
-        )
+        FeatsLoader(RULES_DIR).load(feat_reg, relative_path="core/feats.yaml")
         assert len(feat_reg) == expected
 
     def test_load_returns_names(self) -> None:
@@ -488,7 +486,7 @@ class TestFeatsLoader:
 
         feat_reg = FeatRegistry()
         names = FeatsLoader(RULES_DIR).load(
-            feat_reg, relative_path="core/feats_phb.yaml"
+            feat_reg, relative_path="core/feats.yaml"
         )
         assert "Dodge" in names
         assert "Power Attack" in names
@@ -568,7 +566,7 @@ class TestFeatsLoader:
 
         with pytest.raises(LoaderError, match="not found"):
             FeatsLoader(tmp_path).load(
-                FeatRegistry(), relative_path="core/feats_phb.yaml"
+                FeatRegistry(), relative_path="core/feats.yaml"
             )
 
     def test_load_raises_on_missing_feats_key(self, tmp_path: Path) -> None:
@@ -576,10 +574,10 @@ class TestFeatsLoader:
 
         core = tmp_path / "core"
         core.mkdir()
-        (core / "feats_phb.yaml").write_text("not_feats: []\n")
+        (core / "feats.yaml").write_text("not_feats: []\n")
         with pytest.raises(LoaderError, match="top-level 'feats' key"):
             FeatsLoader(tmp_path).load(
-                FeatRegistry(), relative_path="core/feats_phb.yaml"
+                FeatRegistry(), relative_path="core/feats.yaml"
             )
 
 

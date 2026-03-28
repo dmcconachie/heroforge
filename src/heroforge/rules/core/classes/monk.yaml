@@ -1,0 +1,116 @@
+classes:
+
+  - name: Monk
+    source_book: PHB
+    hit_die: 8
+    bab_progression: medium
+    save_progressions:
+      fort: good
+      ref: good
+      will: good
+    skills_per_level: 4
+    class_skills:
+      - Balance
+      - Climb
+      - Concentration
+      - Craft
+      - Diplomacy
+      - Escape Artist
+      - Hide
+      - Jump
+      - Knowledge (Arcana)
+      - Knowledge (Religion)
+      - Listen
+      - Move Silently
+      - Perform
+      - Profession
+      - Sense Motive
+      - Spot
+      - Swim
+      - Tumble
+    spellcasting: null
+    class_features:
+      - level: 1
+        feature: flurry_of_blows
+        description: "Extra attack with -2 to all attacks"
+        buff_name: "Flurry of Blows"
+        note: >-
+          Extra attack at highest BAB; -2
+          penalty on all attacks during flurry
+          (removed at monk level 5)
+        effects:
+          - target: attack_all
+            bonus_type: untyped
+            value: -2
+      - level: 1
+        feature: unarmed_strike
+        description: "Unarmed deals 1d6; increases per level"
+      - level: 1
+        feature: bonus_feat_monk_1
+        description: >-
+          Improved Unarmed Strike + one of:
+          Combat Reflexes, Deflect Arrows,
+          Improved Grapple
+      - level: 2
+        feature: evasion
+        description: "No damage on successful Reflex saves"
+      - level: 2
+        feature: bonus_feat_monk_2
+        description: "Combat Reflexes, Deflect Arrows, or Improved Trip"
+      - level: 3
+        feature: still_mind
+        description: "+2 saves vs enchantments"
+      - level: 4
+        feature: ki_strike_magic
+        description: "Unarmed strike treated as magic"
+      - level: 4
+        feature: slow_fall_20
+        description: "Slow fall up to 20 ft"
+      - level: 5
+        feature: purity_of_body
+        description: "Immune to natural disease"
+      - level: 5
+        feature: slow_fall_30
+        description: "Slow fall up to 30 ft"
+      - level: 6
+        feature: bonus_feat_monk_3
+        description: "Improved Disarm, Improved Trip, or Stunning Fist"
+      - level: 7
+        feature: wholeness_of_body
+        description: "Heal own HP equal to 2× Monk level/day"
+      - level: 8
+        feature: slow_fall_50
+        description: "Slow fall up to 50 ft"
+      - level: 9
+        feature: improved_evasion
+        description: "Half damage on failed Reflex saves"
+      - level: 10
+        feature: ki_strike_lawful
+        description: "Unarmed strike treated as lawful-aligned"
+      - level: 11
+        feature: diamond_body
+        description: "Immune to all poisons"
+      - level: 12
+        feature: abundant_step
+        description: "Dimension door 1/day"
+      - level: 13
+        feature: diamond_soul
+        description: "SR 10 + Monk level"
+      - level: 15
+        feature: quivering_palm
+        description: "Set lethal vibrations in target"
+      - level: 16
+        feature: ki_strike_adamantine
+        description: "Unarmed strike bypasses DR/adamantine"
+      - level: 17
+        feature: timeless_body
+        description: "No aging penalties"
+      - level: 17
+        feature: tongue_of_sun_moon
+        description: "Speak with any living creature"
+      - level: 19
+        feature: empty_body
+        description: "Etherealness 1 min/day per Monk level"
+      - level: 20
+        feature: perfect_self
+        description: "Outsider type; DR 10/magic"

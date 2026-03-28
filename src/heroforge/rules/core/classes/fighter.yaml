@@ -1,0 +1,33 @@
+classes:
+
+  - name: Fighter
+    source_book: PHB
+    hit_die: 10
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: poor
+      will: poor
+    skills_per_level: 2
+    class_skills:
+      - Climb
+      - Craft
+      - Handle Animal
+      - Intimidate
+      - Jump
+      - Knowledge (Dungeoneering)
+      - Ride
+      - Swim
+    spellcasting: null
+    class_features:
+      - {level: 1, feature: bonus_feat_1, description: "Bonus fighter feat"}
+      - {level: 2, feature: bonus_feat_2, description: "Bonus fighter feat"}
+      - {level: 4, feature: bonus_feat_4, description: "Bonus fighter feat"}
+      - {level: 6, feature: bonus_feat_6, description: "Bonus fighter feat"}
+      - {level: 8, feature: bonus_feat_8, description: "Bonus fighter feat"}
+      - {level: 10, feature: bonus_feat_10, description: "Bonus fighter feat"}
+      - {level: 12, feature: bonus_feat_12, description: "Bonus fighter feat"}
+      - {level: 14, feature: bonus_feat_14, description: "Bonus fighter feat"}
+      - {level: 16, feature: bonus_feat_16, description: "Bonus fighter feat"}
+      - {level: 18, feature: bonus_feat_18, description: "Bonus fighter feat"}
+      - {level: 20, feature: bonus_feat_20, description: "Bonus fighter feat"}

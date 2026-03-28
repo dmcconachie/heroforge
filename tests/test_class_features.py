@@ -27,7 +27,7 @@ def _load_class_buffs() -> BuffRegistry:
     cr = ClassRegistry()
     ClassesLoader(RULES_DIR).load(
         cr,
-        "core/classes.yaml",
+        "core/classes",
         buff_registry=reg,
     )
     return reg

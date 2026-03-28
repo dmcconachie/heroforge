@@ -1,0 +1,58 @@
+prestige_classes:
+
+  - name: "Arcane Archer"
+    source_book: DMG
+    hit_die: 8
+    max_level: 10
+    bab_progression: full
+    save_progressions:
+      fort: good
+      ref: good
+      will: poor
+    skills_per_level: 4
+    class_skills:
+      - Craft
+      - Hide
+      - Listen
+      - Move Silently
+      - Ride
+      - Spot
+      - Survival
+      - Use Rope
+    entry_prerequisites:
+      all_of:
+        - stat: {key: bab, min: 6, label: BAB}
+        - feat: "Point Blank Shot"
+        - feat: "Precise Shot"
+        - feat: "Weapon Focus"
+    class_features:
+      - level: 1
+        feature: enhance_arrows_1
+        description: "+1 enhancement bonus"
+      - level: 3
+        feature: enhance_arrows_2
+        description: "+2 enhancement bonus"
+      - level: 5
+        feature: enhance_arrows_3
+        description: "+3 enhancement bonus"
+      - level: 7
+        feature: enhance_arrows_4
+        description: "+4 enhancement bonus"
+      - level: 9
+        feature: enhance_arrows_5
+        description: "+5 enhancement bonus"
+      - level: 2
+        feature: imbue_arrow
+        description: "Place spell on arrow"
+      - level: 4
+        feature: seeker_arrow
+        description: "Arrow ignores cover"
+      - level: 6
+        feature: phase_arrow
+        description: "Arrow phases through walls"
+      - level: 8
+        feature: hail_of_arrows
+        description: "One arrow per enemy"
+      - level: 10
+        feature: death_arrow
+        description: "Arrow of death 1/day"

@@ -1,0 +1,42 @@
+classes:
+
+  - name: Wizard
+    source_book: PHB
+    hit_die: 4
+    bab_progression: poor
+    save_progressions:
+      fort: poor
+      ref: poor
+      will: good
+    skills_per_level: 2
+    class_skills:
+      - Concentration
+      - Craft
+      - Decipher Script
+      - Knowledge (all)
+      - Profession
+      - Spellcraft
+    spellcasting:
+      cast_type: arcane
+      stat: int
+      preparation: prepared
+      max_spell_level: 9
+    class_features:
+      - level: 1
+        feature: summon_familiar
+        description: "Summon a familiar"
+      - level: 1
+        feature: scribe_scroll
+        description: "Scribe scroll feat for free"
+      - level: 5
+        feature: bonus_feat_wizard_5
+        description: "Bonus wizard feat (Item Creation or Metamagic)"
+      - level: 10
+        feature: bonus_feat_wizard_10
+        description: "Bonus wizard feat"
+      - level: 15
+        feature: bonus_feat_wizard_15
+        description: "Bonus wizard feat"
+      - level: 20
+        feature: bonus_feat_wizard_20
+        description: "Bonus wizard feat"
