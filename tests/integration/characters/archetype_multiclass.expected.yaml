@@ -39,7 +39,7 @@ combat:
     dex: 2
     total: 12
   touch_ac: 12
-  flatfooted_ac: 10
+  flatfooted_ac: 12
   hp_max:
     hit_dice: 70
     con: 30

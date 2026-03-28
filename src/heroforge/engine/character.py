@@ -765,17 +765,39 @@ class Character:
             stacking += max(vals)
         return touch + stacking
 
+    def has_class_feature(self, feature_key: str) -> bool:
+        """Check if this character has a class feature."""
+        reg = self._class_registry_ref
+        if reg is None:
+            return False
+        for cn, lvl in self.class_level_map.items():
+            defn = reg.get(cn)
+            if defn is None:
+                continue
+            for feat in defn.class_features:
+                if feat.feature == feature_key and feat.level <= lvl:
+                    return True
+        return False
+
     def flatfooted_ac(self) -> int:
         """
         Flat-footed AC = AC without DEX or dodge bonuses.
+        If character has Uncanny Dodge, retains DEX bonus.
         """
         from collections import defaultdict
 
         ac_pool = self.get_pool("ac")
         if ac_pool is None:
+            if self.has_class_feature("uncanny_dodge"):
+                return 10 + self.dex_mod
             return 10
 
+        has_ud = self.has_class_feature("uncanny_dodge")
+
         flat = 10
+        if has_ud:
+            flat += self.get("ac_dex_contribution")
+
         active = ac_pool.active_entries(self)
         from heroforge.engine.bonus import (
             ALWAYS_STACKING,
@@ -1366,10 +1388,7 @@ class Character:
         prefix = "classfeature:"
         for pool in self._pools.values():
             for sk in pool.source_keys():
-                if (
-                    sk.startswith(prefix)
-                    and sk not in active_keys
-                ):
+                if sk.startswith(prefix) and sk not in active_keys:
                     pool.clear_source(sk)
 
     def add_level(self, class_name: str, hp_roll: int) -> None:

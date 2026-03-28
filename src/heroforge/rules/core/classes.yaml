@@ -681,6 +681,16 @@ classes:
       - level: 2
         feature: divine_grace
         description: "+CHA modifier to all saves"
+        effects:
+          - target: fort_save
+            bonus_type: untyped
+            value: "cha_mod"
+          - target: ref_save
+            bonus_type: untyped
+            value: "cha_mod"
+          - target: will_save
+            bonus_type: untyped
+            value: "cha_mod"
       - level: 2
         feature: lay_on_hands
         description: "Heal HP per day = Paladin level × CHA modifier"
@@ -1391,9 +1401,17 @@ prestige_classes:
       - level: 1
         feature: canny_defense
         description: "INT to AC (unarmored)"
+        effects:
+          - target: ac
+            bonus_type: untyped
+            value: "max(0, int_mod)"
       - level: 2
         feature: improved_reaction
         description: "+2 initiative"
+        effects:
+          - target: initiative
+            bonus_type: untyped
+            value: 2
       - level: 2
         feature: enhanced_mobility
         description: "+4 AC vs AoO"
@@ -1403,6 +1421,10 @@ prestige_classes:
       - level: 4
         feature: grace
         description: "+2 Reflex saves"
+        effects:
+          - target: ref_save
+            bonus_type: competence
+            value: 2
       - level: 5
         feature: acrobatic_charge
         description: "Charge in difficult terrain"
@@ -1586,6 +1608,16 @@ prestige_classes:
       - level: 2
         feature: dark_blessing
         description: "CHA bonus to saves"
+        effects:
+          - target: fort_save
+            bonus_type: untyped
+            value: "cha_mod"
+          - target: ref_save
+            bonus_type: untyped
+            value: "cha_mod"
+          - target: will_save
+            bonus_type: untyped
+            value: "cha_mod"
       - level: 2
         feature: smite_good
         description: "Smite good 1/day"
@@ -1709,24 +1741,44 @@ prestige_classes:
       - level: 1
         feature: natural_armor_1
         description: "+1 natural armor"
+        effects:
+          - target: ac
+            bonus_type: natural_armor
+            value: 1
       - level: 2
         feature: str_increase_2
         description: "+2 STR"
+        effects:
+          - target: str_score
+            bonus_type: untyped
+            value: 2
       - level: 2
         feature: claws_and_bite
         description: "Natural weapons"
       - level: 4
         feature: str_increase_4
         description: "+2 STR (cumulative)"
+        effects:
+          - target: str_score
+            bonus_type: untyped
+            value: 2
       - level: 4
         feature: natural_armor_4
-        description: "+2 natural armor"
+        description: "+3 natural armor (cumulative)"
+        effects:
+          - target: ac
+            bonus_type: natural_armor
+            value: 3
       - level: 5
         feature: blindsense
         description: "Blindsense 30 ft"
       - level: 7
         feature: natural_armor_7
-        description: "+3 natural armor"
+        description: "+6 natural armor (cumulative)"
+        effects:
+          - target: ac
+            bonus_type: natural_armor
+            value: 6
       - level: 9
         feature: wings
         description: "Fly speed 30 ft"
@@ -1758,6 +1810,26 @@ prestige_classes:
       - level: 1
         feature: defensive_stance
         description: "+2 STR/CON, +2 saves, +4 AC"
+        buff_name: "Defensive Stance"
+        effects:
+          - target: str_score
+            bonus_type: morale
+            value: 2
+          - target: con_score
+            bonus_type: morale
+            value: 2
+          - target: fort_save
+            bonus_type: morale
+            value: 2
+          - target: ref_save
+            bonus_type: morale
+            value: 2
+          - target: will_save
+            bonus_type: morale
+            value: 2
+          - target: ac
+            bonus_type: dodge
+            value: 4
       - level: 2
         feature: uncanny_dodge
         description: "Never flat-footed"

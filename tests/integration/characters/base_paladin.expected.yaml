@@ -53,14 +53,17 @@ combat:
   fort:
     base: 5
     con: 2
-    total: 7
+    untyped: 2
+    total: 9
   ref:
     base: 2
-    total: 2
+    untyped: 2
+    total: 4
   will:
     base: 2
     wis: 1
-    total: 3
+    untyped: 2
+    total: 5
   attack_melee:
     bab: 6
     str: 3

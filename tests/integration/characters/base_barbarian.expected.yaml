@@ -43,7 +43,7 @@ combat:
     untyped: -2
     total: 10
   touch_ac: 10
-  flatfooted_ac: 8
+  flatfooted_ac: 10
   hp_max:
     hit_dice: 52
     con: 24
