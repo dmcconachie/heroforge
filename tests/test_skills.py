@@ -98,8 +98,12 @@ class TestSkillsYaml:
         import yaml
 
         valid = {
-            "str", "dex", "con",
-            "int", "wis", "cha",
+            "str",
+            "dex",
+            "con",
+            "int",
+            "wis",
+            "cha",
             "none",
         }
         with open(RULES_DIR / "core" / "skills.yaml") as f:

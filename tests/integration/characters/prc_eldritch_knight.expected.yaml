@@ -1,0 +1,181 @@
+identity:
+  name: Gareth Spellblade
+  race: Human
+  class_str: Fighter 1 / Wizard 5 / Eldritch Knight 1
+  level: 7
+  alignment: neutral
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 14
+    score: 14
+    mod: 2
+  DEX:
+    base: 12
+    score: 12
+    mod: 1
+  CON:
+    base: 14
+    score: 14
+    mod: 2
+  INT:
+    base: 16
+    score: 16
+    mod: 3
+  WIS:
+    base: 10
+    score: 10
+    mod: 0
+  CHA:
+    base: 8
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 1
+    total: 11
+  touch_ac: 11
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 31
+    con: 14
+    total: 45
+  bab:
+    base: 4
+    total: 4
+  initiative:
+    dex: 1
+    total: 1
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 5
+    con: 2
+    total: 7
+  ref:
+    base: 1
+    dex: 1
+    total: 2
+  will:
+    base: 4
+    total: 4
+  attack_melee:
+    bab: 4
+    str: 2
+    untyped: 1
+    total: 7
+  attack_ranged:
+    bab: 4
+    dex: 1
+    untyped: 1
+    total: 6
+  damage_melee:
+    str: 2
+    total: 2
+  grapple:
+    bab: 4
+    str: 2
+    total: 6
+attack_iteratives:
+  melee:
+  - 7
+  ranged:
+  - 6
+skills:
+  Climb:
+    ranks: 4
+    ability_mod: 2
+    total: 6
+  Concentration:
+    ranks: 9
+    ability_mod: 2
+    total: 11
+  Decipher Script:
+    ranks: 6
+    ability_mod: 3
+    total: 9
+  Handle Animal:
+    ranks: 4
+    ability_mod: -1
+    total: 3
+  Intimidate:
+    ranks: 4
+    ability_mod: -1
+    total: 3
+  Jump:
+    ranks: 5
+    ability_mod: 2
+    total: 7
+  Knowledge (Arcana):
+    ranks: 5
+    ability_mod: 3
+    synergy: 2
+    total: 10
+  Knowledge (Religion):
+    ranks: 4
+    ability_mod: 3
+    total: 7
+  Knowledge (The Planes):
+    ranks: 2
+    ability_mod: 3
+    total: 5
+  Ride:
+    ranks: 5
+    ability_mod: 1
+    total: 6
+  Spellcraft:
+    ranks: 7
+    ability_mod: 3
+    synergy: 2
+    total: 12
+  Swim:
+    ranks: 5
+    ability_mod: 2
+    total: 7
+  Tumble:
+    ability_mod: 1
+    synergy: 2
+    total: 3
+  Use Magic Device:
+    ability_mod: -1
+    synergy: 2
+    total: 1
+carrying_capacity:
+  light: 58
+  medium: 116
+  heavy: 175
+feats:
+- Power Attack
+- Weapon Focus
+- Combat Casting
+- Scribe Scroll
+- Dodge
+- Mobility
+- Extend Spell
+class_features:
+- 'bonus_feat_1: Bonus fighter feat'
+- 'summon_familiar: Summon a familiar'
+- 'scribe_scroll: Scribe scroll feat for free'
+- 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+- 'bonus_feat: Bonus fighter feat'
+spellcasting:
+  Wizard:
+    caster_level: 5
+    key_ability: int
+    cast_type: arcane
+    preparation: prepared
+    slots_per_day:
+    - 4
+    - 4
+    - 3
+    - 2
+    spell_save_dc:
+      0: 13
+      1: 14
+      2: 15
+      3: 16
+resources: {}

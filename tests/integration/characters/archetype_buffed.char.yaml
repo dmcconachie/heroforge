@@ -1,0 +1,101 @@
+identity:
+  name: "Sister Maeven"
+  player: ""
+  race: Human
+  alignment: neutral_good
+  deity: "Pelor"
+
+ability_scores:
+  str: 14
+  dex: 10
+  con: 14
+  int: 10
+  wis: 16
+  cha: 12
+
+levels:
+  - level: 1
+    class: Cleric
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 4
+      Heal: 4
+      Knowledge (Religion): 4
+    feats:
+      - name: "Combat Casting"
+        source: character
+      - name: "Extra Turning"
+        source: human_bonus
+  - level: 2
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Spellcraft: 1
+  - level: 3
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Spellcraft: 1
+    feats:
+      - name: "Extend Spell"
+        source: character
+  - level: 4
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Diplomacy: 1
+  - level: 5
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Diplomacy: 1
+  - level: 6
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Diplomacy: 1
+    feats:
+      - name: "Improved Turning"
+        source: character
+  - level: 7
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Knowledge (Religion): 1
+  - level: 8
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Knowledge (Religion): 1
+
+buffs:
+  - name: "Bull's Strength"
+    active: true
+    caster_level: 8
+  - name: "Bless"
+    active: true
+    caster_level: 8
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons: []
+
+notes: ""

@@ -1,0 +1,142 @@
+identity:
+  name: Dolgrin Shieldwall
+  race: Dwarf
+  class_str: Fighter 7 / Dwarven Defender 1
+  level: 8
+  alignment: lawful_good
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 16
+    score: 16
+    mod: 3
+  DEX:
+    base: 14
+    score: 14
+    mod: 2
+  CON:
+    base: 14
+    racial: 2
+    score: 16
+    mod: 3
+  INT:
+    base: 10
+    score: 10
+    mod: 0
+  WIS:
+    base: 12
+    score: 12
+    mod: 1
+  CHA:
+    base: 10
+    racial: -2
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 2
+    total: 12
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 68
+    con: 24
+    untyped: 3
+    total: 95
+  bab:
+    base: 8
+    total: 8
+  initiative:
+    dex: 2
+    total: 2
+  speed:
+    base: 20
+    total: 20
+  sr: 0
+  fort:
+    base: 7
+    con: 3
+    total: 10
+  ref:
+    base: 2
+    dex: 2
+    total: 4
+  will:
+    base: 4
+    wis: 1
+    total: 5
+  attack_melee:
+    bab: 8
+    str: 3
+    untyped: 1
+    total: 12
+  attack_ranged:
+    bab: 8
+    dex: 2
+    untyped: 1
+    total: 11
+  damage_melee:
+    str: 3
+    untyped: 2
+    total: 5
+  grapple:
+    bab: 8
+    str: 3
+    total: 11
+attack_iteratives:
+  melee:
+  - 12
+  - 7
+  ranged:
+  - 11
+  - 6
+skills:
+  Bluff:
+    ability_mod: -1
+    synergy: 2
+    total: 1
+  Climb:
+    ranks: 8
+    ability_mod: 3
+    total: 11
+  Intimidate:
+    ranks: 8
+    ability_mod: -1
+    total: 7
+  Jump:
+    ranks: 3
+    ability_mod: 3
+    total: 6
+  Listen:
+    ranks: 1
+    ability_mod: 1
+    total: 2
+  Spot:
+    ranks: 1
+    ability_mod: 1
+    total: 2
+  Swim:
+    ranks: 1
+    ability_mod: 3
+    total: 4
+carrying_capacity:
+  light: 76
+  medium: 153
+  heavy: 230
+feats:
+- Dodge
+- Toughness
+- Power Attack
+- Weapon Focus
+- Weapon Specialization
+- Cleave
+- Blind-Fight
+class_features:
+- 'bonus_feat_1: Bonus fighter feat'
+- 'bonus_feat_2: Bonus fighter feat'
+- 'bonus_feat_4: Bonus fighter feat'
+- 'bonus_feat_6: Bonus fighter feat'
+- 'defensive_stance: +2 STR/CON, +2 saves, +4 AC'
+resources: {}

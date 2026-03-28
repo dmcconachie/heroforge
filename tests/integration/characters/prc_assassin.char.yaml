@@ -1,0 +1,127 @@
+identity:
+  name: "Vex Nighthollow"
+  player: ""
+  race: Human
+  alignment: neutral_evil
+  deity: ""
+
+ability_scores:
+  str: 10
+  dex: 16
+  con: 12
+  int: 14
+  wis: 10
+  cha: 8
+
+levels:
+  - level: 1
+    class: Rogue
+    hp_roll: 6
+    skill_ranks:
+      Hide: 4
+      Move Silently: 4
+      Disguise: 4
+      Tumble: 4
+      Open Lock: 4
+      Disable Device: 4
+      Search: 4
+      Listen: 4
+      Spot: 4
+      Bluff: 4
+      Balance: 4
+    feats:
+      - name: "Dodge"
+        source: character
+      - name: "Improved Initiative"
+        source: human_bonus
+  - level: 2
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Open Lock: 1
+      Disable Device: 1
+      Search: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+      Balance: 1
+  - level: 3
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Open Lock: 1
+      Disable Device: 1
+      Search: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+      Balance: 1
+    feats:
+      - name: "Mobility"
+        source: character
+  - level: 4
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Open Lock: 1
+      Disable Device: 1
+      Search: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+      Balance: 1
+  - level: 5
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Open Lock: 1
+      Disable Device: 1
+      Search: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+      Balance: 1
+  - level: 6
+    class: Assassin
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Disguise: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+    feats:
+      - name: "Spring Attack"
+        source: character
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Short Sword"
+      base: Short Sword
+
+notes: ""

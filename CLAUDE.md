@@ -37,4 +37,3 @@ ARCHITECTURE.md
   `pyproject.toml`; `uv run` handles everything.
 - Use `uv run pytest` to run tests — do not set env vars like `QT_QPA_PLATFORM` 
   on the command line.
-

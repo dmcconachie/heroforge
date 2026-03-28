@@ -1,0 +1,107 @@
+identity:
+  name: "Thaelin Swiftarrow"
+  player: ""
+  race: Elf
+  alignment: chaotic_good
+  deity: ""
+
+ability_scores:
+  str: 14
+  dex: 14
+  con: 14
+  int: 12
+  wis: 10
+  cha: 8
+
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    skill_ranks:
+      Climb: 4
+      Jump: 4
+      Swim: 4
+    feats:
+      - name: "Point Blank Shot"
+        source: character
+      - name: "Weapon Focus"
+        source: fighter_bonus
+        parameter: Longbow
+  - level: 2
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: "Precise Shot"
+        source: fighter_bonus
+  - level: 3
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: "Rapid Shot"
+        source: character
+  - level: 4
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: "Improved Initiative"
+        source: fighter_bonus
+  - level: 5
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+      Swim: 1
+  - level: 6
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: "Manyshot"
+        source: character
+      - name: "Far Shot"
+        source: fighter_bonus
+  - level: 7
+    class: Wizard
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 2
+      Spellcraft: 1
+    feats:
+      - name: "Scribe Scroll"
+        source: wizard_bonus
+  - level: 8
+    class: "Arcane Archer"
+    hp_roll: 6
+    skill_ranks:
+      Hide: 3
+      Listen: 2
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Longbow"
+      base: Longbow
+
+notes: ""

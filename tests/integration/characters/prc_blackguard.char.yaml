@@ -1,0 +1,107 @@
+identity:
+  name: "Malachar Dreadborn"
+  player: ""
+  race: Human
+  alignment: neutral_evil
+  deity: ""
+
+ability_scores:
+  str: 16
+  dex: 12
+  con: 14
+  int: 10
+  wis: 10
+  cha: 14
+
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    skill_ranks:
+      Knowledge (Religion): 2
+      Hide: 2
+      Intimidate: 4
+    feats:
+      - name: "Power Attack"
+        source: character
+      - name: "Cleave"
+        source: fighter_bonus
+      - name: "Weapon Focus"
+        source: human_bonus
+        parameter: Longsword
+  - level: 2
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Climb: 1
+      Jump: 1
+    feats:
+      - name: "Improved Initiative"
+        source: fighter_bonus
+  - level: 3
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Hide: 1
+      Intimidate: 1
+    feats:
+      - name: "Dodge"
+        source: character
+  - level: 4
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Climb: 1
+      Jump: 1
+    feats:
+      - name: "Blind-Fight"
+        source: fighter_bonus
+  - level: 5
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Hide: 1
+      Intimidate: 1
+  - level: 6
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Climb: 1
+      Jump: 1
+    feats:
+      - name: "Great Cleave"
+        source: character
+      - name: "Weapon Specialization"
+        source: fighter_bonus
+        parameter: Longsword
+  - level: 7
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Hide: 1
+      Climb: 1
+    feats: []
+  - level: 8
+    class: Blackguard
+    hp_roll: 8
+    skill_ranks:
+      Hide: 1
+      Intimidate: 1
+      Knowledge (Religion): 1
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Longsword"
+      base: Longsword
+
+notes: ""

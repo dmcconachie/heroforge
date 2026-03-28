@@ -1,0 +1,144 @@
+identity:
+  name: "Thorek Stoneblade"
+  player: ""
+  race: Dwarf
+  alignment: neutral
+  deity: ""
+
+ability_scores:
+  str: 14
+  dex: 14
+  con: 14
+  int: 12
+  wis: 10
+  cha: 10
+
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    skill_ranks:
+      Climb: 4
+      Intimidate: 4
+      Jump: 4
+    feats:
+      - name: "Power Attack"
+        source: character
+      - name: "Weapon Focus"
+        source: fighter_bonus
+        parameter: Dwarven Waraxe
+  - level: 2
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Intimidate: 1
+      Jump: 1
+    feats:
+      - name: "Cleave"
+        source: fighter_bonus
+  - level: 3
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Intimidate: 1
+      Jump: 1
+    feats:
+      - name: "Dodge"
+        source: character
+  - level: 4
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Intimidate: 1
+      Jump: 1
+    feats:
+      - name: "Combat Expertise"
+        source: fighter_bonus
+  - level: 5
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Intimidate: 1
+      Jump: 1
+  - level: 6
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Intimidate: 1
+      Jump: 1
+    feats:
+      - name: "Improved Trip"
+        source: character
+      - name: "Blind-Fight"
+        source: fighter_bonus
+  - level: 7
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 2
+      Move Silently: 2
+      Open Lock: 2
+      Search: 1
+      Disable Device: 1
+      Tumble: 1
+  - level: 8
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Disable Device: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Climb: 1
+  - level: 9
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Disable Device: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Climb: 1
+    feats:
+      - name: "Iron Will"
+        source: character
+  - level: 10
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Open Lock: 1
+      Search: 1
+      Disable Device: 1
+      Tumble: 1
+      Listen: 1
+      Spot: 1
+      Climb: 1
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Dwarven Waraxe"
+      base: Dwarven Waraxe
+
+notes: ""

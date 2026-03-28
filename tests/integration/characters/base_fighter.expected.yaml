@@ -1,0 +1,133 @@
+identity:
+  name: Gundrik Ironshield
+  race: Dwarf
+  class_str: Fighter 6
+  level: 6
+  alignment: lawful_neutral
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 16
+    score: 16
+    mod: 3
+  DEX:
+    base: 14
+    score: 14
+    mod: 2
+  CON:
+    base: 16
+    racial: 2
+    score: 18
+    mod: 4
+  INT:
+    base: 10
+    score: 10
+    mod: 0
+  WIS:
+    base: 12
+    score: 12
+    mod: 1
+  CHA:
+    base: 8
+    racial: -2
+    score: 6
+    mod: -2
+combat:
+  ac:
+    base: 10
+    dex: 2
+    total: 12
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 45
+    con: 24
+    total: 69
+  bab:
+    base: 6
+    total: 6
+  initiative:
+    dex: 2
+    total: 2
+  speed:
+    base: 20
+    total: 20
+  sr: 0
+  fort:
+    base: 5
+    con: 4
+    untyped: 2
+    total: 11
+  ref:
+    base: 2
+    dex: 2
+    total: 4
+  will:
+    base: 2
+    wis: 1
+    total: 3
+  attack_melee:
+    bab: 6
+    str: 3
+    untyped: 1
+    total: 10
+  attack_ranged:
+    bab: 6
+    dex: 2
+    untyped: 1
+    total: 9
+  damage_melee:
+    str: 3
+    untyped: 2
+    total: 5
+  grapple:
+    bab: 6
+    str: 3
+    total: 9
+attack_iteratives:
+  melee:
+  - 10
+  - 5
+  ranged:
+  - 9
+  - 4
+skills:
+  Bluff:
+    ability_mod: -2
+    synergy: 2
+    total: 0
+  Climb:
+    ranks: 7
+    ability_mod: 3
+    total: 10
+  Intimidate:
+    ranks: 7
+    ability_mod: -2
+    total: 5
+  Jump:
+    ranks: 2
+    ability_mod: 3
+    total: 5
+  Swim:
+    ranks: 2
+    ability_mod: 3
+    total: 5
+carrying_capacity:
+  light: 76
+  medium: 153
+  heavy: 230
+feats:
+- Power Attack
+- Cleave
+- Weapon Focus
+- Great Fortitude
+- Weapon Specialization
+- Improved Bull Rush
+- Great Cleave
+class_features:
+- 'bonus_feat_1: Bonus fighter feat'
+- 'bonus_feat_2: Bonus fighter feat'
+- 'bonus_feat_4: Bonus fighter feat'
+- 'bonus_feat_6: Bonus fighter feat'
+resources: {}

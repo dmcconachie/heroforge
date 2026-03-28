@@ -33,6 +33,9 @@ src/heroforge/
 │   ├── templates.py        # TemplateDefinition,
 │   │                       #   apply_template()
 │   ├── persistence.py      # save/load character YAML
+│   ├── sheet.py            # extract_sheet(),
+│   │                       #   gather_sheet(), charsheet
+│   │                       #   CLI entry point
 │   ├── equipment.py        # ArmorDefinition,
 │   │                       #   WeaponDefinition,
 │   │                       #   equip/unequip helpers
@@ -106,6 +109,11 @@ src/heroforge/
 
 tests/
 ├── conftest.py             # QT_QPA_PLATFORM=offscreen, qapp
+├── integration/            # golden-file char sheets
+│   ├── conftest.py         #   app_state fixture
+│   ├── test_golden.py      #   parametrized golden tests
+│   └── characters/         #   29 .char.yaml + .expected.yaml
+│                           #   (11 base + 3 archetype + 15 PrC)
 ├── test_bonus.py
 ├── test_stat.py
 ├── test_character.py
@@ -166,7 +174,8 @@ Supporting dataclasses:
 
 - `CharacterLevel` — one per-character-level entry
   (e.g. level 3 = Rogue). Stores class name, HP roll,
-  and per-level skill point allocation.
+  per-level skill point allocation, and feats acquired
+  at that level (with source tag).
 - `ClassLevel` — legacy cumulative model, now a computed
   property that aggregates `CharacterLevel` entries.
 - `BuffState` — per-buff persistent state: active flag,
@@ -296,9 +305,10 @@ and registered with the checker automatically.
 ## Layer 9: Templates (`engine/templates.py`)
 
 `TemplateDefinition` models creature templates (Half-Celestial,
-etc.) with ability modifiers, type/subtype changes, natural
-armor, granted feats, partial-application support, and an
-optional `ongoing_prereq`.
+etc.) with ability modifiers (bonus_type: racial, so they
+stack with racial ability mods), type/subtype changes,
+natural armor, granted feats, partial-application support,
+and an optional `ongoing_prereq`.
 
 `apply_template()` / `remove_template()` wire effects into the
 Character. `effective_type()` and `effective_subtypes()` resolve
@@ -308,10 +318,33 @@ the final creature type after all template layers.
 
 `save_character()` serializes to `.char.yaml` (version 2).
 The `levels:` key stores per-character-level entries with
-class name, HP roll, and skill point allocation.
+class name, HP roll, skill point allocation, and feats
+acquired at that level (each with name, source, optional
+parameter). Feats, skills, and class_levels are all
+derived from `levels:` — no redundant top-level keys.
 `load_character()` deserializes and re-applies race,
 template, and feat effects through the normal engine
 methods so all derived stats recompute correctly.
+
+## Layer 10b: Sheet extraction (`engine/sheet.py`) — TODO
+
+`extract_sheet(path, app_state)` loads a `.char.yaml` and
+returns a complete dict of all numerical values with full
+bonus-type breakdowns. `gather_sheet(character, app_state)`
+does the extraction from an already-loaded Character.
+
+CLI entry point: `uv run charsheet input.char.yaml`
+prints YAML to stdout; `-o file.yaml` writes to file.
+
+The output dict includes: identity, abilities (base +
+typed bonuses + score + mod), combat stats (base + typed
+bonuses + total for AC, saves, attacks, grapple, HP,
+initiative, speed, SR), per-weapon attacks with
+weapon-specific bonuses, skills (ranks + ability_mod +
+typed bonuses), carrying capacity, feats, class features,
+spellcasting (slots, DCs, spells known), and resources.
+
+Zero-value bonuses are omitted from the output.
 
 ## Layer 11: Equipment (`engine/equipment.py`)
 
@@ -428,7 +461,8 @@ Single object holding all registries and the active
 `Character`. Created by `MainWindow`. Methods: `load_rules()`,
 `new_character()`, `set_character()`, `skill_total()`.
 
-Registries: `buff_registry` (BuffRegistry),
+Registries:
+`buff_registry` (BuffRegistry),
 `condition_registry` (ConditionRegistry),
 `magic_item_registry` (MagicItemRegistry),
 `spell_compendium` (SpellCompendium),
@@ -509,6 +543,9 @@ Reusable components in `widgets/`: `LabeledField`,
 
 ## Not yet implemented
 
+- Per-weapon attack breakdowns in sheet extraction
+- Resources (uses/day) in sheet extraction
+  (ResourceTracker not yet wired to Character)
 - Companion/familiar sub-objects (placeholder fields
   exist on Character but no logic)
 - Two-weapon fighting penalty tables

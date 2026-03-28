@@ -1,0 +1,133 @@
+identity:
+  name: Brother Aldric
+  race: Human
+  class_str: Cleric 6
+  level: 6
+  alignment: lawful_good
+  deity: Pelor
+  size: Medium
+abilities:
+  STR:
+    base: 14
+    score: 14
+    mod: 2
+  DEX:
+    base: 10
+    score: 10
+    mod: 0
+  CON:
+    base: 14
+    score: 14
+    mod: 2
+  INT:
+    base: 10
+    score: 10
+    mod: 0
+  WIS:
+    base: 16
+    score: 16
+    mod: 3
+  CHA:
+    base: 12
+    score: 12
+    mod: 1
+combat:
+  ac:
+    base: 10
+    total: 10
+  touch_ac: 10
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 36
+    con: 12
+    total: 48
+  bab:
+    base: 4
+    total: 4
+  initiative:
+    total: 0
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 5
+    con: 2
+    total: 7
+  ref:
+    base: 2
+    total: 2
+  will:
+    base: 5
+    wis: 3
+    total: 8
+  attack_melee:
+    bab: 4
+    str: 2
+    total: 6
+  attack_ranged:
+    bab: 4
+    total: 4
+  damage_melee:
+    str: 2
+    total: 2
+  grapple:
+    bab: 4
+    str: 2
+    total: 6
+attack_iteratives:
+  melee:
+  - 6
+  ranged:
+  - 4
+skills:
+  Concentration:
+    ranks: 9
+    ability_mod: 2
+    total: 11
+  Diplomacy:
+    ranks: 2
+    ability_mod: 1
+    total: 3
+  Heal:
+    ranks: 7
+    ability_mod: 3
+    total: 10
+  Knowledge (Religion):
+    ranks: 6
+    ability_mod: 0
+    total: 6
+  Spellcraft:
+    ranks: 3
+    ability_mod: 0
+    total: 3
+carrying_capacity:
+  light: 58
+  medium: 116
+  heavy: 175
+feats:
+- Combat Casting
+- Extra Turning
+- Improved Turning
+- Spell Focus
+class_features:
+- 'turn_undead: Turn or rebuke undead'
+- 'spontaneous_casting: Convert prepared spells to cure/inflict'
+- 'domains: Two domains granting bonus spells and powers'
+spellcasting:
+  Cleric:
+    caster_level: 6
+    key_ability: wis
+    cast_type: divine
+    preparation: prepared
+    slots_per_day:
+    - 5
+    - 4
+    - 4
+    - 3
+    spell_save_dc:
+      0: 13
+      1: 14
+      2: 15
+      3: 16
+resources: {}

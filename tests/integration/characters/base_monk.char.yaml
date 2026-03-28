@@ -1,0 +1,94 @@
+identity:
+  name: "Thalindra Swiftwind"
+  player: ""
+  race: Elf
+  alignment: lawful_neutral
+  deity: ""
+
+ability_scores:
+  str: 12
+  dex: 16
+  con: 10
+  int: 10
+  wis: 16
+  cha: 8
+
+levels:
+  - level: 1
+    class: Monk
+    hp_roll: 8
+    skill_ranks:
+      Balance: 4
+      Jump: 4
+      Tumble: 4
+      Listen: 4
+    feats:
+      - name: "Dodge"
+        source: character
+      - name: "Improved Unarmed Strike"
+        source: "class:Monk"
+      - name: "Stunning Fist"
+        source: "class:Monk"
+  - level: 2
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Jump: 1
+      Tumble: 1
+      Spot: 1
+    feats:
+      - name: "Combat Reflexes"
+        source: "class:Monk"
+  - level: 3
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Jump: 1
+      Tumble: 1
+      Listen: 1
+    feats:
+      - name: "Mobility"
+        source: character
+  - level: 4
+    class: Monk
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Spot: 1
+      Listen: 1
+  - level: 5
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Jump: 1
+      Tumble: 1
+      Spot: 1
+  - level: 6
+    class: Monk
+    hp_roll: 6
+    skill_ranks:
+      Hide: 1
+      Move Silently: 1
+      Spot: 1
+      Listen: 1
+    feats:
+      - name: "Improved Initiative"
+        source: character
+      - name: "Improved Trip"
+        source: "class:Monk"
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons: []
+
+notes: ""

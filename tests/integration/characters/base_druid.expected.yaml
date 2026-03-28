@@ -1,0 +1,170 @@
+identity:
+  name: Bimble Mosswalker
+  race: Gnome
+  class_str: Druid 6
+  level: 6
+  alignment: neutral
+  deity: ''
+  size: Small
+abilities:
+  STR:
+    base: 8
+    racial: -2
+    score: 6
+    mod: -2
+  DEX:
+    base: 14
+    score: 14
+    mod: 2
+  CON:
+    base: 14
+    racial: 2
+    score: 16
+    mod: 3
+  INT:
+    base: 12
+    score: 12
+    mod: 1
+  WIS:
+    base: 16
+    score: 16
+    mod: 3
+  CHA:
+    base: 10
+    score: 10
+    mod: 0
+combat:
+  ac:
+    base: 10
+    dex: 2
+    size: 1
+    total: 13
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 35
+    con: 18
+    total: 53
+  bab:
+    base: 4
+    total: 4
+  initiative:
+    dex: 2
+    total: 2
+  speed:
+    base: 20
+    total: 20
+  sr: 0
+  fort:
+    base: 5
+    con: 3
+    total: 8
+  ref:
+    base: 2
+    dex: 2
+    total: 4
+  will:
+    base: 5
+    wis: 3
+    total: 8
+  attack_melee:
+    bab: 4
+    str: -2
+    size: 1
+    total: 3
+  attack_ranged:
+    bab: 4
+    dex: 2
+    size: 1
+    total: 7
+  damage_melee:
+    str: -2
+    total: -2
+  grapple:
+    bab: 4
+    str: -2
+    size: -4
+    total: -2
+attack_iteratives:
+  melee:
+  - 3
+  ranged:
+  - 7
+skills:
+  Concentration:
+    ranks: 9
+    ability_mod: 3
+    total: 12
+  Diplomacy:
+    ability_mod: 0
+    synergy: 2
+    total: 2
+  Handle Animal:
+    ranks: 7
+    ability_mod: 0
+    total: 7
+  Knowledge (Arcana):
+    ability_mod: 1
+    synergy: 2
+    total: 3
+  Knowledge (Nature):
+    ranks: 6
+    ability_mod: 1
+    synergy: 2
+    total: 9
+  Listen:
+    ranks: 3
+    ability_mod: 3
+    total: 6
+  Spellcraft:
+    ranks: 6
+    ability_mod: 1
+    total: 7
+  Spot:
+    ranks: 5
+    ability_mod: 3
+    total: 8
+  Survival:
+    ranks: 9
+    ability_mod: 3
+    synergy: 2
+    total: 14
+  Use Magic Device:
+    ability_mod: 0
+    synergy: 2
+    total: 2
+carrying_capacity:
+  light: 15
+  medium: 30
+  heavy: 45
+feats:
+- Spell Focus
+- Augment Summoning
+- Natural Spell
+class_features:
+- 'animal_companion: Special animal companion'
+- 'nature_sense: +2 Knowledge (Nature) and Survival'
+- 'wild_empathy: Improve attitude of animals'
+- 'woodland_stride: Move through natural undergrowth at full speed'
+- 'trackless_step: Leave no trail in natural surroundings'
+- 'resist_natures_lure: +4 saves vs fey spell-like abilities'
+- 'wild_shape_1: Wild Shape 1/day (Small or Medium animal)'
+- 'wild_shape_2: Wild Shape 2/day'
+- 'wild_shape_3: Wild Shape 3/day; Large animal'
+spellcasting:
+  Druid:
+    caster_level: 6
+    key_ability: wis
+    cast_type: divine
+    preparation: prepared
+    slots_per_day:
+    - 5
+    - 4
+    - 4
+    - 3
+    spell_save_dc:
+      0: 13
+      1: 14
+      2: 15
+      3: 16
+resources: {}

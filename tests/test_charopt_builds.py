@@ -180,13 +180,13 @@ class TestHumanFighter8:
     def test_toughness_adds_hp(self) -> None:
         base_hp = self.c.hp_max
         defn = self.state.feat_registry.require("Toughness")
-        self.c.add_feat("Toughness", defn)
+        self.c.add_feat("Toughness", defn, level=1, source="character")
         assert self.c.hp_max == base_hp + 3
 
     def test_iron_will_adds_will(self) -> None:
         base_will = self.c.will
         defn = self.state.feat_registry.require("Iron Will")
-        self.c.add_feat("Iron Will", defn)
+        self.c.add_feat("Iron Will", defn, level=1, source="character")
         assert self.c.will == base_will + 2
 
 
@@ -960,7 +960,7 @@ class TestVampireRogue8:
 
     def test_granted_feat_source(self) -> None:
         dodge = next(f for f in self.c.feats if f["name"] == "Dodge")
-        assert dodge.get("source") == "Vampire"
+        assert dodge.get("source") == "template:Vampire"
 
     def test_improved_init_always_on(self) -> None:
         # Improved Initiative is always-on: +4 init

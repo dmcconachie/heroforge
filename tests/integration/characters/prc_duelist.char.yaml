@@ -1,0 +1,117 @@
+identity:
+  name: "Caelith Bladesong"
+  player: ""
+  race: Elf
+  alignment: chaotic_neutral
+  deity: ""
+
+ability_scores:
+  str: 14
+  dex: 14
+  con: 14
+  int: 14
+  wis: 10
+  cha: 8
+
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    skill_ranks:
+      Climb: 4
+      Jump: 4
+      Intimidate: 4
+      Tumble: 1
+      Perform: 1
+    feats:
+      - name: "Dodge"
+        source: character
+      - name: "Weapon Focus"
+        source: fighter_bonus
+        parameter: Rapier
+  - level: 2
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Tumble: 1
+      Swim: 1
+    feats:
+      - name: "Mobility"
+        source: fighter_bonus
+  - level: 3
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Jump: 1
+      Perform: 1
+      Swim: 1
+    feats:
+      - name: "Combat Expertise"
+        source: character
+  - level: 4
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Tumble: 1
+      Jump: 1
+    feats:
+      - name: "Improved Initiative"
+        source: fighter_bonus
+  - level: 5
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Perform: 1
+      Jump: 1
+  - level: 6
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+      Swim: 2
+    feats:
+      - name: "Weapon Finesse"
+        source: character
+      - name: "Spring Attack"
+        source: fighter_bonus
+  - level: 7
+    class: Rogue
+    hp_roll: 5
+    skill_ranks:
+      Tumble: 2
+      Perform: 1
+      Hide: 1
+      Move Silently: 1
+      Listen: 1
+      Spot: 1
+      Bluff: 1
+      Search: 1
+      Sense Motive: 1
+  - level: 8
+    class: Duelist
+    hp_roll: 8
+    skill_ranks:
+      Tumble: 1
+      Perform: 1
+      Listen: 1
+      Sense Motive: 1
+      Escape Artist: 1
+      Balance: 1
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Rapier"
+      base: Rapier
+
+notes: ""

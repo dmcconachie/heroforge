@@ -1,0 +1,112 @@
+identity:
+  name: "Gareth Spellblade"
+  player: ""
+  race: Human
+  alignment: neutral
+  deity: ""
+
+ability_scores:
+  str: 14
+  dex: 12
+  con: 14
+  int: 16
+  wis: 10
+  cha: 8
+
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    skill_ranks:
+      Climb: 4
+      Jump: 4
+      Intimidate: 4
+      Swim: 4
+      Ride: 4
+      Handle Animal: 4
+    feats:
+      - name: "Power Attack"
+        source: character
+      - name: "Weapon Focus"
+        source: fighter_bonus
+        parameter: Longsword
+      - name: "Combat Casting"
+        source: human_bonus
+  - level: 2
+    class: Wizard
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 4
+      Spellcraft: 2
+    feats:
+      - name: "Scribe Scroll"
+        source: wizard_bonus
+  - level: 3
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Decipher Script: 3
+    feats:
+      - name: "Dodge"
+        source: character
+  - level: 4
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Decipher Script: 1
+      Knowledge (Religion): 2
+  - level: 5
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Knowledge (The Planes): 1
+  - level: 6
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+      Knowledge (The Planes): 1
+    feats:
+      - name: "Mobility"
+        source: character
+      - name: "Extend Spell"
+        source: wizard_bonus
+  - level: 7
+    class: "Eldritch Knight"
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Jump: 1
+      Ride: 1
+      Knowledge (Arcana): 1
+      Swim: 1
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Longsword"
+      base: Longsword
+
+notes: ""

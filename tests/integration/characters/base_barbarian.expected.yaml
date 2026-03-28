@@ -1,0 +1,142 @@
+identity:
+  name: Grukk Skullcrusher
+  race: Half-Orc
+  class_str: Barbarian 6
+  level: 6
+  alignment: chaotic_neutral
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 18
+    racial: 2
+    score: 20
+    mod: 5
+  DEX:
+    base: 14
+    score: 14
+    mod: 2
+  CON:
+    base: 14
+    score: 14
+    mod: 2
+  INT:
+    base: 8
+    racial: -2
+    score: 6
+    mod: -2
+  WIS:
+    base: 12
+    score: 12
+    mod: 1
+  CHA:
+    base: 6
+    racial: -2
+    score: 4
+    mod: -3
+combat:
+  ac:
+    base: 10
+    dex: 2
+    total: 12
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 52
+    con: 12
+    total: 64
+  bab:
+    base: 6
+    total: 6
+  initiative:
+    dex: 2
+    total: 2
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 5
+    con: 2
+    total: 7
+  ref:
+    base: 2
+    dex: 2
+    total: 4
+  will:
+    base: 2
+    wis: 1
+    total: 3
+  attack_melee:
+    bab: 6
+    str: 5
+    total: 11
+  attack_ranged:
+    bab: 6
+    dex: 2
+    total: 8
+  damage_melee:
+    str: 5
+    total: 5
+  grapple:
+    bab: 6
+    str: 5
+    total: 11
+attack_iteratives:
+  melee:
+  - 11
+  - 6
+  ranged:
+  - 8
+  - 3
+skills:
+  Bluff:
+    ability_mod: -3
+    synergy: 2
+    total: -1
+  Climb:
+    ranks: 7
+    ability_mod: 5
+    total: 12
+  Intimidate:
+    ranks: 6
+    ability_mod: -3
+    total: 3
+  Jump:
+    ranks: 6
+    ability_mod: 5
+    total: 11
+  Listen:
+    ranks: 3
+    ability_mod: 1
+    total: 4
+  Survival:
+    ranks: 3
+    ability_mod: 1
+    total: 4
+  Swim:
+    ranks: 2
+    ability_mod: 5
+    total: 7
+  Tumble:
+    ability_mod: 2
+    synergy: 2
+    total: 4
+carrying_capacity:
+  light: 133
+  medium: 266
+  heavy: 400
+feats:
+- Power Attack
+- Cleave
+- Great Cleave
+class_features:
+- 'fast_movement: +10 ft speed (not in medium/heavy armor)'
+- 'illiteracy: Cannot read unless spending 2 skill points'
+- 'rage: +4 STR/CON, +2 Will, -2 AC; 1/day'
+- 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+- 'trap_sense_1: +1 Reflex and AC vs traps'
+- 'rage_2: Rage 2/day'
+- 'improved_uncanny_dodge: Cannot be flanked'
+- 'trap_sense_2: +2 Reflex and AC vs traps'
+resources: {}

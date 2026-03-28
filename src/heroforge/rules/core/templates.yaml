@@ -40,22 +40,22 @@ templates:
     ability_modifiers:
       - ability: str
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: dex
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: wis
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 1
     partially_applicable: false
     special_qualities:
@@ -87,19 +87,19 @@ templates:
     ability_modifiers:
       - ability: str
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: dex
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 1
     partially_applicable: false
     special_qualities:
@@ -128,16 +128,16 @@ templates:
     ability_modifiers:
       - ability: str
         value: 8
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 4
     partially_applicable: false
     special_qualities:
@@ -156,16 +156,16 @@ templates:
     ability_modifiers:
       - ability: str
         value: 8
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 4
     partially_applicable: false
     special_qualities:
@@ -191,13 +191,13 @@ templates:
     ability_modifiers:
       - ability: str
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 0
     partially_applicable: false
     special_qualities:
@@ -224,13 +224,13 @@ templates:
     ability_modifiers:
       - ability: str
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 0
     partially_applicable: false
     special_qualities:
@@ -256,19 +256,19 @@ templates:
     ability_modifiers:
       - ability: str
         value: 6
-        bonus_type: untyped
+        bonus_type: racial
       - ability: dex
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: wis
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
         # CON: undead have no CON score;
         # modelled as 0 delta here.
     natural_armor_bonus: 6
@@ -310,11 +310,11 @@ templates:
     ability_modifiers:
       - ability: cha
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       # DEX: ghosts gain +2 Dex for incorporeal movement purposes
       - ability: dex
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 0
     partially_applicable: false
     special_qualities:
@@ -341,13 +341,13 @@ templates:
     ability_modifiers:
       - ability: int
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: wis
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 5
     partially_applicable: false
     special_qualities:
@@ -377,13 +377,13 @@ templates:
     ability_modifiers:
       - ability: str
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: wis
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 2
     partially_applicable: true
     max_level: 3
@@ -411,13 +411,13 @@ templates:
     ability_modifiers:
       - ability: str
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: wis
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 1
     partially_applicable: true
     max_level: 6
@@ -439,22 +439,22 @@ templates:
     ability_modifiers:
       - ability: str
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: dex
         value: 4
-        bonus_type: untyped
+        bonus_type: racial
       - ability: con
         value: 2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: int
         value: -2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: wis
         value: -2
-        bonus_type: untyped
+        bonus_type: racial
       - ability: cha
         value: -4
-        bonus_type: untyped
+        bonus_type: racial
     natural_armor_bonus: 2
     partially_applicable: false
     special_qualities:

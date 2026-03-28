@@ -1,0 +1,173 @@
+identity:
+  name: Vex Nighthollow
+  race: Human
+  class_str: Rogue 5 / Assassin 1
+  level: 6
+  alignment: neutral_evil
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 10
+    score: 10
+    mod: 0
+  DEX:
+    base: 16
+    score: 16
+    mod: 3
+  CON:
+    base: 12
+    score: 12
+    mod: 1
+  INT:
+    base: 14
+    score: 14
+    mod: 2
+  WIS:
+    base: 10
+    score: 10
+    mod: 0
+  CHA:
+    base: 8
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 3
+    total: 13
+  touch_ac: 13
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 31
+    con: 6
+    total: 37
+  bab:
+    base: 3
+    total: 3
+  initiative:
+    dex: 3
+    untyped: 4
+    total: 7
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 1
+    con: 1
+    total: 2
+  ref:
+    base: 6
+    dex: 3
+    total: 9
+  will:
+    base: 1
+    total: 1
+  attack_melee:
+    bab: 3
+    total: 3
+  attack_ranged:
+    bab: 3
+    dex: 3
+    total: 6
+  damage_melee:
+    total: 0
+  grapple:
+    bab: 3
+    total: 3
+attack_iteratives:
+  melee:
+  - 3
+  ranged:
+  - 6
+skills:
+  Balance:
+    ranks: 8
+    ability_mod: 3
+    synergy: 2
+    total: 13
+  Bluff:
+    ranks: 9
+    ability_mod: -1
+    synergy: 2
+    total: 10
+  Diplomacy:
+    ability_mod: -1
+    synergy: 2
+    total: 1
+  Disable Device:
+    ranks: 8
+    ability_mod: 2
+    total: 10
+  Disguise:
+    ranks: 9
+    ability_mod: -1
+    synergy: 2
+    total: 10
+  Hide:
+    ranks: 9
+    ability_mod: 3
+    total: 12
+  Intimidate:
+    ability_mod: -1
+    synergy: 2
+    total: 1
+  Jump:
+    ability_mod: 0
+    synergy: 2
+    total: 2
+  Listen:
+    ranks: 9
+    ability_mod: 0
+    total: 9
+  Move Silently:
+    ranks: 9
+    ability_mod: 3
+    synergy: 2
+    total: 14
+  Open Lock:
+    ranks: 8
+    ability_mod: 3
+    total: 11
+  Search:
+    ranks: 8
+    ability_mod: 2
+    total: 10
+  Sleight of Hand:
+    ability_mod: 3
+    synergy: 2
+    total: 5
+  Spot:
+    ranks: 9
+    ability_mod: 0
+    total: 9
+  Survival:
+    ability_mod: 0
+    synergy: 2
+    total: 2
+  Tumble:
+    ranks: 9
+    ability_mod: 3
+    total: 12
+carrying_capacity:
+  light: 33
+  medium: 66
+  heavy: 100
+feats:
+- Dodge
+- Improved Initiative
+- Mobility
+- Spring Attack
+class_features:
+- 'sneak_attack_1d6: Sneak attack +1d6'
+- 'trapfinding: Find and disable magical traps'
+- 'evasion: No damage on successful Reflex save'
+- 'sneak_attack_2d6: Sneak attack +2d6'
+- 'trap_sense_1: +1 Reflex and AC vs traps'
+- 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+- 'sneak_attack_3d6: Sneak attack +3d6'
+- 'sneak_attack_1d6: +1d6 sneak attack'
+- 'death_attack: Study + kill'
+- 'poison_use: Never poison self'
+resources: {}

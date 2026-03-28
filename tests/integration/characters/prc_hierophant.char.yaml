@@ -1,0 +1,157 @@
+identity:
+  name: "Davan Lightcaller"
+  player: ""
+  race: Human
+  alignment: neutral_good
+  deity: "Pelor"
+
+ability_scores:
+  str: 10
+  dex: 10
+  con: 14
+  int: 10
+  wis: 18
+  cha: 12
+
+levels:
+  # Cleric 1 — Human gets 3/level, x4 = 12 pts
+  - level: 1
+    class: Cleric
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 4
+      Heal: 4
+      Knowledge (Religion): 4
+    feats:
+      - name: "Combat Casting"
+        source: character
+      - name: "Extra Turning"
+        source: human_bonus
+  # Cleric 2 — 3 pts
+  - level: 2
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Spellcraft: 1
+  # Cleric 3 — 3 pts
+  - level: 3
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Spellcraft: 1
+    feats:
+      - name: "Extend Spell"
+        source: character
+  # Cleric 4 — 3 pts
+  - level: 4
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Knowledge (Religion): 1
+  # Cleric 5 — 3 pts
+  - level: 5
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Knowledge (Religion): 1
+  # Cleric 6 — 3 pts
+  - level: 6
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Knowledge (Religion): 1
+    feats:
+      - name: "Spell Penetration"
+        source: character
+  # Cleric 7 — 3 pts
+  - level: 7
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Diplomacy: 1
+  # Cleric 8 — 3 pts
+  - level: 8
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Diplomacy: 1
+  # Cleric 9 — 3 pts
+  - level: 9
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Diplomacy: 1
+    feats:
+      - name: "Augment Summoning"
+        source: character
+  # Cleric 10 — 3 pts
+  - level: 10
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (The Planes): 1
+  # Cleric 11 — 3 pts
+  - level: 11
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (The Planes): 1
+  # Cleric 12 — 3 pts
+  - level: 12
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (The Planes): 1
+    feats:
+      - name: "Greater Spell Penetration"
+        source: character
+  # Cleric 13 — 3 pts
+  - level: 13
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Heal: 1
+      Knowledge (The Planes): 1
+  # Hierophant 1 — 3 pts
+  - level: 14
+    class: Hierophant
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Religion): 1
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons: []
+
+notes: ""

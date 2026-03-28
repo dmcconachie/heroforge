@@ -593,35 +593,55 @@ class TestCharacterAddRemoveFeat:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Point Blank Shot")
-        c.add_feat("Point Blank Shot", defn)
+        c.add_feat("Point Blank Shot", defn, level=1, source="character")
         assert any(f["name"] == "Point Blank Shot" for f in c.feats)
 
     def test_add_passive_feat_no_stat_effect(self) -> None:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         base_ac = c.ac
-        c.add_feat("Point Blank Shot", feat_reg.require("Point Blank Shot"))
+        c.add_feat(
+            "Point Blank Shot",
+            feat_reg.require("Point Blank Shot"),
+            level=1,
+            source="character",
+        )
         assert c.ac == base_ac
 
     def test_add_always_on_feat_applies_bonus(self) -> None:
         c = fresh_char()
         base_will = c.will
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Iron Will", feat_reg.require("Iron Will"))
+        c.add_feat(
+            "Iron Will",
+            feat_reg.require("Iron Will"),
+            level=1,
+            source="character",
+        )
         assert c.will == base_will + 2
 
     def test_add_toughness_increases_hp(self) -> None:
         c = fighter(4)
         base_hp = c.hp_max
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Toughness", feat_reg.require("Toughness"))
+        c.add_feat(
+            "Toughness",
+            feat_reg.require("Toughness"),
+            level=1,
+            source="character",
+        )
         assert c.hp_max == base_hp + 3
 
     def test_add_iron_will_increases_will(self) -> None:
         c = fresh_char()
         base_will = c.will
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Iron Will", feat_reg.require("Iron Will"))
+        c.add_feat(
+            "Iron Will",
+            feat_reg.require("Iron Will"),
+            level=1,
+            source="character",
+        )
         assert c.will == base_will + 2
 
     def test_add_improved_initiative_increases_initiative(self) -> None:
@@ -629,7 +649,10 @@ class TestCharacterAddRemoveFeat:
         base_init = c.get("initiative")
         feat_reg, _, _ = loaded_registries()
         c.add_feat(
-            "Improved Initiative", feat_reg.require("Improved Initiative")
+            "Improved Initiative",
+            feat_reg.require("Improved Initiative"),
+            level=1,
+            source="character",
         )
         assert c.get("initiative") == base_init + 4
 
@@ -638,8 +661,8 @@ class TestCharacterAddRemoveFeat:
         base_will = c.will
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Iron Will")
-        c.add_feat("Iron Will", defn)
-        c.add_feat("Iron Will", defn)  # no-op
+        c.add_feat("Iron Will", defn, level=1, source="character")
+        c.add_feat("Iron Will", defn, level=1, source="character")  # no-op
         assert c.will == base_will + 2
 
     def test_add_conditional_feat_registers_buff_not_activated(
@@ -647,7 +670,9 @@ class TestCharacterAddRemoveFeat:
     ) -> None:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Dodge", feat_reg.require("Dodge"))
+        c.add_feat(
+            "Dodge", feat_reg.require("Dodge"), level=1, source="character"
+        )
         assert any(f["name"] == "Dodge" for f in c.feats)
         assert not c.is_buff_active("Dodge")
 
@@ -656,7 +681,7 @@ class TestCharacterAddRemoveFeat:
         base_will = c.will
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Iron Will")
-        c.add_feat("Iron Will", defn)
+        c.add_feat("Iron Will", defn, level=1, source="character")
         assert c.will == base_will + 2
         c.remove_feat("Iron Will", defn)
         assert c.will == base_will
@@ -666,7 +691,7 @@ class TestCharacterAddRemoveFeat:
         base_hp = c.hp_max
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Toughness")
-        c.add_feat("Toughness", defn)
+        c.add_feat("Toughness", defn, level=1, source="character")
         c.remove_feat("Toughness", defn)
         assert c.hp_max == base_hp
 
@@ -674,14 +699,14 @@ class TestCharacterAddRemoveFeat:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Iron Will")
-        c.add_feat("Iron Will", defn)
+        c.add_feat("Iron Will", defn, level=1, source="character")
         assert "Iron Will" not in c._buff_states
 
     def test_always_on_feat_uses_pool_source(self) -> None:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Iron Will")
-        c.add_feat("Iron Will", defn)
+        c.add_feat("Iron Will", defn, level=1, source="character")
         pool = c.get_pool("will_save")
         assert pool is not None
         assert "feat:Iron Will" in pool._sources
@@ -692,7 +717,7 @@ class TestCharacterAddRemoveFeat:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Iron Will")
-        c.add_feat("Iron Will", defn)
+        c.add_feat("Iron Will", defn, level=1, source="character")
         c.remove_feat("Iron Will", defn)
         pool = c.get_pool("will_save")
         assert pool is not None
@@ -708,7 +733,7 @@ class TestCharacterAddRemoveFeat:
         base_ac = c.ac
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Dodge")
-        c.add_feat("Dodge", defn)
+        c.add_feat("Dodge", defn, level=1, source="character")
         # Not activated yet — AC unchanged
         assert c.ac == base_ac
         # Toggle on
@@ -728,7 +753,7 @@ class TestCharacterAddRemoveFeat:
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Point Blank Shot")
-        c.add_feat("Point Blank Shot", defn)
+        c.add_feat("Point Blank Shot", defn, level=1, source="character")
         c.remove_feat("Point Blank Shot", defn)
         assert not any(f["name"] == "Point Blank Shot" for f in c.feats)
 
@@ -743,7 +768,9 @@ class TestConditionalFeatActivation:
         c = fresh_char()
         base_ac = c.ac
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Dodge", feat_reg.require("Dodge"))
+        c.add_feat(
+            "Dodge", feat_reg.require("Dodge"), level=1, source="character"
+        )
         c.toggle_buff("Dodge", True)
         assert c.ac == base_ac + 1
 
@@ -751,7 +778,9 @@ class TestConditionalFeatActivation:
         c = fresh_char()
         base_ac = c.ac
         feat_reg, _, _ = loaded_registries()
-        c.add_feat("Dodge", feat_reg.require("Dodge"))
+        c.add_feat(
+            "Dodge", feat_reg.require("Dodge"), level=1, source="character"
+        )
         c.toggle_buff("Dodge", True)
         c.toggle_buff("Dodge", False)
         assert c.ac == base_ac
@@ -863,9 +892,24 @@ class TestMultipleAlwaysOnFeats:
         base_fort = c.fort
         base_ref = c.ref
 
-        c.add_feat("Iron Will", feat_reg.require("Iron Will"))
-        c.add_feat("Great Fortitude", feat_reg.require("Great Fortitude"))
-        c.add_feat("Lightning Reflexes", feat_reg.require("Lightning Reflexes"))
+        c.add_feat(
+            "Iron Will",
+            feat_reg.require("Iron Will"),
+            level=1,
+            source="character",
+        )
+        c.add_feat(
+            "Great Fortitude",
+            feat_reg.require("Great Fortitude"),
+            level=1,
+            source="character",
+        )
+        c.add_feat(
+            "Lightning Reflexes",
+            feat_reg.require("Lightning Reflexes"),
+            level=1,
+            source="character",
+        )
 
         assert c.will == base_will + 2
         assert c.fort == base_fort + 2
@@ -878,10 +922,14 @@ class TestMultipleAlwaysOnFeats:
         base_ac = c.ac
         base_init = c.get("initiative")
 
-        c.add_feat("Dodge", feat_reg.require("Dodge"))
+        c.add_feat(
+            "Dodge", feat_reg.require("Dodge"), level=1, source="character"
+        )
         c.add_feat(
             "Improved Initiative",
             feat_reg.require("Improved Initiative"),
+            level=1,
+            source="character",
         )
 
         # Dodge not toggled — AC unchanged
@@ -902,6 +950,6 @@ class TestMultipleAlwaysOnFeats:
         # Add three separate toughness feats (e.g. from templates and normal)
         # In practice the character can only take it once, but the pool
         # handles multiple sources correctly.
-        c.add_feat("Toughness", defn)
+        c.add_feat("Toughness", defn, level=1, source="character")
         # Re-adding is a no-op due to deduplication
         assert c.hp_max == base_hp + 3

@@ -1,0 +1,168 @@
+identity:
+  name: Thorek Stoneblade
+  race: Dwarf
+  class_str: Fighter 6 / Rogue 4
+  level: 10
+  alignment: neutral
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 14
+    score: 14
+    mod: 2
+  DEX:
+    base: 14
+    score: 14
+    mod: 2
+  CON:
+    base: 14
+    racial: 2
+    score: 16
+    mod: 3
+  INT:
+    base: 12
+    score: 12
+    mod: 1
+  WIS:
+    base: 10
+    score: 10
+    mod: 0
+  CHA:
+    base: 10
+    racial: -2
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 2
+    total: 12
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 70
+    con: 30
+    total: 100
+  bab:
+    base: 9
+    total: 9
+  initiative:
+    dex: 2
+    total: 2
+  speed:
+    base: 20
+    total: 20
+  sr: 0
+  fort:
+    base: 6
+    con: 3
+    total: 9
+  ref:
+    base: 6
+    dex: 2
+    total: 8
+  will:
+    base: 3
+    untyped: 2
+    total: 5
+  attack_melee:
+    bab: 9
+    str: 2
+    untyped: 1
+    total: 12
+  attack_ranged:
+    bab: 9
+    dex: 2
+    untyped: 1
+    total: 12
+  damage_melee:
+    str: 2
+    total: 2
+  grapple:
+    bab: 9
+    str: 2
+    total: 11
+attack_iteratives:
+  melee:
+  - 12
+  - 7
+  ranged:
+  - 12
+  - 7
+skills:
+  Bluff:
+    ability_mod: -1
+    synergy: 2
+    total: 1
+  Climb:
+    ranks: 12
+    ability_mod: 2
+    total: 14
+  Disable Device:
+    ranks: 4
+    ability_mod: 1
+    total: 5
+  Hide:
+    ranks: 5
+    ability_mod: 2
+    total: 7
+  Intimidate:
+    ranks: 9
+    ability_mod: -1
+    total: 8
+  Jump:
+    ranks: 9
+    ability_mod: 2
+    total: 11
+  Listen:
+    ranks: 3
+    ability_mod: 0
+    total: 3
+  Move Silently:
+    ranks: 5
+    ability_mod: 2
+    synergy: 2
+    total: 9
+  Open Lock:
+    ranks: 5
+    ability_mod: 2
+    total: 7
+  Search:
+    ranks: 4
+    ability_mod: 1
+    total: 5
+  Spot:
+    ranks: 3
+    ability_mod: 0
+    total: 3
+  Tumble:
+    ranks: 4
+    ability_mod: 2
+    synergy: 2
+    total: 8
+carrying_capacity:
+  light: 58
+  medium: 116
+  heavy: 175
+feats:
+- Power Attack
+- Weapon Focus
+- Cleave
+- Dodge
+- Combat Expertise
+- Improved Trip
+- Blind-Fight
+- Iron Will
+class_features:
+- 'bonus_feat_1: Bonus fighter feat'
+- 'bonus_feat_2: Bonus fighter feat'
+- 'bonus_feat_4: Bonus fighter feat'
+- 'bonus_feat_6: Bonus fighter feat'
+- 'sneak_attack_1d6: Sneak attack +1d6'
+- 'trapfinding: Find and disable magical traps'
+- 'evasion: No damage on successful Reflex save'
+- 'sneak_attack_2d6: Sneak attack +2d6'
+- 'trap_sense_1: +1 Reflex and AC vs traps'
+- 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+resources: {}

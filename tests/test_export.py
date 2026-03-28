@@ -68,9 +68,24 @@ def full_char(state: AppState) -> Character:
         c.set_ability_score(ab, score)
 
     # Feats
-    c.add_feat("Dodge", state.feat_registry.require("Dodge"))
-    c.add_feat("Toughness", state.feat_registry.require("Toughness"))
-    c.add_feat("Iron Will", state.feat_registry.require("Iron Will"))
+    c.add_feat(
+        "Dodge",
+        state.feat_registry.require("Dodge"),
+        level=1,
+        source="character",
+    )
+    c.add_feat(
+        "Toughness",
+        state.feat_registry.require("Toughness"),
+        level=1,
+        source="character",
+    )
+    c.add_feat(
+        "Iron Will",
+        state.feat_registry.require("Iron Will"),
+        level=1,
+        source="character",
+    )
 
     # Skills
     set_skill_ranks(c, "Climb", 6)
@@ -280,7 +295,12 @@ class TestGatherFeats:
 
     def test_feat_note_included(self) -> None:
         state = make_state()
-        state.character.add_feat("Dodge", state.feat_registry.require("Dodge"))
+        state.character.add_feat(
+            "Dodge",
+            state.feat_registry.require("Dodge"),
+            level=1,
+            source="character",
+        )
         data = gather(state.character, state)
         dodge = next(f for f in data.feats if f.name == "Dodge")
         assert "dodge" in dodge.note.lower() or dodge.note != ""

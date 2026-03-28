@@ -1,0 +1,253 @@
+identity:
+  name: "Meridius the Exalted"
+  player: ""
+  race: Human
+  alignment: neutral
+  deity: ""
+
+ability_scores:
+  str: 8
+  dex: 12
+  con: 14
+  int: 18
+  wis: 10
+  cha: 8
+
+levels:
+  # Wizard 1 — Human: 2+4(INT)+1(human)=7, x4=28 pts
+  - level: 1
+    class: Wizard
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 4
+      Spellcraft: 4
+      Knowledge (Arcana): 4
+      Knowledge (History): 4
+      Knowledge (The Planes): 4
+      Knowledge (Religion): 4
+      Decipher Script: 4
+    feats:
+      - name: "Scribe Scroll"
+        source: wizard_bonus
+      - name: "Spell Focus"
+        source: character
+        parameter: Evocation
+      - name: "Skill Focus"
+        source: human_bonus
+        parameter: Spellcraft
+  # Wizard 2 — 7 pts
+  - level: 2
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+  # Wizard 3 — 7 pts
+  - level: 3
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+    feats:
+      - name: "Combat Casting"
+        source: character
+  # Wizard 4 — 7 pts
+  - level: 4
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+  # Wizard 5 — 7 pts; wizard bonus feat
+  - level: 5
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+    feats:
+      - name: "Extend Spell"
+        source: wizard_bonus
+  # Wizard 6 — 7 pts
+  - level: 6
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+    feats:
+      - name: "Spell Penetration"
+        source: character
+  # Wizard 7 — 7 pts
+  - level: 7
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+  # Wizard 8 — 7 pts
+  - level: 8
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+  # Wizard 9 — 7 pts
+  - level: 9
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+    feats:
+      - name: "Greater Spell Focus"
+        source: character
+        parameter: Evocation
+  # Wizard 10 — 7 pts; wizard bonus feat
+  - level: 10
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+    feats:
+      - name: "Empower Spell"
+        source: wizard_bonus
+  # Wizard 11 — 7 pts
+  - level: 11
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+  # Wizard 12 — 7 pts
+  - level: 12
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+    feats:
+      - name: "Greater Spell Penetration"
+        source: character
+  # Wizard 13 — 7 pts
+  - level: 13
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+  # Wizard 14 — 7 pts
+  - level: 14
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+  # Wizard 15 — 7 pts; wizard bonus feat
+  - level: 15
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Decipher Script: 1
+    feats:
+      - name: "Maximize Spell"
+        source: wizard_bonus
+      - name: "Quicken Spell"
+        source: character
+  # Archmage 1 — 2+4(INT)+1(human)=7 pts
+  - level: 16
+    class: Archmage
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (History): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Search: 1
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons: []
+
+notes: ""

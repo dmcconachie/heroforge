@@ -12,7 +12,6 @@ Covers:
   - Inactive buff states preserved
   - Templates round-trip
   - DM overrides round-trip
-  - Version mismatch raises ValueError
   - Unknown race/class/buff/template load gracefully without crashing
   - Full character round-trip: saved stats == loaded stats
 """
@@ -22,7 +21,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-import pytest
 import yaml
 
 if TYPE_CHECKING:
@@ -34,7 +32,6 @@ from heroforge.engine.effects import (
     apply_buff,
 )
 from heroforge.engine.persistence import (
-    SCHEMA_VERSION,
     load_character,
     save_character,
 )
@@ -59,16 +56,15 @@ def make_app_state() -> AppState:
 
 def fighter_char(app_state: AppState) -> Character:
     """A fully built Fighter 6 for round-trip tests."""
+    from heroforge.engine.character import (
+        CharacterLevel,
+    )
+
     c = app_state.character
     c.name = "Aldric Vane"
     c.player = "Test Player"
     c.alignment = "lawful_good"
     c.deity = "St. Cuthbert"
-
-    apply_race(app_state.race_registry.require("Human"), c)
-
-    cl = app_state.class_registry.require("Fighter").make_class_level(6)
-    c.set_class_levels([cl])
 
     c.set_ability_score("str", 16)
     c.set_ability_score("dex", 14)
@@ -77,13 +73,52 @@ def fighter_char(app_state: AppState) -> Character:
     c.set_ability_score("wis", 10)
     c.set_ability_score("cha", 8)
 
-    # Add a feat
-    iw_defn = app_state.feat_registry.require("Iron Will")
-    c.add_feat("Iron Will", iw_defn)
+    apply_race(app_state.race_registry.require("Human"), c)
 
-    # Set some skills
-    set_skill_ranks(c, "Climb", 6)
-    set_skill_ranks(c, "Swim", 4)
+    # Build levels with per-level skill ranks
+    c.levels = [
+        CharacterLevel(
+            character_level=1,
+            class_name="Fighter",
+            hp_roll=10,
+            skill_ranks={"Climb": 4, "Swim": 4},
+        ),
+        CharacterLevel(
+            character_level=2,
+            class_name="Fighter",
+            hp_roll=8,
+            skill_ranks={"Climb": 1, "Swim": 1},
+        ),
+        CharacterLevel(
+            character_level=3,
+            class_name="Fighter",
+            hp_roll=8,
+        ),
+        CharacterLevel(
+            character_level=4,
+            class_name="Fighter",
+            hp_roll=8,
+        ),
+        CharacterLevel(
+            character_level=5,
+            class_name="Fighter",
+            hp_roll=8,
+        ),
+        CharacterLevel(
+            character_level=6,
+            class_name="Fighter",
+            hp_roll=8,
+        ),
+    ]
+    c._invalidate_class_stats()
+
+    # Set skill totals from level entries
+    set_skill_ranks(c, "Climb", 5)
+    set_skill_ranks(c, "Swim", 5)
+
+    # Add a feat
+    iw = app_state.feat_registry.require("Iron Will")
+    c.add_feat("Iron Will", iw, level=1, source="character")
 
     # Activate Bless (CL 5)
     bless = app_state.buff_registry.require("Bless")
@@ -112,17 +147,8 @@ class TestSaveCharacter:
         with open(path) as f:
             data = yaml.safe_load(f)
         assert isinstance(data, dict)
-        assert "meta" in data
         assert "identity" in data
         assert "ability_scores" in data
-
-    def test_meta_version_present(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        path = tmp_path / "c.char.yaml"
-        save_character(state.character, path)
-        with open(path) as f:
-            data = yaml.safe_load(f)
-        assert data["meta"]["version"] == SCHEMA_VERSION
 
     def test_identity_fields_saved(self, tmp_path: Path) -> None:
         state = make_app_state()
@@ -148,7 +174,7 @@ class TestSaveCharacter:
         assert data["ability_scores"]["str"] == 18
         assert data["ability_scores"]["dex"] == 16
 
-    def test_class_levels_saved(self, tmp_path: Path) -> None:
+    def test_levels_saved(self, tmp_path: Path) -> None:
         state = make_app_state()
         cl = state.class_registry.require("Fighter").make_class_level(4)
         state.character.set_class_levels([cl])
@@ -156,9 +182,9 @@ class TestSaveCharacter:
         save_character(state.character, path)
         with open(path) as f:
             data = yaml.safe_load(f)
-        assert len(data["class_levels"]) == 1
-        assert data["class_levels"][0]["class"] == "Fighter"
-        assert data["class_levels"][0]["level"] == 4
+        levels = data["levels"]
+        assert len(levels) == 4
+        assert levels[0]["class"] == "Fighter"
 
     def test_active_buff_saved_with_cl(self, tmp_path: Path) -> None:
         state = make_app_state()
@@ -174,23 +200,30 @@ class TestSaveCharacter:
         assert bless_data is not None
         assert bless_data["active"] is True
 
-    def test_zero_rank_skills_omitted(self, tmp_path: Path) -> None:
+    def test_skill_ranks_in_levels(self, tmp_path: Path) -> None:
+        """Skill ranks are stored per-level, not top-level."""
         state = make_app_state()
-        # Don't set any ranks
-        path = tmp_path / "c.char.yaml"
-        save_character(state.character, path)
-        with open(path) as f:
-            data = yaml.safe_load(f)
-        assert data["skills"] == {}
+        c = state.character
+        # Add a level with skill ranks
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
 
-    def test_skill_ranks_saved(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        set_skill_ranks(state.character, "Hide", 8)
+        c.levels.append(
+            CharacterLevel(
+                character_level=1,
+                class_name="Fighter",
+                hp_roll=10,
+                skill_ranks={"Hide": 4, "Climb": 4},
+            )
+        )
         path = tmp_path / "c.char.yaml"
-        save_character(state.character, path)
+        save_character(c, path)
         with open(path) as f:
             data = yaml.safe_load(f)
-        assert data["skills"]["Hide"] == 8
+        lv1 = data["levels"][0]
+        assert lv1["skill_ranks"]["Hide"] == 4
+        assert "skills" not in data
 
     def test_dm_override_saved(self, tmp_path: Path) -> None:
         state = make_app_state()
@@ -220,13 +253,6 @@ class TestLoadCharacter:
         loaded = load_character(path, state)
         state.set_character(loaded)
         return loaded, state
-
-    def test_version_mismatch_raises(self, tmp_path: Path) -> None:
-        path = tmp_path / "bad.char.yaml"
-        path.write_text("meta:\n  version: '99'\nidentity: {}\n")
-        state = make_app_state()
-        with pytest.raises(ValueError, match="Unsupported"):
-            load_character(path, state)
 
     def test_identity_restored(self, tmp_path: Path) -> None:
         state = make_app_state()
@@ -275,34 +301,79 @@ class TestLoadCharacter:
         assert loaded.con_score == 12  # 10 + 2 racial
 
     def test_always_on_feat_effect_restored(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
         state = make_app_state()
         c = state.character
+        c.levels = [
+            CharacterLevel(
+                character_level=1,
+                class_name="Fighter",
+                hp_roll=10,
+            ),
+        ]
+        c._invalidate_class_stats()
         c.add_feat(
             "Iron Will",
             state.feat_registry.require("Iron Will"),
+            level=1,
+            source="character",
         )
         will_with_feat = c.will
         loaded, new_state = self._save_and_load(tmp_path, c)
-        # Iron Will (+2 will) should be re-applied
         assert loaded.will == will_with_feat
 
     def test_skill_ranks_restored(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
         state = make_app_state()
-        set_skill_ranks(state.character, "Hide", 8)
-        set_skill_ranks(state.character, "Climb", 4)
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        c = state.character
+        c.levels = [
+            CharacterLevel(
+                character_level=1,
+                class_name="Rogue",
+                hp_roll=6,
+                skill_ranks={"Hide": 4, "Climb": 4},
+            ),
+            CharacterLevel(
+                character_level=2,
+                class_name="Rogue",
+                hp_roll=4,
+                skill_ranks={"Hide": 4},
+            ),
+        ]
+        c._invalidate_class_stats()
+        set_skill_ranks(c, "Hide", 8)
+        set_skill_ranks(c, "Climb", 4)
+        loaded, _ = self._save_and_load(tmp_path, c)
         assert loaded.skills.get("Hide") == 8
         assert loaded.skills.get("Climb") == 4
 
     def test_skill_total_correct_after_load(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
         state = make_app_state()
         c = state.character
         c.set_ability_score("dex", 16)
+        c.levels = [
+            CharacterLevel(
+                character_level=1,
+                class_name="Rogue",
+                hp_roll=6,
+                skill_ranks={"Hide": 6},
+            ),
+        ]
+        c._invalidate_class_stats()
         set_skill_ranks(c, "Hide", 6)
         loaded, new_state = self._save_and_load(tmp_path, c)
-        assert (
-            new_state.skill_total("Hide") == 9
-        )  # 6 ranks + 3 dex mod (dex 16, no race)
+        # 6 ranks + 3 dex mod (dex 16, no race)
+        assert new_state.skill_total("Hide") == 9
 
     def test_active_buff_restored(self, tmp_path: Path) -> None:
         state = make_app_state()
@@ -350,35 +421,31 @@ class TestLoadCharacter:
         """Unknown race name sets race but doesn't crash."""
         path = tmp_path / "unknown_race.char.yaml"
         path.write_text(
-            "meta:\n  version: '2'\n"
             "identity:\n  name: Test\n"
             "  race: Githzerai\n"
             "  alignment: ''\n  deity: ''\n"
             "ability_scores:"
             " {str: 10, dex: 10, con: 10,"
             " int: 10, wis: 10, cha: 10}\n"
-            "class_levels: []\nfeats: []\n"
-            "skills: {}\nbuffs: []\n"
+            "levels: []\nbuffs: []\n"
             "templates: []\n"
             "dm_overrides: []\nequipment: {}\n"
         )
         state = make_app_state()
         loaded = load_character(path, state)
-        assert loaded.race == "Githzerai"  # stored even if unknown
+        assert loaded.race == "Githzerai"
 
     def test_unknown_buff_round_trips(self, tmp_path: Path) -> None:
         """Unknown buff should round-trip cleanly."""
         path = tmp_path / "splatbook.char.yaml"
         path.write_text(
-            "meta:\n  version: '2'\n"
             "identity:\n  name: X\n"
             "  race: Human\n"
             "  alignment: ''\n  deity: ''\n"
             "ability_scores:"
             " {str: 10, dex: 10, con: 10,"
             " int: 10, wis: 10, cha: 10}\n"
-            "class_levels: []\nfeats: []\n"
-            "skills: {}\n"
+            "levels: []\n"
             "buffs:\n"
             "  - name: 'Homebrew Buff'\n"
             "    active: true\n"
@@ -388,7 +455,6 @@ class TestLoadCharacter:
         )
         state = make_app_state()
         loaded = load_character(path, state)
-        # Should not crash; buff state preserved
         state_obj = loaded.get_buff_state("Homebrew Buff")
         assert state_obj is not None
 
@@ -448,13 +514,40 @@ class TestRoundTrip:
             )
 
     def test_skill_totals_match_after_round_trip(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
         state = make_app_state()
         c = state.character
         apply_race(state.race_registry.require("Elf"), c)
         c.set_ability_score("dex", 16)
+        c.levels = [
+            CharacterLevel(
+                character_level=1,
+                class_name="Rogue",
+                hp_roll=6,
+                skill_ranks={
+                    "Hide": 4,
+                    "Move Silently": 4,
+                    "Tumble": 4,
+                },
+            ),
+            CharacterLevel(
+                character_level=2,
+                class_name="Rogue",
+                hp_roll=4,
+                skill_ranks={
+                    "Hide": 2,
+                    "Move Silently": 2,
+                    "Tumble": 1,
+                },
+            ),
+        ]
+        c._invalidate_class_stats()
         set_skill_ranks(c, "Hide", 6)
         set_skill_ranks(c, "Move Silently", 6)
-        set_skill_ranks(c, "Tumble", 5)  # synergy to Balance
+        set_skill_ranks(c, "Tumble", 5)
 
         before_hide = state.skill_total("Hide")
         before_balance = state.skill_total("Balance")

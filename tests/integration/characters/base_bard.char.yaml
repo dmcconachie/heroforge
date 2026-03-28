@@ -1,0 +1,129 @@
+identity:
+  name: "Lyris Silverveil"
+  player: ""
+  race: Half-Elf
+  alignment: chaotic_good
+  deity: ""
+
+ability_scores:
+  str: 10
+  dex: 14
+  con: 12
+  int: 14
+  wis: 10
+  cha: 16
+
+levels:
+  - level: 1
+    class: Bard
+    hp_roll: 6
+    skill_ranks:
+      Bluff: 4
+      Concentration: 4
+      Diplomacy: 4
+      Perform: 4
+      Spellcraft: 4
+      Tumble: 4
+      Knowledge (Arcana): 4
+      Use Magic Device: 4
+    feats:
+      - name: "Dodge"
+        source: character
+    spells_learned:
+      0: ["Detect Magic", "Ghost Sound",
+          "Mage Hand", "Prestidigitation"]
+      1: ["Charm Person", "Grease"]
+  - level: 2
+    class: Bard
+    hp_roll: 4
+    skill_ranks:
+      Bluff: 1
+      Concentration: 1
+      Diplomacy: 1
+      Perform: 1
+      Spellcraft: 1
+      Tumble: 1
+      Knowledge (Arcana): 1
+      Listen: 1
+    spells_learned:
+      0: ["Message"]
+      1: ["Cure Light Wounds"]
+  - level: 3
+    class: Bard
+    hp_roll: 4
+    skill_ranks:
+      Bluff: 1
+      Concentration: 1
+      Diplomacy: 1
+      Perform: 1
+      Spellcraft: 1
+      Tumble: 1
+      Knowledge (Arcana): 1
+      Listen: 1
+    feats:
+      - name: "Combat Casting"
+        source: character
+    spells_learned:
+      0: ["Light"]
+      1: ["Hideous Laughter"]
+  - level: 4
+    class: Bard
+    hp_roll: 4
+    skill_ranks:
+      Bluff: 1
+      Concentration: 1
+      Diplomacy: 1
+      Perform: 1
+      Spellcraft: 1
+      Tumble: 1
+      Knowledge (Arcana): 1
+      Gather Information: 1
+    spells_learned:
+      1: ["Feather Fall"]
+      2: ["Invisibility"]
+  - level: 5
+    class: Bard
+    hp_roll: 4
+    skill_ranks:
+      Bluff: 1
+      Concentration: 1
+      Diplomacy: 1
+      Perform: 1
+      Spellcraft: 1
+      Tumble: 1
+      Knowledge (Arcana): 1
+      Listen: 1
+    spells_learned:
+      2: ["Cure Moderate Wounds"]
+  - level: 6
+    class: Bard
+    hp_roll: 4
+    skill_ranks:
+      Bluff: 1
+      Concentration: 1
+      Diplomacy: 1
+      Perform: 1
+      Spellcraft: 1
+      Tumble: 1
+      Knowledge (Arcana): 1
+      Gather Information: 1
+    feats:
+      - name: "Spell Focus"
+        source: character
+        parameter: Enchantment
+    spells_learned:
+      2: ["Eagle's Splendor"]
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Rapier"
+      base: Rapier
+
+notes: ""

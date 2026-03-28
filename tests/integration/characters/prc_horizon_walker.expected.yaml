@@ -1,0 +1,166 @@
+identity:
+  name: Kael Farstrider
+  race: Human
+  class_str: Ranger 8 / Horizon Walker 1
+  level: 9
+  alignment: neutral
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 16
+    score: 16
+    mod: 3
+  DEX:
+    base: 14
+    score: 14
+    mod: 2
+  CON:
+    base: 12
+    score: 12
+    mod: 1
+  INT:
+    base: 12
+    score: 12
+    mod: 1
+  WIS:
+    base: 14
+    score: 14
+    mod: 2
+  CHA:
+    base: 8
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 2
+    total: 12
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 56
+    con: 9
+    untyped: 3
+    total: 68
+  bab:
+    base: 9
+    total: 9
+  initiative:
+    dex: 2
+    total: 2
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 8
+    con: 1
+    total: 9
+  ref:
+    base: 6
+    dex: 2
+    total: 8
+  will:
+    base: 2
+    wis: 2
+    untyped: 2
+    total: 6
+  attack_melee:
+    bab: 9
+    str: 3
+    total: 12
+  attack_ranged:
+    bab: 9
+    dex: 2
+    total: 11
+  damage_melee:
+    str: 3
+    total: 3
+  grapple:
+    bab: 9
+    str: 3
+    total: 12
+attack_iteratives:
+  melee:
+  - 12
+  - 7
+  ranged:
+  - 11
+  - 6
+skills:
+  Climb:
+    ranks: 12
+    ability_mod: 3
+    total: 15
+  Hide:
+    ranks: 12
+    ability_mod: 2
+    total: 14
+  Knowledge (Geography):
+    ranks: 12
+    ability_mod: 1
+    total: 13
+  Knowledge (Nature):
+    ability_mod: 1
+    synergy: 2
+    total: 3
+  Listen:
+    ranks: 12
+    ability_mod: 2
+    untyped: 2
+    total: 16
+  Move Silently:
+    ranks: 11
+    ability_mod: 2
+    synergy: 2
+    total: 15
+  Spot:
+    ranks: 12
+    ability_mod: 2
+    untyped: 2
+    total: 16
+  Survival:
+    ranks: 12
+    ability_mod: 2
+    total: 14
+  Swim:
+    ranks: 11
+    ability_mod: 3
+    total: 14
+carrying_capacity:
+  light: 76
+  medium: 153
+  heavy: 230
+feats:
+- Power Attack
+- Alertness
+- Endurance
+- Cleave
+- Iron Will
+- Toughness
+class_features:
+- 'favored_enemy_1: Favored enemy 1: +2 vs type'
+- 'track: Track feat for free'
+- 'wild_empathy: Improve attitude of animals'
+- 'combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)'
+- 'endurance: Endurance feat for free'
+- 'animal_companion: Special animal companion'
+- 'favored_enemy_2: Favored enemy 2; +4 vs type'
+- 'improved_combat_style: Manyshot or Improved Two-Weapon Fighting'
+- 'woodland_stride: Move through natural undergrowth at full speed'
+- 'swift_tracker: Track at full speed without penalty'
+- 'terrain_mastery: Choose terrain mastery'
+spellcasting:
+  Ranger:
+    caster_level: 8
+    key_ability: wis
+    cast_type: divine
+    preparation: prepared
+    slots_per_day:
+    - 1
+    - 1
+    spell_save_dc:
+      0: 12
+      1: 13
+resources: {}

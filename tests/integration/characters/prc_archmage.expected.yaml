@@ -1,0 +1,180 @@
+identity:
+  name: Meridius the Exalted
+  race: Human
+  class_str: Wizard 15 / Archmage 1
+  level: 16
+  alignment: neutral
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 8
+    score: 8
+    mod: -1
+  DEX:
+    base: 12
+    score: 12
+    mod: 1
+  CON:
+    base: 14
+    score: 14
+    mod: 2
+  INT:
+    base: 18
+    score: 18
+    mod: 4
+  WIS:
+    base: 10
+    score: 10
+    mod: 0
+  CHA:
+    base: 8
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 1
+    total: 11
+  touch_ac: 11
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 49
+    con: 32
+    total: 81
+  bab:
+    base: 7
+    total: 7
+  initiative:
+    dex: 1
+    total: 1
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 5
+    con: 2
+    total: 7
+  ref:
+    base: 5
+    dex: 1
+    total: 6
+  will:
+    base: 11
+    total: 11
+  attack_melee:
+    bab: 7
+    str: -1
+    total: 6
+  attack_ranged:
+    bab: 7
+    dex: 1
+    total: 8
+  damage_melee:
+    str: -1
+    total: -1
+  grapple:
+    bab: 7
+    str: -1
+    total: 6
+attack_iteratives:
+  melee:
+  - 6
+  - 1
+  ranged:
+  - 8
+  - 3
+skills:
+  Concentration:
+    ranks: 19
+    ability_mod: 2
+    total: 21
+  Decipher Script:
+    ranks: 18
+    ability_mod: 4
+    total: 22
+  Knowledge (Arcana):
+    ranks: 19
+    ability_mod: 4
+    synergy: 2
+    total: 25
+  Knowledge (History):
+    ranks: 19
+    ability_mod: 4
+    total: 23
+  Knowledge (Religion):
+    ranks: 19
+    ability_mod: 4
+    total: 23
+  Knowledge (The Planes):
+    ranks: 19
+    ability_mod: 4
+    total: 23
+  Search:
+    ranks: 1
+    ability_mod: 4
+    total: 5
+  Spellcraft:
+    ranks: 19
+    ability_mod: 4
+    synergy: 2
+    total: 25
+  Survival:
+    ability_mod: 0
+    synergy: 2
+    total: 2
+  Use Magic Device:
+    ability_mod: -1
+    synergy: 2
+    total: 1
+carrying_capacity:
+  light: 26
+  medium: 53
+  heavy: 80
+feats:
+- Scribe Scroll
+- Spell Focus
+- Skill Focus
+- Combat Casting
+- Extend Spell
+- Spell Penetration
+- Greater Spell Focus
+- Empower Spell
+- Greater Spell Penetration
+- Maximize Spell
+- Quicken Spell
+class_features:
+- 'summon_familiar: Summon a familiar'
+- 'scribe_scroll: Scribe scroll feat for free'
+- 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+- 'bonus_feat_wizard_10: Bonus wizard feat'
+- 'bonus_feat_wizard_15: Bonus wizard feat'
+- 'high_arcana_1: High arcana ability'
+spellcasting:
+  Wizard:
+    caster_level: 15
+    key_ability: int
+    cast_type: arcane
+    preparation: prepared
+    slots_per_day:
+    - 4
+    - 5
+    - 5
+    - 5
+    - 5
+    - 4
+    - 3
+    - 2
+    - 1
+    spell_save_dc:
+      0: 14
+      1: 15
+      2: 16
+      3: 17
+      4: 18
+      5: 19
+      6: 20
+      7: 21
+      8: 22
+resources: {}

@@ -1,0 +1,139 @@
+identity:
+  name: Brother Callum
+  race: Human
+  class_str: Cleric 5 / Thaumaturgist 1
+  level: 6
+  alignment: lawful_neutral
+  deity: St. Cuthbert
+  size: Medium
+abilities:
+  STR:
+    base: 10
+    score: 10
+    mod: 0
+  DEX:
+    base: 10
+    score: 10
+    mod: 0
+  CON:
+    base: 14
+    score: 14
+    mod: 2
+  INT:
+    base: 10
+    score: 10
+    mod: 0
+  WIS:
+    base: 16
+    score: 16
+    mod: 3
+  CHA:
+    base: 14
+    score: 14
+    mod: 2
+combat:
+  ac:
+    base: 10
+    total: 10
+  touch_ac: 10
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 35
+    con: 12
+    total: 47
+  bab:
+    base: 3
+    total: 3
+  initiative:
+    total: 0
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 4
+    con: 2
+    total: 6
+  ref:
+    base: 1
+    total: 1
+  will:
+    base: 6
+    wis: 3
+    total: 9
+  attack_melee:
+    bab: 3
+    total: 3
+  attack_ranged:
+    bab: 3
+    total: 3
+  damage_melee:
+    total: 0
+  grapple:
+    bab: 3
+    total: 3
+attack_iteratives:
+  melee:
+  - 3
+  ranged:
+  - 3
+skills:
+  Concentration:
+    ranks: 9
+    ability_mod: 2
+    total: 11
+  Knowledge (Arcana):
+    ability_mod: 0
+    synergy: 2
+    total: 2
+  Knowledge (Religion):
+    ranks: 6
+    ability_mod: 0
+    total: 6
+  Knowledge (The Planes):
+    ranks: 7
+    ability_mod: 0
+    total: 7
+  Spellcraft:
+    ranks: 5
+    ability_mod: 0
+    total: 5
+  Survival:
+    ability_mod: 3
+    synergy: 2
+    total: 5
+  Use Magic Device:
+    ability_mod: 2
+    synergy: 2
+    total: 4
+carrying_capacity:
+  light: 33
+  medium: 66
+  heavy: 100
+feats:
+- Spell Focus
+- Augment Summoning
+- Combat Casting
+- Extend Spell
+class_features:
+- 'turn_undead: Turn or rebuke undead'
+- 'spontaneous_casting: Convert prepared spells to cure/inflict'
+- 'domains: Two domains granting bonus spells and powers'
+- 'improved_ally: Better planar ally'
+spellcasting:
+  Cleric:
+    caster_level: 5
+    key_ability: wis
+    cast_type: divine
+    preparation: prepared
+    slots_per_day:
+    - 5
+    - 4
+    - 3
+    - 2
+    spell_save_dc:
+      0: 13
+      1: 14
+      2: 15
+      3: 16
+resources: {}

@@ -35,7 +35,6 @@ Public API:
 
 from __future__ import annotations
 
-import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -48,8 +47,6 @@ if TYPE_CHECKING:
         CharacterLevel,
     )
     from heroforge.ui.app_state import AppState
-
-SCHEMA_VERSION = "2"
 
 
 # ---------------------------------------------------------------------------
@@ -79,10 +76,6 @@ def save_character(character: "Character", path: Path | str) -> None:
 def _character_to_dict(c: "Character") -> dict:
     """Serialize all character state to a plain dict."""
     return {
-        "meta": {
-            "version": SCHEMA_VERSION,
-            "modified": datetime.date.today().isoformat(),
-        },
         "identity": {
             "name": c.name,
             "player": getattr(c, "player", ""),
@@ -91,31 +84,20 @@ def _character_to_dict(c: "Character") -> dict:
             "deity": c.deity,
         },
         "ability_scores": {
-            # Save BASE scores only (before racial/template pool bonuses).
-            # Race and templates are re-applied on load.
+            # Save BASE scores only (before racial/template
+            # pool bonuses). Race and templates are
+            # re-applied on load.
             ab: c._ability_scores.get(ab, 10)
-            for ab in ("str", "dex", "con", "int", "wis", "cha")
+            for ab in (
+                "str",
+                "dex",
+                "con",
+                "int",
+                "wis",
+                "cha",
+            )
         },
         "levels": [_level_to_dict(lv) for lv in c.levels],
-        # Legacy summary for human readability
-        "class_levels": [
-            {
-                "class": cl.class_name,
-                "level": cl.level,
-                "hp_rolls": cl.hp_rolls,
-                "bab": cl.bab_contribution,
-                "fort": cl.fort_contribution,
-                "ref": cl.ref_contribution,
-                "will": cl.will_contribution,
-            }
-            for cl in c.class_levels
-        ],
-        "feats": [
-            {k: v for k, v in feat.items() if v is not None} for feat in c.feats
-        ],
-        "skills": {
-            name: ranks for name, ranks in sorted(c.skills.items()) if ranks > 0
-        },
         "buffs": [
             _buff_state_to_dict(name, state)
             for name, state in sorted(c._buff_states.items())
@@ -144,6 +126,14 @@ def _level_to_dict(lv: "CharacterLevel") -> dict:
     }
     if lv.skill_ranks:
         d["skill_ranks"] = dict(sorted(lv.skill_ranks.items()))
+    if lv.feats:
+        d["feats"] = [
+            {k: v for k, v in f.items() if v is not None} for f in lv.feats
+        ]
+    if lv.spells_learned:
+        d["spells_learned"] = dict(lv.spells_learned)
+    if lv.spells_replaced:
+        d["spells_replaced"] = list(lv.spells_replaced)
     return d
 
 
@@ -179,8 +169,6 @@ def load_character(
     path = Path(path)
     with open(path) as f:
         data = yaml.safe_load(f)
-
-    _validate_version(data)
 
     from heroforge.engine.character import (
         BuffState,
@@ -225,32 +213,49 @@ def load_character(
         else:
             c.race = race_name  # Unknown race: just store the name
 
-    # Per-character-level entries
+    # Per-character-level entries (includes feats,
+    # skill ranks, and spells learned at each level)
     for lv_dict in data.get("levels", []):
+        char_level = int(lv_dict["level"])
         c.levels.append(
             CharacterLevel(
-                character_level=int(lv_dict["level"]),
+                character_level=char_level,
                 class_name=lv_dict["class"],
                 hp_roll=int(lv_dict.get("hp_roll", 0)),
                 skill_ranks=dict(lv_dict.get("skill_ranks", {})),
+                feats=list(lv_dict.get("feats", [])),
+                spells_learned=dict(lv_dict.get("spells_learned", {})),
+                spells_replaced=list(lv_dict.get("spells_replaced", [])),
             )
         )
     if c.levels:
         c._invalidate_class_stats()
 
-    # Feats — record names; apply always-on effects
-    for feat_dict in data.get("feats", []):
-        feat_name = feat_dict.get("name", "")
-        if not feat_name:
-            continue
-        feat_defn = app_state.feat_registry.get(feat_name)
-        source = feat_dict.get("source", "")
-        parameter = feat_dict.get("parameter")
-        c.add_feat(feat_name, feat_defn, parameter=parameter, source=source)
+    # Feats — read from each level entry
+    for lv in c.levels:
+        for feat_dict in lv.feats:
+            feat_name = feat_dict.get("name", "")
+            if not feat_name:
+                continue
+            feat_defn = app_state.feat_registry.get(feat_name)
+            source = feat_dict.get("source", "")
+            parameter = feat_dict.get("parameter")
+            c.add_feat(
+                feat_name,
+                feat_defn,
+                level=lv.character_level,
+                source=source,
+                parameter=parameter,
+            )
 
-    # Skills — ranks
-    for skill_name, ranks in data.get("skills", {}).items():
-        set_skill_ranks(c, skill_name, int(ranks))
+    # Skills — compute total ranks from level entries
+    for lv in c.levels:
+        for skill_name, pts in lv.skill_ranks.items():
+            set_skill_ranks(
+                c,
+                skill_name,
+                c.skills.get(skill_name, 0) + pts,
+            )
 
     # Buffs — restore states and re-register definitions
     for buff_dict in data.get("buffs", []):
@@ -325,14 +330,3 @@ def load_character(
     c.notes = str(data.get("notes", ""))
 
     return c
-
-
-def _validate_version(data: dict) -> None:
-    meta = data.get("meta", {})
-    version = str(meta.get("version", ""))
-    if version != SCHEMA_VERSION:
-        raise ValueError(
-            f"Unsupported character file version "
-            f"{version!r}. "
-            f"Expected {SCHEMA_VERSION!r}."
-        )

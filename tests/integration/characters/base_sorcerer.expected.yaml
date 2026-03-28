@@ -1,0 +1,178 @@
+identity:
+  name: Kael Firebrand
+  race: Human
+  class_str: Sorcerer 6
+  level: 6
+  alignment: chaotic_good
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 8
+    score: 8
+    mod: -1
+  DEX:
+    base: 14
+    score: 14
+    mod: 2
+  CON:
+    base: 14
+    score: 14
+    mod: 2
+  INT:
+    base: 10
+    score: 10
+    mod: 0
+  WIS:
+    base: 10
+    score: 10
+    mod: 0
+  CHA:
+    base: 18
+    score: 18
+    mod: 4
+combat:
+  ac:
+    base: 10
+    dex: 2
+    total: 12
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 19
+    con: 12
+    untyped: 3
+    total: 34
+  bab:
+    base: 3
+    total: 3
+  initiative:
+    dex: 2
+    total: 2
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 2
+    con: 2
+    total: 4
+  ref:
+    base: 2
+    dex: 2
+    total: 4
+  will:
+    base: 5
+    total: 5
+  attack_melee:
+    bab: 3
+    str: -1
+    total: 2
+  attack_ranged:
+    bab: 3
+    dex: 2
+    total: 5
+  damage_melee:
+    str: -1
+    total: -1
+  grapple:
+    bab: 3
+    str: -1
+    total: 2
+attack_iteratives:
+  melee:
+  - 2
+  ranged:
+  - 5
+skills:
+  Bluff:
+    ranks: 6
+    ability_mod: 4
+    total: 10
+  Concentration:
+    ranks: 9
+    ability_mod: 2
+    total: 11
+  Diplomacy:
+    ability_mod: 4
+    synergy: 2
+    total: 6
+  Disguise:
+    ability_mod: 4
+    synergy: 2
+    total: 6
+  Intimidate:
+    ability_mod: 4
+    synergy: 2
+    total: 6
+  Knowledge (Arcana):
+    ranks: 3
+    ability_mod: 0
+    synergy: 2
+    total: 5
+  Sleight of Hand:
+    ability_mod: 2
+    synergy: 2
+    total: 4
+  Spellcraft:
+    ranks: 9
+    ability_mod: 0
+    total: 9
+  Use Magic Device:
+    ability_mod: 4
+    synergy: 2
+    total: 6
+carrying_capacity:
+  light: 26
+  medium: 53
+  heavy: 80
+feats:
+- Toughness
+- Combat Casting
+- Spell Focus
+- Spell Penetration
+class_features:
+- 'summon_familiar: Summon a familiar'
+spellcasting:
+  Sorcerer:
+    caster_level: 6
+    key_ability: cha
+    cast_type: arcane
+    preparation: spontaneous
+    slots_per_day:
+    - 6
+    - 7
+    - 6
+    - 4
+    spell_save_dc:
+      0: 14
+      1: 15
+      2: 16
+      3: 17
+    spells_known_count:
+    - 7
+    - 4
+    - 2
+    - 1
+    spells_known:
+      0:
+      - Detect Magic
+      - Read Magic
+      - Light
+      - Mage Hand
+      - Prestidigitation
+      - Ray of Frost
+      - Resistance
+      1:
+      - Magic Missile
+      - Shield
+      - Mage Armor
+      - Grease
+      - Burning Hands
+      2:
+      - Scorching Ray
+      - Mirror Image
+      - Invisibility
+      3:
+      - Fireball
+resources: {}

@@ -1,0 +1,158 @@
+identity:
+  name: Aelindra Starweave
+  race: Elf
+  class_str: Wizard 6
+  level: 6
+  alignment: neutral_good
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 8
+    score: 8
+    mod: -1
+  DEX:
+    base: 14
+    racial: 2
+    score: 16
+    mod: 3
+  CON:
+    base: 10
+    racial: -2
+    score: 8
+    mod: -1
+  INT:
+    base: 18
+    score: 18
+    mod: 4
+  WIS:
+    base: 12
+    score: 12
+    mod: 1
+  CHA:
+    base: 8
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 3
+    total: 13
+  touch_ac: 13
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 19
+    con: -6
+    total: 13
+  bab:
+    base: 3
+    total: 3
+  initiative:
+    dex: 3
+    total: 3
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 2
+    con: -1
+    total: 1
+  ref:
+    base: 2
+    dex: 3
+    total: 5
+  will:
+    base: 5
+    wis: 1
+    total: 6
+  attack_melee:
+    bab: 3
+    str: -1
+    total: 2
+  attack_ranged:
+    bab: 3
+    dex: 3
+    total: 6
+  damage_melee:
+    str: -1
+    total: -1
+  grapple:
+    bab: 3
+    str: -1
+    total: 2
+attack_iteratives:
+  melee:
+  - 2
+  ranged:
+  - 6
+skills:
+  Concentration:
+    ranks: 9
+    ability_mod: -1
+    total: 8
+  Decipher Script:
+    ranks: 6
+    ability_mod: 4
+    total: 10
+  Knowledge (Arcana):
+    ranks: 9
+    ability_mod: 4
+    synergy: 2
+    total: 15
+  Knowledge (Nature):
+    ranks: 5
+    ability_mod: 4
+    total: 9
+  Knowledge (Religion):
+    ranks: 7
+    ability_mod: 4
+    total: 11
+  Knowledge (The Planes):
+    ranks: 9
+    ability_mod: 4
+    total: 13
+  Spellcraft:
+    ranks: 9
+    ability_mod: 4
+    synergy: 2
+    total: 15
+  Survival:
+    ability_mod: 1
+    synergy: 4
+    total: 5
+  Use Magic Device:
+    ability_mod: -1
+    synergy: 2
+    total: 1
+carrying_capacity:
+  light: 26
+  medium: 53
+  heavy: 80
+feats:
+- Spell Focus
+- Scribe Scroll
+- Spell Penetration
+- Extend Spell
+- Greater Spell Focus
+class_features:
+- 'summon_familiar: Summon a familiar'
+- 'scribe_scroll: Scribe scroll feat for free'
+- 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+spellcasting:
+  Wizard:
+    caster_level: 6
+    key_ability: int
+    cast_type: arcane
+    preparation: prepared
+    slots_per_day:
+    - 4
+    - 4
+    - 4
+    - 3
+    spell_save_dc:
+      0: 14
+      1: 15
+      2: 16
+      3: 17
+resources: {}

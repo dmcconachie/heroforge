@@ -1,0 +1,88 @@
+identity:
+  name: "Brother Callum"
+  player: ""
+  race: Human
+  alignment: lawful_neutral
+  deity: "St. Cuthbert"
+
+ability_scores:
+  str: 10
+  dex: 10
+  con: 14
+  int: 10
+  wis: 16
+  cha: 14
+
+levels:
+  # Cleric 1 — Human: 2+0(INT)+1(human)=3, x4=12 pts
+  - level: 1
+    class: Cleric
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 4
+      Knowledge (Religion): 4
+      Knowledge (The Planes): 4
+    feats:
+      - name: "Spell Focus"
+        source: character
+        parameter: Conjuration
+      - name: "Augment Summoning"
+        source: human_bonus
+  # Cleric 2 — 3 pts
+  - level: 2
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Religion): 1
+      Spellcraft: 1
+  # Cleric 3 — 3 pts
+  - level: 3
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Knowledge (Religion): 1
+      Spellcraft: 1
+    feats:
+      - name: "Combat Casting"
+        source: character
+  # Cleric 4 — 3 pts
+  - level: 4
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Knowledge (The Planes): 1
+      Spellcraft: 1
+  # Cleric 5 — 3 pts
+  - level: 5
+    class: Cleric
+    hp_roll: 6
+    skill_ranks:
+      Concentration: 1
+      Knowledge (The Planes): 1
+      Spellcraft: 1
+  # Thaumaturgist 1 — 2+0(INT)+1(human)=3 pts
+  - level: 6
+    class: Thaumaturgist
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Knowledge (The Planes): 1
+      Spellcraft: 1
+    feats:
+      - name: "Extend Spell"
+        source: character
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons: []
+
+notes: ""

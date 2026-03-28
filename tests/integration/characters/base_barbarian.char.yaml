@@ -1,0 +1,81 @@
+identity:
+  name: "Grukk Skullcrusher"
+  player: ""
+  race: Half-Orc
+  alignment: chaotic_neutral
+  deity: ""
+
+ability_scores:
+  str: 18
+  dex: 14
+  con: 14
+  int: 8
+  wis: 12
+  cha: 6
+
+levels:
+  - level: 1
+    class: Barbarian
+    hp_roll: 12
+    skill_ranks:
+      Climb: 4
+      Intimidate: 4
+      Jump: 4
+    feats:
+      - name: "Power Attack"
+        source: character
+  - level: 2
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 3
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: "Cleave"
+        source: character
+  - level: 4
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 5
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 6
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+    feats:
+      - name: "Great Cleave"
+        source: character
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Greataxe"
+      base: Greataxe
+
+notes: ""

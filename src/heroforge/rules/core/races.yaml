@@ -12,7 +12,7 @@
 #   ability_modifiers:
 #     - ability: str|dex|con|int|wis|cha
 #       value: int (positive or negative)
-#       bonus_type: untyped (racial ability mods are always untyped)
+#       bonus_type: racial (always stacks)
 #   favored_class   : class name or "any"
 #   languages_auto  : list of automatic languages
 #   languages_bonus : list of bonus language choices
@@ -61,8 +61,8 @@ races:
     size: Medium
     base_speed: 20
     ability_modifiers:
-      - {ability: con, value: 2, bonus_type: untyped}
-      - {ability: cha, value: -2, bonus_type: untyped}
+      - {ability: con, value: 2, bonus_type: racial}
+      - {ability: cha, value: -2, bonus_type: racial}
     favored_class: Fighter
     la: 0
     racial_traits:
@@ -101,8 +101,8 @@ races:
     size: Medium
     base_speed: 30
     ability_modifiers:
-      - {ability: dex, value: 2, bonus_type: untyped}
-      - {ability: con, value: -2, bonus_type: untyped}
+      - {ability: dex, value: 2, bonus_type: racial}
+      - {ability: con, value: -2, bonus_type: racial}
     favored_class: Wizard
     la: 0
     racial_traits:
@@ -141,8 +141,8 @@ races:
     size: Small
     base_speed: 20
     ability_modifiers:
-      - {ability: con, value: 2, bonus_type: untyped}
-      - {ability: str, value: -2, bonus_type: untyped}
+      - {ability: con, value: 2, bonus_type: racial}
+      - {ability: str, value: -2, bonus_type: racial}
     favored_class: Bard
     la: 0
     racial_traits:
@@ -212,9 +212,9 @@ races:
     size: Medium
     base_speed: 30
     ability_modifiers:
-      - {ability: str, value: 2, bonus_type: untyped}
-      - {ability: int, value: -2, bonus_type: untyped}
-      - {ability: cha, value: -2, bonus_type: untyped}
+      - {ability: str, value: 2, bonus_type: racial}
+      - {ability: int, value: -2, bonus_type: racial}
+      - {ability: cha, value: -2, bonus_type: racial}
     favored_class: Barbarian
     la: 0
     racial_traits:
@@ -238,8 +238,8 @@ races:
     size: Small
     base_speed: 20
     ability_modifiers:
-      - {ability: dex, value: 2, bonus_type: untyped}
-      - {ability: str, value: -2, bonus_type: untyped}
+      - {ability: dex, value: 2, bonus_type: racial}
+      - {ability: str, value: -2, bonus_type: racial}
     favored_class: Rogue
     la: 0
     racial_traits:

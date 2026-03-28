@@ -1,0 +1,99 @@
+identity:
+  name: "Dolgrin Shieldwall"
+  player: ""
+  race: Dwarf
+  alignment: lawful_good
+  deity: ""
+
+ability_scores:
+  str: 16
+  dex: 14
+  con: 14
+  int: 10
+  wis: 12
+  cha: 10
+
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    skill_ranks:
+      Climb: 4
+      Intimidate: 4
+    feats:
+      - name: "Dodge"
+        source: character
+      - name: "Toughness"
+        source: fighter_bonus
+  - level: 2
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Intimidate: 1
+    feats:
+      - name: "Power Attack"
+        source: fighter_bonus
+  - level: 3
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+    feats:
+      - name: "Weapon Focus"
+        source: character
+        parameter: Dwarven Waraxe
+  - level: 4
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Intimidate: 1
+    feats:
+      - name: "Weapon Specialization"
+        source: fighter_bonus
+        parameter: Dwarven Waraxe
+  - level: 5
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Jump: 1
+      Intimidate: 1
+  - level: 6
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Jump: 1
+    feats:
+      - name: "Cleave"
+        source: character
+      - name: "Blind-Fight"
+        source: fighter_bonus
+  - level: 7
+    class: Fighter
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Swim: 1
+  - level: 8
+    class: Dwarven Defender
+    hp_roll: 10
+    skill_ranks:
+      Listen: 1
+      Spot: 1
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Dwarven Waraxe"
+      base: Dwarven Waraxe
+
+notes: ""

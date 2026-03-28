@@ -107,6 +107,16 @@ class CharacterLevel:
     # skill_ranks stores skill points SPENT at this
     # level (not ranks gained). For class skills
     # 1 point = 1 rank; for cross-class 2 pts = 1 rank.
+    feats: list[dict] = field(default_factory=list)
+    # feats acquired at this level. Each entry:
+    #   {"name": str, "source": str,
+    #    "parameter": int|None}
+    spells_learned: dict = field(default_factory=dict)
+    # spells learned at this level (spontaneous casters)
+    # keyed by spell level: {0: ["Detect Magic"], 1: [...]}
+    spells_replaced: list[dict] = field(default_factory=list)
+    # spells swapped at this level:
+    #   [{"old": str, "new": str}]
 
 
 @dataclass
@@ -711,6 +721,83 @@ class Character:
             int(heavy * size_mult),
         )
 
+    def touch_ac(self) -> int:
+        """
+        Touch AC = 10 + DEX mod + dodge + deflection
+        + untyped + luck/insight/sacred/profane/morale/
+        competence. Excludes armor, shield, natural armor.
+        """
+        from collections import defaultdict
+
+        ac_pool = self.get_pool("ac")
+        if ac_pool is None:
+            return 10 + self.dex_mod
+
+        touch = 10 + self.get("ac_dex_contribution")
+        active = ac_pool.active_entries(self)
+        from heroforge.engine.bonus import (
+            ALWAYS_STACKING,
+            BonusType,
+        )
+
+        touch_types = {
+            BonusType.DODGE,
+            BonusType.DEFLECTION,
+            BonusType.UNTYPED,
+            BonusType.LUCK,
+            BonusType.INSIGHT,
+            BonusType.SACRED,
+            BonusType.PROFANE,
+            BonusType.MORALE,
+            BonusType.COMPETENCE,
+        }
+
+        stacking = 0
+        typed: dict = defaultdict(list)
+        for e in active:
+            if e.bonus_type not in touch_types:
+                continue
+            if e.bonus_type in ALWAYS_STACKING:
+                stacking += e.value
+            else:
+                typed[e.bonus_type].append(e.value)
+        for vals in typed.values():
+            stacking += max(vals)
+        return touch + stacking
+
+    def flatfooted_ac(self) -> int:
+        """
+        Flat-footed AC = AC without DEX or dodge bonuses.
+        """
+        from collections import defaultdict
+
+        ac_pool = self.get_pool("ac")
+        if ac_pool is None:
+            return 10
+
+        flat = 10
+        active = ac_pool.active_entries(self)
+        from heroforge.engine.bonus import (
+            ALWAYS_STACKING,
+            BonusType,
+        )
+
+        excluded = {BonusType.DODGE}
+
+        stacking = 0
+        typed: dict = defaultdict(list)
+        for e in active:
+            if e.bonus_type in excluded:
+                continue
+            if e.bonus_type in ALWAYS_STACKING:
+                stacking += e.value
+            else:
+                typed[e.bonus_type].append(e.value)
+        for vals in typed.values():
+            if vals:
+                stacking += max(vals)
+        return flat + stacking
+
     # -----------------------------------------------------------------------
     # Public properties
     # -----------------------------------------------------------------------
@@ -1075,11 +1162,19 @@ class Character:
         self,
         feat_name: str,
         defn: FeatDefinition | None = None,
+        *,
+        level: int,
+        source: str,
         parameter: int | None = None,
-        source: str = "",
     ) -> None:
         """
         Add a feat to this character.
+
+        level:  character level at which feat is acquired.
+        source: why the feat was granted (e.g.
+                'character', 'fighter_bonus',
+                'human_bonus', 'class:Ranger',
+                'template:Half-Dragon').
 
         For always_on feats: immediately applies the feat's
         stat effects directly to the relevant pools (never
@@ -1101,12 +1196,23 @@ class Character:
         if feat_name in existing:
             return
 
-        entry: dict = {"name": feat_name}
-        if source:
-            entry["source"] = source
+        entry: dict = {
+            "name": feat_name,
+            "level": level,
+            "source": source,
+        }
         if parameter is not None:
             entry["parameter"] = parameter
         self.feats.append(entry)
+
+        # Also store in the matching CharacterLevel
+        # (skip if already present, e.g. during load)
+        for lv in self.levels:
+            if lv.character_level == level:
+                names = {f.get("name") for f in lv.feats}
+                if feat_name not in names:
+                    lv.feats.append(entry)
+                break
 
         if defn is None:
             return

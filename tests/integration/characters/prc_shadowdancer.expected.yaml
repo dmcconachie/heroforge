@@ -1,0 +1,166 @@
+identity:
+  name: Lyra Nightwhisper
+  race: Human
+  class_str: Rogue 7 / Shadowdancer 1
+  level: 8
+  alignment: chaotic_neutral
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 10
+    score: 10
+    mod: 0
+  DEX:
+    base: 18
+    score: 18
+    mod: 4
+  CON:
+    base: 12
+    score: 12
+    mod: 1
+  INT:
+    base: 12
+    score: 12
+    mod: 1
+  WIS:
+    base: 10
+    score: 10
+    mod: 0
+  CHA:
+    base: 8
+    score: 8
+    mod: -1
+combat:
+  ac:
+    base: 10
+    dex: 4
+    total: 14
+  touch_ac: 14
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 36
+    con: 8
+    total: 44
+  bab:
+    base: 5
+    total: 5
+  initiative:
+    dex: 4
+    total: 4
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 2
+    con: 1
+    total: 3
+  ref:
+    base: 7
+    dex: 4
+    total: 11
+  will:
+    base: 2
+    total: 2
+  attack_melee:
+    bab: 5
+    total: 5
+  attack_ranged:
+    bab: 5
+    dex: 4
+    total: 9
+  damage_melee:
+    total: 0
+  grapple:
+    bab: 5
+    total: 5
+attack_iteratives:
+  melee:
+  - 5
+  ranged:
+  - 9
+skills:
+  Balance:
+    ranks: 11
+    ability_mod: 4
+    synergy: 2
+    total: 17
+  Bluff:
+    ranks: 1
+    ability_mod: -1
+    total: 0
+  Disable Device:
+    ranks: 5
+    ability_mod: 1
+    total: 6
+  Escape Artist:
+    ranks: 10
+    ability_mod: 4
+    total: 14
+  Hide:
+    ranks: 11
+    ability_mod: 4
+    total: 15
+  Jump:
+    ability_mod: 0
+    synergy: 2
+    total: 2
+  Listen:
+    ranks: 11
+    ability_mod: 0
+    total: 11
+  Move Silently:
+    ranks: 10
+    ability_mod: 4
+    synergy: 2
+    total: 16
+  Open Lock:
+    ranks: 10
+    ability_mod: 4
+    total: 14
+  Perform:
+    ranks: 6
+    ability_mod: -1
+    total: 5
+  Search:
+    ranks: 11
+    ability_mod: 1
+    total: 12
+  Spot:
+    ranks: 11
+    ability_mod: 0
+    total: 11
+  Survival:
+    ability_mod: 0
+    synergy: 2
+    total: 2
+  Tumble:
+    ranks: 11
+    ability_mod: 4
+    total: 15
+  Use Rope:
+    ability_mod: 4
+    synergy: 2
+    total: 6
+carrying_capacity:
+  light: 33
+  medium: 66
+  heavy: 100
+feats:
+- Dodge
+- Combat Reflexes
+- Mobility
+- Weapon Finesse
+class_features:
+- 'sneak_attack_1d6: Sneak attack +1d6'
+- 'trapfinding: Find and disable magical traps'
+- 'evasion: No damage on successful Reflex save'
+- 'sneak_attack_2d6: Sneak attack +2d6'
+- 'trap_sense_1: +1 Reflex and AC vs traps'
+- 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+- 'sneak_attack_3d6: Sneak attack +3d6'
+- 'trap_sense_2: +2 Reflex and AC vs traps'
+- 'sneak_attack_4d6: Sneak attack +4d6'
+- 'hide_in_plain_sight: Hide while observed'
+resources: {}

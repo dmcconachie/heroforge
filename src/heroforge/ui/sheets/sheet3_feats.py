@@ -323,7 +323,12 @@ class Sheet3Feats(QWidget):
             return
 
         defn = self._state.feat_registry.get(feat_name)
-        self._state.character.add_feat(feat_name, defn)
+        self._state.character.add_feat(
+            feat_name,
+            defn,
+            level=self._state.character.total_level,
+            source="character",
+        )
         self._state.character.on_change.notify({feat_name})
         self.refresh()
 

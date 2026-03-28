@@ -1,0 +1,110 @@
+identity:
+  name: "Aelindra Starweave"
+  player: ""
+  race: Elf
+  alignment: neutral_good
+  deity: ""
+
+ability_scores:
+  str: 8
+  dex: 14
+  con: 10
+  int: 18
+  wis: 12
+  cha: 8
+
+levels:
+  # L1: 6 skill pts x4 = 24
+  - level: 1
+    class: Wizard
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 4
+      Spellcraft: 4
+      Knowledge (Arcana): 4
+      Knowledge (The Planes): 4
+      Decipher Script: 4
+      Knowledge (Religion): 4
+    feats:
+      - name: "Spell Focus"
+        source: character
+      - name: "Scribe Scroll"
+        source: wizard_bonus
+  # L2: 6 skill pts
+  - level: 2
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+  # L3: 6 skill pts
+  - level: 3
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Decipher Script: 1
+    feats:
+      - name: "Spell Penetration"
+        source: character
+  # L4: 6 skill pts
+  - level: 4
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Nature): 1
+      Knowledge (Religion): 1
+  # L5: 6 skill pts
+  - level: 5
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Knowledge (Religion): 1
+      Knowledge (Nature): 1
+    feats:
+      - name: "Extend Spell"
+        source: wizard_bonus
+  # L6: 6 skill pts
+  - level: 6
+    class: Wizard
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+      Knowledge (The Planes): 1
+      Decipher Script: 1
+      Knowledge (Nature): 1
+    feats:
+      - name: "Greater Spell Focus"
+        source: character
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Quarterstaff"
+      base: Quarterstaff
+
+notes: ""

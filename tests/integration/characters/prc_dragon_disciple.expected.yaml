@@ -1,0 +1,146 @@
+identity:
+  name: Kael Wyrmsong
+  race: Human
+  class_str: Sorcerer 2 / Dragon Disciple 1
+  level: 3
+  alignment: chaotic_good
+  deity: ''
+  size: Medium
+abilities:
+  STR:
+    base: 14
+    score: 14
+    mod: 2
+  DEX:
+    base: 12
+    score: 12
+    mod: 1
+  CON:
+    base: 14
+    score: 14
+    mod: 2
+  INT:
+    base: 10
+    score: 10
+    mod: 0
+  WIS:
+    base: 10
+    score: 10
+    mod: 0
+  CHA:
+    base: 16
+    score: 16
+    mod: 3
+combat:
+  ac:
+    base: 10
+    dex: 1
+    total: 11
+  touch_ac: 11
+  flatfooted_ac: 10
+  hp_max:
+    hit_dice: 17
+    con: 6
+    untyped: 3
+    total: 26
+  bab:
+    base: 1
+    total: 1
+  initiative:
+    dex: 1
+    total: 1
+  speed:
+    base: 30
+    total: 30
+  sr: 0
+  fort:
+    base: 2
+    con: 2
+    total: 4
+  ref:
+    base: 0
+    dex: 1
+    total: 1
+  will:
+    base: 5
+    total: 5
+  attack_melee:
+    bab: 1
+    str: 2
+    total: 3
+  attack_ranged:
+    bab: 1
+    dex: 1
+    total: 2
+  damage_melee:
+    str: 2
+    total: 2
+  grapple:
+    bab: 1
+    str: 2
+    total: 3
+attack_iteratives:
+  melee:
+  - 3
+  ranged:
+  - 2
+skills:
+  Concentration:
+    ranks: 6
+    ability_mod: 2
+    total: 8
+  Knowledge (Arcana):
+    ranks: 6
+    ability_mod: 0
+    synergy: 2
+    total: 8
+  Spellcraft:
+    ranks: 5
+    ability_mod: 0
+    synergy: 2
+    total: 7
+  Spot:
+    ranks: 1
+    ability_mod: 0
+    total: 1
+  Use Magic Device:
+    ability_mod: 3
+    synergy: 2
+    total: 5
+carrying_capacity:
+  light: 58
+  medium: 116
+  heavy: 175
+feats:
+- Dodge
+- Toughness
+- Combat Casting
+class_features:
+- 'summon_familiar: Summon a familiar'
+- 'natural_armor_1: +1 natural armor'
+spellcasting:
+  Sorcerer:
+    caster_level: 2
+    key_ability: cha
+    cast_type: arcane
+    preparation: spontaneous
+    slots_per_day:
+    - 6
+    - 5
+    spell_save_dc:
+      0: 13
+      1: 14
+    spells_known_count:
+    - 5
+    - 2
+    spells_known:
+      0:
+      - Detect Magic
+      - Read Magic
+      - Light
+      - Mage Hand
+      1:
+      - Magic Missile
+      - Shield
+      - Burning Hands
+resources: {}

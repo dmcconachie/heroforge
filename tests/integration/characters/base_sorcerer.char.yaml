@@ -1,0 +1,123 @@
+identity:
+  name: "Kael Firebrand"
+  player: ""
+  race: Human
+  alignment: chaotic_good
+  deity: ""
+
+ability_scores:
+  str: 8
+  dex: 14
+  con: 14
+  int: 10
+  wis: 10
+  cha: 18
+
+levels:
+  # L1: 3 skill pts x4 = 12
+  - level: 1
+    class: Sorcerer
+    hp_roll: 4
+    skill_ranks:
+      Concentration: 4
+      Spellcraft: 4
+      Bluff: 4
+    feats:
+      - name: "Toughness"
+        source: character
+      - name: "Combat Casting"
+        source: human_bonus
+    spells_learned:
+      0:
+        - "Detect Magic"
+        - "Read Magic"
+        - "Light"
+        - "Mage Hand"
+      1:
+        - "Magic Missile"
+        - "Shield"
+  # L2: 3 skill pts
+  - level: 2
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    spells_learned:
+      0:
+        - "Prestidigitation"
+      1:
+        - "Mage Armor"
+  # L3: 3 skill pts
+  - level: 3
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Bluff: 1
+    feats:
+      - name: "Spell Focus"
+        source: character
+    spells_learned:
+      0:
+        - "Ray of Frost"
+      1:
+        - "Grease"
+  # L4: 3 skill pts
+  - level: 4
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    spells_learned:
+      1:
+        - "Burning Hands"
+      2:
+        - "Scorching Ray"
+  # L5: 3 skill pts
+  - level: 5
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    spells_learned:
+      2:
+        - "Mirror Image"
+  # L6: 3 skill pts
+  - level: 6
+    class: Sorcerer
+    hp_roll: 3
+    skill_ranks:
+      Concentration: 1
+      Spellcraft: 1
+      Knowledge (Arcana): 1
+    feats:
+      - name: "Spell Penetration"
+        source: character
+    spells_learned:
+      0:
+        - "Resistance"
+      2:
+        - "Invisibility"
+      3:
+        - "Fireball"
+
+buffs: []
+templates: []
+dm_overrides: []
+
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - name: "Quarterstaff"
+      base: Quarterstaff
+
+notes: ""

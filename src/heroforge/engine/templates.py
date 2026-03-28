@@ -289,7 +289,8 @@ def apply_template(
         character.add_feat(
             feat_name,
             feat_defn,
-            source=defn.name,
+            level=level,
+            source=f"template:{defn.name}",
         )
 
     # --- Record application ----------------------------------------------
