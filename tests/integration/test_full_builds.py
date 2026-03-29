@@ -22,7 +22,7 @@ _INTEGRATION_DIR = Path(__file__).parent
 
 CHAR_DIRS: list[Path] = [
     _INTEGRATION_DIR / "base_characters",
-    _INTEGRATION_DIR / "custom_characters",
+    # _INTEGRATION_DIR / "custom_characters",
 ]
 
 

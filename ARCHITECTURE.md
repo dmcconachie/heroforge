@@ -550,7 +550,12 @@ Reusable components in `widgets/`: `LabeledField`,
 - Armor/shield/weapon proficiency checks (nonproficiency
   attack penalties not applied; tower shield proficiency
   not distinguished from regular shield proficiency)
+- Weapon proficiency checks (nonproficiency penalties not applied)
+- War domain granted power: free Martial Weapon
+  Proficiency and Weapon Focus with deity's favored
+  weapon (requires deity → favored weapon mapping)
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
 - Equipment persistence (equip/unequip saves)
-- Wild Shape form mechanics
+- Inherent stat bumps from levels
+- What level a Tome/Manual of {Wisdom,Intellect,...} was used
