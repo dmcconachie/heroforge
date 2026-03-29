@@ -323,16 +323,10 @@ class StatsLoader:
         registered: list[str] = []
         seen_keys: set[str] = set()
 
-        from heroforge.rules.schema import (
-            _forbid_extra,
-        )
-
         for decl in data:
             key = decl.get("key")
             if not key:
-                raise LoaderError(f"Stat declaration missing 'key': {decl}")
-
-            _forbid_extra(decl, StatNode, f"stat {key!r}")
+                raise LoaderError(f"Stat missing 'key': {decl}")
 
             # Duplicate check within the YAML itself
             if key in seen_keys:
@@ -370,6 +364,8 @@ class StatsLoader:
                 compute=compute_fn,
                 pools=pools,
                 description=decl.get("description", ""),
+                sheet=decl.get("sheet", 0),
+                save_name=decl.get("save_name", ""),
             )
 
             try:

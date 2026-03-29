@@ -453,15 +453,6 @@ def build_template_from_yaml(
       grants_feats: [...]
       note: "..."
     """
-    from heroforge.rules.schema import (
-        _forbid_extra,
-    )
-
-    _forbid_extra(
-        decl,
-        TemplateDefinition,
-        decl.get("name", "?"),
-    )
     ability_mods = []
     for amod in decl.get("ability_modifiers", []):
         bt_str = amod.get("bonus_type", "untyped")

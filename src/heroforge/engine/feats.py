@@ -297,15 +297,7 @@ def build_feat_from_yaml(
     from heroforge.engine.prerequisites import (
         build_prereq_from_yaml,
     )
-    from heroforge.rules.schema import (
-        _forbid_extra,
-    )
 
-    _forbid_extra(
-        decl,
-        FeatDefinition,
-        decl.get("name", "?"),
-    )
     name = decl["name"]
     kind_str = decl.get("kind", "passive")
     kind = FeatKind(kind_str)

@@ -33,29 +33,6 @@ from heroforge.engine.spells import SpellEntry
 converter = cattrs.Converter(forbid_extra_keys=True)
 
 
-def _fields_of(cls: type) -> set[str]:
-    """Return init field names for a dataclass."""
-    from dataclasses import fields
-
-    return {f.name for f in fields(cls) if f.init}
-
-
-def _forbid_extra(
-    val: dict,
-    cls_or_keys: type | set[str],
-    label: str,
-) -> None:
-    """Raise if *val* has keys not in the dataclass."""
-    if isinstance(cls_or_keys, set):
-        allowed = cls_or_keys
-    else:
-        allowed = _fields_of(cls_or_keys)
-    extra = set(val) - allowed
-    if extra:
-        msg = f"{label}: unknown keys {sorted(extra)}"
-        raise Exception(msg)  # noqa: TRY002
-
-
 # ---------------------------------------------------
 # Enums: cattrs handles string -> enum by value
 # automatically with forbid_extra_keys=True.

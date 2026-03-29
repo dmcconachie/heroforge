@@ -73,7 +73,7 @@ class StatNode:
     pools: list[str] = field(default_factory=list)
     description: str = ""
     sheet: int = 0
-    save_name: str = ""
+    save_name: str = ""  # "fort"/"ref"/"will" for saves
 
     # Runtime state — not part of identity
     _cache: int | None = field(
