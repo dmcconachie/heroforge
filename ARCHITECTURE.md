@@ -542,6 +542,12 @@ Reusable components in `widgets/`: `LabeledField`,
 
 ## Not yet implemented
 
+- Remove `_forbid_extra` from schema.py — it's a
+  private function used only by feats.py, templates.py,
+  and loader.py (stats). cattrs `forbid_extra_keys=True`
+  handles this for structured types; remaining callers
+  should migrate to cattrs or move the function to where
+  it's used.
 - Per-weapon attack breakdowns in sheet extraction
 - Resources (uses/day) in sheet extraction
   (ResourceTracker not yet wired to Character)

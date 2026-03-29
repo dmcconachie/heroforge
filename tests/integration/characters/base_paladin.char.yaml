@@ -1,10 +1,9 @@
 identity:
-  name: "Aldric Dawnguard"
-  player: ""
+  name: Aldric Dawnguard
+  player: ''
   race: Human
   alignment: lawful_good
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 16
   dex: 10
@@ -12,7 +11,6 @@ ability_scores:
   int: 10
   wis: 12
   cha: 14
-
 levels:
   - level: 1
     class: Paladin
@@ -22,9 +20,9 @@ levels:
       Diplomacy: 4
       Heal: 4
     feats:
-      - name: "Power Attack"
+      - name: Power Attack
         source: character
-      - name: "Weapon Focus"
+      - name: Weapon Focus
         source: human_bonus
         parameter: Longsword
   - level: 2
@@ -42,7 +40,7 @@ levels:
       Diplomacy: 1
       Ride: 1
     feats:
-      - name: "Cleave"
+      - name: Cleave
         source: character
   - level: 4
     class: Paladin
@@ -66,7 +64,7 @@ levels:
       Sense Motive: 1
       Heal: 1
     feats:
-      - name: "Extra Turning"
+      - name: Extra Turning
         source: character
   - level: 7
     class: Paladin
@@ -90,7 +88,7 @@ levels:
       Diplomacy: 1
       Ride: 1
     feats:
-      - name: "Improved Bull Rush"
+      - name: Improved Bull Rush
         source: character
   - level: 10
     class: Paladin
@@ -114,7 +112,7 @@ levels:
       Sense Motive: 1
       Heal: 1
     feats:
-      - name: "Mounted Combat"
+      - name: Mounted Combat
         source: character
   - level: 13
     class: Paladin
@@ -138,7 +136,7 @@ levels:
       Diplomacy: 1
       Ride: 1
     feats:
-      - name: "Ride-By Attack"
+      - name: Ride-By Attack
         source: character
   - level: 16
     class: Paladin
@@ -162,7 +160,7 @@ levels:
       Sense Motive: 1
       Heal: 1
     feats:
-      - name: "Spirited Charge"
+      - name: Spirited Charge
         source: character
   - level: 19
     class: Paladin
@@ -178,17 +176,14 @@ levels:
       Ride: 1
       Sense Motive: 1
       Heal: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Longsword"
+    - name: Longsword
       base: Longsword
-
-notes: ""
+notes: ''

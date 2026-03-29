@@ -12,167 +12,167 @@ ability_scores:
   wis: 12
   cha: 6
 levels:
-- level: 1
-  class: Barbarian
-  hp_roll: 12
-  skill_ranks:
-    Climb: 4
-    Intimidate: 4
-    Jump: 4
-  feats:
-  - name: Power Attack
-    source: character
-- level: 2
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-- level: 3
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-  feats:
-  - name: Cleave
-    source: character
-- level: 4
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-- level: 5
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-- level: 6
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-  feats:
-  - name: Great Cleave
-    source: character
-- level: 7
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-- level: 8
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-- level: 9
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-  feats:
-  - name: Improved Bull Rush
-    source: character
-- level: 10
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-- level: 11
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-- level: 12
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-  feats:
-  - name: Improved Sunder
-    source: character
-- level: 13
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-- level: 14
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-- level: 15
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-  feats:
-  - name: Blind-Fight
-    source: character
-- level: 16
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-- level: 17
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-- level: 18
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
-  feats:
-  - name: Toughness
-    source: character
-- level: 19
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Intimidate: 1
-    Jump: 1
-    Swim: 1
-- level: 20
-  class: Barbarian
-  hp_roll: 8
-  skill_ranks:
-    Climb: 1
-    Listen: 1
-    Survival: 1
+  - level: 1
+    class: Barbarian
+    hp_roll: 12
+    skill_ranks:
+      Climb: 4
+      Intimidate: 4
+      Jump: 4
+    feats:
+      - name: Power Attack
+        source: character
+  - level: 2
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 3
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: Cleave
+        source: character
+  - level: 4
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 5
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 6
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+    feats:
+      - name: Great Cleave
+        source: character
+  - level: 7
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 8
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 9
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: Improved Bull Rush
+        source: character
+  - level: 10
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 11
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 12
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+    feats:
+      - name: Improved Sunder
+        source: character
+  - level: 13
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 14
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 15
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+    feats:
+      - name: Blind-Fight
+        source: character
+  - level: 16
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+  - level: 17
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 18
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
+    feats:
+      - name: Toughness
+        source: character
+  - level: 19
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Intimidate: 1
+      Jump: 1
+      Swim: 1
+  - level: 20
+    class: Barbarian
+    hp_roll: 8
+    skill_ranks:
+      Climb: 1
+      Listen: 1
+      Survival: 1
 buffs:
   Mighty Rage:
     active: true
@@ -183,6 +183,6 @@ equipment:
   shield: {}
   worn: []
   weapons:
-  - name: Greataxe
-    base: Greataxe
+    - name: Greataxe
+      base: Greataxe
 notes: ''

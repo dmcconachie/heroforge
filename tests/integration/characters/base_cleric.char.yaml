@@ -1,10 +1,9 @@
 identity:
-  name: "Brother Aldric"
-  player: ""
+  name: Brother Aldric
+  player: ''
   race: Human
   alignment: lawful_good
-  deity: "Pelor"
-
+  deity: Pelor
 ability_scores:
   str: 14
   dex: 10
@@ -12,7 +11,6 @@ ability_scores:
   int: 10
   wis: 16
   cha: 12
-
 levels:
   - level: 1
     class: Cleric
@@ -22,9 +20,9 @@ levels:
       Heal: 4
       Knowledge (Religion): 4
     feats:
-      - name: "Combat Casting"
+      - name: Combat Casting
         source: character
-      - name: "Extra Turning"
+      - name: Extra Turning
         source: human_bonus
   - level: 2
     class: Cleric
@@ -41,7 +39,7 @@ levels:
       Spellcraft: 1
       Diplomacy: 1
     feats:
-      - name: "Improved Turning"
+      - name: Improved Turning
         source: character
   - level: 4
     class: Cleric
@@ -65,7 +63,7 @@ levels:
       Heal: 1
       Knowledge (Religion): 1
     feats:
-      - name: "Spell Focus"
+      - name: Spell Focus
         source: character
         parameter: Conjuration
   - level: 7
@@ -90,7 +88,7 @@ levels:
       Spellcraft: 1
       Diplomacy: 1
     feats:
-      - name: "Augment Summoning"
+      - name: Augment Summoning
         source: character
   - level: 10
     class: Cleric
@@ -114,7 +112,7 @@ levels:
       Heal: 1
       Knowledge (Religion): 1
     feats:
-      - name: "Spell Penetration"
+      - name: Spell Penetration
         source: character
   - level: 13
     class: Cleric
@@ -138,7 +136,7 @@ levels:
       Spellcraft: 1
       Diplomacy: 1
     feats:
-      - name: "Greater Spell Focus"
+      - name: Greater Spell Focus
         source: character
         parameter: Conjuration
   - level: 16
@@ -163,7 +161,7 @@ levels:
       Heal: 1
       Knowledge (Religion): 1
     feats:
-      - name: "Greater Spell Penetration"
+      - name: Greater Spell Penetration
         source: character
   - level: 19
     class: Cleric
@@ -179,17 +177,14 @@ levels:
       Concentration: 1
       Heal: 1
       Knowledge (Religion): 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Heavy Mace"
+    - name: Heavy Mace
       base: Heavy Mace
-
-notes: ""
+notes: ''

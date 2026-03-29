@@ -88,15 +88,15 @@ combat:
     total: 18
 attack_iteratives:
   melee:
-  - 19
-  - 14
-  - 9
-  - 4
+    - 19
+    - 14
+    - 9
+    - 4
   ranged:
-  - 20
-  - 15
-  - 10
-  - 5
+    - 20
+    - 15
+    - 10
+    - 5
 skills:
   Balance:
     ranks: 10
@@ -174,29 +174,29 @@ carrying_capacity:
   medium: 116
   heavy: 175
 feats:
-- Dodge
-- Weapon Focus
-- Mobility
-- Combat Expertise
-- Improved Initiative
-- Weapon Finesse
-- Spring Attack
-- Whirlwind Attack
-- Improved Critical
-- Lightning Reflexes
+  - Dodge
+  - Weapon Focus
+  - Mobility
+  - Combat Expertise
+  - Improved Initiative
+  - Weapon Finesse
+  - Spring Attack
+  - Whirlwind Attack
+  - Improved Critical
+  - Lightning Reflexes
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'bonus_feat_2: Bonus fighter feat'
-- 'bonus_feat_4: Bonus fighter feat'
-- 'bonus_feat_6: Bonus fighter feat'
-- 'sneak_attack_1d6: Sneak attack +1d6'
-- 'trapfinding: Find and disable magical traps'
-- 'canny_defense: INT to AC (unarmored)'
-- 'improved_reaction: +2 initiative'
-- 'enhanced_mobility: +4 AC vs AoO'
-- 'precise_strike: +1d6 damage (light)'
-- 'grace: +2 Reflex saves'
-- 'acrobatic_charge: Charge in difficult terrain'
-- 'deflect_arrows: Deflect one ranged/round'
-- 'crippling_critical: Critical hit debuff'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_4: Bonus fighter feat'
+  - 'bonus_feat_6: Bonus fighter feat'
+  - 'sneak_attack_1d6: Sneak attack +1d6'
+  - 'trapfinding: Find and disable magical traps'
+  - 'canny_defense: INT to AC (unarmored)'
+  - 'improved_reaction: +2 initiative'
+  - 'enhanced_mobility: +4 AC vs AoO'
+  - 'precise_strike: +1d6 damage (light)'
+  - 'grace: +2 Reflex saves'
+  - 'acrobatic_charge: Charge in difficult terrain'
+  - 'deflect_arrows: Deflect one ranged/round'
+  - 'crippling_critical: Critical hit debuff'
 resources: {}

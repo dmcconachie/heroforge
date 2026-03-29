@@ -12,9 +12,9 @@ Aid:
     Cleric: 2
   note: +1 morale on attack/saves vs fear; +1d8+CL temporary HP
   effects:
-  - target: attack_all
-    bonus_type: morale
-    value: 1
+    - target: attack_all
+      bonus_type: morale
+      value: 1
 Align Weapon:
   level:
     Cleric: 2
@@ -41,9 +41,9 @@ Barkskin:
   note: Enhancement bonus to natural armor; scales with CL
   requires_caster_level: true
   effects:
-  - target: ac
-    bonus_type: natural_armor
-    value: max(2, 1 + caster_level // 3)
+    - target: ac
+      bonus_type: natural_armor
+      value: max(2, 1 + caster_level // 3)
 Bear's Endurance:
   level:
     Cleric: 2
@@ -53,9 +53,9 @@ Bear's Endurance:
     Wizard: 2
   note: +4 enhancement to CON
   effects:
-  - target: con_score
-    bonus_type: enhancement
-    value: 4
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
 Blindness/Deafness:
   level:
     Bard: 2
@@ -77,9 +77,9 @@ Bull's Strength:
     Wizard: 2
   note: +4 enhancement to STR
   effects:
-  - target: str_score
-    bonus_type: enhancement
-    value: 4
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
 Calm Emotions:
   level:
     Bard: 2
@@ -93,9 +93,9 @@ Cat's Grace:
     Wizard: 2
   note: +4 enhancement to DEX
   effects:
-  - target: dex_score
-    bonus_type: enhancement
-    value: 4
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
 Chill Metal:
   level:
     Druid: 2
@@ -154,9 +154,9 @@ Eagle's Splendor:
     Wizard: 2
   note: +4 enhancement to CHA
   effects:
-  - target: cha_score
-    bonus_type: enhancement
-    value: 4
+    - target: cha_score
+      bonus_type: enhancement
+      value: 4
 Enthrall:
   level:
     Bard: 2
@@ -168,10 +168,10 @@ False Life:
   note: 'Temporary hit points: 1d10 + CL (max +10)'
   requires_caster_level: true
   effects:
-  - target: hp_bonus
-    bonus_type: untyped
-    value: min(caster_level, 10)
-    source_label: False Life (temp HP)
+    - target: hp_bonus
+      bonus_type: untyped
+      value: min(caster_level, 10)
+      source_label: False Life (temp HP)
 Find Traps:
   level:
     Cleric: 2
@@ -200,9 +200,9 @@ Fox's Cunning:
     Wizard: 2
   note: +4 enhancement to INT
   effects:
-  - target: int_score
-    bonus_type: enhancement
-    value: 4
+    - target: int_score
+      bonus_type: enhancement
+      value: 4
 Gentle Repose:
   level:
     Cleric: 2
@@ -232,18 +232,18 @@ Heroism:
     Wizard: 3
   note: +2 morale on attack, saves, skill checks
   effects:
-  - target: attack_all
-    bonus_type: morale
-    value: 2
-  - target: fort_save
-    bonus_type: morale
-    value: 2
-  - target: ref_save
-    bonus_type: morale
-    value: 2
-  - target: will_save
-    bonus_type: morale
-    value: 2
+    - target: attack_all
+      bonus_type: morale
+      value: 2
+    - target: fort_save
+      bonus_type: morale
+      value: 2
+    - target: ref_save
+      bonus_type: morale
+      value: 2
+    - target: will_save
+      bonus_type: morale
+      value: 2
 Hold Animal:
   level:
     Druid: 2
@@ -269,9 +269,9 @@ Invisibility:
     Wizard: 2
   note: Invisible; +2 attack vs sighted foes; broken by attacking
   effects:
-  - target: attack_all
-    bonus_type: untyped
-    value: 2
+    - target: attack_all
+      bonus_type: untyped
+      value: 2
 Knock:
   level:
     Sorcerer: 2
@@ -314,9 +314,9 @@ Owl's Wisdom:
     Wizard: 2
   note: +4 enhancement to WIS
   effects:
-  - target: wis_score
-    bonus_type: enhancement
-    value: 4
+    - target: wis_score
+      bonus_type: enhancement
+      value: 4
 Phantom Trap:
   level:
     Sorcerer: 2
@@ -344,15 +344,15 @@ Rage:
     Wizard: 3
   note: +2 morale to STR and CON, -2 AC
   effects:
-  - target: str_score
-    bonus_type: morale
-    value: 2
-  - target: con_score
-    bonus_type: morale
-    value: 2
-  - target: ac
-    bonus_type: untyped
-    value: -2
+    - target: str_score
+      bonus_type: morale
+      value: 2
+    - target: con_score
+      bonus_type: morale
+      value: 2
+    - target: ac
+      bonus_type: untyped
+      value: -2
 Reduce Animal:
   level:
     Druid: 2
@@ -462,15 +462,15 @@ Touch of Idiocy:
     Wizard: 2
   note: -1d6 INT, WIS, CHA (min 1)
   effects:
-  - target: int_score
-    bonus_type: untyped
-    value: -4
-  - target: wis_score
-    bonus_type: untyped
-    value: -4
-  - target: cha_score
-    bonus_type: untyped
-    value: -4
+    - target: int_score
+      bonus_type: untyped
+      value: -4
+    - target: wis_score
+      bonus_type: untyped
+      value: -4
+    - target: cha_score
+      bonus_type: untyped
+      value: -4
 Tree Shape:
   level:
     Druid: 2

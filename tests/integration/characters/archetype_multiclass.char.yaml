@@ -1,10 +1,9 @@
 identity:
-  name: "Thorek Stoneblade"
-  player: ""
+  name: Thorek Stoneblade
+  player: ''
   race: Dwarf
   alignment: neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 14
   dex: 14
@@ -12,7 +11,6 @@ ability_scores:
   int: 12
   wis: 10
   cha: 10
-
 levels:
   - level: 1
     class: Fighter
@@ -22,9 +20,9 @@ levels:
       Intimidate: 4
       Jump: 4
     feats:
-      - name: "Power Attack"
+      - name: Power Attack
         source: character
-      - name: "Weapon Focus"
+      - name: Weapon Focus
         source: fighter_bonus
         parameter: Dwarven Waraxe
   - level: 2
@@ -35,7 +33,7 @@ levels:
       Intimidate: 1
       Jump: 1
     feats:
-      - name: "Cleave"
+      - name: Cleave
         source: fighter_bonus
   - level: 3
     class: Fighter
@@ -45,7 +43,7 @@ levels:
       Intimidate: 1
       Jump: 1
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
   - level: 4
     class: Fighter
@@ -55,7 +53,7 @@ levels:
       Intimidate: 1
       Jump: 1
     feats:
-      - name: "Combat Expertise"
+      - name: Combat Expertise
         source: fighter_bonus
   - level: 5
     class: Fighter
@@ -72,9 +70,9 @@ levels:
       Intimidate: 1
       Jump: 1
     feats:
-      - name: "Improved Trip"
+      - name: Improved Trip
         source: character
-      - name: "Blind-Fight"
+      - name: Blind-Fight
         source: fighter_bonus
   - level: 7
     class: Rogue
@@ -113,7 +111,7 @@ levels:
       Spot: 1
       Climb: 1
     feats:
-      - name: "Iron Will"
+      - name: Iron Will
         source: character
   - level: 10
     class: Rogue
@@ -128,17 +126,14 @@ levels:
       Listen: 1
       Spot: 1
       Climb: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Dwarven Waraxe"
+    - name: Dwarven Waraxe
       base: Dwarven Waraxe
-
-notes: ""
+notes: ''

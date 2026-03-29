@@ -1,10 +1,9 @@
 identity:
-  name: "Thaelin Swiftarrow"
-  player: ""
+  name: Thaelin Swiftarrow
+  player: ''
   race: Elf
   alignment: chaotic_good
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 14
   dex: 14
@@ -12,7 +11,6 @@ ability_scores:
   int: 12
   wis: 10
   cha: 8
-
 levels:
   - level: 1
     class: Fighter
@@ -22,9 +20,9 @@ levels:
       Jump: 4
       Swim: 4
     feats:
-      - name: "Point Blank Shot"
+      - name: Point Blank Shot
         source: character
-      - name: "Weapon Focus"
+      - name: Weapon Focus
         source: fighter_bonus
         parameter: Longbow
   - level: 2
@@ -35,7 +33,7 @@ levels:
       Jump: 1
       Swim: 1
     feats:
-      - name: "Precise Shot"
+      - name: Precise Shot
         source: fighter_bonus
   - level: 3
     class: Fighter
@@ -45,7 +43,7 @@ levels:
       Jump: 1
       Swim: 1
     feats:
-      - name: "Rapid Shot"
+      - name: Rapid Shot
         source: character
   - level: 4
     class: Fighter
@@ -55,7 +53,7 @@ levels:
       Jump: 1
       Swim: 1
     feats:
-      - name: "Improved Initiative"
+      - name: Improved Initiative
         source: fighter_bonus
   - level: 5
     class: Fighter
@@ -72,9 +70,9 @@ levels:
       Jump: 1
       Swim: 1
     feats:
-      - name: "Manyshot"
+      - name: Manyshot
         source: character
-      - name: "Far Shot"
+      - name: Far Shot
         source: fighter_bonus
   - level: 7
     class: Wizard
@@ -83,17 +81,16 @@ levels:
       Concentration: 2
       Spellcraft: 1
     feats:
-      - name: "Scribe Scroll"
+      - name: Scribe Scroll
         source: wizard_bonus
   - level: 8
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 3
       Listen: 2
-  # AA 2 — total 9; character feat at L9
   - level: 9
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -102,11 +99,10 @@ levels:
       Move Silently: 1
       Survival: 1
     feats:
-      - name: "Shot on the Run"
+      - name: Shot on the Run
         source: character
-  # AA 3 — total 10
   - level: 10
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -114,9 +110,8 @@ levels:
       Spot: 1
       Move Silently: 1
       Survival: 1
-  # AA 4 — total 11
   - level: 11
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -124,9 +119,8 @@ levels:
       Spot: 1
       Move Silently: 1
       Survival: 1
-  # AA 5 — total 12; character feat at L12
   - level: 12
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -135,11 +129,10 @@ levels:
       Move Silently: 1
       Survival: 1
     feats:
-      - name: "Improved Critical"
+      - name: Improved Critical
         source: character
-  # AA 6 — total 13
   - level: 13
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -147,9 +140,8 @@ levels:
       Spot: 1
       Move Silently: 1
       Survival: 1
-  # AA 7 — total 14
   - level: 14
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -157,9 +149,8 @@ levels:
       Spot: 1
       Move Silently: 1
       Survival: 1
-  # AA 8 — total 15; character feat at L15
   - level: 15
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -168,11 +159,10 @@ levels:
       Move Silently: 1
       Survival: 1
     feats:
-      - name: "Improved Precise Shot"
+      - name: Improved Precise Shot
         source: character
-  # AA 9 — total 16
   - level: 16
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -180,9 +170,8 @@ levels:
       Spot: 1
       Move Silently: 1
       Survival: 1
-  # AA 10 — total 17
   - level: 17
-    class: "Arcane Archer"
+    class: Arcane Archer
     hp_roll: 6
     skill_ranks:
       Hide: 1
@@ -190,17 +179,14 @@ levels:
       Spot: 1
       Move Silently: 1
       Survival: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Longbow"
+    - name: Longbow
       base: Longbow
-
-notes: ""
+notes: ''

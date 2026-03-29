@@ -1,10 +1,9 @@
 identity:
-  name: "Gareth Spellblade"
-  player: ""
+  name: Gareth Spellblade
+  player: ''
   race: Human
   alignment: neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 14
   dex: 12
@@ -12,7 +11,6 @@ ability_scores:
   int: 16
   wis: 10
   cha: 8
-
 levels:
   - level: 1
     class: Fighter
@@ -25,12 +23,12 @@ levels:
       Ride: 4
       Handle Animal: 4
     feats:
-      - name: "Power Attack"
+      - name: Power Attack
         source: character
-      - name: "Weapon Focus"
+      - name: Weapon Focus
         source: fighter_bonus
         parameter: Longsword
-      - name: "Combat Casting"
+      - name: Combat Casting
         source: human_bonus
   - level: 2
     class: Wizard
@@ -39,7 +37,7 @@ levels:
       Concentration: 4
       Spellcraft: 2
     feats:
-      - name: "Scribe Scroll"
+      - name: Scribe Scroll
         source: wizard_bonus
   - level: 3
     class: Wizard
@@ -50,7 +48,7 @@ levels:
       Knowledge (Arcana): 1
       Decipher Script: 3
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
   - level: 4
     class: Wizard
@@ -82,12 +80,12 @@ levels:
       Decipher Script: 1
       Knowledge (The Planes): 1
     feats:
-      - name: "Mobility"
+      - name: Mobility
         source: character
-      - name: "Extend Spell"
+      - name: Extend Spell
         source: wizard_bonus
   - level: 7
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 5
     skill_ranks:
       Concentration: 1
@@ -96,9 +94,8 @@ levels:
       Ride: 1
       Knowledge (Arcana): 1
       Swim: 1
-  # EK 2 — total 8
   - level: 8
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -107,9 +104,8 @@ levels:
       Knowledge (Arcana): 1
       Swim: 1
       Ride: 1
-  # EK 3 — total 9; character feat at L9
   - level: 9
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -119,11 +115,10 @@ levels:
       Swim: 1
       Ride: 1
     feats:
-      - name: "Spring Attack"
+      - name: Spring Attack
         source: character
-  # EK 4 — total 10
   - level: 10
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -132,9 +127,8 @@ levels:
       Knowledge (Arcana): 1
       Swim: 1
       Ride: 1
-  # EK 5 — total 11
   - level: 11
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -143,9 +137,8 @@ levels:
       Knowledge (Arcana): 1
       Swim: 1
       Ride: 1
-  # EK 6 — total 12; character feat at L12
   - level: 12
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -155,11 +148,10 @@ levels:
       Swim: 1
       Ride: 1
     feats:
-      - name: "Improved Initiative"
+      - name: Improved Initiative
         source: character
-  # EK 7 — total 13
   - level: 13
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -168,9 +160,8 @@ levels:
       Knowledge (Arcana): 1
       Swim: 1
       Ride: 1
-  # EK 8 — total 14
   - level: 14
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -179,9 +170,8 @@ levels:
       Knowledge (Arcana): 1
       Swim: 1
       Ride: 1
-  # EK 9 — total 15; character feat at L15
   - level: 15
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -191,11 +181,10 @@ levels:
       Swim: 1
       Ride: 1
     feats:
-      - name: "Toughness"
+      - name: Toughness
         source: character
-  # EK 10 — total 16
   - level: 16
-    class: "Eldritch Knight"
+    class: Eldritch Knight
     hp_roll: 4
     skill_ranks:
       Concentration: 1
@@ -204,17 +193,14 @@ levels:
       Knowledge (Arcana): 1
       Swim: 1
       Ride: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Longsword"
+    - name: Longsword
       base: Longsword
-
-notes: ""
+notes: ''

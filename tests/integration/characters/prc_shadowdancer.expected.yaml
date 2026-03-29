@@ -78,13 +78,13 @@ combat:
     total: 12
 attack_iteratives:
   melee:
-  - 12
-  - 7
-  - 2
+    - 12
+    - 7
+    - 2
   ranged:
-  - 16
-  - 11
-  - 6
+    - 16
+    - 11
+    - 6
 skills:
   Balance:
     ranks: 20
@@ -153,32 +153,32 @@ carrying_capacity:
   medium: 66
   heavy: 100
 feats:
-- Dodge
-- Combat Reflexes
-- Mobility
-- Weapon Finesse
-- Spring Attack
-- Blind-Fight
-- Lightning Reflexes
+  - Dodge
+  - Combat Reflexes
+  - Mobility
+  - Weapon Finesse
+  - Spring Attack
+  - Blind-Fight
+  - Lightning Reflexes
 class_features:
-- 'sneak_attack_1d6: Sneak attack +1d6'
-- 'trapfinding: Find and disable magical traps'
-- 'evasion: No damage on successful Reflex save'
-- 'sneak_attack_2d6: Sneak attack +2d6'
-- 'trap_sense_1: +1 Reflex and AC vs traps'
-- 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
-- 'sneak_attack_3d6: Sneak attack +3d6'
-- 'trap_sense_2: +2 Reflex and AC vs traps'
-- 'sneak_attack_4d6: Sneak attack +4d6'
-- 'hide_in_plain_sight: Hide while observed'
-- 'evasion: No damage on Ref save'
-- 'darkvision: Darkvision 60 ft'
-- 'uncanny_dodge: Never flat-footed'
-- 'shadow_illusion: Silent image 1/day'
-- 'summon_shadow: Summon shadow companion'
-- 'shadow_jump_20: Teleport 20 ft/day'
-- 'defensive_roll: Avoid lethal blow'
-- 'improved_uncanny_dodge: Cannot be flanked'
-- 'slippery_mind: Re-roll enchantment save'
-- 'improved_evasion: Half damage on failed save'
+  - 'sneak_attack_1d6: Sneak attack +1d6'
+  - 'trapfinding: Find and disable magical traps'
+  - 'evasion: No damage on successful Reflex save'
+  - 'sneak_attack_2d6: Sneak attack +2d6'
+  - 'trap_sense_1: +1 Reflex and AC vs traps'
+  - 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+  - 'sneak_attack_3d6: Sneak attack +3d6'
+  - 'trap_sense_2: +2 Reflex and AC vs traps'
+  - 'sneak_attack_4d6: Sneak attack +4d6'
+  - 'hide_in_plain_sight: Hide while observed'
+  - 'evasion: No damage on Ref save'
+  - 'darkvision: Darkvision 60 ft'
+  - 'uncanny_dodge: Never flat-footed'
+  - 'shadow_illusion: Silent image 1/day'
+  - 'summon_shadow: Summon shadow companion'
+  - 'shadow_jump_20: Teleport 20 ft/day'
+  - 'defensive_roll: Avoid lethal blow'
+  - 'improved_uncanny_dodge: Cannot be flanked'
+  - 'slippery_mind: Re-roll enchantment save'
+  - 'improved_evasion: Half damage on failed save'
 resources: {}

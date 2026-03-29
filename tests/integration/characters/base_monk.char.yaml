@@ -1,10 +1,9 @@
 identity:
-  name: "Thalindra Swiftwind"
-  player: ""
+  name: Thalindra Swiftwind
+  player: ''
   race: Elf
   alignment: lawful_neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 12
   dex: 16
@@ -12,7 +11,6 @@ ability_scores:
   int: 10
   wis: 16
   cha: 8
-
 levels:
   - level: 1
     class: Monk
@@ -23,12 +21,12 @@ levels:
       Tumble: 4
       Listen: 4
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
-      - name: "Improved Unarmed Strike"
-        source: "class:Monk"
-      - name: "Stunning Fist"
-        source: "class:Monk"
+      - name: Improved Unarmed Strike
+        source: class:Monk
+      - name: Stunning Fist
+        source: class:Monk
   - level: 2
     class: Monk
     hp_roll: 5
@@ -38,8 +36,8 @@ levels:
       Tumble: 1
       Spot: 1
     feats:
-      - name: "Combat Reflexes"
-        source: "class:Monk"
+      - name: Combat Reflexes
+        source: class:Monk
   - level: 3
     class: Monk
     hp_roll: 5
@@ -49,7 +47,7 @@ levels:
       Tumble: 1
       Listen: 1
     feats:
-      - name: "Mobility"
+      - name: Mobility
         source: character
   - level: 4
     class: Monk
@@ -76,10 +74,10 @@ levels:
       Spot: 1
       Listen: 1
     feats:
-      - name: "Improved Initiative"
+      - name: Improved Initiative
         source: character
-      - name: "Improved Trip"
-        source: "class:Monk"
+      - name: Improved Trip
+        source: class:Monk
   - level: 7
     class: Monk
     hp_roll: 5
@@ -105,7 +103,7 @@ levels:
       Tumble: 1
       Spot: 1
     feats:
-      - name: "Spring Attack"
+      - name: Spring Attack
         source: character
   - level: 10
     class: Monk
@@ -132,7 +130,7 @@ levels:
       Spot: 1
       Listen: 1
     feats:
-      - name: "Deflect Arrows"
+      - name: Deflect Arrows
         source: character
   - level: 13
     class: Monk
@@ -159,7 +157,7 @@ levels:
       Tumble: 1
       Listen: 1
     feats:
-      - name: "Snatch Arrows"
+      - name: Snatch Arrows
         source: character
   - level: 16
     class: Monk
@@ -186,7 +184,7 @@ levels:
       Spot: 1
       Listen: 1
     feats:
-      - name: "Improved Grapple"
+      - name: Improved Grapple
         source: character
   - level: 19
     class: Monk
@@ -204,15 +202,12 @@ levels:
       Move Silently: 1
       Spot: 1
       Listen: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons: []
-
-notes: ""
+notes: ''

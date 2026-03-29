@@ -8,11 +8,11 @@ Warrior:
     will: poor
   skills_per_level: 2
   class_skills:
-  - Climb
-  - Handle Animal
-  - Intimidate
-  - Jump
-  - Ride
-  - Swim
+    - Climb
+    - Handle Animal
+    - Intimidate
+    - Jump
+    - Ride
+    - Swim
   spellcasting: null
   class_features: []

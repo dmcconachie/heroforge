@@ -1,10 +1,9 @@
 identity:
-  name: "Aelindra Starweave"
-  player: ""
+  name: Aelindra Starweave
+  player: ''
   race: Elf
   alignment: neutral_good
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 8
   dex: 14
@@ -12,9 +11,7 @@ ability_scores:
   int: 18
   wis: 12
   cha: 8
-
 levels:
-  # L1: 6 skill pts x4 = 24
   - level: 1
     class: Wizard
     hp_roll: 4
@@ -26,11 +23,10 @@ levels:
       Decipher Script: 4
       Knowledge (Religion): 4
     feats:
-      - name: "Spell Focus"
+      - name: Spell Focus
         source: character
-      - name: "Scribe Scroll"
+      - name: Scribe Scroll
         source: wizard_bonus
-  # L2: 6 skill pts
   - level: 2
     class: Wizard
     hp_roll: 3
@@ -41,7 +37,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
       Knowledge (Nature): 1
-  # L3: 6 skill pts
   - level: 3
     class: Wizard
     hp_roll: 3
@@ -53,9 +48,8 @@ levels:
       Knowledge (Nature): 1
       Decipher Script: 1
     feats:
-      - name: "Spell Penetration"
+      - name: Spell Penetration
         source: character
-  # L4: 6 skill pts
   - level: 4
     class: Wizard
     hp_roll: 3
@@ -66,7 +60,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Nature): 1
       Knowledge (Religion): 1
-  # L5: 6 skill pts
   - level: 5
     class: Wizard
     hp_roll: 3
@@ -78,9 +71,8 @@ levels:
       Knowledge (Religion): 1
       Knowledge (Nature): 1
     feats:
-      - name: "Extend Spell"
+      - name: Extend Spell
         source: wizard_bonus
-  # L6: 6 skill pts
   - level: 6
     class: Wizard
     hp_roll: 3
@@ -92,9 +84,8 @@ levels:
       Decipher Script: 1
       Knowledge (Nature): 1
     feats:
-      - name: "Greater Spell Focus"
+      - name: Greater Spell Focus
         source: character
-  # L7: 6 skill pts
   - level: 7
     class: Wizard
     hp_roll: 3
@@ -105,7 +96,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
       Knowledge (Nature): 1
-  # L8: 6 skill pts
   - level: 8
     class: Wizard
     hp_roll: 3
@@ -116,7 +106,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Nature): 1
       Decipher Script: 1
-  # L9: 6 skill pts
   - level: 9
     class: Wizard
     hp_roll: 3
@@ -128,9 +117,8 @@ levels:
       Knowledge (Religion): 1
       Knowledge (Nature): 1
     feats:
-      - name: "Greater Spell Penetration"
+      - name: Greater Spell Penetration
         source: character
-  # L10: 6 skill pts
   - level: 10
     class: Wizard
     hp_roll: 3
@@ -142,9 +130,8 @@ levels:
       Knowledge (Nature): 1
       Decipher Script: 1
     feats:
-      - name: "Empower Spell"
+      - name: Empower Spell
         source: wizard_bonus
-  # L11: 6 skill pts
   - level: 11
     class: Wizard
     hp_roll: 3
@@ -155,7 +142,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
       Knowledge (Nature): 1
-  # L12: 6 skill pts
   - level: 12
     class: Wizard
     hp_roll: 3
@@ -167,9 +153,8 @@ levels:
       Knowledge (Nature): 1
       Decipher Script: 1
     feats:
-      - name: "Iron Will"
+      - name: Iron Will
         source: character
-  # L13: 6 skill pts
   - level: 13
     class: Wizard
     hp_roll: 3
@@ -180,7 +165,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
       Knowledge (Nature): 1
-  # L14: 6 skill pts
   - level: 14
     class: Wizard
     hp_roll: 3
@@ -191,7 +175,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Nature): 1
       Decipher Script: 1
-  # L15: 6 skill pts
   - level: 15
     class: Wizard
     hp_roll: 3
@@ -203,11 +186,10 @@ levels:
       Knowledge (Religion): 1
       Knowledge (Nature): 1
     feats:
-      - name: "Spell Mastery"
+      - name: Spell Mastery
         source: character
-      - name: "Maximize Spell"
+      - name: Maximize Spell
         source: wizard_bonus
-  # L16: 6 skill pts
   - level: 16
     class: Wizard
     hp_roll: 3
@@ -218,7 +200,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Nature): 1
       Decipher Script: 1
-  # L17: 6 skill pts
   - level: 17
     class: Wizard
     hp_roll: 3
@@ -229,7 +210,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
       Knowledge (Nature): 1
-  # L18: 6 skill pts
   - level: 18
     class: Wizard
     hp_roll: 3
@@ -241,9 +221,8 @@ levels:
       Knowledge (Nature): 1
       Decipher Script: 1
     feats:
-      - name: "Quicken Spell"
+      - name: Quicken Spell
         source: character
-  # L19: 6 skill pts
   - level: 19
     class: Wizard
     hp_roll: 3
@@ -254,7 +233,6 @@ levels:
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
       Knowledge (Nature): 1
-  # L20: 6 skill pts
   - level: 20
     class: Wizard
     hp_roll: 3
@@ -266,19 +244,16 @@ levels:
       Knowledge (Nature): 1
       Decipher Script: 1
     feats:
-      - name: "Craft Wondrous Item"
+      - name: Craft Wondrous Item
         source: wizard_bonus
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Quarterstaff"
+    - name: Quarterstaff
       base: Quarterstaff
-
-notes: ""
+notes: ''

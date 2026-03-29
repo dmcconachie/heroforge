@@ -8,50 +8,50 @@ Expert:
     will: good
   skills_per_level: 6
   class_skills:
-  - Appraise
-  - Balance
-  - Bluff
-  - Climb
-  - Concentration
-  - Craft
-  - Decipher Script
-  - Diplomacy
-  - Disable Device
-  - Disguise
-  - Escape Artist
-  - Forgery
-  - Gather Information
-  - Handle Animal
-  - Heal
-  - Hide
-  - Intimidate
-  - Jump
-  - Knowledge (Arcana)
-  - Knowledge (Architecture)
-  - Knowledge (Dungeoneering)
-  - Knowledge (Geography)
-  - Knowledge (History)
-  - Knowledge (Local)
-  - Knowledge (Nature)
-  - Knowledge (Nobility)
-  - Knowledge (Religion)
-  - Knowledge (The Planes)
-  - Listen
-  - Move Silently
-  - Open Lock
-  - Perform
-  - Profession
-  - Ride
-  - Search
-  - Sense Motive
-  - Sleight of Hand
-  - Speak Language
-  - Spellcraft
-  - Spot
-  - Survival
-  - Swim
-  - Tumble
-  - Use Magic Device
-  - Use Rope
+    - Appraise
+    - Balance
+    - Bluff
+    - Climb
+    - Concentration
+    - Craft
+    - Decipher Script
+    - Diplomacy
+    - Disable Device
+    - Disguise
+    - Escape Artist
+    - Forgery
+    - Gather Information
+    - Handle Animal
+    - Heal
+    - Hide
+    - Intimidate
+    - Jump
+    - Knowledge (Arcana)
+    - Knowledge (Architecture)
+    - Knowledge (Dungeoneering)
+    - Knowledge (Geography)
+    - Knowledge (History)
+    - Knowledge (Local)
+    - Knowledge (Nature)
+    - Knowledge (Nobility)
+    - Knowledge (Religion)
+    - Knowledge (The Planes)
+    - Listen
+    - Move Silently
+    - Open Lock
+    - Perform
+    - Profession
+    - Ride
+    - Search
+    - Sense Motive
+    - Sleight of Hand
+    - Speak Language
+    - Spellcraft
+    - Spot
+    - Survival
+    - Swim
+    - Tumble
+    - Use Magic Device
+    - Use Rope
   spellcasting: null
   class_features: []

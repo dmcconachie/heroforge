@@ -82,15 +82,15 @@ combat:
     total: 23
 attack_iteratives:
   melee:
-  - 24
-  - 19
-  - 14
-  - 9
+    - 24
+    - 19
+    - 14
+    - 9
   ranged:
-  - 21
-  - 16
-  - 11
-  - 6
+    - 21
+    - 16
+    - 11
+    - 6
 skills:
   Concentration:
     ranks: 14
@@ -119,35 +119,35 @@ carrying_capacity:
   medium: 153
   heavy: 230
 feats:
-- Power Attack
-- Weapon Focus
-- Cleave
-- Extra Turning
-- Improved Bull Rush
-- Mounted Combat
-- Ride-By Attack
-- Spirited Charge
+  - Power Attack
+  - Weapon Focus
+  - Cleave
+  - Extra Turning
+  - Improved Bull Rush
+  - Mounted Combat
+  - Ride-By Attack
+  - Spirited Charge
 class_features:
-- 'aura_of_good: Aura of good (equal to Paladin level)'
-- 'detect_evil: Detect evil at will'
-- 'smite_evil_1: Smite evil 1/day'
-- 'divine_grace: +CHA modifier to all saves'
-- 'lay_on_hands: Heal HP per day = Paladin level × CHA modifier'
-- 'aura_of_courage: Immune to fear; allies +4 morale vs fear'
-- 'divine_health: Immune to all diseases'
-- 'turn_undead: Turn undead as Cleric of (Paladin level - 3)'
-- 'smite_evil_2: Smite evil 2/day'
-- 'special_mount: Celestial heavy warhorse or pony'
-- 'remove_disease_1: Remove disease 1/week'
-- 'smite_evil_3: Smite evil 3/day'
-- 'remove_disease_2: Remove disease 2/week'
-- 'smite_evil_4: Smite evil 4/day'
-- 'remove_disease_3: Remove disease 3/week'
-- 'smite_evil_5: Smite evil 5/day'
-- 'remove_disease_4: Remove disease 4/week'
-- 'smite_evil_6: Smite evil 6/day'
-- 'remove_disease_5: Remove disease 5/week'
-- 'smite_evil_7: Smite evil 7/day'
+  - 'aura_of_good: Aura of good (equal to Paladin level)'
+  - 'detect_evil: Detect evil at will'
+  - 'smite_evil_1: Smite evil 1/day'
+  - 'divine_grace: +CHA modifier to all saves'
+  - 'lay_on_hands: Heal HP per day = Paladin level × CHA modifier'
+  - 'aura_of_courage: Immune to fear; allies +4 morale vs fear'
+  - 'divine_health: Immune to all diseases'
+  - 'turn_undead: Turn undead as Cleric of (Paladin level - 3)'
+  - 'smite_evil_2: Smite evil 2/day'
+  - 'special_mount: Celestial heavy warhorse or pony'
+  - 'remove_disease_1: Remove disease 1/week'
+  - 'smite_evil_3: Smite evil 3/day'
+  - 'remove_disease_2: Remove disease 2/week'
+  - 'smite_evil_4: Smite evil 4/day'
+  - 'remove_disease_3: Remove disease 3/week'
+  - 'smite_evil_5: Smite evil 5/day'
+  - 'remove_disease_4: Remove disease 4/week'
+  - 'smite_evil_6: Smite evil 6/day'
+  - 'remove_disease_5: Remove disease 5/week'
+  - 'smite_evil_7: Smite evil 7/day'
 spellcasting:
   Paladin:
     caster_level: 20
@@ -155,10 +155,10 @@ spellcasting:
     cast_type: divine
     preparation: prepared
     slots_per_day:
-    - 3
-    - 4
-    - 3
-    - 3
+      - 3
+      - 4
+      - 3
+      - 3
     spell_save_dc:
       0: 11
       1: 12

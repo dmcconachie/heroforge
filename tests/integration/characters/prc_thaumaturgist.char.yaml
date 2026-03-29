@@ -1,10 +1,9 @@
 identity:
-  name: "Brother Callum"
-  player: ""
+  name: Brother Callum
+  player: ''
   race: Human
   alignment: lawful_neutral
-  deity: "St. Cuthbert"
-
+  deity: St. Cuthbert
 ability_scores:
   str: 10
   dex: 10
@@ -12,9 +11,7 @@ ability_scores:
   int: 10
   wis: 16
   cha: 14
-
 levels:
-  # Cleric 1 — Human: 2+0(INT)+1(human)=3, x4=12 pts
   - level: 1
     class: Cleric
     hp_roll: 8
@@ -23,12 +20,11 @@ levels:
       Knowledge (Religion): 4
       Knowledge (The Planes): 4
     feats:
-      - name: "Spell Focus"
+      - name: Spell Focus
         source: character
         parameter: Conjuration
-      - name: "Augment Summoning"
+      - name: Augment Summoning
         source: human_bonus
-  # Cleric 2 — 3 pts
   - level: 2
     class: Cleric
     hp_roll: 6
@@ -36,7 +32,6 @@ levels:
       Concentration: 1
       Knowledge (Religion): 1
       Spellcraft: 1
-  # Cleric 3 — 3 pts
   - level: 3
     class: Cleric
     hp_roll: 6
@@ -45,9 +40,8 @@ levels:
       Knowledge (Religion): 1
       Spellcraft: 1
     feats:
-      - name: "Combat Casting"
+      - name: Combat Casting
         source: character
-  # Cleric 4 — 3 pts
   - level: 4
     class: Cleric
     hp_roll: 6
@@ -55,7 +49,6 @@ levels:
       Concentration: 1
       Knowledge (The Planes): 1
       Spellcraft: 1
-  # Cleric 5 — 3 pts
   - level: 5
     class: Cleric
     hp_roll: 6
@@ -63,7 +56,6 @@ levels:
       Concentration: 1
       Knowledge (The Planes): 1
       Spellcraft: 1
-  # Thaumaturgist 1 — 2+0(INT)+1(human)=3 pts
   - level: 6
     class: Thaumaturgist
     hp_roll: 3
@@ -72,9 +64,8 @@ levels:
       Knowledge (The Planes): 1
       Spellcraft: 1
     feats:
-      - name: "Extend Spell"
+      - name: Extend Spell
         source: character
-  # Thaumaturgist 2 — total 7
   - level: 7
     class: Thaumaturgist
     hp_roll: 3
@@ -82,7 +73,6 @@ levels:
       Concentration: 1
       Knowledge (The Planes): 1
       Knowledge (Religion): 1
-  # Thaumaturgist 3 — total 8
   - level: 8
     class: Thaumaturgist
     hp_roll: 3
@@ -90,7 +80,6 @@ levels:
       Concentration: 1
       Spellcraft: 1
       Knowledge (The Planes): 1
-  # Thaumaturgist 4 — total 9; character feat L9
   - level: 9
     class: Thaumaturgist
     hp_roll: 3
@@ -99,9 +88,8 @@ levels:
       Spellcraft: 1
       Knowledge (Religion): 1
     feats:
-      - name: "Spell Penetration"
+      - name: Spell Penetration
         source: character
-  # Thaumaturgist 5 — total 10
   - level: 10
     class: Thaumaturgist
     hp_roll: 3
@@ -109,15 +97,12 @@ levels:
       Concentration: 1
       Spellcraft: 1
       Knowledge (The Planes): 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons: []
-
-notes: ""
+notes: ''

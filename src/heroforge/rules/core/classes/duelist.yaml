@@ -9,64 +9,64 @@ Duelist:
     will: poor
   skills_per_level: 4
   class_skills:
-  - Balance
-  - Bluff
-  - Escape Artist
-  - Jump
-  - Listen
-  - Perform
-  - Sense Motive
-  - Spot
-  - Tumble
+    - Balance
+    - Bluff
+    - Escape Artist
+    - Jump
+    - Listen
+    - Perform
+    - Sense Motive
+    - Spot
+    - Tumble
   entry_prerequisites:
     all_of:
-    - stat:
-        key: bab
-        min: 6
-        label: BAB
-    - feat: Dodge
-    - feat: Mobility
-    - skill:
-        name: Tumble
-        min: 5
-    - skill:
-        name: Perform
-        min: 3
+      - stat:
+          key: bab
+          min: 6
+          label: BAB
+      - feat: Dodge
+      - feat: Mobility
+      - skill:
+          name: Tumble
+          min: 5
+      - skill:
+          name: Perform
+          min: 3
   class_features:
-  - level: 1
-    feature: canny_defense
-    description: INT to AC (unarmored)
-    effects:
-    - target: ac
-      bonus_type: untyped
-      value: max(0, int_mod)
-  - level: 2
-    feature: improved_reaction
-    description: +2 initiative
-    effects:
-    - target: initiative
-      bonus_type: untyped
-      value: 2
-  - level: 2
-    feature: enhanced_mobility
-    description: +4 AC vs AoO
-  - level: 3
-    feature: precise_strike
-    description: +1d6 damage (light)
-  - level: 4
-    feature: grace
-    description: +2 Reflex saves
-    effects:
-    - target: ref_save
-      bonus_type: competence
-      value: 2
-  - level: 5
-    feature: acrobatic_charge
-    description: Charge in difficult terrain
-  - level: 9
-    feature: deflect_arrows
-    description: Deflect one ranged/round
-  - level: 10
-    feature: crippling_critical
-    description: Critical hit debuff
+    - level: 1
+      feature: canny_defense
+      description: INT to AC (unarmored)
+      effects:
+        - target: ac
+          bonus_type: untyped
+          value: max(0, int_mod)
+    - level: 2
+      feature: improved_reaction
+      description: +2 initiative
+      effects:
+        - target: initiative
+          bonus_type: untyped
+          value: 2
+    - level: 2
+      feature: enhanced_mobility
+      description: +4 AC vs AoO
+    - level: 3
+      feature: precise_strike
+      description: +1d6 damage (light)
+    - level: 4
+      feature: grace
+      description: +2 Reflex saves
+      effects:
+        - target: ref_save
+          bonus_type: competence
+          value: 2
+    - level: 5
+      feature: acrobatic_charge
+      description: Charge in difficult terrain
+    - level: 9
+      feature: deflect_arrows
+      description: Deflect one ranged/round
+    - level: 10
+      feature: crippling_critical
+      description: Critical hit debuff
   is_prestige: true

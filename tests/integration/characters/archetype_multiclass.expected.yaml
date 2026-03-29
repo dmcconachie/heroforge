@@ -85,11 +85,11 @@ combat:
     total: 11
 attack_iteratives:
   melee:
-  - 12
-  - 7
+    - 12
+    - 7
   ranged:
-  - 12
-  - 7
+    - 12
+    - 7
 skills:
   Bluff:
     ability_mod: -1
@@ -146,23 +146,23 @@ carrying_capacity:
   medium: 116
   heavy: 175
 feats:
-- Power Attack
-- Weapon Focus
-- Cleave
-- Dodge
-- Combat Expertise
-- Improved Trip
-- Blind-Fight
-- Iron Will
+  - Power Attack
+  - Weapon Focus
+  - Cleave
+  - Dodge
+  - Combat Expertise
+  - Improved Trip
+  - Blind-Fight
+  - Iron Will
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'bonus_feat_2: Bonus fighter feat'
-- 'bonus_feat_4: Bonus fighter feat'
-- 'bonus_feat_6: Bonus fighter feat'
-- 'sneak_attack_1d6: Sneak attack +1d6'
-- 'trapfinding: Find and disable magical traps'
-- 'evasion: No damage on successful Reflex save'
-- 'sneak_attack_2d6: Sneak attack +2d6'
-- 'trap_sense_1: +1 Reflex and AC vs traps'
-- 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_4: Bonus fighter feat'
+  - 'bonus_feat_6: Bonus fighter feat'
+  - 'sneak_attack_1d6: Sneak attack +1d6'
+  - 'trapfinding: Find and disable magical traps'
+  - 'evasion: No damage on successful Reflex save'
+  - 'sneak_attack_2d6: Sneak attack +2d6'
+  - 'trap_sense_1: +1 Reflex and AC vs traps'
+  - 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
 resources: {}

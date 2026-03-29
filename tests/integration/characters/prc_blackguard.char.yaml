@@ -1,10 +1,9 @@
 identity:
-  name: "Malachar Dreadborn"
-  player: ""
+  name: Malachar Dreadborn
+  player: ''
   race: Human
   alignment: neutral_evil
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 16
   dex: 12
@@ -12,7 +11,6 @@ ability_scores:
   int: 10
   wis: 10
   cha: 14
-
 levels:
   - level: 1
     class: Fighter
@@ -22,11 +20,11 @@ levels:
       Hide: 2
       Intimidate: 4
     feats:
-      - name: "Power Attack"
+      - name: Power Attack
         source: character
-      - name: "Cleave"
+      - name: Cleave
         source: fighter_bonus
-      - name: "Weapon Focus"
+      - name: Weapon Focus
         source: human_bonus
         parameter: Longsword
   - level: 2
@@ -37,7 +35,7 @@ levels:
       Climb: 1
       Jump: 1
     feats:
-      - name: "Improved Initiative"
+      - name: Improved Initiative
         source: fighter_bonus
   - level: 3
     class: Fighter
@@ -46,7 +44,7 @@ levels:
       Hide: 1
       Intimidate: 1
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
   - level: 4
     class: Fighter
@@ -56,7 +54,7 @@ levels:
       Climb: 1
       Jump: 1
     feats:
-      - name: "Blind-Fight"
+      - name: Blind-Fight
         source: fighter_bonus
   - level: 5
     class: Fighter
@@ -72,9 +70,9 @@ levels:
       Climb: 1
       Jump: 1
     feats:
-      - name: "Great Cleave"
+      - name: Great Cleave
         source: character
-      - name: "Weapon Specialization"
+      - name: Weapon Specialization
         source: fighter_bonus
         parameter: Longsword
   - level: 7
@@ -91,7 +89,6 @@ levels:
       Hide: 1
       Intimidate: 1
       Knowledge (Religion): 1
-  # BG 2 — total 9; character feat at L9
   - level: 9
     class: Blackguard
     hp_roll: 7
@@ -100,9 +97,8 @@ levels:
       Intimidate: 1
       Knowledge (Religion): 1
     feats:
-      - name: "Iron Will"
+      - name: Iron Will
         source: character
-  # BG 3 — total 10
   - level: 10
     class: Blackguard
     hp_roll: 7
@@ -110,7 +106,6 @@ levels:
       Hide: 1
       Intimidate: 1
       Knowledge (Religion): 1
-  # BG 4 — total 11
   - level: 11
     class: Blackguard
     hp_roll: 7
@@ -118,7 +113,6 @@ levels:
       Hide: 1
       Intimidate: 1
       Knowledge (Religion): 1
-  # BG 5 — total 12; character feat at L12
   - level: 12
     class: Blackguard
     hp_roll: 7
@@ -127,9 +121,8 @@ levels:
       Intimidate: 1
       Knowledge (Religion): 1
     feats:
-      - name: "Improved Bull Rush"
+      - name: Improved Bull Rush
         source: character
-  # BG 6 — total 13
   - level: 13
     class: Blackguard
     hp_roll: 7
@@ -137,7 +130,6 @@ levels:
       Hide: 1
       Intimidate: 1
       Knowledge (Religion): 1
-  # BG 7 — total 14
   - level: 14
     class: Blackguard
     hp_roll: 7
@@ -145,7 +137,6 @@ levels:
       Hide: 1
       Intimidate: 1
       Knowledge (Religion): 1
-  # BG 8 — total 15; character feat at L15
   - level: 15
     class: Blackguard
     hp_roll: 7
@@ -154,9 +145,8 @@ levels:
       Intimidate: 1
       Knowledge (Religion): 1
     feats:
-      - name: "Improved Sunder"
+      - name: Improved Sunder
         source: character
-  # BG 9 — total 16
   - level: 16
     class: Blackguard
     hp_roll: 7
@@ -164,7 +154,6 @@ levels:
       Hide: 1
       Intimidate: 1
       Knowledge (Religion): 1
-  # BG 10 — total 17
   - level: 17
     class: Blackguard
     hp_roll: 7
@@ -172,17 +161,14 @@ levels:
       Hide: 1
       Intimidate: 1
       Knowledge (Religion): 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Longsword"
+    - name: Longsword
       base: Longsword
-
-notes: ""
+notes: ''

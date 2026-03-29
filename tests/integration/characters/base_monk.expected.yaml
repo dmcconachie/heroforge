@@ -84,13 +84,13 @@ combat:
     total: 16
 attack_iteratives:
   melee:
-  - 16
-  - 11
-  - 6
+    - 16
+    - 11
+    - 6
   ranged:
-  - 19
-  - 14
-  - 9
+    - 19
+    - 14
+    - 9
 skills:
   Balance:
     ranks: 14
@@ -129,41 +129,41 @@ carrying_capacity:
   medium: 86
   heavy: 130
 feats:
-- Dodge
-- Improved Unarmed Strike
-- Stunning Fist
-- Combat Reflexes
-- Mobility
-- Improved Initiative
-- Improved Trip
-- Spring Attack
-- Deflect Arrows
-- Snatch Arrows
-- Improved Grapple
+  - Dodge
+  - Improved Unarmed Strike
+  - Stunning Fist
+  - Combat Reflexes
+  - Mobility
+  - Improved Initiative
+  - Improved Trip
+  - Spring Attack
+  - Deflect Arrows
+  - Snatch Arrows
+  - Improved Grapple
 class_features:
-- 'flurry_of_blows: Extra attack with -2 to all attacks'
-- 'unarmed_strike: Unarmed deals 1d6; increases per level'
-- 'bonus_feat_monk_1: ''''''Improved Unarmed Strike + one of: Combat Reflexes, Deflect
-  Arrows, Improved Grapple'''''''
-- 'evasion: No damage on successful Reflex saves'
-- 'bonus_feat_monk_2: Combat Reflexes, Deflect Arrows, or Improved Trip'
-- 'still_mind: +2 saves vs enchantments'
-- 'ki_strike_magic: Unarmed strike treated as magic'
-- 'slow_fall_20: Slow fall up to 20 ft'
-- 'purity_of_body: Immune to natural disease'
-- 'slow_fall_30: Slow fall up to 30 ft'
-- 'bonus_feat_monk_3: Improved Disarm, Improved Trip, or Stunning Fist'
-- 'wholeness_of_body: Heal own HP equal to 2× Monk level/day'
-- 'slow_fall_50: Slow fall up to 50 ft'
-- 'improved_evasion: Half damage on failed Reflex saves'
-- 'ki_strike_lawful: Unarmed strike treated as lawful-aligned'
-- 'diamond_body: Immune to all poisons'
-- 'abundant_step: Dimension door 1/day'
-- 'diamond_soul: SR 10 + Monk level'
-- 'quivering_palm: Set lethal vibrations in target'
-- 'ki_strike_adamantine: Unarmed strike bypasses DR/adamantine'
-- 'timeless_body: No aging penalties'
-- 'tongue_of_sun_moon: Speak with any living creature'
-- 'empty_body: Etherealness 1 min/day per Monk level'
-- 'perfect_self: Outsider type; DR 10/magic'
+  - 'flurry_of_blows: Extra attack with -2 to all attacks'
+  - 'unarmed_strike: Unarmed deals 1d6; increases per level'
+  - 'bonus_feat_monk_1: ''''''''''''''Improved Unarmed Strike + one of: Combat Reflexes,
+    Deflect Arrows, Improved Grapple'''''''''''''''
+  - 'evasion: No damage on successful Reflex saves'
+  - 'bonus_feat_monk_2: Combat Reflexes, Deflect Arrows, or Improved Trip'
+  - 'still_mind: +2 saves vs enchantments'
+  - 'ki_strike_magic: Unarmed strike treated as magic'
+  - 'slow_fall_20: Slow fall up to 20 ft'
+  - 'purity_of_body: Immune to natural disease'
+  - 'slow_fall_30: Slow fall up to 30 ft'
+  - 'bonus_feat_monk_3: Improved Disarm, Improved Trip, or Stunning Fist'
+  - 'wholeness_of_body: Heal own HP equal to 2× Monk level/day'
+  - 'slow_fall_50: Slow fall up to 50 ft'
+  - 'improved_evasion: Half damage on failed Reflex saves'
+  - 'ki_strike_lawful: Unarmed strike treated as lawful-aligned'
+  - 'diamond_body: Immune to all poisons'
+  - 'abundant_step: Dimension door 1/day'
+  - 'diamond_soul: SR 10 + Monk level'
+  - 'quivering_palm: Set lethal vibrations in target'
+  - 'ki_strike_adamantine: Unarmed strike bypasses DR/adamantine'
+  - 'timeless_body: No aging penalties'
+  - 'tongue_of_sun_moon: Speak with any living creature'
+  - 'empty_body: Etherealness 1 min/day per Monk level'
+  - 'perfect_self: Outsider type; DR 10/magic'
 resources: {}

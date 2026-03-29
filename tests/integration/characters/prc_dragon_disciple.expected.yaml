@@ -85,11 +85,11 @@ combat:
     total: 12
 attack_iteratives:
   melee:
-  - 12
-  - 7
+    - 12
+    - 7
   ranged:
-  - 9
-  - 4
+    - 9
+    - 4
 skills:
   Concentration:
     ranks: 15
@@ -122,23 +122,23 @@ carrying_capacity:
   medium: 200
   heavy: 300
 feats:
-- Dodge
-- Toughness
-- Combat Casting
-- Iron Will
-- Great Fortitude
-- Blind-Fight
+  - Dodge
+  - Toughness
+  - Combat Casting
+  - Iron Will
+  - Great Fortitude
+  - Blind-Fight
 class_features:
-- 'summon_familiar: Summon a familiar'
-- 'natural_armor_1: +1 natural armor'
-- 'str_increase_2: +2 STR'
-- 'claws_and_bite: Natural weapons'
-- 'str_increase_4: +2 STR (cumulative)'
-- 'natural_armor_4: +3 natural armor (cumulative)'
-- 'blindsense: Blindsense 30 ft'
-- 'natural_armor_7: +6 natural armor (cumulative)'
-- 'wings: Fly speed 30 ft'
-- 'dragon_apotheosis: Become half-dragon'
+  - 'summon_familiar: Summon a familiar'
+  - 'natural_armor_1: +1 natural armor'
+  - 'str_increase_2: +2 STR'
+  - 'claws_and_bite: Natural weapons'
+  - 'str_increase_4: +2 STR (cumulative)'
+  - 'natural_armor_4: +3 natural armor (cumulative)'
+  - 'blindsense: Blindsense 30 ft'
+  - 'natural_armor_7: +6 natural armor (cumulative)'
+  - 'wings: Fly speed 30 ft'
+  - 'dragon_apotheosis: Become half-dragon'
 spellcasting:
   Sorcerer:
     caster_level: 2
@@ -146,22 +146,22 @@ spellcasting:
     cast_type: arcane
     preparation: spontaneous
     slots_per_day:
-    - 6
-    - 5
+      - 6
+      - 5
     spell_save_dc:
       0: 13
       1: 14
     spells_known_count:
-    - 5
-    - 2
+      - 5
+      - 2
     spells_known:
       0:
-      - Detect Magic
-      - Read Magic
-      - Light
-      - Mage Hand
+        - Detect Magic
+        - Read Magic
+        - Light
+        - Mage Hand
       1:
-      - Magic Missile
-      - Shield
-      - Burning Hands
+        - Magic Missile
+        - Shield
+        - Burning Hands
 resources: {}

@@ -21,8 +21,6 @@ from collections import defaultdict
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-import yaml
-
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
@@ -558,12 +556,9 @@ def main() -> None:
 
     sheet = extract_sheet(args.input, state)
 
-    out = yaml.dump(
-        sheet,
-        default_flow_style=False,
-        allow_unicode=True,
-        sort_keys=False,
-    )
+    from heroforge.engine.persistence import yaml_dump
+
+    out = yaml_dump(sheet)
 
     if args.output:
         args.output.write_text(out)

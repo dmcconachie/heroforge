@@ -96,9 +96,9 @@ Divine Power:
     +6 enhancement to STR, BAB = full cleric level (modelled as +CL to BAB pool)
   requires_caster_level: true
   effects:
-  - target: str_score
-    bonus_type: enhancement
-    value: 6
+    - target: str_score
+      bonus_type: enhancement
+      value: 6
 Dominate Person:
   level:
     Bard: 4
@@ -117,8 +117,8 @@ Fire Shield:
     Sorcerer: 4
     Wizard: 4
   note: >-
-    '''Warm shield: resist cold 10, deal 1d6+1/CL fire to melee attackers. Chill
-    shield: resist fire 10, deal 1d6+1/CL cold. Note only.'''
+    '''''''Warm shield: resist cold 10, deal 1d6+1/CL fire to melee attackers.
+    Chill shield: resist fire 10, deal 1d6+1/CL cold. Note only.'''''''
 Flame Strike:
   level:
     Cleric: 5

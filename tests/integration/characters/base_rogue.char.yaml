@@ -1,10 +1,9 @@
 identity:
-  name: "Lyra Shadowstep"
-  player: ""
+  name: Lyra Shadowstep
+  player: ''
   race: Human
   alignment: chaotic_neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 10
   dex: 18
@@ -12,9 +11,7 @@ ability_scores:
   int: 14
   wis: 10
   cha: 8
-
 levels:
-  # L1: 11 skill pts x4 = 44
   - level: 1
     class: Rogue
     hp_roll: 6
@@ -31,11 +28,10 @@ levels:
       Bluff: 4
       Climb: 4
     feats:
-      - name: "Improved Initiative"
+      - name: Improved Initiative
         source: character
-      - name: "Dodge"
+      - name: Dodge
         source: human_bonus
-  # L2: 11 skill pts
   - level: 2
     class: Rogue
     hp_roll: 4
@@ -51,7 +47,6 @@ levels:
       Sense Motive: 1
       Use Magic Device: 1
       Escape Artist: 1
-  # L3: 11 skill pts
   - level: 3
     class: Rogue
     hp_roll: 4
@@ -68,9 +63,8 @@ levels:
       Use Magic Device: 1
       Escape Artist: 1
     feats:
-      - name: "Mobility"
+      - name: Mobility
         source: character
-  # L4: 11 skill pts
   - level: 4
     class: Rogue
     hp_roll: 4
@@ -86,7 +80,6 @@ levels:
       Diplomacy: 1
       Sleight of Hand: 1
       Gather Information: 1
-  # L5: 11 skill pts
   - level: 5
     class: Rogue
     hp_roll: 4
@@ -102,7 +95,6 @@ levels:
       Diplomacy: 1
       Sleight of Hand: 1
       Gather Information: 1
-  # L6: 11 skill pts
   - level: 6
     class: Rogue
     hp_roll: 4
@@ -119,9 +111,8 @@ levels:
       Sleight of Hand: 1
       Gather Information: 1
     feats:
-      - name: "Combat Reflexes"
+      - name: Combat Reflexes
         source: character
-  # L7: 11 skill pts
   - level: 7
     class: Rogue
     hp_roll: 4
@@ -137,7 +128,6 @@ levels:
       Sense Motive: 1
       Use Magic Device: 1
       Escape Artist: 1
-  # L8: 11 skill pts
   - level: 8
     class: Rogue
     hp_roll: 4
@@ -153,7 +143,6 @@ levels:
       Bluff: 1
       Diplomacy: 1
       Gather Information: 1
-  # L9: 11 skill pts
   - level: 9
     class: Rogue
     hp_roll: 4
@@ -170,9 +159,8 @@ levels:
       Use Magic Device: 1
       Escape Artist: 1
     feats:
-      - name: "Spring Attack"
+      - name: Spring Attack
         source: character
-  # L10: 11 skill pts
   - level: 10
     class: Rogue
     hp_roll: 4
@@ -188,7 +176,6 @@ levels:
       Bluff: 1
       Sleight of Hand: 1
       Gather Information: 1
-  # L11: 11 skill pts
   - level: 11
     class: Rogue
     hp_roll: 4
@@ -204,7 +191,6 @@ levels:
       Diplomacy: 1
       Sense Motive: 1
       Use Magic Device: 1
-  # L12: 11 skill pts
   - level: 12
     class: Rogue
     hp_roll: 4
@@ -221,9 +207,8 @@ levels:
       Escape Artist: 1
       Gather Information: 1
     feats:
-      - name: "Weapon Finesse"
+      - name: Weapon Finesse
         source: character
-  # L13: 11 skill pts
   - level: 13
     class: Rogue
     hp_roll: 4
@@ -239,7 +224,6 @@ levels:
       Diplomacy: 1
       Sense Motive: 1
       Use Magic Device: 1
-  # L14: 11 skill pts
   - level: 14
     class: Rogue
     hp_roll: 4
@@ -255,7 +239,6 @@ levels:
       Bluff: 1
       Sleight of Hand: 1
       Gather Information: 1
-  # L15: 11 skill pts
   - level: 15
     class: Rogue
     hp_roll: 4
@@ -272,9 +255,8 @@ levels:
       Sense Motive: 1
       Use Magic Device: 1
     feats:
-      - name: "Stealthy"
+      - name: Stealthy
         source: character
-  # L16: 11 skill pts
   - level: 16
     class: Rogue
     hp_roll: 4
@@ -290,7 +272,6 @@ levels:
       Bluff: 1
       Escape Artist: 1
       Gather Information: 1
-  # L17: 11 skill pts
   - level: 17
     class: Rogue
     hp_roll: 4
@@ -306,7 +287,6 @@ levels:
       Diplomacy: 1
       Sense Motive: 1
       Use Magic Device: 1
-  # L18: 11 skill pts
   - level: 18
     class: Rogue
     hp_roll: 4
@@ -323,9 +303,8 @@ levels:
       Sleight of Hand: 1
       Gather Information: 1
     feats:
-      - name: "Nimble Fingers"
+      - name: Nimble Fingers
         source: character
-  # L19: 11 skill pts
   - level: 19
     class: Rogue
     hp_roll: 4
@@ -341,7 +320,6 @@ levels:
       Diplomacy: 1
       Sense Motive: 1
       Escape Artist: 1
-  # L20: 11 skill pts
   - level: 20
     class: Rogue
     hp_roll: 4
@@ -357,17 +335,14 @@ levels:
       Use Magic Device: 1
       Bluff: 1
       Gather Information: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Short Sword"
+    - name: Short Sword
       base: Short Sword
-
-notes: ""
+notes: ''

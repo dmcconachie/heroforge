@@ -29,14 +29,14 @@ Bluff:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Diplomacy
-    bonus: 2
-  - skill: Intimidate
-    bonus: 2
-  - skill: Sleight of Hand
-    bonus: 2
-  - skill: Disguise
-    bonus: 2
+    - skill: Diplomacy
+      bonus: 2
+    - skill: Intimidate
+      bonus: 2
+    - skill: Sleight of Hand
+      bonus: 2
+    - skill: Disguise
+      bonus: 2
   description: Lie convincingly; feint in combat
 Climb:
   key: skill_climb
@@ -68,10 +68,10 @@ Diplomacy:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Sense Motive
-    bonus: 2
-  - skill: Knowledge (Nobility)
-    bonus: 2
+    - skill: Sense Motive
+      bonus: 2
+    - skill: Knowledge (Nobility)
+      bonus: 2
   description: Influence attitudes and negotiate
 Disable Device:
   key: skill_disable_device
@@ -85,8 +85,8 @@ Disguise:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Bluff
-    bonus: 2
+    - skill: Bluff
+      bonus: 2
   description: Change appearance to impersonate another
 Escape Artist:
   key: skill_escape_artist
@@ -94,8 +94,8 @@ Escape Artist:
   trained_only: false
   armor_check: true
   synergies:
-  - skill: Use Rope
-    bonus: 2
+    - skill: Use Rope
+      bonus: 2
   description: Escape grapples, bonds, and tight spaces
 Forgery:
   key: skill_forgery
@@ -115,8 +115,8 @@ Handle Animal:
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Diplomacy
-    bonus: 2
+    - skill: Diplomacy
+      bonus: 2
   description: Train, manage, and work with animals
 Heal:
   key: skill_heal
@@ -130,8 +130,8 @@ Hide:
   trained_only: false
   armor_check: true
   synergies:
-  - skill: Move Silently
-    bonus: 2
+    - skill: Move Silently
+      bonus: 2
   description: Conceal yourself from observers
 Intimidate:
   key: skill_intimidate
@@ -139,8 +139,8 @@ Intimidate:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Bluff
-    bonus: 2
+    - skill: Bluff
+      bonus: 2
   description: Coerce or frighten others
 Jump:
   key: skill_jump
@@ -148,8 +148,8 @@ Jump:
   trained_only: false
   armor_check: true
   synergies:
-  - skill: Tumble
-    bonus: 2
+    - skill: Tumble
+      bonus: 2
   description: Leap, vault, and spring
 Knowledge (Arcana):
   key: skill_knowledge_arcana
@@ -157,8 +157,8 @@ Knowledge (Arcana):
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Spellcraft
-    bonus: 2
+    - skill: Spellcraft
+      bonus: 2
   description: Magic, ancient mysteries, spells, magic traditions
 Knowledge (Architecture and Engineering):
   key: skill_knowledge_architecture
@@ -184,8 +184,8 @@ Knowledge (History):
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Bardic Knowledge
-    bonus: 2
+    - skill: Bardic Knowledge
+      bonus: 2
   description: Royalty, wars, colonies, migrations, founding of cities
 Knowledge (Local):
   key: skill_knowledge_local
@@ -193,8 +193,8 @@ Knowledge (Local):
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Gather Information
-    bonus: 2
+    - skill: Gather Information
+      bonus: 2
   description: Legends, personalities, inhabitants, laws, customs
 Knowledge (Nature):
   key: skill_knowledge_nature
@@ -202,8 +202,8 @@ Knowledge (Nature):
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Survival
-    bonus: 2
+    - skill: Survival
+      bonus: 2
   description: Animals, fey, giants, monstrous humanoids, plants, seasons
 Knowledge (Nobility and Royalty):
   key: skill_knowledge_nobility
@@ -211,8 +211,8 @@ Knowledge (Nobility and Royalty):
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Diplomacy
-    bonus: 2
+    - skill: Diplomacy
+      bonus: 2
   description: Lineages, heraldry, family trees, mottoes, personalities
 Knowledge (Religion):
   key: skill_knowledge_religion
@@ -220,8 +220,8 @@ Knowledge (Religion):
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Turn Undead
-    bonus: 2
+    - skill: Turn Undead
+      bonus: 2
   description: Gods and goddesses, mythic history, ecclesiastic tradition
 Knowledge (The Planes):
   key: skill_knowledge_planes
@@ -229,8 +229,8 @@ Knowledge (The Planes):
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Survival
-    bonus: 2
+    - skill: Survival
+      bonus: 2
   description: The Inner Planes, Outer Planes, Astral Plane, Ethereal Plane
 Listen:
   key: skill_listen
@@ -274,8 +274,8 @@ Search:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Survival
-    bonus: 2
+    - skill: Survival
+      bonus: 2
   description: Find secret doors, traps, and concealed items
 Sense Motive:
   key: skill_sense_motive
@@ -283,8 +283,8 @@ Sense Motive:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Diplomacy
-    bonus: 2
+    - skill: Diplomacy
+      bonus: 2
   description: Sense deception; get a hunch
 Sleight of Hand:
   key: skill_sleight_of_hand
@@ -292,8 +292,8 @@ Sleight of Hand:
   trained_only: true
   armor_check: true
   synergies:
-  - skill: Bluff
-    bonus: 2
+    - skill: Bluff
+      bonus: 2
   description: Palm objects; pick pockets; conceal weapons
 Speak Language:
   key: skill_speak_language
@@ -307,10 +307,10 @@ Spellcraft:
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Knowledge (Arcana)
-    bonus: 2
-  - skill: Use Magic Device
-    bonus: 2
+    - skill: Knowledge (Arcana)
+      bonus: 2
+    - skill: Use Magic Device
+      bonus: 2
   description: Identify spells; decipher magic writing
 Spot:
   key: skill_spot
@@ -324,8 +324,8 @@ Survival:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Knowledge (Nature)
-    bonus: 2
+    - skill: Knowledge (Nature)
+      bonus: 2
   description: Track, find food and shelter, handle weather
 Swim:
   key: skill_swim
@@ -339,10 +339,10 @@ Tumble:
   trained_only: true
   armor_check: true
   synergies:
-  - skill: Balance
-    bonus: 2
-  - skill: Jump
-    bonus: 2
+    - skill: Balance
+      bonus: 2
+    - skill: Jump
+      bonus: 2
   description: Fall safely; move through threatened squares
 Use Magic Device:
   key: skill_use_magic_device
@@ -350,8 +350,8 @@ Use Magic Device:
   trained_only: true
   armor_check: false
   synergies:
-  - skill: Spellcraft
-    bonus: 2
+    - skill: Spellcraft
+      bonus: 2
   description: Use magic items regardless of class or alignment
 Use Rope:
   key: skill_use_rope
@@ -359,8 +359,8 @@ Use Rope:
   trained_only: false
   armor_check: false
   synergies:
-  - skill: Climb
-    bonus: 2
-  - skill: Escape Artist
-    bonus: 2
+    - skill: Climb
+      bonus: 2
+    - skill: Escape Artist
+      bonus: 2
   description: Bind, splice, and tie with rope

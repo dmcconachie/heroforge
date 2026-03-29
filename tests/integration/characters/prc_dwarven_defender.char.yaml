@@ -1,10 +1,9 @@
 identity:
-  name: "Dolgrin Shieldwall"
-  player: ""
+  name: Dolgrin Shieldwall
+  player: ''
   race: Dwarf
   alignment: lawful_good
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 16
   dex: 14
@@ -12,7 +11,6 @@ ability_scores:
   int: 10
   wis: 12
   cha: 10
-
 levels:
   - level: 1
     class: Fighter
@@ -21,9 +19,9 @@ levels:
       Climb: 4
       Intimidate: 4
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
-      - name: "Toughness"
+      - name: Toughness
         source: fighter_bonus
   - level: 2
     class: Fighter
@@ -32,7 +30,7 @@ levels:
       Climb: 1
       Intimidate: 1
     feats:
-      - name: "Power Attack"
+      - name: Power Attack
         source: fighter_bonus
   - level: 3
     class: Fighter
@@ -41,7 +39,7 @@ levels:
       Climb: 1
       Jump: 1
     feats:
-      - name: "Weapon Focus"
+      - name: Weapon Focus
         source: character
         parameter: Dwarven Waraxe
   - level: 4
@@ -51,7 +49,7 @@ levels:
       Climb: 1
       Intimidate: 1
     feats:
-      - name: "Weapon Specialization"
+      - name: Weapon Specialization
         source: fighter_bonus
         parameter: Dwarven Waraxe
   - level: 5
@@ -67,9 +65,9 @@ levels:
       Climb: 1
       Jump: 1
     feats:
-      - name: "Cleave"
+      - name: Cleave
         source: character
-      - name: "Blind-Fight"
+      - name: Blind-Fight
         source: fighter_bonus
   - level: 7
     class: Fighter
@@ -83,7 +81,6 @@ levels:
     skill_ranks:
       Listen: 1
       Spot: 1
-  # DwDef 2 — total 9; character feat at L9
   - level: 9
     class: Dwarven Defender
     hp_roll: 8
@@ -91,23 +88,20 @@ levels:
       Listen: 1
       Spot: 1
     feats:
-      - name: "Great Fortitude"
+      - name: Great Fortitude
         source: character
-  # DwDef 3 — total 10
   - level: 10
     class: Dwarven Defender
     hp_roll: 8
     skill_ranks:
       Listen: 1
       Spot: 1
-  # DwDef 4 — total 11
   - level: 11
     class: Dwarven Defender
     hp_roll: 8
     skill_ranks:
       Listen: 1
       Sense Motive: 1
-  # DwDef 5 — total 12; character feat at L12
   - level: 12
     class: Dwarven Defender
     hp_roll: 8
@@ -115,23 +109,20 @@ levels:
       Listen: 1
       Spot: 1
     feats:
-      - name: "Iron Will"
+      - name: Iron Will
         source: character
-  # DwDef 6 — total 13
   - level: 13
     class: Dwarven Defender
     hp_roll: 8
     skill_ranks:
       Listen: 1
       Sense Motive: 1
-  # DwDef 7 — total 14
   - level: 14
     class: Dwarven Defender
     hp_roll: 8
     skill_ranks:
       Listen: 1
       Spot: 1
-  # DwDef 8 — total 15; character feat at L15
   - level: 15
     class: Dwarven Defender
     hp_roll: 8
@@ -139,33 +130,28 @@ levels:
       Listen: 1
       Sense Motive: 1
     feats:
-      - name: "Great Cleave"
+      - name: Great Cleave
         source: character
-  # DwDef 9 — total 16
   - level: 16
     class: Dwarven Defender
     hp_roll: 8
     skill_ranks:
       Listen: 1
       Spot: 1
-  # DwDef 10 — total 17
   - level: 17
     class: Dwarven Defender
     hp_roll: 8
     skill_ranks:
       Listen: 1
       Sense Motive: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Dwarven Waraxe"
+    - name: Dwarven Waraxe
       base: Dwarven Waraxe
-
-notes: ""
+notes: ''

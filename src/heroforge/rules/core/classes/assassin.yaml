@@ -9,71 +9,71 @@ Assassin:
     will: poor
   skills_per_level: 4
   class_skills:
-  - Balance
-  - Bluff
-  - Climb
-  - Craft
-  - Decipher Script
-  - Diplomacy
-  - Disable Device
-  - Disguise
-  - Escape Artist
-  - Forgery
-  - Gather Information
-  - Hide
-  - Intimidate
-  - Jump
-  - Listen
-  - Move Silently
-  - Open Lock
-  - Search
-  - Sense Motive
-  - Sleight of Hand
-  - Spot
-  - Swim
-  - Tumble
-  - Use Magic Device
-  - Use Rope
+    - Balance
+    - Bluff
+    - Climb
+    - Craft
+    - Decipher Script
+    - Diplomacy
+    - Disable Device
+    - Disguise
+    - Escape Artist
+    - Forgery
+    - Gather Information
+    - Hide
+    - Intimidate
+    - Jump
+    - Listen
+    - Move Silently
+    - Open Lock
+    - Search
+    - Sense Motive
+    - Sleight of Hand
+    - Spot
+    - Swim
+    - Tumble
+    - Use Magic Device
+    - Use Rope
   entry_prerequisites:
     all_of:
-    - skill:
-        name: Disguise
-        min: 4
-    - skill:
-        name: Hide
-        min: 8
-    - skill:
-        name: Move Silently
-        min: 8
+      - skill:
+          name: Disguise
+          min: 4
+      - skill:
+          name: Hide
+          min: 8
+      - skill:
+          name: Move Silently
+          min: 8
   class_features:
-  - level: 1
-    feature: sneak_attack_1d6
-    description: +1d6 sneak attack
-  - level: 1
-    feature: death_attack
-    description: Study + kill
-  - level: 1
-    feature: poison_use
-    description: Never poison self
-  - level: 2
-    feature: uncanny_dodge
-    description: Never flat-footed
-  - level: 3
-    feature: sneak_attack_2d6
-    description: +2d6 sneak attack
-  - level: 5
-    feature: sneak_attack_3d6
-    description: +3d6 sneak attack
-  - level: 5
-    feature: improved_uncanny_dodge
-    description: Cannot be flanked
-  - level: 7
-    feature: sneak_attack_4d6
-    description: +4d6 sneak attack
-  - level: 8
-    feature: hide_in_plain_sight
-    description: Hide while observed
-  - level: 9
-    feature: sneak_attack_5d6
-    description: +5d6 sneak attack
+    - level: 1
+      feature: sneak_attack_1d6
+      description: +1d6 sneak attack
+    - level: 1
+      feature: death_attack
+      description: Study + kill
+    - level: 1
+      feature: poison_use
+      description: Never poison self
+    - level: 2
+      feature: uncanny_dodge
+      description: Never flat-footed
+    - level: 3
+      feature: sneak_attack_2d6
+      description: +2d6 sneak attack
+    - level: 5
+      feature: sneak_attack_3d6
+      description: +3d6 sneak attack
+    - level: 5
+      feature: improved_uncanny_dodge
+      description: Cannot be flanked
+    - level: 7
+      feature: sneak_attack_4d6
+      description: +4d6 sneak attack
+    - level: 8
+      feature: hide_in_plain_sight
+      description: Hide while observed
+    - level: 9
+      feature: sneak_attack_5d6
+      description: +5d6 sneak attack
   is_prestige: true

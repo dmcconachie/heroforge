@@ -36,12 +36,12 @@ Foresight:
     Wizard: 9
   note: Never surprised or flat-footed; +2 insight to AC and Reflex saves
   effects:
-  - target: ac
-    bonus_type: insight
-    value: 2
-  - target: ref_save
-    bonus_type: insight
-    value: 2
+    - target: ac
+      bonus_type: insight
+      value: 2
+    - target: ref_save
+      bonus_type: insight
+      value: 2
 Freedom:
   level:
     Sorcerer: 9

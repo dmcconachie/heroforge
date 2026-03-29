@@ -1,10 +1,9 @@
 identity:
-  name: "Bimble Mosswalker"
-  player: ""
+  name: Bimble Mosswalker
+  player: ''
   race: Gnome
   alignment: neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 8
   dex: 14
@@ -12,7 +11,6 @@ ability_scores:
   int: 12
   wis: 16
   cha: 10
-
 levels:
   - level: 1
     class: Druid
@@ -24,7 +22,7 @@ levels:
       Spellcraft: 4
       Survival: 4
     feats:
-      - name: "Spell Focus"
+      - name: Spell Focus
         source: character
         parameter: Conjuration
   - level: 2
@@ -46,7 +44,7 @@ levels:
       Spot: 1
       Survival: 1
     feats:
-      - name: "Augment Summoning"
+      - name: Augment Summoning
         source: character
   - level: 4
     class: Druid
@@ -76,7 +74,7 @@ levels:
       Spot: 1
       Survival: 1
     feats:
-      - name: "Natural Spell"
+      - name: Natural Spell
         source: character
   - level: 7
     class: Druid
@@ -106,7 +104,7 @@ levels:
       Spot: 1
       Survival: 1
     feats:
-      - name: "Spell Penetration"
+      - name: Spell Penetration
         source: character
   - level: 10
     class: Druid
@@ -136,7 +134,7 @@ levels:
       Spot: 1
       Survival: 1
     feats:
-      - name: "Greater Spell Focus"
+      - name: Greater Spell Focus
         source: character
         parameter: Conjuration
   - level: 13
@@ -167,7 +165,7 @@ levels:
       Spot: 1
       Survival: 1
     feats:
-      - name: "Greater Spell Penetration"
+      - name: Greater Spell Penetration
         source: character
   - level: 16
     class: Druid
@@ -197,7 +195,7 @@ levels:
       Spot: 1
       Survival: 1
     feats:
-      - name: "Combat Casting"
+      - name: Combat Casting
         source: character
   - level: 19
     class: Druid
@@ -217,17 +215,14 @@ levels:
       Listen: 1
       Spot: 1
       Survival: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Quarterstaff"
+    - name: Quarterstaff
       base: Quarterstaff
-
-notes: ""
+notes: ''

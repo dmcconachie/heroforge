@@ -24,18 +24,18 @@ Cloak of Chaos:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (chaotic characters)
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 4
-  - target: fort_save
-    bonus_type: resistance
-    value: 4
-  - target: ref_save
-    bonus_type: resistance
-    value: 4
-  - target: will_save
-    bonus_type: resistance
-    value: 4
+    - target: ac
+      bonus_type: deflection
+      value: 4
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
 Clone:
   level:
     Sorcerer: 8
@@ -75,18 +75,18 @@ Holy Aura:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (good characters)
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 4
-  - target: fort_save
-    bonus_type: resistance
-    value: 4
-  - target: ref_save
-    bonus_type: resistance
-    value: 4
-  - target: will_save
-    bonus_type: resistance
-    value: 4
+    - target: ac
+      bonus_type: deflection
+      value: 4
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
 Horrid Wilting:
   level:
     Sorcerer: 8
@@ -108,12 +108,12 @@ Iron Body:
     (min
     1); half speed
   effects:
-  - target: str_score
-    bonus_type: enhancement
-    value: 6
-  - target: dex_score
-    bonus_type: untyped
-    value: -6
+    - target: str_score
+      bonus_type: enhancement
+      value: 6
+    - target: dex_score
+      bonus_type: untyped
+      value: -6
 Maze:
   level:
     Sorcerer: 8
@@ -132,9 +132,9 @@ Moment of Prescience:
   note: +1/CL insight bonus (max +25) to one attack, check, or save (one use)
   requires_caster_level: true
   effects:
-  - target: attack_all
-    bonus_type: insight
-    value: min(25, caster_level)
+    - target: attack_all
+      bonus_type: insight
+      value: min(25, caster_level)
 Planar Ally (Greater):
   level:
     Cleric: 8
@@ -186,18 +186,18 @@ Shield of Law:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (lawful characters)
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 4
-  - target: fort_save
-    bonus_type: resistance
-    value: 4
-  - target: ref_save
-    bonus_type: resistance
-    value: 4
-  - target: will_save
-    bonus_type: resistance
-    value: 4
+    - target: ac
+      bonus_type: deflection
+      value: 4
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
 Spell Immunity (Greater):
   level:
     Cleric: 8
@@ -246,18 +246,18 @@ Unholy Aura:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (evil characters)
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 4
-  - target: fort_save
-    bonus_type: resistance
-    value: 4
-  - target: ref_save
-    bonus_type: resistance
-    value: 4
-  - target: will_save
-    bonus_type: resistance
-    value: 4
+    - target: ac
+      bonus_type: deflection
+      value: 4
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
 Whirlwind:
   level:
     Druid: 8

@@ -84,13 +84,13 @@ combat:
     total: 15
 attack_iteratives:
   melee:
-  - 16
-  - 11
-  - 6
+    - 16
+    - 11
+    - 6
   ranged:
-  - 15
-  - 10
-  - 5
+    - 15
+    - 10
+    - 5
 skills:
   Climb:
     ranks: 4
@@ -155,22 +155,22 @@ carrying_capacity:
   medium: 116
   heavy: 175
 feats:
-- Power Attack
-- Weapon Focus
-- Combat Casting
-- Scribe Scroll
-- Dodge
-- Mobility
-- Extend Spell
-- Spring Attack
-- Improved Initiative
-- Toughness
+  - Power Attack
+  - Weapon Focus
+  - Combat Casting
+  - Scribe Scroll
+  - Dodge
+  - Mobility
+  - Extend Spell
+  - Spring Attack
+  - Improved Initiative
+  - Toughness
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'summon_familiar: Summon a familiar'
-- 'scribe_scroll: Scribe scroll feat for free'
-- 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
-- 'bonus_feat: Bonus fighter feat'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'summon_familiar: Summon a familiar'
+  - 'scribe_scroll: Scribe scroll feat for free'
+  - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+  - 'bonus_feat: Bonus fighter feat'
 spellcasting:
   Wizard:
     caster_level: 5
@@ -178,10 +178,10 @@ spellcasting:
     cast_type: arcane
     preparation: prepared
     slots_per_day:
-    - 4
-    - 4
-    - 3
-    - 2
+      - 4
+      - 4
+      - 3
+      - 2
     spell_save_dc:
       0: 13
       1: 14

@@ -54,23 +54,43 @@ if TYPE_CHECKING:
 # ---------------------------------------------------------------------------
 
 
+class _IndentDumper(yaml.Dumper):
+    """Dumper that indents sequences under their key."""
+
+    def increase_indent(  # type: ignore[override]
+        self,
+        flow: bool = False,
+        indentless: bool = False,
+    ) -> None:
+        return super().increase_indent(flow, indentless=False)
+
+
+def yaml_dump(data: object, stream: object = None) -> str:
+    """
+    Dump YAML with indented sequences and stable key
+    order, matching the project's yamllint config.
+    """
+    return yaml.dump(
+        data,
+        stream,
+        Dumper=_IndentDumper,
+        default_flow_style=False,
+        allow_unicode=True,
+        sort_keys=False,
+    )
+
+
 def save_character(character: "Character", path: Path | str) -> None:
     """
     Serialize a Character to a .char.yaml file.
 
-    Always writes in a stable key order for human readability and
-    clean diffs.
+    Always writes in a stable key order for human
+    readability and clean diffs.
     """
     path = Path(path)
     data = _character_to_dict(character)
     with open(path, "w") as f:
-        yaml.dump(
-            data,
-            f,
-            default_flow_style=False,
-            allow_unicode=True,
-            sort_keys=False,
-        )
+        yaml_dump(data, f)
 
 
 def _character_to_dict(c: "Character") -> dict:

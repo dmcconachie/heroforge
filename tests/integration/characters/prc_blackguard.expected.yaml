@@ -87,15 +87,15 @@ combat:
     total: 20
 attack_iteratives:
   melee:
-  - 21
-  - 16
-  - 11
-  - 6
+    - 21
+    - 16
+    - 11
+    - 6
   ranged:
-  - 19
-  - 14
-  - 9
-  - 4
+    - 19
+    - 14
+    - 9
+    - 4
 skills:
   Bluff:
     ability_mod: 2
@@ -130,32 +130,32 @@ carrying_capacity:
   medium: 153
   heavy: 230
 feats:
-- Power Attack
-- Cleave
-- Weapon Focus
-- Improved Initiative
-- Dodge
-- Blind-Fight
-- Great Cleave
-- Weapon Specialization
-- Iron Will
-- Improved Bull Rush
-- Improved Sunder
+  - Power Attack
+  - Cleave
+  - Weapon Focus
+  - Improved Initiative
+  - Dodge
+  - Blind-Fight
+  - Great Cleave
+  - Weapon Specialization
+  - Iron Will
+  - Improved Bull Rush
+  - Improved Sunder
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'bonus_feat_2: Bonus fighter feat'
-- 'bonus_feat_4: Bonus fighter feat'
-- 'bonus_feat_6: Bonus fighter feat'
-- 'aura_of_evil: Strong evil aura'
-- 'detect_good: Detect good at will'
-- 'dark_blessing: CHA bonus to saves'
-- 'smite_good: Smite good 1/day'
-- 'aura_of_despair: -2 saves to enemies'
-- 'command_undead: Command/rebuke undead'
-- 'sneak_attack_1d6: +1d6 sneak attack'
-- 'fiendish_servant: Fiendish mount'
-- 'sneak_attack_2d6: +2d6 sneak attack'
-- 'sneak_attack_3d6: +3d6 sneak attack'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_4: Bonus fighter feat'
+  - 'bonus_feat_6: Bonus fighter feat'
+  - 'aura_of_evil: Strong evil aura'
+  - 'detect_good: Detect good at will'
+  - 'dark_blessing: CHA bonus to saves'
+  - 'smite_good: Smite good 1/day'
+  - 'aura_of_despair: -2 saves to enemies'
+  - 'command_undead: Command/rebuke undead'
+  - 'sneak_attack_1d6: +1d6 sneak attack'
+  - 'fiendish_servant: Fiendish mount'
+  - 'sneak_attack_2d6: +2d6 sneak attack'
+  - 'sneak_attack_3d6: +3d6 sneak attack'
 spellcasting:
   Blackguard:
     caster_level: 10

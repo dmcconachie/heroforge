@@ -8,15 +8,15 @@ Commoner:
     will: poor
   skills_per_level: 2
   class_skills:
-  - Climb
-  - Craft
-  - Handle Animal
-  - Jump
-  - Listen
-  - Profession
-  - Ride
-  - Spot
-  - Swim
-  - Use Rope
+    - Climb
+    - Craft
+    - Handle Animal
+    - Jump
+    - Listen
+    - Profession
+    - Ride
+    - Spot
+    - Swim
+    - Use Rope
   spellcasting: null
   class_features: []

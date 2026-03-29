@@ -28,37 +28,37 @@ Half-Celestial:
   la_adjustment: '+4'
   type_change: null
   subtype_add:
-  - Good
-  - Extraplanar
+    - Good
+    - Extraplanar
   ability_modifiers:
-  - ability: str
-    value: 4
-    bonus_type: racial
-  - ability: dex
-    value: 2
-    bonus_type: racial
-  - ability: con
-    value: 4
-    bonus_type: racial
-  - ability: int
-    value: 2
-    bonus_type: racial
-  - ability: wis
-    value: 4
-    bonus_type: racial
-  - ability: cha
-    value: 4
-    bonus_type: racial
+    - ability: str
+      value: 4
+      bonus_type: racial
+    - ability: dex
+      value: 2
+      bonus_type: racial
+    - ability: con
+      value: 4
+      bonus_type: racial
+    - ability: int
+      value: 2
+      bonus_type: racial
+    - ability: wis
+      value: 4
+      bonus_type: racial
+    - ability: cha
+      value: 4
+      bonus_type: racial
   natural_armor_bonus: 1
   partially_applicable: false
   special_qualities:
-  - Darkvision 60 ft.
-  - Immunity to disease
-  - Resistance to acid 10, cold 10, electricity 10
-  - Damage reduction 5/magic (if 5 HD or less) or 10/magic (if more)
-  - 'Spell resistance: character level + 11'
-  - Lay on hands (as paladin of character level)
-  - +4 racial bonus on saving throws vs. poison
+    - Darkvision 60 ft.
+    - Immunity to disease
+    - Resistance to acid 10, cold 10, electricity 10
+    - Damage reduction 5/magic (if 5 HD or less) or 10/magic (if more)
+    - 'Spell resistance: character level + 11'
+    - Lay on hands (as paladin of character level)
+    - +4 racial bonus on saving throws vs. poison
   grants_feats: []
   note: >-
     Outsider heritage; retains base type but gains Good and Extraplanar subtypes
@@ -68,33 +68,33 @@ Half-Fiend:
   la_adjustment: '+4'
   type_change: null
   subtype_add:
-  - Evil
-  - Extraplanar
+    - Evil
+    - Extraplanar
   ability_modifiers:
-  - ability: str
-    value: 4
-    bonus_type: racial
-  - ability: dex
-    value: 4
-    bonus_type: racial
-  - ability: con
-    value: 2
-    bonus_type: racial
-  - ability: int
-    value: 4
-    bonus_type: racial
-  - ability: cha
-    value: 2
-    bonus_type: racial
+    - ability: str
+      value: 4
+      bonus_type: racial
+    - ability: dex
+      value: 4
+      bonus_type: racial
+    - ability: con
+      value: 2
+      bonus_type: racial
+    - ability: int
+      value: 4
+      bonus_type: racial
+    - ability: cha
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 1
   partially_applicable: false
   special_qualities:
-  - Darkvision 60 ft.
-  - Immunity to poison
-  - Resistance to acid 10, cold 10, electricity 10, fire 10
-  - Damage reduction 5/magic (if 5 HD or less) or 10/magic
-  - 'Spell resistance: character level + 11'
-  - Smite good 1/day (as blackguard)
+    - Darkvision 60 ft.
+    - Immunity to poison
+    - Resistance to acid 10, cold 10, electricity 10, fire 10
+    - Damage reduction 5/magic (if 5 HD or less) or 10/magic
+    - 'Spell resistance: character level + 11'
+    - Smite good 1/day (as blackguard)
   grants_feats: []
   note: >-
     Fiendish heritage; retains base type but gains Evil and Extraplanar subtypes
@@ -105,24 +105,24 @@ Half-Dragon (Red):
   type_change: Dragon
   subtype_add: []
   ability_modifiers:
-  - ability: str
-    value: 8
-    bonus_type: racial
-  - ability: con
-    value: 2
-    bonus_type: racial
-  - ability: int
-    value: 2
-    bonus_type: racial
-  - ability: cha
-    value: 2
-    bonus_type: racial
+    - ability: str
+      value: 8
+      bonus_type: racial
+    - ability: con
+      value: 2
+      bonus_type: racial
+    - ability: int
+      value: 2
+      bonus_type: racial
+    - ability: cha
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 4
   partially_applicable: false
   special_qualities:
-  - Darkvision 60 ft., low-light vision
-  - Immunity to fire, sleep, paralysis
-  - 'Breath weapon: 6d8 fire (cone), once per day'
+    - Darkvision 60 ft., low-light vision
+    - Immunity to fire, sleep, paralysis
+    - 'Breath weapon: 6d8 fire (cone), once per day'
   grants_feats: []
   note: Becomes Dragon type
 Half-Dragon (White):
@@ -132,24 +132,24 @@ Half-Dragon (White):
   type_change: Dragon
   subtype_add: []
   ability_modifiers:
-  - ability: str
-    value: 8
-    bonus_type: racial
-  - ability: con
-    value: 2
-    bonus_type: racial
-  - ability: int
-    value: 2
-    bonus_type: racial
-  - ability: cha
-    value: 2
-    bonus_type: racial
+    - ability: str
+      value: 8
+      bonus_type: racial
+    - ability: con
+      value: 2
+      bonus_type: racial
+    - ability: int
+      value: 2
+      bonus_type: racial
+    - ability: cha
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 4
   partially_applicable: false
   special_qualities:
-  - Darkvision 60 ft., low-light vision
-  - Immunity to cold, sleep, paralysis
-  - 'Breath weapon: 6d6 cold (cone), once per day'
+    - Darkvision 60 ft., low-light vision
+    - Immunity to cold, sleep, paralysis
+    - 'Breath weapon: 6d6 cold (cone), once per day'
   grants_feats: []
   note: Becomes Dragon type
 Fiendish Creature:
@@ -158,25 +158,25 @@ Fiendish Creature:
   la_adjustment: '+2'
   type_change: null
   subtype_add:
-  - Evil
-  - Extraplanar
+    - Evil
+    - Extraplanar
   ability_modifiers:
-  - ability: str
-    value: 2
-    bonus_type: racial
-  - ability: con
-    value: 2
-    bonus_type: racial
-  - ability: int
-    value: 2
-    bonus_type: racial
+    - ability: str
+      value: 2
+      bonus_type: racial
+    - ability: con
+      value: 2
+      bonus_type: racial
+    - ability: int
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 0
   partially_applicable: false
   special_qualities:
-  - Darkvision 60 ft.
-  - Resistance to cold 5, fire 5
-  - 'Spell resistance: HD + 5'
-  - Smite good 1/day
+    - Darkvision 60 ft.
+    - Resistance to cold 5, fire 5
+    - 'Spell resistance: HD + 5'
+    - Smite good 1/day
   grants_feats: []
   note: Denizen of lower planes; relatively minor modifications
 Celestial Creature:
@@ -185,25 +185,25 @@ Celestial Creature:
   la_adjustment: '+2'
   type_change: null
   subtype_add:
-  - Good
-  - Extraplanar
+    - Good
+    - Extraplanar
   ability_modifiers:
-  - ability: str
-    value: 2
-    bonus_type: racial
-  - ability: con
-    value: 2
-    bonus_type: racial
-  - ability: int
-    value: 2
-    bonus_type: racial
+    - ability: str
+      value: 2
+      bonus_type: racial
+    - ability: con
+      value: 2
+      bonus_type: racial
+    - ability: int
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 0
   partially_applicable: false
   special_qualities:
-  - Darkvision 60 ft.
-  - Resistance to acid 5, cold 5, electricity 5
-  - 'Spell resistance: HD + 5'
-  - Smite evil 1/day
+    - Darkvision 60 ft.
+    - Resistance to acid 5, cold 5, electricity 5
+    - 'Spell resistance: HD + 5'
+    - Smite evil 1/day
   grants_feats: []
   note: Denizen of upper planes
 Vampire:
@@ -212,44 +212,44 @@ Vampire:
   la_adjustment: '+8'
   type_change: Undead
   subtype_add:
-  - Augmented
+    - Augmented
   ability_modifiers:
-  - ability: str
-    value: 6
-    bonus_type: racial
-  - ability: dex
-    value: 4
-    bonus_type: racial
-  - ability: int
-    value: 2
-    bonus_type: racial
-  - ability: wis
-    value: 2
-    bonus_type: racial
-  - ability: cha
-    value: 4
-    bonus_type: racial
+    - ability: str
+      value: 6
+      bonus_type: racial
+    - ability: dex
+      value: 4
+      bonus_type: racial
+    - ability: int
+      value: 2
+      bonus_type: racial
+    - ability: wis
+      value: 2
+      bonus_type: racial
+    - ability: cha
+      value: 4
+      bonus_type: racial
   natural_armor_bonus: 6
   partially_applicable: false
   special_qualities:
-  - Undead traits (no CON score, immunity to mind-affecting)
-  - Damage reduction 10/silver and magic
-  - Fast healing 5
-  - Gaseous form at will
-  - Spider climb at will
-  - Alternate form (wolf or bat)
-  - Children of the night 1/day
-  - Create spawn
-  - Dominate person 3/day
-  - Energy drain (2 negative levels)
-  - Blood drain
-  - 'Weaknesses: garlic, mirror, running water, wooden stake'
+    - Undead traits (no CON score, immunity to mind-affecting)
+    - Damage reduction 10/silver and magic
+    - Fast healing 5
+    - Gaseous form at will
+    - Spider climb at will
+    - Alternate form (wolf or bat)
+    - Children of the night 1/day
+    - Create spawn
+    - Dominate person 3/day
+    - Energy drain (2 negative levels)
+    - Blood drain
+    - 'Weaknesses: garlic, mirror, running water, wooden stake'
   grants_feats:
-  - Alertness
-  - Combat Reflexes
-  - Dodge
-  - Improved Initiative
-  - Lightning Reflexes
+    - Alertness
+    - Combat Reflexes
+    - Dodge
+    - Improved Initiative
+    - Lightning Reflexes
   note: Becomes Undead; CON score becomes — (treat as 0 for game purposes)
 Ghost:
   source_book: MM
@@ -257,23 +257,23 @@ Ghost:
   la_adjustment: '+5'
   type_change: Undead
   subtype_add:
-  - Incorporeal
-  - Augmented
+    - Incorporeal
+    - Augmented
   ability_modifiers:
-  - ability: cha
-    value: 4
-    bonus_type: racial
-  - ability: dex
-    value: 2
-    bonus_type: racial
+    - ability: cha
+      value: 4
+      bonus_type: racial
+    - ability: dex
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 0
   partially_applicable: false
   special_qualities:
-  - Undead traits
-  - Incorporeal subtype
-  - Rejuvenation
-  - Manifestation
-  - Corrupting touch or other ghostly attack
+    - Undead traits
+    - Incorporeal subtype
+    - Rejuvenation
+    - Manifestation
+    - Corrupting touch or other ghostly attack
   grants_feats: []
   note: Becomes incorporeal undead
 Lich:
@@ -282,27 +282,27 @@ Lich:
   la_adjustment: '+4'
   type_change: Undead
   subtype_add:
-  - Augmented
+    - Augmented
   ability_modifiers:
-  - ability: int
-    value: 2
-    bonus_type: racial
-  - ability: wis
-    value: 2
-    bonus_type: racial
-  - ability: cha
-    value: 2
-    bonus_type: racial
+    - ability: int
+      value: 2
+      bonus_type: racial
+    - ability: wis
+      value: 2
+      bonus_type: racial
+    - ability: cha
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 5
   partially_applicable: false
   special_qualities:
-  - Undead traits (no CON score)
-  - Damage reduction 15/bludgeoning and magic
-  - Fear aura (60 ft., Will DC 18)
-  - 'Immunities: cold, electricity, polymorph, mind-affecting'
-  - Paralyzing touch (Fort DC 18)
-  - Spell resistance 20
-  - Turn resistance +4
+    - Undead traits (no CON score)
+    - Damage reduction 15/bludgeoning and magic
+    - Fear aura (60 ft., Will DC 18)
+    - 'Immunities: cold, electricity, polymorph, mind-affecting'
+    - Paralyzing touch (Fort DC 18)
+    - Spell resistance 20
+    - Turn resistance +4
   grants_feats: []
   note: Spellcaster-only template; becomes Undead
 Lycanthrope (Werewolf):
@@ -311,27 +311,27 @@ Lycanthrope (Werewolf):
   la_adjustment: '+3'
   type_change: null
   subtype_add:
-  - Shapechanger
+    - Shapechanger
   ability_modifiers:
-  - ability: str
-    value: 2
-    bonus_type: racial
-  - ability: con
-    value: 4
-    bonus_type: racial
-  - ability: wis
-    value: 2
-    bonus_type: racial
+    - ability: str
+      value: 2
+      bonus_type: racial
+    - ability: con
+      value: 4
+      bonus_type: racial
+    - ability: wis
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 2
   partially_applicable: true
   max_level: 3
   special_qualities:
-  - Alternate Form (wolf and hybrid)
-  - Lycanthropic Empathy (wolves and dire wolves)
-  - Low-light vision
-  - Scent
+    - Alternate Form (wolf and hybrid)
+    - Lycanthropic Empathy (wolves and dire wolves)
+    - Low-light vision
+    - Scent
   grants_feats:
-  - Iron Will
+    - Iron Will
   note: Humanoid (shapechanger); levels 1-3 control hybrid form access
 Mostly-Half-Celestial:
   source_book: Living Greyhawk
@@ -339,22 +339,22 @@ Mostly-Half-Celestial:
   la_adjustment: varies
   type_change: null
   subtype_add:
-  - Good
+    - Good
   ability_modifiers:
-  - ability: str
-    value: 2
-    bonus_type: racial
-  - ability: wis
-    value: 2
-    bonus_type: racial
-  - ability: cha
-    value: 2
-    bonus_type: racial
+    - ability: str
+      value: 2
+      bonus_type: racial
+    - ability: wis
+      value: 2
+      bonus_type: racial
+    - ability: cha
+      value: 2
+      bonus_type: racial
   natural_armor_bonus: 1
   partially_applicable: true
   max_level: 6
   special_qualities:
-  - Partial celestial traits (scales with level)
+    - Partial celestial traits (scales with level)
   grants_feats: []
   note: Living Greyhawk variant; partial Half-Celestial template
 Feral:
@@ -364,29 +364,29 @@ Feral:
   type_change: null
   subtype_add: []
   ability_modifiers:
-  - ability: str
-    value: 4
-    bonus_type: racial
-  - ability: dex
-    value: 4
-    bonus_type: racial
-  - ability: con
-    value: 2
-    bonus_type: racial
-  - ability: int
-    value: -2
-    bonus_type: racial
-  - ability: wis
-    value: -2
-    bonus_type: racial
-  - ability: cha
-    value: -4
-    bonus_type: racial
+    - ability: str
+      value: 4
+      bonus_type: racial
+    - ability: dex
+      value: 4
+      bonus_type: racial
+    - ability: con
+      value: 2
+      bonus_type: racial
+    - ability: int
+      value: -2
+      bonus_type: racial
+    - ability: wis
+      value: -2
+      bonus_type: racial
+    - ability: cha
+      value: -4
+      bonus_type: racial
   natural_armor_bonus: 2
   partially_applicable: false
   special_qualities:
-  - Low-light vision
-  - Scent
-  - 'Natural attacks: 2 claws (1d4), bite (1d4)'
+    - Low-light vision
+    - Scent
+    - 'Natural attacks: 2 claws (1d4), bite (1d4)'
   grants_feats: []
   note: Savage, bestial template; significant CHA penalty

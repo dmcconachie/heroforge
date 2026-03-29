@@ -89,15 +89,15 @@ combat:
     total: 20
 attack_iteratives:
   melee:
-  - 21
-  - 16
-  - 11
-  - 6
+    - 21
+    - 16
+    - 11
+    - 6
   ranged:
-  - 20
-  - 15
-  - 10
-  - 5
+    - 20
+    - 15
+    - 10
+    - 5
 skills:
   Bluff:
     ability_mod: -1
@@ -136,27 +136,27 @@ carrying_capacity:
   medium: 153
   heavy: 230
 feats:
-- Dodge
-- Toughness
-- Power Attack
-- Weapon Focus
-- Weapon Specialization
-- Cleave
-- Blind-Fight
-- Great Fortitude
-- Iron Will
-- Great Cleave
+  - Dodge
+  - Toughness
+  - Power Attack
+  - Weapon Focus
+  - Weapon Specialization
+  - Cleave
+  - Blind-Fight
+  - Great Fortitude
+  - Iron Will
+  - Great Cleave
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'bonus_feat_2: Bonus fighter feat'
-- 'bonus_feat_4: Bonus fighter feat'
-- 'bonus_feat_6: Bonus fighter feat'
-- 'defensive_stance: +2 STR/CON, +2 saves, +4 AC'
-- 'uncanny_dodge: Never flat-footed'
-- 'trap_sense_1: +1 vs traps'
-- 'damage_reduction_1: DR 3/—'
-- 'damage_reduction_2: DR 6/—'
-- 'improved_uncanny_dodge: Cannot be flanked'
-- 'damage_reduction_3: DR 9/—'
-- 'mobile_defense: Move 5 ft in stance'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_4: Bonus fighter feat'
+  - 'bonus_feat_6: Bonus fighter feat'
+  - 'defensive_stance: +2 STR/CON, +2 saves, +4 AC'
+  - 'uncanny_dodge: Never flat-footed'
+  - 'trap_sense_1: +1 vs traps'
+  - 'damage_reduction_1: DR 3/—'
+  - 'damage_reduction_2: DR 6/—'
+  - 'improved_uncanny_dodge: Cannot be flanked'
+  - 'damage_reduction_3: DR 9/—'
+  - 'mobile_defense: Move 5 ft in stance'
 resources: {}

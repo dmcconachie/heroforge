@@ -89,20 +89,20 @@ Heroism (Greater):
     Wizard: 6
   note: +4 morale on attack, saves, skill checks; +1 temp HP/level
   mutually_exclusive_with:
-  - Heroism
+    - Heroism
   effects:
-  - target: attack_all
-    bonus_type: morale
-    value: 4
-  - target: fort_save
-    bonus_type: morale
-    value: 4
-  - target: ref_save
-    bonus_type: morale
-    value: 4
-  - target: will_save
-    bonus_type: morale
-    value: 4
+    - target: attack_all
+      bonus_type: morale
+      value: 4
+    - target: fort_save
+      bonus_type: morale
+      value: 4
+    - target: ref_save
+      bonus_type: morale
+      value: 4
+    - target: will_save
+      bonus_type: morale
+      value: 4
 Inflict Light Wounds (Mass):
   level:
     Cleric: 5
@@ -190,12 +190,12 @@ Righteous Might:
   note: +4 STR, +2 CON, natural armor; size increase handled separately
   requires_caster_level: true
   effects:
-  - target: str_score
-    bonus_type: enhancement
-    value: 4
-  - target: con_score
-    bonus_type: enhancement
-    value: 2
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
 Secret Chest:
   level:
     Sorcerer: 5
@@ -227,9 +227,9 @@ Spell Resistance:
   note: SR = 12 + caster level
   requires_caster_level: true
   effects:
-  - target: sr
-    bonus_type: untyped
-    value: 12 + caster_level
+    - target: sr
+      bonus_type: untyped
+      value: 12 + caster_level
 Suggestion (Mass):
   level:
     Bard: 5

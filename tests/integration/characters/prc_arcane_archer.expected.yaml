@@ -85,15 +85,15 @@ combat:
     total: 18
 attack_iteratives:
   melee:
-  - 19
-  - 14
-  - 9
-  - 4
+    - 19
+    - 14
+    - 9
+    - 4
   ranged:
-  - 20
-  - 15
-  - 10
-  - 5
+    - 20
+    - 15
+    - 10
+    - 5
 skills:
   Climb:
     ranks: 9
@@ -149,34 +149,34 @@ carrying_capacity:
   medium: 116
   heavy: 175
 feats:
-- Point Blank Shot
-- Weapon Focus
-- Precise Shot
-- Rapid Shot
-- Improved Initiative
-- Manyshot
-- Far Shot
-- Scribe Scroll
-- Shot on the Run
-- Improved Critical
-- Improved Precise Shot
+  - Point Blank Shot
+  - Weapon Focus
+  - Precise Shot
+  - Rapid Shot
+  - Improved Initiative
+  - Manyshot
+  - Far Shot
+  - Scribe Scroll
+  - Shot on the Run
+  - Improved Critical
+  - Improved Precise Shot
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'bonus_feat_2: Bonus fighter feat'
-- 'bonus_feat_4: Bonus fighter feat'
-- 'bonus_feat_6: Bonus fighter feat'
-- 'summon_familiar: Summon a familiar'
-- 'scribe_scroll: Scribe scroll feat for free'
-- 'enhance_arrows_1: +1 enhancement bonus'
-- 'enhance_arrows_2: +2 enhancement bonus'
-- 'enhance_arrows_3: +3 enhancement bonus'
-- 'enhance_arrows_4: +4 enhancement bonus'
-- 'enhance_arrows_5: +5 enhancement bonus'
-- 'imbue_arrow: Place spell on arrow'
-- 'seeker_arrow: Arrow ignores cover'
-- 'phase_arrow: Arrow phases through walls'
-- 'hail_of_arrows: One arrow per enemy'
-- 'death_arrow: Arrow of death 1/day'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_4: Bonus fighter feat'
+  - 'bonus_feat_6: Bonus fighter feat'
+  - 'summon_familiar: Summon a familiar'
+  - 'scribe_scroll: Scribe scroll feat for free'
+  - 'enhance_arrows_1: +1 enhancement bonus'
+  - 'enhance_arrows_2: +2 enhancement bonus'
+  - 'enhance_arrows_3: +3 enhancement bonus'
+  - 'enhance_arrows_4: +4 enhancement bonus'
+  - 'enhance_arrows_5: +5 enhancement bonus'
+  - 'imbue_arrow: Place spell on arrow'
+  - 'seeker_arrow: Arrow ignores cover'
+  - 'phase_arrow: Arrow phases through walls'
+  - 'hail_of_arrows: One arrow per enemy'
+  - 'death_arrow: Arrow of death 1/day'
 spellcasting:
   Wizard:
     caster_level: 1
@@ -184,8 +184,8 @@ spellcasting:
     cast_type: arcane
     preparation: prepared
     slots_per_day:
-    - 3
-    - 2
+      - 3
+      - 2
     spell_save_dc:
       0: 11
       1: 12

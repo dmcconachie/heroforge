@@ -86,15 +86,15 @@ combat:
     total: 16
 attack_iteratives:
   melee:
-  - 22
-  - 17
-  - 12
-  - 7
+    - 22
+    - 17
+    - 12
+    - 7
   ranged:
-  - 27
-  - 22
-  - 17
-  - 12
+    - 27
+    - 22
+    - 17
+    - 12
 skills:
   Climb:
     ranks: 16
@@ -141,36 +141,36 @@ carrying_capacity:
   medium: 49
   heavy: 75
 feats:
-- Point Blank Shot
-- Track
-- Rapid Shot
-- Precise Shot
-- Endurance
-- Many Shot
-- Weapon Focus
-- Far Shot
-- Improved Precise Shot
-- Dodge
-- Mobility
-- Self-Sufficient
+  - Point Blank Shot
+  - Track
+  - Rapid Shot
+  - Precise Shot
+  - Endurance
+  - Many Shot
+  - Weapon Focus
+  - Far Shot
+  - Improved Precise Shot
+  - Dodge
+  - Mobility
+  - Self-Sufficient
 class_features:
-- 'favored_enemy_1: Favored enemy 1: +2 vs type'
-- 'track: Track feat for free'
-- 'wild_empathy: Improve attitude of animals'
-- 'combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)'
-- 'endurance: Endurance feat for free'
-- 'animal_companion: Special animal companion'
-- 'favored_enemy_2: Favored enemy 2; +4 vs type'
-- 'improved_combat_style: Manyshot or Improved Two-Weapon Fighting'
-- 'woodland_stride: Move through natural undergrowth at full speed'
-- 'swift_tracker: Track at full speed without penalty'
-- 'evasion: No damage on successful Reflex save'
-- 'favored_enemy_3: Favored enemy 3; +6 vs type'
-- 'combat_style_mastery: Improved Precise Shot or Greater Two-Weapon Fighting'
-- 'camouflage: Hide in natural terrain without cover'
-- 'favored_enemy_4: Favored enemy 4'
-- 'hide_in_plain_sight: Hide while observed in natural terrain'
-- 'favored_enemy_5: Favored enemy 5'
+  - 'favored_enemy_1: Favored enemy 1: +2 vs type'
+  - 'track: Track feat for free'
+  - 'wild_empathy: Improve attitude of animals'
+  - 'combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)'
+  - 'endurance: Endurance feat for free'
+  - 'animal_companion: Special animal companion'
+  - 'favored_enemy_2: Favored enemy 2; +4 vs type'
+  - 'improved_combat_style: Manyshot or Improved Two-Weapon Fighting'
+  - 'woodland_stride: Move through natural undergrowth at full speed'
+  - 'swift_tracker: Track at full speed without penalty'
+  - 'evasion: No damage on successful Reflex save'
+  - 'favored_enemy_3: Favored enemy 3; +6 vs type'
+  - 'combat_style_mastery: Improved Precise Shot or Greater Two-Weapon Fighting'
+  - 'camouflage: Hide in natural terrain without cover'
+  - 'favored_enemy_4: Favored enemy 4'
+  - 'hide_in_plain_sight: Hide while observed in natural terrain'
+  - 'favored_enemy_5: Favored enemy 5'
 spellcasting:
   Ranger:
     caster_level: 20
@@ -178,10 +178,10 @@ spellcasting:
     cast_type: divine
     preparation: prepared
     slots_per_day:
-    - 3
-    - 4
-    - 4
-    - 3
+      - 3
+      - 4
+      - 4
+      - 3
     spell_save_dc:
       0: 12
       1: 13

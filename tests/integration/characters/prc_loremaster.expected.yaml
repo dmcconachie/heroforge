@@ -81,13 +81,13 @@ combat:
     total: 10
 attack_iteratives:
   melee:
-  - 10
-  - 5
-  - 0
+    - 10
+    - 5
+    - 0
   ranged:
-  - 12
-  - 7
-  - 2
+    - 12
+    - 7
+    - 2
 skills:
   Appraise:
     ranks: 10
@@ -140,25 +140,25 @@ carrying_capacity:
   medium: 53
   heavy: 80
 feats:
-- Scribe Scroll
-- Spell Focus
-- Toughness
-- Combat Casting
-- Extend Spell
-- Spell Penetration
-- Greater Spell Focus
-- Empower Spell
-- Augment Summoning
-- Maximize Spell
-- Quicken Spell
-- Heighten Spell
+  - Scribe Scroll
+  - Spell Focus
+  - Toughness
+  - Combat Casting
+  - Extend Spell
+  - Spell Penetration
+  - Greater Spell Focus
+  - Empower Spell
+  - Augment Summoning
+  - Maximize Spell
+  - Quicken Spell
+  - Heighten Spell
 class_features:
-- 'summon_familiar: Summon a familiar'
-- 'scribe_scroll: Scribe scroll feat for free'
-- 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
-- 'bonus_feat_wizard_10: Bonus wizard feat'
-- 'secret: Choose lore secret'
-- 'lore: Lore check (like bard)'
+  - 'summon_familiar: Summon a familiar'
+  - 'scribe_scroll: Scribe scroll feat for free'
+  - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+  - 'bonus_feat_wizard_10: Bonus wizard feat'
+  - 'secret: Choose lore secret'
+  - 'lore: Lore check (like bard)'
 spellcasting:
   Wizard:
     caster_level: 13
@@ -166,14 +166,14 @@ spellcasting:
     cast_type: arcane
     preparation: prepared
     slots_per_day:
-    - 4
-    - 5
-    - 5
-    - 5
-    - 5
-    - 3
-    - 2
-    - 1
+      - 4
+      - 5
+      - 5
+      - 5
+      - 5
+      - 3
+      - 2
+      - 1
     spell_save_dc:
       0: 14
       1: 15

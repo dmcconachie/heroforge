@@ -1,10 +1,9 @@
 identity:
-  name: "Lyra Nightwhisper"
-  player: ""
+  name: Lyra Nightwhisper
+  player: ''
   race: Human
   alignment: chaotic_neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 10
   dex: 18
@@ -12,7 +11,6 @@ ability_scores:
   int: 12
   wis: 10
   cha: 8
-
 levels:
   - level: 1
     class: Rogue
@@ -29,9 +27,9 @@ levels:
       Search: 4
       Open Lock: 4
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
-      - name: "Combat Reflexes"
+      - name: Combat Reflexes
         source: human_bonus
   - level: 2
     class: Rogue
@@ -62,7 +60,7 @@ levels:
       Open Lock: 1
       Disable Device: 1
     feats:
-      - name: "Mobility"
+      - name: Mobility
         source: character
   - level: 4
     class: Rogue
@@ -107,7 +105,7 @@ levels:
       Open Lock: 1
       Disable Device: 1
     feats:
-      - name: "Weapon Finesse"
+      - name: Weapon Finesse
         source: character
   - level: 7
     class: Rogue
@@ -135,7 +133,6 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
-  # SD 2 — total 9; character feat at L9
   - level: 9
     class: Shadowdancer
     hp_roll: 6
@@ -149,9 +146,8 @@ levels:
       Search: 1
       Balance: 1
     feats:
-      - name: "Spring Attack"
+      - name: Spring Attack
         source: character
-  # SD 3 — total 10
   - level: 10
     class: Shadowdancer
     hp_roll: 6
@@ -164,7 +160,6 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
-  # SD 4 — total 11
   - level: 11
     class: Shadowdancer
     hp_roll: 6
@@ -177,7 +172,6 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
-  # SD 5 — total 12; character feat at L12
   - level: 12
     class: Shadowdancer
     hp_roll: 6
@@ -191,9 +185,8 @@ levels:
       Search: 1
       Balance: 1
     feats:
-      - name: "Blind-Fight"
+      - name: Blind-Fight
         source: character
-  # SD 6 — total 13
   - level: 13
     class: Shadowdancer
     hp_roll: 6
@@ -206,7 +199,6 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
-  # SD 7 — total 14
   - level: 14
     class: Shadowdancer
     hp_roll: 6
@@ -219,7 +211,6 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
-  # SD 8 — total 15; character feat at L15
   - level: 15
     class: Shadowdancer
     hp_roll: 6
@@ -233,9 +224,8 @@ levels:
       Search: 1
       Balance: 1
     feats:
-      - name: "Lightning Reflexes"
+      - name: Lightning Reflexes
         source: character
-  # SD 9 — total 16
   - level: 16
     class: Shadowdancer
     hp_roll: 6
@@ -248,7 +238,6 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
-  # SD 10 — total 17
   - level: 17
     class: Shadowdancer
     hp_roll: 6
@@ -261,17 +250,14 @@ levels:
       Spot: 1
       Search: 1
       Balance: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Rapier"
+    - name: Rapier
       base: Rapier
-
-notes: ""
+notes: ''

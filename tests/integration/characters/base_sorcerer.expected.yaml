@@ -82,11 +82,11 @@ combat:
     total: 9
 attack_iteratives:
   melee:
-  - 9
-  - 4
+    - 9
+    - 4
   ranged:
-  - 12
-  - 7
+    - 12
+    - 7
 skills:
   Bluff:
     ranks: 13
@@ -131,16 +131,16 @@ carrying_capacity:
   medium: 53
   heavy: 80
 feats:
-- Toughness
-- Combat Casting
-- Spell Focus
-- Spell Penetration
-- Greater Spell Focus
-- Greater Spell Penetration
-- Iron Will
-- Empower Spell
+  - Toughness
+  - Combat Casting
+  - Spell Focus
+  - Spell Penetration
+  - Greater Spell Focus
+  - Greater Spell Penetration
+  - Iron Will
+  - Empower Spell
 class_features:
-- 'summon_familiar: Summon a familiar'
+  - 'summon_familiar: Summon a familiar'
 spellcasting:
   Sorcerer:
     caster_level: 20
@@ -148,16 +148,16 @@ spellcasting:
     cast_type: arcane
     preparation: spontaneous
     slots_per_day:
-    - 6
-    - 7
-    - 7
-    - 7
-    - 7
-    - 6
-    - 6
-    - 6
-    - 6
-    - 6
+      - 6
+      - 7
+      - 7
+      - 7
+      - 7
+      - 6
+      - 6
+      - 6
+      - 6
+      - 6
     spell_save_dc:
       0: 14
       1: 15
@@ -170,70 +170,70 @@ spellcasting:
       8: 22
       9: 23
     spells_known_count:
-    - 9
-    - 5
-    - 5
-    - 4
-    - 4
-    - 4
-    - 3
-    - 3
-    - 3
-    - 3
+      - 9
+      - 5
+      - 5
+      - 4
+      - 4
+      - 4
+      - 3
+      - 3
+      - 3
+      - 3
     spells_known:
       0:
-      - Detect Magic
-      - Read Magic
-      - Light
-      - Mage Hand
-      - Prestidigitation
-      - Ray of Frost
-      - Resistance
-      - Ghost Sound
-      - Acid Splash
+        - Detect Magic
+        - Read Magic
+        - Light
+        - Mage Hand
+        - Prestidigitation
+        - Ray of Frost
+        - Resistance
+        - Ghost Sound
+        - Acid Splash
       1:
-      - Magic Missile
-      - Shield
-      - Mage Armor
-      - Grease
-      - Burning Hands
-      - Enlarge Person
+        - Magic Missile
+        - Shield
+        - Mage Armor
+        - Grease
+        - Burning Hands
+        - Enlarge Person
       2:
-      - Scorching Ray
-      - Mirror Image
-      - Invisibility
-      - Web
-      - Glitterdust
-      - See Invisibility
+        - Scorching Ray
+        - Mirror Image
+        - Invisibility
+        - Web
+        - Glitterdust
+        - See Invisibility
       3:
-      - Fireball
-      - Haste
-      - Lightning Bolt
-      - Fly
+        - Fireball
+        - Haste
+        - Lightning Bolt
+        - Fly
       4:
-      - Dimension Door
-      - Stoneskin
-      - Greater Invisibility
-      - Ice Storm
+        - Dimension Door
+        - Stoneskin
+        - Greater Invisibility
+        - Ice Storm
       5:
-      - Teleport
-      - Cone of Cold
-      - Wall of Force
-      - Dominate Person
+        - Teleport
+        - Cone of Cold
+        - Wall of Force
+        - Dominate Person
       6:
-      - Disintegrate
-      - Chain Lightning
-      - Greater Dispel Magic
+        - Disintegrate
+        - Chain Lightning
+        - Greater Dispel Magic
       7:
-      - Finger of Death
-      - Prismatic Spray
-      - Limited Wish
+        - Finger of Death
+        - Prismatic Spray
+        - Limited Wish
       8:
-      - Horrid Wilting
-      - Polar Ray
-      - Greater Shout
+        - Horrid Wilting
+        - Polar Ray
+        - Greater Shout
       9:
-      - Wish
-      - Meteor Swarm
-      - Time Stop
+        - Wish
+        - Meteor Swarm
+        - Time Stop
 resources: {}

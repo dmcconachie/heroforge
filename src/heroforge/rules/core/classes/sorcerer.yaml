@@ -8,12 +8,12 @@ Sorcerer:
     will: good
   skills_per_level: 2
   class_skills:
-  - Bluff
-  - Concentration
-  - Craft
-  - Knowledge (Arcana)
-  - Profession
-  - Spellcraft
+    - Bluff
+    - Concentration
+    - Craft
+    - Knowledge (Arcana)
+    - Profession
+    - Spellcraft
   spellcasting:
     cast_type: arcane
     stat: cha
@@ -21,6 +21,6 @@ Sorcerer:
     max_spell_level: 9
     starts_at_level: 1
   class_features:
-  - level: 1
-    feature: summon_familiar
-    description: Summon a familiar
+    - level: 1
+      feature: summon_familiar
+      description: Summon a familiar

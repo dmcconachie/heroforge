@@ -1,10 +1,9 @@
 identity:
-  name: "Lyris Silverveil"
-  player: ""
+  name: Lyris Silverveil
+  player: ''
   race: Half-Elf
   alignment: chaotic_good
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 10
   dex: 14
@@ -12,7 +11,6 @@ ability_scores:
   int: 14
   wis: 10
   cha: 16
-
 levels:
   - level: 1
     class: Bard
@@ -27,12 +25,17 @@ levels:
       Knowledge (Arcana): 4
       Use Magic Device: 4
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
     spells_learned:
-      0: ["Detect Magic", "Ghost Sound",
-          "Mage Hand", "Prestidigitation"]
-      1: ["Charm Person", "Grease"]
+      0:
+        - Detect Magic
+        - Ghost Sound
+        - Mage Hand
+        - Prestidigitation
+      1:
+        - Charm Person
+        - Grease
   - level: 2
     class: Bard
     hp_roll: 4
@@ -46,8 +49,10 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     spells_learned:
-      0: ["Message"]
-      1: ["Cure Light Wounds"]
+      0:
+        - Message
+      1:
+        - Cure Light Wounds
   - level: 3
     class: Bard
     hp_roll: 4
@@ -61,11 +66,13 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     feats:
-      - name: "Combat Casting"
+      - name: Combat Casting
         source: character
     spells_learned:
-      0: ["Light"]
-      1: ["Hideous Laughter"]
+      0:
+        - Light
+      1:
+        - Hideous Laughter
   - level: 4
     class: Bard
     hp_roll: 4
@@ -79,8 +86,10 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     spells_learned:
-      1: ["Feather Fall"]
-      2: ["Invisibility"]
+      1:
+        - Feather Fall
+      2:
+        - Invisibility
   - level: 5
     class: Bard
     hp_roll: 4
@@ -94,7 +103,8 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     spells_learned:
-      2: ["Cure Moderate Wounds"]
+      2:
+        - Cure Moderate Wounds
   - level: 6
     class: Bard
     hp_roll: 4
@@ -108,11 +118,12 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     feats:
-      - name: "Spell Focus"
+      - name: Spell Focus
         source: character
         parameter: Enchantment
     spells_learned:
-      2: ["Eagle's Splendor"]
+      2:
+        - Eagle's Splendor
   - level: 7
     class: Bard
     hp_roll: 4
@@ -126,8 +137,11 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     spells_learned:
-      2: ["Mirror Image"]
-      3: ["Haste", "Charm Monster"]
+      2:
+        - Mirror Image
+      3:
+        - Haste
+        - Charm Monster
   - level: 8
     class: Bard
     hp_roll: 4
@@ -141,7 +155,8 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     spells_learned:
-      3: ["Cure Serious Wounds"]
+      3:
+        - Cure Serious Wounds
   - level: 9
     class: Bard
     hp_roll: 4
@@ -155,7 +170,7 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     feats:
-      - name: "Greater Spell Focus"
+      - name: Greater Spell Focus
         source: character
         parameter: Enchantment
   - level: 10
@@ -171,8 +186,9 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     spells_learned:
-      4: ["Cure Critical Wounds",
-          "Freedom of Movement"]
+      4:
+        - Cure Critical Wounds
+        - Freedom of Movement
   - level: 11
     class: Bard
     hp_roll: 4
@@ -186,8 +202,10 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     spells_learned:
-      3: ["Dispel Magic"]
-      4: ["Greater Invisibility"]
+      3:
+        - Dispel Magic
+      4:
+        - Greater Invisibility
   - level: 12
     class: Bard
     hp_roll: 4
@@ -201,7 +219,7 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     feats:
-      - name: "Spell Penetration"
+      - name: Spell Penetration
         source: character
   - level: 13
     class: Bard
@@ -216,8 +234,9 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     spells_learned:
-      5: ["Greater Heroism",
-          "Mass Cure Light Wounds"]
+      5:
+        - Greater Heroism
+        - Mass Cure Light Wounds
   - level: 14
     class: Bard
     hp_roll: 4
@@ -231,8 +250,10 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     spells_learned:
-      4: ["Break Enchantment"]
-      5: ["Song of Discord"]
+      4:
+        - Break Enchantment
+      5:
+        - Song of Discord
   - level: 15
     class: Bard
     hp_roll: 4
@@ -246,7 +267,7 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     feats:
-      - name: "Mobility"
+      - name: Mobility
         source: character
   - level: 16
     class: Bard
@@ -261,9 +282,11 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     spells_learned:
-      1: ["Silent Image"]
-      6: ["Mass Charm Monster",
-          "Mass Suggestion"]
+      1:
+        - Silent Image
+      6:
+        - Mass Charm Monster
+        - Mass Suggestion
   - level: 17
     class: Bard
     hp_roll: 4
@@ -277,9 +300,12 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     spells_learned:
-      2: ["Silence"]
-      5: ["Mislead"]
-      6: ["Otto's Irresistible Dance"]
+      2:
+        - Silence
+      5:
+        - Mislead
+      6:
+        - Otto's Irresistible Dance
   - level: 18
     class: Bard
     hp_roll: 4
@@ -293,10 +319,11 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     feats:
-      - name: "Greater Spell Penetration"
+      - name: Greater Spell Penetration
         source: character
     spells_learned:
-      3: ["Good Hope"]
+      3:
+        - Good Hope
   - level: 19
     class: Bard
     hp_roll: 4
@@ -310,8 +337,10 @@ levels:
       Knowledge (Arcana): 1
       Listen: 1
     spells_learned:
-      4: ["Locate Creature"]
-      6: ["Geas/Quest"]
+      4:
+        - Locate Creature
+      6:
+        - Geas/Quest
   - level: 20
     class: Bard
     hp_roll: 4
@@ -325,18 +354,16 @@ levels:
       Knowledge (Arcana): 1
       Gather Information: 1
     spells_learned:
-      5: ["Nightmare"]
-
+      5:
+        - Nightmare
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Rapier"
+    - name: Rapier
       base: Rapier
-
-notes: ""
+notes: ''

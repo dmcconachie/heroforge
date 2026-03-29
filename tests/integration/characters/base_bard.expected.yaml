@@ -77,13 +77,13 @@ combat:
     total: 15
 attack_iteratives:
   melee:
-  - 15
-  - 10
-  - 5
+    - 15
+    - 10
+    - 5
   ranged:
-  - 17
-  - 12
-  - 7
+    - 17
+    - 12
+    - 7
 skills:
   Balance:
     ability_mod: 2
@@ -158,28 +158,28 @@ carrying_capacity:
   medium: 66
   heavy: 100
 feats:
-- Dodge
-- Combat Casting
-- Spell Focus
-- Greater Spell Focus
-- Spell Penetration
-- Mobility
-- Greater Spell Penetration
+  - Dodge
+  - Combat Casting
+  - Spell Focus
+  - Greater Spell Focus
+  - Spell Penetration
+  - Mobility
+  - Greater Spell Penetration
 class_features:
-- 'bardic_music: Bardic music abilities; uses/day = Bard level'
-- 'bardic_knowledge: Bardic knowledge check (Bard level + INT)'
-- 'countersong: Counter sonic/language-dependent magic'
-- 'fascinate: Fascinate creatures with Perform check'
-- 'inspire_courage_1: +1 morale bonus attacks/saves vs fear'
-- 'inspire_competence: +2 competence bonus on skill checks'
-- 'suggestion: Suggestion via fascinate'
-- 'inspire_courage_2: +2 morale bonus attacks/saves vs fear'
-- 'inspire_greatness: +2 HD, +2 attack, +1 Fort'
-- 'song_of_freedom: Break enchantment via music'
-- 'inspire_courage_3: +3 morale bonus attacks/saves vs fear'
-- 'inspire_heroics: +4 AC and saves for one creature'
-- 'mass_suggestion: Suggestion to all fascinated'
-- 'inspire_courage_4: +4 morale bonus attacks/saves vs fear'
+  - 'bardic_music: Bardic music abilities; uses/day = Bard level'
+  - 'bardic_knowledge: Bardic knowledge check (Bard level + INT)'
+  - 'countersong: Counter sonic/language-dependent magic'
+  - 'fascinate: Fascinate creatures with Perform check'
+  - 'inspire_courage_1: +1 morale bonus attacks/saves vs fear'
+  - 'inspire_competence: +2 competence bonus on skill checks'
+  - 'suggestion: Suggestion via fascinate'
+  - 'inspire_courage_2: +2 morale bonus attacks/saves vs fear'
+  - 'inspire_greatness: +2 HD, +2 attack, +1 Fort'
+  - 'song_of_freedom: Break enchantment via music'
+  - 'inspire_courage_3: +3 morale bonus attacks/saves vs fear'
+  - 'inspire_heroics: +4 AC and saves for one creature'
+  - 'mass_suggestion: Suggestion to all fascinated'
+  - 'inspire_courage_4: +4 morale bonus attacks/saves vs fear'
 spellcasting:
   Bard:
     caster_level: 20
@@ -187,13 +187,13 @@ spellcasting:
     cast_type: arcane
     preparation: spontaneous
     slots_per_day:
-    - 4
-    - 5
-    - 5
-    - 5
-    - 4
-    - 4
-    - 4
+      - 4
+      - 5
+      - 5
+      - 5
+      - 4
+      - 4
+      - 4
     spell_save_dc:
       0: 13
       1: 14
@@ -203,55 +203,55 @@ spellcasting:
       5: 18
       6: 19
     spells_known_count:
-    - 6
-    - 5
-    - 5
-    - 5
-    - 5
-    - 5
-    - 4
+      - 6
+      - 5
+      - 5
+      - 5
+      - 5
+      - 5
+      - 4
     spells_known:
       0:
-      - Detect Magic
-      - Ghost Sound
-      - Mage Hand
-      - Prestidigitation
-      - Message
-      - Light
+        - Detect Magic
+        - Ghost Sound
+        - Mage Hand
+        - Prestidigitation
+        - Message
+        - Light
       1:
-      - Charm Person
-      - Grease
-      - Cure Light Wounds
-      - Hideous Laughter
-      - Feather Fall
-      - Silent Image
+        - Charm Person
+        - Grease
+        - Cure Light Wounds
+        - Hideous Laughter
+        - Feather Fall
+        - Silent Image
       2:
-      - Invisibility
-      - Cure Moderate Wounds
-      - Eagle's Splendor
-      - Mirror Image
-      - Silence
+        - Invisibility
+        - Cure Moderate Wounds
+        - Eagle's Splendor
+        - Mirror Image
+        - Silence
       3:
-      - Haste
-      - Charm Monster
-      - Cure Serious Wounds
-      - Dispel Magic
-      - Good Hope
+        - Haste
+        - Charm Monster
+        - Cure Serious Wounds
+        - Dispel Magic
+        - Good Hope
       4:
-      - Cure Critical Wounds
-      - Freedom of Movement
-      - Greater Invisibility
-      - Break Enchantment
-      - Locate Creature
+        - Cure Critical Wounds
+        - Freedom of Movement
+        - Greater Invisibility
+        - Break Enchantment
+        - Locate Creature
       5:
-      - Greater Heroism
-      - Mass Cure Light Wounds
-      - Song of Discord
-      - Mislead
-      - Nightmare
+        - Greater Heroism
+        - Mass Cure Light Wounds
+        - Song of Discord
+        - Mislead
+        - Nightmare
       6:
-      - Mass Charm Monster
-      - Mass Suggestion
-      - Otto's Irresistible Dance
-      - Geas/Quest
+        - Mass Charm Monster
+        - Mass Suggestion
+        - Otto's Irresistible Dance
+        - Geas/Quest
 resources: {}

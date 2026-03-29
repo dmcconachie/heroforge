@@ -9,68 +9,68 @@ Arcane Trickster:
     will: good
   skills_per_level: 4
   class_skills:
-  - Appraise
-  - Balance
-  - Bluff
-  - Climb
-  - Concentration
-  - Craft
-  - Decipher Script
-  - Diplomacy
-  - Disable Device
-  - Disguise
-  - Escape Artist
-  - Gather Information
-  - Hide
-  - Jump
-  - Knowledge (all)
-  - Listen
-  - Move Silently
-  - Open Lock
-  - Profession
-  - Search
-  - Sense Motive
-  - Sleight of Hand
-  - Speak Language
-  - Spellcraft
-  - Spot
-  - Swim
-  - Tumble
-  - Use Rope
+    - Appraise
+    - Balance
+    - Bluff
+    - Climb
+    - Concentration
+    - Craft
+    - Decipher Script
+    - Diplomacy
+    - Disable Device
+    - Disguise
+    - Escape Artist
+    - Gather Information
+    - Hide
+    - Jump
+    - Knowledge (all)
+    - Listen
+    - Move Silently
+    - Open Lock
+    - Profession
+    - Search
+    - Sense Motive
+    - Sleight of Hand
+    - Speak Language
+    - Spellcraft
+    - Spot
+    - Swim
+    - Tumble
+    - Use Rope
   entry_prerequisites:
     all_of:
-    - skill:
-        name: Decipher Script
-        min: 7
-    - skill:
-        name: Disable Device
-        min: 7
-    - skill:
-        name: Escape Artist
-        min: 7
-    - skill:
-        name: Knowledge (Arcana)
-        min: 4
-    - spellcasting:
-        cast_type: arcane
-        min_level: 3
+      - skill:
+          name: Decipher Script
+          min: 7
+      - skill:
+          name: Disable Device
+          min: 7
+      - skill:
+          name: Escape Artist
+          min: 7
+      - skill:
+          name: Knowledge (Arcana)
+          min: 4
+      - spellcasting:
+          cast_type: arcane
+          min_level: 3
   class_features:
-  - level: 1
-    feature: ranged_legerdemain
-    description: Ranged sleight of hand
-  - level: 2
-    feature: sneak_attack_1d6
-    description: +1d6 sneak attack
-  - level: 4
-    feature: sneak_attack_2d6
-    description: +2d6 sneak attack
-  - level: 6
-    feature: sneak_attack_3d6
-    description: +3d6 sneak attack
-  - level: 8
-    feature: sneak_attack_4d6
-    description: +4d6 sneak attack
-  - level: 10
-    feature: sneak_attack_5d6
-    description: +5d6 sneak attack
+    - level: 1
+      feature: ranged_legerdemain
+      description: Ranged sleight of hand
+    - level: 2
+      feature: sneak_attack_1d6
+      description: +1d6 sneak attack
+    - level: 4
+      feature: sneak_attack_2d6
+      description: +2d6 sneak attack
+    - level: 6
+      feature: sneak_attack_3d6
+      description: +3d6 sneak attack
+    - level: 8
+      feature: sneak_attack_4d6
+      description: +4d6 sneak attack
+    - level: 10
+      feature: sneak_attack_5d6
+      description: +5d6 sneak attack
   is_prestige: true

@@ -6,8 +6,9 @@
 #   domain_spells  : map of level (1-9) -> spell name
 
 Air:
-  granted_power: Turn or destroy earth creatures as a good cleric turns undead.
-    Rebuke, command, or bolster air creatures as an evil cleric rebukes undead.
+  granted_power: >-
+    Turn or destroy earth creatures as a good cleric turns undead. Rebuke,
+    command, or bolster air creatures as an evil cleric rebukes undead.
   domain_spells:
     1: Obscuring Mist
     2: Wind Wall
@@ -46,7 +47,8 @@ Chaos:
     9: Summon Monster IX
 Death:
   granted_power: >-
-    '''Death touch 1/day: melee touch deals 1d6 per cleric level damage.'''
+    '''''''Death touch 1/day: melee touch deals 1d6 per cleric level
+    damage.'''''''
   domain_spells:
     1: Cause Fear
     2: Death Knell
@@ -59,7 +61,8 @@ Death:
     9: Wail of the Banshee
 Destruction:
   granted_power: >-
-    '''Smite 1/day: +4 attack, +cleric level damage on one melee attack.'''
+    '''''''Smite 1/day: +4 attack, +cleric level damage on one melee
+    attack.'''''''
   domain_spells:
     1: Inflict Light Wounds
     2: Shatter
@@ -97,8 +100,9 @@ Evil:
     8: Unholy Aura
     9: Summon Monster IX
 Fire:
-  granted_power: Turn or destroy water creatures as a good cleric turns undead.
-    Rebuke, command, or bolster fire creatures as an evil cleric rebukes undead.
+  granted_power: >-
+    Turn or destroy water creatures as a good cleric turns undead. Rebuke,
+    command, or bolster fire creatures as an evil cleric rebukes undead.
   domain_spells:
     1: Burning Hands
     2: Produce Flame
@@ -174,8 +178,9 @@ Luck:
     8: Moment of Prescience
     9: Miracle
 Magic:
-  granted_power: Use scrolls, wands, and other spell-completion/trigger items as
-    a wizard of half your cleric level (min 1st).
+  granted_power: >-
+    Use scrolls, wands, and other spell-completion/trigger items as a
+    wizard of half your cleric level (min 1st).
   domain_spells:
     1: Magic Aura
     2: Identify
@@ -230,8 +235,8 @@ Strength:
     9: Crushing Hand
 Sun:
   granted_power: >-
-    '''Greater turning 1/day: undead that would be turned are destroyed
-    instead.'''
+    '''''''Greater turning 1/day: undead that would be turned are destroyed
+    instead.'''''''
   domain_spells:
     1: Endure Elements
     2: Heat Metal
@@ -243,8 +248,9 @@ Sun:
     8: Sunburst
     9: Prismatic Sphere
 Travel:
-  granted_power: Freedom of movement for 1 round/cleric level per day. Survival
-    is a class skill.
+  granted_power: >-
+    Freedom of movement for 1 round/cleric level per day. Survival is
+    a class skill.
   domain_spells:
     1: Longstrider
     2: Locate Object

@@ -81,11 +81,11 @@ combat:
     total: 8
 attack_iteratives:
   melee:
-  - 8
-  - 3
+    - 8
+    - 3
   ranged:
-  - 11
-  - 6
+    - 11
+    - 6
 skills:
   Balance:
     ability_mod: 2
@@ -209,31 +209,31 @@ carrying_capacity:
   medium: 53
   heavy: 80
 feats:
-- Dodge
-- Combat Casting
-- Improved Initiative
-- Scribe Scroll
-- Spell Focus
-- Still Spell
-- Mobility
-- Extend Spell
-- Empower Spell
-- Silent Spell
+  - Dodge
+  - Combat Casting
+  - Improved Initiative
+  - Scribe Scroll
+  - Spell Focus
+  - Still Spell
+  - Mobility
+  - Extend Spell
+  - Empower Spell
+  - Silent Spell
 class_features:
-- 'sneak_attack_1d6: Sneak attack +1d6'
-- 'trapfinding: Find and disable magical traps'
-- 'evasion: No damage on successful Reflex save'
-- 'sneak_attack_2d6: Sneak attack +2d6'
-- 'trap_sense_1: +1 Reflex and AC vs traps'
-- 'summon_familiar: Summon a familiar'
-- 'scribe_scroll: Scribe scroll feat for free'
-- 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
-- 'ranged_legerdemain: Ranged sleight of hand'
-- 'sneak_attack_1d6: +1d6 sneak attack'
-- 'sneak_attack_2d6: +2d6 sneak attack'
-- 'sneak_attack_3d6: +3d6 sneak attack'
-- 'sneak_attack_4d6: +4d6 sneak attack'
-- 'sneak_attack_5d6: +5d6 sneak attack'
+  - 'sneak_attack_1d6: Sneak attack +1d6'
+  - 'trapfinding: Find and disable magical traps'
+  - 'evasion: No damage on successful Reflex save'
+  - 'sneak_attack_2d6: Sneak attack +2d6'
+  - 'trap_sense_1: +1 Reflex and AC vs traps'
+  - 'summon_familiar: Summon a familiar'
+  - 'scribe_scroll: Scribe scroll feat for free'
+  - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+  - 'ranged_legerdemain: Ranged sleight of hand'
+  - 'sneak_attack_1d6: +1d6 sneak attack'
+  - 'sneak_attack_2d6: +2d6 sneak attack'
+  - 'sneak_attack_3d6: +3d6 sneak attack'
+  - 'sneak_attack_4d6: +4d6 sneak attack'
+  - 'sneak_attack_5d6: +5d6 sneak attack'
 spellcasting:
   Wizard:
     caster_level: 5
@@ -241,10 +241,10 @@ spellcasting:
     cast_type: arcane
     preparation: prepared
     slots_per_day:
-    - 4
-    - 4
-    - 3
-    - 2
+      - 4
+      - 4
+      - 3
+      - 2
     spell_save_dc:
       0: 14
       1: 15

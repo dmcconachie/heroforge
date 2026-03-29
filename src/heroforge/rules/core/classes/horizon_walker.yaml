@@ -9,28 +9,28 @@ Horizon Walker:
     will: poor
   skills_per_level: 4
   class_skills:
-  - Balance
-  - Climb
-  - Diplomacy
-  - Handle Animal
-  - Hide
-  - Knowledge (Geography)
-  - Listen
-  - Move Silently
-  - Profession
-  - Ride
-  - Speak Language
-  - Spot
-  - Survival
-  - Swim
+    - Balance
+    - Climb
+    - Diplomacy
+    - Handle Animal
+    - Hide
+    - Knowledge (Geography)
+    - Listen
+    - Move Silently
+    - Profession
+    - Ride
+    - Speak Language
+    - Spot
+    - Survival
+    - Swim
   entry_prerequisites:
     all_of:
-    - skill:
-        name: Knowledge (Geography)
-        min: 8
-    - feat: Endurance
+      - skill:
+          name: Knowledge (Geography)
+          min: 8
+      - feat: Endurance
   class_features:
-  - level: 1
-    feature: terrain_mastery
-    description: Choose terrain mastery
+    - level: 1
+      feature: terrain_mastery
+      description: Choose terrain mastery
   is_prestige: true

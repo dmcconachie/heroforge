@@ -70,18 +70,18 @@ Guidance:
     Druid: 0
   note: +1 competence on one attack roll, saving throw, or skill check
   effects:
-  - target: attack_all
-    bonus_type: competence
-    value: 1
-  - target: fort_save
-    bonus_type: competence
-    value: 1
-  - target: ref_save
-    bonus_type: competence
-    value: 1
-  - target: will_save
-    bonus_type: competence
-    value: 1
+    - target: attack_all
+      bonus_type: competence
+      value: 1
+    - target: fort_save
+      bonus_type: competence
+      value: 1
+    - target: ref_save
+      bonus_type: competence
+      value: 1
+    - target: will_save
+      bonus_type: competence
+      value: 1
 Inflict Minor Wounds:
   level:
     Cleric: 0
@@ -153,15 +153,15 @@ Resistance:
     Wizard: 0
   note: +1 resistance bonus on saving throws
   effects:
-  - target: fort_save
-    bonus_type: resistance
-    value: 1
-  - target: ref_save
-    bonus_type: resistance
-    value: 1
-  - target: will_save
-    bonus_type: resistance
-    value: 1
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
 Summon Instrument:
   level:
     Bard: 0
@@ -176,6 +176,6 @@ Virtue:
     Paladin: 1
   note: +1 temporary hit point
   effects:
-  - target: hp_bonus
-    bonus_type: untyped
-    value: 1
+    - target: hp_bonus
+      bonus_type: untyped
+      value: 1

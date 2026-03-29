@@ -74,9 +74,9 @@ combat:
     total: 5
 attack_iteratives:
   melee:
-  - 5
+    - 5
   ranged:
-  - 5
+    - 5
 skills:
   Concentration:
     ranks: 13
@@ -111,20 +111,20 @@ carrying_capacity:
   medium: 66
   heavy: 100
 feats:
-- Spell Focus
-- Augment Summoning
-- Combat Casting
-- Extend Spell
-- Spell Penetration
+  - Spell Focus
+  - Augment Summoning
+  - Combat Casting
+  - Extend Spell
+  - Spell Penetration
 class_features:
-- 'turn_undead: Turn or rebuke undead'
-- 'spontaneous_casting: Convert prepared spells to cure/inflict'
-- 'domains: Two domains granting bonus spells and powers'
-- 'improved_ally: Better planar ally'
-- 'augment_summoning: Augment Summoning feat'
-- 'extended_summoning: Double duration'
-- 'contingent_conjuration: Contingency on summon'
-- 'planar_cohort: Outsider cohort'
+  - 'turn_undead: Turn or rebuke undead'
+  - 'spontaneous_casting: Convert prepared spells to cure/inflict'
+  - 'domains: Two domains granting bonus spells and powers'
+  - 'improved_ally: Better planar ally'
+  - 'augment_summoning: Augment Summoning feat'
+  - 'extended_summoning: Double duration'
+  - 'contingent_conjuration: Contingency on summon'
+  - 'planar_cohort: Outsider cohort'
 spellcasting:
   Cleric:
     caster_level: 5
@@ -132,10 +132,10 @@ spellcasting:
     cast_type: divine
     preparation: prepared
     slots_per_day:
-    - 5
-    - 4
-    - 3
-    - 2
+      - 5
+      - 4
+      - 3
+      - 2
     spell_save_dc:
       0: 13
       1: 14

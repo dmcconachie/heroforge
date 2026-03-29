@@ -74,11 +74,11 @@ combat:
     total: 8
 attack_iteratives:
   melee:
-  - 8
-  - 3
+    - 8
+    - 3
   ranged:
-  - 8
-  - 3
+    - 8
+    - 3
 skills:
   Concentration:
     ranks: 19
@@ -129,20 +129,20 @@ carrying_capacity:
   medium: 66
   heavy: 100
 feats:
-- Spell Focus
-- Combat Casting
-- Augment Summoning
-- Scribe Scroll
-- Extend Spell
-- Spell Penetration
-- Greater Spell Focus
-- Greater Spell Penetration
+  - Spell Focus
+  - Combat Casting
+  - Augment Summoning
+  - Scribe Scroll
+  - Extend Spell
+  - Spell Penetration
+  - Greater Spell Focus
+  - Greater Spell Penetration
 class_features:
-- 'turn_undead: Turn or rebuke undead'
-- 'spontaneous_casting: Convert prepared spells to cure/inflict'
-- 'domains: Two domains granting bonus spells and powers'
-- 'summon_familiar: Summon a familiar'
-- 'scribe_scroll: Scribe scroll feat for free'
+  - 'turn_undead: Turn or rebuke undead'
+  - 'spontaneous_casting: Convert prepared spells to cure/inflict'
+  - 'domains: Two domains granting bonus spells and powers'
+  - 'summon_familiar: Summon a familiar'
+  - 'scribe_scroll: Scribe scroll feat for free'
 spellcasting:
   Cleric:
     caster_level: 3
@@ -150,9 +150,9 @@ spellcasting:
     cast_type: divine
     preparation: prepared
     slots_per_day:
-    - 4
-    - 3
-    - 2
+      - 4
+      - 3
+      - 2
     spell_save_dc:
       0: 13
       1: 14
@@ -163,9 +163,9 @@ spellcasting:
     cast_type: arcane
     preparation: prepared
     slots_per_day:
-    - 4
-    - 3
-    - 2
+      - 4
+      - 3
+      - 2
     spell_save_dc:
       0: 13
       1: 14

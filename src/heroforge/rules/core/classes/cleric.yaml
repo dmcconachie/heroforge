@@ -8,16 +8,16 @@ Cleric:
     will: good
   skills_per_level: 2
   class_skills:
-  - Concentration
-  - Craft
-  - Diplomacy
-  - Heal
-  - Knowledge (Arcana)
-  - Knowledge (History)
-  - Knowledge (Religion)
-  - Knowledge (The Planes)
-  - Profession
-  - Spellcraft
+    - Concentration
+    - Craft
+    - Diplomacy
+    - Heal
+    - Knowledge (Arcana)
+    - Knowledge (History)
+    - Knowledge (Religion)
+    - Knowledge (The Planes)
+    - Profession
+    - Spellcraft
   spellcasting:
     cast_type: divine
     stat: wis
@@ -25,12 +25,12 @@ Cleric:
     max_spell_level: 9
     starts_at_level: 1
   class_features:
-  - level: 1
-    feature: turn_undead
-    description: Turn or rebuke undead
-  - level: 1
-    feature: spontaneous_casting
-    description: Convert prepared spells to cure/inflict
-  - level: 1
-    feature: domains
-    description: Two domains granting bonus spells and powers
+    - level: 1
+      feature: turn_undead
+      description: Turn or rebuke undead
+    - level: 1
+      feature: spontaneous_casting
+      description: Convert prepared spells to cure/inflict
+    - level: 1
+      feature: domains
+      description: Two domains granting bonus spells and powers

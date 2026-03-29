@@ -39,100 +39,100 @@
 - key: str_score
   compute: base_plus_bonus
   pools:
-  - str_score
+    - str_score
   description: Strength score
   sheet: 1
 - key: dex_score
   compute: base_plus_bonus
   pools:
-  - dex_score
+    - dex_score
   description: Dexterity score
   sheet: 1
 - key: con_score
   compute: base_plus_bonus
   pools:
-  - con_score
+    - con_score
   description: Constitution score
   sheet: 1
 - key: int_score
   compute: base_plus_bonus
   pools:
-  - int_score
+    - int_score
   description: Intelligence score
   sheet: 1
 - key: wis_score
   compute: base_plus_bonus
   pools:
-  - wis_score
+    - wis_score
   description: Wisdom score
   sheet: 1
 - key: cha_score
   compute: base_plus_bonus
   pools:
-  - cha_score
+    - cha_score
   description: Charisma score
   sheet: 1
 - key: str_mod
   compute: ability_modifier
   inputs:
-  - str_score
+    - str_score
   description: Strength modifier
 - key: dex_mod
   compute: ability_modifier
   inputs:
-  - dex_score
+    - dex_score
   description: Dexterity modifier
 - key: con_mod
   compute: ability_modifier
   inputs:
-  - con_score
+    - con_score
   description: Constitution modifier
 - key: int_mod
   compute: ability_modifier
   inputs:
-  - int_score
+    - int_score
   description: Intelligence modifier
 - key: wis_mod
   compute: ability_modifier
   inputs:
-  - wis_score
+    - wis_score
   description: Wisdom modifier
 - key: cha_mod
   compute: ability_modifier
   inputs:
-  - cha_score
+    - cha_score
   description: Charisma modifier
 - key: bab
   compute: bab
   pools:
-  - bab_misc
+    - bab_misc
   description: Base Attack Bonus
   sheet: 1
 - key: fort_save
   compute: base_save
   save_name: fort
   inputs:
-  - con_mod
+    - con_mod
   pools:
-  - fort_save
+    - fort_save
   description: Fortitude save
   sheet: 1
 - key: ref_save
   compute: base_save
   save_name: ref
   inputs:
-  - dex_mod
+    - dex_mod
   pools:
-  - ref_save
+    - ref_save
   description: Reflex save
   sheet: 1
 - key: will_save
   compute: base_save
   save_name: will
   inputs:
-  - wis_mod
+    - wis_mod
   pools:
-  - will_save
+    - will_save
   description: Will save
   sheet: 1
 - key: max_dex_bonus
@@ -141,71 +141,71 @@
 - key: ac_dex_contribution
   compute: capped_dex
   inputs:
-  - dex_mod
-  - max_dex_bonus
+    - dex_mod
+    - max_dex_bonus
   description: DEX contribution to AC (capped by armour max dex)
 - key: ac
   compute: ac_total
   inputs:
-  - ac_dex_contribution
+    - ac_dex_contribution
   pools:
-  - ac
+    - ac
   description: Armour Class
   sheet: 1
 - key: initiative
   compute: sum
   inputs:
-  - dex_mod
+    - dex_mod
   pools:
-  - initiative
+    - initiative
   description: Initiative modifier
   sheet: 1
 - key: speed
   compute: base_speed
   pools:
-  - speed
+    - speed
   description: Land speed (ft)
   sheet: 1
 - key: hp_max
   compute: hp_max
   inputs:
-  - con_mod
+    - con_mod
   pools:
-  - hp_bonus
+    - hp_bonus
   description: Maximum hit points
   sheet: 1
 - key: sr
   compute: sum
   pools:
-  - sr
+    - sr
   description: Spell Resistance
   sheet: 1
 - key: attack_melee
   compute: attack_melee_total
   inputs:
-  - bab
-  - str_mod
+    - bab
+    - str_mod
   pools:
-  - attack_melee
-  - attack_all
+    - attack_melee
+    - attack_all
   description: Primary melee attack bonus (before weapon modifiers)
   sheet: 1
 - key: attack_ranged
   compute: attack_ranged_total
   inputs:
-  - bab
-  - dex_mod
+    - bab
+    - dex_mod
   pools:
-  - attack_ranged
-  - attack_all
+    - attack_ranged
+    - attack_all
   description: Primary ranged attack bonus (before weapon modifiers)
   sheet: 1
 - key: damage_str_bonus
   compute: sum
   inputs:
-  - str_mod
+    - str_mod
   pools:
-  - damage_melee
-  - damage_all
+    - damage_melee
+    - damage_all
   description: STR bonus to melee damage
   sheet: 1

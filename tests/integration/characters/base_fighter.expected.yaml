@@ -91,15 +91,15 @@ combat:
     total: 23
 attack_iteratives:
   melee:
-  - 25
-  - 20
-  - 15
-  - 10
+    - 25
+    - 20
+    - 15
+    - 10
   ranged:
-  - 24
-  - 19
-  - 14
-  - 9
+    - 24
+    - 19
+    - 14
+    - 9
 skills:
   Bluff:
     ability_mod: -2
@@ -130,34 +130,34 @@ carrying_capacity:
   medium: 153
   heavy: 230
 feats:
-- Power Attack
-- Cleave
-- Weapon Focus
-- Great Fortitude
-- Weapon Specialization
-- Improved Bull Rush
-- Great Cleave
-- Greater Weapon Focus
-- Improved Sunder
-- Improved Initiative
-- Blind-Fight
-- Greater Weapon Specialization
-- Improved Overrun
-- Iron Will
-- Improved Critical
-- Toughness
-- Lightning Reflexes
-- Quick Draw
+  - Power Attack
+  - Cleave
+  - Weapon Focus
+  - Great Fortitude
+  - Weapon Specialization
+  - Improved Bull Rush
+  - Great Cleave
+  - Greater Weapon Focus
+  - Improved Sunder
+  - Improved Initiative
+  - Blind-Fight
+  - Greater Weapon Specialization
+  - Improved Overrun
+  - Iron Will
+  - Improved Critical
+  - Toughness
+  - Lightning Reflexes
+  - Quick Draw
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'bonus_feat_2: Bonus fighter feat'
-- 'bonus_feat_4: Bonus fighter feat'
-- 'bonus_feat_6: Bonus fighter feat'
-- 'bonus_feat_8: Bonus fighter feat'
-- 'bonus_feat_10: Bonus fighter feat'
-- 'bonus_feat_12: Bonus fighter feat'
-- 'bonus_feat_14: Bonus fighter feat'
-- 'bonus_feat_16: Bonus fighter feat'
-- 'bonus_feat_18: Bonus fighter feat'
-- 'bonus_feat_20: Bonus fighter feat'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_4: Bonus fighter feat'
+  - 'bonus_feat_6: Bonus fighter feat'
+  - 'bonus_feat_8: Bonus fighter feat'
+  - 'bonus_feat_10: Bonus fighter feat'
+  - 'bonus_feat_12: Bonus fighter feat'
+  - 'bonus_feat_14: Bonus fighter feat'
+  - 'bonus_feat_16: Bonus fighter feat'
+  - 'bonus_feat_18: Bonus fighter feat'
+  - 'bonus_feat_20: Bonus fighter feat'
 resources: {}

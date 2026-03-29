@@ -148,21 +148,21 @@ Good Hope:
     Bard: 3
   note: +2 morale on attack rolls, damage, saves, skill checks, ability checks
   effects:
-  - target: attack_all
-    bonus_type: morale
-    value: 2
-  - target: damage_all
-    bonus_type: morale
-    value: 2
-  - target: fort_save
-    bonus_type: morale
-    value: 2
-  - target: ref_save
-    bonus_type: morale
-    value: 2
-  - target: will_save
-    bonus_type: morale
-    value: 2
+    - target: attack_all
+      bonus_type: morale
+      value: 2
+    - target: damage_all
+      bonus_type: morale
+      value: 2
+    - target: fort_save
+      bonus_type: morale
+      value: 2
+    - target: ref_save
+      bonus_type: morale
+      value: 2
+    - target: will_save
+      bonus_type: morale
+      value: 2
 Halt Undead:
   level:
     Sorcerer: 3
@@ -174,15 +174,15 @@ Haste:
     Wizard: 3
   note: +1 untyped attack, +1 dodge AC, +1 Reflex, speed bonus
   effects:
-  - target: attack_all
-    bonus_type: untyped
-    value: 1
-  - target: ac
-    bonus_type: dodge
-    value: 1
-  - target: ref_save
-    bonus_type: untyped
-    value: 1
+    - target: attack_all
+      bonus_type: untyped
+      value: 1
+    - target: ac
+      bonus_type: dodge
+      value: 1
+    - target: ref_save
+      bonus_type: untyped
+      value: 1
 Heal Mount:
   level:
     Paladin: 3
@@ -221,18 +221,18 @@ Magic Circle against Chaos:
     Wizard: 3
   note: +2 deflection AC, +2 resistance saves vs chaotic; 10 ft. radius
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 2
-  - target: fort_save
-    bonus_type: resistance
-    value: 2
-  - target: ref_save
-    bonus_type: resistance
-    value: 2
-  - target: will_save
-    bonus_type: resistance
-    value: 2
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
 Magic Circle against Evil:
   level:
     Cleric: 3
@@ -241,18 +241,18 @@ Magic Circle against Evil:
     Wizard: 3
   note: +2 deflection AC, +2 resistance saves vs evil; 10 ft. radius
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 2
-  - target: fort_save
-    bonus_type: resistance
-    value: 2
-  - target: ref_save
-    bonus_type: resistance
-    value: 2
-  - target: will_save
-    bonus_type: resistance
-    value: 2
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
 Magic Circle against Good:
   level:
     Cleric: 3
@@ -260,18 +260,18 @@ Magic Circle against Good:
     Wizard: 3
   note: +2 deflection AC, +2 resistance saves vs good; 10 ft. radius
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 2
-  - target: fort_save
-    bonus_type: resistance
-    value: 2
-  - target: ref_save
-    bonus_type: resistance
-    value: 2
-  - target: will_save
-    bonus_type: resistance
-    value: 2
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
 Magic Circle against Law:
   level:
     Cleric: 3
@@ -279,18 +279,18 @@ Magic Circle against Law:
     Wizard: 3
   note: +2 deflection AC, +2 resistance saves vs lawful; 10 ft. radius
   effects:
-  - target: ac
-    bonus_type: deflection
-    value: 2
-  - target: fort_save
-    bonus_type: resistance
-    value: 2
-  - target: ref_save
-    bonus_type: resistance
-    value: 2
-  - target: will_save
-    bonus_type: resistance
-    value: 2
+    - target: ac
+      bonus_type: deflection
+      value: 2
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
 Magic Fang (Greater):
   level:
     Druid: 3
@@ -301,9 +301,9 @@ Magic Vestment:
   note: Enhancement bonus to armor/shield; scales with CL
   requires_caster_level: true
   effects:
-  - target: ac
-    bonus_type: enhancement
-    value: max(1, caster_level // 4)
+    - target: ac
+      bonus_type: enhancement
+      value: max(1, caster_level // 4)
 Magic Weapon (Greater):
   level:
     Cleric: 4
@@ -313,12 +313,12 @@ Magic Weapon (Greater):
   note: Enhancement bonus to attack and damage; scales with CL
   requires_caster_level: true
   effects:
-  - target: attack_all
-    bonus_type: enhancement
-    value: max(1, caster_level // 4)
-  - target: damage_all
-    bonus_type: enhancement
-    value: max(1, caster_level // 4)
+    - target: attack_all
+      bonus_type: enhancement
+      value: max(1, caster_level // 4)
+    - target: damage_all
+      bonus_type: enhancement
+      value: max(1, caster_level // 4)
 Major Image:
   level:
     Bard: 3
@@ -359,21 +359,21 @@ Prayer:
     Paladin: 3
   note: +1 luck on attack, damage, saves, skill checks
   effects:
-  - target: attack_all
-    bonus_type: luck
-    value: 1
-  - target: damage_all
-    bonus_type: luck
-    value: 1
-  - target: fort_save
-    bonus_type: luck
-    value: 1
-  - target: ref_save
-    bonus_type: luck
-    value: 1
-  - target: will_save
-    bonus_type: luck
-    value: 1
+    - target: attack_all
+      bonus_type: luck
+      value: 1
+    - target: damage_all
+      bonus_type: luck
+      value: 1
+    - target: fort_save
+      bonus_type: luck
+      value: 1
+    - target: ref_save
+      bonus_type: luck
+      value: 1
+    - target: will_save
+      bonus_type: luck
+      value: 1
 Quench:
   level:
     Druid: 3

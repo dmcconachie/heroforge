@@ -1,10 +1,9 @@
 identity:
-  name: "Pip Thornfoot"
-  player: ""
+  name: Pip Thornfoot
+  player: ''
   race: Halfling
   alignment: neutral_good
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 12
   dex: 18
@@ -12,7 +11,6 @@ ability_scores:
   int: 12
   wis: 14
   cha: 8
-
 levels:
   - level: 1
     class: Ranger
@@ -26,10 +24,10 @@ levels:
       Search: 4
       Climb: 4
     feats:
-      - name: "Point Blank Shot"
+      - name: Point Blank Shot
         source: character
-      - name: "Track"
-        source: "class:Ranger"
+      - name: Track
+        source: class:Ranger
   - level: 2
     class: Ranger
     hp_roll: 6
@@ -42,8 +40,8 @@ levels:
       Search: 1
       Heal: 1
     feats:
-      - name: "Rapid Shot"
-        source: "class:Ranger"
+      - name: Rapid Shot
+        source: class:Ranger
   - level: 3
     class: Ranger
     hp_roll: 5
@@ -56,10 +54,10 @@ levels:
       Search: 1
       Climb: 1
     feats:
-      - name: "Precise Shot"
+      - name: Precise Shot
         source: character
-      - name: "Endurance"
-        source: "class:Ranger"
+      - name: Endurance
+        source: class:Ranger
   - level: 4
     class: Ranger
     hp_roll: 6
@@ -94,9 +92,9 @@ levels:
       Search: 1
       Climb: 1
     feats:
-      - name: "Many Shot"
-        source: "class:Ranger"
-      - name: "Weapon Focus"
+      - name: Many Shot
+        source: class:Ranger
+      - name: Weapon Focus
         source: character
         parameter: Longbow
   - level: 7
@@ -133,7 +131,7 @@ levels:
       Search: 1
       Climb: 1
     feats:
-      - name: "Far Shot"
+      - name: Far Shot
         source: character
   - level: 10
     class: Ranger
@@ -158,8 +156,8 @@ levels:
       Climb: 1
       Heal: 1
     feats:
-      - name: "Improved Precise Shot"
-        source: "class:Ranger"
+      - name: Improved Precise Shot
+        source: class:Ranger
   - level: 12
     class: Ranger
     hp_roll: 6
@@ -172,7 +170,7 @@ levels:
       Search: 1
       Climb: 1
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
   - level: 13
     class: Ranger
@@ -208,7 +206,7 @@ levels:
       Search: 1
       Climb: 1
     feats:
-      - name: "Mobility"
+      - name: Mobility
         source: character
   - level: 16
     class: Ranger
@@ -244,7 +242,7 @@ levels:
       Search: 1
       Climb: 1
     feats:
-      - name: "Self-Sufficient"
+      - name: Self-Sufficient
         source: character
   - level: 19
     class: Ranger
@@ -268,17 +266,14 @@ levels:
       Survival: 1
       Climb: 1
       Heal: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Longbow"
+    - name: Longbow
       base: Longbow
-
-notes: ""
+notes: ''

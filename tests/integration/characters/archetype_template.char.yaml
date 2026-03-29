@@ -1,10 +1,9 @@
 identity:
-  name: "Brennan Drakeblood"
-  player: ""
+  name: Brennan Drakeblood
+  player: ''
   race: Human
   alignment: chaotic_neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 16
   dex: 12
@@ -12,7 +11,6 @@ ability_scores:
   int: 10
   wis: 10
   cha: 8
-
 levels:
   - level: 1
     class: Fighter
@@ -22,11 +20,11 @@ levels:
       Jump: 4
       Intimidate: 4
     feats:
-      - name: "Power Attack"
+      - name: Power Attack
         source: character
-      - name: "Cleave"
+      - name: Cleave
         source: fighter_bonus
-      - name: "Weapon Focus"
+      - name: Weapon Focus
         source: human_bonus
         parameter: Greatsword
   - level: 2
@@ -37,7 +35,7 @@ levels:
       Jump: 1
       Intimidate: 1
     feats:
-      - name: "Improved Initiative"
+      - name: Improved Initiative
         source: fighter_bonus
   - level: 3
     class: Fighter
@@ -47,7 +45,7 @@ levels:
       Jump: 1
       Intimidate: 1
     feats:
-      - name: "Great Cleave"
+      - name: Great Cleave
         source: character
   - level: 4
     class: Fighter
@@ -57,7 +55,7 @@ levels:
       Jump: 1
       Intimidate: 1
     feats:
-      - name: "Weapon Specialization"
+      - name: Weapon Specialization
         source: fighter_bonus
         parameter: Greatsword
   - level: 5
@@ -75,24 +73,21 @@ levels:
       Jump: 1
       Intimidate: 1
     feats:
-      - name: "Blind-Fight"
+      - name: Blind-Fight
         source: character
-      - name: "Improved Bull Rush"
+      - name: Improved Bull Rush
         source: fighter_bonus
-
 buffs: {}
 templates:
-  - template: "Half-Dragon (Red)"
+  - template: Half-Dragon (Red)
     level: 5
-    note: ""
+    note: ''
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Greatsword"
+    - name: Greatsword
       base: Greatsword
-
-notes: ""
+notes: ''

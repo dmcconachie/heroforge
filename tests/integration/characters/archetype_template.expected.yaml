@@ -89,11 +89,11 @@ combat:
     total: 13
 attack_iteratives:
   melee:
-  - 14
-  - 9
+    - 14
+    - 9
   ranged:
-  - 8
-  - 3
+    - 8
+    - 3
 skills:
   Bluff:
     ability_mod: 0
@@ -120,17 +120,17 @@ carrying_capacity:
   medium: 466
   heavy: 700
 feats:
-- Power Attack
-- Cleave
-- Weapon Focus
-- Improved Initiative
-- Great Cleave
-- Weapon Specialization
-- Blind-Fight
-- Improved Bull Rush
+  - Power Attack
+  - Cleave
+  - Weapon Focus
+  - Improved Initiative
+  - Great Cleave
+  - Weapon Specialization
+  - Blind-Fight
+  - Improved Bull Rush
 class_features:
-- 'bonus_feat_1: Bonus fighter feat'
-- 'bonus_feat_2: Bonus fighter feat'
-- 'bonus_feat_4: Bonus fighter feat'
-- 'bonus_feat_6: Bonus fighter feat'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_4: Bonus fighter feat'
+  - 'bonus_feat_6: Bonus fighter feat'
 resources: {}

@@ -1,10 +1,9 @@
 identity:
-  name: "Vex Nighthollow"
-  player: ""
+  name: Vex Nighthollow
+  player: ''
   race: Human
   alignment: neutral_evil
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 10
   dex: 16
@@ -12,7 +11,6 @@ ability_scores:
   int: 14
   wis: 10
   cha: 8
-
 levels:
   - level: 1
     class: Rogue
@@ -30,9 +28,9 @@ levels:
       Bluff: 4
       Balance: 4
     feats:
-      - name: "Dodge"
+      - name: Dodge
         source: character
-      - name: "Improved Initiative"
+      - name: Improved Initiative
         source: human_bonus
   - level: 2
     class: Rogue
@@ -65,7 +63,7 @@ levels:
       Bluff: 1
       Balance: 1
     feats:
-      - name: "Mobility"
+      - name: Mobility
         source: character
   - level: 4
     class: Rogue
@@ -109,9 +107,8 @@ levels:
       Spot: 1
       Bluff: 1
     feats:
-      - name: "Spring Attack"
+      - name: Spring Attack
         source: character
-  # Assassin 2 — total 7
   - level: 7
     class: Assassin
     hp_roll: 4
@@ -123,7 +120,6 @@ levels:
       Listen: 1
       Spot: 1
       Bluff: 1
-  # Assassin 3 — total 8
   - level: 8
     class: Assassin
     hp_roll: 4
@@ -135,7 +131,6 @@ levels:
       Listen: 1
       Spot: 1
       Bluff: 1
-  # Assassin 4 — total 9; character feat at L9
   - level: 9
     class: Assassin
     hp_roll: 4
@@ -148,9 +143,8 @@ levels:
       Spot: 1
       Bluff: 1
     feats:
-      - name: "Weapon Finesse"
+      - name: Weapon Finesse
         source: character
-  # Assassin 5 — total 10
   - level: 10
     class: Assassin
     hp_roll: 4
@@ -162,7 +156,6 @@ levels:
       Listen: 1
       Spot: 1
       Bluff: 1
-  # Assassin 6 — total 11
   - level: 11
     class: Assassin
     hp_roll: 4
@@ -174,7 +167,6 @@ levels:
       Listen: 1
       Spot: 1
       Bluff: 1
-  # Assassin 7 — total 12; character feat at L12
   - level: 12
     class: Assassin
     hp_roll: 4
@@ -187,9 +179,8 @@ levels:
       Spot: 1
       Bluff: 1
     feats:
-      - name: "Blind-Fight"
+      - name: Blind-Fight
         source: character
-  # Assassin 8 — total 13
   - level: 13
     class: Assassin
     hp_roll: 4
@@ -201,7 +192,6 @@ levels:
       Listen: 1
       Spot: 1
       Bluff: 1
-  # Assassin 9 — total 14
   - level: 14
     class: Assassin
     hp_roll: 4
@@ -213,7 +203,6 @@ levels:
       Listen: 1
       Spot: 1
       Bluff: 1
-  # Assassin 10 — total 15; character feat at L15
   - level: 15
     class: Assassin
     hp_roll: 4
@@ -226,19 +215,16 @@ levels:
       Spot: 1
       Bluff: 1
     feats:
-      - name: "Combat Reflexes"
+      - name: Combat Reflexes
         source: character
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Short Sword"
+    - name: Short Sword
       base: Short Sword
-
-notes: ""
+notes: ''

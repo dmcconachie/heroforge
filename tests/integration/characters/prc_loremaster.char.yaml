@@ -1,10 +1,9 @@
 identity:
-  name: "Vaelith the Learned"
-  player: ""
+  name: Vaelith the Learned
+  player: ''
   race: Human
   alignment: neutral
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 8
   dex: 12
@@ -12,9 +11,7 @@ ability_scores:
   int: 18
   wis: 10
   cha: 8
-
 levels:
-  # Wizard 1 — Human: 2+4(INT)+1(human)=7, x4=28 pts
   - level: 1
     class: Wizard
     hp_roll: 4
@@ -27,14 +24,13 @@ levels:
       Knowledge (The Planes): 4
       Decipher Script: 4
     feats:
-      - name: "Scribe Scroll"
+      - name: Scribe Scroll
         source: wizard_bonus
-      - name: "Spell Focus"
+      - name: Spell Focus
         source: character
         parameter: Conjuration
-      - name: "Toughness"
+      - name: Toughness
         source: human_bonus
-  # Wizard 2 — 7 pts
   - level: 2
     class: Wizard
     hp_roll: 3
@@ -46,7 +42,6 @@ levels:
       Knowledge (Religion): 1
       Knowledge (The Planes): 1
       Decipher Script: 1
-  # Wizard 3 — 7 pts
   - level: 3
     class: Wizard
     hp_roll: 3
@@ -59,9 +54,8 @@ levels:
       Knowledge (The Planes): 1
       Decipher Script: 1
     feats:
-      - name: "Combat Casting"
+      - name: Combat Casting
         source: character
-  # Wizard 4 — 7 pts
   - level: 4
     class: Wizard
     hp_roll: 3
@@ -73,7 +67,6 @@ levels:
       Knowledge (Religion): 1
       Knowledge (The Planes): 1
       Decipher Script: 1
-  # Wizard 5 — 7 pts; wizard bonus feat
   - level: 5
     class: Wizard
     hp_roll: 3
@@ -86,9 +79,8 @@ levels:
       Knowledge (The Planes): 1
       Decipher Script: 1
     feats:
-      - name: "Extend Spell"
+      - name: Extend Spell
         source: wizard_bonus
-  # Wizard 6 — 7 pts
   - level: 6
     class: Wizard
     hp_roll: 3
@@ -101,9 +93,8 @@ levels:
       Knowledge (The Planes): 1
       Decipher Script: 1
     feats:
-      - name: "Spell Penetration"
+      - name: Spell Penetration
         source: character
-  # Wizard 7 — 7 pts
   - level: 7
     class: Wizard
     hp_roll: 3
@@ -115,7 +106,6 @@ levels:
       Knowledge (Religion): 1
       Knowledge (The Planes): 1
       Decipher Script: 1
-  # Wizard 8 — 7 pts
   - level: 8
     class: Wizard
     hp_roll: 3
@@ -127,7 +117,6 @@ levels:
       Knowledge (Religion): 1
       Knowledge (The Planes): 1
       Decipher Script: 1
-  # Wizard 9 — 7 pts
   - level: 9
     class: Wizard
     hp_roll: 3
@@ -140,10 +129,9 @@ levels:
       Knowledge (The Planes): 1
       Decipher Script: 1
     feats:
-      - name: "Greater Spell Focus"
+      - name: Greater Spell Focus
         source: character
         parameter: Conjuration
-  # Wizard 10 — 7 pts; wizard bonus feat
   - level: 10
     class: Wizard
     hp_roll: 3
@@ -156,9 +144,8 @@ levels:
       Knowledge (The Planes): 1
       Decipher Script: 1
     feats:
-      - name: "Empower Spell"
+      - name: Empower Spell
         source: wizard_bonus
-  # Wizard 11 — 7 pts
   - level: 11
     class: Wizard
     hp_roll: 3
@@ -170,7 +157,6 @@ levels:
       Knowledge (Religion): 1
       Knowledge (The Planes): 1
       Decipher Script: 1
-  # Wizard 12 — 7 pts
   - level: 12
     class: Wizard
     hp_roll: 3
@@ -183,9 +169,8 @@ levels:
       Knowledge (The Planes): 1
       Decipher Script: 1
     feats:
-      - name: "Augment Summoning"
+      - name: Augment Summoning
         source: character
-  # Wizard 13 — 7 pts
   - level: 13
     class: Wizard
     hp_roll: 3
@@ -197,7 +182,6 @@ levels:
       Knowledge (Religion): 1
       Knowledge (The Planes): 1
       Decipher Script: 1
-  # Loremaster 1 — 4+4(INT)+1(human)=9 pts
   - level: 14
     class: Loremaster
     hp_roll: 3
@@ -211,7 +195,6 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
-  # LM 2 — total 15; character feat at L15
   - level: 15
     class: Loremaster
     hp_roll: 3
@@ -226,9 +209,8 @@ levels:
       Gather Information: 1
       Appraise: 1
     feats:
-      - name: "Maximize Spell"
+      - name: Maximize Spell
         source: character
-  # LM 3 — total 16
   - level: 16
     class: Loremaster
     hp_roll: 3
@@ -242,7 +224,6 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
-  # LM 4 — total 17
   - level: 17
     class: Loremaster
     hp_roll: 3
@@ -256,7 +237,6 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
-  # LM 5 — total 18; character feat at L18
   - level: 18
     class: Loremaster
     hp_roll: 3
@@ -271,9 +251,8 @@ levels:
       Gather Information: 1
       Appraise: 1
     feats:
-      - name: "Quicken Spell"
+      - name: Quicken Spell
         source: character
-  # LM 6 — total 19
   - level: 19
     class: Loremaster
     hp_roll: 3
@@ -287,7 +266,6 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
-  # LM 7 — total 20
   - level: 20
     class: Loremaster
     hp_roll: 3
@@ -301,7 +279,6 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
-  # LM 8 — total 21; character feat at L21
   - level: 21
     class: Loremaster
     hp_roll: 3
@@ -316,9 +293,8 @@ levels:
       Gather Information: 1
       Appraise: 1
     feats:
-      - name: "Heighten Spell"
+      - name: Heighten Spell
         source: character
-  # LM 9 — total 22
   - level: 22
     class: Loremaster
     hp_roll: 3
@@ -332,7 +308,6 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
-  # LM 10 — total 23
   - level: 23
     class: Loremaster
     hp_roll: 3
@@ -346,15 +321,12 @@ levels:
       Decipher Script: 1
       Gather Information: 1
       Appraise: 1
-
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons: []
-
-notes: ""
+notes: ''

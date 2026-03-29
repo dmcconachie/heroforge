@@ -1,10 +1,9 @@
 identity:
-  name: "Kael Firebrand"
-  player: ""
+  name: Kael Firebrand
+  player: ''
   race: Human
   alignment: chaotic_good
-  deity: ""
-
+  deity: ''
 ability_scores:
   str: 8
   dex: 14
@@ -12,9 +11,7 @@ ability_scores:
   int: 10
   wis: 10
   cha: 18
-
 levels:
-  # L1: 3 skill pts x4 = 12
   - level: 1
     class: Sorcerer
     hp_roll: 4
@@ -23,20 +20,19 @@ levels:
       Spellcraft: 4
       Bluff: 4
     feats:
-      - name: "Toughness"
+      - name: Toughness
         source: character
-      - name: "Combat Casting"
+      - name: Combat Casting
         source: human_bonus
     spells_learned:
       0:
-        - "Detect Magic"
-        - "Read Magic"
-        - "Light"
-        - "Mage Hand"
+        - Detect Magic
+        - Read Magic
+        - Light
+        - Mage Hand
       1:
-        - "Magic Missile"
-        - "Shield"
-  # L2: 3 skill pts
+        - Magic Missile
+        - Shield
   - level: 2
     class: Sorcerer
     hp_roll: 3
@@ -46,10 +42,9 @@ levels:
       Bluff: 1
     spells_learned:
       0:
-        - "Prestidigitation"
+        - Prestidigitation
       1:
-        - "Mage Armor"
-  # L3: 3 skill pts
+        - Mage Armor
   - level: 3
     class: Sorcerer
     hp_roll: 3
@@ -58,14 +53,13 @@ levels:
       Spellcraft: 1
       Bluff: 1
     feats:
-      - name: "Spell Focus"
+      - name: Spell Focus
         source: character
     spells_learned:
       0:
-        - "Ray of Frost"
+        - Ray of Frost
       1:
-        - "Grease"
-  # L4: 3 skill pts
+        - Grease
   - level: 4
     class: Sorcerer
     hp_roll: 3
@@ -75,10 +69,9 @@ levels:
       Knowledge (Arcana): 1
     spells_learned:
       1:
-        - "Burning Hands"
+        - Burning Hands
       2:
-        - "Scorching Ray"
-  # L5: 3 skill pts
+        - Scorching Ray
   - level: 5
     class: Sorcerer
     hp_roll: 3
@@ -88,8 +81,7 @@ levels:
       Knowledge (Arcana): 1
     spells_learned:
       2:
-        - "Mirror Image"
-  # L6: 3 skill pts
+        - Mirror Image
   - level: 6
     class: Sorcerer
     hp_roll: 3
@@ -98,17 +90,15 @@ levels:
       Spellcraft: 1
       Knowledge (Arcana): 1
     feats:
-      - name: "Spell Penetration"
+      - name: Spell Penetration
         source: character
     spells_learned:
       0:
-        - "Resistance"
+        - Resistance
       2:
-        - "Invisibility"
+        - Invisibility
       3:
-        - "Fireball"
-  # L7: 3 skill pts
-  # Spells known delta: 0/+1/+1/+1
+        - Fireball
   - level: 7
     class: Sorcerer
     hp_roll: 3
@@ -118,13 +108,11 @@ levels:
       Bluff: 1
     spells_learned:
       1:
-        - "Enlarge Person"
+        - Enlarge Person
       2:
-        - "Web"
+        - Web
       3:
-        - "Haste"
-  # L8: 3 skill pts
-  # Spells known delta: +1/0/0/0/+1
+        - Haste
   - level: 8
     class: Sorcerer
     hp_roll: 3
@@ -134,11 +122,9 @@ levels:
       Knowledge (Arcana): 1
     spells_learned:
       0:
-        - "Ghost Sound"
+        - Ghost Sound
       4:
-        - "Dimension Door"
-  # L9: 3 skill pts
-  # Spells known delta: 0/0/+1/+1/+1
+        - Dimension Door
   - level: 9
     class: Sorcerer
     hp_roll: 3
@@ -147,17 +133,15 @@ levels:
       Spellcraft: 1
       Bluff: 1
     feats:
-      - name: "Greater Spell Focus"
+      - name: Greater Spell Focus
         source: character
     spells_learned:
       2:
-        - "Glitterdust"
+        - Glitterdust
       3:
-        - "Lightning Bolt"
+        - Lightning Bolt
       4:
-        - "Stoneskin"
-  # L10: 3 skill pts
-  # Spells known delta: +1/0/0/0/0/+1
+        - Stoneskin
   - level: 10
     class: Sorcerer
     hp_roll: 3
@@ -167,11 +151,9 @@ levels:
       Knowledge (Arcana): 1
     spells_learned:
       0:
-        - "Acid Splash"
+        - Acid Splash
       5:
-        - "Teleport"
-  # L11: 3 skill pts
-  # Spells known delta: 0/0/+1/+1/+1/+1
+        - Teleport
   - level: 11
     class: Sorcerer
     hp_roll: 3
@@ -181,15 +163,13 @@ levels:
       Bluff: 1
     spells_learned:
       2:
-        - "See Invisibility"
+        - See Invisibility
       3:
-        - "Fly"
+        - Fly
       4:
-        - "Greater Invisibility"
+        - Greater Invisibility
       5:
-        - "Cone of Cold"
-  # L12: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/0/+1
+        - Cone of Cold
   - level: 12
     class: Sorcerer
     hp_roll: 3
@@ -198,13 +178,11 @@ levels:
       Spellcraft: 1
       Knowledge (Arcana): 1
     feats:
-      - name: "Greater Spell Penetration"
+      - name: Greater Spell Penetration
         source: character
     spells_learned:
       6:
-        - "Disintegrate"
-  # L13: 3 skill pts
-  # Spells known delta: 0/0/0/0/+1/+1/+1
+        - Disintegrate
   - level: 13
     class: Sorcerer
     hp_roll: 3
@@ -214,13 +192,11 @@ levels:
       Bluff: 1
     spells_learned:
       4:
-        - "Ice Storm"
+        - Ice Storm
       5:
-        - "Wall of Force"
+        - Wall of Force
       6:
-        - "Chain Lightning"
-  # L14: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/0/0/+1
+        - Chain Lightning
   - level: 14
     class: Sorcerer
     hp_roll: 3
@@ -230,9 +206,7 @@ levels:
       Knowledge (Arcana): 1
     spells_learned:
       7:
-        - "Finger of Death"
-  # L15: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/+1/+1/+1
+        - Finger of Death
   - level: 15
     class: Sorcerer
     hp_roll: 3
@@ -241,17 +215,15 @@ levels:
       Spellcraft: 1
       Bluff: 1
     feats:
-      - name: "Iron Will"
+      - name: Iron Will
         source: character
     spells_learned:
       5:
-        - "Dominate Person"
+        - Dominate Person
       6:
-        - "Greater Dispel Magic"
+        - Greater Dispel Magic
       7:
-        - "Prismatic Spray"
-  # L16: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/0/0/0/+1
+        - Prismatic Spray
   - level: 16
     class: Sorcerer
     hp_roll: 3
@@ -261,9 +233,7 @@ levels:
       Knowledge (Arcana): 1
     spells_learned:
       8:
-        - "Horrid Wilting"
-  # L17: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/0/0/+1/+1
+        - Horrid Wilting
   - level: 17
     class: Sorcerer
     hp_roll: 3
@@ -273,11 +243,9 @@ levels:
       Bluff: 1
     spells_learned:
       7:
-        - "Limited Wish"
+        - Limited Wish
       8:
-        - "Polar Ray"
-  # L18: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/0/0/0/0/+1
+        - Polar Ray
   - level: 18
     class: Sorcerer
     hp_roll: 3
@@ -286,13 +254,11 @@ levels:
       Spellcraft: 1
       Knowledge (Arcana): 1
     feats:
-      - name: "Empower Spell"
+      - name: Empower Spell
         source: character
     spells_learned:
       9:
-        - "Wish"
-  # L19: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/0/0/0/+1/+1
+        - Wish
   - level: 19
     class: Sorcerer
     hp_roll: 3
@@ -302,11 +268,9 @@ levels:
       Bluff: 1
     spells_learned:
       8:
-        - "Greater Shout"
+        - Greater Shout
       9:
-        - "Meteor Swarm"
-  # L20: 3 skill pts
-  # Spells known delta: 0/0/0/0/0/0/0/0/0/+1
+        - Meteor Swarm
   - level: 20
     class: Sorcerer
     hp_roll: 3
@@ -316,18 +280,15 @@ levels:
       Knowledge (Arcana): 1
     spells_learned:
       9:
-        - "Time Stop"
-
+        - Time Stop
 buffs: {}
 templates: []
 dm_overrides: []
-
 equipment:
   armor: {}
   shield: {}
   worn: []
   weapons:
-    - name: "Quarterstaff"
+    - name: Quarterstaff
       base: Quarterstaff
-
-notes: ""
+notes: ''

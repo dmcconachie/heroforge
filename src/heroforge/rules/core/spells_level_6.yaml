@@ -256,21 +256,22 @@ Transformation:
   level:
     Sorcerer: 6
     Wizard: 6
-  note: +4 enhancement STR, DEX, CON; +4 natural armor AC; full BAB; cannot cast
+  note: >-
+    +4 enhancement STR, DEX, CON; +4 natural armor AC; full BAB; cannot cast
     spells
   effects:
-  - target: str_score
-    bonus_type: enhancement
-    value: 4
-  - target: dex_score
-    bonus_type: enhancement
-    value: 4
-  - target: con_score
-    bonus_type: enhancement
-    value: 4
-  - target: ac
-    bonus_type: natural_armor
-    value: 4
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
+    - target: ac
+      bonus_type: natural_armor
+      value: 4
 Transport via Plants:
   level:
     Druid: 6

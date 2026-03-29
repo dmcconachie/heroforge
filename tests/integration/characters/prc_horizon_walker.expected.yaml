@@ -85,15 +85,15 @@ combat:
     total: 21
 attack_iteratives:
   melee:
-  - 21
-  - 16
-  - 11
-  - 6
+    - 21
+    - 16
+    - 11
+    - 6
   ranged:
-  - 20
-  - 15
-  - 10
-  - 5
+    - 20
+    - 15
+    - 10
+    - 5
 skills:
   Climb:
     ranks: 21
@@ -139,27 +139,27 @@ carrying_capacity:
   medium: 153
   heavy: 230
 feats:
-- Power Attack
-- Alertness
-- Endurance
-- Cleave
-- Iron Will
-- Toughness
-- Great Fortitude
-- Diehard
-- Lightning Reflexes
+  - Power Attack
+  - Alertness
+  - Endurance
+  - Cleave
+  - Iron Will
+  - Toughness
+  - Great Fortitude
+  - Diehard
+  - Lightning Reflexes
 class_features:
-- 'favored_enemy_1: Favored enemy 1: +2 vs type'
-- 'track: Track feat for free'
-- 'wild_empathy: Improve attitude of animals'
-- 'combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)'
-- 'endurance: Endurance feat for free'
-- 'animal_companion: Special animal companion'
-- 'favored_enemy_2: Favored enemy 2; +4 vs type'
-- 'improved_combat_style: Manyshot or Improved Two-Weapon Fighting'
-- 'woodland_stride: Move through natural undergrowth at full speed'
-- 'swift_tracker: Track at full speed without penalty'
-- 'terrain_mastery: Choose terrain mastery'
+  - 'favored_enemy_1: Favored enemy 1: +2 vs type'
+  - 'track: Track feat for free'
+  - 'wild_empathy: Improve attitude of animals'
+  - 'combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)'
+  - 'endurance: Endurance feat for free'
+  - 'animal_companion: Special animal companion'
+  - 'favored_enemy_2: Favored enemy 2; +4 vs type'
+  - 'improved_combat_style: Manyshot or Improved Two-Weapon Fighting'
+  - 'woodland_stride: Move through natural undergrowth at full speed'
+  - 'swift_tracker: Track at full speed without penalty'
+  - 'terrain_mastery: Choose terrain mastery'
 spellcasting:
   Ranger:
     caster_level: 8
@@ -167,8 +167,8 @@ spellcasting:
     cast_type: divine
     preparation: prepared
     slots_per_day:
-    - 1
-    - 1
+      - 1
+      - 1
     spell_save_dc:
       0: 12
       1: 13

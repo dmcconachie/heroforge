@@ -9,32 +9,32 @@ Loremaster:
     will: good
   skills_per_level: 4
   class_skills:
-  - Appraise
-  - Concentration
-  - Craft
-  - Decipher Script
-  - Gather Information
-  - Handle Animal
-  - Heal
-  - Knowledge (all)
-  - Perform
-  - Profession
-  - Speak Language
-  - Spellcraft
-  - Use Magic Device
+    - Appraise
+    - Concentration
+    - Craft
+    - Decipher Script
+    - Gather Information
+    - Handle Animal
+    - Heal
+    - Knowledge (all)
+    - Perform
+    - Profession
+    - Speak Language
+    - Spellcraft
+    - Use Magic Device
   entry_prerequisites:
     all_of:
-    - spellcasting:
-        cast_type: arcane
-        min_level: 7
-    - skill:
-        name: Knowledge (Arcana)
-        min: 10
+      - spellcasting:
+          cast_type: arcane
+          min_level: 7
+      - skill:
+          name: Knowledge (Arcana)
+          min: 10
   class_features:
-  - level: 1
-    feature: secret
-    description: Choose lore secret
-  - level: 2
-    feature: lore
-    description: Lore check (like bard)
+    - level: 1
+      feature: secret
+      description: Choose lore secret
+    - level: 2
+      feature: lore
+      description: Lore check (like bard)
   is_prestige: true
