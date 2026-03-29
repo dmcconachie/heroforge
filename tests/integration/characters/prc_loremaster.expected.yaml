@@ -155,7 +155,8 @@ feats:
 class_features:
   - 'summon_familiar: Summon a familiar'
   - 'scribe_scroll: Scribe scroll feat for free'
-  - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+  - >-
+    bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)
   - 'bonus_feat_wizard_10: Bonus wizard feat'
   - 'secret: Choose lore secret'
   - 'lore: Lore check (like bard)'

@@ -132,8 +132,10 @@ feats:
   - Greater Spell Penetration
 class_features:
   - 'turn_undead: Turn or rebuke undead'
-  - 'spontaneous_casting: Convert prepared spells to cure/inflict'
-  - 'domains: Two domains granting bonus spells and powers'
+  - >-
+    spontaneous_casting: Convert prepared spells to cure/inflict
+  - >-
+    domains: Two domains granting bonus spells and powers
 spellcasting:
   Cleric:
     caster_level: 20

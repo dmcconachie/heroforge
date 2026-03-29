@@ -128,14 +128,18 @@ feats:
   - Ride-By Attack
   - Spirited Charge
 class_features:
-  - 'aura_of_good: Aura of good (equal to Paladin level)'
+  - >-
+    aura_of_good: Aura of good (equal to Paladin level)
   - 'detect_evil: Detect evil at will'
   - 'smite_evil_1: Smite evil 1/day'
   - 'divine_grace: +CHA modifier to all saves'
-  - 'lay_on_hands: Heal HP per day = Paladin level × CHA modifier'
-  - 'aura_of_courage: Immune to fear; allies +4 morale vs fear'
+  - >-
+    lay_on_hands: Heal HP per day = Paladin level × CHA modifier
+  - >-
+    aura_of_courage: Immune to fear; allies +4 morale vs fear
   - 'divine_health: Immune to all diseases'
-  - 'turn_undead: Turn undead as Cleric of (Paladin level - 3)'
+  - >-
+    turn_undead: Turn undead as Cleric of (Paladin level - 3)
   - 'smite_evil_2: Smite evil 2/day'
   - 'special_mount: Celestial heavy warhorse or pony'
   - 'remove_disease_1: Remove disease 1/week'

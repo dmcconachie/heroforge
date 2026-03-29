@@ -152,12 +152,15 @@ class_features:
   - 'favored_enemy_1: Favored enemy 1: +2 vs type'
   - 'track: Track feat for free'
   - 'wild_empathy: Improve attitude of animals'
-  - 'combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)'
+  - >-
+    combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)
   - 'endurance: Endurance feat for free'
   - 'animal_companion: Special animal companion'
   - 'favored_enemy_2: Favored enemy 2; +4 vs type'
-  - 'improved_combat_style: Manyshot or Improved Two-Weapon Fighting'
-  - 'woodland_stride: Move through natural undergrowth at full speed'
+  - >-
+    improved_combat_style: Manyshot or Improved Two-Weapon Fighting
+  - >-
+    woodland_stride: Move through natural undergrowth at full speed
   - 'swift_tracker: Track at full speed without penalty'
   - 'terrain_mastery: Choose terrain mastery'
 spellcasting:

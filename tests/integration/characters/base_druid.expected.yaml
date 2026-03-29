@@ -153,10 +153,14 @@ class_features:
   - 'animal_companion: Special animal companion'
   - 'nature_sense: +2 Knowledge (Nature) and Survival'
   - 'wild_empathy: Improve attitude of animals'
-  - 'woodland_stride: Move through natural undergrowth at full speed'
-  - 'trackless_step: Leave no trail in natural surroundings'
-  - 'resist_natures_lure: +4 saves vs fey spell-like abilities'
-  - 'wild_shape_1: Wild Shape 1/day (Small or Medium animal)'
+  - >-
+    woodland_stride: Move through natural undergrowth at full speed
+  - >-
+    trackless_step: Leave no trail in natural surroundings
+  - >-
+    resist_natures_lure: +4 saves vs fey spell-like abilities
+  - >-
+    wild_shape_1: Wild Shape 1/day (Small or Medium animal)
   - 'wild_shape_2: Wild Shape 2/day'
   - 'wild_shape_3: Wild Shape 3/day; Large animal'
   - 'wild_shape_4: Wild Shape 4/day; Tiny animal'

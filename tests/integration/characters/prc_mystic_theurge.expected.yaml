@@ -139,8 +139,10 @@ feats:
   - Greater Spell Penetration
 class_features:
   - 'turn_undead: Turn or rebuke undead'
-  - 'spontaneous_casting: Convert prepared spells to cure/inflict'
-  - 'domains: Two domains granting bonus spells and powers'
+  - >-
+    spontaneous_casting: Convert prepared spells to cure/inflict
+  - >-
+    domains: Two domains granting bonus spells and powers
   - 'summon_familiar: Summon a familiar'
   - 'scribe_scroll: Scribe scroll feat for free'
 spellcasting:

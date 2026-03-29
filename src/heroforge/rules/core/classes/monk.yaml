@@ -46,8 +46,9 @@ Monk:
     - level: 1
       feature: bonus_feat_monk_1
       description: >-
-        '''''''Improved Unarmed Strike + one of: Combat Reflexes, Deflect
-        Arrows, Improved Grapple'''''''
+        Improved Unarmed Strike + choice
+        of Combat Reflexes, Deflect Arrows,
+        or Improved Grapple
     - level: 2
       feature: evasion
       description: No damage on successful Reflex saves

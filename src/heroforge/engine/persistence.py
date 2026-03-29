@@ -55,7 +55,7 @@ if TYPE_CHECKING:
 
 
 class _IndentDumper(yaml.Dumper):
-    """Dumper that indents sequences under their key."""
+    """Dumper with indented sequences and folded long strings."""
 
     def increase_indent(  # type: ignore[override]
         self,
@@ -63,6 +63,20 @@ class _IndentDumper(yaml.Dumper):
         indentless: bool = False,
     ) -> None:
         return super().increase_indent(flow, indentless=False)
+
+
+def _str_representer(dumper: yaml.Dumper, data: str) -> yaml.Node:
+    """Use folded block scalar for long strings."""
+    if len(data) > 50 and "\n" not in data:
+        return dumper.represent_scalar(
+            "tag:yaml.org,2002:str",
+            data,
+            style=">",
+        )
+    return dumper.represent_scalar("tag:yaml.org,2002:str", data)
+
+
+_IndentDumper.add_representer(str, _str_representer)
 
 
 def yaml_dump(data: object, stream: object = None) -> str:
@@ -77,6 +91,7 @@ def yaml_dump(data: object, stream: object = None) -> str:
         default_flow_style=False,
         allow_unicode=True,
         sort_keys=False,
+        width=72,
     )
 
 

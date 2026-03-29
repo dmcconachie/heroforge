@@ -166,20 +166,28 @@ feats:
   - Mobility
   - Greater Spell Penetration
 class_features:
-  - 'bardic_music: Bardic music abilities; uses/day = Bard level'
-  - 'bardic_knowledge: Bardic knowledge check (Bard level + INT)'
-  - 'countersong: Counter sonic/language-dependent magic'
+  - >-
+    bardic_music: Bardic music abilities; uses/day = Bard level
+  - >-
+    bardic_knowledge: Bardic knowledge check (Bard level + INT)
+  - >-
+    countersong: Counter sonic/language-dependent magic
   - 'fascinate: Fascinate creatures with Perform check'
-  - 'inspire_courage_1: +1 morale bonus attacks/saves vs fear'
-  - 'inspire_competence: +2 competence bonus on skill checks'
+  - >-
+    inspire_courage_1: +1 morale bonus attacks/saves vs fear
+  - >-
+    inspire_competence: +2 competence bonus on skill checks
   - 'suggestion: Suggestion via fascinate'
-  - 'inspire_courage_2: +2 morale bonus attacks/saves vs fear'
+  - >-
+    inspire_courage_2: +2 morale bonus attacks/saves vs fear
   - 'inspire_greatness: +2 HD, +2 attack, +1 Fort'
   - 'song_of_freedom: Break enchantment via music'
-  - 'inspire_courage_3: +3 morale bonus attacks/saves vs fear'
+  - >-
+    inspire_courage_3: +3 morale bonus attacks/saves vs fear
   - 'inspire_heroics: +4 AC and saves for one creature'
   - 'mass_suggestion: Suggestion to all fascinated'
-  - 'inspire_courage_4: +4 morale bonus attacks/saves vs fear'
+  - >-
+    inspire_courage_4: +4 morale bonus attacks/saves vs fear
 spellcasting:
   Bard:
     caster_level: 20

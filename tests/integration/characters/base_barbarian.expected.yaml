@@ -149,10 +149,13 @@ feats:
   - Blind-Fight
   - Toughness
 class_features:
-  - 'fast_movement: +10 ft speed (not in medium/heavy armor)'
-  - 'illiteracy: Cannot read unless spending 2 skill points'
+  - >-
+    fast_movement: +10 ft speed (not in medium/heavy armor)
+  - >-
+    illiteracy: Cannot read unless spending 2 skill points
   - 'rage: +4 STR/CON, +2 Will, -2 AC; 1/day'
-  - 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+  - >-
+    uncanny_dodge: Retain DEX bonus to AC when flat-footed
   - 'trap_sense_1: +1 Reflex and AC vs traps'
   - 'rage_2: Rage 2/day'
   - 'improved_uncanny_dodge: Cannot be flanked'
@@ -166,7 +169,8 @@ class_features:
   - 'trap_sense_4: +4 Reflex and AC vs traps'
   - 'rage_5: Rage 5/day'
   - 'damage_reduction_3: DR 3/—'
-  - 'indomitable_will: +4 Will vs enchantments while raging'
+  - >-
+    indomitable_will: +4 Will vs enchantments while raging
   - 'trap_sense_5: +5 Reflex and AC vs traps'
   - 'rage_6: Rage 6/day'
   - 'damage_reduction_4: DR 4/—'

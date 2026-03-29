@@ -169,7 +169,8 @@ class_features:
   - 'bonus_feat_1: Bonus fighter feat'
   - 'summon_familiar: Summon a familiar'
   - 'scribe_scroll: Scribe scroll feat for free'
-  - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+  - >-
+    bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)
   - 'bonus_feat: Bonus fighter feat'
 spellcasting:
   Wizard:

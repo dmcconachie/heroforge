@@ -227,7 +227,8 @@ class_features:
   - 'trap_sense_1: +1 Reflex and AC vs traps'
   - 'summon_familiar: Summon a familiar'
   - 'scribe_scroll: Scribe scroll feat for free'
-  - 'bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)'
+  - >-
+    bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)
   - 'ranged_legerdemain: Ranged sleight of hand'
   - 'sneak_attack_1d6: +1d6 sneak attack'
   - 'sneak_attack_2d6: +2d6 sneak attack'

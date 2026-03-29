@@ -207,14 +207,16 @@ class_features:
   - 'evasion: No damage on successful Reflex save'
   - 'sneak_attack_2d6: Sneak attack +2d6'
   - 'trap_sense_1: +1 Reflex and AC vs traps'
-  - 'uncanny_dodge: Retain DEX bonus to AC when flat-footed'
+  - >-
+    uncanny_dodge: Retain DEX bonus to AC when flat-footed
   - 'sneak_attack_3d6: Sneak attack +3d6'
   - 'trap_sense_2: +2 Reflex and AC vs traps'
   - 'sneak_attack_4d6: Sneak attack +4d6'
   - 'improved_uncanny_dodge: Cannot be flanked'
   - 'sneak_attack_5d6: Sneak attack +5d6'
   - 'trap_sense_3: +3 Reflex and AC vs traps'
-  - 'special_ability: Rogue special ability (crippling strike, etc.)'
+  - >-
+    special_ability: Rogue special ability (crippling strike, etc.)
   - 'sneak_attack_6d6: Sneak attack +6d6'
   - 'trap_sense_4: +4 Reflex and AC vs traps'
   - 'sneak_attack_7d6: Sneak attack +7d6'

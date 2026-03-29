@@ -118,8 +118,10 @@ feats:
   - Spell Penetration
 class_features:
   - 'turn_undead: Turn or rebuke undead'
-  - 'spontaneous_casting: Convert prepared spells to cure/inflict'
-  - 'domains: Two domains granting bonus spells and powers'
+  - >-
+    spontaneous_casting: Convert prepared spells to cure/inflict
+  - >-
+    domains: Two domains granting bonus spells and powers
   - 'improved_ally: Better planar ally'
   - 'augment_summoning: Augment Summoning feat'
   - 'extended_summoning: Double duration'

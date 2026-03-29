@@ -129,8 +129,10 @@ feats:
   - Quicken Spell
 class_features:
   - 'turn_undead: Turn or rebuke undead'
-  - 'spontaneous_casting: Convert prepared spells to cure/inflict'
-  - 'domains: Two domains granting bonus spells and powers'
+  - >-
+    spontaneous_casting: Convert prepared spells to cure/inflict
+  - >-
+    domains: Two domains granting bonus spells and powers
   - 'special_ability: Choose hierophant ability'
 spellcasting:
   Cleric:
