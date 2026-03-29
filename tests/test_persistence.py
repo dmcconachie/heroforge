@@ -27,7 +27,6 @@ if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
 
-from heroforge.engine.classes_races import apply_race
 from heroforge.engine.effects import (
     apply_buff,
 )
@@ -35,6 +34,7 @@ from heroforge.engine.persistence import (
     load_character,
     save_character,
 )
+from heroforge.engine.races import apply_race
 from heroforge.engine.skills import set_skill_ranks
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"

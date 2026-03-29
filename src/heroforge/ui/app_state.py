@@ -16,12 +16,9 @@ from __future__ import annotations
 from pathlib import Path
 
 from heroforge.engine.character import Character
-from heroforge.engine.classes_races import (
-    ClassRegistry,
-    DomainRegistry,
-    RaceRegistry,
-)
+from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.conditions import ConditionRegistry
+from heroforge.engine.domains import DomainRegistry
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.equipment import (
     ArmorRegistry,
@@ -32,6 +29,7 @@ from heroforge.engine.magic_items import MagicItemRegistry
 from heroforge.engine.prerequisites import (
     PrerequisiteChecker,
 )
+from heroforge.engine.races import RaceRegistry
 from heroforge.engine.skills import (
     SkillRegistry,
     register_skills_on_character,

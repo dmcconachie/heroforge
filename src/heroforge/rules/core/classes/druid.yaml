@@ -26,6 +26,7 @@ Druid:
     stat: wis
     preparation: prepared
     max_spell_level: 9
+    starts_at_level: 1
   class_features:
   - level: 1
     feature: animal_companion

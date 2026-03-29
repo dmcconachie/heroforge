@@ -1,21 +1,19 @@
 """
-tests/test_classes_races.py
----------------------------
-Test suite for engine/classes_races.py, rules/core/classes.yaml,
-rules/core/races.yaml, ClassesLoader, and RacesLoader.
+tests/test_classes.py
+---------------------
+Test suite for engine/classes.py, rules/core/classes.yaml,
+and ClassesLoader.
 
 Covers:
-  - BAB and save progression helper functions at key level boundaries
+  - BAB and save progression helper functions at key level
+    boundaries
   - ClassDefinition construction and make_class_level()
   - ClassRegistry: register, get, require
-  - RaceDefinition construction and size modifiers
-  - RaceRegistry: register, get, require
-  - build_class_from_yaml / build_race_from_yaml
-  - ClassesLoader: YAML validation, registration, all 9 core classes
-  - RacesLoader: YAML validation, registration, all 7 core races
-  - apply_race(): ability bonuses, base speed, creature type
-  - remove_race(): full revert
-  - Character integration: race + class levels → correct all stats
+  - build_class_from_yaml
+  - ClassesLoader: YAML validation, registration, all core
+    classes
+  - Character integration: race + class levels -> correct
+    all stats
 """
 
 from __future__ import annotations
@@ -24,30 +22,24 @@ from pathlib import Path
 
 import pytest
 
-from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character
-from heroforge.engine.classes_races import (
+from heroforge.engine.classes import (
     BABProgression,
     ClassDefinition,
     ClassFeature,
     ClassRegistry,
-    RaceAbilityMod,
-    RaceDefinition,
-    RaceRegistry,
     SaveProgression,
     SaveProgressions,
-    apply_race,
     bab_at_level,
-    remove_race,
     save_at_level,
 )
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
 
-# ===========================================================================
+# ===============================================================
 # Helpers
-# ===========================================================================
+# ===============================================================
 
 
 def loaded_class_registry() -> ClassRegistry:
@@ -58,21 +50,13 @@ def loaded_class_registry() -> ClassRegistry:
     return reg
 
 
-def loaded_race_registry() -> RaceRegistry:
-    from heroforge.rules.loader import RacesLoader
-
-    reg = RaceRegistry()
-    RacesLoader(RULES_DIR).load(reg, "core/races.yaml")
-    return reg
-
-
 def fresh_char() -> Character:
     return Character()
 
 
-# ===========================================================================
+# ===============================================================
 # BAB progression helper
-# ===========================================================================
+# ===============================================================
 
 
 class TestBabAtLevel:
@@ -117,9 +101,9 @@ class TestBabAtLevel:
             assert bab_at_level(prog, 0) == 0
 
 
-# ===========================================================================
+# ===============================================================
 # Save progression helper
-# ===========================================================================
+# ===============================================================
 
 
 class TestSaveAtLevel:
@@ -155,9 +139,9 @@ class TestSaveAtLevel:
             assert save_at_level(prog, 0) == 0
 
 
-# ===========================================================================
+# ===============================================================
 # ClassDefinition
-# ===========================================================================
+# ===============================================================
 
 
 class TestClassDefinition:
@@ -221,9 +205,9 @@ class TestClassDefinition:
         assert len(f.features_up_to_level(3)) == 2
 
 
-# ===========================================================================
+# ===============================================================
 # ClassRegistry
-# ===========================================================================
+# ===============================================================
 
 
 class TestClassRegistry:
@@ -246,142 +230,16 @@ class TestClassRegistry:
         reg = ClassRegistry()
         for name in ("Wizard", "Barbarian", "Cleric"):
             reg.register(ClassDefinition(name=name))
-        assert reg.all_names() == ["Barbarian", "Cleric", "Wizard"]
+        assert reg.all_names() == [
+            "Barbarian",
+            "Cleric",
+            "Wizard",
+        ]
 
 
-# ===========================================================================
-# RaceDefinition
-# ===========================================================================
-
-
-class TestRaceDefinition:
-    def test_medium_size_mod_zero(self) -> None:
-        r = RaceDefinition(name="Human", size="Medium")
-        assert r.size_modifier == 0
-        assert r.hide_modifier == 0
-
-    def test_small_size_mod(self) -> None:
-        r = RaceDefinition(name="Gnome", size="Small")
-        assert r.size_modifier == 1
-        assert r.hide_modifier == 4
-
-    def test_large_size_mod(self) -> None:
-        r = RaceDefinition(name="Giant", size="Large")
-        assert r.size_modifier == -1
-        assert r.hide_modifier == -4
-
-    def test_ability_modifiers_stored(self) -> None:
-        r = RaceDefinition(
-            name="Dwarf",
-            ability_modifiers=[
-                RaceAbilityMod("con", 2, BonusType.UNTYPED),
-                RaceAbilityMod("cha", -2, BonusType.UNTYPED),
-            ],
-        )
-        assert len(r.ability_modifiers) == 2
-        assert r.ability_modifiers[0].value == 2
-
-
-# ===========================================================================
-# apply_race / remove_race
-# ===========================================================================
-
-
-class TestApplyRace:
-    def test_apply_race_sets_ability_bonuses(self) -> None:
-        c = fresh_char()
-        c.set_ability_score("dex", 10)
-        c.set_ability_score("con", 10)
-
-        dwarf = RaceDefinition(
-            name="Dwarf",
-            ability_modifiers=[
-                RaceAbilityMod("con", 2, BonusType.UNTYPED),
-                RaceAbilityMod("cha", -2, BonusType.UNTYPED),
-            ],
-        )
-        apply_race(dwarf, c)
-        assert c.con_score == 12
-        assert c.cha_score == 8
-
-    def test_apply_race_sets_character_race_name(self) -> None:
-        c = fresh_char()
-        apply_race(RaceDefinition(name="Human"), c)
-        assert c.race == "Human"
-
-    def test_apply_race_sets_base_speed(self) -> None:
-        c = fresh_char()
-        apply_race(RaceDefinition(name="Dwarf", base_speed=20), c)
-        assert c._race_base_speed == 20
-
-    def test_apply_race_is_idempotent(self) -> None:
-        c = fresh_char()
-        c.set_ability_score("dex", 10)
-        elf = RaceDefinition(
-            name="Elf",
-            ability_modifiers=[RaceAbilityMod("dex", 2, BonusType.UNTYPED)],
-        )
-        apply_race(elf, c)
-        dex_once = c.dex_score
-        apply_race(elf, c)
-        assert c.dex_score == dex_once  # no double-counting
-
-    def test_remove_race_reverts_ability_bonuses(self) -> None:
-        c = fresh_char()
-        c.set_ability_score("dex", 10)
-        elf = RaceDefinition(
-            name="Elf",
-            ability_modifiers=[RaceAbilityMod("dex", 2, BonusType.UNTYPED)],
-        )
-        apply_race(elf, c)
-        assert c.dex_score == 12
-        remove_race(elf, c)
-        assert c.dex_score == 10
-
-    def test_remove_race_reverts_name(self) -> None:
-        c = fresh_char()
-        elf = RaceDefinition(name="Elf")
-        apply_race(elf, c)
-        remove_race(elf, c)
-        assert c.race == ""
-
-    def test_remove_race_not_applied_is_noop(self) -> None:
-        c = fresh_char()
-        elf = RaceDefinition(name="Elf")
-        remove_race(elf, c)  # must not raise
-
-    def test_human_has_no_ability_modifiers(self) -> None:
-        c = fresh_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
-            c.set_ability_score(ab, 10)
-        apply_race(RaceDefinition(name="Human"), c)
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
-            assert c.get_ability_score(ab) == 10
-
-    def test_elf_dex_bonus_propagates_to_ac(self) -> None:
-        c = fresh_char()
-        c.set_ability_score("dex", 10)
-        base_ac = c.ac
-        elf = RaceDefinition(
-            name="Elf",
-            ability_modifiers=[
-                RaceAbilityMod("dex", 2, BonusType.UNTYPED),
-                RaceAbilityMod("con", -2, BonusType.UNTYPED),
-            ],
-        )
-        apply_race(elf, c)
-        assert c.ac == base_ac + 1  # dex 10→12, mod 0→1
-
-    def test_halfling_small_speed(self) -> None:
-        c = fresh_char()
-        halfling = RaceDefinition(name="Halfling", base_speed=20)
-        apply_race(halfling, c)
-        assert c._race_base_speed == 20
-
-
-# ===========================================================================
+# ===============================================================
 # ClassesLoader
-# ===========================================================================
+# ===============================================================
 
 
 class TestClassesLoader:
@@ -467,7 +325,9 @@ class TestClassesLoader:
         assert reg.require("Rogue").hit_die == 6
         assert reg.require("Barbarian").hit_die == 12
 
-    def test_fighter_class_features_include_bonus_feats(self) -> None:
+    def test_fighter_class_features_include_bonus_feats(
+        self,
+    ) -> None:
         reg = loaded_class_registry()
         f = reg.require("Fighter")
         feats = {cf.feature for cf in f.class_features}
@@ -483,156 +343,56 @@ class TestClassesLoader:
     def test_cleric_make_class_level(self) -> None:
         reg = loaded_class_registry()
         cl = reg.require("Cleric").make_class_level(5)
-        assert cl.bab_contribution == 3  # medium: floor(5*3/4)
+        # medium: floor(5*3/4)
+        assert cl.bab_contribution == 3
         assert cl.fort_contribution == 4  # good: 2 + 5//2
 
     def test_no_duplicate_class_names(self) -> None:
-        """Loading with overwrite=False would raise on dups."""
+        """
+        Loading with overwrite=False would raise on
+        dups."""
         reg = loaded_class_registry()
         assert len(reg) == 31
 
     def test_load_missing_file_raises(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import ClassesLoader, LoaderError
+        from heroforge.rules.loader import (
+            ClassesLoader,
+            LoaderError,
+        )
 
         with pytest.raises(LoaderError, match="not found"):
             ClassesLoader(tmp_path).load(ClassRegistry(), "core/classes")
 
 
-# ===========================================================================
-# RacesLoader
-# ===========================================================================
-
-
-class TestRacesLoader:
-    def test_load_registers_all_races(self) -> None:
-        import yaml
-
-        from heroforge.rules.loader import RacesLoader
-
-        with open(RULES_DIR / "core" / "races.yaml") as f:
-            data = yaml.safe_load(f)
-        expected = len(data)
-        reg = RaceRegistry()
-        RacesLoader(RULES_DIR).load(reg, "core/races.yaml")
-        assert len(reg) == expected
-
-    def test_all_phb_races_present(self) -> None:
-        reg = loaded_race_registry()
-        for name in (
-            "Human",
-            "Dwarf",
-            "Elf",
-            "Gnome",
-            "Half-Elf",
-            "Half-Orc",
-            "Halfling",
-        ):
-            assert name in reg, f"{name} missing from race registry"
-
-    def test_human_no_ability_mods(self) -> None:
-        reg = loaded_race_registry()
-        h = reg.require("Human")
-        assert h.ability_modifiers == []
-
-    def test_dwarf_con_cha_mods(self) -> None:
-        reg = loaded_race_registry()
-        d = reg.require("Dwarf")
-        mods = {m.ability: m.value for m in d.ability_modifiers}
-        assert mods["con"] == 2
-        assert mods["cha"] == -2
-
-    def test_elf_dex_con_mods(self) -> None:
-        reg = loaded_race_registry()
-        e = reg.require("Elf")
-        mods = {m.ability: m.value for m in e.ability_modifiers}
-        assert mods["dex"] == 2
-        assert mods["con"] == -2
-
-    def test_gnome_small_size(self) -> None:
-        reg = loaded_race_registry()
-        g = reg.require("Gnome")
-        assert g.size == "Small"
-        assert g.size_modifier == 1
-
-    def test_human_medium_size(self) -> None:
-        reg = loaded_race_registry()
-        h = reg.require("Human")
-        assert h.size == "Medium"
-
-    def test_halfling_small_size(self) -> None:
-        reg = loaded_race_registry()
-        h = reg.require("Halfling")
-        assert h.size == "Small"
-        assert h.base_speed == 20
-
-    def test_dwarf_speed_20(self) -> None:
-        reg = loaded_race_registry()
-        d = reg.require("Dwarf")
-        assert d.base_speed == 20
-
-    def test_dwarf_darkvision_60(self) -> None:
-        reg = loaded_race_registry()
-        d = reg.require("Dwarf")
-        assert d.darkvision == 60
-
-    def test_human_no_darkvision(self) -> None:
-        reg = loaded_race_registry()
-        h = reg.require("Human")
-        assert h.darkvision == 0
-
-    def test_elf_low_light_vision(self) -> None:
-        reg = loaded_race_registry()
-        e = reg.require("Elf")
-        assert e.low_light_vision is True
-
-    def test_human_no_low_light_vision(self) -> None:
-        reg = loaded_race_registry()
-        h = reg.require("Human")
-        assert h.low_light_vision is False
-
-    def test_dwarf_weapon_familiarity(self) -> None:
-        reg = loaded_race_registry()
-        d = reg.require("Dwarf")
-        assert "Dwarven Waraxe" in d.weapon_familiarity
-
-    def test_human_favored_class_any(self) -> None:
-        reg = loaded_race_registry()
-        h = reg.require("Human")
-        assert h.favored_class == "any"
-
-    def test_elf_favored_class_wizard(self) -> None:
-        reg = loaded_race_registry()
-        e = reg.require("Elf")
-        assert e.favored_class == "Wizard"
-
-    def test_no_duplicate_race_names(self) -> None:
-        """Dict keys are unique by definition."""
-        reg = loaded_race_registry()
-        assert len(reg) == 7
-
-    def test_load_missing_file_raises(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import LoaderError, RacesLoader
-
-        with pytest.raises(LoaderError, match="not found"):
-            RacesLoader(tmp_path).load(RaceRegistry(), "core/races.yaml")
-
-
-# ===========================================================================
+# ===============================================================
 # Character integration: race + class
-# ===========================================================================
+# ===============================================================
 
 
 class TestCharacterIntegration:
+    def _load_registries(self) -> tuple:
+        from heroforge.engine.races import (
+            RaceRegistry,
+            apply_race,
+            remove_race,
+        )
+        from heroforge.rules.loader import RacesLoader
+
+        race_reg = RaceRegistry()
+        RacesLoader(RULES_DIR).load(race_reg, "core/races.yaml")
+        class_reg = loaded_class_registry()
+        return race_reg, class_reg, apply_race, remove_race
+
     def test_dwarf_fighter_saves(self) -> None:
         """
         Dwarf Fighter 4:
-          STR 14 (mod +2), DEX 10, CON 14 (+2 racial) = 16 (mod +3)
+          STR 14 (mod +2), DEX 10,
+          CON 14 (+2 racial) = 16 (mod +3)
           Fort = base(4) + con_mod(3) = 7 (good fort)
           Ref  = base(1) + dex_mod(0) = 1 (poor ref)
           Will = base(1) + wis_mod(0) = 1 (poor will)
         """
-        race_reg = loaded_race_registry()
-        class_reg = loaded_class_registry()
+        race_reg, class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         c.set_ability_score("str", 14)
@@ -654,8 +414,7 @@ class TestCharacterIntegration:
           BAB = poor floor(6/2) = 3
           Will = good 2+6//2=5 + wis_mod(0) = 5
         """
-        race_reg = loaded_race_registry()
-        class_reg = loaded_class_registry()
+        race_reg, class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         apply_race(race_reg.require("Elf"), c)
@@ -666,9 +425,10 @@ class TestCharacterIntegration:
         assert c.will == 5
 
     def test_halfling_rogue_speed(self) -> None:
-        """Halfling has base speed 20; should be reflected."""
-        race_reg = loaded_race_registry()
-        class_reg = loaded_class_registry()
+        """
+        Halfling has base speed 20; should be
+        reflected."""
+        race_reg, class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         apply_race(race_reg.require("Halfling"), c)
@@ -680,11 +440,10 @@ class TestCharacterIntegration:
     def test_half_orc_barbarian_str(self) -> None:
         """
         Half-Orc Barbarian 5:
-          +2 STR racial. STR 14 base → 16.
+          +2 STR racial. STR 14 base -> 16.
           STR mod = 3. Attack = bab(5) + str_mod(3) = 8.
         """
-        race_reg = loaded_race_registry()
-        class_reg = loaded_class_registry()
+        race_reg, class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         c.set_ability_score("str", 14)
@@ -693,16 +452,16 @@ class TestCharacterIntegration:
 
         cl = class_reg.require("Barbarian").make_class_level(5)
         c.set_class_levels([cl])
-        assert c.get("attack_melee") == 8  # bab 5 + str_mod 3
+        assert c.get("attack_melee") == 8  # bab 5 + str 3
 
     def test_human_fighter_multiclass_bab(self) -> None:
         """
         Human Fighter 4 / Wizard 4:
-          Fighter BAB = 4 (full), Wizard BAB = 2 (poor).
+          Fighter BAB = 4 (full),
+          Wizard BAB = 2 (poor).
           Combined BAB = 6.
         """
-        race_reg = loaded_race_registry()
-        class_reg = loaded_class_registry()
+        race_reg, class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         apply_race(race_reg.require("Human"), c)
@@ -716,16 +475,24 @@ class TestCharacterIntegration:
     def test_gnome_small_size_ac(self) -> None:
         """
         Gnome is Small (+1 size AC).
-        Size modifiers to AC are handled via the size pool — for now
-        verify the size_modifier property is correct.
+        Size modifiers to AC are handled via the size
+        pool -- for now verify the size_modifier property
+        is correct.
         """
-        race_reg = loaded_race_registry()
+        race_reg, _, _, _ = self._load_registries()
         g = race_reg.require("Gnome")
         assert g.size_modifier == 1
 
     def test_remove_race_then_reapply(self) -> None:
-        """Remove and re-apply a race produces the same state as one apply."""
-        race_reg = loaded_race_registry()
+        """
+        Remove and re-apply a race produces the same
+        state as one apply."""
+        (
+            race_reg,
+            _,
+            apply_race,
+            remove_race,
+        ) = self._load_registries()
         c = fresh_char()
         c.set_ability_score("dex", 10)
         c.set_ability_score("con", 10)

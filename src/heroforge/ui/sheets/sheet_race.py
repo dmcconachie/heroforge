@@ -167,7 +167,7 @@ class SheetRace(QWidget):
         defn = self._state.race_registry.get(name)
         if defn is None:
             return
-        from heroforge.engine.classes_races import (
+        from heroforge.engine.races import (
             apply_race,
             remove_race,
         )

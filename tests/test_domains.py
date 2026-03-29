@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from heroforge.engine.classes_races import (
+from heroforge.engine.domains import (
     DomainRegistry,
 )
 from heroforge.rules.loader import DomainsLoader

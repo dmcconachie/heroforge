@@ -8,7 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from heroforge.engine.character import Character
-from heroforge.engine.classes_races import ClassRegistry
+from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.effects import (
     BuffRegistry,
     apply_buff,

@@ -48,15 +48,14 @@ if TYPE_CHECKING:
     from collections.abc import Callable
 
     from heroforge.engine.character import Character
-    from heroforge.engine.classes_races import (
+    from heroforge.engine.classes import (
         ClassDefinition,
         ClassRegistry,
-        DomainRegistry,
-        RaceRegistry,
     )
     from heroforge.engine.conditions import (
         ConditionRegistry,
     )
+    from heroforge.engine.domains import DomainRegistry
     from heroforge.engine.effects import BuffRegistry
     from heroforge.engine.equipment import (
         ArmorRegistry,
@@ -70,6 +69,7 @@ if TYPE_CHECKING:
         Prerequisite,
         PrerequisiteChecker,
     )
+    from heroforge.engine.races import RaceRegistry
     from heroforge.engine.skills import SkillRegistry
     from heroforge.engine.spells import SpellCompendium
     from heroforge.engine.stat import StatGraph
@@ -796,7 +796,7 @@ class ClassesLoader:
         prereq_checker: (PrerequisiteChecker | None) = None,
         buff_registry: BuffRegistry | None = None,
     ) -> list[str]:
-        from heroforge.engine.classes_races import (
+        from heroforge.engine.classes import (
             ClassDefinition,
         )
         from heroforge.rules.schema import converter
@@ -920,7 +920,7 @@ class RacesLoader:
         if not isinstance(data, dict):
             raise LoaderError(f"{path} must be a YAML mapping.")
 
-        from heroforge.engine.classes_races import (
+        from heroforge.engine.races import (
             RaceDefinition,
         )
         from heroforge.rules.schema import converter
@@ -1007,7 +1007,7 @@ class DomainsLoader:
         registry: "DomainRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.classes_races import (
+        from heroforge.engine.domains import (
             DomainDefinition,
         )
         from heroforge.rules.schema import converter

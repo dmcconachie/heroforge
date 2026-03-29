@@ -28,7 +28,7 @@ if TYPE_CHECKING:
     from typing import Callable
 
     from heroforge.engine.character import Character
-    from heroforge.engine.classes_races import (
+    from heroforge.engine.classes import (
         ClassDefinition,
     )
 

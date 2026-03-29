@@ -117,7 +117,7 @@ class RaceDialog(QDialog):
         if defn is None:
             self.reject()
             return
-        from heroforge.engine.classes_races import apply_race, remove_race
+        from heroforge.engine.races import apply_race, remove_race
 
         # Remove old race first
         old_race = self._state.character.race

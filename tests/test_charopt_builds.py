@@ -43,7 +43,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from heroforge.engine.character import Character
-from heroforge.engine.classes_races import (
+from heroforge.engine.races import (
     apply_race,
     remove_race,
 )

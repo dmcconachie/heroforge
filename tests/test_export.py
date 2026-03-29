@@ -17,8 +17,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from heroforge.engine.classes_races import apply_race
 from heroforge.engine.effects import apply_buff
+from heroforge.engine.races import apply_race
 from heroforge.engine.skills import set_skill_ranks
 from heroforge.engine.templates import apply_template
 from heroforge.export.sheet_data import gather

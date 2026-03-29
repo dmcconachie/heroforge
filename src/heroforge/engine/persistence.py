@@ -175,7 +175,7 @@ def load_character(
         Character,
         CharacterLevel,
     )
-    from heroforge.engine.classes_races import apply_race
+    from heroforge.engine.races import apply_race
     from heroforge.engine.skills import (
         register_skills_on_character,
         set_skill_ranks,
