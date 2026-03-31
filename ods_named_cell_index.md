@@ -1,0 +1,8395 @@
+# HeroForge Anew 3.5 v7.4.1.2-a1 — Named Cell Index
+
+Reference for locating data in the ODS spreadsheet.
+Source: HeroForge Anew 3.5 v7.4.1.2-a1.ods
+
+## Summary
+
+- **Sheets:** 64
+- **Named ranges/cells:** 7970
+- **Named expressions:** 71
+- **Print areas:** 9
+
+## Sheets
+
+ 1. ExportSheet (1623 named cells/ranges)
+ 2. Custom Race (2 named cells/ranges)
+ 3. Custom Template (2 named cells/ranges)
+ 4. Custom Class
+ 5. Custom Familiar (1 named cells/ranges)
+ 6. Options
+ 7. Sources
+ 8. Option Info (30 named cells/ranges)
+ 9. Stats & Character Details (96 named cells/ranges)
+10. Race Info (104 named cells/ranges)
+11. Racial Abilities (34 named cells/ranges)
+12. Template Info (64 named cells/ranges)
+13. Race & Templates (111 named cells/ranges)
+14. Classes (116 named cells/ranges)
+15. Class Info (789 named cells/ranges)
+16. Variants (5 named cells/ranges)
+17. Domain Select
+18. Prestige Classes I
+19. Prestige Classes II (8 named cells/ranges)
+20. Prestige Classes III (15 named cells/ranges)
+21. Binder Vestiges (18 named cells/ranges)
+22. Marshal Auras (1 named cells/ranges)
+23. Soulmelds (85 named cells/ranges)
+24. SoulmeldsInfo (16 named cells/ranges)
+25. SoulmeldAbilities (69 named cells/ranges)
+26. Incarnum Abilities (28 named cells/ranges)
+27. Skills (110 named cells/ranges)
+28. Skill Tricks (10 named cells/ranges)
+29. Languages (23 named cells/ranges)
+30. Grafts (16 named cells/ranges)
+31. Traits (48 named cells/ranges)
+32. Flaws (20 named cells/ranges)
+33. Maneuvers & Stances (55 named cells/ranges)
+34. Feats (2713 named cells/ranges)
+35. Armor (50 named cells/ranges)
+36. Attacks (89 named cells/ranges)
+37. Enhancements (46 named cells/ranges)
+38. Magic Equipment (166 named cells/ranges)
+39. Buffs (338 named cells/ranges)
+40. Character Sheet I (15 named cells/ranges)
+41. Character Sheet II (8 named cells/ranges)
+42. Character Sheet III (3 named cells/ranges)
+43. Familiar (19 named cells/ranges)
+44. Character Sheet IV
+45. Character Sheet V
+46. Animal Companion (31 named cells/ranges)
+47. CS Calc.
+48. Class Abilities (139 named cells/ranges)
+49. Creature Info (128 named cells/ranges)
+50. Class Weapons & Armor (25 named cells/ranges)
+51. Graft Abilities (2 named cells/ranges)
+52. Deities (31 named cells/ranges)
+53. Domains (2 named cells/ranges)
+54. Spell Info (56 named cells/ranges)
+55. Spells per Day (43 named cells/ranges)
+56. Spells Known (23 named cells/ranges)
+57. Psionic Info (34 named cells/ranges)
+58. Initiative Card
+59. Table Tent (1 named cells/ranges)
+60. Game Log (9 named cells/ranges)
+61. LG Game Log (8 named cells/ranges)
+62. LG Item Access Tracking (1 named cells/ranges)
+63. LG MIL (2 named cells/ranges)
+64. Tables (238 named cells/ranges)
+
+## ExportSheet
+
+### Alignment
+
+- `AlignmentCell` [cell] → ExportSheet.E10
+
+### Anoint
+
+- `Anoint1` [cell] → ExportSheet.AI10
+- `Anoint2` [cell] → ExportSheet.AI11
+- `Anoint3` [cell] → ExportSheet.AI12
+- `Anoint4` [cell] → ExportSheet.AI13
+- `AnointSelfStatBump` [cell] → ExportSheet.AK10
+- `AnointW1` [cell] → ExportSheet.AI14
+- `AnointW2` [cell] → ExportSheet.AI15
+- `AnointW3` [cell] → ExportSheet.AI16
+
+### Armor
+
+- `ArmorCell` [cell] → ExportSheet.F43
+- `ArmorMat` [cell] → ExportSheet.F45
+- `ArmorQual` [cell] → ExportSheet.F44
+
+### Attacks
+
+- `AttackAmmo1` [cell] → ExportSheet.E28
+- `AttackAmmo2` [cell] → ExportSheet.G28
+- `AttackAmmo3` [cell] → ExportSheet.I28
+- `AttackAmmo4` [cell] → ExportSheet.K28
+- `AttackAmmo5` [cell] → ExportSheet.M28
+- `AttackAmmo6` [cell] → ExportSheet.O28
+- `AttackEnh1` [cell] → ExportSheet.E27
+- `AttackEnh2` [cell] → ExportSheet.G27
+- `AttackEnh3` [cell] → ExportSheet.I27
+- `AttackEnh4` [cell] → ExportSheet.K27
+- `AttackEnh5` [cell] → ExportSheet.M27
+- `AttackEnh6` [cell] → ExportSheet.O27
+- `AttackFt1` [cell] → ExportSheet.E30
+- `AttackFt2` [cell] → ExportSheet.G30
+- `AttackFt3` [cell] → ExportSheet.I30
+- `AttackFt4` [cell] → ExportSheet.K30
+- `AttackFt5` [cell] → ExportSheet.M30
+- `AttackFt6` [cell] → ExportSheet.O30
+- `AttackMat1` [cell] → ExportSheet.E29
+- `AttackMat2` [cell] → ExportSheet.G29
+- `AttackMat3` [cell] → ExportSheet.I29
+- `AttackMat4` [cell] → ExportSheet.K29
+- `AttackMat5` [cell] → ExportSheet.M29
+- `AttackMat6` [cell] → ExportSheet.O29
+- `AttackMgty1` [cell] → ExportSheet.E31
+- `AttackMgty2` [cell] → ExportSheet.G31
+- `AttackMgty3` [cell] → ExportSheet.I31
+- `AttackMgty4` [cell] → ExportSheet.K31
+- `AttackMgty5` [cell] → ExportSheet.M31
+- `AttackMgty6` [cell] → ExportSheet.O31
+- `AttackSize1` [cell] → ExportSheet.D27
+- `AttackSize2` [cell] → ExportSheet.F27
+- `AttackSize3` [cell] → ExportSheet.H27
+- `AttackSize4` [cell] → ExportSheet.J27
+- `AttackSize5` [cell] → ExportSheet.L27
+- `AttackSize6` [cell] → ExportSheet.N27
+- `AttackUsage1` [cell] → ExportSheet.E26
+- `AttackUsage2` [cell] → ExportSheet.G26
+- `AttackUsage3` [cell] → ExportSheet.I26
+- `AttackUsage4` [cell] → ExportSheet.K26
+- `AttackUsage5` [cell] → ExportSheet.M26
+- `AttackUsage6` [cell] → ExportSheet.O26
+- `AttackWpn1` [cell] → ExportSheet.E25
+- `AttackWpn2` [cell] → ExportSheet.G25
+- `AttackWpn3` [cell] → ExportSheet.I25
+- `AttackWpn4` [cell] → ExportSheet.K25
+- `AttackWpn5` [cell] → ExportSheet.M25
+- `AttackWpn6` [cell] → ExportSheet.O25
+
+### Class Levels
+
+- `ExportTemplateSelectionLvl` [range] → ExportSheet.AO73:.AO80
+- `LorAbilMasterLvl` [cell] → ExportSheet.AC9
+
+### Equipment Slots
+
+- `ExtraSlot1Cell` [cell] → ExportSheet.BW3
+- `ExtraSlot1Class` [cell] → ExportSheet.BV3
+- `ExtraSlot2Cell` [cell] → ExportSheet.BW4
+- `ExtraSlot2Class` [cell] → ExportSheet.BV4
+- `ExtraSlot3Cell` [cell] → ExportSheet.BW5
+- `ExtraSlot3Class` [cell] → ExportSheet.BV5
+- `ExtraSlotLevel1` [cell] → ExportSheet.BX3
+- `ExtraSlotLevel2` [cell] → ExportSheet.BX4
+- `ExtraSlotLevel3` [cell] → ExportSheet.BX5
+
+### Familiar
+
+- `FamiliarCell` [cell] → ExportSheet.T22
+
+### Feats
+
+- `FeatSelectedLevel` [range] → ExportSheet.BT3:.BT17
+- `FeatsHideCheck` [cell] → ExportSheet.BV2
+
+### General
+
+- `AbleLearnerLevel` [cell] → ExportSheet.BT13
+- `AmbientSecret1` [cell] → ExportSheet.AI57
+- `AmbientSecret2` [cell] → ExportSheet.AI58
+- `AmbientSecret3` [cell] → ExportSheet.AI59
+- `AmbientSecrets` [range] → ExportSheet.AI57:.AI59
+- `AnarchicSelected` [cell] → ExportSheet.AN36
+- `AnimalCompanion` [cell] → ExportSheet.T20
+- `ArcaneThesis` [range] → ExportSheet.AI61:.AI64
+- `ArcaneThesis1` [cell] → ExportSheet.AI61
+- `ArcaneThesis2` [cell] → ExportSheet.AI62
+- `ArcaneThesis3` [cell] → ExportSheet.AI63
+- `ArcaneThesis4` [cell] → ExportSheet.AI64
+- `ArdentMantle1` [cell] → ExportSheet.W43
+- `ArdentMantle2` [cell] → ExportSheet.W44
+- `ArdentMantle3` [cell] → ExportSheet.W45
+- `ArdentMantle4` [cell] → ExportSheet.W46
+- `ArdentMantle5` [cell] → ExportSheet.W47
+- `ArdentMantle6` [cell] → ExportSheet.W48
+- `ArdentMantlesSelected` [range] → ExportSheet.W43:.W48
+- `Armament1` [cell] → ExportSheet.AG16
+- `Armament2` [cell] → ExportSheet.AG17
+- `Armament3` [cell] → ExportSheet.AG18
+- `ArvSkill1` [cell] → ExportSheet.T54
+- `ArvSkill2` [cell] → ExportSheet.T55
+- `ArvSkill3` [cell] → ExportSheet.T56
+- `ArvSkill4` [cell] → ExportSheet.T57
+- `ArvSkills` [range] → ExportSheet.T54:.T57
+- `AtavistPersonality` [cell] → ExportSheet.AE51
+- `AurasSelected` [range] → ExportSheet.W9:.W42
+- `AxiomaticSelected` [cell] → ExportSheet.AN37
+- `BindArms` [cell] → ExportSheet.BE53
+- `BindBrow` [cell] → ExportSheet.BD61
+- `BindCrown` [cell] → ExportSheet.BF57
+- `BindDouble1` [cell] → ExportSheet.BD65
+- `BindDouble2` [cell] → ExportSheet.BE65
+- `BindDouble3` [cell] → ExportSheet.BF65
+- `BindFeet` [cell] → ExportSheet.BE57
+- `BindHands` [cell] → ExportSheet.BF53
+- `BindHeart` [cell] → ExportSheet.BF61
+- `BindShoulders` [cell] → ExportSheet.BD53
+- `BindSoul` [cell] → ExportSheet.BD57
+- `BindThroat` [cell] → ExportSheet.BE61
+- `BindTotem` [cell] → ExportSheet.BG57
+- `BindTotem2` [cell] → ExportSheet.BG61
+- `BindWaist` [cell] → ExportSheet.BG53
+- `BlackMagicElixir1` [cell] → ExportSheet.AJ14
+- `BlackMagicElixir2` [cell] → ExportSheet.AJ15
+- `BlackMagicElixir3` [cell] → ExportSheet.AJ16
+- `BlackMagicElixirStatBump` [cell] → ExportSheet.AK12
+- `BlackMagicOil1` [cell] → ExportSheet.AJ10
+- `BlackMagicOil2` [cell] → ExportSheet.AJ11
+- `BlackMagicOil3` [cell] → ExportSheet.AJ12
+- `BlackMagicOil4` [cell] → ExportSheet.AJ13
+- `BlackMagicOilStatBump` [cell] → ExportSheet.AK11
+- `Blessing1` [cell] → ExportSheet.AK27
+- `Blessing2` [cell] → ExportSheet.AK28
+- `Blessing3` [cell] → ExportSheet.AK29
+- `Blessing4` [cell] → ExportSheet.AK30
+- `Blessing5` [cell] → ExportSheet.AK31
+- `BondRaceCell` [cell] → ExportSheet.AD10
+- `BondedSummonerElementCell` [cell] → ExportSheet.AH18
+- `BonusDamage1` [cell] → ExportSheet.AG34
+- `BonusDamage2` [cell] → ExportSheet.AG35
+- `BonusDamage3` [cell] → ExportSheet.AG36
+- `BonusDamage4` [cell] → ExportSheet.AG37
+- `BonusSpellCasterIndex` [range] → ExportSheet.AD14:.AD63
+- `BonusSpellCasterNames` [range] → ExportSheet.AC14:.AC63
+- `BrainmateKnSk1` [cell] → ExportSheet.AB92
+- `BrainmateKnSk2` [cell] → ExportSheet.AB93
+- `BulletSubLevel` [cell] → ExportSheet.BU28
+- `BulletTopLevel` [cell] → ExportSheet.BU27
+- `CCBbnSpiritualTotem` [cell] → ExportSheet.E82
+- `CCBbnTotemManifestation` [cell] → ExportSheet.E83
+- `CCBbnViewTheSpiritWorld` [cell] → ExportSheet.E84
+- `CCBrdHealingHymn` [cell] → ExportSheet.F82
+- `CCBrdHymnOfFortification` [cell] → ExportSheet.F83
+- `CCClrPoolOfHealing` [cell] → ExportSheet.G82
+- `CCFtrAlignedStrike` [cell] → ExportSheet.J82
+- `CCFtrArmorOfGod` [cell] → ExportSheet.J83
+- `CCFtrResolute` [cell] → ExportSheet.J84
+- `CCMnkHolyStrike` [cell] → ExportSheet.M82
+- `CCMnkPrayerfulMeditation` [cell] → ExportSheet.M83
+- `CCPalHolyWarrior` [cell] → ExportSheet.N82
+- `CCPalUnderdarkKnight` [cell] → ExportSheet.N83
+- `CCRgrChampionOfTheWild` [cell] → ExportSheet.O82
+- `CCRgrSpiritualConnection` [cell] → ExportSheet.O83
+- `CCRgrSpiritualGuide` [cell] → ExportSheet.O84
+- `CCRogAntiquarian` [cell] → ExportSheet.P82
+- `CCRogDeathsRuin` [cell] → ExportSheet.P83
+- `CCRogFriendsEvasion` [cell] → ExportSheet.P84
+- `CCRogHolyStalker` [cell] → ExportSheet.P85
+- `CCSorDivineCompanion` [cell] → ExportSheet.R82
+- `CCSorDomainAccess` [cell] → ExportSheet.R83
+- `CCSpiritualTotem` [cell] → ExportSheet.E70
+- `CCWizDomainGrantedPower` [cell] → ExportSheet.V82
+- `CCWizSpontaneousDivination` [cell] → ExportSheet.V83
+- `CMBbnSpellSense` [cell] → ExportSheet.E73
+- `CMBrdSpellBreakerSong` [cell] → ExportSheet.F73
+- `CMClrDivCounterSpell` [cell] → ExportSheet.G73
+- `CMClrDivMagician` [cell] → ExportSheet.G74
+- `CMDrdElementalComp` [cell] → ExportSheet.H73
+- `CMFtrArmoredMage` [cell] → ExportSheet.J73
+- `CMMnkSoulwarpStrike` [cell] → ExportSheet.M74
+- `CMMnkSpellReflection` [cell] → ExportSheet.M73
+- `CMPalCurseBreaker` [cell] → ExportSheet.N73
+- `CMPalDivCounterSpell` [cell] → ExportSheet.N74
+- `CMRgrArcaneHunter` [cell] → ExportSheet.O73
+- `CMRgrSpellReflection` [cell] → ExportSheet.O74
+- `CMRogSpellReflection` [cell] → ExportSheet.P73
+- `CMRogSpellSense` [cell] → ExportSheet.P74
+- `CMSctSpellReflection` [cell] → ExportSheet.Q73
+- `CMSorStalwartSorcerer` [cell] → ExportSheet.R73
+- `CMSwsArcaneStunt` [cell] → ExportSheet.S73
+- `CMWizFocusedSpecialist` [cell] → ExportSheet.V73
+- `CWPalWoSpell` [cell] → ExportSheet.N72
+- `CWRgrWoSpell` [cell] → ExportSheet.O72
+- `CampaignCell` [cell] → ExportSheet.A26
+- `CasterCell` [cell] → ExportSheet.AC13
+- `CelestialCompanionCell` [cell] → ExportSheet.AH21
+- `CharSheetIV` [cell] → ExportSheet.B21
+- `CharSheetV` [cell] → ExportSheet.B22
+- `CitySlickerLevel` [cell] → ExportSheet.BT12
+- `ClrNeutTurn` [cell] → ExportSheet.U17
+- `CommonerProf` [cell] → ExportSheet.T19
+- `ConqueredVice1` [cell] → ExportSheet.W62
+- `ConqueredVice2` [cell] → ExportSheet.W63
+- `ConstellationPower1` [cell] → ExportSheet.AG47
+- `ConstellationPower2` [cell] → ExportSheet.AG48
+- `ConstellationPower3` [cell] → ExportSheet.AG49
+- `ConstellationPower4` [cell] → ExportSheet.AG50
+- `ConstellationPower5` [cell] → ExportSheet.AG51
+- `ConstellationPowers` [range] → ExportSheet.AG47:.AG51
+- `CorruptingGazeCell` [cell] → ExportSheet.AP9
+- `CorruptingTouchCell` [cell] → ExportSheet.AP10
+- `CrSWeaponProf` [cell] → ExportSheet.AB44
+- `DMBbnUncannyBravery` [cell] → ExportSheet.E88
+- `DMGFeatsHideCheck` [cell] → ExportSheet.BX2
+- `DMRogUncannyBravery` [cell] → ExportSheet.P88
+- `DSBbnTrapKiller` [cell] → ExportSheet.E86
+- `DSBrdLoreSong` [cell] → ExportSheet.F86
+- `DSBrdMimickingSong` [cell] → ExportSheet.F87
+- `DSClrDivineRestoration` [cell] → ExportSheet.G86
+- `DSDrdRootWalker` [cell] → ExportSheet.H86
+- `DSFtrDungeonCrasher` [cell] → ExportSheet.J86
+- `DSMnkStandingJump` [cell] → ExportSheet.M86
+- `DSMnkWallWalker` [cell] → ExportSheet.M87
+- `DSPalDivineSpirit` [cell] → ExportSheet.N86
+- `DSRgrTrapExpert` [cell] → ExportSheet.O86
+- `DSRogPenetratingStrike` [cell] → ExportSheet.P87
+- `DSRogQuickFingers` [cell] → ExportSheet.P86
+- `DSSorSpellShield` [cell] → ExportSheet.R86
+- `DSWizOfSunAndMoon` [cell] → ExportSheet.V86
+- `DcxWordBurn` [cell] → ExportSheet.Z40
+- `DcxWordFlee` [cell] → ExportSheet.Z35
+- `DcxWordInvigorate` [cell] → ExportSheet.Z38
+- `DcxWordLearn` [cell] → ExportSheet.Z33
+- `DcxWordProlong` [cell] → ExportSheet.Z36
+- `DcxWordReplenish` [cell] → ExportSheet.Z37
+- `DcxWordRest` [cell] → ExportSheet.Z32
+- `DcxWordSee` [cell] → ExportSheet.Z34
+- `DcxWordSpeak` [cell] → ExportSheet.Z31
+- `DcxWordTravel` [cell] → ExportSheet.Z39
+- `DedicatedPaladin` [cell] → ExportSheet.U21
+- `DeformityCell` [cell] → ExportSheet.AK21
+- `DeityCell` [cell] → ExportSheet.E11
+- `DfABreathEffect1` [cell] → ExportSheet.U44
+- `DfABreathEffect2` [cell] → ExportSheet.U45
+- `DfABreathEffect3` [cell] → ExportSheet.U46
+- `DfABreathEffect4` [cell] → ExportSheet.U47
+- `DfABreathEffect5` [cell] → ExportSheet.U48
+- `DfABreathEffect6` [cell] → ExportSheet.U49
+- `DfABreathEffects` [range] → ExportSheet.U44:.U49
+- `DiDrAug1` [cell] → ExportSheet.AB45
+- `DiDrAug10` [cell] → ExportSheet.AB47
+- `DiDrAug5` [cell] → ExportSheet.AB46
+- `DiDrAugs` [range] → ExportSheet.AB45:.AB47
+- `DisciplineFocusCell` [cell] → ExportSheet.W65
+- `DisciplineFocusCell2` [cell] → ExportSheet.W66
+- `DisciplineFocusCell3` [cell] → ExportSheet.W67
+- `DisciplineFocusCell4` [cell] → ExportSheet.W68
+- `DisciplineFocusCell5` [cell] → ExportSheet.W69
+- `Dishonorable` [cell] → ExportSheet.AB19
+- `DivineMindMantle1` [cell] → ExportSheet.W49
+- `DivineMindMantle2` [cell] → ExportSheet.W50
+- `DivineMindMantle3` [cell] → ExportSheet.W51
+- `Domain1` [cell] → ExportSheet.V9
+- `Domain2` [cell] → ExportSheet.V10
+- `Domain3` [cell] → ExportSheet.V11
+- `Domain4` [cell] → ExportSheet.V12
+- `Domain5` [cell] → ExportSheet.V13
+- `Domain6` [cell] → ExportSheet.V14
+- `DomainCells` [range] → ExportSheet.V9:.V14
+- `DoomlordStat1` [cell] → ExportSheet.AB34
+- `DoomlordStat2` [cell] → ExportSheet.AB35
+- `DrMDrdAspectOfTheDragon` [cell] → ExportSheet.H88
+- `DrMMnkDraconicFist` [cell] → ExportSheet.M88
+- `DrNMartialWeaponCell` [cell] → ExportSheet.U22
+- `DracolexiInfo` [range] → ExportSheet.Z31:.Z40
+- `DraconicCreatureSelected` [cell] → ExportSheet.AN54
+- `DraconicFistEnergyType` [cell] → ExportSheet.B178
+- `DragShamPresenceAura` [cell] → ExportSheet.U59
+- `DragShamanAura1` [cell] → ExportSheet.T59
+- `DragShamanAura2` [cell] → ExportSheet.T60
+- `DragShamanAura3` [cell] → ExportSheet.T61
+- `DragShamanAura4` [cell] → ExportSheet.T62
+- `DragShamanAura5` [cell] → ExportSheet.T63
+- `DragShamanAura6` [cell] → ExportSheet.T64
+- `DragShamanAura7` [cell] → ExportSheet.T65
+- `DragShamanSkFocus1` [cell] → ExportSheet.T66
+- `DragShamanSkFocus2` [cell] → ExportSheet.T67
+- `DragShamanSkFocus3` [cell] → ExportSheet.T68
+- `DragonCell` [cell] → ExportSheet.AA10
+- `DragonSamuraiCell` [cell] → ExportSheet.AH19
+- `DragonShamanColor` [cell] → ExportSheet.T58
+- `DragonType` [cell] → ExportSheet.AA10
+- `DragonVassalSelected` [cell] → ExportSheet.AN62
+- `DragonVassalType` [cell] → ExportSheet.AO62
+- `DragonkithCell` [cell] → ExportSheet.AE9
+- `DragonkithSpellExport` [cell] → ExportSheet.AE10
+- `DragonspawnType` [cell] → ExportSheet.AO61
+- `DrainingTouchCell` [cell] → ExportSheet.AP11
+- `DrgLAura1` [cell] → ExportSheet.AA48
+- `DrgLAura10` [cell] → ExportSheet.AA51
+- `DrgLAura4` [cell] → ExportSheet.AA49
+- `DrgLAura7` [cell] → ExportSheet.AA50
+- `DrgLAuraEnergy1` [cell] → ExportSheet.AB48
+- `DrgLAuraEnergy10` [cell] → ExportSheet.AB51
+- `DrgLAuraEnergy4` [cell] → ExportSheet.AB49
+- `DrgLAuraEnergy7` [cell] → ExportSheet.AB50
+- `DrgLAuras` [range] → ExportSheet.AA48:.AB51
+- `Drift10Cell` [cell] → ExportSheet.AA33
+- `Drift1Cell` [cell] → ExportSheet.AA24
+- `Drift2Cell` [cell] → ExportSheet.AA25
+- `Drift3Cell` [cell] → ExportSheet.AA26
+- `Drift4Cell` [cell] → ExportSheet.AA27
+- `Drift5Cell` [cell] → ExportSheet.AA28
+- `Drift6Cell` [cell] → ExportSheet.AA29
+- `Drift7Cell` [cell] → ExportSheet.AA30
+- `Drift8Cell` [cell] → ExportSheet.AA31
+- `Drift9Cell` [cell] → ExportSheet.AA32
+- `DustStuffedSelected` [cell] → ExportSheet.AN59
+- `EBCSHouseCell` [cell] → ExportSheet.J16
+- `EPgWeaponFocusCell` [cell] → ExportSheet.W71
+- `EcclesiarchLevel` [cell] → ExportSheet.BT8
+- `EldeenRangerSectCell` [cell] → ExportSheet.AE47
+- `ElementalArchonCell` [cell] → ExportSheet.AI25
+- `ElementalCell` [cell] → ExportSheet.AA11
+- `ElementalFleshType` [cell] → ExportSheet.AH77
+- `ElementalRebuke` [cell] → ExportSheet.AF64
+- `ElementalScionGraft` [cell] → ExportSheet.AG52
+- `ElementalSelected` [cell] → ExportSheet.AO34
+- `ElementalWarriorElementCell` [cell] → ExportSheet.AB36
+- `EnergyAuraEnergyType` [cell] → ExportSheet.X31
+- `EnergyCell1` [cell] → ExportSheet.AI17
+- `EnergyCell2` [cell] → ExportSheet.AI18
+- `EnergyCell3` [cell] → ExportSheet.AI19
+- `EnergyCell4` [cell] → ExportSheet.AI20
+- `EnergyCells` [range] → ExportSheet.AI17:.AI20
+- `EnlightenedSpiritAbilities` [range] → ExportSheet.AG32:.AG33
+- `EnlightenedSpiritEnergyResist1` [cell] → ExportSheet.AG32
+- `EnlightenedSpiritEnergyResist2` [cell] → ExportSheet.AG33
+- `EntropicSelected` [cell] → ExportSheet.AN38
+- `EpicExpandedKnowledgeLevel1` [cell] → ExportSheet.BX18
+- `EpicExpandedKnowledgeLevel2` [cell] → ExportSheet.BX19
+- `EpicExpandedKnowledgeLevel3` [cell] → ExportSheet.BX20
+- `EpicFeatsHideCheck` [cell] → ExportSheet.BW2
+- `EternalKnowledge` [range] → ExportSheet.Z45:.Z49
+- `EternalKnowledge1` [cell] → ExportSheet.Z45
+- `EternalKnowledge2` [cell] → ExportSheet.Z46
+- `EternalKnowledge3` [cell] → ExportSheet.Z47
+- `EternalKnowledge4` [cell] → ExportSheet.Z48
+- `EternalKnowledge5` [cell] → ExportSheet.Z49
+- `Evolved2Selected` [cell] → ExportSheet.AN43
+- `Evolved3Selected` [cell] → ExportSheet.AN44
+- `EvolvedSelected` [cell] → ExportSheet.AN42
+- `ExpSoulmeldCap1` [cell] → ExportSheet.BD68
+- `ExpSoulmeldCap2` [cell] → ExportSheet.BE68
+- `ExpSoulmeldCap3` [cell] → ExportSheet.BF68
+- `ExpandedKnowledge1Cell` [cell] → ExportSheet.BW15
+- `ExpandedKnowledge1Class` [cell] → ExportSheet.BV15
+- `ExpandedKnowledge2Cell` [cell] → ExportSheet.BW16
+- `ExpandedKnowledge2Class` [cell] → ExportSheet.BV16
+- `ExpandedKnowledge3Cell` [cell] → ExportSheet.BW17
+- `ExpandedKnowledge3Class` [cell] → ExportSheet.BV17
+- `ExpandedKnowledgeLevel1` [cell] → ExportSheet.BX15
+- `ExpandedKnowledgeLevel2` [cell] → ExportSheet.BX16
+- `ExpandedKnowledgeLevel3` [cell] → ExportSheet.BX17
+- `Expert1` [cell] → ExportSheet.T9
+- `Expert10` [cell] → ExportSheet.T18
+- `Expert2` [cell] → ExportSheet.T10
+- `Expert3` [cell] → ExportSheet.T11
+- `Expert4` [cell] → ExportSheet.T12
+- `Expert5` [cell] → ExportSheet.T13
+- `Expert6` [cell] → ExportSheet.T14
+- `Expert7` [cell] → ExportSheet.T15
+- `Expert8` [cell] → ExportSheet.T16
+- `Expert9` [cell] → ExportSheet.T17
+- `ExportARInfo1` [range] → ExportSheet.CS4:.CV225
+- `ExportARInfo2` [range] → ExportSheet.CW4:.CX225
+- `ExportARInfo3` [range] → ExportSheet.CY4:.CZ225
+- `ExportARInfo4` [range] → ExportSheet.DA4:.DD225
+- `ExportArmorOverrides` [range] → ExportSheet.F50:.F57
+- `ExportArmorProps` [cell] → ExportSheet.F49
+- `ExportAugPsionicBuffs` [range] → ExportSheet.AU71:.AU83
+- `ExportBaseStats` [range] → ExportSheet.E2:.E7
+- `ExportBonusFeats` [cell] → ExportSheet.CB1
+- `ExportBonusSelected` [range] → ExportSheet.CA3:.CA3626
+- `ExportBuffClassSelect` [range] → ExportSheet.AT10:.AT54
+- `ExportBuffConditionalSelect` [range] → ExportSheet.AU10:.AU26
+- `ExportBuffMiscExternalSelect` [range] → ExportSheet.AU35:.AU44
+- `ExportBuffSpellsCasterLevel` [range] → ExportSheet.AS10:.AS96
+- `ExportBuffSpellsSelect` [range] → ExportSheet.AR10:.AR96
+- `ExportCROverride` [cell] → ExportSheet.G9
+- `ExportCampaignName` [cell] → ExportSheet.E22
+- `ExportCataclysmMageProphecies` [range] → ExportSheet.AE65:.AE67
+- `ExportCharacterDescription` [range] → ExportSheet.E12:.E17
+- `ExportClassLvls` [range] → ExportSheet.Q9:.Q68
+- `ExportCoins` [range] → ExportSheet.E18:.E21
+- `ExportCoinsOther` [range] → ExportSheet.F18:.F20
+- `ExportCompAge` [cell] → ExportSheet.GJ4
+- `ExportCompArmor` [cell] → ExportSheet.GJ10
+- `ExportCompDeflect` [cell] → ExportSheet.GJ12
+- `ExportCompEyes` [cell] → ExportSheet.GJ8
+- `ExportCompGender` [cell] → ExportSheet.GJ5
+- `ExportCompHair` [cell] → ExportSheet.GJ9
+- `ExportCompHeight` [cell] → ExportSheet.GJ6
+- `ExportCompMiscAC` [cell] → ExportSheet.GJ13
+- `ExportCompName` [cell] → ExportSheet.GJ3
+- `ExportCompShield` [cell] → ExportSheet.GJ11
+- `ExportCompSkillMisc` [range] → ExportSheet.GL3:.GL116
+- `ExportCompSkillRanks` [range] → ExportSheet.GK3:.GK116
+- `ExportCompWeight` [cell] → ExportSheet.GJ7
+- `ExportCustomFeats` [range] → ExportSheet.BY3621:.BY3628
+- `ExportCustomFeatsDesc` [range] → ExportSheet.CC3390:.CC3397
+- `ExportDeityOverride` [cell] → ExportSheet.F11
+- `ExportEnhancementSkills` [range] → ExportSheet.J58:.J63
+- `ExportEnhancements` [range] → ExportSheet.I43:.I65
+- `ExportEquipment1` [range] → ExportSheet.BG10:.BG19
+- `ExportEquipment2` [range] → ExportSheet.BI10:.BI19
+- `ExportEthnicity` [cell] → ExportSheet.H17
+- `ExportEthnicityOverride` [cell] → ExportSheet.H18
+- `ExportExperiencePoints` [cell] → ExportSheet.H21
+- `ExportFamName` [cell] → ExportSheet.H19
+- `ExportFavoredWeaponOverride` [cell] → ExportSheet.G11
+- `ExportFeatsSelected` [range] → ExportSheet.BZ3:.BZ3626
+- `ExportFlawsSelected` [range] → ExportSheet.BE9:.BE26
+- `ExportFtArcaneThesis` [range] → ExportSheet.BY164:.BY166
+- `ExportGender` [cell] → ExportSheet.E9
+- `ExportGenderOverride` [cell] → ExportSheet.F10
+- `ExportGestaltClassLvls` [range] → ExportSheet.R9:.R68
+- `ExportHitPoints` [range] → ExportSheet.S10:.S68
+- `ExportItemAccessList` [range] → ExportSheet.GF3:.GH102
+- `ExportLABuyOff` [cell] → ExportSheet.L15
+- `ExportLanguageList` [range] → ExportSheet.CD2:.CD180
+- `ExportLanguagesSelected` [range] → ExportSheet.CE2:.CE180
+- `ExportListSelected` [range] → ExportSheet.CB3:.CB3625
+- `ExportManeuversReadied` [range] → ExportSheet.BR4:.BR227
+- `ExportManeuversSelected` [range] → ExportSheet.BQ4:.BQ227
+- `ExportMiscBuffsSelected` [range] → ExportSheet.AT61:.AT65
+- `ExportNotes1` [range] → ExportSheet.BK10:.BK30
+- `ExportNotes2` [range] → ExportSheet.BL10:.BL30
+- `ExportNotes3` [range] → ExportSheet.BM10:.BM81
+- `ExportNotes4` [range] → ExportSheet.BN10:.BN81
+- `ExportPlayer` [cell] → ExportSheet.H20
+- `ExportPsionicBuffsSelected` [range] → ExportSheet.AT71:.AT83
+- `ExportRMmComponents` [cell] → ExportSheet.AG54
+- `ExportRaceSelectionOptions` [range] → ExportSheet.AM83:.AM98
+- `ExportRaceTxt` [cell] → ExportSheet.E8
+- `ExportRegion` [cell] → ExportSheet.H15
+- `ExportRegionOverride` [cell] → ExportSheet.H16
+- `ExportShieldOverrides` [range] → ExportSheet.F59:.F63
+- `ExportShieldProps` [cell] → ExportSheet.F58
+- `ExportSignatureSpell` [range] → ExportSheet.BY2118:.BY2120
+- `ExportSkillList` [range] → ExportSheet.D101:.D180
+- `ExportSkillMatrix` [range] → ExportSheet.F101:.BN180
+- `ExportSkillTricksSelected` [range] → ExportSheet.AX10:.AX57
+- `ExportSpellMastery` [range] → ExportSheet.BY106:.BY108
+- `ExportStatBumps` [range] → ExportSheet.F2:.BN7
+- `ExportSymbiontMastery` [cell] → ExportSheet.BY2719
+- `ExportTableTentPicture` [range] → ExportSheet.F205:.X224
+- `ExportTblConditionalModifiers` [range] → ExportSheet.BC29:.BF45
+- `ExportTemplateSelection` [range] → ExportSheet.AN73:.AN80
+- `ExportTemplateSelectionOptions` [range] → ExportSheet.AP68:.AP96
+- `ExportToBPrC` [range] → ExportSheet.BS4:.BS41
+- `ExportTraitsListSelected` [range] → ExportSheet.BB9:.BB48
+- `ExportTraitsSelected` [range] → ExportSheet.BA9:.BA54
+- `ExportUserFlaws` [range] → ExportSheet.BD22:.BD26
+- `ExportUserTraits` [range] → ExportSheet.AZ49:.AZ54
+- `ExportVBugfix` [cell] → ExportSheet.A6
+- `ExportVMajor` [cell] → ExportSheet.A3
+- `ExportVMinor` [cell] → ExportSheet.A5
+- `ExportVSource` [cell] → ExportSheet.A4
+- `ExportVersion` [cell] → ExportSheet.A2
+- `ExportVersionBreakdown` [range] → ExportSheet.A3:.A6
+- `ExportWasteHunter` [cell] → ExportSheet.B179
+- `ExportWeapon1Overrides` [range] → ExportSheet.E32:.E40
+- `ExportWeapon2Overrides` [range] → ExportSheet.G32:.G40
+- `ExportWeapon3Overrides` [range] → ExportSheet.I32:.I40
+- `ExportWeapon4Overrides` [range] → ExportSheet.K32:.K40
+- `ExportWeapon5Overrides` [range] → ExportSheet.M32:.M40
+- `ExportWeapon6Overrides` [range] → ExportSheet.O32:.O40
+- `ExportWeights1` [range] → ExportSheet.BH10:.BH19
+- `ExportWeights2` [range] → ExportSheet.BJ10:.BJ19
+- `ExtraSpell1Cell` [cell] → ExportSheet.BW7
+- `ExtraSpell1Class` [cell] → ExportSheet.BV7
+- `ExtraSpell2Cell` [cell] → ExportSheet.BW8
+- `ExtraSpell2Class` [cell] → ExportSheet.BV8
+- `ExtraSpell3Cell` [cell] → ExportSheet.BW9
+- `ExtraSpell3Class` [cell] → ExportSheet.BV9
+- `ExtraSpellLevel1` [cell] → ExportSheet.BX7
+- `ExtraSpellLevel2` [cell] → ExportSheet.BX8
+- `ExtraSpellLevel3` [cell] → ExportSheet.BX9
+- `FaerzressInfusedSelected` [cell] → ExportSheet.AN57
+- `Favored1` [cell] → ExportSheet.T26
+- `Favored10` [cell] → ExportSheet.T35
+- `Favored10_1` [cell] → ExportSheet.U35
+- `Favored11` [cell] → ExportSheet.T36
+- `Favored11_1` [cell] → ExportSheet.U36
+- `Favored12` [cell] → ExportSheet.T37
+- `Favored12_1` [cell] → ExportSheet.U37
+- `Favored13` [cell] → ExportSheet.T38
+- `Favored13_1` [cell] → ExportSheet.U38
+- `Favored2` [cell] → ExportSheet.T27
+- `Favored2_1` [cell] → ExportSheet.U27
+- `Favored3` [cell] → ExportSheet.T28
+- `Favored3_1` [cell] → ExportSheet.U28
+- `Favored4` [cell] → ExportSheet.T29
+- `Favored4_1` [cell] → ExportSheet.U29
+- `Favored5` [cell] → ExportSheet.T30
+- `Favored5_1` [cell] → ExportSheet.U30
+- `Favored6` [cell] → ExportSheet.T31
+- `Favored6_1` [cell] → ExportSheet.U31
+- `Favored7` [cell] → ExportSheet.T32
+- `Favored7_1` [cell] → ExportSheet.U32
+- `Favored8` [cell] → ExportSheet.T33
+- `Favored8_1` [cell] → ExportSheet.U33
+- `Favored9` [cell] → ExportSheet.T34
+- `Favored9_1` [cell] → ExportSheet.U34
+- `FavoredDRCell` [cell] → ExportSheet.U39
+- `FavoredE` [cell] → ExportSheet.AE48
+- `FavoredE_1` [cell] → ExportSheet.AF48
+- `FavoredEnemies` [range] → ExportSheet.T26:.T34
+- `FavoredEnergies` [range] → ExportSheet.U40:.U42
+- `FavoredEnergy1` [cell] → ExportSheet.U40
+- `FavoredEnergy2` [cell] → ExportSheet.U41
+- `FavoredEnergy3` [cell] → ExportSheet.U42
+- `FavoredHPa` [range] → ExportSheet.AI35:.AJ36
+- `FavoredHPa1` [cell] → ExportSheet.AI35
+- `FavoredHPa1_1` [cell] → ExportSheet.AJ35
+- `FavoredHPa2` [cell] → ExportSheet.AI36
+- `FavoredHPa2_1` [cell] → ExportSheet.AJ36
+- `FavoredS` [cell] → ExportSheet.AI21
+- `FavoredSSc` [cell] → ExportSheet.AH50
+- `FavoredS_1` [cell] → ExportSheet.AJ21
+- `FeralLevel` [cell] → ExportSheet.AO53
+- `FeralSelected` [cell] → ExportSheet.AN53
+- `FiendishCell` [cell] → ExportSheet.AA9
+- `FleshwarperFamiliarTaint` [range] → ExportSheet.AB37:.AB40
+- `FleshwarperFamiliarTaint1` [cell] → ExportSheet.AB37
+- `FleshwarperFamiliarTaint2` [cell] → ExportSheet.AB38
+- `FleshwarperFamiliarTaint3` [cell] → ExportSheet.AB39
+- `FleshwarperFamiliarTaint4` [cell] → ExportSheet.AB40
+- `FleshwarperSecret` [range] → ExportSheet.AB41:.AB43
+- `FleshwarperSecret1` [cell] → ExportSheet.AB41
+- `FleshwarperSecret2` [cell] → ExportSheet.AB42
+- `FleshwarperSecret3` [cell] → ExportSheet.AB43
+- `FrightfulMoanCell` [cell] → ExportSheet.AP12
+- `FtKnowledgeDevotionSkill` [cell] → ExportSheet.CB1070
+- `GRAbolethTentacle` [cell] → ExportSheet.Y77
+- `GRAddedTail` [cell] → ExportSheet.AD77
+- `GRAmphibiousSkin` [cell] → ExportSheet.Y79
+- `GRAntennae` [cell] → ExportSheet.AB77
+- `GRAqueousBody` [cell] → ExportSheet.AH88
+- `GRArmOfTheAncestor` [cell] → ExportSheet.AG77
+- `GRBodaksEye` [cell] → ExportSheet.AC82
+- `GRBonePlating` [cell] → ExportSheet.AG78
+- `GRBonemail` [cell] → ExportSheet.AC77
+- `GRBrainmate` [cell] → ExportSheet.AB89
+- `GRBreathOfTheWaves` [cell] → ExportSheet.AH89
+- `GRBuffetingFists` [cell] → ExportSheet.AH79
+- `GRBuffettingWings` [cell] → ExportSheet.AF77
+- `GRBurrowingClaws` [cell] → ExportSheet.AB85
+- `GRCharmingEye` [cell] → ExportSheet.AA77
+- `GRChitinPlating` [cell] → ExportSheet.AE77
+- `GRClawedArm` [cell] → ExportSheet.AA78
+- `GRClimbingLegs` [cell] → ExportSheet.AB78
+- `GRCrownOfEyes` [cell] → ExportSheet.Z77
+- `GRDarksightEyes` [cell] → ExportSheet.AB86
+- `GRDarkwoodFlesh` [cell] → ExportSheet.AI77
+- `GRDeathlessFlesh` [cell] → ExportSheet.AG79
+- `GRDeathlessVisage` [cell] → ExportSheet.AG80
+- `GRDragonboneLegs` [cell] → ExportSheet.AF78
+- `GRDragonheartPresence` [cell] → ExportSheet.AF79
+- `GRDustForm` [cell] → ExportSheet.AH80
+- `GREarthGlider` [cell] → ExportSheet.AH82
+- `GRElementalFlesh` [cell] → ExportSheet.AH78
+- `GREnervatingArm` [cell] → ExportSheet.AC78
+- `GRExtendedLegs` [cell] → ExportSheet.AE78
+- `GRExtractingTentacle` [cell] → ExportSheet.AB91
+- `GREyeOfFlame` [cell] → ExportSheet.AC83
+- `GREyeStalk` [cell] → ExportSheet.Z78
+- `GREyeStalkAbility` [cell] → ExportSheet.Z86
+- `GRFastLeg` [cell] → ExportSheet.AA79
+- `GRFatigueSpores` [cell] → ExportSheet.AI78
+- `GRFearsomeEye` [cell] → ExportSheet.AA80
+- `GRFeatheredWings` [cell] → ExportSheet.AA81
+- `GRFiendishEar` [cell] → ExportSheet.AA82
+- `GRFiendishJaw` [cell] → ExportSheet.AA83
+- `GRFiendishSkin` [cell] → ExportSheet.AA84
+- `GRFlexibleArm` [cell] → ExportSheet.AA85
+- `GRFlexibleSpine` [cell] → ExportSheet.AE79
+- `GRFrightfulCrest` [cell] → ExportSheet.AF80
+- `GRGazingEye` [cell] → ExportSheet.Z79
+- `GRGazingEyeAbility` [cell] → ExportSheet.Z87
+- `GRGhostlyArm` [cell] → ExportSheet.AC84
+- `GRGlaringEye` [cell] → ExportSheet.AF81
+- `GRGleamingScales` [cell] → ExportSheet.AF82
+- `GRGoringHorn` [cell] → ExportSheet.AB79
+- `GRGrapplingTentacle` [cell] → ExportSheet.AA86
+- `GRGrapplingTentacle2` [cell] → ExportSheet.AB90
+- `GRGrapplingVine` [cell] → ExportSheet.AI79
+- `GRGraspingMandibles` [cell] → ExportSheet.AB80
+- `GRHandsOfFlame` [cell] → ExportSheet.AH85
+- `GRHaulingBack` [cell] → ExportSheet.AB81
+- `GRHealingBlood` [cell] → ExportSheet.AE80
+- `GRHealingNodules` [cell] → ExportSheet.AI80
+- `GRHumanoidSkin` [cell] → ExportSheet.AB88
+- `GRIncendiarySkin` [cell] → ExportSheet.AH86
+- `GRInksac` [cell] → ExportSheet.Y82
+- `GRLegsOfTheUndyingMarcher` [cell] → ExportSheet.AG81
+- `GRLockingHand` [cell] → ExportSheet.X85
+- `GRLongArm` [cell] → ExportSheet.AA87
+- `GRMembranousWings` [cell] → ExportSheet.AA88
+- `GRMetabolicFire` [cell] → ExportSheet.AF83
+- `GRMindblastRelay` [cell] → ExportSheet.AB87
+- `GRMohrgsTongue` [cell] → ExportSheet.AC85
+- `GRMucusProjector` [cell] → ExportSheet.Y83
+- `GRMucusSheath` [cell] → ExportSheet.Y78
+- `GRMummifiedEye` [cell] → ExportSheet.AC79
+- `GRMummifiedHand` [cell] → ExportSheet.AC86
+- `GROceanicAdaptation` [cell] → ExportSheet.AH90
+- `GRParalyzingArm` [cell] → ExportSheet.AC80
+- `GRPerceptionSeed` [cell] → ExportSheet.AI81
+- `GRPlatedSkin` [cell] → ExportSheet.Z80
+- `GRPoisonFangs` [cell] → ExportSheet.AD78
+- `GRRakingTentacle` [cell] → ExportSheet.AB82
+- `GRRendingClaw` [cell] → ExportSheet.AB83
+- `GRReplacementEye` [cell] → ExportSheet.Z81
+- `GRReplacementEyeAbility` [cell] → ExportSheet.Z89
+- `GRReplacementTail` [cell] → ExportSheet.AD79
+- `GRResilientScales` [cell] → ExportSheet.AF84
+- `GRRollers` [cell] → ExportSheet.X86
+- `GRRootlegs` [cell] → ExportSheet.AI82
+- `GRRudimentaryEyespots` [cell] → ExportSheet.AE81
+- `GRScalySkin` [cell] → ExportSheet.AD80
+- `GRScorchingGaze` [cell] → ExportSheet.AH87
+- `GRSerpentArm` [cell] → ExportSheet.AD81
+- `GRShovingArm` [cell] → ExportSheet.X87
+- `GRShudderPlate` [cell] → ExportSheet.X88
+- `GRSilthilarBones` [cell] → ExportSheet.AE82
+- `GRSilthilarHeart` [cell] → ExportSheet.AE83
+- `GRSilthilarMuscles` [cell] → ExportSheet.AE84
+- `GRSilthilarTendons` [cell] → ExportSheet.AE85
+- `GRSkeletalHand` [cell] → ExportSheet.AC87
+- `GRSkumEyes` [cell] → ExportSheet.Y80
+- `GRSkumTail` [cell] → ExportSheet.Y81
+- `GRSmashingTail` [cell] → ExportSheet.AF85
+- `GRSpikeStones` [cell] → ExportSheet.X89
+- `GRSpringingLeg` [cell] → ExportSheet.AA89
+- `GRStingTail` [cell] → ExportSheet.AA90
+- `GRStoneSpitter` [cell] → ExportSheet.X90
+- `GRStonyPlating` [cell] → ExportSheet.AH83
+- `GRStrongLeg` [cell] → ExportSheet.AA91
+- `GRTalonedArm` [cell] → ExportSheet.AF86
+- `GRThirdEye` [cell] → ExportSheet.Z82
+- `GRTramplingLeg` [cell] → ExportSheet.AA92
+- `GRTreebarkCarapace` [cell] → ExportSheet.AI83
+- `GRTremorGraft` [cell] → ExportSheet.AH84
+- `GRUndeadSkin` [cell] → ExportSheet.AC88
+- `GRVampiricFangs` [cell] → ExportSheet.AC89
+- `GRWaterjet` [cell] → ExportSheet.Y84
+- `GRWeakeningArm` [cell] → ExportSheet.AC81
+- `GRWeaponGraft` [cell] → ExportSheet.AB84
+- `GRWhipTail` [cell] → ExportSheet.AA93
+- `GRWhirlwindForm` [cell] → ExportSheet.AH81
+- `GRZombieArm` [cell] → ExportSheet.AC90
+- `GameLog` [cell] → ExportSheet.CI1
+- `GameLogTreasure` [cell] → ExportSheet.CK1
+- `GameLogXP` [cell] → ExportSheet.CJ1
+- `GeoTerrain1` [cell] → ExportSheet.AA21
+- `GeoTerrain2` [cell] → ExportSheet.AA22
+- `GeoTerrain3` [cell] → ExportSheet.AA23
+- `GeomancerInfo` [range] → ExportSheet.AA21:.AA33
+- `GhostSA1` [cell] → ExportSheet.I10
+- `GhostSA2` [cell] → ExportSheet.I11
+- `GhostSA3` [cell] → ExportSheet.I12
+- `GhostSA4` [cell] → ExportSheet.I13
+- `GiftOfTheDivine1` [cell] → ExportSheet.AG28
+- `GiftOfTheDivine2` [cell] → ExportSheet.AG29
+- `GiftOfTheDivine3` [cell] → ExportSheet.AG30
+- `GiftOfTheDivine4` [cell] → ExportSheet.AG31
+- `GiftOfTonguesLevel` [cell] → ExportSheet.BT3
+- `GraveTouchedGhoullevel` [cell] → ExportSheet.AP41
+- `GuerrillaScoutLevel` [cell] → ExportSheet.BT14
+- `GuerrillaWarriorLevel` [cell] → ExportSheet.BT15
+- `GurikChaAhlSelected` [cell] → ExportSheet.AN64
+- `HDPgDragonColor` [cell] → ExportSheet.W73
+- `HEBElemental1` [cell] → ExportSheet.AF55
+- `HEBElemental2` [cell] → ExportSheet.AF56
+- `HEBElemental3` [cell] → ExportSheet.AF57
+- `HEBElemental4` [cell] → ExportSheet.AF58
+- `HEPgStatBump` [cell] → ExportSheet.W72
+- `HR2Thirds` [cell] → ExportSheet.B27
+- `HR3Quarters` [cell] → ExportSheet.A27
+- `HRAoM` [cell] → ExportSheet.B106
+- `HRBoED` [cell] → ExportSheet.B51
+- `HRBoK` [cell] → ExportSheet.B107
+- `HRBoVD` [cell] → ExportSheet.B52
+- `HRCA` [cell] → ExportSheet.B31
+- `HRCC` [cell] → ExportSheet.B37
+- `HRCD` [cell] → ExportSheet.B32
+- `HRCM` [cell] → ExportSheet.B35
+- `HRCOD` [cell] → ExportSheet.B101
+- `HRCPs` [cell] → ExportSheet.B33
+- `HRCS` [cell] → ExportSheet.B36
+- `HRCV` [cell] → ExportSheet.B30
+- `HRCW` [cell] → ExportSheet.B34
+- `HRChR` [cell] → ExportSheet.B82
+- `HRChV` [cell] → ExportSheet.B83
+- `HRCi` [cell] → ExportSheet.B46
+- `HRCoS` [cell] → ExportSheet.B84
+- `HRDAB` [cell] → ExportSheet.B116
+- `HRDC` [cell] → ExportSheet.B122
+- `HRDLCS` [cell] → ExportSheet.B105
+- `HRDMag` [cell] → ExportSheet.B111
+- `HRDR` [cell] → ExportSheet.B70
+- `HRDrM` [cell] → ExportSheet.B71
+- `HRDs` [cell] → ExportSheet.B45
+- `HREBCS` [cell] → ExportSheet.B88
+- `HRECS` [cell] → ExportSheet.B87
+- `HREH` [cell] → ExportSheet.B92
+- `HRELH` [cell] → ExportSheet.B59
+- `HRFCII` [cell] → ExportSheet.B74
+- `HRFF` [cell] → ExportSheet.B69
+- `HRFN` [cell] → ExportSheet.B89
+- `HRFRCS` [cell] → ExportSheet.B77
+- `HRFlaws` [cell] → ExportSheet.B13
+- `HRFrost` [cell] → ExportSheet.B42
+- `HRGestalt` [cell] → ExportSheet.B9
+- `HRHB` [cell] → ExportSheet.B47
+- `HRHH` [cell] → ExportSheet.B48
+- `HRHOL` [cell] → ExportSheet.B100
+- `HRHalfPlus1` [cell] → ExportSheet.B26
+- `HRHideTrained` [cell] → ExportSheet.B8
+- `HRLI` [cell] → ExportSheet.B72
+- `HRLM` [cell] → ExportSheet.B73
+- `HRLivingGreyhawk` [cell] → ExportSheet.B110
+- `HRMH` [cell] → ExportSheet.B54
+- `HRMM` [cell] → ExportSheet.B62
+- `HRMM2` [cell] → ExportSheet.B63
+- `HRMM3` [cell] → ExportSheet.B64
+- `HRMM4` [cell] → ExportSheet.B65
+- `HRMoE` [cell] → ExportSheet.B95
+- `HRMoF` [cell] → ExportSheet.B79
+- `HRMoI` [cell] → ExportSheet.B58
+- `HROA` [cell] → ExportSheet.B121
+- `HRPC` [cell] → ExportSheet.B114
+- `HRPGtA` [cell] → ExportSheet.B115
+- `HRPGtE` [cell] → ExportSheet.B94
+- `HRPGtF` [cell] → ExportSheet.B78
+- `HRPHB2` [cell] → ExportSheet.B55
+- `HRPlH` [cell] → ExportSheet.B57
+- `HRRE` [cell] → ExportSheet.B90
+- `HRRLCS` [cell] → ExportSheet.B117
+- `HRRVL` [cell] → ExportSheet.B99
+- `HRRoD` [cell] → ExportSheet.B38
+- `HRRoF` [cell] → ExportSheet.B80
+- `HRRoS` [cell] → ExportSheet.B40
+- `HRRotD` [cell] → ExportSheet.B39
+- `HRRotW` [cell] → ExportSheet.B41
+- `HRSC` [cell] → ExportSheet.B53
+- `HRSF` [cell] → ExportSheet.B123
+- `HRSN` [cell] → ExportSheet.B91
+- `HRSS` [cell] → ExportSheet.B67
+- `HRSVMC` [cell] → ExportSheet.B68
+- `HRSand` [cell] → ExportSheet.B43
+- `HRSoS` [cell] → ExportSheet.B96
+- `HRSoX` [cell] → ExportSheet.B93
+- `HRSto` [cell] → ExportSheet.B44
+- `HRSummarizeAbilities` [cell] → ExportSheet.A143
+- `HRToB` [cell] → ExportSheet.B49
+- `HRToM` [cell] → ExportSheet.B50
+- `HRTraits` [cell] → ExportSheet.B12
+- `HRUD` [cell] → ExportSheet.B81
+- `HRVRA1` [cell] → ExportSheet.B102
+- `HRXPH` [cell] → ExportSheet.B56
+- `HRfBAB` [cell] → ExportSheet.B10
+- `HRfSave` [cell] → ExportSheet.B11
+- `HVSpecialAttack` [cell] → ExportSheet.AO48
+- `HWMSpecialAttack1` [cell] → ExportSheet.AB52
+- `HWMSpecialAttack2` [cell] → ExportSheet.AB53
+- `HWMSpecialAttack3` [cell] → ExportSheet.AB54
+- `HWMSpecialAttacks` [range] → ExportSheet.AB52:.AB54
+- `HalfDragonCell` [cell] → ExportSheet.AO14
+- `HalfElementalSelected` [cell] → ExportSheet.AN34
+- `HalfFarspawnSelected` [cell] → ExportSheet.AN40
+- `HalfFeySelected` [cell] → ExportSheet.AN26
+- `HalfTrollSelected` [cell] → ExportSheet.AN28
+- `HdBHordeEnemy1` [cell] → ExportSheet.AE56
+- `HdBHordeEnemy2` [cell] → ExportSheet.AE57
+- `HdBHordeEnemy3` [cell] → ExportSheet.AE58
+- `HeartsGrace` [range] → ExportSheet.AI65:.AI66
+- `HeartsGrace1` [cell] → ExportSheet.AI65
+- `HeartsGrace2` [cell] → ExportSheet.AI66
+- `Hierophant1` [cell] → ExportSheet.AB29
+- `Hierophant2` [cell] → ExportSheet.AB30
+- `Hierophant3` [cell] → ExportSheet.AB31
+- `Hierophant4` [cell] → ExportSheet.AB32
+- `Hierophant5` [cell] → ExportSheet.AB33
+- `HierophantAbilities` [range] → ExportSheet.AB29:.AB33
+- `HighArcana` [range] → ExportSheet.AB24:.AB28
+- `HighArcana1` [cell] → ExportSheet.AB24
+- `HighArcana2` [cell] → ExportSheet.AB25
+- `HighArcana3` [cell] → ExportSheet.AB26
+- `HighArcana4` [cell] → ExportSheet.AB27
+- `HighArcana5` [cell] → ExportSheet.AB28
+- `HorizonWalkerInfo` [range] → ExportSheet.AA34:.AA43
+- `HorrificAppearanceCell` [cell] → ExportSheet.AP13
+- `HpMKnowledgeCell` [cell] → ExportSheet.AI27
+- `HpMSkillCell` [cell] → ExportSheet.AI28
+- `HpPBlessings` [range] → ExportSheet.AK27:.AK31
+- `HuPg1` [cell] → ExportSheet.X71
+- `HuPg10` [cell] → ExportSheet.X80
+- `HuPg2` [cell] → ExportSheet.X72
+- `HuPg3` [cell] → ExportSheet.X73
+- `HuPg4` [cell] → ExportSheet.X74
+- `HuPg5` [cell] → ExportSheet.X75
+- `HuPg6` [cell] → ExportSheet.X76
+- `HuPg7` [cell] → ExportSheet.X77
+- `HuPg8` [cell] → ExportSheet.X78
+- `HuPg9` [cell] → ExportSheet.X79
+- `HuPgClassSkillCell` [cell] → ExportSheet.W75
+- `HuPgMartialWeaponCell` [cell] → ExportSheet.W74
+- `HuPgStatBump` [cell] → ExportSheet.W76
+- `Hulk1` [cell] → ExportSheet.AH15
+- `Hulk2` [cell] → ExportSheet.AH16
+- `InitSheet` [cell] → ExportSheet.B14
+- `InitiateOfSharLevel` [cell] → ExportSheet.BT17
+- `ItemAccessSheet` [cell] → ExportSheet.B23
+- `KelanenFavoredWeaponCell` [cell] → ExportSheet.V15
+- `KoSSAlignedStrikeSel` [cell] → ExportSheet.AF187
+- `KoSSVestigePatron` [cell] → ExportSheet.AF188
+- `LFWTerrain` [cell] → ExportSheet.AF66
+- `LScRegion1` [cell] → ExportSheet.AI67
+- `LScRegion2` [cell] → ExportSheet.AI68
+- `LScRegion3` [cell] → ExportSheet.AI69
+- `LegionScoutRegions` [range] → ExportSheet.AI67:.AI69
+- `Level12StatBump` [cell] → ExportSheet.L11
+- `Level16StatBump` [cell] → ExportSheet.L12
+- `Level20StatBump` [cell] → ExportSheet.L13
+- `Level24StatBump` [cell] → ExportSheet.M9
+- `Level28StatBump` [cell] → ExportSheet.M10
+- `Level32StatBump` [cell] → ExportSheet.M11
+- `Level36StatBump` [cell] → ExportSheet.M12
+- `Level40StatBump` [cell] → ExportSheet.M13
+- `Level44StatBump` [cell] → ExportSheet.N9
+- `Level48StatBump` [cell] → ExportSheet.N10
+- `Level4StatBump` [cell] → ExportSheet.L9
+- `Level52StatBump` [cell] → ExportSheet.N11
+- `Level56StatBump` [cell] → ExportSheet.N12
+- `Level60StatBump` [cell] → ExportSheet.N13
+- `Level8StatBump` [cell] → ExportSheet.L10
+- `LichLevel` [cell] → ExportSheet.AO16
+- `LichSelected` [cell] → ExportSheet.AN16
+- `LolthTouchedSelected` [cell] → ExportSheet.AN52
+- `LorAbilBonus1` [cell] → ExportSheet.AB17
+- `LorAbilBonus2` [cell] → ExportSheet.AB18
+- `LorAbilDodge` [cell] → ExportSheet.AB15
+- `LorAbilFort` [cell] → ExportSheet.AB12
+- `LorAbilHealth` [cell] → ExportSheet.AB10
+- `LorAbilKnow` [cell] → ExportSheet.AB16
+- `LorAbilMast` [cell] → ExportSheet.AB9
+- `LorAbilRef` [cell] → ExportSheet.AB13
+- `LorAbilWeap` [cell] → ExportSheet.AB14
+- `LorAbilWill` [cell] → ExportSheet.AB11
+- `LoreMasterInfo` [range] → ExportSheet.AB9:.AB18
+- `MChBonus` [range] → ExportSheet.AI30:.AI34
+- `MChBonus1` [cell] → ExportSheet.AI30
+- `MChBonus2` [cell] → ExportSheet.AI31
+- `MChBonus3` [cell] → ExportSheet.AI32
+- `MChBonus4` [cell] → ExportSheet.AI33
+- `MChBonus5` [cell] → ExportSheet.AI34
+- `MILSheet` [cell] → ExportSheet.B15
+- `MaTTrick1` [cell] → ExportSheet.AG13
+- `MaTTrick2` [cell] → ExportSheet.AG14
+- `MaTTrick3` [cell] → ExportSheet.AG15
+- `MageKillerSaveCell` [cell] → ExportSheet.AK33
+- `MageKillerSchoolCell` [cell] → ExportSheet.AK34
+- `MagicEquipArmBonus` [cell] → ExportSheet.K54
+- `MagicEquipArmType` [cell] → ExportSheet.K53
+- `MagicEquipBodyBonus` [cell] → ExportSheet.M45
+- `MagicEquipBodyType` [cell] → ExportSheet.M44
+- `MagicEquipFaceBonus` [cell] → ExportSheet.L48
+- `MagicEquipFaceType` [cell] → ExportSheet.L47
+- `MagicEquipFeetBonus` [cell] → ExportSheet.M54
+- `MagicEquipFeetType` [cell] → ExportSheet.M53
+- `MagicEquipHandBonus` [cell] → ExportSheet.K51
+- `MagicEquipHandType` [cell] → ExportSheet.K50
+- `MagicEquipHeadBonus` [cell] → ExportSheet.L45
+- `MagicEquipHeadType` [cell] → ExportSheet.L44
+- `MagicEquipNeckBonus` [cell] → ExportSheet.L51
+- `MagicEquipNeckType` [cell] → ExportSheet.L50
+- `MagicEquipRingBonus1` [cell] → ExportSheet.K45
+- `MagicEquipRingBonus2` [cell] → ExportSheet.K48
+- `MagicEquipRingType1` [cell] → ExportSheet.K44
+- `MagicEquipRingType2` [cell] → ExportSheet.K47
+- `MagicEquipShoulderBonus` [cell] → ExportSheet.L54
+- `MagicEquipShoulderType` [cell] → ExportSheet.L53
+- `MagicEquipTorsoBonus` [cell] → ExportSheet.M48
+- `MagicEquipTorsoType` [cell] → ExportSheet.M47
+- `MagicEquipUnslottedType1` [cell] → ExportSheet.K56
+- `MagicEquipUnslottedType10` [cell] → ExportSheet.L60
+- `MagicEquipUnslottedType11` [cell] → ExportSheet.L62
+- `MagicEquipUnslottedType12` [cell] → ExportSheet.L64
+- `MagicEquipUnslottedType13` [cell] → ExportSheet.L66
+- `MagicEquipUnslottedType14` [cell] → ExportSheet.L68
+- `MagicEquipUnslottedType15` [cell] → ExportSheet.M56
+- `MagicEquipUnslottedType16` [cell] → ExportSheet.M58
+- `MagicEquipUnslottedType17` [cell] → ExportSheet.M60
+- `MagicEquipUnslottedType18` [cell] → ExportSheet.M62
+- `MagicEquipUnslottedType19` [cell] → ExportSheet.M64
+- `MagicEquipUnslottedType2` [cell] → ExportSheet.K58
+- `MagicEquipUnslottedType20` [cell] → ExportSheet.M66
+- `MagicEquipUnslottedType21` [cell] → ExportSheet.M68
+- `MagicEquipUnslottedType22` [cell] → ExportSheet.N56
+- `MagicEquipUnslottedType23` [cell] → ExportSheet.N58
+- `MagicEquipUnslottedType3` [cell] → ExportSheet.K60
+- `MagicEquipUnslottedType4` [cell] → ExportSheet.K62
+- `MagicEquipUnslottedType5` [cell] → ExportSheet.K64
+- `MagicEquipUnslottedType6` [cell] → ExportSheet.K66
+- `MagicEquipUnslottedType7` [cell] → ExportSheet.K68
+- `MagicEquipUnslottedType8` [cell] → ExportSheet.L56
+- `MagicEquipUnslottedType9` [cell] → ExportSheet.L58
+- `MagicEquipWaistBonus` [cell] → ExportSheet.M51
+- `MagicEquipWaistType` [cell] → ExportSheet.M50
+- `MagnificoBonusClassSkill` [cell] → ExportSheet.W54
+- `MalevolenceCell` [cell] → ExportSheet.AP14
+- `ManifestedCell` [cell] → ExportSheet.AP17
+- `Manifester1` [cell] → ExportSheet.AF14
+- `Manifester10` [cell] → ExportSheet.AF23
+- `Manifester11` [cell] → ExportSheet.AF24
+- `Manifester12` [cell] → ExportSheet.AF25
+- `Manifester13` [cell] → ExportSheet.AF26
+- `Manifester14` [cell] → ExportSheet.AF27
+- `Manifester15` [cell] → ExportSheet.AF28
+- `Manifester16` [cell] → ExportSheet.AF29
+- `Manifester17` [cell] → ExportSheet.AF30
+- `Manifester18` [cell] → ExportSheet.AF31
+- `Manifester19` [cell] → ExportSheet.AF32
+- `Manifester2` [cell] → ExportSheet.AF15
+- `Manifester20` [cell] → ExportSheet.AF33
+- `Manifester21` [cell] → ExportSheet.AF34
+- `Manifester22` [cell] → ExportSheet.AF35
+- `Manifester23` [cell] → ExportSheet.AF36
+- `Manifester24` [cell] → ExportSheet.AF37
+- `Manifester25` [cell] → ExportSheet.AF38
+- `Manifester3` [cell] → ExportSheet.AF16
+- `Manifester4` [cell] → ExportSheet.AF17
+- `Manifester5` [cell] → ExportSheet.AF18
+- `Manifester6` [cell] → ExportSheet.AF19
+- `Manifester7` [cell] → ExportSheet.AF20
+- `Manifester8` [cell] → ExportSheet.AF21
+- `Manifester9` [cell] → ExportSheet.AF22
+- `ManifesterCell` [cell] → ExportSheet.AE13
+- `ManifesterIndex` [range] → ExportSheet.AF14:.AF38
+- `ManifesterNames` [range] → ExportSheet.AE14:.AE38
+- `MarshalDraconicAuras` [range] → ExportSheet.W31:.W40
+- `MasterLinguistLevel` [cell] → ExportSheet.BT16
+- `MasterThrowerCells` [range] → ExportSheet.AG13:.AG15
+- `MeldArms` [cell] → ExportSheet.BE51
+- `MeldArmsClass` [cell] → ExportSheet.BE52
+- `MeldBrow` [cell] → ExportSheet.BD59
+- `MeldBrowClass` [cell] → ExportSheet.BD60
+- `MeldCrown` [cell] → ExportSheet.BF55
+- `MeldCrownClass` [cell] → ExportSheet.BF56
+- `MeldDouble1` [cell] → ExportSheet.BD63
+- `MeldDouble1Class` [cell] → ExportSheet.BD64
+- `MeldDouble2` [cell] → ExportSheet.BE63
+- `MeldDouble2Class` [cell] → ExportSheet.BE64
+- `MeldDouble3` [cell] → ExportSheet.BF63
+- `MeldDouble3Class` [cell] → ExportSheet.BF64
+- `MeldFeet` [cell] → ExportSheet.BE55
+- `MeldFeetClass` [cell] → ExportSheet.BE56
+- `MeldHands` [cell] → ExportSheet.BF51
+- `MeldHandsClass` [cell] → ExportSheet.BF52
+- `MeldHeart` [cell] → ExportSheet.BF59
+- `MeldHeartClass` [cell] → ExportSheet.BF60
+- `MeldShoulders` [cell] → ExportSheet.BD51
+- `MeldShouldersClass` [cell] → ExportSheet.BD52
+- `MeldSoul` [cell] → ExportSheet.BD55
+- `MeldSoulClass` [cell] → ExportSheet.BD56
+- `MeldThroat` [cell] → ExportSheet.BE59
+- `MeldThroatClass` [cell] → ExportSheet.BE60
+- `MeldWaist` [cell] → ExportSheet.BG51
+- `MeldWaistClass` [cell] → ExportSheet.BG52
+- `Meldshaper1` [cell] → ExportSheet.AL37
+- `Meldshaper10` [cell] → ExportSheet.AL46
+- `Meldshaper11` [cell] → ExportSheet.AL47
+- `Meldshaper12` [cell] → ExportSheet.AL48
+- `Meldshaper13` [cell] → ExportSheet.AL49
+- `Meldshaper14` [cell] → ExportSheet.AL50
+- `Meldshaper15` [cell] → ExportSheet.AL51
+- `Meldshaper16` [cell] → ExportSheet.AL52
+- `Meldshaper17` [cell] → ExportSheet.AL53
+- `Meldshaper18` [cell] → ExportSheet.AL54
+- `Meldshaper19` [cell] → ExportSheet.AL55
+- `Meldshaper2` [cell] → ExportSheet.AL38
+- `Meldshaper20` [cell] → ExportSheet.AL56
+- `Meldshaper21` [cell] → ExportSheet.AL57
+- `Meldshaper22` [cell] → ExportSheet.AL58
+- `Meldshaper23` [cell] → ExportSheet.AL59
+- `Meldshaper24` [cell] → ExportSheet.AL60
+- `Meldshaper25` [cell] → ExportSheet.AL61
+- `Meldshaper3` [cell] → ExportSheet.AL39
+- `Meldshaper4` [cell] → ExportSheet.AL40
+- `Meldshaper5` [cell] → ExportSheet.AL41
+- `Meldshaper6` [cell] → ExportSheet.AL42
+- `Meldshaper7` [cell] → ExportSheet.AL43
+- `Meldshaper8` [cell] → ExportSheet.AL44
+- `Meldshaper9` [cell] → ExportSheet.AL45
+- `MeldshaperCell` [cell] → ExportSheet.AK36
+- `MeldshaperIndex` [range] → ExportSheet.AL37:.AL61
+- `MeldshaperNames` [range] → ExportSheet.AK37:.AK61
+- `MercenaryBackgroundLevel` [cell] → ExportSheet.BT6
+- `MineralWarriorLevel` [cell] → ExportSheet.AO58
+- `MonkFeat1` [cell] → ExportSheet.T23
+- `MonkFeat2` [cell] → ExportSheet.T24
+- `MonkFeat3` [cell] → ExportSheet.T25
+- `MonkFeats` [range] → ExportSheet.T23:.T25
+- `MonkTattoo1` [cell] → ExportSheet.AH10
+- `MonkTattoo2` [cell] → ExportSheet.AH11
+- `MonkTattoo3` [cell] → ExportSheet.AH12
+- `MonkTattoo4` [cell] → ExportSheet.AH13
+- `MonkTattoo5` [cell] → ExportSheet.AH14
+- `MoonSpeakerAbilities` [range] → ExportSheet.AE52:.AE54
+- `MoonSpkEnergyResist1` [cell] → ExportSheet.AE52
+- `MoonSpkEnergyResist2` [cell] → ExportSheet.AE53
+- `MountCell` [cell] → ExportSheet.T21
+- `MsEPsiChangeShape` [cell] → ExportSheet.F184
+- `MsEPsiEnergySnap` [cell] → ExportSheet.F192
+- `MsEPsiFatePoints` [cell] → ExportSheet.F187
+- `MsEPsiGreaterAnimator` [cell] → ExportSheet.F193
+- `MsEPsiHarbinger` [cell] → ExportSheet.F191
+- `MsEPsiPersonalConstruct` [cell] → ExportSheet.F189
+- `MsEPsiPersonalSpace` [cell] → ExportSheet.F194
+- `MsEPsiPsionicKnowledge` [cell] → ExportSheet.F186
+- `MsEPsiTelepathicCommunication` [cell] → ExportSheet.F190
+- `MsEPsiTemporalGrace` [cell] → ExportSheet.F195
+- `MsEPsiTrinkets` [cell] → ExportSheet.F188
+- `MsEPsiTrueHealer` [cell] → ExportSheet.F185
+- `MummifiedLevel` [cell] → ExportSheet.AO46
+- `MummifiedSelected` [cell] → ExportSheet.AN46
+- `MysticTheurge1` [cell] → ExportSheet.AD39
+- `MysticTheurge10` [cell] → ExportSheet.AD48
+- `MysticTheurge11` [cell] → ExportSheet.AD49
+- `MysticTheurge12` [cell] → ExportSheet.AD50
+- `MysticTheurge13` [cell] → ExportSheet.AD51
+- `MysticTheurge14` [cell] → ExportSheet.AD52
+- `MysticTheurge15` [cell] → ExportSheet.AD53
+- `MysticTheurge16` [cell] → ExportSheet.AD54
+- `MysticTheurge17` [cell] → ExportSheet.AD55
+- `MysticTheurge18` [cell] → ExportSheet.AD56
+- `MysticTheurge19` [cell] → ExportSheet.AD57
+- `MysticTheurge2` [cell] → ExportSheet.AD40
+- `MysticTheurge20` [cell] → ExportSheet.AD58
+- `MysticTheurge21` [cell] → ExportSheet.AD59
+- `MysticTheurge22` [cell] → ExportSheet.AD60
+- `MysticTheurge23` [cell] → ExportSheet.AD61
+- `MysticTheurge24` [cell] → ExportSheet.AD62
+- `MysticTheurge25` [cell] → ExportSheet.AD63
+- `MysticTheurge3` [cell] → ExportSheet.AD41
+- `MysticTheurge4` [cell] → ExportSheet.AD42
+- `MysticTheurge5` [cell] → ExportSheet.AD43
+- `MysticTheurge6` [cell] → ExportSheet.AD44
+- `MysticTheurge7` [cell] → ExportSheet.AD45
+- `MysticTheurge8` [cell] → ExportSheet.AD46
+- `MysticTheurge9` [cell] → ExportSheet.AD47
+- `NativeTies` [range] → ExportSheet.AF60:.AF62
+- `NativeTies1` [cell] → ExportSheet.AF60
+- `NativeTies2` [cell] → ExportSheet.AF61
+- `NativeTies3` [cell] → ExportSheet.AF62
+- `NaturalLycanthropeCell` [cell] → ExportSheet.AP20
+- `NaturesWarriorCells` [range] → ExportSheet.AG16:.AG18
+- `NecropolitanSelected` [cell] → ExportSheet.AN47
+- `NinjaSpyWpn1` [cell] → ExportSheet.AH46
+- `NinjaSpyWpn3` [cell] → ExportSheet.AH47
+- `NinjaSpyWpn6` [cell] → ExportSheet.AH48
+- `NinjaSpyWpn9` [cell] → ExportSheet.AH49
+- `NinjaSpyWpns` [range] → ExportSheet.AH46:.AH49
+- `NobleBonusClassSkillCell` [cell] → ExportSheet.W52
+- `NomadShamanRegionCell` [cell] → ExportSheet.AJ61
+- `NymphsKissLevel` [cell] → ExportSheet.BT4
+- `OghmasInsightCell` [cell] → ExportSheet.AK32
+- `OgreTitanLevel` [cell] → ExportSheet.AO66
+- `OgreTitanSelected` [cell] → ExportSheet.AN66
+- `OpenMinded1Level` [cell] → ExportSheet.BT9
+- `OpenMinded2Level` [cell] → ExportSheet.BT10
+- `OpenMinded3Level` [cell] → ExportSheet.BT11
+- `PHB2BbnBerserkerStrength` [cell] → ExportSheet.E75
+- `PHB2BrdBardicKnack` [cell] → ExportSheet.F75
+- `PHB2ClrSpontaneousDomainCast` [cell] → ExportSheet.G75
+- `PHB2DrdShapeshift` [cell] → ExportSheet.H76
+- `PHB2DrdSpontaneousRejuvenation` [cell] → ExportSheet.H75
+- `PHB2FtrCounterattack` [cell] → ExportSheet.J76
+- `PHB2FtrElusiveAttack` [cell] → ExportSheet.J75
+- `PHB2FtrOverpoweringAttack` [cell] → ExportSheet.J77
+- `PHB2FvSDeitysFavor` [cell] → ExportSheet.I75
+- `PHB2HxBDarkCompanion` [cell] → ExportSheet.K75
+- `PHB2MnkDecisiveStrike` [cell] → ExportSheet.M75
+- `PHB2MrsAdrenalineBoost` [cell] → ExportSheet.L75
+- `PHB2PalChargingSmite` [cell] → ExportSheet.N75
+- `PHB2RgrDistractingAttack` [cell] → ExportSheet.O75
+- `PHB2RogDisruptiveAttack` [cell] → ExportSheet.P75
+- `PHB2SctDungeonSpecialist` [cell] → ExportSheet.Q75
+- `PHB2SorMetamagicSpecialist` [cell] → ExportSheet.R75
+- `PHB2SwsShieldofBlades` [cell] → ExportSheet.S75
+- `PHB2WizImmediateMagic` [cell] → ExportSheet.V75
+- `PHB2WrlFiendishFlamewreath` [cell] → ExportSheet.T75
+- `PHB2WrmEclecticLearning` [cell] → ExportSheet.U75
+- `PactAug1` [cell] → ExportSheet.AX70
+- `PactAug2` [cell] → ExportSheet.AX71
+- `PactAug3` [cell] → ExportSheet.AX72
+- `PactAug4` [cell] → ExportSheet.AX73
+- `PactAug5` [cell] → ExportSheet.AX74
+- `ParagonsPathCell` [cell] → ExportSheet.AG38
+- `PiousTemplarCell` [cell] → ExportSheet.AH20
+- `PrSASecret1` [cell] → ExportSheet.AG66
+- `PrSASecret2` [cell] → ExportSheet.AG67
+- `PrSASecret3` [cell] → ExportSheet.AG68
+- `PrSASecret4` [cell] → ExportSheet.AG69
+- `PracticedManifester1Cell` [cell] → ExportSheet.BU19
+- `PracticedManifester1Class` [cell] → ExportSheet.BT19
+- `PracticedManifester2Cell` [cell] → ExportSheet.BU20
+- `PracticedManifester2Class` [cell] → ExportSheet.BT20
+- `PracticedManifester3Cell` [cell] → ExportSheet.BU21
+- `PracticedManifester3Class` [cell] → ExportSheet.BT21
+- `PracticedSpellcaster1Cell` [cell] → ExportSheet.BW11
+- `PracticedSpellcaster1Class` [cell] → ExportSheet.BV11
+- `PracticedSpellcaster2Cell` [cell] → ExportSheet.BW12
+- `PracticedSpellcaster2Class` [cell] → ExportSheet.BV12
+- `PracticedSpellcaster3Cell` [cell] → ExportSheet.BW13
+- `PracticedSpellcaster3Class` [cell] → ExportSheet.BV13
+- `PrestigeCell` [cell] → ExportSheet.Z9
+- `PrimordialSelected` [cell] → ExportSheet.AN60
+- `PsionDisciplineCell` [cell] → ExportSheet.U14
+- `RSLSelected` [range] → ExportSheet.BU50:.BU209
+- `RWElfFavoredEnemy` [cell] → ExportSheet.O93
+- `RaceIgnoreSrc` [cell] → ExportSheet.AN68
+- `RangerCombatStyle` [cell] → ExportSheet.T39
+- `RecasterSuddenMetamagic1` [cell] → ExportSheet.AF51
+- `RecasterSuddenMetamagic2` [cell] → ExportSheet.AF52
+- `ResistanceAuraEnergyType` [cell] → ExportSheet.X35
+- `RisenMartyr` [cell] → ExportSheet.U18
+- `RogAbil1` [cell] → ExportSheet.T40
+- `RogAbil10` [cell] → ExportSheet.T49
+- `RogAbil11` [cell] → ExportSheet.T50
+- `RogAbil12` [cell] → ExportSheet.T51
+- `RogAbil13` [cell] → ExportSheet.T52
+- `RogAbil14` [cell] → ExportSheet.T53
+- `RogAbil2` [cell] → ExportSheet.T41
+- `RogAbil3` [cell] → ExportSheet.T42
+- `RogAbil4` [cell] → ExportSheet.T43
+- `RogAbil5` [cell] → ExportSheet.T44
+- `RogAbil6` [cell] → ExportSheet.T45
+- `RogAbil7` [cell] → ExportSheet.T46
+- `RogAbil8` [cell] → ExportSheet.T47
+- `RogAbil9` [cell] → ExportSheet.T48
+- `RogAbils` [range] → ExportSheet.T40:.T43
+- `RslAaInc1` [cell] → ExportSheet.BU50
+- `RslAaInc3` [cell] → ExportSheet.BU51
+- `RslAaInc7` [cell] → ExportSheet.BU52
+- `RslAzClr1` [cell] → ExportSheet.BU53
+- `RslAzClr4` [cell] → ExportSheet.BU54
+- `RslAzClr9` [cell] → ExportSheet.BU55
+- `RslChEgo1` [cell] → ExportSheet.BU56
+- `RslChEgo3` [cell] → ExportSheet.BU57
+- `RslChEgo5` [cell] → ExportSheet.BU58
+- `RslChRog1` [cell] → ExportSheet.BU59
+- `RslChRog3` [cell] → ExportSheet.BU60
+- `RslChRog8` [cell] → ExportSheet.BU61
+- `RslChRogSkillSelected` [cell] → ExportSheet.BV57
+- `RslChWiz1` [cell] → ExportSheet.BU62
+- `RslChWiz10` [cell] → ExportSheet.BU64
+- `RslChWiz5` [cell] → ExportSheet.BU63
+- `RslDBEnergyType` [cell] → ExportSheet.BV199
+- `RslDbClr1` [cell] → ExportSheet.BU201
+- `RslDbClr5` [cell] → ExportSheet.BU202
+- `RslDbClr9` [cell] → ExportSheet.BU203
+- `RslDbPal1` [cell] → ExportSheet.BU207
+- `RslDbPal4` [cell] → ExportSheet.BU208
+- `RslDbPal5` [cell] → ExportSheet.BU209
+- `RslDbSor1` [cell] → ExportSheet.BU204
+- `RslDbSor4` [cell] → ExportSheet.BU205
+- `RslDbSor7` [cell] → ExportSheet.BU206
+- `RslDkBbn1` [cell] → ExportSheet.BU65
+- `RslDkBbn11` [cell] → ExportSheet.BU67
+- `RslDkBbn7` [cell] → ExportSheet.BU66
+- `RslDwClr1` [cell] → ExportSheet.BU68
+- `RslDwClr4` [cell] → ExportSheet.BU69
+- `RslDwClr8` [cell] → ExportSheet.BU70
+- `RslDwFtr1` [cell] → ExportSheet.BU71
+- `RslDwFtr2` [cell] → ExportSheet.BU72
+- `RslDwFtr8` [cell] → ExportSheet.BU73
+- `RslDwSbn1` [cell] → ExportSheet.BU77
+- `RslDwSbn3` [cell] → ExportSheet.BU78
+- `RslDwSbn9` [cell] → ExportSheet.BU79
+- `RslDwSor1` [cell] → ExportSheet.BU74
+- `RslDwSor5` [cell] → ExportSheet.BU75
+- `RslDwSor9` [cell] → ExportSheet.BU76
+- `RslElPal1` [cell] → ExportSheet.BU80
+- `RslElPal3` [cell] → ExportSheet.BU81
+- `RslElPal5` [cell] → ExportSheet.BU82
+- `RslElRgr1` [cell] → ExportSheet.BU83
+- `RslElRgr10` [cell] → ExportSheet.BU85
+- `RslElRgr4` [cell] → ExportSheet.BU84
+- `RslElSbn1` [cell] → ExportSheet.BU86
+- `RslElSbn2` [cell] → ExportSheet.BU87
+- `RslElSbn7` [cell] → ExportSheet.BU88
+- `RslElWiz1` [cell] → ExportSheet.BU89
+- `RslElWiz3` [cell] → ExportSheet.BU90
+- `RslElWiz5` [cell] → ExportSheet.BU91
+- `RslGnBrd1` [cell] → ExportSheet.BU92
+- `RslGnBrd11` [cell] → ExportSheet.BU95
+- `RslGnBrd3` [cell] → ExportSheet.BU93
+- `RslGnBrd6` [cell] → ExportSheet.BU94
+- `RslGnIll1` [cell] → ExportSheet.BU96
+- `RslGnIll10` [cell] → ExportSheet.BU98
+- `RslGnIll1SchoolSelected` [cell] → ExportSheet.BV96
+- `RslGnIll5` [cell] → ExportSheet.BU97
+- `RslGnInc1` [cell] → ExportSheet.BU99
+- `RslGnInc2` [cell] → ExportSheet.BU100
+- `RslGnInc7` [cell] → ExportSheet.BU101
+- `RslGnRgr1` [cell] → ExportSheet.BU102
+- `RslGnRgr4` [cell] → ExportSheet.BU103
+- `RslGnRgr8` [cell] → ExportSheet.BU104
+- `RslGoBbn1` [cell] → ExportSheet.BU105
+- `RslGoBbn5` [cell] → ExportSheet.BU106
+- `RslGoBbn7` [cell] → ExportSheet.BU107
+- `RslGoDrd1` [cell] → ExportSheet.BU108
+- `RslGoDrd12` [cell] → ExportSheet.BU110
+- `RslGoDrd6` [cell] → ExportSheet.BU109
+- `RslGoRog2` [cell] → ExportSheet.BU111
+- `RslGoRog3` [cell] → ExportSheet.BU112
+- `RslGoRog8` [cell] → ExportSheet.BU113
+- `RslHaDrd1` [cell] → ExportSheet.BU132
+- `RslHaDrd13` [cell] → ExportSheet.BU134
+- `RslHaDrd5` [cell] → ExportSheet.BU133
+- `RslHaMnk1` [cell] → ExportSheet.BU135
+- `RslHaMnk2` [cell] → ExportSheet.BU136
+- `RslHaMnk7` [cell] → ExportSheet.BU137
+- `RslHaRog1` [cell] → ExportSheet.BU138
+- `RslHaRog10` [cell] → ExportSheet.BU140
+- `RslHaRog3` [cell] → ExportSheet.BU139
+- `RslHaTotm1` [cell] → ExportSheet.BU141
+- `RslHaTotm3` [cell] → ExportSheet.BU142
+- `RslHaTotm8` [cell] → ExportSheet.BU143
+- `RslHeBrd1` [cell] → ExportSheet.BU114
+- `RslHeBrd6` [cell] → ExportSheet.BU115
+- `RslHeBrd8` [cell] → ExportSheet.BU116
+- `RslHeFtr1` [cell] → ExportSheet.BU117
+- `RslHeFtr2` [cell] → ExportSheet.BU118
+- `RslHeFtr6` [cell] → ExportSheet.BU119
+- `RslHeRgr1` [cell] → ExportSheet.BU120
+- `RslHeRgr13` [cell] → ExportSheet.BU122
+- `RslHeRgr4` [cell] → ExportSheet.BU121
+- `RslHoBbn2` [cell] → ExportSheet.BU123
+- `RslHoBbn5` [cell] → ExportSheet.BU124
+- `RslHoBbn7` [cell] → ExportSheet.BU125
+- `RslHoDrd1` [cell] → ExportSheet.BU126
+- `RslHoDrd4` [cell] → ExportSheet.BU127
+- `RslHoDrd6` [cell] → ExportSheet.BU128
+- `RslHoPal1` [cell] → ExportSheet.BU129
+- `RslHoPal3` [cell] → ExportSheet.BU130
+- `RslHoPal6` [cell] → ExportSheet.BU131
+- `RslKaMnk1` [cell] → ExportSheet.BU144
+- `RslKaMnk2` [cell] → ExportSheet.BU145
+- `RslKaMnk7` [cell] → ExportSheet.BU146
+- `RslKaSou1` [cell] → ExportSheet.BU147
+- `RslKaSou3` [cell] → ExportSheet.BU148
+- `RslKaSou6` [cell] → ExportSheet.BU149
+- `RslKaTel1` [cell] → ExportSheet.BU150
+- `RslKaTel3` [cell] → ExportSheet.BU151
+- `RslKaTel5` [cell] → ExportSheet.BU152
+- `RslKoFtr1` [cell] → ExportSheet.BU153
+- `RslKoFtr2` [cell] → ExportSheet.BU154
+- `RslKoFtr4` [cell] → ExportSheet.BU155
+- `RslKoRgr1` [cell] → ExportSheet.BU156
+- `RslKoRgr4` [cell] → ExportSheet.BU157
+- `RslKoRgr7` [cell] → ExportSheet.BU158
+- `RslKoRog1` [cell] → ExportSheet.BU159
+- `RslKoRog3` [cell] → ExportSheet.BU160
+- `RslKoRog8` [cell] → ExportSheet.BU161
+- `RslRaClr1` [cell] → ExportSheet.BU162
+- `RslRaClr3` [cell] → ExportSheet.BU163
+- `RslRaClr7` [cell] → ExportSheet.BU164
+- `RslRaFtr1` [cell] → ExportSheet.BU165
+- `RslRaFtr4` [cell] → ExportSheet.BU166
+- `RslRaFtr8` [cell] → ExportSheet.BU167
+- `RslRaSor1` [cell] → ExportSheet.BU168
+- `RslRaSor11` [cell] → ExportSheet.BU170
+- `RslRaSor5` [cell] → ExportSheet.BU169
+- `RslRiRog1` [cell] → ExportSheet.BU171
+- `RslRiRog10` [cell] → ExportSheet.BU173
+- `RslRiRog3` [cell] → ExportSheet.BU172
+- `RslShDrd1` [cell] → ExportSheet.BU174
+- `RslShDrd1AbilitySelected` [cell] → ExportSheet.BV174
+- `RslShDrd1TraitSelected` [cell] → ExportSheet.BV175
+- `RslShDrd4` [cell] → ExportSheet.BU175
+- `RslShDrd5` [cell] → ExportSheet.BU176
+- `RslShRgr1` [cell] → ExportSheet.BU177
+- `RslShRgr4` [cell] → ExportSheet.BU178
+- `RslShRgr9` [cell] → ExportSheet.BU179
+- `RslShWil1` [cell] → ExportSheet.BU180
+- `RslShWil2` [cell] → ExportSheet.BU181
+- `RslShWil6` [cell] → ExportSheet.BU182
+- `RslSkMnk1` [cell] → ExportSheet.BU183
+- `RslSkMnk10` [cell] → ExportSheet.BU185
+- `RslSkMnk5` [cell] → ExportSheet.BU184
+- `RslSsBrd1` [cell] → ExportSheet.BU186
+- `RslSsBrd3` [cell] → ExportSheet.BU187
+- `RslSsBrd6` [cell] → ExportSheet.BU188
+- `RslTiInc1` [cell] → ExportSheet.BU189
+- `RslTiInc3` [cell] → ExportSheet.BU190
+- `RslTiInc7` [cell] → ExportSheet.BU191
+- `RslWaArt1` [cell] → ExportSheet.BU192
+- `RslWaArt4` [cell] → ExportSheet.BU193
+- `RslWaArt5` [cell] → ExportSheet.BU194
+- `RslWaFtr1` [cell] → ExportSheet.BU195
+- `RslWaFtr2` [cell] → ExportSheet.BU196
+- `RslWaFtr4` [cell] → ExportSheet.BU197
+- `RslWaPal1` [cell] → ExportSheet.BU198
+- `RslWaPal2` [cell] → ExportSheet.BU199
+- `RslWaPal3` [cell] → ExportSheet.BU200
+- `RuatharMartialWeaponCell` [cell] → ExportSheet.AA12
+- `RunecasterAbilities` [range] → ExportSheet.AF51:.AF52
+- `SAMoSSpellType` [range] → ExportSheet.AI39:.AI43
+- `SAMoSSpellType1` [cell] → ExportSheet.AI39
+- `SAMoSSpellType2` [cell] → ExportSheet.AI40
+- `SAMoSSpellType3` [cell] → ExportSheet.AI41
+- `SAMoSSpellType4` [cell] → ExportSheet.AI42
+- `SAMoSSpellType5` [cell] → ExportSheet.AI43
+- `SAMoSSpellsExport` [range] → ExportSheet.AJ39:.AJ43
+- `SSBbnBonusFeat` [cell] → ExportSheet.E80
+- `SSBbnWastelandDamageReduction` [cell] → ExportSheet.E81
+- `SSBbnWastelandTrapSense` [cell] → ExportSheet.E79
+- `SSDrdHeatEndurance` [cell] → ExportSheet.H80
+- `SSDrdSandskimmer` [cell] → ExportSheet.H79
+- `SSDrdWildShape` [cell] → ExportSheet.H81
+- `SSRgrHeatEndurance` [cell] → ExportSheet.O79
+- `SSRgrSandskimmer` [cell] → ExportSheet.O80
+- `SSRgrWasteHunter` [cell] → ExportSheet.O81
+- `SWMnkWaterStep` [cell] → ExportSheet.M78
+- `SWiEnergyResistance` [cell] → ExportSheet.AB55
+- `SaHSpecialAbility` [cell] → ExportSheet.AJ25
+- `SanctifiedOneAbilities` [range] → ExportSheet.AG39:.AG42
+- `SanctifiedOneAbility1` [cell] → ExportSheet.AG40
+- `SanctifiedOneAbility2` [cell] → ExportSheet.AG41
+- `SanctifiedOneAbility3` [cell] → ExportSheet.AG42
+- `SanctifiedOneDeityCell` [cell] → ExportSheet.AG39
+- `ShadowSelected` [cell] → ExportSheet.AN35
+- `ShapeSoulmeld1Choice` [cell] → ExportSheet.BD70
+- `ShapeSoulmeld2Choice` [cell] → ExportSheet.BE70
+- `ShapeSoulmeld3Choice` [cell] → ExportSheet.BF70
+- `ShapeSoulmeldClass1` [cell] → ExportSheet.BD71
+- `ShapeSoulmeldClass2` [cell] → ExportSheet.BE71
+- `ShapeSoulmeldClass3` [cell] → ExportSheet.BF71
+- `ShifterCell` [cell] → ExportSheet.J9
+- `ShifterCell3` [cell] → ExportSheet.AE54
+- `ShugenjaElementCell` [cell] → ExportSheet.U19
+- `ShugenjaOrderCell` [cell] → ExportSheet.U20
+- `SiftWingSurge1` [cell] → ExportSheet.AB56
+- `SiftWingSurge2` [cell] → ExportSheet.AB57
+- `SpecForbid` [cell] → ExportSheet.U10
+- `SpecForbid2` [cell] → ExportSheet.U11
+- `SpecForbid3` [cell] → ExportSheet.U12
+- `SpecForbid4` [cell] → ExportSheet.U13
+- `SpecWiz` [cell] → ExportSheet.U9
+- `SpecWizInfo` [range] → ExportSheet.U9:.U11
+- `SpiderServant` [cell] → ExportSheet.AK25
+- `SpiritGuideCell` [cell] → ExportSheet.U43
+- `StatBumps1_20` [range] → ExportSheet.L9:.L13
+- `StatBumps21_40` [range] → ExportSheet.M9:.M13
+- `StatBumps41_60` [range] → ExportSheet.N9:.N13
+- `SteelLegionnaireFavEnemyCell1` [cell] → ExportSheet.AI46
+- `SteelLegionnaireFavEnemyCell2` [cell] → ExportSheet.AI47
+- `SteelLegionnaireFavEnemyCell3` [cell] → ExportSheet.AI48
+- `StoneLordCells` [range] → ExportSheet.AG19:.AG23
+- `StonePower1` [cell] → ExportSheet.AG19
+- `StonePower2` [cell] → ExportSheet.AG20
+- `StonePower3` [cell] → ExportSheet.AG21
+- `StonePower4` [cell] → ExportSheet.AG22
+- `StonePower5` [cell] → ExportSheet.AG23
+- `SublimeBuddyClass` [cell] → ExportSheet.Z19
+- `SublimeBuddyClassCell` [cell] → ExportSheet.AA19
+- `SvPactAugChoice1` [cell] → ExportSheet.AC191
+- `SvPactAugChoice2` [cell] → ExportSheet.AC192
+- `SvPactAugChoice3` [cell] → ExportSheet.AC193
+- `SvPactAugChoice4` [cell] → ExportSheet.AC194
+- `SvPactAugChoice5` [cell] → ExportSheet.AC195
+- `SvVestigeChoice1` [cell] → ExportSheet.AC186
+- `SvVestigeChoice2` [cell] → ExportSheet.AC187
+- `SvVestigeChoice3` [cell] → ExportSheet.AC188
+- `SvVestigeChoice4` [cell] → ExportSheet.AC189
+- `SwarmShifter3Selected` [cell] → ExportSheet.AN51
+- `SwarmShifterSelected` [cell] → ExportSheet.AN49
+- `TPgResistCell` [cell] → ExportSheet.W77
+- `TSLAbilClarity` [cell] → ExportSheet.Z24
+- `TSLAbilForb1` [cell] → ExportSheet.Z29
+- `TSLAbilForb2` [cell] → ExportSheet.Z30
+- `TSLAbilKnell` [cell] → ExportSheet.Z23
+- `TSLAbilMeta` [cell] → ExportSheet.Z21
+- `TSLAbilSeeking` [cell] → ExportSheet.Z26
+- `TSLAbilStanch` [cell] → ExportSheet.Z22
+- `TSLAbilTainted` [cell] → ExportSheet.Z28
+- `TSLAbilThicker` [cell] → ExportSheet.Z27
+- `TSLAbilWholesome` [cell] → ExportSheet.Z25
+- `TableTent` [cell] → ExportSheet.B24
+- `TaintedScholarInfo` [range] → ExportSheet.Z21:.Z30
+- `TashalatoraCell` [cell] → ExportSheet.BW18
+- `TashalatoraClass` [cell] → ExportSheet.BV18
+- `TelekinesisCell` [cell] → ExportSheet.AP15
+- `TemplateIgnorePrereq` [cell] → ExportSheet.AN70
+- `TemplateIgnoreSrc` [cell] → ExportSheet.AN69
+- `ThGImbue1` [cell] → ExportSheet.AJ27
+- `ThGImbue2` [cell] → ExportSheet.AJ28
+- `ThGNatWeaponCell` [cell] → ExportSheet.AJ26
+- `ThrallBonusCells` [range] → ExportSheet.AK13:.AK20
+- `ThunderLore` [range] → ExportSheet.AE60:.AE64
+- `ThunderLore1` [cell] → ExportSheet.AE60
+- `ThunderLore2` [cell] → ExportSheet.AE61
+- `ThunderLore3` [cell] → ExportSheet.AE62
+- `ThunderLore4` [cell] → ExportSheet.AE63
+- `ThunderLore5` [cell] → ExportSheet.AE64
+- `ToDBonus1` [cell] → ExportSheet.AK13
+- `ToDBonus2` [cell] → ExportSheet.AK14
+- `ToDBonus3` [cell] → ExportSheet.AK15
+- `ToDBonus4` [cell] → ExportSheet.AK16
+- `ToOBonus1` [cell] → ExportSheet.AK17
+- `ToOBonus2` [cell] → ExportSheet.AK18
+- `ToOBonus3` [cell] → ExportSheet.AK19
+- `ToOBonus4` [cell] → ExportSheet.AK20
+- `TotemicInsight` [range] → ExportSheet.AJ62:.AJ66
+- `TotemicInsight1` [cell] → ExportSheet.AJ62
+- `TotemicInsight2` [cell] → ExportSheet.AJ63
+- `TotemicInsight3` [cell] → ExportSheet.AJ64
+- `TotemicInsight4` [cell] → ExportSheet.AJ65
+- `TotemicInsight5` [cell] → ExportSheet.AJ66
+- `Trick1` [cell] → ExportSheet.AG10
+- `Trick2` [cell] → ExportSheet.AG11
+- `Trick3` [cell] → ExportSheet.AG12
+- `UABbnCraftyHunter` [cell] → ExportSheet.E89
+- `UABrdFeyLink` [cell] → ExportSheet.F88
+- `UAClrChampionOfFaith` [cell] → ExportSheet.G72
+- `UADrdHunter` [cell] → ExportSheet.H72
+- `UAFtrStealthCunning` [cell] → ExportSheet.J72
+- `UAMnkDR` [cell] → ExportSheet.M72
+- `UAPalFavEn` [cell] → ExportSheet.N76
+- `UARngWildShape` [cell] → ExportSheet.O76
+- `UARogMartialTrain` [cell] → ExportSheet.P72
+- `UnTBonusLevelCell1` [cell] → ExportSheet.AG43
+- `UnTBonusLevelCell2` [cell] → ExportSheet.AG44
+- `UnseenSeerBonusDamage` [range] → ExportSheet.AG34:.AG37
+- `UseDragonlanceDeities` [cell] → ExportSheet.B20
+- `UseEberronDeities` [cell] → ExportSheet.B18
+- `UseFRDeities` [cell] → ExportSheet.B17
+- `UseLGDeities` [cell] → ExportSheet.B16
+- `UseRavenloftBeliefs` [cell] → ExportSheet.B19
+- `ValidateDeity` [cell] → ExportSheet.H11
+- `VampireLevel` [cell] → ExportSheet.AO17
+- `VariantsSelected` [range] → ExportSheet.E72:.V97
+- `VariantsSelectedCont` [range] → ExportSheet.F184:.X203
+- `Vestige1` [cell] → ExportSheet.AW70
+- `Vestige2` [cell] → ExportSheet.AW71
+- `Vestige3` [cell] → ExportSheet.AW72
+- `Vestige4` [cell] → ExportSheet.AW73
+- `Vice1` [cell] → ExportSheet.W55
+- `Vice2` [cell] → ExportSheet.W56
+- `Vice3` [cell] → ExportSheet.W57
+- `Vice4` [cell] → ExportSheet.W58
+- `Vice5` [cell] → ExportSheet.W59
+- `Vice6` [cell] → ExportSheet.W60
+- `VoidMindLevel` [cell] → ExportSheet.AO33
+- `VowPovertyLevel` [cell] → ExportSheet.BT5
+- `WalkerTerrain1` [cell] → ExportSheet.AA34
+- `WalkerTerrain10` [cell] → ExportSheet.AA43
+- `WalkerTerrain2` [cell] → ExportSheet.AA35
+- `WalkerTerrain3` [cell] → ExportSheet.AA36
+- `WalkerTerrain4` [cell] → ExportSheet.AA37
+- `WalkerTerrain5` [cell] → ExportSheet.AA38
+- `WalkerTerrain6` [cell] → ExportSheet.AA39
+- `WalkerTerrain7` [cell] → ExportSheet.AA40
+- `WalkerTerrain8` [cell] → ExportSheet.AA41
+- `WalkerTerrain9` [cell] → ExportSheet.AA42
+- `WalkerTerrains` [range] → ExportSheet.AA34:.AA43
+- `WarWizardMartialCell` [cell] → ExportSheet.AI29
+- `WeaponMasterKiCritical` [cell] → ExportSheet.AH52
+- `WeaponMasterWoC` [cell] → ExportSheet.AH51
+- `WearerOfPurpleCell` [cell] → ExportSheet.AI26
+- `WellReadLevel` [cell] → ExportSheet.BT7
+- `WeretouchedMasterForm` [cell] → ExportSheet.AE49
+- `WichtlinLevel` [cell] → ExportSheet.AO65
+- `WildPlainsMountCell` [cell] → ExportSheet.AD9
+- `WildshapeCell` [cell] → ExportSheet.AU31
+- `WoHsAbilities` [range] → ExportSheet.AI49:.AI55
+- `WoHsForbidSchoolCell` [cell] → ExportSheet.AI50
+- `WoHsOrderCell` [cell] → ExportSheet.AI49
+- `WoHsOrderSecret1` [cell] → ExportSheet.AI51
+- `WoHsOrderSecret2` [cell] → ExportSheet.AI52
+- `WoHsOrderSecret3` [cell] → ExportSheet.AI53
+- `WoHsOrderSecret4` [cell] → ExportSheet.AI54
+- `WoHsOrderSecret5` [cell] → ExportSheet.AI55
+- `WrlEnergy1` [cell] → ExportSheet.V30
+- `WrlEnergy2` [cell] → ExportSheet.V31
+- `WuJElem` [cell] → ExportSheet.V29
+- `WuJFeats` [range] → ExportSheet.V24:.V28
+- `WuJFt1` [cell] → ExportSheet.V24
+- `WuJFt2` [cell] → ExportSheet.V25
+- `WuJFt3` [cell] → ExportSheet.V26
+- `WuJFt4` [cell] → ExportSheet.V27
+- `WuJFt5` [cell] → ExportSheet.V28
+- `usrColorCode` [cell] → ExportSheet.N15
+- `usrNoWordWrap` [cell] → ExportSheet.N16
+
+### Shield
+
+- `ShieldCell` [cell] → ExportSheet.F46
+- `ShieldMat` [cell] → ExportSheet.F48
+- `ShieldQual` [cell] → ExportSheet.F47
+
+### Skills
+
+- `SkillArtistry1` [cell] → ExportSheet.AG24
+- `SkillArtistry2` [cell] → ExportSheet.AG25
+- `SkillArtistry3` [cell] → ExportSheet.AG26
+- `SkillArtistry4` [cell] → ExportSheet.AG27
+- `SkillArtistryCells` [range] → ExportSheet.AG24:.AG27
+- `SkillsAlwaysInClassReset` [range] → ExportSheet.E101:.E180
+
+### Spells
+
+- `Spellcaster1` [cell] → ExportSheet.AD14
+- `Spellcaster10` [cell] → ExportSheet.AD23
+- `Spellcaster11` [cell] → ExportSheet.AD24
+- `Spellcaster12` [cell] → ExportSheet.AD25
+- `Spellcaster13` [cell] → ExportSheet.AD26
+- `Spellcaster14` [cell] → ExportSheet.AD27
+- `Spellcaster15` [cell] → ExportSheet.AD28
+- `Spellcaster16` [cell] → ExportSheet.AD29
+- `Spellcaster17` [cell] → ExportSheet.AD30
+- `Spellcaster18` [cell] → ExportSheet.AD31
+- `Spellcaster19` [cell] → ExportSheet.AD32
+- `Spellcaster2` [cell] → ExportSheet.AD15
+- `Spellcaster20` [cell] → ExportSheet.AD33
+- `Spellcaster21` [cell] → ExportSheet.AD34
+- `Spellcaster22` [cell] → ExportSheet.AD35
+- `Spellcaster23` [cell] → ExportSheet.AD36
+- `Spellcaster24` [cell] → ExportSheet.AD37
+- `Spellcaster25` [cell] → ExportSheet.AD38
+- `Spellcaster3` [cell] → ExportSheet.AD16
+- `Spellcaster4` [cell] → ExportSheet.AD17
+- `Spellcaster5` [cell] → ExportSheet.AD18
+- `Spellcaster6` [cell] → ExportSheet.AD19
+- `Spellcaster7` [cell] → ExportSheet.AD20
+- `Spellcaster8` [cell] → ExportSheet.AD21
+- `Spellcaster9` [cell] → ExportSheet.AD22
+- `SpellwarpedSelected` [cell] → ExportSheet.AN32
+
+### Tables/Lookups
+
+- `TblAnointSelf` [range] → ExportSheet.AI10:.AI13
+- `TblAnointWeapon` [range] → ExportSheet.AI14:.AI16
+- `TblAnointedIntBumps` [range] → ExportSheet.AL10:.AL12
+- `TblAnointedStatBumps` [range] → ExportSheet.AK10:.AK12
+- `TblArmorCells` [range] → ExportSheet.F43:.F48
+- `TblAttack1Cells` [range] → ExportSheet.E25:.E31
+- `TblAttack2Cells` [range] → ExportSheet.G25:.G31
+- `TblAttack3Cells` [range] → ExportSheet.I25:.I31
+- `TblAttack4Cells` [range] → ExportSheet.K25:.K31
+- `TblAttack5Cells` [range] → ExportSheet.M25:.M31
+- `TblAttack6Cells` [range] → ExportSheet.O25:.O31
+- `TblBlackMagicElixir` [range] → ExportSheet.AJ14:.AJ16
+- `TblBlackMagicOil` [range] → ExportSheet.AJ10:.AJ13
+- `TblBonusFeats` [range] → ExportSheet.BX21:.BX120
+- `TblBonusManifesters` [range] → ExportSheet.AE14:.AF38
+- `TblBonusMeldshapers` [range] → ExportSheet.AK37:.AL61
+- `TblBonusSpellcasters` [range] → ExportSheet.AC14:.AD63
+- `TblDisciplineFocus` [range] → ExportSheet.W65:.W69
+- `TblDrShamanAbilities` [range] → ExportSheet.T58:.T68
+- `TblEvolvedUndead` [range] → ExportSheet.AN42:.AN44
+- `TblEvolvedUndeadDropdowns` [range] → ExportSheet.AP42:.AP45
+- `TblExoticWeaponTricks` [range] → ExportSheet.AG10:.AG12
+- `TblExpandedKnowledge` [range] → ExportSheet.BV15:.BX17
+- `TblExpandedKnowledgeCells` [range] → ExportSheet.BW15:.BW17
+- `TblExpertSkills` [range] → ExportSheet.T9:.T18
+- `TblExportArcaneDefense` [range] → ExportSheet.BY508:.BY510
+- `TblExportEfficientItemCreationFeat` [range] → ExportSheet.BY3274:.BY3276
+- `TblExportMIL` [range] → ExportSheet.DF3:.GD80
+- `TblExportPermanentEminationFeat` [range] → ExportSheet.BY3373:.BY3375
+- `TblExportPsicrystalPowerFeat` [range] → ExportSheet.BY3445:.BY3447
+- `TblExportSpellStowawayFeat` [range] → ExportSheet.BY3391:.BY3393
+- `TblExportSpontaneousSpellFeat` [range] → ExportSheet.BY3400:.BY3402
+- `TblExportTenaciousMagicFeat` [range] → ExportSheet.BY3407:.BY3409
+- `TblExtraSlotCells` [range] → ExportSheet.BW3:.BW5
+- `TblExtraSlots` [range] → ExportSheet.BV3:.BX5
+- `TblExtraSpellCells` [range] → ExportSheet.BW7:.BW9
+- `TblExtraSpells` [range] → ExportSheet.BV7:.BX9
+- `TblFavoredEnemies` [range] → ExportSheet.U27:.U34
+- `TblFeyriAbilities` [range] → ExportSheet.A160:.A170
+- `TblGRAboleth` [range] → ExportSheet.Y77:.Y84
+- `TblGRBeholder` [range] → ExportSheet.Z77:.Z82
+- `TblGRBeholderDropdowns` [range] → ExportSheet.Z86:.Z89
+- `TblGRDeathless` [range] → ExportSheet.AG77:.AG81
+- `TblGRDraconic` [range] → ExportSheet.AF77:.AF86
+- `TblGRElementAir` [range] → ExportSheet.AH79:.AH81
+- `TblGRElementEarth` [range] → ExportSheet.AH82:.AH84
+- `TblGRElementFire` [range] → ExportSheet.AH85:.AH87
+- `TblGRElementWater` [range] → ExportSheet.AH88:.AH90
+- `TblGRElemental` [range] → ExportSheet.AH78:.AH90
+- `TblGRFiendish` [range] → ExportSheet.AA77:.AA93
+- `TblGRIllithid` [range] → ExportSheet.AB77:.AB91
+- `TblGRIllithidDropdowns` [range] → ExportSheet.AB92:.AB93
+- `TblGRMaug` [range] → ExportSheet.X85:.X90
+- `TblGRPlant` [range] → ExportSheet.AI77:.AI83
+- `TblGRSilthilar` [range] → ExportSheet.AE77:.AE85
+- `TblGRUndead` [range] → ExportSheet.AC77:.AC90
+- `TblGRYuanTi` [range] → ExportSheet.AD77:.AD81
+- `TblGameLogExport` [range] → ExportSheet.CH4:.CQ2010
+- `TblGeomancerDriftCells` [range] → ExportSheet.AA24:.AA33
+- `TblGhostAbilities` [range] → ExportSheet.AP9:.AP15
+- `TblHdBHordeEnemy` [range] → ExportSheet.AE56:.AE58
+- `TblHuPgSkills` [range] → ExportSheet.X71:.X80
+- `TblLycanthropeSelected` [range] → ExportSheet.AN18:.AN23
+- `TblManifester` [range] → ExportSheet.AE14:.AE28
+- `TblMonkTattoos` [range] → ExportSheet.AH10:.AH14
+- `TblPrSSelected` [range] → ExportSheet.AG66:.AG69
+- `TblPracticedManifesters` [range] → ExportSheet.BT19:.BU21
+- `TblPracticedSpellcasterCells` [range] → ExportSheet.BW11:.BW13
+- `TblPracticedSpellcasters` [range] → ExportSheet.BV11:.BW13
+- `TblRacesStatsDragonborn` [range] → ExportSheet.J10:.J11
+- `TblRacesStatsEthnicities` [range] → ExportSheet.J14:.J17
+- `TblRacesStatsRegions` [range] → ExportSheet.H12:.H15
+- `TblStatBumps` [range] → ExportSheet.L9:.N13
+- `TblSteelLegionnaire` [range] → ExportSheet.AI46:.AI48
+- `TblSwarmShifterDropdowns` [range] → ExportSheet.AO49:.AO51
+- `TblTemplateTimeStamp` [range] → ExportSheet.AM9:.AM66
+- `TblTemplatesSelected` [range] → ExportSheet.AN9:.AN66
+- `TblThGImbue` [range] → ExportSheet.AJ27:.AJ28
+- `TblUARacialParagons1` [range] → ExportSheet.W71:.W77
+- `TblUnTBonusLevels` [range] → ExportSheet.AG43:.AG44
+- `TblVicesConquered` [range] → ExportSheet.W62:.W63
+- `TblVicesSelected` [range] → ExportSheet.W55:.W60
+
+## Custom Race
+
+- `CustomRace` [range] → Custom Race.D3:.D48
+- `HasCustomRace` [cell] → Custom Race.I2
+
+## Custom Template
+
+- `CustomTemplate` [range] → Custom Template.D3:.D46
+- `HasCustomTemplate` [cell] → Custom Template.I2
+
+## Custom Familiar
+
+- `FamiliarTypes` [range] → Custom Familiar.P3:.P203
+
+## Option Info
+
+### General
+
+- `BulletSubLevelTxt` [cell] → Option Info.H49
+- `BulletTopLevelTxt` [cell] → Option Info.H48
+- `BulletsBase` [cell] → Option Info.H46
+- `BulletsRowsCnt` [cell] → Option Info.H47
+- `IsEberron` [cell] → Option Info.H17
+- `Setting` [cell] → Option Info.H12
+- `SettingDefault` [cell] → Option Info.H13
+- `SettingIdx` [cell] → Option Info.H15
+- `SettingTxt` [cell] → Option Info.H16
+- `SettingsBase` [cell] → Option Info.H14
+- `SettingsRowsCnt` [cell] → Option Info.H11
+- `Sourcebooks` [cell] → Option Info.H23
+- `SourcebooksCategoryList` [range] → Option Info.A30:.A35
+- `SourcebooksDefault` [cell] → Option Info.H24
+- `SourcebooksFeatsSrcCnt` [cell] → Option Info.Q1
+- `SourcebooksRowsCnt` [cell] → Option Info.H22
+- `SourcebooksStatusList` [range] → Option Info.A22:.A27
+- `VBugfix` [cell] → Option Info.A5
+- `VMajor` [cell] → Option Info.A2
+- `VMinor` [cell] → Option Info.A4
+- `VSource` [cell] → Option Info.A3
+- `Version` [cell] → Option Info.H2
+- `VersionBreakdown` [range] → Option Info.A2:.A5
+- `VersionDate` [cell] → Option Info.H3
+- `VersionExport` [cell] → Option Info.H5
+- `VersionLog` [cell] → Option Info.H4
+
+### Tables/Lookups
+
+- `TblBullets` [range] → Option Info.A45:.E65
+- `TblSettings` [range] → Option Info.A10:.E17
+- `TblSheets` [range] → Option Info.T1:.AD65
+- `TblVersion` [range] → Option Info.A1:.D8
+
+## Stats & Character Details
+
+### Alignment
+
+- `Alignment` [cell] → Stats & Character Details.CM37
+- `AlignmentBase` [cell] → Stats & Character Details.CK39
+- `AlignmentChaotic` [cell] → Stats & Character Details.CP39
+- `AlignmentComponents` [range] → Stats & Character Details.CM35:.CM36
+- `AlignmentDeity` [cell] → Stats & Character Details.CM41
+- `AlignmentEvil` [cell] → Stats & Character Details.CP36
+- `AlignmentGood` [cell] → Stats & Character Details.CP37
+- `AlignmentLawful` [cell] → Stats & Character Details.CP38
+- `AlignmentList` [range] → Stats & Character Details.CI35:.CI43
+- `AlignmentNeutral` [cell] → Stats & Character Details.CP35
+- `AlignmentNonChaotic` [cell] → Stats & Character Details.CP43
+- `AlignmentNonEvil` [cell] → Stats & Character Details.CP40
+- `AlignmentNonGood` [cell] → Stats & Character Details.CP41
+- `AlignmentNonLawful` [cell] → Stats & Character Details.CP42
+- `AlignmentSeq` [range] → Stats & Character Details.CH35:.CH43
+- `AlignmentTrueNeutral` [cell] → Stats & Character Details.CM42
+- `AlignmentTxt` [cell] → Stats & Character Details.CM38
+
+### Attacks
+
+- `AttacksList` [cell] → Stats & Character Details.CR17
+
+### General
+
+- `AbilityAcronym` [range] → Stats & Character Details.CE3:.CE8
+- `AbilityInitialScore` [range] → Stats & Character Details.CG3:.CG8
+- `AbilityTxt` [range] → Stats & Character Details.CQ3:.CQ8
+- `Art` [cell] → Stats & Character Details.B29
+- `BaseStats` [range] → Stats & Character Details.B3:.B8
+- `CP` [cell] → Stats & Character Details.B28
+- `CROverride` [cell] → Stats & Character Details.BS25
+- `CampaignName` [cell] → Stats & Character Details.B34
+- `Cha` [cell] → Stats & Character Details.BN8
+- `ChaMagicMod` [cell] → Stats & Character Details.BM8
+- `ChaMod` [cell] → Stats & Character Details.BO8
+- `CharacterAge` [cell] → Stats & Character Details.B19
+- `CharacterDescription` [range] → Stats & Character Details.B18:.D23
+- `CharacterEyes` [cell] → Stats & Character Details.B23
+- `CharacterHair` [cell] → Stats & Character Details.B22
+- `CharacterHeight` [cell] → Stats & Character Details.B20
+- `CharacterName` [cell] → Stats & Character Details.B18
+- `CharacterWeight` [cell] → Stats & Character Details.B21
+- `Coins` [range] → Stats & Character Details.B25:.D28
+- `CoinsOther` [range] → Stats & Character Details.B29:.D31
+- `Con` [cell] → Stats & Character Details.BN5
+- `ConMagicMod` [cell] → Stats & Character Details.BM5
+- `ConMod` [cell] → Stats & Character Details.BO5
+- `DefaultConMod` [cell] → Stats & Character Details.CT3
+- `DeityOverride` [cell] → Stats & Character Details.H15
+- `Dex` [cell] → Stats & Character Details.BN4
+- `DexMagicMod` [cell] → Stats & Character Details.BM4
+- `DexMod` [cell] → Stats & Character Details.BO4
+- `DoBumpsIntAdj` [cell] → Stats & Character Details.CE27
+- `DoInherentIntAdj` [cell] → Stats & Character Details.CE28
+- `ExperiencePoints` [cell] → Stats & Character Details.BS28
+- `FavoredWeaponOverride` [cell] → Stats & Character Details.H16
+- `GP` [cell] → Stats & Character Details.B26
+- `Gems` [cell] → Stats & Character Details.B30
+- `HasAgeInfo` [cell] → Stats & Character Details.CH11
+- `HasHeightWeightInfo` [cell] → Stats & Character Details.CK11
+- `InitialCha` [cell] → Stats & Character Details.B8
+- `InitialCon` [cell] → Stats & Character Details.B5
+- `InitialDex` [cell] → Stats & Character Details.B4
+- `InitialInt` [cell] → Stats & Character Details.B6
+- `InitialStr` [cell] → Stats & Character Details.B3
+- `InitialWis` [cell] → Stats & Character Details.B7
+- `Int` [cell] → Stats & Character Details.BN6
+- `IntMagicMod` [cell] → Stats & Character Details.BM6
+- `IntMod` [cell] → Stats & Character Details.BO6
+- `LABuyOff` [cell] → Stats & Character Details.BS22
+- `NextLevelExperience` [cell] → Stats & Character Details.E39
+- `OtherGP` [cell] → Stats & Character Details.B31
+- `PP` [cell] → Stats & Character Details.B25
+- `Player` [cell] → Stats & Character Details.B33
+- `RandomAge` [cell] → Stats & Character Details.CH24
+- `RandomHeight` [cell] → Stats & Character Details.CK24
+- `RandomWeight` [cell] → Stats & Character Details.CN24
+- `SAList` [cell] → Stats & Character Details.CR26
+- `SP` [cell] → Stats & Character Details.B27
+- `SQList` [cell] → Stats & Character Details.CR27
+- `StatBumps` [range] → Stats & Character Details.E3:.BM8
+- `Str` [cell] → Stats & Character Details.BN3
+- `StrMagicMod` [cell] → Stats & Character Details.BM3
+- `StrMod` [cell] → Stats & Character Details.BO3
+- `Wis` [cell] → Stats & Character Details.BN7
+- `WisMagicMod` [cell] → Stats & Character Details.BM7
+- `WisMod` [cell] → Stats & Character Details.BO7
+- `ageDieType` [cell] → Stats & Character Details.CH22
+- `ageNumDice` [cell] → Stats & Character Details.CH23
+- `baseAge` [cell] → Stats & Character Details.CH19
+- `baseHgt` [cell] → Stats & Character Details.CK19
+- `baseWgt` [cell] → Stats & Character Details.CN19
+- `hgtDieType` [cell] → Stats & Character Details.CK22
+- `hgtNumDice` [cell] → Stats & Character Details.CK23
+- `rndClassIndex` [cell] → Stats & Character Details.CH12
+- `wgtDieType` [cell] → Stats & Character Details.CN22
+- `wgtNumDice` [cell] → Stats & Character Details.CN23
+
+### Tables/Lookups
+
+- `TblAlign` [range] → Stats & Character Details.CD31:.CD39
+- `TblAlignment` [range] → Stats & Character Details.CD34:.CI43
+- `TblRandomDest` [range] → Stats & Character Details.B19:.D21
+- `TblRandomSource` [range] → Stats & Character Details.AN19:.AN21
+- `TblStats` [range] → Stats & Character Details.A2:.A8
+
+## Race Info
+
+### General
+
+- `AquaticSubtype` [cell] → Race Info.BK80
+- `BaseSpeed` [cell] → Race Info.G1
+- `BiteDamage` [cell] → Race Info.BO47
+- `ClawDamage` [cell] → Race Info.BP47
+- `CorporealSubtype` [cell] → Race Info.BK82
+- `Devil` [cell] → Race Info.BK16
+- `EthnicityListRowsCnt` [cell] → Race Info.BP124
+- `FRaceCurrent` [cell] → Race Info.BK14
+- `FaceReach` [cell] → Race Info.BK34
+- `FavoredClass` [cell] → Race Info.AQ1
+- `FullRace` [cell] → Race Info.BK12
+- `HasSubrace` [cell] → Race Info.BK8
+- `IncorporealSubtype` [cell] → Race Info.BK81
+- `IndexRaceAttacks` [cell] → Race Info.N5
+- `LivingConstructSubtype` [cell] → Race Info.BK79
+- `MonType` [cell] → Race Info.BL54
+- `MonsterClassRace` [cell] → Race Info.BK17
+- `Planetouched` [cell] → Race Info.BK15
+- `Race` [cell] → Race Info.BK9
+- `RaceAbilitiesAdj` [range] → Race Info.AD1:.AI1
+- `RaceAbilitiesAdjTxt` [cell] → Race Info.BK21
+- `RaceAge` [cell] → Race Info.AR1
+- `RaceAttacks` [cell] → Race Info.N1
+- `RaceAutoLanguages` [cell] → Race Info.AL1
+- `RaceBAB` [cell] → Race Info.BM20
+- `RaceBase` [cell] → Race Info.A1
+- `RaceBaseHD` [cell] → Race Info.BL20
+- `RaceBonusLanguages` [cell] → Race Info.AM1
+- `RaceBurrowSpeed` [cell] → Race Info.H1
+- `RaceCR` [cell] → Race Info.AN1
+- `RaceChaModReal` [cell] → Race Info.AI1
+- `RaceChk` [cell] → Race Info.BK13
+- `RaceClimbSpeed` [cell] → Race Info.I1
+- `RaceConModReal` [cell] → Race Info.AF1
+- `RaceDR` [cell] → Race Info.Z1
+- `RaceDarkvision` [cell] → Race Info.T1
+- `RaceDefault` [cell] → Race Info.BK7
+- `RaceDexModReal` [cell] → Race Info.AE1
+- `RaceEssentia` [cell] → Race Info.AB1
+- `RaceEthnicity` [cell] → Race Info.BK10
+- `RaceFeats` [cell] → Race Info.AK1
+- `RaceFlySpeed` [cell] → Race Info.J1
+- `RaceFort` [cell] → Race Info.BN20
+- `RaceHD` [cell] → Race Info.F1
+- `RaceHDType` [cell] → Race Info.BK20
+- `RaceHdr` [range] → Race Info.A3:.BG3
+- `RaceHeader` [range] → Race Info.A3:.BD3
+- `RaceHeight` [cell] → Race Info.AS1
+- `RaceIdx` [cell] → Race Info.AW1
+- `RaceImmunities` [cell] → Race Info.V1
+- `RaceIndexList` [range] → Race Info.BF4:.BF332
+- `RaceInfoAvailableCol` [cell] → Race Info.BF1
+- `RaceInfoRowsCnt` [cell] → Race Info.BK5
+- `RaceInfoSkillsCol` [cell] → Race Info.BM7
+- `RaceIntModReal` [cell] → Race Info.AG1
+- `RaceListBase` [cell] → Race Info.BE3
+- `RaceListRowsCnt` [cell] → Race Info.BK6
+- `RaceLowlight` [cell] → Race Info.S1
+- `RaceLvlAdj` [cell] → Race Info.AP1
+- `RaceManeuverability` [cell] → Race Info.K1
+- `RaceNA` [cell] → Race Info.M1
+- `RaceRef` [cell] → Race Info.BO20
+- `RaceResistances` [cell] → Race Info.X1
+- `RaceSR` [cell] → Race Info.Y1
+- `RaceSize` [cell] → Race Info.C1
+- `RaceSkillMod` [cell] → Race Info.AJ1
+- `RaceSkillPoints` [cell] → Race Info.BQ20
+- `RaceSpellLike` [cell] → Race Info.P1
+- `RaceStrModReal` [cell] → Race Info.AD1
+- `RaceSwimSpeed` [cell] → Race Info.L1
+- `RaceType` [cell] → Race Info.D1
+- `RaceVulnerabilities` [cell] → Race Info.W1
+- `RaceWeight` [cell] → Race Info.AT1
+- `RaceWill` [cell] → Race Info.BP20
+- `RaceWisModReal` [cell] → Race Info.AH1
+- `RacialSubtype` [cell] → Race Info.E1
+- `RegionListRowsCnt` [cell] → Race Info.BK125
+- `Size` [cell] → Race Info.BK31
+- `SizeArmorWgt` [cell] → Race Info.BK47
+- `SizeBase` [cell] → Race Info.BK33
+- `SizeBaseIdx` [cell] → Race Info.BL33
+- `SizeChanged` [cell] → Race Info.BK30
+- `SizeFace` [cell] → Race Info.BQ47
+- `SizeList` [range] → Race Info.BS5:.BS18
+- `SizeLong` [cell] → Race Info.BK32
+- `SizeMod` [cell] → Race Info.BM47
+- `SizeNumber` [cell] → Race Info.BJ47
+- `SizeReach` [cell] → Race Info.BR47
+- `SizeReachLong` [cell] → Race Info.BS47
+- `SizeSkillMod` [cell] → Race Info.BN47
+- `SizeWgtMod` [cell] → Race Info.BL47
+- `Subrace` [cell] → Race Info.BK11
+- `Subtype` [cell] → Race Info.BK78
+- `TypeBase` [cell] → Race Info.BK50
+- `TypeBaseIdx` [cell] → Race Info.BK55
+- `TypeInfo` [cell] → Race Info.BK54
+- `TypeList` [range] → Race Info.BS59:.BS74
+- `TypeLiving` [cell] → Race Info.BO50
+- `TypePyramidList` [range] → Race Info.BJ57:.BJ75
+
+### Tables/Lookups
+
+- `TblRaceInfo` [range] → Race Info.A3:.BD332
+- `TblRaceList` [range] → Race Info.BG4:.BG332
+- `TblSize` [range] → Race Info.BJ37:.BS45
+- `TblSizes` [range] → Race Info.BJ37:.BJ45
+- `TblTypesPyramid` [range] → Race Info.BJ57:.BQ75
+
+## Racial Abilities
+
+### General
+
+- `AddShifts` [cell] → Racial Abilities.N681
+- `Darkvision` [cell] → Racial Abilities.F3
+- `DarkvisionAmount` [cell] → Racial Abilities.F7
+- `HalfDragonColor` [cell] → Racial Abilities.G875
+- `HasLowlightVision` [cell] → Racial Abilities.F16
+- `IsShifter` [cell] → Racial Abilities.G681
+- `RaceRa` [cell] → Racial Abilities.F1
+- `RacialAbilities` [cell] → Racial Abilities.D1
+- `Regeneration` [cell] → Racial Abilities.F15
+- `RilkanSkBonus` [cell] → Racial Abilities.E733
+- `ShifterAbility` [cell] → Racial Abilities.H681
+- `ShifterAttackBite` [cell] → Racial Abilities.J691
+- `ShifterAttackClaw` [cell] → Racial Abilities.J692
+- `ShifterAttackGore` [cell] → Racial Abilities.J689
+- `ShifterAttacks` [cell] → Racial Abilities.K683
+- `ShifterClimbSpeed` [cell] → Racial Abilities.J687
+- `ShifterCnt` [cell] → Racial Abilities.J683
+- `ShifterDmgBonus` [cell] → Racial Abilities.K681
+- `ShifterFlySpeed` [cell] → Racial Abilities.J693
+- `ShifterHandleAnimalBonus` [cell] → Racial Abilities.J688
+- `ShifterLandSpeedBonus` [cell] → Racial Abilities.J690
+- `ShifterNaturalArmor` [cell] → Racial Abilities.J686
+- `ShifterSurvivalBonus` [cell] → Racial Abilities.J695
+- `ShifterSwimSpeed` [cell] → Racial Abilities.J694
+- `ShifterTrait1Idx` [cell] → Racial Abilities.G683
+- `ShifterTrait2Idx` [cell] → Racial Abilities.H683
+- `ShifterTrait3Idx` [cell] → Racial Abilities.I683
+- `ShifterTrait3Txt` [cell] → Racial Abilities.J681
+- `ShifterTrait4Idx` [cell] → Racial Abilities.L681
+- `ShifterTrait4Txt` [cell] → Racial Abilities.M681
+- `ShifterTraitList` [range] → Racial Abilities.G686:.G695
+- `ShifterTraitTxt` [cell] → Racial Abilities.I681
+- `TemplateAbilities` [cell] → Racial Abilities.F870
+
+### Tables/Lookups
+
+- `TblShifterTrait` [range] → Racial Abilities.G685:.K695
+
+## Template Info
+
+### Class Levels
+
+- `TemplateSelectedLvl` [range] → Template Info.AU5:.AU12
+
+### General
+
+- `DoTemplateAcquiredIntAdj` [cell] → Template Info.BI17
+- `EvolvedCnt` [cell] → Template Info.BI28
+- `HasHalfTemplate` [cell] → Template Info.BI30
+- `HasTemplate` [cell] → Template Info.AP1
+- `InheritedTemplateIntBonus` [cell] → Template Info.AF3
+- `IsPrimordial` [cell] → Template Info.BI31
+- `SwarmShifterCnt` [cell] → Template Info.BI29
+- `TemplateALMod` [range] → Template Info.BI19:.BJ22
+- `TemplateAcquiredAbilitiesAdj` [range] → Template Info.AC2:.AH2
+- `TemplateAcquiredInt` [range] → Template Info.AF3:.AF8
+- `TemplateAddedHD` [cell] → Template Info.F1
+- `TemplateAddedHP` [cell] → Template Info.BI23
+- `TemplateAttacks` [cell] → Template Info.N1
+- `TemplateAutomaticLanguage` [cell] → Template Info.AK1
+- `TemplateBonusLanguage` [cell] → Template Info.AL1
+- `TemplateBurrowSpeed` [cell] → Template Info.H1
+- `TemplateCR` [cell] → Template Info.AM1
+- `TemplateCha` [cell] → Template Info.AH1
+- `TemplateClimbSpeed` [cell] → Template Info.I1
+- `TemplateCon` [cell] → Template Info.AE1
+- `TemplateDR` [cell] → Template Info.Z1
+- `TemplateDarkvision` [cell] → Template Info.T1
+- `TemplateDex` [cell] → Template Info.AD1
+- `TemplateEnergyResistance` [cell] → Template Info.X1
+- `TemplateFastHealing` [cell] → Template Info.AA1
+- `TemplateFeats` [cell] → Template Info.AJ1
+- `TemplateFlySpeed` [cell] → Template Info.J1
+- `TemplateHDChange` [cell] → Template Info.AR1
+- `TemplateHeader` [range] → Template Info.A14:.BD14
+- `TemplateImmunities` [cell] → Template Info.V1
+- `TemplateInfoRowsCnt` [cell] → Template Info.BI15
+- `TemplateInheritedAbilitiesAdj` [range] → Template Info.AC3:.AH3
+- `TemplateInt` [cell] → Template Info.AF1
+- `TemplateLA` [cell] → Template Info.AO1
+- `TemplateLandSpeed` [cell] → Template Info.G1
+- `TemplateListRowsCnt` [cell] → Template Info.BI16
+- `TemplateLowLight` [cell] → Template Info.S1
+- `TemplateManeuverability` [cell] → Template Info.K1
+- `TemplateMonType` [cell] → Template Info.BI25
+- `TemplateNA` [cell] → Template Info.M1
+- `TemplatePsi` [cell] → Template Info.Q1
+- `TemplateRaceChk` [cell] → Template Info.BI27
+- `TemplateRaceHDChanged` [cell] → Template Info.AQ1
+- `TemplateRacialSkillMod` [cell] → Template Info.AI1
+- `TemplateSA` [cell] → Template Info.AB1
+- `TemplateSelected` [range] → Template Info.A3:.A8
+- `TemplateSelectedName` [range] → Template Info.A5:.A12
+- `TemplateSelectionCnt` [cell] → Template Info.BC1
+- `TemplateSizeMod` [cell] → Template Info.AZ1
+- `TemplateSp` [cell] → Template Info.P1
+- `TemplateSpellResistance` [cell] → Template Info.Y1
+- `TemplateStr` [cell] → Template Info.AC1
+- `TemplateSubtype` [cell] → Template Info.E1
+- `TemplateSubtypeChk` [cell] → Template Info.BI26
+- `TemplateSwimSpeed` [cell] → Template Info.L1
+- `TemplateType` [cell] → Template Info.D1
+- `TemplateTypeChk` [cell] → Template Info.BI25
+- `TemplateTypeValue` [cell] → Template Info.AT1
+- `TemplateVulnerabilities` [cell] → Template Info.W1
+- `TemplateWis` [cell] → Template Info.AG1
+- `Templates` [cell] → Template Info.BI24
+
+### Tables/Lookups
+
+- `TblTemplateRacialSkillMod` [cell] → Template Info.AI1
+- `TblTemplateSelInfo` [range] → Template Info.A5:.BE12
+
+## Race & Templates
+
+### Class Levels
+
+- `TemplateSelectionLvl` [range] → Race & Templates.H19:.H26
+
+### General
+
+- `CelestialSelected` [cell] → Race & Templates.AG18
+- `ChameleonSelected` [cell] → Race & Templates.AG41
+- `ChildoftheSeaSelected` [cell] → Race & Templates.AG43
+- `DaelkyrSymbiont` [cell] → Race & Templates.P3
+- `DaelkyrSymbiontListRowsCnt` [cell] → Race & Templates.AG10
+- `DeathKnightSelected` [cell] → Race & Templates.AG30
+- `DireWereboarSelected` [cell] → Race & Templates.AG28
+- `DragonOverlordList` [range] → Race & Templates.AX24:.AX29
+- `DragonVassalOverlord` [cell] → Race & Templates.X3
+- `DragonbornAspect` [cell] → Race & Templates.P4
+- `DragonbornFormerRaceTxt` [cell] → Race & Templates.P5
+- `Dragonmark` [cell] → Race & Templates.AG9
+- `DragonmarkedHouse` [cell] → Race & Templates.AG7
+- `DragonspawnCreator` [cell] → Race & Templates.X4
+- `DragonspawnSelected` [cell] → Race & Templates.AC4
+- `DryLichSelected` [cell] → Race & Templates.AG17
+- `EBCSHouse` [cell] → Race & Templates.P6
+- `EBHouseListRowsCnt` [cell] → Race & Templates.AG6
+- `EthnicityOverride` [cell] → Race & Templates.P16
+- `EvolvedSp` [range] → Race & Templates.X5:.X8
+- `EvolvedSpListRowsCnt` [cell] → Race & Templates.AJ4
+- `FaerzressInfusedInheritance` [cell] → Race & Templates.X9
+- `FeyriAbilities` [range] → Race & Templates.P10:.P13
+- `FeyriAbilitiesListRowsCnt` [cell] → Race & Templates.AG13
+- `FeyriCharm` [cell] → Race & Templates.AZ14
+- `FeyriClairaudience` [cell] → Race & Templates.AZ15
+- `FeyriDDoor` [cell] → Race & Templates.AZ18
+- `FeyriDR` [cell] → Race & Templates.AZ19
+- `FeyriDarkness` [cell] → Race & Templates.AZ16
+- `FeyriDetectThoughts` [cell] → Race & Templates.AZ17
+- `FeyriElectricity` [cell] → Race & Templates.AZ12
+- `FeyriEnervation` [cell] → Race & Templates.AZ20
+- `FeyriFireRes` [cell] → Race & Templates.AZ21
+- `FeyriHasSpecialAbility` [cell] → Race & Templates.AG12
+- `FeyriPoison` [cell] → Race & Templates.AZ13
+- `FeyriSuggestion` [cell] → Race & Templates.AZ22
+- `FiendishSelected` [cell] → Race & Templates.AG19
+- `Gender` [cell] → Race & Templates.AG3
+- `GenderOverride` [cell] → Race & Templates.D9
+- `GenderTxt` [cell] → Race & Templates.D8
+- `GhostAbilities` [range] → Race & Templates.X11:.X13
+- `GhostAbilitiesList` [range] → Race & Templates.AP3:.AP9
+- `GhostAbilitiesListRowsCnt` [cell] → Race & Templates.AJ5
+- `GhostAbilitiesTxt` [cell] → Race & Templates.AJ7
+- `GhostForm` [cell] → Race & Templates.X10
+- `GhostSelected` [cell] → Race & Templates.AJ6
+- `GraveTouchedGhoulSelected` [cell] → Race & Templates.AG37
+- `HalfCelestialSelected` [cell] → Race & Templates.AG20
+- `HalfDragonSelected` [cell] → Race & Templates.AG21
+- `HalfDragonType` [cell] → Race & Templates.X14
+- `HalfElementalType` [cell] → Race & Templates.X15
+- `HalfFiendSelected` [cell] → Race & Templates.AG22
+- `HalfIllithidSelected` [cell] → Race & Templates.AG31
+- `HalfVampireAttack` [cell] → Race & Templates.X16
+- `HalfVampireSelected` [cell] → Race & Templates.AG39
+- `HasEBHouse` [cell] → Race & Templates.AG8
+- `HellbredAspect` [cell] → Race & Templates.P7
+- `HengeyokaiAnimal` [cell] → Race & Templates.P8
+- `HengeyokaiForm` [cell] → Race & Templates.P9
+- `HoodedPupilSelected` [cell] → Race & Templates.AG38
+- `InsectileSelected` [cell] → Race & Templates.AG40
+- `LycanthropeAffliction` [cell] → Race & Templates.X18
+- `LycanthropeAnimal` [cell] → Race & Templates.X17
+- `LycanthropeForm` [cell] → Race & Templates.X19
+- `MCCell` [cell] → Race & Templates.P17
+- `MineralWarriorSelected` [cell] → Race & Templates.AG42
+- `PrimordialKnowledge` [cell] → Race & Templates.X21
+- `PrimordialSp` [cell] → Race & Templates.X20
+- `RaceEthnicityTxt` [cell] → Race & Templates.P15
+- `RaceHDMirror` [cell] → Race & Templates.AJ14
+- `RaceSelectionOptions` [range] → Race & Templates.P3:.P18
+- `RaceTxt` [cell] → Race & Templates.D6
+- `Region` [cell] → Race & Templates.AG4
+- `RegionChk` [cell] → Race & Templates.AG5
+- `RegionOverride` [cell] → Race & Templates.D12
+- `RegionTxt` [cell] → Race & Templates.D11
+- `ShadowAbilities` [range] → Race & Templates.X22:.X28
+- `ShadowAbilitiesListRowsCnt` [cell] → Race & Templates.AJ8
+- `ShadowCFear` [cell] → Race & Templates.AN12
+- `ShadowDR` [cell] → Race & Templates.AN13
+- `ShadowEvasion` [cell] → Race & Templates.AN14
+- `ShadowFH2` [cell] → Race & Templates.AN15
+- `ShadowLuck` [cell] → Race & Templates.AN11
+- `ShadowMImage` [cell] → Race & Templates.AN16
+- `ShadowPShift` [cell] → Race & Templates.AN17
+- `ShifterTrait1Txt` [cell] → Race & Templates.P18
+- `SwarmShifter2Selected` [cell] → Race & Templates.AC30
+- `SwarmShifterTypes` [range] → Race & Templates.X29:.X31
+- `SwarmTypesListRowsCnt` [cell] → Race & Templates.AJ9
+- `SwordwraithSelected` [cell] → Race & Templates.AG32
+- `TaintedOneSelected` [cell] → Race & Templates.AG29
+- `TemplateHDMirror` [cell] → Race & Templates.AJ15
+- `TemplateSelection` [range] → Race & Templates.D19:.D26
+- `TemplateSelectionOptions` [range] → Race & Templates.X3:.X31
+- `TinkerGnomeGuild` [cell] → Race & Templates.P14
+- `VampireSelected` [cell] → Race & Templates.AJ11
+- `VivaciousSelected` [cell] → Race & Templates.AG36
+- `VoidmindSelected` [cell] → Race & Templates.AG35
+- `WendigoSelected` [cell] → Race & Templates.AG33
+- `WerebearSelected` [cell] → Race & Templates.AG23
+- `WereboarSelected` [cell] → Race & Templates.AG24
+- `WereratSelected` [cell] → Race & Templates.AG25
+- `WeretigerSelected` [cell] → Race & Templates.AG26
+- `WerewolfSelected` [cell] → Race & Templates.AG27
+- `WichtlinSelected` [cell] → Race & Templates.AG44
+- `WoodlingSelected` [cell] → Race & Templates.AG34
+
+### Tables/Lookups
+
+- `TblDragonmark` [range] → Race & Templates.AR15:.AS28
+- `TblEBCSHouses` [range] → Race & Templates.AR15:.AR28
+- `TblShadowAbilities` [range] → Race & Templates.AN11:.AN17
+- `TblSwarmType` [range] → Race & Templates.AR2:.AS14
+
+## Classes
+
+### General
+
+- `BAB` [cell] → Classes.BI2
+- `BaseAtk` [cell] → Classes.BI3
+- `BaseFort` [cell] → Classes.BO37
+- `BaseRef` [cell] → Classes.BO38
+- `BaseWill` [cell] → Classes.BO39
+- `Class1` [cell] → Classes.BN21
+- `ClassChkSum` [cell] → Classes.BN16
+- `ClassChkSumOld` [cell] → Classes.BN17
+- `ClassGLvlMax` [cell] → Classes.BP15
+- `ClassLvl1` [cell] → Classes.C2
+- `ClassLvlMax` [cell] → Classes.BO15
+- `ClassMeleeModifier` [cell] → Classes.BN48
+- `ClassRangedModifier` [cell] → Classes.BN49
+- `ClassesChanged` [cell] → Classes.BN18
+- `CommandedDestroyed` [cell] → Classes.BJ18
+- `CureInflict` [cell] → Classes.BI19
+- `DestroyedCommanded` [cell] → Classes.BI18
+- `DisciplineFocusList` [range] → Classes.BN8:.BN12
+- `DrNMartialWeapon` [cell] → Classes.O58
+- `DrShDragonListRowsCnt` [cell] → Classes.BN6
+- `DrShSkFocusList` [range] → Classes.BT15:.BT18
+- `DragShamanSkillFocusList` [range] → Classes.BU16:.BU18
+- `DragonMMList` [range] → Classes.BR3:.BR12
+- `EpicBAB` [cell] → Classes.BN35
+- `EpicSave` [cell] → Classes.BN36
+- `ExtraSkPts` [cell] → Classes.BN45
+- `FavEnemy10Check` [cell] → Classes.M40
+- `FavEnemy11Check` [cell] → Classes.M41
+- `FavEnemy12Check` [cell] → Classes.M42
+- `FavEnemy13Check` [cell] → Classes.M43
+- `FavEnemy1Check` [cell] → Classes.M31
+- `FavEnemy2Check` [cell] → Classes.M32
+- `FavEnemy3Check` [cell] → Classes.M33
+- `FavEnemy4Check` [cell] → Classes.M34
+- `FavEnemy5Check` [cell] → Classes.M35
+- `FavEnemy6Check` [cell] → Classes.M36
+- `FavEnemy7Check` [cell] → Classes.M37
+- `FavEnemy8Check` [cell] → Classes.M38
+- `FavEnemy9Check` [cell] → Classes.M39
+- `FavEnemyBonus1` [cell] → Classes.BI22
+- `FavEnemyBonus10` [cell] → Classes.BI31
+- `FavEnemyBonus11` [cell] → Classes.BI32
+- `FavEnemyBonus12` [cell] → Classes.BI33
+- `FavEnemyBonus13` [cell] → Classes.BI34
+- `FavEnemyBonus2` [cell] → Classes.BI23
+- `FavEnemyBonus3` [cell] → Classes.BI24
+- `FavEnemyBonus4` [cell] → Classes.BI25
+- `FavEnemyBonus5` [cell] → Classes.BI26
+- `FavEnemyBonus6` [cell] → Classes.BI27
+- `FavEnemyBonus7` [cell] → Classes.BI28
+- `FavEnemyBonus8` [cell] → Classes.BI29
+- `FavEnemyBonus9` [cell] → Classes.BI30
+- `FavEnemyBonusE` [cell] → Classes.BI36
+- `FavEnemyBonusHPa1` [cell] → Classes.BI37
+- `FavEnemyBonusHPa2` [cell] → Classes.BI38
+- `FavEnemyBonusS` [cell] → Classes.BI35
+- `FavEnemyBonusSSc` [cell] → Classes.BI39
+- `FtDragShamanSkFocus1` [cell] → Classes.BU16
+- `FtDragShamanSkFocus2` [cell] → Classes.BU17
+- `FtDragShamanSkFocus3` [cell] → Classes.BU18
+- `GClassLvl1` [cell] → Classes.E2
+- `HDSpecial` [cell] → Classes.BN22
+- `HDSummary` [cell] → Classes.BJ13
+- `HasDomainChoices` [cell] → Classes.BN50
+- `HasPrestige` [cell] → Classes.BN40
+- `HasPrestige2` [cell] → Classes.BN41
+- `HasPrestige3` [cell] → Classes.BN42
+- `HuPgClassSkill` [cell] → Classes.BN3
+- `HuPgMartialWeapon` [cell] → Classes.BN4
+- `IgnoreTempConForHP` [cell] → Classes.BN29
+- `ImportInProgress` [cell] → Classes.BN20
+- `IsGestalt` [cell] → Classes.BN28
+- `Lvl1to20List` [range] → Classes.A2:.A21
+- `Lvl1to60List` [range] → Classes.A2:.A61
+- `LvlCS` [cell] → Classes.BN14
+- `LvlMax` [cell] → Classes.BN15
+- `MeleeBonus` [cell] → Classes.BJ2
+- `NumDomainsOfChoice` [cell] → Classes.BN51
+- `RSL_List` [range] → Classes.BX4:.BX161
+- `RSL_Table` [range] → Classes.BX4:.CB161
+- `RangeBonus` [cell] → Classes.BK2
+- `RebukeTurn` [cell] → Classes.BJ15
+- `RebukedTurned` [cell] → Classes.BJ17
+- `RebukingTurning` [cell] → Classes.BJ16
+- `RedoInProgress` [cell] → Classes.BN19
+- `SpecificDomains` [cell] → Classes.BN52
+- `SwSaDisciplineFocus` [cell] → Classes.BN8
+- `SwSaDisciplineFocus2` [cell] → Classes.BN9
+- `SwSaDisciplineFocus3` [cell] → Classes.BN10
+- `SwSaDisciplineFocus4` [cell] → Classes.BN11
+- `SwSaDisciplineFocus5` [cell] → Classes.BN12
+- `TurnRebuke` [cell] → Classes.BI15
+- `TurnedRebuked` [cell] → Classes.BI17
+- `TurningRebuking` [cell] → Classes.BI16
+- `UndeadType` [cell] → Classes.BN44
+- `fBAB` [cell] → Classes.BN31
+- `fFort` [cell] → Classes.BN32
+- `fRef` [cell] → Classes.BN33
+- `fWill` [cell] → Classes.BN34
+
+### Hit Points
+
+- `HPAdjLvl1` [cell] → Classes.BN25
+- `HPAdjLvl2to60` [cell] → Classes.BN26
+- `HPLycanthrope` [cell] → Classes.BN27
+- `HPMax` [cell] → Classes.BN24
+- `HPRoll` [cell] → Classes.BN23
+- `HitPoints` [cell] → Classes.H63
+
+### Saving Throws
+
+- `FortSave` [cell] → Classes.BN37
+- `RefSave` [cell] → Classes.BN38
+- `WillSave` [cell] → Classes.BN39
+
+### Tables/Lookups
+
+- `TblClassLvls` [range] → Classes.C2:.C61
+- `TblClasses1to20` [range] → Classes.C2:.C21
+- `TblDraconicAuras` [range] → Classes.BR16:.BR28
+- `TblFavEnemies` [range] → Classes.BH22:.BH36
+- `TblGClasses1to20` [range] → Classes.E2:.E21
+- `TblGestaltClassLvls` [range] → Classes.E2:.E61
+- `TblHitPoints` [range] → Classes.H3:.H61
+- `TblSkillPoints` [range] → Classes.F2:.F61
+
+## Class Info
+
+### Class Levels
+
+- `AChLvl` [cell] → Class Info.E619
+- `ANRLvl` [cell] → Class Info.E500
+- `AbJLvl` [cell] → Class Info.E249
+- `AblLvl` [cell] → Class Info.E687
+- `AcSLvl` [cell] → Class Info.E606
+- `AcrLvl` [cell] → Class Info.E235
+- `AdpLvl` [cell] → Class Info.E99
+- `AdtLvl` [cell] → Class Info.E422
+- `AfcLvl` [cell] → Class Info.E87
+- `AlSLvl` [cell] → Class Info.E576
+- `AliLvl` [cell] → Class Info.E187
+- `AlpLvl` [cell] → Class Info.E773
+- `AmTLvl` [cell] → Class Info.E601
+- `AnInLvl` [cell] → Class Info.E740
+- `AnKLvl` [cell] → Class Info.E712
+- `AnWrLvl` [cell] → Class Info.E741
+- `AniMLvl` [cell] → Class Info.E382
+- `AnmLvl` [cell] → Class Info.E774
+- `AoPLvl` [cell] → Class Info.E713
+- `AoSLvl` [cell] → Class Info.E186
+- `ApeLvl` [cell] → Class Info.E206
+- `ArHLvl` [cell] → Class Info.E311
+- `ArItLvl` [cell] → Class Info.E240
+- `ArSLvl` [cell] → Class Info.E188
+- `ArTLvl` [cell] → Class Info.E107
+- `AraLvl` [cell] → Class Info.E461
+- `ArcLvl` [cell] → Class Info.E106
+- `ArdtLvl` [cell] → Class Info.E38
+- `AriLvl` [cell] → Class Info.E100
+- `ArmLvl` [cell] → Class Info.E108
+- `ArvLvl` [cell] → Class Info.E42
+- `AsDLvl` [cell] → Class Info.E425
+- `AsnLvl` [cell] → Class Info.E109
+- `AtvLvl` [cell] → Class Info.E552
+- `AusLvl` [cell] → Class Info.E462
+- `AvELvl` [cell] → Class Info.E261
+- `AvnLvl` [cell] → Class Info.E775
+- `AwDLvl` [cell] → Class Info.E337
+- `BBCLvl` [cell] → Class Info.E513
+- `BBHLvl` [cell] → Class Info.E435
+- `BBoLvl` [cell] → Class Info.E288
+- `BDfLvl` [cell] → Class Info.E744
+- `BFZLvl` [cell] → Class Info.E160
+- `BHALvl` [cell] → Class Info.E364
+- `BKtLvl` [cell] → Class Info.E549
+- `BMaLvl` [cell] → Class Info.E620
+- `BPALvl` [cell] → Class Info.E742
+- `BPlLvl` [cell] → Class Info.E743
+- `BWaLvl` [cell] → Class Info.E123
+- `BaDLvl` [cell] → Class Info.E621
+- `BbnLvl` [cell] → Class Info.E5
+- `BcMLvl` [cell] → Class Info.E373
+- `BdsLvl` [cell] → Class Info.E124
+- `BegLvl` [cell] → Class Info.E17
+- `BerLvl` [cell] → Class Info.E207
+- `BhrLvl` [cell] → Class Info.E767
+- `BinLvl` [cell] → Class Info.E51
+- `BirLvl` [cell] → Class Info.E208
+- `BlDaLvl` [cell] → Class Info.E622
+- `BldLvl` [cell] → Class Info.E215
+- `BliLvl` [cell] → Class Info.E161
+- `BlkLvl` [cell] → Class Info.E110
+- `BloLvl` [cell] → Class Info.E189
+- `BndLvl` [cell] → Class Info.E400
+- `BoVLvl` [cell] → Class Info.E714
+- `BrGLvl` [cell] → Class Info.E492
+- `BrZLvl` [cell] → Class Info.E602
+- `BrdLvl` [cell] → Class Info.E6
+- `BsBLvl` [cell] → Class Info.E374
+- `BsFLvl` [cell] → Class Info.E652
+- `BsmLvl` [cell] → Class Info.E214
+- `BtTLvl` [cell] → Class Info.E262
+- `BtrLvl` [cell] → Class Info.E491
+- `BtsLvl` [cell] → Class Info.E287
+- `CClLvl` [cell] → Class Info.E83
+- `CMdLvl` [cell] → Class Info.E352
+- `CMyLvl` [cell] → Class Info.E607
+- `CShLvl` [cell] → Class Info.E436
+- `CTrLvl` [cell] → Class Info.E264
+- `CWALvl` [cell] → Class Info.E561
+- `CadLvl` [cell] → Class Info.E423
+- `CatLvl` [cell] → Class Info.E209
+- `CatMLvl` [cell] → Class Info.E565
+- `CavLvl` [cell] → Class Info.E125
+- `CbTLvl` [cell] → Class Info.E553
+- `CcMLvl` [cell] → Class Info.E694
+- `CebLvl` [cell] → Class Info.E408
+- `ChCLvl` [cell] → Class Info.E312
+- `ChChLvl` [cell] → Class Info.E603
+- `ChILvl` [cell] → Class Info.E162
+- `CharLvl` [cell] → Class Info.EE9
+- `CharSheetLvl` [cell] → Class Info.EE12
+- `ChlLvl` [cell] → Class Info.E753
+- `ChmLvl` [cell] → Class Info.E437
+- `ChtLvl` [cell] → Class Info.E424
+- `ClALvl` [cell] → Class Info.E326
+- `ClDLvl` [cell] → Class Info.E263
+- `ClMLvl` [cell] → Class Info.E715
+- `ClassLvl` [cell] → Class Info.EE7
+- `ClrLvl` [cell] → Class Info.E7
+- `CmLLvl` [cell] → Class Info.E303
+- `CoALvl` [cell] → Class Info.E357
+- `CoGLvl` [cell] → Class Info.E716
+- `CoHLvl` [cell] → Class Info.E163
+- `ComLvl` [cell] → Class Info.E101
+- `ConLvl` [cell] → Class Info.E164
+- `CrALvl` [cell] → Class Info.E289
+- `CrSLvl` [cell] → Class Info.E369
+- `CrkLvl` [cell] → Class Info.E327
+- `CruLvl` [cell] → Class Info.E47
+- `CryLvl` [cell] → Class Info.E776
+- `CstLvl` [cell] → Class Info.E800
+- `CtELvl` [cell] → Class Info.E562
+- `CvLLvl` [cell] → Class Info.E501
+- `CyaLvl` [cell] → Class Info.E548
+- `DAshLvl` [cell] → Class Info.E653
+- `DBgLvl` [cell] → Class Info.E623
+- `DChLvl` [cell] → Class Info.E674
+- `DCmLvl` [cell] → Class Info.E353
+- `DDRLvl` [cell] → Class Info.E502
+- `DDvLvl` [cell] → Class Info.E322
+- `DLdLvl` [cell] → Class Info.E419
+- `DLtLvl` [cell] → Class Info.E547
+- `DMaLvl` [cell] → Class Info.E700
+- `DMeLvl` [cell] → Class Info.E701
+- `DPWLvl` [cell] → Class Info.E654
+- `DSLLvl` [cell] → Class Info.E646
+- `DSmLvl` [cell] → Class Info.E401
+- `DStLvl` [cell] → Class Info.E647
+- `DWJLvl` [cell] → Class Info.E503
+- `DWhLvl` [cell] → Class Info.E359
+- `DaMLvl` [cell] → Class Info.E216
+- `DaSLvl` [cell] → Class Info.E217
+- `DcxLvl` [cell] → Class Info.E321
+- `DdMLvl` [cell] → Class Info.E464
+- `DeDLvl` [cell] → Class Info.E358
+- `DefLvl` [cell] → Class Info.E418
+- `DemLvl` [cell] → Class Info.E695
+- `DevLvl` [cell] → Class Info.E434
+- `DfALvl` [cell] → Class Info.E85
+- `DgDLvl` [cell] → Class Info.E111
+- `DgLLvl` [cell] → Class Info.E367
+- `DgRLvl` [cell] → Class Info.E644
+- `DgSLvl` [cell] → Class Info.E645
+- `DgmLvl` [cell] → Class Info.E577
+- `DhMLvl` [cell] → Class Info.E323
+- `DhrLvl` [cell] → Class Info.E768
+- `DiDrLvl` [cell] → Class Info.E661
+- `DiOLvl` [cell] → Class Info.E166
+- `DiaLvl` [cell] → Class Info.E696
+- `DirLvl` [cell] → Class Info.E777
+- `DisLvl` [cell] → Class Info.E438
+- `DkRLvl` [cell] → Class Info.E688
+- `DkSLvl` [cell] → Class Info.E127
+- `DkhLvl` [cell] → Class Info.E428
+- `DmCLvl` [cell] → Class Info.E754
+- `DmGLvl` [cell] → Class Info.E463
+- `DmHLvl` [cell] → Class Info.E537
+- `DnCLvl` [cell] → Class Info.E290
+- `DoALvl` [cell] → Class Info.E697
+- `DoBLvl` [cell] → Class Info.E698
+- `DoDLvl` [cell] → Class Info.E699
+- `DoELvl` [cell] → Class Info.E320
+- `DoSLvl` [cell] → Class Info.E717
+- `DoTLvl` [cell] → Class Info.E328
+- `DrHLvl` [cell] → Class Info.E126
+- `DrKLvl` [cell] → Class Info.E643
+- `DrMLvl` [cell] → Class Info.E129
+- `DrNLvl` [cell] → Class Info.E43
+- `DrPLvl` [cell] → Class Info.E578
+- `DrPgLvl` [cell] → Class Info.E71
+- `DrRiLvl` [cell] → Class Info.E596
+- `DrShLvl` [cell] → Class Info.E18
+- `DrcLvl` [cell] → Class Info.E642
+- `DrdLvl` [cell] → Class Info.E8
+- `DrgALvl` [cell] → Class Info.E655
+- `DrgDLvl` [cell] → Class Info.E662
+- `DrgLLvl` [cell] → Class Info.E663
+- `DrsLvl` [cell] → Class Info.E675
+- `DsSLvl` [cell] → Class Info.E375
+- `DttLvl` [cell] → Class Info.E746
+- `DtvLvl` [cell] → Class Info.E745
+- `DuBLvl` [cell] → Class Info.E19
+- `DueLvl` [cell] → Class Info.E112
+- `DunLvl` [cell] → Class Info.E219
+- `DvALvl` [cell] → Class Info.E735
+- `DvCLvl` [cell] → Class Info.E165
+- `DvDLvl` [cell] → Class Info.E797
+- `DvMdLvl` [cell] → Class Info.E39
+- `DvPLvl` [cell] → Class Info.E292
+- `DvsLvl` [cell] → Class Info.E128
+- `DwChLvl` [cell] → Class Info.E793
+- `DwDLvl` [cell] → Class Info.E113
+- `DwPgLvl` [cell] → Class Info.E72
+- `DweLvl` [cell] → Class Info.E167
+- `DwnLvl` [cell] → Class Info.E291
+- `EHMLvl` [cell] → Class Info.E493
+- `EHRLvl` [cell] → Class Info.E441
+- `EPgLvl` [cell] → Class Info.E73
+- `ESFLvl` [cell] → Class Info.E539
+- `ESZLvl` [cell] → Class Info.E579
+- `ETGLvl` [cell] → Class Info.E440
+- `EWMLvl` [cell] → Class Info.E130
+- `EbInLvl` [cell] → Class Info.E370
+- `EbStLvl` [cell] → Class Info.E241
+- `EcAdLvl` [cell] → Class Info.E242
+- `EexLvl` [cell] → Class Info.E682
+- `EfMLvl` [cell] → Class Info.E190
+- `ElALvl` [cell] → Class Info.E465
+- `ElDLvl` [cell] → Class Info.E250
+- `ElKLvl` [cell] → Class Info.E114
+- `ElMLvl` [cell] → Class Info.E656
+- `ElRLvl` [cell] → Class Info.E538
+- `ElSLvl` [cell] → Class Info.E191
+- `ElTLvl` [cell] → Class Info.E251
+- `ElWLvl` [cell] → Class Info.E426
+- `EloLvl` [cell] → Class Info.E409
+- `EnFLvl` [cell] → Class Info.E192
+- `EnSLvl` [cell] → Class Info.E252
+- `EntLvl` [cell] → Class Info.E168
+- `EoBLvl` [cell] → Class Info.E718
+- `EquLvl` [cell] → Class Info.E210
+- `ErDLvl` [cell] → Class Info.E293
+- `EtBLvl` [cell] → Class Info.E376
+- `EuWLvl` [cell] → Class Info.E624
+- `EvaLvl` [cell] → Class Info.E169
+- `ExALvl` [cell] → Class Info.E719
+- `ExELvl` [cell] → Class Info.E540
+- `ExlLvl` [cell] → Class Info.E94
+- `ExpLvl` [cell] → Class Info.E102
+- `ExrLvl` [cell] → Class Info.E220
+- `EyeLvl` [cell] → Class Info.E131
+- `FBdLvl` [cell] → Class Info.E360
+- `FBkLvl` [cell] → Class Info.E132
+- `FBlLvl` [cell] → Class Info.E784
+- `FCoLvl` [cell] → Class Info.E785
+- `FDQLvl` [cell] → Class Info.E585
+- `FFrLvl` [cell] → Class Info.E265
+- `FMkLvl` [cell] → Class Info.E420
+- `FPoLvl` [cell] → Class Info.E786
+- `FRaLvl` [cell] → Class Info.E720
+- `FarLvl` [cell] → Class Info.E95
+- `FctLvl` [cell] → Class Info.E45
+- `FlwLvl` [cell] → Class Info.E689
+- `FoFLvl` [cell] → Class Info.E275
+- `FoLLvl` [cell] → Class Info.E221
+- `FoRLvl` [cell] → Class Info.E276
+- `FoZLvl` [cell] → Class Info.E410
+- `FrMLvl` [cell] → Class Info.E466
+- `FrMgLvl` [cell] → Class Info.E329
+- `FrRLvl` [cell] → Class Info.E330
+- `FsPsLvl` [cell] → Class Info.E243
+- `FtSLvl` [cell] → Class Info.E193
+- `FtrLvl` [cell] → Class Info.E9
+- `FvSLvl` [cell] → Class Info.E26
+- `GGSLvl` [cell] → Class Info.E133
+- `GHELvl` [cell] → Class Info.E532
+- `GRSLvl` [cell] → Class Info.E494
+- `GSALvl` [cell] → Class Info.E195
+- `GWWLvl` [cell] → Class Info.E481
+- `GdELvl` [cell] → Class Info.E467
+- `GdnLvl` [cell] → Class Info.E778
+- `GeoLvl` [cell] → Class Info.E170
+- `GhKLvl` [cell] → Class Info.E222
+- `GhrLvl` [cell] → Class Info.E769
+- `GiKLvl` [cell] → Class Info.E525
+- `GlLLvl` [cell] → Class Info.E294
+- `GlaLvl` [cell] → Class Info.E788
+- `GmtLvl` [cell] → Class Info.E194
+- `GnALvl` [cell] → Class Info.E480
+- `GnPgLvl` [cell] → Class Info.E74
+- `GrGLvl` [cell] → Class Info.E266
+- `GtCLvl` [cell] → Class Info.E736
+- `HCDLvl` [cell] → Class Info.E657
+- `HDPgLvl` [cell] → Class Info.E75
+- `HEBLvl` [cell] → Class Info.E573
+- `HEPgLvl` [cell] → Class Info.E76
+- `HOPgLvl` [cell] → Class Info.E77
+- `HPaLvl` [cell] → Class Info.E444
+- `HSCLvl` [cell] → Class Info.E253
+- `HSbLvl` [cell] → Class Info.E541
+- `HStLvl` [cell] → Class Info.E648
+- `HWMLvl` [cell] → Class Info.E664
+- `HWhLvl` [cell] → Class Info.E794
+- `HWlLvl` [cell] → Class Info.E670
+- `HaPgLvl` [cell] → Class Info.E78
+- `HazLvl` [cell] → Class Info.E586
+- `HbrLvl` [cell] → Class Info.E669
+- `HdBLvl` [cell] → Class Info.E526
+- `HenLvl` [cell] → Class Info.E625
+- `HfOLvl` [cell] → Class Info.E134
+- `HiDLvl` [cell] → Class Info.E626
+- `HiSLvl` [cell] → Class Info.E223
+- `HieLvl` [cell] → Class Info.E115
+- `HkHLvl` [cell] → Class Info.E135
+- `HlrLvl` [cell] → Class Info.E59
+- `HltWLvl` [cell] → Class Info.E277
+- `HoDLvl` [cell] → Class Info.E136
+- `HoLLvl` [cell] → Class Info.E171
+- `HoMLvl` [cell] → Class Info.E442
+- `HoWLvl` [cell] → Class Info.E116
+- `HosLvl` [cell] → Class Info.E172
+- `HpMLvl` [cell] → Class Info.E482
+- `HpPLvl` [cell] → Class Info.E483
+- `HrHLvl` [cell] → Class Info.E469
+- `HrpLvl` [cell] → Class Info.E443
+- `HrvLvl` [cell] → Class Info.E671
+- `HtWLvl` [cell] → Class Info.E468
+- `HthLvl` [cell] → Class Info.E445
+- `HuPgLvl` [cell] → Class Info.E79
+- `HvMLvl` [cell] → Class Info.E402
+- `HwiLvl` [cell] → Class Info.E779
+- `HwrLvl` [cell] → Class Info.E755
+- `HxBLvl` [cell] → Class Info.E22
+- `IBTLvl` [cell] → Class Info.E504
+- `IDGLvl` [cell] → Class Info.E506
+- `IDMLvl` [cell] → Class Info.E649
+- `IPSLvl` [cell] → Class Info.E721
+- `IPrLvl` [cell] → Class Info.E580
+- `IVTLvl` [cell] → Class Info.E505
+- `IaiLvl` [cell] → Class Info.E627
+- `IlSLvl` [cell] → Class Info.E411
+- `IlSlLvl` [cell] → Class Info.E244
+- `InBlLvl` [cell] → Class Info.E389
+- `InChLvl` [cell] → Class Info.E388
+- `InMLvl` [cell] → Class Info.E295
+- `IncLvl` [cell] → Class Info.E55
+- `InqLvl` [cell] → Class Info.E597
+- `InvLvl` [cell] → Class Info.E137
+- `IrFmLvl` [cell] → Class Info.E390
+- `ItrLvl` [cell] → Class Info.E96
+- `ItxLvl` [cell] → Class Info.E446
+- `JPMLvl` [cell] → Class Info.E377
+- `JWWLvl` [cell] → Class Info.E514
+- `JusLvl` [cell] → Class Info.E138
+- `KBMLvl` [cell] → Class Info.E533
+- `KChLvl` [cell] → Class Info.E429
+- `KESLvl` [cell] → Class Info.E527
+- `KIGLvl` [cell] → Class Info.E331
+- `KPhLvl` [cell] → Class Info.E546
+- `KenLvl` [cell] → Class Info.E139
+- `KiCLvl` [cell] → Class Info.E628
+- `KnELvl` [cell] → Class Info.E747
+- `KnPLvl` [cell] → Class Info.E141
+- `KniLvl` [cell] → Class Info.E20
+- `KnoCLvl` [cell] → Class Info.E588
+- `KnoLLvl` [cell] → Class Info.E591
+- `KnoRLvl` [cell] → Class Info.E590
+- `KnoSkLvl` [cell] → Class Info.E592
+- `KnoSwLvl` [cell] → Class Info.E589
+- `KnoTLvl` [cell] → Class Info.E593
+- `KoCLvl` [cell] → Class Info.E140
+- `KoCSLvl` [cell] → Class Info.E690
+- `KoFHLvl` [cell] → Class Info.E520
+- `KoSSLvl` [cell] → Class Info.E383
+- `KoWLvl` [cell] → Class Info.E521
+- `KotPLvl` [cell] → Class Info.E344
+- `KshLvl` [cell] → Class Info.E780
+- `LFWLvl` [cell] → Class Info.E569
+- `LLdLvl` [cell] → Class Info.E354
+- `LMyLvl` [cell] → Class Info.E609
+- `LScLvl` [cell] → Class Info.E610
+- `LSoLvl` [cell] → Class Info.E611
+- `LTiLvl` [cell] → Class Info.E338
+- `LdCLvl` [cell] → Class Info.E345
+- `LdlLvl` [cell] → Class Info.E304
+- `LfdLvl` [cell] → Class Info.E702
+- `LgTaLvl` [cell] → Class Info.E598
+- `LkSLvl` [cell] → Class Info.E313
+- `LkTLvl` [cell] → Class Info.E683
+- `LoTLvl` [cell] → Class Info.E722
+- `LorLvl` [cell] → Class Info.E117
+- `LrkLvl` [cell] → Class Info.E40
+- `LshLvl` [cell] → Class Info.E798
+- `LvHLvl` [cell] → Class Info.E346
+- `LyTLvl` [cell] → Class Info.E254
+- `MAmLvl` [cell] → Class Info.E612
+- `MBrLvl` [cell] → Class Info.E305
+- `MChLvl` [cell] → Class Info.E449
+- `MInLvl` [cell] → Class Info.E542
+- `MLDLvl` [cell] → Class Info.E450
+- `MMFLvl` [cell] → Class Info.E225
+- `MMcLvl` [cell] → Class Info.E629
+- `MNMLvl` [cell] → Class Info.E630
+- `MSpLvl` [cell] → Class Info.E144
+- `MTrLvl` [cell] → Class Info.E198
+- `MUHLvl` [cell] → Class Info.E143
+- `MVpLvl` [cell] → Class Info.E684
+- `MaTLvl` [cell] → Class Info.E142
+- `MaeLvl` [cell] → Class Info.E224
+- `MagTLvl` [cell] → Class Info.E267
+- `MalLvl` [cell] → Class Info.E268
+- `MarLvl` [cell] → Class Info.E92
+- `MasNLvl` [cell] → Class Info.E378
+- `MbLvl` [cell] → Class Info.E759
+- `McuLvl` [cell] → Class Info.E757
+- `MgKLvl` [cell] → Class Info.E484
+- `MhrLvl` [cell] → Class Info.E766
+- `MnSpLvl` [cell] → Class Info.E554
+- `MnbLvl` [cell] → Class Info.E199
+- `MnfLvl` [cell] → Class Info.E97
+- `MnkLvl` [cell] → Class Info.E10
+- `MnsALvl` [cell] → Class Info.E534
+- `MoALvl` [cell] → Class Info.E197
+- `MoJLvl` [cell] → Class Info.E430
+- `MoLLvl` [cell] → Class Info.E451
+- `MoMLvl` [cell] → Class Info.E269
+- `MoPLvl` [cell] → Class Info.E448
+- `MoRLvl` [cell] → Class Info.E676
+- `MoSLvl` [cell] → Class Info.E677
+- `MonLvl` [cell] → Class Info.E805
+- `MotLvl` [cell] → Class Info.E631
+- `MouLvl` [cell] → Class Info.E270
+- `MplLvl` [cell] → Class Info.E756
+- `MpsLvl` [cell] → Class Info.E748
+- `MrsLvl` [cell] → Class Info.E60
+- `MsALvl` [cell] → Class Info.E485
+- `MsSkLvl` [cell] → Class Info.E522
+- `MsmLvl` [cell] → Class Info.E758
+- `MstSLvl` [cell] → Class Info.E255
+- `MtHLvl` [cell] → Class Info.E703
+- `MtaLvl` [cell] → Class Info.E412
+- `MyELvl` [cell] → Class Info.E278
+- `MyTLvl` [cell] → Class Info.E118
+- `MyWLvl` [cell] → Class Info.E486
+- `MysLvl` [cell] → Class Info.E89
+- `NMDLvl` [cell] → Class Info.E515
+- `NSpLvl` [cell] → Class Info.E256
+- `NWrLvl` [cell] → Class Info.E145
+- `NcrLvl` [cell] → Class Info.E391
+- `NjSLvl` [cell] → Class Info.E632
+- `NjaLvl` [cell] → Class Info.E34
+- `NldLvl` [cell] → Class Info.E760
+- `NoShLvl` [cell] → Class Info.E613
+- `NobLvl` [cell] → Class Info.E90
+- `NsELvl` [cell] → Class Info.E226
+- `NsILvl` [cell] → Class Info.E227
+- `NstLvl` [cell] → Class Info.E608
+- `NtCLvl` [cell] → Class Info.E470
+- `OASLvl` [cell] → Class Info.E67
+- `OChLvl` [cell] → Class Info.E306
+- `OPgLvl` [cell] → Class Info.E80
+- `OcALvl` [cell] → Class Info.E471
+- `OcWLvl` [cell] → Class Info.E495
+- `OccLvl` [cell] → Class Info.E146
+- `OllLvl` [cell] → Class Info.E228
+- `OrSLvl` [cell] → Class Info.E528
+- `OrdCLvl` [cell] → Class Info.E279
+- `OstLvl` [cell] → Class Info.E791
+- `PDKLvl` [cell] → Class Info.E148
+- `PHDLvl` [cell] → Class Info.E361
+- `PMsLvl` [cell] → Class Info.E678
+- `PUGLvl` [cell] → Class Info.E507
+- `PalLvl` [cell] → Class Info.E11
+- `PbALvl` [cell] → Class Info.E665
+- `PeALvl` [cell] → Class Info.E529
+- `PirLvl` [cell] → Class Info.E218
+- `PisLvl` [cell] → Class Info.E781
+- `PlCLvl` [cell] → Class Info.E737
+- `PlKLvl` [cell] → Class Info.E650
+- `PlSLvl` [cell] → Class Info.E738
+- `PoELvl` [cell] → Class Info.E723
+- `PrRLvl` [cell] → Class Info.E296
+- `PrSLvl` [cell] → Class Info.E570
+- `PrgALvl` [cell] → Class Info.E280
+- `PrgILvl` [cell] → Class Info.E281
+- `PrmLvl` [cell] → Class Info.E332
+- `ProLvl` [cell] → Class Info.E104
+- `PrpLvl` [cell] → Class Info.E761
+- `PsALvl` [cell] → Class Info.E271
+- `PsULvl` [cell] → Class Info.E413
+- `PsiLvl` [cell] → Class Info.E62
+- `PswLvl` [cell] → Class Info.E63
+- `PyrLvl` [cell] → Class Info.E414
+- `QMhLvl` [cell] → Class Info.E581
+- `QrNLvl` [cell] → Class Info.E555
+- `RBlLvl` [cell] → Class Info.E574
+- `RKVLvl` [cell] → Class Info.E379
+- `RKnLvl` [cell] → Class Info.E614
+- `RMmLvl` [cell] → Class Info.E582
+- `RRnLvl` [cell] → Class Info.E556
+- `RSPLvl` [cell] → Class Info.E174
+- `RWzLvl` [cell] → Class Info.E119
+- `RaMLvl` [cell] → Class Info.E149
+- `RavLvl` [cell] → Class Info.E150
+- `RcstLvl` [cell] → Class Info.E557
+- `RdrLvl` [cell] → Class Info.E181
+- `ReMLvl` [cell] → Class Info.E151
+- `RfgLvl` [cell] → Class Info.E558
+- `RgrLvl` [cell] → Class Info.E12
+- `RiZeLvl` [cell] → Class Info.E599
+- `RmWLvl` [cell] → Class Info.E333
+- `RnSLvl` [cell] → Class Info.E175
+- `RncLvl` [cell] → Class Info.E452
+- `RogLvl` [cell] → Class Info.E13
+- `RonLvl` [cell] → Class Info.E152
+- `RsMLvl` [cell] → Class Info.E724
+- `RuSLvl` [cell] → Class Info.E297
+- `RuaLvl` [cell] → Class Info.E314
+- `SAMaLvl` [cell] → Class Info.E615
+- `SAdLvl` [cell] → Class Info.E454
+- `SBHLvl` [cell] → Class Info.E179
+- `SDCLvl` [cell] → Class Info.E509
+- `SHrLvl` [cell] → Class Info.E392
+- `SLoLvl` [cell] → Class Info.E456
+- `SMILvl` [cell] → Class Info.E178
+- `SMWLvl` [cell] → Class Info.E508
+- `SMaLvl` [cell] → Class Info.E394
+- `SMdLvl` [cell] → Class Info.E691
+- `SPfLvl` [cell] → Class Info.E679
+- `SPrLvl` [cell] → Class Info.E635
+- `SSMLvl` [cell] → Class Info.E563
+- `SSNLvl` [cell] → Class Info.E380
+- `SScLvl` [cell] → Class Info.E633
+- `SShLvl` [cell] → Class Info.E339
+- `STALvl` [cell] → Class Info.E455
+- `STNLvl` [cell] → Class Info.E340
+- `SWBLvl` [cell] → Class Info.E658
+- `SWiLvl` [cell] → Class Info.E666
+- `SaELvl` [cell] → Class Info.E176
+- `SaFLvl` [cell] → Class Info.E177
+- `SaHLvl` [cell] → Class Info.E516
+- `SaOLvl` [cell] → Class Info.E282
+- `SamLvl` [cell] → Class Info.E23
+- `SbSLvl` [cell] → Class Info.E230
+- `SbnLvl` [cell] → Class Info.E56
+- `ScCLvl` [cell] → Class Info.E347
+- `ScChLvl` [cell] → Class Info.E604
+- `ScDLvl` [cell] → Class Info.E384
+- `ScELvl` [cell] → Class Info.E307
+- `ScHLvl` [cell] → Class Info.E341
+- `ScMLvl` [cell] → Class Info.E298
+- `ScSLvl` [cell] → Class Info.E559
+- `ScWLvl` [cell] → Class Info.E571
+- `ScgLvl` [cell] → Class Info.E762
+- `SclLvl` [cell] → Class Info.E749
+- `ScrLvl` [cell] → Class Info.E393
+- `SctLvl` [cell] → Class Info.E35
+- `SdALvl` [cell] → Class Info.E300
+- `SeeLvl` [cell] → Class Info.E200
+- `SfCLvl` [cell] → Class Info.E488
+- `SfLLvl` [cell] → Class Info.E473
+- `SfiLvl` [cell] → Class Info.E616
+- `SftLvl` [cell] → Class Info.E789
+- `SgdLvl` [cell] → Class Info.E672
+- `SghLvl` [cell] → Class Info.E637
+- `ShCLvl` [cell] → Class Info.E52
+- `ShHLvl` [cell] → Class Info.E453
+- `ShILvl` [cell] → Class Info.E229
+- `ShMkLvl` [cell] → Class Info.E636
+- `ShSLvl` [cell] → Class Info.E308
+- `ShaLvl` [cell] → Class Info.E68
+- `ShaSLvl` [cell] → Class Info.E283
+- `ShdLvl` [cell] → Class Info.E120
+- `ShjLvl` [cell] → Class Info.E27
+- `ShkLvl` [cell] → Class Info.E211
+- `ShmLvl` [cell] → Class Info.E231
+- `ShpLvl` [cell] → Class Info.E634
+- `ShtSLvl` [cell] → Class Info.E284
+- `SiOLvl` [cell] → Class Info.E431
+- `SkPLvl` [cell] → Class Info.E315
+- `SklLvl` [cell] → Class Info.E403
+- `SkrLvl` [cell] → Class Info.E439
+- `SkyLvl` [cell] → Class Info.E726
+- `SlBwLvl` [cell] → Class Info.E245
+- `SlELvl` [cell] → Class Info.E704
+- `SmnLvl` [cell] → Class Info.E28
+- `SnkLvl` [cell] → Class Info.E212
+- `SoBLvl` [cell] → Class Info.E725
+- `SoCLvl` [cell] → Class Info.E324
+- `SoDLvl` [cell] → Class Info.E727
+- `SoKLvl` [cell] → Class Info.E728
+- `SoLLvl` [cell] → Class Info.E285
+- `SoSLvl` [cell] → Class Info.E457
+- `SohLvl` [cell] → Class Info.E69
+- `SorLvl` [cell] → Class Info.E14
+- `SouLvl` [cell] → Class Info.E64
+- `SpDLvl` [cell] → Class Info.E487
+- `SpTLvl` [cell] → Class Info.E36
+- `SpWLvl` [cell] → Class Info.E395
+- `SplSLvl` [cell] → Class Info.E496
+- `SpsLvl` [cell] → Class Info.E153
+- `SpwSLvl` [cell] → Class Info.E272
+- `SpyLvl` [cell] → Class Info.E232
+- `SpyrLvl` [cell] → Class Info.E550
+- `SsGLvl` [cell] → Class Info.E301
+- `StCLvl` [cell] → Class Info.E349
+- `StDsLvl` [cell] → Class Info.E246
+- `StLLvl` [cell] → Class Info.E180
+- `StLgLvl` [cell] → Class Info.E594
+- `StSLvl` [cell] → Class Info.E334
+- `StTLvl` [cell] → Class Info.E316
+- `StbLvl` [cell] → Class Info.E299
+- `StfLvl` [cell] → Class Info.E233
+- `StoLvl` [cell] → Class Info.E154
+- `StyLvl` [cell] → Class Info.E782
+- `SuALvl` [cell] → Class Info.E202
+- `SuSMLvl` [cell] → Class Info.E535
+- `SubLvl` [cell] → Class Info.E201
+- `SvSLvl` [cell] → Class Info.E472
+- `SwDLvl` [cell] → Class Info.E474
+- `SwRLvl` [cell] → Class Info.E730
+- `SwSaLvl` [cell] → Class Info.E48
+- `SwaLvl` [cell] → Class Info.E729
+- `SwfLvl` [cell] → Class Info.E795
+- `SwhLvl` [cell] → Class Info.E348
+- `SwsLvl` [cell] → Class Info.E24
+- `SyoLvl` [cell] → Class Info.E763
+- `TGULvl` [cell] → Class Info.E566
+- `TNcLvl` [cell] → Class Info.E680
+- `TPgLvl` [cell] → Class Info.E81
+- `TRgLvl` [cell] → Class Info.E396
+- `TSlLvl` [cell] → Class Info.E362
+- `TWdLvl` [cell] → Class Info.E685
+- `TctLvl` [cell] → Class Info.E404
+- `TecLvl` [cell] → Class Info.E475
+- `TemLvl` [cell] → Class Info.E173
+- `TenALvl` [cell] → Class Info.E385
+- `ThGLvl` [cell] → Class Info.E517
+- `ThmLvl` [cell] → Class Info.E121
+- `ThrLvl` [cell] → Class Info.E415
+- `ThyLvl` [cell] → Class Info.E156
+- `TmpLvl` [cell] → Class Info.E234
+- `ToDLvl` [cell] → Class Info.E705
+- `ToGLvl` [cell] → Class Info.E706
+- `ToJLvl` [cell] → Class Info.E707
+- `ToOLvl` [cell] → Class Info.E708
+- `ToSLvl` [cell] → Class Info.E731
+- `ToTLvl` [cell] → Class Info.E651
+- `TotmLvl` [cell] → Class Info.E57
+- `TrILvl` [cell] → Class Info.E750
+- `TriKLvl` [cell] → Class Info.E523
+- `TrsmLvl` [cell] → Class Info.E365
+- `TruLvl` [cell] → Class Info.E53
+- `TtMLvl` [cell] → Class Info.E155
+- `TurnLvl` [cell] → Class Info.EI8
+- `TyrLvl` [cell] → Class Info.E447
+- `TzGLvl` [cell] → Class Info.E692
+- `URTLvl` [cell] → Class Info.E659
+- `UlMLvl` [cell] → Class Info.E257
+- `UmDLvl` [cell] → Class Info.E397
+- `UnSLvl` [cell] → Class Info.E258
+- `UnTLvl` [cell] → Class Info.E273
+- `UrPLvl` [cell] → Class Info.E182
+- `UrSLvl` [cell] → Class Info.E309
+- `UrSvLvl` [cell] → Class Info.E371
+- `VBdLvl` [cell] → Class Info.E99
+- `VKPLvl` [cell] → Class Info.E510
+- `VPaLvl` [cell] → Class Info.E100
+- `VSALvl` [cell] → Class Info.E583
+- `VSkLvl` [cell] → Class Info.E421
+- `VdDLvl` [cell] → Class Info.E183
+- `VekLvl` [cell] → Class Info.E518
+- `VhrLvl` [cell] → Class Info.E770
+- `VigLvl` [cell] → Class Info.E236
+- `VirLvl` [cell] → Class Info.E237
+- `VmLLvl` [cell] → Class Info.E709
+- `VoBLvl` [cell] → Class Info.E732
+- `VthLvl` [cell] → Class Info.E432
+- `WBrLvl` [cell] → Class Info.E398
+- `WHkLvl` [cell] → Class Info.E405
+- `WHnLvl` [cell] → Class Info.E639
+- `WMaLvl` [cell] → Class Info.E617
+- `WMdLvl` [cell] → Class Info.E416
+- `WPOLvl` [cell] → Class Info.E238
+- `WSlLvl` [cell] → Class Info.E259
+- `WWCLvl` [cell] → Class Info.E489
+- `WWiLvl` [cell] → Class Info.E667
+- `WWvLvl` [cell] → Class Info.E355
+- `WaPLvl` [cell] → Class Info.E184
+- `WarLvl` [cell] → Class Info.E103
+- `WayLvl` [cell] → Class Info.E203
+- `WblLvl` [cell] → Class Info.E49
+- `WcfLvl` [cell] → Class Info.E406
+- `WdSLvl` [cell] → Class Info.E530
+- `WdWLvl` [cell] → Class Info.E478
+- `WfJLvl` [cell] → Class Info.E543
+- `WhALvl` [cell] → Class Info.E751
+- `WhrLvl` [cell] → Class Info.E771
+- `WiCLvl` [cell] → Class Info.E567
+- `WiMLvl` [cell] → Class Info.E204
+- `WiRLvl` [cell] → Class Info.E318
+- `WiSLvl` [cell] → Class Info.E386
+- `WiWLvl` [cell] → Class Info.E342
+- `WizLvl` [cell] → Class Info.E15
+- `WlRLvl` [cell] → Class Info.E311
+- `WldLvl` [cell] → Class Info.E65
+- `WlfLvl` [cell] → Class Info.E213
+- `WoDLvl` [cell] → Class Info.E710
+- `WoHSLvl` [cell] → Class Info.E595
+- `WoILvl` [cell] → Class Info.E335
+- `WoPLvl` [cell] → Class Info.E477
+- `WonLvl` [cell] → Class Info.E733
+- `WpMLvl` [cell] → Class Info.E638
+- `WrCLvl` [cell] → Class Info.E157
+- `WrSLvl` [cell] → Class Info.E497
+- `WrbLvl` [cell] → Class Info.E764
+- `WrlLvl` [cell] → Class Info.E30
+- `WrmLvl` [cell] → Class Info.E31
+- `WrpLvl` [cell] → Class Info.E158
+- `WsKLvl` [cell] → Class Info.E317
+- `WsSLvl` [cell] → Class Info.E498
+- `WtMLvl` [cell] → Class Info.E544
+- `WuJLvl` [cell] → Class Info.E32
+- `WvSLvl` [cell] → Class Info.E476
+- `WvkLvl` [cell] → Class Info.E350
+- `YWRLvl` [cell] → Class Info.E511
+- `YakLvl` [cell] → Class Info.E640
+- `YatLvl` [cell] → Class Info.E458
+- `ZSpLvl` [cell] → Class Info.E459
+- `ZtCbLvl` [cell] → Class Info.E247
+
+### Feats
+
+- `FeatAbilitiesAdj` [range] → Class Info.EN180:.EN185
+- `FeatAbilitiesAdjRowsCnt` [cell] → Class Info.EE180
+- `FeatIntAdj` [cell] → Class Info.EN183
+
+### General
+
+- `BonusManifester` [cell] → Class Info.EI6
+- `BonusMeldshaper` [cell] → Class Info.EI7
+- `BonusSpellCaster2` [cell] → Class Info.EI5
+- `BonusSpellcaster` [cell] → Class Info.EI4
+- `Class` [cell] → Class Info.EE10
+- `ClassALMod` [range] → Class Info.EF297:.EG298
+- `ClassALModRowsCnt` [cell] → Class Info.EE295
+- `ClassAbbr` [cell] → Class Info.EE13
+- `ClassAbilitiesAdj` [range] → Class Info.EN140:.EN145
+- `ClassAbilitiesAdjRowsCnt` [cell] → Class Info.EE140
+- `ClassDR` [cell] → Class Info.EE363
+- `ClassDRRowsCnt` [cell] → Class Info.EE361
+- `ClassInfoClassNameColumn` [cell] → Class Info.B1
+- `ClassInfoClassPrereqColumn` [cell] → Class Info.DZ1
+- `ClassInfoHDColumn` [cell] → Class Info.L1
+- `ClassInfoLevelColumn` [cell] → Class Info.E1
+- `ClassInfoTLAColumn` [cell] → Class Info.D1
+- `ClassInfofBABColumn` [cell] → Class Info.U1
+- `ClassInfofFortColumn` [cell] → Class Info.V1
+- `ClassInfofRefColumn` [cell] → Class Info.W1
+- `ClassInfofWillColumn` [cell] → Class Info.X1
+- `ClassIntAdj` [cell] → Class Info.EN143
+- `ClassLen` [cell] → Class Info.EF10
+- `ClassSubtype` [cell] → Class Info.EE261
+- `ClassSubtypeModRowsCnt` [cell] → Class Info.EE259
+- `ClassTypeModRowsCnt` [cell] → Class Info.EE221
+- `ClassTypeName` [cell] → Class Info.EE224
+- `ClassTypeValue` [cell] → Class Info.EE223
+- `ClassVirtualLvls` [cell] → Class Info.EE279
+- `ClassVirtualRowsCnt` [cell] → Class Info.EE277
+- `DoClassALMod` [cell] → Class Info.EE296
+- `DoClassAbilityAdj` [cell] → Class Info.EE141
+- `DoClassDR` [cell] → Class Info.EE362
+- `DoClassIntAdj` [cell] → Class Info.EE142
+- `DoClassSubtypeMod` [cell] → Class Info.EE260
+- `DoClassTypeMod` [cell] → Class Info.EE222
+- `DoFeatAbilityAdj` [cell] → Class Info.EE181
+- `DoFeatIntAdj` [cell] → Class Info.EE182
+- `ECL` [cell] → Class Info.EE9
+- `FirstPrestigeClass` [cell] → Class Info.A105
+- `HasVirtualClasses` [cell] → Class Info.EE278
+- `HvyArmorProf` [cell] → Class Info.EI13
+- `ISVLvL` [cell] → Class Info.E196
+- `LightArmorProf` [cell] → Class Info.EI11
+- `LycanthropeCell` [cell] → Class Info.A803
+- `LycanthropeSelected` [cell] → Class Info.EE4
+- `MartialProf` [cell] → Class Info.EI17
+- `MedArmorProf` [cell] → Class Info.EI12
+- `MonCell` [cell] → Class Info.A805
+- `MonSelected` [cell] → Class Info.EE5
+- `OoBLvL` [cell] → Class Info.E147
+- `PrestigeQual` [cell] → Class Info.EL6
+- `PrestigeReqs` [cell] → Class Info.EL7
+- `RaceCi` [cell] → Class Info.EL4
+- `RaceCl` [cell] → Class Info.EL4
+- `ShortClass` [cell] → Class Info.EE11
+- `ShortClassLen` [cell] → Class Info.EF11
+- `SimpleProf` [cell] → Class Info.EI16
+- `TowerProf` [cell] → Class Info.EI15
+- `TurnAttempts` [cell] → Class Info.EI9
+- `TurnAttemptsBase` [cell] → Class Info.EJ8
+- `TurnCheckModifier` [cell] → Class Info.EI10
+
+### Hit Points
+
+- `HitDice` [cell] → Class Info.EE8
+
+### Shield
+
+- `ShieldProf` [cell] → Class Info.EI14
+
+### Tables/Lookups
+
+- `TblClassList` [range] → Class Info.B4:.B805
+- `TblClassListLGStatus` [range] → Class Info.DK4:.DK805
+- `TblClassListRef` [range] → Class Info.DJ4:.DJ805
+- `TblClassTypeMod` [range] → Class Info.ED188:.EN219
+- `TblClasses` [range] → Class Info.A4:.X805
+- `TblGestaltClassList` [range] → Class Info.B4:.B805
+- `TblPrestige` [range] → Class Info.B105:.B801
+- `TblPrestigeReq` [range] → Class Info.EA105:.EB801
+- `TblSkillPointsByClass` [range] → Class Info.K4:.K805
+- `TblSkills` [range] → Class Info.AH4:.DI805
+- `TblTLAList` [range] → Class Info.D4:.D805
+
+## Variants
+
+- `DsDivineRestorationDomain` [cell] → Variants.H33
+- `HasVariants` [cell] → Variants.BC2
+- `RslChRogSkillName` [cell] → Variants.P185
+- `RslDBClrEnergyTypeSelected` [cell] → Variants.P442
+- `WasteHunterCreature` [cell] → Variants.C120
+
+## Prestige Classes II
+
+### General
+
+- `DragonkithSpell` [cell] → Prestige Classes II.F38
+- `EnlightenedSpiritElement1` [cell] → Prestige Classes II.M6
+- `EnlightenedSpiritElement2` [cell] → Prestige Classes II.M7
+- `FavEnemySCheck` [cell] → Prestige Classes II.C43
+- `UnTBonusLevel1` [cell] → Prestige Classes II.M9
+- `UnTBonusLevel2` [cell] → Prestige Classes II.M10
+
+### Tables/Lookups
+
+- `TblDoomLordStat` [range] → Prestige Classes II.M2:.M4
+- `TblSkillArtistry` [range] → Prestige Classes II.M16:.M19
+
+## Prestige Classes III
+
+### General
+
+- `FavEnemyECheck` [cell] → Prestige Classes III.E5
+- `FavEnemyHPa1Check` [cell] → Prestige Classes III.B12
+- `FavEnemyHPa2Check` [cell] → Prestige Classes III.B13
+- `FavEnemySScCheck` [cell] → Prestige Classes III.H16
+- `NoElementalScionGraft` [cell] → Prestige Classes III.I40
+- `Prophecy1` [cell] → Prestige Classes III.E19
+- `Prophecy2` [cell] → Prestige Classes III.E20
+- `Prophecy3` [cell] → Prestige Classes III.E21
+- `RenegadeMastermakerComponents` [cell] → Prestige Classes III.I30
+- `SAMoSSpells` [range] → Prestige Classes III.E42:.E46
+- `ThGWeaponSpec1` [cell] → Prestige Classes III.R30
+- `ThGWeaponSpec2` [cell] → Prestige Classes III.R31
+- `ThayanGladiatorNatWeapon` [cell] → Prestige Classes III.R28
+
+### Tables/Lookups
+
+- `TblCataclysmMageProphecies` [range] → Prestige Classes III.E19:.E21
+- `TblEternalKnowledge` [range] → Prestige Classes III.S23:.S27
+
+## Binder Vestiges
+
+- `BalamInsightAC` [cell] → Binder Vestiges.W61
+- `FavVestigeListRowCnt` [cell] → Binder Vestiges.AN1
+- `PactAugChoice1` [cell] → Binder Vestiges.E6
+- `PactAugChoice2` [cell] → Binder Vestiges.E7
+- `PactAugChoice3` [cell] → Binder Vestiges.E8
+- `PactAugChoice4` [cell] → Binder Vestiges.E9
+- `PactAugChoice5` [cell] → Binder Vestiges.E10
+- `PactAugmentCount` [range] → Binder Vestiges.S61:.S72
+- `PactAugmentList` [range] → Binder Vestiges.Q61:.Q72
+- `VestigeChoice1` [cell] → Binder Vestiges.B6
+- `VestigeChoice2` [cell] → Binder Vestiges.B7
+- `VestigeChoice3` [cell] → Binder Vestiges.B8
+- `VestigeChoice4` [cell] → Binder Vestiges.B9
+- `VestigeList1RowCnt` [cell] → Binder Vestiges.AB1
+- `VestigeList2RowCnt` [cell] → Binder Vestiges.AE1
+- `VestigeList3RowCnt` [cell] → Binder Vestiges.AH1
+- `VestigeList4RowCnt` [cell] → Binder Vestiges.AK1
+- `VestigesSelected` [range] → Binder Vestiges.B6:.B9
+
+## Marshal Auras
+
+- `TblMarshallAurasKnown` [range] → Marshal Auras.H1:.J21
+
+## Soulmelds
+
+### Equipment Slots
+
+- `MeldSlots` [cell] → Soulmelds.Y42
+
+### General
+
+- `BonusEssentia` [cell] → Soulmelds.S7
+- `Essentia` [cell] → Soulmelds.AL29
+- `EssentiaArms` [cell] → Soulmelds.C10
+- `EssentiaBrow` [cell] → Soulmelds.O10
+- `EssentiaCap` [cell] → Soulmelds.AL27
+- `EssentiaCrown` [cell] → Soulmelds.O5
+- `EssentiaDouble1` [cell] → Soulmelds.C32
+- `EssentiaDouble2` [cell] → Soulmelds.I32
+- `EssentiaDouble3` [cell] → Soulmelds.O32
+- `EssentiaFeet` [cell] → Soulmelds.C25
+- `EssentiaHands` [cell] → Soulmelds.C15
+- `EssentiaHeart` [cell] → Soulmelds.O20
+- `EssentiaShoulders` [cell] → Soulmelds.C5
+- `EssentiaSoul` [cell] → Soulmelds.C20
+- `EssentiaThroat` [cell] → Soulmelds.O15
+- `EssentiaWaist` [cell] → Soulmelds.O25
+- `HasSoulmelds` [cell] → Soulmelds.Y41
+- `IncBinds` [cell] → Soulmelds.BS11
+- `IncMelds` [cell] → Soulmelds.BS3
+- `MeldLvlInc` [cell] → Soulmelds.AA4
+- `MeldLvlMax` [cell] → Soulmelds.AA8
+- `MeldLvlSbn` [cell] → Soulmelds.AA5
+- `MeldLvlSpW` [cell] → Soulmelds.AA7
+- `MeldLvlTotm` [cell] → Soulmelds.AA6
+- `MeldsShaped` [cell] → Soulmelds.AN28
+- `MeldshaperListChanged` [cell] → Soulmelds.AG1
+- `NecrocarnateBinds` [cell] → Soulmelds.BH17
+- `NecrocarnateMelds` [cell] → Soulmelds.BG17
+- `OpenBinds` [cell] → Soulmelds.BS15
+- `OpenMelds` [cell] → Soulmelds.BS7
+- `SbnBinds` [cell] → Soulmelds.BS12
+- `SbnMelds` [cell] → Soulmelds.BS4
+- `SpWBinds` [cell] → Soulmelds.BS14
+- `SpwMelds` [cell] → Soulmelds.BS6
+- `TotmBinds` [cell] → Soulmelds.BS13
+- `TotmMelds` [cell] → Soulmelds.BS5
+
+### Tables/Lookups
+
+- `TblActiveMelds` [range] → Soulmelds.Y14:.AC26
+- `TblBindableChakras` [range] → Soulmelds.AF28:.AF39
+- `TblBindsArms` [range] → Soulmelds.BF31:.BF32
+- `TblBindsBrow` [range] → Soulmelds.BI31:.BI32
+- `TblBindsCrown` [range] → Soulmelds.AW31:.AW32
+- `TblBindsDouble1` [range] → Soulmelds.AW41:.AW42
+- `TblBindsDouble2` [range] → Soulmelds.AZ41:.AZ42
+- `TblBindsDouble3` [range] → Soulmelds.BC41:.BC42
+- `TblBindsFeet` [range] → Soulmelds.BC31:.BC32
+- `TblBindsHands` [range] → Soulmelds.AZ31:.AZ32
+- `TblBindsHeart` [range] → Soulmelds.BU31:.BU32
+- `TblBindsShoulders` [range] → Soulmelds.BL31:.BL32
+- `TblBindsSoul` [range] → Soulmelds.BX31:.BX32
+- `TblBindsThroat` [range] → Soulmelds.BO31:.BO32
+- `TblBindsTotem` [range] → Soulmelds.AG13:.AG26
+- `TblBindsTotem2` [range] → Soulmelds.AJ13:.AJ26
+- `TblBindsWaist` [range] → Soulmelds.BR31:.BR32
+- `TblChakras` [range] → Soulmelds.X13:.X23
+- `TblClassBinds` [range] → Soulmelds.AX1:.BA22
+- `TblClassEssentia` [range] → Soulmelds.AN1:.AS22
+- `TblClassMelds` [range] → Soulmelds.AT1:.AW22
+- `TblExpSoulmeldCap1` [range] → Soulmelds.BJ2:.BJ12
+- `TblExpSoulmeldCap2` [range] → Soulmelds.BK2:.BK12
+- `TblExpSoulmeldCap3` [range] → Soulmelds.BL2:.BL12
+- `TblExpandedSoulmelds` [range] → Soulmelds.BC15:.BC17
+- `TblMeldArmsClasses` [range] → Soulmelds.BF27:.BF30
+- `TblMeldBrowClasses` [range] → Soulmelds.BI27:.BI30
+- `TblMeldClassesKey` [range] → Soulmelds.BC1:.BD4
+- `TblMeldCrownClasses` [range] → Soulmelds.AW27:.AW30
+- `TblMeldDouble1Classes` [range] → Soulmelds.AW37:.AW40
+- `TblMeldDouble2Classes` [range] → Soulmelds.AZ37:.AZ40
+- `TblMeldDouble3Classes` [range] → Soulmelds.BC37:.BC40
+- `TblMeldFeetClasses` [range] → Soulmelds.BC27:.BC30
+- `TblMeldHandsClasses` [range] → Soulmelds.AZ27:.AZ30
+- `TblMeldHeartClasses` [range] → Soulmelds.BU27:.BU30
+- `TblMeldShouldersClasses` [range] → Soulmelds.BL27:.BL30
+- `TblMeldSoulClasses` [range] → Soulmelds.BX27:.BX30
+- `TblMeldThroatClasses` [range] → Soulmelds.BO27:.BO30
+- `TblMeldWaistClasses` [range] → Soulmelds.BR27:.BR30
+- `TblMeldsShaped` [range] → Soulmelds.BI2:.BI12
+- `TblMeldshaper` [range] → Soulmelds.AK1:.AK25
+- `TblMeldshaperClass` [range] → Soulmelds.AE3:.AE7
+- `TblMeldshaperMirror` [range] → Soulmelds.AF3:.AF7
+- `TblOpenChakras` [range] → Soulmelds.Y29:.AC39
+- `TblShapeSoulmeldChoices` [range] → Soulmelds.BC20:.BD22
+- `TblShapeSoulmeldClass1` [range] → Soulmelds.BG37:.BG39
+- `TblShapeSoulmeldClass2` [range] → Soulmelds.BJ37:.BJ39
+- `TblShapeSoulmeldClass3` [range] → Soulmelds.BM37:.BM39
+
+## SoulmeldsInfo
+
+- `TblMeldsAll` [range] → SoulmeldsInfo.X4:.X112
+- `TblMeldsArms` [range] → SoulmeldsInfo.AM4:.AM112
+- `TblMeldsBrow` [range] → SoulmeldsInfo.AD4:.AD112
+- `TblMeldsCrown` [range] → SoulmeldsInfo.AA4:.AA112
+- `TblMeldsDouble1` [range] → SoulmeldsInfo.BE4:.BE112
+- `TblMeldsDouble2` [range] → SoulmeldsInfo.BH4:.BH112
+- `TblMeldsDouble3` [range] → SoulmeldsInfo.BK4:.BK112
+- `TblMeldsFeet` [range] → SoulmeldsInfo.AY4:.AY112
+- `TblMeldsHands` [range] → SoulmeldsInfo.AP4:.AP112
+- `TblMeldsHeart` [range] → SoulmeldsInfo.AS4:.AS112
+- `TblMeldsShoulders` [range] → SoulmeldsInfo.AJ4:.AJ112
+- `TblMeldsSoul` [range] → SoulmeldsInfo.BB4:.BB112
+- `TblMeldsThroat` [range] → SoulmeldsInfo.AG4:.AG112
+- `TblMeldsWaist` [range] → SoulmeldsInfo.AV4:.AV112
+- `TblShapeSoulmeld` [range] → SoulmeldsInfo.BN4:.BN112
+- `TblSoulmelds` [range] → SoulmeldsInfo.A3:.U112
+
+## SoulmeldAbilities
+
+### General
+
+- `AdPaulDR` [cell] → SoulmeldAbilities.G10
+- `AnkBreAC` [cell] → SoulmeldAbilities.G14
+- `AstVamDR` [cell] → SoulmeldAbilities.G23
+- `BTCSkBonus` [cell] → SoulmeldAbilities.G29
+- `BloodtalonsSkBonus` [cell] → SoulmeldAbilities.G38
+- `BlueBraceInitBonus` [cell] → SoulmeldAbilities.G44
+- `BrassManeSkBonus` [cell] → SoulmeldAbilities.G46
+- `CeruSandSpd` [cell] → SoulmeldAbilities.G49
+- `ClawofWyrmClimbSpeed` [cell] → SoulmeldAbilities.G272
+- `CryHelmAC` [cell] → SoulmeldAbilities.G53
+- `DispMantSkBonus` [cell] → SoulmeldAbilities.G60
+- `DragonMantleDR` [cell] → SoulmeldAbilities.G275
+- `DragonMantleFortBonus` [cell] → SoulmeldAbilities.G273
+- `DragonTailSkBonus` [cell] → SoulmeldAbilities.G278
+- `DragonfireMaskSkBonus` [cell] → SoulmeldAbilities.G281
+- `ElderSpiritSkBonus` [cell] → SoulmeldAbilities.G285
+- `EnigmaHelmWillBonus` [cell] → SoulmeldAbilities.G70
+- `FearMaskSkBonus` [cell] → SoulmeldAbilities.G72
+- `GRMSkBonus` [cell] → SoulmeldAbilities.G89
+- `GirArmsSkBonus` [cell] → SoulmeldAbilities.G81
+- `GorgonMaskFortBonus` [cell] → SoulmeldAbilities.G86
+- `HuntCircSkBonus` [cell] → SoulmeldAbilities.G95
+- `IllVeilSkBonus` [cell] → SoulmeldAbilities.G99
+- `ImpBootsRefBonus` [cell] → SoulmeldAbilities.G100
+- `IncAlignment` [cell] → SoulmeldAbilities.G1
+- `IncAvACBonus` [cell] → SoulmeldAbilities.G106
+- `IncAvDmgBonus` [cell] → SoulmeldAbilities.G104
+- `IncAvMeleeBonus` [cell] → SoulmeldAbilities.G108
+- `IncAvRangedBonus` [cell] → SoulmeldAbilities.G102
+- `IncAvSpd` [cell] → SoulmeldAbilities.G103
+- `KeenLensSkBonus` [cell] → SoulmeldAbilities.G118
+- `KrakenMantGrappleMod` [cell] → SoulmeldAbilities.G122
+- `KrakenMantSkBonus` [cell] → SoulmeldAbilities.G121
+- `KrensharMaskSkBonus` [cell] → SoulmeldAbilities.G124
+- `KruthClawSkBonus` [cell] → SoulmeldAbilities.G126
+- `LamiaBeltSkBonus` [cell] → SoulmeldAbilities.G130
+- `LamiaBeltSpd` [cell] → SoulmeldAbilities.G131
+- `LandsharkBootsSkBonus` [cell] → SoulmeldAbilities.G137
+- `MageSpecSkBonus` [cell] → SoulmeldAbilities.G147
+- `MantBeltFlySpeed` [cell] → SoulmeldAbilities.G150
+- `MantBeltSkBonus` [cell] → SoulmeldAbilities.G149
+- `MaulGauntUnarmedBonus` [cell] → SoulmeldAbilities.G156
+- `NecroTouchSkBonus` [cell] → SoulmeldAbilities.G163
+- `PauldHealthFortBonus` [cell] → SoulmeldAbilities.G170
+- `PegCloakFlySpeed` [cell] → SoulmeldAbilities.G173
+- `PegCloakSkBonus` [cell] → SoulmeldAbilities.G172
+- `PhaseCloakSkBonus` [cell] → SoulmeldAbilities.G175
+- `PsionEyesSkBonus` [cell] → SoulmeldAbilities.G186
+- `RideBracerSkBonus` [cell] → SoulmeldAbilities.G196
+- `SailBraceSkBonus` [cell] → SoulmeldAbilities.G199
+- `ShadowMantleSkBonus` [cell] → SoulmeldAbilities.G201
+- `SightGlovesDmgBonus` [cell] → SoulmeldAbilities.G208
+- `SilverMaskSkBonus` [cell] → SoulmeldAbilities.G210
+- `SoulmeldAbilities` [cell] → SoulmeldAbilities.F3
+- `SoulmeldWeaponFinesse` [cell] → SoulmeldAbilities.G5
+- `SphinxClawSkBonus` [cell] → SoulmeldAbilities.G222
+- `TheftGloveSkBonus` [cell] → SoulmeldAbilities.G228
+- `ThreefoldMaskSkBonus` [cell] → SoulmeldAbilities.G232
+- `TotemAvACBonus` [cell] → SoulmeldAbilities.G238
+- `TotemAvDR` [cell] → SoulmeldAbilities.G241
+- `TruthGogglesSkBonus` [cell] → SoulmeldAbilities.G244
+- `UnicornHornSkBonus` [cell] → SoulmeldAbilities.G246
+- `VitBeltSkBonus` [cell] → SoulmeldAbilities.G252
+- `WorgPeltSkBonus` [cell] → SoulmeldAbilities.G259
+- `WorgPeltSpd` [cell] → SoulmeldAbilities.G260
+- `WormBeltACBonus` [cell] → SoulmeldAbilities.G263
+- `YrthakMaskSkBonus` [cell] → SoulmeldAbilities.G266
+- `YrthakMaskSkPenalty` [cell] → SoulmeldAbilities.G267
+
+### Tables/Lookups
+
+- `TblMeldSaves` [range] → SoulmeldAbilities.L1:.M5
+
+## Incarnum Abilities
+
+### Armor
+
+- `ArmorBondBonus` [cell] → Incarnum Abilities.Z36
+
+### General
+
+- `AbilityEssentia` [cell] → Incarnum Abilities.W1
+- `AzureTalentBonus` [cell] → Incarnum Abilities.Z5
+- `AzureTouchBonus` [cell] → Incarnum Abilities.Z6
+- `AzureToughnessBonus` [cell] → Incarnum Abilities.Z7
+- `AzureTurningBonus` [cell] → Incarnum Abilities.Z8
+- `AzureWildShapeBonus` [cell] → Incarnum Abilities.Z9
+- `BonusEssentiaMirror` [cell] → Incarnum Abilities.U6
+- `CeruleanFortitudeBonus` [cell] → Incarnum Abilities.Z10
+- `CeruleanReflexesBonus` [cell] → Incarnum Abilities.Z11
+- `CeruleanWillBonus` [cell] → Incarnum Abilities.Z12
+- `CobaltExpertiseBonus` [cell] → Incarnum Abilities.Z15
+- `CobaltPowerBonus` [cell] → Incarnum Abilities.Z16
+- `CobaltRageBonus` [cell] → Incarnum Abilities.Z18
+- `DefensiveInsightBonus` [cell] → Incarnum Abilities.Z53
+- `DusklingSpeedBonus` [cell] → Incarnum Abilities.Z3
+- `IncandescentStrikeBonus` [cell] → Incarnum Abilities.Z30
+- `IncarnumDefenseBonus` [cell] → Incarnum Abilities.Z52
+- `IncarnumListChanged` [cell] → Incarnum Abilities.AI1
+- `IncarnumSpeedInitBonus` [cell] → Incarnum Abilities.Z51
+- `IncarnumSpeedMoveBonus` [cell] → Incarnum Abilities.AA51
+- `SapphireFistBonus` [cell] → Incarnum Abilities.Z25
+- `SapphireSmiteBonus` [cell] → Incarnum Abilities.Z26
+- `ShowIncarnum` [cell] → Incarnum Abilities.AB1
+- `StepoftheBodilessBonus` [cell] → Incarnum Abilities.Z39
+- `WeaponBondBonus` [cell] → Incarnum Abilities.Z37
+
+### Tables/Lookups
+
+- `TblIncarnumAbilities` [range] → Incarnum Abilities.AE3:.AE62
+- `TblIncarnumMirror` [range] → Incarnum Abilities.AH3:.AH62
+
+## Skills
+
+### General
+
+- `ListenTotal` [cell] → Skills.HI55
+- `RaceSk` [cell] → Skills.HP3
+- `SearchTotal` [cell] → Skills.HI73
+- `SkACP` [cell] → Skills.GR1
+- `SkAppraiseRanks` [cell] → Skills.HH6
+- `SkAutohypnosisRanks` [cell] → Skills.HH7
+- `SkBalanceRanks` [cell] → Skills.HH8
+- `SkBluffRanks` [cell] → Skills.HH9
+- `SkClimbRanks` [cell] → Skills.HH10
+- `SkConcentrationRanks` [cell] → Skills.HH12
+- `SkControlShapeRanks` [cell] → Skills.HH11
+- `SkCraft1Ranks` [cell] → Skills.HH14
+- `SkCraft2Ranks` [cell] → Skills.HH15
+- `SkCraft3Ranks` [cell] → Skills.HH16
+- `SkCraft4Ranks` [cell] → Skills.HH17
+- `SkCraft5Ranks` [cell] → Skills.HH18
+- `SkCraft6Ranks` [cell] → Skills.HH19
+- `SkCraftRanks` [cell] → Skills.HM13
+- `SkDecipherScriptRanks` [cell] → Skills.HH20
+- `SkDiplomacyRanks` [cell] → Skills.HH21
+- `SkDisableDeviceRanks` [cell] → Skills.HH22
+- `SkDisguiseRanks` [cell] → Skills.HH23
+- `SkEscapeArtistRanks` [cell] → Skills.HH24
+- `SkForgeryRanks` [cell] → Skills.HH25
+- `SkGatherInformationRanks` [cell] → Skills.HH26
+- `SkHandleAnimalRanks` [cell] → Skills.HH27
+- `SkHealRanks` [cell] → Skills.HH28
+- `SkHideRanks` [cell] → Skills.HH29
+- `SkHypnosisRanks` [cell] → Skills.HH30
+- `SkIaijutsuRanks` [cell] → Skills.HH31
+- `SkIntimidateRanks` [cell] → Skills.HH32
+- `SkJumpRanks` [cell] → Skills.HH33
+- `SkKnowledge1Ranks` [cell] → Skills.HH48
+- `SkKnowledge2Ranks` [cell] → Skills.HH49
+- `SkKnowledge3Ranks` [cell] → Skills.HH50
+- `SkKnowledge4Ranks` [cell] → Skills.HH51
+- `SkKnowledge5Ranks` [cell] → Skills.HH52
+- `SkKnowledge6Ranks` [cell] → Skills.HH53
+- `SkKnowledge7Ranks` [cell] → Skills.HH54
+- `SkKnowledgeArcanaRanks` [cell] → Skills.HH34
+- `SkKnowledgeArchitectureRanks` [cell] → Skills.HH35
+- `SkKnowledgeDungeoneeringRanks` [cell] → Skills.HH36
+- `SkKnowledgeGeographyRanks` [cell] → Skills.HH37
+- `SkKnowledgeHistoryRanks` [cell] → Skills.HH38
+- `SkKnowledgeListRowsCnt` [cell] → Skills.II2
+- `SkKnowledgeLocalRanks` [cell] → Skills.HH39
+- `SkKnowledgeMonsterLoreRanks` [cell] → Skills.HH40
+- `SkKnowledgeNatureRanks` [cell] → Skills.HH41
+- `SkKnowledgeNobilityRanks` [cell] → Skills.HH42
+- `SkKnowledgePlanesRanks` [cell] → Skills.HH46
+- `SkKnowledgePsionicsRanks` [cell] → Skills.HH43
+- `SkKnowledgeRanks` [cell] → Skills.HM47
+- `SkKnowledgeRavenloftRanks` [cell] → Skills.HH44
+- `SkKnowledgeReligionRanks` [cell] → Skills.HH45
+- `SkListRowsCnt` [cell] → Skills.II1
+- `SkListenRanks` [cell] → Skills.HH55
+- `SkMoveSilentlyRanks` [cell] → Skills.HH57
+- `SkNonProfACP` [cell] → Skills.GR2
+- `SkOpenLockRanks` [cell] → Skills.HH58
+- `SkPerform1Ranks` [cell] → Skills.HH60
+- `SkPerform2Ranks` [cell] → Skills.HH61
+- `SkPerform3Ranks` [cell] → Skills.HH62
+- `SkPerform4Ranks` [cell] → Skills.HH63
+- `SkPerform5Ranks` [cell] → Skills.HH64
+- `SkPerformRanks` [cell] → Skills.HM59
+- `SkProfession1Ranks` [cell] → Skills.HH66
+- `SkProfession2Ranks` [cell] → Skills.HH67
+- `SkProfession3Ranks` [cell] → Skills.HH68
+- `SkProfession4Ranks` [cell] → Skills.HH69
+- `SkProfession5Ranks` [cell] → Skills.HH70
+- `SkProfessionRanks` [cell] → Skills.HM65
+- `SkPsicraftRanks` [cell] → Skills.HH71
+- `SkRacialModMisc` [cell] → Skills.IN6
+- `SkRanks` [range] → Skills.F6:.F85
+- `SkRideRanks` [cell] → Skills.HH72
+- `SkSearchRanks` [cell] → Skills.HH73
+- `SkSenseMotiveRanks` [cell] → Skills.HH74
+- `SkSkillTricks` [cell] → Skills.HH75
+- `SkSleightOfHandRanks` [cell] → Skills.HH76
+- `SkSpeakLanguageRanks` [cell] → Skills.HH77
+- `SkSpellcraftRanks` [cell] → Skills.HH78
+- `SkSpotRanks` [cell] → Skills.HH79
+- `SkSurvivalRanks` [cell] → Skills.HH80
+- `SkSwimRanks` [cell] → Skills.HH81
+- `SkTumbleRanks` [cell] → Skills.HH82
+- `SkUseMagicDeviceRanks` [cell] → Skills.HH83
+- `SkUseRopeRanks` [cell] → Skills.HH85
+- `SpotTotal` [cell] → Skills.HI79
+
+### Skills
+
+- `SkillAvailable` [range] → Skills.IF6:.IF85
+- `SkillList` [cell] → Skills.HW6
+- `SkillName` [range] → Skills.IA5:.IA85
+- `SkillTrickRanks` [cell] → Skills.F75
+
+### Tables/Lookups
+
+- `TblCharSheetSk` [range] → Skills.HN6:.HT85
+- `TblCraftRanks` [range] → Skills.HH14:.HH19
+- `TblCraftSkills` [range] → Skills.A14:.A19
+- `TblEpicSkillFocus` [range] → Skills.HZ6:.HZ85
+- `TblKnowSkills` [range] → Skills.A48:.A54
+- `TblKnowledgeRanks` [range] → Skills.HH34:.HH54
+- `TblKnowledgeSkills` [range] → Skills.A34:.A54
+- `TblPerformRanks` [range] → Skills.HH60:.HH64
+- `TblPerformSkills` [range] → Skills.A60:.A64
+- `TblProfessionRanks` [range] → Skills.HH66:.HH70
+- `TblProfessionSkills` [range] → Skills.A66:.A70
+- `TblSkFocusKnow` [range] → Skills.GS36:.GS54
+- `TblSkKnowRanks` [range] → Skills.F34:.F54
+- `TblSkillBin` [range] → Skills.HE6:.HL85
+- `TblSkillInfo` [range] → Skills.IA5:.IF85
+- `TblSkillList` [range] → Skills.A6:.A85
+- `TblSkillListFocus` [range] → Skills.HK6:.HK85
+- `TblSkillMatrix` [range] → Skills.G6:.BO85
+
+## Skill Tricks
+
+### General
+
+- `HasSkillTricks` [cell] → Skill Tricks.H3
+- `InteractionSkillTricks` [cell] → Skill Tricks.O6
+- `ManipulationSkillTricks` [cell] → Skill Tricks.O14
+- `MentalSkillTricks` [cell] → Skill Tricks.O28
+- `MovementSkillTricks` [cell] → Skill Tricks.O37
+
+### Skills
+
+- `SkillTrickList` [cell] → Skill Tricks.R5
+- `SkillTricks` [cell] → Skill Tricks.S5
+- `SkillTricksSelected` [cell] → Skill Tricks.G3
+
+### Tables/Lookups
+
+- `TblSkillTrickReset` [range] → Skill Tricks.U6:.U53
+- `TblSkillTricksSelected` [range] → Skill Tricks.G6:.G53
+
+## Languages
+
+### General
+
+- `Abyssal` [cell] → Languages.H6
+- `Aquan` [cell] → Languages.H7
+- `Argon` [cell] → Languages.H89
+- `Auran` [cell] → Languages.H8
+- `CustomLanguages` [range] → Languages.B174:.B183
+- `Draconic` [cell] → Languages.H10
+- `Drow` [cell] → Languages.H11
+- `Druidic` [cell] → Languages.H13
+- `Elven` [cell] → Languages.H11
+- `Ferral` [cell] → Languages.H45
+- `Giant` [cell] → Languages.H16
+- `Ignan` [cell] → Languages.H21
+- `Infernal` [cell] → Languages.H22
+- `LanguagesKnown` [cell] → Languages.O3
+- `Literate` [cell] → Languages.N27
+- `Sahuagin` [cell] → Languages.H106
+- `Terran` [cell] → Languages.H25
+
+### Tables/Lookups
+
+- `TblLangKnown` [range] → Languages.R5:.R183
+- `TblLanguageList` [range] → Languages.B5:.B183
+- `TblLanguagesAutomatic` [range] → Languages.M5:.M183
+- `TblLanguagesHave` [range] → Languages.N5:.N183
+- `TblLanguagesSelected` [range] → Languages.H5:.H183
+- `TblRavenloftLanguages` [range] → Languages.B140:.B149
+
+## Grafts
+
+### General
+
+- `CGP` [cell] → Grafts.G1
+- `ChitinPlateBonus` [cell] → Grafts.E67
+- `ChitinPlateBonusReset` [cell] → Grafts.AF67
+- `GRCha` [cell] → Grafts.N4
+- `GRCon` [cell] → Grafts.K4
+- `GRDex` [cell] → Grafts.J4
+- `GRHPCost` [cell] → Grafts.H4
+- `GRInt` [cell] → Grafts.L4
+- `GRStr` [cell] → Grafts.I4
+- `GRWis` [cell] → Grafts.M4
+- `GraftList` [cell] → Grafts.AC4
+- `Grafts` [cell] → Grafts.AB4
+- `GraftsAbilitiesAdj` [range] → Grafts.I4:.N4
+- `HasGraft` [cell] → Grafts.Y2
+
+### Tables/Lookups
+
+- `TblGRBeholderDropdownsReset` [range] → Grafts.AF24:.AF27
+- `TblGRIllithidDropdownsReset` [range] → Grafts.AF62:.AF63
+
+## Traits
+
+### General
+
+- `HasTraits` [cell] → Traits.F2
+- `TrAbrasive` [cell] → Traits.F4
+- `TrAbsentMinded` [cell] → Traits.F5
+- `TrAggressive` [cell] → Traits.F6
+- `TrBrawler` [cell] → Traits.F7
+- `TrCautious` [cell] → Traits.F8
+- `TrDetached` [cell] → Traits.F9
+- `TrDishonest` [cell] → Traits.F10
+- `TrDistinctive` [cell] → Traits.F11
+- `TrEasygoing` [cell] → Traits.F12
+- `TrFarsighted` [cell] → Traits.F13
+- `TrFocused` [cell] → Traits.F14
+- `TrHardOfHearing` [cell] → Traits.F15
+- `TrHardy` [cell] → Traits.F16
+- `TrHonest` [cell] → Traits.F17
+- `TrIlliterate` [cell] → Traits.F18
+- `TrInattentive` [cell] → Traits.F20
+- `TrInattentive1` [cell] → Traits.F21
+- `TrInattentive2` [cell] → Traits.F22
+- `TrInattentive3` [cell] → Traits.F23
+- `TrMusclebound` [cell] → Traits.F24
+- `TrNearsighted` [cell] → Traits.F25
+- `TrNightsighted` [cell] → Traits.F26
+- `TrPassionate` [cell] → Traits.F27
+- `TrPlucky` [cell] → Traits.F28
+- `TrPolite` [cell] → Traits.F29
+- `TrQuick` [cell] → Traits.F30
+- `TrReckless` [cell] → Traits.F31
+- `TrRelentless` [cell] → Traits.F32
+- `TrSaddleborn` [cell] → Traits.F33
+- `TrSkinny` [cell] → Traits.F34
+- `TrSlippery` [cell] → Traits.F35
+- `TrSlow` [cell] → Traits.F36
+- `TrSpecialized` [cell] → Traits.F37
+- `TrSpellgifted` [cell] → Traits.F39
+- `TrStout` [cell] → Traits.F41
+- `TrSuspicious` [cell] → Traits.F42
+- `TrTorpid` [cell] → Traits.F43
+- `TrUncivilized` [cell] → Traits.F44
+- `Traits` [cell] → Traits.N3
+- `TraitsList` [cell] → Traits.O3
+- `TraitsSelected` [cell] → Traits.E2
+
+### Tables/Lookups
+
+- `TblTrIlliterate` [cell] → Traits.G19
+- `TblTrListReset` [range] → Traits.P4:.P49
+- `TblTraitsListSelected` [range] → Traits.H4:.H44
+- `TblTraitsReset` [range] → Traits.Q4:.Q49
+- `TblTraitsSelected` [range] → Traits.E4:.E49
+- `TblUserTraits` [range] → Traits.C45:.C49
+
+## Flaws
+
+### General
+
+- `FlFeeble` [cell] → Flaws.F5
+- `FlFrail` [cell] → Flaws.F6
+- `FlInattentive` [cell] → Flaws.F7
+- `FlMeagerFortitude` [cell] → Flaws.F8
+- `FlMurkyEyed` [cell] → Flaws.F9
+- `FlNoncombatant` [cell] → Flaws.F10
+- `FlPathetic` [cell] → Flaws.F11
+- `FlPoorReflexes` [cell] → Flaws.F12
+- `FlShaky` [cell] → Flaws.F13
+- `FlSlow` [cell] → Flaws.F14
+- `FlUnreactive` [cell] → Flaws.F15
+- `FlVulnerable` [cell] → Flaws.F16
+- `FlWeakWill` [cell] → Flaws.F17
+- `Flaws` [cell] → Flaws.K4
+- `FlawsList` [cell] → Flaws.L4
+- `FlawsSelected` [cell] → Flaws.E3
+- `HasFlaws` [cell] → Flaws.F3
+
+### Tables/Lookups
+
+- `TblFlawsReset` [range] → Flaws.M5:.M22
+- `TblFlawsSelected` [range] → Flaws.E5:.E22
+- `TblUserFlaws` [range] → Flaws.C18:.C22
+
+## Maneuvers & Stances
+
+### Class Levels
+
+- `CruILLvl` [cell] → Maneuvers & Stances.BJ7
+- `OtherILLvl` [cell] → Maneuvers & Stances.BJ10
+- `SwSaILLvl` [cell] → Maneuvers & Stances.BJ8
+- `WblILLvl` [cell] → Maneuvers & Stances.BJ9
+
+### General
+
+- `CruManKnow` [cell] → Maneuvers & Stances.BJ13
+- `CruManKnowList` [cell] → Maneuvers & Stances.AP6
+- `CruManReady` [cell] → Maneuvers & Stances.BJ19
+- `CruStanKnow` [cell] → Maneuvers & Stances.BJ25
+- `CruStanKnowList` [cell] → Maneuvers & Stances.AX6
+- `DesertWindManeuvers` [cell] → Maneuvers & Stances.X7
+- `DesertWindStrikes` [cell] → Maneuvers & Stances.AE33
+- `DevotedSpiritManeuvers` [cell] → Maneuvers & Stances.X36
+- `DevotedSpiritStances` [cell] → Maneuvers & Stances.AE36
+- `DiamondMindManeuvers` [cell] → Maneuvers & Stances.X64
+- `DiamondMindStrikes` [cell] → Maneuvers & Stances.AE64
+- `HasManeuvers` [cell] → Maneuvers & Stances.Y6
+- `IronHeartManeuvers` [cell] → Maneuvers & Stances.X88
+- `IronHeartStrikes` [cell] → Maneuvers & Stances.AE88
+- `ManKnownClass` [range] → Maneuvers & Stances.Z7:.Z230
+- `ManReadiedClass` [range] → Maneuvers & Stances.AD7:.AD230
+- `ManeuverList` [cell] → Maneuvers & Stances.BB6
+- `Maneuvers` [cell] → Maneuvers & Stances.BC6
+- `MartialClass` [cell] → Maneuvers & Stances.Y1
+- `OtherManKnow` [cell] → Maneuvers & Stances.BJ16
+- `OtherManKnowList` [cell] → Maneuvers & Stances.AS6
+- `OtherManReady` [cell] → Maneuvers & Stances.BJ22
+- `OtherStanKnow` [cell] → Maneuvers & Stances.BJ28
+- `OtherStanKnowList` [cell] → Maneuvers & Stances.BA6
+- `SettingSunManeuvers` [cell] → Maneuvers & Stances.X111
+- `SettingSunStrikes` [cell] → Maneuvers & Stances.AE111
+- `ShadowHandManeuvers` [cell] → Maneuvers & Stances.X133
+- `ShadowHandStances` [cell] → Maneuvers & Stances.AE133
+- `StanKnownClass` [range] → Maneuvers & Stances.AA7:.AA230
+- `StoneDragonManeuvers` [cell] → Maneuvers & Stances.X160
+- `SwSaManKnowList` [cell] → Maneuvers & Stances.AQ6
+- `SwSaManReady` [cell] → Maneuvers & Stances.BJ20
+- `SwSaStanKnow` [cell] → Maneuvers & Stances.BJ26
+- `SwsaManKnow` [cell] → Maneuvers & Stances.BJ14
+- `SwsaStanKnowList` [cell] → Maneuvers & Stances.AY6
+- `TigerClawManeuvers` [cell] → Maneuvers & Stances.X186
+- `ToBPrCReset` [range] → Maneuvers & Stances.BH6:.BH42
+- `TotalManeuvers` [cell] → Maneuvers & Stances.X6
+- `WblManKnow` [cell] → Maneuvers & Stances.BJ15
+- `WblManKnowList` [cell] → Maneuvers & Stances.AR6
+- `WblManReady` [cell] → Maneuvers & Stances.BJ21
+- `WblStanKnow` [cell] → Maneuvers & Stances.BJ27
+- `WblStanKnowList` [cell] → Maneuvers & Stances.AZ6
+- `WhiteRavenManeuvers` [cell] → Maneuvers & Stances.X211
+
+### Tables/Lookups
+
+- `TblManSel` [range] → Maneuvers & Stances.BO7:.BO11
+- `TblManSelIndx` [range] → Maneuvers & Stances.BN7:.BO11
+- `TblManeuversReadied` [range] → Maneuvers & Stances.AC7:.AC230
+- `TblManeuversReadiedReset` [range] → Maneuvers & Stances.BG7:.BG230
+- `TblManeuversReset` [range] → Maneuvers & Stances.BF7:.BF230
+- `TblManeuversSelected` [range] → Maneuvers & Stances.Y7:.Y230
+- `TblToBPrCSelected` [range] → Maneuvers & Stances.BU6:.BU42
+
+## Feats
+
+### Armor
+
+- `ArmorSkinFeat` [cell] → Feats.AQ406
+- `ArmorSpecial1` [cell] → Feats.AO178
+- `ArmorSpecial2` [cell] → Feats.AO179
+- `ArmorSpecial3` [cell] → Feats.AO180
+
+### Equipment Slots
+
+- `FtExtraSlot1` [cell] → Feats.AR530
+- `FtExtraSlot2` [cell] → Feats.AR531
+- `FtExtraSlot3` [cell] → Feats.AR532
+
+### Feats
+
+- `FeatList` [cell] → Feats.AU10
+- `FeatSource` [cell] → Feats.F2
+- `FeatSourceCell` [cell] → Feats.F1
+- `Feats` [cell] → Feats.AV10
+- `FeatsCnt` [range] → Feats.O10:.P10
+- `FeatsHideALL` [range] → Feats.AA9:.AA3634
+- `FeatsHideAoM` [range] → Feats.AA2793:.AA2815
+- `FeatsHideAoMCheck` [cell] → Feats.AA2792
+- `FeatsHideBE` [range] → Feats.AA2038:.AA2097
+- `FeatsHideBECheck` [cell] → Feats.AA2037
+- `FeatsHideBV` [range] → Feats.AA1995:.AA2036
+- `FeatsHideBVCheck` [cell] → Feats.AA1994
+- `FeatsHideCAD` [range] → Feats.AA641:.AA720
+- `FeatsHideCADCheck` [cell] → Feats.AA640
+- `FeatsHideCAr` [range] → Feats.AA514:.AA639
+- `FeatsHideCArCheck` [cell] → Feats.AA513
+- `FeatsHideCC` [range] → Feats.AA1038:.AA1137
+- `FeatsHideCCCheck` [cell] → Feats.AA1037
+- `FeatsHideCD` [range] → Feats.AA430:.AA512
+- `FeatsHideCDCheck` [cell] → Feats.AA429
+- `FeatsHideCM` [range] → Feats.AA886:.AA965
+- `FeatsHideCMCheck` [cell] → Feats.AA885
+- `FeatsHideCPs` [range] → Feats.AA722:.AA884
+- `FeatsHideCPsCheck` [cell] → Feats.AA721
+- `FeatsHideCS` [range] → Feats.AA967:.AA1036
+- `FeatsHideCSCheck` [cell] → Feats.AA966
+- `FeatsHideCW` [range] → Feats.AA302:.AA428
+- `FeatsHideCWCheck` [cell] → Feats.AA301
+- `FeatsHideChR` [range] → Feats.AA2340:.AA2395
+- `FeatsHideChRCheck` [cell] → Feats.AA2339
+- `FeatsHideChV` [range] → Feats.AA2397:.AA2431
+- `FeatsHideChVCheck` [cell] → Feats.AA2396
+- `FeatsHideCi` [range] → Feats.AA1738:.AA1762
+- `FeatsHideCiCheck` [cell] → Feats.AA1737
+- `FeatsHideCoD` [range] → Feats.AA3531:.AA3568
+- `FeatsHideCoDCheck` [cell] → Feats.AA3530
+- `FeatsHideCoS` [range] → Feats.AA2433:.AA2441
+- `FeatsHideCoSCheck` [cell] → Feats.AA2432
+- `FeatsHideDLCS` [range] → Feats.AA2778:.AA2791
+- `FeatsHideDLCSCheck` [cell] → Feats.AA2777
+- `FeatsHideDMG` [range] → Feats.AA3465:.AA3492
+- `FeatsHideDMGCheck` [cell] → Feats.AA3464
+- `FeatsHideDMag` [range] → Feats.AA1933:.AA1993
+- `FeatsHideDMagCheck` [cell] → Feats.AA1932
+- `FeatsHideDr` [range] → Feats.AA2893:.AA2955
+- `FeatsHideDrCheck` [cell] → Feats.AA2892
+- `FeatsHideDrM` [range] → Feats.AA2957:.AA3005
+- `FeatsHideDrMCheck` [cell] → Feats.AA2956
+- `FeatsHideDs` [range] → Feats.AA1725:.AA1736
+- `FeatsHideDsCheck` [cell] → Feats.AA1724
+- `FeatsHideECS` [range] → Feats.AA2443:.AA2532
+- `FeatsHideECSCheck` [cell] → Feats.AA2442
+- `FeatsHideELH` [range] → Feats.AA3257:.AA3463
+- `FeatsHideELHCheck` [cell] → Feats.AA3256
+- `FeatsHideFB` [range] → Feats.AA1363:.AA1401
+- `FeatsHideFBCheck` [cell] → Feats.AA1362
+- `FeatsHideFCII` [range] → Feats.AA3143:.AA3179
+- `FeatsHideFCIICheck` [cell] → Feats.AA3142
+- `FeatsHideHB` [range] → Feats.AA1462:.AA1482
+- `FeatsHideHBCheck` [cell] → Feats.AA1461
+- `FeatsHideHH` [range] → Feats.AA1484:.AA1519
+- `FeatsHideHHCheck` [cell] → Feats.AA1483
+- `FeatsHideHoL` [range] → Feats.AA3509:.AA3529
+- `FeatsHideHoLCheck` [cell] → Feats.AA3508
+- `FeatsHideLM` [range] → Feats.AA3007:.AA3074
+- `FeatsHideLMCheck` [cell] → Feats.AA3006
+- `FeatsHideLoM` [range] → Feats.AA3076:.AA3108
+- `FeatsHideLoMCheck` [cell] → Feats.AA3075
+- `FeatsHideMF` [range] → Feats.AA2211:.AA2215
+- `FeatsHideMFCheck` [cell] → Feats.AA2210
+- `FeatsHideMH` [range] → Feats.AA1764:.AA1796
+- `FeatsHideMHCheck` [cell] → Feats.AA1763
+- `FeatsHideMM` [range] → Feats.AA3110:.AA3133
+- `FeatsHideMM4` [range] → Feats.AA3135:.AA3141
+- `FeatsHideMM4Check` [cell] → Feats.AA3134
+- `FeatsHideMMCheck` [cell] → Feats.AA3109
+- `FeatsHideMoE` [range] → Feats.AA2703:.AA2740
+- `FeatsHideMoECheck` [cell] → Feats.AA2702
+- `FeatsHideMoI` [range] → Feats.AA1659:.AA1723
+- `FeatsHideMoICheck` [cell] → Feats.AA1658
+- `FeatsHideOA` [range] → Feats.AA2817:.AA2891
+- `FeatsHideOACheck` [cell] → Feats.AA2816
+- `FeatsHidePC` [range] → Feats.AA3602:.AA3625
+- `FeatsHidePCCheck` [cell] → Feats.AA3601
+- `FeatsHidePF` [range] → Feats.AA2099:.AA2209
+- `FeatsHidePFCheck` [cell] → Feats.AA2098
+- `FeatsHidePGE` [range] → Feats.AA2645:.AA2701
+- `FeatsHidePGECheck` [cell] → Feats.AA2644
+- `FeatsHidePH2` [range] → Feats.AA167:.AA300
+- `FeatsHidePH2Check` [cell] → Feats.AA166
+- `FeatsHidePlH` [range] → Feats.AA1899:.AA1931
+- `FeatsHidePlHCheck` [cell] → Feats.AA1898
+- `FeatsHideRD` [range] → Feats.AA1234:.AA1275
+- `FeatsHideRDCheck` [cell] → Feats.AA1233
+- `FeatsHideRDr` [range] → Feats.AA1312:.AA1361
+- `FeatsHideRDrCheck` [cell] → Feats.AA1311
+- `FeatsHideRE` [range] → Feats.AA2534:.AA2606
+- `FeatsHideRECheck` [cell] → Feats.AA2533
+- `FeatsHideRF` [range] → Feats.AA2217:.AA2301
+- `FeatsHideRFCheck` [cell] → Feats.AA2216
+- `FeatsHideRS` [range] → Feats.AA1139:.AA1232
+- `FeatsHideRSCheck` [cell] → Feats.AA1138
+- `FeatsHideRVL` [range] → Feats.AA3494:.AA3507
+- `FeatsHideRVLCheck` [cell] → Feats.AA3493
+- `FeatsHideRW` [range] → Feats.AA1277:.AA1310
+- `FeatsHideRWCheck` [cell] → Feats.AA1276
+- `FeatsHideSN` [range] → Feats.AA2608:.AA2615
+- `FeatsHideSNCheck` [cell] → Feats.AA2607
+- `FeatsHideSS` [range] → Feats.AA1403:.AA1432
+- `FeatsHideSSCheck` [cell] → Feats.AA1402
+- `FeatsHideSV` [range] → Feats.AA3181:.AA3255
+- `FeatsHideSVCheck` [cell] → Feats.AA3180
+- `FeatsHideSW` [range] → Feats.AA1434:.AA1460
+- `FeatsHideSWCheck` [cell] → Feats.AA1433
+- `FeatsHideSX` [range] → Feats.AA2617:.AA2643
+- `FeatsHideSXCheck` [cell] → Feats.AA2616
+- `FeatsHideSoS` [range] → Feats.AA2742:.AA2776
+- `FeatsHideSoSCheck` [cell] → Feats.AA2741
+- `FeatsHideToB` [range] → Feats.AA1521:.AA1573
+- `FeatsHideToBCheck` [cell] → Feats.AA1520
+- `FeatsHideToM` [range] → Feats.AA1575:.AA1657
+- `FeatsHideToMCheck` [cell] → Feats.AA1574
+- `FeatsHideUD` [range] → Feats.AA2303:.AA2338
+- `FeatsHideUDCheck` [cell] → Feats.AA2302
+- `FeatsHideVRA1` [range] → Feats.AA3570:.AA3600
+- `FeatsHideVRA1Check` [cell] → Feats.AA3569
+- `FeatsHideXPH` [range] → Feats.AA1798:.AA1897
+- `FeatsHideXPHCheck` [cell] → Feats.AA1797
+
+### General
+
+- `AberrantSelected` [cell] → Feats.AM6
+- `AereniFocusSkill` [cell] → Feats.AP2653
+- `ArcaneDiscipleDomain1` [cell] → Feats.AO432
+- `ArcaneDiscipleDomain2` [cell] → Feats.AO433
+- `ArcaneDiscipleDomain3` [cell] → Feats.AO434
+- `ArtistCraftSkill` [cell] → Feats.AQ2103
+- `BladeMeditationCell` [cell] → Feats.AP1525
+- `BladebearerOfTheValenarBonus` [cell] → Feats.AQ2537
+- `BonusDomains` [cell] → Feats.AQ498
+- `BonusFeatCell` [cell] → Feats.L4
+- `BonusFeatClass` [cell] → Feats.L3
+- `BonusFeats` [cell] → Feats.C4
+- `BonusFeatsAvailable` [range] → Feats.BL9:.BL107
+- `BonusFeatsSelection` [cell] → Feats.L5
+- `BoundingAssault` [cell] → Feats.AR183
+- `Brandof9HellsSelected` [cell] → Feats.AP3145
+- `CelestialSorcererHeratigeFeats` [cell] → Feats.AQ276
+- `CombatFormFeats` [cell] → Feats.AQ258
+- `CraneArtistCraftSkill` [cell] → Feats.AQ2843
+- `CrossbowType1` [cell] → Feats.AO92
+- `CrossbowType2` [cell] → Feats.AO93
+- `CrossbowType3` [cell] → Feats.AO94
+- `CurrentBonusFeats` [cell] → Feats.K5
+- `DeformitySkinNatArmor` [cell] → Feats.AQ1494
+- `DevilTouchedSelected` [cell] → Feats.AI6
+- `DivineFeatsSelected` [cell] → Feats.AK6
+- `DoubleChakra1Choice` [cell] → Feats.AP1662
+- `DoubleChakra2Choice` [cell] → Feats.AP1663
+- `DoubleChakra3Choice` [cell] → Feats.AP1664
+- `DraconicAuraSelected1` [cell] → Feats.AP2960
+- `DraconicAuraSelected2` [cell] → Feats.AP2961
+- `DraconicAuraSelected3` [cell] → Feats.AP2962
+- `DraconicHeritageCell` [cell] → Feats.AP2988
+- `DraconicSelected` [cell] → Feats.AJ6
+- `DragonwroughtCell` [cell] → Feats.AP1323
+- `EnergySubstitutionSelection1` [cell] → Feats.AP590
+- `EnergySubstitutionSelection2` [cell] → Feats.AP591
+- `EnergySubstitutionSelection3` [cell] → Feats.AP592
+- `EpicFort` [cell] → Feats.AQ3291
+- `EpicProwess` [cell] → Feats.AQ415
+- `EpicReflexes` [cell] → Feats.AQ3293
+- `EpicToughness` [cell] → Feats.AQ418
+- `EpicWeaponFocusList` [cell] → Feats.AQ423
+- `EpicWill` [cell] → Feats.AQ3300
+- `ExaltedFeats` [cell] → Feats.AQ2045
+- `ExoticWeapon1` [cell] → Feats.AO38
+- `ExoticWeapon2` [cell] → Feats.AO39
+- `ExoticWeapon3` [cell] → Feats.AO40
+- `ExoticWeaponList` [cell] → Feats.AQ38
+- `ExtraSmites` [cell] → Feats.AQ318
+- `FTDamageReduction1` [cell] → Feats.AR411
+- `FTMechanicalMindedness` [cell] → Feats.AR3617
+- `FavoredSoulFavoredWeaponSelected` [cell] → Feats.AO124
+- `FavoredVestiges` [range] → Feats.AO1591:.AO1594
+- `FeyFeats` [cell] → Feats.AQ919
+- `FreeAlertness` [cell] → Feats.J13
+- `FreeAttuneGem` [cell] → Feats.J2215
+- `FreeAugmentSummoning` [cell] → Feats.J19
+- `FreeBlindFight` [cell] → Feats.J20
+- `FreeBoostSpellLikeAbility` [cell] → Feats.J1996
+- `FreeBrewPotion` [cell] → Feats.J147
+- `FreeCloseQuartersFighting` [cell] → Feats.J307
+- `FreeCombatCasting` [cell] → Feats.J21
+- `FreeCombatExpertise` [cell] → Feats.J22
+- `FreeCombatReflexes` [cell] → Feats.J27
+- `FreeDeflectArrows` [cell] → Feats.J56
+- `FreeDeformityGaunt` [cell] → Feats.J2035
+- `FreeDeformityObese` [cell] → Feats.J2036
+- `FreeDiehard` [cell] → Feats.J35
+- `FreeDodge` [cell] → Feats.J31
+- `FreeEndurance` [cell] → Feats.J34
+- `FreeEschewMaterials` [cell] → Feats.J36
+- `FreeExaltedCompanion` [cell] → Feats.J2050
+- `FreeExoticWeaponProficiency` [cell] → Feats.J37
+- `FreeExtendSpell` [cell] → Feats.J159
+- `FreeExtraTurning` [range] → Feats.J41:.J43
+- `FreeExtraTurning1` [cell] → Feats.J41
+- `FreeExtraTurning2` [cell] → Feats.J42
+- `FreeExtraTurning3` [cell] → Feats.J43
+- `FreeFasterHealing` [cell] → Feats.J326
+- `FreeFistOfTheHeavens` [cell] → Feats.J2056
+- `FreeGreatCleave` [cell] → Feats.J86
+- `FreeGreatFortitude` [cell] → Feats.J45
+- `FreeGreaterTwoWeaponFighting` [cell] → Feats.J127
+- `FreeGreaterWeaponFocus` [cell] → Feats.J137
+- `FreeImprovedCounterspell` [cell] → Feats.J46
+- `FreeImprovedCritical` [cell] → Feats.J48
+- `FreeImprovedDisarm` [cell] → Feats.J23
+- `FreeImprovedFeint` [cell] → Feats.J24
+- `FreeImprovedGrapple` [cell] → Feats.J55
+- `FreeImprovedInitiative` [cell] → Feats.J52
+- `FreeImprovedPreciseShot` [cell] → Feats.J80
+- `FreeImprovedTrip` [cell] → Feats.J25
+- `FreeImprovedTwoWeaponFighting` [cell] → Feats.J126
+- `FreeImprovedUnarmedStrike` [cell] → Feats.J54
+- `FreeInsidiousMagic` [cell] → Feats.J2192
+- `FreeIronWill` [cell] → Feats.J60
+- `FreeLeadership` [cell] → Feats.J61
+- `FreeLightningReflexes` [cell] → Feats.J62
+- `FreeManyShot` [cell] → Feats.J82
+- `FreeMobility` [cell] → Feats.J32
+- `FreeMountedCombat` [cell] → Feats.J68
+- `FreePerniciousMagic` [cell] → Feats.J2193
+- `FreePointBlankShot` [cell] → Feats.J77
+- `FreeQuickDraw` [cell] → Feats.J90
+- `FreeRapidShot` [cell] → Feats.J81
+- `FreeRecklessOffensive` [cell] → Feats.J2282
+- `FreeSanctifyMartialStrike` [cell] → Feats.J2086
+- `FreeScribeScroll` [cell] → Feats.J154
+- `FreeSharpShooting` [cell] → Feats.J367
+- `FreeSidestep` [cell] → Feats.J1786
+- `FreeSilentSpell` [cell] → Feats.J163
+- `FreeSkillFocus` [cell] → Feats.J101
+- `FreeSnatchArrows` [cell] → Feats.J57
+- `FreeSpiritedCharge` [cell] → Feats.J72
+- `FreeSpringAttack` [cell] → Feats.J33
+- `FreeStealthy` [cell] → Feats.J119
+- `FreeStillSpell` [cell] → Feats.J164
+- `FreeStunningFist` [cell] → Feats.J58
+- `FreeSuddenEmpower` [cell] → Feats.J610
+- `FreeSuddenEnlarge` [cell] → Feats.J611
+- `FreeSuddenMaximize` [cell] → Feats.J613
+- `FreeSuddenWiden` [cell] → Feats.J617
+- `FreeTenaciousMagic` [cell] → Feats.J2195
+- `FreeToughness1` [cell] → Feats.J120
+- `FreeToughness2` [cell] → Feats.J121
+- `FreeToughness3` [cell] → Feats.J122
+- `FreeTrack` [cell] → Feats.J123
+- `FreeTrample` [cell] → Feats.J71
+- `FreeTwoWeaponFighting` [cell] → Feats.J124
+- `FreeWeaponFinesse` [cell] → Feats.J128
+- `FreeWeaponFocus` [cell] → Feats.J129
+- `FreeWeaponSpecialization` [cell] → Feats.J133
+- `FtAberrantDragonmark` [cell] → Feats.AR2445
+- `FtAberrationBanemagic` [cell] → Feats.AR3077
+- `FtAberrationBlood` [cell] → Feats.AR3091
+- `FtAberrationBlood1` [cell] → Feats.AR3092
+- `FtAberrationBlood2` [cell] → Feats.AR3093
+- `FtAberrationBlood3` [cell] → Feats.AR3094
+- `FtAberrationWildShape` [cell] → Feats.AR3095
+- `FtAbilityFocus` [cell] → Feats.AR3110
+- `FtAbleLearner` [cell] → Feats.AR1243
+- `FtAbleSniper` [cell] → Feats.AR1278
+- `FtAccelerateMetamagic1` [cell] → Feats.AR1314
+- `FtAccelerateMetamagic2` [cell] → Feats.AR1315
+- `FtAccelerateMetamagic3` [cell] → Feats.AR1316
+- `FtAcrobatic` [cell] → Feats.AR11
+- `FtAcrobaticStrike` [cell] → Feats.AR168
+- `FtActionBoost` [cell] → Feats.AR2446
+- `FtActionSurge` [cell] → Feats.AR2447
+- `FtActiveShieldDefense` [cell] → Feats.AR234
+- `FtAdamantineBody` [cell] → Feats.AR2596
+- `FtAdaptableFlanker` [cell] → Feats.AR250
+- `FtAdaptiveStyle` [cell] → Feats.AR1522
+- `FtAdditionalMagicItemSpace1` [cell] → Feats.AR3259
+- `FtAdditionalMagicItemSpace2` [cell] → Feats.AR3260
+- `FtAdditionalMagicItemSpace3` [cell] → Feats.AR3261
+- `FtAdroitFlybyAttack` [cell] → Feats.AR2915
+- `FtAerenalBeastmaster` [cell] → Feats.AR2535
+- `FtAereniFocus` [cell] → Feats.AR2652
+- `FtAerialReflexes` [cell] → Feats.AR1279
+- `FtAerialSuperiority` [cell] → Feats.AR1280
+- `FtAftersight` [cell] → Feats.AR2218
+- `FtAgile` [cell] → Feats.AR12
+- `FtAgileAthlete` [cell] → Feats.AR1281
+- `FtAgileShieldFighter` [cell] → Feats.AR235
+- `FtAirDevotion1` [cell] → Feats.AR1048
+- `FtAirDevotion2` [cell] → Feats.AR1049
+- `FtAirHeritage` [cell] → Feats.AR1920
+- `FtAlchemicalHomunculus` [cell] → Feats.AR3583
+- `FtAlertness` [cell] → Feats.AR13
+- `FtAlignedAttack` [cell] → Feats.AR1820
+- `FtAltitudeAdaptation` [cell] → Feats.AR1364
+- `FtAnarchicHeritage` [cell] → Feats.AR1921
+- `FtAncestralGuidance` [cell] → Feats.AR2536
+- `FtAncestralKnowledge` [cell] → Feats.AR1174
+- `FtAncestralLegacy` [cell] → Feats.AR3588
+- `FtAncestralRelic` [cell] → Feats.AR2039
+- `FtAncestralSpirit` [cell] → Feats.AR2219
+- `FtAnimalAffinity` [cell] → Feats.AR14
+- `FtAnimalDevotion1` [cell] → Feats.AR1051
+- `FtAnimalDevotion2` [cell] → Feats.AR1052
+- `FtAnimalFriend` [cell] → Feats.AR2046
+- `FtAntipsionicMagic` [cell] → Feats.AR1799
+- `FtAnvilOfThunder` [cell] → Feats.AR394
+- `FtAquaticShot` [cell] → Feats.AR1435
+- `FtAquaticSpellcasting` [cell] → Feats.AR3078
+- `FtArachnidRider` [cell] → Feats.AR2220
+- `FtArcaneAccompaniment` [cell] → Feats.AR170
+- `FtArcaneConsumption` [cell] → Feats.AR176
+- `FtArcaneDefense1` [cell] → Feats.AR516
+- `FtArcaneDefense2` [cell] → Feats.AR517
+- `FtArcaneDefense3` [cell] → Feats.AR518
+- `FtArcaneDisciple1` [cell] → Feats.AR432
+- `FtArcaneDisciple2` [cell] → Feats.AR433
+- `FtArcaneDisciple3` [cell] → Feats.AR434
+- `FtArcaneFlourish` [cell] → Feats.AR169
+- `FtArcaneInsight` [cell] → Feats.AR1264
+- `FtArcaneMastery` [cell] → Feats.AR519
+- `FtArcanePenetration` [cell] → Feats.AR520
+- `FtArcaneSchooling` [cell] → Feats.AR2101
+- `FtArcaneStrike` [cell] → Feats.AR303
+- `FtArcaneThesis` [cell] → Feats.AR171
+- `FtArcaneThesis1` [cell] → Feats.AR172
+- `FtArcaneThesis2` [cell] → Feats.AR173
+- `FtArcaneThesis3` [cell] → Feats.AR174
+- `FtArcaneToughness` [cell] → Feats.AR175
+- `FtArcheronFlurry` [cell] → Feats.AR1900
+- `FtArchivistOfNature` [cell] → Feats.AR1485
+- `FtArcticAdaptation` [cell] → Feats.AR2221
+- `FtArcticPriest` [cell] → Feats.AR1365
+- `FtAreaAttack` [cell] → Feats.AR3182
+- `FtArmorHeavy` [cell] → Feats.AR17
+- `FtArmorLight` [cell] → Feats.AR15
+- `FtArmorMedium` [cell] → Feats.AR16
+- `FtArmorSkin1` [cell] → Feats.AR406
+- `FtArmorSkin2` [cell] → Feats.AR407
+- `FtArmorSkin3` [cell] → Feats.AR408
+- `FtArmorSpecialization1` [cell] → Feats.AR178
+- `FtArmorSpecialization2` [cell] → Feats.AR179
+- `FtArmorSpecialization3` [cell] → Feats.AR180
+- `FtArtOfFascination` [cell] → Feats.AR2841
+- `FtArterialStrike` [cell] → Feats.AR304
+- `FtArtist` [cell] → Feats.AR2103
+- `FtAsceticHunter` [cell] → Feats.AR643
+- `FtAsceticKnight` [cell] → Feats.AR644
+- `FtAsceticMage` [cell] → Feats.AR645
+- `FtAsceticPsion` [cell] → Feats.AR2744
+- `FtAsceticRogue` [cell] → Feats.AR646
+- `FtAsceticStalker` [cell] → Feats.AR968
+- `FtAshbound` [cell] → Feats.AR2448
+- `FtAssumeSupernaturalAbility` [cell] → Feats.AR3183
+- `FtAthletic` [cell] → Feats.AR18
+- `FtAttentionToDetail` [cell] → Feats.AR2844
+- `FtAttuneGem` [cell] → Feats.AR2215
+- `FtAttuneMagicWeapon` [cell] → Feats.AR2502
+- `FtAugmentHealing` [cell] → Feats.AR435
+- `FtAugmentSummoning` [cell] → Feats.AR19
+- `FtAugmentedAlchemy` [cell] → Feats.AR706
+- `FtAuspiciousMarking` [cell] → Feats.AR1175
+- `FtAutomaticQuickenPower1` [cell] → Feats.AR878
+- `FtAutomaticQuickenPower2` [cell] → Feats.AR879
+- `FtAutomaticQuickenSpell2` [cell] → Feats.AR623
+- `FtAutomaticQuickenSpell3` [cell] → Feats.AR624
+- `FtAutomaticQuikenSpell1` [cell] → Feats.AR622
+- `FtAutomaticSilentSpell1` [cell] → Feats.AR625
+- `FtAutomaticSilentSpell2` [cell] → Feats.AR626
+- `FtAutomaticSilentSpell3` [cell] → Feats.AR627
+- `FtAutomaticStillSpell1` [cell] → Feats.AR628
+- `FtAutomaticStillSpell2` [cell] → Feats.AR629
+- `FtAutomaticStillSpell3` [cell] → Feats.AR630
+- `FtAutonomous` [cell] → Feats.AR1800
+- `FtAwakenFrightfulPresence` [cell] → Feats.AR2936
+- `FtAwakenSpellResistance` [cell] → Feats.AR2937
+- `FtAwesomeBlow` [cell] → Feats.AR3135
+- `FtAxeSpike` [cell] → Feats.AR1225
+- `FtAxethrower` [cell] → Feats.AR2104
+- `FtAxiomaticHeritage` [cell] → Feats.AR1922
+- `FtAxiomaticStrike` [cell] → Feats.AR305
+- `FtAzerblood` [cell] → Feats.AR2222
+- `FtAzureEnmity` [cell] → Feats.AR1694
+- `FtAzureTalent` [cell] → Feats.AR1695
+- `FtAzureTouch` [cell] → Feats.AR1696
+- `FtAzureToughness` [cell] → Feats.AR1697
+- `FtAzureTurning` [cell] → Feats.AR1698
+- `FtAzureWildShape` [cell] → Feats.AR1699
+- `FtBackToTheWall` [cell] → Feats.AR3495
+- `FtBadgeOfBondage` [cell] → Feats.AR1935
+- `FtBalefulMoan` [cell] → Feats.AR3055
+- `FtBallistaProficiency` [cell] → Feats.AR1463
+- `FtBaneMagic1` [cell] → Feats.AR1487
+- `FtBaneMagic2` [cell] → Feats.AR1488
+- `FtBaneMagic3` [cell] → Feats.AR1489
+- `FtBaneOfEnemies` [cell] → Feats.AR3262
+- `FtBatrider` [cell] → Feats.AR2223
+- `FtBattleCaster` [cell] → Feats.AR521
+- `FtBattleCasting` [cell] → Feats.AR1282
+- `FtBattleDancer` [cell] → Feats.AR181
+- `FtBattleHardened` [cell] → Feats.AR1181
+- `FtBattlefieldInspiration1` [cell] → Feats.AR1765
+- `FtBattlefieldInspiration2` [cell] → Feats.AR1766
+- `FtBattlefieldInspiration3` [cell] → Feats.AR1767
+- `FtBattleshifterTraining` [cell] → Feats.AR2588
+- `FtBearFang` [cell] → Feats.AR395
+- `FtBeastShape` [cell] → Feats.AR2451
+- `FtBeastTotem` [cell] → Feats.AR2450
+- `FtBeasthideElite` [cell] → Feats.AR2511
+- `FtBeastialConscience` [cell] → Feats.AR3510
+- `FtBeckonTheFrozen` [cell] → Feats.AR1366
+- `FtBestialHide` [cell] → Feats.AR3096
+- `FtBindElemental` [cell] → Feats.AR2503
+- `FtBindVestige` [cell] → Feats.AR1576
+- `FtBlackLoreOfMoil` [cell] → Feats.AR585
+- `FtBlackmoorianRhymes` [cell] → Feats.AR1937
+- `FtBlackwaterInvocation` [cell] → Feats.AR1436
+- `FtBladeMeditation` [cell] → Feats.AR1524
+- `FtBladebearerOfTheValenar` [cell] → Feats.AR2537
+- `FtBlazingBerserker` [cell] → Feats.AR1404
+- `FtBlessed` [cell] → Feats.AR3511
+- `FtBlessedByTemEtNu` [cell] → Feats.AR1405
+- `FtBlessedOfTheSevenSisters` [cell] → Feats.AR2153
+- `FtBlindFight` [cell] → Feats.AR20
+- `FtBlindingSpeed1` [cell] → Feats.AR3264
+- `FtBlindingSpeed2` [cell] → Feats.AR3265
+- `FtBlindsense` [cell] → Feats.AR698
+- `FtBlockArrow` [cell] → Feats.AR1464
+- `FtBloodCallsToBlood` [cell] → Feats.AR1490
+- `FtBloodOfTheWarlord` [cell] → Feats.AR2247
+- `FtBloodSorcerer` [cell] → Feats.AR2845
+- `FtBloodSpikedCharger` [cell] → Feats.AR295
+- `FtBlooded` [cell] → Feats.AR2105
+- `FtBloodedDM` [cell] → Feats.AR1939
+- `FtBloodlineofFire` [cell] → Feats.AR2106
+- `FtBlowhard` [cell] → Feats.AR3185
+- `FtBoarsFerocity` [cell] → Feats.AR482
+- `FtBodyFuel` [cell] → Feats.AR1821
+- `FtBondedFamiliar` [cell] → Feats.AR182
+- `FtBonusBreath` [cell] → Feats.AR3224
+- `FtBonusCol` [cell] → Feats.P8
+- `FtBonusDomain1` [cell] → Feats.AR498
+- `FtBonusDomain2` [cell] → Feats.AR499
+- `FtBonusDomain3` [cell] → Feats.AR500
+- `FtBonusDomain4` [cell] → Feats.AR501
+- `FtBonusEssentia` [cell] → Feats.AR1660
+- `FtBoomerangDaze` [cell] → Feats.AR2538
+- `FtBoomerangRichochet` [cell] → Feats.AR2539
+- `FtBoostConstruct` [cell] → Feats.AR1822
+- `FtBoostSpellLike` [cell] → Feats.AR1996
+- `FtBoostSpellLike2` [cell] → Feats.AR1997
+- `FtBoostSpellLike3` [cell] → Feats.AR1998
+- `FtBoostSpellResistance` [cell] → Feats.AR1999
+- `FtBorderWatch` [cell] → Feats.AR1940
+- `FtBornDuelist` [cell] → Feats.AR2846
+- `FtBornFlyer` [cell] → Feats.AR1283
+- `FtBornOfTheThreeThunders` [cell] → Feats.AR593
+- `FtBoundingAssault` [cell] → Feats.Y184
+- `FtBrachiation` [cell] → Feats.AR647
+- `FtBrandof9Hells` [cell] → Feats.AR3144
+- `FtBrawler` [cell] → Feats.AR3532
+- `FtBreathControl` [cell] → Feats.AR2745
+- `FtBreathingLink` [cell] → Feats.AR2248
+- `FtBreathingLink1` [cell] → Feats.AR1437
+- `FtBreathingLink2` [cell] → Feats.AR1438
+- `FtBrewPotion` [cell] → Feats.AR147
+- `FtBrightSigil` [cell] → Feats.AR1244
+- `FtBrutalStrike` [cell] → Feats.AR185
+- `FtBrutalThrow` [cell] → Feats.AR648
+- `FtBruteFighting` [cell] → Feats.AR2589
+- `FtBullheaded` [cell] → Feats.AR2107
+- `FtBurrowFriend` [cell] → Feats.AR1182
+- `FtBurrowingPower` [cell] → Feats.AR1875
+- `FtCalishiteElementalist` [cell] → Feats.AR2249
+- `FtCallOfTheUndying` [cell] → Feats.AR2540
+- `FtCaramendineMonk` [cell] → Feats.AR2399
+- `FtCaravanner` [cell] → Feats.AR2224
+- `FtCatfolkPounce` [cell] → Feats.AR1284
+- `FtCavalryCharger` [cell] → Feats.AR384
+- `FtCelestialBloodline` [cell] → Feats.AR2250
+- `FtCelestialFamiliar` [cell] → Feats.AR2047
+- `FtCelestialHeritage` [cell] → Feats.AR1923
+- `FtCelestialMount` [cell] → Feats.AR2048
+- `FtCelestialScion` [cell] → Feats.AR1942
+- `FtCelestialSorcererHeritage` [cell] → Feats.AR277
+- `FtCelestialSummoningSpecialist` [cell] → Feats.AR1901
+- `FtCentaurTrample` [cell] → Feats.AR1285
+- `FtCeruleanFortitude` [cell] → Feats.AR1700
+- `FtCeruleanReflexes` [cell] → Feats.AR1701
+- `FtCeruleanWill` [cell] → Feats.AR1702
+- `FtChainPower` [cell] → Feats.AR1876
+- `FtChainSpell` [cell] → Feats.AR586
+- `FtChanneledRage` [cell] → Feats.AR1245
+- `FtChantOfFortitude` [cell] → Feats.AR693
+- `FtChaosDevotion1` [cell] → Feats.AR1054
+- `FtChaosDevotion2` [cell] → Feats.AR1055
+- `FtChaoticMind` [cell] → Feats.AR1801
+- `FtCharming` [cell] → Feats.AR2794
+- `FtCheetahsSpeed` [cell] → Feats.AR483
+- `FtChildOfWinter` [cell] → Feats.AR2453
+- `FtChokeHold` [cell] → Feats.AR2818
+- `FtChondathanMissionary` [cell] → Feats.AR2251
+- `FtChosenWeaponSpecialization` [cell] → Feats.AR2200
+- `FtChosenofIborighu` [cell] → Feats.AR1367
+- `FtCitySlicker` [cell] → Feats.AR1235
+- `FtClanPrestige` [cell] → Feats.AR1183
+- `FtCleave` [cell] → Feats.AR85
+- `FtCleverWrestling` [cell] → Feats.AR1440
+- `FtCliffwalkElite` [cell] → Feats.AR2570
+- `FtClimbLikeAnApe` [cell] → Feats.AR699
+- `FtClingingBreath` [cell] → Feats.AR3140
+- `FtCloakDance` [cell] → Feats.AR1802
+- `FtCloseQuartersFighting` [cell] → Feats.AR307
+- `FtClosedMind` [cell] → Feats.AR1803
+- `FtCobaltCharge` [cell] → Feats.AR1703
+- `FtCobaltCritical` [cell] → Feats.AR1704
+- `FtCobaltExpertise` [cell] → Feats.AR1705
+- `FtCobaltPower` [cell] → Feats.AR1706
+- `FtCobaltPrecision` [cell] → Feats.AR1707
+- `FtCobaltRage` [cell] → Feats.AR1708
+- `FtColdEndurance` [cell] → Feats.AR1368
+- `FtColdFocus` [cell] → Feats.AR1372
+- `FtColdIronTracery` [cell] → Feats.AR2597
+- `FtColdOne` [cell] → Feats.AR3496
+- `FtColdSpellSpecialization` [cell] → Feats.AR1388
+- `FtColossalWildShape` [cell] → Feats.AR3459
+- `FtCombatAcrobat` [cell] → Feats.AR186
+- `FtCombatArchery` [cell] → Feats.AR409
+- `FtCombatAwareness` [cell] → Feats.AR263
+- `FtCombatBrute` [cell] → Feats.AR385
+- `FtCombatCasting` [cell] → Feats.AR21
+- `FtCombatCloakExpert` [cell] → Feats.AR296
+- `FtCombatDefense` [cell] → Feats.AR261
+- `FtCombatExpertise` [cell] → Feats.AR22
+- `FtCombatFamiliar` [cell] → Feats.AR187
+- `FtCombatFocus` [cell] → Feats.AR259
+- `FtCombatInsight` [cell] → Feats.AR410
+- `FtCombatIntuition` [cell] → Feats.AR650
+- `FtCombatManifestation` [cell] → Feats.AR1823
+- `FtCombatReflexes` [cell] → Feats.AR27
+- `FtCombatStability` [cell] → Feats.AR260
+- `FtCombatStrike` [cell] → Feats.AR264
+- `FtCombatTactician` [cell] → Feats.AR189
+- `FtCombatVigor` [cell] → Feats.AR262
+- `FtCometaryCollision` [cell] → Feats.AR190
+- `FtCommunicator` [cell] → Feats.AR523
+- `FtCompanionGuardStyle` [cell] → Feats.AR1943
+- `FtCompanionSpellbond` [cell] → Feats.AR191
+- `FtComplementaryInsight` [cell] → Feats.AR1246
+- `FtConfoundTheBigFolk` [cell] → Feats.AR1307
+- `FtConfoundTheBiggerFolk` [cell] → Feats.AR1307
+- `FtConscience` [cell] → Feats.AR3512
+- `FtConsecrateSpell` [cell] → Feats.AR475
+- `FtConsecrateSpellLike` [cell] → Feats.AR2040
+- `FtConsecrateSpellTrigger` [cell] → Feats.AR2049
+- `FtConstructLock` [cell] → Feats.AR2598
+- `FtContagiousParalysis` [cell] → Feats.AR3056
+- `FtControlledRespiration` [cell] → Feats.AR3186
+- `FtCoolHead` [cell] → Feats.AR969
+- `FtCooperativeSpell` [cell] → Feats.AR587
+- `FtCoordinatedShot` [cell] → Feats.AR1465
+- `FtCoordinatedStrike` [cell] → Feats.AR1286
+- `FtCorporealPurgative` [cell] → Feats.AR3578
+- `FtCorporealPurifier` [cell] → Feats.AR3580
+- `FtCorpsecrafter` [cell] → Feats.AR3008
+- `FtCorruptArcana` [cell] → Feats.AR1491
+- `FtCorruptSpell` [cell] → Feats.AR476
+- `FtCorruptSpellFocus` [cell] → Feats.AR1492
+- `FtCorruptSpellLike` [cell] → Feats.AR2000
+- `FtCorruptSpelllikeAbility2` [cell] → Feats.AR2001
+- `FtCorruptedWildShape` [cell] → Feats.AR3057
+- `FtCosmopolitan` [cell] → Feats.AR2108
+- `FtCougarsVision` [cell] → Feats.AR700
+- `FtCourage` [cell] → Feats.AR3497
+- `FtCourageousRally` [cell] → Feats.AR1466
+- `FtCrabLuckOfHeroes` [cell] → Feats.AR2862
+- `FtCrabSeaLegs` [cell] → Feats.AR2876
+- `FtCraftCognizanceCrystal` [cell] → Feats.AR1890
+- `FtCraftConstruct` [cell] → Feats.AR3114
+- `FtCraftContingentSpell` [cell] → Feats.AR582
+- `FtCraftCrystalWeapon` [cell] → Feats.AR2890
+- `FtCraftDorje` [cell] → Feats.AR1891
+- `FtCraftMagicArmsAndArmor` [cell] → Feats.AR148
+- `FtCraftPsicrown` [cell] → Feats.AR1892
+- `FtCraftPsionicArmsAndArmor` [cell] → Feats.AR1893
+- `FtCraftPsionicConstruct` [cell] → Feats.AR1894
+- `FtCraftRod` [cell] → Feats.AR149
+- `FtCraftRuneCircle` [cell] → Feats.AR1214
+- `FtCraftSkullTalisman` [cell] → Feats.AR1398
+- `FtCraftStaff` [cell] → Feats.AR150
+- `FtCraftTalisman` [cell] → Feats.AR2891
+- `FtCraftUniversalItem` [cell] → Feats.AR1895
+- `FtCraftWand` [cell] → Feats.AR151
+- `FtCraftWonderousItem` [cell] → Feats.AR152
+- `FtCraneArtist` [cell] → Feats.AR2843
+- `FtCraneMagicalArtisan` [cell] → Feats.AR2864
+- `FtCraneSmoothTalk` [cell] → Feats.AR2878
+- `FtCrescentMoon` [cell] → Feats.AR396
+- `FtCrossbowSniper` [cell] → Feats.AR192
+- `FtCrowdTactics` [cell] → Feats.AR1274
+- `FtCrush` [cell] → Feats.AR3187
+- `FtCrushingStrike` [cell] → Feats.AR218
+- `FtCumbrousDodge` [cell] → Feats.AR3188
+- `FtCumbrousFortitude` [cell] → Feats.AR3189
+- `FtCumbrousReflexes` [cell] → Feats.AR3190
+- `FtCumbrousWill` [cell] → Feats.AR3191
+- `FtCunningEvasion` [cell] → Feats.AR193
+- `FtCunningSidestep` [cell] → Feats.AR2894
+- `FtCurlingWaveStrike` [cell] → Feats.AR1441
+- `FtDLDiscipline` [cell] → Feats.AR2795
+- `FtDLEducation` [cell] → Feats.AR2796
+- `FtDLStreetSmart` [cell] → Feats.AR2808
+- `FtDabbler` [cell] → Feats.AR3518
+- `FtDallahThaunsLuck` [cell] → Feats.AR1287
+- `FtDamageReduction2` [cell] → Feats.AR412
+- `FtDamageReduction3` [cell] → Feats.AR413
+- `FtDampenSpell` [cell] → Feats.AR194
+- `FtDancingWithShadows` [cell] → Feats.AR2590
+- `FtDangerSense` [cell] → Feats.AR651
+- `FtDarguunMauler` [cell] → Feats.AR2541
+- `FtDaringOutlaw` [cell] → Feats.AR971
+- `FtDaringWarrior` [cell] → Feats.AR972
+- `FtDarkBlood` [cell] → Feats.AR2629
+- `FtDarkSpeech` [cell] → Feats.AR2018
+- `FtDarknessWithin` [cell] → Feats.AR3533
+- `FtDarkstalker` [cell] → Feats.AR3079
+- `FtDash` [cell] → Feats.AR308
+- `FtDauntingPresence` [cell] → Feats.AR3014
+- `FtDauntless` [cell] → Feats.AR2109
+- `FtDaylightAdaptation` [cell] → Feats.AR2542
+- `FtDeadManWalking` [cell] → Feats.AR3498
+- `FtDeadeyeShot` [cell] → Feats.AR195
+- `FtDeadlyDefense` [cell] → Feats.AR973
+- `FtDeadlyPoison` [cell] → Feats.AR3255
+- `FtDeadlyPrecision` [cell] → Feats.AR1804
+- `FtDeadlyPresence` [cell] → Feats.AR3557
+- `FtDeafeningSong` [cell] → Feats.AR3269
+- `FtDeathBlow` [cell] → Feats.AR652
+- `FtDeathDevotion1` [cell] → Feats.AR1057
+- `FtDeathDevotion2` [cell] → Feats.AR1058
+- `FtDeathMaster` [cell] → Feats.AR3058
+- `FtDeathlessFleshgrafter` [cell] → Feats.AR2730
+- `FtDeathlyPallor` [cell] → Feats.AR3534
+- `FtDeathsFavor` [cell] → Feats.AR3558
+- `FtDeceitful` [cell] → Feats.AR28
+- `FtDeepDenizen` [cell] → Feats.AR3215
+- `FtDeepImpact` [cell] → Feats.AR1868
+- `FtDeepVision` [cell] → Feats.AR723
+- `FtDeepeningDarkness` [cell] → Feats.AR2252
+- `FtDeepspawn` [cell] → Feats.AR3097
+- `FtDefensiveArchery` [cell] → Feats.AR1288
+- `FtDefensiveStrike` [cell] → Feats.AR309
+- `FtDefensiveSweep` [cell] → Feats.AR196
+- `FtDefensiveThrow` [cell] → Feats.AR310
+- `FtDeflectArrows` [cell] → Feats.AR56
+- `FtDeflectiveArmor` [cell] → Feats.AR1218
+- `FtDeformityClawedHands` [cell] → Feats.AR2032
+- `FtDeformityEyes` [cell] → Feats.AR2033
+- `FtDeformityFace` [cell] → Feats.AR2034
+- `FtDeformityGaunt` [cell] → Feats.AR2035
+- `FtDeformityObese` [cell] → Feats.AR2036
+- `FtDeformitySkin1` [cell] → Feats.AR1494
+- `FtDeformitySkin2` [cell] → Feats.AR1495
+- `FtDeformitySkin3` [cell] → Feats.AR1496
+- `FtDeformityTall` [cell] → Feats.AR1497
+- `FtDeftHands` [cell] → Feats.AR29
+- `FtDeftOpportunist` [cell] → Feats.AR653
+- `FtDeftStrike` [cell] → Feats.AR654
+- `FtDelayPower` [cell] → Feats.AR1877
+- `FtDelaySpell` [cell] → Feats.AR588
+- `FtDesertDweller` [cell] → Feats.AR3216
+- `FtDesertWindDodge` [cell] → Feats.AR1527
+- `FtDestructionDevotion1` [cell] → Feats.AR1060
+- `FtDestructionDevotion2` [cell] → Feats.AR1061
+- `FtDestructiveRage` [cell] → Feats.AR311
+- `FtDetach` [cell] → Feats.AR3225
+- `FtDetectVirtue` [cell] → Feats.AR3519
+- `FtDevastatingCritical1` [cell] → Feats.AR3272
+- `FtDevastatingCritical2` [cell] → Feats.AR3273
+- `FtDevastatingCritical3` [cell] → Feats.AR3274
+- `FtDevilsAura` [cell] → Feats.AR3165
+- `FtDevilsFavor` [cell] → Feats.AR3164
+- `FtDevilsFlesh` [cell] → Feats.AR3166
+- `FtDevilsFleshBonus` [cell] → Feats.AO3166
+- `FtDevilsSight` [cell] → Feats.AR3167
+- `FtDevilsStamina` [cell] → Feats.AR3168
+- `FtDevilsTongue` [cell] → Feats.AR3169
+- `FtDevotedBulwark` [cell] → Feats.AR1528
+- `FtDevotedInquisitor` [cell] → Feats.AR655
+- `FtDevotedPerformer` [cell] → Feats.AR656
+- `FtDevotedTracker` [cell] → Feats.AR657
+- `FtDiehard` [cell] → Feats.AR35
+- `FtDilateAura` [cell] → Feats.AR3155
+- `FtDiligent` [cell] → Feats.AR30
+- `FtDiminutiveWildShape` [cell] → Feats.AR3456
+- `FtDinosauWrangler` [cell] → Feats.AR2544
+- `FtDinosaurHunter` [cell] → Feats.AR2543
+- `FtDireFlailMindBlade` [cell] → Feats.AR724
+- `FtDirgeOfWoe` [cell] → Feats.AR3535
+- `FtDiscipleOfDarkness` [cell] → Feats.AR2019
+- `FtDiscipleOfTheSun` [cell] → Feats.AR448
+- `FtDiscipline` [cell] → Feats.AR2111
+- `FtDiseaseImmunity` [cell] → Feats.AR1500
+- `FtDisentangler` [cell] → Feats.AR2225
+- `FtDisguiseSpell` [cell] → Feats.AR658
+- `FtDispassionateDreadCompanion` [cell] → Feats.AR3536
+- `FtDisruptingSpell` [cell] → Feats.AR3179
+- `FtDistractingAttack` [cell] → Feats.AR1768
+- `FtDisturbingVisage` [cell] → Feats.AR2591
+- `FtDiveForCover` [cell] → Feats.AR659
+- `FtDiverseBackground` [cell] → Feats.AR1247
+- `FtDivineAccuracy` [cell] → Feats.AR3039
+- `FtDivineCensure` [cell] → Feats.AR3172
+- `FtDivineCleansing` [cell] → Feats.AR376
+- `FtDivineDefiance` [cell] → Feats.AR3173
+- `FtDivineJustice` [cell] → Feats.AR3174
+- `FtDivineMetamagic1` [cell] → Feats.AR450
+- `FtDivineMetamagic2` [cell] → Feats.AR451
+- `FtDivineMetamagic3` [cell] → Feats.AR452
+- `FtDivineMight` [cell] → Feats.AR378
+- `FtDivineResistance` [cell] → Feats.AR377
+- `FtDivineShield` [cell] → Feats.AR379
+- `FtDivineSpellPenetration` [cell] → Feats.AR2201
+- `FtDivineSpellPower` [cell] → Feats.AR453
+- `FtDivineSpellshield` [cell] → Feats.AR1209
+- `FtDivineVigor` [cell] → Feats.AR380
+- `FtDivingCharge` [cell] → Feats.AR1289
+- `FtDivingDamageReduction` [cell] → Feats.AR1208
+- `FtDodge` [cell] → Feats.AR31
+- `FtDodgeEquiv` [cell] → Feats.T4
+- `FtDomainFocus1` [cell] → Feats.AR437
+- `FtDomainFocus2` [cell] → Feats.AR438
+- `FtDomainFocus3` [cell] → Feats.AR439
+- `FtDomainSpontaneity1` [cell] → Feats.AR456
+- `FtDomainSpontaneity2` [cell] → Feats.AR457
+- `FtDomainSpontaneity3` [cell] → Feats.AR458
+- `FtDonMantle` [cell] → Feats.AR769
+- `FtDonMantle1` [cell] → Feats.AR770
+- `FtDonMantle2` [cell] → Feats.AR771
+- `FtDonMantle3` [cell] → Feats.AR772
+- `FtDoubleChakra` [cell] → Feats.AR1661
+- `FtDoubleChakra1` [cell] → Feats.AR1662
+- `FtDoubleChakra2` [cell] → Feats.AR1663
+- `FtDoubleChakra3` [cell] → Feats.AR1664
+- `FtDoubleHit` [cell] → Feats.AR1769
+- `FtDoubleSteelStrike` [cell] → Feats.AR2456
+- `FtDoubleWandWielder` [cell] → Feats.AR524
+- `FtDraconianBreathWeapon` [cell] → Feats.AR2780
+- `FtDraconicArcaneGrace` [cell] → Feats.AR1347
+- `FtDraconicArchivist` [cell] → Feats.AR1501
+- `FtDraconicAura1` [cell] → Feats.AR2960
+- `FtDraconicAura2` [cell] → Feats.AR2961
+- `FtDraconicAura3` [cell] → Feats.AR2962
+- `FtDraconicBreath` [cell] → Feats.AR1348
+- `FtDraconicClaw` [cell] → Feats.AR1349
+- `FtDraconicFlight` [cell] → Feats.AR1350
+- `FtDraconicHeritage` [cell] → Feats.AR2987
+- `FtDraconicKnowledge` [cell] → Feats.AR2995
+- `FtDraconicLegacy` [cell] → Feats.AR1351
+- `FtDraconicPersuation` [cell] → Feats.AR1352
+- `FtDraconicPower` [cell] → Feats.AR1353
+- `FtDraconicPresence` [cell] → Feats.AR1354
+- `FtDraconicResistance` [cell] → Feats.AR1355
+- `FtDraconicSenses` [cell] → Feats.AR3002
+- `FtDraconicSkin` [cell] → Feats.AR1356
+- `FtDraconicToughness` [cell] → Feats.AR1357
+- `FtDragonBreath` [cell] → Feats.AR1317
+- `FtDragonCohort` [cell] → Feats.AR2897
+- `FtDragonFamiliar` [cell] → Feats.AR2898
+- `FtDragonHunter` [cell] → Feats.AR2899
+- `FtDragonHunterBravery` [cell] → Feats.AR2900
+- `FtDragonHunterDefense` [cell] → Feats.AR2901
+- `FtDragonProphesier` [cell] → Feats.AR2706
+- `FtDragonRage` [cell] → Feats.AR2459
+- `FtDragonSteed` [cell] → Feats.AR2902
+- `FtDragonTail` [cell] → Feats.AR1318
+- `FtDragonTotem` [cell] → Feats.AR2458
+- `FtDragonTrainer` [cell] → Feats.AR1319
+- `FtDragonWildShape` [cell] → Feats.AR2903
+- `FtDragonWings` [cell] → Feats.AR1320
+- `FtDragonbane` [cell] → Feats.AR2906
+- `FtDragoncrafter` [cell] → Feats.AR2904
+- `FtDragondoom` [cell] → Feats.AR2907
+- `FtDragonfoe` [cell] → Feats.AR2905
+- `FtDragonfriend` [cell] → Feats.AR2908
+- `FtDragonsong` [cell] → Feats.AR2909
+- `FtDragonthrall` [cell] → Feats.AR2910
+- `FtDragontouched` [cell] → Feats.AR2963
+- `FtDragonwrought` [cell] → Feats.AR1323
+- `FtDreadTyranny` [cell] → Feats.AR1265
+- `FtDreadfulWrath` [cell] → Feats.AR2112
+- `FtDreamScion` [cell] → Feats.AR2757
+- `FtDreamofContact` [cell] → Feats.AR2758
+- `FtDreamofInsight` [cell] → Feats.AR2759
+- `FtDreamofInstinct` [cell] → Feats.AR2760
+- `FtDreamofPerception` [cell] → Feats.AR2761
+- `FtDreamofStrength` [cell] → Feats.AR2762
+- `FtDreamoftheMoment` [cell] → Feats.AR2763
+- `FtDreamsightElite` [cell] → Feats.AR2571
+- `FtDreamtelling` [cell] → Feats.AR1502
+- `FtDreamtouched` [range] → Feats.AR2758:.AR2763
+- `FtDriftMagic` [cell] → Feats.AR1406
+- `FtDrivingAttack` [cell] → Feats.AR219
+- `FtDromiteRay1` [cell] → Feats.AR782
+- `FtDromiteRay2` [cell] → Feats.AR783
+- `FtDromiteRay3` [cell] → Feats.AR784
+- `FtDrowEyes` [cell] → Feats.AR2226
+- `FtDrowSkirmisher` [cell] → Feats.AR2619
+- `FtDruuthSlayer` [cell] → Feats.AR2401
+- `FtDualStrike` [cell] → Feats.AR660
+- `FtDuergarExpansion1` [cell] → Feats.AR786
+- `FtDuergarExpansion2` [cell] → Feats.AR787
+- `FtDuergarExpansion3` [cell] → Feats.AR788
+- `FtDuergarInvisibility1` [cell] → Feats.AR789
+- `FtDuergarInvisibility2` [cell] → Feats.AR790
+- `FtDuergarInvisibility3` [cell] → Feats.AR791
+- `FtDuergarMindshaper` [cell] → Feats.AR2253
+- `FtDungeoneersIntuition` [cell] → Feats.AR2434
+- `FtDurableForm` [cell] → Feats.AR3098
+- `FtDustCloud` [cell] → Feats.AR3226
+- `FtDwarflore` [cell] → Feats.AR1948
+- `FtDwarvenArmorProficiency` [cell] → Feats.AR1184
+- `FtDwarvenUrgoshMindBlade` [cell] → Feats.AR725
+- `FtEagleClawAttack` [cell] → Feats.AR313
+- `FtEaglesFury` [cell] → Feats.AR1407
+- `FtEaglesWings` [cell] → Feats.AR484
+- `FtEarthAdept` [cell] → Feats.AR1141
+- `FtEarthDevotion1` [cell] → Feats.AR1063
+- `FtEarthDevotion2` [cell] → Feats.AR1064
+- `FtEarthFist` [cell] → Feats.AR1185
+- `FtEarthHeritage` [cell] → Feats.AR1924
+- `FtEarthMaster` [cell] → Feats.AR1142
+- `FtEarthPower` [cell] → Feats.AR1219
+- `FtEarthSense` [cell] → Feats.AR1140
+- `FtEarthSpell` [cell] → Feats.AR1143
+- `FtEarthsEmbrace` [cell] → Feats.AR312
+- `FtEarthsWarding` [cell] → Feats.AR1207
+- `FtEbQuickChange` [cell] → Feats.AR2552
+- `FtEcclesiarch` [cell] → Feats.AR2460
+- `FtEctopicForm1` [cell] → Feats.AR727
+- `FtEctopicForm2` [cell] → Feats.AR728
+- `FtEctopicForm3` [cell] → Feats.AR729
+- `FtEdgewalkerSentinel` [cell] → Feats.AR2747
+- `FtEducation` [cell] → Feats.AR2461
+- `FtEfficientItemCreation1` [cell] → Feats.AR3280
+- `FtEfficientItemCreation2` [cell] → Feats.AR3281
+- `FtEfficientItemCreation3` [cell] → Feats.AR3282
+- `FtEideticMemory` [cell] → Feats.AR3520
+- `FtEinhander` [cell] → Feats.AR298
+- `FtEldeenPlantGrafter` [cell] → Feats.AR2732
+- `FtEldritchLinguist` [cell] → Feats.AR2254
+- `FtElementalBloodline` [cell] → Feats.AR2255
+- `FtElementalEnvoy` [cell] → Feats.AR730
+- `FtElementalEssance1` [cell] → Feats.AR1132
+- `FtElementalEssance2` [cell] → Feats.AR1133
+- `FtElementalEssance3` [cell] → Feats.AR1134
+- `FtElementalGrafter` [cell] → Feats.AR2733
+- `FtElementalHealing` [cell] → Feats.AR460
+- `FtElementalSmiting` [cell] → Feats.AR459
+- `FtElementalSpellcasting1` [cell] → Feats.AR1903
+- `FtElementalSpellcasting2` [cell] → Feats.AR1904
+- `FtElementalSpellcasting3` [cell] → Feats.AR1905
+- `FtElephantsHide` [cell] → Feats.AR485
+- `FtElevenSpellLore` [cell] → Feats.AR197
+- `FtElfDilettante` [cell] → Feats.AR1290
+- `FtElfHunter3` [cell] → Feats.AR2311
+- `FtElfhunter` [cell] → Feats.AR2309
+- `FtElfhunter2` [cell] → Feats.AR2310
+- `FtElflore` [cell] → Feats.AR1951
+- `FtElightenedChild` [cell] → Feats.AR3585
+- `FtElusiveTarget` [cell] → Feats.AR386
+- `FtEmbedSpellFocus` [cell] → Feats.AR2939
+- `FtEmotionalPurgative` [cell] → Feats.AR3577
+- `FtEmpowerPower` [cell] → Feats.AR1878
+- `FtEmpowerSpell` [cell] → Feats.AR157
+- `FtEmpowerSpellLikeAbility` [cell] → Feats.AR3115
+- `FtEmpowerSupernaturalAbility1` [cell] → Feats.AR1580
+- `FtEmpowerSupernaturalAbility2` [cell] → Feats.AR1581
+- `FtEmpowerSupernaturalAbility3` [cell] → Feats.AR1582
+- `FtEmpowerTurning` [cell] → Feats.AR3017
+- `FtEmpoweredAbilityDamage` [cell] → Feats.AR3060
+- `FtEnchantingSong` [cell] → Feats.AR1201
+- `FtEndurance` [cell] → Feats.AR34
+- `FtEndureBlows` [cell] → Feats.AR2940
+- `FtEndureSunlight` [cell] → Feats.AR3061
+- `FtEnduringLife` [cell] → Feats.AR3015
+- `FtEnergizeArmor` [cell] → Feats.AR743
+- `FtEnergizeSpell` [cell] → Feats.AR3047
+- `FtEnergyAdmixture1` [cell] → Feats.AR595
+- `FtEnergyAdmixture2` [cell] → Feats.AR596
+- `FtEnergyAdmixture3` [cell] → Feats.AR597
+- `FtEnergyAffinity1` [cell] → Feats.AR1790
+- `FtEnergyAffinity2` [cell] → Feats.AR1791
+- `FtEnergyAffinity3` [cell] → Feats.AR1792
+- `FtEnergyDrain` [cell] → Feats.AR3559
+- `FtEnergyResistance1` [cell] → Feats.AR3284
+- `FtEnergyResistance2` [cell] → Feats.AR3285
+- `FtEnergyResistance3` [cell] → Feats.AR3286
+- `FtEnergySubstitution1` [cell] → Feats.AR590
+- `FtEnergySubstitution2` [cell] → Feats.AR591
+- `FtEnergySubstitution3` [cell] → Feats.AR592
+- `FtEnervateSpell` [cell] → Feats.AR3048
+- `FtEnervativeHealing` [cell] → Feats.AR2256
+- `FtEnhanceEffect` [cell] → Feats.AR2202
+- `FtEnhanceSpell` [cell] → Feats.AR631
+- `FtEnhancedPowerSigils` [cell] → Feats.AR1248
+- `FtEnlargeBreath` [cell] → Feats.AR2924
+- `FtEnlargePower` [cell] → Feats.AR1879
+- `FtEnlargeSpell` [cell] → Feats.AR158
+- `FtEnlargeSupernaturalAbility1` [cell] → Feats.AR1583
+- `FtEnlargeSupernaturalAbility2` [cell] → Feats.AR1584
+- `FtEnlargeSupernaturalAbility3` [cell] → Feats.AR1585
+- `FtEntanglingExhalation` [cell] → Feats.AR1337
+- `FtEpicAxiomaticStrike` [cell] → Feats.AR2199
+- `FtEpicCombatExpertise` [cell] → Feats.AR414
+- `FtEpicCounterspell` [cell] → Feats.AR2203
+- `FtEpicDR` [cell] → Feats.AQ411
+- `FtEpicDevotion` [cell] → Feats.AR502
+- `FtEpicDevotion1` [cell] → Feats.AR503
+- `FtEpicDevotion2` [cell] → Feats.AR504
+- `FtEpicDodge` [cell] → Feats.AR707
+- `FtEpicDragonWildShape` [cell] → Feats.AR3460
+- `FtEpicImprovedFavoredEnemy` [cell] → Feats.AR3473
+- `FtEpicInspiration1` [cell] → Feats.AR3288
+- `FtEpicInspiration2` [cell] → Feats.AR3289
+- `FtEpicLeadership` [cell] → Feats.AR3292
+- `FtEpicProwess1` [cell] → Feats.AR415
+- `FtEpicProwess2` [cell] → Feats.AR416
+- `FtEpicProwess3` [cell] → Feats.AR417
+- `FtEpicPsionicFocus1` [cell] → Feats.AR3438
+- `FtEpicPsionicFocus2` [cell] → Feats.AR3439
+- `FtEpicReputation` [cell] → Feats.AR708
+- `FtEpicSkillFocus1` [cell] → Feats.AR710
+- `FtEpicSkillFocus2` [cell] → Feats.AR711
+- `FtEpicSkillFocus3` [cell] → Feats.AR712
+- `FtEpicSpellFocus1` [cell] → Feats.AR633
+- `FtEpicSpellFocus2` [cell] → Feats.AR634
+- `FtEpicSpellFocus3` [cell] → Feats.AR635
+- `FtEpicSpellPenetration` [cell] → Feats.AR636
+- `FtEpicSpellfireWielder` [cell] → Feats.AR2205
+- `FtEpicSunder` [cell] → Feats.AR421
+- `FtEpicToughness1` [cell] → Feats.AR418
+- `FtEpicToughness2` [cell] → Feats.AR419
+- `FtEpicToughness3` [cell] → Feats.AR420
+- `FtEpicWeaponFocus` [cell] → Feats.AR422
+- `FtEpicWeaponFocus1` [cell] → Feats.AR423
+- `FtEpicWeaponFocus3` [cell] → Feats.AR425
+- `FtEpicWeaponSpecialization1` [cell] → Feats.AR3297
+- `FtEpicWeaponSpecialization2` [cell] → Feats.AR3298
+- `FtEpicWeaponSpecialization3` [cell] → Feats.AR3299
+- `FtEquestrian` [cell] → Feats.AR3537
+- `FtEschewMaterials` [cell] → Feats.AR36
+- `FtEssentialCoagulant` [cell] → Feats.AR3576
+- `FtEternalStrength` [cell] → Feats.AR1266
+- `FtEtherealEmpathy` [cell] → Feats.AR3499
+- `FtEtherealTouch` [cell] → Feats.AR3538
+- `FtEthran` [cell] → Feats.AR2114
+- `FtEvasiveReflexes` [cell] → Feats.AR1529
+- `FtEvilBrand` [cell] → Feats.AR2020
+- `FtEvilDevotion1` [cell] → Feats.AR1066
+- `FtEvilDevotion2` [cell] → Feats.AR1067
+- `FtExaltedCompanion` [cell] → Feats.AR2050
+- `FtExaltedSR` [cell] → Feats.AR2052
+- `FtExaltedSmite` [cell] → Feats.AR2051
+- `FtExaltedTurning` [cell] → Feats.AR2053
+- `FtExaltedWildShape` [cell] → Feats.AR2054
+- `FtExceptionalArtisan` [cell] → Feats.AR2504
+- `FtExhaledBarrier` [cell] → Feats.AR1338
+- `FtExhaledImmunity` [cell] → Feats.AR1339
+- `FtExoticArmorProficiency1` [cell] → Feats.AR1146
+- `FtExoticArmorProficiency2` [cell] → Feats.AR1147
+- `FtExoticArmorProficiency3` [cell] → Feats.AR1148
+- `FtExoticShieldProficiency1` [cell] → Feats.AR1150
+- `FtExoticShieldProficiency2` [cell] → Feats.AR1151
+- `FtExoticShieldProficiency3` [cell] → Feats.AR1152
+- `FtExoticWeapon1` [cell] → Feats.AR38
+- `FtExoticWeapon2` [cell] → Feats.AR39
+- `FtExoticWeapon3` [cell] → Feats.AR40
+- `FtExoticWeaponProf` [cell] → Feats.AR37
+- `FtExpSoulmeldCap` [cell] → Feats.AR1665
+- `FtExpSoulmeldCap2` [cell] → Feats.AR1666
+- `FtExpSoulmeldCap3` [cell] → Feats.AR1667
+- `FtExpandedAuraOfCourage` [cell] → Feats.AR1467
+- `FtExpandedKiPool` [cell] → Feats.AR974
+- `FtExpandedKnowledge1` [cell] → Feats.AR1825
+- `FtExpandedKnowledge2` [cell] → Feats.AR1826
+- `FtExpandedKnowledge3` [cell] → Feats.AR1827
+- `FtExpeditiousDodge` [cell] → Feats.AR1291
+- `FtExpelVestige` [cell] → Feats.AR1586
+- `FtExpertSiegeEngineer` [cell] → Feats.AR1468
+- `FtExpertSwimmer` [cell] → Feats.AR1442
+- `FtExpertTactician` [cell] → Feats.AR661
+- `FtExplosiveSpell` [cell] → Feats.AR599
+- `FtExtendPower` [cell] → Feats.AR1880
+- `FtExtendRage` [cell] → Feats.AR2464
+- `FtExtendSpell` [cell] → Feats.AR159
+- `FtExtendSpreadingBreath` [cell] → Feats.AR2932
+- `FtExtendSupernaturalAbility1` [cell] → Feats.AR1588
+- `FtExtendSupernaturalAbility2` [cell] → Feats.AR1589
+- `FtExtendSupernaturalAbility3` [cell] → Feats.AR1590
+- `FtExtendedLifeSpan1` [cell] → Feats.AR3302
+- `FtExtendedLifeSpan2` [cell] → Feats.AR3303
+- `FtExtendedReach` [cell] → Feats.AR3227
+- `FtExtraAura1` [cell] → Feats.AR774
+- `FtExtraAura2` [cell] → Feats.AR775
+- `FtExtraAura3` [cell] → Feats.AR776
+- `FtExtraContacts` [cell] → Feats.AR1740
+- `FtExtraContacts2` [cell] → Feats.AR1741
+- `FtExtraDomain` [cell] → Feats.AR3563
+- `FtExtraDomainSpell1` [cell] → Feats.AR1771
+- `FtExtraDomainSpell2` [cell] → Feats.AR1772
+- `FtExtraDomainSpell3` [cell] → Feats.AR1773
+- `FtExtraEdge` [cell] → Feats.AR525
+- `FtExtraExhalation1` [cell] → Feats.AR1340
+- `FtExtraExhalation2` [cell] → Feats.AR1341
+- `FtExtraExhalation3` [cell] → Feats.AR1342
+- `FtExtraFollowers` [cell] → Feats.AR1479
+- `FtExtraInvocation1` [cell] → Feats.AR526
+- `FtExtraInvocation2` [cell] → Feats.AR527
+- `FtExtraInvocation3` [cell] → Feats.AR528
+- `FtExtraItemSpace` [cell] → Feats.AR3228
+- `FtExtraLurkAugment` [cell] → Feats.AR744
+- `FtExtraMusic1` [cell] → Feats.AR662
+- `FtExtraMusic2` [cell] → Feats.AR663
+- `FtExtraMusic3` [cell] → Feats.AR664
+- `FtExtraRage1` [cell] → Feats.AR315
+- `FtExtraRage2` [cell] → Feats.AR316
+- `FtExtraRage3` [cell] → Feats.AR317
+- `FtExtraRings` [cell] → Feats.AR2505
+- `FtExtraShifterTrait` [cell] → Feats.AR2572
+- `FtExtraSilence1` [cell] → Feats.AR1186
+- `FtExtraSilence2` [cell] → Feats.AR1187
+- `FtExtraSilence3` [cell] → Feats.AR1188
+- `FtExtraSmiting1` [cell] → Feats.AR318
+- `FtExtraSmiting2` [cell] → Feats.AR319
+- `FtExtraSmiting3` [cell] → Feats.AR320
+- `FtExtraSmiting4` [cell] → Feats.AR321
+- `FtExtraSpell1` [cell] → Feats.AR534
+- `FtExtraSpell2` [cell] → Feats.AR535
+- `FtExtraSpell3` [cell] → Feats.AR536
+- `FtExtraSpellSecret1` [cell] → Feats.AR538
+- `FtExtraSpellSecret2` [cell] → Feats.AR539
+- `FtExtraSpellSecret3` [cell] → Feats.AR540
+- `FtExtraStunning1` [cell] → Feats.AR322
+- `FtExtraStunning2` [cell] → Feats.AR323
+- `FtExtraStunning3` [cell] → Feats.AR324
+- `FtExtraTurning1` [cell] → Feats.AR41
+- `FtExtraTurning2` [cell] → Feats.AR42
+- `FtExtraTurning3` [cell] → Feats.AR43
+- `FtExtraTurning4` [cell] → Feats.AR44
+- `FtExtraWildShape1` [cell] → Feats.AR486
+- `FtExtraWildShape2` [cell] → Feats.AR487
+- `FtExtraWildShape3` [cell] → Feats.AR488
+- `FtExtraWounds` [cell] → Feats.AR3560
+- `FtExtraXephBurst1` [cell] → Feats.AR826
+- `FtExtraXephBurst2` [cell] → Feats.AR827
+- `FtExtraordanaryArtisan` [cell] → Feats.AR2506
+- `FtExtraordanaryConcentration` [cell] → Feats.AR665
+- `FtExtraordanarySpellAim` [cell] → Feats.AR666
+- `FtExtraordanaryTrapsmith` [cell] → Feats.AR1324
+- `FtEyesBackOfHead` [cell] → Feats.AR325
+- `FtEyesOfLight` [cell] → Feats.AR2257
+- `FtFadeIntoViolence` [cell] → Feats.AR198
+- `FtFaithInTheFrost` [cell] → Feats.AR1374
+- `FtFallingStarStrike` [cell] → Feats.AR2823
+- `FtFallingSunAttack` [cell] → Feats.AR1532
+- `FtFamiliarSpell` [cell] → Feats.AR2314
+- `FtFamiliarSpell1` [cell] → Feats.AR3466
+- `FtFamiliarSpell2` [cell] → Feats.AR3467
+- `FtFamiliarSpell3` [cell] → Feats.AR3468
+- `FtFamiliarSpellx2` [cell] → Feats.AR2315
+- `FtFarHorizons` [cell] → Feats.AR1267
+- `FtFarShot` [cell] → Feats.AR78
+- `FtFastHealing1` [cell] → Feats.AR3305
+- `FtFastHealing2` [cell] → Feats.AR3306
+- `FtFastWildShape` [cell] → Feats.AR489
+- `FtFasterHealing` [cell] → Feats.AR326
+- `FtFavored` [cell] → Feats.AR1743
+- `FtFavored2` [cell] → Feats.AR1744
+- `FtFavoredCompanions` [cell] → Feats.AR2055
+- `FtFavoredInHouse` [cell] → Feats.AR2466
+- `FtFavoredMagicFoe1` [cell] → Feats.AR896
+- `FtFavoredMagicFoe2` [cell] → Feats.AR897
+- `FtFavoredMagicFoe3` [cell] → Feats.AR898
+- `FtFavoredOfTheZulkirs` [cell] → Feats.AR2154
+- `FtFavoredPowerAttack` [cell] → Feats.AR327
+- `FtFavoredVestige1` [cell] → Feats.AR1592
+- `FtFavoredVestige2` [cell] → Feats.AR1593
+- `FtFavoredVestige3` [cell] → Feats.AR1594
+- `FtFearless` [cell] → Feats.AR2115
+- `FtFearlessDestiny` [cell] → Feats.AR1251
+- `FtFearsomeAndFearless` [cell] → Feats.AR2849
+- `FtFellAnimate` [cell] → Feats.AR3049
+- `FtFellDrain` [cell] → Feats.AR3050
+- `FtFellFrighten` [cell] → Feats.AR3051
+- `FtFellShot` [cell] → Feats.AR1860
+- `FtFellWeaken` [cell] → Feats.AR3052
+- `FtFeralRearing` [cell] → Feats.AR3539
+- `FtFeyHeritage` [cell] → Feats.AR919
+- `FtFeySkin` [cell] → Feats.AR923
+- `FtFiendishBloodline` [cell] → Feats.AR2258
+- `FtFiendishHeritage` [cell] → Feats.AR924
+- `FtFiendishSummoningSpecialist` [cell] → Feats.AR1906
+- `FtFieryFist` [cell] → Feats.AR199
+- `FtFieryKiDefense` [cell] → Feats.AR200
+- `FtFierySpell` [cell] → Feats.AR1431
+- `FtFilthEater` [cell] → Feats.AR2609
+- `FtFinalStrike` [cell] → Feats.AR3229
+- `FtFineWildShape` [cell] → Feats.AR3457
+- `FtFireDevotion1` [cell] → Feats.AR1069
+- `FtFireDevotion2` [cell] → Feats.AR1070
+- `FtFireHeritage` [cell] → Feats.AR1926
+- `FtFistHeavens` [cell] → Feats.AR2056
+- `FtFistsOfIron` [cell] → Feats.AR328
+- `FtFlay` [cell] → Feats.AR202
+- `FtFleetOfFoot` [cell] → Feats.AR329
+- `FtFleetOfFootRegional` [cell] → Feats.AR2116
+- `FtFlencingStrike` [cell] → Feats.AR2467
+- `FtFlickOfTheWrist` [cell] → Feats.AR1292
+- `FtFlingAlly` [cell] → Feats.AR1163
+- `FtFlingEnemy` [cell] → Feats.AR1164
+- `FtFlyByAttack` [cell] → Feats.AR3118
+- `FtFlybyBreath` [cell] → Feats.AR2782
+- `FtFlyingFishLeap` [cell] → Feats.AR1443
+- `FtFlyingKick` [cell] → Feats.AR331
+- `FtFlyingTiger` [cell] → Feats.AR2774
+- `FtFocusedMind` [cell] → Feats.AR1293
+- `FtFocusedShield` [cell] → Feats.AR1220
+- `FtFocusedSkillUser1` [cell] → Feats.AR737
+- `FtFocusedSkillUser2` [cell] → Feats.AR738
+- `FtFocusedSkillUser3` [cell] → Feats.AR739
+- `FtFocusedSunder` [cell] → Feats.AR1828
+- `FtFoeHunter` [cell] → Feats.AR2117
+- `FtFoeSpecialist1` [cell] → Feats.AR1775
+- `FtFoeSpecialist2` [cell] → Feats.AR1776
+- `FtFoeSpecialist3` [cell] → Feats.AR1777
+- `FtFontOfLife` [cell] → Feats.AR1506
+- `FtForceOfPersonality` [cell] → Feats.AR667
+- `FtForceOfWill` [cell] → Feats.AR1805
+- `FtForestGnomePhantasist` [cell] → Feats.AR2259
+- `FtForester` [cell] → Feats.AR2118
+- `FtForgeRing` [cell] → Feats.AR153
+- `FtForgeheart` [cell] → Feats.AR2119
+- `FtFormationExpert` [cell] → Feats.AR387
+- `FtFortifySpell` [cell] → Feats.AR600
+- `FtFreeMountedCombat` [cell] → Feats.J68
+- `FtFreerunner` [cell] → Feats.AR976
+- `FtFreezingTheLifeblood` [cell] → Feats.AR332
+- `FtFrightfulPresence` [cell] → Feats.AR2911
+- `FtFrostfellProdigy` [cell] → Feats.AR1389
+- `FtFrozenBerserker` [cell] → Feats.AR1375
+- `FtFrozenMagic` [cell] → Feats.AR1386
+- `FtFrozenWildShape` [cell] → Feats.AR1376
+- `FtFuriousCharge` [cell] → Feats.AR2120
+- `FtGapeOfTheSerpent` [cell] → Feats.AR3193
+- `FtGargantuanWildShape` [cell] → Feats.AR3458
+- `FtGatekeeperInitiate` [cell] → Feats.AR2468
+- `FtGenieLore` [cell] → Feats.AR2227
+- `FtGestaltAnchor` [cell] → Feats.AR2564
+- `FtGestaltMight` [cell] → Feats.AR2765
+- `FtGhostAttack` [cell] → Feats.AR1829
+- `FtGhostScarred` [cell] → Feats.AR3018
+- `FtGhostlyGrasp` [cell] → Feats.AR3062
+- `FtGhostsight` [cell] → Feats.AR3500
+- `FtGiantbane` [cell] → Feats.AR388
+- `FtGiftOfDiscernment` [cell] → Feats.AR2155
+- `FtGiftOfFaith` [cell] → Feats.AR2057
+- `FtGiftOfGrace` [cell] → Feats.AR2058
+- `FtGiftOfTongues` [cell] → Feats.AR2228
+- `FtGiftedGeneral` [cell] → Feats.AR2850
+- `FtGloriousWeapons` [cell] → Feats.AR454
+- `FtGnollFerocity` [cell] → Feats.AR1294
+- `FtGnomeFoeKiller` [cell] → Feats.AR1189
+- `FtGnomelore` [cell] → Feats.AR1957
+- `FtGoad` [cell] → Feats.AR668
+- `FtGoldDwarfDweomersmith` [cell] → Feats.AR2260
+- `FtGoodDevotion1` [cell] → Feats.AR1072
+- `FtGoodDevotion2` [cell] → Feats.AR1073
+- `FtGorebruteElite` [cell] → Feats.AR2573
+- `FtGraftFlesh` [cell] → Feats.AR3108
+- `FtGrapplingBlock` [cell] → Feats.AR2827
+- `FtGrassTrekker` [cell] → Feats.AR3217
+- `FtGreatBite` [cell] → Feats.AR2514
+- `FtGreatCaptain` [cell] → Feats.AR1444
+- `FtGreatCharisma1` [cell] → Feats.AR3308
+- `FtGreatCharisma2` [cell] → Feats.AR3309
+- `FtGreatCharisma3` [cell] → Feats.AR3310
+- `FtGreatCleave` [cell] → Feats.AR86
+- `FtGreatConstitution1` [cell] → Feats.AR3311
+- `FtGreatConstitution2` [cell] → Feats.AR3312
+- `FtGreatConstitution3` [cell] → Feats.AR3313
+- `FtGreatCrafter` [cell] → Feats.AR2851
+- `FtGreatDexterity1` [cell] → Feats.AR3314
+- `FtGreatDexterity2` [cell] → Feats.AR3315
+- `FtGreatDexterity3` [cell] → Feats.AR3316
+- `FtGreatDiplomat` [cell] → Feats.AR2852
+- `FtGreatFlybyAttack` [cell] → Feats.AR3194
+- `FtGreatFortitude` [cell] → Feats.AR45
+- `FtGreatIntelligence1` [cell] → Feats.AR3317
+- `FtGreatIntelligence2` [cell] → Feats.AR3318
+- `FtGreatIntelligence3` [cell] → Feats.AR3319
+- `FtGreatRend` [cell] → Feats.AR2515
+- `FtGreatSmiting1` [cell] → Feats.AR3469
+- `FtGreatSmiting2` [cell] → Feats.AR3470
+- `FtGreatSmiting3` [cell] → Feats.AR3471
+- `FtGreatStamina` [cell] → Feats.AR2853
+- `FtGreatStrength1` [cell] → Feats.AR3320
+- `FtGreatStrength2` [cell] → Feats.AR3321
+- `FtGreatStrength3` [cell] → Feats.AR3322
+- `FtGreatTeamwork` [cell] → Feats.AR2854
+- `FtGreatThrow` [cell] → Feats.AR2832
+- `FtGreatWisdom1` [cell] → Feats.AR3323
+- `FtGreatWisdom2` [cell] → Feats.AR3324
+- `FtGreatWisdom3` [cell] → Feats.AR3325
+- `FtGreaterColdFocus` [cell] → Feats.AR1373
+- `FtGreaterCorruptSpellFocus` [cell] → Feats.AR1493
+- `FtGreaterDragonmark` [cell] → Feats.AR2478
+- `FtGreaterHeavyArmorOptimization` [cell] → Feats.AR1155
+- `FtGreaterKiaiShout` [cell] → Feats.AR350
+- `FtGreaterManyshot` [cell] → Feats.AR1806
+- `FtGreaterMightyRoar` [cell] → Feats.AR3238
+- `FtGreaterMultigrab` [cell] → Feats.AR3240
+- `FtGreaterMultiweaponFighting` [cell] → Feats.AR3232
+- `FtGreaterPowerPenetration` [cell] → Feats.AR1840
+- `FtGreaterPsionicEndowment` [cell] → Feats.AR1853
+- `FtGreaterResiliency` [cell] → Feats.AR333
+- `FtGreaterShifterDefense` [cell] → Feats.AR2519
+- `FtGreaterSpellFocus1` [cell] → Feats.AR110
+- `FtGreaterSpellFocus2` [cell] → Feats.AR111
+- `FtGreaterSpellFocus3` [cell] → Feats.AR112
+- `FtGreaterSpellPenetration` [cell] → Feats.AR118
+- `FtGreaterTwoWeaponDefense` [cell] → Feats.AR335
+- `FtGreaterTwoWeaponFighting` [cell] → Feats.AR127
+- `FtGreaterWeaponFocus1` [cell] → Feats.AR138
+- `FtGreaterWeaponFocus2` [cell] → Feats.AR139
+- `FtGreaterWeaponFocus3` [cell] → Feats.AR140
+- `FtGreaterWeaponSpecialization1` [cell] → Feats.AR142
+- `FtGreaterWeaponSpecialization2` [cell] → Feats.AR143
+- `FtGreaterWeaponSpecialization3` [cell] → Feats.AR144
+- `FtGreenEar` [cell] → Feats.AR669
+- `FtGreensingerInitiate` [cell] → Feats.AR2470
+- `FtGrenadier` [cell] → Feats.AR203
+- `FtGreyhawkMethod` [cell] → Feats.AR1959
+- `FtGrimVisage` [cell] → Feats.AR2229
+- `FtGrizzlysClaws` [cell] → Feats.AR490
+- `FtGroupInspiration` [cell] → Feats.AR713
+- `FtGuardianSpirit` [cell] → Feats.AR541
+- `FtGuerrillaScout` [cell] → Feats.AR1469
+- `FtGuerrillaWarrior` [cell] → Feats.AR1470
+- `FtHaggler` [cell] → Feats.AR2799
+- `FtHalfGiantStomp1` [cell] → Feats.AR804
+- `FtHalfGiantStomp2` [cell] → Feats.AR805
+- `FtHalflinglore` [cell] → Feats.AR1960
+- `FtHammerFist` [cell] → Feats.AR2261
+- `FtHammersEdge` [cell] → Feats.AR397
+- `FtHamstring` [cell] → Feats.AR336
+- `FtHandOfTyr` [cell] → Feats.AR2435
+- `FtHandsOfAHealer` [cell] → Feats.AR2059
+- `FtHaremTrained` [cell] → Feats.AR2230
+- `FtHaunted` [cell] → Feats.AR3501
+- `FtHauntingMelody` [cell] → Feats.AR1508
+- `FtHawksVision` [cell] → Feats.AR701
+- `FtHazingStrike` [cell] → Feats.AR2749
+- `FtHeadlongRush` [cell] → Feats.AR2262
+- `FtHealingDevotion1` [cell] → Feats.AR1075
+- `FtHealingDevotion2` [cell] → Feats.AR1076
+- `FtHealingFactor` [cell] → Feats.AR2516
+- `FtHealingFlames` [cell] → Feats.AR2263
+- `FtHealingSoul` [cell] → Feats.AR1709
+- `FtHearTheUnseen` [cell] → Feats.AR670
+- `FtHearthlore` [cell] → Feats.AR3540
+- `FtHeartofIncarnum` [cell] → Feats.AR1668
+- `FtHeatEndurance` [cell] → Feats.AR1408
+- `FtHeavyArmorOptimization` [cell] → Feats.AR1154
+- `FtHeavyLithoderms` [cell] → Feats.AR1190
+- `FtHeavyweightWings` [cell] → Feats.AR1332
+- `FtHeightenBreath` [cell] → Feats.AR2925
+- `FtHeightenSpell` [cell] → Feats.AR160
+- `FtHeightenSpellAbility3` [cell] → Feats.AR544
+- `FtHeightenSpellLikeAbility1` [cell] → Feats.AR542
+- `FtHeightenSpellLikeAbility2` [cell] → Feats.AR543
+- `FtHeightenTurning` [cell] → Feats.AR3020
+- `FtHeroicCompanion` [cell] → Feats.AR2718
+- `FtHeroicDestiny` [cell] → Feats.AR1249
+- `FtHeroicFocus` [cell] → Feats.AR2737
+- `FtHeroicMetamagic` [cell] → Feats.AR2546
+- `FtHeroicSpirit` [cell] → Feats.AR2472
+- `FtHeroicSurge` [cell] → Feats.AR2800
+- `FtHeroism` [cell] → Feats.AR3521
+- `FtHexbreaker` [cell] → Feats.AR3589
+- `FtHideringOpportunist` [cell] → Feats.AR204
+- `FtHighSwordLowAxe` [cell] → Feats.AR398
+- `FtHighbornDrow` [cell] → Feats.AR2264
+- `FtHinWandermage` [cell] → Feats.AR2265
+- `FtHinderingOpportunist` [cell] → Feats.Y205
+- `FtHoldTheLine` [cell] → Feats.AR337
+- `FtHolisticPurifier` [cell] → Feats.AR3582
+- `FtHollow` [cell] → Feats.AR3541
+- `FtHolyKiStrike` [cell] → Feats.AR2085
+- `FtHolyRadiance` [cell] → Feats.AR2068
+- `FtHolyStrike` [cell] → Feats.AR505
+- `FtHolySubdual` [cell] → Feats.AR2060
+- `FtHonestMerchant` [cell] → Feats.AR2855
+- `FtHonorBound` [cell] → Feats.AR2784
+- `FtHope` [cell] → Feats.AR3513
+- `FtHornedStampede` [cell] → Feats.AR2801
+- `FtHorseNomad` [cell] → Feats.AR2121
+- `FtHostileMind` [cell] → Feats.AR1807
+- `FtHover` [cell] → Feats.AR3119
+- `FtHumanHeritage` [cell] → Feats.AR1252
+- `FtHurlingCharge` [cell] → Feats.AR1778
+- `FtIMprovedSuddenStrike` [cell] → Feats.AR715
+- `FtIaijutsuMaster` [cell] → Feats.AR2856
+- `FtIceHarmonics` [cell] → Feats.AR1377
+- `FtIcyCalling` [cell] → Feats.AR1387
+- `FtIgnoreSpecialRequirement` [cell] → Feats.AR1603
+- `FtIllithidGrapple1` [cell] → Feats.AR852
+- `FtIllithidGrapple2` [cell] → Feats.AR853
+- `FtIllithidGrapple3` [cell] → Feats.AR854
+- `FtIllithidGrapple4` [cell] → Feats.AR855
+- `FtIllithidHeritage` [cell] → Feats.AR848
+- `FtIllithidSkin1` [cell] → Feats.AR859
+- `FtIllithidSkin2` [cell] → Feats.AR860
+- `FtIllithidSkin3` [cell] → Feats.AR861
+- `FtImprintStone` [cell] → Feats.AR1896
+- `FtImprovedAid` [cell] → Feats.AR2857
+- `FtImprovedAlignmentBasedCasting1` [cell] → Feats.AR3328
+- `FtImprovedAlignmentBasedCasting2` [cell] → Feats.AR3329
+- `FtImprovedAlignmentBasedCasting3` [cell] → Feats.AR3330
+- `FtImprovedArrowOfDeath1` [cell] → Feats.AR3331
+- `FtImprovedArrowOfDeath2` [cell] → Feats.AR3332
+- `FtImprovedAssumeSupernaturalAbility` [cell] → Feats.AR3184
+- `FtImprovedAuraOfCourage` [cell] → Feats.AR3334
+- `FtImprovedBindVestige` [cell] → Feats.AR1577
+- `FtImprovedBinding` [cell] → Feats.AR1604
+- `FtImprovedBucklerDefense` [cell] → Feats.AR338
+- `FtImprovedBullRush` [cell] → Feats.AR87
+- `FtImprovedCohort` [cell] → Feats.AR1480
+- `FtImprovedColdEndurance1` [cell] → Feats.AR1369
+- `FtImprovedColdEndurance2` [cell] → Feats.AR1370
+- `FtImprovedCombatCasting` [cell] → Feats.AR637
+- `FtImprovedCombatExpertise` [cell] → Feats.AR339
+- `FtImprovedCooperativeMetamagic` [cell] → Feats.AR2206
+- `FtImprovedCounterspell` [cell] → Feats.AR46
+- `FtImprovedCritical` [cell] → Feats.AR47
+- `FtImprovedCritical1` [cell] → Feats.AR48
+- `FtImprovedCritical2` [cell] → Feats.AR49
+- `FtImprovedCritical3` [cell] → Feats.AR50
+- `FtImprovedDamageReduction1` [cell] → Feats.AR2525
+- `FtImprovedDamageReduction2` [cell] → Feats.AR2526
+- `FtImprovedDamageReduction3` [cell] → Feats.AR2527
+- `FtImprovedDarkvision1` [cell] → Feats.AR3337
+- `FtImprovedDarkvision2` [cell] → Feats.AR3338
+- `FtImprovedDeathAttack1` [cell] → Feats.AR3340
+- `FtImprovedDeathAttack2` [cell] → Feats.AR3341
+- `FtImprovedDeversion` [cell] → Feats.AR671
+- `FtImprovedDisarm` [cell] → Feats.AR23
+- `FtImprovedDragonWings` [cell] → Feats.AR1321
+- `FtImprovedElementalHeritage` [cell] → Feats.AR1927
+- `FtImprovedElementalWildShape` [cell] → Feats.AR3472
+- `FtImprovedEnergyDrain` [cell] → Feats.AR3063
+- `FtImprovedEnergyResistance` [cell] → Feats.AR2266
+- `FtImprovedEnergyResistance1` [cell] → Feats.AR2267
+- `FtImprovedEnergyResistance2` [cell] → Feats.AR2268
+- `FtImprovedEnergyResistance3` [cell] → Feats.AR2269
+- `FtImprovedEssentiaCap` [cell] → Feats.AR1669
+- `FtImprovedFamiliar` [cell] → Feats.AR51
+- `FtImprovedFamiliarCS` [cell] → Feats.AR977
+- `FtImprovedFavoredEnemy` [cell] → Feats.AR340
+- `FtImprovedFeint` [cell] → Feats.AR24
+- `FtImprovedFlight` [cell] → Feats.AR1295
+- `FtImprovedFlightItem` [cell] → Feats.AR2615
+- `FtImprovedFlybyAttack` [cell] → Feats.AR3195
+- `FtImprovedFortification` [cell] → Feats.AR2528
+- `FtImprovedFrostyTouch` [cell] → Feats.AR1378
+- `FtImprovedGrapple` [cell] → Feats.AR55
+- `FtImprovedHeatEndurance` [cell] → Feats.AR1409
+- `FtImprovedInitiative` [cell] → Feats.AR52
+- `FtImprovedLevitation` [cell] → Feats.AR2270
+- `FtImprovedLowBlow` [cell] → Feats.AR2276
+- `FtImprovedLowLightVision1` [cell] → Feats.AR3345
+- `FtImprovedLowLightVision2` [cell] → Feats.AR3346
+- `FtImprovedManeuverability` [cell] → Feats.AR2916
+- `FtImprovedManifestation1` [cell] → Feats.AR3441
+- `FtImprovedManifestation2` [cell] → Feats.AR3442
+- `FtImprovedMetapsionics1` [cell] → Feats.AR3444
+- `FtImprovedMetapsionics2` [cell] → Feats.AR3445
+- `FtImprovedMountedArchery` [cell] → Feats.AR341
+- `FtImprovedMultiattack` [cell] → Feats.AR2942
+- `FtImprovedMultiweaponFighting` [cell] → Feats.AR3231
+- `FtImprovedNaturalArmor` [cell] → Feats.AR3120
+- `FtImprovedNaturalAttack` [cell] → Feats.AR3123
+- `FtImprovedNaturalAttack1` [cell] → Feats.AR3124
+- `FtImprovedNaturalAttack2` [cell] → Feats.AR3125
+- `FtImprovedNaturalAttack3` [cell] → Feats.AR3126
+- `FtImprovedOverrun` [cell] → Feats.AR88
+- `FtImprovedParalysis` [cell] → Feats.AR3065
+- `FtImprovedPreciseShot` [cell] → Feats.AR80
+- `FtImprovedPsicrystal1` [cell] → Feats.AR1846
+- `FtImprovedPsicrystal2` [cell] → Feats.AR1847
+- `FtImprovedPsicrystal3` [cell] → Feats.AR1848
+- `FtImprovedRapidShot` [cell] → Feats.AR342
+- `FtImprovedRapidStrike` [cell] → Feats.AR2944
+- `FtImprovedResiliency` [cell] → Feats.AR2599
+- `FtImprovedRockHurling` [cell] → Feats.AR1162
+- `FtImprovedScent` [cell] → Feats.AR3196
+- `FtImprovedShieldBash` [cell] → Feats.AR98
+- `FtImprovedShieldmate` [cell] → Feats.AR1785
+- `FtImprovedSkirmish` [cell] → Feats.AR978
+- `FtImprovedSkirmishEpic` [cell] → Feats.AR714
+- `FtImprovedSmiting` [cell] → Feats.AR441
+- `FtImprovedSnatch` [cell] → Feats.AR2946
+- `FtImprovedSnatchSpell` [cell] → Feats.AR2207
+- `FtImprovedSneakAttack1` [cell] → Feats.AR3475
+- `FtImprovedSneakAttack2` [cell] → Feats.AR3476
+- `FtImprovedSneakAttack3` [cell] → Feats.AR3477
+- `FtImprovedSpeed` [cell] → Feats.AR2941
+- `FtImprovedSpellCapacity1` [cell] → Feats.AR3478
+- `FtImprovedSpellCapacity2` [cell] → Feats.AR3479
+- `FtImprovedSpellCapacity3` [cell] → Feats.AR3480
+- `FtImprovedSpellResistance1` [cell] → Feats.AR3349
+- `FtImprovedSpellResistance2` [cell] → Feats.AR3350
+- `FtImprovedSpellpoolAccess` [cell] → Feats.AR2208
+- `FtImprovedStunningFist` [cell] → Feats.AR3481
+- `FtImprovedSunder` [cell] → Feats.AR89
+- `FtImprovedSwimming` [cell] → Feats.AR673
+- `FtImprovedTaunt` [cell] → Feats.AR2802
+- `FtImprovedToughness` [cell] → Feats.AR3138
+- `FtImprovedTrip` [cell] → Feats.AR25
+- `FtImprovedTurning` [cell] → Feats.AR53
+- `FtImprovedTwoWeaponDefense` [cell] → Feats.AR344
+- `FtImprovedTwoWeaponFighting` [cell] → Feats.AR126
+- `FtImprovedUnarmed` [cell] → Feats.AR54
+- `FtImprovedWeaponFamiliarity` [cell] → Feats.AR1156
+- `FtImprovedWeb` [cell] → Feats.AR3234
+- `FtIncarnumFortifiedBody` [cell] → Feats.AR1670
+- `FtIncarnumSpellshaping` [cell] → Feats.AR1710
+- `FtIndigoStrike` [cell] → Feats.AR1711
+- `FtIndistinct` [cell] → Feats.AR2631
+- `FtIndomitable` [cell] → Feats.AR3590
+- `FtIndomitableSoul` [cell] → Feats.AR206
+- `FtInfernalBargainer` [cell] → Feats.AR2271
+- `FtInfernalSorcererHeritage` [cell] → Feats.AR282
+- `FtInhumanReach` [cell] → Feats.AR3099
+- `FtInhumanVision` [cell] → Feats.AR3100
+- `FtInitiateOfAastorinian` [cell] → Feats.AR2975
+- `FtInitiateOfAstilabor` [cell] → Feats.AR2976
+- `FtInitiateOfBahamut` [cell] → Feats.AR2977
+- `FtInitiateOfBane` [cell] → Feats.AR2156
+- `FtInitiateOfCyric` [cell] → Feats.AR2157
+- `FtInitiateOfFalazure` [cell] → Feats.AR2978
+- `FtInitiateOfGaryx` [cell] → Feats.AR2979
+- `FtInitiateOfGond` [cell] → Feats.AR2158
+- `FtInitiateOfHelm` [cell] → Feats.AR2159
+- `FtInitiateOfHlal` [cell] → Feats.AR2980
+- `FtInitiateOfIlmater` [cell] → Feats.AR2160
+- `FtInitiateOfIo` [cell] → Feats.AR2981
+- `FtInitiateOfLathander` [cell] → Feats.AR2161
+- `FtInitiateOfLendys` [cell] → Feats.AR2982
+- `FtInitiateOfMalar` [cell] → Feats.AR2162
+- `FtInitiateOfMystra` [cell] → Feats.AR2163
+- `FtInitiateOfNature` [cell] → Feats.AR2164
+- `FtInitiateOfSelune` [cell] → Feats.AR2165
+- `FtInitiateOfShar` [cell] → Feats.AR2441
+- `FtInitiateOfTamara` [cell] → Feats.AR2983
+- `FtInitiateOfTiamat` [cell] → Feats.AR2984
+- `FtInitiateOfTorm` [cell] → Feats.AR2427
+- `FtInitiateOfTyr` [cell] → Feats.AR2166
+- `FtInnateSpell1` [cell] → Feats.AR545
+- `FtInnateSpell2` [cell] → Feats.AR546
+- `FtInnateSpell3` [cell] → Feats.AR547
+- `FtInnocenceCoagulant` [cell] → Feats.AR3575
+- `FtInquisitor` [cell] → Feats.AR1830
+- `FtInscribeEpicRune` [cell] → Feats.AR2209
+- `FtInscribeRune` [cell] → Feats.AR2187
+- `FtInsideConnection` [cell] → Feats.AR1236
+- `FtInsidiousMagic` [cell] → Feats.AR2192
+- `FtInsidiousTerror` [cell] → Feats.AR2772
+- `FtInsightful` [cell] → Feats.AR548
+- `FtInsightfulReflexes` [cell] → Feats.AR674
+- `FtInspirationalLeadership` [cell] → Feats.AR1481
+- `FtInspireSpellpower` [cell] → Feats.AR1202
+- `FtInstantReload1` [cell] → Feats.AR3357
+- `FtInstantReload2` [cell] → Feats.AR3358
+- `FtInstantReload3` [cell] → Feats.AR3359
+- `FtInstantaneousRage` [cell] → Feats.AR346
+- `FtIntimidatingRage` [cell] → Feats.AR347
+- `FtIntimidatingStrike` [cell] → Feats.AR207
+- `FtIntuitiveAttack` [cell] → Feats.AR2061
+- `FtInuredToEnergy` [cell] → Feats.AR3198
+- `FtInvestArmor` [cell] → Feats.AR742
+- `FtInvestigate` [cell] → Feats.AR2474
+- `FtInvestigator` [cell] → Feats.AR59
+- `FtInvoluntaryRage` [cell] → Feats.AR3199
+- `FtIronMind` [cell] → Feats.AR2231
+- `FtIronSkinChant` [cell] → Feats.AR694
+- `FtIronWill` [cell] → Feats.AR60
+- `FtIronheartAura` [cell] → Feats.AR1533
+- `FtIronwoodBody` [cell] → Feats.AR2600
+- `FtIrresistibleGaze` [cell] → Feats.AR3235
+- `FtJackofAllTrades` [cell] → Feats.AR675
+- `FtJaded` [cell] → Feats.AR3502
+- `FtJawsOfDeath` [cell] → Feats.AR2601
+- `FtJotunbrud` [cell] → Feats.AR2232
+- `FtJudgedByAurifar` [cell] → Feats.AR1410
+- `FtJungleStamina` [cell] → Feats.AR2233
+- `FtKalashtarMindlink` [cell] → Feats.AR2768
+- `FtKalashtarThoughtshifter` [cell] → Feats.AR2592
+- `FtKamisIntuition` [cell] → Feats.AR2858
+- `FtKarmicStrike` [cell] → Feats.AR348
+- `FtKarmicTwin` [cell] → Feats.AR2859
+- `FtKeenEaredScout` [cell] → Feats.AR208
+- `FtKeenIntellect` [cell] → Feats.AR2860
+- `FtKeenStrike` [cell] → Feats.AR3360
+- `FtKiBlast` [cell] → Feats.AR201
+- `FtKiStrike` [cell] → Feats.AR2022
+- `FtKiaiShout` [cell] → Feats.AR349
+- `FtKillorenAncient` [cell] → Feats.AR1296
+- `FtKillorenDestroyer` [cell] → Feats.AR1297
+- `FtKillorenHunter` [cell] → Feats.AR1298
+- `FtKissOfDawn` [cell] → Feats.AR3522
+- `FtKnifefighter` [cell] → Feats.AR2122
+- `FtKnightOfStars` [cell] → Feats.AR2062
+- `FtKnightTraining` [cell] → Feats.AR2475
+- `FtKnockback` [cell] → Feats.AR1157
+- `FtKnowledgeDevotion` [cell] → Feats.AR1078
+- `FtKnowledgeable` [cell] → Feats.AR3523
+- `FtKoboldEndurance` [cell] → Feats.AR1325
+- `FtKoboldFoeStrike` [cell] → Feats.AR1326
+- `FtLandwalker` [cell] → Feats.AR1445
+- `FtLargeAndInCharge` [cell] → Feats.AR2917
+- `FtLastingInspiration` [cell] → Feats.AR3482
+- `FtLawDevotion1` [cell] → Feats.AR1079
+- `FtLawDevotion2` [cell] → Feats.AR1080
+- `FtLawInviolate` [cell] → Feats.AR1268
+- `FtLeadership` [cell] → Feats.AR61
+- `FtLeapAttack` [cell] → Feats.AR676
+- `FtLeapOfTheHeavens` [cell] → Feats.AR209
+- `FtLeastDragonmark` [cell] → Feats.AR2476
+- `FtLeechItem` [cell] → Feats.AR2813
+- `FtLegendaryAcrobat` [cell] → Feats.AR716
+- `FtLegendaryArtisan` [cell] → Feats.AR2507
+- `FtLegendaryClimber` [cell] → Feats.AR717
+- `FtLegendaryLeaper` [cell] → Feats.AR718
+- `FtLegendaryRider` [cell] → Feats.AR426
+- `FtLegendaryTracker` [cell] → Feats.AR719
+- `FtLesserDragonmark` [cell] → Feats.AR2477
+- `FtLibrary` [cell] → Feats.AR3525
+- `FtLichLoved` [cell] → Feats.AR2021
+- `FtLifeDrain` [cell] → Feats.AR3067
+- `FtLifeSense` [cell] → Feats.AR3071
+- `FtLifebond1` [cell] → Feats.AR3068
+- `FtLifebond2` [cell] → Feats.AR3069
+- `FtLifeforceSacrifice` [cell] → Feats.AR3566
+- `FtLightFeet` [cell] → Feats.AR1299
+- `FtLightOfAurifar` [cell] → Feats.AR1411
+- `FtLightToDaylight` [cell] → Feats.AR2272
+- `FtLightbringer` [cell] → Feats.AR2273
+- `FtLightningMace` [cell] → Feats.AR399
+- `FtLightningReflexes` [cell] → Feats.AR62
+- `FtLingeringBreath` [cell] → Feats.AR3141
+- `FtLingeringSong` [cell] → Feats.AR677
+- `FtLionSpy` [cell] → Feats.AR2861
+- `FtLionsPounce` [cell] → Feats.AR491
+- `FtLiteracy` [cell] → Feats.AR3524
+- `FtLliirasBlessing` [cell] → Feats.AR2167
+- `FtLogicalMind` [cell] → Feats.AR3591
+- `FtLolthsBlessing` [cell] → Feats.AR2274
+- `FtLolthsMeat` [cell] → Feats.AR2319
+- `FtLongstrideElite` [cell] → Feats.AR2574
+- `FtLongtoothElite` [cell] → Feats.AR2575
+- `FtLordOfTheUttercold` [cell] → Feats.AR598
+- `FtLowBlow` [cell] → Feats.AR2275
+- `FtLuckDevotion1` [cell] → Feats.AR1082
+- `FtLuckDevotion2` [cell] → Feats.AR1083
+- `FtLuckOfHeroes` [cell] → Feats.AR2123
+- `FtLucky` [cell] → Feats.AR2803
+- `FtLunarMagic` [cell] → Feats.AR2437
+- `FtLunatic` [cell] → Feats.AR3503
+- `FtLunaticInsight` [cell] → Feats.AR1509
+- `FtLungingStrike` [cell] → Feats.AR210
+- `FtLurkingFamiliar` [cell] → Feats.AR188
+- `FtLyricSpell` [cell] → Feats.AR695
+- `FtMachiavellian` [cell] → Feats.AR3542
+- `FtMadFaith` [cell] → Feats.AR1510
+- `FtMadFoamRager` [cell] → Feats.AR211
+- `FtMaenadFury1` [cell] → Feats.AR808
+- `FtMaenadFury2` [cell] → Feats.AR809
+- `FtMaenadScream1` [cell] → Feats.AR811
+- `FtMaenadScream2` [cell] → Feats.AR812
+- `FtMageSlayer` [cell] → Feats.AR549
+- `FtMagicDevotion1` [cell] → Feats.AR1085
+- `FtMagicDevotion2` [cell] → Feats.AR1086
+- `FtMagicInTheBlood` [cell] → Feats.AR2124
+- `FtMagicOfTheLand` [cell] → Feats.AR1300
+- `FtMagicalAptitude` [cell] → Feats.AR63
+- `FtMagicalArtisan` [cell] → Feats.AR2168
+- `FtMagicalArtisan1` [cell] → Feats.AR2169
+- `FtMagicalArtisan2` [cell] → Feats.AR2170
+- `FtMagicalArtisan3` [cell] → Feats.AR2171
+- `FtMagicalBeastCompanion` [cell] → Feats.AR3461
+- `FtMagicalBeastWildShape` [cell] → Feats.AR506
+- `FtMagicalTraining` [cell] → Feats.AR2126
+- `FtMagistratesMind` [cell] → Feats.AR2866
+- `FtMakingsOfTheHunter` [cell] → Feats.AR1177
+- `FtManifestFlight` [cell] → Feats.AR2610
+- `FtManifestLeap` [cell] → Feats.AR2611
+- `FtManyMasks` [cell] → Feats.AR2867
+- `FtManyshot` [cell] → Feats.AR82
+- `FtMarkingOfTheBlessed` [cell] → Feats.AR1176
+- `FtMarkingsOfTheMagi` [cell] → Feats.AR1178
+- `FtMarkingsOfTheMaker` [cell] → Feats.AR1179
+- `FtMarkingsOfTheWarrior` [cell] → Feats.AR1180
+- `FtMarkofAvernus` [cell] → Feats.AR3146
+- `FtMarkofCania` [cell] → Feats.AR3147
+- `FtMarkofDis` [cell] → Feats.AR3148
+- `FtMarkofHleid` [cell] → Feats.AR1379
+- `FtMarkofMaladomini` [cell] → Feats.AR3149
+- `FtMarkofMalbolge` [cell] → Feats.AR3150
+- `FtMarkofMinauros` [cell] → Feats.AR3151
+- `FtMarkofNessus` [cell] → Feats.AR3152
+- `FtMarkofPhlegethos` [cell] → Feats.AR3153
+- `FtMarkofStygia` [cell] → Feats.AR3154
+- `FtMartialStalker` [cell] → Feats.AR979
+- `FtMartialStance` [cell] → Feats.AR1534
+- `FtMartialStance2` [cell] → Feats.AR1535
+- `FtMartialStance3` [cell] → Feats.AR1536
+- `FtMartialStudy` [cell] → Feats.AR1537
+- `FtMartialStudy1` [cell] → Feats.AR1538
+- `FtMartialStudy2` [cell] → Feats.AR1539
+- `FtMartialStudy3` [cell] → Feats.AR1540
+- `FtMartialThrow` [cell] → Feats.AR1779
+- `FtMartialWeapon` [cell] → Feats.AR64
+- `FtMartialWeapon1` [cell] → Feats.AR65
+- `FtMartialWeapon2` [cell] → Feats.AR66
+- `FtMartialWeapon3` [cell] → Feats.AR67
+- `FtMasterLinguist` [cell] → Feats.AR2547
+- `FtMasterManipulator` [cell] → Feats.AR212
+- `FtMasterOfKnowledge` [cell] → Feats.AR1511
+- `FtMasterStaff` [cell] → Feats.AR638
+- `FtMasterWand` [cell] → Feats.AR639
+- `FtMaximizeBreath` [cell] → Feats.AR2926
+- `FtMaximizePower` [cell] → Feats.AR1881
+- `FtMaximizeSpell` [cell] → Feats.AR161
+- `FtMaximizeSpellLikeAbility1` [cell] → Feats.AR552
+- `FtMaximizeSpellLikeAbility2` [cell] → Feats.AR553
+- `FtMechanicalAptitude` [cell] → Feats.AR3543
+- `FtMeleeEvasion` [cell] → Feats.AR213
+- `FtMeleeWeaponMastery` [cell] → Feats.AR214
+- `FtMeleeWeaponMastery1` [cell] → Feats.AR215
+- `FtMeleeWeaponMastery2` [cell] → Feats.AR216
+- `FtMeleeWeaponMastery3` [cell] → Feats.AR217
+- `FtMelodicCasting` [cell] → Feats.AR904
+- `FtMemoryCoagulant` [cell] → Feats.AR3574
+- `FtMenacingDemeanor` [cell] → Feats.AR1259
+- `FtMentalLeap` [cell] → Feats.AR1831
+- `FtMentalResistance` [cell] → Feats.AR1808
+- `FtMercantileBackground` [cell] → Feats.AR1968
+- `FtMercenaryBackground` [cell] → Feats.AR1969
+- `FtMesmerizing` [cell] → Feats.AR3544
+- `FtMetallurgy` [cell] → Feats.AR2235
+- `FtMetamagicSchoolFocus1` [cell] → Feats.AR906
+- `FtMetamagicSchoolFocus2` [cell] → Feats.AR907
+- `FtMetamagicSchoolFocus3` [cell] → Feats.AR908
+- `FtMetamagicSong` [cell] → Feats.AR1203
+- `FtMetamorphicTransfer1` [cell] → Feats.AR1832
+- `FtMetamorphicTransfer2` [cell] → Feats.AR1833
+- `FtMetamorphicTransfer3` [cell] → Feats.AR1834
+- `FtMetapower1` [cell] → Feats.AR866
+- `FtMetapower2` [cell] → Feats.AR867
+- `FtMidnightAugmentation` [cell] → Feats.AR1712
+- `FtMidnightDodge` [cell] → Feats.AR1713
+- `FtMidnightMetamagic` [cell] → Feats.AR1714
+- `FtMightMakesRight` [cell] → Feats.AR2277
+- `FtMightyLeaping` [cell] → Feats.AR3200
+- `FtMightyRage` [cell] → Feats.AR3365
+- `FtMightyRoar` [cell] → Feats.AR3237
+- `FtMilitia` [cell] → Feats.AR2128
+- `FtMimic` [cell] → Feats.AR2804
+- `FtMimicry` [cell] → Feats.AR3545
+- `FtMindCleave` [cell] → Feats.AR750
+- `FtMindMask` [cell] → Feats.AR2769
+- `FtMindOverBody` [cell] → Feats.AR2130
+- `FtMindsight` [cell] → Feats.AR3080
+- `FtMisleadingSong` [cell] → Feats.AR1204
+- `FtMithralBody` [cell] → Feats.AR2602
+- `FtMithralFluidity1` [cell] → Feats.AR2530
+- `FtMithralFluidity2` [cell] → Feats.AR2531
+- `FtMithralFluidity3` [cell] → Feats.AR2532
+- `FtMobileSpellcasting` [cell] → Feats.AR678
+- `FtMobility` [cell] → Feats.AR32
+- `FtMonasticTraining` [cell] → Feats.AR2479
+- `FtMonkeyGrip` [cell] → Feats.AR351
+- `FtMonksSpadeMindBlade` [cell] → Feats.AR2770
+- `FtMoradinsSmile` [cell] → Feats.AR1191
+- `FtMortalbane` [cell] → Feats.AR2003
+- `FtMortalbane2` [cell] → Feats.AR2004
+- `FtMortalbane3` [cell] → Feats.AR2005
+- `FtMotherCyst` [cell] → Feats.AR3022
+- `FtMountainStance` [cell] → Feats.AR2750
+- `FtMountainWarrior` [cell] → Feats.AR1158
+- `FtMountaineer` [cell] → Feats.AR1380
+- `FtMountedArchery` [cell] → Feats.AR69
+- `FtMountedCasting` [cell] → Feats.AR1780
+- `FtMountedCombat` [cell] → Feats.AR68
+- `FtMountedMobility` [cell] → Feats.AR1471
+- `FtMrorStalwart` [cell] → Feats.AR2548
+- `FtMultiattack` [cell] → Feats.AR3127
+- `FtMultigrab` [cell] → Feats.AR3239
+- `FtMultisnatch` [cell] → Feats.AR2949
+- `FtMultispell1` [cell] → Feats.AR3367
+- `FtMultispell2` [cell] → Feats.AR3368
+- `FtMultitasking` [cell] → Feats.AR3242
+- `FtMultivoice` [cell] → Feats.AR3243
+- `FtMultiweaponFighting` [cell] → Feats.AR3128
+- `FtMuse` [cell] → Feats.AR3592
+- `FtMusicOfGrowth` [cell] → Feats.AR2480
+- `FtMusicOfMaking` [cell] → Feats.AR2481
+- `FtMusicOfTheOuterSpheres` [cell] → Feats.AR3081
+- `FtMutableBody` [cell] → Feats.AR2549
+- `FtMysteriousMagic` [cell] → Feats.AR2624
+- `FtNarrowMind` [cell] → Feats.AR1836
+- `FtNarrowedGaze` [cell] → Feats.AR3244
+- `FtNaturalBond` [cell] → Feats.AR679
+- `FtNaturalHeavyweight` [cell] → Feats.AR1929
+- `FtNaturalLeader` [cell] → Feats.AR1472
+- `FtNaturalSpell` [cell] → Feats.AR73
+- `FtNaturalTrickster1` [cell] → Feats.AR1192
+- `FtNaturalTrickster2` [cell] → Feats.AR1193
+- `FtNaturalTrickster3` [cell] → Feats.AR1194
+- `FtNecrocarnumAcolyte` [cell] → Feats.AR1672
+- `FtNecropolisBorn` [cell] → Feats.AR555
+- `FtNecropotent` [cell] → Feats.AR3026
+- `FtNecroticPresence` [cell] → Feats.AR3023
+- `FtNecroticReserve` [cell] → Feats.AR3072
+- `FtNegativeEnergyBurst` [cell] → Feats.AR507
+- `FtNegotiator` [cell] → Feats.AR74
+- `FtNemesis` [cell] → Feats.AR2063
+- `FtNemesis1` [cell] → Feats.AR2064
+- `FtNemesis2` [cell] → Feats.AR2065
+- `FtNemesis3` [cell] → Feats.AR2066
+- `FtNeraphCharge` [cell] → Feats.AR1907
+- `FtNeraphThrow` [cell] → Feats.AR1908
+- `FtNetAndTrident` [cell] → Feats.AR400
+- `FtNexusMethod` [cell] → Feats.AR1971
+- `FtNightHaunt` [cell] → Feats.AR556
+- `FtNimbleFingers` [cell] → Feats.AR75
+- `FtNimbusOfLight` [cell] → Feats.AR2067
+- `FtNineLives` [cell] → Feats.AR3593
+- `FtNobleSoul` [cell] → Feats.AR1972
+- `FtNobodysFool` [cell] → Feats.AR2236
+- `FtNodeSpellcasting` [cell] → Feats.AR2353
+- `FtNodeSpellcasting1` [cell] → Feats.AR2354
+- `FtNodeSpellcasting2` [cell] → Feats.AR2355
+- `FtNodeStore1` [cell] → Feats.AR2358
+- `FtNodeStore2` [cell] → Feats.AR2359
+- `FtNonlethalSubstitution` [cell] → Feats.AR601
+- `FtNonlethalSubstitution1` [cell] → Feats.AR602
+- `FtNonlethalSubstitution2` [cell] → Feats.AR603
+- `FtNonlethalSubstitution3` [cell] → Feats.AR604
+- `FtNonverbalSpell` [cell] → Feats.AR1909
+- `FtNormalCol` [cell] → Feats.O8
+- `FtNymphsKiss` [cell] → Feats.AR2070
+- `FtOakenResilience` [cell] → Feats.AR492
+- `FtObscureLore` [cell] → Feats.AR680
+- `FtObtainFamiliar` [cell] → Feats.AR557
+- `FtOcularSpell` [cell] → Feats.AR3088
+- `FtOldSalt` [cell] → Feats.AR1446
+- `FtOneiromancy` [cell] → Feats.AR1503
+- `FtOnisBane` [cell] → Feats.AR2868
+- `FtOpenArmsChakra` [cell] → Feats.AR1676
+- `FtOpenBrowChakra` [cell] → Feats.AR1677
+- `FtOpenCrownChakra` [cell] → Feats.AR1673
+- `FtOpenFeetChakra` [cell] → Feats.AR1675
+- `FtOpenHandsChakra` [cell] → Feats.AR1674
+- `FtOpenMind` [cell] → Feats.AR3504
+- `FtOpenMinded1` [cell] → Feats.AR681
+- `FtOpenMinded2` [cell] → Feats.AR682
+- `FtOpenMinded3` [cell] → Feats.AR683
+- `FtOpenShouldersChakra` [cell] → Feats.AR1678
+- `FtOpenThroatChakra` [cell] → Feats.AR1679
+- `FtOpenWaistChakra` [cell] → Feats.AR1680
+- `FtOpportunityPower` [cell] → Feats.AR1882
+- `FtOralHistory` [cell] → Feats.AR2237
+- `FtOrcBlooded` [cell] → Feats.AR1973
+- `FtOtherworldly` [cell] → Feats.AR2131
+- `FtOutsiderWings` [cell] → Feats.AR2278
+- `FtOverchannel` [cell] → Feats.AR1837
+- `FtOvercomeWeakness` [cell] → Feats.AR2952
+- `FtOverheadThrust` [cell] → Feats.AR2895
+- `FtOversizedTwoWeaponFighting` [cell] → Feats.AR684
+- `FtOverwhelmingAssault` [cell] → Feats.AR223
+- `FtOverwhelmingCritical` [cell] → Feats.AR3483
+- `FtOverwhelmingCritical1` [cell] → Feats.AR3484
+- `FtOverwhelmingCritical2` [cell] → Feats.AR3485
+- `FtOverwhelmingCritical3` [cell] → Feats.AR3486
+- `FtPainMastery` [cell] → Feats.AR3201
+- `FtPainTouch` [cell] → Feats.AR352
+- `FtParaElementalPower1` [cell] → Feats.AR870
+- `FtParaElementalPower2` [cell] → Feats.AR871
+- `FtParaElementalPower3` [cell] → Feats.AR872
+- `FtParryingShield` [cell] → Feats.AR3082
+- `FtPathOfShadows` [cell] → Feats.AR2550
+- `FtPeakHopper` [cell] → Feats.AR3218
+- `FtPenetrateDamageReduction1` [cell] → Feats.AR3373
+- `FtPenetrateDamageReduction2` [cell] → Feats.AR3374
+- `FtPenetrateDamageReduction3` [cell] → Feats.AR3375
+- `FtPenetratingShot` [cell] → Feats.AR224
+- `FtPerfectTwoWeaponFighting` [cell] → Feats.AR427
+- `FtPermanentEmanation1` [cell] → Feats.AR3379
+- `FtPermanentEmanation2` [cell] → Feats.AR3380
+- `FtPermanentEmanation3` [cell] → Feats.AR3381
+- `FtPerniciousMagic` [cell] → Feats.AR2193
+- `FtPersistantRefusal` [cell] → Feats.AR3175
+- `FtPersistentSpell` [cell] → Feats.AR605
+- `FtPersonaImmersion` [cell] → Feats.AR2551
+- `FtPersonalTouchstone1` [cell] → Feats.AR1914
+- `FtPersonalTouchstone2` [cell] → Feats.AR1915
+- `FtPersuasive` [cell] → Feats.AR76
+- `FtPervasiveGaze` [cell] → Feats.AR3245
+- `FtPhalanxFighting` [cell] → Feats.AR353
+- `FtPharaohsFist` [cell] → Feats.AR1412
+- `FtPhilosophicalChild` [cell] → Feats.AR3584
+- `FtPhilosophicalPurifier` [cell] → Feats.AR3581
+- `FtPhoenixDiscipline` [cell] → Feats.AR2848
+- `FtPierceMagicalConcealment` [cell] → Feats.AR550
+- `FtPierceMagicalProtection` [cell] → Feats.AR551
+- `FtPiercingCold` [cell] → Feats.AR1401
+- `FtPiercingGaze` [cell] → Feats.AR3236
+- `FtPiercingSight` [cell] → Feats.AR1195
+- `FtPinShield` [cell] → Feats.AR354
+- `FtPiousDefense` [cell] → Feats.AR467
+- `FtPiousDefiance` [cell] → Feats.AR3176
+- `FtPiousSoul` [cell] → Feats.AR468
+- `FtPiousSpellsurge` [cell] → Feats.AR469
+- `FtPlagueResistant` [cell] → Feats.AR2238
+- `FtPlanarFamiliar` [cell] → Feats.AR1910
+- `FtPlanarTouchstone1` [cell] → Feats.AR1911
+- `FtPlanarTouchstone2` [cell] → Feats.AR1912
+- `FtPlanarTurning` [cell] → Feats.AR3487
+- `FtPlanetouchedAnimalAffinity` [cell] → Feats.AR2279
+- `FtPlantDevotion1` [cell] → Feats.AR1088
+- `FtPlantDevotion2` [cell] → Feats.AR1089
+- `FtPlantWildShape` [cell] → Feats.AR3462
+- `FtPlundgingShot` [cell] → Feats.AR1473
+- `FtPointBlankShot` [cell] → Feats.AR77
+- `FtPoisonExpert` [cell] → Feats.AR981
+- `FtPoisonExpert1` [cell] → Feats.AR982
+- `FtPoisonExpert2` [cell] → Feats.AR983
+- `FtPoisonExpert3` [cell] → Feats.AR984
+- `FtPoisonImmunity` [cell] → Feats.AR2006
+- `FtPoisonImmunity1` [cell] → Feats.AR2007
+- `FtPoisonImmunity2` [cell] → Feats.AR2008
+- `FtPoisonImmunity3` [cell] → Feats.AR2009
+- `FtPoisonMaster1` [cell] → Feats.AR986
+- `FtPoisonMaster2` [cell] → Feats.AR987
+- `FtPoisonMaster3` [cell] → Feats.AR988
+- `FtPoisonResistance` [cell] → Feats.AR3246
+- `FtPoleMaster` [cell] → Feats.AR2751
+- `FtPolyglot` [cell] → Feats.AR720
+- `FtPortalMaster` [cell] → Feats.AR2172
+- `FtPortents` [cell] → Feats.AR3594
+- `FtPositiveEnergyAura` [cell] → Feats.AR508
+- `FtPositiveEnergyResistance` [cell] → Feats.AR3073
+- `FtPowerAttack` [cell] → Feats.AR84
+- `FtPowerAttackEquiv` [cell] → Feats.S4
+- `FtPowerAttackIaijutsu` [cell] → Feats.AR2869
+- `FtPowerAttackShadowlands` [cell] → Feats.AR2870
+- `FtPowerClimb` [cell] → Feats.AR2918
+- `FtPowerCritical1` [cell] → Feats.AR356
+- `FtPowerCritical2` [cell] → Feats.AR357
+- `FtPowerCritical3` [cell] → Feats.AR358
+- `FtPowerDive` [cell] → Feats.AR2919
+- `FtPowerKnowledge1` [cell] → Feats.AR3447
+- `FtPowerKnowledge2` [cell] → Feats.AR3448
+- `FtPowerPenetration` [cell] → Feats.AR1839
+- `FtPowerSpecialization` [cell] → Feats.AR1841
+- `FtPowerThrow` [cell] → Feats.AR649
+- `FtPowerfulCharge` [cell] → Feats.AR2482
+- `FtPowerfulVoice` [cell] → Feats.AR2871
+- `FtPowerfulWildshape` [cell] → Feats.AR1231
+- `FtPracticalMetamagic1` [cell] → Feats.AR1328
+- `FtPracticalMetamagic2` [cell] → Feats.AR1329
+- `FtPracticalMetamagic3` [cell] → Feats.AR1330
+- `FtPracticedBinder` [cell] → Feats.AR1578
+- `FtPracticedCohort` [cell] → Feats.AR1482
+- `FtPracticedManifester1` [cell] → Feats.AR757
+- `FtPracticedManifester2` [cell] → Feats.AR758
+- `FtPracticedManifester3` [cell] → Feats.AR759
+- `FtPracticedSpellcaster1` [cell] → Feats.AR559
+- `FtPracticedSpellcaster2` [cell] → Feats.AR560
+- `FtPracticedSpellcaster3` [cell] → Feats.AR561
+- `FtPrecApprentice` [cell] → Feats.AR562
+- `FtPreciseShot` [cell] → Feats.AR79
+- `FtPreciseSwing` [cell] → Feats.AR2484
+- `FtPrehensileTail` [cell] → Feats.AR3248
+- `FtPriestOfTheWaste` [cell] → Feats.AR1413
+- `FtPrimevalWildShape` [cell] → Feats.AR1381
+- `FtPrimitiveCaster` [cell] → Feats.AR1382
+- `FtPrivilegedEnergy` [cell] → Feats.AR760
+- `FtPrivilegedEnergy1` [cell] → Feats.AR761
+- `FtPrivilegedEnergy2` [cell] → Feats.AR762
+- `FtPrivilegedEnergy3` [cell] → Feats.AR763
+- `FtProfaneBoost` [cell] → Feats.AR461
+- `FtProfaneLifeleech` [cell] → Feats.AR3040
+- `FtProfaneVigor` [cell] → Feats.AR3041
+- `FtProneAttack` [cell] → Feats.AR359
+- `FtProtectedDestiny` [cell] → Feats.AR1250
+- `FtProtectionDevotion1` [cell] → Feats.AR1091
+- `FtProtectionDevotion2` [cell] → Feats.AR1092
+- `FtPsicrystalAffinity` [cell] → Feats.AR1843
+- `FtPsicrystalContainment` [cell] → Feats.AR1849
+- `FtPsicrystalPower1` [cell] → Feats.AR3451
+- `FtPsicrystalPower2` [cell] → Feats.AR3452
+- `FtPsicrystalPower3` [cell] → Feats.AR3453
+- `FtPsiforgedBody` [cell] → Feats.AR2720
+- `FtPsionicAffinity` [cell] → Feats.AR1811
+- `FtPsionicBody` [cell] → Feats.AR1850
+- `FtPsionicCharge` [cell] → Feats.AR1870
+- `FtPsionicDodge` [cell] → Feats.AR1851
+- `FtPsionicEndowment` [cell] → Feats.AR1852
+- `FtPsionicFist` [cell] → Feats.AR1854
+- `FtPsionicHole` [cell] → Feats.AR1812
+- `FtPsionicMeditation` [cell] → Feats.AR1857
+- `FtPsionicShot` [cell] → Feats.AR1858
+- `FtPsionicTalent1` [cell] → Feats.AR1862
+- `FtPsionicTalent2` [cell] → Feats.AR1863
+- `FtPsionicTalent3` [cell] → Feats.AR1864
+- `FtPsionicTalent4` [cell] → Feats.AR1865
+- `FtPsionicWeapon` [cell] → Feats.AR1866
+- `FtPsithief` [cell] → Feats.AR989
+- `FtPsycarnumBlade` [cell] → Feats.AR1715
+- `FtPsycarnumCrystal` [cell] → Feats.AR1722
+- `FtPsycarnumInfusion` [cell] → Feats.AR1723
+- `FtPsychicWarfare` [cell] → Feats.AR2766
+- `FtPureSoul` [cell] → Feats.AR1512
+- `FtPurebloodedSuel` [cell] → Feats.AR1974
+- `FtPurifySpell` [cell] → Feats.AR2097
+- `FtPurifySpellLike` [cell] → Feats.AR2041
+- `FtPurifySpellTrigger` [cell] → Feats.AR2071
+- `FtPursue` [cell] → Feats.AR2485
+- `FtPushback` [cell] → Feats.AR1781
+- `FtQuellTheProfane` [cell] → Feats.AR2072
+- `FtQuickChange` [cell] → Feats.AR3203
+- `FtQuickDraw` [cell] → Feats.AR90
+- `FtQuickReconnoiter` [cell] → Feats.AR1727
+- `FtQuickRecovery` [cell] → Feats.AR3083
+- `FtQuickStaff` [cell] → Feats.AR401
+- `FtQuickThinking` [cell] → Feats.AR2805
+- `FtQuickenBreath` [cell] → Feats.AR2927
+- `FtQuickenDragonmarkLeast` [cell] → Feats.AR2721
+- `FtQuickenDragonmarkLesser` [cell] → Feats.AR2722
+- `FtQuickenManifestation` [cell] → Feats.AR3074
+- `FtQuickenPower` [cell] → Feats.AR1883
+- `FtQuickenSpell` [cell] → Feats.AR162
+- `FtQuickenSpellLikeAbility` [cell] → Feats.AR3129
+- `FtQuickenTurning` [cell] → Feats.AR3027
+- `FtQuintessence` [cell] → Feats.AR3571
+- `FtQuoriDread` [cell] → Feats.AR2771
+- `FtRacialEmulation` [cell] → Feats.AR2553
+- `FtRadiantFire` [cell] → Feats.AR1269
+- `FtRagewildFighting` [cell] → Feats.AR2593
+- `FtRagingLuck` [cell] → Feats.AR2486
+- `FtRaidersSpirit` [cell] → Feats.AR1975
+- `FtRampagingBullRush` [cell] → Feats.AR1159
+- `FtRangedDisarm` [cell] → Feats.AR360
+- `FtRangedInspiration1` [cell] → Feats.AR3382
+- `FtRangedInspiration2` [cell] → Feats.AR3383
+- `FtRangedPin` [cell] → Feats.AR361
+- `FtRangedSmiteEvil` [cell] → Feats.AR2073
+- `FtRangedSpellSpecialization` [cell] → Feats.AR563
+- `FtRangedSunder` [cell] → Feats.AR362
+- `FtRangedWeaponMastery` [cell] → Feats.AR225
+- `FtRangedWeaponMastery1` [cell] → Feats.AR226
+- `FtRangedWeaponMastery2` [cell] → Feats.AR227
+- `FtRangedWeaponMastery3` [cell] → Feats.AR228
+- `FtRapidBlitz` [cell] → Feats.AR184
+- `FtRapidBreath` [cell] → Feats.AR3249
+- `FtRapidMetabolism` [cell] → Feats.AR1813
+- `FtRapidRegen1` [cell] → Feats.AR3156
+- `FtRapidRegen2` [cell] → Feats.AR3157
+- `FtRapidRegen3` [cell] → Feats.AR3158
+- `FtRapidReload` [cell] → Feats.AR91
+- `FtRapidReload1` [cell] → Feats.AR92
+- `FtRapidReload2` [cell] → Feats.AR93
+- `FtRapidReload3` [cell] → Feats.AR94
+- `FtRapidShot` [cell] → Feats.AR81
+- `FtRapidSpell` [cell] → Feats.AR477
+- `FtRapidStrike` [cell] → Feats.AR2943
+- `FtRapidStunning1` [cell] → Feats.AR363
+- `FtRapidStunning2` [cell] → Feats.AR364
+- `FtRapidStunning3` [cell] → Feats.AR365
+- `FtRapidSwimming` [cell] → Feats.AR1447
+- `FtRapscallion` [cell] → Feats.AR1976
+- `FtRaptorSchool` [cell] → Feats.AR389
+- `FtRattlesnakeStrike` [cell] → Feats.AR1414
+- `FtRazingStrike` [cell] → Feats.AR686
+- `FtRazorclawElite` [cell] → Feats.AR2576
+- `FtReachSpell` [cell] → Feats.AR478
+- `FtReactiveCounterspell` [cell] → Feats.AR2173
+- `FtReactiveShifting` [cell] → Feats.AR2577
+- `FtReadyShot` [cell] → Feats.AR1474
+- `FtRecklessCharge` [cell] → Feats.AR1782
+- `FtRecklessOffense` [cell] → Feats.AR1814
+- `FtRecklessOffensive` [cell] → Feats.AR2282
+- `FtRecklessRage` [cell] → Feats.AR1160
+- `FtRecklessWandWielder` [cell] → Feats.AR564
+- `FtRecognizeImposter` [cell] → Feats.AR2487
+- `FtRecoverBreath` [cell] → Feats.AR2928
+- `FtRedhead` [cell] → Feats.AR3505
+- `FtRegenerativeSalve` [cell] → Feats.AR3572
+- `FtReincarnated` [cell] → Feats.AR3506
+- `FtReinforcedWings` [cell] → Feats.AR1331
+- `FtRelicHunter` [cell] → Feats.AR2554
+- `FtRend` [cell] → Feats.AR2950
+- `FtRendingConstriction` [cell] → Feats.AR3241
+- `FtRepeatSpell` [cell] → Feats.AR606
+- `FtRepelAberration` [cell] → Feats.AR2469
+- `FtRepelOutsider` [cell] → Feats.AR2748
+- `FtRequiem` [cell] → Feats.AR3028
+- `FtResearch` [cell] → Feats.AR2488
+- `FtResistDragonfear` [cell] → Feats.AR2787
+- `FtResistPoison` [cell] → Feats.AR2872
+- `FtResistPoisonRegional` [cell] → Feats.AR2132
+- `FtResistTaint` [cell] → Feats.AR2873
+- `FtResolute` [cell] → Feats.AR3514
+- `FtResoundingBlow` [cell] → Feats.AR2042
+- `FtResoursefulBuyer` [cell] → Feats.AR1237
+- `FtReverberation` [cell] → Feats.AR3204
+- `FtRhennlore` [cell] → Feats.AR1977
+- `FtRideByAttack` [cell] → Feats.AR70
+- `FtRightOfCouncel` [cell] → Feats.AR2489
+- `FtRighteousWrath` [cell] → Feats.AR2074
+- `FtRitualBlessing` [cell] → Feats.AR255
+- `FtRitualBloodBonds` [cell] → Feats.AR256
+- `FtRobilarsGambit` [cell] → Feats.AR229
+- `FtRockGnomeTrickster` [cell] → Feats.AR2283
+- `FtRockHurling` [cell] → Feats.AR1161
+- `FtRollWithIt` [cell] → Feats.AR3205
+- `FtRollWithIt2` [cell] → Feats.AR3206
+- `FtRollWithIt3` [cell] → Feats.AR3207
+- `FtRoofwalker` [cell] → Feats.AR1761
+- `FtRootsOfTheMountain` [cell] → Feats.AR1211
+- `FtRoundaboutKick` [cell] → Feats.AR366
+- `FtRun` [cell] → Feats.AR95
+- `FtRunesmith` [cell] → Feats.AR2284
+- `FtSacredBoost` [cell] → Feats.AR462
+- `FtSacredHealing` [cell] → Feats.AR463
+- `FtSacredHealingPHB2` [cell] → Feats.AR272
+- `FtSacredStrike` [cell] → Feats.AR2075
+- `FtSacredTattoo` [cell] → Feats.AR2285
+- `FtSacredVengeance` [cell] → Feats.AR3042
+- `FtSacredVitality` [cell] → Feats.AR3043
+- `FtSacredVow` [cell] → Feats.AR2076
+- `FtSacrificialMastery` [cell] → Feats.AR2023
+- `FtSaddleback` [cell] → Feats.AR2133
+- `FtSagaciousMethod` [cell] → Feats.AR1979
+- `FtSahuaginFlip` [cell] → Feats.AR1448
+- `FtSailorsBalance` [cell] → Feats.AR1449
+- `FtSanctifyKiStrike` [cell] → Feats.AR2084
+- `FtSanctifyMartialStrike` [cell] → Feats.AR2086
+- `FtSanctifyMartialStrike1` [cell] → Feats.AR2087
+- `FtSanctifyMartialStrike2` [cell] → Feats.AR2088
+- `FtSanctifyMartialStrike3` [cell] → Feats.AR2089
+- `FtSanctifyNaturalAttack` [cell] → Feats.AR2090
+- `FtSanctifyRelic` [cell] → Feats.AR472
+- `FtSanctifyWater` [cell] → Feats.AR1450
+- `FtSanctifyWeapon` [cell] → Feats.AR2091
+- `FtSanctity` [cell] → Feats.AR3515
+- `FtSanctumSpell` [cell] → Feats.AR607
+- `FtSandCamouflage` [cell] → Feats.AR1420
+- `FtSandDancer` [cell] → Feats.AR1415
+- `FtSandSkimmer` [cell] → Feats.AR1418
+- `FtSandSnare` [cell] → Feats.AR1417
+- `FtSandSpinner` [cell] → Feats.AR1416
+- `FtSandskimmer2` [cell] → Feats.AR1419
+- `FtSanity` [cell] → Feats.AR3516
+- `FtSapphireFist` [cell] → Feats.AR1716
+- `FtSapphireSmite` [cell] → Feats.AR1717
+- `FtSapphireSprint` [cell] → Feats.AR1718
+- `FtSavageGrapple` [cell] → Feats.AR702
+- `FtScavengingGullet` [cell] → Feats.AR3101
+- `FtScent` [cell] → Feats.AR703
+- `FtScentOfTheGrave` [cell] → Feats.AR3595
+- `FtScholarOfNature` [cell] → Feats.AR2875
+- `FtScorpionsGrasp` [cell] → Feats.AR1421
+- `FtScorpionsInstincts` [cell] → Feats.AR1422
+- `FtScorpionsResolve` [cell] → Feats.AR1423
+- `FtScorpionsSense` [cell] → Feats.AR1424
+- `FtScourgeOfTheSeas` [cell] → Feats.AR1451
+- `FtScramble` [cell] → Feats.AR3208
+- `FtScribeScroll` [cell] → Feats.AR154
+- `FtScribeTattoo` [cell] → Feats.AR1897
+- `FtSculptSpell` [cell] → Feats.AR608
+- `FtSeaLegs` [cell] → Feats.AR1452
+- `FtSearingSpell` [cell] → Feats.AR1432
+- `FtSecondSight` [cell] → Feats.AR3547
+- `FtSecondSlam` [cell] → Feats.AR2603
+- `FtSecondWind` [cell] → Feats.AR1783
+- `FtSecretSociety` [cell] → Feats.AR3526
+- `FtSelfConcealment1` [cell] → Feats.AR3390
+- `FtSelfConcealment2` [cell] → Feats.AR3391
+- `FtSelfSufficient` [cell] → Feats.AR96
+- `FtSenseWeakness` [cell] → Feats.AR2912
+- `FtSerpentStrike` [cell] → Feats.AR2490
+- `FtSerpentsFang` [cell] → Feats.AR1425
+- `FtSerpentsVenom` [cell] → Feats.AR493
+- `FtServantOfTheHeavens` [cell] → Feats.AR2092
+- `FtShadowAffinity` [cell] → Feats.AR3567
+- `FtShadowBlade` [cell] → Feats.AR1542
+- `FtShadowHeratige` [cell] → Feats.AR1930
+- `FtShadowMarchesWarmonger` [cell] → Feats.AR2555
+- `FtShadowShield` [cell] → Feats.AR2239
+- `FtShadowShift` [cell] → Feats.AR2633
+- `FtShadowSong` [cell] → Feats.AR2240
+- `FtShadowWeaveMagic` [cell] → Feats.AR2174
+- `FtShapeBreath` [cell] → Feats.AR2929
+- `FtShapeSoulmeld` [cell] → Feats.AR1681
+- `FtShapeSoulmeld1` [cell] → Feats.AR1682
+- `FtShapeSoulmeld2` [cell] → Feats.AR1683
+- `FtShapeSoulmeld3` [cell] → Feats.AR1684
+- `FtShapedSplash` [cell] → Feats.AR2556
+- `FtShareSoulmeld` [cell] → Feats.AR1685
+- `FtSharedFury` [cell] → Feats.AR1302
+- `FtSharpEyed` [cell] → Feats.AR2806
+- `FtSharpShooting` [cell] → Feats.AR367
+- `FtShieldCharge` [cell] → Feats.AR368
+- `FtShieldDwarfWarder` [cell] → Feats.AR2286
+- `FtShieldOfThought` [cell] → Feats.AR2565
+- `FtShieldProficiency` [cell] → Feats.AR97
+- `FtShieldSlam` [cell] → Feats.AR369
+- `FtShieldSling` [cell] → Feats.AR236
+- `FtShieldSpecialization` [cell] → Feats.AR230
+- `FtShieldSpecialization1` [cell] → Feats.AR231
+- `FtShieldSpecialization2` [cell] → Feats.AR232
+- `FtShieldSpecialization3` [cell] → Feats.AR233
+- `FtShieldWall` [cell] → Feats.AR1475
+- `FtShieldWard` [cell] → Feats.AR237
+- `FtShieldedAxe` [cell] → Feats.AR1226
+- `FtShieldedCasting` [cell] → Feats.AR1165
+- `FtShieldmate` [cell] → Feats.AR1784
+- `FtShifterAgility` [cell] → Feats.AR2578
+- `FtShifterDefense` [cell] → Feats.AR2518
+- `FtShifterFerocity` [cell] → Feats.AR2579
+- `FtShifterInstincts` [cell] → Feats.AR2580
+- `FtShifterMultiattack` [cell] → Feats.AR2521
+- `FtShifterSavagery` [cell] → Feats.AR2581
+- `FtShifterStamina` [cell] → Feats.AR2582
+- `FtShipSavvy` [cell] → Feats.AR2557
+- `FtShipsMage` [cell] → Feats.AR1453
+- `FtShockTrooper` [cell] → Feats.AR390
+- `FtShockWave` [cell] → Feats.AR2945
+- `FtShortHaft` [cell] → Feats.AR238
+- `FtShotOnTheRun` [cell] → Feats.AR83
+- `FtSidestep` [cell] → Feats.AR1786
+- `FtSidestepCharge` [cell] → Feats.AR1815
+- `FtSignatureSpell` [cell] → Feats.AR2175
+- `FtSignatureSpell1` [cell] → Feats.AR2176
+- `FtSignatureSpell2` [cell] → Feats.AR2177
+- `FtSignatureSpell3` [cell] → Feats.AR2178
+- `FtSilencingStrike` [cell] → Feats.AR1196
+- `FtSilentMethod` [cell] → Feats.AR1982
+- `FtSilentSpell` [cell] → Feats.AR163
+- `FtSilverPalm` [cell] → Feats.AR2134
+- `FtSilverSmite` [cell] → Feats.AR2491
+- `FtSilverTongue` [cell] → Feats.AR2877
+- `FtSilverTracery` [cell] → Feats.AR2604
+- `FtSimpleWeaponProficiency` [cell] → Feats.AR100
+- `FtSkeletalDreadCompanion` [cell] → Feats.AR3548
+- `FtSkillFocus1` [cell] → Feats.AR102
+- `FtSkillFocus2` [cell] → Feats.AR103
+- `FtSkillFocus3` [cell] → Feats.AR104
+- `FtSkilledPact` [cell] → Feats.AR1605
+- `FtSkyrider` [cell] → Feats.AR2241
+- `FtSkywise` [cell] → Feats.AR3549
+- `FtSlashingFury` [cell] → Feats.AR220
+- `FtSmatterings` [cell] → Feats.AR1238
+- `FtSmiteFieryFoe` [cell] → Feats.AR1384
+- `FtSmitten` [cell] → Feats.AR3596
+- `FtSmoothTalk` [cell] → Feats.AR2135
+- `FtSnakeBlood` [cell] → Feats.AR2136
+- `FtSnatch` [cell] → Feats.AR3132
+- `FtSnatchAndSwallow` [cell] → Feats.AR2947
+- `FtSnatchArrows` [cell] → Feats.AR57
+- `FtSnatchTrophy` [cell] → Feats.AR2366
+- `FtSnowcasting` [cell] → Feats.AR1385
+- `FtSnowflakeWardance` [cell] → Feats.AR1391
+- `FtSnowrunner` [cell] → Feats.AR1390
+- `FtSociablePersonality` [cell] → Feats.AR1260
+- `FtSongOfTheHeart` [cell] → Feats.AR2492
+- `FtSoothTheBeast` [cell] → Feats.AR2493
+- `FtSoulOfHonor` [cell] → Feats.AR2879
+- `FtSoulOfLoyalty` [cell] → Feats.AR2880
+- `FtSoulOfSincerity` [cell] → Feats.AR2881
+- `FtSoulOfTheNorth` [cell] → Feats.AR565
+- `FtSoulbladeWarrior` [cell] → Feats.AR2558
+- `FtSoulsight` [cell] → Feats.AR1719
+- `FtSoultouchedSpellcasting` [cell] → Feats.AR1720
+- `FtSoutherMagician` [cell] → Feats.AR2287
+- `FtSpecialDispensation` [cell] → Feats.AR1747
+- `FtSpecialDispensation2` [cell] → Feats.AR1748
+- `FtSpectralSkirmisher` [cell] → Feats.AR239
+- `FtSpectralStike` [cell] → Feats.AR509
+- `FtSpeedOfThought` [cell] → Feats.AR1869
+- `FtSpellFocus` [cell] → Feats.AR105
+- `FtSpellFocus1` [cell] → Feats.AR106
+- `FtSpellFocus2` [cell] → Feats.AR107
+- `FtSpellFocus3` [cell] → Feats.AR108
+- `FtSpellGirding` [cell] → Feats.AR2211
+- `FtSpellHand` [cell] → Feats.AR566
+- `FtSpellKnowledge1` [cell] → Feats.AR3488
+- `FtSpellKnowledge2` [cell] → Feats.AR3489
+- `FtSpellKnowledge3` [cell] → Feats.AR3490
+- `FtSpellKnowledge4` [cell] → Feats.AR3491
+- `FtSpellLikeAbilityFocus` [cell] → Feats.AR2288
+- `FtSpellLikeAbiltyFocus2` [cell] → Feats.AR2289
+- `FtSpellLinkedFamiliar` [cell] → Feats.AR240
+- `FtSpellMastery1` [cell] → Feats.AR114
+- `FtSpellMastery2` [cell] → Feats.AR115
+- `FtSpellMastery3` [cell] → Feats.AR116
+- `FtSpellPenetration` [cell] → Feats.AR117
+- `FtSpellPower` [cell] → Feats.AR2882
+- `FtSpellRazor` [cell] → Feats.AR1227
+- `FtSpellRehearsal` [cell] → Feats.AR1360
+- `FtSpellStowaway1` [cell] → Feats.AR3397
+- `FtSpellStowaway2` [cell] → Feats.AR3398
+- `FtSpellStowaway3` [cell] → Feats.AR3399
+- `FtSpellThematics` [cell] → Feats.AR2179
+- `FtSpellcasterSupport` [cell] → Feats.AR2883
+- `FtSpellcastingProdigy` [cell] → Feats.AR2807
+- `FtSpellcastingProdigyCha` [cell] → Feats.AR2180
+- `FtSpellcastingProdigyInt` [cell] → Feats.AR2181
+- `FtSpellcastingProdigyWis` [cell] → Feats.AR2182
+- `FtSpellfireWielder` [cell] → Feats.AR2212
+- `FtSpellwise` [cell] → Feats.AR2137
+- `FtSpiderBite` [cell] → Feats.AR2183
+- `FtSpikedBody` [cell] → Feats.AR2605
+- `FtSpinningHalberd` [cell] → Feats.AR402
+- `FtSpireWalking` [cell] → Feats.AR2242
+- `FtSpiritOfLight` [cell] → Feats.AR3597
+- `FtSpiritSense` [cell] → Feats.AR1513
+- `FtSpiritedCharge` [cell] → Feats.AR72
+- `FtSpiritualForce` [cell] → Feats.AR2566
+- `FtSpiritualPurgative` [cell] → Feats.AR3579
+- `FtSplitBreath` [cell] → Feats.AR2930
+- `FtSplitChakra` [cell] → Feats.AR1686
+- `FtSplitChakra1` [cell] → Feats.AR1687
+- `FtSplitChakra2` [cell] → Feats.AR1688
+- `FtSplitChakra3` [cell] → Feats.AR1689
+- `FtSplitPsionicRay` [cell] → Feats.AR1884
+- `FtSplitRay` [cell] → Feats.AR609
+- `FtSpontaneousCasting` [cell] → Feats.AR2494
+- `FtSpontaneousDomainAccess1` [cell] → Feats.AR3402
+- `FtSpontaneousHealer` [cell] → Feats.AR443
+- `FtSpontaneousSpell1` [cell] → Feats.AR3406
+- `FtSpontaneousSpell2` [cell] → Feats.AR3407
+- `FtSpontaneousSpell3` [cell] → Feats.AR3408
+- `FtSpontaneousSummoner` [cell] → Feats.AR444
+- `FtSpontaneousWounder` [cell] → Feats.AR445
+- `FtSpreadingBreath` [cell] → Feats.AR2931
+- `FtSpringAttack` [cell] → Feats.AR33
+- `FtSpurnDeathsTouch` [cell] → Feats.AR3044
+- `FtStableFooting` [cell] → Feats.AR2559
+- `FtStaggeringStrike` [cell] → Feats.AR687
+- `FtStalwartDefense` [cell] → Feats.AR205
+- `FtStalwartPlanarAlly` [cell] → Feats.AR1917
+- `FtStamp` [cell] → Feats.AR3209
+- `FtStandStill` [cell] → Feats.AR1816
+- `FtStarspawn` [cell] → Feats.AR3102
+- `FtSteadfastDetermination` [cell] → Feats.AR241
+- `FtSteadyConcentration` [cell] → Feats.AR1167
+- `FtSteadyMountaineer` [cell] → Feats.AR1168
+- `FtStealthy` [cell] → Feats.AR119
+- `FtSteamMagic` [cell] → Feats.AR1454
+- `FtStigmata` [cell] → Feats.AR2069
+- `FtStillSpell` [cell] → Feats.AR164
+- `FtStitchedFleshFamiliar` [cell] → Feats.AR3029
+- `FtStoneBreaker` [cell] → Feats.AR2775
+- `FtStoneColossus` [cell] → Feats.AR2292
+- `FtStoneForm` [cell] → Feats.AR1232
+- `FtStonePower` [cell] → Feats.AR1546
+- `FtStoneRage` [cell] → Feats.AR1144
+- `FtStoneSlide` [cell] → Feats.AR2293
+- `FtStoneback` [cell] → Feats.AR1170
+- `FtStoneblood` [cell] → Feats.AR2294
+- `FtStoneshaper` [cell] → Feats.AR2243
+- `FtStonewalkerFist` [cell] → Feats.AR2295
+- `FtStormMagic` [cell] → Feats.AR1455
+- `FtStormheart` [cell] → Feats.AR2138
+- `FtStreetSmart` [cell] → Feats.AR2139
+- `FtStrengthDevotion1` [cell] → Feats.AR1094
+- `FtStrengthDevotion2` [cell] → Feats.AR1095
+- `FtStrengthOfTheCharger` [cell] → Feats.AR2884
+- `FtStrengthOfTheCrab` [cell] → Feats.AR2885
+- `FtStrengthOfTwo` [cell] → Feats.AR2567
+- `FtStrongMind` [cell] → Feats.AR2495
+- `FtStrongSoul` [cell] → Feats.AR2140
+- `FtStubborn` [cell] → Feats.AR2809
+- `FtStunningFist` [cell] → Feats.AR58
+- `FtStunningMaster` [cell] → Feats.AR2752
+- `FtSubduingStrike` [cell] → Feats.AR2043
+- `FtSubsonics` [cell] → Feats.AR688
+- `FtSuddenAbilityFocus1` [cell] → Feats.AR1606
+- `FtSuddenAbilityFocus2` [cell] → Feats.AR1607
+- `FtSuddenAbilityFocus3` [cell] → Feats.AR1608
+- `FtSuddenEmpower` [cell] → Feats.AR610
+- `FtSuddenEnergyAffinity` [cell] → Feats.AR1793
+- `FtSuddenEnergyAffinity1` [cell] → Feats.AR1794
+- `FtSuddenEnergyAffinity2` [cell] → Feats.AR1795
+- `FtSuddenEnergyAffinity3` [cell] → Feats.AR1796
+- `FtSuddenEnlarge` [cell] → Feats.AR611
+- `FtSuddenExtend` [cell] → Feats.AR612
+- `FtSuddenMaximize` [cell] → Feats.AR613
+- `FtSuddenQuicken` [cell] → Feats.AR614
+- `FtSuddenSilent` [cell] → Feats.AR615
+- `FtSuddenStill` [cell] → Feats.AR616
+- `FtSuddenWiden` [cell] → Feats.AR617
+- `FtSugliinMastery` [cell] → Feats.AR1393
+- `FtSummonEarthElemental` [cell] → Feats.AR2297
+- `FtSunDevotion1` [cell] → Feats.AR1097
+- `FtSunDevotion2` [cell] → Feats.AR1098
+- `FtSunSchool` [cell] → Feats.AR391
+- `FtSunkenSong` [cell] → Feats.AR1456
+- `FtSuperiorInitiative` [cell] → Feats.AR3410
+- `FtSuperiorUnarmedStrike` [cell] → Feats.AR1548
+- `FtSupernaturalCrusader` [cell] → Feats.AR1609
+- `FtSupernaturalInstincts` [cell] → Feats.AR3159
+- `FtSupernaturalTransformation` [cell] → Feats.AR3210
+- `FtSuppressWeakness` [cell] → Feats.AR2951
+- `FtSureHand` [cell] → Feats.AR991
+- `FtSurefooted` [cell] → Feats.AR2141
+- `FtSurgeOfMalevolence` [cell] → Feats.AR1514
+- `FtSurrogateSpellcasting` [cell] → Feats.AR3250
+- `FtSurvivor` [cell] → Feats.AR2142
+- `FtSutbleSigil` [cell] → Feats.AR1261
+- `FtSvirfneblinFigmentMaster` [cell] → Feats.AR2298
+- `FtSwampStalker` [cell] → Feats.AR3219
+- `FtSwarmfighting` [cell] → Feats.AR370
+- `FtSwarmsEmbrace` [cell] → Feats.AR2612
+- `FtSweetTalker` [cell] → Feats.AR992
+- `FtSwiftAmbusher` [cell] → Feats.AR993
+- `FtSwiftAndSilent` [cell] → Feats.AR2143
+- `FtSwiftHunter` [cell] → Feats.AR994
+- `FtSwiftwingElite` [cell] → Feats.AR2583
+- `FtSwimByAttack` [cell] → Feats.AR1457
+- `FtSwimLikeAFish` [cell] → Feats.AR494
+- `FtSwornEnemy` [cell] → Feats.AR3598
+- `FtSymbiontMastery` [cell] → Feats.AR2725
+- `FtTactileTrapsmith` [cell] → Feats.AR689
+- `FtTailConstrict` [cell] → Feats.AR2948
+- `FtTailSweepKnockdown` [cell] → Feats.AR2953
+- `FtTalentaWarrior` [cell] → Feats.AR2560
+- `FtTalented` [cell] → Feats.AR1838
+- `FtTalfirianSong` [cell] → Feats.AR2299
+- `FtTantricAbility` [cell] → Feats.AR3550
+- `FtTapMantle` [cell] → Feats.AR768
+- `FtTargetVulnerableSpot` [cell] → Feats.AR3551
+- `FtTarokkaNatural` [cell] → Feats.AR3552
+- `FtTashalatora` [cell] → Feats.AR2754
+- `FtTattooFocus` [cell] → Feats.AR2144
+- `FtTattooMagic` [cell] → Feats.AR2300
+- `FtTellingBlow` [cell] → Feats.AR242
+- `FtTempestBreath` [cell] → Feats.AR2933
+- `FtTenaciousMagic` [cell] → Feats.AR2195
+- `FtTenaciousMagic1` [cell] → Feats.AR3413
+- `FtTenaciousMagic2` [cell] → Feats.AR3414
+- `FtTenaciousMagic3` [cell] → Feats.AR3415
+- `FtTerrifyingRage` [cell] → Feats.AR3492
+- `FtTestOfVirtue` [cell] → Feats.AR3527
+- `FtTheocrat` [cell] → Feats.AR2244
+- `FtThickSkinned` [cell] → Feats.AR3251
+- `FtThickSkinned2` [cell] → Feats.AR3252
+- `FtThickSkinned3` [cell] → Feats.AR3253
+- `FtThrallBred` [cell] → Feats.AR3084
+- `FtThrallToDemon` [cell] → Feats.AR2024
+- `FtThreeMountains` [cell] → Feats.AR403
+- `FtThriKreenClaw1` [cell] → Feats.AR817
+- `FtThriKreenClaw2` [cell] → Feats.AR818
+- `FtThriKreenDisplacement1` [cell] → Feats.AR820
+- `FtThriKreenDisplacement2` [cell] → Feats.AR821
+- `FtThriKreenPoison1` [cell] → Feats.AR823
+- `FtThriKreenPoison2` [cell] → Feats.AR824
+- `FtThrowAnything` [cell] → Feats.AR371
+- `FtThug` [cell] → Feats.AR2145
+- `FtThunderTwin` [cell] → Feats.AR2146
+- `FtThunderclap` [cell] → Feats.AR3211
+- `FtTireless` [cell] → Feats.AR2147
+- `FtTissueRegenerator` [cell] → Feats.AR3573
+- `FtTitanFighting` [cell] → Feats.AR1197
+- `FtTombTaintedSoul` [cell] → Feats.AR3030
+- `FtToothedBlow` [cell] → Feats.AR1458
+- `FtTotemCompanion` [cell] → Feats.AR2452
+- `FtTouchOfGoldenIce` [cell] → Feats.AR2093
+- `FtTouchOfHate` [cell] → Feats.AR2184
+- `FtTouchSpellSpecialization` [cell] → Feats.AR567
+- `FtTouchstone1` [cell] → Feats.AR1426
+- `FtTouchstone2` [cell] → Feats.AR1427
+- `FtToughness1` [cell] → Feats.AR120
+- `FtToughness2` [cell] → Feats.AR121
+- `FtToughness3` [cell] → Feats.AR122
+- `FtToughnessEquiv` [cell] → Feats.U4
+- `FtTowerShieldProficiency` [cell] → Feats.AR99
+- `FtTrack` [cell] → Feats.AR123
+- `FtTrample` [cell] → Feats.AR71
+- `FtTransdimensionalSpell` [cell] → Feats.AR618
+- `FtTravelDevotion1` [cell] → Feats.AR1100
+- `FtTravelDevotion2` [cell] → Feats.AR1101
+- `FtTreeTopper` [cell] → Feats.AR2148
+- `FtTreefriend` [cell] → Feats.AR3220
+- `FtTrickeryDevotion1` [cell] → Feats.AR1103
+- `FtTrickeryDevotion2` [cell] → Feats.AR1104
+- `FtTrivialKnowledge` [cell] → Feats.AR1198
+- `FtTrophyCollector` [cell] → Feats.AR243
+- `FtTrueBeliever` [cell] → Feats.AR464
+- `FtTruediveElite` [cell] → Feats.AR2584
+- `FtTrustworthy` [cell] → Feats.AR2810
+- `FtTumblingFeint` [cell] → Feats.AR244
+- `FtTunnelFighting` [cell] → Feats.AR1730
+- `FtTunnelRiding` [cell] → Feats.AR1171
+- `FtTunnelrunner` [cell] → Feats.AR2328
+- `FtTurtleDart` [cell] → Feats.AR1228
+- `FtTwinPower` [cell] → Feats.AR1885
+- `FtTwinSpell` [cell] → Feats.AR619
+- `FtTwinSwordStyle` [cell] → Feats.AR2149
+- `FtTwoWeaponDefense` [cell] → Feats.AR125
+- `FtTwoWeaponFighting` [cell] → Feats.AR124
+- `FtTwoWeaponPounce` [cell] → Feats.AR245
+- `FtTwoWeaponRend` [cell] → Feats.AR246
+- `FtUnarmoredBody` [cell] → Feats.AR2606
+- `FtUnavoidableStrike` [cell] → Feats.AR1856
+- `FtUnbalancingStrike` [cell] → Feats.AR2839
+- `FtUncannyScent` [cell] → Feats.AR3197
+- `FtUnconditionalPower` [cell] → Feats.AR1886
+- `FtUndeadEmpathy` [cell] → Feats.AR2496
+- `FtUndeadLeadership` [cell] → Feats.AR3034
+- `FtUndeadMastery` [cell] → Feats.AR510
+- `FtUndeadMeldshaper` [cell] → Feats.AR1690
+- `FtUnderfootCombat` [cell] → Feats.AR1303
+- `FtUndoResistance` [cell] → Feats.AR3160
+- `FtUndyingFate` [cell] → Feats.AR1270
+- `FtUnholyStrike` [cell] → Feats.AR511
+- `FtUnicornCoolHead` [cell] → Feats.AR2847
+- `FtUnicornMagicInTheBlood` [cell] → Feats.AR2863
+- `FtUnicornSaddleback` [cell] → Feats.AR2874
+- `FtUnicornStrongSoul` [cell] → Feats.AR2886
+- `FtUnicornsFellowship` [cell] → Feats.AR3517
+- `FtUniversityEducation` [cell] → Feats.AR3528
+- `FtUnnaturalWill` [cell] → Feats.AR1518
+- `FtUnnervingCalm` [cell] → Feats.AR1550
+- `FtUnquenchedFlameOfLife` [cell] → Feats.AR3035
+- `FtUnseen` [cell] → Feats.AR3599
+- `FtUnseenSensor` [cell] → Feats.AR3568
+- `FtUnwholesomeIchor` [cell] → Feats.AR3553
+- `FtUpTheWalls` [cell] → Feats.AR1871
+- `FtUrbanStealth` [cell] → Feats.AR1239
+- `FtUrbanTracking` [cell] → Feats.AR1752
+- `FtVampireHunter` [cell] → Feats.AR3036
+- `FtVampiricRegeneration` [cell] → Feats.AR3554
+- `FtVengefulSurge` [cell] → Feats.AR3161
+- `FtVeratileSpellcaster` [cell] → Feats.AR1333
+- `FtVerminCompanion` [cell] → Feats.AR2454
+- `FtVerminShape` [cell] → Feats.AR2455
+- `FtVerminWildShape` [cell] → Feats.AR3463
+- `FtVerminfriend` [cell] → Feats.AR2025
+- `FtVersatileUnarmedStrike` [cell] → Feats.AR248
+- `FtVesatilePerformer` [cell] → Feats.AR690
+- `FtVestigeFocus1` [cell] → Feats.AR1596
+- `FtVestigeFocus2` [cell] → Feats.AR1597
+- `FtVestigeFocus3` [cell] → Feats.AR1598
+- `FtVeteranKnowledge` [cell] → Feats.AR1476
+- `FtVexingFlanker` [cell] → Feats.AR249
+- `FtViciousWound` [cell] → Feats.AR3212
+- `FtVicticGaze` [cell] → Feats.AR247
+- `FtVileMartialStrike` [cell] → Feats.AR2026
+- `FtVileMartialStrike1` [cell] → Feats.AR2027
+- `FtVileMartialStrike2` [cell] → Feats.AR2028
+- `FtVileMartialStrike3` [cell] → Feats.AR2029
+- `FtVileNaturalAttack` [cell] → Feats.AR2030
+- `FtViolateSpell` [cell] → Feats.AR2015
+- `FtViolateSpellLike` [cell] → Feats.AR2010
+- `FtViolateSpelllikeAbility2` [cell] → Feats.AR2011
+- `FtViolateSpelllikeAbility3` [cell] → Feats.AR2012
+- `FtVirulentPoison` [cell] → Feats.AR3254
+- `FtVoiceOfWrath` [cell] → Feats.AR3507
+- `FtVowAbstinence` [cell] → Feats.AR2077
+- `FtVowChastity` [cell] → Feats.AR2078
+- `FtVowNonviolence` [cell] → Feats.AR2079
+- `FtVowObedience` [cell] → Feats.AR2081
+- `FtVowPeace` [cell] → Feats.AR2080
+- `FtVowPoverty` [cell] → Feats.AR2082
+- `FtVowPurity` [cell] → Feats.AR2083
+- `FtWandMastery` [cell] → Feats.AR2508
+- `FtWandStrike` [cell] → Feats.AR568
+- `FtWandersDiplomacy` [cell] → Feats.AR251
+- `FtWarDevotion1` [cell] → Feats.AR1106
+- `FtWarDevotion2` [cell] → Feats.AR1107
+- `FtWardenInitiate` [cell] → Feats.AR2498
+- `FtWardingGesture` [cell] → Feats.AR3600
+- `FtWarpedMind` [cell] → Feats.AR3103
+- `FtWarriorInstinct` [cell] → Feats.AR2887
+- `FtWarriorShugenja` [cell] → Feats.AR2888
+- `FtWaterAdaptation` [cell] → Feats.AR1459
+- `FtWaterDevotion1` [cell] → Feats.AR1109
+- `FtWaterDevotion2` [cell] → Feats.AR1110
+- `FtWaterHeritage` [cell] → Feats.AR1931
+- `FtWaterSplittingStone` [cell] → Feats.AR252
+- `FtWaterspawn` [cell] → Feats.AR3104
+- `FtWeakeningTouch` [cell] → Feats.AR372
+- `FtWealth` [cell] → Feats.AR3529
+- `FtWeaponFinesse` [cell] → Feats.AR128
+- `FtWeaponFocus` [cell] → Feats.AR129
+- `FtWeaponFocus1` [cell] → Feats.AR130
+- `FtWeaponFocus2` [cell] → Feats.AR131
+- `FtWeaponFocus3` [cell] → Feats.AR132
+- `FtWeaponSpecialization1` [cell] → Feats.AR134
+- `FtWeaponSpecialization2` [cell] → Feats.AR135
+- `FtWeaponSpecialization3` [cell] → Feats.AR136
+- `FtWeaponSupremacy` [cell] → Feats.AR221
+- `FtWeaponSupremacy1` [cell] → Feats.AR222
+- `FtWeirdPiercingGaze` [cell] → Feats.AR3546
+- `FtWellRead` [cell] → Feats.AR1990
+- `FtWhirlingSteelStrike` [cell] → Feats.AR2499
+- `FtWhirlwindAttack` [cell] → Feats.AR26
+- `FtWhirlwindTailSweep` [cell] → Feats.AR2954
+- `FtWhisperedSecrets` [cell] → Feats.AR1271
+- `FtWhiteRavenDefense` [cell] → Feats.AR1552
+- `FtWhiteScorpionStrike` [cell] → Feats.AR2561
+- `FtWidenPower` [cell] → Feats.AR1887
+- `FtWidenSpell` [cell] → Feats.AR165
+- `FtWidenSupernaturalAbility1` [cell] → Feats.AR1611
+- `FtWidenSupernaturalAbility2` [cell] → Feats.AR1612
+- `FtWidenSupernaturalAbility3` [cell] → Feats.AR1613
+- `FtWieldOversizedWeapon` [cell] → Feats.AR428
+- `FtWildTalent` [cell] → Feats.AR3085
+- `FtWildhuntElite` [cell] → Feats.AR2585
+- `FtWillingDeformity` [cell] → Feats.AR2031
+- `FtWindandFire` [cell] → Feats.AR2776
+- `FtWindsinger` [cell] → Feats.AR1460
+- `FtWingExpert` [cell] → Feats.AR1361
+- `FtWingedWarrior` [cell] → Feats.AR1308
+- `FtWingover` [cell] → Feats.AR3133
+- `FtWingstorm` [cell] → Feats.AR2955
+- `FtWintersChampion` [cell] → Feats.AR1394
+- `FtWintersChild` [cell] → Feats.AR3221
+- `FtWintersMount` [cell] → Feats.AR1395
+- `FtWisdomBreedCaution` [cell] → Feats.AR2329
+- `FtWolfpack` [cell] → Feats.AR1309
+- `FtWolverinesRage` [cell] → Feats.AR495
+- `FtWoodlandArcher` [cell] → Feats.AR1310
+- `FtWordsOfCreation` [cell] → Feats.AR2094
+- `FtWoundingAttack` [cell] → Feats.AR1872
+- `FtWyrmgrafter` [cell] → Feats.AR1334
+- `FtYondallasSense` [cell] → Feats.AR1304
+- `FtZenArchery` [cell] → Feats.AR373
+- `FtZoneOfAnimation` [cell] → Feats.AR512
+- `FuriousInhalation` [cell] → Feats.AR1343
+- `GreatChaMod` [cell] → Feats.AQ3308
+- `GreatConMod` [cell] → Feats.AQ3311
+- `GreatDexMod` [cell] → Feats.AQ3314
+- `GreatIntMod` [cell] → Feats.AQ3317
+- `GreatStrMod` [cell] → Feats.AQ3320
+- `GreatWisMod` [cell] → Feats.AQ3323
+- `GreaterResiliencyCell` [cell] → Feats.AP334
+- `GreaterResiliencyDR` [cell] → Feats.AQ334
+- `HRLivingGreyhawkFt` [cell] → Feats.AQ2
+- `HostFeats` [cell] → Feats.AQ837
+- `IllithidFeats` [cell] → Feats.AQ847
+- `IllithidSkinAC` [cell] → Feats.AQ859
+- `ImprovedArrowOfDeath` [cell] → Feats.AQ3331
+- `ImprovedCritical1` [cell] → Feats.AO48
+- `ImprovedCritical2` [cell] → Feats.AO49
+- `ImprovedCritical3` [cell] → Feats.AO50
+- `ImprovedDamageReduction` [cell] → Feats.AQ2525
+- `ImprovedDarkvisionMod` [cell] → Feats.AQ3337
+- `ImprovedMetamagic` [cell] → Feats.AR3474
+- `ImprovedNaturalArmor` [cell] → Feats.AQ3120
+- `ImprovedOuterPlanarHeritage` [cell] → Feats.AR1928
+- `ImprovedSneakAttack` [cell] → Feats.AQ3475
+- `ImprovedSpellResistance` [cell] → Feats.AQ3349
+- `ImprovedTurnResistance` [cell] → Feats.AR3066
+- `IncarnumSelected` [cell] → Feats.AL6
+- `ItemCreationRowsCnt` [cell] → Feats.BD8
+- `ItemCreationSelected` [cell] → Feats.AD6
+- `LGNonCoreAvailableFt` [cell] → Feats.AQ3
+- `LegendaryWrestlerMod` [cell] → Feats.AQ3363
+- `ListSpecialization` [cell] → Feats.AQ134
+- `LuckFeatsSelected` [cell] → Feats.AH6
+- `MagicFeats` [cell] → Feats.AC5
+- `MagicalTraining` [cell] → Feats.AQ2126
+- `MartialFeatChanged` [range] → Feats.O1534:.P1540
+- `MartialStudy1` [cell] → Feats.AO1538
+- `MartialStudy2` [cell] → Feats.AO1539
+- `MartialStudy3` [cell] → Feats.AO1540
+- `MartialWeapon1` [cell] → Feats.AO65
+- `MartialWeapon2` [cell] → Feats.AO66
+- `MartialWeapon3` [cell] → Feats.AO67
+- `MaxCasterLevelFt` [cell] → Feats.AQ4
+- `MeleeWeaponMasteryCell1` [cell] → Feats.AP215
+- `MeleeWeaponMasteryCell2` [cell] → Feats.AP216
+- `MeleeWeaponMasteryCell3` [cell] → Feats.AP217
+- `MetaBreathFeats` [cell] → Feats.AQ2921
+- `MetamagicRowsCnt` [cell] → Feats.AY8
+- `MetamagicSelected` [cell] → Feats.AC6
+- `MetapsionicFeatSelected` [cell] → Feats.AF6
+- `MindOverBodyFeat` [cell] → Feats.AQ2130
+- `MithralFluidity` [cell] → Feats.AQ2529
+- `PierceTheDarkness` [cell] → Feats.AR1210
+- `PsionicSelected` [cell] → Feats.AE6
+- `RaceFt` [cell] → Feats.BK4
+- `RangedWeaponMasteryCell1` [cell] → Feats.AP226
+- `RangedWeaponMasteryCell2` [cell] → Feats.AP227
+- `RangedWeaponMasteryCell3` [cell] → Feats.AP228
+- `RapidRecovery1` [cell] → Feats.AR1600
+- `RapidRecovery2` [cell] → Feats.AR1601
+- `RapidRecovery3` [cell] → Feats.AR1602
+- `SamType` [cell] → Feats.BK77
+- `ScionCell` [cell] → Feats.AP1942
+- `ShifterCell2` [cell] → Feats.AP2572
+- `ShifterSelected` [cell] → Feats.AN6
+- `ShifterTrait2Txt` [cell] → Feats.AQ2572
+- `ShiftingMod` [cell] → Feats.AN5
+- `SpecWpn1` [cell] → Feats.D127
+- `SpecWpn2` [cell] → Feats.D128
+- `SpecWpn3` [cell] → Feats.D129
+- `SplitChakra1Choice` [cell] → Feats.AP1687
+- `SplitChakra2Choice` [cell] → Feats.AP1688
+- `SplitChakra3Choice` [cell] → Feats.AP1689
+- `ToughnessHPs` [cell] → Feats.AQ120
+- `WeaponFocus1` [cell] → Feats.BL140
+- `WeaponFocus2` [cell] → Feats.BL141
+- `WeaponFocus3` [cell] → Feats.BL142
+- `WeaponFocusFree1` [cell] → Feats.BL137
+- `WeaponFocusFree2` [cell] → Feats.BL138
+- `WeaponFocusFree3` [cell] → Feats.BL139
+- `WeaponFocusList` [cell] → Feats.AQ128
+- `WeaponSupremacyCell` [cell] → Feats.AP222
+- `WildFeats` [cell] → Feats.AG6
+- `tEpicWeaponFocus2` [cell] → Feats.AR424
+
+### Shield
+
+- `ShieldSpecial1` [cell] → Feats.AO231
+- `ShieldSpecial2` [cell] → Feats.AO232
+- `ShieldSpecial3` [cell] → Feats.AO233
+- `ShieldedManifesting` [cell] → Feats.AR1166
+
+### Skills
+
+- `SkillFocusList` [cell] → Feats.AQ102
+
+### Tables/Lookups
+
+- `TblAberrantFeatureFeat` [range] → Feats.AO3092:.AO3094
+- `TblAereniFocus` [cell] → Feats.AO2653
+- `TblAllFeatsAvailable` [range] → Feats.K11:.L3634
+- `TblAllFeatsSelected` [range] → Feats.O11:.P3634
+- `TblArcaneDefense` [range] → Feats.AO516:.AO518
+- `TblBonusClassAbrev` [range] → Feats.BK8:.BK107
+- `TblBonusFeatClasses` [range] → Feats.BJ8:.BJ107
+- `TblBonusSelected` [range] → Feats.P11:.P3634
+- `TblCriticalFocus` [range] → Feats.AO3476:.AO3480
+- `TblCustomFeats` [range] → Feats.D3627:.D3634
+- `TblCustomFeatsDesc` [range] → Feats.E3627:.E3634
+- `TblDonMantleFeat` [range] → Feats.AO770:.AO772
+- `TblEducationFeats` [range] → Feats.AO2462:.AO2463
+- `TblEfficientItemCreationFeat` [range] → Feats.D3280:.D3282
+- `TblEnergySub` [range] → Feats.AO590:.AO592
+- `TblEpicSkillFocusList` [range] → Feats.AO710:.AO712
+- `TblEpicWeaponFocusFeat` [range] → Feats.AO423:.AO425
+- `TblEpicWeaponSpecialization` [range] → Feats.AO3297:.AO3299
+- `TblExoticArmorProficiency` [range] → Feats.AO1146:.AO1148
+- `TblExoticFeats` [range] → Feats.AO37:.AO40
+- `TblExoticShieldProficiency` [range] → Feats.AO1150:.AO1152
+- `TblExtraTurning` [range] → Feats.AR41:.AR44
+- `TblFeatsSelected` [range] → Feats.O11:.O3634
+- `TblFtArcaneThesis` [range] → Feats.D172:.D174
+- `TblFtPoisonMaster` [range] → Feats.AO986:.AO988
+- `TblGreaterSpellFocus` [range] → Feats.AO110:.AO112
+- `TblGreaterWeaponFocusFeat` [range] → Feats.AO137:.AO140
+- `TblGreaterWeaponSpecializationFeat` [range] → Feats.AO142:.AO144
+- `TblImprovedCritical` [range] → Feats.AO47:.AO50
+- `TblImprovedNaturalAttacks` [range] → Feats.AO3124:.AO3126
+- `TblListReset` [range] → Feats.BI11:.BI3634
+- `TblListSelected` [range] → Feats.AP11:.AP3634
+- `TblMartialFeats` [range] → Feats.AO62:.AO67
+- `TblMartialStudy` [range] → Feats.AO1538:.AO1540
+- `TblOverWhelmingCrtit` [range] → Feats.AO3484:.AO3486
+- `TblOverwhelmingCrit` [range] → Feats.AO3484:.AO3486
+- `TblPermanentEminationFeat` [range] → Feats.D3379:.D3381
+- `TblPracticedManifester` [range] → Feats.AO757:.AO759
+- `TblPracticedSpellcaster` [range] → Feats.AO559:.AO561
+- `TblPracticedSpellcasterData` [range] → Feats.AO559:.AP561
+- `TblPrivilegedEnergy` [range] → Feats.AO761:.AO763
+- `TblPsicrystalAffinityFeat` [range] → Feats.AO1845:.AO1848
+- `TblPsicrystalPowerFeat` [range] → Feats.D3451:.D3453
+- `TblRapidReload` [range] → Feats.AO92:.AO94
+- `TblSignatureSpell` [range] → Feats.D2176:.D2178
+- `TblSkillFocus` [range] → Feats.AO97:.AO104
+- `TblSpellFocus` [range] → Feats.AO105:.AO108
+- `TblSpellMastery` [range] → Feats.D114:.D116
+- `TblSpellStowawayFeat` [range] → Feats.D3397:.D3399
+- `TblSpontaneousSpellFeat` [range] → Feats.D3406:.D3408
+- `TblSymbiontMastery` [cell] → Feats.D2726
+- `TblTenaciousMagicFeat` [range] → Feats.D3413:.D3415
+- `TblUmbragenFeats` [range] → Feats.AR2628:.AR2637
+- `TblWeaponFocusFeat` [range] → Feats.BM128:.BM148
+- `TblWeaponSpecAndGreaterWeaponFocus` [range] → Feats.AO146:.AO149
+- `TblWeaponSpecializationFeat` [range] → Feats.AO132:.AO136
+- `TblWeaponSpecializationFree` [range] → Feats.Y134:.Y136
+
+## Armor
+
+### Armor
+
+- `ArmorACP` [cell] → Armor.O1
+- `ArmorBonus` [cell] → Armor.M1
+- `ArmorMaterial` [cell] → Armor.J1
+- `ArmorMaterialName` [cell] → Armor.K90
+- `ArmorMaterialsList` [range] → Armor.H106:.H122
+- `ArmorMaxDex` [cell] → Armor.N1
+- `ArmorName` [cell] → Armor.K88
+- `ArmorProficient` [cell] → Armor.L1
+- `ArmorProps` [cell] → Armor.A7
+- `ArmorSel` [cell] → Armor.I88
+- `ArmorSpeed` [cell] → Armor.R1
+- `ArmorSpellFail` [cell] → Armor.P1
+- `ArmorSummary` [cell] → Armor.AA11
+- `ArmorType` [cell] → Armor.J88
+- `ArmorWgt` [cell] → Armor.Q1
+
+### Armor Class
+
+- `ACP` [cell] → Armor.N81
+
+### General
+
+- `ActualArmorName` [cell] → Armor.H1
+- `ActualArmorType` [cell] → Armor.K1
+- `ActualShieldName` [cell] → Armor.H62
+- `ArcaneSpellFailure` [cell] → Armor.P81
+- `ClassFlySpeed` [cell] → Armor.V3
+- `ClassManeuverability` [cell] → Armor.W3
+- `DragonShamanNatArmor` [cell] → Armor.T25
+- `FlySpeed` [cell] → Armor.V4
+- `GraftsMiscNatArmor` [cell] → Armor.V26
+- `LoadACP` [cell] → Armor.R14
+- `LoadMaxDex` [cell] → Armor.R12
+- `MaxDexBonus` [cell] → Armor.N80
+- `MiscNatArmor` [cell] → Armor.T29
+- `NonProfACP` [cell] → Armor.N82
+- `SpeedWithRun` [cell] → Armor.S1
+- `SwimSpeed` [cell] → Armor.U6
+- `VekACP` [cell] → Armor.N85
+- `WarforgedArmorType` [cell] → Armor.H61
+
+### Shield
+
+- `ShieldBonus` [cell] → Armor.M62
+- `ShieldCP` [cell] → Armor.O62
+- `ShieldMaterial` [cell] → Armor.J62
+- `ShieldMaterialName` [cell] → Armor.M90
+- `ShieldMaxDex` [cell] → Armor.N62
+- `ShieldName` [cell] → Armor.M88
+- `ShieldProficient` [cell] → Armor.L62
+- `ShieldProps` [cell] → Armor.A22
+- `ShieldSel` [cell] → Armor.I90
+- `ShieldSpellFail` [cell] → Armor.P62
+- `ShieldType` [cell] → Armor.J90
+- `ShieldWgt` [cell] → Armor.Q62
+
+### Tables/Lookups
+
+- `TblArmorOverrides` [range] → Armor.C8:.E15
+- `TblExoticArmorList` [range] → Armor.H124:.H134
+- `TblExoticShieldList` [range] → Armor.H136:.H140
+- `TblShieldOverrides` [range] → Armor.C23:.E27
+
+## Attacks
+
+### Attacks
+
+- `Attack1Bonus` [cell] → Attacks.B36
+- `Attack1Critical` [cell] → Attacks.B38
+- `Attack1Damage` [cell] → Attacks.B37
+- `Attack1Name` [cell] → Attacks.B35
+- `Attack1Props` [cell] → Attacks.B43
+- `Attack1Range` [cell] → Attacks.B39
+- `Attack1Size` [cell] → Attacks.B42
+- `Attack1Txt` [cell] → Attacks.D35
+- `Attack1Type` [cell] → Attacks.B41
+- `Attack1UsageIndex` [cell] → Attacks.C17
+- `Attack1Wgt` [cell] → Attacks.B40
+- `Attack2Bonus` [cell] → Attacks.Q36
+- `Attack2Critical` [cell] → Attacks.Q38
+- `Attack2Damage` [cell] → Attacks.Q37
+- `Attack2Name` [cell] → Attacks.Q35
+- `Attack2Props` [cell] → Attacks.Q43
+- `Attack2Range` [cell] → Attacks.Q39
+- `Attack2Size` [cell] → Attacks.Q42
+- `Attack2Txt` [cell] → Attacks.S35
+- `Attack2Type` [cell] → Attacks.Q41
+- `Attack2UsageIndex` [cell] → Attacks.R17
+- `Attack2Wgt` [cell] → Attacks.Q40
+- `Attack3Bonus` [cell] → Attacks.AF36
+- `Attack3Critical` [cell] → Attacks.AF38
+- `Attack3Damage` [cell] → Attacks.AF37
+- `Attack3Name` [cell] → Attacks.AF35
+- `Attack3Props` [cell] → Attacks.AF43
+- `Attack3Range` [cell] → Attacks.AF39
+- `Attack3Size` [cell] → Attacks.AF42
+- `Attack3Txt` [cell] → Attacks.AH35
+- `Attack3Type` [cell] → Attacks.AF41
+- `Attack3UsageIndex` [cell] → Attacks.AG17
+- `Attack3Wgt` [cell] → Attacks.AF40
+- `Attack4Bonus` [cell] → Attacks.AU36
+- `Attack4Critical` [cell] → Attacks.AU38
+- `Attack4Damage` [cell] → Attacks.AU37
+- `Attack4Name` [cell] → Attacks.AU35
+- `Attack4Props` [cell] → Attacks.AU43
+- `Attack4Range` [cell] → Attacks.AU39
+- `Attack4Size` [cell] → Attacks.AU42
+- `Attack4Txt` [cell] → Attacks.AW35
+- `Attack4Type` [cell] → Attacks.AU41
+- `Attack4UsageIndex` [cell] → Attacks.AV17
+- `Attack4Wgt` [cell] → Attacks.AU40
+- `Attack5Bonus` [cell] → Attacks.BJ36
+- `Attack5Critical` [cell] → Attacks.BJ38
+- `Attack5Damage` [cell] → Attacks.BJ37
+- `Attack5Name` [cell] → Attacks.BJ35
+- `Attack5Props` [cell] → Attacks.BJ43
+- `Attack5Range` [cell] → Attacks.BJ39
+- `Attack5Size` [cell] → Attacks.BJ42
+- `Attack5Txt` [cell] → Attacks.BL35
+- `Attack5Type` [cell] → Attacks.BJ41
+- `Attack5UsageIndex` [cell] → Attacks.BK17
+- `Attack5Wgt` [cell] → Attacks.BJ40
+- `Attack6Bonus` [cell] → Attacks.BY36
+- `Attack6Critical` [cell] → Attacks.BY38
+- `Attack6Damage` [cell] → Attacks.BY37
+- `Attack6Name` [cell] → Attacks.BY35
+- `Attack6Props` [cell] → Attacks.BY43
+- `Attack6Range` [cell] → Attacks.BY39
+- `Attack6Size` [cell] → Attacks.BY42
+- `Attack6Txt` [cell] → Attacks.CA35
+- `Attack6Type` [cell] → Attacks.BY41
+- `Attack6UsageIndex` [cell] → Attacks.BZ17
+- `Attack6Wgt` [cell] → Attacks.BY40
+- `AttackName1` [cell] → Attacks.B7
+- `AttackName2` [cell] → Attacks.Q7
+- `AttackName3` [cell] → Attacks.AF7
+- `AttackName4` [cell] → Attacks.AU7
+- `AttackName5` [cell] → Attacks.BJ7
+- `AttackName6` [cell] → Attacks.BY7
+- `AttackTxt` [cell] → Attacks.D37
+- `AttacksChanged` [cell] → Attacks.CP1
+
+### General
+
+- `ImportAttack` [cell] → Attacks.A10
+- `MySize` [cell] → Attacks.L36
+- `PowerBuild` [cell] → Attacks.L35
+- `StrongarmBracers` [cell] → Attacks.L34
+
+### Tables/Lookups
+
+- `TblAttackFeat` [range] → Attacks.J45:.J56
+- `TblAttacks` [range] → Attacks.CN3:.CN8
+- `TblAttacksMirror` [range] → Attacks.CO3:.CO8
+- `TblWeapon1Overrides` [range] → Attacks.B45:.B53
+- `TblWeapon2Overrides` [range] → Attacks.Q45:.Q53
+- `TblWeapon3Overrides` [range] → Attacks.AF45:.AF53
+- `TblWeapon4Overrides` [range] → Attacks.AU45:.AU53
+- `TblWeapon5Overrides` [range] → Attacks.BJ45:.BJ53
+- `TblWeapon6Overrides` [range] → Attacks.BY45:.BY53
+- `TblWeaponMaterial` [range] → Attacks.M45:.M64
+- `TblWeaponMaterialInfo` [range] → Attacks.M45:.O64
+
+## Enhancements
+
+### Buffs
+
+- `BuffsACBonus` [cell] → Enhancements.N17
+- `BuffsAbilitiesAdj` [range] → Enhancements.R17:.W17
+- `BuffsChaMod` [cell] → Enhancements.W17
+- `BuffsConMod` [cell] → Enhancements.T17
+- `BuffsDamageBonus` [cell] → Enhancements.K17
+- `BuffsDamageMeleeBonus` [cell] → Enhancements.L17
+- `BuffsDamageRangedBonus` [cell] → Enhancements.M17
+- `BuffsDexMod` [cell] → Enhancements.S17
+- `BuffsIntMod` [cell] → Enhancements.U17
+- `BuffsStrMod` [cell] → Enhancements.R17
+- `BuffsTempHP` [cell] → Enhancements.H19
+- `BuffsToFort` [cell] → Enhancements.O17
+- `BuffsToHitBonus` [cell] → Enhancements.H17
+- `BuffsToHitMeleeBonus` [cell] → Enhancements.I17
+- `BuffsToHitRangedBonus` [cell] → Enhancements.J17
+- `BuffsToRef` [cell] → Enhancements.P17
+- `BuffsToWill` [cell] → Enhancements.Q17
+- `BuffsWisMod` [cell] → Enhancements.V17
+
+### General
+
+- `AbilitySkillBonus` [range] → Enhancements.A27:.C32
+- `ActionPointBonus` [cell] → Enhancements.C24
+- `BonusCasterLevel` [cell] → Enhancements.C18
+- `BonusManifesterLevel` [cell] → Enhancements.C19
+- `Corr` [cell] → Enhancements.C20
+- `DROverride` [cell] → Enhancements.C22
+- `DeflectionBonus` [cell] → Enhancements.C6
+- `Dep` [cell] → Enhancements.C21
+- `DexSizeMod` [cell] → Enhancements.S14
+- `EnhTurnAttempts` [cell] → Enhancements.C14
+- `EnhTurnCheck` [cell] → Enhancements.C13
+- `MagicArmor` [cell] → Enhancements.C3
+- `MagicFort` [cell] → Enhancements.C9
+- `MagicInit` [cell] → Enhancements.C8
+- `MagicRef` [cell] → Enhancements.C10
+- `MagicShield` [cell] → Enhancements.C4
+- `MagicTurn` [cell] → Enhancements.C12
+- `MagicWill` [cell] → Enhancements.C11
+- `MiscACBonus` [cell] → Enhancements.C7
+- `MiscAttack` [cell] → Enhancements.C15
+- `MiscMelee` [cell] → Enhancements.C16
+- `MiscRanged` [cell] → Enhancements.C17
+- `MiscSpeed` [cell] → Enhancements.C2
+- `NatArmor` [cell] → Enhancements.C5
+- `SROverride` [cell] → Enhancements.C23
+- `StrSizeMod` [cell] → Enhancements.R14
+
+### Tables/Lookups
+
+- `TblEnhancementSkills` [range] → Enhancements.C27:.C32
+- `TblEnhancements` [range] → Enhancements.C2:.C24
+
+## Magic Equipment
+
+### Equipment Slots
+
+- `ArmSlot` [cell] → Magic Equipment.J17
+- `ArmSlotACMod` [cell] → Magic Equipment.BA24
+- `ArmSlotAttackBonus` [cell] → Magic Equipment.BA13
+- `ArmSlotDamageBonus` [cell] → Magic Equipment.BA14
+- `ArmSlotValue` [cell] → Magic Equipment.BB51
+- `ArmSlotWeight` [cell] → Magic Equipment.AZ51
+- `BodySlot` [cell] → Magic Equipment.R2
+- `BodySlotValue` [cell] → Magic Equipment.BG24
+- `BodySlotWeight` [cell] → Magic Equipment.BE24
+- `FaceSlot` [cell] → Magic Equipment.P7
+- `FaceSlotValue` [cell] → Magic Equipment.AM81
+- `FaceSlotWeight` [cell] → Magic Equipment.AK81
+- `FeetSlot` [cell] → Magic Equipment.R17
+- `FeetSlotValue` [cell] → Magic Equipment.BV53
+- `FeetSlotWeight` [cell] → Magic Equipment.BT53
+- `HandSlot` [cell] → Magic Equipment.J12
+- `HandSlotDexMod` [cell] → Magic Equipment.AB16
+- `HandSlotStrMod` [cell] → Magic Equipment.AB15
+- `HandSlotValue` [cell] → Magic Equipment.AC73
+- `HandSlotWeight` [cell] → Magic Equipment.AA73
+- `HeadSlot` [cell] → Magic Equipment.P2
+- `HeadSlotChaBonus` [cell] → Magic Equipment.AG17
+- `HeadSlotChaCheckBonus` [cell] → Magic Equipment.AG18
+- `HeadSlotIntBonus` [cell] → Magic Equipment.AG16
+- `HeadSlotValue` [cell] → Magic Equipment.AH55
+- `HeadSlotWeight` [cell] → Magic Equipment.AF55
+- `NeckSlot` [cell] → Magic Equipment.P12
+- `NeckSlotConMod` [cell] → Magic Equipment.AQ16
+- `NeckSlotMightFistBonus` [cell] → Magic Equipment.AQ19
+- `NeckSlotNatArmorMod` [cell] → Magic Equipment.AQ17
+- `NeckSlotValue` [cell] → Magic Equipment.AR111
+- `NeckSlotWeight` [cell] → Magic Equipment.AP111
+- `NeckSlotWisMod` [cell] → Magic Equipment.AQ18
+- `RingSlotLH` [cell] → Magic Equipment.J7
+- `RingSlotRH` [cell] → Magic Equipment.J2
+- `ShoulderSlot` [cell] → Magic Equipment.P17
+- `ShoulderSlotChaMod` [cell] → Magic Equipment.AV17
+- `ShoulderSlotSavesMod` [cell] → Magic Equipment.AV18
+- `ShoulderSlotSpellResist` [cell] → Magic Equipment.AV19
+- `ShoulderSlotValue` [cell] → Magic Equipment.AW56
+- `ShoulderSlotWeight` [cell] → Magic Equipment.AU56
+- `TorsoSlot` [cell] → Magic Equipment.R7
+- `TorsoSlotResistSaveBonus` [cell] → Magic Equipment.BK16
+- `TorsoSlotValue` [cell] → Magic Equipment.BL49
+- `TorsoSlotWeight` [cell] → Magic Equipment.BJ49
+- `WaistSlot` [cell] → Magic Equipment.R12
+- `WaistSlotAllStatsMod` [cell] → Magic Equipment.BP15
+- `WaistSlotStrMod` [cell] → Magic Equipment.BP14
+- `WaistSlotValue` [cell] → Magic Equipment.BQ30
+- `WaistSlotWeight` [cell] → Magic Equipment.BO30
+
+### General
+
+- `HasMagicEquip` [cell] → Magic Equipment.CE2
+- `RingArmorBonus` [cell] → Magic Equipment.V16
+- `RingLHValue` [cell] → Magic Equipment.X103
+- `RingOfProtectionBonus` [cell] → Magic Equipment.V15
+- `RingRHValue` [cell] → Magic Equipment.X102
+- `RingShieldBonus` [cell] → Magic Equipment.V17
+- `SzirbsShiningHelmAC` [cell] → Magic Equipment.AG54
+- `Unslotted1` [cell] → Magic Equipment.J21
+- `Unslotted10` [cell] → Magic Equipment.J30
+- `Unslotted11` [cell] → Magic Equipment.J31
+- `Unslotted12` [cell] → Magic Equipment.J32
+- `Unslotted13` [cell] → Magic Equipment.J33
+- `Unslotted14` [cell] → Magic Equipment.J34
+- `Unslotted15` [cell] → Magic Equipment.J35
+- `Unslotted16` [cell] → Magic Equipment.J36
+- `Unslotted17` [cell] → Magic Equipment.J37
+- `Unslotted18` [cell] → Magic Equipment.J38
+- `Unslotted19` [cell] → Magic Equipment.J39
+- `Unslotted2` [cell] → Magic Equipment.J22
+- `Unslotted20` [cell] → Magic Equipment.J40
+- `Unslotted21` [cell] → Magic Equipment.J41
+- `Unslotted22` [cell] → Magic Equipment.J42
+- `Unslotted23` [cell] → Magic Equipment.J43
+- `Unslotted3` [cell] → Magic Equipment.J23
+- `Unslotted4` [cell] → Magic Equipment.J24
+- `Unslotted5` [cell] → Magic Equipment.J25
+- `Unslotted6` [cell] → Magic Equipment.J26
+- `Unslotted7` [cell] → Magic Equipment.J27
+- `Unslotted8` [cell] → Magic Equipment.J28
+- `Unslotted9` [cell] → Magic Equipment.J29
+- `UnslottedAlertness` [cell] → Magic Equipment.CA13
+- `UnslottedCircThieves` [cell] → Magic Equipment.CA23
+- `UnslottedCompHide` [cell] → Magic Equipment.CA21
+- `UnslottedCompMS` [cell] → Magic Equipment.CA22
+- `UnslottedCompMost` [cell] → Magic Equipment.CA18
+- `UnslottedEnhCha` [cell] → Magic Equipment.CA11
+- `UnslottedEnhCon` [cell] → Magic Equipment.CA10
+- `UnslottedEnhDex` [cell] → Magic Equipment.CA7
+- `UnslottedEnhInt` [cell] → Magic Equipment.CA12
+- `UnslottedEnhStr` [cell] → Magic Equipment.CA9
+- `UnslottedEnhWis` [cell] → Magic Equipment.CA8
+- `UnslottedIbnDuman` [cell] → Magic Equipment.CA27
+- `UnslottedInsightAC` [cell] → Magic Equipment.CA6
+- `UnslottedItemsWorn` [range] → Magic Equipment.J21:.J43
+- `UnslottedLensOfDetection` [cell] → Magic Equipment.CA3
+- `UnslottedLuckstone` [cell] → Magic Equipment.CA4
+- `UnslottedValue1` [cell] → Magic Equipment.K21
+- `UnslottedValue10` [cell] → Magic Equipment.K30
+- `UnslottedValue11` [cell] → Magic Equipment.K31
+- `UnslottedValue12` [cell] → Magic Equipment.K32
+- `UnslottedValue13` [cell] → Magic Equipment.K33
+- `UnslottedValue14` [cell] → Magic Equipment.K34
+- `UnslottedValue15` [cell] → Magic Equipment.K35
+- `UnslottedValue16` [cell] → Magic Equipment.K36
+- `UnslottedValue17` [cell] → Magic Equipment.K37
+- `UnslottedValue18` [cell] → Magic Equipment.K38
+- `UnslottedValue19` [cell] → Magic Equipment.K39
+- `UnslottedValue2` [cell] → Magic Equipment.K22
+- `UnslottedValue20` [cell] → Magic Equipment.K40
+- `UnslottedValue21` [cell] → Magic Equipment.K41
+- `UnslottedValue22` [cell] → Magic Equipment.K42
+- `UnslottedValue23` [cell] → Magic Equipment.K43
+- `UnslottedValue3` [cell] → Magic Equipment.K23
+- `UnslottedValue4` [cell] → Magic Equipment.K24
+- `UnslottedValue5` [cell] → Magic Equipment.K25
+- `UnslottedValue6` [cell] → Magic Equipment.K26
+- `UnslottedValue7` [cell] → Magic Equipment.K27
+- `UnslottedValue8` [cell] → Magic Equipment.K28
+- `UnslottedValue9` [cell] → Magic Equipment.K29
+
+### Tables/Lookups
+
+- `TblHasMagicEquip` [range] → Magic Equipment.CD2:.CD12
+- `TblMAgicEquipArmWeight` [range] → Magic Equipment.AZ2:.AZ49
+- `TblMagicEquipArm` [range] → Magic Equipment.AY2:.AY6
+- `TblMagicEquipArmBonus` [range] → Magic Equipment.BA3:.BA22
+- `TblMagicEquipArmValue` [range] → Magic Equipment.BB2:.BB49
+- `TblMagicEquipArms` [range] → Magic Equipment.AY2:.AY49
+- `TblMagicEquipBody` [range] → Magic Equipment.BD2:.BD22
+- `TblMagicEquipBodyBonus` [range] → Magic Equipment.BF3:.BF7
+- `TblMagicEquipBodyValue` [range] → Magic Equipment.BG2:.BG22
+- `TblMagicEquipBodyWeight` [range] → Magic Equipment.BE2:.BE22
+- `TblMagicEquipFace` [range] → Magic Equipment.AJ2:.AJ79
+- `TblMagicEquipFaceValue` [range] → Magic Equipment.AM2:.AM79
+- `TblMagicEquipFaceWeight` [range] → Magic Equipment.AK2:.AK79
+- `TblMagicEquipFeet` [range] → Magic Equipment.BS2:.BS51
+- `TblMagicEquipFeetValue` [range] → Magic Equipment.BV2:.BV51
+- `TblMagicEquipFeetWeight` [range] → Magic Equipment.BT2:.BT51
+- `TblMagicEquipHandBonus` [range] → Magic Equipment.AB3:.AB12
+- `TblMagicEquipHandWeight` [range] → Magic Equipment.AA2:.AA72
+- `TblMagicEquipHands` [range] → Magic Equipment.Z2:.Z72
+- `TblMagicEquipHandsValue` [range] → Magic Equipment.AC2:.AC72
+- `TblMagicEquipHead` [range] → Magic Equipment.AE2:.AE54
+- `TblMagicEquipHeadBonus` [range] → Magic Equipment.AG3:.AG12
+- `TblMagicEquipHeadValue` [range] → Magic Equipment.AH2:.AH54
+- `TblMagicEquipHeadWeight` [range] → Magic Equipment.AF2:.AF54
+- `TblMagicEquipNeck` [range] → Magic Equipment.AO2:.AO110
+- `TblMagicEquipNeckBonus` [range] → Magic Equipment.AQ3:.AQ12
+- `TblMagicEquipNeckValue` [range] → Magic Equipment.AR2:.AR110
+- `TblMagicEquipNeckWeight` [range] → Magic Equipment.AP2:.AP110
+- `TblMagicEquipRingValue` [range] → Magic Equipment.X2:.X101
+- `TblMagicEquipRings` [range] → Magic Equipment.U2:.U101
+- `TblMagicEquipShoulders` [range] → Magic Equipment.AT2:.AT54
+- `TblMagicEquipShouldersBonus` [range] → Magic Equipment.AV3:.AV12
+- `TblMagicEquipShouldersValue` [range] → Magic Equipment.AW2:.AW54
+- `TblMagicEquipShouldersWeight` [range] → Magic Equipment.AU2:.AU54
+- `TblMagicEquipTorso` [range] → Magic Equipment.BI2:.BI47
+- `TblMagicEquipTorsoBonus` [range] → Magic Equipment.BK3:.BK12
+- `TblMagicEquipTorsoValue` [range] → Magic Equipment.BL2:.BL47
+- `TblMagicEquipTorsoWeight` [range] → Magic Equipment.BJ2:.BJ47
+- `TblMagicEquipUnslotted` [range] → Magic Equipment.BY2:.BY50
+- `TblMagicEquipUnslottedValue` [range] → Magic Equipment.CB2:.CB50
+- `TblMagicEquipUnslottedWeight` [range] → Magic Equipment.BZ2:.BZ50
+- `TblMagicEquipWaist` [range] → Magic Equipment.BN2:.BN29
+- `TblMagicEquipWaistBonus` [range] → Magic Equipment.BP3:.BP11
+- `TblMagicEquipWaistValue` [range] → Magic Equipment.BQ2:.BQ29
+- `TblMagicEquipWaistWeight` [range] → Magic Equipment.BO2:.BO29
+- `TblRingBonusType1` [range] → Magic Equipment.V2:.V11
+- `TblRingBonusType2` [range] → Magic Equipment.W2:.W11
+
+## Buffs
+
+### Buffs
+
+- `BuffClassSelect` [range] → Buffs.M3:.M47
+- `BuffClassSelectReset` [range] → Buffs.N3:.N47
+- `BuffConditionalSelect` [range] → Buffs.W2:.W18
+- `BuffConditionalSelectReset` [range] → Buffs.X2:.X18
+- `BuffMiscExternalSelect` [range] → Buffs.W24:.W33
+- `BuffRaceSelectedReset` [range] → Buffs.N51:.N51
+- `BuffSpellsCasterLevel` [range] → Buffs.E3:.E89
+- `BuffSpellsCasterLevelReset` [range] → Buffs.F3:.F89
+- `BuffSpellsSelect` [range] → Buffs.B3:.B89
+- `BuffSpellsSelectReset` [range] → Buffs.C3:.C89
+- `BuffsExternalMiscSelectedReset` [range] → Buffs.X24:.X33
+- `BuffsMiscSelectedReset` [range] → Buffs.N54:.N58
+- `BuffsPsionicSelectedReset` [range] → Buffs.N64:.N76
+
+### General
+
+- `Aid` [cell] → Buffs.B20
+- `AidHP` [cell] → Buffs.E20
+- `AidToHit` [cell] → Buffs.G20
+- `AnimalisticPower` [cell] → Buffs.B21
+- `AnimalisticPowerMod` [cell] → Buffs.G21
+- `AugmentedBiofeedback` [cell] → Buffs.P66
+- `AugmentedDefensivePrecognition` [cell] → Buffs.P72
+- `AugmentedForceShield` [cell] → Buffs.P70
+- `AugmentedInertialArmor` [cell] → Buffs.P68
+- `AugmentedMentalBarrier` [cell] → Buffs.P71
+- `AugmentedOffensivePrecognition` [cell] → Buffs.P73
+- `AugmentedOffensivePrescience` [cell] → Buffs.P74
+- `AugmentedPsionicVigor` [cell] → Buffs.P76
+- `AugmentedThickenSkin` [cell] → Buffs.P75
+- `BalancingLorecall` [cell] → Buffs.B23
+- `BalancingLorecallMod` [cell] → Buffs.G23
+- `Bane` [cell] → Buffs.W2
+- `BaneToHit` [cell] → Buffs.Y2
+- `Barkskin` [cell] → Buffs.B22
+- `BarkskinMod` [cell] → Buffs.G22
+- `BearsEndurance` [cell] → Buffs.B27
+- `BearsEnduranceMod` [cell] → Buffs.G27
+- `Benediction` [cell] → Buffs.B24
+- `BenedictionMod` [cell] → Buffs.G24
+- `Biofeedback` [cell] → Buffs.M66
+- `BiofeedbackDR` [cell] → Buffs.Q66
+- `Bless` [cell] → Buffs.B5
+- `BlessToHit` [cell] → Buffs.G5
+- `Blinded` [cell] → Buffs.W3
+- `BlindedACMod` [cell] → Buffs.Y3
+- `BullsStrength` [cell] → Buffs.B25
+- `BullsStrengthMod` [cell] → Buffs.G25
+- `Camouflage` [cell] → Buffs.B6
+- `CamouflageMod` [cell] → Buffs.G6
+- `CatsGrace` [cell] → Buffs.B26
+- `CatsGraceMod` [cell] → Buffs.G26
+- `Chameleon` [cell] → Buffs.M67
+- `ChasingPerfection` [cell] → Buffs.B75
+- `ChasingPerfectionMod` [cell] → Buffs.G75
+- `CloakOfChaos` [cell] → Buffs.B85
+- `CloakOfChaosMod` [cell] → Buffs.G85
+- `CombatExpertiseAmount` [cell] → Buffs.M57
+- `CombatReadiness` [cell] → Buffs.B7
+- `CombatReadinessMod` [cell] → Buffs.G7
+- `ConditionalBuffsCSDisplay` [cell] → Buffs.P54
+- `Conviction` [cell] → Buffs.B8
+- `ConvictionMod` [cell] → Buffs.G8
+- `CrownOfClarity` [cell] → Buffs.B39
+- `CrownOfClarityMod` [cell] → Buffs.G39
+- `CrownOfMight` [cell] → Buffs.B40
+- `CrownOfMightMod` [cell] → Buffs.G40
+- `CrownOfProtection` [cell] → Buffs.B41
+- `CrownOfProtectionMod` [cell] → Buffs.G41
+- `CrownOfVeils` [cell] → Buffs.B42
+- `CrownOfVeilsMod` [cell] → Buffs.G42
+- `CrushingDespair` [cell] → Buffs.W4
+- `CrushingDespairMod` [cell] → Buffs.Y4
+- `DCmTeamInitBuff` [cell] → Buffs.M41
+- `Dazzled` [cell] → Buffs.W5
+- `DazzledMod` [cell] → Buffs.Y5
+- `Deafened` [cell] → Buffs.W6
+- `DeafenedMod` [cell] → Buffs.Y6
+- `DeathDragon` [cell] → Buffs.B83
+- `DeathDragonMod` [cell] → Buffs.G83
+- `DefendingWeapon` [cell] → Buffs.W26
+- `DefensivePrecognition` [cell] → Buffs.M72
+- `DefensivePrecognitionMod` [cell] → Buffs.Q72
+- `DefensiveStance` [cell] → Buffs.M35
+- `DefensiveStanceACMod` [cell] → Buffs.T35
+- `DefensiveStanceConMod` [cell] → Buffs.R35
+- `DefensiveStanceSaveMod` [cell] → Buffs.S35
+- `DefensiveStanceStrMod` [cell] → Buffs.Q35
+- `DemandFortMod` [cell] → Buffs.M17
+- `DivineAgility` [cell] → Buffs.B61
+- `DivineAgilityMod` [cell] → Buffs.G61
+- `DivineFavor` [cell] → Buffs.B9
+- `DivineFavorMod` [cell] → Buffs.G9
+- `DivinePower` [cell] → Buffs.B54
+- `DivinePowerHP` [cell] → Buffs.E54
+- `DivinePowerStrMod` [cell] → Buffs.G54
+- `DivineProtection` [cell] → Buffs.B35
+- `DivineProtectionMod` [cell] → Buffs.G35
+- `DraconicMight` [cell] → Buffs.B62
+- `DraconicMightMod` [cell] → Buffs.G62
+- `Dragonskin` [cell] → Buffs.B43
+- `DragonskinMod` [cell] → Buffs.G43
+- `Dreamtouched` [cell] → Buffs.M61
+- `EaglesSplendor` [cell] → Buffs.B30
+- `EaglesSplendorMod` [cell] → Buffs.G30
+- `EnlargeDexMod` [cell] → Buffs.H10
+- `EnlargePerson` [cell] → Buffs.B10
+- `EnlargeStrMod` [cell] → Buffs.G10
+- `Entangled` [cell] → Buffs.W7
+- `EntangledDexMod` [cell] → Buffs.Z7
+- `EntangledToHit` [cell] → Buffs.Y7
+- `Exhausted` [cell] → Buffs.W8
+- `ExhaustedMod` [cell] → Buffs.Y8
+- `ExpansionDexMod` [cell] → Buffs.R65
+- `ExpansionStrMod` [cell] → Buffs.Q65
+- `FalseLife` [cell] → Buffs.B31
+- `FalseLifeHP` [cell] → Buffs.G31
+- `Fatigued` [cell] → Buffs.W9
+- `FatiguedMod` [cell] → Buffs.Y9
+- `FieldOfResistance` [cell] → Buffs.B63
+- `FieldOfResistanceMod` [cell] → Buffs.G63
+- `FightDefensive` [cell] → Buffs.M54
+- `FightDefensiveACMod` [cell] → Buffs.Q54
+- `FightDefensiveAtkMod` [cell] → Buffs.R54
+- `ForceOfWillMod` [cell] → Buffs.M18
+- `ForceScreen` [cell] → Buffs.M70
+- `ForceScreenMod` [cell] → Buffs.Q70
+- `FoxsCunning` [cell] → Buffs.B28
+- `FoxsCunningMod` [cell] → Buffs.G28
+- `Frenzy` [cell] → Buffs.M37
+- `FrenzyACMod` [cell] → Buffs.R37
+- `FrenzyStrMod` [cell] → Buffs.Q37
+- `Frightened` [cell] → Buffs.W10
+- `FrightenedMod` [cell] → Buffs.Y10
+- `Grace` [cell] → Buffs.B44
+- `GraceHideMod` [cell] → Buffs.H44
+- `GraceMod` [cell] → Buffs.G44
+- `GreaterHeroism` [cell] → Buffs.B76
+- `GreaterHeroismHP` [cell] → Buffs.E76
+- `GreaterHeroismMod` [cell] → Buffs.G76
+- `GreaterLuminousArmor` [cell] → Buffs.B57
+- `GreaterLuminousArmorMd` [cell] → Buffs.G57
+- `GreaterMageArmor` [cell] → Buffs.B47
+- `GreaterMageArmorMod` [cell] → Buffs.G47
+- `GreaterRage` [cell] → Buffs.M4
+- `GreaterRageACMod` [cell] → Buffs.T4
+- `GreaterRageConMod` [cell] → Buffs.R4
+- `GreaterRageStrMod` [cell] → Buffs.Q4
+- `GreaterRageWillMod` [cell] → Buffs.S4
+- `GreaterResistance` [cell] → Buffs.B55
+- `GreaterResistanceMod` [cell] → Buffs.G55
+- `HardySoldiersMod` [cell] → Buffs.M27
+- `Haste` [cell] → Buffs.B45
+- `HasteBurrowSpeed` [cell] → Buffs.I46
+- `HasteClimbSpeed` [cell] → Buffs.J45
+- `HasteFlySpeed` [cell] → Buffs.I45
+- `HasteMod` [cell] → Buffs.G45
+- `HasteSpeed` [cell] → Buffs.H45
+- `HasteSwimSpeed` [cell] → Buffs.H46
+- `HeartOfAir` [cell] → Buffs.B32
+- `HeartOfAirMod` [cell] → Buffs.G32
+- `HeartOfEarth` [cell] → Buffs.B56
+- `HeartOfEarthMod` [cell] → Buffs.G56
+- `HeartOfFire` [cell] → Buffs.B64
+- `HeartOfFireMod` [cell] → Buffs.G64
+- `Heroism` [cell] → Buffs.B46
+- `HeroismMod` [cell] → Buffs.G46
+- `HerosFeast` [cell] → Buffs.B78
+- `HerosFeastHP` [cell] → Buffs.E78
+- `HerosFeastToHit` [cell] → Buffs.G78
+- `HerosFeastToWill` [cell] → Buffs.H78
+- `HolyAura` [cell] → Buffs.B86
+- `HolyAuraMod` [cell] → Buffs.G86
+- `InertialArmor` [cell] → Buffs.M68
+- `InertialArmorMod` [cell] → Buffs.Q68
+- `InertialBarrier` [cell] → Buffs.M69
+- `InertialBarrierDR` [cell] → Buffs.Q69
+- `InspireCourageBonus` [cell] → Buffs.M7
+- `IronBody` [cell] → Buffs.B87
+- `IronBodyACP` [cell] → Buffs.J87
+- `IronBodyDexMod` [cell] → Buffs.H87
+- `IronBodySpellFail` [cell] → Buffs.I87
+- `IronBodyStrMod` [cell] → Buffs.G87
+- `IsShifting` [cell] → Buffs.Q51
+- `ListeningLorecall` [cell] → Buffs.B33
+- `ListeningLorecallMod` [cell] → Buffs.G33
+- `LuminousArmor` [cell] → Buffs.B34
+- `LuminousArmorMod` [cell] → Buffs.G34
+- `MageArmor` [cell] → Buffs.B11
+- `MageArmorBonus` [cell] → Buffs.G11
+- `MentalBarrier` [cell] → Buffs.M71
+- `MentalBarrierACMod` [cell] → Buffs.Q71
+- `MightyRage` [cell] → Buffs.M5
+- `MightyRageConMod` [cell] → Buffs.R5
+- `MightyRageStrMod` [cell] → Buffs.Q5
+- `MightyRageWillMod` [cell] → Buffs.S5
+- `ModivateArdorMod` [cell] → Buffs.M28
+- `MotivateAttackMod` [cell] → Buffs.M29
+- `MotivateCareMod` [cell] → Buffs.M30
+- `MotivateChaMod` [cell] → Buffs.M19
+- `MotivateConMod` [cell] → Buffs.M20
+- `MotivateDexterityMod` [cell] → Buffs.M21
+- `MotivateIntMod` [cell] → Buffs.M22
+- `MotivateStrMod` [cell] → Buffs.M23
+- `MotivateUrgencyMod` [cell] → Buffs.M31
+- `MotivateWisMod` [cell] → Buffs.M24
+- `NegativeLevels` [cell] → Buffs.W11
+- `NegativeLevelsHP` [cell] → Buffs.Y11
+- `Nerveskitter` [cell] → Buffs.B12
+- `NerveskitterMod` [cell] → Buffs.G12
+- `NightShieldMod` [cell] → Buffs.G13
+- `Nightshield` [cell] → Buffs.B13
+- `NightstalkersTransformation` [cell] → Buffs.B66
+- `NightstalkersTransformationACMod` [cell] → Buffs.H66
+- `NightstalkersTransformationDexMod` [cell] → Buffs.G66
+- `NightstalkersTransformationRefMod` [cell] → Buffs.I66
+- `NightstalkersTransformationSkillMod` [cell] → Buffs.J66
+- `NotRelishiSword` [cell] → Buffs.W25
+- `NotRelishiSwordLuckBonus` [cell] → Buffs.Y25
+- `OffensivePrecognition` [cell] → Buffs.M73
+- `OffensivePrecognitionMod` [cell] → Buffs.Q73
+- `OffensivePrescience` [cell] → Buffs.M74
+- `OffensivePrescienceMod` [cell] → Buffs.Q74
+- `OwlsInsight` [cell] → Buffs.B65
+- `OwlsInsightMod` [cell] → Buffs.G65
+- `OwlsWisdom` [cell] → Buffs.B29
+- `OwlsWisdomMod` [cell] → Buffs.G29
+- `Panicked` [cell] → Buffs.W12
+- `PanickedMod` [cell] → Buffs.Y12
+- `PowerAttackAmount` [cell] → Buffs.M58
+- `PowerAuraMod` [cell] → Buffs.M9
+- `Prayer` [cell] → Buffs.B48
+- `PrayerBonus` [cell] → Buffs.G48
+- `PresenceAuraMod` [cell] → Buffs.M10
+- `PrimalHunter` [cell] → Buffs.B36
+- `PrimalHunterMod` [cell] → Buffs.G36
+- `PrimalInstinct` [cell] → Buffs.B49
+- `PrimalInstinctMod` [cell] → Buffs.G49
+- `PrimalScream` [cell] → Buffs.M39
+- `PrimalScreamDexMod` [cell] → Buffs.R39
+- `PrimalScreamStrMod` [cell] → Buffs.Q39
+- `PrimalSenses` [cell] → Buffs.B58
+- `PrimalSensesMod` [cell] → Buffs.G58
+- `PrimalSpeed` [cell] → Buffs.B79
+- `PrimalSpeedToRef` [cell] → Buffs.G79
+- `PrimalSpeedToSpeed` [cell] → Buffs.H79
+- `PrimevalWildShape` [cell] → Buffs.M15
+- `PsionicAugmentedExpansion` [cell] → Buffs.M65
+- `PsionicExpansion` [cell] → Buffs.M64
+- `PsionicVigor` [cell] → Buffs.M76
+- `PsionicVigorMod` [cell] → Buffs.Q76
+- `Rage` [cell] → Buffs.M3
+- `RageACMod` [cell] → Buffs.T3
+- `RageConMod` [cell] → Buffs.R3
+- `RageSpell` [cell] → Buffs.B50
+- `RageSpellACMod` [cell] → Buffs.J50
+- `RageSpellConMod` [cell] → Buffs.H50
+- `RageSpellStrMod` [cell] → Buffs.G50
+- `RageSpellWillMod` [cell] → Buffs.I50
+- `RageStrMod` [cell] → Buffs.Q3
+- `RageWillMod` [cell] → Buffs.S3
+- `RamsMight` [cell] → Buffs.B14
+- `RamsMightMod` [cell] → Buffs.G14
+- `RaptorsSight` [cell] → Buffs.B15
+- `RaptorsSightMod` [cell] → Buffs.G15
+- `Recitation` [cell] → Buffs.B59
+- `RecitationTotal` [cell] → Buffs.I59
+- `ReduceDexMod` [cell] → Buffs.H16
+- `ReducePerson` [cell] → Buffs.B16
+- `ReduceStrMod` [cell] → Buffs.G16
+- `ResilientTroopsMod` [cell] → Buffs.M32
+- `Resistance` [cell] → Buffs.B3
+- `ResistanceMod` [cell] → Buffs.G3
+- `RighteousMight` [cell] → Buffs.B67
+- `RighteousMightConMod` [cell] → Buffs.H67
+- `RighteousMightDR` [cell] → Buffs.J67
+- `RighteousMightNatArmor` [cell] → Buffs.I67
+- `RighteousMightStrMod` [cell] → Buffs.G67
+- `RighteousWrath` [cell] → Buffs.B68
+- `RighteousWrathMod` [cell] → Buffs.G68
+- `SameDeity` [cell] → Buffs.E59
+- `SensesAuraMod` [cell] → Buffs.M11
+- `Shaken` [cell] → Buffs.W13
+- `ShakenMod` [cell] → Buffs.Y13
+- `ShareTalents` [cell] → Buffs.B37
+- `ShareTalentsMod` [cell] → Buffs.G37
+- `ShifterAgilityMod` [cell] → Buffs.R51
+- `Sickened` [cell] → Buffs.W14
+- `SickenedMod` [cell] → Buffs.Y14
+- `Slow` [cell] → Buffs.W15
+- `SlowMod` [cell] → Buffs.Y15
+- `SonicShield` [cell] → Buffs.B69
+- `SonicShieldMod` [cell] → Buffs.G69
+- `Spiderskin` [cell] → Buffs.B52
+- `SpiderskinMod` [cell] → Buffs.G52
+- `Squeezing` [cell] → Buffs.W16
+- `SqueezingHalfSpace` [cell] → Buffs.W17
+- `SqueezingMod` [cell] → Buffs.Y16
+- `StalwartPact` [cell] → Buffs.B71
+- `StalwartPactHP` [cell] → Buffs.H71
+- `StalwartPactMod` [cell] → Buffs.G71
+- `SteadyHandMod` [cell] → Buffs.M33
+- `StoneBody` [cell] → Buffs.B72
+- `StoneBodyDexMod` [cell] → Buffs.H72
+- `StoneBodyStrMod` [cell] → Buffs.G72
+- `Stunned` [cell] → Buffs.W18
+- `StunnedACMod` [cell] → Buffs.Y18
+- `SuperiorResistance` [cell] → Buffs.B77
+- `SuperiorResistanceMod` [cell] → Buffs.G77
+- `SurgeOfFortune` [cell] → Buffs.B73
+- `SurgeOfFortuneMod` [cell] → Buffs.G73
+- `TensersTransformation` [cell] → Buffs.B80
+- `TensersTransformationFortMod` [cell] → Buffs.H80
+- `TensersTransformationMod` [cell] → Buffs.G80
+- `ThickenSkin` [cell] → Buffs.M75
+- `ThickenSkinMod` [cell] → Buffs.Q75
+- `TortoiseShell` [cell] → Buffs.B81
+- `TortoiseShellMod` [cell] → Buffs.G81
+- `TotalDefense` [cell] → Buffs.M55
+- `TotalDefenseACMod` [cell] → Buffs.Q55
+- `ToughnessAuraMod` [cell] → Buffs.M12
+- `TwoWeaponDefense` [cell] → Buffs.M56
+- `TwoWeaponDefenseShieldBonus` [cell] → Buffs.Q56
+- `UnholyAura` [cell] → Buffs.B89
+- `UnholyAuraMod` [cell] → Buffs.G89
+- `WatchfulEyeMod` [cell] → Buffs.M25
+- `WildShape` [cell] → Buffs.M14
+
+### Shield
+
+- `ShieldOfFaith` [cell] → Buffs.B18
+- `ShieldOfFaithAC` [cell] → Buffs.G18
+- `ShieldOfLaw` [cell] → Buffs.B88
+- `ShieldOfLawMod` [cell] → Buffs.G88
+- `ShieldOfWarding` [cell] → Buffs.B51
+- `ShieldOfWardingMod` [cell] → Buffs.G51
+- `ShieldSpell` [cell] → Buffs.B17
+- `ShieldSpellBonus` [cell] → Buffs.G17
+
+### Spells
+
+- `SpellResistBuff` [cell] → Buffs.B70
+- `SpellResistBuffMod` [cell] → Buffs.G70
+
+### Tables/Lookups
+
+- `TblAugPsionicBuffs` [range] → Buffs.P64:.P76
+- `TblMiscBuffsSelected` [range] → Buffs.M54:.M58
+- `TblMiscExternalBuffsSelected` [range] → Buffs.W24:.W33
+- `TblPsionicBuffsSelected` [range] → Buffs.M64:.M76
+
+## Character Sheet I
+
+### General
+
+- `CSBaseAtkMod` [cell] → Character Sheet I.BA35
+- `CSChaTemp` [cell] → Character Sheet I.T35
+- `CSConTemp` [cell] → Character Sheet I.T23
+- `CSDexTemp` [cell] → Character Sheet I.T19
+- `CSFortTempMod` [cell] → Character Sheet I.AI41
+- `CSIntTemp` [cell] → Character Sheet I.T27
+- `CSMeleeTempMod` [cell] → Character Sheet I.BA66
+- `CSRangedTempMod` [cell] → Character Sheet I.BA70
+- `CSRefTempMod` [cell] → Character Sheet I.AI45
+- `CSStrTemp` [cell] → Character Sheet I.T15
+- `CSWillTempMod` [cell] → Character Sheet I.AI49
+- `CSWisTemp` [cell] → Character Sheet I.T31
+- `DR` [cell] → Character Sheet I.CJ19
+- `Wounds` [cell] → Character Sheet I.AQ15
+
+### Tables/Lookups
+
+- `TblConditionalModifiers` [range] → Character Sheet I.AN41:.BD58
+
+## Character Sheet II
+
+### General
+
+- `CSIIAbilities` [range] → Character Sheet II.BG4:.CV67
+- `TotalWeightCarried` [cell] → Character Sheet II.BA63
+
+### Tables/Lookups
+
+- `TblEquipment1` [range] → Character Sheet II.C28:.Y37
+- `TblEquipment2` [range] → Character Sheet II.AD28:.AZ37
+- `TblNotes1` [range] → Character Sheet II.C66:.T86
+- `TblNotes2` [range] → Character Sheet II.V66:.AM86
+- `TblWeights1` [range] → Character Sheet II.Z28:.AC37
+- `TblWeights2` [range] → Character Sheet II.BA28:.BD37
+
+## Character Sheet III
+
+### General
+
+- `CSIIIAbilities` [range] → Character Sheet III.D4:.AT75
+
+### Tables/Lookups
+
+- `TblNotes3` [range] → Character Sheet III.AV4:.BU75
+- `TblNotes4` [range] → Character Sheet III.BW4:.CV75
+
+## Familiar
+
+### Familiar
+
+- `FamAbilityLookup` [range] → Familiar.CZ3:.DA8
+- `FamAge` [cell] → Familiar.S9
+- `FamArmorBonus` [cell] → Familiar.AE112
+- `FamArmorItem` [cell] → Familiar.C112
+- `FamDeflect` [cell] → Familiar.BU19
+- `FamEyes` [cell] → Familiar.AY9
+- `FamGear` [range] → Familiar.AE134:.BD147
+- `FamGender` [cell] → Familiar.AA9
+- `FamHair` [cell] → Familiar.BG9
+- `FamHeight` [cell] → Familiar.AI9
+- `FamMiscAC` [cell] → Familiar.BZ19
+- `FamName` [cell] → Familiar.C3
+- `FamShieldBonus` [cell] → Familiar.T122
+- `FamShieldItem` [cell] → Familiar.C122
+- `FamSkillsLookup` [range] → Familiar.CZ10:.DC25
+- `FamWeight` [cell] → Familiar.AQ9
+- `FamiliarName` [cell] → Familiar.C3
+
+### Tables/Lookups
+
+- `TblFamiliar` [range] → Familiar.DK2:.DP53
+- `TblFamiliarStrengthDamage` [range] → Familiar.DH7:.DH11
+
+## Animal Companion
+
+### General
+
+- `CompanionAbilityLookup` [range] → Animal Companion.CZ3:.DA8
+- `CompanionAge` [cell] → Animal Companion.S9
+- `CompanionAmmo` [range] → Animal Companion.C132:.V137
+- `CompanionArmor` [cell] → Animal Companion.AU19
+- `CompanionArmorCheck` [cell] → Animal Companion.CE19
+- `CompanionChaTemp` [cell] → Animal Companion.T35
+- `CompanionConTemp` [cell] → Animal Companion.T23
+- `CompanionDeflect` [cell] → Animal Companion.BT19
+- `CompanionDexTemp` [cell] → Animal Companion.T19
+- `CompanionEyes` [cell] → Animal Companion.AY9
+- `CompanionFortTempMod` [cell] → Animal Companion.AD41
+- `CompanionGear` [range] → Animal Companion.AE134:.BD147
+- `CompanionGender` [cell] → Animal Companion.AA9
+- `CompanionHP` [cell] → Animal Companion.DB3
+- `CompanionHair` [cell] → Animal Companion.BG9
+- `CompanionHeight` [cell] → Animal Companion.AI9
+- `CompanionIntTemp` [cell] → Animal Companion.T27
+- `CompanionMiscAC` [cell] → Animal Companion.BY19
+- `CompanionName` [cell] → Animal Companion.C3
+- `CompanionRefTempMod` [cell] → Animal Companion.AD45
+- `CompanionShield` [cell] → Animal Companion.AZ19
+- `CompanionSkillMisc` [range] → Animal Companion.CS31:.CV144
+- `CompanionSkillRanks` [range] → Animal Companion.CN31:.CQ144
+- `CompanionStrTemp` [cell] → Animal Companion.T15
+- `CompanionSubdual` [cell] → Animal Companion.BG15
+- `CompanionWeight` [cell] → Animal Companion.AQ9
+- `CompanionWillTempMod` [cell] → Animal Companion.AD49
+- `CompanionWisTemp` [cell] → Animal Companion.T31
+- `CompanionWounds` [cell] → Animal Companion.AQ15
+
+### Tables/Lookups
+
+- `TblCompanionStrengthDamage` [range] → Animal Companion.DH7:.DH11
+- `TblFamiliar` [range] → Animal Companion.DK2:.DP53
+
+## Class Abilities
+
+### Armor
+
+- `ArmorMasteryHeavy` [cell] → Class Abilities.D2817
+- `ArmorMasteryMedium` [cell] → Class Abilities.D2813
+
+### Class Levels
+
+- `effBinLvl` [cell] → Class Abilities.E4538
+
+### General
+
+- `ArcaneBacklashMod` [cell] → Class Abilities.D3308
+- `AtavistSociableBonus` [cell] → Class Abilities.D2838
+- `AuraGoodStr` [cell] → Class Abilities.F24
+- `AuraLawStr` [cell] → Class Abilities.F23
+- `AuraOfCourageAbility` [cell] → Class Abilities.B106
+- `AuraOfWardingMod` [cell] → Class Abilities.D608
+- `BardicKnowledge` [cell] → Class Abilities.E12
+- `BardicMusic` [cell] → Class Abilities.E13
+- `BardicMusicAmount` [cell] → Class Abilities.F13
+- `BattleFortitude` [cell] → Class Abilities.D850
+- `BerserkerStrengthBonus` [cell] → Class Abilities.K1
+- `BinderDC` [cell] → Class Abilities.E4543
+- `BlDaSpdBonus` [cell] → Class Abilities.D5102
+- `BondRace` [cell] → Class Abilities.D1132
+- `BringerOfVengenceMod` [cell] → Class Abilities.D3306
+- `ClassAbilities` [cell] → Class Abilities.D1
+- `ClassAbilitiesList` [cell] → Class Abilities.D2
+- `CounterStrikeMod` [cell] → Class Abilities.D3307
+- `DaSWildAmount` [cell] → Class Abilities.D961
+- `DamageReductionAmount` [cell] → Class Abilities.E7
+- `DivineGrace` [cell] → Class Abilities.D63
+- `DoDrSh` [cell] → Class Abilities.E2766
+- `DrShCreatureIdx` [cell] → Class Abilities.E2768
+- `DragShamanAuraBonus` [cell] → Class Abilities.E2770
+- `DragShamanColor` [cell] → Class Abilities.E2767
+- `DragonLordAuraBonus` [cell] → Class Abilities.D4368
+- `DragonkithCompanion` [cell] → Class Abilities.E2529
+- `DragonkithIdx` [cell] → Class Abilities.E2528
+- `DruidWildshapeLevel` [cell] → Class Abilities.E33
+- `DsmDragon` [cell] → Class Abilities.F1584
+- `ElAElement` [cell] → Class Abilities.E2201
+- `ElSElementListRowsCnt` [cell] → Class Abilities.E718
+- `EldritchBlastAmount` [cell] → Class Abilities.G661
+- `Element4List` [range] → Class Abilities.D725:.D728
+- `ElementalScionGraftElement` [cell] → Class Abilities.E4067
+- `ElementalShapeAmount` [cell] → Class Abilities.E37
+- `ElementalShapeMaxSize` [cell] → Class Abilities.G39
+- `ElementalShapeMinSize` [cell] → Class Abilities.G38
+- `Energy4List` [range] → Class Abilities.D1849:.D1852
+- `EternalKnowledgeMod` [cell] → Class Abilities.D4304
+- `ExpertPackerBonus` [cell] → Class Abilities.D3286
+- `FavoredDR` [cell] → Class Abilities.D505
+- `ForbiddenSchool3` [cell] → Class Abilities.K111
+- `ForbiddenSchool4` [cell] → Class Abilities.M111
+- `GraceAmount` [cell] → Class Abilities.D221
+- `HasSmite` [cell] → Class Abilities.G62
+- `HasSmiteEvil` [cell] → Class Abilities.E62
+- `InspireCompetenceAbility` [cell] → Class Abilities.B25
+- `InspireCourageAbility` [cell] → Class Abilities.B24
+- `IsDSm` [cell] → Class Abilities.F1581
+- `KiStrike` [cell] → Class Abilities.D76
+- `KnoCInitiativeMod` [cell] → Class Abilities.D3652
+- `LayOnHands` [cell] → Class Abilities.D64
+- `LurkAugment` [cell] → Class Abilities.D3200
+- `MagicalDefenseMod` [cell] → Class Abilities.D3323
+- `MindBlade` [cell] → Class Abilities.D1607
+- `MnSpShiftingMod` [cell] → Class Abilities.D2852
+- `MnSpShiftingMod2` [cell] → Class Abilities.E2852
+- `MonkACBonus` [cell] → Class Abilities.D71
+- `MonkFlurryLevel` [cell] → Class Abilities.D72
+- `MsSkShieldMod` [cell] → Class Abilities.D3324
+- `MsSkSpellTurnMod` [cell] → Class Abilities.D3325
+- `MyESaveBonus` [cell] → Class Abilities.D3864
+- `PactAugCount` [cell] → Class Abilities.E4541
+- `PoisonUse` [cell] → Class Abilities.D124
+- `PsionDiscipline` [cell] → Class Abilities.F1608
+- `PsionDisciplineName` [cell] → Class Abilities.E1608
+- `PsionicSneakAttack` [cell] → Class Abilities.D3201
+- `PsychicAura` [cell] → Class Abilities.D3195
+- `PsychicEnervation` [cell] → Class Abilities.D1617
+- `PsychicStrike` [cell] → Class Abilities.D1609
+- `RageAmount` [cell] → Class Abilities.F1
+- `RangedSneakAttack` [cell] → Class Abilities.D3360
+- `RemoveDisease` [cell] → Class Abilities.D69
+- `RslGnIll1School` [range] → Class Abilities.Q113:.Q121
+- `RslGnIll1SchoolName` [cell] → Class Abilities.Q111
+- `SHBWeapon` [cell] → Class Abilities.D633
+- `SecretAboleth` [cell] → Class Abilities.D2722
+- `SecretBeholder` [cell] → Class Abilities.D2723
+- `SecretChoker` [cell] → Class Abilities.D2724
+- `SecretDestrachan` [cell] → Class Abilities.D2725
+- `SecretEttercap` [cell] → Class Abilities.D2726
+- `SecretGibberingMouther` [cell] → Class Abilities.D2727
+- `SecretMindFlayer` [cell] → Class Abilities.D2728
+- `SecretOtyugh` [cell] → Class Abilities.D2729
+- `SecretUmberhulk` [cell] → Class Abilities.D2730
+- `ShapeMindBlade` [cell] → Class Abilities.D1611
+- `SkirmishACAmount` [cell] → Class Abilities.E848
+- `SkirmishDamageAmount` [cell] → Class Abilities.D848
+- `SmiteEvil` [cell] → Class Abilities.D62
+- `SmiteGood` [cell] → Class Abilities.D130
+- `SneakAttack` [cell] → Class Abilities.D106
+- `SoLSaveBonus` [cell] → Class Abilities.D3958
+- `SpecWizForbid` [cell] → Class Abilities.D109
+- `SpecWizName` [cell] → Class Abilities.D111
+- `SpecWizNumProhibit` [cell] → Class Abilities.D108
+- `SpecWizSchool` [cell] → Class Abilities.E111
+- `SpecialistName` [cell] → Class Abilities.D111
+- `SpiritArmor` [cell] → Class Abilities.D3422
+- `SpritualUnion` [cell] → Class Abilities.D2842
+- `StillMind` [cell] → Class Abilities.D78
+- `SuddenStrike` [cell] → Class Abilities.D838
+- `SurgingEuphoria` [cell] → Class Abilities.D1619
+- `ThGNatArmor` [cell] → Class Abilities.D3296
+- `TrapSense` [cell] → Class Abilities.AL7
+- `UncannyDodge` [cell] → Class Abilities.AL5
+- `VestigeCount` [cell] → Class Abilities.E4540
+- `VestigeMaxLevel` [cell] → Class Abilities.E4539
+- `VolatileMind` [cell] → Class Abilities.D1620
+- `WeaponMasterWoCText` [cell] → Class Abilities.C5181
+- `WildLevel` [cell] → Class Abilities.E32
+- `WildShapeAmount` [cell] → Class Abilities.E36
+- `WildShapeDuration` [cell] → Class Abilities.F33
+- `WildShapeForms` [cell] → Class Abilities.T33
+- `WildShapeHDLimit` [cell] → Class Abilities.F36
+- `WildShapeLevel` [cell] → Class Abilities.E34
+- `WildShapeMaxSize` [cell] → Class Abilities.G37
+- `WildShapeMinSize` [cell] → Class Abilities.G36
+- `WildSurge` [cell] → Class Abilities.D1616
+- `WoHsArcaneResearchBonus` [cell] → Class Abilities.D3692
+- `baseEvasion` [cell] → Class Abilities.AM8
+- `hasEvasion` [cell] → Class Abilities.AL8
+- `hasTrapfinding` [cell] → Class Abilities.AL9
+
+### Saving Throws
+
+- `ReforgedWisdomCheckMod` [cell] → Class Abilities.D2887
+
+### Spells
+
+- `SpellSense` [cell] → Class Abilities.AM7
+
+### Tables/Lookups
+
+- `TblBondRace` [range] → Class Abilities.D1133:.D1136
+- `TblClassAbilitiesTxt` [range] → Class Abilities.B1:.B5262
+- `TblForbidList` [range] → Class Abilities.G113:.G121
+- `TblForbidList2` [range] → Class Abilities.I113:.I121
+- `TblForbidList3` [range] → Class Abilities.K113:.K121
+- `TblForbidList4` [range] → Class Abilities.M113:.M121
+- `TblLycanthropeHeritage` [range] → Class Abilities.E2477:.E2483
+- `TblPsionDiscipline` [range] → Class Abilities.F1609:.F1617
+- `TblSpecWiz` [range] → Class Abilities.E113:.E121
+- `TblWildshapeForms` [range] → Class Abilities.M33:.N46
+- `TblWildshapeSizes` [range] → Class Abilities.H33:.J41
+
+## Creature Info
+
+### Familiar
+
+- `FamiliarAbilities` [cell] → Creature Info.CN74
+- `FamiliarAlignment` [cell] → Creature Info.BB1
+- `FamiliarAttack` [cell] → Creature Info.N1
+- `FamiliarBAB` [cell] → Creature Info.CN79
+- `FamiliarCHA` [cell] → Creature Info.AF1
+- `FamiliarCON` [cell] → Creature Info.AC1
+- `FamiliarChoiceLevel` [cell] → Creature Info.CN54
+- `FamiliarChoiceType` [cell] → Creature Info.CN55
+- `FamiliarDEX` [cell] → Creature Info.AB1
+- `FamiliarDR` [cell] → Creature Info.Y1
+- `FamiliarDamage` [cell] → Creature Info.O1
+- `FamiliarDarkVision` [cell] → Creature Info.T1
+- `FamiliarEquivType` [cell] → Creature Info.CN75
+- `FamiliarFeats` [cell] → Creature Info.AX1
+- `FamiliarFort` [cell] → Creature Info.CN80
+- `FamiliarHD` [cell] → Creature Info.F1
+- `FamiliarINT` [cell] → Creature Info.AD1
+- `FamiliarIdx` [cell] → Creature Info.CN72
+- `FamiliarLLV` [cell] → Creature Info.S1
+- `FamiliarListRowsCnt` [cell] → Creature Info.CN9
+- `FamiliarNA` [cell] → Creature Info.M1
+- `FamiliarRef` [cell] → Creature Info.CN81
+- `FamiliarRestricted` [cell] → Creature Info.CN52
+- `FamiliarRestrictedList` [cell] → Creature Info.CN53
+- `FamiliarSA` [cell] → Creature Info.BD1
+- `FamiliarSR` [cell] → Creature Info.X1
+- `FamiliarSTR` [cell] → Creature Info.AA1
+- `FamiliarSize` [cell] → Creature Info.C1
+- `FamiliarSpeak` [cell] → Creature Info.CN77
+- `FamiliarSpeed` [cell] → Creature Info.CN78
+- `FamiliarType` [cell] → Creature Info.CN76
+- `FamiliarWIS` [cell] → Creature Info.AE1
+- `FamiliarWill` [cell] → Creature Info.CN82
+
+### General
+
+- `CompanionAbilities` [cell] → Creature Info.CN94
+- `CompanionAlignment` [cell] → Creature Info.BB3
+- `CompanionAttack` [cell] → Creature Info.N3
+- `CompanionBAB` [cell] → Creature Info.CN89
+- `CompanionBaseSpeed` [cell] → Creature Info.G3
+- `CompanionCha` [cell] → Creature Info.AF3
+- `CompanionChoiceLevel` [cell] → Creature Info.CN86
+- `CompanionCon` [cell] → Creature Info.AC3
+- `CompanionDR` [cell] → Creature Info.Y3
+- `CompanionDex` [cell] → Creature Info.AB3
+- `CompanionFeats` [cell] → Creature Info.AX3
+- `CompanionFort` [cell] → Creature Info.CN90
+- `CompanionHD` [cell] → Creature Info.F3
+- `CompanionHDType` [cell] → Creature Info.CN95
+- `CompanionIDx` [cell] → Creature Info.CN87
+- `CompanionInt` [cell] → Creature Info.AD3
+- `CompanionLevel` [cell] → Creature Info.BG3
+- `CompanionListRowsCnt` [cell] → Creature Info.CN10
+- `CompanionNA` [cell] → Creature Info.M3
+- `CompanionRace` [cell] → Creature Info.CN85
+- `CompanionRef` [cell] → Creature Info.CN91
+- `CompanionSA` [cell] → Creature Info.BD3
+- `CompanionSR` [cell] → Creature Info.X3
+- `CompanionSize` [cell] → Creature Info.C3
+- `CompanionSpeed` [cell] → Creature Info.CN88
+- `CompanionStr` [cell] → Creature Info.AA3
+- `CompanionWill` [cell] → Creature Info.CN92
+- `CompanionWis` [cell] → Creature Info.AE3
+- `CreatureBurrowSpeedCol` [cell] → Creature Info.H4
+- `CreatureChaCol` [cell] → Creature Info.AF4
+- `CreatureClimbSpeedCol` [cell] → Creature Info.I4
+- `CreatureConCol` [cell] → Creature Info.AC4
+- `CreatureDexCol` [cell] → Creature Info.AB4
+- `CreatureEnergyCol` [cell] → Creature Info.W4
+- `CreatureFlyManCol` [cell] → Creature Info.K4
+- `CreatureFlySpeedCol` [cell] → Creature Info.J4
+- `CreatureHdr` [range] → Creature Info.A6:.CJ6
+- `CreatureInfoRowsCnt` [cell] → Creature Info.CN7
+- `CreatureIntCol` [cell] → Creature Info.AD4
+- `CreatureNatArmorCol` [cell] → Creature Info.M4
+- `CreatureNaturalAttacksCol` [cell] → Creature Info.N4
+- `CreatureSizeCol` [cell] → Creature Info.C4
+- `CreatureSpecialCol` [cell] → Creature Info.BJ4
+- `CreatureSpeedCol` [cell] → Creature Info.G4
+- `CreatureStrCol` [cell] → Creature Info.AA4
+- `CreatureSwimSpeedCol` [cell] → Creature Info.L4
+- `CreatureWisCol` [cell] → Creature Info.AE4
+- `DoLycanthrope` [cell] → Creature Info.CN60
+- `DragonBreathCol` [cell] → Creature Info.BD4
+- `DragonColorCol` [cell] → Creature Info.BJ4
+- `DragonListRowsCnt` [cell] → Creature Info.CN12
+- `DragonName` [range] → Creature Info.A55:.A101
+- `ElementalAssociatedEnergyCol` [cell] → Creature Info.BJ4
+- `ElementalBaseType` [cell] → Creature Info.CN16
+- `ElementalCompanionChoiceLevel` [cell] → Creature Info.CN98
+- `ElementalLanguageCol` [cell] → Creature Info.AY4
+- `ElementalListRowsCnt` [cell] → Creature Info.CN15
+- `ElementalName` [range] → Creature Info.E107:.E126
+- `ElementalRowsCnt` [cell] → Creature Info.CN14
+- `FiendishServant` [cell] → Creature Info.CQ55
+- `HasFamiliar` [cell] → Creature Info.CN51
+- `IsLycanHumanoid` [cell] → Creature Info.CN62
+- `IsLycanthrope` [cell] → Creature Info.CN59
+- `IsLycanthropeAlternate` [cell] → Creature Info.CN63
+- `LycanthropeBaseIdx` [cell] → Creature Info.CN70
+- `LycanthropeHPAdjustment` [cell] → Creature Info.CN64
+- `LycanthropeIdx` [cell] → Creature Info.CN61
+- `LycanthropeListRowsCnt` [cell] → Creature Info.CN8
+- `LycanthropeName` [cell] → Creature Info.CN65
+- `LycanthropeRacialSkill` [cell] → Creature Info.CN69
+- `MasterLevel` [cell] → Creature Info.CN56
+- `TrueDragonRowsCnt` [cell] → Creature Info.CN13
+- `WildShapeAttacks` [cell] → Creature Info.N2
+- `WildShapeBurrow` [cell] → Creature Info.H2
+- `WildShapeClimb` [cell] → Creature Info.I2
+- `WildShapeCon` [cell] → Creature Info.AC2
+- `WildShapeDex` [cell] → Creature Info.AB2
+- `WildShapeFly` [cell] → Creature Info.J2
+- `WildShapeIDx` [cell] → Creature Info.CN103
+- `WildShapeListRowsCnt` [cell] → Creature Info.CN11
+- `WildShapeManeuver` [cell] → Creature Info.K2
+- `WildShapeNaturalArmor` [cell] → Creature Info.M2
+- `WildShapeSize` [cell] → Creature Info.C2
+- `WildShapeSpeed` [cell] → Creature Info.G2
+- `WildShapeStr` [cell] → Creature Info.AA2
+- `WildShapeSwim` [cell] → Creature Info.L2
+
+### Tables/Lookups
+
+- `TblAnimalCompanionBonuses` [range] → Creature Info.CP10:.CT29
+- `TblCelestialCompanions` [range] → Creature Info.CQ64:.CQ72
+- `TblDragonInfo` [range] → Creature Info.A55:.BS102
+- `TblElementalInfo` [range] → Creature Info.A107:.BS126
+- `TblFamiliarSkills` [range] → Creature Info.AG1:.AW1
+- `TblFiends` [range] → Creature Info.CQ55:.CQ62
+- `TblLycanthropeInfo` [range] → Creature Info.A6:.BS67
+- `TblMounts` [range] → Creature Info.CQ51:.CQ53
+- `TblSpiderServant` [range] → Creature Info.CP75:.CP79
+
+## Class Weapons & Armor
+
+### Armor
+
+- `ArmorProf` [cell] → Class Weapons & Armor.A11
+
+### General
+
+- `ExoticWeaponProfCnt` [cell] → Class Weapons & Armor.AU32
+- `NaturalAttacks` [cell] → Class Weapons & Armor.AQ2
+- `ProfEntry` [cell] → Class Weapons & Armor.A15
+- `WarWizardMartial` [cell] → Class Weapons & Armor.A21
+- `WeaponProf` [cell] → Class Weapons & Armor.A12
+
+### Tables/Lookups
+
+- `TblExoticList` [range] → Class Weapons & Armor.AJ33:.AJ310
+- `TblMartialList` [range] → Class Weapons & Armor.AG33:.AG310
+- `TblMighty` [range] → Class Weapons & Armor.H2:.H27
+- `TblNaturalAttackDamageType` [range] → Class Weapons & Armor.U1:.V25
+- `TblNaturalAttacks` [range] → Class Weapons & Armor.B290:.B311
+- `TblNaturalAttacksCon` [range] → Class Weapons & Armor.AV290:.AV311
+- `TblProfList` [range] → Class Weapons & Armor.AM33:.AM310
+- `TblQuality` [range] → Class Weapons & Armor.F2:.F25
+- `TblSimpleList` [range] → Class Weapons & Armor.AF33:.AF310
+- `TblSpecWeapList` [range] → Class Weapons & Armor.B34:.B290
+- `TblWeaponDamage` [range] → Class Weapons & Armor.K4:.S20
+- `TblWeaponEquiv` [range] → Class Weapons & Armor.AC2:.AD17
+- `TblWeaponEquiv2` [range] → Class Weapons & Armor.AG2:.AH3
+- `TblWeaponInfo` [range] → Class Weapons & Armor.B32:.AS310
+- `TblWeaponSelect` [range] → Class Weapons & Armor.A32:.A310
+- `TblWeaponSizeLookup` [range] → Class Weapons & Armor.K3:.S3
+- `TblWeapons` [range] → Class Weapons & Armor.B32:.B310
+- `TblWeaponsProf` [range] → Class Weapons & Armor.AM32:.AM310
+- `TblWield` [range] → Class Weapons & Armor.Y2:.Y12
+
+## Graft Abilities
+
+- `GraftAttacks` [cell] → Graft Abilities.G12
+- `GraftsSelected` [cell] → Graft Abilities.C5
+
+## Deities
+
+### General
+
+- `AuraGood` [cell] → Deities.L3
+- `AuraLaw` [cell] → Deities.K3
+- `ClrDomain1` [cell] → Deities.A536
+- `ClrDomain2` [cell] → Deities.A537
+- `ClrDomain3` [cell] → Deities.A538
+- `ClrDomain4` [cell] → Deities.A539
+- `ClrDomain5` [cell] → Deities.A540
+- `ClrDomain6` [cell] → Deities.A541
+- `CompetitionDomainBonus` [cell] → Deities.H561
+- `Deity` [cell] → Deities.A1
+- `DeityAlignment` [cell] → Deities.B3
+- `DeityAura` [cell] → Deities.K1
+- `DomainAbil` [range] → Deities.B536:.B541
+- `DomainAbilities` [cell] → Deities.N536
+- `DomainCount` [cell] → Deities.A534
+- `Domains` [range] → Deities.A536:.A541
+- `FavoredWeapon` [cell] → Deities.J3
+- `FavoredWeaponEquiv` [cell] → Deities.J1
+- `ForbidChaos` [cell] → Deities.B553
+- `ForbidEvil` [cell] → Deities.D553
+- `ForbidGood` [cell] → Deities.C553
+- `ForbidLaw` [cell] → Deities.A553
+- `ForbiddenSpells` [cell] → Deities.G554
+- `FullRaceDeity` [cell] → Deities.G2
+- `RaceDeity` [cell] → Deities.G1
+
+### Tables/Lookups
+
+- `TblDeities` [range] → Deities.H4:.H532
+- `TblDeityAlignment` [range] → Deities.A548:.I549
+- `TblDeityList` [range] → Deities.A4:.A532
+- `TblDomain` [range] → Deities.F555:.F739
+- `TblDomainSpellList` [range] → Deities.P535:.P595
+- `TblDomainSpells` [range] → Deities.C536:.K541
+
+## Domains
+
+- `TblDomainInfo` [range] → Domains.A1:.K175
+- `TblDomainList` [range] → Domains.A1:.A175
+
+## Spell Info
+
+### Class Levels
+
+- `EffectiveSfALvl` [cell] → Spell Info.F61
+- `EffectiveWrlLvl` [cell] → Spell Info.F70
+
+### General
+
+- `BaseArcaneCasterLevel` [cell] → Spell Info.D80
+- `BonusCasterLevels` [cell] → Spell Info.L90
+- `CasterIndex` [cell] → Spell Info.L98
+- `CasterListChanged` [cell] → Spell Info.BP1
+- `CasterLvlReal` [cell] → Spell Info.L97
+- `CasterMaxCastableReal` [cell] → Spell Info.L99
+- `CasterModReal` [cell] → Spell Info.L100
+- `LGNonCoreAvailable` [cell] → Spell Info.L102
+- `MaxArcaneLevel` [cell] → Spell Info.E80
+- `MaxArcaneSpellLevel` [cell] → Spell Info.L80
+- `MaxArcaneSpellLikeLevel` [cell] → Spell Info.E82
+- `MaxArtificerLevel` [cell] → Spell Info.F7
+- `MaxCasterLevel` [cell] → Spell Info.E83
+- `MaxCasterMod` [cell] → Spell Info.F75
+- `MaxDivineLevel` [cell] → Spell Info.E81
+- `MaxDivineSpellLevel` [cell] → Spell Info.L81
+- `MaxSpellLevel` [cell] → Spell Info.L82
+- `MaxSpontaneousArcaneLevel` [cell] → Spell Info.L85
+- `MaxSpontaneousDivineLevel` [cell] → Spell Info.L84
+- `MaxSpontaneousLevel` [cell] → Spell Info.L83
+- `PenaltyCasterLevels` [cell] → Spell Info.L89
+- `RaceCaster` [cell] → Spell Info.L78
+- `SICha` [cell] → Spell Info.C77
+- `SIChaMod` [cell] → Spell Info.D77
+- `SICorr` [cell] → Spell Info.C78
+- `SICorrMod` [cell] → Spell Info.D78
+- `SIInt` [cell] → Spell Info.C75
+- `SIIntMod` [cell] → Spell Info.D75
+- `SIWis` [cell] → Spell Info.C76
+- `SIWisMod` [cell] → Spell Info.D76
+- `SelectedCasterReal` [cell] → Spell Info.L96
+- `ShowCanNotCast` [cell] → Spell Info.L87
+- `TotalArcaneCasterLevel` [cell] → Spell Info.C80
+- `TotalArcaneSpellLikeLevel` [cell] → Spell Info.C82
+- `TotalDivineCasterLevel` [cell] → Spell Info.C81
+- `WarmageEdge` [cell] → Spell Info.L88
+
+### Tables/Lookups
+
+- `TblArcaneCasters` [range] → Spell Info.B110:.B132
+- `TblCasterIndex` [range] → Spell Info.A4:.B73
+- `TblCasterLevel` [range] → Spell Info.F4:.F73
+- `TblCasterMod` [range] → Spell Info.J4:.J73
+- `TblCasterRanges` [range] → Spell Info.AV4:.AX73
+- `TblCasterStat` [range] → Spell Info.I4:.I73
+- `TblDivineCasters` [range] → Spell Info.A110:.A141
+- `TblInvocationLevels` [range] → Spell Info.BC84:.BC87
+- `TblRuneSmithSlotLvls` [range] → Spell Info.AZ84:.AZ93
+- `TblSelectsSpellsKnown` [range] → Spell Info.A84:.A106
+- `TblSlotLevels` [range] → Spell Info.BA89:.BA93
+- `TblSpellCasterIdx` [range] → Spell Info.A4:.B73
+- `TblSpellClass` [range] → Spell Info.N3:.N73
+- `TblSpellClassMirror` [range] → Spell Info.BO3:.BO73
+- `TblSpellLevels` [range] → Spell Info.BB84:.BB93
+- `TblSpellcaster` [range] → Spell Info.AX84:.AX122
+- `TblSpellsKnown` [range] → Spell Info.AK4:.AT73
+- `TblSpellsPerDay` [range] → Spell Info.Z4:.AI73
+
+## Spells per Day
+
+- `TblAdpSpsDay` [range] → Spells per Day.A26:.G46
+- `TblAfcSpsDay` [range] → Spells per Day.A141:.H161
+- `TblAoPSpsDay` [range] → Spells per Day.I95:.S105
+- `TblArvSpsDay` [range] → Spells per Day.I285:.S305
+- `TblBegSpsDay` [range] → Spells per Day.I331:.S351
+- `TblBliSpsDay` [range] → Spells per Day.A72:.H92
+- `TblBrdSpsDay` [range] → Spells per Day.A3:.H23
+- `TblBuBSpsDay` [range] → Spells per Day.A164:.G184
+- `TblClrSpsDay` [range] → Spells per Day.I3:.S23
+- `TblCoHSpsDay` [range] → Spells per Day.A49:.G69
+- `TblDemSpsDay` [range] → Spells per Day.AE49:.AJ69
+- `TblDoTSpsDay` [range] → Spells per Day.AE98:.AK108
+- `TblDrNSpsDay` [range] → Spells per Day.I308:.S328
+- `TblDrdSpsDay` [range] → Spells per Day.I26:.S46
+- `TblDvCSpsDay` [range] → Spells per Day.I236:.S246
+- `TblFBlSpsDay` [range] → Spells per Day.A211:.G217
+- `TblFvSSpsDay` [range] → Spells per Day.I108:.S128
+- `TblHlrSpsDay` [range] → Spells per Day.I131:.S151
+- `TblHxBSpsDay` [range] → Spells per Day.T49:.Y69
+- `TblKoWSpsDay` [range] → Spells per Day.AE111:.AL121
+- `TblMhrSpsDay` [range] → Spells per Day.A187:.G192
+- `TblMplSpsDay` [range] → Spells per Day.A195:.G200
+- `TblMysSpsDay` [range] → Spells per Day.I354:.S374
+- `TblNstSpsDay` [range] → Spells per Day.AE137:.AJ147
+- `TblOcASpsDay` [range] → Spells per Day.A95:.H115
+- `TblPUGSpsDay` [range] → Spells per Day.AE124:.AJ134
+- `TblPalSpsDay` [range] → Spells per Day.T3:.Y23
+- `TblRgrSpsDay` [range] → Spells per Day.T26:.Y46
+- `TblShaSpsDay` [range] → Spells per Day.I377:.S397
+- `TblShjSpsDay` [range] → Spells per Day.I190:.S210
+- `TblSmnSpsDay` [range] → Spells per Day.I213:.S233
+- `TblSohSpsDay` [range] → Spells per Day.T72:.Y92
+- `TblSorSpsDay` [range] → Spells per Day.I49:.S69
+- `TblSpTSpsDay` [range] → Spells per Day.A118:.H138
+- `TblStdGSpsDay` [range] → Spells per Day.AE3:.AJ23
+- `TblStdPSpsDay` [range] → Spells per Day.AE26:.AJ46
+- `TblSuASpsDay` [range] → Spells per Day.AE85:.AK95
+- `TblSubSpsDay` [range] → Spells per Day.I272:.S282
+- `TblUrPSpsDay` [range] → Spells per Day.I177:.S187
+- `TblVoBSpsDay` [range] → Spells per Day.AE72:.AJ82
+- `TblWizSpsDay` [range] → Spells per Day.I72:.S92
+- `TblWrmSpsDay` [range] → Spells per Day.I154:.S174
+- `TblWuJSpsDay` [range] → Spells per Day.I249:.S269
+
+## Spells Known
+
+- `TblAsnSpellKn` [range] → Spells Known.T3:.Y13
+- `TblBrdSpellKn` [range] → Spells Known.A3:.H23
+- `TblCShSpellKn` [range] → Spells Known.AS25:.AX35
+- `TblEoBSpellKn` [range] → Spells Known.AM3:.AR13
+- `TblFMkSpellKn` [range] → Spells Known.T62:.Y72
+- `TblFvSSpellKn` [range] → Spells Known.I26:.S46
+- `TblGnASpellKn` [range] → Spells Known.AM16:.AR26
+- `TblHxBSpellKn` [range] → Spells Known.A26:.F46
+- `TblJWWSpellKn` [range] → Spells Known.AM75:.AR85
+- `TblKoWSpellKn` [range] → Spells Known.AB25:.AI36
+- `TblMplSpellKn` [range] → Spells Known.T16:.Y22
+- `TblMysSpellKn` [range] → Spells Known.I62:.S82
+- `TblNstSpellKn` [range] → Spells Known.AM101:.AR111
+- `TblSaHSpellKn` [range] → Spells Known.AM88:.AR98
+- `TblScgSpellKn` [range] → Spells Known.T40:.Z45
+- `TblShjSpellKn` [range] → Spells Known.AB3:.AL23
+- `TblSmnSpellKn` [range] → Spells Known.AS3:.BC23
+- `TblSorSpellKn` [range] → Spells Known.I3:.S23
+- `TblSpTSpellKn` [range] → Spells Known.AM29:.AR49
+- `TblSuASpellKn` [range] → Spells Known.T49:.Z59
+- `TblSubSpellKn` [range] → Spells Known.I49:.S59
+- `TblVigSpellKn` [range] → Spells Known.T26:.Y36
+- `TblWrlSpellKn` [range] → Spells Known.AM52:.AR72
+
+## Psionic Info
+
+### General
+
+- `ArdtLvlAbilities` [range] → Psionic Info.Q66:.S86
+- `BonusManifesterLevels` [cell] → Psionic Info.K17
+- `DvMdLvlAbilities` [range] → Psionic Info.U84:.W104
+- `FoZLvlAbilities` [range] → Psionic Info.U42:.W52
+- `FullRacePsion` [cell] → Psionic Info.F24
+- `LrkLvlAbilities` [range] → Psionic Info.Q90:.S110
+- `ManifesterListChanged` [cell] → Psionic Info.Z1
+- `MaxManifesterLevel` [cell] → Psionic Info.F18
+- `MaxPowerLevel` [cell] → Psionic Info.K18
+- `PICha` [cell] → Psionic Info.D16
+- `PIChaMod` [cell] → Psionic Info.E16
+- `PIInt` [cell] → Psionic Info.D14
+- `PIIntMod` [cell] → Psionic Info.E14
+- `PIWis` [cell] → Psionic Info.D15
+- `PIWisMod` [cell] → Psionic Info.E15
+- `PenaltyManifesterLevels` [cell] → Psionic Info.K16
+- `PowerPointReserve` [cell] → Psionic Info.K19
+- `PsiLvlAbilities` [range] → Psionic Info.Q18:.S38
+- `PsionicAbility` [cell] → Psionic Info.K20
+- `PswLvlAbilities` [range] → Psionic Info.U18:.W38
+- `RacePsion` [cell] → Psionic Info.F23
+- `SelectedManifesterReal` [cell] → Psionic Info.K28
+- `WMdLvlAbilities` [range] → Psionic Info.U56:.W66
+- `WldLvlAbilities` [range] → Psionic Info.Q42:.S62
+- `ZtCbLvlAbilities` [range] → Psionic Info.U70:.W80
+
+### Tables/Lookups
+
+- `TblManifesterClass` [range] → Psionic Info.L3:.L12
+- `TblManifesterIndex` [range] → Psionic Info.A4:.B12
+- `TblManifesterLevel` [range] → Psionic Info.F6:.F12
+- `TblManifesterMirror` [range] → Psionic Info.Y3:.Y12
+- `TblManifesterMod` [range] → Psionic Info.H6:.H12
+- `TblManifesterRanges` [range] → Psionic Info.N6:.P12
+- `TblManifesterRef` [range] → Psionic Info.A4:.J12
+- `TblMaxPowerLvlKnown` [range] → Psionic Info.T6:.T13
+- `TblPowersKnown` [range] → Psionic Info.S6:.S12
+
+## Table Tent
+
+- `TableTentPicture` [cell] → Table Tent.DR31
+
+## Game Log
+
+### General
+
+- `GameLogArt` [cell] → Game Log.G3
+- `GameLogCP` [cell] → Game Log.F3
+- `GameLogGP` [cell] → Game Log.D3
+- `GameLogGems` [cell] → Game Log.H3
+- `GameLogOtherGP` [cell] → Game Log.I3
+- `GameLogPP` [cell] → Game Log.C3
+- `GameLogSP` [cell] → Game Log.E3
+- `GameLogXPTotal` [cell] → Game Log.J3
+
+### Tables/Lookups
+
+- `TblGameLog` [range] → Game Log.A5:.J2005
+
+## LG Game Log
+
+- `ARFinalGP` [cell] → LG Game Log.R27
+- `ARFinalXP` [cell] → LG Game Log.L27
+- `ARInfo1` [range] → LG Game Log.A30:.D250
+- `ARInfo2` [range] → LG Game Log.F30:.G250
+- `ARInfo3` [range] → LG Game Log.J30:.K250
+- `ARInfo4` [range] → LG Game Log.N30:.Q250
+- `ModCodes` [range] → LG Game Log.B30:.B250
+- `StartingGold` [range] → LG Game Log.A1:.C21
+
+## LG Item Access Tracking
+
+- `TblItemAccessList` [range] → LG Item Access Tracking.A4:.C104
+
+## LG MIL
+
+- `TblMIL` [range] → LG MIL.A7:.BY84
+- `TblMILClear` [range] → LG MIL.DA7:.FY84
+
+## Tables
+
+### Anoint
+
+- `AnointSelf` [range] → Tables.N121:.N128
+- `AnointWeapon` [range] → Tables.N136:.N141
+
+### Feats
+
+- `FeatAttacks` [cell] → Tables.U13
+
+### General
+
+- `ArvKnowledgeSkills` [range] → Tables.N349:.N352
+- `BlackMagicElixirs` [range] → Tables.N168:.N173
+- `BlackMagicOils` [range] → Tables.N153:.N160
+- `CarryCap` [range] → Tables.A70:.F139
+- `ClassAttacks` [cell] → Tables.U19
+- `DraconicHeritageSkill` [cell] → Tables.I274
+- `DragonEnergyType` [range] → Tables.G275:.H317
+- `DragonwroughtSkill` [cell] → Tables.I273
+- `DriftAttacks` [cell] → Tables.U3
+- `ExoticWeaponTricks` [range] → Tables.N199:.N211
+- `EyeStalkAbilities` [range] → Tables.J352:.J362
+- `FavEnemy1` [cell] → Tables.R378
+- `FavEnemy10` [cell] → Tables.R387
+- `FavEnemy11` [cell] → Tables.R388
+- `FavEnemy12` [cell] → Tables.R389
+- `FavEnemy13` [cell] → Tables.R390
+- `FavEnemy2` [cell] → Tables.R379
+- `FavEnemy3` [cell] → Tables.R380
+- `FavEnemy4` [cell] → Tables.R381
+- `FavEnemy5` [cell] → Tables.R382
+- `FavEnemy6` [cell] → Tables.R383
+- `FavEnemy7` [cell] → Tables.R384
+- `FavEnemy8` [cell] → Tables.R385
+- `FavEnemy9` [cell] → Tables.R386
+- `FavEnemyE` [cell] → Tables.R392
+- `FavEnemyHPa1` [cell] → Tables.R393
+- `FavEnemyHPa2` [cell] → Tables.R394
+- `FavEnemyRows` [cell] → Tables.V246
+- `FavEnemyS` [cell] → Tables.R391
+- `FavEnemySSc` [cell] → Tables.R395
+- `FoeHunterFoe` [cell] → Tables.D222
+- `HRShowAllInBook` [cell] → Tables.I233
+- `HarperPriestBlessings` [range] → Tables.N180:.N190
+- `HurlTricks` [range] → Tables.N310:.N315
+- `KelanenFavoredWeapon` [cell] → Tables.X124
+- `MajorAuras` [cell] → Tables.P337
+- `MasterThrowerTricks` [range] → Tables.N218:.N227
+- `MinorAuras` [cell] → Tables.P320
+- `MonkTattoos` [range] → Tables.N271:.N301
+- `MoonSpkResist1` [cell] → Tables.Q68
+- `MoonSpkResist2` [cell] → Tables.Q76
+- `NaturesArmaments` [range] → Tables.N234:.N244
+- `Quadruped` [cell] → Tables.E67
+- `RecasterSuddenMetamagicFeat2` [cell] → Tables.Q85
+- `RecasterSuddenmetamagicFeat1` [cell] → Tables.Q84
+- `RogAbilBonusFts` [cell] → Tables.O26
+- `RogAbilBreathstealer` [cell] → Tables.O2
+- `RogAbilCritStrike` [cell] → Tables.O3
+- `RogAbilDefRoll` [cell] → Tables.O4
+- `RogAbilEvasion` [cell] → Tables.O10
+- `RogAbilFortReflexes` [cell] → Tables.O11
+- `RogAbilImpEvasion` [cell] → Tables.O5
+- `RogAbilOpportun` [cell] → Tables.O6
+- `RogAbilSkillMaster` [cell] → Tables.O7
+- `RogAbilSlipMind` [cell] → Tables.O8
+- `RogAbilSnipingMastery` [cell] → Tables.O1
+- `SWiDraconicSurgeMent` [range] → Tables.I205:.I208
+- `SWiDraconicSurgePhys` [range] → Tables.I199:.I202
+- `ScionHouse` [range] → Tables.J53:.J59
+- `Select_a_Terrain` [range] → Tables.P12:.P18
+- `SelectedCaster` [cell] → Tables.H233
+- `ShugenjaElement` [cell] → Tables.L322
+- `ShugenjaOrder` [cell] → Tables.A334
+- `StatMods` [range] → Tables.A143:.L169
+- `StonePowers` [range] → Tables.N253:.N262
+- `Strength_Damage` [range] → Tables.G38:.G41
+
+### Tables/Lookups
+
+- `Tbl1to20` [range] → Tables.L3:.L23
+- `Tbl1to60` [range] → Tables.L3:.L63
+- `TblAberrantFeature` [range] → Tables.E274:.E281
+- `TblAberrantmarks` [range] → Tables.E259:.E272
+- `TblAlignedAttack` [range] → Tables.H53:.H57
+- `TblAlignmentComponents` [range] → Tables.A2:.A5
+- `TblAmbientSecrets` [range] → Tables.Q121:.Q125
+- `TblAncientSecrets` [range] → Tables.R117:.R125
+- `TblAnointSelfStatBump` [range] → Tables.H172:.H175
+- `TblArcaneDivine` [range] → Tables.C53:.C55
+- `TblArcaneThesis` [range] → Tables.Q127:.Q138
+- `TblArmorSpecializationList` [range] → Tables.P101:.P104
+- `TblAtavistPersonality` [range] → Tables.Q62:.Q66
+- `TblAtkSav` [range] → Tables.A2:.J23
+- `TblAtkStrengthBonus` [range] → Tables.G30:.G34
+- `TblBeastTotem` [range] → Tables.H243:.H251
+- `TblBlackMagicElixirStatBump` [range] → Tables.J172:.J175
+- `TblBlackMagicOilStatBump` [range] → Tables.I172:.I175
+- `TblBonusDamageType` [range] → Tables.U61:.U64
+- `TblBonusSpellorFeat` [range] → Tables.P84:.P86
+- `TblBonusTypes` [range] → Tables.W144:.W159
+- `TblBrainmateKnowledgeBonus` [range] → Tables.R87:.R92
+- `TblBrandof9Hells` [range] → Tables.O140:.O149
+- `TblBrandof9HellsBenefits` [range] → Tables.P140:.P149
+- `TblCarryInfo` [range] → Tables.A70:.K119
+- `TblCombatStyles` [range] → Tables.P60:.P62
+- `TblConstellationPower` [range] → Tables.U125:.U136
+- `TblCrSWeaponProf` [range] → Tables.N358:.N361
+- `TblCreatureType` [range] → Tables.N72:.N96
+- `TblCrossbowType` [range] → Tables.I53:.I56
+- `TblDfABreathEffectsAvailList` [range] → Tables.F347:.F362
+- `TblDfABreathEffectsConList` [range] → Tables.G347:.H362
+- `TblDfABreathEffectsDefList` [range] → Tables.G347:.H362
+- `TblDfABreathEffectsMasterList` [range] → Tables.D347:.D362
+- `TblDfABreathWeaponEffects` [range] → Tables.E347:.E362
+- `TblDgdBonuses` [range] → Tables.H216:.J222
+- `TblDiDrAugmentation` [range] → Tables.I193:.I196
+- `TblDraconicHeritage` [range] → Tables.G275:.G317
+- `TblDragShamanAuras` [range] → Tables.W162:.W174
+- `TblDragShamanColor` [range] → Tables.P73:.P83
+- `TblDragShamanSkillFocus` [range] → Tables.P95:.P98
+- `TblEPgWeaponFocus` [range] → Tables.X135:.X142
+- `TblEctopicForms` [range] → Tables.S60:.S68
+- `TblEldeenRangerSect` [range] → Tables.P64:.P69
+- `TblEldritchDiscipleGifts` [range] → Tables.T61:.T69
+- `TblElement` [range] → Tables.G43:.G48
+- `TblElement4` [range] → Tables.G53:.G57
+- `TblElementalRebuke` [range] → Tables.R114:.R116
+- `TblElementalSpecialty` [range] → Tables.F53:.F57
+- `TblElfSubraces` [range] → Tables.U67:.U84
+- `TblEnergy` [range] → Tables.E38:.E43
+- `TblEnergy4` [range] → Tables.E53:.E57
+- `TblExp` [range] → Tables.U180:.W240
+- `TblExtraInvocations` [range] → Tables.H230:.J232
+- `TblFavoredEnemies1` [range] → Tables.A377:.A395
+- `TblFavoredEnemies10` [range] → Tables.J377:.J395
+- `TblFavoredEnemies11` [range] → Tables.K377:.K395
+- `TblFavoredEnemies12` [range] → Tables.L377:.L395
+- `TblFavoredEnemies13` [range] → Tables.M377:.M395
+- `TblFavoredEnemies14` [range] → Tables.N377:.N395
+- `TblFavoredEnemies15` [range] → Tables.O377:.O395
+- `TblFavoredEnemies16` [range] → Tables.P377:.P395
+- `TblFavoredEnemies2` [range] → Tables.B377:.B395
+- `TblFavoredEnemies3` [range] → Tables.C377:.C395
+- `TblFavoredEnemies4` [range] → Tables.D377:.D395
+- `TblFavoredEnemies5` [range] → Tables.E377:.E395
+- `TblFavoredEnemies6` [range] → Tables.F377:.F395
+- `TblFavoredEnemies7` [range] → Tables.G377:.G395
+- `TblFavoredEnemies8` [range] → Tables.H377:.H395
+- `TblFavoredEnemies9` [range] → Tables.I377:.I395
+- `TblFleshwarperSecret` [range] → Tables.H258:.H267
+- `TblFleshwarperTaint` [range] → Tables.G258:.G263
+- `TblFtDraconicAuras` [range] → Tables.R170:.R182
+- `TblGazingEyeAbilities` [range] → Tables.K352:.K356
+- `TblGraftTypes` [range] → Tables.R80:.R86
+- `TblHPaFavEnemy` [range] → Tables.U98:.U104
+- `TblHatedEnemies` [range] → Tables.Q280:.Q290
+- `TblHengeyokaiForms` [range] → Tables.C243:.F255
+- `TblHierophantAbilities` [range] → Tables.N109:.N118
+- `TblHighArcana` [range] → Tables.N99:.N106
+- `TblHordeEnemies` [range] → Tables.S323:.S329
+- `TblHpMKnowledge` [range] → Tables.A196:.A213
+- `TblHpMSkillFocus` [range] → Tables.B196:.B198
+- `TblHpPKnowledge` [range] → Tables.C196:.C213
+- `TblKelanenFavoredWeapon` [range] → Tables.X125:.X132
+- `TblLGMetaRegions` [range] → Tables.J45:.J50
+- `TblLScRegionFamiliarity` [range] → Tables.S125:.S152
+- `TblLevel12StatBump` [range] → Tables.C172:.C178
+- `TblLevel16StatBump` [range] → Tables.D172:.D178
+- `TblLevel20StatBump` [range] → Tables.E172:.E178
+- `TblLevel24StatBump` [range] → Tables.A180:.A186
+- `TblLevel28StatBump` [range] → Tables.B180:.B186
+- `TblLevel32StatBump` [range] → Tables.C180:.C186
+- `TblLevel36StatBump` [range] → Tables.D180:.D186
+- `TblLevel40StatBump` [range] → Tables.E180:.E186
+- `TblLevel44StatBump` [range] → Tables.A188:.A194
+- `TblLevel48StatBump` [range] → Tables.B188:.B194
+- `TblLevel4StatBump` [range] → Tables.A172:.A178
+- `TblLevel52StatBump` [range] → Tables.C188:.C194
+- `TblLevel56StatBump` [range] → Tables.D188:.D194
+- `TblLevel60StatBump` [range] → Tables.E188:.E194
+- `TblLevel8StatBump` [range] → Tables.B172:.B178
+- `TblMMDragonColors` [range] → Tables.T94:.T104
+- `TblMageKillerSaves` [range] → Tables.D196:.D198
+- `TblMageKillerSchools` [range] → Tables.E196:.E200
+- `TblMagicItemSlots` [range] → Tables.R62:.R73
+- `TblMagnificoClassSkill` [range] → Tables.R137:.R166
+- `TblMantles` [range] → Tables.S70:.S100
+- `TblMartialDisciplines` [range] → Tables.V132:.V141
+- `TblMonkFeats1` [range] → Tables.P27:.P30
+- `TblMonkFeats2` [range] → Tables.P32:.P38
+- `TblMonkFeats3` [range] → Tables.P41:.P48
+- `TblMoonSpkEnergyResist1` [range] → Tables.Q69:.Q74
+- `TblMoonSpkEnergyResist2` [range] → Tables.Q77:.Q82
+- `TblNativeTies` [range] → Tables.R106:.R113
+- `TblNinjaSpyWeapons` [range] → Tables.A33:.A45
+- `TblNinjaSpyWpnChoices` [range] → Tables.B33:.B36
+- `TblNobleBonusClassSkill` [range] → Tables.V66:.V95
+- `TblNodeTypes` [range] → Tables.Q93:.Q96
+- `TblNomadShamanRegion` [range] → Tables.T118:.T123
+- `TblOrcusDeformity` [range] → Tables.N148:.N150
+- `TblParagonPaths` [range] → Tables.U27:.W32
+- `TblParagonsPath` [range] → Tables.U28:.U33
+- `TblPlanarTerrains` [range] → Tables.P2:.P18
+- `TblPointBuy` [range] → Tables.A50:.B67
+- `TblPoisonTypes` [range] → Tables.D259:.D263
+- `TblPoisons` [range] → Tables.C259:.C319
+- `TblPsicrystalPersonalities` [range] → Tables.N54:.N69
+- `TblPsionicEnergy` [range] → Tables.C43:.C47
+- `TblRecasterSuddenMetamagic` [range] → Tables.Q86:.Q91
+- `TblRogAbility` [range] → Tables.N2:.N12
+- `TblRuatharWeapon` [range] → Tables.G222:.G226
+- `TblSaHSpecialAbilities` [range] → Tables.Q98:.Q101
+- `TblSanctifiedOneAbilities` [range] → Tables.T87:.T91
+- `TblSanctifiedOneDeity` [range] → Tables.T80:.T84
+- `TblSaveThrow` [range] → Tables.B1:.B4
+- `TblShieldSpecialization` [range] → Tables.P107:.P110
+- `TblShugenjaElements` [range] → Tables.L323:.L327
+- `TblShugenjaOrderInfo` [range] → Tables.A339:.K347
+- `TblShugenjaOrders` [range] → Tables.A335:.A343
+- `TblSpecialMaterials` [range] → Tables.R75:.R78
+- `TblSpellFoci` [range] → Tables.I25:.I37
+- `TblSpiritGuides` [range] → Tables.A345:.A367
+- `TblSpiritualTotem` [range] → Tables.J243:.J248
+- `TblStage1Drift` [range] → Tables.Q2:.R12
+- `TblStage2Drift` [range] → Tables.Q2:.R23
+- `TblStage3Drift` [range] → Tables.Q2:.R34
+- `TblStage4Drift` [range] → Tables.Q2:.R45
+- `TblStage5Drift` [range] → Tables.Q2:.R56
+- `TblSteelLegionnaireFavEnemy` [range] → Tables.V98:.V105
+- `TblStrengthBonusToDamage` [range] → Tables.G37:.G41
+- `TblSwSaDisciplineWeapons` [range] → Tables.T146:.Y151
+- `TblSwSaDisciplines` [range] → Tables.W135:.W141
+- `TblTPgResist` [range] → Tables.T107:.T110
+- `TblTerrainTypes` [range] → Tables.P2:.P10
+- `TblTerrainTypes2` [range] → Tables.P2:.P10
+- `TblThGImbue1` [range] → Tables.Q103:.Q108
+- `TblThGImbue2` [range] → Tables.Q110:.Q118
+- `TblThunderLore` [range] → Tables.R93:.R105
+- `TblTotemicInsight` [range] → Tables.T125:.T135
+- `TblUnarmedDamage` [range] → Tables.Q184:.S244
+- `TblVice` [range] → Tables.R129:.R136
+- `TblWeaponMasteryList` [range] → Tables.P113:.P116
+- `TblWildPlainsMountType` [range] → Tables.P23:.P25
+- `TblWoHsForbidSchool` [range] → Tables.V114:.V121
+- `TblWoHsOrderSecrets` [range] → Tables.V124:.V129
+- `TblWoHsOrders` [range] → Tables.V108:.V111
+- `TblWonderWorkerSlots` [range] → Tables.H223:.J229
+- `TblWujFeat` [range] → Tables.I46:.I50
+
+## Named Expressions
+
+- `AnimalCompanionList` = `[$'Creature Info'.$CB$6]:INDEX([$'Creature Info'.$CB$6:.$CB$225];CompanionListRowsCnt+1)`
+- `AttackNames` = `[$Attacks.$B$7];[$Attacks.$Q$7];[$Attacks.$AF$7];[$Attacks.$AU$7];[$Attacks.$BJ$7];[$Attacks.$BY$7]`
+- `BulletsList` = `INDEX(TblBullets;2;5):INDEX(TblBullets;BulletsRowsCnt;5)`
+- `BulletsName` = `INDEX(TblBullets;2;2):INDEX(TblBullets;BulletsRowsCnt;2)`
+- `BulletsSeq` = `INDEX(TblBullets;2;3):INDEX(TblBullets;BulletsRowsCnt;3)`
+- `BulletsSymbol` = `INDEX(TblBullets;2;1):INDEX(TblBullets;BulletsRowsCnt;1)`
+- `CreatureName` = `[$'Creature Info'.$A$6]:INDEX(TblCreatureInfo;CreatureInfoRowsCnt;1)`
+- `DaelkyrSymbiontList` = `[$'Race & Templates'.$BB$3]:INDEX([$'Race & Templates'.$BB$3:.$BB$10];DaelkyrSymbiontListRowsCnt)`
+- `DrShDragonList` = `[$Classes.$BU$3]:INDEX([$Classes.$BU$3:.$BU$12];DrShDragonListRowsCnt)`
+- `DragonList` = `[$'Creature Info'.$CJ$7]:INDEX([$'Creature Info'.$CJ$7:.$CJ$225];DragonListRowsCnt)`
+- `EBHouseList` = `[$'Race & Templates'.$AV$16]:INDEX([$'Race & Templates'.$AV$16:.$AV$28];EBHouseListRowsCnt)`
+- `ElSElementList` = `[$'Class Abilities'.$G$725]:INDEX([$'Class Abilities'.$G$725:.$G$728];ElSElementListRowsCnt)`
+- `EthnicityList` = `[$'Race Info'.$BR$128]:INDEX([$'Race Info'.$BR$128:.$BR$168];EthnicityListRowsCnt)`
+- `EvolvedSpList` = `[$'Race & Templates'.$AP$19]:INDEX([$'Race & Templates'.$AP$19:.$AP$30];EvolvedSpListRowsCnt)`
+- `FamiliarList` = `[$'Creature Info'.$BX$6]:INDEX([$'Creature Info'.$BX$6:.$BX$225];FamiliarListRowsCnt+1)`
+- `FeyriAbilitiesList` = `[$'Race & Templates'.$BB$12]:INDEX([$'Race & Templates'.$BB$12:.$BB$22];FeyriAbilitiesListRowsCnt)`
+- `HRCampaigns` = `[$ExportSheet.$B$77:.$B$84];[$ExportSheet.$B$87:.$B$96];[$ExportSheet.$B$99:.$B$102];[$ExportSheet.$B$105:.$B$107];[$ExportSheet.$B$110];[$ExportSheet.$B$115:.$B$117];[$ExportSheet.$B$122:.$B$122]`
+- `HRSources` = `[$ExportSheet.$B$30:.$B$58];[$ExportSheet.$B$62:.$B$65];[$ExportSheet.$B$67:.$B$74];[$ExportSheet.$B$114];[$ExportSheet.$B$111];[$ExportSheet.$B$121:.$B$123]`
+- `IncarnumResetRange` = `[$'Incarnum Abilities'.$F$2];[$'Incarnum Abilities'.$L$2];[$'Incarnum Abilities'.$R$2];[$'Incarnum Abilities'.$R$8];[$'Incarnum Abilities'.$L$8];[$'Incarnum Abilities'.$F$8];[$'Incarnum Abilities'.$F$14];[$'Incarnum Abilities'.$L$14];[$'Incarnum Abilities'.$R$14];[$'Incarnum Abilities'.$R$20];[$'Incarnum Abilities'.$L$20];[$'Incarnum Abilities'.$F$20]`
+- `LycanthropeList` = `[$'Creature Info'.$BT$7]:INDEX([$'Creature Info'.$BT$7:.$BT$225];LycanthropeListRowsCnt)`
+- `MagicEquipReset` = `[$ExportSheet.$K$44:.$M$45];[$ExportSheet.$K$47:.$M$48];[$ExportSheet.$K$50:.$M$51];[$ExportSheet.$K$53:.$M$54]`
+- `MagicEquipResetUnslotted` = `[$ExportSheet.$K$56:.$N$56];[$ExportSheet.$K$58:.$N$58];[$ExportSheet.$K$60:.$M$60];[$ExportSheet.$K$62:.$M$62];[$ExportSheet.$K$64:.$M$64];[$ExportSheet.$K$66:.$M$66];[$ExportSheet.$K$68:.$M$68]`
+- `PRCReset` = `[$ExportSheet.$T$9:.$T$68];[$ExportSheet.$U$9:.$U$14];[$ExportSheet.$V$9:.$V$15];[$ExportSheet.$U$19:.$U$20];[$ExportSheet.$U$22];[$ExportSheet.$U$27:.$U$49];[$ExportSheet.$V$24:.$V$31];[$ExportSheet.$X$31];[$ExportSheet.$X$35];[$ExportSheet.$W$43:.$W$52]`
+- `PactAugmentList1` = `IF(BinLvl>=2;[$'Binder Vestiges'.$Q$61:.$Q$72];"")`
+- `PactAugmentList2` = `IF(BinLvl>=5;[$'Binder Vestiges'.$Q$61:.$Q$72];"")`
+- `PactAugmentList3` = `IF(BinLvl>=10;[$'Binder Vestiges'.$Q$61:.$Q$72];"")`
+- `PactAugmentList4` = `IF(BinLvl>=16;[$'Binder Vestiges'.$Q$61:.$Q$72];"")`
+- `PactAugmentList5` = `IF(BinLvl>=20;[$'Binder Vestiges'.$Q$61:.$Q$72];"")`
+- `RaceList` = `[$'Race Info'.$BG$4]:INDEX([$'Race Info'.$BG$5:.$BG$332];RaceListRowsCnt)`
+- `RaceName` = `[$'Race Info'.$A$3]:INDEX([$'Race Info'.$A$3:.$A$332];RaceInfoRowsCnt)`
+- `RegionList` = `[$'Race Info'.$BM$128]:INDEX([$'Race Info'.$BM$128:.$BM$347];RegionListRowsCnt)`
+- `SettingsAbrList` = `INDEX(TblSettings;2;1):INDEX(TblSettings;SettingsRowsCnt;1)`
+- `SettingsList` = `INDEX(TblSettings;2;5):INDEX(TblSettings;SettingsRowsCnt;5)`
+- `ShadowAbilitiesList` = `[$'Race & Templates'.$AP$11]:INDEX([$'Race & Templates'.$AP$11:.$AP$17];ShadowAbilitiesListRowsCnt)`
+- `SkKnowledgeList` = `[$Skills.$IJ$33]:INDEX([$Skills.$IJ$33:.$IJ$53];SkKnowledgeListRowsCnt)`
+- `SoulmeldsReset` = `[$ExportSheet.$BD$51:.$BG$53];[$ExportSheet.$BD$55:.$BF$57];[$ExportSheet.$BG$57];[$ExportSheet.$BD$59:.$BF$61];[$ExportSheet.$BG$61];[$ExportSheet.$BD$63:.$BF$65];[$ExportSheet.$BD$68:.$BF$68];[$ExportSheet.$BD$70:.$BF$71]`
+- `SourcebooksFeatsList` = `[$'Option Info'.$R$2]:INDEX([$'Option Info'.$R$2:.$R$150];SourcebooksFeatsSrcCnt;1)`
+- `SwarmTypeList` = `[$'Race & Templates'.$AV$3]:INDEX([$'Race & Templates'.$AV$3:.$AV$14];SwarmTypesListRowsCnt)`
+- `TblClass1` = `[$Classes.$AN$2]:INDEX([$Classes.$AN$2:.$AN$61];LvlCS;1)`
+- `TblClass2` = `[$Classes.$AO$2]:INDEX([$Classes.$AO$2:.$AO$61];LvlCS;1)`
+- `TblClass3` = `[$Classes.$AP$2]:INDEX([$Classes.$AP$2:.$AP$61];LvlCS;1)`
+- `TblClassAbilitiesAdj` = `[$'Class Info'.$ED$19]:INDEX([$'Class Info'.$ED$19:.$EN$134];ClassAbilitiesAdjRowsCnt;11)`
+- `TblClassAlignmentMod` = `[$'Class Info'.$ED$282]:INDEX([$'Class Info'.$ED$282:.$ER$293];ClassALModRowsCnt;15)`
+- `TblClassDR` = `[$'Class Info'.$ED$301]:INDEX([$'Class Info'.$ED$301:.$EN$359];ClassDRRowsCnt;11)`
+- `TblClassN` = `[$Classes.$AH$2]:INDEX([$Classes.$AH$2:.$AH$61];LvlCS;1)`
+- `TblClassSubtypeMod` = `[$'Class Info'.$ED$227]:INDEX([$'Class Info'.$ED$227:.$EN$257];ClassSubtypeModRowsCnt;11)`
+- `TblClassVirtual` = `[$'Class Info'.$ED$264]:INDEX([$'Class Info'.$ED$264:.$EN$275];ClassVirtualRowsCnt;11)`
+- `TblClassVirtualAtLvl` = `[$'Class Info'.$EM$264]:INDEX([$'Class Info'.$EM$264:.$EM$275];ClassVirtualRowsCnt;1)`
+- `TblClassVirtualIndex` = `[$'Class Info'.$EN$264]:INDEX([$'Class Info'.$EN$264:.$EN$275];ClassVirtualRowsCnt;1)`
+- `TblClassesAtLvlCS` = `[$Classes.$C$2]:INDEX([$Classes.$C$2:.$C$61];LvlCS;1)`
+- `TblCreatureInfo` = `[$'Creature Info'.$A$6]:INDEX([$'Creature Info'.$A$6:.$CG$225];CreatureInfoRowsCnt;64)`
+- `TblFavEnemy` = `[$Tables.$V$247]:INDEX([$Tables.$V$247:.$V$287];FavEnemyRows)`
+- `TblFavEnemy1st` = `OFFSET([$Tables.$R$247];0;0;MATCH("*";[$Tables.$R$247:.$R$281];-1);1)`
+- `TblFeatAbilitiesAdj` = `[$'Class Info'.$ED$149]:INDEX([$'Class Info'.$ED$149:.$EN$178];FeatAbilitiesAdjRowsCnt;11)`
+- `TblGClassN` = `[$Classes.$AI$2]:INDEX([$Classes.$AI$2:.$AI$61];LvlCS;1)`
+- `TblGClassesAtLvlCS` = `[$Classes.$E$2]:INDEX([$Classes.$E$2:.$E$61];LvlCS;1)`
+- `TblItemCreationFeats` = `[$Feats.$BH$10]:INDEX([$Feats.$BH$10:.$BH$3634];ItemCreationRowsCnt)`
+- `TblMetamagicFeats` = `[$Feats.$BC$10]:INDEX([$Feats.$BC$10:.$BC$3634];MetamagicRowsCnt)`
+- `TblRaces` = `[$'Race Info'.$BG$6]:INDEX([$'Race Info'.$BG$6:.$BG$332];RaceListRowsCnt-1;1)`
+- `TblSourcebooks` = `[$'Option Info'.$J$1]:INDEX([$'Option Info'.$J$1:.$R$150];SourcebooksRowsCnt;9)`
+- `TblTemplateInfo` = `[$'Template Info'.$A$14]:INDEX([$'Template Info'.$A$14:.$BD$79];TemplateInfoRowsCnt;55)`
+- `TblVClassesAtLvlCS` = `[$Classes.$AK$2]:INDEX([$Classes.$AK$2:.$AK$61];LvlCS;1)`
+- `TemplateList` = `[$'Template Info'.$BF$15]:INDEX([$'Template Info'.$BF$15:.$BF$79];TemplateListRowsCnt)`
+- `TemplateName` = `[$'Template Info'.$A$14]:INDEX(TblTemplateInfo;TemplateInfoRowsCnt;1)`
+- `TrueDragonList` = `[$'Creature Info'.$CJ$6]:INDEX([$'Creature Info'.$CJ$6:.$CJ$226];DragonListRowsCnt+1)`
+- `VestigeFavList` = `[$'Binder Vestiges'.$AN$7]:INDEX([$'Binder Vestiges'.$AN$7:.$AN$50];FavVestigeListRowCnt+1)`
+- `VestigeList1` = `[$'Binder Vestiges'.$AB$7]:INDEX([$'Binder Vestiges'.$AB$7:.$AB$51];VestigeList1RowCnt+1)`
+- `VestigeList2` = `[$'Binder Vestiges'.$AE$7]:INDEX([$'Binder Vestiges'.$AE$7:.$AE$51];VestigeList2RowCnt+1)`
+- `VestigeList3` = `[$'Binder Vestiges'.$AH$7]:INDEX([$'Binder Vestiges'.$AH$7:.$AH$51];VestigeList3RowCnt+1)`
+- `VestigeList4` = `[$'Binder Vestiges'.$AK$7]:INDEX([$'Binder Vestiges'.$AK$7:.$AK$51];VestigeList4RowCnt+1)`
+- `WildShapeList` = `[$'Creature Info'.$CF$6]:INDEX([$'Creature Info'.$CF$6:.$CF$225];WildShapeListRowsCnt+1)`
+
+## Print Areas
+
+- Stats & Character Details.BZ2:.CB45
+- Character Sheet I.B2:.CW155
+- Character Sheet II.A1:.CX87
+- Character Sheet III.A1:.CX77
+- Familiar.A1:.CX151
+- Character Sheet IV.A1:.CX106
+- Character Sheet V.A1:.CX75
+- Animal Companion.A1:.CX151
+- Table Tent.A1:.ER54
