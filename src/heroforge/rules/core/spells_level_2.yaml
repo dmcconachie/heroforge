@@ -42,7 +42,7 @@ Barkskin:
   requires_caster_level: true
   effects:
     - target: ac
-      bonus_type: natural_armor
+      bonus_type: natural_armor_enhancement
       value: max(2, 1 + caster_level // 3)
 Bear's Endurance:
   level:

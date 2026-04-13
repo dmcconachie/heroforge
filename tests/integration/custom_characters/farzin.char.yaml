@@ -161,8 +161,10 @@ levels:
       Ride: 1
       Spellcraft: 2
       Spot: 1
-
-buffs: {}
+buffs:
+  Barkskin:
+    caster_level: 12
+    active: true
 templates:
   - template: Half-Celestial
     level: 6

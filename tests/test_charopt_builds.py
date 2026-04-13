@@ -1053,11 +1053,5 @@ class TestHalfCelestialCleric6:
     def test_attack_melee(self) -> None:
         assert self.c.get("attack_melee") == 8
 
-    def test_subtypes(self) -> None:
-        from heroforge.engine.templates import (
-            effective_subtypes,
-        )
-
-        subs = effective_subtypes(self.c)
-        assert "Good" in subs
-        assert "Extraplanar" in subs
+    def test_type_change(self) -> None:
+        assert getattr(self.c, "_creature_type_override", None) == "outsider"

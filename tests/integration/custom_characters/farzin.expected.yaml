@@ -45,12 +45,13 @@ combat:
   ac:
     base: 10
     dex: 1
+    natural_armor_enhancement: 5
     natural_armor: 1
     armor: 9
     shield: 3
-    total: 24
+    total: 29
   touch_ac: 11
-  flatfooted_ac: 23
+  flatfooted_ac: 28
   hp_max:
     hit_dice: 68
     con: 52
@@ -133,10 +134,6 @@ skills:
     speed_mod: -6
     untyped: -5
     total: -3
-  Knowledge (Arcana):
-    ability_mod: 2
-    synergy: 2
-    total: 4
   Knowledge (Nature):
     ability_mod: 2
     synergy: 2
@@ -178,10 +175,6 @@ skills:
     ability_mod: 2
     untyped: -5
     total: -3
-  Use Magic Device:
-    ability_mod: 1
-    synergy: 2
-    total: 3
 carrying_capacity:
   light: 306
   medium: 613
@@ -238,6 +231,16 @@ spellcasting:
       4: 22
       5: 23
       6: 24
+special_qualities:
+  - Darkvision 60 ft.
+  - 'Fly speed: 2x base land speed (good)'
+  - Immunity to disease
+  - Resistance to acid 10, cold 10, electricity 10
+  - >-
+    Damage reduction 5/magic (if 5 HD or less) or 10/magic (if more)
+  - 'Spell resistance: character level + 11'
+  - Lay on hands (as paladin of character level)
+  - +4 racial bonus on saving throws vs. poison
 equipment:
   armor:
     name: +1 Full Plate

@@ -55,6 +55,7 @@ class BonusType(enum.Enum):
     ARMOR = "armor"
     SHIELD = "shield"
     NATURAL_ARMOR = "natural_armor"
+    NATURAL_ARMOR_ENHANCEMENT = "natural_armor_enhancement"
     SIZE = "size"
     # --- Stacking (all instances sum) ---------------------------------------
     DODGE = "dodge"

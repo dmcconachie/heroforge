@@ -567,3 +567,39 @@ class TestRealScenarios:
         assert p.total() == 0
         p.set_source("Bull's Strength", [e])
         assert p.total() == 4
+
+
+class TestNaturalArmorEnhancement:
+    """
+    natural_armor_enhancement stacks with
+    natural_armor but not with itself.
+    """
+
+    def test_stacks_with_natural_armor(self) -> None:
+        p = BonusPool("ac")
+        na = BonusEntry(1, BonusType.NATURAL_ARMOR, "Half-Celestial")
+        nae = BonusEntry(
+            3,
+            BonusType.NATURAL_ARMOR_ENHANCEMENT,
+            "Barkskin",
+        )
+        p.set_source("template", [na])
+        p.set_source("spell", [nae])
+        assert p.total() == 4  # 1 + 3
+
+    def test_does_not_stack_with_itself(self) -> None:
+        p = BonusPool("ac")
+        b1 = BonusEntry(
+            3,
+            BonusType.NATURAL_ARMOR_ENHANCEMENT,
+            "Barkskin",
+        )
+        b2 = BonusEntry(
+            2,
+            BonusType.NATURAL_ARMOR_ENHANCEMENT,
+            "Amulet +2",
+        )
+        p.set_source("spell", [b1])
+        p.set_source("item", [b2])
+        # Only highest (3) applies
+        assert p.total() == 3

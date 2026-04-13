@@ -128,35 +128,35 @@ Amulet of Natural Armor +1:
   note: +1 enhancement to natural armor
   effects:
     - target: ac
-      bonus_type: natural_armor
+      bonus_type: natural_armor_enhancement
       value: 1
 Amulet of Natural Armor +2:
   slot: neck
   note: +2 enhancement to natural armor
   effects:
     - target: ac
-      bonus_type: natural_armor
+      bonus_type: natural_armor_enhancement
       value: 2
 Amulet of Natural Armor +3:
   slot: neck
   note: +3 enhancement to natural armor
   effects:
     - target: ac
-      bonus_type: natural_armor
+      bonus_type: natural_armor_enhancement
       value: 3
 Amulet of Natural Armor +4:
   slot: neck
   note: +4 enhancement to natural armor
   effects:
     - target: ac
-      bonus_type: natural_armor
+      bonus_type: natural_armor_enhancement
       value: 4
 Amulet of Natural Armor +5:
   slot: neck
   note: +5 enhancement to natural armor
   effects:
     - target: ac
-      bonus_type: natural_armor
+      bonus_type: natural_armor_enhancement
       value: 5
 Periapt of Wisdom +2:
   slot: neck

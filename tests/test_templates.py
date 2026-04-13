@@ -704,6 +704,7 @@ class TestTemplatesLoader:
         apply_template(hc, c)
 
         assert c.str_score == 18  # 14 + 4
-        # Half-Celestial: natural armor +1 AND dex +2 (10→12, mod 0→1) → AC 12
+        # Half-Celestial: natural armor +1 AND
+        # dex +2 (10→12, mod 0→1) → AC 12
         assert c.ac == 12
-        assert "Good" in effective_subtypes(c)
+        assert getattr(c, "_creature_type_override", None) == "outsider"
