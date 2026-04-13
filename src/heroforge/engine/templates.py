@@ -91,9 +91,6 @@ class TemplateDefinition:
     ability_modifiers   : List of TemplateAbilityModifier entries.
     natural_armor_bonus : Flat bonus to natural armor AC (untyped, stacks
                           with racial natural armor as enhancement bonus).
-    partially_applicable: True if the template has a "level" field (like
-                          Lycanthrope, Mostly Half-Celestial).
-    max_level           : Maximum level for partial templates (0 = N/A).
     special_qualities   : List of strings (display only for now; full
                           implementation in a future phase).
     grants_feats        : List of feat names granted by the template.
@@ -115,8 +112,6 @@ class TemplateDefinition:
         default_factory=list
     )
     natural_armor_bonus: int = 0
-    partially_applicable: bool = False
-    max_level: int = 0
     special_qualities: list[str] = field(default_factory=list)
     grants_feats: list[str] = field(default_factory=list)
     note: str = ""
@@ -134,8 +129,7 @@ class TemplateApplication:
     One template applied to a character.
 
     template_name : Name of the TemplateDefinition.
-    level         : For partially_applicable templates, which level is applied.
-                    0 = not applicable / fully applied.
+    level         : Character level when template was applied.
     dm_override   : True if the DM overrode the template's prerequisites.
     note          : Optional DM/player annotation.
     """
@@ -217,8 +211,7 @@ def apply_template(
     Idempotent: applying the same template twice updates to the latest values
     (set_source overwrites).
 
-    level: for partially_applicable templates, controls which level's bonuses
-           apply.  Ignored for non-partial templates.
+    level: character level when template was applied.
     """
     source_key = _template_source_key(defn.name)
 
@@ -237,11 +230,6 @@ def apply_template(
         else:
             resolved = mod.value
 
-        # For partial templates, scale by level if applicable
-        if defn.partially_applicable and level > 0 and defn.max_level > 0:
-            fraction = level / defn.max_level
-            resolved = int(resolved * fraction)
-
         entry = BonusEntry(
             value=resolved,
             bonus_type=mod.bonus_type,
@@ -255,9 +243,6 @@ def apply_template(
         ac_pool = character.get_pool("ac")
         if ac_pool is not None:
             na_value = defn.natural_armor_bonus
-            if defn.partially_applicable and level > 0 and defn.max_level > 0:
-                na_value = int(na_value * level / defn.max_level)
-
             entry = BonusEntry(
                 value=na_value,
                 bonus_type=BonusType.NATURAL_ARMOR,
@@ -448,7 +433,6 @@ def build_template_from_yaml(
           value: 4
           bonus_type: untyped
       natural_armor_bonus: 1
-      partially_applicable: false
       special_qualities: [...]
       grants_feats: [...]
       note: "..."
@@ -478,8 +462,6 @@ def build_template_from_yaml(
         subtype_remove=decl.get("subtype_remove", []),
         ability_modifiers=ability_mods,
         natural_armor_bonus=int(decl.get("natural_armor_bonus", 0)),
-        partially_applicable=bool(decl.get("partially_applicable", False)),
-        max_level=int(decl.get("max_level", 0)),
         special_qualities=decl.get("special_qualities", []),
         grants_feats=decl.get("grants_feats", []),
         note=decl.get("note", ""),

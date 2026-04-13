@@ -129,6 +129,10 @@ class_features:
   - 'bonus_feat_2: Bonus fighter feat'
   - 'bonus_feat_4: Bonus fighter feat'
   - 'bonus_feat_6: Bonus fighter feat'
+special_qualities:
+  - Darkvision 60 ft., low-light vision
+  - Immunity to fire, sleep, paralysis
+  - 'Breath weapon: 6d8 fire (cone), once per day'
 equipment:
   weapons:
     - name: Greatsword

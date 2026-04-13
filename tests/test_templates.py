@@ -100,8 +100,6 @@ def werewolf_template() -> TemplateDefinition:
             TemplateAbilityModifier("wis", 2),
         ],
         natural_armor_bonus=2,
-        partially_applicable=True,
-        max_level=3,
         grants_feats=["Iron Will"],
     )
 
@@ -119,7 +117,6 @@ class TestTemplateDefinition:
         assert t.subtype_add == []
         assert t.ability_modifiers == []
         assert t.natural_armor_bonus == 0
-        assert t.partially_applicable is False
 
     def test_construction_full(self) -> None:
         t = half_celestial()
@@ -363,54 +360,6 @@ class TestRemoveTemplate:
 
 
 # ===========================================================================
-# Partial templates
-# ===========================================================================
-
-
-class TestPartialTemplates:
-    def test_partial_level_1_of_3_scales_bonuses(self) -> None:
-        """Lycanthrope level 1 of max 3 → 1/3 of bonuses."""
-        c = fresh_char()
-        c.set_ability_score("str", 12)
-        t = werewolf_template()  # max_level=3, str bonus=2
-        apply_template(t, c, level=1)
-        # str bonus = int(2 * 1/3) = 0 (truncated)
-        # CON bonus = int(4 * 1/3) = 1
-        assert c.get_ability_score("con") == 11  # 10 + int(4 * 1/3) = 1
-
-    def test_partial_level_3_of_3_full_bonuses(self) -> None:
-        """Level 3 of max 3 → full bonuses."""
-        c = fresh_char()
-        for ab in ("str", "con", "wis"):
-            c.set_ability_score(ab, 10)
-        t = werewolf_template()  # str+2, con+4, wis+2
-        apply_template(t, c, level=3)
-        assert c.str_score == 12
-        assert c.con_score == 14
-        assert c.wis_score == 12
-
-    def test_partial_level_2_of_3_scales_bonuses(self) -> None:
-        c = fresh_char()
-        c.set_ability_score("con", 10)
-        t = werewolf_template()  # con+4, max_level=3
-        apply_template(t, c, level=2)
-        # int(4 * 2/3) = int(2.666) = 2
-        assert c.con_score == 12
-
-    def test_partial_natural_armor_scales(self) -> None:
-        """Natural armor also scales with partial level."""
-        c = fresh_char()
-        base_ac = c.ac
-        t = werewolf_template()  # natural_armor=2, max_level=3
-        apply_template(t, c, level=1)
-        # int(2 * 1/3) = 0
-        assert c.ac == base_ac
-
-        apply_template(t, c, level=3)  # full level
-        assert c.ac == base_ac + 2
-
-
-# ===========================================================================
 # Multiple templates
 # ===========================================================================
 
@@ -615,18 +564,6 @@ class TestBuildTemplateFromYaml:
         assert "Good" in t.subtype_add
         assert "Extraplanar" in t.subtype_add
 
-    def test_partial_applicable(self) -> None:
-        t = build_template_from_yaml(
-            {
-                "name": "Werewolf",
-                "partially_applicable": True,
-                "max_level": 3,
-                "ability_modifiers": [],
-            }
-        )
-        assert t.partially_applicable is True
-        assert t.max_level == 3
-
     def test_grants_feats(self) -> None:
         t = build_template_from_yaml(
             {
@@ -704,16 +641,6 @@ class TestTemplatesLoader:
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         hd = reg.require("Half-Dragon (Red)")
         assert hd.type_change == "Dragon"
-
-    def test_werewolf_partially_applicable(self) -> None:
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import TemplatesLoader
-
-        reg = TemplateRegistry()
-        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
-        ww = reg.require("Lycanthrope (Werewolf)")
-        assert ww.partially_applicable is True
-        assert ww.max_level == 3
 
     def test_vampire_grants_feats(self) -> None:
         from heroforge.engine.templates import TemplateRegistry

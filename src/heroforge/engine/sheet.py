@@ -119,6 +119,9 @@ def gather_sheet(
     sc = _spellcasting(character, app_state)
     if sc:
         d["spellcasting"] = sc
+    sq = _special_qualities(character, app_state)
+    if sq:
+        d["special_qualities"] = sq
     eq = _equipment(character)
     if eq:
         d["equipment"] = eq
@@ -534,6 +537,21 @@ def _spellcasting(c: "Character", app_state: "AppState") -> dict:
                 entry["spells_known"] = spells_dict
 
         result[class_name] = entry
+    return result
+
+
+# -----------------------------------------------------------
+# Special qualities (from templates)
+# -----------------------------------------------------------
+
+
+def _special_qualities(c: "Character", app_state: "AppState") -> list[str]:
+    result: list[str] = []
+    for app in c.templates:
+        defn = app_state.template_registry.get(app.template_name)
+        if defn is None:
+            continue
+        result.extend(defn.special_qualities)
     return result
 
 

@@ -600,3 +600,6 @@ Reusable components in `widgets/`: `LabeledField`,
 - Per-weapon attack/damage breakdowns (weapon
   enhancement, masterwork, keen, speed properties
   need per-weapon stat nodes)
+- Template special qualities as mechanical effects:
+  fly speed, spell resistance, damage reduction,
+  energy resistances (currently display-only text)
