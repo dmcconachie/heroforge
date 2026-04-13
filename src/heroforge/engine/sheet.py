@@ -165,6 +165,12 @@ def _abilities(c: "Character") -> dict:
         pool = c.get_pool(f"{ab}_score")
         bd = _pool_breakdown(pool, c)
         entry: dict = {"base": base}
+        bumps = c._level_bump_total(ab)
+        if bumps:
+            entry["level_bumps"] = bumps
+        inherent = c._inherent_bonus_total(ab)
+        if inherent:
+            entry["inherent"] = inherent
         entry.update(bd)
         entry["score"] = c.get_ability_score(ab)
         entry["mod"] = c.get_ability_modifier(ab)

@@ -459,3 +459,68 @@ class TestAppStateSkills:
         state.load_rules()
         state.new_character()
         assert state.skill_total("Nonexistent Skill") == 0
+
+
+# =======================================================
+# Skill budget respects INT at level
+# =======================================================
+
+
+class TestSkillBudgetIntAtLevel:
+    """
+    Skill point budget uses INT at that level,
+    not current INT."""
+
+    def test_int_bump_does_not_retroact(self) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
+        c = fresh_char()
+        c.set_ability_score("int", 12)  # mod +1
+        for i in range(1, 5):
+            c.levels.append(
+                CharacterLevel(
+                    character_level=i,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            )
+        c._invalidate_class_stats()
+        # Bump INT at level 4
+        c.set_level_ability_bump(4, "int")
+
+        # Level 1: INT 12 → mod +1, Fighter base 2
+        # Budget: (2 + 1) * 4 = 12
+        assert c.skill_points_for_level(1) == 12
+        # Level 3: still INT 12 → mod +1
+        # Budget: 2 + 1 = 3
+        assert c.skill_points_for_level(3) == 3
+        # Level 4: INT 13 → mod +1 (threshold
+        # not crossed)
+        assert c.skill_points_for_level(4) == 3
+
+    def test_int_bump_crosses_threshold(self) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
+        c = fresh_char()
+        c.set_ability_score("int", 13)  # mod +1
+        for i in range(1, 5):
+            c.levels.append(
+                CharacterLevel(
+                    character_level=i,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            )
+        c._invalidate_class_stats()
+        c.set_level_ability_bump(4, "int")
+
+        # Level 1: INT 13 → mod +1
+        # Budget: (2 + 1) * 4 = 12
+        assert c.skill_points_for_level(1) == 12
+        # Level 4: INT 14 → mod +2
+        # Budget: 2 + 2 = 4
+        assert c.skill_points_for_level(4) == 4

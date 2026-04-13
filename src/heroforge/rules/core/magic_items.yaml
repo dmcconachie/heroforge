@@ -748,18 +748,11 @@ Mantle of Spell Resistance:
     - target: sr
       bonus_type: untyped
       value: 21
-Manual of Bodily Health +1:
-  slot: slotless
-  note: Inherent +1 CON (permanent, read once, stacks up to +5 total inherent)
-Manual of Gainful Exercise +1:
-  slot: slotless
-  note: Inherent +1 STR (permanent, read once)
-Manual of Quickness of Action +1:
-  slot: slotless
-  note: Inherent +1 DEX (permanent, read once)
 Stone of Good Luck (Luckstone):
   slot: slotless
-  note: +1 luck bonus on saves, ability checks, and skill checks
+  note: >-
+    +1 luck bonus on saves, ability checks,
+    and skill checks
   effects:
     - target: fort_save
       bonus_type: luck
@@ -770,12 +763,35 @@ Stone of Good Luck (Luckstone):
     - target: will_save
       bonus_type: luck
       value: 1
+# ── Consumed items (not equipped) ──────────────
+Manual of Bodily Health +1:
+  slot: consumed
+  note: >-
+    Inherent +1 CON (permanent, read once,
+    up to +5 total inherent).
+    Tracked via level inherent_bumps.
+Manual of Gainful Exercise +1:
+  slot: consumed
+  note: >-
+    Inherent +1 STR (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Quickness of Action +1:
+  slot: consumed
+  note: >-
+    Inherent +1 DEX (permanent, read once).
+    Tracked via level inherent_bumps.
 Tome of Clear Thought +1:
-  slot: slotless
-  note: Inherent +1 INT (permanent, read once)
-Tome of Leadership +1:
-  slot: slotless
-  note: Inherent +1 CHA (permanent, read once)
+  slot: consumed
+  note: >-
+    Inherent +1 INT (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Leadership and Influence +1:
+  slot: consumed
+  note: >-
+    Inherent +1 CHA (permanent, read once).
+    Tracked via level inherent_bumps.
 Tome of Understanding +1:
-  slot: slotless
-  note: Inherent +1 WIS (permanent, read once)
+  slot: consumed
+  note: >-
+    Inherent +1 WIS (permanent, read once).
+    Tracked via level inherent_bumps.

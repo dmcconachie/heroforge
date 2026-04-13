@@ -302,7 +302,7 @@ def validate_skill_allocation(
         defn = reg.get(lv.class_name)
         if defn is not None:
             spl = defn.skills_per_level
-    int_mod = (character._ability_scores["int"] - 10) // 2
+    int_mod = character.int_mod_at_level(char_level)
     is_human = character.race == "Human"
     budget = compute_skill_budget(spl, int_mod, char_level, is_human)
     spent = sum(skill_ranks.values())

@@ -173,8 +173,10 @@ Supporting dataclasses:
 
 - `CharacterLevel` — one per-character-level entry
   (e.g. level 3 = Rogue). Stores class name, HP roll,
-  per-level skill point allocation, and feats acquired
-  at that level (with source tag).
+  per-level skill point allocation, feats acquired
+  at that level (with source tag), an optional
+  `ability_bump` (every-4th-level +1), and
+  `inherent_bumps` (consumed Tomes/Manuals).
 - `ClassLevel` — legacy cumulative model, now a computed
   property that aggregates `CharacterLevel` entries.
 - `BuffState` — per-buff persistent state: active flag,
@@ -183,7 +185,16 @@ Supporting dataclasses:
 
 Per-level methods: `add_level()`, `remove_last_level()`,
 `set_level_class()`, `set_level_hp()`,
-`set_level_skill_ranks()`, `skill_points_for_level()`.
+`set_level_skill_ranks()`, `skill_points_for_level()`,
+`set_level_ability_bump()`, `add_inherent_bump()`,
+`remove_inherent_bump()`.
+
+Ability bump helpers: `_level_bump_total(ability)` counts
+every-4th-level bumps; `_inherent_bonus_total(ability)`
+returns the highest inherent bonus (capped at +5, per 3.5e
+non-stacking rules); `int_mod_at_level(char_level)` gives
+the INT modifier using only base + bumps/inherent up to
+that level (skill-point budgets are not retroactive).
 
 Computed properties: `class_level_map` (cumulative levels
 per class), `total_level`, `attack_iteratives()`,
@@ -556,6 +567,8 @@ Reusable components in `widgets/`: `LabeledField`,
   weapon (requires deity → favored weapon mapping)
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
-- Equipment persistence (equip/unequip saves)
-- Inherent stat bumps from levels
-- What level a Tome/Manual of {Wisdom,Intellect,...} was used
+- Equipment persistence (equip/unequip saves).
+  Currently `equipment` is stored as a raw dict and
+  `worn` items are NOT activated as buffs on load.
+  Worn magic items should be re-activated via the
+  buff registry so their effects apply on load.

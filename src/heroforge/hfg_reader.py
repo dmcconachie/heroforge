@@ -92,7 +92,7 @@ ABILITY_ROWS = {
 # ── helpers ────────────────────────────────────
 
 
-def _open_src():
+def _open_src() -> openpyxl.Workbook:
     return openpyxl.load_workbook(
         SRC_PATH,
         data_only=True,
@@ -101,7 +101,7 @@ def _open_src():
     )
 
 
-def _open_char():
+def _open_char() -> openpyxl.Workbook:
     if not CHAR_COPY.exists():
         shutil.copy(CHAR_PATH, CHAR_COPY)
     return openpyxl.load_workbook(CHAR_COPY, data_only=True)
@@ -365,11 +365,11 @@ def extract_char() -> dict:
     return data
 
 
-def dump_char():
+def dump_char() -> None:
     """Print extracted character data."""
     data = extract_char()
     class_map = _load_class_map()
-    prc_map = _load_prc_map()
+    _load_prc_map()
     weapon_map = _load_weapon_map()
     deity_map = _load_deity_map()
 
@@ -383,7 +383,7 @@ def dump_char():
         deity = "(none)"
     print(f"Deity: {deity_id} -> {deity}")
     print(f"Ability scores: {data['ability_scores']}")
-    print(f"Stat bumps: {[(l, a) for l, a in data['stat_bumps']]}")
+    print(f"Stat bumps: {[(lv, a) for lv, a in data['stat_bumps']]}")
 
     print("\n--- Levels ---")
     for lvl in data["levels"]:
@@ -598,6 +598,7 @@ def convert_char(
     )
 
     # Levels
+    bump_map = {lvl: ab for lvl, ab in data["stat_bumps"]}
     for lvl in data["levels"]:
         cid = lvl["class_id"]
         cname = class_map.get(cid, f"Unknown_{cid}")
@@ -606,10 +607,7 @@ def convert_char(
         if hp == "max":
             # Look up hit die from class registry
             cls_def = app_state.class_registry.get(cname)
-            if cls_def:
-                hp = cls_def.hit_die
-            else:
-                hp = 8
+            hp = cls_def.hit_die if cls_def else 8
 
         skills = data["skills"].get(lvl["level"], {})
         feats = feat_map.get(lvl["level"], [])
@@ -621,6 +619,7 @@ def convert_char(
                 hp_roll=hp,
                 skill_ranks=dict(sorted(skills.items())),
                 feats=feats,
+                ability_bump=bump_map.get(lvl["level"]),
             )
         )
 
@@ -649,11 +648,8 @@ def convert_char(
 # ── CLI subcommands ────────────────────────────
 
 
-def cmd_read(args):
-    if args.target == "SRC":
-        wb = _open_src()
-    else:
-        wb = _open_char()
+def cmd_read(args: argparse.Namespace) -> None:
+    wb = _open_src() if args.target == "SRC" else _open_char()
 
     if args.sheet == "?":
         print("Sheets:", wb.sheetnames)
@@ -682,7 +678,7 @@ def cmd_read(args):
             print(f"  Row {r}: {', '.join(vals)}")
 
 
-def cmd_lookup(args):
+def cmd_lookup(args: argparse.Namespace) -> None:
     if args.class_ids:
         m = _load_class_map()
         ids = [int(x) for x in args.class_ids.split(",")]
@@ -711,11 +707,8 @@ def cmd_lookup(args):
             print(f"  Weapon {wid}: {m.get(wid, 'UNKNOWN')}")
 
 
-def cmd_search(args):
-    if args.target == "SRC":
-        wb = _open_src()
-    else:
-        wb = _open_char()
+def cmd_search(args: argparse.Namespace) -> None:
+    wb = _open_src() if args.target == "SRC" else _open_char()
 
     ws = wb[args.sheet]
     text = args.text.lower()
@@ -730,7 +723,7 @@ def cmd_search(args):
                 print(f"  {cl}{r}: {v!r}")
 
 
-def main():
+def main() -> None:
     p = argparse.ArgumentParser(description="HeroForge .hfg reader/converter")
     sub = p.add_subparsers(dest="cmd")
 

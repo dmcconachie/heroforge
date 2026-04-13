@@ -578,3 +578,86 @@ class TestRoundTrip:
         new_state = make_app_state()
         loaded = load_character(path, new_state)
         assert loaded.str_score == before_str
+
+
+# =======================================================
+# Ability bumps & inherent bonuses round-trip
+# =======================================================
+
+
+class TestAbilityBumpRoundTrip:
+    def test_ability_bump_round_trips(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
+        state = make_app_state()
+        c = state.character
+        c.set_ability_score("str", 14)
+        for i in range(1, 5):
+            c.levels.append(
+                CharacterLevel(
+                    character_level=i,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            )
+        c._invalidate_class_stats()
+        c.set_level_ability_bump(4, "str")
+        assert c.get_ability_score("str") == 15
+
+        path = tmp_path / "bumps.char.yaml"
+        save_character(c, path)
+        loaded = load_character(path, make_app_state())
+        assert loaded.levels[3].ability_bump == "str"
+        assert loaded.get_ability_score("str") == 15
+
+    def test_inherent_bumps_round_trips(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
+        state = make_app_state()
+        c = state.character
+        c.set_ability_score("int", 14)
+        for i in range(1, 6):
+            c.levels.append(
+                CharacterLevel(
+                    character_level=i,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            )
+        c._invalidate_class_stats()
+        c.add_inherent_bump(5, "int", 2)
+        assert c.get_ability_score("int") == 16
+
+        path = tmp_path / "inherent.char.yaml"
+        save_character(c, path)
+        loaded = load_character(path, make_app_state())
+        assert loaded.levels[4].inherent_bumps == [
+            {"ability": "int", "value": 2}
+        ]
+        assert loaded.get_ability_score("int") == 16
+
+    def test_old_file_without_bumps_loads(self, tmp_path: Path) -> None:
+        """
+        Files without ability_bump / inherent_bumps
+        load cleanly (fields default to None / [])."""
+        data = {
+            "identity": {"name": "Old Char"},
+            "ability_scores": {"str": 14},
+            "levels": [
+                {
+                    "level": 1,
+                    "class": "Fighter",
+                    "hp_roll": 10,
+                }
+            ],
+        }
+        path = tmp_path / "old.char.yaml"
+        with open(path, "w") as f:
+            yaml.dump(data, f)
+        loaded = load_character(path, make_app_state())
+        assert loaded.levels[0].ability_bump is None
+        assert loaded.levels[0].inherent_bumps == []

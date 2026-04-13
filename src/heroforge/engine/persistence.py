@@ -169,6 +169,10 @@ def _level_to_dict(lv: "CharacterLevel") -> dict:
         d["spells_learned"] = dict(lv.spells_learned)
     if lv.spells_replaced:
         d["spells_replaced"] = list(lv.spells_replaced)
+    if lv.ability_bump:
+        d["ability_bump"] = lv.ability_bump
+    if lv.inherent_bumps:
+        d["inherent_bumps"] = list(lv.inherent_bumps)
     return d
 
 
@@ -261,6 +265,8 @@ def load_character(
                 feats=list(lv_dict.get("feats", [])),
                 spells_learned=dict(lv_dict.get("spells_learned", {})),
                 spells_replaced=list(lv_dict.get("spells_replaced", [])),
+                ability_bump=lv_dict.get("ability_bump"),
+                inherent_bumps=list(lv_dict.get("inherent_bumps", [])),
             )
         )
     if c.levels:

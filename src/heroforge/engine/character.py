@@ -117,6 +117,15 @@ class CharacterLevel:
     spells_replaced: list[dict] = field(default_factory=list)
     # spells swapped at this level:
     #   [{"old": str, "new": str}]
+    ability_bump: str | None = None
+    # Ability score increase at every 4th character level
+    # (4, 8, 12, …). One of "str"/"dex"/"con"/"int"/
+    # "wis"/"cha" or None if not yet chosen / not a
+    # bump level.
+    inherent_bumps: list[dict] = field(default_factory=list)
+    # Inherent bonuses consumed at this level (e.g.
+    # Tomes/Manuals). Each entry:
+    #   {"ability": "int", "value": 1}
 
 
 @dataclass
@@ -342,7 +351,8 @@ class Character:
             g.register_pool(pool)
 
         # ---- Ability scores ------------------------------------------------
-        # Each score has a base (set by _ability_scores) + pool bonuses.
+        # Each score has a base (set by _ability_scores)
+        # + level-up bumps + inherent bonuses + pool bonuses.
         for ab in ("str", "dex", "con", "int", "wis", "cha"):
             base = self._ability_scores[ab]
             pool_key = f"{ab}_score"
@@ -351,7 +361,12 @@ class Character:
                 ability: str,
             ) -> Callable[[dict, int], int]:
                 def compute(inputs: dict, bt: int) -> int:
-                    return self._ability_scores[ability] + bt
+                    return (
+                        self._ability_scores[ability]
+                        + self._level_bump_total(ability)
+                        + self._inherent_bonus_total(ability)
+                        + bt
+                    )
 
                 return compute
 
@@ -984,6 +999,124 @@ class Character:
     def get_ability_modifier(self, ability: str) -> int:
         return self._graph.resolve(f"{ability.lower()}_mod", self)
 
+    # ---------------------------------------------------------------
+    # Level-up ability bumps & inherent bonuses
+    # ---------------------------------------------------------------
+
+    _ABILITIES = frozenset({"str", "dex", "con", "int", "wis", "cha"})
+
+    def _level_bump_total(self, ability: str) -> int:
+        """Count +1 bumps to *ability* across all levels."""
+        return sum(1 for lv in self.levels if lv.ability_bump == ability)
+
+    def _inherent_bonus_total(self, ability: str) -> int:
+        """
+        Effective inherent bonus for *ability*.
+
+        Per 3.5e, inherent bonuses don't stack — only
+        the highest applies, capped at +5.
+        """
+        best = 0
+        for lv in self.levels:
+            for ib in lv.inherent_bumps:
+                if ib.get("ability") == ability:
+                    best = max(best, ib.get("value", 0))
+        return min(best, 5)
+
+    def _inherent_bonus_at_level(self, ability: str, char_level: int) -> int:
+        """
+        Highest inherent bonus for *ability* from
+        levels up to and including *char_level*."""
+        best = 0
+        for lv in self.levels[:char_level]:
+            for ib in lv.inherent_bumps:
+                if ib.get("ability") == ability:
+                    best = max(best, ib.get("value", 0))
+        return min(best, 5)
+
+    def int_mod_at_level(self, char_level: int) -> int:
+        """
+        INT modifier using base + bumps/inherent up
+        to *char_level*.  Used for skill-point budgets
+        so that later INT changes are not retroactive.
+        """
+        base = self._ability_scores["int"]
+        bumps = sum(
+            1 for lv in self.levels[:char_level] if lv.ability_bump == "int"
+        )
+        inherent = self._inherent_bonus_at_level("int", char_level)
+        return (base + bumps + inherent - 10) // 2
+
+    def set_level_ability_bump(
+        self,
+        char_level: int,
+        ability: str | None,
+    ) -> None:
+        """
+        Set or clear the ability bump at *char_level*.
+
+        Invalidates the affected ability score node(s).
+        """
+        idx = char_level - 1
+        if idx < 0 or idx >= len(self.levels):
+            raise CharacterError(f"No level {char_level} to set bump on")
+        if ability is not None:
+            ability = ability.lower()
+            if ability not in self._ABILITIES:
+                raise CharacterError(f"Unknown ability: {ability!r}")
+        old = self.levels[idx].ability_bump
+        self.levels[idx].ability_bump = ability
+        changed: set[str] = set()
+        for ab in {old, ability} - {None}:
+            self._graph.invalidate(f"{ab}_score")
+            changed.add(f"{ab}_score")
+            changed.add(f"{ab}_mod")
+        if changed:
+            self._notify(changed)
+
+    def add_inherent_bump(
+        self,
+        char_level: int,
+        ability: str,
+        value: int,
+    ) -> None:
+        """
+        Record an inherent bonus consumed at
+        *char_level* (e.g. a Tome of Clear Thought)."""
+        idx = char_level - 1
+        if idx < 0 or idx >= len(self.levels):
+            raise CharacterError(f"No level {char_level}")
+        ability = ability.lower()
+        if ability not in self._ABILITIES:
+            raise CharacterError(f"Unknown ability: {ability!r}")
+        if not 1 <= value <= 5:
+            raise CharacterError("Inherent bonus must be 1-5")
+        self.levels[idx].inherent_bumps.append(
+            {"ability": ability, "value": value}
+        )
+        self._graph.invalidate(f"{ability}_score")
+        self._notify({f"{ability}_score", f"{ability}_mod"})
+
+    def remove_inherent_bump(
+        self,
+        char_level: int,
+        ability: str,
+        value: int,
+    ) -> None:
+        """
+        Remove an inherent bonus entry at
+        *char_level*."""
+        idx = char_level - 1
+        if idx < 0 or idx >= len(self.levels):
+            raise CharacterError(f"No level {char_level}")
+        ability = ability.lower()
+        entry = {"ability": ability, "value": value}
+        bumps = self.levels[idx].inherent_bumps
+        if entry in bumps:
+            bumps.remove(entry)
+        self._graph.invalidate(f"{ability}_score")
+        self._notify({f"{ability}_score", f"{ability}_mod"})
+
     # -----------------------------------------------------------------------
     # Stat resolution (general)
     # -----------------------------------------------------------------------
@@ -1319,6 +1452,10 @@ class Character:
         self._graph.invalidate("ref_save")
         self._graph.invalidate("will_save")
         self._graph.invalidate("hp_max")
+        # Levels may carry ability bumps / inherent
+        # bonuses, so invalidate all ability scores.
+        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+            self._graph.invalidate(f"{ab}_score")
         self._notify(
             {
                 "bab",
@@ -1328,6 +1465,12 @@ class Character:
                 "hp_max",
                 "attack_melee",
                 "attack_ranged",
+                "str_score",
+                "dex_score",
+                "con_score",
+                "int_score",
+                "wis_score",
+                "cha_score",
             }
         )
 
@@ -1453,7 +1596,7 @@ class Character:
             defn = reg.get(lv.class_name)
             if defn is not None:
                 base = defn.skills_per_level
-        int_mod = (self._ability_scores["int"] - 10) // 2
+        int_mod = self.int_mod_at_level(char_level)
         pts = base + int_mod
         # Humans get +1 skill point per level
         if self.race == "Human":

@@ -24,6 +24,7 @@ from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
 from heroforge.engine.character import (
     Character,
     CharacterError,
+    CharacterLevel,
     ClassLevel,
 )
 
@@ -757,3 +758,180 @@ class TestFullScenario:
 
         # bab(6) + str_mod(0) + morale_max(2) + luck(1) + dodge(1) + enh(3) = 13
         assert c.get("attack_melee") == 13
+
+
+# ===========================================================================
+# Level-up ability bumps
+# ===========================================================================
+
+
+def _char_with_levels(n: int) -> Character:
+    """Character with n Fighter levels (no class registry)."""
+    c = make_char()
+    for i in range(1, n + 1):
+        c.levels.append(
+            CharacterLevel(
+                character_level=i,
+                class_name="Fighter",
+                hp_roll=10,
+            )
+        )
+    c._invalidate_class_stats()
+    return c
+
+
+class TestAbilityBumps:
+    def test_bump_at_level_4_increases_score(self) -> None:
+        c = _char_with_levels(4)
+        c.set_ability_score("str", 14)
+        c.set_level_ability_bump(4, "str")
+        assert c.get_ability_score("str") == 15
+
+    def test_bumps_stack_across_levels(self) -> None:
+        c = _char_with_levels(8)
+        c.set_ability_score("str", 14)
+        c.set_level_ability_bump(4, "str")
+        c.set_level_ability_bump(8, "str")
+        assert c.get_ability_score("str") == 16
+
+    def test_bumps_to_different_abilities(self) -> None:
+        c = _char_with_levels(8)
+        c.set_ability_score("str", 14)
+        c.set_ability_score("dex", 12)
+        c.set_level_ability_bump(4, "str")
+        c.set_level_ability_bump(8, "dex")
+        assert c.get_ability_score("str") == 15
+        assert c.get_ability_score("dex") == 13
+
+    def test_change_bump_updates_both_stats(self) -> None:
+        c = _char_with_levels(4)
+        c.set_ability_score("str", 14)
+        c.set_ability_score("dex", 12)
+        c.set_level_ability_bump(4, "str")
+        assert c.get_ability_score("str") == 15
+        c.set_level_ability_bump(4, "dex")
+        assert c.get_ability_score("str") == 14
+        assert c.get_ability_score("dex") == 13
+
+    def test_remove_bump(self) -> None:
+        c = _char_with_levels(4)
+        c.set_ability_score("str", 14)
+        c.set_level_ability_bump(4, "str")
+        assert c.get_ability_score("str") == 15
+        c.set_level_ability_bump(4, None)
+        assert c.get_ability_score("str") == 14
+
+    def test_bump_affects_modifier(self) -> None:
+        c = _char_with_levels(4)
+        c.set_ability_score("str", 15)  # mod = 2
+        c.set_level_ability_bump(4, "str")
+        # 15 + 1 = 16 → mod = 3
+        assert c.get_ability_modifier("str") == 3
+
+    def test_invalid_level_raises(self) -> None:
+        c = _char_with_levels(4)
+        with pytest.raises(CharacterError):
+            c.set_level_ability_bump(5, "str")
+
+    def test_invalid_ability_raises(self) -> None:
+        c = _char_with_levels(4)
+        with pytest.raises(CharacterError):
+            c.set_level_ability_bump(4, "foo")
+
+
+# ===========================================================================
+# Inherent bonuses (Tomes / Manuals)
+# ===========================================================================
+
+
+class TestInherentBumps:
+    def test_inherent_increases_score(self) -> None:
+        c = _char_with_levels(5)
+        c.set_ability_score("int", 14)
+        c.add_inherent_bump(5, "int", 1)
+        assert c.get_ability_score("int") == 15
+
+    def test_inherent_does_not_stack(self) -> None:
+        """Only the highest inherent bonus applies."""
+        c = _char_with_levels(8)
+        c.set_ability_score("int", 14)
+        c.add_inherent_bump(3, "int", 1)
+        c.add_inherent_bump(7, "int", 2)
+        # Only +2 applies, not +1 + +2
+        assert c.get_ability_score("int") == 16
+
+    def test_inherent_capped_at_5(self) -> None:
+        c = _char_with_levels(5)
+        c.set_ability_score("str", 14)
+        with pytest.raises(CharacterError):
+            c.add_inherent_bump(5, "str", 6)
+
+    def test_inherent_stacks_with_level_bump(self) -> None:
+        c = _char_with_levels(8)
+        c.set_ability_score("str", 14)
+        c.set_level_ability_bump(4, "str")  # +1
+        c.add_inherent_bump(5, "str", 2)  # +2
+        # 14 + 1 (bump) + 2 (inherent) = 17
+        assert c.get_ability_score("str") == 17
+
+    def test_remove_inherent_bump(self) -> None:
+        c = _char_with_levels(5)
+        c.set_ability_score("str", 14)
+        c.add_inherent_bump(5, "str", 2)
+        assert c.get_ability_score("str") == 16
+        c.remove_inherent_bump(5, "str", 2)
+        assert c.get_ability_score("str") == 14
+
+
+# ===========================================================================
+# INT modifier at level (for skill points)
+# ===========================================================================
+
+
+class TestIntModAtLevel:
+    def test_base_int_only(self) -> None:
+        c = _char_with_levels(4)
+        c.set_ability_score("int", 14)  # mod +2
+        assert c.int_mod_at_level(1) == 2
+        assert c.int_mod_at_level(4) == 2
+
+    def test_int_bump_excluded_before_bump_level(
+        self,
+    ) -> None:
+        c = _char_with_levels(4)
+        c.set_ability_score("int", 14)
+        c.set_level_ability_bump(4, "int")
+        # Level 3: no bump yet → mod +2
+        assert c.int_mod_at_level(3) == 2
+        # Level 4: bump included → 15 → mod +2
+        assert c.int_mod_at_level(4) == 2
+
+    def test_int_bump_crosses_modifier_threshold(
+        self,
+    ) -> None:
+        c = _char_with_levels(4)
+        c.set_ability_score("int", 13)  # mod +1
+        c.set_level_ability_bump(4, "int")
+        # Level 3: INT 13 → mod +1
+        assert c.int_mod_at_level(3) == 1
+        # Level 4: INT 14 → mod +2
+        assert c.int_mod_at_level(4) == 2
+
+    def test_inherent_int_at_level(self) -> None:
+        c = _char_with_levels(8)
+        c.set_ability_score("int", 13)  # mod +1
+        c.add_inherent_bump(5, "int", 1)
+        # Level 4: no inherent yet → mod +1
+        assert c.int_mod_at_level(4) == 1
+        # Level 5: inherent +1 → INT 14 → mod +2
+        assert c.int_mod_at_level(5) == 2
+
+    def test_multiple_int_bumps_accumulate(self) -> None:
+        c = _char_with_levels(8)
+        c.set_ability_score("int", 12)  # mod +1
+        c.set_level_ability_bump(4, "int")  # +1
+        c.set_level_ability_bump(8, "int")  # +1
+        # Level 4: INT 13 → mod +1
+        assert c.int_mod_at_level(4) == 1
+        # Level 8: INT 14 → mod +2
+        assert c.int_mod_at_level(8) == 2

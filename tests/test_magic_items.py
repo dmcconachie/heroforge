@@ -116,6 +116,7 @@ SLOT_ORDER = [
     "waist",
     "feet",
     "slotless",
+    "consumed",
 ]
 
 
