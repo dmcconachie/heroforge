@@ -116,10 +116,6 @@ skills:
     ranks: 16
     ability_mod: 4
     total: 20
-  Diplomacy:
-    ability_mod: 1
-    synergy: 2
-    total: 3
   Escape Artist:
     ability_mod: 2
     untyped: -5
@@ -155,7 +151,8 @@ skills:
   Ride:
     ranks: 16
     ability_mod: 2
-    total: 18
+    synergy: 2
+    total: 20
   Sleight of Hand:
     ability_mod: 2
     untyped: -5

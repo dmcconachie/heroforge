@@ -99,10 +99,6 @@ skills:
     ranks: 23
     ability_mod: 3
     total: 26
-  Diplomacy:
-    ability_mod: 0
-    synergy: 2
-    total: 2
   Handle Animal:
     ranks: 14
     ability_mod: 0
@@ -120,6 +116,10 @@ skills:
     ranks: 10
     ability_mod: 3
     total: 13
+  Ride:
+    ability_mod: 2
+    synergy: 2
+    total: 4
   Spellcraft:
     ranks: 13
     ability_mod: 1

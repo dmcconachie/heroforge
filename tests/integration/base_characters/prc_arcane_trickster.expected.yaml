@@ -94,8 +94,7 @@ skills:
   Bluff:
     ranks: 6
     ability_mod: 0
-    synergy: 2
-    total: 8
+    total: 6
   Concentration:
     ranks: 5
     ability_mod: 1
@@ -164,8 +163,7 @@ skills:
   Move Silently:
     ranks: 16
     ability_mod: 2
-    synergy: 2
-    total: 20
+    total: 18
   Open Lock:
     ranks: 16
     ability_mod: 2

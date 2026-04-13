@@ -97,10 +97,6 @@ attack_iteratives:
     - 9
     - 4
 skills:
-  Bluff:
-    ability_mod: 2
-    synergy: 2
-    total: 4
   Climb:
     ranks: 4
     ability_mod: 3
@@ -121,10 +117,6 @@ skills:
     ranks: 12
     ability_mod: 0
     total: 12
-  Move Silently:
-    ability_mod: 1
-    synergy: 2
-    total: 3
 carrying_capacity:
   light: 76
   medium: 153

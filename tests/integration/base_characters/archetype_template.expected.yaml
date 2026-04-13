@@ -95,10 +95,6 @@ attack_iteratives:
     - 8
     - 3
 skills:
-  Bluff:
-    ability_mod: 0
-    synergy: 2
-    total: 2
   Climb:
     ranks: 9
     ability_mod: 7

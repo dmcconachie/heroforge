@@ -112,8 +112,7 @@ skills:
   Sense Motive:
     ranks: 9
     ability_mod: 1
-    synergy: 2
-    total: 12
+    total: 10
 carrying_capacity:
   light: 76
   medium: 153

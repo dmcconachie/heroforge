@@ -91,10 +91,6 @@ attack_iteratives:
     - 12
     - 7
 skills:
-  Bluff:
-    ability_mod: -1
-    synergy: 2
-    total: 1
   Climb:
     ranks: 12
     ability_mod: 2
@@ -122,8 +118,7 @@ skills:
   Move Silently:
     ranks: 5
     ability_mod: 2
-    synergy: 2
-    total: 9
+    total: 7
   Open Lock:
     ranks: 5
     ability_mod: 2

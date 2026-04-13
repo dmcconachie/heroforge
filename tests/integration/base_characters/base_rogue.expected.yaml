@@ -94,8 +94,7 @@ skills:
   Bluff:
     ranks: 13
     ability_mod: -1
-    synergy: 2
-    total: 14
+    total: 12
   Climb:
     ranks: 4
     ability_mod: 0
@@ -142,9 +141,8 @@ skills:
   Move Silently:
     ranks: 23
     ability_mod: 4
-    synergy: 2
     untyped: 2
-    total: 31
+    total: 29
   Open Lock:
     ranks: 22
     ability_mod: 4
@@ -157,8 +155,7 @@ skills:
   Sense Motive:
     ranks: 9
     ability_mod: 0
-    synergy: 2
-    total: 11
+    total: 9
   Sleight of Hand:
     ranks: 6
     ability_mod: 4

@@ -118,8 +118,7 @@ skills:
   Move Silently:
     ranks: 19
     ability_mod: 4
-    synergy: 2
-    total: 25
+    total: 23
   Open Lock:
     ranks: 10
     ability_mod: 4

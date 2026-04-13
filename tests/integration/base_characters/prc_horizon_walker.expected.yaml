@@ -119,8 +119,7 @@ skills:
   Move Silently:
     ranks: 14
     ability_mod: 2
-    synergy: 2
-    total: 18
+    total: 16
   Spot:
     ranks: 21
     ability_mod: 2

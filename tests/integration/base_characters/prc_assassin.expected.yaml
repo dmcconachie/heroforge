@@ -92,8 +92,7 @@ skills:
   Bluff:
     ranks: 18
     ability_mod: -1
-    synergy: 2
-    total: 19
+    total: 17
   Diplomacy:
     ability_mod: -1
     synergy: 2
@@ -126,8 +125,7 @@ skills:
   Move Silently:
     ranks: 18
     ability_mod: 3
-    synergy: 2
-    total: 23
+    total: 21
   Open Lock:
     ranks: 8
     ability_mod: 3

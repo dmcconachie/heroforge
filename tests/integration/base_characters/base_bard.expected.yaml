@@ -131,10 +131,6 @@ skills:
     ranks: 23
     ability_mod: 3
     total: 26
-  Sense Motive:
-    ability_mod: 0
-    synergy: 2
-    total: 2
   Sleight of Hand:
     ability_mod: 2
     synergy: 2

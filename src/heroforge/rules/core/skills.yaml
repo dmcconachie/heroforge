@@ -67,11 +67,6 @@ Diplomacy:
   ability: cha
   trained_only: false
   armor_check: false
-  synergies:
-    - skill: Sense Motive
-      bonus: 2
-    - skill: Knowledge (Nobility)
-      bonus: 2
   description: Influence attitudes and negotiate
 Disable Device:
   key: skill_disable_device
@@ -84,9 +79,6 @@ Disguise:
   ability: cha
   trained_only: false
   armor_check: false
-  synergies:
-    - skill: Bluff
-      bonus: 2
   description: Change appearance to impersonate another
 Escape Artist:
   key: skill_escape_artist
@@ -115,7 +107,7 @@ Handle Animal:
   trained_only: true
   armor_check: false
   synergies:
-    - skill: Diplomacy
+    - skill: Ride
       bonus: 2
   description: Train, manage, and work with animals
 Heal:
@@ -129,18 +121,12 @@ Hide:
   ability: dex
   trained_only: false
   armor_check: true
-  synergies:
-    - skill: Move Silently
-      bonus: 2
   description: Conceal yourself from observers
 Intimidate:
   key: skill_intimidate
   ability: cha
   trained_only: false
   armor_check: false
-  synergies:
-    - skill: Bluff
-      bonus: 2
   description: Coerce or frighten others
 Jump:
   key: skill_jump
@@ -183,10 +169,9 @@ Knowledge (History):
   ability: int
   trained_only: true
   armor_check: false
-  synergies:
-    - skill: Bardic Knowledge
-      bonus: 2
-  description: Royalty, wars, colonies, migrations, founding of cities
+  description: >-
+    Royalty, wars, colonies, migrations,
+    founding of cities
 Knowledge (Local):
   key: skill_knowledge_local
   ability: int
@@ -219,10 +204,9 @@ Knowledge (Religion):
   ability: int
   trained_only: true
   armor_check: false
-  synergies:
-    - skill: Turn Undead
-      bonus: 2
-  description: Gods and goddesses, mythic history, ecclesiastic tradition
+  description: >-
+    Gods and goddesses, mythic history,
+    ecclesiastic tradition
 Knowledge (The Planes):
   key: skill_knowledge_planes
   ability: int
@@ -291,10 +275,8 @@ Sleight of Hand:
   ability: dex
   trained_only: true
   armor_check: true
-  synergies:
-    - skill: Bluff
-      bonus: 2
-  description: Palm objects; pick pockets; conceal weapons
+  description: >-
+    Palm objects; pick pockets; conceal weapons
 Speak Language:
   key: skill_speak_language
   ability: none

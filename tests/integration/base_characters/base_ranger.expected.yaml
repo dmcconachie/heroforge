@@ -120,8 +120,7 @@ skills:
   Move Silently:
     ranks: 23
     ability_mod: 5
-    synergy: 2
-    total: 30
+    total: 28
   Search:
     ranks: 17
     ability_mod: 1

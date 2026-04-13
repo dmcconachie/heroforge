@@ -113,8 +113,7 @@ skills:
   Sense Motive:
     ranks: 10
     ability_mod: 3
-    synergy: 2
-    total: 15
+    total: 13
   Spellcraft:
     ranks: 19
     ability_mod: 3
