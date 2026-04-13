@@ -1,0 +1,34 @@
+# Materials and their armor/shield adjustments.
+# All adjustments are additive (ACP toward 0, etc.).
+# category_shift: -1 means one category lighter
+#   (heavy→medium, medium→light).
+# includes_masterwork: true means the acp_adjust
+#   already accounts for the masterwork -1 ACP.
+Adamantine:
+  acp_adjust: 1
+  includes_masterwork: true
+  note: >-
+    DR 1/- (light), 2/- (medium), 3/- (heavy)
+Alchemical Silver:
+  note: Weapon material only; -1 damage
+Cold Iron:
+  note: >-
+    Bypasses DR/cold iron; costs double
+Darkwood:
+  acp_adjust: 2
+  includes_masterwork: true
+  note: >-
+    Shields and wooden armor; weighs half
+Dragonhide:
+  acp_adjust: 1
+  includes_masterwork: true
+  note: >-
+    Druids can wear; masterwork quality
+Mithral:
+  acp_adjust: 3
+  max_dex_adjust: 2
+  asf_adjust: -10
+  category_shift: -1
+  includes_masterwork: true
+  note: >-
+    Weighs half; counts as one category lighter

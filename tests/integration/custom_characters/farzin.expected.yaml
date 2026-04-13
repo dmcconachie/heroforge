@@ -104,197 +104,86 @@ attack_iteratives:
     - 12
     - 7
 skills:
-  Appraise:
-    ability_mod: 2
-    untyped: -6
-    total: -4
   Balance:
     ability_mod: 2
-    untyped: -6
-    total: -4
-  Bluff:
-    ability_mod: 1
-    untyped: -6
-    total: -5
+    untyped: -5
+    total: -3
   Climb:
     ability_mod: 8
-    untyped: -6
-    total: 2
+    untyped: -5
+    total: 3
   Concentration:
     ranks: 16
     ability_mod: 4
-    untyped: -6
-    total: 14
-  Craft:
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Decipher Script:
-    ability_mod: 2
-    untyped: -6
-    total: -4
+    total: 20
   Diplomacy:
     ability_mod: 1
     synergy: 2
-    untyped: -6
-    total: -3
-  Disable Device:
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Disguise:
-    ability_mod: 1
-    untyped: -6
-    total: -5
+    total: 3
   Escape Artist:
     ability_mod: 2
-    untyped: -6
-    total: -4
-  Forgery:
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Gather Information:
-    ability_mod: 1
-    untyped: -6
-    total: -5
+    untyped: -5
+    total: -3
   Handle Animal:
     ranks: 5
     ability_mod: 1
-    untyped: -6
-    total: 0
-  Heal:
-    ability_mod: 8
-    untyped: -6
-    total: 2
+    total: 6
   Hide:
     ability_mod: 2
-    untyped: -6
-    total: -4
-  Intimidate:
-    ability_mod: 1
-    untyped: -6
-    total: -5
+    untyped: -5
+    total: -3
   Jump:
     ability_mod: 8
-    untyped: -6
-    total: 2
+    untyped: -5
+    total: 3
   Knowledge (Arcana):
     ability_mod: 2
     synergy: 2
-    untyped: -6
-    total: -2
-  Knowledge (Architecture and Engineering):
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Knowledge (Dungeoneering):
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Knowledge (Geography):
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Knowledge (History):
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Knowledge (Local):
-    ability_mod: 2
-    untyped: -6
-    total: -4
+    total: 4
   Knowledge (Nature):
     ability_mod: 2
     synergy: 2
-    untyped: -6
-    total: -2
-  Knowledge (Nobility and Royalty):
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Knowledge (Religion):
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Knowledge (The Planes):
-    ability_mod: 2
-    untyped: -6
-    total: -4
+    total: 4
   Listen:
     ranks: 16
     ability_mod: 8
-    untyped: -6
-    total: 18
+    total: 24
   Move Silently:
     ability_mod: 2
-    untyped: -6
-    total: -4
-  Open Lock:
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Perform:
-    ability_mod: 1
-    untyped: -6
-    total: -5
-  Profession:
-    ability_mod: 8
-    untyped: -6
-    total: 2
+    untyped: -5
+    total: -3
   Ride:
     ranks: 16
     ability_mod: 2
-    untyped: -6
-    total: 12
-  Search:
-    ability_mod: 2
-    untyped: -6
-    total: -4
-  Sense Motive:
-    ability_mod: 8
-    untyped: -6
-    total: 2
+    total: 18
   Sleight of Hand:
     ability_mod: 2
-    untyped: -6
-    total: -4
-  Speak Language:
-    ability_mod: 0
-    untyped: -6
-    total: -6
+    untyped: -5
+    total: -3
   Spellcraft:
     ranks: 12
     ability_mod: 2
-    untyped: -6
-    total: 8
+    total: 14
   Spot:
     ranks: 16
     ability_mod: 8
-    untyped: -6
-    total: 18
+    total: 24
   Survival:
     ranks: 5
     ability_mod: 8
-    untyped: -6
-    total: 7
+    total: 13
   Swim:
     ability_mod: 8
-    untyped: -6
-    total: 2
+    untyped: -10
+    total: -2
   Tumble:
     ability_mod: 2
-    untyped: -6
-    total: -4
+    untyped: -5
+    total: -3
   Use Magic Device:
     ability_mod: 1
     synergy: 2
-    untyped: -6
-    total: -3
-  Use Rope:
-    ability_mod: 2
-    untyped: -6
-    total: -4
+    total: 3
 carrying_capacity:
   light: 306
   medium: 613
@@ -353,8 +242,8 @@ spellcasting:
       6: 24
 equipment:
   armor:
-    name: +1 Wildwood Full Plate
-    acp: -6
+    name: +1 Full Plate
+    acp: -5
     max_dex: 1
     asf: 35
   shield:
@@ -368,6 +257,6 @@ equipment:
     - Belt of Giant Strength +6
     - Cloak of Resistance +5
   weapons:
-    - name: Bronzewood Lance
+    - name: +1 Bronzewood Lance
     - name: Longbow, Composite
 resources: {}

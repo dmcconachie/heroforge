@@ -127,6 +127,38 @@ class ArmorRegistry:
         return len(self._entries)
 
 
+@dataclass(frozen=True)
+class MaterialDefinition:
+    """Armor/shield material with stat adjustments."""
+
+    name: str
+    acp_adjust: int = 0  # toward 0 (positive)
+    max_dex_adjust: int = 0
+    asf_adjust: int = 0  # negative = less failure
+    category_shift: int = 0  # -1 = one lighter
+    includes_masterwork: bool = False
+    note: str = ""
+
+
+class MaterialRegistry:
+    def __init__(self) -> None:
+        self._entries: dict[str, MaterialDefinition] = {}
+
+    def register(self, defn: MaterialDefinition) -> None:
+        self._entries[defn.name.lower()] = defn
+
+    def get(self, name: str) -> MaterialDefinition | None:
+        return self._entries.get(name.lower())
+
+    def all_materials(
+        self,
+    ) -> list[MaterialDefinition]:
+        return list(self._entries.values())
+
+    def __len__(self) -> int:
+        return len(self._entries)
+
+
 class WeaponRegistry:
     def __init__(self) -> None:
         self._entries: dict[str, WeaponDefinition] = {}
@@ -153,25 +185,48 @@ def adjust_for_material(
     acp: int,
     max_dex: int,
     asf: int,
-    material: str,
+    material: str | MaterialDefinition,
 ) -> tuple[int, int, int]:
     """
     Return (acp, max_dex, asf) adjusted for material.
 
-    Per SRD:
-    - Mithral: ACP -3, max DEX +2, ASF -10%
-    - Darkwood: ACP -2
-    - Adamantine: no ACP/DEX/ASF change
+    *material* can be a MaterialDefinition or a string
+    (looked up in the module-level registry).
     """
-    mat = material.lower() if material else ""
-    if mat == "mithral":
-        acp = min(acp + 3, 0)
-        if max_dex >= 0:
-            max_dex += 2
-        asf = max(asf - 10, 0)
-    elif mat == "darkwood":
-        acp = min(acp + 2, 0)
+    mat = _resolve_material(material)
+    if mat is None:
+        return acp, max_dex, asf
+    if mat.acp_adjust:
+        acp = min(acp + mat.acp_adjust, 0)
+    if mat.max_dex_adjust and max_dex >= 0:
+        max_dex += mat.max_dex_adjust
+    if mat.asf_adjust:
+        asf = max(asf + mat.asf_adjust, 0)
     return acp, max_dex, asf
+
+
+# Fallback registry for when AppState isn't available.
+_material_registry: MaterialRegistry | None = None
+
+
+def set_material_registry(
+    reg: MaterialRegistry,
+) -> None:
+    """Set the module-level material registry."""
+    global _material_registry  # noqa: PLW0603
+    _material_registry = reg
+
+
+def _resolve_material(
+    material: str | MaterialDefinition,
+) -> MaterialDefinition | None:
+    if isinstance(material, MaterialDefinition):
+        return material
+    if not material:
+        return None
+    if _material_registry is not None:
+        return _material_registry.get(material)
+    return None
 
 
 # -------------------------------------------------------
@@ -187,6 +242,7 @@ def equip_armor(
     armor: ArmorDefinition,
     enhancement: int = 0,
     material: str = "",
+    masterwork: bool = False,
 ) -> None:
     """Wire armor bonuses into Character pools."""
     from heroforge.engine.bonus import (
@@ -197,8 +253,15 @@ def equip_armor(
     acp = armor.armor_check_penalty
     max_dex = armor.max_dex_bonus
     asf = armor.arcane_spell_failure
-    if material:
-        acp, max_dex, asf = adjust_for_material(acp, max_dex, asf, material)
+    mat_def = _resolve_material(material)
+    if mat_def is not None:
+        acp, max_dex, asf = adjust_for_material(acp, max_dex, asf, mat_def)
+    # Masterwork reduces ACP by 1, but special
+    # materials that include_masterwork already
+    # account for this in their acp_adjust.
+    mat_is_mw = mat_def.includes_masterwork if mat_def else False
+    if (enhancement > 0 or masterwork) and not mat_is_mw:
+        acp = min(acp + 1, 0)
 
     total_ac = armor.armor_bonus + enhancement
 
@@ -261,6 +324,7 @@ def equip_shield(
     shield: ArmorDefinition,
     enhancement: int = 0,
     material: str = "",
+    masterwork: bool = False,
 ) -> None:
     """Wire shield bonuses into Character pools."""
     from heroforge.engine.bonus import (
@@ -271,8 +335,12 @@ def equip_shield(
     acp = shield.armor_check_penalty
     asf = shield.arcane_spell_failure
     max_dex = shield.max_dex_bonus
-    if material:
-        acp, max_dex, asf = adjust_for_material(acp, max_dex, asf, material)
+    mat_def = _resolve_material(material)
+    if mat_def is not None:
+        acp, max_dex, asf = adjust_for_material(acp, max_dex, asf, mat_def)
+    mat_is_mw = mat_def.includes_masterwork if mat_def else False
+    if (enhancement > 0 or masterwork) and not mat_is_mw:
+        acp = min(acp + 1, 0)
 
     total_ac = shield.armor_bonus + enhancement
 
@@ -325,16 +393,23 @@ _HEAVY_CATS = {ArmorCategory.HEAVY}
 _SPEED_PENALTY = {30: -10, 20: -5}
 
 
+_CAT_ORDER = [
+    ArmorCategory.LIGHT,
+    ArmorCategory.MEDIUM,
+    ArmorCategory.HEAVY,
+]
+
+
 def _effective_category(cat: ArmorCategory, material: str) -> ArmorCategory:
-    """Category after material adjustment."""
-    mat = material.lower() if material else ""
-    if mat != "mithral":
+    """Category after material's category_shift."""
+    mat = _resolve_material(material)
+    if mat is None or mat.category_shift == 0:
         return cat
-    if cat in _HEAVY_CATS:
-        return ArmorCategory.MEDIUM
-    if cat in _MEDIUM_CATS:
-        return ArmorCategory.LIGHT
-    return cat
+    if cat not in _CAT_ORDER:
+        return cat  # shields don't shift
+    idx = _CAT_ORDER.index(cat)
+    idx = max(0, min(len(_CAT_ORDER) - 1, idx + mat.category_shift))
+    return _CAT_ORDER[idx]
 
 
 def _apply_armor_speed(
@@ -373,6 +448,20 @@ def _apply_armor_speed(
         )
 
 
+# SRD: these skills take ACP.  Swim takes double.
+_ACP_SKILLS = {
+    "skill_balance",
+    "skill_climb",
+    "skill_escape_artist",
+    "skill_hide",
+    "skill_jump",
+    "skill_move_silently",
+    "skill_sleight_of_hand",
+    "skill_tumble",
+}
+_ACP_DOUBLE_SKILLS = {"skill_swim"}
+
+
 def _apply_acp(
     character: Character,
     source: str,
@@ -386,27 +475,39 @@ def _apply_acp(
         BonusType,
     )
 
-    for key, pool in character._pools.items():
-        if not key.startswith("skill_"):
-            continue
-        # Only apply to armor-check skills
-        # The pool key pattern is skill_<name>
-        pool.set_source(
-            source,
-            [
-                BonusEntry(
-                    value=penalty,
-                    bonus_type=BonusType.UNTYPED,
-                    source=source,
-                )
-            ],
-        )
+    for key in _ACP_SKILLS:
+        pool = character._pools.get(key)
+        if pool is not None:
+            pool.set_source(
+                source,
+                [
+                    BonusEntry(
+                        value=penalty,
+                        bonus_type=BonusType.UNTYPED,
+                        source=source,
+                    )
+                ],
+            )
+    for key in _ACP_DOUBLE_SKILLS:
+        pool = character._pools.get(key)
+        if pool is not None:
+            pool.set_source(
+                source,
+                [
+                    BonusEntry(
+                        value=penalty * 2,
+                        bonus_type=BonusType.UNTYPED,
+                        source=source,
+                    )
+                ],
+            )
 
 
 def _clear_acp(character: Character, source: str) -> None:
-    """Remove ACP from all skill pools."""
-    for key, pool in character._pools.items():
-        if key.startswith("skill_"):
+    """Remove ACP from affected skill pools."""
+    for key in _ACP_SKILLS | _ACP_DOUBLE_SKILLS:
+        pool = character._pools.get(key)
+        if pool is not None:
             pool.clear_source(source)
 
 

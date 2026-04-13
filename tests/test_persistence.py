@@ -698,7 +698,7 @@ class TestEquipmentRoundTrip:
         equip_armor(c, fp, enhancement=1, material="Mithral")
         before_ac = c.get("ac")
         acp = c.equipment["armor"]["armor_check_penalty"]
-        assert acp == -3  # -6 + 3 from mithral
+        assert acp == -3  # -6 + 3 (mithral, incl MW)
 
         path = tmp_path / "mithral.char.yaml"
         save_character(c, path)

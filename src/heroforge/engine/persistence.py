@@ -417,9 +417,16 @@ def _load_equipment(
         base = armor_d.get("base") or armor_d.get("name", "")
         enh = int(armor_d.get("enhancement", 0))
         mat = armor_d.get("material", "")
+        mw = bool(armor_d.get("masterwork", False))
         defn = app_state.armor_registry.get(base)
         if defn is not None:
-            equip_armor(c, defn, enh, material=mat)
+            equip_armor(
+                c,
+                defn,
+                enh,
+                material=mat,
+                masterwork=mw,
+            )
             # Preserve extra fields (properties, etc.)
             props = armor_d.get("properties", [])
             if props:
@@ -434,9 +441,16 @@ def _load_equipment(
         base = shield_d.get("base") or shield_d.get("name", "")
         enh = int(shield_d.get("enhancement", 0))
         mat = shield_d.get("material", "")
+        mw = bool(shield_d.get("masterwork", False))
         defn = app_state.armor_registry.get(base)
         if defn is not None:
-            equip_shield(c, defn, enh, material=mat)
+            equip_shield(
+                c,
+                defn,
+                enh,
+                material=mat,
+                masterwork=mw,
+            )
             props = shield_d.get("properties", [])
             if props:
                 c.equipment["shield"]["properties"] = list(props)

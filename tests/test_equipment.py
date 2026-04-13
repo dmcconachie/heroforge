@@ -13,12 +13,14 @@ from heroforge.engine.equipment import (
     ArmorCategory,
     ArmorDefinition,
     ArmorRegistry,
+    MaterialRegistry,
     WeaponRegistry,
     adjust_for_material,
     equip_armor,
     equip_item,
     equip_shield,
     equipment_display_name,
+    set_material_registry,
     unequip_armor,
     unequip_item,
     unequip_shield,
@@ -26,6 +28,15 @@ from heroforge.engine.equipment import (
 from heroforge.rules.loader import EquipmentLoader
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+
+
+@pytest.fixture(autouse=True)
+def _load_materials() -> None:
+    """Ensure material registry is available."""
+    reg = MaterialRegistry()
+    loader = EquipmentLoader(RULES_DIR)
+    loader.load_materials(reg, "core/materials.yaml")
+    set_material_registry(reg)
 
 
 @pytest.fixture()
@@ -126,6 +137,17 @@ class TestEquipmentEnhancement:
         # 10 + DEX(3) + armor(4+1) = 18
         assert ac == 18
 
+    def test_enhancement_implies_masterwork_acp(self, char: Character) -> None:
+        equip_armor(char, FULL_PLATE, enhancement=1)
+        acp = char.equipment["armor"]["armor_check_penalty"]
+        # Base -6, MW -1 = -5
+        assert acp == -5
+
+    def test_explicit_masterwork_acp(self, char: Character) -> None:
+        equip_armor(char, FULL_PLATE, masterwork=True)
+        acp = char.equipment["armor"]["armor_check_penalty"]
+        assert acp == -5
+
 
 class TestEquipmentLoader:
     def test_load_armor(self) -> None:
@@ -177,9 +199,10 @@ class TestMaterialAdjustments:
         assert max_dex == -1  # unchanged
         assert asf == 15  # unchanged
 
-    def test_adamantine_no_change(self) -> None:
+    def test_adamantine_masterwork_only(self) -> None:
         acp, max_dex, asf = adjust_for_material(-6, 1, 35, "Adamantine")
-        assert acp == -6
+        # Adamantine is masterwork: ACP -1 only
+        assert acp == -5
         assert max_dex == 1
         assert asf == 35
 

@@ -22,6 +22,7 @@ from heroforge.engine.domains import DomainRegistry
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.equipment import (
     ArmorRegistry,
+    MaterialRegistry,
     WeaponRegistry,
 )
 from heroforge.engine.feats import FeatRegistry
@@ -81,6 +82,7 @@ class AppState:
         self.feat_registry = FeatRegistry()
         self.armor_registry = ArmorRegistry()
         self.weapon_registry = WeaponRegistry()
+        self.material_registry = MaterialRegistry()
         self.domain_registry = DomainRegistry()
         self.skill_registry = SkillRegistry()
         self.template_registry = TemplateRegistry()
@@ -138,6 +140,16 @@ class AppState:
         eq_loader = EquipmentLoader(rd)
         eq_loader.load_armor(self.armor_registry, "core/armor.yaml")
         eq_loader.load_weapons(self.weapon_registry, "core/weapons.yaml")
+        eq_loader.load_materials(
+            self.material_registry,
+            "core/materials.yaml",
+        )
+        # Set module-level registry for adjust_for_material
+        from heroforge.engine.equipment import (
+            set_material_registry,
+        )
+
+        set_material_registry(self.material_registry)
 
         # Load spell compendium (all spells, with
         # dual registration of buff effects)

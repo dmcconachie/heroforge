@@ -170,7 +170,7 @@ dm_overrides: []
 equipment:
   armor:
     base: Full Plate
-    material: Wildwood
+    # material: Wildwood
     enhancement: 1
     properties: []
   shield:
@@ -186,5 +186,6 @@ equipment:
   weapons:
     - base: Lance
       material: Bronzewood
+      enhancement: 1
     - base: Longbow, Composite
 notes: ''

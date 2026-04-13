@@ -59,6 +59,7 @@ if TYPE_CHECKING:
     from heroforge.engine.effects import BuffRegistry
     from heroforge.engine.equipment import (
         ArmorRegistry,
+        MaterialRegistry,
         WeaponRegistry,
     )
     from heroforge.engine.feats import FeatRegistry
@@ -1096,6 +1097,39 @@ class EquipmentLoader:
                 defn = converter.structure(decl, WeaponDefinition)
             except Exception as e:
                 raise LoaderError(f"Failed to load weapon {name!r}: {e}") from e
+            registry.register(defn)
+            registered.append(name)
+        return registered
+
+    def load_materials(
+        self,
+        registry: "MaterialRegistry",
+        relative_path: str,
+    ) -> list[str]:
+        from heroforge.engine.equipment import (
+            MaterialDefinition,
+        )
+        from heroforge.rules.schema import converter
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Materials file not found: {path}")
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
+
+        registered: list[str] = []
+        for name, decl in data.items():
+            if decl is None:
+                decl = {}
+            decl["name"] = name
+            try:
+                defn = converter.structure(decl, MaterialDefinition)
+            except Exception as e:
+                raise LoaderError(
+                    f"Failed to load material {name!r}: {e}"
+                ) from e
             registry.register(defn)
             registered.append(name)
         return registered
