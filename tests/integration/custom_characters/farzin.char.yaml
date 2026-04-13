@@ -1,0 +1,193 @@
+identity:
+  name: Farzin bin'Gira
+  player: ''
+  race: Human
+  alignment: neutral_good
+  deity: 'Istus'
+ability_scores:
+  str: 14
+  dex: 12
+  con: 14
+  int: 12
+  wis: 15
+  cha: 8
+levels:
+  - level: 1
+    class: Druid
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 4
+      Handle Animal: 4
+      Knowledge (nature): 4
+      Listen: 4
+      Profession (soldier): 3
+      Ride: 1
+      Spot: 4
+      Survival: 4
+    feats:
+      - name: Mounted Combat
+        source: character
+      - name: Ride-By Attack
+        source: human_bonus
+  - level: 2
+    class: Fighter
+    hp_roll: 5
+    skill_ranks:
+      Ride: 4
+      Handle Animal: 1
+    feats:
+      - name: Spirited Charge
+        source: fighter_bonus
+  - level: 3
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 1
+      Listen: 1
+      Ride: 1
+      Spellcraft: 1
+      Spot: 2
+    feats:
+      - name: Power Attack
+        source: character
+  - level: 4
+    class: Druid
+    hp_roll: 5
+    ability_bump: wis
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 1
+      Listen: 2
+      Ride: 1
+      Spellcraft: 1
+      Spot: 1
+  - level: 5
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 2
+      Knowledge (nature): 1
+      Listen: 1
+      Ride: 1
+      Spellcraft: 1
+      Spot: 1
+  - level: 6
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 2
+      Listen: 1
+      Spellcraft: 2
+      Spot: 1
+    feats:
+      - name: Craft Wondrous Item
+        source: character
+  - level: 7
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 1
+      Listen: 1
+      Profession (soldier): 1
+      Spellcraft: 1
+      Spot: 1
+      Survival: 1
+  - level: 8
+    class: Druid
+    hp_roll: 5
+    ability_bump: str
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 1
+      Listen: 1
+      Profession (soldier): 2
+      Spellcraft: 1
+      Spot: 1
+  - level: 9
+    class: Fighter
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Ride: 4
+    feats:
+      - name: Improved Bull Rush
+        source: character
+      - name: Shock Trooper
+        source: fighter_bonus
+  - level: 10
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 1
+      Listen: 1
+      Ride: 1
+      Spellcraft: 1
+      Spot: 2
+  - level: 11
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 1
+      Listen: 2
+      Ride: 1
+      Spellcraft: 1
+      Spot: 1
+  - level: 12
+    class: Druid
+    hp_roll: 5
+    ability_bump: str
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 2
+      Listen: 1
+      Ride: 1
+      Spellcraft: 1
+      Spot: 1
+    feats:
+      - name: Lion's Pounce
+        source: character
+  - level: 13
+    class: Druid
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Knowledge (nature): 1
+      Listen: 1
+      Ride: 1
+      Spellcraft: 2
+      Spot: 1
+
+buffs: {}
+templates:
+  - template: Half-Celestial
+    level: 6
+dm_overrides: []
+equipment:
+  armor:
+    base: Full Plate
+    materiel: Wildwood
+    enhancement: 1
+    properties: []
+  shield:
+    base: Heavy Shield
+    materiel: Wood
+    enhancement: 1
+    properties:
+      - animated
+  worn:
+    Periapt of Wisdom:
+      enhancement: +6
+    Belt of Giant Strength:
+      enhancement: +6
+    Cloak of Resistance:
+      enhancement: +5
+  weapons:
+    - base: Lance
+      materiel: Bronzewood
+    - base: Longbow, Composite
+notes: ''
