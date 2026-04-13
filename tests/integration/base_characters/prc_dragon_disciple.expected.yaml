@@ -98,8 +98,7 @@ skills:
   Knowledge (Arcana):
     ranks: 9
     ability_mod: 0
-    synergy: 2
-    total: 11
+    total: 9
   Listen:
     ranks: 5
     ability_mod: 0
@@ -112,10 +111,6 @@ skills:
   Spot:
     ranks: 5
     ability_mod: 0
-    total: 5
-  Use Magic Device:
-    ability_mod: 3
-    synergy: 2
     total: 5
 carrying_capacity:
   light: 100

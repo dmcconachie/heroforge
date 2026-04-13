@@ -111,8 +111,7 @@ skills:
   Knowledge (Arcana):
     ranks: 10
     ability_mod: 0
-    synergy: 2
-    total: 12
+    total: 10
   Sleight of Hand:
     ability_mod: 2
     synergy: 2
@@ -122,10 +121,6 @@ skills:
     ability_mod: 0
     synergy: 2
     total: 25
-  Use Magic Device:
-    ability_mod: 4
-    synergy: 2
-    total: 6
 carrying_capacity:
   light: 26
   medium: 53

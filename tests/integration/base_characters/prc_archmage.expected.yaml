@@ -97,8 +97,7 @@ skills:
   Knowledge (Arcana):
     ranks: 23
     ability_mod: 4
-    synergy: 2
-    total: 29
+    total: 27
   Knowledge (History):
     ranks: 23
     ability_mod: 4
@@ -124,10 +123,6 @@ skills:
     ability_mod: 0
     synergy: 4
     total: 4
-  Use Magic Device:
-    ability_mod: -1
-    synergy: 2
-    total: 1
 carrying_capacity:
   light: 26
   medium: 53

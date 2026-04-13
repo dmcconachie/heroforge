@@ -107,10 +107,6 @@ skills:
     ability_mod: -2
     speed_mod: -6
     total: -8
-  Knowledge (Arcana):
-    ability_mod: 1
-    synergy: 2
-    total: 3
   Knowledge (Nature):
     ranks: 13
     ability_mod: 1
@@ -137,10 +133,6 @@ skills:
     ability_mod: 3
     synergy: 2
     total: 28
-  Use Magic Device:
-    ability_mod: 0
-    synergy: 2
-    total: 2
 carrying_capacity:
   light: 15
   medium: 30

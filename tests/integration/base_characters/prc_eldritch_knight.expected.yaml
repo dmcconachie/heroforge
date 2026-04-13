@@ -119,8 +119,7 @@ skills:
   Knowledge (Arcana):
     ranks: 14
     ability_mod: 3
-    synergy: 2
-    total: 19
+    total: 17
   Knowledge (Religion):
     ranks: 4
     ability_mod: 3
@@ -146,10 +145,6 @@ skills:
     ability_mod: 1
     synergy: 2
     total: 3
-  Use Magic Device:
-    ability_mod: -1
-    synergy: 2
-    total: 1
 carrying_capacity:
   light: 58
   medium: 116

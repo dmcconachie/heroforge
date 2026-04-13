@@ -288,11 +288,6 @@ Spellcraft:
   ability: int
   trained_only: true
   armor_check: false
-  synergies:
-    - skill: Knowledge (Arcana)
-      bonus: 2
-    - skill: Use Magic Device
-      bonus: 2
   description: Identify spells; decipher magic writing
 Spot:
   key: skill_spot
