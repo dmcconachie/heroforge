@@ -109,7 +109,8 @@ class SkillTotal:
     misc_bonus: int  # from BonusPool (feats, magic items, etc.)
     synergy_bonus: int  # from synergies
     armor_penalty: int  # negative or 0
-    total: int
+    speed_mod: int = 0  # Jump speed modifier
+    total: int = 0
 
     @property
     def usable(self) -> bool:
@@ -410,7 +411,18 @@ def compute_skill_total(
     # Armor check penalty (only if skill has armor_check=True)
     acp = armor_check_penalty if skill_def.armor_check else 0
 
-    total = ranks + ability_mod + misc_bonus + synergy_bonus + acp
+    # Jump gets a speed modifier: +4 per 10ft above 30,
+    # -6 per 10ft below 30.
+    speed_mod = 0
+    if skill_def.key == "skill_jump":
+        speed = character.get("speed")
+        diff = speed - 30
+        if diff > 0:
+            speed_mod = (diff // 10) * 4
+        elif diff < 0:
+            speed_mod = (diff // 10) * 6
+
+    total = ranks + ability_mod + misc_bonus + synergy_bonus + acp + speed_mod
 
     return SkillTotal(
         skill_name=skill_def.name,
@@ -419,6 +431,7 @@ def compute_skill_total(
         misc_bonus=misc_bonus,
         synergy_bonus=synergy_bonus,
         armor_penalty=acp,
+        speed_mod=speed_mod,
         total=total,
     )
 

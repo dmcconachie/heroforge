@@ -109,6 +109,10 @@ skills:
     ranks: 23
     ability_mod: 5
     total: 28
+  Jump:
+    ability_mod: 0
+    speed_mod: -6
+    total: -6
   Knowledge (Nature):
     ability_mod: 1
     synergy: 2

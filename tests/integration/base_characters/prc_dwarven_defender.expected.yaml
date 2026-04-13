@@ -110,7 +110,8 @@ skills:
   Jump:
     ranks: 3
     ability_mod: 3
-    total: 6
+    speed_mod: -6
+    total: 0
   Listen:
     ranks: 10
     ability_mod: 1

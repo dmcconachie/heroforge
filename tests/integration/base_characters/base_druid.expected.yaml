@@ -103,6 +103,10 @@ skills:
     ranks: 14
     ability_mod: 0
     total: 14
+  Jump:
+    ability_mod: -2
+    speed_mod: -6
+    total: -8
   Knowledge (Arcana):
     ability_mod: 1
     synergy: 2

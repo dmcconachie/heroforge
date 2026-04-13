@@ -367,6 +367,7 @@ def _skills(c: "Character", app_state: "AppState") -> dict:
             or st.misc_bonus != 0
             or st.synergy_bonus != 0
             or st.armor_penalty != 0
+            or st.speed_mod != 0
         )
         if not has_extra:
             # Check pool for typed bonuses (racial, etc.)
@@ -394,6 +395,8 @@ def _skills(c: "Character", app_state: "AppState") -> dict:
             entry["synergy"] = st.synergy_bonus
         if st.armor_penalty:
             entry["armor_penalty"] = st.armor_penalty
+        if st.speed_mod:
+            entry["speed_mod"] = st.speed_mod
 
         # Add typed pool bonuses (racial, competence...)
         pool = c.get_pool(sd.key)

@@ -112,7 +112,8 @@ skills:
   Jump:
     ranks: 9
     ability_mod: 3
-    total: 12
+    speed_mod: -6
+    total: 6
   Swim:
     ranks: 9
     ability_mod: 3

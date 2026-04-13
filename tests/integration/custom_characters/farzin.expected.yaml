@@ -130,8 +130,9 @@ skills:
     total: -3
   Jump:
     ability_mod: 8
+    speed_mod: -6
     untyped: -5
-    total: 3
+    total: -3
   Knowledge (Arcana):
     ability_mod: 2
     synergy: 2
