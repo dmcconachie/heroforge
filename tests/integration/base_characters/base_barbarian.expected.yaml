@@ -179,4 +179,7 @@ class_features:
   - 'rage_7: Rage 7/day'
   - 'damage_reduction_5: DR 5/—'
   - 'mighty_rage: +8 STR/CON, +4 Will, -2 AC'
+equipment:
+  weapons:
+    - name: Greataxe
 resources: {}

@@ -44,11 +44,13 @@ abilities:
 combat:
   ac:
     base: 10
-    dex: 2
+    dex: 1
     natural_armor: 1
-    total: 13
-  touch_ac: 12
-  flatfooted_ac: 11
+    armor: 9
+    shield: 3
+    total: 24
+  touch_ac: 11
+  flatfooted_ac: 23
   hp_max:
     hit_dice: 68
     con: 52
@@ -61,87 +63,238 @@ combat:
     total: 2
   speed:
     base: 30
+    untyped: -10
     total: 20
-  sr: 23
+  sr: 0
   fort:
     base: 10
     con: 4
-    total: 14
+    resistance: 5
+    total: 19
   ref:
     base: 3
     dex: 2
-    total: 5
+    resistance: 5
+    total: 10
   will:
     base: 7
-    wis: 5
-    total: 12
+    wis: 8
+    resistance: 5
+    total: 20
   attack_melee:
     bab: 10
-    str: 5
-    total: 15
+    str: 8
+    total: 18
   attack_ranged:
     bab: 10
     dex: 2
     total: 12
   damage_melee:
-    str: 5
-    total: 5
+    str: 8
+    total: 8
   grapple:
     bab: 10
-    str: 5
-    total: 15
+    str: 8
+    total: 18
 attack_iteratives:
   melee:
-    - 15
-    - 10
+    - 18
+    - 13
   ranged:
     - 12
     - 7
 skills:
+  Appraise:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Balance:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Bluff:
+    ability_mod: 1
+    untyped: -6
+    total: -5
+  Climb:
+    ability_mod: 8
+    untyped: -6
+    total: 2
   Concentration:
     ranks: 16
     ability_mod: 4
-    total: 20
+    untyped: -6
+    total: 14
+  Craft:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Decipher Script:
+    ability_mod: 2
+    untyped: -6
+    total: -4
   Diplomacy:
     ability_mod: 1
     synergy: 2
-    total: 3
+    untyped: -6
+    total: -3
+  Disable Device:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Disguise:
+    ability_mod: 1
+    untyped: -6
+    total: -5
+  Escape Artist:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Forgery:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Gather Information:
+    ability_mod: 1
+    untyped: -6
+    total: -5
   Handle Animal:
     ranks: 5
     ability_mod: 1
-    total: 6
+    untyped: -6
+    total: 0
+  Heal:
+    ability_mod: 8
+    untyped: -6
+    total: 2
+  Hide:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Intimidate:
+    ability_mod: 1
+    untyped: -6
+    total: -5
+  Jump:
+    ability_mod: 8
+    untyped: -6
+    total: 2
   Knowledge (Arcana):
     ability_mod: 2
     synergy: 2
-    total: 4
+    untyped: -6
+    total: -2
+  Knowledge (Architecture and Engineering):
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Knowledge (Dungeoneering):
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Knowledge (Geography):
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Knowledge (History):
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Knowledge (Local):
+    ability_mod: 2
+    untyped: -6
+    total: -4
   Knowledge (Nature):
     ability_mod: 2
     synergy: 2
-    total: 4
+    untyped: -6
+    total: -2
+  Knowledge (Nobility and Royalty):
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Knowledge (Religion):
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Knowledge (The Planes):
+    ability_mod: 2
+    untyped: -6
+    total: -4
   Listen:
     ranks: 16
-    ability_mod: 5
-    total: 21
+    ability_mod: 8
+    untyped: -6
+    total: 18
+  Move Silently:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Open Lock:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Perform:
+    ability_mod: 1
+    untyped: -6
+    total: -5
+  Profession:
+    ability_mod: 8
+    untyped: -6
+    total: 2
   Ride:
     ranks: 16
     ability_mod: 2
-    total: 18
+    untyped: -6
+    total: 12
+  Search:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Sense Motive:
+    ability_mod: 8
+    untyped: -6
+    total: 2
+  Sleight of Hand:
+    ability_mod: 2
+    untyped: -6
+    total: -4
+  Speak Language:
+    ability_mod: 0
+    untyped: -6
+    total: -6
   Spellcraft:
     ranks: 12
     ability_mod: 2
-    total: 14
+    untyped: -6
+    total: 8
   Spot:
     ranks: 16
-    ability_mod: 5
-    total: 21
+    ability_mod: 8
+    untyped: -6
+    total: 18
   Survival:
     ranks: 5
-    ability_mod: 5
-    total: 10
+    ability_mod: 8
+    untyped: -6
+    total: 7
+  Swim:
+    ability_mod: 8
+    untyped: -6
+    total: 2
+  Tumble:
+    ability_mod: 2
+    untyped: -6
+    total: -4
   Use Magic Device:
     ability_mod: 1
     synergy: 2
-    total: 3
+    untyped: -6
+    total: -3
+  Use Rope:
+    ability_mod: 2
+    untyped: -6
+    total: -4
 carrying_capacity:
   light: 306
   medium: 613
@@ -185,17 +338,36 @@ spellcasting:
     slots_per_day:
       - 6
       - 7
+      - 6
+      - 6
       - 5
-      - 5
-      - 4
       - 3
-      - 1
+      - 2
     spell_save_dc:
-      0: 15
-      1: 16
-      2: 17
-      3: 18
-      4: 19
-      5: 20
-      6: 21
+      0: 18
+      1: 19
+      2: 20
+      3: 21
+      4: 22
+      5: 23
+      6: 24
+equipment:
+  armor:
+    name: +1 Wildwood Full Plate
+    acp: -6
+    max_dex: 1
+    asf: 35
+  shield:
+    name: +1 Darkwood Heavy Wooden Shield
+    acp: 0
+    asf: 15
+    properties:
+      - animated
+  worn:
+    - Periapt of Wisdom +6
+    - Belt of Giant Strength +6
+    - Cloak of Resistance +5
+  weapons:
+    - name: Bronzewood Lance
+    - name: Longbow, Composite
 resources: {}

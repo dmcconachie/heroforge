@@ -6,6 +6,10 @@ Everytime a bug is found; a regression test should be added if practical. A
 small bug is worth a small regression test. A big bug is worth a large
 regression test.
 
+When rules items are added they must be part of the persistance layer to count
+as finished. I.e.; if you can't put it in the input YAML and see it in the
+output YAML then you're not done.
+
 ## Project
 
 HeroForge Anew — a D&D 3.5e character sheet application built with PyQt6 and 

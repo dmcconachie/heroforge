@@ -166,4 +166,7 @@ class_features:
   - 'trap_sense_1: +1 Reflex and AC vs traps'
   - >-
     uncanny_dodge: Retain DEX bonus to AC when flat-footed
+equipment:
+  weapons:
+    - name: Dwarven Waraxe
 resources: {}

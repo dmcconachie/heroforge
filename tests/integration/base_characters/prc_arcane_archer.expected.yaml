@@ -189,4 +189,7 @@ spellcasting:
     spell_save_dc:
       0: 11
       1: 12
+equipment:
+  weapons:
+    - name: Longbow
 resources: {}

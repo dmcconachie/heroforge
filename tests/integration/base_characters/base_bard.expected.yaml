@@ -262,4 +262,7 @@ spellcasting:
         - Mass Suggestion
         - Otto's Irresistible Dance
         - Geas/Quest
+equipment:
+  weapons:
+    - name: Rapier
 resources: {}

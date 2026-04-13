@@ -181,4 +181,7 @@ spellcasting:
       7: 21
       8: 22
       9: 23
+equipment:
+  weapons:
+    - name: Quarterstaff
 resources: {}

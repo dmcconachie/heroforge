@@ -228,4 +228,7 @@ class_features:
   - 'trap_sense_6: +6 Reflex and AC vs traps'
   - 'sneak_attack_10d6: Sneak attack +10d6'
   - 'special_ability_4: Rogue special ability'
+equipment:
+  weapons:
+    - name: Short Sword
 resources: {}

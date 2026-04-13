@@ -164,4 +164,7 @@ spellcasting:
     preparation: prepared
     slots_per_day: []
     spell_save_dc: {}
+equipment:
+  weapons:
+    - name: Longsword
 resources: {}

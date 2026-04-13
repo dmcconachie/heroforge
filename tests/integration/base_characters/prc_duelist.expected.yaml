@@ -199,4 +199,7 @@ class_features:
   - 'acrobatic_charge: Charge in difficult terrain'
   - 'deflect_arrows: Deflect one ranged/round'
   - 'crippling_critical: Critical hit debuff'
+equipment:
+  weapons:
+    - name: Rapier
 resources: {}

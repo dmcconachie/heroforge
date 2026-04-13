@@ -661,3 +661,106 @@ class TestAbilityBumpRoundTrip:
         loaded = load_character(path, make_app_state())
         assert loaded.levels[0].ability_bump is None
         assert loaded.levels[0].inherent_bumps == []
+
+
+# =======================================================
+# Equipment round-trip
+# =======================================================
+
+
+class TestEquipmentRoundTrip:
+    def test_armor_round_trips(self, tmp_path: Path) -> None:
+        state = make_app_state()
+        c = state.character
+        from heroforge.engine.equipment import (
+            equip_armor,
+        )
+
+        fp = state.armor_registry.get("Full Plate")
+        assert fp is not None
+        equip_armor(c, fp, enhancement=1)
+        before_ac = c.get("ac")
+
+        path = tmp_path / "armor.char.yaml"
+        save_character(c, path)
+        loaded = load_character(path, make_app_state())
+        assert loaded.get("ac") == before_ac
+
+    def test_mithral_armor_round_trips(self, tmp_path: Path) -> None:
+        state = make_app_state()
+        c = state.character
+        from heroforge.engine.equipment import (
+            equip_armor,
+        )
+
+        fp = state.armor_registry.get("Full Plate")
+        assert fp is not None
+        equip_armor(c, fp, enhancement=1, material="Mithral")
+        before_ac = c.get("ac")
+        acp = c.equipment["armor"]["armor_check_penalty"]
+        assert acp == -3  # -6 + 3 from mithral
+
+        path = tmp_path / "mithral.char.yaml"
+        save_character(c, path)
+        loaded = load_character(path, make_app_state())
+        assert loaded.get("ac") == before_ac
+        assert loaded.equipment["armor"]["armor_check_penalty"] == -3
+
+    def test_worn_item_round_trips(self, tmp_path: Path) -> None:
+        state = make_app_state()
+        c = state.character
+        c.set_ability_score("str", 14)
+        from heroforge.engine.equipment import (
+            equip_item,
+        )
+
+        belt = state.magic_item_registry.get("Belt of Giant Strength +4")
+        assert belt is not None
+        equip_item(c, belt)
+        c.equipment.setdefault("worn", []).append(belt.name)
+        assert c.get_ability_score("str") == 18
+
+        path = tmp_path / "worn.char.yaml"
+        save_character(c, path)
+        loaded = load_character(path, make_app_state())
+        assert loaded.get_ability_score("str") == 18
+        assert "Belt of Giant Strength +4" in (loaded.equipment.get("worn", []))
+
+    def test_weapon_data_round_trips(self, tmp_path: Path) -> None:
+        state = make_app_state()
+        c = state.character
+        c.equipment["weapons"] = [
+            {
+                "base": "Lance",
+                "enhancement": 1,
+                "material": "Bronzewood",
+                "properties": ["Keen"],
+            }
+        ]
+
+        path = tmp_path / "weapons.char.yaml"
+        save_character(c, path)
+        loaded = load_character(path, make_app_state())
+        weapons = loaded.equipment.get("weapons", [])
+        assert len(weapons) == 1
+        assert weapons[0]["base"] == "Lance"
+        assert weapons[0]["enhancement"] == 1
+
+    def test_unknown_armor_round_trips(self, tmp_path: Path) -> None:
+        """Unknown armor stores raw data."""
+        data = {
+            "identity": {"name": "Test"},
+            "ability_scores": {},
+            "levels": [],
+            "equipment": {
+                "armor": {
+                    "base": "Alien Carapace",
+                    "enhancement": 0,
+                }
+            },
+        }
+        path = tmp_path / "unknown.char.yaml"
+        with open(path, "w") as f:
+            yaml.dump(data, f)
+        loaded = load_character(path, make_app_state())
+        assert "armor" in loaded.equipment

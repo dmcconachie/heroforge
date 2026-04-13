@@ -164,4 +164,7 @@ spellcasting:
         - Magic Missile
         - Shield
         - Burning Hands
+equipment:
+  weapons:
+    - name: Quarterstaff
 resources: {}

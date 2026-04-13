@@ -133,4 +133,7 @@ class_features:
   - 'bonus_feat_2: Bonus fighter feat'
   - 'bonus_feat_4: Bonus fighter feat'
   - 'bonus_feat_6: Bonus fighter feat'
+equipment:
+  weapons:
+    - name: Greatsword
 resources: {}

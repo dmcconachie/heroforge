@@ -119,6 +119,9 @@ def gather_sheet(
     sc = _spellcasting(character, app_state)
     if sc:
         d["spellcasting"] = sc
+    eq = _equipment(character)
+    if eq:
+        d["equipment"] = eq
     d["resources"] = {}  # TODO: wire ResourceTracker
     return d
 
@@ -528,6 +531,93 @@ def _spellcasting(c: "Character", app_state: "AppState") -> dict:
                 entry["spells_known"] = spells_dict
 
         result[class_name] = entry
+    return result
+
+
+# -----------------------------------------------------------
+# Equipment
+# -----------------------------------------------------------
+
+
+def _equipment(c: "Character") -> dict:
+    from heroforge.engine.equipment import (
+        equipment_display_name,
+    )
+
+    eq = c.equipment
+    result: dict = {}
+
+    armor = eq.get("armor")
+    if armor:
+        entry: dict = {
+            "name": equipment_display_name(
+                base=armor.get("name", ""),
+                enhancement=armor.get("enhancement", 0),
+                material=armor.get("material", ""),
+            ),
+            "acp": armor.get("armor_check_penalty", 0),
+        }
+        max_dex = armor.get("max_dex_bonus", -1)
+        if max_dex >= 0:
+            entry["max_dex"] = max_dex
+        asf = armor.get("arcane_spell_failure", 0)
+        if asf:
+            entry["asf"] = asf
+        props = armor.get("properties", [])
+        if props:
+            entry["properties"] = props
+        result["armor"] = entry
+
+    shield = eq.get("shield")
+    if shield:
+        entry = {
+            "name": equipment_display_name(
+                base=shield.get("name", ""),
+                enhancement=shield.get("enhancement", 0),
+                material=shield.get("material", ""),
+            ),
+            "acp": shield.get("armor_check_penalty", 0),
+        }
+        asf = shield.get("arcane_spell_failure", 0)
+        if asf:
+            entry["asf"] = asf
+        props = shield.get("properties", [])
+        if props:
+            entry["properties"] = props
+        result["shield"] = entry
+
+    worn = eq.get("worn", [])
+    if worn:
+        result["worn"] = list(worn)
+
+    weapons = eq.get("weapons", [])
+    if weapons:
+        wlist = []
+        for w in weapons:
+            wlist.append(
+                {
+                    "name": equipment_display_name(
+                        base=w.get("base", ""),
+                        enhancement=w.get("enhancement", 0),
+                        material=w.get("material", ""),
+                        name=w.get("name", ""),
+                    ),
+                    **{
+                        k: v
+                        for k, v in w.items()
+                        if k
+                        not in (
+                            "name",
+                            "base",
+                            "enhancement",
+                            "material",
+                        )
+                        and v
+                    },
+                }
+            )
+        result["weapons"] = wlist
+
     return result
 
 

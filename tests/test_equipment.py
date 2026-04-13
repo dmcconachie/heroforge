@@ -14,9 +14,13 @@ from heroforge.engine.equipment import (
     ArmorDefinition,
     ArmorRegistry,
     WeaponRegistry,
+    adjust_for_material,
     equip_armor,
+    equip_item,
     equip_shield,
+    equipment_display_name,
     unequip_armor,
+    unequip_item,
     unequip_shield,
 )
 from heroforge.rules.loader import EquipmentLoader
@@ -149,3 +153,179 @@ class TestEquipmentLoader:
         loader.load_armor(reg, "core/armor.yaml")
         assert len(reg.all_armor()) >= 12
         assert len(reg.all_shields()) >= 4
+
+
+# ===================================================
+# Material adjustments
+# ===================================================
+
+
+class TestMaterialAdjustments:
+    def test_mithral_reduces_acp(self) -> None:
+        acp, max_dex, asf = adjust_for_material(-6, 1, 35, "Mithral")
+        assert acp == -3
+        assert max_dex == 3
+        assert asf == 25
+
+    def test_mithral_acp_floors_at_zero(self) -> None:
+        acp, _, _ = adjust_for_material(-2, 4, 20, "Mithral")
+        assert acp == 0
+
+    def test_darkwood_reduces_acp(self) -> None:
+        acp, max_dex, asf = adjust_for_material(-2, -1, 15, "Darkwood")
+        assert acp == 0
+        assert max_dex == -1  # unchanged
+        assert asf == 15  # unchanged
+
+    def test_adamantine_no_change(self) -> None:
+        acp, max_dex, asf = adjust_for_material(-6, 1, 35, "Adamantine")
+        assert acp == -6
+        assert max_dex == 1
+        assert asf == 35
+
+    def test_no_material_no_change(self) -> None:
+        acp, max_dex, asf = adjust_for_material(-6, 1, 35, "")
+        assert acp == -6
+
+    def test_mithral_armor_ac(self, char: Character) -> None:
+        equip_armor(char, FULL_PLATE, material="Mithral")
+        ac = char.get("ac")
+        # 10 + DEX(3, capped at 1+2=3) + armor(8) = 21
+        assert ac == 21
+
+    def test_heavy_armor_speed_penalty(self, char: Character) -> None:
+        equip_armor(char, FULL_PLATE)
+        # Base 30 → 20 with heavy armor
+        assert char.get("speed") == 20
+
+    def test_light_armor_no_speed_penalty(self, char: Character) -> None:
+        equip_armor(char, CHAIN_SHIRT)
+        assert char.get("speed") == 30
+
+    def test_mithral_heavy_still_reduces_speed(self, char: Character) -> None:
+        # Mithral heavy → medium category → still -10
+        equip_armor(char, FULL_PLATE, material="Mithral")
+        assert char.get("speed") == 20
+
+    def test_unequip_restores_speed(self, char: Character) -> None:
+        equip_armor(char, FULL_PLATE)
+        assert char.get("speed") == 20
+        unequip_armor(char)
+        assert char.get("speed") == 30
+
+
+# ===================================================
+# Worn magic items
+# ===================================================
+
+
+class TestEquipItem:
+    def test_belt_of_strength(self) -> None:
+        from heroforge.engine.magic_items import (
+            MagicItemDefinition,
+        )
+
+        belt = MagicItemDefinition(
+            name="Belt of Giant Strength +4",
+            effects=[
+                {
+                    "target": "str_score",
+                    "bonus_type": "enhancement",
+                    "value": 4,
+                }
+            ],
+        )
+        c = Character()
+        c.set_ability_score("str", 14)
+        equip_item(c, belt)
+        assert c.get_ability_score("str") == 18
+
+    def test_unequip_item(self) -> None:
+        from heroforge.engine.magic_items import (
+            MagicItemDefinition,
+        )
+
+        belt = MagicItemDefinition(
+            name="Belt of Giant Strength +4",
+            effects=[
+                {
+                    "target": "str_score",
+                    "bonus_type": "enhancement",
+                    "value": 4,
+                }
+            ],
+        )
+        c = Character()
+        c.set_ability_score("str", 14)
+        equip_item(c, belt)
+        assert c.get_ability_score("str") == 18
+        unequip_item(c, belt.name)
+        assert c.get_ability_score("str") == 14
+
+    def test_ring_of_protection(self) -> None:
+        from heroforge.engine.magic_items import (
+            MagicItemDefinition,
+        )
+
+        ring = MagicItemDefinition(
+            name="Ring of Protection +2",
+            effects=[
+                {
+                    "target": "ac",
+                    "bonus_type": "deflection",
+                    "value": 2,
+                }
+            ],
+        )
+        c = Character()
+        equip_item(c, ring)
+        assert c.get("ac") == 12  # 10 + 2
+
+    def test_item_no_effects(self) -> None:
+        from heroforge.engine.magic_items import (
+            MagicItemDefinition,
+        )
+
+        item = MagicItemDefinition(name="Mundane Trinket")
+        c = Character()
+        equip_item(c, item)  # should not crash
+        assert c.get("ac") == 10
+
+
+# ===================================================
+# Display name
+# ===================================================
+
+
+class TestDisplayName:
+    def test_enhancement_only(self) -> None:
+        assert equipment_display_name("Lance", enhancement=1) == "+1 Lance"
+
+    def test_enhancement_and_material(self) -> None:
+        assert (
+            equipment_display_name(
+                "Lance",
+                enhancement=1,
+                material="Bronzewood",
+            )
+            == "+1 Bronzewood Lance"
+        )
+
+    def test_masterwork(self) -> None:
+        assert (
+            equipment_display_name("Longsword", masterwork=True)
+            == "Masterwork Longsword"
+        )
+
+    def test_plain(self) -> None:
+        assert equipment_display_name("Dagger") == "Dagger"
+
+    def test_name_override(self) -> None:
+        assert (
+            equipment_display_name(
+                "Longsword",
+                enhancement=1,
+                name="+1 Flaming Longsword",
+            )
+            == "+1 Flaming Longsword"
+        )

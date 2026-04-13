@@ -182,4 +182,7 @@ class_features:
   - 'improved_uncanny_dodge: Cannot be flanked'
   - 'slippery_mind: Re-roll enchantment save'
   - 'improved_evasion: Half damage on failed save'
+equipment:
+  weapons:
+    - name: Rapier
 resources: {}

@@ -1,8 +1,9 @@
 """
 engine/equipment.py
 -------------------
-Equipment system: armor, shields, and weapons with
-stat effects wired into the Character's BonusPools.
+Equipment system: armor, shields, worn magic items,
+and weapons with stat effects wired into the
+Character's BonusPools.
 
 Armor contributes:
   - Armor bonus to AC (BonusType.ARMOR)
@@ -15,19 +16,27 @@ Shields contribute:
   - Armor check penalty (stacks with armor ACP)
   - Arcane spell failure chance
 
+Worn magic items (rings, cloaks, belts, etc.) are
+permanent — their effects feed directly into pools
+via set_source(), NOT through the buff toggle system.
+
 Weapons are data-only — no pool contributions.
 Attack/damage bonuses come from ability scores, BAB,
 and enhancement bonuses (applied separately).
 
 Public API:
-  ArmorDefinition   — data model for armor/shields
-  WeaponDefinition  — data model for weapons
-  ArmorRegistry     — name-based lookup
-  WeaponRegistry    — name-based lookup
-  equip_armor()     — wire armor into Character pools
-  unequip_armor()   — remove armor from Character pools
-  equip_shield()    — wire shield into Character pools
-  unequip_shield()  — remove shield from pools
+  ArmorDefinition          — data model for armor/shields
+  WeaponDefinition         — data model for weapons
+  ArmorRegistry            — name-based lookup
+  WeaponRegistry           — name-based lookup
+  equip_armor()            — wire armor into pools
+  unequip_armor()          — remove armor from pools
+  equip_shield()           — wire shield into pools
+  unequip_shield()         — remove shield from pools
+  equip_item()             — wire magic item into pools
+  unequip_item()           — remove magic item from pools
+  adjust_for_material()    — material ACP/DEX/ASF mods
+  equipment_display_name() — build display name
 """
 
 from __future__ import annotations
@@ -38,6 +47,9 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
+    from heroforge.engine.magic_items import (
+        MagicItemDefinition,
+    )
 
 
 class ArmorCategory(enum.Enum):
@@ -133,6 +145,36 @@ class WeaponRegistry:
 
 
 # -------------------------------------------------------
+# Material adjustments
+# -------------------------------------------------------
+
+
+def adjust_for_material(
+    acp: int,
+    max_dex: int,
+    asf: int,
+    material: str,
+) -> tuple[int, int, int]:
+    """
+    Return (acp, max_dex, asf) adjusted for material.
+
+    Per SRD:
+    - Mithral: ACP -3, max DEX +2, ASF -10%
+    - Darkwood: ACP -2
+    - Adamantine: no ACP/DEX/ASF change
+    """
+    mat = material.lower() if material else ""
+    if mat == "mithral":
+        acp = min(acp + 3, 0)
+        if max_dex >= 0:
+            max_dex += 2
+        asf = max(asf - 10, 0)
+    elif mat == "darkwood":
+        acp = min(acp + 2, 0)
+    return acp, max_dex, asf
+
+
+# -------------------------------------------------------
 # Equip / unequip helpers
 # -------------------------------------------------------
 
@@ -144,12 +186,19 @@ def equip_armor(
     character: Character,
     armor: ArmorDefinition,
     enhancement: int = 0,
+    material: str = "",
 ) -> None:
     """Wire armor bonuses into Character pools."""
     from heroforge.engine.bonus import (
         BonusEntry,
         BonusType,
     )
+
+    acp = armor.armor_check_penalty
+    max_dex = armor.max_dex_bonus
+    asf = armor.arcane_spell_failure
+    if material:
+        acp, max_dex, asf = adjust_for_material(acp, max_dex, asf, material)
 
     total_ac = armor.armor_bonus + enhancement
 
@@ -170,21 +219,22 @@ def equip_armor(
     # Store armor data for max DEX and ACP
     character.equipment["armor"] = {
         "name": armor.name,
-        "max_dex_bonus": armor.max_dex_bonus,
-        "armor_check_penalty": (armor.armor_check_penalty),
-        "arcane_spell_failure": (armor.arcane_spell_failure),
+        "max_dex_bonus": max_dex,
+        "armor_check_penalty": acp,
+        "arcane_spell_failure": asf,
         "enhancement": enhancement,
+        "material": material,
     }
 
     # Push ACP into skill pools
-    _apply_acp(
-        character,
-        _ARMOR_SRC,
-        armor.armor_check_penalty,
-    )
+    _apply_acp(character, _ARMOR_SRC, acp)
+
+    # Speed penalty from medium/heavy armor
+    _apply_armor_speed(character, armor, material)
 
     character._graph.invalidate("ac")
-    character.on_change.notify({"ac", "equipment"})
+    character._graph.invalidate("speed")
+    character.on_change.notify({"ac", "equipment", "speed"})
 
 
 def unequip_armor(character: Character) -> None:
@@ -196,20 +246,33 @@ def unequip_armor(character: Character) -> None:
     character.equipment.pop("armor", None)
     _clear_acp(character, _ARMOR_SRC)
 
+    # Remove speed penalty
+    sp = character._pools.get("speed")
+    if sp is not None:
+        sp.clear_source(_ARMOR_SRC)
+
     character._graph.invalidate("ac")
-    character.on_change.notify({"ac", "equipment"})
+    character._graph.invalidate("speed")
+    character.on_change.notify({"ac", "equipment", "speed"})
 
 
 def equip_shield(
     character: Character,
     shield: ArmorDefinition,
     enhancement: int = 0,
+    material: str = "",
 ) -> None:
     """Wire shield bonuses into Character pools."""
     from heroforge.engine.bonus import (
         BonusEntry,
         BonusType,
     )
+
+    acp = shield.armor_check_penalty
+    asf = shield.arcane_spell_failure
+    max_dex = shield.max_dex_bonus
+    if material:
+        acp, max_dex, asf = adjust_for_material(acp, max_dex, asf, material)
 
     total_ac = shield.armor_bonus + enhancement
 
@@ -228,16 +291,13 @@ def equip_shield(
 
     character.equipment["shield"] = {
         "name": shield.name,
-        "armor_check_penalty": (shield.armor_check_penalty),
-        "arcane_spell_failure": (shield.arcane_spell_failure),
+        "armor_check_penalty": acp,
+        "arcane_spell_failure": asf,
         "enhancement": enhancement,
+        "material": material,
     }
 
-    _apply_acp(
-        character,
-        _SHIELD_SRC,
-        shield.armor_check_penalty,
-    )
+    _apply_acp(character, _SHIELD_SRC, acp)
 
     character._graph.invalidate("ac")
     character.on_change.notify({"ac", "equipment"})
@@ -254,6 +314,63 @@ def unequip_shield(character: Character) -> None:
 
     character._graph.invalidate("ac")
     character.on_change.notify({"ac", "equipment"})
+
+
+_LIGHT_CATS = {ArmorCategory.LIGHT}
+_MEDIUM_CATS = {ArmorCategory.MEDIUM}
+_HEAVY_CATS = {ArmorCategory.HEAVY}
+
+# 3.5e: medium/heavy → 30→20, 20→15.
+# Mithral shifts category one lighter.
+_SPEED_PENALTY = {30: -10, 20: -5}
+
+
+def _effective_category(cat: ArmorCategory, material: str) -> ArmorCategory:
+    """Category after material adjustment."""
+    mat = material.lower() if material else ""
+    if mat != "mithral":
+        return cat
+    if cat in _HEAVY_CATS:
+        return ArmorCategory.MEDIUM
+    if cat in _MEDIUM_CATS:
+        return ArmorCategory.LIGHT
+    return cat
+
+
+def _apply_armor_speed(
+    character: Character,
+    armor: ArmorDefinition,
+    material: str,
+) -> None:
+    """Push speed penalty for medium/heavy armor."""
+    from heroforge.engine.bonus import (
+        BonusEntry,
+        BonusType,
+    )
+
+    eff_cat = _effective_category(armor.category, material)
+    if eff_cat in _LIGHT_CATS or eff_cat == ArmorCategory.LIGHT:
+        # Light armor: no speed penalty
+        sp = character._pools.get("speed")
+        if sp is not None:
+            sp.clear_source(_ARMOR_SRC)
+        return
+
+    base_speed = character._race_base_speed
+    penalty = _SPEED_PENALTY.get(base_speed, -10)
+
+    sp = character._pools.get("speed")
+    if sp is not None:
+        sp.set_source(
+            _ARMOR_SRC,
+            [
+                BonusEntry(
+                    value=penalty,
+                    bonus_type=BonusType.UNTYPED,
+                    source=_ARMOR_SRC,
+                )
+            ],
+        )
 
 
 def _apply_acp(
@@ -291,3 +408,126 @@ def _clear_acp(character: Character, source: str) -> None:
     for key, pool in character._pools.items():
         if key.startswith("skill_"):
             pool.clear_source(source)
+
+
+# -------------------------------------------------------
+# Worn magic items
+# -------------------------------------------------------
+
+_MULTI_TARGET_EXPANSIONS: dict[str, list[str]] = {
+    "attack_all": ["attack_melee", "attack_ranged"],
+    "damage_all": ["damage_melee", "damage_ranged"],
+}
+
+
+def equip_item(
+    character: Character,
+    item: "MagicItemDefinition",
+) -> None:
+    """
+    Wire a worn magic item's effects into pools.
+
+    Items are permanent — they use set_source()
+    directly, NOT the buff toggle system.
+    """
+    from heroforge.engine.bonus import BonusType
+    from heroforge.engine.effects import (
+        BonusEffect,
+    )
+
+    if not item.effects:
+        return
+
+    bt_map = {bt.value: bt for bt in BonusType}
+    source_key = f"item:{item.name}"
+
+    pool_entries: dict[str, list] = {}
+    for eff_decl in item.effects:
+        target = eff_decl.get("target", "")
+        bt_str = eff_decl.get("bonus_type", "untyped")
+        bonus_type = bt_map.get(bt_str)
+        if not target or bonus_type is None:
+            continue
+        raw_value = eff_decl.get("value", 0)
+        if isinstance(raw_value, bool):
+            raw_value = int(raw_value)
+
+        effect = BonusEffect(
+            target=target,
+            bonus_type=bonus_type,
+            value=raw_value,
+        )
+        entry = effect.to_bonus_entry(item.name)
+        targets = _MULTI_TARGET_EXPANSIONS.get(target, [target])
+        for tgt in targets:
+            pool_entries.setdefault(tgt, []).append(entry)
+
+    affected: set[str] = set()
+    for pool_key, entries in pool_entries.items():
+        pool = character._pools.get(pool_key)
+        if pool is None:
+            continue
+        pool.set_source(source_key, entries)
+        affected.add(pool_key)
+
+    for pk in affected:
+        character._graph.invalidate_pool(pk)
+    if affected:
+        character.on_change.notify(affected | {"equipment"})
+
+
+def unequip_item(
+    character: Character,
+    item_name: str,
+) -> None:
+    """Remove a worn magic item's effects."""
+    source_key = f"item:{item_name}"
+    affected: set[str] = set()
+    for pool in character._pools.values():
+        if source_key in pool._sources:
+            pool.clear_source(source_key)
+            affected.add(pool.stat_key)
+    for pk in affected:
+        character._graph.invalidate_pool(pk)
+    if affected:
+        character.on_change.notify(affected | {"equipment"})
+
+
+# -------------------------------------------------------
+# Display name helpers
+# -------------------------------------------------------
+
+
+def equipment_display_name(
+    base: str,
+    enhancement: int = 0,
+    material: str = "",
+    masterwork: bool = False,
+    name: str = "",
+) -> str:
+    """
+    Build a display name from equipment parts.
+
+    Examples:
+      base="Lance", enhancement=1
+        → "+1 Lance"
+      base="Lance", enhancement=1, material="Bronzewood"
+        → "+1 Bronzewood Lance"
+      base="Longsword", masterwork=True
+        → "Masterwork Longsword"
+      base="Full Plate", enhancement=1, material="Mithral"
+        → "+1 Mithral Full Plate"
+      name="+1 Flaming Longsword" (explicit override)
+        → "+1 Flaming Longsword"
+    """
+    if name:
+        return name
+    parts: list[str] = []
+    if enhancement > 0:
+        parts.append(f"+{enhancement}")
+    elif masterwork:
+        parts.append("Masterwork")
+    if material:
+        parts.append(material)
+    parts.append(base)
+    return " ".join(parts)

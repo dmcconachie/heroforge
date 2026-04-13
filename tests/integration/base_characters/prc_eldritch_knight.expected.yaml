@@ -188,4 +188,7 @@ spellcasting:
       1: 14
       2: 15
       3: 16
+equipment:
+  weapons:
+    - name: Longsword
 resources: {}

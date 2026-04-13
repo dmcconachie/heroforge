@@ -236,4 +236,7 @@ spellcasting:
         - Wish
         - Meteor Swarm
         - Time Stop
+equipment:
+  weapons:
+    - name: Quarterstaff
 resources: {}

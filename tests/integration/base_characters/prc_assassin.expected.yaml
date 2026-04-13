@@ -183,4 +183,7 @@ class_features:
   - 'sneak_attack_4d6: +4d6 sneak attack'
   - 'hide_in_plain_sight: Hide while observed'
   - 'sneak_attack_5d6: +5d6 sneak attack'
+equipment:
+  weapons:
+    - name: Short Sword
 resources: {}

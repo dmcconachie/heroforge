@@ -160,4 +160,7 @@ class_features:
   - 'bonus_feat_16: Bonus fighter feat'
   - 'bonus_feat_18: Bonus fighter feat'
   - 'bonus_feat_20: Bonus fighter feat'
+equipment:
+  weapons:
+    - name: Dwarven Waraxe
 resources: {}

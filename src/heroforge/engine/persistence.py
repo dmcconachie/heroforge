@@ -148,7 +148,7 @@ def _character_to_dict(c: "Character") -> dict:
         "dm_overrides": [
             {"target": ov.target, "note": ov.note} for ov in c.dm_overrides
         ],
-        "equipment": dict(c.equipment),
+        "equipment": _equipment_to_dict(c.equipment),
         "notes": c.notes,
     }
 
@@ -187,9 +187,36 @@ def _buff_state_to_dict(state: "BuffState") -> dict:
     return d
 
 
-# ---------------------------------------------------------------------------
+def _equipment_to_dict(eq: dict) -> dict:
+    """Serialize equipment for YAML output."""
+    result: dict = {}
+    for slot in ("armor", "shield"):
+        item = eq.get(slot)
+        if not item:
+            continue
+        d: dict = {"base": item.get("name", "")}
+        enh = item.get("enhancement", 0)
+        if enh:
+            d["enhancement"] = enh
+        mat = item.get("material", "")
+        if mat:
+            d["material"] = mat
+        props = item.get("properties", [])
+        if props:
+            d["properties"] = list(props)
+        result[slot] = d
+    worn = eq.get("worn", [])
+    if worn:
+        result["worn"] = list(worn)
+    weapons = eq.get("weapons", [])
+    if weapons:
+        result["weapons"] = list(weapons)
+    return result
+
+
+# -----------------------------------------------------------
 # Load
-# ---------------------------------------------------------------------------
+# -----------------------------------------------------------
 
 
 def load_character(
@@ -361,10 +388,72 @@ def load_character(
         if target:
             c.add_dm_override(target, note=ov_dict.get("note", ""))
 
-    # Equipment (currently just stored as a dict)
-    c.equipment = dict(data.get("equipment", {}))
+    # Equipment — re-apply armor/shield/worn items
+    _load_equipment(data.get("equipment", {}), c, app_state)
 
     # Notes
     c.notes = str(data.get("notes", ""))
 
     return c
+
+
+def _load_equipment(
+    eq_data: dict,
+    c: "Character",
+    app_state: "AppState",
+) -> None:
+    """Re-apply equipment from YAML data."""
+    from heroforge.engine.equipment import (
+        equip_armor,
+        equip_item,
+        equip_shield,
+    )
+
+    # Armor
+    armor_d = eq_data.get("armor")
+    if armor_d:
+        # Support both old format (name key) and new
+        # (base key)
+        base = armor_d.get("base") or armor_d.get("name", "")
+        enh = int(armor_d.get("enhancement", 0))
+        mat = armor_d.get("material", "")
+        defn = app_state.armor_registry.get(base)
+        if defn is not None:
+            equip_armor(c, defn, enh, material=mat)
+            # Preserve extra fields (properties, etc.)
+            props = armor_d.get("properties", [])
+            if props:
+                c.equipment["armor"]["properties"] = list(props)
+        else:
+            # Unknown armor: store raw for round-trip
+            c.equipment["armor"] = dict(armor_d)
+
+    # Shield
+    shield_d = eq_data.get("shield")
+    if shield_d:
+        base = shield_d.get("base") or shield_d.get("name", "")
+        enh = int(shield_d.get("enhancement", 0))
+        mat = shield_d.get("material", "")
+        defn = app_state.armor_registry.get(base)
+        if defn is not None:
+            equip_shield(c, defn, enh, material=mat)
+            props = shield_d.get("properties", [])
+            if props:
+                c.equipment["shield"]["properties"] = list(props)
+        else:
+            c.equipment["shield"] = dict(shield_d)
+
+    # Worn magic items
+    worn = eq_data.get("worn", [])
+    for item_name in worn:
+        item_defn = app_state.magic_item_registry.get(item_name)
+        if item_defn is not None:
+            equip_item(c, item_defn)
+    # Always store the name list for round-trip
+    if worn:
+        c.equipment["worn"] = list(worn)
+
+    # Weapons (display only, store as-is)
+    weapons = eq_data.get("weapons", [])
+    if weapons:
+        c.equipment["weapons"] = list(weapons)

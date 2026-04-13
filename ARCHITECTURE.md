@@ -364,10 +364,40 @@ dataclasses with all SRD stats. `ArmorRegistry` and
 
 `equip_armor()` / `equip_shield()` push armor/shield
 bonuses into AC pool and armor check penalties into
-skill pools. `unequip_armor()` / `unequip_shield()`
-reverse these. Source keys (`"equip:armor"`,
-`"equip:shield"`) keep equipment bonuses separate from
-buff bonuses.
+skill pools. Both accept an optional `material`
+parameter; `adjust_for_material()` modifies ACP,
+max DEX, and ASF for Mithral (-3 ACP, +2 DEX,
+-10% ASF), Darkwood (-2 ACP), etc.
+
+`equip_item()` / `unequip_item()` wire worn magic
+item effects directly into pools via `set_source()`
+(items are permanent, NOT buff-toggled). Source key
+is `"item:{name}"`.
+
+`equipment_display_name()` builds a display name
+from base, enhancement, and material parts.
+
+YAML format:
+```yaml
+equipment:
+  armor:
+    base: Full Plate
+    enhancement: 1
+    material: Mithral
+  shield:
+    base: Heavy Steel Shield
+  worn:
+    - Belt of Giant Strength +4
+    - Periapt of Wisdom +4
+  weapons:
+    - base: Lance
+      enhancement: 1
+      material: Bronzewood
+      properties: [Keen]
+```
+
+Weapons are display-only (no stat wiring yet —
+deferred to per-weapon attack nodes).
 
 ## Layer 12: Spellcasting (`engine/spellcasting.py`)
 
@@ -567,8 +597,6 @@ Reusable components in `widgets/`: `LabeledField`,
   weapon (requires deity → favored weapon mapping)
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
-- Equipment persistence (equip/unequip saves).
-  Currently `equipment` is stored as a raw dict and
-  `worn` items are NOT activated as buffs on load.
-  Worn magic items should be re-activated via the
-  buff registry so their effects apply on load.
+- Per-weapon attack/damage breakdowns (weapon
+  enhancement, masterwork, keen, speed properties
+  need per-weapon stat nodes)

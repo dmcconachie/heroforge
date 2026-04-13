@@ -192,4 +192,7 @@ spellcasting:
       1: 13
       2: 14
       3: 15
+equipment:
+  weapons:
+    - name: Longbow
 resources: {}

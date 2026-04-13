@@ -199,4 +199,7 @@ spellcasting:
       7: 20
       8: 21
       9: 22
+equipment:
+  weapons:
+    - name: Quarterstaff
 resources: {}

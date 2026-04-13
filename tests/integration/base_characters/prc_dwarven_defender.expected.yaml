@@ -159,4 +159,7 @@ class_features:
   - 'improved_uncanny_dodge: Cannot be flanked'
   - 'damage_reduction_3: DR 9/—'
   - 'mobile_defense: Move 5 ft in stance'
+equipment:
+  weapons:
+    - name: Dwarven Waraxe
 resources: {}

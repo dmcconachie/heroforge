@@ -170,24 +170,21 @@ dm_overrides: []
 equipment:
   armor:
     base: Full Plate
-    materiel: Wildwood
+    material: Wildwood
     enhancement: 1
     properties: []
   shield:
-    base: Heavy Shield
-    materiel: Wood
+    base: Heavy Wooden Shield
+    material: Darkwood
     enhancement: 1
     properties:
       - animated
   worn:
-    Periapt of Wisdom:
-      enhancement: +6
-    Belt of Giant Strength:
-      enhancement: +6
-    Cloak of Resistance:
-      enhancement: +5
+    - Periapt of Wisdom +6
+    - Belt of Giant Strength +6
+    - Cloak of Resistance +5
   weapons:
     - base: Lance
-      materiel: Bronzewood
+      material: Bronzewood
     - base: Longbow, Composite
 notes: ''
