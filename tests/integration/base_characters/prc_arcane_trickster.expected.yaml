@@ -155,6 +155,10 @@ skills:
     ranks: 4
     ability_mod: 4
     total: 8
+  Knowledge (The Planes):
+    ranks: 4
+    ability_mod: 4
+    total: 8
   Listen:
     ranks: 16
     ability_mod: 0

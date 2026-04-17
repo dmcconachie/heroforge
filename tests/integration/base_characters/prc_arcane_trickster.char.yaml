@@ -93,7 +93,7 @@ levels:
       Concentration: 1
       Spellcraft: 1
       Knowledge (Religion): 1
-      Knowledge (Planes): 1
+      Knowledge (The Planes): 1
   - level: 6
     class: Wizard
     hp_roll: 3
@@ -102,7 +102,7 @@ levels:
       Concentration: 1
       Spellcraft: 1
       Knowledge (Religion): 1
-      Knowledge (Planes): 1
+      Knowledge (The Planes): 1
       Decipher Script: 1
       Knowledge (Nature): 1
     feats:
@@ -117,7 +117,7 @@ levels:
       Concentration: 1
       Spellcraft: 1
       Knowledge (Religion): 1
-      Knowledge (Planes): 1
+      Knowledge (The Planes): 1
       Decipher Script: 1
       Knowledge (Nature): 1
   - level: 8
@@ -127,7 +127,7 @@ levels:
       Knowledge (Arcana): 1
       Concentration: 1
       Spellcraft: 1
-      Knowledge (Planes): 1
+      Knowledge (The Planes): 1
       Decipher Script: 1
       Knowledge (Nature): 1
       Knowledge (History): 1

@@ -107,7 +107,7 @@ levels:
       Spellcraft: 1
       Spot: 1
   - level: 9
-    class: Fighter
+    class: Hospitaler
     hp_roll: 5
     skill_ranks:
       Concentration: 1

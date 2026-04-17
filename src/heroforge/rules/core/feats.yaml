@@ -716,7 +716,7 @@ Magical Aptitude:
       bonus_type: untyped
       value: 2
       source_label: Magical Aptitude
-Many Shot:
+Manyshot:
   kind: passive
   source_book: PHB
   note: Fire multiple arrows in one attack action

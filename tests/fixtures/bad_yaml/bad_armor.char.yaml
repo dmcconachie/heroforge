@@ -1,0 +1,10 @@
+identity:
+  name: Test
+  race: Human
+ability_scores:
+  str: 10
+levels: []
+equipment:
+  armor:
+    base: Ful Plate
+    enhancement: 1

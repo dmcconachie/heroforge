@@ -1,0 +1,11 @@
+identity:
+  name: Test
+  race: Human
+ability_scores:
+  str: 10
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    skill_ranks:
+      Clmb: 4

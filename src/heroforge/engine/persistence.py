@@ -237,7 +237,6 @@ def load_character(
         data = yaml.safe_load(f)
 
     from heroforge.engine.character import (
-        BuffState,
         Character,
         CharacterLevel,
     )
@@ -247,7 +246,6 @@ def load_character(
         set_skill_ranks,
     )
     from heroforge.engine.templates import (
-        TemplateApplication,
         apply_template,
     )
 
@@ -270,23 +268,46 @@ def load_character(
     for ab, val in scores.items():
         c.set_ability_score(ab, int(val))
 
-    # Race — apply via registry if available
+    # Race
     race_name = identity.get("race", "")
     if race_name:
         race_defn = app_state.race_registry.get(race_name)
-        if race_defn:
-            apply_race(race_defn, c)
-        else:
-            c.race = race_name  # Unknown race: just store the name
+        if race_defn is None:
+            raise ValueError(
+                f"Unknown race {race_name!r} in {path}:identity.race"
+            )
+        apply_race(race_defn, c)
 
-    # Per-character-level entries (includes feats,
-    # skill ranks, and spells learned at each level)
+    # Per-character-level entries
+    _LEVEL_KEYS = {
+        "level",
+        "class",
+        "hp_roll",
+        "skill_ranks",
+        "feats",
+        "spells_learned",
+        "spells_replaced",
+        "ability_bump",
+        "inherent_bumps",
+    }
     for lv_dict in data.get("levels", []):
         char_level = int(lv_dict["level"])
+        bad = set(lv_dict) - _LEVEL_KEYS
+        if bad:
+            raise ValueError(
+                f"Unknown key(s) {bad} in {path}:levels[{char_level}]"
+            )
+        cls_name = lv_dict["class"]
+        if app_state.class_registry.get(cls_name) is None:
+            raise ValueError(
+                f"Unknown class {cls_name!r}"
+                f" in {path}:"
+                f"levels[{char_level}].class"
+            )
         c.levels.append(
             CharacterLevel(
                 character_level=char_level,
-                class_name=lv_dict["class"],
+                class_name=cls_name,
                 hp_roll=int(lv_dict.get("hp_roll", 0)),
                 skill_ranks=dict(lv_dict.get("skill_ranks", {})),
                 feats=list(lv_dict.get("feats", [])),
@@ -306,6 +327,12 @@ def load_character(
             if not feat_name:
                 continue
             feat_defn = app_state.feat_registry.get(feat_name)
+            if feat_defn is None:
+                raise ValueError(
+                    f"Unknown feat {feat_name!r}"
+                    f" in {path}:levels"
+                    f"[{lv.character_level}].feats"
+                )
             source = feat_dict.get("source", "")
             parameter = feat_dict.get("parameter")
             c.add_feat(
@@ -319,68 +346,72 @@ def load_character(
     # Skills — compute total ranks from level entries
     for lv in c.levels:
         for skill_name, pts in lv.skill_ranks.items():
+            if app_state.skill_registry.get(skill_name) is None:
+                raise ValueError(
+                    f"Unknown skill"
+                    f" {skill_name!r} in"
+                    f" {path}:levels"
+                    f"[{lv.character_level}]"
+                    f".skill_ranks"
+                )
             set_skill_ranks(
                 c,
                 skill_name,
                 c.skills.get(skill_name, 0) + pts,
             )
 
-    # Buffs — restore states and re-register definitions
+    # Buffs — restore states and re-register
+    _BUFF_KEYS = {
+        "active",
+        "caster_level",
+        "parameter",
+        "note",
+    }
     for buff_name, buff_dict in data.get("buffs", {}).items():
+        bad = set(buff_dict) - _BUFF_KEYS
+        if bad:
+            raise ValueError(
+                f"Unknown key(s) {bad} in {path}:buffs[{buff_name}]"
+            )
+        buff_defn = app_state.buff_registry.get(buff_name)
+        if buff_defn is None:
+            raise ValueError(
+                f"Unknown buff {buff_name!r} in {path}:buffs[{buff_name}]"
+            )
         active = bool(buff_dict.get("active", False))
         caster_level = buff_dict.get("caster_level")
         parameter = buff_dict.get("parameter")
         note = buff_dict.get("note", "")
-
-        # Look up definition and register if present
-        buff_defn = app_state.buff_registry.get(buff_name)
-        if buff_defn is not None:
-            cl_val = int(caster_level) if caster_level is not None else 0
-            pairs = buff_defn.pool_entries(cl_val, c)
-            c.register_buff_definition(buff_name, pairs)
-            if active:
-                c.toggle_buff(
-                    buff_name,
-                    True,
-                    caster_level=int(caster_level) if caster_level else None,
-                    parameter=int(parameter) if parameter else None,
-                )
-            else:
-                # Just store the state without activating
-                state = c._buff_states[buff_name]
-                if caster_level is not None:
-                    state.caster_level = int(caster_level)
-                if parameter is not None:
-                    state.parameter = int(parameter)
-                state.note = note
-        else:
-            # Unknown buff (e.g. from a splatbook not loaded):
-            # store a stub state so it round-trips cleanly
-            c._buff_states[buff_name] = BuffState(
-                active=active,
-                caster_level=int(caster_level) if caster_level else None,
-                parameter=int(parameter) if parameter else None,
-                note=note,
+        cl_val = int(caster_level) if caster_level is not None else 0
+        pairs = buff_defn.pool_entries(cl_val, c)
+        c.register_buff_definition(buff_name, pairs)
+        if active:
+            c.toggle_buff(
+                buff_name,
+                True,
+                caster_level=(int(caster_level) if caster_level else None),
+                parameter=(int(parameter) if parameter else None),
             )
+        else:
+            state = c._buff_states[buff_name]
+            if caster_level is not None:
+                state.caster_level = int(caster_level)
+            if parameter is not None:
+                state.parameter = int(parameter)
+            state.note = note
 
     # Templates
-    for tpl_dict in data.get("templates", []):
+    for i, tpl_dict in enumerate(data.get("templates", [])):
         tpl_name = tpl_dict.get("template", "")
         if not tpl_name:
             continue
         level = int(tpl_dict.get("level", 0))
         tpl_defn = app_state.template_registry.get(tpl_name)
-        if tpl_defn:
-            apply_template(tpl_defn, c, level=level)
-        else:
-            # Unknown template: record application without effects
-            c.templates.append(
-                TemplateApplication(
-                    template_name=tpl_name,
-                    level=level,
-                    note=tpl_dict.get("note", ""),
-                )
+        if tpl_defn is None:
+            raise ValueError(
+                f"Unknown template {tpl_name!r} in {path}:templates[{i}]"
             )
+        apply_template(tpl_defn, c, level=level)
 
     # DM overrides
     for ov_dict in data.get("dm_overrides", []):
@@ -389,7 +420,7 @@ def load_character(
             c.add_dm_override(target, note=ov_dict.get("note", ""))
 
     # Equipment — re-apply armor/shield/worn items
-    _load_equipment(data.get("equipment", {}), c, app_state)
+    _load_equipment(data.get("equipment", {}), c, app_state, path)
 
     # Notes
     c.notes = str(data.get("notes", ""))
@@ -401,6 +432,7 @@ def _load_equipment(
     eq_data: dict,
     c: "Character",
     app_state: "AppState",
+    path: Path,
 ) -> None:
     """Re-apply equipment from YAML data."""
     from heroforge.engine.equipment import (
@@ -412,28 +444,25 @@ def _load_equipment(
     # Armor
     armor_d = eq_data.get("armor")
     if armor_d:
-        # Support both old format (name key) and new
-        # (base key)
         base = armor_d.get("base") or armor_d.get("name", "")
         enh = int(armor_d.get("enhancement", 0))
         mat = armor_d.get("material", "")
         mw = bool(armor_d.get("masterwork", False))
         defn = app_state.armor_registry.get(base)
-        if defn is not None:
-            equip_armor(
-                c,
-                defn,
-                enh,
-                material=mat,
-                masterwork=mw,
+        if defn is None:
+            raise ValueError(
+                f"Unknown armor {base!r} in {path}:equipment.armor"
             )
-            # Preserve extra fields (properties, etc.)
-            props = armor_d.get("properties", [])
-            if props:
-                c.equipment["armor"]["properties"] = list(props)
-        else:
-            # Unknown armor: store raw for round-trip
-            c.equipment["armor"] = dict(armor_d)
+        equip_armor(
+            c,
+            defn,
+            enh,
+            material=mat,
+            masterwork=mw,
+        )
+        props = armor_d.get("properties", [])
+        if props:
+            c.equipment["armor"]["properties"] = list(props)
 
     # Shield
     shield_d = eq_data.get("shield")
@@ -443,29 +472,37 @@ def _load_equipment(
         mat = shield_d.get("material", "")
         mw = bool(shield_d.get("masterwork", False))
         defn = app_state.armor_registry.get(base)
-        if defn is not None:
-            equip_shield(
-                c,
-                defn,
-                enh,
-                material=mat,
-                masterwork=mw,
+        if defn is None:
+            raise ValueError(
+                f"Unknown shield {base!r} in {path}:equipment.shield"
             )
-            props = shield_d.get("properties", [])
-            if props:
-                c.equipment["shield"]["properties"] = list(props)
-        else:
-            c.equipment["shield"] = dict(shield_d)
+        equip_shield(
+            c,
+            defn,
+            enh,
+            material=mat,
+            masterwork=mw,
+        )
+        props = shield_d.get("properties", [])
+        if props:
+            c.equipment["shield"]["properties"] = list(props)
 
     # Worn magic items
     worn = eq_data.get("worn", [])
-    for item_name in worn:
+    for i, item_name in enumerate(worn):
         item_defn = app_state.magic_item_registry.get(item_name)
-        if item_defn is not None:
-            equip_item(c, item_defn)
-    # Always store the name list for round-trip
+        if item_defn is None:
+            raise ValueError(
+                f"Unknown item {item_name!r} in {path}:equipment.worn[{i}]"
+            )
+        equip_item(c, item_defn)
     if worn:
         c.equipment["worn"] = list(worn)
+
+    # Weapons (display only, store as-is)
+    weapons = eq_data.get("weapons", [])
+    if weapons:
+        c.equipment["weapons"] = list(weapons)
 
     # Weapons (display only, store as-is)
     weapons = eq_data.get("weapons", [])

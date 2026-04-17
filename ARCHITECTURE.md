@@ -603,6 +603,3 @@ Reusable components in `widgets/`: `LabeledField`,
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)
-- Unknown buff/race/class/feat/item names in
-  character YAML should raise errors during load,
-  not silently fall through

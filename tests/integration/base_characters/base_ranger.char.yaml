@@ -92,7 +92,7 @@ levels:
       Search: 1
       Climb: 1
     feats:
-      - name: Many Shot
+      - name: Manyshot
         source: class:Ranger
       - name: Weapon Focus
         source: character

@@ -1,0 +1,9 @@
+identity:
+  name: Test
+  race: Human
+ability_scores:
+  str: 10
+levels: []
+templates:
+  - template: Half-Celstial
+    level: 1

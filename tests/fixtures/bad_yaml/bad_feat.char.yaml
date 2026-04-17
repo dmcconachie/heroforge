@@ -1,0 +1,12 @@
+identity:
+  name: Test
+  race: Human
+ability_scores:
+  str: 10
+levels:
+  - level: 1
+    class: Fighter
+    hp_roll: 10
+    feats:
+      - name: Powre Attack
+        source: character

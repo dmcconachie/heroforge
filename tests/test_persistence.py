@@ -21,6 +21,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+import pytest
 import yaml
 
 if TYPE_CHECKING:
@@ -415,8 +416,8 @@ class TestLoadCharacter:
         loaded, _ = self._save_and_load(tmp_path, state.character)
         assert loaded.has_dm_override("Improved Precise Shot")
 
-    def test_unknown_race_stored_without_crash(self, tmp_path: Path) -> None:
-        """Unknown race name sets race but doesn't crash."""
+    def test_unknown_race_raises(self, tmp_path: Path) -> None:
+        """Unknown race name raises ValueError."""
         path = tmp_path / "unknown_race.char.yaml"
         path.write_text(
             "identity:\n  name: Test\n"
@@ -430,11 +431,11 @@ class TestLoadCharacter:
             "dm_overrides: []\nequipment: {}\n"
         )
         state = make_app_state()
-        loaded = load_character(path, state)
-        assert loaded.race == "Githzerai"
+        with pytest.raises(ValueError, match="Githzerai"):
+            load_character(path, state)
 
-    def test_unknown_buff_round_trips(self, tmp_path: Path) -> None:
-        """Unknown buff should round-trip cleanly."""
+    def test_unknown_buff_raises(self, tmp_path: Path) -> None:
+        """Unknown buff raises ValueError."""
         path = tmp_path / "splatbook.char.yaml"
         path.write_text(
             "identity:\n  name: X\n"
@@ -452,9 +453,8 @@ class TestLoadCharacter:
             "dm_overrides: []\nequipment: {}\n"
         )
         state = make_app_state()
-        loaded = load_character(path, state)
-        state_obj = loaded.get_buff_state("Homebrew Buff")
-        assert state_obj is not None
+        with pytest.raises(ValueError, match="Homebrew Buff"):
+            load_character(path, state)
 
 
 # ===========================================================================
@@ -747,7 +747,7 @@ class TestEquipmentRoundTrip:
         assert weapons[0]["enhancement"] == 1
 
     def test_unknown_armor_round_trips(self, tmp_path: Path) -> None:
-        """Unknown armor stores raw data."""
+        """Unknown armor raises ValueError."""
         data = {
             "identity": {"name": "Test"},
             "ability_scores": {},
@@ -762,5 +762,5 @@ class TestEquipmentRoundTrip:
         path = tmp_path / "unknown.char.yaml"
         with open(path, "w") as f:
             yaml.dump(data, f)
-        loaded = load_character(path, make_app_state())
-        assert "armor" in loaded.equipment
+        with pytest.raises(ValueError, match="Alien Carapace"):
+            load_character(path, make_app_state())
