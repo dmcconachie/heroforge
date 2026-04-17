@@ -20,7 +20,7 @@ What this module does NOT do:
   - No prerequisite checking (engine/prerequisites.py)
 
 Public API:
-  AbilityScore        — enum of the six ability scores
+  KnownAbility        — see rules/known.py
   ClassLevel          — named tuple (class_name, level, hp_rolls)
   BuffState           — persisted per-buff toggle state
   Character           — the main class
@@ -30,7 +30,6 @@ Public API:
 from __future__ import annotations
 
 import contextlib
-import enum
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
@@ -54,15 +53,6 @@ from heroforge.engine.stat import (
 # ---------------------------------------------------------------------------
 # Supporting types
 # ---------------------------------------------------------------------------
-
-
-class AbilityScore(enum.Enum):
-    STR = "str"
-    DEX = "dex"
-    CON = "con"
-    INT = "int"
-    WIS = "wis"
-    CHA = "cha"
 
 
 ABILITY_TO_SAVE = {

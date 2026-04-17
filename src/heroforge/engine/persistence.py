@@ -233,8 +233,10 @@ def yaml_dump(data: object, stream: object = None) -> str:
 def save_character(character: "Character", path: Path | str) -> None:
     """Serialize a Character to a .char.yaml file."""
     path = Path(path)
+    from heroforge.rules.schema import converter
+
     cf = _character_to_charfile(character)
-    data = _unstructure_charfile(cf)
+    data = converter.unstructure(cf)
     with open(path, "w") as f:
         yaml_dump(data, f)
 
@@ -358,123 +360,6 @@ def _armor_to_entry(
         material=(KnownMaterial(mat) if mat else None),
         properties=list(a.get("properties", [])),
     )
-
-
-def _unstructure_charfile(cf: CharFile) -> dict:
-    """Convert CharFile to a plain dict for YAML."""
-    d: dict = {}
-    d["identity"] = {
-        "name": cf.identity.name,
-        "player": cf.identity.player,
-        "race": str(cf.identity.race),
-        "alignment": str(cf.identity.alignment),
-        "deity": cf.identity.deity,
-    }
-    d["ability_scores"] = {str(k): v for k, v in cf.ability_scores.items()}
-
-    levels = []
-    for lv in cf.levels:
-        ld: dict = {
-            "level": lv.level,
-            "class": str(lv.class_),
-            "hp_roll": lv.hp_roll,
-        }
-        if lv.skill_ranks:
-            ld["skill_ranks"] = {str(k): v for k, v in lv.skill_ranks.items()}
-        if lv.feats:
-            ld["feats"] = [_feat_to_dict(f) for f in lv.feats]
-        if lv.spells_learned:
-            ld["spells_learned"] = lv.spells_learned
-        if lv.spells_replaced:
-            ld["spells_replaced"] = lv.spells_replaced
-        if lv.ability_bump is not None:
-            ld["ability_bump"] = str(lv.ability_bump)
-        if lv.inherent_bumps:
-            ld["inherent_bumps"] = {
-                str(k): v for k, v in lv.inherent_bumps.items()
-            }
-        levels.append(ld)
-    d["levels"] = levels
-
-    buffs: dict = {}
-    for name, be in cf.buffs.items():
-        bd: dict = {"active": be.active}
-        if be.caster_level is not None:
-            bd["caster_level"] = be.caster_level
-        if be.parameter is not None:
-            bd["parameter"] = be.parameter
-        if be.note:
-            bd["note"] = be.note
-        buffs[str(name)] = bd
-    d["buffs"] = buffs
-
-    templates: dict = {}
-    for name, te in cf.templates.items():
-        td: dict = {}
-        if te.level:
-            td["level"] = te.level
-        if te.note:
-            td["note"] = te.note
-        templates[str(name)] = td
-    d["templates"] = templates
-
-    d["dm_overrides"] = [
-        {"target": o.target, "note": o.note} for o in cf.dm_overrides
-    ]
-
-    eq: dict = {}
-    if cf.equipment.armor is not None:
-        a = cf.equipment.armor
-        ad: dict = {"base": str(a.base)}
-        if a.enhancement:
-            ad["enhancement"] = a.enhancement
-        if a.material:
-            ad["material"] = str(a.material)
-        if a.properties:
-            ad["properties"] = a.properties
-        eq["armor"] = ad
-    if cf.equipment.shield is not None:
-        s = cf.equipment.shield
-        sd: dict = {"base": str(s.base)}
-        if s.enhancement:
-            sd["enhancement"] = s.enhancement
-        if s.material:
-            sd["material"] = str(s.material)
-        if s.properties:
-            sd["properties"] = s.properties
-        eq["shield"] = sd
-    if cf.equipment.worn:
-        eq["worn"] = [str(n) for n in cf.equipment.worn]
-    if cf.equipment.weapons:
-        wl = []
-        for w in cf.equipment.weapons:
-            wd: dict = {}
-            if w.name:
-                wd["name"] = w.name
-            if w.base:
-                wd["base"] = str(w.base)
-            if w.enhancement:
-                wd["enhancement"] = w.enhancement
-            if w.material:
-                wd["material"] = str(w.material)
-            if w.properties:
-                wd["properties"] = w.properties
-            wl.append(wd)
-        eq["weapons"] = wl
-    d["equipment"] = eq
-
-    d["notes"] = cf.notes
-    return d
-
-
-def _feat_to_dict(f: FeatEntry) -> dict:
-    """Convert a FeatEntry to a plain dict."""
-    d: dict = {"name": str(f.name)}
-    if f.source:
-        d["source"] = f.source
-    if f.parameter is not None:
-        d["parameter"] = f.parameter
-    return d
 
 
 def _flatten_cattrs_error(e: Exception) -> str:

@@ -15,8 +15,14 @@ Public API:
 
 from __future__ import annotations
 
+from enum import StrEnum
+
 import cattrs
-from cattrs.gen import make_dict_structure_fn, override
+from cattrs.gen import (
+    make_dict_structure_fn,
+    make_dict_unstructure_fn,
+    override,
+)
 
 from heroforge.engine.classes import (
     ClassDefinition,
@@ -227,6 +233,31 @@ converter.register_structure_hook(
     KnownMaterial | None,
     _structure_material,
 )
+
+
+# ---------------------------------------------------
+# Unstructure hooks (CharFile → plain dict for YAML)
+# ---------------------------------------------------
+
+# StrEnums → plain str for YAML output.
+converter.register_unstructure_hook(
+    StrEnum,
+    lambda v: str(v),
+)
+
+# CharLevelEntry: Python "class_" → YAML "class".
+converter.register_unstructure_hook(
+    CharLevelEntry,
+    make_dict_unstructure_fn(
+        CharLevelEntry,
+        converter,
+        class_=override(rename="class"),
+    ),
+)
+
+# CharFile: use converter.unstructure() directly.
+# The default unstructure for dataclasses works;
+# StrEnum hook handles all enum→str conversion.
 
 # FeatEntry: no special hook needed beyond
 # forbid_extra_keys, but cattrs needs to know
