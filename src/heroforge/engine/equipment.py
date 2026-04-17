@@ -123,6 +123,9 @@ class ArmorRegistry:
             d for d in self._entries.values() if d.category in self._SHIELD_CATS
         ]
 
+    def all_entries(self) -> list[ArmorDefinition]:
+        return list(self._entries.values())
+
     def __len__(self) -> int:
         return len(self._entries)
 

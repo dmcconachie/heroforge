@@ -1,0 +1,58 @@
+"""
+skills.py
+SRD core skills.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreSkill(StrEnum):
+    APPRAISE = "Appraise"
+    BALANCE = "Balance"
+    BLUFF = "Bluff"
+    CLIMB = "Climb"
+    CONCENTRATION = "Concentration"
+    CRAFT = "Craft"
+    DECIPHER_SCRIPT = "Decipher Script"
+    DIPLOMACY = "Diplomacy"
+    DISABLE_DEVICE = "Disable Device"
+    DISGUISE = "Disguise"
+    ESCAPE_ARTIST = "Escape Artist"
+    FORGERY = "Forgery"
+    GATHER_INFORMATION = "Gather Information"
+    HANDLE_ANIMAL = "Handle Animal"
+    HEAL = "Heal"
+    HIDE = "Hide"
+    INTIMIDATE = "Intimidate"
+    JUMP = "Jump"
+    KNOWLEDGE_ARCANA = "Knowledge (Arcana)"
+    KNOWLEDGE_ARCHITECTURE_AND_ENGINEERING = (
+        "Knowledge (Architecture and Engineering)"
+    )
+    KNOWLEDGE_DUNGEONEERING = "Knowledge (Dungeoneering)"
+    KNOWLEDGE_GEOGRAPHY = "Knowledge (Geography)"
+    KNOWLEDGE_HISTORY = "Knowledge (History)"
+    KNOWLEDGE_LOCAL = "Knowledge (Local)"
+    KNOWLEDGE_NATURE = "Knowledge (Nature)"
+    KNOWLEDGE_NOBILITY_AND_ROYALTY = "Knowledge (Nobility and Royalty)"
+    KNOWLEDGE_RELIGION = "Knowledge (Religion)"
+    KNOWLEDGE_THE_PLANES = "Knowledge (The Planes)"
+    LISTEN = "Listen"
+    MOVE_SILENTLY = "Move Silently"
+    OPEN_LOCK = "Open Lock"
+    PERFORM = "Perform"
+    PROFESSION = "Profession"
+    RIDE = "Ride"
+    SEARCH = "Search"
+    SENSE_MOTIVE = "Sense Motive"
+    SLEIGHT_OF_HAND = "Sleight of Hand"
+    SPEAK_LANGUAGE = "Speak Language"
+    SPELLCRAFT = "Spellcraft"
+    SPOT = "Spot"
+    SURVIVAL = "Survival"
+    SWIM = "Swim"
+    TUMBLE = "Tumble"
+    USE_MAGIC_DEVICE = "Use Magic Device"
+    USE_ROPE = "Use Rope"
