@@ -28,6 +28,10 @@ from heroforge.engine.equipment import (
     ArmorDefinition,
     WeaponDefinition,
 )
+from heroforge.engine.persistence import (
+    ArmorSlotEntry,
+    CharLevelEntry,
+)
 from heroforge.engine.spells import SpellEntry
 
 converter = cattrs.Converter(forbid_extra_keys=True)
@@ -170,4 +174,42 @@ converter.register_structure_hook(
             ),
         ),
     ),
+)
+
+
+# ---------------------------------------------------
+# Character YAML schema hooks
+# ---------------------------------------------------
+
+# CharLevelEntry: YAML uses "class" but Python uses
+# "class_" (reserved word).
+converter.register_structure_hook(
+    CharLevelEntry,
+    make_dict_structure_fn(
+        CharLevelEntry,
+        converter,
+        class_=override(rename="class"),
+    ),
+)
+
+# EquipmentSection: armor/shield are optional
+# (None if absent). cattrs needs a hint for
+# ArmorSlotEntry | None.
+
+
+def _structure_armor_slot(val: object, _: type) -> ArmorSlotEntry | None:
+    if val is None:
+        return None
+    if isinstance(val, ArmorSlotEntry):
+        return val
+    if isinstance(val, dict):
+        if not val:
+            return None  # empty dict = no item
+        return converter.structure(val, ArmorSlotEntry)
+    return None
+
+
+converter.register_structure_hook(
+    ArmorSlotEntry | None,
+    _structure_armor_slot,
 )
