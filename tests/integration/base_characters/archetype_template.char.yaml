@@ -79,9 +79,8 @@ levels:
         source: fighter_bonus
 buffs: {}
 templates:
-  - template: Half-Dragon (Red)
+  Half-Dragon (Red):
     level: 5
-    note: ''
 dm_overrides: []
 equipment:
   armor: {}

@@ -267,7 +267,7 @@ levels:
       Climb: 1
       Heal: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

@@ -127,7 +127,7 @@ levels:
       Spot: 1
       Climb: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

@@ -251,7 +251,7 @@ levels:
       Search: 1
       Balance: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

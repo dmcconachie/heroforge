@@ -98,7 +98,7 @@ levels:
       Spellcraft: 1
       Knowledge (The Planes): 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

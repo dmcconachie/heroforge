@@ -269,7 +269,7 @@ levels:
       Knowledge (Religion): 1
       Search: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

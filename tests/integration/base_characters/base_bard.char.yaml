@@ -357,7 +357,7 @@ levels:
       5:
         - Nightmare
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

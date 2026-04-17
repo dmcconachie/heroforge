@@ -282,7 +282,7 @@ levels:
       9:
         - Time Stop
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

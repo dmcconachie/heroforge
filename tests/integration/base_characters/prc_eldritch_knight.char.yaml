@@ -194,7 +194,7 @@ levels:
       Swim: 1
       Ride: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

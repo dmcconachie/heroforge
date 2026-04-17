@@ -234,7 +234,7 @@ levels:
       - name: Lightning Reflexes
         source: character
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

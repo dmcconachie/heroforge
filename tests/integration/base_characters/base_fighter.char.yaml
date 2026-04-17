@@ -187,7 +187,7 @@ levels:
       - name: Quick Draw
         source: fighter_bonus
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

@@ -162,7 +162,7 @@ levels:
       - name: Quicken Spell
         source: character
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

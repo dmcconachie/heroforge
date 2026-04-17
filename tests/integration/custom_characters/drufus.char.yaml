@@ -246,7 +246,7 @@ levels:
       Spot: 4
       Use Magic Device: 5
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

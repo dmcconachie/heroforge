@@ -218,7 +218,7 @@ levels:
       - name: Combat Reflexes
         source: character
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

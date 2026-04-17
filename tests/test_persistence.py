@@ -52,6 +52,10 @@ def make_app_state() -> AppState:
     state = AppState()
     state.load_rules()
     state.new_character()
+    # Set required fields so save/load works
+    c = state.character
+    c.alignment = "neutral"
+    apply_race(state.race_registry.require("Human"), c)
     return state
 
 
@@ -427,7 +431,7 @@ class TestLoadCharacter:
             " {str: 10, dex: 10, con: 10,"
             " int: 10, wis: 10, cha: 10}\n"
             "levels: []\nbuffs: {}\n"
-            "templates: []\n"
+            "templates: {}\n"
             "dm_overrides: []\nequipment: {}\n"
         )
         state = make_app_state()
@@ -449,7 +453,7 @@ class TestLoadCharacter:
             "  Homebrew Buff:\n"
             "    active: true\n"
             "    caster_level: 8\n"
-            "templates: []\n"
+            "templates: {}\n"
             "dm_overrides: []\nequipment: {}\n"
         )
         state = make_app_state()
@@ -645,7 +649,11 @@ class TestAbilityBumpRoundTrip:
         Files without ability_bump / inherent_bumps
         load cleanly (fields default to None / [])."""
         data = {
-            "identity": {"name": "Old Char"},
+            "identity": {
+                "name": "Old Char",
+                "race": "Human",
+                "alignment": "neutral",
+            },
             "ability_scores": {"str": 14},
             "levels": [
                 {
@@ -733,7 +741,7 @@ class TestEquipmentRoundTrip:
             {
                 "base": "Lance",
                 "enhancement": 1,
-                "material": "Bronzewood",
+                "material": "Darkwood",
                 "properties": ["Keen"],
             }
         ]

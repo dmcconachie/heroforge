@@ -33,6 +33,7 @@ from heroforge.engine.persistence import (
     CharLevelEntry,
 )
 from heroforge.engine.spells import SpellEntry
+from heroforge.rules.known import KnownMaterial
 
 converter = cattrs.Converter(forbid_extra_keys=True)
 
@@ -181,8 +182,7 @@ converter.register_structure_hook(
 # Character YAML schema hooks
 # ---------------------------------------------------
 
-# CharLevelEntry: YAML uses "class" but Python uses
-# "class_" (reserved word).
+# CharLevelEntry: YAML "class" → Python "class_".
 converter.register_structure_hook(
     CharLevelEntry,
     make_dict_structure_fn(
@@ -192,9 +192,7 @@ converter.register_structure_hook(
     ),
 )
 
-# EquipmentSection: armor/shield are optional
-# (None if absent). cattrs needs a hint for
-# ArmorSlotEntry | None.
+# ArmorSlotEntry | None: empty dict = no item.
 
 
 def _structure_armor_slot(val: object, _: type) -> ArmorSlotEntry | None:
@@ -204,7 +202,7 @@ def _structure_armor_slot(val: object, _: type) -> ArmorSlotEntry | None:
         return val
     if isinstance(val, dict):
         if not val:
-            return None  # empty dict = no item
+            return None
         return converter.structure(val, ArmorSlotEntry)
     return None
 
@@ -213,3 +211,24 @@ converter.register_structure_hook(
     ArmorSlotEntry | None,
     _structure_armor_slot,
 )
+
+# KnownMaterial | None: absent = None.
+
+
+def _structure_material(val: object, _: type) -> KnownMaterial | None:
+    if val is None or val == "":
+        return None
+    if isinstance(val, KnownMaterial):
+        return val
+    return KnownMaterial(val)
+
+
+converter.register_structure_hook(
+    KnownMaterial | None,
+    _structure_material,
+)
+
+# FeatEntry: no special hook needed beyond
+# forbid_extra_keys, but cattrs needs to know
+# how to structure KnownFeat from strings
+# (handled automatically by StrEnum).

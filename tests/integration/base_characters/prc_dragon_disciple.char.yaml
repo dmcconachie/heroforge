@@ -126,7 +126,7 @@ levels:
       - name: Blind-Fight
         source: character
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

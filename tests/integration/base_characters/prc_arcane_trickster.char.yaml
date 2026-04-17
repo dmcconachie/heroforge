@@ -277,7 +277,7 @@ levels:
       - name: Silent Spell
         source: character
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

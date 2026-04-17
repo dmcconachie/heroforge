@@ -60,6 +60,32 @@ def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:
     return StrEnum(name, members)
 
 
+# --- Fixed enums (not from YAML) -------------------
+
+
+class KnownAlignment(StrEnum):
+    LAWFUL_GOOD = "lawful_good"
+    LAWFUL_NEUTRAL = "lawful_neutral"
+    LAWFUL_EVIL = "lawful_evil"
+    NEUTRAL_GOOD = "neutral_good"
+    NEUTRAL = "neutral"
+    NEUTRAL_EVIL = "neutral_evil"
+    CHAOTIC_GOOD = "chaotic_good"
+    CHAOTIC_NEUTRAL = "chaotic_neutral"
+    CHAOTIC_EVIL = "chaotic_evil"
+
+
+class KnownAbility(StrEnum):
+    STR = "str"
+    DEX = "dex"
+    CON = "con"
+    INT = "int"
+    WIS = "wis"
+    CHA = "cha"
+
+
+# --- Combined enums from rule sources --------------
+
 KnownRace = _combine("KnownRace", KnownCoreRace)
 KnownClass = _combine("KnownClass", KnownCoreClass)
 KnownFeat = _combine("KnownFeat", KnownCoreFeat)

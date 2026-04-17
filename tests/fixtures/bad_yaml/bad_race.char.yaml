@@ -1,6 +1,7 @@
 identity:
   name: Test
   race: Dorf
+  alignment: neutral
 ability_scores:
   str: 10
 levels: []

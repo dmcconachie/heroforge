@@ -166,7 +166,7 @@ buffs:
     caster_level: 12
     active: true
 templates:
-  - template: Half-Celestial
+  Half-Celestial:
     level: 6
 dm_overrides: []
 equipment:
@@ -187,7 +187,7 @@ equipment:
     - Cloak of Resistance +5
   weapons:
     - base: Lance
-      material: Bronzewood
+      # material: Bronzewood
       enhancement: 1
     - base: Longbow, Composite
 notes: ''

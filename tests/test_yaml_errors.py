@@ -58,7 +58,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_race.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"identity\.race",
+            match=r"attribute race",
         ):
             load_character(path, app_state)
 
@@ -74,7 +74,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_feat.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"levels\[1\].*feats",
+            match=r"KnownFeat",
         ):
             load_character(path, app_state)
 
@@ -90,7 +90,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_buff.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"buffs\[barkskin\]",
+            match=r"KnownBuff",
         ):
             load_character(path, app_state)
 
@@ -106,7 +106,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_template.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"templates\[0\]",
+            match=r"KnownTemplate",
         ):
             load_character(path, app_state)
 
@@ -122,7 +122,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_armor.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"equipment\.armor",
+            match=r"KnownArmor",
         ):
             load_character(path, app_state)
 
@@ -146,7 +146,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_worn.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"equipment\.worn\[0\]",
+            match=r"KnownMagicItem",
         ):
             load_character(path, app_state)
 
@@ -162,7 +162,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_skill.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"levels\[1\].*skill_ranks",
+            match=r"KnownSkill",
         ):
             load_character(path, app_state)
 
@@ -178,7 +178,7 @@ class TestUnknownNames:
         path = BAD_YAML / "bad_class.char.yaml"
         with pytest.raises(
             ValueError,
-            match=r"levels\[1\]\.class",
+            match=r"KnownClass",
         ):
             load_character(path, app_state)
 

@@ -322,7 +322,7 @@ levels:
       Gather Information: 1
       Appraise: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

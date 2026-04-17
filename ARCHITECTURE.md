@@ -603,3 +603,13 @@ Reusable components in `widgets/`: `LabeledField`,
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)
+- Buff registry conflates three distinct concepts:
+  transitory effects (spells, conditions, rage),
+  always-on item effects (Amulet of Health), and
+  single-use permanent effects (Tome of
+  Understanding). Only transitory effects belong
+  in the buff system. Always-on items should use
+  equipment.equip_item() and consumed items should
+  use CharacterLevel.inherent_bumps. See
+  rules/core/buffs.py for the full list of
+  entries that need reclassification.

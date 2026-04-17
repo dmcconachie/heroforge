@@ -176,7 +176,7 @@ levels:
 buffs:
   Mighty Rage:
     active: true
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

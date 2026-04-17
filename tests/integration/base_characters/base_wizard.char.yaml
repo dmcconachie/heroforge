@@ -247,7 +247,7 @@ levels:
       - name: Craft Wondrous Item
         source: wizard_bonus
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

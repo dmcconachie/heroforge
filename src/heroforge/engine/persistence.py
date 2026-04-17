@@ -24,6 +24,21 @@ from typing import TYPE_CHECKING
 
 import yaml
 
+from heroforge.rules.known import (
+    KnownAbility,
+    KnownAlignment,
+    KnownArmor,
+    KnownBuff,
+    KnownClass,
+    KnownFeat,
+    KnownMagicItem,
+    KnownMaterial,
+    KnownRace,
+    KnownSkill,
+    KnownTemplate,
+    KnownWeapon,
+)
+
 if TYPE_CHECKING:
     from heroforge.engine.character import (
         Character,
@@ -33,6 +48,10 @@ if TYPE_CHECKING:
 
 # -----------------------------------------------------------
 # YAML schema dataclasses (parse/serialize only)
+#
+# Every string that represents a known name uses a
+# StrEnum. cattrs validates at parse time — invalid
+# names are rejected automatically.
 # -----------------------------------------------------------
 
 
@@ -40,26 +59,42 @@ if TYPE_CHECKING:
 class CharIdentity:
     """identity: section of .char.yaml."""
 
-    name: str = ""
+    name: str
+    race: KnownRace
+    alignment: KnownAlignment
     player: str = ""
-    race: str = ""
-    alignment: str = ""
     deity: str = ""
+
+
+@dataclass
+class FeatEntry:
+    """
+    .char.yaml feat entry within a level.
+
+    A list (not dict) because feats like Toughness
+    can be taken multiple times, and parameterized
+    feats (Weapon Focus) can appear with different
+    parameters at the same level.
+    """
+
+    name: KnownFeat
+    source: str = ""
+    parameter: str | None = None
 
 
 @dataclass
 class CharLevelEntry:
     """.char.yaml level entry."""
 
-    level: int = 0
-    class_: str = ""  # "class" in YAML
+    level: int
+    class_: KnownClass  # "class" in YAML
     hp_roll: int = 0
-    skill_ranks: dict[str, int] = field(default_factory=dict)
-    feats: list[dict] = field(default_factory=list)
+    skill_ranks: dict[KnownSkill, int] = field(default_factory=dict)
+    feats: list[FeatEntry] = field(default_factory=list)
     spells_learned: dict = field(default_factory=dict)
     spells_replaced: list[dict] = field(default_factory=list)
-    ability_bump: str | None = None
-    inherent_bumps: list[dict] = field(default_factory=list)
+    ability_bump: KnownAbility | None = None
+    inherent_bumps: dict[KnownAbility, int] = field(default_factory=dict)
 
 
 @dataclass
@@ -74,16 +109,25 @@ class BuffEntry:
 
 @dataclass
 class TemplateEntry:
-    """.char.yaml template entry."""
+    """
+    .char.yaml template entry.
 
-    template: str = ""
+    The template name is the dict key in
+    CharFile.templates, not a field here.
+    """
+
     level: int = 0
     note: str = ""
 
 
 @dataclass
 class DmOverrideEntry:
-    """.char.yaml DM override entry."""
+    """
+    .char.yaml DM override entry.
+
+    TODO: type the target field once DM overrides
+    are fully implemented.
+    """
 
     target: str = ""
     note: str = ""
@@ -93,23 +137,23 @@ class DmOverrideEntry:
 class ArmorSlotEntry:
     """.char.yaml armor/shield slot."""
 
-    base: str = ""
+    base: KnownArmor
     enhancement: int = 0
-    material: str = ""
+    material: KnownMaterial | None = None
     masterwork: bool = False
     properties: list[str] = field(default_factory=list)
-    name: str = ""  # old format compat
+    name: str = ""  # display name override
 
 
 @dataclass
 class WeaponSlotEntry:
     """.char.yaml weapon entry."""
 
-    base: str = ""
+    base: KnownWeapon
     enhancement: int = 0
-    material: str = ""
+    material: KnownMaterial | None = None
     properties: list[str] = field(default_factory=list)
-    name: str = ""
+    name: str = ""  # display name override
 
 
 @dataclass
@@ -118,7 +162,7 @@ class EquipmentSection:
 
     armor: ArmorSlotEntry | None = None
     shield: ArmorSlotEntry | None = None
-    worn: list[str] = field(default_factory=list)
+    worn: list[KnownMagicItem] = field(default_factory=list)
     weapons: list[WeaponSlotEntry] = field(default_factory=list)
 
 
@@ -126,11 +170,11 @@ class EquipmentSection:
 class CharFile:
     """Top-level .char.yaml schema."""
 
-    identity: CharIdentity = field(default_factory=CharIdentity)
-    ability_scores: dict[str, int] = field(default_factory=dict)
+    identity: CharIdentity
+    ability_scores: dict[KnownAbility, int] = field(default_factory=dict)
     levels: list[CharLevelEntry] = field(default_factory=list)
-    buffs: dict[str, BuffEntry] = field(default_factory=dict)
-    templates: list[TemplateEntry] = field(default_factory=list)
+    buffs: dict[KnownBuff, BuffEntry] = field(default_factory=dict)
+    templates: dict[KnownTemplate, TemplateEntry] = field(default_factory=dict)
     dm_overrides: list[DmOverrideEntry] = field(default_factory=list)
     equipment: EquipmentSection = field(default_factory=EquipmentSection)
     notes: str = ""
@@ -201,81 +245,75 @@ def _character_to_charfile(
     """Build a CharFile from a Character."""
     identity = CharIdentity(
         name=c.name,
+        race=KnownRace(c.race),
+        alignment=KnownAlignment(c.alignment),
         player=getattr(c, "player", ""),
-        race=c.race,
-        alignment=c.alignment,
         deity=c.deity,
     )
 
     levels = []
     for lv in c.levels:
+        feats = [
+            FeatEntry(
+                name=KnownFeat(f["name"]),
+                source=f.get("source", ""),
+                parameter=f.get("parameter"),
+            )
+            for f in lv.feats
+            if f.get("name")
+        ]
+        sr = {KnownSkill(k): v for k, v in sorted(lv.skill_ranks.items())}
+        ib = {KnownAbility(d["ability"]): d["value"] for d in lv.inherent_bumps}
         levels.append(
             CharLevelEntry(
                 level=lv.character_level,
-                class_=lv.class_name,
+                class_=KnownClass(lv.class_name),
                 hp_roll=lv.hp_roll,
-                skill_ranks=dict(sorted(lv.skill_ranks.items())),
-                feats=[
-                    {k: v for k, v in f.items() if v is not None}
-                    for f in lv.feats
-                ],
-                spells_learned=dict(lv.spells_learned),
-                spells_replaced=list(lv.spells_replaced),
+                skill_ranks=sr,
+                feats=feats,
+                spells_learned=lv.spells_learned,
+                spells_replaced=lv.spells_replaced,
                 ability_bump=lv.ability_bump,
-                inherent_bumps=list(lv.inherent_bumps),
+                inherent_bumps=ib,
             )
         )
 
-    buffs = {}
+    buffs: dict[KnownBuff, BuffEntry] = {}
     for name, state in sorted(c._buff_states.items()):
-        buffs[name] = BuffEntry(
+        buffs[KnownBuff(name)] = BuffEntry(
             active=state.active,
             caster_level=state.caster_level,
             parameter=state.parameter,
             note=state.note,
         )
 
-    templates = [
-        TemplateEntry(
-            template=app.template_name,
+    templates: dict[KnownTemplate, TemplateEntry] = {}
+    for app in c.templates:
+        templates[KnownTemplate(app.template_name)] = TemplateEntry(
             level=app.level,
             note=app.note,
         )
-        for app in c.templates
-    ]
 
     dm_overrides = [
         DmOverrideEntry(target=ov.target, note=ov.note) for ov in c.dm_overrides
     ]
 
     eq = c.equipment
-    armor = None
-    if "armor" in eq:
-        a = eq["armor"]
-        armor = ArmorSlotEntry(
-            base=a.get("name", ""),
-            enhancement=a.get("enhancement", 0),
-            material=a.get("material", ""),
-            properties=list(a.get("properties", [])),
-        )
-    shield = None
-    if "shield" in eq:
-        s = eq["shield"]
-        shield = ArmorSlotEntry(
-            base=s.get("name", ""),
-            enhancement=s.get("enhancement", 0),
-            material=s.get("material", ""),
-            properties=list(s.get("properties", [])),
-        )
-    worn = list(eq.get("worn", []))
+    armor = _armor_to_entry(eq.get("armor"))
+    shield = _armor_to_entry(eq.get("shield"))
+    worn = [KnownMagicItem(n) for n in eq.get("worn", [])]
     weapons = []
     for w in eq.get("weapons", []):
-        if isinstance(w, dict):
+        if isinstance(w, dict) and w.get("base"):
             weapons.append(
                 WeaponSlotEntry(
-                    base=w.get("base", ""),
+                    base=KnownWeapon(w["base"]),
                     enhancement=w.get("enhancement", 0),
-                    material=w.get("material", ""),
+                    material=(
+                        KnownMaterial(w["material"])
+                        if w.get("material")
+                        else None
+                    ),
                     properties=list(w.get("properties", [])),
                     name=w.get("name", ""),
                 )
@@ -284,7 +322,7 @@ def _character_to_charfile(
     return CharFile(
         identity=identity,
         ability_scores={
-            ab: c._ability_scores.get(ab, 10)
+            KnownAbility(ab): c._ability_scores.get(ab, 10)
             for ab in (
                 "str",
                 "dex",
@@ -308,39 +346,53 @@ def _character_to_charfile(
     )
 
 
+def _armor_to_entry(
+    a: dict | None,
+) -> ArmorSlotEntry | None:
+    if not a:
+        return None
+    mat = a.get("material", "")
+    return ArmorSlotEntry(
+        base=KnownArmor(a.get("name", "")),
+        enhancement=a.get("enhancement", 0),
+        material=(KnownMaterial(mat) if mat else None),
+        properties=list(a.get("properties", [])),
+    )
+
+
 def _unstructure_charfile(cf: CharFile) -> dict:
     """Convert CharFile to a plain dict for YAML."""
     d: dict = {}
-    d["identity"] = _nz_dict(
-        {
-            "name": cf.identity.name,
-            "player": cf.identity.player,
-            "race": cf.identity.race,
-            "alignment": cf.identity.alignment,
-            "deity": cf.identity.deity,
-        }
-    )
-    d["ability_scores"] = cf.ability_scores
+    d["identity"] = {
+        "name": cf.identity.name,
+        "player": cf.identity.player,
+        "race": str(cf.identity.race),
+        "alignment": str(cf.identity.alignment),
+        "deity": cf.identity.deity,
+    }
+    d["ability_scores"] = {str(k): v for k, v in cf.ability_scores.items()}
 
     levels = []
     for lv in cf.levels:
         ld: dict = {
             "level": lv.level,
-            "class": lv.class_,
+            "class": str(lv.class_),
             "hp_roll": lv.hp_roll,
         }
         if lv.skill_ranks:
-            ld["skill_ranks"] = lv.skill_ranks
+            ld["skill_ranks"] = {str(k): v for k, v in lv.skill_ranks.items()}
         if lv.feats:
-            ld["feats"] = lv.feats
+            ld["feats"] = [_feat_to_dict(f) for f in lv.feats]
         if lv.spells_learned:
             ld["spells_learned"] = lv.spells_learned
         if lv.spells_replaced:
             ld["spells_replaced"] = lv.spells_replaced
-        if lv.ability_bump:
-            ld["ability_bump"] = lv.ability_bump
+        if lv.ability_bump is not None:
+            ld["ability_bump"] = str(lv.ability_bump)
         if lv.inherent_bumps:
-            ld["inherent_bumps"] = lv.inherent_bumps
+            ld["inherent_bumps"] = {
+                str(k): v for k, v in lv.inherent_bumps.items()
+            }
         levels.append(ld)
     d["levels"] = levels
 
@@ -353,46 +405,46 @@ def _unstructure_charfile(cf: CharFile) -> dict:
             bd["parameter"] = be.parameter
         if be.note:
             bd["note"] = be.note
-        buffs[name] = bd
+        buffs[str(name)] = bd
     d["buffs"] = buffs
 
-    d["templates"] = [
-        _nz_dict(
-            {
-                "template": t.template,
-                "level": t.level,
-                "note": t.note,
-            }
-        )
-        for t in cf.templates
-    ]
+    templates: dict = {}
+    for name, te in cf.templates.items():
+        td: dict = {}
+        if te.level:
+            td["level"] = te.level
+        if te.note:
+            td["note"] = te.note
+        templates[str(name)] = td
+    d["templates"] = templates
+
     d["dm_overrides"] = [
-        _nz_dict({"target": o.target, "note": o.note}) for o in cf.dm_overrides
+        {"target": o.target, "note": o.note} for o in cf.dm_overrides
     ]
 
     eq: dict = {}
     if cf.equipment.armor is not None:
         a = cf.equipment.armor
-        ad: dict = {"base": a.base}
+        ad: dict = {"base": str(a.base)}
         if a.enhancement:
             ad["enhancement"] = a.enhancement
         if a.material:
-            ad["material"] = a.material
+            ad["material"] = str(a.material)
         if a.properties:
             ad["properties"] = a.properties
         eq["armor"] = ad
     if cf.equipment.shield is not None:
         s = cf.equipment.shield
-        sd: dict = {"base": s.base}
+        sd: dict = {"base": str(s.base)}
         if s.enhancement:
             sd["enhancement"] = s.enhancement
         if s.material:
-            sd["material"] = s.material
+            sd["material"] = str(s.material)
         if s.properties:
             sd["properties"] = s.properties
         eq["shield"] = sd
     if cf.equipment.worn:
-        eq["worn"] = cf.equipment.worn
+        eq["worn"] = [str(n) for n in cf.equipment.worn]
     if cf.equipment.weapons:
         wl = []
         for w in cf.equipment.weapons:
@@ -400,11 +452,11 @@ def _unstructure_charfile(cf: CharFile) -> dict:
             if w.name:
                 wd["name"] = w.name
             if w.base:
-                wd["base"] = w.base
+                wd["base"] = str(w.base)
             if w.enhancement:
                 wd["enhancement"] = w.enhancement
             if w.material:
-                wd["material"] = w.material
+                wd["material"] = str(w.material)
             if w.properties:
                 wd["properties"] = w.properties
             wl.append(wd)
@@ -415,10 +467,13 @@ def _unstructure_charfile(cf: CharFile) -> dict:
     return d
 
 
-def _nz_dict(d: dict) -> dict:
-    """
-    Return dict with falsy values kept (for
-    identity fields like empty strings)."""
+def _feat_to_dict(f: FeatEntry) -> dict:
+    """Convert a FeatEntry to a plain dict."""
+    d: dict = {"name": str(f.name)}
+    if f.source:
+        d["source"] = f.source
+    if f.parameter is not None:
+        d["parameter"] = f.parameter
     return d
 
 
@@ -450,8 +505,8 @@ def load_character(
     """
     Deserialize a .char.yaml file into a Character.
 
-    Raises ValueError on unknown keys (via cattrs)
-    or unknown registry names.
+    Raises ValueError on unknown keys or names
+    (via cattrs StrEnum validation).
     """
     from heroforge.rules.schema import converter
 
@@ -459,14 +514,12 @@ def load_character(
     with open(path) as f:
         raw = yaml.safe_load(f) or {}
 
-    # --- Structural parse via cattrs ---------------
     try:
         cf = converter.structure(raw, CharFile)
     except Exception as e:
         detail = _flatten_cattrs_error(e)
         raise ValueError(f"Invalid YAML in {path}: {detail}") from e
 
-    # --- Build Character from parsed schema --------
     from heroforge.engine.character import (
         Character,
         CharacterLevel,
@@ -488,59 +541,57 @@ def load_character(
     # Identity
     c.name = cf.identity.name
     c.player = cf.identity.player
-    c.alignment = cf.identity.alignment
+    c.alignment = str(cf.identity.alignment)
     c.deity = cf.identity.deity
 
     # Ability scores
     for ab, val in cf.ability_scores.items():
-        c.set_ability_score(ab, val)
+        c.set_ability_score(str(ab), val)
 
-    # Race
-    if cf.identity.race:
-        race_defn = app_state.race_registry.get(cf.identity.race)
-        if race_defn is None:
-            raise ValueError(
-                f"Unknown race {cf.identity.race!r} in {path}:identity.race"
-            )
-        apply_race(race_defn, c)
+    # Race (validated by KnownRace)
+    race_defn = app_state.race_registry.get(str(cf.identity.race))
+    apply_race(race_defn, c)
 
-    # Levels
+    # Levels (class validated by KnownClass)
     for lv in cf.levels:
-        if app_state.class_registry.get(lv.class_) is None:
-            raise ValueError(
-                f"Unknown class {lv.class_!r}"
-                f" in {path}:"
-                f"levels[{lv.level}].class"
-            )
         c.levels.append(
             CharacterLevel(
                 character_level=lv.level,
-                class_name=lv.class_,
+                class_name=str(lv.class_),
                 hp_roll=lv.hp_roll,
-                skill_ranks=dict(lv.skill_ranks),
-                feats=list(lv.feats),
-                spells_learned=dict(lv.spells_learned),
-                spells_replaced=list(lv.spells_replaced),
-                ability_bump=lv.ability_bump,
-                inherent_bumps=list(lv.inherent_bumps),
+                skill_ranks={str(k): v for k, v in lv.skill_ranks.items()},
+                feats=[
+                    {
+                        "name": str(f.name),
+                        "source": f.source,
+                        "parameter": f.parameter,
+                    }
+                    for f in lv.feats
+                ],
+                spells_learned=lv.spells_learned,
+                spells_replaced=lv.spells_replaced,
+                ability_bump=(
+                    str(lv.ability_bump) if lv.ability_bump else None
+                ),
+                inherent_bumps=[
+                    {
+                        "ability": str(ab),
+                        "value": v,
+                    }
+                    for ab, v in lv.inherent_bumps.items()
+                ],
             )
         )
     if c.levels:
         c._invalidate_class_stats()
 
-    # Feats
+    # Feats (validated by KnownFeat)
     for lv in c.levels:
         for feat_dict in lv.feats:
             feat_name = feat_dict.get("name", "")
             if not feat_name:
                 continue
             feat_defn = app_state.feat_registry.get(feat_name)
-            if feat_defn is None:
-                raise ValueError(
-                    f"Unknown feat {feat_name!r}"
-                    f" in {path}:levels"
-                    f"[{lv.character_level}].feats"
-                )
             c.add_feat(
                 feat_name,
                 feat_defn,
@@ -549,57 +600,40 @@ def load_character(
                 parameter=feat_dict.get("parameter"),
             )
 
-    # Skills
+    # Skills (validated by KnownSkill)
     for lv in c.levels:
         for skill_name, pts in lv.skill_ranks.items():
-            if app_state.skill_registry.get(skill_name) is None:
-                raise ValueError(
-                    f"Unknown skill"
-                    f" {skill_name!r} in"
-                    f" {path}:levels"
-                    f"[{lv.character_level}]"
-                    f".skill_ranks"
-                )
             set_skill_ranks(
                 c,
                 skill_name,
                 c.skills.get(skill_name, 0) + pts,
             )
 
-    # Buffs
+    # Buffs (validated by KnownBuff)
     for buff_name, be in cf.buffs.items():
-        buff_defn = app_state.buff_registry.get(buff_name)
-        if buff_defn is None:
-            raise ValueError(
-                f"Unknown buff {buff_name!r} in {path}:buffs[{buff_name}]"
-            )
+        name = str(buff_name)
+        buff_defn = app_state.buff_registry.get(name)
         cl_val = be.caster_level if be.caster_level is not None else 0
         pairs = buff_defn.pool_entries(cl_val, c)
-        c.register_buff_definition(buff_name, pairs)
+        c.register_buff_definition(name, pairs)
         if be.active:
             c.toggle_buff(
-                buff_name,
+                name,
                 True,
                 caster_level=be.caster_level,
                 parameter=be.parameter,
             )
         else:
-            state = c._buff_states[buff_name]
+            state = c._buff_states[name]
             if be.caster_level is not None:
                 state.caster_level = be.caster_level
             if be.parameter is not None:
                 state.parameter = be.parameter
             state.note = be.note
 
-    # Templates
-    for i, te in enumerate(cf.templates):
-        if not te.template:
-            continue
-        tpl_defn = app_state.template_registry.get(te.template)
-        if tpl_defn is None:
-            raise ValueError(
-                f"Unknown template {te.template!r} in {path}:templates[{i}]"
-            )
+    # Templates (validated by KnownTemplate)
+    for tpl_name, te in cf.templates.items():
+        tpl_defn = app_state.template_registry.get(str(tpl_name))
         apply_template(tpl_defn, c, level=te.level)
 
     # DM overrides
@@ -608,7 +642,7 @@ def load_character(
             c.add_dm_override(ov.target, note=ov.note)
 
     # Equipment
-    _load_equipment(cf.equipment, c, app_state, path)
+    _load_equipment(cf.equipment, c, app_state)
 
     # Notes
     c.notes = cf.notes
@@ -620,7 +654,6 @@ def _load_equipment(
     eq: EquipmentSection,
     c: "Character",
     app_state: "AppState",
-    path: Path,
 ) -> None:
     """Apply equipment from parsed schema."""
     from heroforge.engine.equipment import (
@@ -630,48 +663,36 @@ def _load_equipment(
     )
 
     if eq.armor is not None:
-        base = eq.armor.base or eq.armor.name
+        base = str(eq.armor.base or eq.armor.name)
         defn = app_state.armor_registry.get(base)
-        if defn is None:
-            raise ValueError(
-                f"Unknown armor {base!r} in {path}:equipment.armor"
-            )
         equip_armor(
             c,
             defn,
             eq.armor.enhancement,
-            material=eq.armor.material,
+            material=(str(eq.armor.material) if eq.armor.material else ""),
             masterwork=eq.armor.masterwork,
         )
         if eq.armor.properties:
             c.equipment["armor"]["properties"] = list(eq.armor.properties)
 
     if eq.shield is not None:
-        base = eq.shield.base or eq.shield.name
+        base = str(eq.shield.base or eq.shield.name)
         defn = app_state.armor_registry.get(base)
-        if defn is None:
-            raise ValueError(
-                f"Unknown shield {base!r} in {path}:equipment.shield"
-            )
         equip_shield(
             c,
             defn,
             eq.shield.enhancement,
-            material=eq.shield.material,
+            material=(str(eq.shield.material) if eq.shield.material else ""),
             masterwork=eq.shield.masterwork,
         )
         if eq.shield.properties:
             c.equipment["shield"]["properties"] = list(eq.shield.properties)
 
-    for i, item_name in enumerate(eq.worn):
-        item_defn = app_state.magic_item_registry.get(item_name)
-        if item_defn is None:
-            raise ValueError(
-                f"Unknown item {item_name!r} in {path}:equipment.worn[{i}]"
-            )
+    for item_name in eq.worn:
+        item_defn = app_state.magic_item_registry.get(str(item_name))
         equip_item(c, item_defn)
     if eq.worn:
-        c.equipment["worn"] = list(eq.worn)
+        c.equipment["worn"] = [str(n) for n in eq.worn]
 
     if eq.weapons:
         c.equipment["weapons"] = [

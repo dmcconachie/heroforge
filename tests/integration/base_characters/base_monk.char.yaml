@@ -203,7 +203,7 @@ levels:
       Spot: 1
       Listen: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

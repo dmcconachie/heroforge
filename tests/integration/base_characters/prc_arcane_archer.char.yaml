@@ -180,7 +180,7 @@ levels:
       Move Silently: 1
       Survival: 1
 buffs: {}
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}

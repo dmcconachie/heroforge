@@ -86,7 +86,7 @@ buffs:
   Bless:
     active: true
     caster_level: 8
-templates: []
+templates: {}
 dm_overrides: []
 equipment:
   armor: {}
