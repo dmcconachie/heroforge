@@ -7,84 +7,97 @@ identity:
   deity: ''
   size: Small
 abilities:
-  STR:
+  str:
     base: 8
-    racial: -2
     score: 6
     mod: -2
-  DEX:
+    typed:
+      racial: -2
+  dex:
     base: 14
     score: 14
     mod: 2
-  CON:
+  con:
     base: 14
-    racial: 2
     score: 16
     mod: 3
-  INT:
+    typed:
+      racial: 2
+  int:
     base: 12
     score: 12
     mod: 1
-  WIS:
+  wis:
     base: 16
     score: 16
     mod: 3
-  CHA:
+  cha:
     base: 10
     score: 10
     mod: 0
 combat:
   ac:
-    base: 10
-    dex: 2
-    size: 1
     total: 13
+    base: 10
+    ability:
+      dex: 2
+    size: 1
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 112
-    con: 60
     total: 172
+    base: 112
+    ability:
+      con: 60
   bab:
+    total: 15
     base: 15
-    total: 15
   initiative:
-    dex: 2
     total: 2
+    ability:
+      dex: 2
   speed:
-    base: 20
     total: 20
+    base: 20
   sr: 0
-  fort:
-    base: 12
-    con: 3
-    total: 15
-  ref:
-    base: 6
-    dex: 2
-    total: 8
-  will:
-    base: 12
-    wis: 3
-    total: 15
+  saves:
+    fort:
+      total: 15
+      base: 12
+      ability:
+        con: 3
+    ref:
+      total: 8
+      base: 6
+      ability:
+        dex: 2
+    will:
+      total: 15
+      base: 12
+      ability:
+        wis: 3
   attack_melee:
-    bab: 15
-    str: -2
-    size: 1
     total: 14
-  attack_ranged:
-    bab: 15
-    dex: 2
+    base: 15
+    ability:
+      str: -2
     size: 1
+  attack_ranged:
     total: 18
+    base: 15
+    ability:
+      dex: 2
+    size: 1
   damage_melee:
-    str: -2
     total: -2
+    ability:
+      str: -2
   grapple:
-    bab: 15
-    str: -2
-    size: -4
     total: 9
+    base: 15
+    ability:
+      str: -2
+    size: -4
 attack_iteratives:
   melee:
     - 14
@@ -96,43 +109,43 @@ attack_iteratives:
     - 8
 skills:
   Concentration:
-    ranks: 23
-    ability_mod: 3
     total: 26
+    ability_mod: 3
+    ranks: 23
   Handle Animal:
-    ranks: 14
-    ability_mod: 0
     total: 14
+    ability_mod: 0
+    ranks: 14
   Jump:
+    total: -8
     ability_mod: -2
     speed_mod: -6
-    total: -8
   Knowledge (Nature):
-    ranks: 13
-    ability_mod: 1
-    synergy: 2
     total: 16
+    ability_mod: 1
+    ranks: 13
+    synergy: 2
   Listen:
-    ranks: 10
-    ability_mod: 3
     total: 13
+    ability_mod: 3
+    ranks: 10
   Ride:
+    total: 4
     ability_mod: 2
     synergy: 2
-    total: 4
   Spellcraft:
-    ranks: 13
-    ability_mod: 1
     total: 14
+    ability_mod: 1
+    ranks: 13
   Spot:
-    ranks: 19
-    ability_mod: 3
     total: 22
-  Survival:
-    ranks: 23
     ability_mod: 3
-    synergy: 2
+    ranks: 19
+  Survival:
     total: 28
+    ability_mod: 3
+    ranks: 23
+    synergy: 2
 carrying_capacity:
   light: 15
   medium: 30
@@ -198,4 +211,3 @@ spellcasting:
 equipment:
   weapons:
     - name: Quarterstaff
-resources: {}

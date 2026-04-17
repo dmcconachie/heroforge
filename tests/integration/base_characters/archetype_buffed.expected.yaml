@@ -7,77 +7,87 @@ identity:
   deity: Pelor
   size: Medium
 abilities:
-  STR:
+  str:
     base: 14
-    enhancement: 4
     score: 18
     mod: 4
-  DEX:
+    typed:
+      enhancement: 4
+  dex:
     base: 10
     score: 10
     mod: 0
-  CON:
+  con:
     base: 14
     score: 14
     mod: 2
-  INT:
+  int:
     base: 10
     score: 10
     mod: 0
-  WIS:
+  wis:
     base: 16
     score: 16
     mod: 3
-  CHA:
+  cha:
     base: 12
     score: 12
     mod: 1
 combat:
   ac:
-    base: 10
     total: 10
+    base: 10
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 50
-    con: 16
     total: 66
+    base: 50
+    ability:
+      con: 16
   bab:
-    base: 6
     total: 6
+    base: 6
   initiative:
     total: 0
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 6
-    con: 2
-    total: 8
-  ref:
-    base: 2
-    total: 2
-  will:
-    base: 6
-    wis: 3
-    total: 9
+  saves:
+    fort:
+      total: 8
+      base: 6
+      ability:
+        con: 2
+    ref:
+      total: 2
+      base: 2
+    will:
+      total: 9
+      base: 6
+      ability:
+        wis: 3
   attack_melee:
-    bab: 6
-    str: 4
-    morale: 1
     total: 11
+    base: 6
+    ability:
+      str: 4
+    typed:
+      morale: 1
   attack_ranged:
-    bab: 6
-    morale: 1
     total: 7
+    base: 6
+    typed:
+      morale: 1
   damage_melee:
-    str: 4
     total: 4
+    ability:
+      str: 4
   grapple:
-    bab: 6
-    str: 4
     total: 10
+    base: 6
+    ability:
+      str: 4
 attack_iteratives:
   melee:
     - 11
@@ -87,25 +97,25 @@ attack_iteratives:
     - 2
 skills:
   Concentration:
-    ranks: 11
-    ability_mod: 2
     total: 13
-  Diplomacy:
-    ranks: 3
-    ability_mod: 1
-    total: 4
-  Heal:
+    ability_mod: 2
     ranks: 11
-    ability_mod: 3
+  Diplomacy:
+    total: 4
+    ability_mod: 1
+    ranks: 3
+  Heal:
     total: 14
+    ability_mod: 3
+    ranks: 11
   Knowledge (Religion):
-    ranks: 6
-    ability_mod: 0
     total: 6
-  Spellcraft:
-    ranks: 2
     ability_mod: 0
+    ranks: 6
+  Spellcraft:
     total: 2
+    ability_mod: 0
+    ranks: 2
 carrying_capacity:
   light: 100
   medium: 200
@@ -139,4 +149,3 @@ spellcasting:
       2: 15
       3: 16
       4: 17
-resources: {}

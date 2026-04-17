@@ -7,81 +7,95 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 8
     score: 8
     mod: -1
-  DEX:
+  dex:
     base: 14
-    racial: 2
     score: 16
     mod: 3
-  CON:
+    typed:
+      racial: 2
+  con:
     base: 10
-    racial: -2
     score: 8
     mod: -1
-  INT:
+    typed:
+      racial: -2
+  int:
     base: 18
     score: 18
     mod: 4
-  WIS:
+  wis:
     base: 12
     score: 12
     mod: 1
-  CHA:
+  cha:
     base: 8
     score: 8
     mod: -1
 combat:
   ac:
-    base: 10
-    dex: 3
     total: 13
+    base: 10
+    ability:
+      dex: 3
   touch_ac: 13
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 61
-    con: -20
     total: 41
+    base: 61
+    ability:
+      con: -20
   bab:
-    base: 10
     total: 10
+    base: 10
   initiative:
-    dex: 3
     total: 3
+    ability:
+      dex: 3
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 6
-    con: -1
-    total: 5
-  ref:
-    base: 6
-    dex: 3
-    total: 9
-  will:
-    base: 12
-    wis: 1
-    untyped: 2
-    total: 15
+  saves:
+    fort:
+      total: 5
+      base: 6
+      ability:
+        con: -1
+    ref:
+      total: 9
+      base: 6
+      ability:
+        dex: 3
+    will:
+      total: 15
+      base: 12
+      ability:
+        wis: 1
+      typed:
+        untyped: 2
   attack_melee:
-    bab: 10
-    str: -1
     total: 9
+    base: 10
+    ability:
+      str: -1
   attack_ranged:
-    bab: 10
-    dex: 3
     total: 13
+    base: 10
+    ability:
+      dex: 3
   damage_melee:
-    str: -1
     total: -1
+    ability:
+      str: -1
   grapple:
-    bab: 10
-    str: -1
     total: 9
+    base: 10
+    ability:
+      str: -1
 attack_iteratives:
   melee:
     - 9
@@ -91,38 +105,38 @@ attack_iteratives:
     - 8
 skills:
   Concentration:
-    ranks: 23
-    ability_mod: -1
     total: 22
+    ability_mod: -1
+    ranks: 23
   Decipher Script:
-    ranks: 13
-    ability_mod: 4
     total: 17
+    ability_mod: 4
+    ranks: 13
   Knowledge (Arcana):
-    ranks: 23
-    ability_mod: 4
     total: 27
+    ability_mod: 4
+    ranks: 23
   Knowledge (Nature):
-    ranks: 19
-    ability_mod: 4
     total: 23
+    ability_mod: 4
+    ranks: 19
   Knowledge (Religion):
-    ranks: 14
-    ability_mod: 4
     total: 18
+    ability_mod: 4
+    ranks: 14
   Knowledge (The Planes):
-    ranks: 23
-    ability_mod: 4
     total: 27
-  Spellcraft:
-    ranks: 23
     ability_mod: 4
-    synergy: 2
+    ranks: 23
+  Spellcraft:
     total: 29
+    ability_mod: 4
+    ranks: 23
+    synergy: 2
   Survival:
+    total: 5
     ability_mod: 1
     synergy: 4
-    total: 5
 carrying_capacity:
   light: 26
   medium: 53
@@ -179,4 +193,3 @@ spellcasting:
 equipment:
   weapons:
     - name: Quarterstaff
-resources: {}

@@ -7,87 +7,106 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 18
-    racial: 2
-    morale: 8
     score: 28
     mod: 9
-  DEX:
+    typed:
+      racial: 2
+      morale: 8
+  dex:
     base: 14
     score: 14
     mod: 2
-  CON:
+  con:
     base: 14
-    morale: 8
     score: 22
     mod: 6
-  INT:
+    typed:
+      morale: 8
+  int:
     base: 8
-    racial: -2
     score: 6
     mod: -2
-  WIS:
+    typed:
+      racial: -2
+  wis:
     base: 12
     score: 12
     mod: 1
-  CHA:
+  cha:
     base: 6
-    racial: -2
     score: 4
     mod: -3
+    typed:
+      racial: -2
 combat:
   ac:
-    base: 10
-    dex: 2
-    untyped: -2
     total: 10
+    base: 10
+    ability:
+      dex: 2
+    typed:
+      untyped: -2
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 164
-    con: 120
-    untyped: 3
     total: 287
+    base: 164
+    ability:
+      con: 120
+    typed:
+      untyped: 3
   bab:
-    base: 20
     total: 20
+    base: 20
   initiative:
-    dex: 2
     total: 2
+    ability:
+      dex: 2
   speed:
-    base: 30
-    untyped: 10
     total: 40
+    base: 30
+    typed:
+      untyped: 10
   sr: 0
-  fort:
-    base: 12
-    con: 6
-    total: 18
-  ref:
-    base: 6
-    dex: 2
-    total: 8
-  will:
-    base: 6
-    wis: 1
-    morale: 4
-    total: 11
+  saves:
+    fort:
+      total: 18
+      base: 12
+      ability:
+        con: 6
+    ref:
+      total: 8
+      base: 6
+      ability:
+        dex: 2
+    will:
+      total: 11
+      base: 6
+      ability:
+        wis: 1
+      typed:
+        morale: 4
   attack_melee:
-    bab: 20
-    str: 9
     total: 29
+    base: 20
+    ability:
+      str: 9
   attack_ranged:
-    bab: 20
-    dex: 2
     total: 22
+    base: 20
+    ability:
+      dex: 2
   damage_melee:
-    str: 9
     total: 9
+    ability:
+      str: 9
   grapple:
-    bab: 20
-    str: 9
     total: 29
+    base: 20
+    ability:
+      str: 9
 attack_iteratives:
   melee:
     - 29
@@ -101,38 +120,38 @@ attack_iteratives:
     - 7
 skills:
   Climb:
-    ranks: 14
-    ability_mod: 9
     total: 23
-  Intimidate:
-    ranks: 13
-    ability_mod: -3
-    total: 10
-  Jump:
-    ranks: 13
     ability_mod: 9
-    speed_mod: 4
+    ranks: 14
+  Intimidate:
+    total: 10
+    ability_mod: -3
+    ranks: 13
+  Jump:
     total: 26
+    ability_mod: 9
+    ranks: 13
+    speed_mod: 4
   Knowledge (Nature):
+    total: 0
     ability_mod: -2
     synergy: 2
-    total: 0
   Listen:
-    ranks: 10
-    ability_mod: 1
     total: 11
+    ability_mod: 1
+    ranks: 10
   Survival:
-    ranks: 10
-    ability_mod: 1
     total: 11
+    ability_mod: 1
+    ranks: 10
   Swim:
-    ranks: 9
-    ability_mod: 9
     total: 18
+    ability_mod: 9
+    ranks: 9
   Tumble:
+    total: 4
     ability_mod: 2
     synergy: 2
-    total: 4
 carrying_capacity:
   light: 400
   medium: 800
@@ -179,4 +198,3 @@ class_features:
 equipment:
   weapons:
     - name: Greataxe
-resources: {}

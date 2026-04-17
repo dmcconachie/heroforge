@@ -7,86 +7,105 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 16
-    racial: 8
     score: 24
     mod: 7
-  DEX:
+    typed:
+      racial: 8
+  dex:
     base: 12
     score: 12
     mod: 1
-  CON:
+  con:
     base: 14
-    racial: 2
     score: 16
     mod: 3
-  INT:
+    typed:
+      racial: 2
+  int:
     base: 10
-    racial: 2
     score: 12
     mod: 1
-  WIS:
+    typed:
+      racial: 2
+  wis:
     base: 10
     score: 10
     mod: 0
-  CHA:
+  cha:
     base: 8
-    racial: 2
     score: 10
     mod: 0
+    typed:
+      racial: 2
 combat:
   ac:
-    base: 10
-    dex: 1
-    natural_armor: 4
     total: 15
+    base: 10
+    ability:
+      dex: 1
+    typed:
+      natural_armor: 4
   touch_ac: 11
   flatfooted_ac: 14
   hp_max:
-    hit_dice: 50
-    con: 18
     total: 68
+    base: 50
+    ability:
+      con: 18
   bab:
-    base: 6
     total: 6
+    base: 6
   initiative:
-    dex: 1
-    untyped: 4
     total: 5
+    ability:
+      dex: 1
+    typed:
+      untyped: 4
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 5
-    con: 3
-    total: 8
-  ref:
-    base: 2
-    dex: 1
-    total: 3
-  will:
-    base: 2
-    total: 2
+  saves:
+    fort:
+      total: 8
+      base: 5
+      ability:
+        con: 3
+    ref:
+      total: 3
+      base: 2
+      ability:
+        dex: 1
+    will:
+      total: 2
+      base: 2
   attack_melee:
-    bab: 6
-    str: 7
-    untyped: 1
     total: 14
+    base: 6
+    ability:
+      str: 7
+    typed:
+      untyped: 1
   attack_ranged:
-    bab: 6
-    dex: 1
-    untyped: 1
     total: 8
+    base: 6
+    ability:
+      dex: 1
+    typed:
+      untyped: 1
   damage_melee:
-    str: 7
-    untyped: 2
     total: 9
+    ability:
+      str: 7
+    typed:
+      untyped: 2
   grapple:
-    bab: 6
-    str: 7
     total: 13
+    base: 6
+    ability:
+      str: 7
 attack_iteratives:
   melee:
     - 14
@@ -96,21 +115,21 @@ attack_iteratives:
     - 3
 skills:
   Climb:
-    ranks: 9
-    ability_mod: 7
     total: 16
+    ability_mod: 7
+    ranks: 9
   Intimidate:
-    ranks: 9
-    ability_mod: 0
     total: 9
-  Jump:
+    ability_mod: 0
     ranks: 9
-    ability_mod: 7
+  Jump:
     total: 16
+    ability_mod: 7
+    ranks: 9
   Tumble:
+    total: 3
     ability_mod: 1
     synergy: 2
-    total: 3
 carrying_capacity:
   light: 233
   medium: 466
@@ -136,4 +155,3 @@ special_qualities:
 equipment:
   weapons:
     - name: Greatsword
-resources: {}

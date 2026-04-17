@@ -24,6 +24,7 @@ from cattrs.gen import (
     override,
 )
 
+from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Ability
 from heroforge.engine.classes import (
     ClassDefinition,
@@ -39,6 +40,22 @@ from heroforge.engine.equipment import (
 from heroforge.engine.persistence import (
     ArmorSlotEntry,
     CharLevelEntry,
+)
+from heroforge.engine.sheet_schema import (
+    AbilityEntry,
+    ArmorDisplay,
+    Breakdown,
+    CarryingCapacity,
+    CombatSection,
+    Iteratives,
+    Sheet,
+    SheetIdentity,
+    SkillEntry,
+    SpellcastingEntry,
+    WeaponDisplay,
+)
+from heroforge.engine.sheet_schema import (
+    EquipmentSection as SheetEquipmentSection,
 )
 from heroforge.engine.skills import SkillDefinition
 from heroforge.engine.spells import SpellEntry
@@ -323,3 +340,55 @@ converter.register_unstructure_hook(
 # forbid_extra_keys, but cattrs needs to know
 # how to structure KnownFeat from strings
 # (handled automatically by StrEnum).
+
+
+# ---------------------------------------------------
+# BonusType (plain enum.Enum, not StrEnum): use
+# its .value string for YAML output.
+# ---------------------------------------------------
+converter.register_unstructure_hook(
+    BonusType,
+    lambda v: v.value,
+)
+
+
+# ---------------------------------------------------
+# Sheet dataclasses: omit fields equal to their
+# default value. Gives compact YAML (optional
+# level_bumps, inherent, size, base, etc. disappear
+# when unset) while required fields (totals, scores)
+# are always emitted.
+# ---------------------------------------------------
+
+
+def _register_sheet_omit_default(cls: type) -> None:
+    converter.register_unstructure_hook(
+        cls,
+        make_dict_unstructure_fn(
+            cls,
+            converter,
+            _cattrs_omit_if_default=True,
+        ),
+    )
+
+
+# Order matters: cattrs codegens the hook for a
+# container class by inspecting what's already
+# registered for its fields, so leaf dataclasses
+# must be registered before the aggregates that
+# embed them.
+for _sheet_cls in (
+    AbilityEntry,
+    Breakdown,
+    SkillEntry,
+    SpellcastingEntry,
+    ArmorDisplay,
+    WeaponDisplay,
+    SheetIdentity,
+    Iteratives,
+    CarryingCapacity,
+    SheetEquipmentSection,
+    CombatSection,
+    Sheet,
+):
+    _register_sheet_omit_default(_sheet_cls)

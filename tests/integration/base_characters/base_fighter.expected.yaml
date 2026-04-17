@@ -7,88 +7,109 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 16
     score: 16
     mod: 3
-  DEX:
+  dex:
     base: 14
     score: 14
     mod: 2
-  CON:
+  con:
     base: 16
-    racial: 2
     score: 18
     mod: 4
-  INT:
+    typed:
+      racial: 2
+  int:
     base: 10
     score: 10
     mod: 0
-  WIS:
+  wis:
     base: 12
     score: 12
     mod: 1
-  CHA:
+  cha:
     base: 8
-    racial: -2
     score: 6
     mod: -2
+    typed:
+      racial: -2
 combat:
   ac:
-    base: 10
-    dex: 2
     total: 12
+    base: 10
+    ability:
+      dex: 2
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 137
-    con: 80
-    untyped: 3
     total: 220
+    base: 137
+    ability:
+      con: 80
+    typed:
+      untyped: 3
   bab:
-    base: 20
     total: 20
+    base: 20
   initiative:
-    dex: 2
-    untyped: 4
     total: 6
+    ability:
+      dex: 2
+    typed:
+      untyped: 4
   speed:
-    base: 20
     total: 20
+    base: 20
   sr: 0
-  fort:
-    base: 12
-    con: 4
-    untyped: 2
-    total: 18
-  ref:
-    base: 6
-    dex: 2
-    untyped: 2
-    total: 10
-  will:
-    base: 6
-    wis: 1
-    untyped: 2
-    total: 9
+  saves:
+    fort:
+      total: 18
+      base: 12
+      ability:
+        con: 4
+      typed:
+        untyped: 2
+    ref:
+      total: 10
+      base: 6
+      ability:
+        dex: 2
+      typed:
+        untyped: 2
+    will:
+      total: 9
+      base: 6
+      ability:
+        wis: 1
+      typed:
+        untyped: 2
   attack_melee:
-    bab: 20
-    str: 3
-    untyped: 2
     total: 25
+    base: 20
+    ability:
+      str: 3
+    typed:
+      untyped: 2
   attack_ranged:
-    bab: 20
-    dex: 2
-    untyped: 2
     total: 24
+    base: 20
+    ability:
+      dex: 2
+    typed:
+      untyped: 2
   damage_melee:
-    str: 3
-    untyped: 4
     total: 7
+    ability:
+      str: 3
+    typed:
+      untyped: 4
   grapple:
-    bab: 20
-    str: 3
     total: 23
+    base: 20
+    ability:
+      str: 3
 attack_iteratives:
   melee:
     - 25
@@ -102,26 +123,26 @@ attack_iteratives:
     - 9
 skills:
   Climb:
-    ranks: 14
-    ability_mod: 3
     total: 17
-  Intimidate:
+    ability_mod: 3
     ranks: 14
+  Intimidate:
+    total: 12
     ability_mod: -2
-    total: 12
+    ranks: 14
   Jump:
-    ranks: 9
-    ability_mod: 3
-    speed_mod: -6
     total: 6
-  Swim:
-    ranks: 9
     ability_mod: 3
+    ranks: 9
+    speed_mod: -6
+  Swim:
     total: 12
+    ability_mod: 3
+    ranks: 9
   Tumble:
+    total: 4
     ability_mod: 2
     synergy: 2
-    total: 4
 carrying_capacity:
   light: 76
   medium: 153
@@ -160,4 +181,3 @@ class_features:
 equipment:
   weapons:
     - name: Dwarven Waraxe
-resources: {}

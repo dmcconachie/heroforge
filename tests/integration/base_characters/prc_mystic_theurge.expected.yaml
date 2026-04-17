@@ -7,71 +7,75 @@ identity:
   deity: Pelor
   size: Medium
 abilities:
-  STR:
+  str:
     base: 10
     score: 10
     mod: 0
-  DEX:
+  dex:
     base: 10
     score: 10
     mod: 0
-  CON:
+  con:
     base: 14
     score: 14
     mod: 2
-  INT:
+  int:
     base: 16
     score: 16
     mod: 3
-  WIS:
+  wis:
     base: 16
     score: 16
     mod: 3
-  CHA:
+  cha:
     base: 8
     score: 8
     mod: -1
 combat:
   ac:
-    base: 10
     total: 10
+    base: 10
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 60
-    con: 32
     total: 92
+    base: 60
+    ability:
+      con: 32
   bab:
-    base: 8
     total: 8
+    base: 8
   initiative:
     total: 0
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 7
-    con: 2
-    total: 9
-  ref:
-    base: 5
-    total: 5
-  will:
-    base: 13
-    wis: 3
-    total: 16
+  saves:
+    fort:
+      total: 9
+      base: 7
+      ability:
+        con: 2
+    ref:
+      total: 5
+      base: 5
+    will:
+      total: 16
+      base: 13
+      ability:
+        wis: 3
   attack_melee:
-    bab: 8
     total: 8
+    base: 8
   attack_ranged:
-    bab: 8
     total: 8
+    base: 8
   damage_melee:
     total: 0
   grapple:
-    bab: 8
     total: 8
+    base: 8
 attack_iteratives:
   melee:
     - 8
@@ -81,43 +85,43 @@ attack_iteratives:
     - 3
 skills:
   Concentration:
-    ranks: 19
+    total: 21
     ability_mod: 2
-    total: 21
+    ranks: 19
   Decipher Script:
-    ranks: 14
-    ability_mod: 3
     total: 17
+    ability_mod: 3
+    ranks: 14
   Diplomacy:
-    ranks: 6
-    ability_mod: -1
-    synergy: 2
     total: 7
-  Heal:
+    ability_mod: -1
     ranks: 6
-    ability_mod: 3
-    total: 9
-  Knowledge (Arcana):
-    ranks: 19
-    ability_mod: 3
-    total: 22
-  Knowledge (Religion):
-    ranks: 18
-    ability_mod: 3
-    total: 21
-  Knowledge (The Planes):
-    ranks: 3
-    ability_mod: 3
-    total: 6
-  Sense Motive:
-    ranks: 10
-    ability_mod: 3
-    total: 13
-  Spellcraft:
-    ranks: 19
-    ability_mod: 3
     synergy: 2
+  Heal:
+    total: 9
+    ability_mod: 3
+    ranks: 6
+  Knowledge (Arcana):
+    total: 22
+    ability_mod: 3
+    ranks: 19
+  Knowledge (Religion):
+    total: 21
+    ability_mod: 3
+    ranks: 18
+  Knowledge (The Planes):
+    total: 6
+    ability_mod: 3
+    ranks: 3
+  Sense Motive:
+    total: 13
+    ability_mod: 3
+    ranks: 10
+  Spellcraft:
     total: 24
+    ability_mod: 3
+    ranks: 19
+    synergy: 2
 carrying_capacity:
   light: 33
   medium: 66
@@ -166,4 +170,3 @@ spellcasting:
       0: 13
       1: 14
       2: 15
-resources: {}

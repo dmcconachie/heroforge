@@ -7,82 +7,97 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 14
     score: 14
     mod: 2
-  DEX:
+  dex:
     base: 14
     score: 14
     mod: 2
-  CON:
+  con:
     base: 14
-    racial: 2
     score: 16
     mod: 3
-  INT:
+    typed:
+      racial: 2
+  int:
     base: 12
     score: 12
     mod: 1
-  WIS:
+  wis:
     base: 10
     score: 10
     mod: 0
-  CHA:
+  cha:
     base: 10
-    racial: -2
     score: 8
     mod: -1
+    typed:
+      racial: -2
 combat:
   ac:
-    base: 10
-    dex: 2
     total: 12
+    base: 10
+    ability:
+      dex: 2
   touch_ac: 12
   flatfooted_ac: 12
   hp_max:
-    hit_dice: 70
-    con: 30
     total: 100
+    base: 70
+    ability:
+      con: 30
   bab:
+    total: 9
     base: 9
-    total: 9
   initiative:
-    dex: 2
     total: 2
+    ability:
+      dex: 2
   speed:
-    base: 20
     total: 20
+    base: 20
   sr: 0
-  fort:
-    base: 6
-    con: 3
-    total: 9
-  ref:
-    base: 6
-    dex: 2
-    total: 8
-  will:
-    base: 3
-    untyped: 2
-    total: 5
+  saves:
+    fort:
+      total: 9
+      base: 6
+      ability:
+        con: 3
+    ref:
+      total: 8
+      base: 6
+      ability:
+        dex: 2
+    will:
+      total: 5
+      base: 3
+      typed:
+        untyped: 2
   attack_melee:
-    bab: 9
-    str: 2
-    untyped: 1
     total: 12
+    base: 9
+    ability:
+      str: 2
+    typed:
+      untyped: 1
   attack_ranged:
-    bab: 9
-    dex: 2
-    untyped: 1
     total: 12
+    base: 9
+    ability:
+      dex: 2
+    typed:
+      untyped: 1
   damage_melee:
-    str: 2
     total: 2
+    ability:
+      str: 2
   grapple:
-    bab: 9
-    str: 2
     total: 11
+    base: 9
+    ability:
+      str: 2
 attack_iteratives:
   melee:
     - 12
@@ -92,51 +107,51 @@ attack_iteratives:
     - 7
 skills:
   Climb:
-    ranks: 12
-    ability_mod: 2
     total: 14
+    ability_mod: 2
+    ranks: 12
   Disable Device:
-    ranks: 4
-    ability_mod: 1
     total: 5
+    ability_mod: 1
+    ranks: 4
   Hide:
-    ranks: 5
-    ability_mod: 2
     total: 7
+    ability_mod: 2
+    ranks: 5
   Intimidate:
-    ranks: 9
+    total: 8
     ability_mod: -1
-    total: 8
-  Jump:
     ranks: 9
+  Jump:
+    total: 5
     ability_mod: 2
+    ranks: 9
     speed_mod: -6
-    total: 5
   Listen:
-    ranks: 3
-    ability_mod: 0
     total: 3
+    ability_mod: 0
+    ranks: 3
   Move Silently:
-    ranks: 5
-    ability_mod: 2
     total: 7
+    ability_mod: 2
+    ranks: 5
   Open Lock:
-    ranks: 5
-    ability_mod: 2
     total: 7
-  Search:
-    ranks: 4
-    ability_mod: 1
-    total: 5
-  Spot:
-    ranks: 3
-    ability_mod: 0
-    total: 3
-  Tumble:
-    ranks: 4
     ability_mod: 2
-    synergy: 2
+    ranks: 5
+  Search:
+    total: 5
+    ability_mod: 1
+    ranks: 4
+  Spot:
+    total: 3
+    ability_mod: 0
+    ranks: 3
+  Tumble:
     total: 8
+    ability_mod: 2
+    ranks: 4
+    synergy: 2
 carrying_capacity:
   light: 58
   medium: 116
@@ -165,4 +180,3 @@ class_features:
 equipment:
   weapons:
     - name: Dwarven Waraxe
-resources: {}

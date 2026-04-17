@@ -7,82 +7,97 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 14
-    untyped: 4
     score: 18
     mod: 4
-  DEX:
+    typed:
+      untyped: 4
+  dex:
     base: 12
     score: 12
     mod: 1
-  CON:
+  con:
     base: 14
     score: 14
     mod: 2
-  INT:
+  int:
     base: 10
     score: 10
     mod: 0
-  WIS:
+  wis:
     base: 10
     score: 10
     mod: 0
-  CHA:
+  cha:
     base: 16
     score: 16
     mod: 3
 combat:
   ac:
-    base: 10
-    dex: 1
-    natural_armor: 6
     total: 17
+    base: 10
+    ability:
+      dex: 1
+    typed:
+      natural_armor: 6
   touch_ac: 11
   flatfooted_ac: 16
   hp_max:
-    hit_dice: 89
-    con: 24
-    untyped: 3
     total: 116
+    base: 89
+    ability:
+      con: 24
+    typed:
+      untyped: 3
   bab:
-    base: 8
     total: 8
+    base: 8
   initiative:
-    dex: 1
     total: 1
+    ability:
+      dex: 1
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 7
-    con: 2
-    untyped: 2
-    total: 11
-  ref:
-    base: 3
-    dex: 1
-    total: 4
-  will:
-    base: 10
-    untyped: 2
-    total: 12
+  saves:
+    fort:
+      total: 11
+      base: 7
+      ability:
+        con: 2
+      typed:
+        untyped: 2
+    ref:
+      total: 4
+      base: 3
+      ability:
+        dex: 1
+    will:
+      total: 12
+      base: 10
+      typed:
+        untyped: 2
   attack_melee:
-    bab: 8
-    str: 4
     total: 12
+    base: 8
+    ability:
+      str: 4
   attack_ranged:
-    bab: 8
-    dex: 1
     total: 9
+    base: 8
+    ability:
+      dex: 1
   damage_melee:
-    str: 4
     total: 4
+    ability:
+      str: 4
   grapple:
-    bab: 8
-    str: 4
     total: 12
+    base: 8
+    ability:
+      str: 4
 attack_iteratives:
   melee:
     - 12
@@ -92,26 +107,26 @@ attack_iteratives:
     - 4
 skills:
   Concentration:
-    ranks: 15
-    ability_mod: 2
     total: 17
+    ability_mod: 2
+    ranks: 15
   Knowledge (Arcana):
-    ranks: 9
-    ability_mod: 0
     total: 9
+    ability_mod: 0
+    ranks: 9
   Listen:
-    ranks: 5
-    ability_mod: 0
     total: 5
+    ability_mod: 0
+    ranks: 5
   Spellcraft:
-    ranks: 11
-    ability_mod: 0
-    synergy: 2
     total: 13
-  Spot:
-    ranks: 5
     ability_mod: 0
+    ranks: 11
+    synergy: 2
+  Spot:
     total: 5
+    ability_mod: 0
+    ranks: 5
 carrying_capacity:
   light: 100
   medium: 200
@@ -162,4 +177,3 @@ spellcasting:
 equipment:
   weapons:
     - name: Quarterstaff
-resources: {}

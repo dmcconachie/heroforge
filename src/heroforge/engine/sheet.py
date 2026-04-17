@@ -1,16 +1,21 @@
 """
 heroforge/engine/sheet.py
 --------------------------
-Extract a complete character sheet from a .char.yaml
-input file. Produces a plain dict with all numerical
-values and full bonus-type breakdowns.
+Build a typed :class:`Sheet` from a Character.
+
+`Sheet` (defined in ``engine/sheet_schema.py``) holds
+every derived value on the character sheet with full
+bonus-type breakdowns. Serialisation runs through the
+shared cattrs converter so every enum emits as a plain
+string.
 
 Public API:
-  extract_sheet(path, app_state) -> dict
-  gather_sheet(character, app_state) -> dict
+  extract_sheet(path, app_state) -> Sheet
+  gather_sheet(character, app_state) -> Sheet
 
 CLI:
   uv run charsheet input.char.yaml [-o output.yaml]
+  python -m heroforge.engine.sheet input.char.yaml
 """
 
 from __future__ import annotations
@@ -21,16 +26,41 @@ from collections import defaultdict
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from heroforge.engine.character import Ability
+from heroforge.engine.bonus import ALWAYS_STACKING, BonusPool, BonusType
+from heroforge.engine.character import (
+    SAVE_ABILITY,
+    Ability,
+    Alignment,
+    Save,
+    Size,
+)
+from heroforge.engine.persistence import load_character, yaml_dump
+from heroforge.engine.sheet_schema import (
+    AbilityEntry,
+    ArmorDisplay,
+    Breakdown,
+    CarryingCapacity,
+    CombatSection,
+    EquipmentSection,
+    Iteratives,
+    Sheet,
+    SheetIdentity,
+    SkillEntry,
+    SpellcastingEntry,
+    WeaponDisplay,
+)
+from heroforge.rules.known import (
+    KnownClass,
+    KnownMagicItem,
+    KnownRace,
+    KnownSkill,
+)
+from heroforge.rules.schema import converter
+from heroforge.ui.app_state import AppState
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
-    from heroforge.ui.app_state import AppState
 
-from heroforge.engine.bonus import (
-    ALWAYS_STACKING,
-    BonusPool,
-)
 
 # -----------------------------------------------------------
 # Pool breakdown helper
@@ -40,45 +70,39 @@ from heroforge.engine.bonus import (
 def _pool_breakdown(
     pool: BonusPool | None,
     character: "Character",
-) -> dict[str, int]:
+) -> dict[BonusType, int]:
     """
     Break down a BonusPool into effective contributions
     per bonus type. Applies stacking rules. Returns only
-    non-zero entries keyed by bonus_type.value.
+    non-zero entries.
     """
     if pool is None:
         return {}
-
     active = pool.active_entries(character)
     if not active:
         return {}
 
-    stacking: dict[str, int] = defaultdict(int)
-    typed_buckets: dict[str, list[int]] = defaultdict(list)
+    stacking: dict[BonusType, int] = defaultdict(int)
+    typed_buckets: dict[BonusType, list[int]] = defaultdict(list)
 
     for e in active:
-        name = e.bonus_type.value
-        if e.value < 0:
-            # Penalties always stack
-            stacking[name] += e.value
-        elif e.bonus_type in ALWAYS_STACKING:
-            stacking[name] += e.value
+        if e.value < 0 or e.bonus_type in ALWAYS_STACKING:
+            stacking[e.bonus_type] += e.value
         else:
-            typed_buckets[name].append(e.value)
+            typed_buckets[e.bonus_type].append(e.value)
 
-    result: dict[str, int] = {}
-    for name, val in stacking.items():
+    result: dict[BonusType, int] = {}
+    for bt, val in stacking.items():
         if val != 0:
-            result[name] = val
-    for name, vals in typed_buckets.items():
+            result[bt] = val
+    for bt, vals in typed_buckets.items():
         best = max(vals)
         if best != 0:
-            result[name] = best
+            result[bt] = best
     return result
 
 
-def _nz(d: dict) -> dict:
-    """Return dict with zero-value entries removed."""
+def _drop_zeros(d: dict[BonusType, int]) -> dict[BonusType, int]:
     return {k: v for k, v in d.items() if v != 0}
 
 
@@ -90,12 +114,8 @@ def _nz(d: dict) -> dict:
 def extract_sheet(
     char_path: Path | str,
     app_state: "AppState",
-) -> dict:
+) -> Sheet:
     """Load a .char.yaml and return the full sheet."""
-    from heroforge.engine.persistence import (
-        load_character,
-    )
-
     char = load_character(Path(char_path), app_state)
     return gather_sheet(char, app_state)
 
@@ -103,32 +123,21 @@ def extract_sheet(
 def gather_sheet(
     character: "Character",
     app_state: "AppState",
-) -> dict:
-    """
-    Extract all numerical values from a Character
-    into a plain, YAML-serializable dict with full
-    bonus-type breakdowns.
-    """
-    d: dict = {}
-    d["identity"] = _identity(character, app_state)
-    d["abilities"] = _abilities(character)
-    d["combat"] = _combat(character)
-    d["attack_iteratives"] = _iteratives(character)
-    d["skills"] = _skills(character, app_state)
-    d["carrying_capacity"] = _carrying(character)
-    d["feats"] = _feats(character)
-    d["class_features"] = _class_features(character, app_state)
-    sc = _spellcasting(character, app_state)
-    if sc:
-        d["spellcasting"] = sc
-    sq = _special_qualities(character, app_state)
-    if sq:
-        d["special_qualities"] = sq
-    eq = _equipment(character)
-    if eq:
-        d["equipment"] = eq
-    d["resources"] = {}  # TODO: wire ResourceTracker
-    return d
+) -> Sheet:
+    """Build a Sheet from a Character + loaded rules."""
+    return Sheet(
+        identity=_identity(character, app_state),
+        abilities=_abilities(character),
+        combat=_combat(character),
+        attack_iteratives=_iteratives(character),
+        skills=_skills(character, app_state),
+        carrying_capacity=_carrying(character),
+        feats=_feats(character),
+        class_features=_class_features(character, app_state),
+        spellcasting=_spellcasting(character, app_state),
+        special_qualities=_special_qualities(character, app_state),
+        equipment=_equipment(character),
+    )
 
 
 # -----------------------------------------------------------
@@ -136,7 +145,7 @@ def gather_sheet(
 # -----------------------------------------------------------
 
 
-def _identity(c: "Character", app_state: "AppState") -> dict:
+def _identity(c: "Character", app_state: "AppState") -> SheetIdentity:
     clm = c.class_level_map
     if clm:
         class_str = " / ".join(f"{cn} {lvl}" for cn, lvl in clm.items())
@@ -144,18 +153,16 @@ def _identity(c: "Character", app_state: "AppState") -> dict:
         class_str = ""
 
     race_defn = app_state.race_registry.get(c.race)
-    size = race_defn.size if race_defn else "Medium"
+    size = Size(race_defn.size) if race_defn else Size.MEDIUM
 
-    return _nz(
-        {
-            "name": c.name,
-            "race": c.race,
-            "class_str": class_str,
-            "level": c.total_level,
-            "alignment": c.alignment,
-            "deity": c.deity,
-            "size": size,
-        }
+    return SheetIdentity(
+        name=c.name,
+        race=KnownRace(c.race) if c.race else KnownRace("Human"),
+        class_str=class_str,
+        level=c.total_level,
+        alignment=Alignment(c.alignment) if c.alignment else Alignment.NEUTRAL,
+        deity=c.deity,
+        size=size,
     )
 
 
@@ -164,23 +171,22 @@ def _identity(c: "Character", app_state: "AppState") -> dict:
 # -----------------------------------------------------------
 
 
-def _abilities(c: "Character") -> dict:
-    result = {}
+def _abilities(c: "Character") -> dict[Ability, AbilityEntry]:
+    result: dict[Ability, AbilityEntry] = {}
     for ab in Ability:
         base = c._ability_scores.get(ab, 10)
         pool = c.get_pool(f"{ab}_score")
-        bd = _pool_breakdown(pool, c)
-        entry: dict = {"base": base}
+        typed = _pool_breakdown(pool, c)
         bumps = c._level_bump_total(ab)
-        if bumps:
-            entry["level_bumps"] = bumps
         inherent = c._inherent_bonus_total(ab)
-        if inherent:
-            entry["inherent"] = inherent
-        entry.update(bd)
-        entry["score"] = c.get_ability_score(ab)
-        entry["mod"] = c.get_ability_modifier(ab)
-        result[ab.upper()] = entry
+        result[ab] = AbilityEntry(
+            base=base,
+            score=c.get_ability_score(ab),
+            mod=c.get_ability_modifier(ab),
+            level_bumps=bumps or None,
+            inherent=inherent or None,
+            typed=typed,
+        )
     return result
 
 
@@ -188,154 +194,126 @@ def _abilities(c: "Character") -> dict:
 # Combat
 # -----------------------------------------------------------
 
-_SAVE_ABILITY = {
-    "fort": Ability.CON,
-    "ref": Ability.DEX,
-    "will": Ability.WIS,
-}
 
-
-def _combat(c: "Character") -> dict:
-    d: dict = {}
+def _combat(c: "Character") -> CombatSection:
+    str_mod = c.get_ability_modifier(Ability.STR)
 
     # AC
-    ac_pool = c.get_pool("ac")
-    ac_bd = _pool_breakdown(ac_pool, c)
-    dex_contrib = c.get("ac_dex_contribution")
-    ac_entry: dict = {"base": 10}
-    if dex_contrib:
-        ac_entry["dex"] = dex_contrib
-    size = c._compute_size_mod_attack()
-    if size:
-        ac_entry["size"] = size
-    ac_entry.update(ac_bd)
-    ac_entry["total"] = c.ac
-    d["ac"] = ac_entry
-    d["touch_ac"] = c.touch_ac()
-    d["flatfooted_ac"] = c.flatfooted_ac()
+    ac_typed = _pool_breakdown(c.get_pool("ac"), c)
+    ac_dex = c.get("ac_dex_contribution")
+    ac_size = c._compute_size_mod_attack()
+    ac = Breakdown(
+        total=c.ac,
+        base=10,
+        ability={Ability.DEX: ac_dex} if ac_dex else {},
+        size=ac_size or None,
+        typed=ac_typed,
+    )
 
     # HP
-    hp_dice = c._compute_hp_from_rolls()
+    hp_typed = _pool_breakdown(c.get_pool("hp_bonus"), c)
     con_hp = c.get_ability_modifier(Ability.CON) * c.total_level
-    hp_pool = c.get_pool("hp_bonus")
-    hp_bd = _pool_breakdown(hp_pool, c)
-    hp_entry: dict = {"hit_dice": hp_dice}
-    if con_hp:
-        hp_entry["con"] = con_hp
-    hp_entry.update(hp_bd)
-    hp_entry["total"] = c.hp_max
-    d["hp_max"] = hp_entry
+    hp_max = Breakdown(
+        total=c.hp_max,
+        base=c._compute_hp_from_rolls(),
+        ability={Ability.CON: con_hp} if con_hp else {},
+        typed=hp_typed,
+    )
 
     # BAB
-    base_bab = c._compute_bab()
-    bab_pool = c.get_pool("bab_misc")
-    bab_bd = _pool_breakdown(bab_pool, c)
-    bab_entry: dict = {"base": base_bab}
-    bab_entry.update(bab_bd)
-    bab_entry["total"] = c.bab
-    d["bab"] = bab_entry
+    bab = Breakdown(
+        total=c.bab,
+        base=c._compute_bab(),
+        typed=_pool_breakdown(c.get_pool("bab_misc"), c),
+    )
 
     # Initiative
+    init_typed = _pool_breakdown(c.get_pool("initiative"), c)
     dex_mod = c.get_ability_modifier(Ability.DEX)
-    init_pool = c.get_pool("initiative")
-    init_bd = _pool_breakdown(init_pool, c)
-    init_entry: dict = {}
-    if dex_mod:
-        init_entry["dex"] = dex_mod
-    init_entry.update(init_bd)
-    init_entry["total"] = c.get("initiative")
-    d["initiative"] = init_entry
+    initiative = Breakdown(
+        total=c.get("initiative"),
+        ability={Ability.DEX: dex_mod} if dex_mod else {},
+        typed=init_typed,
+    )
 
     # Speed
-    base_speed = c._compute_base_speed()
-    speed_pool = c.get_pool("speed")
-    speed_bd = _pool_breakdown(speed_pool, c)
-    speed_entry: dict = {"base": base_speed}
-    speed_entry.update(speed_bd)
-    speed_entry["total"] = c.get("speed")
-    d["speed"] = speed_entry
-
-    # SR
-    d["sr"] = c.get("sr")
+    speed = Breakdown(
+        total=c.get("speed"),
+        base=c._compute_base_speed(),
+        typed=_pool_breakdown(c.get_pool("speed"), c),
+    )
 
     # Saves
-    for save, ab in _SAVE_ABILITY.items():
-        base_save = c._compute_base_save(save)
+    saves: dict[Save, Breakdown] = {}
+    for save in Save:
+        ab = SAVE_ABILITY[save]
         ab_mod = c.get_ability_modifier(ab)
-        pool = c.get_pool(f"{save}_save")
-        bd = _pool_breakdown(pool, c)
-        entry: dict = {"base": base_save}
-        if ab_mod:
-            entry[ab] = ab_mod
-        entry.update(bd)
-        entry["total"] = getattr(c, save)
-        d[save] = entry
-
-    # Melee attack
-    d["attack_melee"] = _attack_breakdown(c, "attack_melee", Ability.STR)
-    # Ranged attack
-    d["attack_ranged"] = _attack_breakdown(c, "attack_ranged", Ability.DEX)
+        saves[save] = Breakdown(
+            total=getattr(c, save.value),
+            base=c._compute_base_save(save.value),
+            ability={ab: ab_mod} if ab_mod else {},
+            typed=_pool_breakdown(c.get_pool(f"{save.value}_save"), c),
+        )
 
     # Damage (melee STR bonus)
-    str_mod = c.get_ability_modifier(Ability.STR)
-    dmg_m_pool = c.get_pool("damage_melee")
-    dmg_a_pool = c.get_pool("damage_all")
-    dmg_bd = _pool_breakdown(dmg_m_pool, c)
-    dmg_all_bd = _pool_breakdown(dmg_a_pool, c)
-    dmg_entry: dict = {}
-    if str_mod:
-        dmg_entry["str"] = str_mod
-    dmg_entry.update(dmg_bd)
-    # Merge damage_all pool (e.g. Weapon Specialization)
-    for k, v in dmg_all_bd.items():
-        dmg_entry[k] = dmg_entry.get(k, 0) + v
-    dmg_entry = _nz(dmg_entry)
-    dmg_entry["total"] = c.get("damage_str_bonus")
-    d["damage_melee"] = dmg_entry
+    dmg_typed = _pool_breakdown(c.get_pool("damage_melee"), c)
+    dmg_all = _pool_breakdown(c.get_pool("damage_all"), c)
+    for bt, v in dmg_all.items():
+        dmg_typed[bt] = dmg_typed.get(bt, 0) + v
+    damage_melee = Breakdown(
+        total=c.get("damage_str_bonus"),
+        ability={Ability.STR: str_mod} if str_mod else {},
+        typed=_drop_zeros(dmg_typed),
+    )
 
     # Grapple
     grapple_size = c._compute_size_mod_grapple()
-    grapple_pool = c.get_pool("grapple")
-    grapple_bd = _pool_breakdown(grapple_pool, c)
-    grapple_entry: dict = {"bab": c.bab}
-    if str_mod:
-        grapple_entry["str"] = str_mod
-    if grapple_size:
-        grapple_entry["size"] = grapple_size
-    grapple_entry.update(grapple_bd)
-    grapple_entry["total"] = c.get("grapple")
-    d["grapple"] = grapple_entry
+    grapple = Breakdown(
+        total=c.get("grapple"),
+        base=c.bab,
+        ability={Ability.STR: str_mod} if str_mod else {},
+        size=grapple_size or None,
+        typed=_pool_breakdown(c.get_pool("grapple"), c),
+    )
 
-    return d
+    return CombatSection(
+        ac=ac,
+        touch_ac=c.touch_ac(),
+        flatfooted_ac=c.flatfooted_ac(),
+        hp_max=hp_max,
+        bab=bab,
+        initiative=initiative,
+        speed=speed,
+        sr=c.get("sr"),
+        saves=saves,
+        attack_melee=_attack_breakdown(c, "attack_melee", Ability.STR),
+        attack_ranged=_attack_breakdown(c, "attack_ranged", Ability.DEX),
+        damage_melee=damage_melee,
+        grapple=grapple,
+    )
 
 
 def _attack_breakdown(
     c: "Character",
     stat_key: str,
     ability: Ability,
-) -> dict:
-    """Build attack breakdown for melee or ranged."""
-    bab = c.bab
+) -> Breakdown:
     ab_mod = c.get_ability_modifier(ability)
     size = c._compute_size_mod_attack()
 
-    # Merge specific + attack_all pools
-    pool = c.get_pool(stat_key)
-    all_pool = c.get_pool("attack_all")
-    bd = _pool_breakdown(pool, c)
-    all_bd = _pool_breakdown(all_pool, c)
+    typed = _pool_breakdown(c.get_pool(stat_key), c)
+    all_bd = _pool_breakdown(c.get_pool("attack_all"), c)
+    for bt, v in all_bd.items():
+        typed[bt] = typed.get(bt, 0) + v
+    typed = _drop_zeros(typed)
 
-    entry: dict = {"bab": bab}
-    if ab_mod:
-        entry[ability] = ab_mod
-    if size:
-        entry["size"] = size
-    entry.update(bd)
-    for k, v in all_bd.items():
-        entry[k] = entry.get(k, 0) + v
-    entry = {k: v for k, v in entry.items() if v != 0}
-    entry["total"] = c.get(stat_key)
-    return entry
+    return Breakdown(
+        total=c.get(stat_key),
+        base=c.bab,
+        ability={ability: ab_mod} if ab_mod else {},
+        size=size or None,
+        typed=typed,
+    )
 
 
 # -----------------------------------------------------------
@@ -343,11 +321,11 @@ def _attack_breakdown(
 # -----------------------------------------------------------
 
 
-def _iteratives(c: "Character") -> dict:
-    return {
-        "melee": c.attack_iteratives(melee=True),
-        "ranged": c.attack_iteratives(melee=False),
-    }
+def _iteratives(c: "Character") -> Iteratives:
+    return Iteratives(
+        melee=c.attack_iteratives(melee=True),
+        ranged=c.attack_iteratives(melee=False),
+    )
 
 
 # -----------------------------------------------------------
@@ -355,72 +333,47 @@ def _iteratives(c: "Character") -> dict:
 # -----------------------------------------------------------
 
 
-def _skills(c: "Character", app_state: "AppState") -> dict:
-    from heroforge.engine.skills import (
-        compute_skill_total,
-    )
+def _skills(
+    c: "Character",
+    app_state: "AppState",
+) -> dict[KnownSkill, SkillEntry]:
+    from heroforge.engine.skills import compute_skill_total
 
-    result = {}
+    result: dict[KnownSkill, SkillEntry] = {}
     for sd in app_state.skill_registry.all_skills():
         st = compute_skill_total(c, sd)
-        # Include skill only if it has any modifier
-        # beyond the base ability mod
-        has_extra = (
-            st.ranks != 0
-            or st.misc_bonus != 0
-            or st.synergy_bonus != 0
-            or st.armor_penalty != 0
-            or st.speed_mod != 0
+        pool = c.get_pool(sd.key)
+        bd = _pool_breakdown(pool, c) if pool else {}
+
+        # Pool's UNTYPED bucket includes ranks — subtract so
+        # only genuine untyped bonuses remain.
+        if bd.get(BonusType.UNTYPED, 0):
+            remaining = bd[BonusType.UNTYPED] - st.ranks
+            if remaining:
+                bd[BonusType.UNTYPED] = remaining
+            else:
+                del bd[BonusType.UNTYPED]
+
+        has_extra = bool(
+            st.ranks
+            or st.misc_bonus
+            or st.synergy_bonus
+            or st.armor_penalty
+            or st.speed_mod
+            or bd
         )
-        if not has_extra:
-            # Check pool for typed bonuses (racial, etc.)
-            pool = c.get_pool(sd.key)
-            if pool:
-                bd = _pool_breakdown(pool, c)
-                # Pool includes ranks as untyped;
-                # if only ranks and ability mod,
-                # skip. Check for non-rank entries.
-                non_rank = {
-                    k: v
-                    for k, v in bd.items()
-                    if k != "untyped" or v != st.ranks
-                }
-                if non_rank:
-                    has_extra = True
         if not has_extra:
             continue
 
-        entry: dict = {}
-        if st.ranks:
-            entry["ranks"] = st.ranks
-        entry["ability_mod"] = st.ability_mod
-        if st.synergy_bonus:
-            entry["synergy"] = st.synergy_bonus
-        if st.armor_penalty:
-            entry["armor_penalty"] = st.armor_penalty
-        if st.speed_mod:
-            entry["speed_mod"] = st.speed_mod
-
-        # Add typed pool bonuses (racial, competence...)
-        pool = c.get_pool(sd.key)
-        if pool:
-            bd = _pool_breakdown(pool, c)
-            # Remove ranks (already shown) and
-            # ability mod (shown separately)
-            # Pool "untyped" includes ranks, so
-            # subtract them
-            if "untyped" in bd:
-                remaining = bd["untyped"] - st.ranks
-                if remaining:
-                    bd["untyped"] = remaining
-                else:
-                    del bd["untyped"]
-            for k, v in bd.items():
-                if v != 0:
-                    entry[k] = v
-
-        entry["total"] = st.total
-        result[sd.name] = entry
+        result[KnownSkill(sd.name)] = SkillEntry(
+            total=st.total,
+            ability_mod=st.ability_mod,
+            ranks=st.ranks or None,
+            synergy=st.synergy_bonus or None,
+            armor_penalty=st.armor_penalty or None,
+            speed_mod=st.speed_mod or None,
+            typed=bd,
+        )
     return result
 
 
@@ -429,13 +382,9 @@ def _skills(c: "Character", app_state: "AppState") -> dict:
 # -----------------------------------------------------------
 
 
-def _carrying(c: "Character") -> dict:
+def _carrying(c: "Character") -> CarryingCapacity:
     light, med, heavy = c.carrying_capacity()
-    return {
-        "light": light,
-        "medium": med,
-        "heavy": heavy,
-    }
+    return CarryingCapacity(light=light, medium=med, heavy=heavy)
 
 
 # -----------------------------------------------------------
@@ -453,7 +402,7 @@ def _feats(c: "Character") -> list[str]:
 
 
 def _class_features(c: "Character", app_state: "AppState") -> list[str]:
-    features = []
+    features: list[str] = []
     for class_name, level in c.class_level_map.items():
         defn = app_state.class_registry.get(class_name)
         if defn is None:
@@ -469,14 +418,18 @@ def _class_features(c: "Character", app_state: "AppState") -> list[str]:
 # -----------------------------------------------------------
 
 
-def _spellcasting(c: "Character", app_state: "AppState") -> dict:
+def _spellcasting(
+    c: "Character",
+    app_state: "AppState",
+) -> dict[KnownClass, SpellcastingEntry]:
+    from heroforge.engine.classes import SpellPreparation
     from heroforge.engine.spellcasting import (
         slots_per_day,
         spell_save_dc,
         spells_known,
     )
 
-    result = {}
+    result: dict[KnownClass, SpellcastingEntry] = {}
     for class_name, level in c.class_level_map.items():
         defn = app_state.class_registry.get(class_name)
         if defn is None or defn.spellcasting is None:
@@ -488,34 +441,22 @@ def _spellcasting(c: "Character", app_state: "AppState") -> dict:
         ab_score = c.get_ability_score(sc.stat)
         ab_mod = c.get_ability_modifier(sc.stat)
         slots = slots_per_day(class_name, level, ab_score)
-        # Strip trailing None entries
         while slots and slots[-1] is None:
             slots.pop()
 
-        entry: dict = {
-            "caster_level": level,
-            "key_ability": sc.stat,
-            "cast_type": sc.cast_type,
-            "preparation": sc.preparation,
-            "slots_per_day": slots,
-        }
-
-        # Spell save DCs per level
-        dcs = {}
+        dcs: dict[int, int] = {}
         for spell_lvl in range(len(slots)):
             if slots[spell_lvl] is not None:
                 dcs[spell_lvl] = spell_save_dc(ab_mod, spell_lvl)
-        entry["spell_save_dc"] = dcs
 
-        # Spells known (spontaneous casters)
-        if sc.preparation == "spontaneous":
+        known_count: list[int | None] | None = None
+        known_spells: dict[int, list[str]] | None = None
+        if sc.preparation == SpellPreparation.SPONTANEOUS:
             known = spells_known(class_name, level)
             while known and known[-1] is None:
                 known.pop()
-            entry["spells_known_count"] = known
+            known_count = known
 
-            # Actual spell list from level entries
-            # spells_learned is {spell_level: [names]}
             by_level: dict[int, list[str]] = {}
             replaced: set[str] = set()
             for lv in c.levels:
@@ -526,17 +467,24 @@ def _spellcasting(c: "Character", app_state: "AppState") -> dict:
                 for sl, names in lv.spells_learned.items():
                     by_level.setdefault(int(sl), [])
                     by_level[int(sl)].extend(names)
-            # Remove replaced spells
             for sl in by_level:
                 by_level[sl] = [s for s in by_level[sl] if s not in replaced]
-            # Only include non-empty levels
             spells_dict = {
                 sl: names for sl, names in sorted(by_level.items()) if names
             }
             if spells_dict:
-                entry["spells_known"] = spells_dict
+                known_spells = spells_dict
 
-        result[class_name] = entry
+        result[KnownClass(class_name)] = SpellcastingEntry(
+            caster_level=level,
+            key_ability=sc.stat,
+            cast_type=sc.cast_type,
+            preparation=sc.preparation,
+            slots_per_day=slots,
+            spell_save_dc=dcs,
+            spells_known_count=known_count,
+            spells_known=known_spells,
+        )
     return result
 
 
@@ -560,86 +508,63 @@ def _special_qualities(c: "Character", app_state: "AppState") -> list[str]:
 # -----------------------------------------------------------
 
 
-def _equipment(c: "Character") -> dict:
-    from heroforge.engine.equipment import (
-        equipment_display_name,
-    )
+def _equipment(c: "Character") -> EquipmentSection:
+    from heroforge.engine.equipment import equipment_display_name
 
     eq = c.equipment
-    result: dict = {}
+    section = EquipmentSection()
 
     armor = eq.get("armor")
     if armor:
-        entry: dict = {
-            "name": equipment_display_name(
+        max_dex_raw = armor.get("max_dex_bonus", -1)
+        section.armor = ArmorDisplay(
+            name=equipment_display_name(
                 base=armor.get("name", ""),
                 enhancement=armor.get("enhancement", 0),
                 material=armor.get("material", ""),
             ),
-            "acp": armor.get("armor_check_penalty", 0),
-        }
-        max_dex = armor.get("max_dex_bonus", -1)
-        if max_dex >= 0:
-            entry["max_dex"] = max_dex
-        asf = armor.get("arcane_spell_failure", 0)
-        if asf:
-            entry["asf"] = asf
-        props = armor.get("properties", [])
-        if props:
-            entry["properties"] = props
-        result["armor"] = entry
+            acp=armor.get("armor_check_penalty", 0),
+            max_dex=max_dex_raw if max_dex_raw >= 0 else None,
+            asf=armor.get("arcane_spell_failure", 0) or None,
+            properties=list(armor.get("properties", [])),
+        )
 
     shield = eq.get("shield")
     if shield:
-        entry = {
-            "name": equipment_display_name(
+        section.shield = ArmorDisplay(
+            name=equipment_display_name(
                 base=shield.get("name", ""),
                 enhancement=shield.get("enhancement", 0),
                 material=shield.get("material", ""),
             ),
-            "acp": shield.get("armor_check_penalty", 0),
-        }
-        asf = shield.get("arcane_spell_failure", 0)
-        if asf:
-            entry["asf"] = asf
-        props = shield.get("properties", [])
-        if props:
-            entry["properties"] = props
-        result["shield"] = entry
+            acp=shield.get("armor_check_penalty", 0),
+            asf=shield.get("arcane_spell_failure", 0) or None,
+            properties=list(shield.get("properties", [])),
+        )
 
-    worn = eq.get("worn", [])
-    if worn:
-        result["worn"] = list(worn)
+    section.worn = [KnownMagicItem(n) for n in eq.get("worn", [])]
 
-    weapons = eq.get("weapons", [])
-    if weapons:
-        wlist = []
-        for w in weapons:
-            wlist.append(
-                {
-                    "name": equipment_display_name(
-                        base=w.get("base", ""),
-                        enhancement=w.get("enhancement", 0),
-                        material=w.get("material", ""),
-                        name=w.get("name", ""),
-                    ),
-                    **{
-                        k: v
-                        for k, v in w.items()
-                        if k
-                        not in (
-                            "name",
-                            "base",
-                            "enhancement",
-                            "material",
-                        )
-                        and v
-                    },
-                }
+    for w in eq.get("weapons", []):
+        section.weapons.append(
+            WeaponDisplay(
+                name=equipment_display_name(
+                    base=w.get("base", ""),
+                    enhancement=w.get("enhancement", 0),
+                    material=w.get("material", ""),
+                    name=w.get("name", ""),
+                ),
+                damage_dice=w.get("damage_dice", ""),
+                crit_range=w.get("crit_range", ""),
+                crit_mult=w.get("crit_mult", ""),
+                range_inc=w.get("range_inc") or None,
+                damage_types=list(w.get("damage_types", [])),
+                weapon_type=w.get("weapon_type", ""),
+                weight=w.get("weight") or None,
+                properties=list(w.get("properties", [])),
             )
-        result["weapons"] = wlist
+        )
 
-    return result
+    return section
 
 
 # -----------------------------------------------------------
@@ -650,7 +575,7 @@ def _equipment(c: "Character") -> dict:
 def main() -> None:
     """CLI entry point: uv run charsheet."""
     parser = argparse.ArgumentParser(
-        description=("Build a character sheet from YAML"),
+        description="Build a character sheet from YAML",
     )
     parser.add_argument(
         "input",
@@ -666,18 +591,17 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    from heroforge.ui.app_state import AppState
-
     state = AppState()
     state.load_rules()
 
     sheet = extract_sheet(args.input, state)
-
-    from heroforge.engine.persistence import yaml_dump
-
-    out = yaml_dump(sheet)
+    out = yaml_dump(converter.unstructure(sheet))
 
     if args.output:
         args.output.write_text(out)
     else:
         sys.stdout.write(out)
+
+
+if __name__ == "__main__":
+    main()

@@ -7,71 +7,75 @@ identity:
   deity: Pelor
   size: Medium
 abilities:
-  STR:
+  str:
     base: 10
     score: 10
     mod: 0
-  DEX:
+  dex:
     base: 10
     score: 10
     mod: 0
-  CON:
+  con:
     base: 14
     score: 14
     mod: 2
-  INT:
+  int:
     base: 10
     score: 10
     mod: 0
-  WIS:
+  wis:
     base: 18
     score: 18
     mod: 4
-  CHA:
+  cha:
     base: 12
     score: 12
     mod: 1
 combat:
   ac:
-    base: 10
     total: 10
+    base: 10
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 110
-    con: 36
     total: 146
+    base: 110
+    ability:
+      con: 36
   bab:
-    base: 11
     total: 11
+    base: 11
   initiative:
     total: 0
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 9
-    con: 2
-    total: 11
-  ref:
-    base: 5
-    total: 5
-  will:
-    base: 12
-    wis: 4
-    total: 16
+  saves:
+    fort:
+      total: 11
+      base: 9
+      ability:
+        con: 2
+    ref:
+      total: 5
+      base: 5
+    will:
+      total: 16
+      base: 12
+      ability:
+        wis: 4
   attack_melee:
-    bab: 11
     total: 11
+    base: 11
   attack_ranged:
-    bab: 11
     total: 11
+    base: 11
   damage_melee:
     total: 0
   grapple:
-    bab: 11
     total: 11
+    base: 11
 attack_iteratives:
   melee:
     - 11
@@ -83,29 +87,29 @@ attack_iteratives:
     - 1
 skills:
   Concentration:
-    ranks: 21
-    ability_mod: 2
     total: 23
+    ability_mod: 2
+    ranks: 21
   Diplomacy:
-    ranks: 4
-    ability_mod: 1
     total: 5
-  Heal:
-    ranks: 12
-    ability_mod: 4
-    total: 16
-  Knowledge (Religion):
-    ranks: 10
-    ability_mod: 0
-    total: 10
-  Knowledge (The Planes):
+    ability_mod: 1
     ranks: 4
-    ability_mod: 0
-    total: 4
-  Spellcraft:
+  Heal:
+    total: 16
+    ability_mod: 4
     ranks: 12
+  Knowledge (Religion):
+    total: 10
     ability_mod: 0
+    ranks: 10
+  Knowledge (The Planes):
+    total: 4
+    ability_mod: 0
+    ranks: 4
+  Spellcraft:
     total: 12
+    ability_mod: 0
+    ranks: 12
 carrying_capacity:
   light: 33
   medium: 66
@@ -150,4 +154,3 @@ spellcasting:
       5: 19
       6: 20
       7: 21
-resources: {}

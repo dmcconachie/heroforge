@@ -7,75 +7,83 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 10
     score: 10
     mod: 0
-  DEX:
+  dex:
     base: 18
     score: 18
     mod: 4
-  CON:
+  con:
     base: 12
     score: 12
     mod: 1
-  INT:
+  int:
     base: 12
     score: 12
     mod: 1
-  WIS:
+  wis:
     base: 10
     score: 10
     mod: 0
-  CHA:
+  cha:
     base: 8
     score: 8
     mod: -1
 combat:
   ac:
-    base: 10
-    dex: 4
     total: 14
+    base: 10
+    ability:
+      dex: 4
   touch_ac: 14
   flatfooted_ac: 14
   hp_max:
-    hit_dice: 90
-    con: 17
     total: 107
+    base: 90
+    ability:
+      con: 17
   bab:
-    base: 12
     total: 12
+    base: 12
   initiative:
-    dex: 4
     total: 4
+    ability:
+      dex: 4
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 5
-    con: 1
-    total: 6
-  ref:
-    base: 12
-    dex: 4
-    untyped: 2
-    total: 18
-  will:
-    base: 5
-    total: 5
+  saves:
+    fort:
+      total: 6
+      base: 5
+      ability:
+        con: 1
+    ref:
+      total: 18
+      base: 12
+      ability:
+        dex: 4
+      typed:
+        untyped: 2
+    will:
+      total: 5
+      base: 5
   attack_melee:
-    bab: 12
     total: 12
+    base: 12
   attack_ranged:
-    bab: 12
-    dex: 4
     total: 16
+    base: 12
+    ability:
+      dex: 4
   damage_melee:
     total: 0
   grapple:
-    bab: 12
     total: 12
+    base: 12
 attack_iteratives:
   melee:
     - 12
@@ -87,66 +95,66 @@ attack_iteratives:
     - 6
 skills:
   Balance:
-    ranks: 20
-    ability_mod: 4
-    synergy: 2
     total: 26
+    ability_mod: 4
+    ranks: 20
+    synergy: 2
   Bluff:
-    ranks: 1
-    ability_mod: -1
     total: 0
-  Disable Device:
-    ranks: 5
-    ability_mod: 1
-    total: 6
-  Escape Artist:
-    ranks: 10
-    ability_mod: 4
-    total: 14
-  Hide:
-    ranks: 20
-    ability_mod: 4
-    total: 24
-  Jump:
-    ability_mod: 0
-    synergy: 2
-    total: 2
-  Listen:
-    ranks: 20
-    ability_mod: 0
-    total: 20
-  Move Silently:
-    ranks: 19
-    ability_mod: 4
-    total: 23
-  Open Lock:
-    ranks: 10
-    ability_mod: 4
-    total: 14
-  Perform:
-    ranks: 15
     ability_mod: -1
-    total: 14
-  Search:
-    ranks: 20
-    ability_mod: 1
-    total: 21
-  Spot:
-    ranks: 20
-    ability_mod: 0
-    total: 20
-  Survival:
-    ability_mod: 0
-    synergy: 2
-    total: 2
-  Tumble:
-    ranks: 20
-    ability_mod: 4
-    total: 24
-  Use Rope:
-    ability_mod: 4
-    synergy: 2
+    ranks: 1
+  Disable Device:
     total: 6
+    ability_mod: 1
+    ranks: 5
+  Escape Artist:
+    total: 14
+    ability_mod: 4
+    ranks: 10
+  Hide:
+    total: 24
+    ability_mod: 4
+    ranks: 20
+  Jump:
+    total: 2
+    ability_mod: 0
+    synergy: 2
+  Listen:
+    total: 20
+    ability_mod: 0
+    ranks: 20
+  Move Silently:
+    total: 23
+    ability_mod: 4
+    ranks: 19
+  Open Lock:
+    total: 14
+    ability_mod: 4
+    ranks: 10
+  Perform:
+    total: 14
+    ability_mod: -1
+    ranks: 15
+  Search:
+    total: 21
+    ability_mod: 1
+    ranks: 20
+  Spot:
+    total: 20
+    ability_mod: 0
+    ranks: 20
+  Survival:
+    total: 2
+    ability_mod: 0
+    synergy: 2
+  Tumble:
+    total: 24
+    ability_mod: 4
+    ranks: 20
+  Use Rope:
+    total: 6
+    ability_mod: 4
+    synergy: 2
 carrying_capacity:
   light: 33
   medium: 66
@@ -184,4 +192,3 @@ class_features:
 equipment:
   weapons:
     - name: Rapier
-resources: {}

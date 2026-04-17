@@ -36,6 +36,8 @@ src/heroforge/
 │   ├── sheet.py            # extract_sheet(),
 │   │                       #   gather_sheet(), charsheet
 │   │                       #   CLI entry point
+│   ├── sheet_schema.py     # Sheet + sub-section
+│   │                       #   dataclasses (typed output)
 │   ├── equipment.py        # ArmorDefinition,
 │   │                       #   WeaponDefinition,
 │   │                       #   equip/unequip helpers
@@ -336,25 +338,40 @@ derived from `levels:` — no redundant top-level keys.
 template, and feat effects through the normal engine
 methods so all derived stats recompute correctly.
 
-## Layer 10b: Sheet extraction (`engine/sheet.py`) — TODO
+## Layer 10b: Sheet extraction (`engine/sheet.py`)
 
 `extract_sheet(path, app_state)` loads a `.char.yaml` and
-returns a complete dict of all numerical values with full
-bonus-type breakdowns. `gather_sheet(character, app_state)`
-does the extraction from an already-loaded Character.
+returns a typed `Sheet` (defined in
+`engine/sheet_schema.py`) containing every numerical value
+with full bonus-type breakdowns.
+`gather_sheet(character, app_state)` does the same from an
+already-loaded Character.
 
-CLI entry point: `uv run charsheet input.char.yaml`
-prints YAML to stdout; `-o file.yaml` writes to file.
+CLI entry points: `uv run charsheet input.char.yaml` and
+`python -m heroforge.engine.sheet input.char.yaml` both
+serialise the Sheet via the shared cattrs converter
+(`rules/schema.py`) and print YAML to stdout; `-o file.yaml`
+writes to file.
 
-The output dict includes: identity, abilities (base +
-typed bonuses + score + mod), combat stats (base + typed
-bonuses + total for AC, saves, attacks, grapple, HP,
-initiative, speed, SR), per-weapon attacks with
-weapon-specific bonuses, skills (ranks + ability_mod +
-typed bonuses), carrying capacity, feats, class features,
-spellcasting (slots, DCs, spells known), and resources.
+`Sheet` includes: identity, abilities (base + typed
+bonuses + score + mod), combat stats (base + typed bonuses
++ total for AC, saves, attacks, grapple, HP, initiative,
+speed, SR), attack iteratives, skills (ranks + ability_mod
++ typed bonuses), carrying capacity, feats, class
+features, spellcasting (slots, DCs, spells known),
+special qualities, and equipment.
 
-Zero-value bonuses are omitted from the output.
+The cattrs converter has per-class `omit_if_default`
+unstructure hooks registered for every sheet dataclass,
+so fields left at their default (None / empty dict /
+empty list) disappear from the YAML. Required fields
+(totals, scores) always emit.
+
+Integration coverage lives in
+`tests/integration/test_full_builds.py`, which invokes
+the CLI as a subprocess and compares stdout byte-for-byte
+against `*.expected.yaml` golden files under
+`base_characters/` and `custom_characters/`.
 
 ## Layer 11: Equipment (`engine/equipment.py`)
 

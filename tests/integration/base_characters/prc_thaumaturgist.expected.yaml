@@ -7,71 +7,75 @@ identity:
   deity: St. Cuthbert
   size: Medium
 abilities:
-  STR:
+  str:
     base: 10
     score: 10
     mod: 0
-  DEX:
+  dex:
     base: 10
     score: 10
     mod: 0
-  CON:
+  con:
     base: 14
     score: 14
     mod: 2
-  INT:
+  int:
     base: 10
     score: 10
     mod: 0
-  WIS:
+  wis:
     base: 16
     score: 16
     mod: 3
-  CHA:
+  cha:
     base: 14
     score: 14
     mod: 2
 combat:
   ac:
-    base: 10
     total: 10
+    base: 10
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 47
-    con: 20
     total: 67
+    base: 47
+    ability:
+      con: 20
   bab:
-    base: 5
     total: 5
+    base: 5
   initiative:
     total: 0
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 5
-    con: 2
-    total: 7
-  ref:
-    base: 2
-    total: 2
-  will:
-    base: 8
-    wis: 3
-    total: 11
+  saves:
+    fort:
+      total: 7
+      base: 5
+      ability:
+        con: 2
+    ref:
+      total: 2
+      base: 2
+    will:
+      total: 11
+      base: 8
+      ability:
+        wis: 3
   attack_melee:
-    bab: 5
     total: 5
+    base: 5
   attack_ranged:
-    bab: 5
     total: 5
+    base: 5
   damage_melee:
     total: 0
   grapple:
-    bab: 5
     total: 5
+    base: 5
 attack_iteratives:
   melee:
     - 5
@@ -79,25 +83,25 @@ attack_iteratives:
     - 5
 skills:
   Concentration:
-    ranks: 13
-    ability_mod: 2
     total: 15
+    ability_mod: 2
+    ranks: 13
   Knowledge (Religion):
-    ranks: 8
-    ability_mod: 0
     total: 8
+    ability_mod: 0
+    ranks: 8
   Knowledge (The Planes):
-    ranks: 10
-    ability_mod: 0
     total: 10
-  Spellcraft:
-    ranks: 8
     ability_mod: 0
+    ranks: 10
+  Spellcraft:
     total: 8
+    ability_mod: 0
+    ranks: 8
   Survival:
+    total: 5
     ability_mod: 3
     synergy: 2
-    total: 5
 carrying_capacity:
   light: 33
   medium: 66
@@ -135,4 +139,3 @@ spellcasting:
       1: 14
       2: 15
       3: 16
-resources: {}

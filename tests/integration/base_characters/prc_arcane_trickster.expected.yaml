@@ -7,78 +7,89 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 8
     score: 8
     mod: -1
-  DEX:
+  dex:
     base: 14
     score: 14
     mod: 2
-  CON:
+  con:
     base: 12
     score: 12
     mod: 1
-  INT:
+  int:
     base: 18
     score: 18
     mod: 4
-  WIS:
+  wis:
     base: 10
     score: 10
     mod: 0
-  CHA:
+  cha:
     base: 10
     score: 10
     mod: 0
 combat:
   ac:
-    base: 10
-    dex: 2
     total: 12
+    base: 10
+    ability:
+      dex: 2
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 59
-    con: 18
     total: 77
+    base: 59
+    ability:
+      con: 18
   bab:
-    base: 9
     total: 9
+    base: 9
   initiative:
-    dex: 2
-    untyped: 4
     total: 6
+    ability:
+      dex: 2
+    typed:
+      untyped: 4
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 5
-    con: 1
-    total: 6
-  ref:
-    base: 11
-    dex: 2
-    total: 13
-  will:
-    base: 12
-    total: 12
+  saves:
+    fort:
+      total: 6
+      base: 5
+      ability:
+        con: 1
+    ref:
+      total: 13
+      base: 11
+      ability:
+        dex: 2
+    will:
+      total: 12
+      base: 12
   attack_melee:
-    bab: 9
-    str: -1
     total: 8
+    base: 9
+    ability:
+      str: -1
   attack_ranged:
-    bab: 9
-    dex: 2
     total: 11
+    base: 9
+    ability:
+      dex: 2
   damage_melee:
-    str: -1
     total: -1
+    ability:
+      str: -1
   grapple:
-    bab: 9
-    str: -1
     total: 8
+    base: 9
+    ability:
+      str: -1
 attack_iteratives:
   melee:
     - 8
@@ -88,119 +99,119 @@ attack_iteratives:
     - 6
 skills:
   Balance:
-    ability_mod: 2
-    synergy: 2
     total: 4
+    ability_mod: 2
+    synergy: 2
   Bluff:
+    total: 6
+    ability_mod: 0
     ranks: 6
-    ability_mod: 0
-    total: 6
   Concentration:
-    ranks: 5
-    ability_mod: 1
     total: 6
+    ability_mod: 1
+    ranks: 5
   Decipher Script:
-    ranks: 10
-    ability_mod: 4
     total: 14
-  Diplomacy:
-    ability_mod: 0
-    synergy: 2
-    total: 2
-  Disable Device:
-    ranks: 17
     ability_mod: 4
+    ranks: 10
+  Diplomacy:
+    total: 2
+    ability_mod: 0
+    synergy: 2
+  Disable Device:
     total: 21
-  Disguise:
-    ability_mod: 0
-    synergy: 2
-    total: 2
-  Escape Artist:
+    ability_mod: 4
     ranks: 17
-    ability_mod: 2
+  Disguise:
+    total: 2
+    ability_mod: 0
+    synergy: 2
+  Escape Artist:
     total: 19
-  Gather Information:
-    ability_mod: 0
-    synergy: 2
-    total: 2
-  Hide:
-    ranks: 16
     ability_mod: 2
-    total: 18
-  Intimidate:
+    ranks: 17
+  Gather Information:
+    total: 2
     ability_mod: 0
     synergy: 2
+  Hide:
+    total: 18
+    ability_mod: 2
+    ranks: 16
+  Intimidate:
     total: 2
+    ability_mod: 0
+    synergy: 2
   Jump:
+    total: 1
     ability_mod: -1
     synergy: 2
-    total: 1
   Knowledge (Arcana):
-    ranks: 5
-    ability_mod: 4
     total: 9
-  Knowledge (History):
-    ranks: 1
     ability_mod: 4
-    total: 5
-  Knowledge (Local):
-    ranks: 6
-    ability_mod: 4
-    total: 10
-  Knowledge (Nature):
-    ranks: 3
-    ability_mod: 4
-    total: 7
-  Knowledge (Religion):
-    ranks: 4
-    ability_mod: 4
-    total: 8
-  Knowledge (The Planes):
-    ranks: 4
-    ability_mod: 4
-    total: 8
-  Listen:
-    ranks: 16
-    ability_mod: 0
-    total: 16
-  Move Silently:
-    ranks: 16
-    ability_mod: 2
-    total: 18
-  Open Lock:
-    ranks: 16
-    ability_mod: 2
-    total: 18
-  Search:
-    ranks: 16
-    ability_mod: 4
-    total: 20
-  Sleight of Hand:
-    ranks: 6
-    ability_mod: 2
-    synergy: 2
-    total: 10
-  Spellcraft:
     ranks: 5
+  Knowledge (History):
+    total: 5
     ability_mod: 4
-    synergy: 2
-    total: 11
-  Spot:
-    ranks: 16
-    ability_mod: 0
+    ranks: 1
+  Knowledge (Local):
+    total: 10
+    ability_mod: 4
+    ranks: 6
+  Knowledge (Nature):
+    total: 7
+    ability_mod: 4
+    ranks: 3
+  Knowledge (Religion):
+    total: 8
+    ability_mod: 4
+    ranks: 4
+  Knowledge (The Planes):
+    total: 8
+    ability_mod: 4
+    ranks: 4
+  Listen:
     total: 16
+    ability_mod: 0
+    ranks: 16
+  Move Silently:
+    total: 18
+    ability_mod: 2
+    ranks: 16
+  Open Lock:
+    total: 18
+    ability_mod: 2
+    ranks: 16
+  Search:
+    total: 20
+    ability_mod: 4
+    ranks: 16
+  Sleight of Hand:
+    total: 10
+    ability_mod: 2
+    ranks: 6
+    synergy: 2
+  Spellcraft:
+    total: 11
+    ability_mod: 4
+    ranks: 5
+    synergy: 2
+  Spot:
+    total: 16
+    ability_mod: 0
+    ranks: 16
   Survival:
+    total: 2
     ability_mod: 0
     synergy: 2
-    total: 2
   Tumble:
-    ranks: 16
-    ability_mod: 2
     total: 18
+    ability_mod: 2
+    ranks: 16
   Use Rope:
+    total: 4
     ability_mod: 2
     synergy: 2
-    total: 4
 carrying_capacity:
   light: 26
   medium: 53
@@ -248,4 +259,3 @@ spellcasting:
       1: 15
       2: 16
       3: 17
-resources: {}

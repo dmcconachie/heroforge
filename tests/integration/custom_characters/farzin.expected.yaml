@@ -3,111 +3,122 @@ identity:
   race: Human
   class_str: Druid 11 / Fighter 2
   level: 13
-  alignment: !!python/object/apply:heroforge.engine.character.Alignment
-    - neutral_good
+  alignment: neutral_good
   deity: Istus
   size: Medium
 abilities:
-  STR:
+  str:
     base: 14
-    level_bumps: 2
-    racial: 4
-    enhancement: 6
     score: 26
     mod: 8
-  DEX:
+    level_bumps: 2
+    typed:
+      racial: 4
+      enhancement: 6
+  dex:
     base: 12
-    racial: 2
     score: 14
     mod: 2
-  CON:
+    typed:
+      racial: 2
+  con:
     base: 14
-    racial: 4
     score: 18
     mod: 4
-  INT:
+    typed:
+      racial: 4
+  int:
     base: 12
-    racial: 2
     score: 14
     mod: 2
-  WIS:
+    typed:
+      racial: 2
+  wis:
     base: 15
-    level_bumps: 1
-    racial: 4
-    enhancement: 6
     score: 26
     mod: 8
-  CHA:
+    level_bumps: 1
+    typed:
+      racial: 4
+      enhancement: 6
+  cha:
     base: 8
-    racial: 4
     score: 12
     mod: 1
+    typed:
+      racial: 4
 combat:
   ac:
-    base: 10
-    dex: 1
-    natural_armor_enhancement: 5
-    natural_armor: 1
-    armor: 9
-    shield: 3
     total: 29
+    base: 10
+    ability:
+      dex: 1
+    typed:
+      natural_armor_enhancement: 5
+      natural_armor: 1
+      armor: 9
+      shield: 3
   touch_ac: 11
   flatfooted_ac: 28
   hp_max:
-    hit_dice: 68
-    con: 52
     total: 120
+    base: 68
+    ability:
+      con: 52
   bab:
-    base: 10
     total: 10
+    base: 10
   initiative:
-    dex: 2
     total: 2
+    ability:
+      dex: 2
   speed:
+    total: 20
     base: 30
-    untyped: -10
-    total: 20
+    typed:
+      untyped: -10
   sr: 0
-  fort:
-    base: 10
-    ? !!python/object/apply:heroforge.engine.character.Ability
-      - con
-    : 4
-    resistance: 5
-    total: 19
-  ref:
-    base: 3
-    ? !!python/object/apply:heroforge.engine.character.Ability
-      - dex
-    : 2
-    resistance: 5
-    total: 10
-  will:
-    base: 7
-    ? !!python/object/apply:heroforge.engine.character.Ability
-      - wis
-    : 8
-    resistance: 5
-    total: 20
+  saves:
+    fort:
+      total: 19
+      base: 10
+      ability:
+        con: 4
+      typed:
+        resistance: 5
+    ref:
+      total: 10
+      base: 3
+      ability:
+        dex: 2
+      typed:
+        resistance: 5
+    will:
+      total: 20
+      base: 7
+      ability:
+        wis: 8
+      typed:
+        resistance: 5
   attack_melee:
-    bab: 10
-    ? !!python/object/apply:heroforge.engine.character.Ability
-      - str
-    : 8
     total: 18
+    base: 10
+    ability:
+      str: 8
   attack_ranged:
-    bab: 10
-    ? !!python/object/apply:heroforge.engine.character.Ability
-      - dex
-    : 2
     total: 12
+    base: 10
+    ability:
+      dex: 2
   damage_melee:
-    str: 8
     total: 8
+    ability:
+      str: 8
   grapple:
-    bab: 10
-    str: 8
     total: 18
+    base: 10
+    ability:
+      str: 8
 attack_iteratives:
   melee:
     - 18
@@ -117,77 +128,86 @@ attack_iteratives:
     - 7
 skills:
   Balance:
-    ability_mod: 2
-    untyped: -5
     total: -3
+    ability_mod: 2
+    typed:
+      untyped: -5
   Climb:
-    ability_mod: 8
-    untyped: -5
     total: 3
+    ability_mod: 8
+    typed:
+      untyped: -5
   Concentration:
-    ranks: 16
-    ability_mod: 4
     total: 20
+    ability_mod: 4
+    ranks: 16
   Escape Artist:
-    ability_mod: 2
-    untyped: -5
     total: -3
+    ability_mod: 2
+    typed:
+      untyped: -5
   Handle Animal:
-    ranks: 5
-    ability_mod: 1
     total: 6
+    ability_mod: 1
+    ranks: 5
   Hide:
-    ability_mod: 2
-    untyped: -5
     total: -3
+    ability_mod: 2
+    typed:
+      untyped: -5
   Jump:
+    total: -3
     ability_mod: 8
     speed_mod: -6
-    untyped: -5
-    total: -3
+    typed:
+      untyped: -5
   Knowledge (Nature):
-    ranks: 16
-    ability_mod: 2
-    synergy: 2
     total: 20
+    ability_mod: 2
+    ranks: 16
+    synergy: 2
   Listen:
-    ranks: 16
-    ability_mod: 8
     total: 24
+    ability_mod: 8
+    ranks: 16
   Move Silently:
-    ability_mod: 2
-    untyped: -5
     total: -3
+    ability_mod: 2
+    typed:
+      untyped: -5
   Ride:
-    ranks: 16
-    ability_mod: 2
-    synergy: 2
     total: 20
-  Sleight of Hand:
     ability_mod: 2
-    untyped: -5
-    total: -3
-  Spellcraft:
-    ranks: 12
-    ability_mod: 2
-    total: 14
-  Spot:
     ranks: 16
-    ability_mod: 8
-    total: 24
-  Survival:
-    ranks: 5
-    ability_mod: 8
     synergy: 2
-    total: 15
-  Swim:
-    ability_mod: 8
-    untyped: -10
-    total: -2
-  Tumble:
-    ability_mod: 2
-    untyped: -5
+  Sleight of Hand:
     total: -3
+    ability_mod: 2
+    typed:
+      untyped: -5
+  Spellcraft:
+    total: 14
+    ability_mod: 2
+    ranks: 12
+  Spot:
+    total: 24
+    ability_mod: 8
+    ranks: 16
+  Survival:
+    total: 15
+    ability_mod: 8
+    ranks: 5
+    synergy: 2
+  Swim:
+    total: -2
+    ability_mod: 8
+    typed:
+      untyped: -10
+  Tumble:
+    total: -3
+    ability_mod: 2
+    typed:
+      untyped: -5
 carrying_capacity:
   light: 306
   medium: 613
@@ -223,12 +243,9 @@ class_features:
 spellcasting:
   Druid:
     caster_level: 11
-    key_ability: !!python/object/apply:heroforge.engine.character.Ability
-      - wis
-    cast_type: !!python/object/apply:heroforge.engine.classes.CastType
-      - divine
-    preparation: !!python/object/apply:heroforge.engine.classes.SpellPreparation
-      - prepared
+    key_ability: wis
+    cast_type: divine
+    preparation: prepared
     slots_per_day:
       - 6
       - 7
@@ -263,7 +280,6 @@ equipment:
     asf: 35
   shield:
     name: +1 Darkwood Heavy Wooden Shield
-    acp: 0
     asf: 15
     properties:
       - animated
@@ -274,4 +290,3 @@ equipment:
   weapons:
     - name: +1 Lance
     - name: Composite Longbow
-resources: {}

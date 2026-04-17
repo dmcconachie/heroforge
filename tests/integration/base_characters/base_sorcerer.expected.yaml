@@ -7,79 +7,91 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 8
     score: 8
     mod: -1
-  DEX:
+  dex:
     base: 14
     score: 14
     mod: 2
-  CON:
+  con:
     base: 14
     score: 14
     mod: 2
-  INT:
+  int:
     base: 10
     score: 10
     mod: 0
-  WIS:
+  wis:
     base: 10
     score: 10
     mod: 0
-  CHA:
+  cha:
     base: 18
     score: 18
     mod: 4
 combat:
   ac:
-    base: 10
-    dex: 2
     total: 12
+    base: 10
+    ability:
+      dex: 2
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 61
-    con: 40
-    untyped: 3
     total: 104
+    base: 61
+    ability:
+      con: 40
+    typed:
+      untyped: 3
   bab:
-    base: 10
     total: 10
+    base: 10
   initiative:
-    dex: 2
     total: 2
+    ability:
+      dex: 2
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 6
-    con: 2
-    total: 8
-  ref:
-    base: 6
-    dex: 2
-    total: 8
-  will:
-    base: 12
-    untyped: 2
-    total: 14
+  saves:
+    fort:
+      total: 8
+      base: 6
+      ability:
+        con: 2
+    ref:
+      total: 8
+      base: 6
+      ability:
+        dex: 2
+    will:
+      total: 14
+      base: 12
+      typed:
+        untyped: 2
   attack_melee:
-    bab: 10
-    str: -1
     total: 9
+    base: 10
+    ability:
+      str: -1
   attack_ranged:
-    bab: 10
-    dex: 2
     total: 12
+    base: 10
+    ability:
+      dex: 2
   damage_melee:
-    str: -1
     total: -1
+    ability:
+      str: -1
   grapple:
-    bab: 10
-    str: -1
     total: 9
+    base: 10
+    ability:
+      str: -1
 attack_iteratives:
   melee:
     - 9
@@ -89,38 +101,38 @@ attack_iteratives:
     - 7
 skills:
   Bluff:
-    ranks: 13
-    ability_mod: 4
     total: 17
+    ability_mod: 4
+    ranks: 13
   Concentration:
-    ranks: 23
-    ability_mod: 2
     total: 25
+    ability_mod: 2
+    ranks: 23
   Diplomacy:
+    total: 6
     ability_mod: 4
     synergy: 2
-    total: 6
   Disguise:
+    total: 6
     ability_mod: 4
     synergy: 2
-    total: 6
   Intimidate:
+    total: 6
     ability_mod: 4
     synergy: 2
-    total: 6
   Knowledge (Arcana):
-    ranks: 10
-    ability_mod: 0
     total: 10
+    ability_mod: 0
+    ranks: 10
   Sleight of Hand:
+    total: 4
     ability_mod: 2
     synergy: 2
-    total: 4
   Spellcraft:
-    ranks: 23
-    ability_mod: 0
-    synergy: 2
     total: 25
+    ability_mod: 0
+    ranks: 23
+    synergy: 2
 carrying_capacity:
   light: 26
   medium: 53
@@ -234,4 +246,3 @@ spellcasting:
 equipment:
   weapons:
     - name: Quarterstaff
-resources: {}

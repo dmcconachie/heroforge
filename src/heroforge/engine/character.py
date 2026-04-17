@@ -84,6 +84,18 @@ class Save(StrEnum):
     WILL = "will"
 
 
+class Size(StrEnum):
+    FINE = "Fine"
+    DIMINUTIVE = "Diminutive"
+    TINY = "Tiny"
+    SMALL = "Small"
+    MEDIUM = "Medium"
+    LARGE = "Large"
+    HUGE = "Huge"
+    GARGANTUAN = "Gargantuan"
+    COLOSSAL = "Colossal"
+
+
 SAVE_ABILITY: dict[Save, Ability] = {
     Save.FORT: Ability.CON,
     Save.REF: Ability.DEX,

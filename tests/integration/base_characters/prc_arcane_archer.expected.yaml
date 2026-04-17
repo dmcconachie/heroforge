@@ -7,82 +7,97 @@ identity:
   deity: ''
   size: Medium
 abilities:
-  STR:
+  str:
     base: 14
     score: 14
     mod: 2
-  DEX:
+  dex:
     base: 14
-    racial: 2
     score: 16
     mod: 3
-  CON:
+    typed:
+      racial: 2
+  con:
     base: 14
-    racial: -2
     score: 12
     mod: 1
-  INT:
+    typed:
+      racial: -2
+  int:
     base: 12
     score: 12
     mod: 1
-  WIS:
+  wis:
     base: 10
     score: 10
     mod: 0
-  CHA:
+  cha:
     base: 8
     score: 8
     mod: -1
 combat:
   ac:
-    base: 10
-    dex: 3
     total: 13
+    base: 10
+    ability:
+      dex: 3
   touch_ac: 13
   flatfooted_ac: 10
   hp_max:
-    hit_dice: 114
-    con: 17
     total: 131
+    base: 114
+    ability:
+      con: 17
   bab:
-    base: 16
     total: 16
+    base: 16
   initiative:
-    dex: 3
-    untyped: 4
     total: 7
+    ability:
+      dex: 3
+    typed:
+      untyped: 4
   speed:
-    base: 30
     total: 30
+    base: 30
   sr: 0
-  fort:
-    base: 12
-    con: 1
-    total: 13
-  ref:
-    base: 9
-    dex: 3
-    total: 12
-  will:
-    base: 7
-    total: 7
+  saves:
+    fort:
+      total: 13
+      base: 12
+      ability:
+        con: 1
+    ref:
+      total: 12
+      base: 9
+      ability:
+        dex: 3
+    will:
+      total: 7
+      base: 7
   attack_melee:
-    bab: 16
-    str: 2
-    untyped: 1
     total: 19
+    base: 16
+    ability:
+      str: 2
+    typed:
+      untyped: 1
   attack_ranged:
-    bab: 16
-    dex: 3
-    untyped: 1
     total: 20
+    base: 16
+    ability:
+      dex: 3
+    typed:
+      untyped: 1
   damage_melee:
-    str: 2
     total: 2
+    ability:
+      str: 2
   grapple:
-    bab: 16
-    str: 2
     total: 18
+    base: 16
+    ability:
+      str: 2
 attack_iteratives:
   melee:
     - 19
@@ -96,53 +111,53 @@ attack_iteratives:
     - 5
 skills:
   Climb:
-    ranks: 9
-    ability_mod: 2
     total: 11
+    ability_mod: 2
+    ranks: 9
   Concentration:
+    total: 3
+    ability_mod: 1
     ranks: 2
-    ability_mod: 1
-    total: 3
   Hide:
-    ranks: 12
-    ability_mod: 3
     total: 15
+    ability_mod: 3
+    ranks: 12
   Jump:
-    ranks: 9
-    ability_mod: 2
     total: 11
+    ability_mod: 2
+    ranks: 9
   Knowledge (Nature):
-    ability_mod: 1
-    synergy: 2
     total: 3
-  Listen:
-    ranks: 11
-    ability_mod: 0
-    total: 11
-  Move Silently:
-    ranks: 9
-    ability_mod: 3
-    total: 12
-  Spellcraft:
-    ranks: 1
     ability_mod: 1
-    total: 2
-  Spot:
-    ranks: 9
-    ability_mod: 0
-    total: 9
-  Survival:
-    ranks: 9
-    ability_mod: 0
-    total: 9
-  Swim:
-    ranks: 9
-    ability_mod: 2
+    synergy: 2
+  Listen:
     total: 11
+    ability_mod: 0
+    ranks: 11
+  Move Silently:
+    total: 12
+    ability_mod: 3
+    ranks: 9
+  Spellcraft:
+    total: 2
+    ability_mod: 1
+    ranks: 1
+  Spot:
+    total: 9
+    ability_mod: 0
+    ranks: 9
+  Survival:
+    total: 9
+    ability_mod: 0
+    ranks: 9
+  Swim:
+    total: 11
+    ability_mod: 2
+    ranks: 9
   Tumble:
+    total: 5
     ability_mod: 3
     synergy: 2
-    total: 5
 carrying_capacity:
   light: 58
   medium: 116
@@ -191,4 +206,3 @@ spellcasting:
 equipment:
   weapons:
     - name: Longbow
-resources: {}
