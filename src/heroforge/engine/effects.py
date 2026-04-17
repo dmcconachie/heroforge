@@ -55,6 +55,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry
+from heroforge.engine.character import Ability
 
 if TYPE_CHECKING:
     from typing import Any, Callable
@@ -133,12 +134,12 @@ def evaluate_formula(
     # Inject character-derived values when available
     if character is not None:
         namespace["character_level"] = character.total_level
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             namespace[f"{ab}_mod"] = character.get_ability_modifier(ab)
         namespace["bab"] = character.get("bab")
     else:
         namespace["character_level"] = 0
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             namespace[f"{ab}_mod"] = 0
         namespace["bab"] = 0
 

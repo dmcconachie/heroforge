@@ -24,6 +24,7 @@ from cattrs.gen import (
     override,
 )
 
+from heroforge.engine.character import Ability
 from heroforge.engine.classes import (
     ClassDefinition,
     ClassFeature,
@@ -32,12 +33,14 @@ from heroforge.engine.classes import (
 from heroforge.engine.domains import DomainDefinition
 from heroforge.engine.equipment import (
     ArmorDefinition,
+    DamageType,
     WeaponDefinition,
 )
 from heroforge.engine.persistence import (
     ArmorSlotEntry,
     CharLevelEntry,
 )
+from heroforge.engine.skills import SkillDefinition
 from heroforge.engine.spells import SpellEntry
 from heroforge.rules.known import KnownMaterial
 
@@ -53,10 +56,32 @@ converter = cattrs.Converter(forbid_extra_keys=True)
 # ---------------------------------------------------
 # Simple dataclasses: cattrs auto-structures these
 # with forbid_extra_keys. No hooks needed for:
-#   SkillDefinition, ConditionDefinition,
-#   MagicItemDefinition, RaceAbilityMod,
-#   RaceDefinition, SaveProgressions
+#   ConditionDefinition, MagicItemDefinition,
+#   RaceAbilityMod, RaceDefinition, SaveProgressions
 # ---------------------------------------------------
+
+# ---------------------------------------------------
+# SkillDefinition: ability "none" → None,
+# otherwise Ability enum.
+# ---------------------------------------------------
+
+
+def _structure_ability_or_none(v: object, _: type) -> Ability | None:
+    if v is None or v == "none":
+        return None
+    return Ability(v)
+
+
+converter.register_structure_hook(
+    SkillDefinition,
+    make_dict_structure_fn(
+        SkillDefinition,
+        converter,
+        ability=override(
+            struct_hook=_structure_ability_or_none,
+        ),
+    ),
+)
 
 # ---------------------------------------------------
 # float coercion: ArmorDefinition.weight,
@@ -70,6 +95,25 @@ converter.register_structure_hook(
         converter,
         weight=override(struct_hook=lambda v, _: float(v)),
     ),
+)
+
+# DamageType | str: pass through as-is.
+
+
+def _structure_damage_type_or_str(val: object, _: type) -> DamageType | str:
+    if isinstance(val, DamageType):
+        return val
+    if isinstance(val, str) and val:
+        try:
+            return DamageType(val)
+        except ValueError:
+            return val
+    return str(val) if val is not None else ""
+
+
+converter.register_structure_hook(
+    DamageType | str,
+    _structure_damage_type_or_str,
 )
 
 converter.register_structure_hook(
@@ -232,6 +276,22 @@ def _structure_material(val: object, _: type) -> KnownMaterial | None:
 converter.register_structure_hook(
     KnownMaterial | None,
     _structure_material,
+)
+
+# Ability | None: absent = None.
+
+
+def _structure_ability_or_none(val: object, _: type) -> Ability | None:
+    if val is None or val == "":
+        return None
+    if isinstance(val, Ability):
+        return val
+    return Ability(val)
+
+
+converter.register_structure_hook(
+    Ability | None,
+    _structure_ability_or_none,
 )
 
 

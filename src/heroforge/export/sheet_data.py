@@ -184,7 +184,9 @@ def gather(character: "Character", app_state: "AppState") -> SheetData:
         data.skills.append(
             SkillRow(
                 name=skill_def.name,
-                ability=skill_def.ability.upper(),
+                ability=(
+                    skill_def.ability.upper() if skill_def.ability else ""
+                ),
                 class_skill=skill_def.name in class_skills,
                 ranks=ranks,
                 misc=misc,

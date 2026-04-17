@@ -22,6 +22,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
+from heroforge.engine.character import Ability
 from heroforge.engine.stat import StatNode
 
 if TYPE_CHECKING:
@@ -44,7 +45,7 @@ class SkillDefinition:
 
     name: str
     key: str  # pool key e.g. "skill_hide"
-    ability: str  # "str", "dex", etc.
+    ability: Ability | None  # None for Speak Language
     trained_only: bool = False
     armor_check: bool = False
     synergies: list[dict] = field(default_factory=list)
@@ -124,7 +125,7 @@ class SkillTotal:
 
 
 def _make_skill_compute(
-    ability: str,
+    ability: Ability | None,
     skill_key: str,
 ) -> Callable[[dict[str, int], int], int]:
     """
@@ -182,7 +183,7 @@ def register_skills_on_character(
 
         compute_fn = _make_skill_compute(skill_def.ability, key)
 
-        if skill_def.ability == "none":
+        if skill_def.ability is None:
             inputs: list[str] = []
         else:
             inputs = [f"{skill_def.ability}_mod"]
@@ -381,7 +382,7 @@ def compute_skill_total(
                          and character is wearing armor.
     """
     ranks = character.skills.get(skill_def.name, 0)
-    if skill_def.ability == "none":
+    if skill_def.ability is None:
         ability_mod = 0
     else:
         ability_mod = character.get_ability_modifier(skill_def.ability)
@@ -442,10 +443,12 @@ def compute_skill_total(
 
 
 def build_skill_from_yaml(decl: dict) -> SkillDefinition:
+    raw_ab = decl["ability"]
+    ability: Ability | None = None if raw_ab == "none" else Ability(raw_ab)
     return SkillDefinition(
         name=decl["name"],
         key=decl["key"],
-        ability=decl["ability"],
+        ability=ability,
         trained_only=bool(decl.get("trained_only", False)),
         armor_check=bool(decl.get("armor_check", False)),
         synergies=decl.get("synergies", []),

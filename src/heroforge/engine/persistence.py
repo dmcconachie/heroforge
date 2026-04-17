@@ -24,9 +24,11 @@ from typing import TYPE_CHECKING
 
 import yaml
 
+from heroforge.engine.character import (
+    Ability,
+    Alignment,
+)
 from heroforge.rules.known import (
-    KnownAbility,
-    KnownAlignment,
     KnownArmor,
     KnownBuff,
     KnownClass,
@@ -61,7 +63,7 @@ class CharIdentity:
 
     name: str
     race: KnownRace
-    alignment: KnownAlignment
+    alignment: Alignment
     player: str = ""
     deity: str = ""
 
@@ -93,8 +95,8 @@ class CharLevelEntry:
     feats: list[FeatEntry] = field(default_factory=list)
     spells_learned: dict = field(default_factory=dict)
     spells_replaced: list[dict] = field(default_factory=list)
-    ability_bump: KnownAbility | None = None
-    inherent_bumps: dict[KnownAbility, int] = field(default_factory=dict)
+    ability_bump: Ability | None = None
+    inherent_bumps: dict[Ability, int] = field(default_factory=dict)
 
 
 @dataclass
@@ -171,7 +173,7 @@ class CharFile:
     """Top-level .char.yaml schema."""
 
     identity: CharIdentity
-    ability_scores: dict[KnownAbility, int] = field(default_factory=dict)
+    ability_scores: dict[Ability, int] = field(default_factory=dict)
     levels: list[CharLevelEntry] = field(default_factory=list)
     buffs: dict[KnownBuff, BuffEntry] = field(default_factory=dict)
     templates: dict[KnownTemplate, TemplateEntry] = field(default_factory=dict)
@@ -248,7 +250,7 @@ def _character_to_charfile(
     identity = CharIdentity(
         name=c.name,
         race=KnownRace(c.race),
-        alignment=KnownAlignment(c.alignment),
+        alignment=Alignment(c.alignment),
         player=getattr(c, "player", ""),
         deity=c.deity,
     )
@@ -265,7 +267,7 @@ def _character_to_charfile(
             if f.get("name")
         ]
         sr = {KnownSkill(k): v for k, v in sorted(lv.skill_ranks.items())}
-        ib = {KnownAbility(d["ability"]): d["value"] for d in lv.inherent_bumps}
+        ib = lv.inherent_bumps
         levels.append(
             CharLevelEntry(
                 level=lv.character_level,
@@ -324,7 +326,7 @@ def _character_to_charfile(
     return CharFile(
         identity=identity,
         ability_scores={
-            KnownAbility(ab): c._ability_scores.get(ab, 10)
+            Ability(ab): c._ability_scores.get(ab, 10)
             for ab in (
                 "str",
                 "dex",
@@ -426,12 +428,12 @@ def load_character(
     # Identity
     c.name = cf.identity.name
     c.player = cf.identity.player
-    c.alignment = str(cf.identity.alignment)
+    c.alignment = cf.identity.alignment
     c.deity = cf.identity.deity
 
     # Ability scores
     for ab, val in cf.ability_scores.items():
-        c.set_ability_score(str(ab), val)
+        c.set_ability_score(ab, val)
 
     # Race (validated by KnownRace)
     race_defn = app_state.race_registry.get(str(cf.identity.race))
@@ -455,16 +457,8 @@ def load_character(
                 ],
                 spells_learned=lv.spells_learned,
                 spells_replaced=lv.spells_replaced,
-                ability_bump=(
-                    str(lv.ability_bump) if lv.ability_bump else None
-                ),
-                inherent_bumps=[
-                    {
-                        "ability": str(ab),
-                        "value": v,
-                    }
-                    for ab, v in lv.inherent_bumps.items()
-                ],
+                ability_bump=lv.ability_bump,
+                inherent_bumps=lv.inherent_bumps,
             )
         )
     if c.levels:

@@ -21,6 +21,7 @@ from heroforge.engine.bonus import (
     BonusEntry,
     BonusType,
 )
+from heroforge.engine.character import Ability
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
@@ -35,7 +36,7 @@ if TYPE_CHECKING:
 class RaceAbilityMod:
     """One racial ability score modifier."""
 
-    ability: str  # "str", "dex", etc.
+    ability: Ability
     value: int
     bonus_type: BonusType = BonusType.UNTYPED
 
@@ -170,17 +171,7 @@ def apply_race(defn: RaceDefinition, character: "Character") -> None:
     character._graph.invalidate("attack_melee")
     character._graph.invalidate("attack_ranged")
 
-    affected = {
-        f"{ab}_score"
-        for ab in (
-            "str",
-            "dex",
-            "con",
-            "int",
-            "wis",
-            "cha",
-        )
-    }
+    affected = {f"{ab}_score" for ab in Ability}
     affected |= {
         "speed",
         "ac",
@@ -204,16 +195,6 @@ def remove_race(defn: RaceDefinition, character: "Character") -> None:
     character._graph.invalidate("speed")
     character.race = ""
 
-    affected = {
-        f"{ab}_score"
-        for ab in (
-            "str",
-            "dex",
-            "con",
-            "int",
-            "wis",
-            "cha",
-        )
-    }
+    affected = {f"{ab}_score" for ab in Ability}
     affected.add("speed")
     character._notify(affected)

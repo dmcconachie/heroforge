@@ -639,9 +639,9 @@ class TestAbilityBumpRoundTrip:
         path = tmp_path / "inherent.char.yaml"
         save_character(c, path)
         loaded = load_character(path, make_app_state())
-        assert loaded.levels[4].inherent_bumps == [
-            {"ability": "int", "value": 2}
-        ]
+        from heroforge.engine.character import Ability
+
+        assert loaded.levels[4].inherent_bumps == {Ability.INT: 2}
         assert loaded.get_ability_score("int") == 16
 
     def test_old_file_without_bumps_loads(self, tmp_path: Path) -> None:
@@ -668,7 +668,7 @@ class TestAbilityBumpRoundTrip:
             yaml.dump(data, f)
         loaded = load_character(path, make_app_state())
         assert loaded.levels[0].ability_bump is None
-        assert loaded.levels[0].inherent_bumps == []
+        assert loaded.levels[0].inherent_bumps == {}
 
 
 # =======================================================

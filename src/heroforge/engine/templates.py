@@ -41,6 +41,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusType
+from heroforge.engine.character import Ability
 
 if TYPE_CHECKING:
     from typing import Any
@@ -63,7 +64,7 @@ class TemplateAbilityModifier:
                 templates grant enhancement or other typed bonuses.
     """
 
-    ability: str  # "str", "dex", "con", "int", "wis", "cha"
+    ability: Ability
     value: int | str
     bonus_type: BonusType = BonusType.UNTYPED
 
@@ -291,9 +292,7 @@ def apply_template(
     character.templates = existing_apps
 
     # Notify
-    affected = {
-        f"{ab}_score" for ab in ("str", "dex", "con", "int", "wis", "cha")
-    }
+    affected = {f"{ab}_score" for ab in Ability}
     affected.add("ac")
     character._notify(affected)
 
@@ -362,9 +361,7 @@ def remove_template(
     ]
 
     # Notify
-    affected = {
-        f"{ab}_score" for ab in ("str", "dex", "con", "int", "wis", "cha")
-    }
+    affected = {f"{ab}_score" for ab in Ability}
     affected.add("ac")
     character._notify(affected)
 

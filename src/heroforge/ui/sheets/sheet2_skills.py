@@ -121,7 +121,8 @@ class Sheet2Skills(QWidget):
         self._table.setItem(row, _COL_NAME, name_item)
 
         # Ability
-        ab_item = QTableWidgetItem(skill_def.ability.upper())
+        ab_str = skill_def.ability.upper() if skill_def.ability else "—"
+        ab_item = QTableWidgetItem(ab_str)
         ab_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
         ab_item.setForeground(QColor("#444"))
         self._table.setItem(row, _COL_ABILITY, ab_item)

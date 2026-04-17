@@ -43,6 +43,7 @@ from __future__ import annotations
 
 import enum
 from dataclasses import dataclass
+from enum import StrEnum
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -60,10 +61,24 @@ class ArmorCategory(enum.Enum):
     TOWER_SHIELD = "tower_shield"
 
 
+_SHIELD_CATS = {
+    ArmorCategory.SHIELD,
+    ArmorCategory.TOWER_SHIELD,
+}
+
+
 class WeaponCategory(enum.Enum):
     SIMPLE = "simple"
     MARTIAL = "martial"
     EXOTIC = "exotic"
+
+
+class DamageType(StrEnum):
+    SLASHING = "slashing"
+    PIERCING = "piercing"
+    BLUDGEONING = "bludgeoning"
+    BLUDGEONING_AND_PIERCING = "bludgeoning and piercing"
+    PIERCING_OR_SLASHING = "piercing or slashing"
 
 
 @dataclass(frozen=True)
@@ -88,7 +103,7 @@ class WeaponDefinition:
     damage_dice: str  # e.g. "1d8", "2d6"
     critical_range: int = 20  # threat range start
     critical_multiplier: int = 2
-    damage_type: str = ""  # slash/pierce/bludgeon
+    damage_type: DamageType | str = ""
     range_increment: int = 0  # 0 = melee
     weight: float = 0.0
     cost_gp: int = 0
@@ -106,22 +121,13 @@ class ArmorRegistry:
     def get(self, name: str) -> ArmorDefinition | None:
         return self._entries.get(name)
 
-    _SHIELD_CATS = {
-        ArmorCategory.SHIELD,
-        ArmorCategory.TOWER_SHIELD,
-    }
-
     def all_armor(self) -> list[ArmorDefinition]:
         return [
-            d
-            for d in self._entries.values()
-            if d.category not in self._SHIELD_CATS
+            d for d in self._entries.values() if d.category not in _SHIELD_CATS
         ]
 
     def all_shields(self) -> list[ArmorDefinition]:
-        return [
-            d for d in self._entries.values() if d.category in self._SHIELD_CATS
-        ]
+        return [d for d in self._entries.values() if d.category in _SHIELD_CATS]
 
     def all_entries(self) -> list[ArmorDefinition]:
         return list(self._entries.values())

@@ -14,42 +14,18 @@ from __future__ import annotations
 
 from enum import StrEnum
 
-from heroforge.rules.core.armor import (
-    KnownCoreArmor,
-)
-from heroforge.rules.core.buffs import (
-    KnownCoreBuff,
-)
-from heroforge.rules.core.classes import (
-    KnownCoreClass,
-)
-from heroforge.rules.core.conditions_srd import (
-    KnownCoreCondition,
-)
-from heroforge.rules.core.domains import (
-    KnownCoreDomain,
-)
-from heroforge.rules.core.feats import (
-    KnownCoreFeat,
-)
-from heroforge.rules.core.magic_items import (
-    KnownCoreMagicItem,
-)
-from heroforge.rules.core.materials import (
-    KnownCoreMaterial,
-)
-from heroforge.rules.core.races import (
-    KnownCoreRace,
-)
-from heroforge.rules.core.skills import (
-    KnownCoreSkill,
-)
-from heroforge.rules.core.templates import (
-    KnownCoreTemplate,
-)
-from heroforge.rules.core.weapons import (
-    KnownCoreWeapon,
-)
+from heroforge.rules.core.armor import KnownCoreArmor
+from heroforge.rules.core.buffs import KnownCoreBuff
+from heroforge.rules.core.classes import KnownCoreClass
+from heroforge.rules.core.conditions_srd import KnownCoreCondition
+from heroforge.rules.core.domains import KnownCoreDomain
+from heroforge.rules.core.feats import KnownCoreFeat
+from heroforge.rules.core.magic_items import KnownCoreMagicItem
+from heroforge.rules.core.materials import KnownCoreMaterial
+from heroforge.rules.core.races import KnownCoreRace
+from heroforge.rules.core.skills import KnownCoreSkill
+from heroforge.rules.core.templates import KnownCoreTemplate
+from heroforge.rules.core.weapons import KnownCoreWeapon
 
 
 def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:
@@ -58,30 +34,6 @@ def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:
         for m in src:
             members[m.name] = m.value
     return StrEnum(name, members)
-
-
-# --- Fixed enums (not from YAML) -------------------
-
-
-class KnownAlignment(StrEnum):
-    LAWFUL_GOOD = "lawful_good"
-    LAWFUL_NEUTRAL = "lawful_neutral"
-    LAWFUL_EVIL = "lawful_evil"
-    NEUTRAL_GOOD = "neutral_good"
-    NEUTRAL = "neutral"
-    NEUTRAL_EVIL = "neutral_evil"
-    CHAOTIC_GOOD = "chaotic_good"
-    CHAOTIC_NEUTRAL = "chaotic_neutral"
-    CHAOTIC_EVIL = "chaotic_evil"
-
-
-class KnownAbility(StrEnum):
-    STR = "str"
-    DEX = "dex"
-    CON = "con"
-    INT = "int"
-    WIS = "wis"
-    CHA = "cha"
 
 
 # --- Combined enums from rule sources --------------

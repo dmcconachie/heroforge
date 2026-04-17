@@ -164,14 +164,11 @@ class TestAbilityScores:
         # hp_from_rolls = 50 (5×10), con_mod=2, 5 levels → +10
         assert c.hp_max == 60
 
-    def test_set_ability_score_case_insensitive(self) -> None:
+    def test_set_ability_score_invalid_name_raises(
+        self,
+    ) -> None:
         c = make_char()
-        c.set_ability_score("STR", 16)
-        assert c.str_score == 16
-
-    def test_set_ability_score_invalid_name_raises(self) -> None:
-        c = make_char()
-        with pytest.raises(CharacterError, match="Unknown ability"):
+        with pytest.raises(ValueError):
             c.set_ability_score("luck", 12)
 
     def test_set_ability_score_zero_raises(self) -> None:
@@ -835,7 +832,7 @@ class TestAbilityBumps:
 
     def test_invalid_ability_raises(self) -> None:
         c = _char_with_levels(4)
-        with pytest.raises(CharacterError):
+        with pytest.raises(ValueError):
             c.set_level_ability_bump(4, "foo")
 
 
@@ -879,7 +876,7 @@ class TestInherentBumps:
         c.set_ability_score("str", 14)
         c.add_inherent_bump(5, "str", 2)
         assert c.get_ability_score("str") == 16
-        c.remove_inherent_bump(5, "str", 2)
+        c.remove_inherent_bump(5, "str")
         assert c.get_ability_score("str") == 14
 
 

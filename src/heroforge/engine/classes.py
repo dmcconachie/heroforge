@@ -5,6 +5,8 @@ ClassDefinition and related types for D&D 3.5e
 character classes, plus BAB/save progression helpers.
 
 Public API:
+  CastType          -- enum: ARCANE / DIVINE / EITHER
+  SpellPreparation  -- enum: PREPARED / SPONTANEOUS
   BABProgression    -- enum: FULL / MEDIUM / POOR
   SaveProgression   -- enum: GOOD / POOR
   SaveProgressions  -- fort/ref/will bundle
@@ -21,7 +23,10 @@ from __future__ import annotations
 import enum
 import math
 from dataclasses import dataclass, field
+from enum import StrEnum
 from typing import TYPE_CHECKING, Any
+
+from heroforge.engine.character import Ability
 
 if TYPE_CHECKING:
     from heroforge.engine.character import (
@@ -32,6 +37,17 @@ if TYPE_CHECKING:
 # -----------------------------------------------------------
 # Enumerations
 # -----------------------------------------------------------
+
+
+class CastType(StrEnum):
+    ARCANE = "arcane"
+    DIVINE = "divine"
+    EITHER = "either"
+
+
+class SpellPreparation(StrEnum):
+    PREPARED = "prepared"
+    SPONTANEOUS = "spontaneous"
 
 
 class BABProgression(enum.Enum):
@@ -98,9 +114,9 @@ class ClassFeature:
 class SpellcastingInfo:
     """Spellcasting metadata for a class."""
 
-    cast_type: str  # "arcane" or "divine"
-    stat: str  # "int", "wis", or "cha"
-    preparation: str  # "prepared" or "spontaneous"
+    cast_type: CastType
+    stat: Ability
+    preparation: SpellPreparation
     max_spell_level: int  # 4 or 9
     starts_at_level: int  # 1 or 4
 

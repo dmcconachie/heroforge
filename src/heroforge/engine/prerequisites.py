@@ -28,6 +28,9 @@ import enum
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from heroforge.engine.character import Ability
+from heroforge.engine.classes import CastType
+
 if TYPE_CHECKING:
     from typing import Any
 
@@ -126,7 +129,7 @@ class StatPrereq(Prerequisite):
 class AbilityPrereq(Prerequisite):
     """ability score >= min_value"""
 
-    ability: str  # "str", "dex", etc.
+    ability: Ability
     min_value: int
 
     def check(
@@ -312,7 +315,7 @@ class SpellcastingPrereq(Prerequisite):
     """Character must be able to cast spells of at least min_level."""
 
     min_level: int
-    cast_type: str = "either"  # "arcane", "divine", "either"
+    cast_type: CastType = CastType.EITHER
 
     def check(
         self,
@@ -325,9 +328,9 @@ class SpellcastingPrereq(Prerequisite):
             return PrereqResult.MET, []
         type_str = (
             "arcane"
-            if self.cast_type == "arcane"
+            if self.cast_type == CastType.ARCANE
             else "divine"
-            if self.cast_type == "divine"
+            if self.cast_type == CastType.DIVINE
             else "arcane or divine"
         )
         return PrereqResult.UNMET, [
@@ -633,7 +636,7 @@ class CapabilityChecker:
         self,
         character: "Character",
         min_level: int,
-        cast_type: str = "either",
+        cast_type: CastType = CastType.EITHER,
     ) -> bool:
         """
         Returns True if the character can cast spells of at least min_level.
@@ -718,9 +721,9 @@ class CapabilityChecker:
             ),
         )
 
-        if cast_type == "arcane":
+        if cast_type == CastType.ARCANE:
             return max_arcane >= min_level
-        if cast_type == "divine":
+        if cast_type == CastType.DIVINE:
             return max_divine >= min_level
         return max(max_arcane, max_divine) >= min_level
 
@@ -770,7 +773,7 @@ class CapabilityChecker:
 
         if feature == "spells":
             # Generic "can cast spells" — any spellcasting class
-            return self.can_cast(character, 1, "either")
+            return self.can_cast(character, 1, CastType.EITHER)
 
         # Unknown feature: not present
         return False
@@ -1120,8 +1123,11 @@ def build_prereq_from_yaml(decl: dict[str, Any]) -> Prerequisite | None:
     if "ability" in decl:
         a = decl["ability"] if isinstance(decl["ability"], dict) else decl
         key = a.get("key", "")
-        ability = key.replace("_score", "") if "_score" in key else key
-        return AbilityPrereq(ability=ability, min_value=a["min"])
+        raw = key.replace("_score", "") if "_score" in key else key
+        return AbilityPrereq(
+            ability=Ability(raw),
+            min_value=a["min"],
+        )
 
     if "feat" in decl:
         return FeatPrereq(feat_name=decl["feat"])
@@ -1161,7 +1167,7 @@ def build_prereq_from_yaml(decl: dict[str, Any]) -> Prerequisite | None:
         c = decl["can_cast"]
         return SpellcastingPrereq(
             min_level=c.get("spell_level", 1),
-            cast_type=c.get("type", "either"),
+            cast_type=CastType(c.get("type", "either")),
         )
 
     if "has_class_feature" in decl:

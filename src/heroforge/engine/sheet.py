@@ -21,6 +21,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from heroforge.engine.character import Ability
+
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
@@ -161,12 +163,10 @@ def _identity(c: "Character", app_state: "AppState") -> dict:
 # Abilities
 # -----------------------------------------------------------
 
-_AB_KEYS = ("str", "dex", "con", "int", "wis", "cha")
-
 
 def _abilities(c: "Character") -> dict:
     result = {}
-    for ab in _AB_KEYS:
+    for ab in Ability:
         base = c._ability_scores.get(ab, 10)
         pool = c.get_pool(f"{ab}_score")
         bd = _pool_breakdown(pool, c)
@@ -189,9 +189,9 @@ def _abilities(c: "Character") -> dict:
 # -----------------------------------------------------------
 
 _SAVE_ABILITY = {
-    "fort": "con",
-    "ref": "dex",
-    "will": "wis",
+    "fort": Ability.CON,
+    "ref": Ability.DEX,
+    "will": Ability.WIS,
 }
 
 
@@ -216,7 +216,7 @@ def _combat(c: "Character") -> dict:
 
     # HP
     hp_dice = c._compute_hp_from_rolls()
-    con_hp = c.get_ability_modifier("con") * c.total_level
+    con_hp = c.get_ability_modifier(Ability.CON) * c.total_level
     hp_pool = c.get_pool("hp_bonus")
     hp_bd = _pool_breakdown(hp_pool, c)
     hp_entry: dict = {"hit_dice": hp_dice}
@@ -236,7 +236,7 @@ def _combat(c: "Character") -> dict:
     d["bab"] = bab_entry
 
     # Initiative
-    dex_mod = c.get_ability_modifier("dex")
+    dex_mod = c.get_ability_modifier(Ability.DEX)
     init_pool = c.get_pool("initiative")
     init_bd = _pool_breakdown(init_pool, c)
     init_entry: dict = {}
@@ -272,12 +272,12 @@ def _combat(c: "Character") -> dict:
         d[save] = entry
 
     # Melee attack
-    d["attack_melee"] = _attack_breakdown(c, "attack_melee", "str")
+    d["attack_melee"] = _attack_breakdown(c, "attack_melee", Ability.STR)
     # Ranged attack
-    d["attack_ranged"] = _attack_breakdown(c, "attack_ranged", "dex")
+    d["attack_ranged"] = _attack_breakdown(c, "attack_ranged", Ability.DEX)
 
     # Damage (melee STR bonus)
-    str_mod = c.get_ability_modifier("str")
+    str_mod = c.get_ability_modifier(Ability.STR)
     dmg_m_pool = c.get_pool("damage_melee")
     dmg_a_pool = c.get_pool("damage_all")
     dmg_bd = _pool_breakdown(dmg_m_pool, c)
@@ -312,7 +312,7 @@ def _combat(c: "Character") -> dict:
 def _attack_breakdown(
     c: "Character",
     stat_key: str,
-    ability: str,
+    ability: Ability,
 ) -> dict:
     """Build attack breakdown for melee or ranged."""
     bab = c.bab
