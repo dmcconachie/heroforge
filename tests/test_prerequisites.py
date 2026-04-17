@@ -107,86 +107,72 @@ def make_checker(*feats_with_prereqs: object) -> PrerequisiteChecker:
 
 
 class TestStatPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_when_bab_sufficient(self) -> None:
         c = fighter(6)
-        result, _ = StatPrereq("bab", 6).check(c, self._chk())
+        result, _ = StatPrereq("bab", 6).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_when_bab_insufficient(self) -> None:
         c = fighter(3)
-        result, details = StatPrereq("bab", 6, label="BAB").check(
-            c, self._chk()
-        )
+        result, details = StatPrereq("bab", 6, label="BAB").check(c)
         assert result == PrereqResult.UNMET
         assert details[0].need == "+6"
         assert details[0].have == "+3"
 
     def test_exact_boundary_met(self) -> None:
         c = fighter(5)
-        result, _ = StatPrereq("bab", 5).check(c, self._chk())
+        result, _ = StatPrereq("bab", 5).check(c)
         assert result == PrereqResult.MET
 
 
 class TestAbilityPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_when_dex_sufficient(self) -> None:
         c = char()
         c.set_ability_score("dex", 19)
-        result, _ = AbilityPrereq("dex", 19).check(c, self._chk())
+        result, _ = AbilityPrereq("dex", 19).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_when_dex_insufficient(self) -> None:
         c = char()
         c.set_ability_score("dex", 15)
-        result, details = AbilityPrereq("dex", 19).check(c, self._chk())
+        result, details = AbilityPrereq("dex", 19).check(c)
         assert result == PrereqResult.UNMET
         assert "19" in details[0].need
 
     def test_str_prereq(self) -> None:
         c = char()
         c.set_ability_score("str", 13)
-        result, _ = AbilityPrereq("str", 13).check(c, self._chk())
+        result, _ = AbilityPrereq("str", 13).check(c)
         assert result == PrereqResult.MET
 
 
 class TestFeatPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_when_feat_present(self) -> None:
         c = char()
         c.feats = [{"name": "Point Blank Shot"}]
-        result, _ = FeatPrereq("Point Blank Shot").check(c, self._chk())
+        result, _ = FeatPrereq("Point Blank Shot").check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_when_feat_absent(self) -> None:
         c = char()
         c.feats = []
-        result, details = FeatPrereq("Point Blank Shot").check(c, self._chk())
+        result, details = FeatPrereq("Point Blank Shot").check(c)
         assert result == PrereqResult.UNMET
         assert details[0].is_feat_dep is True
         assert "Point Blank Shot" in details[0].description
 
 
 class TestSkillPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_when_ranks_sufficient(self) -> None:
         c = char()
         c.skills = {"Hide": 5}
-        result, _ = SkillPrereq("Hide", 5).check(c, self._chk())
+        result, _ = SkillPrereq("Hide", 5).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_when_ranks_insufficient(self) -> None:
         c = char()
         c.skills = {"Hide": 3}
-        result, details = SkillPrereq("Hide", 5).check(c, self._chk())
+        result, details = SkillPrereq("Hide", 5).check(c)
         assert result == PrereqResult.UNMET
         assert details[0].have == "3"
         assert details[0].need == "5"
@@ -194,94 +180,80 @@ class TestSkillPrereq:
     def test_missing_skill_treated_as_zero(self) -> None:
         c = char()
         c.skills = {}
-        result, _ = SkillPrereq("Tumble", 5).check(c, self._chk())
+        result, _ = SkillPrereq("Tumble", 5).check(c)
         assert result == PrereqResult.UNMET
 
 
 class TestClassLevelPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_with_sufficient_fighter_levels(self) -> None:
         c = fighter(4)
-        result, _ = ClassLevelPrereq("Fighter", 4).check(c, self._chk())
+        result, _ = ClassLevelPrereq("Fighter", 4).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_with_insufficient_levels(self) -> None:
         c = fighter(3)
-        result, details = ClassLevelPrereq("Fighter", 4).check(c, self._chk())
+        result, details = ClassLevelPrereq("Fighter", 4).check(c)
         assert result == PrereqResult.UNMET
         assert "Fighter" in details[0].description
 
     def test_class_not_present_treated_as_zero(self) -> None:
         c = fighter(5)
-        result, _ = ClassLevelPrereq("Rogue", 1).check(c, self._chk())
+        result, _ = ClassLevelPrereq("Rogue", 1).check(c)
         assert result == PrereqResult.UNMET
 
 
 class TestRacePrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_for_matching_race(self) -> None:
         c = char()
         c.race = "Elf"
-        result, _ = RacePrereq(["Elf", "Half-Elf"]).check(c, self._chk())
+        result, _ = RacePrereq(["Elf", "Half-Elf"]).check(c)
         assert result == PrereqResult.MET
 
     def test_met_for_any_in_list(self) -> None:
         c = char()
         c.race = "Half-Elf"
-        result, _ = RacePrereq(["Elf", "Half-Elf"]).check(c, self._chk())
+        result, _ = RacePrereq(["Elf", "Half-Elf"]).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_for_non_matching_race(self) -> None:
         c = char()
         c.race = "Human"
-        result, details = RacePrereq(["Elf", "Half-Elf"]).check(c, self._chk())
+        result, details = RacePrereq(["Elf", "Half-Elf"]).check(c)
         assert result == PrereqResult.UNMET
         assert "Human" in details[0].have
 
 
 class TestAlignmentPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_for_lawful_good(self) -> None:
         c = char()
         c.alignment = "lawful_good"
-        result, _ = AlignmentPrereq(["lawful_good"]).check(c, self._chk())
+        result, _ = AlignmentPrereq(["lawful_good"]).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_for_chaotic_neutral(self) -> None:
         c = char()
         c.alignment = "chaotic_neutral"
-        result, _ = AlignmentPrereq(["lawful_good", "lawful_neutral"]).check(
-            c, self._chk()
-        )
+        result, _ = AlignmentPrereq(["lawful_good", "lawful_neutral"]).check(c)
         assert result == PrereqResult.UNMET
 
 
 class TestCreatureTypePrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_for_humanoid(self) -> None:
         c = char()
         c.race = "Human"
-        result, _ = CreatureTypePrereq(["Humanoid"]).check(c, self._chk())
+        result, _ = CreatureTypePrereq(["Humanoid"]).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_for_wrong_type(self) -> None:
         c = char()
         c.race = "Warforged"
-        result, _ = CreatureTypePrereq(["Humanoid"]).check(c, self._chk())
+        result, _ = CreatureTypePrereq(["Humanoid"]).check(c)
         assert result == PrereqResult.UNMET
 
     def test_met_for_outsider(self) -> None:
         c = char()
         c.race = "Tiefling"
-        result, _ = CreatureTypePrereq(["Outsider"]).check(c, self._chk())
+        result, _ = CreatureTypePrereq(["Outsider"]).check(c)
         assert result == PrereqResult.MET
 
 
@@ -291,9 +263,6 @@ class TestCreatureTypePrereq:
 
 
 class TestAllOfPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_when_all_children_met(self) -> None:
         c = fighter(6)
         c.feats = [{"name": "Point Blank Shot"}, {"name": "Precise Shot"}]
@@ -306,14 +275,14 @@ class TestAllOfPrereq:
                 AbilityPrereq("dex", 19),
             ]
         )
-        result, details = prereq.check(c, self._chk())
+        result, details = prereq.check(c)
         assert result == PrereqResult.MET
         assert details == []
 
     def test_unmet_when_one_child_unmet(self) -> None:
         c = fighter(3)
         prereq = AllOfPrereq([StatPrereq("bab", 6), StatPrereq("bab", 3)])
-        result, details = prereq.check(c, self._chk())
+        result, details = prereq.check(c)
         assert result == PrereqResult.UNMET
         assert len(details) == 1  # only BAB +6 unmet
 
@@ -329,59 +298,53 @@ class TestAllOfPrereq:
                 FeatPrereq("Point Blank Shot"),
             ]
         )
-        result, details = prereq.check(c, self._chk())
+        result, details = prereq.check(c)
         assert result == PrereqResult.UNMET
         assert len(details) == 3
 
     def test_empty_children_always_met(self) -> None:
         c = char()
-        result, _ = AllOfPrereq([]).check(c, self._chk())
+        result, _ = AllOfPrereq([]).check(c)
         assert result == PrereqResult.MET
 
 
 class TestAnyOfPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_when_first_child_met(self) -> None:
         c = char()
         c.race = "Elf"
         prereq = AnyOfPrereq([RacePrereq(["Elf"]), RacePrereq(["Half-Elf"])])
-        result, _ = prereq.check(c, self._chk())
+        result, _ = prereq.check(c)
         assert result == PrereqResult.MET
 
     def test_met_when_second_child_met(self) -> None:
         c = char()
         c.race = "Half-Elf"
         prereq = AnyOfPrereq([RacePrereq(["Elf"]), RacePrereq(["Half-Elf"])])
-        result, _ = prereq.check(c, self._chk())
+        result, _ = prereq.check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_when_none_met(self) -> None:
         c = char()
         c.race = "Human"
         prereq = AnyOfPrereq([RacePrereq(["Elf"]), RacePrereq(["Half-Elf"])])
-        result, details = prereq.check(c, self._chk())
+        result, details = prereq.check(c)
         assert result == PrereqResult.UNMET
         assert len(details) == 1  # wrapped in single "Any of" detail
 
 
 class TestNoneOfPrereq:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_met_when_none_of_children_met(self) -> None:
         c = char()
         c.feats = []
         prereq = NoneOfPrereq([FeatPrereq("Vow of Poverty")])
-        result, _ = prereq.check(c, self._chk())
+        result, _ = prereq.check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_when_one_child_met(self) -> None:
         c = char()
         c.feats = [{"name": "Vow of Poverty"}]
         prereq = NoneOfPrereq([FeatPrereq("Vow of Poverty")])
-        result, _ = prereq.check(c, self._chk())
+        result, _ = prereq.check(c)
         assert result == PrereqResult.UNMET
 
 
@@ -875,9 +838,6 @@ class TestOngoingViolations:
 
 
 class TestBuildPrereqFromYaml:
-    def _chk(self) -> PrerequisiteChecker:
-        return PrerequisiteChecker()
-
     def test_stat_prereq(self) -> None:
         prereq = build_prereq_from_yaml({"stat": {"key": "bab", "min": 6}})
         assert isinstance(prereq, StatPrereq)

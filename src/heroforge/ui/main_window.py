@@ -192,9 +192,9 @@ class MainWindow(QMainWindow):
         if current == 0:
             self._sheet1.refresh()
         elif current == 1:
-            self._race_tab.refresh(changed_keys)
+            self._race_tab.refresh()
         elif current == 2:
-            self._class_tab.refresh(changed_keys)
+            self._class_tab.refresh()
         elif current == 3:
             ability_keys = {
                 k

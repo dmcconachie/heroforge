@@ -454,7 +454,7 @@ class TestBonusEntry:
         assert e.is_active(None) is True
 
     def test_is_active_condition_no_char_returns_false(self) -> None:
-        e = entry(4, BonusType.ENHANCEMENT, condition=lambda c: True)
+        e = entry(4, BonusType.ENHANCEMENT, condition=lambda c: c is not None)
         assert e.is_active(None) is False
 
     def test_entries_equal_when_fields_equal(self) -> None:

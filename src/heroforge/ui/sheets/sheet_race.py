@@ -346,10 +346,7 @@ class SheetRace(QWidget):
             parts.append(lbl)
         self._active_tpl_label.setText("Active: " + ", ".join(parts))
 
-    def refresh(
-        self,
-        changed_keys: set[str] | None = None,
-    ) -> None:
+    def refresh(self) -> None:
         self._select_current()
         self._refresh_active_label()
         item = self._tpl_list.currentItem()

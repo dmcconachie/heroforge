@@ -41,10 +41,7 @@ class SheetNotes(QWidget):
             return
         self._state.character.notes = self._edit.toPlainText()
 
-    def refresh(
-        self,
-        changed_keys: set[str] | None = None,
-    ) -> None:
+    def refresh(self) -> None:
         self._building = True
         text = self._state.character.notes
         if self._edit.toPlainText() != text:

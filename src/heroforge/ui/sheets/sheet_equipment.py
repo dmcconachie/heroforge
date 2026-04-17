@@ -119,10 +119,7 @@ class SheetEquipment(QWidget):
     # Refresh from model
     # --------------------------------------------------------------
 
-    def refresh(
-        self,
-        changed_keys: set[str] | None = None,
-    ) -> None:
+    def refresh(self) -> None:
         self._building = True
         equip = self._state.character.equipment
         for row, slot in enumerate(EQUIPMENT_SLOTS):

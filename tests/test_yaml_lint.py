@@ -127,7 +127,7 @@ def fix_file(path: Path) -> int:
                     break
                 j += 1
 
-            block = _flow_to_block(collected, line, lines[i : j + 1])
+            block = _flow_to_block(line, lines[i : j + 1])
             if block is not None:
                 out.extend(block)
                 fixes += 1
@@ -136,7 +136,7 @@ def fix_file(path: Path) -> int:
 
         # Single-line flow mapping that's too long
         if len(line) > MAX_LINE and opens == closes and opens > 0:
-            block = _flow_to_block(line, line, [line])
+            block = _flow_to_block(line, [line])
             if block is not None:
                 all_fit = all(len(b) <= MAX_LINE for b in block)
                 if all_fit:
@@ -154,7 +154,6 @@ def fix_file(path: Path) -> int:
 
 
 def _flow_to_block(
-    collected: str,
     first_line: str,
     raw_lines: list[str],
 ) -> list[str] | None:

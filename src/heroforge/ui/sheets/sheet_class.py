@@ -233,10 +233,7 @@ class SheetClass(QWidget):
             self._skill_table.setItem(i, 3, tot_item)
         self._skill_table.blockSignals(False)
 
-    def refresh(
-        self,
-        changed_keys: set[str] | None = None,
-    ) -> None:
+    def refresh(self) -> None:
         self._building = True
         c = self._state.character
         levels = c.levels

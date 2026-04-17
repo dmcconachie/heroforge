@@ -287,7 +287,7 @@ class TestBonusEffect:
 
     def test_to_bonus_entry_preserves_condition(self) -> None:
         def cond(c: object) -> bool:
-            return True
+            return c is not None
 
         e = BonusEffect(
             target="str_score",

@@ -25,6 +25,8 @@ select = [
     "SIM",
     # isort
     "I",
+    # Unused arguments
+    "ARG",
     # pydocstyle: multi-line docstring summary should start at the second line
     "D213",
     # Check the presence of type hints.

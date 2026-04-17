@@ -506,11 +506,7 @@ def apply_buff(
 
     # Register if the character hasn't seen this buff yet
     if defn.name not in character._buff_states:
-        character.register_buff_definition(
-            defn.name,
-            pairs,
-            requires_caster_level=defn.requires_caster_level,
-        )
+        character.register_buff_definition(defn.name, pairs)
     else:
         # Update the registered entries in case CL changed the values
         character._buff_entries[defn.name] = pairs

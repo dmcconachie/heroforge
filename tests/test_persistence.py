@@ -462,6 +462,84 @@ class TestLoadCharacter:
 
 
 # ===========================================================================
+# Error formatting (cattrs leaf error aggregation)
+# ===========================================================================
+
+
+_BAD_YAML = """identity:
+  name: Farzin bin'Gira
+  race: Human
+  alignment: neutral
+  deity: ''
+ability_scores: {str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10}
+levels:
+  - level: 1
+    class: Druid
+    skill_ranks:
+      Profession (Soldier): 3
+  - level: 2
+    class: Druid
+    skill_ranks:
+      Profession (Soldier): 3
+  - level: 3
+    class: Druid
+    skill_ranks:
+      Profession (Soldier): 3
+  - level: 4
+    class: Hospitaler
+    feats:
+      - name: Iron Will
+      - name: Shock Trooper
+  - level: 5
+    class: Fighter
+    feats:
+      - name: Lion's Pounce
+"""
+
+
+class TestCattrsErrorFormatting:
+    """
+    When cattrs rejects a .char.yaml file, the user
+    sees a bulleted list with each distinct leaf
+    error listed once.
+    """
+
+    def _err(self, tmp_path: Path) -> str:
+        path = tmp_path / "bad.char.yaml"
+        path.write_text(_BAD_YAML)
+        with pytest.raises(ValueError) as exc_info:
+            load_character(path, make_app_state())
+        return str(exc_info.value)
+
+    def test_duplicate_errors_listed_once(self, tmp_path: Path) -> None:
+        """Repeated leaf errors are deduplicated."""
+        msg = self._err(tmp_path)
+        assert (
+            msg.count("'Profession (Soldier)' is not a valid KnownSkill") == 1
+        )
+
+    def test_all_distinct_errors_present(self, tmp_path: Path) -> None:
+        msg = self._err(tmp_path)
+        assert "'Profession (Soldier)' is not a valid KnownSkill" in msg
+        assert "'Hospitaler' is not a valid KnownClass" in msg
+        assert "'Shock Trooper' is not a valid KnownFeat" in msg
+        assert '"Lion\'s Pounce" is not a valid KnownFeat' in msg
+
+    def test_no_cattrs_scaffolding_leaks(self, tmp_path: Path) -> None:
+        """Only the leaf message is shown — no scaffolding."""
+        msg = self._err(tmp_path)
+        assert "Structuring" not in msg
+        assert "@ attribute" not in msg
+        assert "@ index" not in msg
+        assert "@ key" not in msg
+
+    def test_each_error_is_a_bullet(self, tmp_path: Path) -> None:
+        msg = self._err(tmp_path)
+        # 4 distinct leaf messages → 4 bullets
+        assert msg.count("\n  - ") == 4
+
+
+# ===========================================================================
 # Full round-trip: stat equality
 # ===========================================================================
 

@@ -104,13 +104,13 @@ def full_char(state: AppState) -> Character:
 
 
 class TestGatherIdentity:
-    def test_name(self, tmp_path: Path) -> None:
+    def test_name(self) -> None:
         state = make_state()
         full_char(state)
         data = gather(state.character, state)
         assert data.identity.name == "Aldric Vane"
 
-    def test_player(self, tmp_path: Path) -> None:
+    def test_player(self) -> None:
         state = make_state()
         full_char(state)
         data = gather(state.character, state)

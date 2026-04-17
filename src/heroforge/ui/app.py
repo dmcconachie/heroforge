@@ -107,13 +107,18 @@ def main() -> None:
     ) -> None:
         import os
 
+        where = f"{frame.f_code.co_name}" if frame is not None else "<unknown>"
         now = time.monotonic()
         if now - _last_sigint[0] < 2.0:
-            print("\nForce quit.", file=sys.stderr)
+            print(
+                f"\nForce quit (signal {signum} in {where}).",
+                file=sys.stderr,
+            )
             os._exit(1)
         _last_sigint[0] = now
         print(
-            "\nClosing… press Ctrl+C again to force quit.",
+            f"\nCaught signal {signum} in {where}; closing… "
+            "press Ctrl+C again to force quit.",
             file=sys.stderr,
         )
         # Schedule close on the Qt event loop

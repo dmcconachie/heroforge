@@ -106,7 +106,7 @@ class TestStatNodeConstruction:
             StatNode(
                 key="doubled",
                 base=4,
-                compute=lambda inputs, bt: 4 * 2 + bt,
+                compute=lambda bt: 4 * 2 + bt,
             )
         )
         assert g.resolve("doubled") == 8
@@ -214,10 +214,7 @@ class TestLazyEvaluation:
     def test_value_cached_after_first_resolve(self) -> None:
         call_count = [0]
 
-        def counting_compute(
-            inputs: dict[str, int],
-            bt: int,
-        ) -> int:
+        def counting_compute(bt: int) -> int:
             call_count[0] += 1
             return 42 + bt
 
@@ -231,10 +228,7 @@ class TestLazyEvaluation:
     def test_invalidation_forces_recompute(self) -> None:
         call_count = [0]
 
-        def counting_compute(
-            inputs: dict[str, int],
-            bt: int,
-        ) -> int:
+        def counting_compute(bt: int) -> int:
             call_count[0] += 1
             return 42 + bt
 
@@ -608,7 +602,7 @@ class TestRealStatChains:
                 key="str_score",
                 base=base_str,
                 pools=["str_score"],
-                compute=lambda inputs, bt: base_str + bt,
+                compute=lambda bt: base_str + bt,
             )
         )
         g.register_node(
@@ -721,7 +715,7 @@ class TestRealStatChains:
                 "dex_score",
                 base=16,
                 pools=["dex_score"],
-                compute=lambda inp, bt: 16 + bt,
+                compute=lambda bt: 16 + bt,
             )
         )
         g.register_node(
@@ -732,7 +726,7 @@ class TestRealStatChains:
             )
         )
         g.register_node(
-            StatNode("max_dex_bonus", base=3, compute=lambda inp, bt: 3 + bt)
+            StatNode("max_dex_bonus", base=3, compute=lambda bt: 3 + bt)
         )
         g.register_node(
             StatNode(
@@ -773,7 +767,7 @@ class TestRealStatChains:
         """
         g = StatGraph()
         g.register_node(
-            StatNode("dex_score", base=16, compute=lambda inp, bt: 16 + bt)
+            StatNode("dex_score", base=16, compute=lambda bt: 16 + bt)
         )
         g.register_node(
             StatNode(
@@ -783,7 +777,7 @@ class TestRealStatChains:
             )
         )
         g.register_node(
-            StatNode("max_dex_bonus", base=1, compute=lambda inp, bt: 1 + bt)
+            StatNode("max_dex_bonus", base=1, compute=lambda bt: 1 + bt)
         )
         g.register_node(
             StatNode(
@@ -806,7 +800,7 @@ class TestRealStatChains:
         g.register_pool(will_pool)
 
         g.register_node(
-            StatNode("wis_score", base=14, compute=lambda inp, bt: 14 + bt)
+            StatNode("wis_score", base=14, compute=lambda bt: 14 + bt)
         )
         g.register_node(
             StatNode(
@@ -837,7 +831,7 @@ class TestRealStatChains:
         """
         g = StatGraph()
         g.register_node(
-            StatNode("str_score", base=1, compute=lambda inp, bt: 1 + bt)
+            StatNode("str_score", base=1, compute=lambda bt: 1 + bt)
         )
         g.register_node(
             StatNode(
@@ -852,7 +846,7 @@ class TestRealStatChains:
         """Score 30 → modifier +10."""
         g = StatGraph()
         g.register_node(
-            StatNode("str_score", base=30, compute=lambda inp, bt: 30 + bt)
+            StatNode("str_score", base=30, compute=lambda bt: 30 + bt)
         )
         g.register_node(
             StatNode(

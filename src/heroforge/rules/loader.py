@@ -101,7 +101,7 @@ def _strategy_base_plus_bonus(
     base = decl.get("base", 0)
     ability = decl.get("key", "").replace("_score", "")
 
-    def compute(inputs: dict[str, int], bonus_total: int) -> int:
+    def compute(bonus_total: int) -> int:
         # Ability score nodes read live from character._ability_scores
         if char_ref is not None and ability in getattr(
             char_ref, "_ability_scores", {}
@@ -153,7 +153,7 @@ def _strategy_bab(
     _decl: dict,
     char_ref: Character | None,
 ) -> Callable:
-    def compute(inputs: dict[str, int], bonus_total: int) -> int:
+    def compute(bonus_total: int) -> int:
         if char_ref is None:
             return bonus_total
         return char_ref._compute_bab() + bonus_total
@@ -193,7 +193,7 @@ def _strategy_base_speed(
     _decl: dict,
     char_ref: Character | None,
 ) -> Callable:
-    def compute(inputs: dict[str, int], bonus_total: int) -> int:
+    def compute(bonus_total: int) -> int:
         base = char_ref._compute_base_speed() if char_ref else 30
         return base + bonus_total
 
@@ -204,7 +204,7 @@ def _strategy_max_dex_bonus(
     _decl: dict,
     char_ref: Character | None,
 ) -> Callable:
-    def compute(inputs: dict[str, int], bonus_total: int) -> int:
+    def compute(bonus_total: int) -> int:
         base = char_ref._compute_max_dex_bonus() if char_ref else -1
         return base + bonus_total
 

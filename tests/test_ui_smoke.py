@@ -19,15 +19,10 @@ QApplication per process.
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 import pytest
 
 from heroforge.ui.app_state import AppState
 from heroforge.ui.main_window import MainWindow
-
-if TYPE_CHECKING:
-    from PyQt6.QtWidgets import QApplication
 
 # Force all tests in this module into a single xdist group so they
 # run in one worker process sharing the session-scoped QApplication.
@@ -59,14 +54,15 @@ def app_state() -> AppState:
 # ===========================================================================
 
 
+@pytest.mark.usefixtures("qapp")
 class TestMainWindowSmoke:
-    def test_main_window_constructs(self, qapp: QApplication) -> None:
+    def test_main_window_constructs(self) -> None:
         """MainWindow.__init__ completes without error."""
         window = MainWindow()
         assert window is not None
         _force_close(window)
 
-    def test_main_window_has_tab_widget(self, qapp: QApplication) -> None:
+    def test_main_window_has_tab_widget(self) -> None:
         window = MainWindow()
         assert window._tabs is not None
         assert window._tabs.count() >= 3
@@ -78,26 +74,21 @@ class TestMainWindowSmoke:
 # ===========================================================================
 
 
+@pytest.mark.usefixtures("qapp")
 class TestSheet1Smoke:
-    def test_sheet1_constructs(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet1_constructs(self, app_state: AppState) -> None:
         from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
 
         sheet = Sheet1Summary(app_state)
         assert sheet is not None
 
-    def test_sheet1_refresh(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet1_refresh(self, app_state: AppState) -> None:
         from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
 
         sheet = Sheet1Summary(app_state)
         sheet.refresh()
 
-    def test_sheet1_name_change_notifies(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet1_name_change_notifies(self, app_state: AppState) -> None:
         """Typing a name fires on_change with identity:name key."""
         from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
 
@@ -118,18 +109,15 @@ class TestSheet1Smoke:
 # ===========================================================================
 
 
+@pytest.mark.usefixtures("qapp")
 class TestSheet2Smoke:
-    def test_sheet2_constructs(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet2_constructs(self, app_state: AppState) -> None:
         from heroforge.ui.sheets.sheet2_skills import Sheet2Skills
 
         sheet = Sheet2Skills(app_state)
         assert sheet is not None
 
-    def test_sheet2_refresh(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet2_refresh(self, app_state: AppState) -> None:
         from heroforge.ui.sheets.sheet2_skills import Sheet2Skills
 
         sheet = Sheet2Skills(app_state)
@@ -141,35 +129,30 @@ class TestSheet2Smoke:
 # ===========================================================================
 
 
+@pytest.mark.usefixtures("qapp")
 class TestSheet3Smoke:
-    def test_sheet3_constructs(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet3_constructs(self, app_state: AppState) -> None:
         from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
         assert sheet is not None
 
-    def test_sheet3_refresh(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet3_refresh(self, app_state: AppState) -> None:
         from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
         sheet.refresh()
 
     def test_sheet3_filter_method_exists_and_works(
-        self, qapp: QApplication, app_state: AppState
+        self, app_state: AppState
     ) -> None:
-        """Typing in the filter field calls _on_filter_changed without error."""
+        """Typing in the filter field updates the feat list without error."""
         from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
         sheet._filter_edit.setText("Dodge")
 
-    def test_sheet3_filter_narrows_list(
-        self, qapp: QApplication, app_state: AppState
-    ) -> None:
+    def test_sheet3_filter_narrows_list(self, app_state: AppState) -> None:
         from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
@@ -187,19 +170,16 @@ class TestSheet3Smoke:
 # ===========================================================================
 
 
+@pytest.mark.usefixtures("qapp")
 class TestNotifierWiring:
-    def test_main_window_subscribes_to_on_change(
-        self, qapp: QApplication
-    ) -> None:
+    def test_main_window_subscribes_to_on_change(self) -> None:
         """MainWindow wires up to character.on_change."""
         window = MainWindow()
         notifier = window._state.character.on_change
         assert len(notifier._listeners) >= 1
         _force_close(window)
 
-    def test_stat_change_does_not_crash_main_window(
-        self, qapp: QApplication
-    ) -> None:
+    def test_stat_change_does_not_crash_main_window(self) -> None:
         """Changing an ability score fires notifications through to the UI."""
         window = MainWindow()
         window._state.character.set_ability_score("str", 18)

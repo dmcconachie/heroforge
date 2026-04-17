@@ -106,7 +106,7 @@ class Sheet3Feats(QWidget):
         filter_row.addWidget(QLabel("Filter:"))
         self._filter_edit = QLineEdit()
         self._filter_edit.setPlaceholderText("Type feat name…")
-        self._filter_edit.textChanged.connect(self._on_filter_changed)
+        self._filter_edit.textChanged.connect(self._refresh_available)
         filter_row.addWidget(self._filter_edit)
         right_layout.addLayout(filter_row)
 
@@ -177,8 +177,10 @@ class Sheet3Feats(QWidget):
                 item.setFont(_italic_font())
             self._taken_list.addItem(item)
 
-    def _refresh_available(self) -> None:
-        filter_text = self._filter_edit.text().lower()
+    def _refresh_available(self, filter_text: str | None = None) -> None:
+        if filter_text is None:
+            filter_text = self._filter_edit.text()
+        filter_text = filter_text.lower()
         self._avail_list.clear()
 
         checker = getattr(self._state, "prereq_checker", None)
@@ -215,20 +217,12 @@ class Sheet3Feats(QWidget):
             self._avail_list.addItem(item)
 
     # ------------------------------------------------------------------
-    # Filter handler
-    # ------------------------------------------------------------------
-
-    def _on_filter_changed(self, text: str) -> None:
-        self._refresh_available()
-
-    # ------------------------------------------------------------------
     # Selection handlers
     # ------------------------------------------------------------------
 
     def _on_taken_selected(
         self,
         current: QListWidgetItem | None,
-        previous: QListWidgetItem | None,
     ) -> None:
         has_selection = current is not None
         if has_selection:
@@ -244,7 +238,6 @@ class Sheet3Feats(QWidget):
     def _on_avail_selected(
         self,
         current: QListWidgetItem | None,
-        previous: QListWidgetItem | None,
     ) -> None:
         if current is None:
             self._detail.clear()

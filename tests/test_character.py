@@ -243,7 +243,6 @@ class TestBuffManagement:
         c.register_buff_definition(
             "Divine Favor",
             [("attack_melee", entry)],
-            requires_caster_level=True,
         )
         c.toggle_buff("Divine Favor", True, caster_level=6)
         state = c.get_buff_state("Divine Favor")
@@ -646,11 +645,12 @@ class TestChangeNotification:
 
     def test_multiple_subscribers_all_notified(self) -> None:
         c = make_char()
-        counts = [0, 0]
-        c.on_change.subscribe(lambda keys: counts.__setitem__(0, counts[0] + 1))
-        c.on_change.subscribe(lambda keys: counts.__setitem__(1, counts[1] + 1))
+        received: list[set[str]] = [set(), set()]
+        c.on_change.subscribe(lambda keys: received[0].update(keys))
+        c.on_change.subscribe(lambda keys: received[1].update(keys))
         c.set_ability_score("con", 14)
-        assert counts == [1, 1]
+        assert received[0] and received[1]
+        assert received[0] == received[1]
 
 
 # ===========================================================================

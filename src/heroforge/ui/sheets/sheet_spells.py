@@ -247,10 +247,7 @@ class SheetSpells(QWidget):
     # Refresh
     # -----------------------------------------------------------
 
-    def refresh(
-        self,
-        changed_keys: set[str] | None = None,
-    ) -> None:
+    def refresh(self) -> None:
         """Sync checkbox/CL state from the character."""
         self._building = True
         try:

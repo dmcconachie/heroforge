@@ -18,9 +18,9 @@ levels:
     skill_ranks:
       Concentration: 4
       Handle Animal: 4
-      Knowledge (nature): 4
+      Knowledge (Nature): 4
       Listen: 4
-      Profession (soldier): 3
+      # Profession (Soldier): 3
       Ride: 1
       Spot: 4
       Survival: 4
@@ -43,7 +43,7 @@ levels:
     hp_roll: 5
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 1
       Ride: 1
       Spellcraft: 1
@@ -57,7 +57,7 @@ levels:
     ability_bump: wis
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 2
       Ride: 1
       Spellcraft: 1
@@ -67,7 +67,7 @@ levels:
     hp_roll: 5
     skill_ranks:
       Concentration: 2
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 1
       Ride: 1
       Spellcraft: 1
@@ -77,7 +77,7 @@ levels:
     hp_roll: 5
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 2
+      Knowledge (Nature): 2
       Listen: 1
       Spellcraft: 2
       Spot: 1
@@ -89,9 +89,9 @@ levels:
     hp_roll: 5
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 1
-      Profession (soldier): 1
+      # Profession (Soldier): 1
       Spellcraft: 1
       Spot: 1
       Survival: 1
@@ -101,13 +101,14 @@ levels:
     ability_bump: str
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 1
-      Profession (soldier): 2
+      # Profession (Soldier): 2
       Spellcraft: 1
       Spot: 1
   - level: 9
-    class: Hospitaler
+    # class: Hospitaler
+    class: Fighter
     hp_roll: 5
     skill_ranks:
       Concentration: 1
@@ -115,14 +116,14 @@ levels:
     feats:
       - name: Improved Bull Rush
         source: character
-      - name: Shock Trooper
-        source: fighter_bonus
+      # - name: Shock Trooper
+      #   source: fighter_bonus
   - level: 10
     class: Druid
     hp_roll: 5
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 1
       Ride: 1
       Spellcraft: 1
@@ -132,7 +133,7 @@ levels:
     hp_roll: 5
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 2
       Ride: 1
       Spellcraft: 1
@@ -143,20 +144,20 @@ levels:
     ability_bump: str
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 2
+      Knowledge (Nature): 2
       Listen: 1
       Ride: 1
       Spellcraft: 1
       Spot: 1
-    feats:
-      - name: Lion's Pounce
-        source: character
+    # feats:
+    #   - name: Lion's Pounce
+    #     source: character
   - level: 13
     class: Druid
     hp_roll: 5
     skill_ranks:
       Concentration: 1
-      Knowledge (nature): 1
+      Knowledge (Nature): 1
       Listen: 1
       Ride: 1
       Spellcraft: 2
@@ -189,5 +190,5 @@ equipment:
     - base: Lance
       # material: Bronzewood
       enhancement: 1
-    - base: Longbow, Composite
+    - base: Composite Longbow
 notes: ''

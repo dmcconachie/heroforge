@@ -368,8 +368,8 @@ class Character:
 
             def make_score_compute(
                 ability: Ability,
-            ) -> Callable[[dict, int], int]:
-                def compute(inputs: dict, bt: int) -> int:
+            ) -> Callable[[int], int]:
+                def compute(bt: int) -> int:
                     return (
                         self._ability_scores[ability]
                         + self._level_bump_total(ability)
@@ -408,7 +408,7 @@ class Character:
             StatNode(
                 key="bab",
                 pools=["bab_misc"],
-                compute=lambda inputs, bt: self._compute_bab() + bt,
+                compute=lambda bt: self._compute_bab() + bt,
                 description="Base Attack Bonus",
             )
         )
@@ -436,7 +436,7 @@ class Character:
         g.register_node(
             StatNode(
                 key="max_dex_bonus",
-                compute=lambda inputs, bt: self._compute_max_dex_bonus() + bt,
+                compute=lambda bt: self._compute_max_dex_bonus() + bt,
                 description="Maximum DEX bonus to AC from armour",
             )
         )
@@ -486,7 +486,7 @@ class Character:
             StatNode(
                 key="speed",
                 pools=["speed"],
-                compute=lambda inputs, bt: self._compute_base_speed() + bt,
+                compute=lambda bt: self._compute_base_speed() + bt,
                 description="Movement speed (ft)",
             )
         )
@@ -1042,8 +1042,7 @@ class Character:
         """
         base = self._ability_scores[Ability.INT]
         bumps = sum(
-            lv.ability_bump == Ability.INT
-            for lv in self.levels[:char_level]
+            lv.ability_bump == Ability.INT for lv in self.levels[:char_level]
         )
         inherent = self._inherent_bonus_at_level(Ability.INT, char_level)
         return (base + bumps + inherent - 10) // 2
@@ -1061,7 +1060,7 @@ class Character:
         """
         if ability is None:
             return
-        
+
         ability = Ability(ability)
         idx = char_level - 1
         if idx < 0 or idx >= len(self.levels):
@@ -1146,7 +1145,6 @@ class Character:
         self,
         buff_name: str,
         entries: list[tuple[str, BonusEntry]],
-        requires_caster_level: bool = False,
     ) -> None:
         """
         Tell the character about a buff and the pool entries it contributes.
@@ -1379,11 +1377,7 @@ class Character:
             # Register but do NOT activate — user toggles from Buffs panel
             pairs = defn.buff_definition.pool_entries(0, self)
             if feat_name not in self._buff_states:
-                self.register_buff_definition(
-                    feat_name,
-                    pairs,
-                    requires_caster_level=False,
-                )
+                self.register_buff_definition(feat_name, pairs)
 
     def remove_feat(
         self,
@@ -1615,6 +1609,9 @@ class Character:
 
     def has_dm_override(self, target: str) -> bool:
         return any(o.target == target for o in self.dm_overrides)
+
+    def has_feat(self, feat_name: str) -> bool:
+        return any(f.get("name", "") == feat_name for f in self.feats)
 
     # -----------------------------------------------------------------------
     # Change notification

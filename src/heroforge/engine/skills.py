@@ -126,7 +126,6 @@ class SkillTotal:
 
 def _make_skill_compute(
     ability: Ability | None,
-    skill_key: str,
 ) -> Callable[[dict[str, int], int], int]:
     """
     Returns a compute function for a skill StatNode.
@@ -181,7 +180,7 @@ def register_skills_on_character(
             pool = BonusPool(key)
             character.add_pool(pool)  # registers in both _pools and _graph
 
-        compute_fn = _make_skill_compute(skill_def.ability, key)
+        compute_fn = _make_skill_compute(skill_def.ability)
 
         if skill_def.ability is None:
             inputs: list[str] = []

@@ -48,138 +48,87 @@ class TestUnknownNames:
 
     def test_error_contains_file_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_race.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"bad_race\.char\.yaml",
-        ):
+        with pytest.raises(ValueError, match=r"bad_race\.char\.yaml"):
             load_character(path, app_state)
 
     def test_error_contains_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_race.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"attribute race",
-        ):
+        with pytest.raises(ValueError, match=r"KnownRace"):
             load_character(path, app_state)
 
     def test_unknown_feat(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_feat.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"Powre Attack",
-        ):
+        with pytest.raises(ValueError, match=r"Powre Attack"):
             load_character(path, app_state)
 
     def test_unknown_feat_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_feat.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"KnownFeat",
-        ):
+        with pytest.raises(ValueError, match=r"KnownFeat"):
             load_character(path, app_state)
 
     def test_unknown_buff(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_buff.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"barkskin",
-        ):
+        with pytest.raises(ValueError, match=r"barkskin"):
             load_character(path, app_state)
 
     def test_unknown_buff_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_buff.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"KnownBuff",
-        ):
+        with pytest.raises(ValueError, match=r"KnownBuff"):
             load_character(path, app_state)
 
     def test_unknown_template(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_template.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"Half-Celstial",
-        ):
+        with pytest.raises(ValueError, match=r"Half-Celstial"):
             load_character(path, app_state)
 
     def test_unknown_template_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_template.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"KnownTemplate",
-        ):
+        with pytest.raises(ValueError, match=r"KnownTemplate"):
             load_character(path, app_state)
 
     def test_unknown_armor(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_armor.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"Ful Plate",
-        ):
+        with pytest.raises(ValueError, match=r"Ful Plate"):
             load_character(path, app_state)
 
     def test_unknown_armor_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_armor.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"KnownArmor",
-        ):
+        with pytest.raises(ValueError, match=r"KnownArmor"):
             load_character(path, app_state)
 
     def test_unknown_shield(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_shield.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"Hevy Steel Shield",
-        ):
+        with pytest.raises(ValueError, match=r"Hevy Steel Shield"):
             load_character(path, app_state)
 
     def test_unknown_worn_item(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_worn.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"Belt of Giant Str \+4",
-        ):
+        with pytest.raises(ValueError, match=r"Belt of Giant Str \+4"):
             load_character(path, app_state)
 
     def test_unknown_worn_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_worn.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"KnownMagicItem",
-        ):
+        with pytest.raises(ValueError, match=r"KnownMagicItem"):
             load_character(path, app_state)
 
     def test_unknown_skill(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_skill.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"Clmb",
-        ):
+        with pytest.raises(ValueError, match=r"Clmb"):
             load_character(path, app_state)
 
     def test_unknown_skill_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_skill.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"KnownSkill",
-        ):
+        with pytest.raises(ValueError, match=r"KnownSkill"):
             load_character(path, app_state)
 
     def test_unknown_class(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_class.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"duid",
-        ):
+        with pytest.raises(ValueError, match=r"duid"):
             load_character(path, app_state)
 
     def test_unknown_class_schema_path(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_class.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"KnownClass",
-        ):
+        with pytest.raises(ValueError, match=r"KnownClass"):
             load_character(path, app_state)
 
 
@@ -190,16 +139,10 @@ class TestUnknownFields:
 
     def test_unknown_buff_field(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_buff_field.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"casterr_level",
-        ):
+        with pytest.raises(ValueError, match=r"casterr_level"):
             load_character(path, app_state)
 
     def test_unknown_level_field(self, app_state: AppState) -> None:
         path = BAD_YAML / "bad_level_field.char.yaml"
-        with pytest.raises(
-            ValueError,
-            match=r"hproll",
-        ):
+        with pytest.raises(ValueError, match=r"hproll"):
             load_character(path, app_state)

@@ -91,7 +91,6 @@ class Prerequisite:
     def check(
         self,
         character: "Character",
-        checker: "PrerequisiteChecker",
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         raise NotImplementedError
 
@@ -110,7 +109,6 @@ class StatPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         have = character.get(self.stat_key)
         if have >= self.min_value:
@@ -135,7 +133,6 @@ class AbilityPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         have = character.get_ability_score(self.ability)
         if have >= self.min_value:
@@ -159,9 +156,8 @@ class FeatPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
-        if checker.has_feat(character, self.feat_name):
+        if character.has_feat(self.feat_name):
             return PrereqResult.MET, []
         return PrereqResult.UNMET, [
             UnmetDetail(
@@ -181,7 +177,6 @@ class SkillPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         have = character.skills.get(self.skill_name, 0)
         if have >= self.min_ranks:
@@ -205,7 +200,6 @@ class ClassLevelPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         have = character.class_level_map.get(self.class_name, 0)
         if have >= self.min_level:
@@ -228,7 +222,6 @@ class RacePrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         race = getattr(character, "race", "")
         # Also check effective race (after templates)
@@ -254,7 +247,6 @@ class AlignmentPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         alignment = getattr(character, "alignment", "")
         if alignment in self.allowed:
@@ -282,15 +274,13 @@ class ProficiencyPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         weapon = self.weapon
-        # Resolve parameter substitution (e.g. Weapon Focus uses the
-        # feat's chosen weapon parameter)
+        # Parameter resolution (e.g. Weapon Focus uses the feat's chosen
+        # weapon parameter) requires feat context that isn't threaded
+        # through here; treat as no weapon specified.
         if weapon.startswith("$"):
-            param_name = weapon[1:]
-            # Resolved by caller passing context; default to no weapon
-            weapon = checker._resolve_param(character, param_name) or ""
+            weapon = ""
 
         if not weapon:
             return PrereqResult.UNMET, [
@@ -299,7 +289,7 @@ class ProficiencyPrereq(Prerequisite):
                 )
             ]
 
-        if checker.capabilities.is_proficient(character, weapon):
+        if _CAPABILITIES.is_proficient(character, weapon):
             return PrereqResult.MET, []
         return PrereqResult.UNMET, [
             UnmetDetail(
@@ -320,11 +310,8 @@ class SpellcastingPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
-        if checker.capabilities.can_cast(
-            character, self.min_level, self.cast_type
-        ):
+        if _CAPABILITIES.can_cast(character, self.min_level, self.cast_type):
             return PrereqResult.MET, []
         type_str = (
             "arcane"
@@ -353,9 +340,8 @@ class ClassFeaturePrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
-        if checker.capabilities.has_class_feature(
+        if _CAPABILITIES.has_class_feature(
             character, self.feature, self.min_value
         ):
             return PrereqResult.MET, []
@@ -374,9 +360,8 @@ class CreatureTypePrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
-        ct = checker.capabilities.effective_creature_type(character)
+        ct = _CAPABILITIES.effective_creature_type(character)
         if ct in self.allowed:
             return PrereqResult.MET, []
         options = " or ".join(self.allowed)
@@ -401,11 +386,10 @@ class AllOfPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         all_details: list[UnmetDetail] = []
         for child in self.children:
-            result, details = child.check(character, checker)
+            result, details = child.check(character)
             if result == PrereqResult.UNMET:
                 all_details.extend(details)
         if all_details:
@@ -422,16 +406,15 @@ class AnyOfPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         for child in self.children:
-            result, _ = child.check(character, checker)
+            result, _ = child.check(character)
             if result == PrereqResult.MET:
                 return PrereqResult.MET, []
         # None met — collect all details
         all_details: list[UnmetDetail] = []
         for child in self.children:
-            _, details = child.check(character, checker)
+            _, details = child.check(character)
             all_details.extend(details)
         return PrereqResult.UNMET, [
             UnmetDetail(
@@ -450,10 +433,9 @@ class NoneOfPrereq(Prerequisite):
     def check(
         self,
         character: Character,
-        checker: PrerequisiteChecker,
     ) -> tuple[PrereqResult, list[UnmetDetail]]:
         for child in self.children:
-            result, _ = child.check(character, checker)
+            result, _ = child.check(character)
             if result == PrereqResult.MET:
                 return PrereqResult.UNMET, [
                     UnmetDetail(
@@ -827,6 +809,10 @@ class CapabilityChecker:
         return base + template_subtypes
 
 
+# Module-level singleton; CapabilityChecker is stateless.
+_CAPABILITIES = CapabilityChecker()
+
+
 # ---------------------------------------------------------------------------
 # PrerequisiteChecker
 # ---------------------------------------------------------------------------
@@ -842,7 +828,6 @@ class PrerequisiteChecker:
     """
 
     def __init__(self) -> None:
-        self.capabilities = CapabilityChecker()
         # feat_name → Prerequisite (the root of its prereq tree)
         self._feat_prereqs: dict[str, Prerequisite] = {}
         # prc_name  → (entry_prereq, ongoing_prereq|None)
@@ -902,7 +887,7 @@ class PrerequisiteChecker:
         if prereq is None:
             return PrereqResult.MET, []
 
-        return prereq.check(character, self)
+        return prereq.check(character)
 
     # ------------------------------------------------------------------
     # Feat availability
@@ -927,7 +912,7 @@ class PrerequisiteChecker:
             return FeatAvailability.OVERRIDE, []
 
         # 2. Already taken
-        if self.has_feat(character, feat_name):
+        if character.has_feat(feat_name):
             return FeatAvailability.TAKEN, []
 
         # 3. No prereqs in registry — not necessarily available; the feat
@@ -950,9 +935,7 @@ class PrerequisiteChecker:
             # Some feat prereqs unmet — is it a partial chain?
             # CHAIN_PARTIAL if at least one feat in the chain IS met
             all_feat_deps = self._collect_feat_deps(prereq)
-            any_met = any(
-                self.has_feat(character, fname) for fname in all_feat_deps
-            )
+            any_met = any(character.has_feat(fname) for fname in all_feat_deps)
             if any_met:
                 return FeatAvailability.CHAIN_PARTIAL, details
 
@@ -1005,9 +988,7 @@ class PrerequisiteChecker:
         feat_deps_unmet = [d for d in details if d.is_feat_dep]
         if feat_deps_unmet:
             all_feat_deps = self._collect_feat_deps(entry_prereq)
-            any_met = any(
-                self.has_feat(character, fname) for fname in all_feat_deps
-            )
+            any_met = any(character.has_feat(fname) for fname in all_feat_deps)
             if any_met:
                 return FeatAvailability.CHAIN_PARTIAL, details
 
@@ -1042,25 +1023,6 @@ class PrerequisiteChecker:
     # ------------------------------------------------------------------
     # Helpers
     # ------------------------------------------------------------------
-
-    def has_feat(self, character: "Character", feat_name: str) -> bool:
-        """Returns True if the character has the named feat."""
-        return any(
-            f.get("name", "") == feat_name
-            for f in getattr(character, "feats", [])
-        )
-
-    def _resolve_param(self, character: "Character", param_name: str) -> str:
-        """
-        Resolve a parameter from the character's feat list.
-        Used for parameterised prereqs like Weapon Focus($weapon).
-        Returns the parameter value or "".
-        """
-        # Look for the feat whose parameter context we're checking;
-        # in practice the caller provides this through the check context.
-        # Simplified: return "" — full parameter resolution requires
-        # the feat context to be threaded through.
-        return ""
 
     def _collect_feat_deps(self, prereq: Prerequisite | None) -> set[str]:
         """

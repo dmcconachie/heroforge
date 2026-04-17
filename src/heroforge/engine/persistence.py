@@ -193,7 +193,7 @@ class _IndentDumper(yaml.Dumper):
     def increase_indent(  # type: ignore[override]
         self,
         flow: bool = False,
-        indentless: bool = False,
+        indentless: bool = False,  # noqa: ARG002
     ) -> None:
         return super().increase_indent(flow, indentless=False)
 
@@ -364,20 +364,27 @@ def _armor_to_entry(
     )
 
 
-def _flatten_cattrs_error(e: Exception) -> str:
-    """Extract readable detail from cattrs errors."""
-    # cattrs wraps errors in ClassValidationError
-    # with nested exceptions. Dig to the leaf.
-    if hasattr(e, "exceptions"):
-        parts = []
-        for sub in e.exceptions:
-            parts.append(_flatten_cattrs_error(sub))
-        return "; ".join(parts)
-    # cattrs notes contain the field path
-    notes = getattr(e, "__notes__", [])
-    if notes:
-        return f"{e} ({', '.join(notes)})"
-    return str(e)
+def _flatten_cattrs_error(e: BaseException) -> str:
+    """
+    Walk cattrs' nested exception tree and return
+    a bulleted list of distinct leaf messages.
+    """
+    leaves: list[str] = []
+    seen: set[str] = set()
+
+    def visit(exc: BaseException) -> None:
+        subs = getattr(exc, "exceptions", None)
+        if subs:
+            for sub in subs:
+                visit(sub)
+            return
+        msg = str(exc)
+        if msg not in seen:
+            seen.add(msg)
+            leaves.append(msg)
+
+    visit(e)
+    return "\n" + "\n".join(f"  - {m}" for m in leaves)
 
 
 # -----------------------------------------------------------

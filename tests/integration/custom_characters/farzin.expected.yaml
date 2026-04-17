@@ -3,7 +3,8 @@ identity:
   race: Human
   class_str: Druid 11 / Fighter 2
   level: 13
-  alignment: neutral_good
+  alignment: !!python/object/apply:heroforge.engine.character.Alignment
+    - neutral_good
   deity: Istus
   size: Medium
 abilities:
@@ -69,26 +70,36 @@ combat:
   sr: 0
   fort:
     base: 10
-    con: 4
+    ? !!python/object/apply:heroforge.engine.character.Ability
+      - con
+    : 4
     resistance: 5
     total: 19
   ref:
     base: 3
-    dex: 2
+    ? !!python/object/apply:heroforge.engine.character.Ability
+      - dex
+    : 2
     resistance: 5
     total: 10
   will:
     base: 7
-    wis: 8
+    ? !!python/object/apply:heroforge.engine.character.Ability
+      - wis
+    : 8
     resistance: 5
     total: 20
   attack_melee:
     bab: 10
-    str: 8
+    ? !!python/object/apply:heroforge.engine.character.Ability
+      - str
+    : 8
     total: 18
   attack_ranged:
     bab: 10
-    dex: 2
+    ? !!python/object/apply:heroforge.engine.character.Ability
+      - dex
+    : 2
     total: 12
   damage_melee:
     str: 8
@@ -135,9 +146,10 @@ skills:
     untyped: -5
     total: -3
   Knowledge (Nature):
+    ranks: 16
     ability_mod: 2
     synergy: 2
-    total: 4
+    total: 20
   Listen:
     ranks: 16
     ability_mod: 8
@@ -166,7 +178,8 @@ skills:
   Survival:
     ranks: 5
     ability_mod: 8
-    total: 13
+    synergy: 2
+    total: 15
   Swim:
     ability_mod: 8
     untyped: -10
@@ -186,8 +199,6 @@ feats:
   - Power Attack
   - Craft Wondrous Item
   - Improved Bull Rush
-  - Shock Trooper
-  - Lion's Pounce
 class_features:
   - 'animal_companion: Special animal companion'
   - 'nature_sense: +2 Knowledge (Nature) and Survival'
@@ -212,9 +223,12 @@ class_features:
 spellcasting:
   Druid:
     caster_level: 11
-    key_ability: wis
-    cast_type: divine
-    preparation: prepared
+    key_ability: !!python/object/apply:heroforge.engine.character.Ability
+      - wis
+    cast_type: !!python/object/apply:heroforge.engine.classes.CastType
+      - divine
+    preparation: !!python/object/apply:heroforge.engine.classes.SpellPreparation
+      - prepared
     slots_per_day:
       - 6
       - 7
@@ -258,6 +272,6 @@ equipment:
     - Belt of Giant Strength +6
     - Cloak of Resistance +5
   weapons:
-    - name: +1 Bronzewood Lance
-    - name: Longbow, Composite
+    - name: +1 Lance
+    - name: Composite Longbow
 resources: {}

@@ -22,6 +22,7 @@ Public API:
 
 from __future__ import annotations
 
+import inspect
 import math
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
@@ -67,9 +68,9 @@ class StatNode:
     key: str
     base: int | None = None
     inputs: list[str] = field(default_factory=list)
-    compute: str | Callable[[dict[str, int], int], int] | None = field(
-        default=None, repr=False
-    )
+    # A compute may take either (bonus_total) or (inputs, bonus_total);
+    # the graph dispatches based on declared arity.
+    compute: str | Callable[..., int] | None = field(default=None, repr=False)
     pools: list[str] = field(default_factory=list)
     description: str = ""
     sheet: int = 0
@@ -80,12 +81,32 @@ class StatNode:
         default=None, init=False, repr=False, compare=False
     )
     _dirty: bool = field(default=True, init=False, repr=False, compare=False)
+    _takes_inputs: bool = field(
+        default=False, init=False, repr=False, compare=False
+    )
 
     def __post_init__(self) -> None:
         # Install the default compute function if none was provided.
         if self.compute is None:
             base = self.base if self.base is not None else 0
-            self.compute = lambda _inputs, bonus_total: base + bonus_total
+            self.compute = lambda bonus_total: base + bonus_total
+        # Decide arity once at registration time so resolve() is hot.
+        if callable(self.compute):
+            try:
+                sig = inspect.signature(self.compute)
+                positional = [
+                    p
+                    for p in sig.parameters.values()
+                    if p.kind
+                    in (
+                        inspect.Parameter.POSITIONAL_ONLY,
+                        inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                    )
+                    and p.default is inspect.Parameter.empty
+                ]
+                self._takes_inputs = len(positional) >= 2
+            except (TypeError, ValueError):
+                self._takes_inputs = True
 
     def invalidate(self) -> None:
         """Mark this node as needing recomputation."""
@@ -203,11 +224,6 @@ class StatGraph:
         if not node._dirty and node._cache is not None:
             return node._cache
 
-        # Resolve all inputs first (recursive, but DAG guarantees termination).
-        input_values: dict[str, int] = {
-            dep_key: self.resolve(dep_key, character) for dep_key in node.inputs
-        }
-
         # Sum bonus pools.
         bonus_total = sum(
             self._pools[pk].total(character)
@@ -215,7 +231,15 @@ class StatGraph:
             if pk in self._pools
         )
 
-        value = node.compute(input_values, bonus_total)
+        if node._takes_inputs:
+            # Resolve declared inputs only when compute needs them.
+            input_values: dict[str, int] = {
+                dep_key: self.resolve(dep_key, character)
+                for dep_key in node.inputs
+            }
+            value = node.compute(input_values, bonus_total)
+        else:
+            value = node.compute(bonus_total)
 
         node._cache = value
         node._dirty = False
