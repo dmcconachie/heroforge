@@ -10,63 +10,70 @@ identity:
   size: Medium
 abilities:
   str:
-    score: 14
-    mod: 2
+    score: 20
+    mod: 5
     typed:
       base: 14
+      enhancement: 6
   dex:
-    score: 26
-    mod: 8
+    score: 32
+    mod: 11
     typed:
       base: 16
       level_bumps: 5
       inherent: 5
+      enhancement: 6
   con:
-    score: 18
-    mod: 4
+    score: 24
+    mod: 7
     typed:
       base: 14
       inherent: 4
+      enhancement: 6
   int:
-    score: 18
-    mod: 4
+    score: 24
+    mod: 7
     typed:
       base: 14
       inherent: 4
+      enhancement: 6
   wis:
-    score: 8
-    mod: -1
+    score: 14
+    mod: 2
     typed:
       base: 8
+      enhancement: 6
   cha:
-    score: 8
-    mod: -1
+    score: 14
+    mod: 2
     typed:
       base: 8
+      enhancement: 6
 combat:
   ac:
-    total: 33
+    total: 35
     typed:
       base: 10
       dex: 6
       armor: 9
       shield: 7
       insight: 1
-  touch_ac: 17
-  flatfooted_ac: 33
+      sacred: 2
+  touch_ac: 19
+  flatfooted_ac: 35
   hp_max:
-    total: 189
+    total: 255
     typed:
       base: 101
-      con: 88
+      con: 154
   bab:
     total: 17
     typed:
       base: 17
   initiative:
-    total: 12
+    total: 15
     typed:
-      dex: 8
+      dex: 11
       untyped: 4
   speed:
     total: 30
@@ -75,253 +82,263 @@ combat:
   sr: 0
   saves:
     fort:
-      total: 17
+      total: 25
       typed:
         base: 11
-        con: 4
+        con: 7
         luck: 1
         competence: 1
+        resistance: 5
     ref:
-      total: 22
+      total: 30
       typed:
         base: 12
-        dex: 8
+        dex: 11
         luck: 1
         competence: 1
+        resistance: 5
     will:
-      total: 9
+      total: 17
       typed:
         base: 8
-        wis: -1
+        wis: 2
         luck: 1
         competence: 1
+        resistance: 5
   attack_melee:
-    total: 21
+    total: 24
     typed:
       base: 17
-      str: 2
+      str: 5
       untyped: 1
       competence: 1
   attack_ranged:
-    total: 27
+    total: 30
     typed:
       base: 17
-      dex: 8
+      dex: 11
       untyped: 1
       competence: 1
   damage_melee:
-    total: 2
-    typed:
-      str: 2
-  grapple:
-    total: 19
-    typed:
-      base: 17
-      str: 2
-attack_iteratives:
-  melee:
-    - 21
-    - 16
-    - 11
-    - 6
-  ranged:
-    - 27
-    - 22
-    - 17
-    - 12
-skills:
-  Appraise:
     total: 5
     typed:
-      ability_mod: 4
-      luck: 1
-  Balance:
-    total: 11
+      str: 5
+  grapple:
+    total: 22
     typed:
-      ability_mod: 8
+      base: 17
+      str: 5
+attack_iteratives:
+  melee:
+    - 24
+    - 19
+    - 14
+    - 9
+  ranged:
+    - 30
+    - 25
+    - 20
+    - 15
+skills:
+  Appraise:
+    total: 12
+    typed:
+      ability_mod: 7
+      luck: 1
+      circumstance: 4
+  Balance:
+    total: 14
+    typed:
+      ability_mod: 11
       synergy: 2
       luck: 1
   Bluff:
-    total: 0
+    total: 7
     typed:
-      ability_mod: -1
+      ability_mod: 2
       luck: 1
+      circumstance: 4
   Climb:
+    total: 6
+    typed:
+      ability_mod: 5
+      luck: 1
+  Concentration:
+    total: 8
+    typed:
+      ability_mod: 7
+      luck: 1
+  Craft:
+    total: 8
+    typed:
+      ability_mod: 7
+      luck: 1
+  Diplomacy:
     total: 3
     typed:
       ability_mod: 2
       luck: 1
-  Concentration:
-    total: 5
-    typed:
-      ability_mod: 4
-      luck: 1
-  Craft:
-    total: 5
-    typed:
-      ability_mod: 4
-      luck: 1
-  Diplomacy:
-    total: 0
-    typed:
-      ability_mod: -1
-      luck: 1
   Disable Device:
-    total: 30
+    total: 35
     typed:
-      ability_mod: 4
+      ability_mod: 7
       ranks: 25
       luck: 1
+      circumstance: 2
   Disguise:
-    total: 0
+    total: 3
     typed:
-      ability_mod: -1
+      ability_mod: 2
       luck: 1
   Escape Artist:
-    total: 9
+    total: 12
     typed:
-      ability_mod: 8
+      ability_mod: 11
       luck: 1
   Forgery:
-    total: 6
+    total: 9
     typed:
-      ability_mod: 4
+      ability_mod: 7
       ranks: 1
       luck: 1
   Gather Information:
-    total: 0
-    typed:
-      ability_mod: -1
-      luck: 1
-  Heal:
-    total: 0
-    typed:
-      ability_mod: -1
-      luck: 1
-  Hide:
-    total: 34
-    typed:
-      ability_mod: 8
-      ranks: 25
-      luck: 1
-  Intimidate:
-    total: 0
-    typed:
-      ability_mod: -1
-      luck: 1
-  Jump:
-    total: 5
+    total: 3
     typed:
       ability_mod: 2
+      luck: 1
+  Heal:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Hide:
+    total: 41
+    typed:
+      ability_mod: 11
+      ranks: 25
+      luck: 1
+      circumstance: 4
+  Intimidate:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Jump:
+    total: 8
+    typed:
+      ability_mod: 5
       synergy: 2
       luck: 1
   Knowledge (Arcana):
-    total: 13
+    total: 16
     typed:
-      ability_mod: 4
+      ability_mod: 7
       ranks: 8
       luck: 1
   Knowledge (Local):
-    total: 6
+    total: 13
     typed:
-      ability_mod: 4
+      ability_mod: 7
       ranks: 1
       luck: 1
+      circumstance: 4
   Listen:
-    total: 25
+    total: 28
     typed:
-      ability_mod: -1
+      ability_mod: 2
       ranks: 25
       luck: 1
   Move Silently:
-    total: 34
+    total: 41
     typed:
-      ability_mod: 8
+      ability_mod: 11
       ranks: 25
       luck: 1
+      circumstance: 4
   Open Lock:
-    total: 23
+    total: 28
     typed:
-      ability_mod: 8
+      ability_mod: 11
       ranks: 14
       luck: 1
+      circumstance: 2
   Perform:
-    total: 0
+    total: 3
     typed:
-      ability_mod: -1
+      ability_mod: 2
       luck: 1
   Perform (Dance):
-    total: 4
+    total: 7
     typed:
-      ability_mod: -1
+      ability_mod: 2
       ranks: 5
   Ride:
-    total: 9
+    total: 12
     typed:
-      ability_mod: 8
+      ability_mod: 11
       luck: 1
   Search:
-    total: 30
+    total: 33
     typed:
-      ability_mod: 4
+      ability_mod: 7
       ranks: 25
       luck: 1
   Sense Motive:
-    total: 0
+    total: 3
     typed:
-      ability_mod: -1
+      ability_mod: 2
       luck: 1
   Sleight of Hand:
-    total: 34
+    total: 37
     typed:
-      ability_mod: 8
+      ability_mod: 11
       ranks: 25
       luck: 1
   Spellcraft:
-    total: 29
+    total: 32
     typed:
-      ability_mod: 4
+      ability_mod: 7
       ranks: 20
       synergy: 4
       luck: 1
   Spot:
-    total: 25
+    total: 28
     typed:
-      ability_mod: -1
+      ability_mod: 2
       ranks: 25
       luck: 1
   Survival:
-    total: 2
+    total: 5
     typed:
-      ability_mod: -1
+      ability_mod: 2
       synergy: 2
       luck: 1
   Swim:
-    total: 3
+    total: 6
     typed:
-      ability_mod: 2
+      ability_mod: 5
       luck: 1
   Tumble:
-    total: 25
+    total: 28
     typed:
-      ability_mod: 8
+      ability_mod: 11
       ranks: 16
       luck: 1
   Use Magic Device:
-    total: 25
+    total: 28
     typed:
-      ability_mod: -1
+      ability_mod: 2
       ranks: 25
       luck: 1
   Use Rope:
-    total: 9
+    total: 12
     typed:
-      ability_mod: 8
+      ability_mod: 11
       luck: 1
 carrying_capacity:
-  light: 58
-  medium: 116
-  heavy: 175
+  light: 133
+  medium: 266
+  heavy: 400
 feats:
   - Combat Reflexes
   - Mobility
@@ -422,6 +439,63 @@ equipment:
     - Pearl of Power (3rd Level)
     - Pearl of Power (3rd Level)
     - Pearl of Power (3rd Level)
+    - Crystal Mask of Insight
+    - Sun Lenses
+    - Vest of Resistance +5
+    - Belt of Magnificence +6
+    - Phoenix Cloak
+    - Holocaust Cloak
+    - Gloves of the Balanced Hand
+    - Deathstrike Bracers
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Quicksilver Boots
+    - Quicksilver Boots
+    - Crystal of Mind Cloaking (Greater)
+    - Gemstone of Heavy Fortification
+    - Heartstone
+    - Earthsilk Rope
+    - Heward's Fortifying Bedroll
+    - Rod of Extend, Lesser
+    - Eternal Wand of Prestidigitation
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Revelation Crystal (Greater)
+    - Truedeath Crystal (Greater)
+    - Truedeath Crystal (Greater)
+    - Demolition Crystal (Greater)
+    - Demolition Crystal (Greater)
+    - Fiendslayer Crystal (Least)
+    - Fiendslayer Crystal (Least)
+    - Horn of Plenty
+    - Githborn Talisman
+    - Szirb's Shining Helm
+    - Thieves' Tools, Masterwork
+    - Xan ibn'Duman
   weapons:
     - name: Dagger
       properties:

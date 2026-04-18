@@ -296,46 +296,63 @@ equipment:
     - Pearl of Power (3rd Level)
     - Pearl of Power (3rd Level)
     - Pearl of Power (3rd Level)
-    # Head slot:
-    # - Szirb's Shining Helm
-    # Face slot:
-    # - Crystal mask of insight
-    # Torso slot:
-    # - Vest of resistance
-    # Neck slot:
-    # - Chronocharm of the horizon walker
-    # Waist slot:
-    # - Belt of Magnificence
-    # Shoulders slot:
-    # - Phoenix cloak
-    # - Holocaust Cloak
-    # Hands slot:
-    # - Gloves of the balanced hand
-    # Arms slot:
-    # - Deathstrike bracers
-    # Unslotted:
-    # - Thieves Tools, MW
-    # - Crystal of Mind Cloaking, Greater
-    # - Heartstone (imm. to disease)
-    # - Xan ibn'Duman
-    # - Crystal of Shadow, Greater
-    # - Crystal of Silent Moves, Greater
-    # - Gemstone of Heavy Fortification
-    # - Earthsilk Rope
-    # - Sun Lenses
-    # - Heward's Fortifying Bedroll
-    # - Rod of Extend, Lesser
-    # - Eternal Wand of Prestidigitation
-    # - Eternal Wand of Magic Aura (x20)
-    # - Greater Revelation Crystal
-    # - Greater Truedeath Crystal (x2)
-    # - Greater Demolition Crystal (x2)
-    # - Least Fiendslayer Crystal (x2)
-    # - Horn of Plenty
-    # - Githborn Talisman
-    # - Quicksilver Boots (x2)
-    # - Chronocharm of the Horizon Walker (x3)
-    # - Chronocharm of the Laughing Rogue (x4)
+    - Crystal Mask of Insight
+    - Sun Lenses
+    - Vest of Resistance +5
+    - Belt of Magnificence +6
+    - Phoenix Cloak
+    - Holocaust Cloak
+    - Gloves of the Balanced Hand
+    - Deathstrike Bracers
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Quicksilver Boots
+    - Quicksilver Boots
+    - Crystal of Mind Cloaking (Greater)
+    - Gemstone of Heavy Fortification
+    - Heartstone
+    - Earthsilk Rope
+    - Heward's Fortifying Bedroll
+    - Rod of Extend, Lesser
+    - Eternal Wand of Prestidigitation
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Eternal Wand of Magic Aura
+    - Revelation Crystal (Greater)
+    - Truedeath Crystal (Greater)
+    - Truedeath Crystal (Greater)
+    - Demolition Crystal (Greater)
+    - Demolition Crystal (Greater)
+    - Fiendslayer Crystal (Least)
+    - Fiendslayer Crystal (Least)
+    - Horn of Plenty
+    - Githborn Talisman
+    - Szirb's Shining Helm
+    - Thieves' Tools, Masterwork
+    - Xan ibn'Duman
   weapons:
     - base: Dagger
       properties:

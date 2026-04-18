@@ -7,6 +7,82 @@
 Armbands of Might:
   slot: arms
   note: +2 to damage when power attacking by at least 2
+Belt of Magnificence +2:
+  slot: waist
+  note: +2 enhancement to all six ability scores
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+    - target: dex_score
+      bonus_type: enhancement
+      value: 2
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+    - target: int_score
+      bonus_type: enhancement
+      value: 2
+    - target: wis_score
+      bonus_type: enhancement
+      value: 2
+    - target: cha_score
+      bonus_type: enhancement
+      value: 2
+Belt of Magnificence +4:
+  slot: waist
+  note: +4 enhancement to all six ability scores
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
+    - target: int_score
+      bonus_type: enhancement
+      value: 4
+    - target: wis_score
+      bonus_type: enhancement
+      value: 4
+    - target: cha_score
+      bonus_type: enhancement
+      value: 4
+Belt of Magnificence +6:
+  slot: waist
+  note: +6 enhancement to all six ability scores
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 6
+    - target: dex_score
+      bonus_type: enhancement
+      value: 6
+    - target: con_score
+      bonus_type: enhancement
+      value: 6
+    - target: int_score
+      bonus_type: enhancement
+      value: 6
+    - target: wis_score
+      bonus_type: enhancement
+      value: 6
+    - target: cha_score
+      bonus_type: enhancement
+      value: 6
+Chronocharm of the Horizon Walker:
+  slot: throat
+  note: >-
+    1/day swift action, treat all terrain as normal for 1 round
+    (ignore difficult terrain movement penalties). MIC p. 79.
+Chronocharm of the Laughing Rogue:
+  slot: throat
+  note: >-
+    1/day swift action, take an extra move action during your
+    turn. MIC p. 79.
 Cloak of Comfort +1:
   slot: torso
   note: +1 resistance to all saves, endure elements
@@ -72,9 +148,85 @@ Cloak of Comfort +5:
     - target: will_save
       bonus_type: resistance
       value: 5
+Crystal Mask of Insight:
+  slot: face
+  note: >-
+    +5 competence bonus on a single Knowledge skill chosen
+    when the mask is created. MIC p. 85.
+Crystal of Mind Cloaking (Greater):
+  slot: slotless
+  note: >-
+    Armor/shield augment crystal; +5 competence on saves vs.
+    mind-affecting, and 1/day reroll a failed save vs.
+    mind-affecting as an immediate action. Requires +3 host
+    item. MIC p. 22.
+Deathstrike Bracers:
+  slot: arms
+  note: >-
+    3/day swift action; next melee attack before start of
+    next turn treats target (undead/construct/elemental/
+    plant/ooze/vermin) as a normal creature for crits and
+    precision damage (sneak attack, skirmish, etc.).
+    MIC p. 78.
+Demolition Crystal (Greater):
+  slot: slotless
+  note: >-
+    Weapon augment crystal; +1d6 damage to constructs,
+    treated as adamantine for bypassing construct DR, and
+    can deliver sneak attacks/criticals against constructs
+    as if they were living. Requires +3 host weapon.
+    MIC p. 67.
+Earthsilk Rope:
+  slot: tool
+  note: >-
+    50-ft rope of deep-spider silk. Hardness 10, 12 hp
+    (vs normal 0/2). +2 circumstance on Use Rope checks;
+    masterwork for binding (+2 DC to escape). Underdark
+    p. 78.
+Eternal Wand of Magic Aura:
+  slot: tool
+  note: >-
+    Eternal wand; casts Nystul's magic aura 2/day at
+    CL 3. Usable by any character with the spell on any
+    class list. MIC p. 159.
+Eternal Wand of Prestidigitation:
+  slot: tool
+  note: >-
+    Eternal wand usable by any character (no UMD). Casts
+    prestidigitation 2/day at CL 1. MIC p. 159.
+Fiendslayer Crystal (Least):
+  slot: slotless
+  note: >-
+    Weapon augment crystal; +1d6 damage to evil
+    outsiders. MIC p. 67.
 Gauntlets of Ghost Fighting:
   slot: hands
   note: ghost touch weapon
+Gemstone of Heavy Fortification:
+  slot: slotless
+  note: >-
+    Armor gemstone; grants heavy fortification (75% chance
+    to negate extra damage from critical hits and sneak
+    attacks) to the attached armor. Draconomicon p. 83.
+Githborn Talisman:
+  slot: slotless
+  note: >-
+    SR 13 vs. spells and spell-like abilities from
+    aberrations. 1/day immediate action reroll a failed
+    Will save vs. a mind-affecting effect from an
+    aberration. MIC p. 206.
+Gloves of the Balanced Hand:
+  slot: hands
+  note: >-
+    Wearer is treated as having Improved Two-Weapon
+    Fighting (extra off-hand attack at -5). Requires
+    Two-Weapon Fighting feat to function. MIC p. 102.
+Heartstone:
+  slot: slotless
+  note: >-
+    Grants immunity to all diseases while carried. Allows
+    true seeing 3/day (1 minute duration). DMG p. 269
+    (hag item).
 Heraldic Crest of Courage:
   slot: head
   effects:
@@ -82,12 +234,91 @@ Heraldic Crest of Courage:
       bonus_type: morale
       value: 1
   note: +1 morale bonus to initiative, CL 5th aid 1/day as a free action
+Heward's Fortifying Bedroll:
+  slot: tool
+  note: >-
+    Sleeping 8 hours in the bedroll gives a full night's
+    rest plus a lesser restoration on waking. One use
+    per day. MIC p. 159.
+Holocaust Cloak:
+  slot: shoulders
+  note: >-
+    1/day immediate action, erupt in flames dealing 3d6
+    fire damage to all adjacent creatures (Reflex DC 13
+    half). MIC p. 102.
+Horn of Plenty:
+  slot: tool
+  note: >-
+    1/day on command, produces a meal sufficient to feed
+    up to eight Medium creatures (nourishment only, no
+    heroes' feast combat bonuses). MIC p. 111.
+Phoenix Cloak:
+  slot: shoulders
+  note: >-
+    Fire resistance 5. When the wearer drops to -10 hp or
+    is slain, body immolates once per day dealing 4d6
+    fire damage in a 10-ft burst (Reflex half).
+    MIC p. 117.
+Quicksilver Boots:
+  slot: feet
+  note: >-
+    1/day swift action; move up to your speed as if via
+    dimension door (no attack after). Does not provoke
+    AoO. MIC p. 85.
+Revelation Crystal (Greater):
+  slot: slotless
+  note: >-
+    Weapon augment crystal; damaging an invisible creature
+    suppresses its invisibility for 1 round (still 50%
+    miss chance) and outlines it in a golden aura; also
+    suppresses concealment/displacement-like effects
+    (blur, displacement) on a damaged creature for 1
+    round. Requires +3 host weapon. MIC p. 68.
 Ring of Tharizdun:
   slot: ring
   note: Casts CL 9 delay death on the wearer if needed
+Rod of Extend, Lesser:
+  slot: tool
+  note: >-
+    Metamagic rod. 3/day, cast a spell of 3rd level or
+    lower as if modified by Extend Spell (duration
+    doubled) without increasing level or casting time.
+    DMG p. 236.
+Sun Lenses:
+  slot: face
+  note: >-
+    Negates the dazzled condition from bright light. +2
+    circumstance on saves vs. visual effects (gaze
+    attacks, patterns, blinding). MIC p. 143.
+Szirb's Shining Helm:
+  slot: head
+  note: +2 sacred bonus to AC
+  effects:
+    - target: ac
+      bonus_type: sacred
+      value: 2
+Thieves' Tools, Masterwork:
+  slot: tool
+  note: >-
+    +2 circumstance bonus to Disable Device and Open
+    Lock checks.
+  effects:
+    - target: skill_disable_device
+      bonus_type: circumstance
+      value: 2
+    - target: skill_open_lock
+      bonus_type: circumstance
+      value: 2
 Third Eye (Clarity):
   slot: face
   note: Imm. action negate confused, etc.
+Truedeath Crystal (Greater):
+  slot: slotless
+  note: >-
+    Weapon augment crystal; +1d6 damage to undead,
+    functions as ghost touch, and can deliver sneak
+    attacks/criticals against undead as if they were
+    living. Requires +3 host weapon. MIC p. 68.
 Vest of Resistance +1:
   slot: torso
   note: +1 resistance to all saves
@@ -153,3 +384,24 @@ Vest of Resistance +5:
     - target: will_save
       bonus_type: resistance
       value: 5
+Xan ibn'Duman:
+  slot: slotless
+  note: >-
+    +4 circumstance bonus to Appraise, Hide, Bluff, Move
+    Silently, and Knowledge (Local).
+  effects:
+    - target: skill_appraise
+      bonus_type: circumstance
+      value: 4
+    - target: skill_hide
+      bonus_type: circumstance
+      value: 4
+    - target: skill_bluff
+      bonus_type: circumstance
+      value: 4
+    - target: skill_move_silently
+      bonus_type: circumstance
+      value: 4
+    - target: skill_knowledge_local
+      bonus_type: circumstance
+      value: 4

@@ -23,31 +23,18 @@ CHAR_DIRS: list[Path] = [
     _INTEGRATION_DIR / "custom_characters",
 ]
 
-# Builds that need additional rules content (splatbook
-# feats/classes) before they can run. Remove from this
-# set as the rules catch up.
-_SKIP_BUILDS: frozenset[str] = frozenset({"drufus"})
 
-
-def _discover() -> list[tuple[str, Path]]:
-    """Find runnable .char.yaml stems across CHAR_DIRS."""
-    builds: list[tuple[str, Path]] = []
+def builds() -> list[tuple[str, Path]]:
+    """Yield runnable .char.yaml stems across CHAR_DIRS."""
+    results: list[tuple[str, Path]] = []
     for d in CHAR_DIRS:
-        if not d.is_dir():
-            continue
         for p in sorted(d.glob("*.char.yaml")):
             stem = p.name.removesuffix(".char.yaml")
-            if stem in _SKIP_BUILDS:
-                continue
-            builds.append((stem, d))
-    return builds
+            results.append((stem, d))
+    return results
 
 
-_BUILDS = _discover()
-_IDS = [name for name, _ in _BUILDS]
-
-
-@pytest.mark.parametrize("build,char_dir", _BUILDS, ids=_IDS)
+@pytest.mark.parametrize("build,char_dir", builds())
 def test_character(build: str, char_dir: Path) -> None:
     """
     Run the `charsheet` CLI on a build and diff its

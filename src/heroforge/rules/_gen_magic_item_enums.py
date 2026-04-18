@@ -103,9 +103,7 @@ def _render_init() -> str:
     lines += [
         "",
         "",
-        "def _combine(",
-        "    name: str, *sources: type[StrEnum]",
-        ") -> type[StrEnum]:",
+        "def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:",
         "    members: dict[str, str] = {}",
         "    for src in sources:",
         "        for m in src:",
