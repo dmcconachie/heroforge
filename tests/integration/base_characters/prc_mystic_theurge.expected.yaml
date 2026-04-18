@@ -209,6 +209,10 @@ skills:
     total: 3
     typed:
       ability_mod: 3
+  Profession (Soldier):
+    total: 3
+    typed:
+      ability_mod: 3
   Search:
     total: 3
     typed:

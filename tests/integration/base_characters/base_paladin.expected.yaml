@@ -166,6 +166,10 @@ skills:
     total: 1
     typed:
       ability_mod: 1
+  Profession (Soldier):
+    total: 1
+    typed:
+      ability_mod: 1
   Ride:
     total: 10
     typed:

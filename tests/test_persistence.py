@@ -476,15 +476,15 @@ levels:
   - level: 1
     class: Druid
     skill_ranks:
-      Profession (Soldier): 3
+      Profession (Unknown): 3
   - level: 2
     class: Druid
     skill_ranks:
-      Profession (Soldier): 3
+      Profession (Unknown): 3
   - level: 3
     class: Druid
     skill_ranks:
-      Profession (Soldier): 3
+      Profession (Unknown): 3
   - level: 4
     class: Hospitaler
     feats:
@@ -515,12 +515,12 @@ class TestCattrsErrorFormatting:
         """Repeated leaf errors are deduplicated."""
         msg = self._err(tmp_path)
         assert (
-            msg.count("'Profession (Soldier)' is not a valid KnownSkill") == 1
+            msg.count("'Profession (Unknown)' is not a valid KnownSkill") == 1
         )
 
     def test_all_distinct_errors_present(self, tmp_path: Path) -> None:
         msg = self._err(tmp_path)
-        assert "'Profession (Soldier)' is not a valid KnownSkill" in msg
+        assert "'Profession (Unknown)' is not a valid KnownSkill" in msg
         assert "'Hospitaler' is not a valid KnownClass" in msg
         assert "'Shock Trooper' is not a valid KnownFeat" in msg
         assert '"Lion\'s Pounce" is not a valid KnownFeat' in msg

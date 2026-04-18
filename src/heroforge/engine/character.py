@@ -1070,10 +1070,8 @@ class Character:
 
         Invalidates affected ability score node(s).
         """
-        if ability is None:
-            return
-
-        ability = Ability(ability)
+        if ability is not None:
+            ability = Ability(ability)
         idx = char_level - 1
         if idx < 0 or idx >= len(self.levels):
             raise CharacterError(f"No level {char_level} to set bump on")

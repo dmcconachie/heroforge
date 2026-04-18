@@ -154,6 +154,10 @@ skills:
     total: 4
     typed:
       ability_mod: 4
+  Profession (Soldier):
+    total: 4
+    typed:
+      ability_mod: 4
   Sense Motive:
     total: 4
     typed:

@@ -4,6 +4,9 @@
 #
 # Sorted alphabetically.
 
+Armbands of Might:
+  slot: arms
+  note: +2 to damage when power attacking by at least 2
 Cloak of Comfort +1:
   slot: torso
   note: +1 resistance to all saves, endure elements
@@ -69,6 +72,9 @@ Cloak of Comfort +5:
     - target: will_save
       bonus_type: resistance
       value: 5
+Gauntlets of Ghost Fighting:
+  slot: hands
+  note: ghost touch weapon
 Ring of Tharizdun:
   slot: ring
   note: Casts CL 9 delay death on the wearer if needed

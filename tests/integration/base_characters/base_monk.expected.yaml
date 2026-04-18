@@ -190,6 +190,10 @@ skills:
     total: 3
     typed:
       ability_mod: 3
+  Profession (Soldier):
+    total: 3
+    typed:
+      ability_mod: 3
   Ride:
     total: 4
     typed:

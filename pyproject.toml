@@ -27,6 +27,7 @@ dev = [
 [project.scripts]
 app = "heroforge.ui.app:main"
 charsheet = "heroforge.engine.sheet:main"
+check-magic-items = "heroforge.rules._gen_magic_item_enums:main"
 hfg_conversion = "heroforge.hfg_reader:main"
 
 [tool.pytest.ini_options]
