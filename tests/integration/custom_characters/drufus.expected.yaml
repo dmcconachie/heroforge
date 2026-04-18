@@ -15,20 +15,24 @@ abilities:
     typed:
       base: 14
   dex:
-    score: 16
-    mod: 3
+    score: 26
+    mod: 8
     typed:
       base: 16
+      level_bumps: 5
+      inherent: 5
   con:
-    score: 14
-    mod: 2
+    score: 18
+    mod: 4
     typed:
       base: 14
+      inherent: 4
   int:
-    score: 14
-    mod: 2
+    score: 18
+    mod: 4
     typed:
       base: 14
+      inherent: 4
   wis:
     score: 8
     mod: -1
@@ -41,25 +45,28 @@ abilities:
       base: 8
 combat:
   ac:
-    total: 13
+    total: 33
     typed:
       base: 10
-      dex: 3
-  touch_ac: 13
-  flatfooted_ac: 13
+      dex: 6
+      armor: 9
+      shield: 7
+      insight: 1
+  touch_ac: 17
+  flatfooted_ac: 33
   hp_max:
-    total: 198
+    total: 189
     typed:
-      base: 154
-      con: 44
+      base: 101
+      con: 88
   bab:
     total: 17
     typed:
       base: 17
   initiative:
-    total: 7
+    total: 12
     typed:
-      dex: 3
+      dex: 8
       untyped: 4
   speed:
     total: 30
@@ -68,32 +75,40 @@ combat:
   sr: 0
   saves:
     fort:
-      total: 13
+      total: 17
       typed:
         base: 11
-        con: 2
+        con: 4
+        luck: 1
+        competence: 1
     ref:
-      total: 15
+      total: 22
       typed:
         base: 12
-        dex: 3
+        dex: 8
+        luck: 1
+        competence: 1
     will:
-      total: 7
+      total: 9
       typed:
         base: 8
         wis: -1
+        luck: 1
+        competence: 1
   attack_melee:
-    total: 20
+    total: 21
     typed:
       base: 17
       str: 2
       untyped: 1
+      competence: 1
   attack_ranged:
-    total: 21
+    total: 27
     typed:
       base: 17
-      dex: 3
+      dex: 8
       untyped: 1
+      competence: 1
   damage_melee:
     total: 2
     typed:
@@ -105,107 +120,204 @@ combat:
       str: 2
 attack_iteratives:
   melee:
-    - 20
-    - 15
-    - 10
-    - 5
-  ranged:
     - 21
     - 16
     - 11
     - 6
+  ranged:
+    - 27
+    - 22
+    - 17
+    - 12
 skills:
-  Balance:
+  Appraise:
     total: 5
     typed:
-      ability_mod: 3
+      ability_mod: 4
+      luck: 1
+  Balance:
+    total: 11
+    typed:
+      ability_mod: 8
       synergy: 2
+      luck: 1
+  Bluff:
+    total: 0
+    typed:
+      ability_mod: -1
+      luck: 1
+  Climb:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Concentration:
+    total: 5
+    typed:
+      ability_mod: 4
+      luck: 1
+  Craft:
+    total: 5
+    typed:
+      ability_mod: 4
+      luck: 1
+  Diplomacy:
+    total: 0
+    typed:
+      ability_mod: -1
+      luck: 1
   Disable Device:
-    total: 27
+    total: 30
     typed:
-      ability_mod: 2
+      ability_mod: 4
       ranks: 25
+      luck: 1
+  Disguise:
+    total: 0
+    typed:
+      ability_mod: -1
+      luck: 1
+  Escape Artist:
+    total: 9
+    typed:
+      ability_mod: 8
+      luck: 1
   Forgery:
-    total: 3
+    total: 6
     typed:
-      ability_mod: 2
+      ability_mod: 4
       ranks: 1
-  Hide:
-    total: 28
+      luck: 1
+  Gather Information:
+    total: 0
     typed:
-      ability_mod: 3
+      ability_mod: -1
+      luck: 1
+  Heal:
+    total: 0
+    typed:
+      ability_mod: -1
+      luck: 1
+  Hide:
+    total: 34
+    typed:
+      ability_mod: 8
       ranks: 25
+      luck: 1
+  Intimidate:
+    total: 0
+    typed:
+      ability_mod: -1
+      luck: 1
   Jump:
-    total: 4
+    total: 5
     typed:
       ability_mod: 2
       synergy: 2
+      luck: 1
   Knowledge (Arcana):
-    total: 10
+    total: 13
     typed:
-      ability_mod: 2
+      ability_mod: 4
       ranks: 8
+      luck: 1
   Knowledge (Local):
-    total: 3
+    total: 6
     typed:
-      ability_mod: 2
+      ability_mod: 4
       ranks: 1
+      luck: 1
   Listen:
-    total: 24
+    total: 25
     typed:
       ability_mod: -1
       ranks: 25
+      luck: 1
   Move Silently:
-    total: 28
+    total: 34
     typed:
-      ability_mod: 3
+      ability_mod: 8
       ranks: 25
+      luck: 1
   Open Lock:
-    total: 17
+    total: 23
     typed:
-      ability_mod: 3
+      ability_mod: 8
       ranks: 14
+      luck: 1
+  Perform:
+    total: 0
+    typed:
+      ability_mod: -1
+      luck: 1
   Perform (Dance):
     total: 4
     typed:
       ability_mod: -1
       ranks: 5
+  Ride:
+    total: 9
+    typed:
+      ability_mod: 8
+      luck: 1
   Search:
-    total: 27
+    total: 30
     typed:
-      ability_mod: 2
+      ability_mod: 4
       ranks: 25
+      luck: 1
+  Sense Motive:
+    total: 0
+    typed:
+      ability_mod: -1
+      luck: 1
   Sleight of Hand:
-    total: 28
+    total: 34
     typed:
-      ability_mod: 3
+      ability_mod: 8
       ranks: 25
+      luck: 1
   Spellcraft:
-    total: 26
+    total: 29
     typed:
-      ability_mod: 2
+      ability_mod: 4
       ranks: 20
       synergy: 4
+      luck: 1
   Spot:
-    total: 24
+    total: 25
     typed:
       ability_mod: -1
       ranks: 25
+      luck: 1
   Survival:
-    total: 1
+    total: 2
     typed:
       ability_mod: -1
       synergy: 2
-  Tumble:
-    total: 19
+      luck: 1
+  Swim:
+    total: 3
     typed:
-      ability_mod: 3
+      ability_mod: 2
+      luck: 1
+  Tumble:
+    total: 25
+    typed:
+      ability_mod: 8
       ranks: 16
+      luck: 1
   Use Magic Device:
-    total: 24
+    total: 25
     typed:
       ability_mod: -1
       ranks: 25
+      luck: 1
+  Use Rope:
+    total: 9
+    typed:
+      ability_mod: 8
+      luck: 1
 carrying_capacity:
   light: 58
   medium: 116
@@ -272,9 +384,74 @@ class_features:
     magical_defense_2: Magical defense bonus increases to +2 (TODO: wire up
     effect)
 equipment:
+  armor:
+    name: +5 Mithral Chain Shirt
+    max_dex: 6
+    asf: 10
+    properties:
+      - blinking
+      - vanishing
+      - blueshine
+      - mindarmor
+      - deathward
+      - mind cloaking
+      - greater shadow
+      - greater silent moves
+      - nimble
+  shield:
+    name: +5 Mithral Heavy Steel Shield
+    asf: 5
+    properties:
+      - animated
+      - deathward
+      - arrow deflection
+  worn:
+    - Ring of Freedom of Movement
+    - Ring of Spell Storing
+    - Hat of Disguise
+    - Handy Haversack
+    - Boots of Speed
+    - Stone of Good Luck (Luckstone)
+    - Ioun Stone (Dusty Rose Prism)
+    - Ioun Stone (Pale Green Prism)
+    - Pearl of Power (1st Level)
+    - Pearl of Power (1st Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (3rd Level)
+    - Pearl of Power (3rd Level)
+    - Pearl of Power (3rd Level)
   weapons:
     - name: Dagger
+      properties:
+        - TWF (primary)
+        - sacred
+        - wounding
+        - vanishing
+        - fiendslayer (least)
+        - weapon bond
     - name: Dagger
+      properties:
+        - TWF (secondary)
+        - sacred
+        - wounding
+        - vanishing
+        - fiendslayer (least)
     - name: Light Mace
+      properties:
+        - TWF (primary)
+        - sacred
+        - bane (undead)
+        - truedeath (greater)
     - name: Light Mace
+      properties:
+        - TWF (secondary)
+        - sacred
+        - bane (undead)
+        - truedeath (greater)
     - name: Composite Longbow
+      properties:
+        - sacred
+        - precise
+        - truedeath (greater)
