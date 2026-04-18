@@ -20,6 +20,7 @@ class KnownCustomMagicItem(StrEnum):
     CLOAK_OF_COMFORT_PLUS_4 = "Cloak of Comfort +4"
     CLOAK_OF_COMFORT_PLUS_5 = "Cloak of Comfort +5"
     GAUNTLETS_OF_GHOST_FIGHTING = "Gauntlets of Ghost Fighting"
+    HERALDIC_CREST_OF_COURAGE = "Heraldic Crest of Courage"
     RING_OF_THARIZDUN = "Ring of Tharizdun"
     THIRD_EYE_CLARITY = "Third Eye (Clarity)"
     VEST_OF_RESISTANCE_PLUS_1 = "Vest of Resistance +1"

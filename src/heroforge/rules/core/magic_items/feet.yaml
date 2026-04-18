@@ -17,25 +17,18 @@ Boots of Levitation:
   note: >-
     Levitate at will, as the spell (CL 3rd);
     vertical movement only
+# TODO: Boots of Speed grants an activatable haste
+# effect (10 rounds/day, free action). Modeled as a
+# note-only item for now; once per-day resources and
+# item-granted buffs are tracked, wire this up to
+# toggle the Haste buff instead of applying effects
+# unconditionally.
 Boots of Speed:
   slot: feet
   note: >-
     Haste for 10 rounds/day (free action to
     activate): +1 attack, +1 dodge AC, +1 Ref,
     +30 ft speed
-  effects:
-    - target: attack_all
-      bonus_type: untyped
-      value: 1
-    - target: ac
-      bonus_type: dodge
-      value: 1
-    - target: ref_save
-      bonus_type: dodge
-      value: 1
-    - target: speed
-      bonus_type: enhancement
-      value: 30
 Boots of Striding and Springing:
   slot: feet
   note: >-

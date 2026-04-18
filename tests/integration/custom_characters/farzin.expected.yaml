@@ -50,17 +50,16 @@ abilities:
       racial: 4
 combat:
   ac:
-    total: 31
+    total: 30
     typed:
       base: 10
       dex: 1
-      dodge: 1
       natural_armor_enhancement: 5
       natural_armor: 1
       armor: 9
       shield: 3
       insight: 1
-  touch_ac: 13
+  touch_ac: 12
   flatfooted_ac: 29
   hp_max:
     total: 133
@@ -72,15 +71,15 @@ combat:
     typed:
       base: 10
   initiative:
-    total: 2
+    total: 3
     typed:
       dex: 2
+      morale: 1
   speed:
-    total: 50
+    total: 20
     typed:
       base: 30
       untyped: -10
-      enhancement: 30
   sr: 0
   saves:
     fort:
@@ -91,11 +90,10 @@ combat:
         resistance: 5
         luck: 1
     ref:
-      total: 12
+      total: 11
       typed:
         base: 3
         dex: 2
-        dodge: 1
         resistance: 5
         luck: 1
     will:
@@ -106,17 +104,15 @@ combat:
         resistance: 5
         luck: 1
   attack_melee:
-    total: 19
+    total: 18
     typed:
       base: 10
       str: 8
-      untyped: 1
   attack_ranged:
-    total: 13
+    total: 12
     typed:
       base: 10
       dex: 2
-      untyped: 1
   damage_melee:
     total: 8
     typed:
@@ -128,11 +124,11 @@ combat:
       str: 8
 attack_iteratives:
   melee:
-    - 19
-    - 14
-  ranged:
+    - 18
     - 13
-    - 8
+  ranged:
+    - 12
+    - 7
 skills:
   Appraise:
     total: 3
@@ -216,10 +212,10 @@ skills:
       ability_mod: 1
       luck: 1
   Jump:
-    total: 12
+    total: -2
     typed:
       ability_mod: 8
-      speed_mod: 8
+      speed_mod: -6
       untyped: -5
       luck: 1
   Knowledge (Nature):
@@ -389,6 +385,7 @@ equipment:
     - Ioun Stone (Dusty Rose Prism)
     - Ioun Stone (Clear Spindle)
     - Ioun Stone (Pink Rhomboid)
+    - Heraldic Crest of Courage
   weapons:
     - name: +1 Lance
     - name: Composite Longbow

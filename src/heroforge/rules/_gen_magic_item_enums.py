@@ -97,9 +97,9 @@ def _render_init() -> str:
     ]
     for slot in SLOTS:
         cls = f"KnownCoreMagicItem{slot.capitalize()}"
-        lines.append(f"from heroforge.rules.core.magic_items.{slot} import (")
-        lines.append(f"    {cls},")
-        lines.append(")")
+        lines.append(
+            f"from heroforge.rules.core.magic_items.{slot} import {cls}"
+        )
     lines += [
         "",
         "",

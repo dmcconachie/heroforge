@@ -75,6 +75,12 @@ Cloak of Comfort +5:
 Gauntlets of Ghost Fighting:
   slot: hands
   note: ghost touch weapon
+Heraldic Crest of Courage:
+  slot: head
+  effects:
+    - target: initiative
+      bonus_type: morale
+      value: 1
 Ring of Tharizdun:
   slot: ring
   note: Casts CL 9 delay death on the wearer if needed
