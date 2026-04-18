@@ -1,0 +1,85 @@
+# rules/core/magic_items/head.yaml
+#
+# Head slot: circlets, crowns, hats, headbands,
+# helms, masks, phylacteries.
+#
+# Sorted alphabetically.
+
+Circlet of Blasting (Major):
+  slot: head
+  note: >-
+    Searing light 1/day (12d6 at CL 10th, or
+    two 6d6 blasts as full-round action)
+Circlet of Blasting (Minor):
+  slot: head
+  note: >-
+    Searing light 1/day (6d6 ranged touch, CL 5th)
+Circlet of Persuasion:
+  slot: head
+  note: >-
+    +3 competence on CHA-based checks (note only —
+    applies to specific skill checks)
+Hat of Disguise:
+  slot: head
+  note: >-
+    Disguise self at will (as spell, CL 1st)
+Headband of Intellect +2:
+  slot: head
+  note: +2 enhancement to INT
+  effects:
+    - target: int_score
+      bonus_type: enhancement
+      value: 2
+Headband of Intellect +4:
+  slot: head
+  note: +4 enhancement to INT
+  effects:
+    - target: int_score
+      bonus_type: enhancement
+      value: 4
+Headband of Intellect +6:
+  slot: head
+  note: +6 enhancement to INT
+  effects:
+    - target: int_score
+      bonus_type: enhancement
+      value: 6
+Helm of Brilliance:
+  slot: head
+  note: >-
+    Various gem-powered spell effects; +1 resistance
+    to fire, various offensive abilities (note only)
+Helm of Comprehend Languages and Read Magic:
+  slot: head
+  note: >-
+    Comprehend languages and read magic at will
+    (+5 competence to Decipher Script for content)
+Helm of Telepathy:
+  slot: head
+  note: >-
+    Detect thoughts at will, telepathic speech,
+    suggestion 1/day (DC 14)
+Helm of Teleportation:
+  slot: head
+  note: >-
+    Teleport 3/day (as the spell, CL 9th)
+Helm of Underwater Action:
+  slot: head
+  note: >-
+    See normally underwater; with goggles worn and
+    command word, grants water breathing (2 hrs/day)
+Mask of the Skull:
+  slot: head
+  note: >-
+    1/day the mask detaches and flies 50 ft to
+    target; slay living effect (DC 16 Fort negates)
+Phylactery of Faithfulness:
+  slot: head
+  note: >-
+    Warns wearer of actions contrary to alignment
+    before they act
+Phylactery of Undead Turning:
+  slot: head
+  note: >-
+    Treat cleric level as +4 higher for purposes of
+    turning or rebuking undead

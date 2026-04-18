@@ -112,11 +112,28 @@ class AppState:
             self.buff_registry,
             "core/conditions_srd.yaml",
         )
-        MagicItemLoader(rd).load(
-            self.magic_item_registry,
-            self.buff_registry,
-            "core/magic_items.yaml",
-        )
+        _mi_loader = MagicItemLoader(rd)
+        for _mi_file in (
+            "head",
+            "face",
+            "throat",
+            "shoulders",
+            "body",
+            "torso",
+            "arms",
+            "hands",
+            "ring",
+            "waist",
+            "feet",
+            "slotless",
+            "tool",
+            "consumable",
+        ):
+            _mi_loader.load(
+                self.magic_item_registry,
+                self.buff_registry,
+                f"core/magic_items/{_mi_file}.yaml",
+            )
         FeatsLoader(rd).load(
             self.feat_registry,
             "core/feats.yaml",

@@ -1,0 +1,78 @@
+# rules/core/magic_items/feet.yaml
+#
+# Feet slot: boots, horseshoes (worn by mount),
+# sandals, shoes, slippers.
+#
+# Sorted alphabetically.
+
+Boots of Elvenkind:
+  slot: feet
+  note: +5 competence on Move Silently
+  effects:
+    - target: skill_move_silently
+      bonus_type: competence
+      value: 5
+Boots of Levitation:
+  slot: feet
+  note: >-
+    Levitate at will, as the spell (CL 3rd);
+    vertical movement only
+Boots of Speed:
+  slot: feet
+  note: >-
+    Haste for 10 rounds/day (free action to
+    activate): +1 attack, +1 dodge AC, +1 Ref,
+    +30 ft speed
+  effects:
+    - target: attack_all
+      bonus_type: untyped
+      value: 1
+    - target: ac
+      bonus_type: dodge
+      value: 1
+    - target: ref_save
+      bonus_type: dodge
+      value: 1
+    - target: speed
+      bonus_type: enhancement
+      value: 30
+Boots of Striding and Springing:
+  slot: feet
+  note: >-
+    +10 ft enhancement speed, +5 competence on
+    Jump
+  effects:
+    - target: speed
+      bonus_type: enhancement
+      value: 10
+    - target: skill_jump
+      bonus_type: competence
+      value: 5
+Boots of Teleportation:
+  slot: feet
+  note: Teleport (as the spell) 3/day (CL 9th)
+Boots of the Winterlands:
+  slot: feet
+  note: >-
+    Endure elements (cold); move without tracks on
+    snow/ice; cold environments treated as normal
+Horseshoes of a Zephyr:
+  slot: feet
+  note: >-
+    Mount's hooves travel 4 inches above any
+    surface; may move across water, quicksand, etc.
+Horseshoes of Speed:
+  slot: feet
+  note: >-
+    Mount's base land speed is increased by 30 ft
+    (enhancement bonus)
+Slippers of Spider Climbing:
+  slot: feet
+  note: >-
+    Spider climb (as the spell, CL 4th) at will;
+    climb walls/ceilings at 20 ft for 10 min/day
+Winged Boots:
+  slot: feet
+  note: >-
+    Fly 60 ft (good) for up to 5 min/day
+    (as the fly spell, CL 5th)

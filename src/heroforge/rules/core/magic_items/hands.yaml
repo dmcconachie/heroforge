@@ -1,0 +1,59 @@
+# rules/core/magic_items/hands.yaml
+#
+# Hands slot: gauntlets, gloves, hand-worn items.
+#
+# Sorted alphabetically.
+
+Gauntlet of Rust:
+  slot: hands
+  note: >-
+    Rusting grasp (as spell) on touch 1/day;
+    instant rust destroys non-magical metal
+Gauntlets of Ogre Power:
+  slot: hands
+  note: +2 enhancement to STR
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+Glove of Storing:
+  slot: hands
+  note: >-
+    Single glove; stores one item of up to 20 lb
+    inside; retrieve/stow as a free action
+Gloves of Arrow Snaring:
+  slot: hands
+  note: >-
+    Catch one ranged attack 2/day as free action
+    (as Deflect Arrows feat)
+Gloves of Dexterity +2:
+  slot: hands
+  note: +2 enhancement to DEX
+  effects:
+    - target: dex_score
+      bonus_type: enhancement
+      value: 2
+Gloves of Dexterity +4:
+  slot: hands
+  note: +4 enhancement to DEX
+  effects:
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
+Gloves of Dexterity +6:
+  slot: hands
+  note: +6 enhancement to DEX
+  effects:
+    - target: dex_score
+      bonus_type: enhancement
+      value: 6
+Gloves of Swimming and Climbing:
+  slot: hands
+  note: +5 competence on Swim and Climb checks
+  effects:
+    - target: skill_swim
+      bonus_type: competence
+      value: 5
+    - target: skill_climb
+      bonus_type: competence
+      value: 5

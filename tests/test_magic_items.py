@@ -18,15 +18,34 @@ from heroforge.rules.loader import MagicItemLoader
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
+SLOT_FILES = [
+    "head",
+    "face",
+    "throat",
+    "shoulders",
+    "body",
+    "torso",
+    "arms",
+    "hands",
+    "ring",
+    "waist",
+    "feet",
+    "slotless",
+    "tool",
+    "consumable",
+]
+
 
 def _load_items() -> tuple[MagicItemRegistry, BuffRegistry]:
     item_reg = MagicItemRegistry()
     buff_reg = BuffRegistry()
-    MagicItemLoader(RULES_DIR).load(
-        item_reg,
-        buff_reg,
-        "core/magic_items.yaml",
-    )
+    loader = MagicItemLoader(RULES_DIR)
+    for slot_file in SLOT_FILES:
+        loader.load(
+            item_reg,
+            buff_reg,
+            f"core/magic_items/{slot_file}.yaml",
+        )
     return item_reg, buff_reg
 
 
@@ -103,55 +122,39 @@ class TestMagicItemEffects:
         assert c.get("str_score") == 18
 
 
-SLOT_ORDER = [
-    "head",
-    "eyes",
-    "neck",
-    "shoulders",
-    "body",
-    "torso",
-    "arms",
-    "hands",
-    "ring",
-    "waist",
-    "feet",
-    "slotless",
-    "consumed",
-]
-
-
 class TestMagicItemsSort:
-    """Items must be sorted by slot then by name."""
+    """
+    Within each slot yaml file, every item's
+    ``slot`` field must match the filename and
+    entries must be sorted alphabetically.
+    """
 
-    def _items(self) -> list[tuple[str, dict]]:
+    def _file_items(self, slot_file: str) -> list[tuple[str, dict]]:
         import yaml
 
-        path = RULES_DIR / "core" / "magic_items.yaml"
+        path = RULES_DIR / "core" / "magic_items" / f"{slot_file}.yaml"
         with open(path) as f:
             data = yaml.safe_load(f)
+        if data is None:
+            return []
         return list(data.items())
 
     def test_all_have_slot(self) -> None:
-        for name, item in self._items():
-            assert "slot" in item, f"{name!r} missing slot"
+        for slot_file in SLOT_FILES:
+            for name, item in self._file_items(slot_file):
+                assert "slot" in item, f"{name!r} missing slot"
 
-    def test_valid_slots(self) -> None:
-        for name, item in self._items():
-            assert item.get("slot") in SLOT_ORDER, (
-                f"{name!r}: unknown slot {item.get('slot')!r}"
-            )
+    def test_slot_matches_filename(self) -> None:
+        for slot_file in SLOT_FILES:
+            for name, item in self._file_items(slot_file):
+                assert item["slot"] == slot_file, (
+                    f"{name!r} in {slot_file}.yaml has slot {item['slot']!r}"
+                )
 
-    def test_sorted_by_slot_then_name(self) -> None:
-        items = self._items()
-        keys = [(SLOT_ORDER.index(v["slot"]), n) for n, v in items]
-        sorted_keys = sorted(keys, key=lambda k: (k[0], k[1].lower()))
-        for i, (actual, expected) in enumerate(
-            zip(keys, sorted_keys, strict=True)
-        ):
-            assert actual == expected, (
-                f"Item at index {i}: "
-                f"({actual[1]!r}, slot "
-                f"{SLOT_ORDER[actual[0]]!r}) should "
-                f"be ({expected[1]!r}, slot "
-                f"{SLOT_ORDER[expected[0]]!r})"
+    def test_sorted_alphabetically(self) -> None:
+        for slot_file in SLOT_FILES:
+            names = [n for n, _ in self._file_items(slot_file)]
+            sorted_names = sorted(names, key=str.lower)
+            assert names == sorted_names, (
+                f"{slot_file}.yaml not sorted: {names} != {sorted_names}"
             )

@@ -1,0 +1,86 @@
+# rules/core/magic_items/arms.yaml
+#
+# Arms slot: bracelets, bracers.
+#
+# Sorted alphabetically.
+
+Bracelet of Friends:
+  slot: arms
+  note: >-
+    Holds 5 charms; break a charm to summon that
+    friend (as refuge/teleport) to wearer's side
+Bracers of Archery (Greater):
+  slot: arms
+  note: >-
+    +2 competence on attack rolls, +1 competence
+    on damage with bows
+  effects:
+    - target: attack_ranged
+      bonus_type: competence
+      value: 2
+    - target: damage_ranged
+      bonus_type: competence
+      value: 1
+Bracers of Archery (Lesser):
+  slot: arms
+  note: +1 competence on attack rolls with bows
+  effects:
+    - target: attack_ranged
+      bonus_type: competence
+      value: 1
+Bracers of Armor +1:
+  slot: arms
+  note: +1 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 1
+Bracers of Armor +2:
+  slot: arms
+  note: +2 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 2
+Bracers of Armor +3:
+  slot: arms
+  note: +3 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 3
+Bracers of Armor +4:
+  slot: arms
+  note: +4 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 4
+Bracers of Armor +5:
+  slot: arms
+  note: +5 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 5
+Bracers of Armor +6:
+  slot: arms
+  note: +6 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 6
+Bracers of Armor +7:
+  slot: arms
+  note: +7 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 7
+Bracers of Armor +8:
+  slot: arms
+  note: +8 armor bonus to AC (no max DEX)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 8

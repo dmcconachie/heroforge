@@ -50,16 +50,17 @@ abilities:
       racial: 4
 combat:
   ac:
-    total: 30
+    total: 31
     typed:
       base: 10
       dex: 1
+      dodge: 1
       natural_armor_enhancement: 5
       natural_armor: 1
       armor: 9
       shield: 3
       insight: 1
-  touch_ac: 12
+  touch_ac: 13
   flatfooted_ac: 29
   hp_max:
     total: 133
@@ -75,10 +76,11 @@ combat:
     typed:
       dex: 2
   speed:
-    total: 20
+    total: 50
     typed:
       base: 30
       untyped: -10
+      enhancement: 30
   sr: 0
   saves:
     fort:
@@ -89,10 +91,11 @@ combat:
         resistance: 5
         luck: 1
     ref:
-      total: 11
+      total: 12
       typed:
         base: 3
         dex: 2
+        dodge: 1
         resistance: 5
         luck: 1
     will:
@@ -103,15 +106,17 @@ combat:
         resistance: 5
         luck: 1
   attack_melee:
-    total: 18
+    total: 19
     typed:
       base: 10
       str: 8
+      untyped: 1
   attack_ranged:
-    total: 12
+    total: 13
     typed:
       base: 10
       dex: 2
+      untyped: 1
   damage_melee:
     total: 8
     typed:
@@ -123,16 +128,17 @@ combat:
       str: 8
 attack_iteratives:
   melee:
-    - 18
-    - 13
+    - 19
+    - 14
   ranged:
-    - 12
-    - 7
+    - 13
+    - 8
 skills:
   Appraise:
-    total: 2
+    total: 3
     typed:
       ability_mod: 2
+      luck: 1
   Balance:
     total: -2
     typed:
@@ -182,10 +188,11 @@ skills:
       ability_mod: 1
       luck: 1
   Escape Artist:
-    total: -3
+    total: -2
     typed:
       ability_mod: 2
       untyped: -5
+      luck: 1
   Forgery:
     total: 3
     typed:
@@ -219,10 +226,10 @@ skills:
       ability_mod: 1
       luck: 1
   Jump:
-    total: -2
+    total: 12
     typed:
       ability_mod: 8
-      speed_mod: -6
+      speed_mod: 8
       untyped: -5
       luck: 1
   Knowledge (Arcana):
@@ -231,18 +238,20 @@ skills:
       ability_mod: 2
       luck: 1
   Knowledge (Architecture and Engineering):
-    total: 2
+    total: 3
     typed:
       ability_mod: 2
+      luck: 1
   Knowledge (Dungeoneering):
     total: 3
     typed:
       ability_mod: 2
       luck: 1
   Knowledge (Geography):
-    total: 2
+    total: 3
     typed:
       ability_mod: 2
+      luck: 1
   Knowledge (History):
     total: 3
     typed:
@@ -261,18 +270,20 @@ skills:
       synergy: 2
       luck: 1
   Knowledge (Nobility and Royalty):
-    total: 2
+    total: 3
     typed:
       ability_mod: 2
+      luck: 1
   Knowledge (Religion):
     total: 3
     typed:
       ability_mod: 2
       luck: 1
   Knowledge (The Planes):
-    total: 2
+    total: 3
     typed:
       ability_mod: 2
+      luck: 1
   Listen:
     total: 25
     typed:
@@ -299,6 +310,12 @@ skills:
     total: 9
     typed:
       ability_mod: 8
+      luck: 1
+  Profession (Soldier):
+    total: 15
+    typed:
+      ability_mod: 8
+      ranks: 6
       luck: 1
   Ride:
     total: 21
@@ -360,9 +377,10 @@ skills:
       ability_mod: 1
       luck: 1
   Use Rope:
-    total: 2
+    total: 3
     typed:
       ability_mod: 2
+      luck: 1
 carrying_capacity:
   light: 306
   medium: 613
@@ -439,6 +457,7 @@ equipment:
     properties:
       - animated
   worn:
+    - Boots of Speed
     - Periapt of Wisdom +6
     - Belt of Giant Strength +6
     - Cloak of Resistance +5

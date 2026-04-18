@@ -1,0 +1,88 @@
+# rules/core/magic_items/torso.yaml
+#
+# Torso slot: vests, shirts, partial vestments.
+#
+# Sorted alphabetically.
+
+Druid's Vestment:
+  slot: torso
+  note: >-
+    Wild shape ability functions one additional
+    time per day while worn
+Vest of Escape:
+  slot: torso
+  note: >-
+    +6 competence on Escape Artist, +4 competence
+    on Open Lock
+  effects:
+    - target: skill_escape_artist
+      bonus_type: competence
+      value: 6
+    - target: skill_open_lock
+      bonus_type: competence
+      value: 4
+Vest of Resistance +1:
+  slot: torso
+  note: +1 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+Vest of Resistance +2:
+  slot: torso
+  note: +2 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+Vest of Resistance +3:
+  slot: torso
+  note: +3 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+Vest of Resistance +4:
+  slot: torso
+  note: +4 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+Vest of Resistance +5:
+  slot: torso
+  note: +5 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5

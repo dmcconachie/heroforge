@@ -1,0 +1,302 @@
+# rules/core/magic_items/consumable.yaml
+#
+# Consumables: single-use magic items — dusts,
+# elixirs, feather tokens, candles that burn out,
+# unguents, gems, and the permanent-bump manuals
+# and tomes (read once, then destroyed; tracked
+# via CharacterLevel inherent_bumps).
+#
+# Sorted alphabetically.
+
+Candle of Invocation:
+  slot: consumable
+  note: >-
+    +2 morale to attack, saves, and skill checks
+    for same-alignment creatures within 30 ft
+  effects:
+    - target: attack_all
+      bonus_type: morale
+      value: 2
+    - target: fort_save
+      bonus_type: morale
+      value: 2
+    - target: ref_save
+      bonus_type: morale
+      value: 2
+    - target: will_save
+      bonus_type: morale
+      value: 2
+Candle of Truth:
+  slot: consumable
+  note: >-
+    Zone of truth (DC 13 Will) 10 ft radius
+    while burning (1 hour)
+Dust of Appearance:
+  slot: consumable
+  note: >-
+    Tossed dust reveals invisible creatures,
+    mirror images, etc. in 10 ft cube
+Dust of Disappearance:
+  slot: consumable
+  note: >-
+    Dust sprinkled on self grants greater
+    invisibility (CL 5th) for 2d6 rounds
+Dust of Dryness:
+  slot: consumable
+  note: >-
+    One pinch removes up to 100 gal of water
+    from a 5 ft cube (or creature; DC 15 Fort)
+Dust of Illusion:
+  slot: consumable
+  note: >-
+    Dust transforms user's appearance (as
+    disguise self) until washed off
+Dust of Tracelessness:
+  slot: consumable
+  note: >-
+    One pinch obscures tracks of up to 10
+    humanoids for 250 ft in any direction
+Elixir of Fire Breath:
+  slot: consumable
+  note: >-
+    Drink to breathe fire (3 bursts, 4d6 damage;
+    DC 15 Ref half); lasts 1 hour
+Elixir of Hiding:
+  slot: consumable
+  note: +10 competence on Hide checks for 1 hour
+Elixir of Love:
+  slot: consumable
+  note: >-
+    Drinker becomes enamored of first creature
+    seen (as charm person, DC 14 Will) 1 hour
+Elixir of Sneaking:
+  slot: consumable
+  note: >-
+    +10 competence on Move Silently checks
+    for 1 hour
+Elixir of Swimming:
+  slot: consumable
+  note: +10 competence on Swim checks for 1 hour
+Elixir of Truth:
+  slot: consumable
+  note: >-
+    Drinker must speak truthfully (DC 13 Will) for
+    10 minutes
+Elixir of Vision:
+  slot: consumable
+  note: +10 competence on Search checks for 1 hour
+Feather Token (Anchor):
+  slot: consumable
+  note: >-
+    Tossed at boat: moors it in place for 1 day
+Feather Token (Bird):
+  slot: consumable
+  note: >-
+    Tossed: summons 1 bird (as summon nature's
+    ally; 24 hrs) to carry small items
+Feather Token (Fan):
+  slot: consumable
+  note: >-
+    Tossed: creates gust of wind (15 mph breeze
+    or stronger gust) in direction
+Feather Token (Swan Boat):
+  slot: consumable
+  note: >-
+    Tossed in water: creates swan-prowed boat
+    that carries 32 Medium creatures for 1 day
+Feather Token (Tree):
+  slot: consumable
+  note: >-
+    Tossed: grows into mature 60 ft oak in
+    1 round (permanent tree)
+Feather Token (Whip):
+  slot: consumable
+  note: >-
+    Tossed: creates animate whip that strikes
+    targets within 10 ft for 1 hour
+Manual of Bodily Health +1:
+  slot: consumable
+  note: >-
+    Inherent +1 CON (permanent, read once,
+    up to +5 total inherent).
+    Tracked via level inherent_bumps.
+Manual of Bodily Health +2:
+  slot: consumable
+  note: >-
+    Inherent +2 CON (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Bodily Health +3:
+  slot: consumable
+  note: >-
+    Inherent +3 CON (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Bodily Health +4:
+  slot: consumable
+  note: >-
+    Inherent +4 CON (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Bodily Health +5:
+  slot: consumable
+  note: >-
+    Inherent +5 CON (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Gainful Exercise +1:
+  slot: consumable
+  note: >-
+    Inherent +1 STR (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Gainful Exercise +2:
+  slot: consumable
+  note: >-
+    Inherent +2 STR (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Gainful Exercise +3:
+  slot: consumable
+  note: >-
+    Inherent +3 STR (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Gainful Exercise +4:
+  slot: consumable
+  note: >-
+    Inherent +4 STR (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Gainful Exercise +5:
+  slot: consumable
+  note: >-
+    Inherent +5 STR (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Quickness of Action +1:
+  slot: consumable
+  note: >-
+    Inherent +1 DEX (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Quickness of Action +2:
+  slot: consumable
+  note: >-
+    Inherent +2 DEX (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Quickness of Action +3:
+  slot: consumable
+  note: >-
+    Inherent +3 DEX (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Quickness of Action +4:
+  slot: consumable
+  note: >-
+    Inherent +4 DEX (permanent, read once).
+    Tracked via level inherent_bumps.
+Manual of Quickness of Action +5:
+  slot: consumable
+  note: >-
+    Inherent +5 DEX (permanent, read once).
+    Tracked via level inherent_bumps.
+Restorative Ointment:
+  slot: consumable
+  note: >-
+    Jar contains 5 applications; each cures
+    1d8+5 hp or neutralizes poison/disease
+Salve of Slipperiness:
+  slot: consumable
+  note: >-
+    One application grants freedom of movement
+    (as spell) for 8 hours
+Silversheen:
+  slot: consumable
+  note: >-
+    One vial coats one weapon; treated as silver
+    (DR purposes) for 1 hour
+Sovereign Glue:
+  slot: consumable
+  note: >-
+    Permanently bonds two surfaces; only
+    universal solvent can dissolve it
+Stone Salve:
+  slot: consumable
+  note: >-
+    Reverses petrification (restores 1 victim)
+    or grants immunity to petrification (1 hour)
+Tome of Clear Thought +1:
+  slot: consumable
+  note: >-
+    Inherent +1 INT (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Clear Thought +2:
+  slot: consumable
+  note: >-
+    Inherent +2 INT (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Clear Thought +3:
+  slot: consumable
+  note: >-
+    Inherent +3 INT (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Clear Thought +4:
+  slot: consumable
+  note: >-
+    Inherent +4 INT (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Clear Thought +5:
+  slot: consumable
+  note: >-
+    Inherent +5 INT (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Leadership and Influence +1:
+  slot: consumable
+  note: >-
+    Inherent +1 CHA (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Leadership and Influence +2:
+  slot: consumable
+  note: >-
+    Inherent +2 CHA (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Leadership and Influence +3:
+  slot: consumable
+  note: >-
+    Inherent +3 CHA (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Leadership and Influence +4:
+  slot: consumable
+  note: >-
+    Inherent +4 CHA (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Leadership and Influence +5:
+  slot: consumable
+  note: >-
+    Inherent +5 CHA (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Understanding +1:
+  slot: consumable
+  note: >-
+    Inherent +1 WIS (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Understanding +2:
+  slot: consumable
+  note: >-
+    Inherent +2 WIS (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Understanding +3:
+  slot: consumable
+  note: >-
+    Inherent +3 WIS (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Understanding +4:
+  slot: consumable
+  note: >-
+    Inherent +4 WIS (permanent, read once).
+    Tracked via level inherent_bumps.
+Tome of Understanding +5:
+  slot: consumable
+  note: >-
+    Inherent +5 WIS (permanent, read once).
+    Tracked via level inherent_bumps.
+Unguent of Timelessness:
+  slot: consumable
+  note: >-
+    Coats an object; slows aging by 100x;
+    protects against time-based effects
+Universal Solvent:
+  slot: consumable
+  note: >-
+    Dissolves adhesives (including sovereign
+    glue); one vial covers a 1 ft cube

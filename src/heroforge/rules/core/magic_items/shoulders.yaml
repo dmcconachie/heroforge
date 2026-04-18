@@ -1,0 +1,151 @@
+# rules/core/magic_items/shoulders.yaml
+#
+# Shoulders slot: capes, cloaks, mantles.
+#
+# Sorted alphabetically.
+
+Cape of the Mountebank:
+  slot: shoulders
+  note: >-
+    Dimension door 1/day as a free action
+    (as spell, CL 9th); leaves a cloud
+Cloak of Arachnida:
+  slot: shoulders
+  note: >-
+    +2 resistance to poison; climb speed 30 ft;
+    free action to cast web 1/day (DC 14)
+Cloak of Charisma +2:
+  slot: shoulders
+  note: +2 enhancement to CHA
+  effects:
+    - target: cha_score
+      bonus_type: enhancement
+      value: 2
+Cloak of Charisma +4:
+  slot: shoulders
+  note: +4 enhancement to CHA
+  effects:
+    - target: cha_score
+      bonus_type: enhancement
+      value: 4
+Cloak of Charisma +6:
+  slot: shoulders
+  note: +6 enhancement to CHA
+  effects:
+    - target: cha_score
+      bonus_type: enhancement
+      value: 6
+Cloak of Displacement (Major):
+  slot: shoulders
+  note: >-
+    Continuous displacement effect (50% miss
+    chance against attacks)
+Cloak of Displacement (Minor):
+  slot: shoulders
+  note: >-
+    Blur (continuous; 20% miss chance against
+    attacks)
+Cloak of Elvenkind:
+  slot: shoulders
+  note: +5 competence on Hide checks
+  effects:
+    - target: skill_hide
+      bonus_type: competence
+      value: 5
+Cloak of Etherealness:
+  slot: shoulders
+  note: >-
+    Become ethereal for up to 10 min/day
+    (as etherealness spell)
+Cloak of Resistance +1:
+  slot: shoulders
+  note: +1 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+Cloak of Resistance +2:
+  slot: shoulders
+  note: +2 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+Cloak of Resistance +3:
+  slot: shoulders
+  note: +3 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+Cloak of Resistance +4:
+  slot: shoulders
+  note: +4 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+Cloak of Resistance +5:
+  slot: shoulders
+  note: +5 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5
+Cloak of the Bat:
+  slot: shoulders
+  note: >-
+    +5 competence on Hide, silent movement;
+    polymorph into bat 1/day; fly 40 ft at night
+Cloak of the Manta Ray:
+  slot: shoulders
+  note: >-
+    Breathe water freely; swim 60 ft; +3 natural
+    armor; resembles cloak of manta ray when worn
+Mantle of Faith:
+  slot: shoulders
+  note: >-
+    SR 19 against spells/abilities cast by evil
+    creatures (as protection from evil)
+Mantle of Spell Resistance:
+  slot: shoulders
+  note: SR 21
+  effects:
+    - target: sr
+      bonus_type: untyped
+      value: 21
+Shrouds of Disintegration:
+  slot: shoulders
+  note: >-
+    Disintegrate wearer on donning if they fail
+    DC 20 Fort save (trap; beware)

@@ -554,6 +554,9 @@ class MagicItemLoader:
         except yaml.YAMLError as e:
             raise LoaderError(f"YAML parse error in {path}: {e}") from e
 
+        if data is None:
+            return []
+
         if not isinstance(data, dict):
             raise LoaderError(f"{path} must be a YAML mapping.")
 

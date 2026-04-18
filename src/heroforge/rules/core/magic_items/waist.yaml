@@ -1,0 +1,45 @@
+# rules/core/magic_items/waist.yaml
+#
+# Waist slot: belts, girdles.
+#
+# Sorted alphabetically.
+
+Belt of Dwarvenkind:
+  slot: waist
+  note: >-
+    +2 enhancement to CON; darkvision 60 ft;
+    dwarven language; +2 CHA toward dwarves
+  effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+Belt of Giant Strength +2:
+  slot: waist
+  note: +2 enhancement to STR
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+Belt of Giant Strength +4:
+  slot: waist
+  note: +4 enhancement to STR
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+Belt of Giant Strength +6:
+  slot: waist
+  note: +6 enhancement to STR
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 6
+Monk's Belt:
+  slot: waist
+  note: >-
+    AC bonus as 5th-level monk (+1); effective monk
+    level +5 for unarmed damage if already a monk
+  effects:
+    - target: ac
+      bonus_type: untyped
+      value: 1

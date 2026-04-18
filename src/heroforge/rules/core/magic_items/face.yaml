@@ -1,0 +1,44 @@
+# rules/core/magic_items/face.yaml
+#
+# Face slot: goggles, lenses, magical eyewear,
+# and other items worn on the face.
+#
+# Sorted alphabetically.
+
+Eyes of Charming:
+  slot: face
+  note: >-
+    Charm person at will on a single gaze target
+    (DC 16 Will negates, usable 10/day)
+Eyes of Doom:
+  slot: face
+  note: >-
+    Doom effect (as spell) on a gazed target at
+    will; deathwatch continuously; fear 1/day
+Eyes of Petrification:
+  slot: face
+  note: >-
+    Flesh to stone on a gazed target 1/day
+    (DC 18 Fort negates)
+Eyes of the Eagle:
+  slot: face
+  note: +5 competence on Spot checks
+  effects:
+    - target: skill_spot
+      bonus_type: competence
+      value: 5
+Goggles of Minute Seeing:
+  slot: face
+  note: +5 competence on Search checks
+  effects:
+    - target: skill_search
+      bonus_type: competence
+      value: 5
+Goggles of Night:
+  slot: face
+  note: Darkvision 60 ft
+Lens of Detection:
+  slot: face
+  note: >-
+    +5 competence on Search checks for tracks and
+    hidden objects (handheld; specific situations)

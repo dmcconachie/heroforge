@@ -44,6 +44,7 @@ class KnownCoreSkill(StrEnum):
     OPEN_LOCK = "Open Lock"
     PERFORM = "Perform"
     PROFESSION = "Profession"
+    PROFESSION_SOLDIER = "Profession (Soldier)"
     RIDE = "Ride"
     SEARCH = "Search"
     SENSE_MOTIVE = "Sense Motive"

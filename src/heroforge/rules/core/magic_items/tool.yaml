@@ -1,0 +1,528 @@
+# rules/core/magic_items/tool.yaml
+#
+# Tools: carried magic items used actively (bags,
+# figurines, horns, mirrors, rods of utility,
+# crystal balls, etc.). They occupy no body slot
+# and do not grant ongoing passive benefits.
+#
+# Sorted alphabetically.
+
+Apparatus of the Crab:
+  slot: tool
+  note: >-
+    Iron barrel holding 2 crew; extends legs/
+    pincers on command; can function underwater
+Bag of Holding (Type I):
+  slot: tool
+  note: >-
+    Interior holds 250 lb / 30 cu ft; bag weighs
+    15 lb regardless of contents
+Bag of Holding (Type II):
+  slot: tool
+  note: >-
+    Interior holds 500 lb / 70 cu ft; bag weighs
+    25 lb regardless of contents
+Bag of Holding (Type III):
+  slot: tool
+  note: >-
+    Interior holds 1,000 lb / 150 cu ft; bag
+    weighs 35 lb regardless of contents
+Bag of Holding (Type IV):
+  slot: tool
+  note: >-
+    Interior holds 1,500 lb / 250 cu ft; bag
+    weighs 60 lb regardless of contents
+Bag of Tricks (Gray):
+  slot: tool
+  note: >-
+    Reach inside for small ball; toss to summon
+    1 of 8 animals (weasel, giant rat, badger...)
+Bag of Tricks (Rust):
+  slot: tool
+  note: >-
+    Reach inside for small ball; toss to summon
+    1 of 8 medium animals (wolf, boar, cheetah...)
+Bag of Tricks (Tan):
+  slot: tool
+  note: >-
+    Reach inside for small ball; toss to summon
+    1 of 8 large animals (lion, bear, tiger...)
+Bead of Force:
+  slot: tool
+  note: >-
+    Thrown: 5d6 force damage (20 ft burst) and
+    imprisons target in resilient sphere (R 15)
+Blessed Book:
+  slot: tool
+  note: >-
+    Wizard spellbook; holds 1,000 pages of spells
+    with no gp/time cost; self-preserves
+Bottle of Air:
+  slot: tool
+  note: >-
+    Always contains breathable air; exhausts into
+    environment when opened (useful underwater)
+Bowl of Commanding Water Elementals:
+  slot: tool
+  note: >-
+    Summons a Large water elemental (as summon
+    monster) to obey commands (24 hr duration)
+Brazier of Commanding Fire Elementals:
+  slot: tool
+  note: >-
+    Summons a Large fire elemental (as summon
+    monster) to obey commands (24 hr duration)
+Broom of Flying:
+  slot: tool
+  note: >-
+    Fly 40 ft (good) with rider up to 200 lb;
+    speed 30 ft with 200–400 lb rider
+Carpet of Flying (10x10):
+  slot: tool
+  note: >-
+    10 ft x 10 ft carpet; fly 30 ft (poor), up to
+    800 lb capacity
+Carpet of Flying (5x10):
+  slot: tool
+  note: >-
+    5 ft x 10 ft carpet; fly 60 ft (poor), up to
+    400 lb capacity
+Carpet of Flying (5x5):
+  slot: tool
+  note: >-
+    5 ft x 5 ft carpet; fly 40 ft (poor), up to
+    200 lb capacity
+Carpet of Flying (6x9):
+  slot: tool
+  note: >-
+    6 ft x 9 ft carpet; fly 40 ft (poor), up to
+    600 lb capacity
+Censer of Controlling Air Elementals:
+  slot: tool
+  note: >-
+    Summons a Large air elemental (as summon
+    monster) to obey commands (24 hr duration)
+Chaos Diamond:
+  slot: tool
+  note: >-
+    1/day each of: magic stone, dispel law,
+    confusion, cloak of chaos (DC 21)
+Chime of Interruption:
+  slot: tool
+  note: >-
+    Once rung, disrupts spellcasting within 30 ft
+    (DC 20 Concentration); up to 3 rounds
+Chime of Opening:
+  slot: tool
+  note: >-
+    Strike to open any lock/bar; up to 10
+    total uses before expending
+Crystal Ball:
+  slot: tool
+  note: Scry target at range (as scrying spell, CL 10th)
+Crystal Ball (Detect Thoughts):
+  slot: tool
+  note: >-
+    Scrying plus detect thoughts (Will DC 13
+    negates)
+Crystal Ball (See Invisibility):
+  slot: tool
+  note: Scrying plus see invisibility effect
+Crystal Ball (Telepathy):
+  slot: tool
+  note: >-
+    Scrying plus two-way telepathic communication
+    with the observed creature
+Crystal Ball (True Seeing):
+  slot: tool
+  note: Scrying plus true seeing effect
+Cube of Force:
+  slot: tool
+  note: >-
+    10 ft cube of force; blocks various attacks
+    based on charge expended (6 settings)
+Cube of Frost Resistance:
+  slot: tool
+  note: >-
+    Creates 10 ft cube of warmth; immune to cold
+    up to 50 hp damage/round
+Cubic Gate:
+  slot: tool
+  note: >-
+    Six faces; press to plane shift self/group,
+    or press twice to summon creature from plane
+Darkskull:
+  slot: tool
+  note: >-
+    Black skull that pulses with desecrate effect
+    in 20 ft radius when placed
+Decanter of Endless Water:
+  slot: tool
+  note: >-
+    Pours fresh or salt water on command; three
+    settings (stream, fountain, or geyser)
+Deck of Illusions:
+  slot: tool
+  note: >-
+    Contains 34 cards; drawing one summons an
+    illusory creature (concentration to maintain)
+Dimensional Shackles:
+  slot: tool
+  note: >-
+    Prevents teleportation and planar travel of
+    bound target; dimensional anchor (CL 11th)
+Drums of Panic:
+  slot: tool
+  note: >-
+    1/day sound causes all within 120 ft (but
+    more than 15 ft) to be panicked (DC 16 Will)
+Efficient Quiver:
+  slot: tool
+  note: >-
+    Holds 60 arrows/bolts/60 javelins in 3
+    compartments; can also hold larger weapons
+Efreeti Bottle:
+  slot: tool
+  note: >-
+    Releases trapped efreeti to serve 10 min/day;
+    grants 3 wishes on release (CL 20th)
+Elemental Gem:
+  slot: tool
+  note: >-
+    Summon monster VI: large elemental of the
+    specified type (earth/water/fire/air)
+Eversmoking Bottle:
+  slot: tool
+  note: >-
+    Pours forth thick smoke continuously when
+    open (obscuring mist effect; 100 ft radius)
+Figurine of Wondrous Power (Bronze Griffon):
+  slot: tool
+  note: >-
+    Transforms into a griffon obedient to owner
+    for up to 6 hours once per week
+Figurine of Wondrous Power (Ebony Fly):
+  slot: tool
+  note: >-
+    Transforms into giant fly (as fly spell);
+    12 hours once per week
+Figurine of Wondrous Power (Golden Lions):
+  slot: tool
+  note: >-
+    Pair transforms into lions; serve for 1 hour
+    once per day
+Figurine of Wondrous Power (Ivory Goats):
+  slot: tool
+  note: >-
+    Three goats: one travels; one battles; one
+    gives milk (durations vary by goat)
+Figurine of Wondrous Power (Marble Elephant):
+  slot: tool
+  note: >-
+    Transforms into elephant; serves owner for
+    24 hours; usable 4 times per month
+Figurine of Wondrous Power (Obsidian Steed):
+  slot: tool
+  note: >-
+    Transforms into a nightmare; flies and
+    plane shifts; 24 hours per use
+Figurine of Wondrous Power (Onyx Dog):
+  slot: tool
+  note: >-
+    Transforms into a dog (scent, +10 Search,
+    DR 5/magic); 6 hours per week
+Figurine of Wondrous Power (Serpentine Owl):
+  slot: tool
+  note: >-
+    Transforms into an owl (speaks with owner);
+    8 hours continuous or short flights
+Figurine of Wondrous Power (Silver Raven):
+  slot: tool
+  note: >-
+    Transforms into a raven (as animal messenger
+    spell); returns on command
+Folding Boat:
+  slot: tool
+  note: >-
+    Command word transforms into rowboat (10 ft)
+    or ship (24 ft) with sail/rigging
+Gem of Brightness:
+  slot: tool
+  note: >-
+    Casts light/daylight/searing beams (50
+    charges; depletes on use)
+Gem of Seeing:
+  slot: tool
+  note: >-
+    Grants true seeing when peered through
+    (30 minutes/day total)
+Golem Manual (Clay):
+  slot: tool
+  note: >-
+    Contains instructions to create a clay golem
+    (reduces crafting cost/time by 50%)
+Golem Manual (Flesh):
+  slot: tool
+  note: >-
+    Contains instructions to create a flesh
+    golem (reduces crafting cost/time by 50%)
+Golem Manual (Greater Stone):
+  slot: tool
+  note: >-
+    Contains instructions to create a greater
+    stone golem (reduces crafting cost/time 50%)
+Golem Manual (Iron):
+  slot: tool
+  note: >-
+    Contains instructions to create an iron
+    golem (reduces crafting cost/time by 50%)
+Golem Manual (Stone):
+  slot: tool
+  note: >-
+    Contains instructions to create a stone
+    golem (reduces crafting cost/time by 50%)
+Handy Haversack:
+  slot: tool
+  note: >-
+    Central pouch plus 2 side pouches; 8 cu ft /
+    80 lb; always retrieves item as free action
+Harp of Charming:
+  slot: tool
+  note: >-
+    Enthrall effect 1/day per charge (up to 14
+    charges) when played successfully
+Horn of Blasting:
+  slot: tool
+  note: >-
+    1/day sonic damage 5d6 in 40 ft cone (DC 16
+    Fort or deafened/knocked prone)
+Horn of Blasting (Greater):
+  slot: tool
+  note: >-
+    1/day sonic damage 10d6 in 40 ft cone (DC 19
+    Fort or deafened/knocked prone/stunned)
+Horn of Fog:
+  slot: tool
+  note: >-
+    Obscuring mist effect (30 ft radius, expands
+    10 ft/round) while blowing
+Horn of Goodness/Evil:
+  slot: tool
+  note: >-
+    Aligns user's attacks as good or evil (for
+    DR purposes); active while blown
+Horn of the Tritons:
+  slot: tool
+  note: >-
+    1/day calms sea/weather, panics aquatic foes,
+    or summons tritons/dolphins
+Horn of Valhalla:
+  slot: tool
+  note: >-
+    1/week summons 2d4+2 berserker warriors of
+    type matching horn (silver/brass/bronze/iron)
+Incense of Meditation:
+  slot: tool
+  note: >-
+    Burned for 8 hours before prayer; maximizes
+    divine spells prepared that day
+Instant Fortress:
+  slot: tool
+  note: >-
+    1-inch metal cube expands to 20 ft x 20 ft x
+    30 ft tower (AC 20, hp 800, hardness 20)
+Iron Bands of Binding:
+  slot: tool
+  note: >-
+    Thrown: binds large-or-smaller target in
+    iron bands (DC 20 Ref negates)
+Iron Flask:
+  slot: tool
+  note: >-
+    Trap extraplanar creature (DC 19 Will) when
+    open; release creature by speaking command
+Lantern of Revealing:
+  slot: tool
+  note: >-
+    Ordinary lantern that reveals invisible
+    creatures/objects within 25 ft radius
+Lyre of Building:
+  slot: tool
+  note: >-
+    Played for 30 min negates 1 hour of effort by
+    up to 100 humans OR builds as 300 workers/day
+Marvelous Pigments:
+  slot: tool
+  note: >-
+    Jar of pigments; paint 1,000 sq ft to create
+    real objects (as permanent image spell)
+Mattock of the Titans:
+  slot: tool
+  note: >-
+    Huge magical digging weapon; +3 adamantine
+    greatpick; triples digging speed
+Maul of the Titans:
+  slot: tool
+  note: >-
+    Huge +3 greatclub; double damage to objects;
+    must have STR 18 to wield effectively
+Mirror of Life Trapping:
+  slot: tool
+  note: >-
+    Traps creatures within 30 ft (DC 23 Will)
+    that gaze at mirror; holds up to 15 victims
+Mirror of Mental Prowess:
+  slot: tool
+  note: >-
+    1/day scry, detect thoughts, and similar
+    divinations; gaze reveals info about viewer
+Mirror of Opposition:
+  slot: tool
+  note: >-
+    Creates a duplicate of reflected creature
+    with reversed alignment; fights original
+Orb of Storms:
+  slot: tool
+  note: >-
+    1/day control weather; 1/month storm of
+    vengeance (CL 18th)
+Pearl of Power (1st Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 1st-level spell
+    slot (as if not used)
+Pearl of Power (2nd Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 2nd-level spell
+    slot (as if not used)
+Pearl of Power (3rd Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 3rd-level spell
+    slot (as if not used)
+Pearl of Power (4th Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 4th-level spell
+    slot (as if not used)
+Pearl of Power (5th Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 5th-level spell
+    slot (as if not used)
+Pearl of Power (6th Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 6th-level spell
+    slot (as if not used)
+Pearl of Power (7th Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 7th-level spell
+    slot (as if not used)
+Pearl of Power (8th Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 8th-level spell
+    slot (as if not used)
+Pearl of Power (9th Level):
+  slot: tool
+  note: >-
+    1/day recall one expended 9th-level spell
+    slot (as if not used)
+Pearl of Power (Two Spells):
+  slot: tool
+  note: >-
+    1/day recall two spell slots totaling 6th
+    level or less
+Pearl of the Sirines:
+  slot: tool
+  note: >-
+    Continual water breathing when held;
+    +2 CHA (checked) around aquatic creatures
+Pipes of Haunting:
+  slot: tool
+  note: >-
+    Play to cause shaken condition in all within
+    30 ft (DC 15 Will) for 4 rounds
+Pipes of Pain:
+  slot: tool
+  note: >-
+    Painful tones force listeners (DC 17 Fort) to
+    be fascinated for 4d4 rounds
+Pipes of Sounding:
+  slot: tool
+  note: >-
+    Plays up to 10 sound effects (crowd, battle,
+    wind, etc.) as ghost sound spell
+Pipes of the Sewers:
+  slot: tool
+  note: >-
+    Summon a swarm of rats/larger rats to do
+    basic bidding (10 minutes duration)
+Portable Hole:
+  slot: tool
+  note: >-
+    6 ft diameter hole onto a 10 ft deep
+    extradimensional space; holds up to 20 MT
+Ring Gates:
+  slot: tool
+  note: >-
+    Pair of linked 3 ft rings; pass small objects
+    or a creature through, unlimited distance
+Rope of Climbing:
+  slot: tool
+  note: >-
+    60 ft silken rope; climbs vertically up to
+    anchor point on command
+Rope of Entanglement:
+  slot: tool
+  note: >-
+    Throws itself around target (DC 14 Ref);
+    restrains victims (hp 12, hardness 10)
+Scabbard of Keen Edges:
+  slot: tool
+  note: >-
+    3/day keen edge effect (as spell) on slashing
+    weapon placed inside for 10 min
+Stone Horse (Courser):
+  slot: tool
+  note: >-
+    Life-size stone horse; obeys master, runs
+    24/7 without need for food/water/rest
+Stone Horse (Destrier):
+  slot: tool
+  note: >-
+    Larger heavier stone horse; fights as iron
+    destrier with slam attacks and trample
+Stone of Alarm:
+  slot: tool
+  note: >-
+    Set on door/object; 1/day loud tone on
+    tampering; heard within 60 ft for 1 hour
+Stone of Controlling Earth Elementals:
+  slot: tool
+  note: >-
+    Summons a Large earth elemental (as summon
+    monster) to obey commands (24 hr duration)
+Sustaining Spoon:
+  slot: tool
+  note: >-
+    Generates enough soup/gruel to sustain 4
+    humans/day with water
+Well of Many Worlds:
+  slot: tool
+  note: >-
+    Place on surface to create gate to random
+    plane; shift target every use
+Wind Fan:
+  slot: tool
+  note: >-
+    1/day gust of wind (as spell); 1-in-5 chance
+    each additional day it breaks when used
+Wings of Flying:
+  slot: tool
+  note: >-
+    Cape sprouts feathered wings; fly 60 ft
+    (good) for up to 10 min/use; 3 uses/day

@@ -246,6 +246,12 @@ Profession:
   trained_only: true
   armor_check: false
   description: Work a non-adventuring job to earn money
+Profession (Soldier):
+  key: skill_profession_soldier
+  ability: wis
+  trained_only: true
+  armor_check: false
+  description: Work as a soldier
 Ride:
   key: skill_ride
   ability: dex

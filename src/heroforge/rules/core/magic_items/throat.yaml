@@ -1,0 +1,258 @@
+# rules/core/magic_items/throat.yaml
+#
+# Throat slot: amulets, brooches, medallions,
+# necklaces, pendants, periapts, scarabs.
+#
+# Sorted alphabetically.
+
+Amulet of Health +2:
+  slot: throat
+  note: +2 enhancement to CON
+  effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+Amulet of Health +4:
+  slot: throat
+  note: +4 enhancement to CON
+  effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
+Amulet of Health +6:
+  slot: throat
+  note: +6 enhancement to CON
+  effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 6
+Amulet of Mighty Fists +1:
+  slot: throat
+  note: >-
+    +1 enhancement to unarmed and natural weapon
+    attacks and damage
+  effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 1
+    - target: damage_all
+      bonus_type: enhancement
+      value: 1
+Amulet of Mighty Fists +2:
+  slot: throat
+  note: >-
+    +2 enhancement to unarmed and natural weapon
+    attacks and damage
+  effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 2
+    - target: damage_all
+      bonus_type: enhancement
+      value: 2
+Amulet of Mighty Fists +3:
+  slot: throat
+  note: >-
+    +3 enhancement to unarmed and natural weapon
+    attacks and damage
+  effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 3
+    - target: damage_all
+      bonus_type: enhancement
+      value: 3
+Amulet of Mighty Fists +4:
+  slot: throat
+  note: >-
+    +4 enhancement to unarmed and natural weapon
+    attacks and damage
+  effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 4
+    - target: damage_all
+      bonus_type: enhancement
+      value: 4
+Amulet of Mighty Fists +5:
+  slot: throat
+  note: >-
+    +5 enhancement to unarmed and natural weapon
+    attacks and damage
+  effects:
+    - target: attack_all
+      bonus_type: enhancement
+      value: 5
+    - target: damage_all
+      bonus_type: enhancement
+      value: 5
+Amulet of Natural Armor +1:
+  slot: throat
+  note: +1 enhancement to natural armor
+  effects:
+    - target: ac
+      bonus_type: natural_armor_enhancement
+      value: 1
+Amulet of Natural Armor +2:
+  slot: throat
+  note: +2 enhancement to natural armor
+  effects:
+    - target: ac
+      bonus_type: natural_armor_enhancement
+      value: 2
+Amulet of Natural Armor +3:
+  slot: throat
+  note: +3 enhancement to natural armor
+  effects:
+    - target: ac
+      bonus_type: natural_armor_enhancement
+      value: 3
+Amulet of Natural Armor +4:
+  slot: throat
+  note: +4 enhancement to natural armor
+  effects:
+    - target: ac
+      bonus_type: natural_armor_enhancement
+      value: 4
+Amulet of Natural Armor +5:
+  slot: throat
+  note: +5 enhancement to natural armor
+  effects:
+    - target: ac
+      bonus_type: natural_armor_enhancement
+      value: 5
+Amulet of Proof against Detection and Location:
+  slot: throat
+  note: >-
+    As nondetection spell (DC 19 caster level check
+    to scry wearer)
+Amulet of the Planes:
+  slot: throat
+  note: >-
+    Plane shift at will (requires DC 15 INT check
+    to reach intended destination, else random)
+Brooch of Shielding:
+  slot: throat
+  note: >-
+    Absorbs magic missiles totaling up to 101 hp
+    before its magic is exhausted
+Golembane Scarab:
+  slot: throat
+  note: >-
+    Detect golems within 60 ft; weapons overcome
+    golem damage reduction against targeted golem
+Hand of Glory:
+  slot: throat
+  note: >-
+    Daylight 1/day; see invisibility 2/day;
+    cast suggestion (DC 14) 1/day; wears 2 rings
+Hand of the Mage:
+  slot: throat
+  note: Mage hand at will (as the spell, CL 2nd)
+Medallion of Thoughts:
+  slot: throat
+  note: Detect thoughts at will (DC 13 Will)
+Necklace of Adaptation:
+  slot: throat
+  note: >-
+    Immune to harmful gases; permits breathing in
+    any environment (including underwater/vacuum)
+Necklace of Fireballs (Type I):
+  slot: throat
+  note: >-
+    Bears bead(s) that detach and explode as
+    fireballs: 5d6 (1)+3d6 (2)
+Necklace of Fireballs (Type II):
+  slot: throat
+  note: >-
+    Bears beads that detach and explode as
+    fireballs: 7d6 (1)+5d6 (2)+3d6 (2)
+Necklace of Fireballs (Type III):
+  slot: throat
+  note: >-
+    Bears beads that detach and explode as
+    fireballs: 7d6 (1)+5d6 (2)+3d6 (4)
+Necklace of Fireballs (Type IV):
+  slot: throat
+  note: >-
+    Bears beads that detach and explode as
+    fireballs: 9d6 (1)+7d6 (2)+5d6 (2)+3d6 (2)
+Necklace of Fireballs (Type V):
+  slot: throat
+  note: >-
+    Bears beads that detach and explode as
+    fireballs: 9d6 (2)+7d6 (2)+5d6 (2)+3d6 (2)
+Necklace of Fireballs (Type VI):
+  slot: throat
+  note: >-
+    Bears beads that detach and explode as
+    fireballs: 9d6 (2)+7d6 (4)+5d6 (2)
+Necklace of Fireballs (Type VII):
+  slot: throat
+  note: >-
+    Bears beads that detach and explode as
+    fireballs: 9d6 (4)+7d6 (2)+5d6 (2)
+Periapt of Health:
+  slot: throat
+  note: >-
+    Immune to all diseases, including supernatural
+    and magical ones (e.g. mummy rot, lycanthropy)
+Periapt of Proof against Poison:
+  slot: throat
+  note: Immune to all forms of poison
+Periapt of Wisdom +2:
+  slot: throat
+  note: +2 enhancement to WIS
+  effects:
+    - target: wis_score
+      bonus_type: enhancement
+      value: 2
+Periapt of Wisdom +4:
+  slot: throat
+  note: +4 enhancement to WIS
+  effects:
+    - target: wis_score
+      bonus_type: enhancement
+      value: 4
+Periapt of Wisdom +6:
+  slot: throat
+  note: +6 enhancement to WIS
+  effects:
+    - target: wis_score
+      bonus_type: enhancement
+      value: 6
+Periapt of Wound Closure:
+  slot: throat
+  note: >-
+    Auto-stabilize at negative HP; double natural
+    healing rate; bleeding wounds close in 1 round
+Scarab of Protection:
+  slot: throat
+  note: >-
+    +3 resistance to saves; absorbs 12 energy drain
+    or death effects
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+Strand of Prayer Beads:
+  slot: throat
+  note: >-
+    Contains standard beads (bead of blessing,
+    healing, karma, smiting, wind walking, summons)
+Strand of Prayer Beads (Greater):
+  slot: throat
+  note: >-
+    Contains all standard beads plus beads of time
+    stop, summons (as greater planar ally)
+Strand of Prayer Beads (Lesser):
+  slot: throat
+  note: >-
+    Contains three basic beads (bead of blessing,
+    bead of healing, bead of karma)

@@ -1,0 +1,99 @@
+# rules/core/magic_items/ring.yaml
+#
+# Ring slot: magic rings (SRD Rings category,
+# not Wondrous Items, but tracked here for
+# unified lookup).
+#
+# Sorted alphabetically.
+
+Ring of Chameleon Power:
+  slot: ring
+  note: +10 competence on Hide checks
+  effects:
+    - target: skill_hide
+      bonus_type: competence
+      value: 10
+Ring of Climbing:
+  slot: ring
+  note: +5 competence on Climb checks
+  effects:
+    - target: skill_climb
+      bonus_type: competence
+      value: 5
+Ring of Climbing, Improved:
+  slot: ring
+  note: +10 competence on Climb checks
+  effects:
+    - target: skill_climb
+      bonus_type: competence
+      value: 10
+Ring of Force Shield:
+  slot: ring
+  note: +2 shield bonus to AC (no penalties)
+  effects:
+    - target: ac
+      bonus_type: shield
+      value: 2
+Ring of Jumping:
+  slot: ring
+  note: +5 competence on Jump checks
+  effects:
+    - target: skill_jump
+      bonus_type: competence
+      value: 5
+Ring of Jumping, Improved:
+  slot: ring
+  note: +10 competence on Jump checks
+  effects:
+    - target: skill_jump
+      bonus_type: competence
+      value: 10
+Ring of Protection +1:
+  slot: ring
+  note: +1 deflection bonus to AC
+  effects:
+    - target: ac
+      bonus_type: deflection
+      value: 1
+Ring of Protection +2:
+  slot: ring
+  note: +2 deflection bonus to AC
+  effects:
+    - target: ac
+      bonus_type: deflection
+      value: 2
+Ring of Protection +3:
+  slot: ring
+  note: +3 deflection bonus to AC
+  effects:
+    - target: ac
+      bonus_type: deflection
+      value: 3
+Ring of Protection +4:
+  slot: ring
+  note: +4 deflection bonus to AC
+  effects:
+    - target: ac
+      bonus_type: deflection
+      value: 4
+Ring of Protection +5:
+  slot: ring
+  note: +5 deflection bonus to AC
+  effects:
+    - target: ac
+      bonus_type: deflection
+      value: 5
+Ring of Swimming:
+  slot: ring
+  note: +5 competence on Swim checks
+  effects:
+    - target: skill_swim
+      bonus_type: competence
+      value: 5
+Ring of Swimming, Improved:
+  slot: ring
+  note: +10 competence on Swim checks
+  effects:
+    - target: skill_swim
+      bonus_type: competence
+      value: 10

@@ -1,0 +1,273 @@
+# rules/core/magic_items/slotless.yaml
+#
+# Slotless: items that grant ongoing passive
+# benefits but are not worn in a specific body
+# slot (ioun stones orbit, luckstones in pocket,
+# mantles as auras).
+#
+# For carried active-use items (bags, figurines,
+# horns, mirrors) see tool.yaml.
+# For single-use items (dusts, elixirs, feather
+# tokens) see consumable.yaml.
+# For ability-bump books see inherent.yaml.
+#
+# Sorted alphabetically.
+
+Ioun Stone (Clear Spindle):
+  slot: slotless
+  note: Sustains creature without food or water
+Ioun Stone (Dark Blue Rhomboid):
+  slot: slotless
+  note: >-
+    +2 insight bonus on Spot and Listen checks
+    (continuous alertness)
+  effects:
+    - target: skill_spot
+      bonus_type: insight
+      value: 2
+    - target: skill_listen
+      bonus_type: insight
+      value: 2
+Ioun Stone (Deep Red Sphere):
+  slot: slotless
+  note: +2 enhancement to DEX
+  effects:
+    - target: dex_score
+      bonus_type: enhancement
+      value: 2
+Ioun Stone (Dusty Rose Prism):
+  slot: slotless
+  note: +1 insight bonus to AC
+  effects:
+    - target: ac
+      bonus_type: insight
+      value: 1
+Ioun Stone (Incandescent Blue Sphere):
+  slot: slotless
+  note: +2 enhancement to WIS
+  effects:
+    - target: wis_score
+      bonus_type: enhancement
+      value: 2
+Ioun Stone (Iridescent Spindle):
+  slot: slotless
+  note: Allows breathing indefinitely in any medium
+Ioun Stone (Lavender and Green Ellipsoid):
+  slot: slotless
+  note: >-
+    Absorbs spells of 8th level or lower (up to
+    50 levels total) before shattering
+Ioun Stone (Orange):
+  slot: slotless
+  note: >-
+    +1 caster level for all spellcasting classes
+    (does not grant new spell slots)
+Ioun Stone (Pale Blue Rhomboid):
+  slot: slotless
+  note: +2 enhancement to STR
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+Ioun Stone (Pale Green Prism):
+  slot: slotless
+  note: >-
+    +1 competence to attack, saves, skill checks,
+    and ability checks
+  effects:
+    - target: attack_all
+      bonus_type: competence
+      value: 1
+    - target: fort_save
+      bonus_type: competence
+      value: 1
+    - target: ref_save
+      bonus_type: competence
+      value: 1
+    - target: will_save
+      bonus_type: competence
+      value: 1
+Ioun Stone (Pale Lavender Ellipsoid):
+  slot: slotless
+  note: >-
+    Absorbs spells of 4th level or lower (up to
+    20 levels total) before shattering
+Ioun Stone (Pearly White Spindle):
+  slot: slotless
+  note: Regenerates 1 hp per 10 minutes
+Ioun Stone (Pink and Green Sphere):
+  slot: slotless
+  note: +2 enhancement to CHA
+  effects:
+    - target: cha_score
+      bonus_type: enhancement
+      value: 2
+Ioun Stone (Pink Rhomboid):
+  slot: slotless
+  note: +2 enhancement to CON
+  effects:
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+Ioun Stone (Scarlet and Blue Sphere):
+  slot: slotless
+  note: +2 enhancement to INT
+  effects:
+    - target: int_score
+      bonus_type: enhancement
+      value: 2
+Ioun Stone (Vibrant Purple Prism):
+  slot: slotless
+  note: >-
+    Stores three levels of spells (like a ring of
+    spell storing) for later recall
+Stone of Good Luck (Luckstone):
+  slot: slotless
+  note: >-
+    +1 luck bonus on saves, ability checks, and
+    skill checks
+  effects:
+    - target: fort_save
+      bonus_type: luck
+      value: 1
+    - target: ref_save
+      bonus_type: luck
+      value: 1
+    - target: will_save
+      bonus_type: luck
+      value: 1
+    - target: skill_appraise
+      bonus_type: luck
+      value: 1
+    - target: skill_balance
+      bonus_type: luck
+      value: 1
+    - target: skill_bluff
+      bonus_type: luck
+      value: 1
+    - target: skill_climb
+      bonus_type: luck
+      value: 1
+    - target: skill_concentration
+      bonus_type: luck
+      value: 1
+    - target: skill_craft
+      bonus_type: luck
+      value: 1
+    - target: skill_decipher_script
+      bonus_type: luck
+      value: 1
+    - target: skill_diplomacy
+      bonus_type: luck
+      value: 1
+    - target: skill_disable_device
+      bonus_type: luck
+      value: 1
+    - target: skill_disguise
+      bonus_type: luck
+      value: 1
+    - target: skill_escape_artist
+      bonus_type: luck
+      value: 1
+    - target: skill_forgery
+      bonus_type: luck
+      value: 1
+    - target: skill_gather_information
+      bonus_type: luck
+      value: 1
+    - target: skill_handle_animal
+      bonus_type: luck
+      value: 1
+    - target: skill_heal
+      bonus_type: luck
+      value: 1
+    - target: skill_hide
+      bonus_type: luck
+      value: 1
+    - target: skill_intimidate
+      bonus_type: luck
+      value: 1
+    - target: skill_jump
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_arcana
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_architecture
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_dungeoneering
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_geography
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_history
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_local
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_nature
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_nobility
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_planes
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_religion
+      bonus_type: luck
+      value: 1
+    - target: skill_listen
+      bonus_type: luck
+      value: 1
+    - target: skill_move_silently
+      bonus_type: luck
+      value: 1
+    - target: skill_open_lock
+      bonus_type: luck
+      value: 1
+    - target: skill_perform
+      bonus_type: luck
+      value: 1
+    - target: skill_profession
+      bonus_type: luck
+      value: 1
+    - target: skill_profession_soldier
+      bonus_type: luck
+      value: 1
+    - target: skill_ride
+      bonus_type: luck
+      value: 1
+    - target: skill_search
+      bonus_type: luck
+      value: 1
+    - target: skill_sense_motive
+      bonus_type: luck
+      value: 1
+    - target: skill_sleight_of_hand
+      bonus_type: luck
+      value: 1
+    - target: skill_spellcraft
+      bonus_type: luck
+      value: 1
+    - target: skill_spot
+      bonus_type: luck
+      value: 1
+    - target: skill_survival
+      bonus_type: luck
+      value: 1
+    - target: skill_swim
+      bonus_type: luck
+      value: 1
+    - target: skill_tumble
+      bonus_type: luck
+      value: 1
+    - target: skill_use_magic_device
+      bonus_type: luck
+      value: 1
+    - target: skill_use_rope
+      bonus_type: luck
+      value: 1

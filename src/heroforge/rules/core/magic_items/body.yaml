@@ -1,0 +1,59 @@
+# rules/core/magic_items/body.yaml
+#
+# Body slot: robes, full-body vestments.
+#
+# Sorted alphabetically.
+
+Robe of Blending:
+  slot: body
+  note: >-
+    +10 competence on Disguise as appearance
+    matches surroundings (nearly invisible 15 ft+)
+Robe of Bones:
+  slot: body
+  note: >-
+    Eight embroidered figures detach as undead:
+    2 skeletons, 2 wolf skeletons, 2 zombies, etc.
+Robe of Eyes:
+  slot: body
+  note: >-
+    All-around vision; see invisibility, detect
+    invisibility; +10 Search/Spot; 120 ft darkvision
+Robe of Scintillating Colors:
+  slot: body
+  note: >-
+    1/day emit dazzling colors (as prismatic spray
+    effects, CL 11th)
+Robe of Stars:
+  slot: body
+  note: +4 deflection to AC
+  effects:
+    - target: ac
+      bonus_type: deflection
+      value: 4
+Robe of the Archmagi:
+  slot: body
+  note: >-
+    +5 armor AC, SR 18, +4 resistance saves
+    (requires matching alignment)
+  effects:
+    - target: ac
+      bonus_type: armor
+      value: 5
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+    - target: sr
+      bonus_type: untyped
+      value: 18
+Robe of Useful Items:
+  slot: body
+  note: >-
+    Embroidered with 16 patches; each detaches as
+    a specified mundane object (rope, boat, etc.)

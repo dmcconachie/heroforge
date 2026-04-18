@@ -20,7 +20,7 @@ levels:
       Handle Animal: 4
       Knowledge (Nature): 4
       Listen: 4
-      # Profession (Soldier): 3
+      Profession (Soldier): 3
       Ride: 1
       Spot: 4
       Survival: 4
@@ -91,7 +91,7 @@ levels:
       Concentration: 1
       Knowledge (Nature): 1
       Listen: 1
-      # Profession (Soldier): 1
+      Profession (Soldier): 1
       Spellcraft: 1
       Spot: 1
       Survival: 1
@@ -103,7 +103,7 @@ levels:
       Concentration: 1
       Knowledge (Nature): 1
       Listen: 1
-      # Profession (Soldier): 2
+      Profession (Soldier): 2
       Spellcraft: 1
       Spot: 1
   - level: 9
