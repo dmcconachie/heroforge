@@ -103,10 +103,6 @@ attack_iteratives:
     - 12
     - 7
 skills:
-  Appraise:
-    total: 2
-    typed:
-      ability_mod: 2
   Balance:
     total: 4
     typed:
@@ -122,50 +118,22 @@ skills:
     typed:
       ability_mod: 1
       ranks: 23
-  Craft:
-    total: 2
-    typed:
-      ability_mod: 2
-  Decipher Script:
-    total: 2
-    typed:
-      ability_mod: 2
   Diplomacy:
     total: 28
     typed:
       ability_mod: 3
       ranks: 23
       synergy: 2
-  Disable Device:
-    total: 2
-    typed:
-      ability_mod: 2
   Disguise:
     total: 5
     typed:
       ability_mod: 3
       synergy: 2
-  Escape Artist:
-    total: 2
-    typed:
-      ability_mod: 2
-  Forgery:
-    total: 2
-    typed:
-      ability_mod: 2
   Gather Information:
     total: 12
     typed:
       ability_mod: 3
       ranks: 9
-  Handle Animal:
-    total: 3
-    typed:
-      ability_mod: 3
-  Hide:
-    total: 2
-    typed:
-      ability_mod: 2
   Intimidate:
     total: 5
     typed:
@@ -180,72 +148,15 @@ skills:
     typed:
       ability_mod: 2
       ranks: 23
-  Knowledge (Architecture and Engineering):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Dungeoneering):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Geography):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (History):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Local):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Nature):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Nobility and Royalty):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Religion):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (The Planes):
-    total: 2
-    typed:
-      ability_mod: 2
   Listen:
     total: 10
     typed:
       ranks: 10
-  Move Silently:
-    total: 2
-    typed:
-      ability_mod: 2
-  Open Lock:
-    total: 2
-    typed:
-      ability_mod: 2
   Perform:
     total: 26
     typed:
       ability_mod: 3
       ranks: 23
-  Ride:
-    total: 2
-    typed:
-      ability_mod: 2
-  Search:
-    total: 2
-    typed:
-      ability_mod: 2
-  Sleight of Hand:
-    total: 4
-    typed:
-      ability_mod: 2
-      synergy: 2
   Spellcraft:
     total: 27
     typed:
@@ -262,10 +173,6 @@ skills:
     typed:
       ability_mod: 3
       ranks: 4
-  Use Rope:
-    total: 2
-    typed:
-      ability_mod: 2
 carrying_capacity:
   light: 33
   medium: 66

@@ -240,6 +240,12 @@ Perform:
   trained_only: false
   armor_check: false
   description: Entertain audiences (each Perform is a separate skill)
+Perform (Dance):
+  key: skill_perform_dance
+  ability: cha
+  trained_only: true
+  armor_check: false
+  description: Entertain audiences with dance
 Profession:
   key: skill_profession
   ability: wis

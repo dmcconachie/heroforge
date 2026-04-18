@@ -106,10 +106,6 @@ attack_iteratives:
     - 11
     - 6
 skills:
-  Appraise:
-    total: 4
-    typed:
-      ability_mod: 4
   Balance:
     total: 4
     typed:
@@ -119,19 +115,11 @@ skills:
     total: 6
     typed:
       ranks: 6
-  Climb:
-    total: -1
-    typed:
-      ability_mod: -1
   Concentration:
     total: 6
     typed:
       ability_mod: 1
       ranks: 5
-  Craft:
-    total: 4
-    typed:
-      ability_mod: 4
   Decipher Script:
     total: 14
     typed:
@@ -155,10 +143,6 @@ skills:
     typed:
       ability_mod: 2
       ranks: 17
-  Forgery:
-    total: 4
-    typed:
-      ability_mod: 4
   Gather Information:
     total: 2
     typed:
@@ -182,18 +166,6 @@ skills:
     typed:
       ability_mod: 4
       ranks: 5
-  Knowledge (Architecture and Engineering):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Dungeoneering):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Geography):
-    total: 4
-    typed:
-      ability_mod: 4
   Knowledge (History):
     total: 5
     typed:
@@ -209,10 +181,6 @@ skills:
     typed:
       ability_mod: 4
       ranks: 3
-  Knowledge (Nobility and Royalty):
-    total: 4
-    typed:
-      ability_mod: 4
   Knowledge (Religion):
     total: 8
     typed:
@@ -237,10 +205,6 @@ skills:
     typed:
       ability_mod: 2
       ranks: 16
-  Ride:
-    total: 2
-    typed:
-      ability_mod: 2
   Search:
     total: 20
     typed:
@@ -266,10 +230,6 @@ skills:
     total: 2
     typed:
       synergy: 2
-  Swim:
-    total: -1
-    typed:
-      ability_mod: -1
   Tumble:
     total: 18
     typed:

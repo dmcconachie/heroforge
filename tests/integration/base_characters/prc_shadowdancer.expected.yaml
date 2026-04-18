@@ -104,10 +104,6 @@ attack_iteratives:
     - 11
     - 6
 skills:
-  Appraise:
-    total: 1
-    typed:
-      ability_mod: 1
   Balance:
     total: 26
     typed:
@@ -119,101 +115,25 @@ skills:
     typed:
       ability_mod: -1
       ranks: 1
-  Concentration:
-    total: 1
-    typed:
-      ability_mod: 1
-  Craft:
-    total: 1
-    typed:
-      ability_mod: 1
-  Decipher Script:
-    total: 1
-    typed:
-      ability_mod: 1
-  Diplomacy:
-    total: -1
-    typed:
-      ability_mod: -1
   Disable Device:
     total: 6
     typed:
       ability_mod: 1
       ranks: 5
-  Disguise:
-    total: -1
-    typed:
-      ability_mod: -1
   Escape Artist:
     total: 14
     typed:
       ability_mod: 4
       ranks: 10
-  Forgery:
-    total: 1
-    typed:
-      ability_mod: 1
-  Gather Information:
-    total: -1
-    typed:
-      ability_mod: -1
-  Handle Animal:
-    total: -1
-    typed:
-      ability_mod: -1
   Hide:
     total: 24
     typed:
       ability_mod: 4
       ranks: 20
-  Intimidate:
-    total: -1
-    typed:
-      ability_mod: -1
   Jump:
     total: 2
     typed:
       synergy: 2
-  Knowledge (Arcana):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Architecture and Engineering):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Dungeoneering):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Geography):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (History):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Local):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Nature):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Nobility and Royalty):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Religion):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (The Planes):
-    total: 1
-    typed:
-      ability_mod: 1
   Listen:
     total: 20
     typed:
@@ -233,23 +153,11 @@ skills:
     typed:
       ability_mod: -1
       ranks: 15
-  Ride:
-    total: 4
-    typed:
-      ability_mod: 4
   Search:
     total: 21
     typed:
       ability_mod: 1
       ranks: 20
-  Sleight of Hand:
-    total: 4
-    typed:
-      ability_mod: 4
-  Spellcraft:
-    total: 1
-    typed:
-      ability_mod: 1
   Spot:
     total: 20
     typed:
@@ -263,10 +171,6 @@ skills:
     typed:
       ability_mod: 4
       ranks: 20
-  Use Magic Device:
-    total: -1
-    typed:
-      ability_mod: -1
   Use Rope:
     total: 6
     typed:

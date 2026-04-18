@@ -97,23 +97,11 @@ attack_iteratives:
     - 8
     - 3
 skills:
-  Appraise:
-    total: 3
-    typed:
-      ability_mod: 3
-  Bluff:
-    total: -1
-    typed:
-      ability_mod: -1
   Concentration:
     total: 21
     typed:
       ability_mod: 2
       ranks: 19
-  Craft:
-    total: 3
-    typed:
-      ability_mod: 3
   Decipher Script:
     total: 17
     typed:
@@ -125,68 +113,16 @@ skills:
       ability_mod: -1
       ranks: 6
       synergy: 2
-  Disable Device:
-    total: 3
-    typed:
-      ability_mod: 3
-  Disguise:
-    total: -1
-    typed:
-      ability_mod: -1
-  Forgery:
-    total: 3
-    typed:
-      ability_mod: 3
-  Gather Information:
-    total: -1
-    typed:
-      ability_mod: -1
-  Handle Animal:
-    total: -1
-    typed:
-      ability_mod: -1
   Heal:
     total: 9
     typed:
       ability_mod: 3
       ranks: 6
-  Intimidate:
-    total: -1
-    typed:
-      ability_mod: -1
   Knowledge (Arcana):
     total: 22
     typed:
       ability_mod: 3
       ranks: 19
-  Knowledge (Architecture and Engineering):
-    total: 3
-    typed:
-      ability_mod: 3
-  Knowledge (Dungeoneering):
-    total: 3
-    typed:
-      ability_mod: 3
-  Knowledge (Geography):
-    total: 3
-    typed:
-      ability_mod: 3
-  Knowledge (History):
-    total: 3
-    typed:
-      ability_mod: 3
-  Knowledge (Local):
-    total: 3
-    typed:
-      ability_mod: 3
-  Knowledge (Nature):
-    total: 3
-    typed:
-      ability_mod: 3
-  Knowledge (Nobility and Royalty):
-    total: 3
-    typed:
-      ability_mod: 3
   Knowledge (Religion):
     total: 21
     typed:
@@ -197,26 +133,6 @@ skills:
     typed:
       ability_mod: 3
       ranks: 3
-  Listen:
-    total: 3
-    typed:
-      ability_mod: 3
-  Perform:
-    total: -1
-    typed:
-      ability_mod: -1
-  Profession:
-    total: 3
-    typed:
-      ability_mod: 3
-  Profession (Soldier):
-    total: 3
-    typed:
-      ability_mod: 3
-  Search:
-    total: 3
-    typed:
-      ability_mod: 3
   Sense Motive:
     total: 13
     typed:
@@ -228,18 +144,6 @@ skills:
       ability_mod: 3
       ranks: 19
       synergy: 2
-  Spot:
-    total: 3
-    typed:
-      ability_mod: 3
-  Survival:
-    total: 3
-    typed:
-      ability_mod: 3
-  Use Magic Device:
-    total: -1
-    typed:
-      ability_mod: -1
 carrying_capacity:
   light: 33
   medium: 66

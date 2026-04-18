@@ -102,10 +102,6 @@ attack_iteratives:
     - 13
     - 8
 skills:
-  Appraise:
-    total: 2
-    typed:
-      ability_mod: 2
   Balance:
     total: 13
     typed:
@@ -117,18 +113,6 @@ skills:
     typed:
       ability_mod: -1
       ranks: 18
-  Concentration:
-    total: 1
-    typed:
-      ability_mod: 1
-  Craft:
-    total: 2
-    typed:
-      ability_mod: 2
-  Decipher Script:
-    total: 2
-    typed:
-      ability_mod: 2
   Diplomacy:
     total: 1
     typed:
@@ -145,22 +129,6 @@ skills:
       ability_mod: -1
       ranks: 18
       synergy: 2
-  Escape Artist:
-    total: 3
-    typed:
-      ability_mod: 3
-  Forgery:
-    total: 2
-    typed:
-      ability_mod: 2
-  Gather Information:
-    total: -1
-    typed:
-      ability_mod: -1
-  Handle Animal:
-    total: -1
-    typed:
-      ability_mod: -1
   Hide:
     total: 21
     typed:
@@ -175,46 +143,6 @@ skills:
     total: 2
     typed:
       synergy: 2
-  Knowledge (Arcana):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Architecture and Engineering):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Dungeoneering):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Geography):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (History):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Local):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Nature):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Nobility and Royalty):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (Religion):
-    total: 2
-    typed:
-      ability_mod: 2
-  Knowledge (The Planes):
-    total: 2
-    typed:
-      ability_mod: 2
   Listen:
     total: 18
     typed:
@@ -229,28 +157,11 @@ skills:
     typed:
       ability_mod: 3
       ranks: 8
-  Perform:
-    total: -1
-    typed:
-      ability_mod: -1
-  Ride:
-    total: 3
-    typed:
-      ability_mod: 3
   Search:
     total: 10
     typed:
       ability_mod: 2
       ranks: 8
-  Sleight of Hand:
-    total: 5
-    typed:
-      ability_mod: 3
-      synergy: 2
-  Spellcraft:
-    total: 2
-    typed:
-      ability_mod: 2
   Spot:
     total: 18
     typed:
@@ -264,14 +175,6 @@ skills:
     typed:
       ability_mod: 3
       ranks: 18
-  Use Magic Device:
-    total: -1
-    typed:
-      ability_mod: -1
-  Use Rope:
-    total: 3
-    typed:
-      ability_mod: 3
 carrying_capacity:
   light: 33
   medium: 66

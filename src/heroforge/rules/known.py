@@ -22,11 +22,11 @@ from heroforge.rules.core.domains import KnownCoreDomain
 from heroforge.rules.core.feats import KnownCoreFeat
 from heroforge.rules.core.magic_items import KnownCoreMagicItem
 from heroforge.rules.core.materials import KnownCoreMaterial
-from heroforge.rules.custom.magic_items import KnownCustomMagicItem
 from heroforge.rules.core.races import KnownCoreRace
 from heroforge.rules.core.skills import KnownCoreSkill
 from heroforge.rules.core.templates import KnownCoreTemplate
 from heroforge.rules.core.weapons import KnownCoreWeapon
+from heroforge.rules.custom.magic_items import KnownCustomMagicItem
 
 
 def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:

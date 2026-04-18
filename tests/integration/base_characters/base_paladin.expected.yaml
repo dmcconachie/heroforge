@@ -110,14 +110,6 @@ attack_iteratives:
     - 11
     - 6
 skills:
-  Bluff:
-    total: 2
-    typed:
-      ability_mod: 2
-  Climb:
-    total: 3
-    typed:
-      ability_mod: 3
   Concentration:
     total: 16
     typed:
@@ -129,47 +121,11 @@ skills:
       ability_mod: 2
       ranks: 16
       synergy: 2
-  Disguise:
-    total: 2
-    typed:
-      ability_mod: 2
-  Gather Information:
-    total: 2
-    typed:
-      ability_mod: 2
-  Handle Animal:
-    total: 2
-    typed:
-      ability_mod: 2
   Heal:
     total: 21
     typed:
       ability_mod: 1
       ranks: 20
-  Intimidate:
-    total: 2
-    typed:
-      ability_mod: 2
-  Jump:
-    total: 3
-    typed:
-      ability_mod: 3
-  Listen:
-    total: 1
-    typed:
-      ability_mod: 1
-  Perform:
-    total: 2
-    typed:
-      ability_mod: 2
-  Profession:
-    total: 1
-    typed:
-      ability_mod: 1
-  Profession (Soldier):
-    total: 1
-    typed:
-      ability_mod: 1
   Ride:
     total: 10
     typed:
@@ -179,22 +135,6 @@ skills:
     typed:
       ability_mod: 1
       ranks: 9
-  Spot:
-    total: 1
-    typed:
-      ability_mod: 1
-  Survival:
-    total: 1
-    typed:
-      ability_mod: 1
-  Swim:
-    total: 3
-    typed:
-      ability_mod: 3
-  Use Magic Device:
-    total: 2
-    typed:
-      ability_mod: 2
 carrying_capacity:
   light: 76
   medium: 153

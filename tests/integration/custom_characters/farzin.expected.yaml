@@ -167,20 +167,10 @@ skills:
     typed:
       ability_mod: 2
       luck: 1
-  Decipher Script:
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
   Diplomacy:
     total: 2
     typed:
       ability_mod: 1
-      luck: 1
-  Disable Device:
-    total: 3
-    typed:
-      ability_mod: 2
       luck: 1
   Disguise:
     total: 2
@@ -232,57 +222,12 @@ skills:
       speed_mod: 8
       untyped: -5
       luck: 1
-  Knowledge (Arcana):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
-  Knowledge (Architecture and Engineering):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
-  Knowledge (Dungeoneering):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
-  Knowledge (Geography):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
-  Knowledge (History):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
-  Knowledge (Local):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
   Knowledge (Nature):
     total: 21
     typed:
       ability_mod: 2
       ranks: 16
       synergy: 2
-      luck: 1
-  Knowledge (Nobility and Royalty):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
-  Knowledge (Religion):
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
-  Knowledge (The Planes):
-    total: 3
-    typed:
-      ability_mod: 2
       luck: 1
   Listen:
     total: 25
@@ -296,20 +241,10 @@ skills:
       ability_mod: 2
       untyped: -5
       luck: 1
-  Open Lock:
-    total: 3
-    typed:
-      ability_mod: 2
-      luck: 1
   Perform:
     total: 2
     typed:
       ability_mod: 1
-      luck: 1
-  Profession:
-    total: 9
-    typed:
-      ability_mod: 8
       luck: 1
   Profession (Soldier):
     total: 15
@@ -333,12 +268,6 @@ skills:
     total: 9
     typed:
       ability_mod: 8
-      luck: 1
-  Sleight of Hand:
-    total: -2
-    typed:
-      ability_mod: 2
-      untyped: -5
       luck: 1
   Spellcraft:
     total: 15
@@ -364,17 +293,6 @@ skills:
     typed:
       ability_mod: 8
       untyped: -10
-      luck: 1
-  Tumble:
-    total: -2
-    typed:
-      ability_mod: 2
-      untyped: -5
-      luck: 1
-  Use Magic Device:
-    total: 2
-    typed:
-      ability_mod: 1
       luck: 1
   Use Rope:
     total: 3

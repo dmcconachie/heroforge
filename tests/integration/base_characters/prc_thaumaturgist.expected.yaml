@@ -95,39 +95,11 @@ attack_iteratives:
   ranged:
     - 5
 skills:
-  Bluff:
-    total: 2
-    typed:
-      ability_mod: 2
   Concentration:
     total: 15
     typed:
       ability_mod: 2
       ranks: 13
-  Diplomacy:
-    total: 2
-    typed:
-      ability_mod: 2
-  Disguise:
-    total: 2
-    typed:
-      ability_mod: 2
-  Gather Information:
-    total: 2
-    typed:
-      ability_mod: 2
-  Handle Animal:
-    total: 2
-    typed:
-      ability_mod: 2
-  Heal:
-    total: 3
-    typed:
-      ability_mod: 3
-  Intimidate:
-    total: 2
-    typed:
-      ability_mod: 2
   Knowledge (Religion):
     total: 8
     typed:
@@ -136,43 +108,15 @@ skills:
     total: 10
     typed:
       ranks: 10
-  Listen:
-    total: 3
-    typed:
-      ability_mod: 3
-  Perform:
-    total: 2
-    typed:
-      ability_mod: 2
-  Profession:
-    total: 3
-    typed:
-      ability_mod: 3
-  Profession (Soldier):
-    total: 3
-    typed:
-      ability_mod: 3
-  Sense Motive:
-    total: 3
-    typed:
-      ability_mod: 3
   Spellcraft:
     total: 8
     typed:
       ranks: 8
-  Spot:
-    total: 3
-    typed:
-      ability_mod: 3
   Survival:
     total: 5
     typed:
       ability_mod: 3
       synergy: 2
-  Use Magic Device:
-    total: 2
-    typed:
-      ability_mod: 2
 carrying_capacity:
   light: 33
   medium: 66

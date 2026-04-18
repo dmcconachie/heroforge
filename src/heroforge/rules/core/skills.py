@@ -43,6 +43,7 @@ class KnownCoreSkill(StrEnum):
     MOVE_SILENTLY = "Move Silently"
     OPEN_LOCK = "Open Lock"
     PERFORM = "Perform"
+    PERFORM_DANCE = "Perform (Dance)"
     PROFESSION = "Profession"
     PROFESSION_SOLDIER = "Profession (Soldier)"
     RIDE = "Ride"

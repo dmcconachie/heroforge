@@ -114,47 +114,11 @@ attack_iteratives:
     - 8
     - 3
 skills:
-  Appraise:
-    total: 1
-    typed:
-      ability_mod: 1
-  Balance:
-    total: 1
-    typed:
-      ability_mod: 1
   Climb:
     total: 16
     typed:
       ability_mod: 7
       ranks: 9
-  Concentration:
-    total: 3
-    typed:
-      ability_mod: 3
-  Craft:
-    total: 1
-    typed:
-      ability_mod: 1
-  Decipher Script:
-    total: 1
-    typed:
-      ability_mod: 1
-  Disable Device:
-    total: 1
-    typed:
-      ability_mod: 1
-  Escape Artist:
-    total: 1
-    typed:
-      ability_mod: 1
-  Forgery:
-    total: 1
-    typed:
-      ability_mod: 1
-  Hide:
-    total: 1
-    typed:
-      ability_mod: 1
   Intimidate:
     total: 9
     typed:
@@ -164,83 +128,6 @@ skills:
     typed:
       ability_mod: 7
       ranks: 9
-  Knowledge (Arcana):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Architecture and Engineering):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Dungeoneering):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Geography):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (History):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Local):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Nature):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Nobility and Royalty):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (Religion):
-    total: 1
-    typed:
-      ability_mod: 1
-  Knowledge (The Planes):
-    total: 1
-    typed:
-      ability_mod: 1
-  Move Silently:
-    total: 1
-    typed:
-      ability_mod: 1
-  Open Lock:
-    total: 1
-    typed:
-      ability_mod: 1
-  Ride:
-    total: 1
-    typed:
-      ability_mod: 1
-  Search:
-    total: 1
-    typed:
-      ability_mod: 1
-  Sleight of Hand:
-    total: 1
-    typed:
-      ability_mod: 1
-  Spellcraft:
-    total: 1
-    typed:
-      ability_mod: 1
-  Swim:
-    total: 7
-    typed:
-      ability_mod: 7
-  Tumble:
-    total: 3
-    typed:
-      ability_mod: 1
-      synergy: 2
-  Use Rope:
-    total: 1
-    typed:
-      ability_mod: 1
 carrying_capacity:
   light: 233
   medium: 466

@@ -113,107 +113,31 @@ skills:
     typed:
       ability_mod: 4
       ranks: 10
-  Balance:
-    total: 1
-    typed:
-      ability_mod: 1
-  Bluff:
-    total: -1
-    typed:
-      ability_mod: -1
-  Climb:
-    total: -1
-    typed:
-      ability_mod: -1
   Concentration:
     total: 28
     typed:
       ability_mod: 2
       ranks: 26
-  Craft:
-    total: 4
-    typed:
-      ability_mod: 4
   Decipher Script:
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
-  Diplomacy:
-    total: -1
-    typed:
-      ability_mod: -1
-  Disable Device:
-    total: 4
-    typed:
-      ability_mod: 4
-  Disguise:
-    total: -1
-    typed:
-      ability_mod: -1
-  Escape Artist:
-    total: 1
-    typed:
-      ability_mod: 1
-  Forgery:
-    total: 4
-    typed:
-      ability_mod: 4
   Gather Information:
     total: 9
     typed:
       ability_mod: -1
       ranks: 10
-  Handle Animal:
-    total: -1
-    typed:
-      ability_mod: -1
-  Hide:
-    total: 1
-    typed:
-      ability_mod: 1
-  Intimidate:
-    total: -1
-    typed:
-      ability_mod: -1
-  Jump:
-    total: -1
-    typed:
-      ability_mod: -1
   Knowledge (Arcana):
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
-  Knowledge (Architecture and Engineering):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Dungeoneering):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Geography):
-    total: 4
-    typed:
-      ability_mod: 4
   Knowledge (History):
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
-  Knowledge (Local):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Nature):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Nobility and Royalty):
-    total: 4
-    typed:
-      ability_mod: 4
   Knowledge (Religion):
     total: 30
     typed:
@@ -224,30 +148,6 @@ skills:
     typed:
       ability_mod: 4
       ranks: 26
-  Move Silently:
-    total: 1
-    typed:
-      ability_mod: 1
-  Open Lock:
-    total: 1
-    typed:
-      ability_mod: 1
-  Perform:
-    total: -1
-    typed:
-      ability_mod: -1
-  Ride:
-    total: 1
-    typed:
-      ability_mod: 1
-  Search:
-    total: 4
-    typed:
-      ability_mod: 4
-  Sleight of Hand:
-    total: 1
-    typed:
-      ability_mod: 1
   Spellcraft:
     total: 32
     typed:
@@ -258,22 +158,6 @@ skills:
     total: 2
     typed:
       synergy: 2
-  Swim:
-    total: -1
-    typed:
-      ability_mod: -1
-  Tumble:
-    total: 1
-    typed:
-      ability_mod: 1
-  Use Magic Device:
-    total: -1
-    typed:
-      ability_mod: -1
-  Use Rope:
-    total: 1
-    typed:
-      ability_mod: 1
 carrying_capacity:
   light: 26
   medium: 53

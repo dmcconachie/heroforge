@@ -110,55 +110,11 @@ attack_iteratives:
     - 9
     - 4
 skills:
-  Balance:
-    total: 1
-    typed:
-      ability_mod: 1
-  Bluff:
-    total: 3
-    typed:
-      ability_mod: 3
-  Climb:
-    total: 4
-    typed:
-      ability_mod: 4
   Concentration:
     total: 17
     typed:
       ability_mod: 2
       ranks: 15
-  Diplomacy:
-    total: 3
-    typed:
-      ability_mod: 3
-  Disguise:
-    total: 3
-    typed:
-      ability_mod: 3
-  Escape Artist:
-    total: 1
-    typed:
-      ability_mod: 1
-  Gather Information:
-    total: 3
-    typed:
-      ability_mod: 3
-  Handle Animal:
-    total: 3
-    typed:
-      ability_mod: 3
-  Hide:
-    total: 1
-    typed:
-      ability_mod: 1
-  Intimidate:
-    total: 3
-    typed:
-      ability_mod: 3
-  Jump:
-    total: 4
-    typed:
-      ability_mod: 4
   Knowledge (Arcana):
     total: 9
     typed:
@@ -167,26 +123,6 @@ skills:
     total: 5
     typed:
       ranks: 5
-  Move Silently:
-    total: 1
-    typed:
-      ability_mod: 1
-  Open Lock:
-    total: 1
-    typed:
-      ability_mod: 1
-  Perform:
-    total: 3
-    typed:
-      ability_mod: 3
-  Ride:
-    total: 1
-    typed:
-      ability_mod: 1
-  Sleight of Hand:
-    total: 1
-    typed:
-      ability_mod: 1
   Spellcraft:
     total: 13
     typed:
@@ -196,22 +132,6 @@ skills:
     total: 5
     typed:
       ranks: 5
-  Swim:
-    total: 4
-    typed:
-      ability_mod: 4
-  Tumble:
-    total: 1
-    typed:
-      ability_mod: 1
-  Use Magic Device:
-    total: 3
-    typed:
-      ability_mod: 3
-  Use Rope:
-    total: 1
-    typed:
-      ability_mod: 1
 carrying_capacity:
   light: 100
   medium: 200

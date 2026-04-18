@@ -52,6 +52,15 @@ class SkillDefinition:
     # synergies: [{skill: "Bluff", bonus: 2}, ...]  (if 5+ ranks in this skill)
     description: str = ""
 
+    def __post_init__(self) -> None:
+        # Parenthesized specializations (e.g. "Craft
+        # (Weaponsmithing)", "Profession (Soldier)") are specific
+        # variants and must be declared trained_only.
+        assert not ("(" in self.name and not self.trained_only), (
+            f"Skill {self.name!r} has a parenthesized specialization "
+            f"but is not marked trained_only."
+        )
+
 
 # ---------------------------------------------------------------------------
 # SkillRegistry
@@ -433,23 +442,4 @@ def compute_skill_total(
         armor_penalty=acp,
         speed_mod=speed_mod,
         total=total,
-    )
-
-
-# ---------------------------------------------------------------------------
-# YAML builder
-# ---------------------------------------------------------------------------
-
-
-def build_skill_from_yaml(decl: dict) -> SkillDefinition:
-    raw_ab = decl["ability"]
-    ability: Ability | None = None if raw_ab == "none" else Ability(raw_ab)
-    return SkillDefinition(
-        name=decl["name"],
-        key=decl["key"],
-        ability=ability,
-        trained_only=bool(decl.get("trained_only", False)),
-        armor_check=bool(decl.get("armor_check", False)),
-        synergies=decl.get("synergies", []),
-        description=decl.get("description", ""),
     )

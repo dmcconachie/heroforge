@@ -117,51 +117,11 @@ skills:
       ability_mod: 4
       ranks: 14
       synergy: 2
-  Bluff:
-    total: -1
-    typed:
-      ability_mod: -1
-  Climb:
-    total: 1
-    typed:
-      ability_mod: 1
-  Concentration:
-    total: -1
-    typed:
-      ability_mod: -1
-  Diplomacy:
-    total: -1
-    typed:
-      ability_mod: -1
-  Disguise:
-    total: -1
-    typed:
-      ability_mod: -1
-  Escape Artist:
-    total: 4
-    typed:
-      ability_mod: 4
-  Gather Information:
-    total: -1
-    typed:
-      ability_mod: -1
-  Handle Animal:
-    total: -1
-    typed:
-      ability_mod: -1
-  Heal:
-    total: 3
-    typed:
-      ability_mod: 3
   Hide:
     total: 13
     typed:
       ability_mod: 4
       ranks: 9
-  Intimidate:
-    total: -1
-    typed:
-      ability_mod: -1
   Jump:
     total: 17
     typed:
@@ -178,61 +138,17 @@ skills:
     typed:
       ability_mod: 4
       ranks: 9
-  Open Lock:
-    total: 4
-    typed:
-      ability_mod: 4
-  Perform:
-    total: -1
-    typed:
-      ability_mod: -1
-  Profession:
-    total: 3
-    typed:
-      ability_mod: 3
-  Profession (Soldier):
-    total: 3
-    typed:
-      ability_mod: 3
-  Ride:
-    total: 4
-    typed:
-      ability_mod: 4
-  Sense Motive:
-    total: 3
-    typed:
-      ability_mod: 3
-  Sleight of Hand:
-    total: 4
-    typed:
-      ability_mod: 4
   Spot:
     total: 17
     typed:
       ability_mod: 3
       ranks: 14
-  Survival:
-    total: 3
-    typed:
-      ability_mod: 3
-  Swim:
-    total: 1
-    typed:
-      ability_mod: 1
   Tumble:
     total: 20
     typed:
       ability_mod: 4
       ranks: 14
       synergy: 2
-  Use Magic Device:
-    total: -1
-    typed:
-      ability_mod: -1
-  Use Rope:
-    total: 4
-    typed:
-      ability_mod: 4
 carrying_capacity:
   light: 43
   medium: 86

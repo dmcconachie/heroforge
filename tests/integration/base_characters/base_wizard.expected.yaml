@@ -109,114 +109,26 @@ attack_iteratives:
     - 13
     - 8
 skills:
-  Appraise:
-    total: 4
-    typed:
-      ability_mod: 4
-  Balance:
-    total: 3
-    typed:
-      ability_mod: 3
-  Bluff:
-    total: -1
-    typed:
-      ability_mod: -1
-  Climb:
-    total: -1
-    typed:
-      ability_mod: -1
   Concentration:
     total: 22
     typed:
       ability_mod: -1
       ranks: 23
-  Craft:
-    total: 4
-    typed:
-      ability_mod: 4
   Decipher Script:
     total: 17
     typed:
       ability_mod: 4
       ranks: 13
-  Diplomacy:
-    total: -1
-    typed:
-      ability_mod: -1
-  Disable Device:
-    total: 4
-    typed:
-      ability_mod: 4
-  Disguise:
-    total: -1
-    typed:
-      ability_mod: -1
-  Escape Artist:
-    total: 3
-    typed:
-      ability_mod: 3
-  Forgery:
-    total: 4
-    typed:
-      ability_mod: 4
-  Gather Information:
-    total: -1
-    typed:
-      ability_mod: -1
-  Handle Animal:
-    total: -1
-    typed:
-      ability_mod: -1
-  Heal:
-    total: 1
-    typed:
-      ability_mod: 1
-  Hide:
-    total: 3
-    typed:
-      ability_mod: 3
-  Intimidate:
-    total: -1
-    typed:
-      ability_mod: -1
-  Jump:
-    total: -1
-    typed:
-      ability_mod: -1
   Knowledge (Arcana):
     total: 27
     typed:
       ability_mod: 4
       ranks: 23
-  Knowledge (Architecture and Engineering):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Dungeoneering):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Geography):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (History):
-    total: 4
-    typed:
-      ability_mod: 4
-  Knowledge (Local):
-    total: 4
-    typed:
-      ability_mod: 4
   Knowledge (Nature):
     total: 23
     typed:
       ability_mod: 4
       ranks: 19
-  Knowledge (Nobility and Royalty):
-    total: 4
-    typed:
-      ability_mod: 4
   Knowledge (Religion):
     total: 18
     typed:
@@ -227,77 +139,17 @@ skills:
     typed:
       ability_mod: 4
       ranks: 23
-  Listen:
-    total: 1
-    typed:
-      ability_mod: 1
-  Move Silently:
-    total: 3
-    typed:
-      ability_mod: 3
-  Open Lock:
-    total: 3
-    typed:
-      ability_mod: 3
-  Perform:
-    total: -1
-    typed:
-      ability_mod: -1
-  Profession:
-    total: 1
-    typed:
-      ability_mod: 1
-  Profession (Soldier):
-    total: 1
-    typed:
-      ability_mod: 1
-  Ride:
-    total: 3
-    typed:
-      ability_mod: 3
-  Search:
-    total: 4
-    typed:
-      ability_mod: 4
-  Sense Motive:
-    total: 1
-    typed:
-      ability_mod: 1
-  Sleight of Hand:
-    total: 3
-    typed:
-      ability_mod: 3
   Spellcraft:
     total: 29
     typed:
       ability_mod: 4
       ranks: 23
       synergy: 2
-  Spot:
-    total: 1
-    typed:
-      ability_mod: 1
   Survival:
     total: 5
     typed:
       ability_mod: 1
       synergy: 4
-  Swim:
-    total: -1
-    typed:
-      ability_mod: -1
-  Tumble:
-    total: 3
-    typed:
-      ability_mod: 3
-  Use Magic Device:
-    total: -1
-    typed:
-      ability_mod: -1
-  Use Rope:
-    total: 3
-    typed:
-      ability_mod: 3
 carrying_capacity:
   light: 26
   medium: 53

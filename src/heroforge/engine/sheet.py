@@ -349,6 +349,13 @@ def _skills(
     result: dict[KnownSkill, SkillEntry] = {}
     for sd in app_state.skill_registry.all_skills():
         st = compute_skill_total(c, sd)
+
+        # Trained-only skills (which also covers all parenthesized
+        # specializations like "Craft (Weaponsmithing)") are only
+        # useful when the character has ranks in them.
+        if sd.trained_only and st.ranks == 0:
+            continue
+
         pool_bd = _pool_breakdown(c.get_pool(sd.key), c)
 
         # Pool's untyped bucket includes ranks — subtract so only
@@ -374,7 +381,10 @@ def _skills(
             typed["speed_mod"] = st.speed_mod
         _merge(typed, pool_bd)
 
-        if not typed:
+        # Only export skills with a modifier beyond the base
+        # ability mod — a pure ability_mod row carries no info.
+        extras = {k: v for k, v in typed.items() if k != "ability_mod"}
+        if not extras:
             continue
 
         result[KnownSkill(sd.name)] = SkillEntry(
