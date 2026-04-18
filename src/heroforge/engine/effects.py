@@ -185,6 +185,11 @@ class BonusEffect:
                   "fort_save", "speed", "initiative".
                   Special key "attack_all" feeds both attack_melee and
                   attack_ranged.
+                  TODO: target pools need validation — effect/buff/item
+                  declarations should be checked against the set of pool
+                  keys the engine actually exposes, so a typo fails
+                  loudly at rules-load time rather than silently
+                  contributing nothing.
     bonus_type  : The BonusType for stacking purposes.
     value       : Static integer value OR a formula string.
                   If str, it is evaluated via evaluate_formula() at

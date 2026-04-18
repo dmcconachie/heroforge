@@ -183,9 +183,13 @@ equipment:
     properties:
       - animated
   worn:
+    - Boots of Speed
     - Periapt of Wisdom +6
     - Belt of Giant Strength +6
     - Cloak of Resistance +5
+    - Stone of Good Luck (Luckstone)
+    - Ioun Stone (Dusty Rose Prism)
+    - Ioun Stone (Pink Rhomboid)
   weapons:
     - base: Lance
       # material: Bronzewood

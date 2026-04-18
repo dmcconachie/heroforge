@@ -8,116 +8,118 @@ identity:
   size: Medium
 abilities:
   str:
-    base: 14
     score: 26
     mod: 8
-    level_bumps: 2
     typed:
+      base: 14
+      level_bumps: 2
       racial: 4
       enhancement: 6
   dex:
-    base: 12
     score: 14
     mod: 2
     typed:
+      base: 12
       racial: 2
   con:
-    base: 14
-    score: 18
-    mod: 4
+    score: 20
+    mod: 5
     typed:
+      base: 14
       racial: 4
+      enhancement: 2
   int:
-    base: 12
     score: 14
     mod: 2
     typed:
+      base: 12
       racial: 2
   wis:
-    base: 15
     score: 26
     mod: 8
-    level_bumps: 1
     typed:
+      base: 15
+      level_bumps: 1
       racial: 4
       enhancement: 6
   cha:
-    base: 8
     score: 12
     mod: 1
     typed:
+      base: 8
       racial: 4
 combat:
   ac:
-    total: 29
-    base: 10
-    ability:
-      dex: 1
+    total: 30
     typed:
+      base: 10
+      dex: 1
       natural_armor_enhancement: 5
       natural_armor: 1
       armor: 9
       shield: 3
-  touch_ac: 11
-  flatfooted_ac: 28
+      insight: 1
+  touch_ac: 12
+  flatfooted_ac: 29
   hp_max:
-    total: 120
-    base: 68
-    ability:
-      con: 52
+    total: 133
+    typed:
+      base: 68
+      con: 65
   bab:
     total: 10
-    base: 10
+    typed:
+      base: 10
   initiative:
     total: 2
-    ability:
+    typed:
       dex: 2
   speed:
     total: 20
-    base: 30
     typed:
+      base: 30
       untyped: -10
   sr: 0
   saves:
     fort:
-      total: 19
-      base: 10
-      ability:
-        con: 4
+      total: 21
       typed:
+        base: 10
+        con: 5
         resistance: 5
+        luck: 1
     ref:
-      total: 10
-      base: 3
-      ability:
+      total: 11
+      typed:
+        base: 3
         dex: 2
-      typed:
         resistance: 5
+        luck: 1
     will:
-      total: 20
-      base: 7
-      ability:
-        wis: 8
+      total: 21
       typed:
+        base: 7
+        wis: 8
         resistance: 5
+        luck: 1
   attack_melee:
     total: 18
-    base: 10
-    ability:
+    typed:
+      base: 10
       str: 8
   attack_ranged:
     total: 12
-    base: 10
-    ability:
+    typed:
+      base: 10
       dex: 2
   damage_melee:
     total: 8
-    ability:
+    typed:
       str: 8
   grapple:
     total: 18
-    base: 10
-    ability:
+    typed:
+      base: 10
       str: 8
 attack_iteratives:
   melee:
@@ -127,87 +129,240 @@ attack_iteratives:
     - 12
     - 7
 skills:
+  Appraise:
+    total: 2
+    typed:
+      ability_mod: 2
   Balance:
-    total: -3
-    ability_mod: 2
+    total: -2
     typed:
+      ability_mod: 2
       untyped: -5
+      luck: 1
+  Bluff:
+    total: 2
+    typed:
+      ability_mod: 1
+      luck: 1
   Climb:
-    total: 3
-    ability_mod: 8
+    total: 4
     typed:
+      ability_mod: 8
       untyped: -5
+      luck: 1
   Concentration:
-    total: 20
-    ability_mod: 4
-    ranks: 16
+    total: 22
+    typed:
+      ability_mod: 5
+      ranks: 16
+      luck: 1
+  Craft:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Decipher Script:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Diplomacy:
+    total: 2
+    typed:
+      ability_mod: 1
+      luck: 1
+  Disable Device:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Disguise:
+    total: 2
+    typed:
+      ability_mod: 1
+      luck: 1
   Escape Artist:
     total: -3
-    ability_mod: 2
     typed:
+      ability_mod: 2
       untyped: -5
+  Forgery:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Gather Information:
+    total: 2
+    typed:
+      ability_mod: 1
+      luck: 1
   Handle Animal:
-    total: 6
-    ability_mod: 1
-    ranks: 5
+    total: 7
+    typed:
+      ability_mod: 1
+      ranks: 5
+      luck: 1
+  Heal:
+    total: 9
+    typed:
+      ability_mod: 8
+      luck: 1
   Hide:
-    total: -3
-    ability_mod: 2
-    typed:
-      untyped: -5
-  Jump:
-    total: -3
-    ability_mod: 8
-    speed_mod: -6
-    typed:
-      untyped: -5
-  Knowledge (Nature):
-    total: 20
-    ability_mod: 2
-    ranks: 16
-    synergy: 2
-  Listen:
-    total: 24
-    ability_mod: 8
-    ranks: 16
-  Move Silently:
-    total: -3
-    ability_mod: 2
-    typed:
-      untyped: -5
-  Ride:
-    total: 20
-    ability_mod: 2
-    ranks: 16
-    synergy: 2
-  Sleight of Hand:
-    total: -3
-    ability_mod: 2
-    typed:
-      untyped: -5
-  Spellcraft:
-    total: 14
-    ability_mod: 2
-    ranks: 12
-  Spot:
-    total: 24
-    ability_mod: 8
-    ranks: 16
-  Survival:
-    total: 15
-    ability_mod: 8
-    ranks: 5
-    synergy: 2
-  Swim:
     total: -2
-    ability_mod: 8
     typed:
-      untyped: -10
-  Tumble:
-    total: -3
-    ability_mod: 2
-    typed:
+      ability_mod: 2
       untyped: -5
+      luck: 1
+  Intimidate:
+    total: 2
+    typed:
+      ability_mod: 1
+      luck: 1
+  Jump:
+    total: -2
+    typed:
+      ability_mod: 8
+      speed_mod: -6
+      untyped: -5
+      luck: 1
+  Knowledge (Arcana):
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Knowledge (Architecture and Engineering):
+    total: 2
+    typed:
+      ability_mod: 2
+  Knowledge (Dungeoneering):
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Knowledge (Geography):
+    total: 2
+    typed:
+      ability_mod: 2
+  Knowledge (History):
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Knowledge (Local):
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Knowledge (Nature):
+    total: 21
+    typed:
+      ability_mod: 2
+      ranks: 16
+      synergy: 2
+      luck: 1
+  Knowledge (Nobility and Royalty):
+    total: 2
+    typed:
+      ability_mod: 2
+  Knowledge (Religion):
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Knowledge (The Planes):
+    total: 2
+    typed:
+      ability_mod: 2
+  Listen:
+    total: 25
+    typed:
+      ability_mod: 8
+      ranks: 16
+      luck: 1
+  Move Silently:
+    total: -2
+    typed:
+      ability_mod: 2
+      untyped: -5
+      luck: 1
+  Open Lock:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Perform:
+    total: 2
+    typed:
+      ability_mod: 1
+      luck: 1
+  Profession:
+    total: 9
+    typed:
+      ability_mod: 8
+      luck: 1
+  Ride:
+    total: 21
+    typed:
+      ability_mod: 2
+      ranks: 16
+      synergy: 2
+      luck: 1
+  Search:
+    total: 3
+    typed:
+      ability_mod: 2
+      luck: 1
+  Sense Motive:
+    total: 9
+    typed:
+      ability_mod: 8
+      luck: 1
+  Sleight of Hand:
+    total: -2
+    typed:
+      ability_mod: 2
+      untyped: -5
+      luck: 1
+  Spellcraft:
+    total: 15
+    typed:
+      ability_mod: 2
+      ranks: 12
+      luck: 1
+  Spot:
+    total: 25
+    typed:
+      ability_mod: 8
+      ranks: 16
+      luck: 1
+  Survival:
+    total: 16
+    typed:
+      ability_mod: 8
+      ranks: 5
+      synergy: 2
+      luck: 1
+  Swim:
+    total: -1
+    typed:
+      ability_mod: 8
+      untyped: -10
+      luck: 1
+  Tumble:
+    total: -2
+    typed:
+      ability_mod: 2
+      untyped: -5
+      luck: 1
+  Use Magic Device:
+    total: 2
+    typed:
+      ability_mod: 1
+      luck: 1
+  Use Rope:
+    total: 2
+    typed:
+      ability_mod: 2
 carrying_capacity:
   light: 306
   medium: 613
@@ -287,6 +442,9 @@ equipment:
     - Periapt of Wisdom +6
     - Belt of Giant Strength +6
     - Cloak of Resistance +5
+    - Stone of Good Luck (Luckstone)
+    - Ioun Stone (Dusty Rose Prism)
+    - Ioun Stone (Pink Rhomboid)
   weapons:
     - name: +1 Lance
     - name: Composite Longbow

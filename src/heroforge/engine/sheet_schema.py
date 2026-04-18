@@ -20,7 +20,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import (
     Ability,
     Alignment,
@@ -61,29 +60,26 @@ class SheetIdentity:
 
 @dataclass
 class AbilityEntry:
-    base: int
     score: int
     mod: int
-    level_bumps: int | None = None
-    inherent: int | None = None
-    typed: dict[BonusType, int] = field(default_factory=dict)
+    typed: dict[str, int] = field(default_factory=dict)
 
 
 # ---------------------------------------------------
 # Generic breakdown used for combat stats, saves,
-# attack rolls, skills — anything with a base value,
-# ability-mod contributions, a size modifier, typed
-# bonus stacking, and a final total.
+# attack rolls — ``total`` is the rolled/computed
+# result; ``typed`` lists every contribution that
+# sums to it (base progression, ability mods by
+# name, size, and every named bonus type). The
+# breakdown is the single source of truth for a
+# player deciding whether a new buff stacks.
 # ---------------------------------------------------
 
 
 @dataclass
 class Breakdown:
     total: int
-    base: int | None = None
-    ability: dict[Ability, int] = field(default_factory=dict)
-    size: int | None = None
-    typed: dict[BonusType, int] = field(default_factory=dict)
+    typed: dict[str, int] = field(default_factory=dict)
 
 
 # ---------------------------------------------------
@@ -122,12 +118,7 @@ class Iteratives:
 @dataclass
 class SkillEntry:
     total: int
-    ability_mod: int
-    ranks: int | None = None
-    synergy: int | None = None
-    armor_penalty: int | None = None
-    speed_mod: int | None = None
-    typed: dict[BonusType, int] = field(default_factory=dict)
+    typed: dict[str, int] = field(default_factory=dict)
 
 
 # ---------------------------------------------------

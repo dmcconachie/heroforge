@@ -8,95 +8,99 @@ identity:
   size: Medium
 abilities:
   str:
-    base: 16
     score: 16
     mod: 3
+    typed:
+      base: 16
   dex:
-    base: 14
     score: 14
     mod: 2
+    typed:
+      base: 14
   con:
-    base: 12
     score: 12
     mod: 1
+    typed:
+      base: 12
   int:
-    base: 12
     score: 12
     mod: 1
+    typed:
+      base: 12
   wis:
-    base: 14
     score: 14
     mod: 2
+    typed:
+      base: 14
   cha:
-    base: 8
     score: 8
     mod: -1
+    typed:
+      base: 8
 combat:
   ac:
     total: 12
-    base: 10
-    ability:
+    typed:
+      base: 10
       dex: 2
   touch_ac: 12
   flatfooted_ac: 10
   hp_max:
     total: 131
-    base: 110
-    ability:
-      con: 18
     typed:
+      base: 110
+      con: 18
       untyped: 3
   bab:
     total: 18
-    base: 18
+    typed:
+      base: 18
   initiative:
     total: 2
-    ability:
+    typed:
       dex: 2
   speed:
     total: 30
-    base: 30
+    typed:
+      base: 30
   sr: 0
   saves:
     fort:
       total: 16
-      base: 13
-      ability:
-        con: 1
       typed:
+        base: 13
+        con: 1
         untyped: 2
     ref:
       total: 13
-      base: 9
-      ability:
-        dex: 2
       typed:
+        base: 9
+        dex: 2
         untyped: 2
     will:
       total: 9
-      base: 5
-      ability:
-        wis: 2
       typed:
+        base: 5
+        wis: 2
         untyped: 2
   attack_melee:
     total: 21
-    base: 18
-    ability:
+    typed:
+      base: 18
       str: 3
   attack_ranged:
     total: 20
-    base: 18
-    ability:
+    typed:
+      base: 18
       dex: 2
   damage_melee:
     total: 3
-    ability:
+    typed:
       str: 3
   grapple:
     total: 21
-    base: 18
-    ability:
+    typed:
+      base: 18
       str: 3
 attack_iteratives:
   melee:
@@ -110,46 +114,193 @@ attack_iteratives:
     - 10
     - 5
 skills:
+  Appraise:
+    total: 1
+    typed:
+      ability_mod: 1
+  Balance:
+    total: 2
+    typed:
+      ability_mod: 2
+  Bluff:
+    total: -1
+    typed:
+      ability_mod: -1
   Climb:
     total: 24
-    ability_mod: 3
-    ranks: 21
+    typed:
+      ability_mod: 3
+      ranks: 21
+  Concentration:
+    total: 1
+    typed:
+      ability_mod: 1
+  Craft:
+    total: 1
+    typed:
+      ability_mod: 1
+  Decipher Script:
+    total: 1
+    typed:
+      ability_mod: 1
+  Diplomacy:
+    total: -1
+    typed:
+      ability_mod: -1
+  Disable Device:
+    total: 1
+    typed:
+      ability_mod: 1
+  Disguise:
+    total: -1
+    typed:
+      ability_mod: -1
+  Escape Artist:
+    total: 2
+    typed:
+      ability_mod: 2
+  Forgery:
+    total: 1
+    typed:
+      ability_mod: 1
+  Gather Information:
+    total: -1
+    typed:
+      ability_mod: -1
+  Handle Animal:
+    total: -1
+    typed:
+      ability_mod: -1
+  Heal:
+    total: 2
+    typed:
+      ability_mod: 2
   Hide:
     total: 20
-    ability_mod: 2
-    ranks: 18
+    typed:
+      ability_mod: 2
+      ranks: 18
+  Intimidate:
+    total: -1
+    typed:
+      ability_mod: -1
+  Jump:
+    total: 3
+    typed:
+      ability_mod: 3
+  Knowledge (Arcana):
+    total: 1
+    typed:
+      ability_mod: 1
+  Knowledge (Architecture and Engineering):
+    total: 1
+    typed:
+      ability_mod: 1
+  Knowledge (Dungeoneering):
+    total: 1
+    typed:
+      ability_mod: 1
   Knowledge (Geography):
     total: 22
-    ability_mod: 1
-    ranks: 21
+    typed:
+      ability_mod: 1
+      ranks: 21
+  Knowledge (History):
+    total: 1
+    typed:
+      ability_mod: 1
+  Knowledge (Local):
+    total: 1
+    typed:
+      ability_mod: 1
   Knowledge (Nature):
     total: 3
-    ability_mod: 1
-    synergy: 2
+    typed:
+      ability_mod: 1
+      synergy: 2
+  Knowledge (Nobility and Royalty):
+    total: 1
+    typed:
+      ability_mod: 1
+  Knowledge (Religion):
+    total: 1
+    typed:
+      ability_mod: 1
+  Knowledge (The Planes):
+    total: 1
+    typed:
+      ability_mod: 1
   Listen:
     total: 25
-    ability_mod: 2
-    ranks: 21
     typed:
+      ability_mod: 2
+      ranks: 21
       untyped: 2
   Move Silently:
     total: 16
-    ability_mod: 2
-    ranks: 14
+    typed:
+      ability_mod: 2
+      ranks: 14
+  Open Lock:
+    total: 2
+    typed:
+      ability_mod: 2
+  Perform:
+    total: -1
+    typed:
+      ability_mod: -1
+  Profession:
+    total: 2
+    typed:
+      ability_mod: 2
+  Ride:
+    total: 2
+    typed:
+      ability_mod: 2
+  Search:
+    total: 1
+    typed:
+      ability_mod: 1
+  Sense Motive:
+    total: 2
+    typed:
+      ability_mod: 2
+  Sleight of Hand:
+    total: 2
+    typed:
+      ability_mod: 2
+  Spellcraft:
+    total: 1
+    typed:
+      ability_mod: 1
   Spot:
     total: 25
-    ability_mod: 2
-    ranks: 21
     typed:
+      ability_mod: 2
+      ranks: 21
       untyped: 2
   Survival:
     total: 23
-    ability_mod: 2
-    ranks: 21
+    typed:
+      ability_mod: 2
+      ranks: 21
   Swim:
     total: 14
-    ability_mod: 3
-    ranks: 11
+    typed:
+      ability_mod: 3
+      ranks: 11
+  Tumble:
+    total: 2
+    typed:
+      ability_mod: 2
+  Use Magic Device:
+    total: -1
+    typed:
+      ability_mod: -1
+  Use Rope:
+    total: 2
+    typed:
+      ability_mod: 2
 carrying_capacity:
   light: 76
   medium: 153

@@ -8,79 +8,90 @@ identity:
   size: Medium
 abilities:
   str:
-    base: 14
     score: 14
     mod: 2
+    typed:
+      base: 14
   dex:
-    base: 10
     score: 10
     mod: 0
+    typed:
+      base: 10
   con:
-    base: 14
     score: 14
     mod: 2
+    typed:
+      base: 14
   int:
-    base: 10
     score: 10
     mod: 0
+    typed:
+      base: 10
   wis:
-    base: 16
     score: 16
     mod: 3
+    typed:
+      base: 16
   cha:
-    base: 12
     score: 12
     mod: 1
+    typed:
+      base: 12
 combat:
   ac:
     total: 10
-    base: 10
+    typed:
+      base: 10
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
     total: 153
-    base: 113
-    ability:
+    typed:
+      base: 113
       con: 40
   bab:
     total: 15
-    base: 15
+    typed:
+      base: 15
   initiative:
     total: 0
   speed:
     total: 30
-    base: 30
+    typed:
+      base: 30
   sr: 0
   saves:
     fort:
       total: 14
-      base: 12
-      ability:
+      typed:
+        base: 12
         con: 2
     ref:
       total: 6
-      base: 6
+      typed:
+        base: 6
     will:
       total: 15
-      base: 12
-      ability:
+      typed:
+        base: 12
         wis: 3
   attack_melee:
     total: 17
-    base: 15
-    ability:
+    typed:
+      base: 15
       str: 2
   attack_ranged:
     total: 15
-    base: 15
+    typed:
+      base: 15
   damage_melee:
     total: 2
-    ability:
+    typed:
       str: 2
   grapple:
     total: 17
-    base: 15
-    ability:
+    typed:
+      base: 15
       str: 2
 attack_iteratives:
   melee:
@@ -92,26 +103,89 @@ attack_iteratives:
     - 10
     - 5
 skills:
+  Bluff:
+    total: 1
+    typed:
+      ability_mod: 1
+  Climb:
+    total: 2
+    typed:
+      ability_mod: 2
   Concentration:
     total: 25
-    ability_mod: 2
-    ranks: 23
+    typed:
+      ability_mod: 2
+      ranks: 23
   Diplomacy:
     total: 10
-    ability_mod: 1
-    ranks: 9
+    typed:
+      ability_mod: 1
+      ranks: 9
+  Disguise:
+    total: 1
+    typed:
+      ability_mod: 1
+  Gather Information:
+    total: 1
+    typed:
+      ability_mod: 1
+  Handle Animal:
+    total: 1
+    typed:
+      ability_mod: 1
   Heal:
     total: 17
-    ability_mod: 3
-    ranks: 14
+    typed:
+      ability_mod: 3
+      ranks: 14
+  Intimidate:
+    total: 1
+    typed:
+      ability_mod: 1
+  Jump:
+    total: 2
+    typed:
+      ability_mod: 2
   Knowledge (Religion):
     total: 13
-    ability_mod: 0
-    ranks: 13
+    typed:
+      ranks: 13
+  Listen:
+    total: 3
+    typed:
+      ability_mod: 3
+  Perform:
+    total: 1
+    typed:
+      ability_mod: 1
+  Profession:
+    total: 3
+    typed:
+      ability_mod: 3
+  Sense Motive:
+    total: 3
+    typed:
+      ability_mod: 3
   Spellcraft:
     total: 10
-    ability_mod: 0
-    ranks: 10
+    typed:
+      ranks: 10
+  Spot:
+    total: 3
+    typed:
+      ability_mod: 3
+  Survival:
+    total: 3
+    typed:
+      ability_mod: 3
+  Swim:
+    total: 2
+    typed:
+      ability_mod: 2
+  Use Magic Device:
+    total: 1
+    typed:
+      ability_mod: 1
 carrying_capacity:
   light: 58
   medium: 116

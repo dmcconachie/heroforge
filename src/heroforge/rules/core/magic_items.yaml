@@ -748,6 +748,8 @@ Mantle of Spell Resistance:
     - target: sr
       bonus_type: untyped
       value: 21
+Druid's Vestment:
+  slot: torso
 Stone of Good Luck (Luckstone):
   slot: slotless
   note: >-
@@ -761,6 +763,135 @@ Stone of Good Luck (Luckstone):
       bonus_type: luck
       value: 1
     - target: will_save
+      bonus_type: luck
+      value: 1
+    - target: skill_apraise
+      bonus_type: luck
+      value: 1
+    - target: skill_balance
+      bonus_type: luck
+      value: 1
+    - target: skill_bluff
+      bonus_type: luck
+      value: 1
+    - target: skill_climb
+      bonus_type: luck
+      value: 1
+    - target: skill_concentration
+      bonus_type: luck
+      value: 1
+    - target: skill_craft
+      bonus_type: luck
+      value: 1
+    - target: skill_decipher_script
+      bonus_type: luck
+      value: 1
+    - target: skill_diplomacy
+      bonus_type: luck
+      value: 1
+    - target: skill_disable_device
+      bonus_type: luck
+      value: 1
+    - target: skill_disguise
+      bonus_type: luck
+      value: 1
+    - target: skill_espace_artist
+      bonus_type: luck
+      value: 1
+    - target: skill_forgery
+      bonus_type: luck
+      value: 1
+    - target: skill_gather_information
+      bonus_type: luck
+      value: 1
+    - target: skill_handle_animal
+      bonus_type: luck
+      value: 1
+    - target: skill_heal
+      bonus_type: luck
+      value: 1
+    - target: skill_hide
+      bonus_type: luck
+      value: 1
+    - target: skill_intimidate
+      bonus_type: luck
+      value: 1
+    - target: skill_jump
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_arcana
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_architecture_and_engineering
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_dungeoneering
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_history
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_local
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_nature
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_nobility_and_royalty
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_religion
+      bonus_type: luck
+      value: 1
+    - target: skill_knowledge_the_planes
+      bonus_type: luck
+      value: 1
+    - target: skill_listen
+      bonus_type: luck
+      value: 1
+    - target: skill_move_silently
+      bonus_type: luck
+      value: 1
+    - target: skill_open_lock
+      bonus_type: luck
+      value: 1
+    - target: skill_perform
+      bonus_type: luck
+      value: 1
+    - target: skill_profession
+      bonus_type: luck
+      value: 1
+    - target: skill_ride
+      bonus_type: luck
+      value: 1
+    - target: skill_search
+      bonus_type: luck
+      value: 1
+    - target: skill_sense_motive
+      bonus_type: luck
+      value: 1
+    - target: skill_sleight_of_hand
+      bonus_type: luck
+      value: 1
+    - target: skill_spellcraft
+      bonus_type: luck
+      value: 1
+    - target: skill_spot
+      bonus_type: luck
+      value: 1
+    - target: skill_survival
+      bonus_type: luck
+      value: 1
+    - target: skill_swim
+      bonus_type: luck
+      value: 1
+    - target: skill_tumble
+      bonus_type: luck
+      value: 1
+    - target: skill_use_magic_device
+      bonus_type: luck
+      value: 1
+    - target: skill_rope
       bonus_type: luck
       value: 1
 # ── Consumed items (not equipped) ──────────────

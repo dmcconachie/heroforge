@@ -70,11 +70,12 @@ if TYPE_CHECKING:
 def _pool_breakdown(
     pool: BonusPool | None,
     character: "Character",
-) -> dict[BonusType, int]:
+) -> dict[str, int]:
     """
     Break down a BonusPool into effective contributions
-    per bonus type. Applies stacking rules. Returns only
-    non-zero entries.
+    per bonus type (keyed by BonusType.value so it can
+    merge directly into a Breakdown.typed dict). Applies
+    stacking rules. Returns only non-zero entries.
     """
     if pool is None:
         return {}
@@ -91,18 +92,25 @@ def _pool_breakdown(
         else:
             typed_buckets[e.bonus_type].append(e.value)
 
-    result: dict[BonusType, int] = {}
+    result: dict[str, int] = {}
     for bt, val in stacking.items():
         if val != 0:
-            result[bt] = val
+            result[bt.value] = val
     for bt, vals in typed_buckets.items():
         best = max(vals)
         if best != 0:
-            result[bt] = best
+            result[bt.value] = best
     return result
 
 
-def _drop_zeros(d: dict[BonusType, int]) -> dict[BonusType, int]:
+def _merge(dst: dict[str, int], src: dict[str, int]) -> None:
+    """Add src into dst in place; later entries accumulate."""
+    for k, v in src.items():
+        if v:
+            dst[k] = dst.get(k, 0) + v
+
+
+def _drop_zeros(d: dict[str, int]) -> dict[str, int]:
     return {k: v for k, v in d.items() if v != 0}
 
 
@@ -174,18 +182,20 @@ def _identity(c: "Character", app_state: "AppState") -> SheetIdentity:
 def _abilities(c: "Character") -> dict[Ability, AbilityEntry]:
     result: dict[Ability, AbilityEntry] = {}
     for ab in Ability:
-        base = c._ability_scores.get(ab, 10)
-        pool = c.get_pool(f"{ab}_score")
-        typed = _pool_breakdown(pool, c)
+        typed: dict[str, int] = {
+            "base": c._ability_scores.get(ab, 10),
+        }
         bumps = c._level_bump_total(ab)
+        if bumps:
+            typed["level_bumps"] = bumps
         inherent = c._inherent_bonus_total(ab)
+        if inherent:
+            typed["inherent"] = inherent
+        _merge(typed, _pool_breakdown(c.get_pool(f"{ab}_score"), c))
         result[ab] = AbilityEntry(
-            base=base,
             score=c.get_ability_score(ab),
             mod=c.get_ability_modifier(ab),
-            level_bumps=bumps or None,
-            inherent=inherent or None,
-            typed=typed,
+            typed=_drop_zeros(typed),
         )
     return result
 
@@ -199,81 +209,84 @@ def _combat(c: "Character") -> CombatSection:
     str_mod = c.get_ability_modifier(Ability.STR)
 
     # AC
-    ac_typed = _pool_breakdown(c.get_pool("ac"), c)
+    ac_typed: dict[str, int] = {"base": 10}
     ac_dex = c.get("ac_dex_contribution")
+    if ac_dex:
+        ac_typed[Ability.DEX.value] = ac_dex
     ac_size = c._compute_size_mod_attack()
-    ac = Breakdown(
-        total=c.ac,
-        base=10,
-        ability={Ability.DEX: ac_dex} if ac_dex else {},
-        size=ac_size or None,
-        typed=ac_typed,
-    )
+    if ac_size:
+        ac_typed["size"] = ac_size
+    _merge(ac_typed, _pool_breakdown(c.get_pool("ac"), c))
+    ac = Breakdown(total=c.ac, typed=_drop_zeros(ac_typed))
 
     # HP
-    hp_typed = _pool_breakdown(c.get_pool("hp_bonus"), c)
+    hp_typed: dict[str, int] = {"base": c._compute_hp_from_rolls()}
     con_hp = c.get_ability_modifier(Ability.CON) * c.total_level
-    hp_max = Breakdown(
-        total=c.hp_max,
-        base=c._compute_hp_from_rolls(),
-        ability={Ability.CON: con_hp} if con_hp else {},
-        typed=hp_typed,
-    )
+    if con_hp:
+        hp_typed[Ability.CON.value] = con_hp
+    _merge(hp_typed, _pool_breakdown(c.get_pool("hp_bonus"), c))
+    hp_max = Breakdown(total=c.hp_max, typed=_drop_zeros(hp_typed))
 
     # BAB
-    bab = Breakdown(
-        total=c.bab,
-        base=c._compute_bab(),
-        typed=_pool_breakdown(c.get_pool("bab_misc"), c),
-    )
+    bab_typed: dict[str, int] = {"base": c._compute_bab()}
+    _merge(bab_typed, _pool_breakdown(c.get_pool("bab_misc"), c))
+    bab = Breakdown(total=c.bab, typed=_drop_zeros(bab_typed))
 
-    # Initiative
-    init_typed = _pool_breakdown(c.get_pool("initiative"), c)
+    # Initiative (no base progression — only ability + pool)
+    init_typed: dict[str, int] = {}
     dex_mod = c.get_ability_modifier(Ability.DEX)
+    if dex_mod:
+        init_typed[Ability.DEX.value] = dex_mod
+    _merge(init_typed, _pool_breakdown(c.get_pool("initiative"), c))
     initiative = Breakdown(
         total=c.get("initiative"),
-        ability={Ability.DEX: dex_mod} if dex_mod else {},
-        typed=init_typed,
+        typed=_drop_zeros(init_typed),
     )
 
     # Speed
-    speed = Breakdown(
-        total=c.get("speed"),
-        base=c._compute_base_speed(),
-        typed=_pool_breakdown(c.get_pool("speed"), c),
-    )
+    speed_typed: dict[str, int] = {"base": c._compute_base_speed()}
+    _merge(speed_typed, _pool_breakdown(c.get_pool("speed"), c))
+    speed = Breakdown(total=c.get("speed"), typed=_drop_zeros(speed_typed))
 
     # Saves
     saves: dict[Save, Breakdown] = {}
     for save in Save:
         ab = SAVE_ABILITY[save]
         ab_mod = c.get_ability_modifier(ab)
+        save_typed: dict[str, int] = {"base": c._compute_base_save(save.value)}
+        if ab_mod:
+            save_typed[ab.value] = ab_mod
+        _merge(
+            save_typed,
+            _pool_breakdown(c.get_pool(f"{save.value}_save"), c),
+        )
         saves[save] = Breakdown(
             total=getattr(c, save.value),
-            base=c._compute_base_save(save.value),
-            ability={ab: ab_mod} if ab_mod else {},
-            typed=_pool_breakdown(c.get_pool(f"{save.value}_save"), c),
+            typed=_drop_zeros(save_typed),
         )
 
     # Damage (melee STR bonus)
-    dmg_typed = _pool_breakdown(c.get_pool("damage_melee"), c)
-    dmg_all = _pool_breakdown(c.get_pool("damage_all"), c)
-    for bt, v in dmg_all.items():
-        dmg_typed[bt] = dmg_typed.get(bt, 0) + v
+    dmg_typed: dict[str, int] = {}
+    if str_mod:
+        dmg_typed[Ability.STR.value] = str_mod
+    _merge(dmg_typed, _pool_breakdown(c.get_pool("damage_melee"), c))
+    _merge(dmg_typed, _pool_breakdown(c.get_pool("damage_all"), c))
     damage_melee = Breakdown(
         total=c.get("damage_str_bonus"),
-        ability={Ability.STR: str_mod} if str_mod else {},
         typed=_drop_zeros(dmg_typed),
     )
 
     # Grapple
+    grapple_typed: dict[str, int] = {"base": c.bab}
+    if str_mod:
+        grapple_typed[Ability.STR.value] = str_mod
     grapple_size = c._compute_size_mod_grapple()
+    if grapple_size:
+        grapple_typed["size"] = grapple_size
+    _merge(grapple_typed, _pool_breakdown(c.get_pool("grapple"), c))
     grapple = Breakdown(
         total=c.get("grapple"),
-        base=c.bab,
-        ability={Ability.STR: str_mod} if str_mod else {},
-        size=grapple_size or None,
-        typed=_pool_breakdown(c.get_pool("grapple"), c),
+        typed=_drop_zeros(grapple_typed),
     )
 
     return CombatSection(
@@ -298,22 +311,16 @@ def _attack_breakdown(
     stat_key: str,
     ability: Ability,
 ) -> Breakdown:
+    typed: dict[str, int] = {"base": c.bab}
     ab_mod = c.get_ability_modifier(ability)
+    if ab_mod:
+        typed[ability.value] = ab_mod
     size = c._compute_size_mod_attack()
-
-    typed = _pool_breakdown(c.get_pool(stat_key), c)
-    all_bd = _pool_breakdown(c.get_pool("attack_all"), c)
-    for bt, v in all_bd.items():
-        typed[bt] = typed.get(bt, 0) + v
-    typed = _drop_zeros(typed)
-
-    return Breakdown(
-        total=c.get(stat_key),
-        base=c.bab,
-        ability={ability: ab_mod} if ab_mod else {},
-        size=size or None,
-        typed=typed,
-    )
+    if size:
+        typed["size"] = size
+    _merge(typed, _pool_breakdown(c.get_pool(stat_key), c))
+    _merge(typed, _pool_breakdown(c.get_pool("attack_all"), c))
+    return Breakdown(total=c.get(stat_key), typed=_drop_zeros(typed))
 
 
 # -----------------------------------------------------------
@@ -342,37 +349,37 @@ def _skills(
     result: dict[KnownSkill, SkillEntry] = {}
     for sd in app_state.skill_registry.all_skills():
         st = compute_skill_total(c, sd)
-        pool = c.get_pool(sd.key)
-        bd = _pool_breakdown(pool, c) if pool else {}
+        pool_bd = _pool_breakdown(c.get_pool(sd.key), c)
 
-        # Pool's UNTYPED bucket includes ranks — subtract so
-        # only genuine untyped bonuses remain.
-        if bd.get(BonusType.UNTYPED, 0):
-            remaining = bd[BonusType.UNTYPED] - st.ranks
+        # Pool's untyped bucket includes ranks — subtract so only
+        # genuine untyped bonuses from the pool remain.
+        untyped_key = BonusType.UNTYPED.value
+        if pool_bd.get(untyped_key, 0):
+            remaining = pool_bd[untyped_key] - st.ranks
             if remaining:
-                bd[BonusType.UNTYPED] = remaining
+                pool_bd[untyped_key] = remaining
             else:
-                del bd[BonusType.UNTYPED]
+                del pool_bd[untyped_key]
 
-        has_extra = bool(
-            st.ranks
-            or st.misc_bonus
-            or st.synergy_bonus
-            or st.armor_penalty
-            or st.speed_mod
-            or bd
-        )
-        if not has_extra:
+        typed: dict[str, int] = {}
+        if st.ability_mod:
+            typed["ability_mod"] = st.ability_mod
+        if st.ranks:
+            typed["ranks"] = st.ranks
+        if st.synergy_bonus:
+            typed["synergy"] = st.synergy_bonus
+        if st.armor_penalty:
+            typed["armor_penalty"] = st.armor_penalty
+        if st.speed_mod:
+            typed["speed_mod"] = st.speed_mod
+        _merge(typed, pool_bd)
+
+        if not typed:
             continue
 
         result[KnownSkill(sd.name)] = SkillEntry(
             total=st.total,
-            ability_mod=st.ability_mod,
-            ranks=st.ranks or None,
-            synergy=st.synergy_bonus or None,
-            armor_penalty=st.armor_penalty or None,
-            speed_mod=st.speed_mod or None,
-            typed=bd,
+            typed=_drop_zeros(typed),
         )
     return result
 
