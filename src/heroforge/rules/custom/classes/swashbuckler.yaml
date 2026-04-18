@@ -1,0 +1,91 @@
+Swashbuckler:
+  source_book: Complete Warrior
+  hit_die: 10
+  bab_progression: full
+  save_progressions:
+    fort: good
+    ref: poor
+    will: poor
+  skills_per_level: 4
+  class_skills:
+    - Balance
+    - Bluff
+    - Climb
+    - Craft
+    - Diplomacy
+    - Escape Artist
+    - Jump
+    - Profession
+    - Sense Motive
+    - Swim
+    - Tumble
+    - Use Rope
+  spellcasting: null
+  class_features:
+    - level: 1
+      feature: weapon_finesse
+      description: Gains Weapon Finesse as a bonus feat
+    - level: 2
+      feature: grace_1
+      description: >-
+        +1 competence bonus on Reflex saves (lost in medium/heavy
+        armor or load) (TODO: wire up effect)
+    - level: 3
+      feature: insightful_strike
+      description: >-
+        Add INT bonus to damage with light/finesse weapons
+        (TODO: wire up effect)
+    - level: 5
+      feature: dodge_bonus_1
+      description: >-
+        +1 dodge bonus to AC vs a designated melee opponent
+        (TODO: wire up effect)
+    - level: 7
+      feature: acrobatic_charge
+      description: May charge over difficult terrain or allies
+    - level: 8
+      feature: improved_flanking
+      description: >-
+        +4 attack bonus when flanking instead of +2
+        (TODO: wire up effect)
+    - level: 10
+      feature: dodge_bonus_2
+      description: >-
+        Dodge bonus vs designated opponent increases to +2
+        (TODO: wire up effect)
+    - level: 11
+      feature: grace_2
+      description: >-
+        Grace bonus on Reflex saves increases to +2
+        (TODO: wire up effect)
+    - level: 11
+      feature: lucky
+      description: Reroll one failed d20 roll 1/day
+    - level: 13
+      feature: acrobatic_skill_mastery
+      description: May take 10 on Jump and Tumble under stress
+    - level: 14
+      feature: weakening_critical
+      description: Critical hits deal 2 points of STR damage
+    - level: 15
+      feature: dodge_bonus_3
+      description: >-
+        Dodge bonus vs designated opponent increases to +3
+        (TODO: wire up effect)
+    - level: 17
+      feature: slippery_mind
+      description: >-
+        May retry a failed save vs enchantment 1 round later
+    - level: 19
+      feature: wounding_critical
+      description: Critical hits deal 2 points of CON damage
+    - level: 20
+      feature: dodge_bonus_4
+      description: >-
+        Dodge bonus vs designated opponent increases to +4
+        (TODO: wire up effect)
+    - level: 20
+      feature: grace_3
+      description: >-
+        Grace bonus on Reflex saves increases to +3
+        (TODO: wire up effect)

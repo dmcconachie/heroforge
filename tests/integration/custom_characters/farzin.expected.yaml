@@ -391,4 +391,6 @@ equipment:
     - Heraldic Crest of Courage
   weapons:
     - name: +1 Bronzewood Lance
+      properties:
+        - illusion bane
     - name: Composite Longbow

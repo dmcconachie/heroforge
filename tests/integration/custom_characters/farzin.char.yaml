@@ -231,5 +231,7 @@ equipment:
     - base: Lance
       material: Bronzewood
       enhancement: 1
+      properties:
+        - illusion bane
     - base: Composite Longbow
 notes: ''

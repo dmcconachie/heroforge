@@ -24,10 +24,7 @@ from typing import TYPE_CHECKING
 
 import yaml
 
-from heroforge.engine.character import (
-    Ability,
-    Alignment,
-)
+from heroforge.engine.character import Ability, Alignment
 from heroforge.rules.known import (
     KnownArmor,
     KnownBuff,
@@ -42,9 +39,7 @@ from heroforge.rules.known import (
 )
 
 if TYPE_CHECKING:
-    from heroforge.engine.character import (
-        Character,
-    )
+    from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
 
 

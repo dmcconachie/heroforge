@@ -1,0 +1,280 @@
+identity:
+  name: Drufus Occult Slayer
+  race: Human
+  class_str: >-
+    Rogue 13 / Swashbuckler 3 / Fighter 2 / Shadowdancer 1 / Occult Slayer
+    3
+  level: 22
+  alignment: chaotic_neutral
+  deity: ''
+  size: Medium
+abilities:
+  str:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+  dex:
+    score: 16
+    mod: 3
+    typed:
+      base: 16
+  con:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+  int:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+  wis:
+    score: 8
+    mod: -1
+    typed:
+      base: 8
+  cha:
+    score: 8
+    mod: -1
+    typed:
+      base: 8
+combat:
+  ac:
+    total: 13
+    typed:
+      base: 10
+      dex: 3
+  touch_ac: 13
+  flatfooted_ac: 13
+  hp_max:
+    total: 198
+    typed:
+      base: 154
+      con: 44
+  bab:
+    total: 17
+    typed:
+      base: 17
+  initiative:
+    total: 7
+    typed:
+      dex: 3
+      untyped: 4
+  speed:
+    total: 30
+    typed:
+      base: 30
+  sr: 0
+  saves:
+    fort:
+      total: 13
+      typed:
+        base: 11
+        con: 2
+    ref:
+      total: 15
+      typed:
+        base: 12
+        dex: 3
+    will:
+      total: 7
+      typed:
+        base: 8
+        wis: -1
+  attack_melee:
+    total: 20
+    typed:
+      base: 17
+      str: 2
+      untyped: 1
+  attack_ranged:
+    total: 21
+    typed:
+      base: 17
+      dex: 3
+      untyped: 1
+  damage_melee:
+    total: 2
+    typed:
+      str: 2
+  grapple:
+    total: 19
+    typed:
+      base: 17
+      str: 2
+attack_iteratives:
+  melee:
+    - 20
+    - 15
+    - 10
+    - 5
+  ranged:
+    - 21
+    - 16
+    - 11
+    - 6
+skills:
+  Balance:
+    total: 5
+    typed:
+      ability_mod: 3
+      synergy: 2
+  Disable Device:
+    total: 27
+    typed:
+      ability_mod: 2
+      ranks: 25
+  Forgery:
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Hide:
+    total: 28
+    typed:
+      ability_mod: 3
+      ranks: 25
+  Jump:
+    total: 4
+    typed:
+      ability_mod: 2
+      synergy: 2
+  Knowledge (Arcana):
+    total: 10
+    typed:
+      ability_mod: 2
+      ranks: 8
+  Knowledge (Local):
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Listen:
+    total: 24
+    typed:
+      ability_mod: -1
+      ranks: 25
+  Move Silently:
+    total: 28
+    typed:
+      ability_mod: 3
+      ranks: 25
+  Open Lock:
+    total: 17
+    typed:
+      ability_mod: 3
+      ranks: 14
+  Perform (Dance):
+    total: 4
+    typed:
+      ability_mod: -1
+      ranks: 5
+  Search:
+    total: 27
+    typed:
+      ability_mod: 2
+      ranks: 25
+  Sleight of Hand:
+    total: 28
+    typed:
+      ability_mod: 3
+      ranks: 25
+  Spellcraft:
+    total: 26
+    typed:
+      ability_mod: 2
+      ranks: 20
+      synergy: 4
+  Spot:
+    total: 24
+    typed:
+      ability_mod: -1
+      ranks: 25
+  Survival:
+    total: 1
+    typed:
+      ability_mod: -1
+      synergy: 2
+  Tumble:
+    total: 19
+    typed:
+      ability_mod: 3
+      ranks: 16
+  Use Magic Device:
+    total: 24
+    typed:
+      ability_mod: -1
+      ranks: 25
+carrying_capacity:
+  light: 58
+  medium: 116
+  heavy: 175
+feats:
+  - Combat Reflexes
+  - Mobility
+  - Improved Initiative
+  - Two-Weapon Fighting
+  - Leadership
+  - Improved Two-Weapon Fighting
+  - Staggering Strike
+  - Tactile Trapsmith
+  - Weapon Focus
+  - Daring Outlaw
+  - Expeditious Dodge
+class_features:
+  - 'sneak_attack_1d6: Sneak attack +1d6'
+  - 'trapfinding: Find and disable magical traps'
+  - 'evasion: No damage on successful Reflex save'
+  - 'sneak_attack_2d6: Sneak attack +2d6'
+  - 'trap_sense_1: +1 Reflex and AC vs traps'
+  - >-
+    uncanny_dodge: Retain DEX bonus to AC when flat-footed
+  - 'sneak_attack_3d6: Sneak attack +3d6'
+  - 'trap_sense_2: +2 Reflex and AC vs traps'
+  - 'sneak_attack_4d6: Sneak attack +4d6'
+  - 'improved_uncanny_dodge: Cannot be flanked'
+  - 'sneak_attack_5d6: Sneak attack +5d6'
+  - 'trap_sense_3: +3 Reflex and AC vs traps'
+  - >-
+    special_ability: Rogue special ability (crippling strike, etc.)
+  - 'sneak_attack_6d6: Sneak attack +6d6'
+  - 'trap_sense_4: +4 Reflex and AC vs traps'
+  - 'sneak_attack_7d6: Sneak attack +7d6'
+  - >-
+    weapon_finesse: Gains Weapon Finesse as a bonus feat
+  - >-
+    grace_1: +1 competence bonus on Reflex saves (lost in medium/heavy armor
+    or load) (TODO: wire up effect)
+  - >-
+    insightful_strike: Add INT bonus to damage with light/finesse weapons
+    (TODO: wire up effect)
+  - 'bonus_feat_1: Bonus fighter feat'
+  - 'bonus_feat_2: Bonus fighter feat'
+  - 'hide_in_plain_sight: Hide while observed'
+  - >-
+    magical_defense_1: +1 bonus on saves vs spells and spell-like abilities
+    (TODO: wire up effect)
+  - >-
+    weapon_bond: Bond with masterwork weapon; +1d6 damage vs spellcasters
+    and creatures with spell-like abilities (TODO: wire up effect)
+  - >-
+    vicious_strike: Readied attack to disrupt a spellcaster deals double damage
+    on hit (TODO: wire up effect)
+  - >-
+    mind_over_magic_1: Rebound a spell or spell-like ability onto originator
+    as spell turning, 1/day (CL = occult slayer level + 5) (TODO: wire up
+    effect)
+  - >-
+    auravision: See magical auras out to 60 ft as detect magic (number of
+    auras only) (TODO: wire up effect)
+  - >-
+    magical_defense_2: Magical defense bonus increases to +2 (TODO: wire up
+    effect)
+equipment:
+  weapons:
+    - name: Dagger
+    - name: Dagger
+    - name: Light Mace
+    - name: Light Mace
+    - name: Composite Longbow

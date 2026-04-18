@@ -511,9 +511,13 @@ sourcebook directories with override semantics.
 `rules/custom/` is a temporary holding area for a few
 splatbook items pulled in ad-hoc to support specific
 characters, before proper per-splatbook directories
-exist. Current contents: `classes/hospitaler.yaml`
-(Complete Warrior), `feats.yaml` (Shock Trooper from
-Complete Warrior, Lion's Pounce from Spell Compendium),
+exist. Current contents: `classes/hospitaler.yaml`,
+`classes/occult_slayer.yaml`, `classes/swashbuckler.yaml`
+(all Complete Warrior), `feats.yaml` (Shock Trooper from
+Complete Warrior, Lion's Pounce from Spell Compendium,
+Staggering Strike and Tactile Trapsmith from Complete
+Adventurer, Daring Outlaw from Complete Scoundrel,
+Expeditious Dodge from Races of the Wild),
 `materials.yaml` (Wildwood from Magic of Faerun,
 Bronzewood from Magic of Faerun), and `magic_items.yaml`.
 Each has a matching Python StrEnum file whose members

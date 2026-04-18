@@ -4,6 +4,36 @@
 #
 # Sorted alphabetically.
 
+Daring Outlaw:
+  kind: passive
+  source_book: Complete Scoundrel
+  note: >-
+    Rogue and swashbuckler levels stack for sneak attack
+    damage, grace (Reflex save bonus), and swashbuckler
+    dodge bonus to AC.
+    TODO: wire rogue/swashbuckler level stacking for sneak
+    attack and class features
+  prerequisites:
+    all_of:
+      - has_class_feature:
+          feature: sneak_attack_2d6
+      - has_class_feature:
+          feature: grace_1
+  effects: []
+Expeditious Dodge:
+  kind: passive
+  source_book: Races of the Wild
+  note: >-
+    When you move 40 ft or more in a single turn, gain a
+    +2 dodge bonus to AC until the beginning of your next
+    turn. Can substitute for Dodge as a prerequisite.
+    TODO: wire conditional +2 dodge AC bonus when moving
+    40+ ft.
+  prerequisites:
+    ability:
+      key: dex_score
+      min: 13
+  effects: []
 Lion's Pounce:
   kind: passive
   source_book: Spell Compendium
@@ -24,4 +54,33 @@ Shock Trooper:
           key: bab
           min: 6
           label: BAB
+  effects: []
+Staggering Strike:
+  kind: passive
+  source_book: Complete Adventurer
+  note: >-
+    Requires sneak attack +2d6. On a melee sneak attack
+    hit, target is treated as staggered for 1 round (Fort
+    save DC = damage dealt negates; ends early on DC 15
+    Heal check or any magical healing). Does not stack; no
+    effect vs. creatures immune to sneak attack.
+    TODO: wire staggered condition on sneak attack hit.
+  prerequisites:
+    all_of:
+      - stat:
+          key: bab
+          min: 6
+          label: BAB
+  effects: []
+Tactile Trapsmith:
+  kind: passive
+  source_book: Complete Adventurer
+  note: >-
+    Use DEX bonus instead of INT bonus on Search and
+    Disable Device checks; ignore darkness/blindness
+    penalties on those checks.
+    TODO: wire DEX-for-INT ability swap on Search/Disable
+    Device and darkness/blindness immunity for those
+    checks.
+  prerequisites: null
   effects: []

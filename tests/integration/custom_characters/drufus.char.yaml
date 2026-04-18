@@ -19,7 +19,7 @@ levels:
       Disable Device: 4
       Forgery: 1
       Hide: 4
-      Knowledge (local): 1
+      Knowledge (Local): 1
       Listen: 4
       Move Silently: 4
       Open Lock: 4
@@ -38,7 +38,7 @@ levels:
     class: Swashbuckler
     hp_roll: 8
     skill_ranks:
-      Knowledge (arcana): 2
+      Knowledge (Arcana): 2
       Spellcraft: 2
       Tumble: 3
   - level: 3
@@ -58,7 +58,7 @@ levels:
     class: Fighter
     hp_roll: 10
     skill_ranks:
-      Knowledge (arcana): 1
+      Knowledge (Arcana): 1
       Spellcraft: 2
     feats:
       - name: Two-Weapon Fighting
@@ -78,7 +78,7 @@ levels:
     class: Swashbuckler
     hp_roll: 8
     skill_ranks:
-      Knowledge (arcana): 3
+      Knowledge (Arcana): 3
       Tumble: 4
     feats:
       - name: Leadership
@@ -187,11 +187,10 @@ levels:
     class: Fighter
     hp_roll: 10
     skill_ranks:
-      Knowledge (arcana): 2
+      Knowledge (Arcana): 2
       Spellcraft: 2
     feats:
       - name: Weapon Focus
-        parameter_id: 12
         source: fighter_bonus
   - level: 17
     class: Rogue
@@ -253,14 +252,9 @@ equipment:
   shield: {}
   worn: []
   weapons:
-    - name: Dagger
-      base: Dagger
-    - name: Dagger
-      base: Dagger
-    - name: Mace, Light
-      base: Mace, Light
-    - name: Mace, Light
-      base: Mace, Light
-    - name: Longbow, Composite
-      base: Longbow, Composite
+    - base: Dagger
+    - base: Dagger
+    - base: Light Mace
+    - base: Light Mace
+    - base: Composite Longbow
 notes: ''

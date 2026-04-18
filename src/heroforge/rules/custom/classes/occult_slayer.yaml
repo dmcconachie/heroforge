@@ -1,0 +1,86 @@
+Occult Slayer:
+  source_book: Complete Warrior
+  hit_die: 8
+  max_level: 5
+  bab_progression: full
+  save_progressions:
+    fort: poor
+    ref: poor
+    will: good
+  skills_per_level: 2
+  class_skills:
+    - Bluff
+    - Craft
+    - Gather Information
+    - Knowledge (Arcana)
+    - Profession
+    - Sense Motive
+    - Spellcraft
+  entry_prerequisites:
+    all_of:
+      - stat:
+          key: bab
+          min: 5
+          label: BAB
+      - skill:
+          name: Knowledge (Arcana)
+          min: 4
+      - skill:
+          name: Spellcraft
+          min: 3
+      - feat: Improved Initiative
+      - feat: Weapon Focus
+  class_features:
+    - level: 1
+      feature: magical_defense_1
+      description: >-
+        +1 bonus on saves vs spells and spell-like abilities
+        (TODO: wire up effect)
+    - level: 1
+      feature: weapon_bond
+      description: >-
+        Bond with masterwork weapon; +1d6 damage vs spellcasters
+        and creatures with spell-like abilities
+        (TODO: wire up effect)
+    - level: 2
+      feature: vicious_strike
+      description: >-
+        Readied attack to disrupt a spellcaster deals double
+        damage on hit (TODO: wire up effect)
+    - level: 2
+      feature: mind_over_magic_1
+      description: >-
+        Rebound a spell or spell-like ability onto originator as
+        spell turning, 1/day (CL = occult slayer level + 5)
+        (TODO: wire up effect)
+    - level: 3
+      feature: auravision
+      description: >-
+        See magical auras out to 60 ft as detect magic (number of
+        auras only) (TODO: wire up effect)
+    - level: 3
+      feature: magical_defense_2
+      description: >-
+        Magical defense bonus increases to +2
+        (TODO: wire up effect)
+    - level: 4
+      feature: mind_over_magic_2
+      description: >-
+        Mind over magic usable 2/day
+        (TODO: wire up effect)
+    - level: 4
+      feature: nondetection_cloak
+      description: >-
+        Constant nondetection effect on self and gear
+        (CL = occult slayer level) (TODO: wire up effect)
+    - level: 5
+      feature: blank_thoughts
+      description: >-
+        Immune to mind-affecting effects; suppress or resume as a
+        free action (TODO: wire up effect)
+    - level: 5
+      feature: magical_defense_3
+      description: >-
+        Magical defense bonus increases to +3
+        (TODO: wire up effect)
+  is_prestige: true

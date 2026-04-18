@@ -10,3 +10,5 @@ from enum import StrEnum
 
 class KnownCustomClass(StrEnum):
     HOSPITALER = "Hospitaler"
+    OCCULT_SLAYER = "Occult Slayer"
+    SWASHBUCKLER = "Swashbuckler"
