@@ -183,12 +183,17 @@ equipment:
     properties:
       - animated
   worn:
-    - Boots of Speed
+    - Ring of Counterspells
+    - Ring of Tharizdun
+    - Third Eye (Clarity)
     - Periapt of Wisdom +6
+    - Cloak of Comfort +5
+    - Druid's Vestment
     - Belt of Giant Strength +6
-    - Cloak of Resistance +5
+    - Boots of Speed
     - Stone of Good Luck (Luckstone)
     - Ioun Stone (Dusty Rose Prism)
+    - Ioun Stone (Clear Spindle)
     - Ioun Stone (Pink Rhomboid)
   weapons:
     - base: Lance

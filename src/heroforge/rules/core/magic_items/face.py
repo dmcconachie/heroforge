@@ -1,0 +1,18 @@
+"""
+face.py
+SRD core magic items worn in the face slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemFace(StrEnum):
+    EYES_OF_CHARMING = "Eyes of Charming"
+    EYES_OF_DOOM = "Eyes of Doom"
+    EYES_OF_PETRIFICATION = "Eyes of Petrification"
+    EYES_OF_THE_EAGLE = "Eyes of the Eagle"
+    GOGGLES_OF_MINUTE_SEEING = "Goggles of Minute Seeing"
+    GOGGLES_OF_NIGHT = "Goggles of Night"
+    LENS_OF_DETECTION = "Lens of Detection"

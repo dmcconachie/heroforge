@@ -1,0 +1,28 @@
+"""
+head.py
+SRD core magic items worn in the head slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemHead(StrEnum):
+    CIRCLET_OF_BLASTING_MAJOR = "Circlet of Blasting (Major)"
+    CIRCLET_OF_BLASTING_MINOR = "Circlet of Blasting (Minor)"
+    CIRCLET_OF_PERSUASION = "Circlet of Persuasion"
+    HAT_OF_DISGUISE = "Hat of Disguise"
+    HEADBAND_OF_INTELLECT_PLUS_2 = "Headband of Intellect +2"
+    HEADBAND_OF_INTELLECT_PLUS_4 = "Headband of Intellect +4"
+    HEADBAND_OF_INTELLECT_PLUS_6 = "Headband of Intellect +6"
+    HELM_OF_BRILLIANCE = "Helm of Brilliance"
+    HELM_OF_COMPREHEND_LANGUAGES_AND_READ_MAGIC = (
+        "Helm of Comprehend Languages and Read Magic"
+    )
+    HELM_OF_TELEPATHY = "Helm of Telepathy"
+    HELM_OF_TELEPORTATION = "Helm of Teleportation"
+    HELM_OF_UNDERWATER_ACTION = "Helm of Underwater Action"
+    MASK_OF_THE_SKULL = "Mask of the Skull"
+    PHYLACTERY_OF_FAITHFULNESS = "Phylactery of Faithfulness"
+    PHYLACTERY_OF_UNDEAD_TURNING = "Phylactery of Undead Turning"

@@ -22,6 +22,7 @@ from heroforge.rules.core.domains import KnownCoreDomain
 from heroforge.rules.core.feats import KnownCoreFeat
 from heroforge.rules.core.magic_items import KnownCoreMagicItem
 from heroforge.rules.core.materials import KnownCoreMaterial
+from heroforge.rules.custom.magic_items import KnownCustomMagicItem
 from heroforge.rules.core.races import KnownCoreRace
 from heroforge.rules.core.skills import KnownCoreSkill
 from heroforge.rules.core.templates import KnownCoreTemplate
@@ -46,7 +47,9 @@ KnownBuff = _combine("KnownBuff", KnownCoreBuff)
 KnownTemplate = _combine("KnownTemplate", KnownCoreTemplate)
 KnownArmor = _combine("KnownArmor", KnownCoreArmor)
 KnownWeapon = _combine("KnownWeapon", KnownCoreWeapon)
-KnownMagicItem = _combine("KnownMagicItem", KnownCoreMagicItem)
+KnownMagicItem = _combine(
+    "KnownMagicItem", KnownCoreMagicItem, KnownCustomMagicItem
+)
 KnownMaterial = _combine("KnownMaterial", KnownCoreMaterial)
 KnownDomain = _combine("KnownDomain", KnownCoreDomain)
 KnownCondition = _combine("KnownCondition", KnownCoreCondition)

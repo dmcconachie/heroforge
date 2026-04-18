@@ -1,0 +1,19 @@
+"""
+hands.py
+SRD core magic items worn in the hands slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemHands(StrEnum):
+    GAUNTLET_OF_RUST = "Gauntlet of Rust"
+    GAUNTLETS_OF_OGRE_POWER = "Gauntlets of Ogre Power"
+    GLOVE_OF_STORING = "Glove of Storing"
+    GLOVES_OF_ARROW_SNARING = "Gloves of Arrow Snaring"
+    GLOVES_OF_DEXTERITY_PLUS_2 = "Gloves of Dexterity +2"
+    GLOVES_OF_DEXTERITY_PLUS_4 = "Gloves of Dexterity +4"
+    GLOVES_OF_DEXTERITY_PLUS_6 = "Gloves of Dexterity +6"
+    GLOVES_OF_SWIMMING_AND_CLIMBING = "Gloves of Swimming and Climbing"

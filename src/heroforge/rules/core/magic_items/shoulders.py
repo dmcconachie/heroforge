@@ -1,0 +1,30 @@
+"""
+shoulders.py
+SRD core magic items worn in the shoulders slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemShoulders(StrEnum):
+    CAPE_OF_THE_MOUNTEBANK = "Cape of the Mountebank"
+    CLOAK_OF_ARACHNIDA = "Cloak of Arachnida"
+    CLOAK_OF_CHARISMA_PLUS_2 = "Cloak of Charisma +2"
+    CLOAK_OF_CHARISMA_PLUS_4 = "Cloak of Charisma +4"
+    CLOAK_OF_CHARISMA_PLUS_6 = "Cloak of Charisma +6"
+    CLOAK_OF_DISPLACEMENT_MAJOR = "Cloak of Displacement (Major)"
+    CLOAK_OF_DISPLACEMENT_MINOR = "Cloak of Displacement (Minor)"
+    CLOAK_OF_ELVENKIND = "Cloak of Elvenkind"
+    CLOAK_OF_ETHEREALNESS = "Cloak of Etherealness"
+    CLOAK_OF_RESISTANCE_PLUS_1 = "Cloak of Resistance +1"
+    CLOAK_OF_RESISTANCE_PLUS_2 = "Cloak of Resistance +2"
+    CLOAK_OF_RESISTANCE_PLUS_3 = "Cloak of Resistance +3"
+    CLOAK_OF_RESISTANCE_PLUS_4 = "Cloak of Resistance +4"
+    CLOAK_OF_RESISTANCE_PLUS_5 = "Cloak of Resistance +5"
+    CLOAK_OF_THE_BAT = "Cloak of the Bat"
+    CLOAK_OF_THE_MANTA_RAY = "Cloak of the Manta Ray"
+    MANTLE_OF_FAITH = "Mantle of Faith"
+    MANTLE_OF_SPELL_RESISTANCE = "Mantle of Spell Resistance"
+    SHROUDS_OF_DISINTEGRATION = "Shrouds of Disintegration"

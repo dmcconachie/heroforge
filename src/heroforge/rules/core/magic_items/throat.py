@@ -1,0 +1,51 @@
+"""
+throat.py
+SRD core magic items worn in the throat slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemThroat(StrEnum):
+    AMULET_OF_HEALTH_PLUS_2 = "Amulet of Health +2"
+    AMULET_OF_HEALTH_PLUS_4 = "Amulet of Health +4"
+    AMULET_OF_HEALTH_PLUS_6 = "Amulet of Health +6"
+    AMULET_OF_MIGHTY_FISTS_PLUS_1 = "Amulet of Mighty Fists +1"
+    AMULET_OF_MIGHTY_FISTS_PLUS_2 = "Amulet of Mighty Fists +2"
+    AMULET_OF_MIGHTY_FISTS_PLUS_3 = "Amulet of Mighty Fists +3"
+    AMULET_OF_MIGHTY_FISTS_PLUS_4 = "Amulet of Mighty Fists +4"
+    AMULET_OF_MIGHTY_FISTS_PLUS_5 = "Amulet of Mighty Fists +5"
+    AMULET_OF_NATURAL_ARMOR_PLUS_1 = "Amulet of Natural Armor +1"
+    AMULET_OF_NATURAL_ARMOR_PLUS_2 = "Amulet of Natural Armor +2"
+    AMULET_OF_NATURAL_ARMOR_PLUS_3 = "Amulet of Natural Armor +3"
+    AMULET_OF_NATURAL_ARMOR_PLUS_4 = "Amulet of Natural Armor +4"
+    AMULET_OF_NATURAL_ARMOR_PLUS_5 = "Amulet of Natural Armor +5"
+    AMULET_OF_PROOF_AGAINST_DETECTION_AND_LOCATION = (
+        "Amulet of Proof against Detection and Location"
+    )
+    AMULET_OF_THE_PLANES = "Amulet of the Planes"
+    BROOCH_OF_SHIELDING = "Brooch of Shielding"
+    GOLEMBANE_SCARAB = "Golembane Scarab"
+    HAND_OF_GLORY = "Hand of Glory"
+    HAND_OF_THE_MAGE = "Hand of the Mage"
+    MEDALLION_OF_THOUGHTS = "Medallion of Thoughts"
+    NECKLACE_OF_ADAPTATION = "Necklace of Adaptation"
+    NECKLACE_OF_FIREBALLS_TYPE_I = "Necklace of Fireballs (Type I)"
+    NECKLACE_OF_FIREBALLS_TYPE_II = "Necklace of Fireballs (Type II)"
+    NECKLACE_OF_FIREBALLS_TYPE_III = "Necklace of Fireballs (Type III)"
+    NECKLACE_OF_FIREBALLS_TYPE_IV = "Necklace of Fireballs (Type IV)"
+    NECKLACE_OF_FIREBALLS_TYPE_V = "Necklace of Fireballs (Type V)"
+    NECKLACE_OF_FIREBALLS_TYPE_VI = "Necklace of Fireballs (Type VI)"
+    NECKLACE_OF_FIREBALLS_TYPE_VII = "Necklace of Fireballs (Type VII)"
+    PERIAPT_OF_HEALTH = "Periapt of Health"
+    PERIAPT_OF_PROOF_AGAINST_POISON = "Periapt of Proof against Poison"
+    PERIAPT_OF_WISDOM_PLUS_2 = "Periapt of Wisdom +2"
+    PERIAPT_OF_WISDOM_PLUS_4 = "Periapt of Wisdom +4"
+    PERIAPT_OF_WISDOM_PLUS_6 = "Periapt of Wisdom +6"
+    PERIAPT_OF_WOUND_CLOSURE = "Periapt of Wound Closure"
+    SCARAB_OF_PROTECTION = "Scarab of Protection"
+    STRAND_OF_PRAYER_BEADS = "Strand of Prayer Beads"
+    STRAND_OF_PRAYER_BEADS_GREATER = "Strand of Prayer Beads (Greater)"
+    STRAND_OF_PRAYER_BEADS_LESSER = "Strand of Prayer Beads (Lesser)"

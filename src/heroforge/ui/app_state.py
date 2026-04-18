@@ -131,9 +131,12 @@ class AppState:
         ):
             _mi_loader.load(
                 self.magic_item_registry,
-                self.buff_registry,
                 f"core/magic_items/{_mi_file}.yaml",
             )
+        _mi_loader.load(
+            self.magic_item_registry,
+            "custom/magic_items.yaml",
+        )
         FeatsLoader(rd).load(
             self.feat_registry,
             "core/feats.yaml",

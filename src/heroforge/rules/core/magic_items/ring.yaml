@@ -6,6 +6,16 @@
 #
 # Sorted alphabetically.
 
+Ring of Animal Friendship:
+  slot: ring
+  note: >-
+    Charm animal at will on a single animal gazed
+    upon (DC 13 Will negates)
+Ring of Blinking:
+  slot: ring
+  note: >-
+    Blink spell effect (as spell, CL 7th) at will;
+    20% miss chance on attacks
 Ring of Chameleon Power:
   slot: ring
   note: +10 competence on Hide checks
@@ -27,6 +37,66 @@ Ring of Climbing, Improved:
     - target: skill_climb
       bonus_type: competence
       value: 10
+Ring of Counterspells:
+  slot: ring
+  note: >-
+    Absorbs one stored spell cast at wearer; ring
+    counters it and is then discharged until
+    reloaded (free, but requires a caster)
+Ring of Djinni Calling:
+  slot: ring
+  note: >-
+    1/day summons djinni who serves for 1 hour
+    (obeys all commands short of suicide)
+Ring of Elemental Command (Air):
+  slot: ring
+  note: >-
+    Air elementals can't attack wearer; grants
+    feather fall, resist elements, gaseous form,
+    wind wall, air walk (charged)
+Ring of Elemental Command (Earth):
+  slot: ring
+  note: >-
+    Earth elementals can't attack wearer; grants
+    meld into stone, soften earth, stone shape,
+    stoneskin, passwall (charged)
+Ring of Elemental Command (Fire):
+  slot: ring
+  note: >-
+    Fire elementals can't attack wearer; grants
+    burning hands, resist elements (fire),
+    pyrotechnics, wall of fire, flame strike
+Ring of Elemental Command (Water):
+  slot: ring
+  note: >-
+    Water elementals can't attack wearer; grants
+    water breathing, water walk, ice storm, wall
+    of ice, control water (charged)
+Ring of Energy Resistance, Greater:
+  slot: ring
+  note: >-
+    Resist 30 against one specified energy type
+    (acid, cold, electricity, fire, or sonic)
+Ring of Energy Resistance, Major:
+  slot: ring
+  note: >-
+    Resist 20 against one specified energy type
+    (acid, cold, electricity, fire, or sonic)
+Ring of Energy Resistance, Minor:
+  slot: ring
+  note: >-
+    Resist 10 against one specified energy type
+    (acid, cold, electricity, fire, or sonic)
+Ring of Evasion:
+  slot: ring
+  note: >-
+    Grants evasion ability (as rogue); successful
+    Ref save against an area attack = no damage
+Ring of Feather Falling:
+  slot: ring
+  note: >-
+    Feather fall (as the spell) when falling more
+    than 5 feet (CL 1st)
 Ring of Force Shield:
   slot: ring
   note: +2 shield bonus to AC (no penalties)
@@ -34,6 +104,21 @@ Ring of Force Shield:
     - target: ac
       bonus_type: shield
       value: 2
+Ring of Freedom of Movement:
+  slot: ring
+  note: >-
+    Continuous freedom of movement (as the spell);
+    immune to paralysis, grapple, web, etc.
+Ring of Friend Shield (Pair):
+  slot: ring
+  note: >-
+    Linked pair; either wearer can transfer half
+    of damage taken to the other (shield other)
+Ring of Invisibility:
+  slot: ring
+  note: >-
+    Invisibility on command (as the spell, CL 3rd);
+    unlimited uses
 Ring of Jumping:
   slot: ring
   note: +5 competence on Jump checks
@@ -48,6 +133,16 @@ Ring of Jumping, Improved:
     - target: skill_jump
       bonus_type: competence
       value: 10
+Ring of Meld into Stone:
+  slot: ring
+  note: >-
+    Meld into stone (as the spell, CL 5th) at
+    will; blends wearer and gear into stone
+Ring of Mind Shielding:
+  slot: ring
+  note: >-
+    Continuously immune to detect thoughts,
+    discern lies, and alignment detection
 Ring of Protection +1:
   slot: ring
   note: +1 deflection bonus to AC
@@ -83,6 +178,41 @@ Ring of Protection +5:
     - target: ac
       bonus_type: deflection
       value: 5
+Ring of Regeneration:
+  slot: ring
+  note: >-
+    Regenerate 1 hp per level per hour (not per
+    day); does not aid restoration of raised dead
+Ring of Shooting Stars:
+  slot: ring
+  note: >-
+    At night/outdoors: ball lightning, shooting
+    stars; underground: spark shower, faerie fire
+Ring of Spell Storing:
+  slot: ring
+  note: >-
+    Holds up to 5 levels of spells cast into it;
+    wearer may release them at will
+Ring of Spell Storing, Major:
+  slot: ring
+  note: >-
+    Holds up to 10 levels of spells cast into it;
+    wearer may release them at will
+Ring of Spell Storing, Minor:
+  slot: ring
+  note: >-
+    Holds up to 3 levels of spells cast into it;
+    wearer may release them at will
+Ring of Spell Turning:
+  slot: ring
+  note: >-
+    Reflects 1d4+6 levels of targeted spells back
+    at caster (as spell turning); 3 charges/day
+Ring of Sustenance:
+  slot: ring
+  note: >-
+    Provides nourishment and reduces sleep need
+    to 2 hours/day (after 1 week attunement)
 Ring of Swimming:
   slot: ring
   note: +5 competence on Swim checks
@@ -97,3 +227,42 @@ Ring of Swimming, Improved:
     - target: skill_swim
       bonus_type: competence
       value: 10
+Ring of Telekinesis:
+  slot: ring
+  note: >-
+    Telekinesis (as the spell, CL 9th) at will;
+    manipulates up to 25 lb at 25 ft range
+Ring of the Ram:
+  slot: ring
+  note: >-
+    Ram-force attack 1d6/2d6/3d6 damage (1/2/3
+    charges); also opens doors as STR 25/27/29
+Ring of Three Wishes:
+  slot: ring
+  note: >-
+    Holds three charges; each grants one wish
+    (as the spell, CL 20th) before depleted
+Ring of Water Walking:
+  slot: ring
+  note: >-
+    Water walk (as the spell, CL 5th) continuously
+    while worn
+Ring of Wizardry (I):
+  slot: ring
+  note: >-
+    Doubles arcane spell slots at 1st level
+    (bonus slots equal to base slots)
+Ring of Wizardry (II):
+  slot: ring
+  note: Doubles arcane spell slots at 2nd level
+Ring of Wizardry (III):
+  slot: ring
+  note: Doubles arcane spell slots at 3rd level
+Ring of Wizardry (IV):
+  slot: ring
+  note: Doubles arcane spell slots at 4th level
+Ring of X-Ray Vision:
+  slot: ring
+  note: >-
+    See through up to 1 ft stone / 1 in metal /
+    3 ft wood or dirt; causes 1 CON damage/min

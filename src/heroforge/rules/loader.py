@@ -502,22 +502,17 @@ class ConditionLoader:
 
 class MagicItemLoader:
     """
-    Reads magic_items.yaml and populates both a
-    MagicItemRegistry and a BuffRegistry.
+    Reads a magic_items YAML file and populates a
+    MagicItemRegistry.
 
-    Each item is stored as a MagicItemDefinition
-    (the canonical domain object) and also converted
-    into a BuffDefinition so the buff-toggle UI keeps
-    working.
+    Magic items are NOT buffs — they use the worn/
+    equipped item flow (see engine.equipment.
+    equip_item) rather than the buff toggle system.
 
     Usage:
         item_reg = MagicItemRegistry()
-        buff_reg = BuffRegistry()
         loader = MagicItemLoader(rules_dir)
-        loader.load(
-            item_reg, buff_reg,
-            "core/magic_items.yaml",
-        )
+        loader.load(item_reg, "core/magic_items/head.yaml")
     """
 
     def __init__(self, rules_dir: Path | str) -> None:
@@ -526,7 +521,6 @@ class MagicItemLoader:
     def load(
         self,
         registry: "MagicItemRegistry",
-        buff_registry: "BuffRegistry",
         relative_path: str,
     ) -> list[str]:
         """
@@ -534,11 +528,6 @@ class MagicItemLoader:
 
         Returns list of item names registered.
         """
-        from heroforge.engine.effects import (
-            BuffCategory,
-            BuffDefinition,
-            build_buff_from_effects,
-        )
         from heroforge.engine.magic_items import (
             MagicItemDefinition,
         )
@@ -573,36 +562,6 @@ class MagicItemLoader:
                 ) from e
 
             registry.register(defn)
-
-            # Also register as a buff so the toggle
-            # UI keeps working.
-            buff = build_buff_from_effects(
-                name=defn.name,
-                category=BuffCategory.ITEM,
-                effects_raw=defn.effects,
-                source_book=defn.source_book,
-                note=defn.note,
-            )
-            if buff is not None:
-                try:
-                    buff_registry.register(buff)
-                except ValueError as e:
-                    raise LoaderError(str(e)) from e
-            elif defn.note:
-                # Note-only item (no stat effects);
-                # still needs a buff entry for the
-                # toggle UI.
-                note_buff = BuffDefinition(
-                    name=defn.name,
-                    category=BuffCategory.ITEM,
-                    source_book=defn.source_book,
-                    note=defn.note,
-                )
-                try:
-                    buff_registry.register(note_buff)
-                except ValueError as e:
-                    raise LoaderError(str(e)) from e
-
             registered.append(name)
 
         return registered

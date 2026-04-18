@@ -1,0 +1,21 @@
+"""
+feet.py
+SRD core magic items worn in the feet slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemFeet(StrEnum):
+    BOOTS_OF_ELVENKIND = "Boots of Elvenkind"
+    BOOTS_OF_LEVITATION = "Boots of Levitation"
+    BOOTS_OF_SPEED = "Boots of Speed"
+    BOOTS_OF_STRIDING_AND_SPRINGING = "Boots of Striding and Springing"
+    BOOTS_OF_TELEPORTATION = "Boots of Teleportation"
+    BOOTS_OF_THE_WINTERLANDS = "Boots of the Winterlands"
+    HORSESHOES_OF_A_ZEPHYR = "Horseshoes of a Zephyr"
+    HORSESHOES_OF_SPEED = "Horseshoes of Speed"
+    SLIPPERS_OF_SPIDER_CLIMBING = "Slippers of Spider Climbing"
+    WINGED_BOOTS = "Winged Boots"

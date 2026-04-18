@@ -1,0 +1,32 @@
+"""
+slotless.py
+SRD core magic items worn in the slotless slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemSlotless(StrEnum):
+    IOUN_STONE_CLEAR_SPINDLE = "Ioun Stone (Clear Spindle)"
+    IOUN_STONE_DARK_BLUE_RHOMBOID = "Ioun Stone (Dark Blue Rhomboid)"
+    IOUN_STONE_DEEP_RED_SPHERE = "Ioun Stone (Deep Red Sphere)"
+    IOUN_STONE_DUSTY_ROSE_PRISM = "Ioun Stone (Dusty Rose Prism)"
+    IOUN_STONE_INCANDESCENT_BLUE_SPHERE = (
+        "Ioun Stone (Incandescent Blue Sphere)"
+    )
+    IOUN_STONE_IRIDESCENT_SPINDLE = "Ioun Stone (Iridescent Spindle)"
+    IOUN_STONE_LAVENDER_AND_GREEN_ELLIPSOID = (
+        "Ioun Stone (Lavender and Green Ellipsoid)"
+    )
+    IOUN_STONE_ORANGE = "Ioun Stone (Orange)"
+    IOUN_STONE_PALE_BLUE_RHOMBOID = "Ioun Stone (Pale Blue Rhomboid)"
+    IOUN_STONE_PALE_GREEN_PRISM = "Ioun Stone (Pale Green Prism)"
+    IOUN_STONE_PALE_LAVENDER_ELLIPSOID = "Ioun Stone (Pale Lavender Ellipsoid)"
+    IOUN_STONE_PEARLY_WHITE_SPINDLE = "Ioun Stone (Pearly White Spindle)"
+    IOUN_STONE_PINK_AND_GREEN_SPHERE = "Ioun Stone (Pink and Green Sphere)"
+    IOUN_STONE_PINK_RHOMBOID = "Ioun Stone (Pink Rhomboid)"
+    IOUN_STONE_SCARLET_AND_BLUE_SPHERE = "Ioun Stone (Scarlet and Blue Sphere)"
+    IOUN_STONE_VIBRANT_PURPLE_PRISM = "Ioun Stone (Vibrant Purple Prism)"
+    STONE_OF_GOOD_LUCK_LUCKSTONE = "Stone of Good Luck (Luckstone)"

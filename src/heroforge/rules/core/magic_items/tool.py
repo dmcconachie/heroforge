@@ -1,0 +1,140 @@
+"""
+tool.py
+SRD core magic items worn in the tool slot.
+"""
+
+from __future__ import annotations
+
+from enum import StrEnum
+
+
+class KnownCoreMagicItemTool(StrEnum):
+    APPARATUS_OF_THE_CRAB = "Apparatus of the Crab"
+    BAG_OF_HOLDING_TYPE_I = "Bag of Holding (Type I)"
+    BAG_OF_HOLDING_TYPE_II = "Bag of Holding (Type II)"
+    BAG_OF_HOLDING_TYPE_III = "Bag of Holding (Type III)"
+    BAG_OF_HOLDING_TYPE_IV = "Bag of Holding (Type IV)"
+    BAG_OF_TRICKS_GRAY = "Bag of Tricks (Gray)"
+    BAG_OF_TRICKS_RUST = "Bag of Tricks (Rust)"
+    BAG_OF_TRICKS_TAN = "Bag of Tricks (Tan)"
+    BEAD_OF_FORCE = "Bead of Force"
+    BLESSED_BOOK = "Blessed Book"
+    BOTTLE_OF_AIR = "Bottle of Air"
+    BOWL_OF_COMMANDING_WATER_ELEMENTALS = "Bowl of Commanding Water Elementals"
+    BRAZIER_OF_COMMANDING_FIRE_ELEMENTALS = (
+        "Brazier of Commanding Fire Elementals"
+    )
+    BROOM_OF_FLYING = "Broom of Flying"
+    CARPET_OF_FLYING_10X10 = "Carpet of Flying (10x10)"
+    CARPET_OF_FLYING_5X10 = "Carpet of Flying (5x10)"
+    CARPET_OF_FLYING_5X5 = "Carpet of Flying (5x5)"
+    CARPET_OF_FLYING_6X9 = "Carpet of Flying (6x9)"
+    CENSER_OF_CONTROLLING_AIR_ELEMENTALS = (
+        "Censer of Controlling Air Elementals"
+    )
+    CHAOS_DIAMOND = "Chaos Diamond"
+    CHIME_OF_INTERRUPTION = "Chime of Interruption"
+    CHIME_OF_OPENING = "Chime of Opening"
+    CRYSTAL_BALL = "Crystal Ball"
+    CRYSTAL_BALL_DETECT_THOUGHTS = "Crystal Ball (Detect Thoughts)"
+    CRYSTAL_BALL_SEE_INVISIBILITY = "Crystal Ball (See Invisibility)"
+    CRYSTAL_BALL_TELEPATHY = "Crystal Ball (Telepathy)"
+    CRYSTAL_BALL_TRUE_SEEING = "Crystal Ball (True Seeing)"
+    CUBE_OF_FORCE = "Cube of Force"
+    CUBE_OF_FROST_RESISTANCE = "Cube of Frost Resistance"
+    CUBIC_GATE = "Cubic Gate"
+    DARKSKULL = "Darkskull"
+    DECANTER_OF_ENDLESS_WATER = "Decanter of Endless Water"
+    DECK_OF_ILLUSIONS = "Deck of Illusions"
+    DIMENSIONAL_SHACKLES = "Dimensional Shackles"
+    DRUMS_OF_PANIC = "Drums of Panic"
+    EFFICIENT_QUIVER = "Efficient Quiver"
+    EFREETI_BOTTLE = "Efreeti Bottle"
+    ELEMENTAL_GEM = "Elemental Gem"
+    EVERSMOKING_BOTTLE = "Eversmoking Bottle"
+    FIGURINE_OF_WONDROUS_POWER_BRONZE_GRIFFON = (
+        "Figurine of Wondrous Power (Bronze Griffon)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_EBONY_FLY = (
+        "Figurine of Wondrous Power (Ebony Fly)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_GOLDEN_LIONS = (
+        "Figurine of Wondrous Power (Golden Lions)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_IVORY_GOATS = (
+        "Figurine of Wondrous Power (Ivory Goats)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_MARBLE_ELEPHANT = (
+        "Figurine of Wondrous Power (Marble Elephant)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_OBSIDIAN_STEED = (
+        "Figurine of Wondrous Power (Obsidian Steed)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_ONYX_DOG = (
+        "Figurine of Wondrous Power (Onyx Dog)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_SERPENTINE_OWL = (
+        "Figurine of Wondrous Power (Serpentine Owl)"
+    )
+    FIGURINE_OF_WONDROUS_POWER_SILVER_RAVEN = (
+        "Figurine of Wondrous Power (Silver Raven)"
+    )
+    FOLDING_BOAT = "Folding Boat"
+    GEM_OF_BRIGHTNESS = "Gem of Brightness"
+    GEM_OF_SEEING = "Gem of Seeing"
+    GOLEM_MANUAL_CLAY = "Golem Manual (Clay)"
+    GOLEM_MANUAL_FLESH = "Golem Manual (Flesh)"
+    GOLEM_MANUAL_GREATER_STONE = "Golem Manual (Greater Stone)"
+    GOLEM_MANUAL_IRON = "Golem Manual (Iron)"
+    GOLEM_MANUAL_STONE = "Golem Manual (Stone)"
+    HANDY_HAVERSACK = "Handy Haversack"
+    HARP_OF_CHARMING = "Harp of Charming"
+    HORN_OF_BLASTING = "Horn of Blasting"
+    HORN_OF_BLASTING_GREATER = "Horn of Blasting (Greater)"
+    HORN_OF_FOG = "Horn of Fog"
+    HORN_OF_GOODNESS_EVIL = "Horn of Goodness/Evil"
+    HORN_OF_THE_TRITONS = "Horn of the Tritons"
+    HORN_OF_VALHALLA = "Horn of Valhalla"
+    INCENSE_OF_MEDITATION = "Incense of Meditation"
+    INSTANT_FORTRESS = "Instant Fortress"
+    IRON_BANDS_OF_BINDING = "Iron Bands of Binding"
+    IRON_FLASK = "Iron Flask"
+    LANTERN_OF_REVEALING = "Lantern of Revealing"
+    LYRE_OF_BUILDING = "Lyre of Building"
+    MARVELOUS_PIGMENTS = "Marvelous Pigments"
+    MATTOCK_OF_THE_TITANS = "Mattock of the Titans"
+    MAUL_OF_THE_TITANS = "Maul of the Titans"
+    MIRROR_OF_LIFE_TRAPPING = "Mirror of Life Trapping"
+    MIRROR_OF_MENTAL_PROWESS = "Mirror of Mental Prowess"
+    MIRROR_OF_OPPOSITION = "Mirror of Opposition"
+    ORB_OF_STORMS = "Orb of Storms"
+    PEARL_OF_POWER_1ST_LEVEL = "Pearl of Power (1st Level)"
+    PEARL_OF_POWER_2ND_LEVEL = "Pearl of Power (2nd Level)"
+    PEARL_OF_POWER_3RD_LEVEL = "Pearl of Power (3rd Level)"
+    PEARL_OF_POWER_4TH_LEVEL = "Pearl of Power (4th Level)"
+    PEARL_OF_POWER_5TH_LEVEL = "Pearl of Power (5th Level)"
+    PEARL_OF_POWER_6TH_LEVEL = "Pearl of Power (6th Level)"
+    PEARL_OF_POWER_7TH_LEVEL = "Pearl of Power (7th Level)"
+    PEARL_OF_POWER_8TH_LEVEL = "Pearl of Power (8th Level)"
+    PEARL_OF_POWER_9TH_LEVEL = "Pearl of Power (9th Level)"
+    PEARL_OF_POWER_TWO_SPELLS = "Pearl of Power (Two Spells)"
+    PEARL_OF_THE_SIRINES = "Pearl of the Sirines"
+    PIPES_OF_HAUNTING = "Pipes of Haunting"
+    PIPES_OF_PAIN = "Pipes of Pain"
+    PIPES_OF_SOUNDING = "Pipes of Sounding"
+    PIPES_OF_THE_SEWERS = "Pipes of the Sewers"
+    PORTABLE_HOLE = "Portable Hole"
+    RING_GATES = "Ring Gates"
+    ROPE_OF_CLIMBING = "Rope of Climbing"
+    ROPE_OF_ENTANGLEMENT = "Rope of Entanglement"
+    SCABBARD_OF_KEEN_EDGES = "Scabbard of Keen Edges"
+    STONE_HORSE_COURSER = "Stone Horse (Courser)"
+    STONE_HORSE_DESTRIER = "Stone Horse (Destrier)"
+    STONE_OF_ALARM = "Stone of Alarm"
+    STONE_OF_CONTROLLING_EARTH_ELEMENTALS = (
+        "Stone of Controlling Earth Elementals"
+    )
+    SUSTAINING_SPOON = "Sustaining Spoon"
+    WELL_OF_MANY_WORLDS = "Well of Many Worlds"
+    WIND_FAN = "Wind Fan"
+    WINGS_OF_FLYING = "Wings of Flying"

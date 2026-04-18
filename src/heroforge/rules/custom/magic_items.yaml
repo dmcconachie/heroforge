@@ -1,0 +1,142 @@
+# rules/custom/magic_items.yaml
+#
+# Custom magic items of all types.
+#
+# Sorted alphabetically.
+
+Cloak of Comfort +1:
+  slot: torso
+  note: +1 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+Cloak of Comfort +2:
+  slot: torso
+  note: +2 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+Cloak of Comfort +3:
+  slot: torso
+  note: +3 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+Cloak of Comfort +4:
+  slot: torso
+  note: +4 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+Cloak of Comfort +5:
+  slot: torso
+  note: +5 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5
+Ring of Tharizdun:
+  slot: ring
+  note: Casts CL 9 delay death on the wearer if needed
+Third Eye (Clarity):
+  slot: face
+  note: something something stun?
+Vest of Resistance +1:
+  slot: torso
+  note: +1 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+Vest of Resistance +2:
+  slot: torso
+  note: +2 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+Vest of Resistance +3:
+  slot: torso
+  note: +3 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+Vest of Resistance +4:
+  slot: torso
+  note: +4 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+Vest of Resistance +5:
+  slot: torso
+  note: +5 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5
