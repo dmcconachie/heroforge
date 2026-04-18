@@ -1,0 +1,27 @@
+# rules/custom/feats.yaml
+#
+# Custom feats from splatbooks.
+#
+# Sorted alphabetically.
+
+Lion's Pounce:
+  kind: passive
+  source_book: Spell Compendium
+  note: Make full attack at end of charge
+  prerequisites: null
+  effects: []
+Shock Trooper:
+  kind: passive
+  source_book: Complete Warrior
+  note: >-
+    Heedless charge: shift Power Attack penalty to AC
+    instead of attack rolls; directed bull rush; domino rush
+  prerequisites:
+    all_of:
+      - feat: Improved Bull Rush
+      - feat: Power Attack
+      - stat:
+          key: bab
+          min: 6
+          label: BAB
+  effects: []

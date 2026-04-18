@@ -26,7 +26,10 @@ from heroforge.rules.core.races import KnownCoreRace
 from heroforge.rules.core.skills import KnownCoreSkill
 from heroforge.rules.core.templates import KnownCoreTemplate
 from heroforge.rules.core.weapons import KnownCoreWeapon
+from heroforge.rules.custom.classes import KnownCustomClass
+from heroforge.rules.custom.feats import KnownCustomFeat
 from heroforge.rules.custom.magic_items import KnownCustomMagicItem
+from heroforge.rules.custom.materials import KnownCustomMaterial
 
 
 def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:
@@ -40,8 +43,8 @@ def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:
 # --- Combined enums from rule sources --------------
 
 KnownRace = _combine("KnownRace", KnownCoreRace)
-KnownClass = _combine("KnownClass", KnownCoreClass)
-KnownFeat = _combine("KnownFeat", KnownCoreFeat)
+KnownClass = _combine("KnownClass", KnownCoreClass, KnownCustomClass)
+KnownFeat = _combine("KnownFeat", KnownCoreFeat, KnownCustomFeat)
 KnownSkill = _combine("KnownSkill", KnownCoreSkill)
 KnownBuff = _combine("KnownBuff", KnownCoreBuff)
 KnownTemplate = _combine("KnownTemplate", KnownCoreTemplate)
@@ -50,6 +53,8 @@ KnownWeapon = _combine("KnownWeapon", KnownCoreWeapon)
 KnownMagicItem = _combine(
     "KnownMagicItem", KnownCoreMagicItem, KnownCustomMagicItem
 )
-KnownMaterial = _combine("KnownMaterial", KnownCoreMaterial)
+KnownMaterial = _combine(
+    "KnownMaterial", KnownCoreMaterial, KnownCustomMaterial
+)
 KnownDomain = _combine("KnownDomain", KnownCoreDomain)
 KnownCondition = _combine("KnownCondition", KnownCoreCondition)

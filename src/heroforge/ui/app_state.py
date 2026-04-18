@@ -143,11 +143,23 @@ class AppState:
             prereq_checker,
             self.buff_registry,
         )
+        FeatsLoader(rd).load(
+            self.feat_registry,
+            "custom/feats.yaml",
+            prereq_checker,
+            self.buff_registry,
+        )
         SkillsLoader(rd).load(self.skill_registry, "core/skills.yaml")
         TemplatesLoader(rd).load(self.template_registry, "core/templates.yaml")
         ClassesLoader(rd).load(
             self.class_registry,
             "core/classes",
+            prereq_checker=prereq_checker,
+            buff_registry=self.buff_registry,
+        )
+        ClassesLoader(rd).load(
+            self.class_registry,
+            "custom/classes",
             prereq_checker=prereq_checker,
             buff_registry=self.buff_registry,
         )
@@ -163,6 +175,10 @@ class AppState:
         eq_loader.load_materials(
             self.material_registry,
             "core/materials.yaml",
+        )
+        eq_loader.load_materials(
+            self.material_registry,
+            "custom/materials.yaml",
         )
         # Set module-level registry for adjust_for_material
         from heroforge.engine.equipment import (

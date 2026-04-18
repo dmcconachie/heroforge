@@ -146,6 +146,7 @@ class MaterialDefinition:
     acp_adjust: int = 0  # toward 0 (positive)
     max_dex_adjust: int = 0
     asf_adjust: int = 0  # negative = less failure
+    armor_bonus_adjust: int = 0  # typically 0 or -1
     category_shift: int = 0  # -1 = one lighter
     includes_masterwork: bool = False
     note: str = ""
@@ -264,9 +265,11 @@ def equip_armor(
     acp = armor.armor_check_penalty
     max_dex = armor.max_dex_bonus
     asf = armor.arcane_spell_failure
+    armor_bonus = armor.armor_bonus
     mat_def = _resolve_material(material)
     if mat_def is not None:
         acp, max_dex, asf = adjust_for_material(acp, max_dex, asf, mat_def)
+        armor_bonus = max(0, armor_bonus + mat_def.armor_bonus_adjust)
     # Masterwork reduces ACP by 1, but special
     # materials that include_masterwork already
     # account for this in their acp_adjust.
@@ -274,7 +277,7 @@ def equip_armor(
     if (enhancement > 0 or masterwork) and not mat_is_mw:
         acp = min(acp + 1, 0)
 
-    total_ac = armor.armor_bonus + enhancement
+    total_ac = armor_bonus + enhancement
 
     # AC bonus
     pool = character._pools.get("ac")

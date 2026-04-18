@@ -107,8 +107,7 @@ levels:
       Spellcraft: 1
       Spot: 1
   - level: 9
-    # class: Hospitaler
-    class: Fighter
+    class: Hospitaler
     hp_roll: 5
     skill_ranks:
       Concentration: 1
@@ -116,8 +115,8 @@ levels:
     feats:
       - name: Improved Bull Rush
         source: character
-      # - name: Shock Trooper
-      #   source: fighter_bonus
+      - name: Shock Trooper
+        source: fighter_bonus
   - level: 10
     class: Druid
     hp_roll: 5
@@ -149,9 +148,9 @@ levels:
       Ride: 1
       Spellcraft: 1
       Spot: 1
-    # feats:
-    #   - name: Lion's Pounce
-    #     source: character
+    feats:
+      - name: Lion's Pounce
+        source: character
   - level: 13
     class: Druid
     hp_roll: 5
@@ -173,7 +172,7 @@ dm_overrides: []
 equipment:
   armor:
     base: Full Plate
-    # material: Wildwood
+    material: Wildwood
     enhancement: 1
     properties: []
   shield:
@@ -198,9 +197,39 @@ equipment:
     - Ioun Stone (Clear Spindle)
     - Ioun Stone (Pink Rhomboid)
     - Heraldic Crest of Courage
+    # - Crystal of Mind Cloaking (greater)
+    #    - +5 competence bonus vs mind affecting
+    #    - Imm. action reroll failed vs. mind-affecting
+    # - Crystal of Bent Sight
+    # - Crystal of Return (least)
+
+    # - Pearl of Power 1 x8
+    # - Pearl of Power 2 x4
+    # - Rod of Extend, lesser
+    # - Rod of Extend, lesser
+
+    # - Orb of Mental Renewal (heal mental stats)
+    # - Rod of Bodily Restoration (heal phys stats)
+    # - Diamondskin Decanter (DR 2/3/4 adamatine)
+    # - Safewing Emblem (single use, fall safely)
+
+    # - Cleansing Rod
+    # - Spool of Endless Rope
+
+    # - Everlasting Feedbag
+    # - Everlasting Rations
+    # - Replenishing Skin
+    # - Heward's Handy Haversack
+    # - Heward's Fortifying Bedroll
+
+    # - Battal: Cloak of Comfort +5
+    # - Battal: Periapt of Health +6
+    # - Battal: Chain Shirt +1
+    # - Battal: Horseshoes of the Zephyr
+
   weapons:
     - base: Lance
-      # material: Bronzewood
+      material: Bronzewood
       enhancement: 1
     - base: Composite Longbow
 notes: ''

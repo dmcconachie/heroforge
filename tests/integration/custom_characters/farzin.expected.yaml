@@ -1,7 +1,7 @@
 identity:
   name: Farzin bin'Gira
   race: Human
-  class_str: Druid 11 / Fighter 2
+  class_str: Druid 11 / Fighter 1 / Hospitaler 1
   level: 13
   alignment: neutral_good
   deity: Istus
@@ -53,14 +53,14 @@ combat:
     total: 30
     typed:
       base: 10
-      dex: 1
+      dex: 2
       natural_armor_enhancement: 5
       natural_armor: 1
-      armor: 9
+      armor: 8
       shield: 3
       insight: 1
-  touch_ac: 12
-  flatfooted_ac: 29
+  touch_ac: 13
+  flatfooted_ac: 28
   hp_max:
     total: 133
     typed:
@@ -83,9 +83,9 @@ combat:
   sr: 0
   saves:
     fort:
-      total: 21
+      total: 22
       typed:
-        base: 10
+        base: 11
         con: 5
         resistance: 5
         luck: 1
@@ -306,6 +306,8 @@ feats:
   - Power Attack
   - Craft Wondrous Item
   - Improved Bull Rush
+  - Shock Trooper
+  - Lion's Pounce
 class_features:
   - 'animal_companion: Special animal companion'
   - 'nature_sense: +2 Knowledge (Nature) and Survival'
@@ -326,7 +328,9 @@ class_features:
   - 'wild_shape_6: Wild Shape 6/day; elemental form'
   - 'wild_shape_huge: Wild Shape: Huge animal'
   - 'bonus_feat_1: Bonus fighter feat'
-  - 'bonus_feat_2: Bonus fighter feat'
+  - 'bonus_feat_1: Bonus fighter feat'
+  - >-
+    lay_on_hands: Lay on hands (as paladin of character level)
 spellcasting:
   Druid:
     caster_level: 11
@@ -357,14 +361,13 @@ special_qualities:
   - >-
     Damage reduction 5/magic (if 5 HD or less) or 10/magic (if more)
   - 'Spell resistance: character level + 11'
-  - Lay on hands (as paladin of character level)
   - +4 racial bonus on saving throws vs. poison
 equipment:
   armor:
-    name: +1 Full Plate
+    name: +1 Wildwood Full Plate
     acp: -5
-    max_dex: 1
-    asf: 35
+    max_dex: 2
+    asf: 30
   shield:
     name: +1 Darkwood Heavy Wooden Shield
     asf: 15
@@ -387,5 +390,5 @@ equipment:
     - Ioun Stone (Pink Rhomboid)
     - Heraldic Crest of Courage
   weapons:
-    - name: +1 Lance
+    - name: +1 Bronzewood Lance
     - name: Composite Longbow

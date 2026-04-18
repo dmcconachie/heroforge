@@ -1,0 +1,53 @@
+Hospitaler:
+  source_book: Complete Warrior
+  hit_die: 8
+  max_level: 10
+  bab_progression: full
+  save_progressions:
+    fort: good
+    ref: poor
+    will: poor
+  skills_per_level: 2
+  class_skills:
+    - Concentration
+    - Craft
+    - Diplomacy
+    - Handle Animal
+    - Heal
+    - Knowledge (Religion)
+    - Profession
+    - Ride
+  entry_prerequisites:
+    all_of:
+      - stat:
+          key: bab
+          min: 5
+          label: BAB
+      - feat: Mounted Combat
+      - feat: Ride-By Attack
+      - skill:
+          name: Handle Animal
+          min_ranks: 5
+      - skill:
+          name: Ride
+          min_ranks: 5
+  class_features:
+    - level: 1
+      feature: bonus_feat_1
+      description: Bonus fighter feat
+    - level: 1
+      feature: lay_on_hands
+      description: Lay on hands (as paladin of character level)
+    - level: 3
+      feature: remove_disease_1
+      description: Remove disease 1/week
+    - level: 5
+      feature: bonus_feat_5
+      description: Bonus fighter feat
+    - level: 7
+      feature: remove_disease_2
+      description: Remove disease 2/week
+    - level: 9
+      feature: bonus_feat_9
+      description: Bonus fighter feat
+  is_prestige: true

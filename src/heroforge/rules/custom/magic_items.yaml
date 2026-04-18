@@ -81,12 +81,13 @@ Heraldic Crest of Courage:
     - target: initiative
       bonus_type: morale
       value: 1
+  note: +1 morale bonus to initiative, CL 5th aid 1/day as a free action
 Ring of Tharizdun:
   slot: ring
   note: Casts CL 9 delay death on the wearer if needed
 Third Eye (Clarity):
   slot: face
-  note: something something stun?
+  note: Imm. action negate confused, etc.
 Vest of Resistance +1:
   slot: torso
   note: +1 resistance to all saves

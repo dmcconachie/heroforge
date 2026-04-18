@@ -486,14 +486,14 @@ levels:
     skill_ranks:
       Profession (Unknown): 3
   - level: 4
-    class: Hospitaler
+    class: Spellblade
     feats:
       - name: Iron Will
-      - name: Shock Trooper
+      - name: Mega Stomp
   - level: 5
     class: Fighter
     feats:
-      - name: Lion's Pounce
+      - name: Dragon's Roar
 """
 
 
@@ -521,9 +521,9 @@ class TestCattrsErrorFormatting:
     def test_all_distinct_errors_present(self, tmp_path: Path) -> None:
         msg = self._err(tmp_path)
         assert "'Profession (Unknown)' is not a valid KnownSkill" in msg
-        assert "'Hospitaler' is not a valid KnownClass" in msg
-        assert "'Shock Trooper' is not a valid KnownFeat" in msg
-        assert '"Lion\'s Pounce" is not a valid KnownFeat' in msg
+        assert "'Spellblade' is not a valid KnownClass" in msg
+        assert "'Mega Stomp' is not a valid KnownFeat" in msg
+        assert '"Dragon\'s Roar" is not a valid KnownFeat' in msg
 
     def test_no_cattrs_scaffolding_leaks(self, tmp_path: Path) -> None:
         """Only the leaf message is shown — no scaffolding."""

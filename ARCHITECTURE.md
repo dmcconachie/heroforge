@@ -508,6 +508,19 @@ classes use a `classes:` key; prestige classes use
 `prestige_classes:`. The design supports additional
 sourcebook directories with override semantics.
 
+`rules/custom/` is a temporary holding area for a few
+splatbook items pulled in ad-hoc to support specific
+characters, before proper per-splatbook directories
+exist. Current contents: `classes/hospitaler.yaml`
+(Complete Warrior), `feats.yaml` (Shock Trooper from
+Complete Warrior, Lion's Pounce from Spell Compendium),
+`materials.yaml` (Wildwood from Magic of Faerun,
+Bronzewood from Magic of Faerun), and `magic_items.yaml`.
+Each has a matching Python StrEnum file whose members
+are merged into `KnownCoreX` via `rules/known.py`.
+These entries will be migrated to `rules/<splatbook>/`
+directories once those books are added in full.
+
 ---
 
 ## Export layer (`export/`)

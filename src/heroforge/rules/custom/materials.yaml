@@ -1,0 +1,23 @@
+# rules/custom/materials.yaml
+#
+# Custom materials from splatbooks.
+#
+# acp_adjust is positive (toward 0).
+# asf_adjust is negative (less spell failure).
+# armor_bonus_adjust is negative if the material grants
+# less AC than the base material.
+# includes_masterwork=true means the acp_adjust
+# already accounts for the masterwork -1 ACP.
+
+Bronzewood:
+  note: >-
+    Wood as hard as iron; druids can use. Weighs 3/4.
+Wildwood:
+  acp_adjust: 1
+  max_dex_adjust: 1
+  asf_adjust: -5
+  armor_bonus_adjust: -1
+  includes_masterwork: true
+  note: >-
+    Nonmetallic armor druids can wear; 1 less armor
+    bonus. Weighs 3/4.

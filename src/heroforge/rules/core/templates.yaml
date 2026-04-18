@@ -56,7 +56,6 @@ Half-Celestial:
       Damage reduction 5/magic (if 5 HD or less)
       or 10/magic (if more)
     - 'Spell resistance: character level + 11'
-    - Lay on hands (as paladin of character level)
     - +4 racial bonus on saving throws vs. poison
   grants_feats: []
   note: >-
