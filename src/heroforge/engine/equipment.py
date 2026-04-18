@@ -46,6 +46,8 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import TYPE_CHECKING
 
+from heroforge.rules.core.pool_keys import PoolKey
+
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.engine.magic_items import (
@@ -458,17 +460,19 @@ def _apply_armor_speed(
 
 
 # SRD: these skills take ACP.  Swim takes double.
-_ACP_SKILLS = {
-    "skill_balance",
-    "skill_climb",
-    "skill_escape_artist",
-    "skill_hide",
-    "skill_jump",
-    "skill_move_silently",
-    "skill_sleight_of_hand",
-    "skill_tumble",
-}
-_ACP_DOUBLE_SKILLS = {"skill_swim"}
+_ACP_SKILLS: frozenset[PoolKey] = frozenset(
+    {
+        PoolKey.SKILL_BALANCE,
+        PoolKey.SKILL_CLIMB,
+        PoolKey.SKILL_ESCAPE_ARTIST,
+        PoolKey.SKILL_HIDE,
+        PoolKey.SKILL_JUMP,
+        PoolKey.SKILL_MOVE_SILENTLY,
+        PoolKey.SKILL_SLEIGHT_OF_HAND,
+        PoolKey.SKILL_TUMBLE,
+    }
+)
+_ACP_DOUBLE_SKILLS: frozenset[PoolKey] = frozenset({PoolKey.SKILL_SWIM})
 
 
 def _apply_acp(
@@ -524,9 +528,9 @@ def _clear_acp(character: Character, source: str) -> None:
 # Worn magic items
 # -------------------------------------------------------
 
-_MULTI_TARGET_EXPANSIONS: dict[str, list[str]] = {
-    "attack_all": ["attack_melee", "attack_ranged"],
-    "damage_all": ["damage_melee", "damage_ranged"],
+_MULTI_TARGET_EXPANSIONS: dict[PoolKey, list[PoolKey]] = {
+    PoolKey.ATTACK_ALL: [PoolKey.ATTACK_MELEE, PoolKey.ATTACK_RANGED],
+    PoolKey.DAMAGE_ALL: [PoolKey.DAMAGE_MELEE, PoolKey.DAMAGE_RANGED],
 }
 
 

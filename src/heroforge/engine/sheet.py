@@ -356,7 +356,7 @@ def _skills(
         if sd.trained_only and st.ranks == 0:
             continue
 
-        pool_bd = _pool_breakdown(c.get_pool(sd.key), c)
+        pool_bd = _pool_breakdown(c.get_pool(sd.pool_key), c)
 
         # Pool's untyped bucket includes ranks — subtract so only
         # genuine untyped bonuses from the pool remain.

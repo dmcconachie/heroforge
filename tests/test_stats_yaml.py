@@ -228,20 +228,39 @@ class TestLoader:
             )
 
     def test_loader_auto_creates_missing_pools(self, tmp_path: Path) -> None:
-        """The loader creates any pools referenced that don't yet exist."""
+        """
+        The loader creates pools referenced by stats.yaml when the
+        pool is a known PoolKey but not yet registered on the graph.
+        """
         core = tmp_path / "core"
         core.mkdir()
+        # speed is a valid PoolKey that a fresh_graph doesn't have.
         (core / "stats.yaml").write_text(
             "- key: test_stat\n"
             "  compute: sum\n"
-            "  pools: [new_pool]\n"
+            "  pools: [speed]\n"
             "  description: Test\n"
         )
         loader = StatsLoader(tmp_path)
         g = fresh_graph()
         loader.load(g)
-        assert g.has_pool("new_pool")
+        assert g.has_pool("speed")
         assert g.has_node("test_stat")
+
+    def test_loader_rejects_unknown_pool_key(self, tmp_path: Path) -> None:
+        """stats.yaml referencing a non-PoolKey pool must fail fast."""
+        core = tmp_path / "core"
+        core.mkdir()
+        (core / "stats.yaml").write_text(
+            "- key: test_stat\n"
+            "  compute: sum\n"
+            "  pools: [not_a_real_pool]\n"
+            "  description: Test\n"
+        )
+        loader = StatsLoader(tmp_path)
+        g = fresh_graph()
+        with pytest.raises(LoaderError, match="not_a_real_pool"):
+            loader.load(g)
 
 
 # ===========================================================================

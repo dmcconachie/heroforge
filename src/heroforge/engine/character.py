@@ -51,6 +51,7 @@ from heroforge.engine.stat import (
     compute_capped_dex,
     compute_sum,
 )
+from heroforge.rules.core.pool_keys import PoolKey
 
 # ---------------------------------------------------------------------------
 # Supporting types
@@ -332,39 +333,30 @@ class Character:
         g = self._graph
 
         # ---- Pools ---------------------------------------------------------
-        pools = [
-            # Ability score pools (buffs like Bull's Strength go here)
-            "str_score",
-            "dex_score",
-            "con_score",
-            "int_score",
-            "wis_score",
-            "cha_score",
-            # Save pools (resistance bonuses, luck, etc.)
-            "fort_save",
-            "ref_save",
-            "will_save",
-            # Attack pools
-            "attack_melee",
-            "attack_ranged",
-            "attack_all",
-            # Damage pools
-            "damage_melee",
-            "damage_ranged",
-            "damage_all",
-            # AC pools
-            "ac",
-            # Initiative
-            "initiative",
-            # Speed
-            "speed",
-            # HP bonus pool (temporary HP, Toughness, etc.)
-            "hp_bonus",
-            # Skill pools — populated by skills.py; placeholder here
-            # (individual skill pools added dynamically)
-            # Misc
-            "sr",  # spell resistance
-            "bab_misc",  # miscellaneous BAB bonuses (rare)
+        # Skill pools are added dynamically by skills.py.
+        pools: list[PoolKey] = [
+            PoolKey.STR_SCORE,
+            PoolKey.DEX_SCORE,
+            PoolKey.CON_SCORE,
+            PoolKey.INT_SCORE,
+            PoolKey.WIS_SCORE,
+            PoolKey.CHA_SCORE,
+            PoolKey.FORT_SAVE,
+            PoolKey.REF_SAVE,
+            PoolKey.WILL_SAVE,
+            PoolKey.ATTACK_MELEE,
+            PoolKey.ATTACK_RANGED,
+            PoolKey.ATTACK_ALL,
+            PoolKey.DAMAGE_MELEE,
+            PoolKey.DAMAGE_RANGED,
+            PoolKey.DAMAGE_ALL,
+            PoolKey.AC,
+            PoolKey.INITIATIVE,
+            PoolKey.SPEED,
+            PoolKey.HP_BONUS,
+            PoolKey.SR,
+            PoolKey.BAB_MISC,
+            PoolKey.GRAPPLE,
         ]
         for pk in pools:
             pool = BonusPool(pk)
@@ -376,7 +368,7 @@ class Character:
         # + level-up bumps + inherent bonuses + pool bonuses.
         for ab in Ability:
             base = self._ability_scores[ab]
-            pool_key = f"{ab}_score"
+            pool_key = PoolKey(f"{ab}_score")
 
             def make_score_compute(
                 ability: Ability,
@@ -419,7 +411,7 @@ class Character:
         g.register_node(
             StatNode(
                 key="bab",
-                pools=["bab_misc"],
+                pools=[PoolKey.BAB_MISC],
                 compute=lambda bt: self._compute_bab() + bt,
                 description="Base Attack Bonus",
             )
@@ -428,7 +420,7 @@ class Character:
         # ---- Saving throws -------------------------------------------------
         # Base saves come from class levels; ability mod feeds in as input.
         for save, ab in SAVE_ABILITY.items():
-            pool_key = f"{save}_save"
+            pool_key = PoolKey(f"{save}_save")
             g.register_node(
                 StatNode(
                     key=f"{save}_save",
@@ -467,7 +459,7 @@ class Character:
             StatNode(
                 key="ac",
                 inputs=["ac_dex_contribution"],
-                pools=["ac"],
+                pools=[PoolKey.AC],
                 compute=lambda inputs, bt: (
                     10
                     + inputs["ac_dex_contribution"]
@@ -487,7 +479,7 @@ class Character:
             StatNode(
                 key="initiative",
                 inputs=["dex_mod"],
-                pools=["initiative"],
+                pools=[PoolKey.INITIATIVE],
                 compute=compute_sum,
                 description="Initiative modifier",
             )
@@ -497,7 +489,7 @@ class Character:
         g.register_node(
             StatNode(
                 key="speed",
-                pools=["speed"],
+                pools=[PoolKey.SPEED],
                 compute=lambda bt: self._compute_base_speed() + bt,
                 description="Movement speed (ft)",
             )
@@ -508,7 +500,7 @@ class Character:
             StatNode(
                 key="hp_max",
                 inputs=["con_mod"],
-                pools=["hp_bonus"],
+                pools=[PoolKey.HP_BONUS],
                 compute=lambda inputs, bt: (
                     self._compute_hp_from_rolls()
                     + inputs["con_mod"] * self.total_level
@@ -522,7 +514,7 @@ class Character:
         g.register_node(
             StatNode(
                 key="sr",
-                pools=["sr"],
+                pools=[PoolKey.SR],
                 compute=compute_sum,
                 description="Spell Resistance",
             )
@@ -535,7 +527,7 @@ class Character:
             StatNode(
                 key="attack_melee",
                 inputs=["bab", "str_mod"],
-                pools=["attack_melee", "attack_all"],
+                pools=[PoolKey.ATTACK_MELEE, PoolKey.ATTACK_ALL],
                 compute=lambda inputs, bt: (
                     inputs["bab"]
                     + inputs["str_mod"]
@@ -550,7 +542,7 @@ class Character:
             StatNode(
                 key="attack_ranged",
                 inputs=["bab", "dex_mod"],
-                pools=["attack_ranged", "attack_all"],
+                pools=[PoolKey.ATTACK_RANGED, PoolKey.ATTACK_ALL],
                 compute=lambda inputs, bt: (
                     inputs["bab"]
                     + inputs["dex_mod"]
@@ -566,7 +558,7 @@ class Character:
             StatNode(
                 key="grapple",
                 inputs=["bab", "str_mod"],
-                pools=["grapple"],
+                pools=[PoolKey.GRAPPLE],
                 compute=lambda inputs, bt: (
                     inputs["bab"]
                     + inputs["str_mod"]
@@ -582,7 +574,7 @@ class Character:
             StatNode(
                 key="damage_str_bonus",
                 inputs=["str_mod"],
-                pools=["damage_melee", "damage_all"],
+                pools=[PoolKey.DAMAGE_MELEE, PoolKey.DAMAGE_ALL],
                 compute=compute_sum,
                 description="STR bonus to melee damage",
             )

@@ -765,7 +765,7 @@ Stone of Good Luck (Luckstone):
     - target: will_save
       bonus_type: luck
       value: 1
-    - target: skill_apraise
+    - target: skill_appraise
       bonus_type: luck
       value: 1
     - target: skill_balance
@@ -795,7 +795,7 @@ Stone of Good Luck (Luckstone):
     - target: skill_disguise
       bonus_type: luck
       value: 1
-    - target: skill_espace_artist
+    - target: skill_escape_artist
       bonus_type: luck
       value: 1
     - target: skill_forgery
@@ -891,7 +891,7 @@ Stone of Good Luck (Luckstone):
     - target: skill_use_magic_device
       bonus_type: luck
       value: 1
-    - target: skill_rope
+    - target: skill_use_rope
       bonus_type: luck
       value: 1
 # ── Consumed items (not equipped) ──────────────

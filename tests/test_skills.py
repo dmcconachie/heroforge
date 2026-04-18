@@ -6,7 +6,7 @@ and the UI AppState's skill integration.
 
 Covers:
   - YAML validation
-  - SkillRegistry: register, get, get_by_key, all_skills
+  - SkillRegistry: register, get, get_by_pool_key, all_skills
   - register_skills_on_character: nodes, pools, _skill_registry
   - set_skill_ranks: pool update, stat graph cascade
   - compute_skill_total: ranks + ability mod + misc + synergy + ACP
@@ -75,26 +75,6 @@ class TestSkillsYaml:
         names = list(data.keys())
         assert len(names) == len(set(names))
 
-    def test_no_duplicate_keys(self) -> None:
-        import yaml
-
-        with open(RULES_DIR / "core" / "skills.yaml") as f:
-            data = yaml.safe_load(f)
-        keys = [d["key"] for d in data.values()]
-        assert len(keys) == len(set(keys))
-
-    def test_all_keys_start_with_skill_(self) -> None:
-        import yaml
-
-        with open(RULES_DIR / "core" / "skills.yaml") as f:
-            data = yaml.safe_load(f)
-        bad = [
-            d["key"]
-            for d in data.values()
-            if not d.get("key", "").startswith("skill_")
-        ]
-        assert bad == []
-
     def test_all_abilities_valid(self) -> None:
         import yaml
 
@@ -143,15 +123,17 @@ class TestSkillsYaml:
 class TestSkillRegistry:
     def test_register_and_get(self) -> None:
         reg = SkillRegistry()
-        defn = SkillDefinition("Hide", "skill_hide", "dex")
+        defn = SkillDefinition("Hide", "dex")
         reg.register(defn)
         assert reg.get("Hide") is defn
 
-    def test_get_by_key(self) -> None:
+    def test_get_by_pool_key(self) -> None:
+        from heroforge.rules.core.pool_keys import PoolKey
+
         reg = SkillRegistry()
-        defn = SkillDefinition("Hide", "skill_hide", "dex")
+        defn = SkillDefinition("Hide", "dex")
         reg.register(defn)
-        assert reg.get_by_key("skill_hide") is defn
+        assert reg.get_by_pool_key(PoolKey.SKILL_HIDE) is defn
 
     def test_get_unknown_returns_none(self) -> None:
         assert SkillRegistry().get("Unknown") is None
@@ -162,9 +144,9 @@ class TestSkillRegistry:
 
     def test_duplicate_raises(self) -> None:
         reg = SkillRegistry()
-        reg.register(SkillDefinition("Hide", "skill_hide", "dex"))
+        reg.register(SkillDefinition("Hide", "dex"))
         with pytest.raises(ValueError, match="already registered"):
-            reg.register(SkillDefinition("Hide", "skill_hide", "dex"))
+            reg.register(SkillDefinition("Hide", "dex"))
 
     def test_all_skills_sorted(self) -> None:
         reg = loaded_skill_registry()

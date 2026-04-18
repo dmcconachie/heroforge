@@ -24,6 +24,7 @@ from typing import TYPE_CHECKING
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
 from heroforge.engine.character import Ability
 from heroforge.engine.stat import StatNode
+from heroforge.rules.core.pool_keys import PoolKey, pool_key_for_skill
 
 if TYPE_CHECKING:
     from typing import Callable
@@ -44,7 +45,6 @@ class SkillDefinition:
     """Metadata describing one skill."""
 
     name: str
-    key: str  # pool key e.g. "skill_hide"
     ability: Ability | None  # None for Speak Language
     trained_only: bool = False
     armor_check: bool = False
@@ -61,6 +61,11 @@ class SkillDefinition:
             f"but is not marked trained_only."
         )
 
+    @property
+    def pool_key(self) -> PoolKey:
+        """BonusPool identifier for this skill (derived from name)."""
+        return pool_key_for_skill(self.name)
+
 
 # ---------------------------------------------------------------------------
 # SkillRegistry
@@ -72,7 +77,6 @@ class SkillRegistry:
 
     def __init__(self) -> None:
         self._by_name: dict[str, SkillDefinition] = {}
-        self._by_key: dict[str, SkillDefinition] = {}
 
     def register(self, defn: SkillDefinition, overwrite: bool = False) -> None:
         if defn.name in self._by_name and not overwrite:
@@ -80,13 +84,15 @@ class SkillRegistry:
                 f"SkillDefinition {defn.name!r} already registered."
             )
         self._by_name[defn.name] = defn
-        self._by_key[defn.key] = defn
 
     def get(self, name: str) -> SkillDefinition | None:
         return self._by_name.get(name)
 
-    def get_by_key(self, key: str) -> SkillDefinition | None:
-        return self._by_key.get(key)
+    def get_by_pool_key(self, key: PoolKey) -> SkillDefinition | None:
+        for defn in self._by_name.values():
+            if defn.pool_key == key:
+                return defn
+        return None
 
     def require(self, name: str) -> SkillDefinition:
         defn = self._by_name.get(name)
@@ -177,7 +183,7 @@ def register_skills_on_character(
     This is idempotent: if the node is already registered it is skipped.
     """
     for skill_def in skill_registry.all_skills():
-        key = skill_def.key
+        key = skill_def.pool_key
 
         # Skip already-registered skills
         if character._graph.has_node(key):
@@ -238,7 +244,8 @@ def set_skill_ranks(
 
     character.skills[skill_name] = ranks
 
-    pool = character.get_pool(defn.key)
+    pool_key = defn.pool_key
+    pool = character.get_pool(pool_key)
     if pool is None:
         return
 
@@ -252,8 +259,8 @@ def set_skill_ranks(
     else:
         pool.clear_source("ranks")
 
-    character._graph.invalidate_pool(defn.key)
-    character._notify({defn.key})
+    character._graph.invalidate_pool(pool_key)
+    character._notify({pool_key})
 
 
 def compute_skill_budget(
@@ -364,7 +371,8 @@ def recompute_skills_from_levels(
         if skill_reg is not None:
             defn = skill_reg.get(skill_name)
             if defn is not None:
-                pool = character.get_pool(defn.key)
+                pool_key = defn.pool_key
+                pool = character.get_pool(pool_key)
                 if pool is not None:
                     if pts > 0:
                         entry = BonusEntry(
@@ -375,7 +383,7 @@ def recompute_skills_from_levels(
                         pool.set_source("ranks", [entry])
                     else:
                         pool.clear_source("ranks")
-                    character._graph.invalidate_pool(defn.key)
+                    character._graph.invalidate_pool(pool_key)
 
 
 def compute_skill_total(
@@ -396,7 +404,7 @@ def compute_skill_total(
         ability_mod = character.get_ability_modifier(skill_def.ability)
 
     # Pool total includes ranks + feat bonuses + item bonuses
-    pool = character.get_pool(skill_def.key)
+    pool = character.get_pool(skill_def.pool_key)
     pool_total = pool.total(character) if pool else 0
     # misc = pool total minus ranks (ranks counted separately in breakdown)
     misc_bonus = pool_total - ranks
@@ -423,7 +431,7 @@ def compute_skill_total(
     # Jump gets a speed modifier: +4 per 10ft above 30,
     # -6 per 10ft below 30.
     speed_mod = 0
-    if skill_def.key == "skill_jump":
+    if skill_def.pool_key is PoolKey.SKILL_JUMP:
         speed = character.get("speed")
         diff = speed - 30
         if diff > 0:

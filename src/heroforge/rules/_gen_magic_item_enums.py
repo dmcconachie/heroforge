@@ -12,11 +12,12 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import re
 import sys
 from pathlib import Path
 
 import yaml
+
+from heroforge.rules._gen_common import emit_member, enum_ident
 
 RULES_DIR = Path(__file__).parent
 CORE_MI = RULES_DIR / "core" / "magic_items"
@@ -42,33 +43,6 @@ SLOTS: tuple[str, ...] = (
     "tool",
     "consumable",
 )
-
-
-def enum_ident(name: str) -> str:
-    """
-    Convert an item display name into an enum
-    identifier (UPPER_SNAKE, ASCII only)."""
-    s = name
-    s = s.replace("+", "plus ")
-    s = s.replace("'", "")
-    s = s.replace("(", " ").replace(")", " ")
-    s = s.replace("/", " ")
-    s = s.replace(",", " ")
-    s = s.replace(".", " ")
-    s = s.replace("-", " ")
-    s = s.replace("&", " and ")
-    s = re.sub(r"\s+", " ", s).strip()
-    return s.replace(" ", "_").upper()
-
-
-def _emit_member(lines: list[str], ident: str, val: str) -> None:
-    single = f'    {ident} = "{val}"'
-    if len(single) <= 80:
-        lines.append(single)
-        return
-    lines.append(f"    {ident} = (")
-    lines.append(f'        "{val}"')
-    lines.append("    )")
 
 
 def _render_slot_module(slot: str, names: list[str]) -> str:
@@ -101,7 +75,7 @@ def _render_slot_module(slot: str, names: list[str]) -> str:
                     f"Duplicate ident {ident!r} in {slot}.yaml (from {name!r})"
                 )
             seen.add(ident)
-            _emit_member(lines, ident, name)
+            emit_member(lines, ident, name)
     return "\n".join(lines) + "\n"
 
 
@@ -180,7 +154,7 @@ def _render_custom(names: list[str]) -> str:
                     f"(from {name!r})"
                 )
             seen.add(ident)
-            _emit_member(lines, ident, name)
+            emit_member(lines, ident, name)
     return "\n".join(lines) + "\n"
 
 

@@ -56,6 +56,7 @@ from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry
 from heroforge.engine.character import Ability
+from heroforge.rules.core.pool_keys import PoolKey
 
 if TYPE_CHECKING:
     from typing import Any, Callable
@@ -180,16 +181,13 @@ class BonusEffect:
 
     Attributes
     ----------
-    target      : The BonusPool key this effect feeds into.
-                  e.g. "str_score", "ac", "attack_melee", "attack_all",
-                  "fort_save", "speed", "initiative".
-                  Special key "attack_all" feeds both attack_melee and
-                  attack_ranged.
-                  TODO: target pools need validation — effect/buff/item
-                  declarations should be checked against the set of pool
-                  keys the engine actually exposes, so a typo fails
-                  loudly at rules-load time rather than silently
-                  contributing nothing.
+    target      : The BonusPool key this effect feeds into
+                  (a PoolKey member). Special key
+                  PoolKey.ATTACK_ALL feeds both attack_melee
+                  and attack_ranged; PoolKey.DAMAGE_ALL
+                  similarly splits damage_melee + damage_ranged.
+                  Strings passed here are coerced to PoolKey in
+                  __post_init__ — unknown values raise ValueError.
     bonus_type  : The BonusType for stacking purposes.
     value       : Static integer value OR a formula string.
                   If str, it is evaluated via evaluate_formula() at
@@ -201,13 +199,22 @@ class BonusEffect:
                   Defaults to the parent BuffDefinition's name.
     """
 
-    target: str
+    target: PoolKey
     bonus_type: BonusType
     value: int | str  # int = static; str = formula
     condition_key: str = ""
     source_label: str = ""
     # Derived (set by loader from condition_key):
     condition: Callable | None = field(default=None, init=False)
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.target, PoolKey):
+            try:
+                self.target = PoolKey(self.target)
+            except ValueError as exc:
+                raise ValueError(
+                    f"BonusEffect target {self.target!r} is not a known PoolKey"
+                ) from exc
 
     def is_formula(self) -> bool:
         return isinstance(self.value, str)
@@ -256,9 +263,9 @@ class BonusEffect:
 # ---------------------------------------------------------------------------
 
 # Special pool-key aliases expanded at application time
-_MULTI_TARGET_EXPANSIONS: dict[str, list[str]] = {
-    "attack_all": ["attack_melee", "attack_ranged"],
-    "damage_all": ["damage_melee", "damage_ranged"],
+_MULTI_TARGET_EXPANSIONS: dict[PoolKey, list[PoolKey]] = {
+    PoolKey.ATTACK_ALL: [PoolKey.ATTACK_MELEE, PoolKey.ATTACK_RANGED],
+    PoolKey.DAMAGE_ALL: [PoolKey.DAMAGE_MELEE, PoolKey.DAMAGE_RANGED],
 }
 
 

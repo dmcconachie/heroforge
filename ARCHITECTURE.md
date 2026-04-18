@@ -62,9 +62,14 @@ src/heroforge/
 │   │                       #   EquipmentLoader,
 │   │                       #   DomainsLoader,
 │   │                       #   SpellCompendiumLoader
+│   ├── _gen_common.py      # enum_ident(), emit_member()
+│   │                       #   shared by YAML→StrEnum tools
+│   ├── _gen_magic_item_enums.py  # check-magic-items CLI
+│   ├── _gen_pool_keys.py   # check-pool-keys CLI
 │   └── core/               # YAML data files
 │       ├── stats.yaml
 │       ├── skills.yaml
+│       ├── pool_keys.py    # PoolKey StrEnum (generated)
 │       ├── classes/           # 1 YAML per class
 │       │                     #   (16 base + 15 prestige)
 │       ├── races.yaml        # 7 core races
@@ -153,6 +158,13 @@ lambda). `BonusPool` collects entries keyed by source name —
 `aggregate()` implements the core stacking rules: dodge,
 racial, and untyped always stack; all other types take highest
 only; penalties always stack.
+
+Every `BonusPool` is identified by a `PoolKey` StrEnum member
+(`rules/core/pool_keys.py`, generated from `stats.yaml` and
+`skills.yaml` via `uv run check-pool-keys --fix`). Effect
+declarations targeting unknown pool keys fail at load time
+(cattrs-style coercion in `BonusEffect.__post_init__` and a
+`PoolKey` check in `StatsLoader`).
 
 ## Layer 2: Stat graph (`engine/stat.py`)
 

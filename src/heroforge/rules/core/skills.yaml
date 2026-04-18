@@ -3,8 +3,10 @@
 # Map keyed by skill name.
 # All D&D 3.5e skills (PHB).
 #
+# The BonusPool key for a skill is derived from the name by
+# _gen_pool_keys.py: skill_<snake(name)>. See rules/core/pool_keys.py.
+#
 # Fields per entry:
-#   key          : pool key used in BonusPool (skill_<snake_case>)
 #   ability      : str | dex | con | int | wis | cha
 #   trained_only : true if requires at least 1 rank to use
 #   armor_check  : true if armor check penalty applies
@@ -12,19 +14,16 @@
 #   description  : Brief description
 
 Appraise:
-  key: skill_appraise
   ability: int
   trained_only: false
   armor_check: false
   description: Determine value of items
 Balance:
-  key: skill_balance
   ability: dex
   trained_only: false
   armor_check: true
   description: Walk on narrow/slippery surfaces
 Bluff:
-  key: skill_bluff
   ability: cha
   trained_only: false
   armor_check: false
@@ -39,49 +38,41 @@ Bluff:
       bonus: 2
   description: Lie convincingly; feint in combat
 Climb:
-  key: skill_climb
   ability: str
   trained_only: false
   armor_check: true
   description: Climb walls, ropes, etc.
 Concentration:
-  key: skill_concentration
   ability: con
   trained_only: false
   armor_check: false
   description: Maintain spells while threatened or injured
 Craft:
-  key: skill_craft
   ability: int
   trained_only: false
   armor_check: false
   description: Create items (each Craft is a separate skill)
 Decipher Script:
-  key: skill_decipher_script
   ability: int
   trained_only: true
   armor_check: false
   description: Read unfamiliar languages and magical writing
 Diplomacy:
-  key: skill_diplomacy
   ability: cha
   trained_only: false
   armor_check: false
   description: Influence attitudes and negotiate
 Disable Device:
-  key: skill_disable_device
   ability: int
   trained_only: true
   armor_check: false
   description: Sabotage traps and mechanical devices
 Disguise:
-  key: skill_disguise
   ability: cha
   trained_only: false
   armor_check: false
   description: Change appearance to impersonate another
 Escape Artist:
-  key: skill_escape_artist
   ability: dex
   trained_only: false
   armor_check: true
@@ -90,19 +81,16 @@ Escape Artist:
       bonus: 2
   description: Escape grapples, bonds, and tight spaces
 Forgery:
-  key: skill_forgery
   ability: int
   trained_only: false
   armor_check: false
   description: Fake documents and signatures
 Gather Information:
-  key: skill_gather_information
   ability: cha
   trained_only: false
   armor_check: false
   description: Research rumors and information in a settlement
 Handle Animal:
-  key: skill_handle_animal
   ability: cha
   trained_only: true
   armor_check: false
@@ -111,25 +99,21 @@ Handle Animal:
       bonus: 2
   description: Train, manage, and work with animals
 Heal:
-  key: skill_heal
   ability: wis
   trained_only: false
   armor_check: false
   description: Provide first aid and long-term care
 Hide:
-  key: skill_hide
   ability: dex
   trained_only: false
   armor_check: true
   description: Conceal yourself from observers
 Intimidate:
-  key: skill_intimidate
   ability: cha
   trained_only: false
   armor_check: false
   description: Coerce or frighten others
 Jump:
-  key: skill_jump
   ability: str
   trained_only: false
   armor_check: true
@@ -138,7 +122,6 @@ Jump:
       bonus: 2
   description: Leap, vault, and spring
 Knowledge (Arcana):
-  key: skill_knowledge_arcana
   ability: int
   trained_only: true
   armor_check: false
@@ -147,25 +130,21 @@ Knowledge (Arcana):
       bonus: 2
   description: Magic, ancient mysteries, spells, magic traditions
 Knowledge (Architecture and Engineering):
-  key: skill_knowledge_architecture
   ability: int
   trained_only: true
   armor_check: false
   description: Buildings, aqueducts, bridges, fortifications
 Knowledge (Dungeoneering):
-  key: skill_knowledge_dungeoneering
   ability: int
   trained_only: true
   armor_check: false
   description: Aberrations, caverns, oozes, spelunking
 Knowledge (Geography):
-  key: skill_knowledge_geography
   ability: int
   trained_only: true
   armor_check: false
   description: Lands, terrain, climate, people
 Knowledge (History):
-  key: skill_knowledge_history
   ability: int
   trained_only: true
   armor_check: false
@@ -173,7 +152,6 @@ Knowledge (History):
     Royalty, wars, colonies, migrations,
     founding of cities
 Knowledge (Local):
-  key: skill_knowledge_local
   ability: int
   trained_only: true
   armor_check: false
@@ -182,7 +160,6 @@ Knowledge (Local):
       bonus: 2
   description: Legends, personalities, inhabitants, laws, customs
 Knowledge (Nature):
-  key: skill_knowledge_nature
   ability: int
   trained_only: true
   armor_check: false
@@ -191,7 +168,6 @@ Knowledge (Nature):
       bonus: 2
   description: Animals, fey, giants, monstrous humanoids, plants, seasons
 Knowledge (Nobility and Royalty):
-  key: skill_knowledge_nobility
   ability: int
   trained_only: true
   armor_check: false
@@ -200,7 +176,6 @@ Knowledge (Nobility and Royalty):
       bonus: 2
   description: Lineages, heraldry, family trees, mottoes, personalities
 Knowledge (Religion):
-  key: skill_knowledge_religion
   ability: int
   trained_only: true
   armor_check: false
@@ -208,7 +183,6 @@ Knowledge (Religion):
     Gods and goddesses, mythic history,
     ecclesiastic tradition
 Knowledge (The Planes):
-  key: skill_knowledge_planes
   ability: int
   trained_only: true
   armor_check: false
@@ -217,55 +191,46 @@ Knowledge (The Planes):
       bonus: 2
   description: The Inner Planes, Outer Planes, Astral Plane, Ethereal Plane
 Listen:
-  key: skill_listen
   ability: wis
   trained_only: false
   armor_check: false
   description: Detect sounds and overhear conversations
 Move Silently:
-  key: skill_move_silently
   ability: dex
   trained_only: false
   armor_check: true
   description: Move without making noise
 Open Lock:
-  key: skill_open_lock
   ability: dex
   trained_only: true
   armor_check: false
   description: Pick locks and defeat mechanical fastenings
 Perform:
-  key: skill_perform
   ability: cha
   trained_only: false
   armor_check: false
   description: Entertain audiences (each Perform is a separate skill)
 Perform (Dance):
-  key: skill_perform_dance
   ability: cha
   trained_only: true
   armor_check: false
   description: Entertain audiences with dance
 Profession:
-  key: skill_profession
   ability: wis
   trained_only: true
   armor_check: false
   description: Work a non-adventuring job to earn money
 Profession (Soldier):
-  key: skill_profession_soldier
   ability: wis
   trained_only: true
   armor_check: false
   description: Work as a soldier
 Ride:
-  key: skill_ride
   ability: dex
   trained_only: false
   armor_check: false
   description: Guide, control, and care for a mount
 Search:
-  key: skill_search
   ability: int
   trained_only: false
   armor_check: false
@@ -274,7 +239,6 @@ Search:
       bonus: 2
   description: Find secret doors, traps, and concealed items
 Sense Motive:
-  key: skill_sense_motive
   ability: wis
   trained_only: false
   armor_check: false
@@ -283,32 +247,27 @@ Sense Motive:
       bonus: 2
   description: Sense deception; get a hunch
 Sleight of Hand:
-  key: skill_sleight_of_hand
   ability: dex
   trained_only: true
   armor_check: true
   description: >-
     Palm objects; pick pockets; conceal weapons
 Speak Language:
-  key: skill_speak_language
   ability: none
   trained_only: true
   armor_check: false
   description: Each rank grants one new language; no checks, no ability modifier
 Spellcraft:
-  key: skill_spellcraft
   ability: int
   trained_only: true
   armor_check: false
   description: Identify spells; decipher magic writing
 Spot:
-  key: skill_spot
   ability: wis
   trained_only: false
   armor_check: false
   description: Notice things; detect approaching creatures
 Survival:
-  key: skill_survival
   ability: wis
   trained_only: false
   armor_check: false
@@ -317,13 +276,11 @@ Survival:
       bonus: 2
   description: Track, find food and shelter, handle weather
 Swim:
-  key: skill_swim
   ability: str
   trained_only: false
   armor_check: true
   description: Move through water; avoid drowning
 Tumble:
-  key: skill_tumble
   ability: dex
   trained_only: true
   armor_check: true
@@ -334,7 +291,6 @@ Tumble:
       bonus: 2
   description: Fall safely; move through threatened squares
 Use Magic Device:
-  key: skill_use_magic_device
   ability: cha
   trained_only: true
   armor_check: false
@@ -343,7 +299,6 @@ Use Magic Device:
       bonus: 2
   description: Use magic items regardless of class or alignment
 Use Rope:
-  key: skill_use_rope
   ability: dex
   trained_only: false
   armor_check: false

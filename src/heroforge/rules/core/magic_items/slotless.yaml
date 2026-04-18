@@ -193,7 +193,7 @@ Stone of Good Luck (Luckstone):
     - target: skill_knowledge_arcana
       bonus_type: luck
       value: 1
-    - target: skill_knowledge_architecture
+    - target: skill_knowledge_architecture_and_engineering
       bonus_type: luck
       value: 1
     - target: skill_knowledge_dungeoneering
@@ -211,10 +211,10 @@ Stone of Good Luck (Luckstone):
     - target: skill_knowledge_nature
       bonus_type: luck
       value: 1
-    - target: skill_knowledge_nobility
+    - target: skill_knowledge_nobility_and_royalty
       bonus_type: luck
       value: 1
-    - target: skill_knowledge_planes
+    - target: skill_knowledge_the_planes
       bonus_type: luck
       value: 1
     - target: skill_knowledge_religion

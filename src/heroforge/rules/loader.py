@@ -43,6 +43,7 @@ from heroforge.engine.stat import (
     compute_ability_modifier,
     compute_sum,
 )
+from heroforge.rules.core.pool_keys import PoolKey
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -338,10 +339,20 @@ class StatsLoader:
             if graph.has_node(key):
                 continue
 
-            # Ensure all pools this node references
-            # exist
+            # Ensure all pools this node references exist. Every
+            # pool key must be a known PoolKey member so typos in
+            # stats.yaml fail loudly instead of creating dead pools.
             pools = decl.get("pools", [])
             for pk in pools:
+                try:
+                    PoolKey(pk)
+                except ValueError as e:
+                    raise LoaderError(
+                        f"Stat {key!r} references unknown pool "
+                        f"{pk!r} — not a PoolKey member. Regenerate "
+                        f"pool_keys.py with `uv run check-pool-keys "
+                        f"--fix` or fix the typo."
+                    ) from e
                 if not graph.has_pool(pk):
                     pool = BonusPool(pk)
                     graph.register_pool(pool)
