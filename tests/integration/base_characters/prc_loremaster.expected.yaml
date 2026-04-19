@@ -50,7 +50,7 @@ combat:
     typed:
       base: 70
       con: 46
-      untyped: 3
+      toughness: 3
   bab:
     total: 11
     typed:
@@ -113,47 +113,56 @@ skills:
     typed:
       ability_mod: 4
       ranks: 10
+      Appraise (ranks): 10
   Concentration:
     total: 28
     typed:
       ability_mod: 2
       ranks: 26
+      Concentration (ranks): 26
   Decipher Script:
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
+      Decipher Script (ranks): 26
   Gather Information:
     total: 9
     typed:
       ability_mod: -1
       ranks: 10
+      Gather Information (ranks): 10
   Knowledge (Arcana):
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
+      Knowledge (Arcana) (ranks): 26
   Knowledge (History):
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
+      Knowledge (History) (ranks): 26
   Knowledge (Religion):
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
+      Knowledge (Religion) (ranks): 26
   Knowledge (The Planes):
     total: 30
     typed:
       ability_mod: 4
       ranks: 26
+      Knowledge (The Planes) (ranks): 26
   Spellcraft:
     total: 32
     typed:
       ability_mod: 4
       ranks: 26
       synergy: 2
+      Spellcraft (ranks): 26
   Survival:
     total: 2
     typed:

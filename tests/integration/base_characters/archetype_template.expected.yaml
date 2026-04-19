@@ -12,7 +12,7 @@ abilities:
     mod: 7
     typed:
       base: 16
-      racial: 8
+      Half-Dragon (Red): 8
   dex:
     score: 12
     mod: 1
@@ -23,13 +23,13 @@ abilities:
     mod: 3
     typed:
       base: 14
-      racial: 2
+      Half-Dragon (Red): 2
   int:
     score: 12
     mod: 1
     typed:
       base: 10
-      racial: 2
+      Half-Dragon (Red): 2
   wis:
     score: 10
     mod: 0
@@ -40,7 +40,7 @@ abilities:
     mod: 0
     typed:
       base: 8
-      racial: 2
+      Half-Dragon (Red): 2
 combat:
   ac:
     total: 15
@@ -63,7 +63,7 @@ combat:
     total: 5
     typed:
       dex: 1
-      untyped: 4
+      improved_initiative: 4
   speed:
     total: 30
     typed:
@@ -89,18 +89,18 @@ combat:
     typed:
       base: 6
       str: 7
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 8
     typed:
       base: 6
       dex: 1
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 9
     typed:
       str: 7
-      untyped: 2
+      weapon_specialization: 2
   grapple:
     total: 13
     typed:
@@ -119,15 +119,18 @@ skills:
     typed:
       ability_mod: 7
       ranks: 9
+      Climb (ranks): 9
   Intimidate:
     total: 9
     typed:
       ranks: 9
+      Intimidate (ranks): 9
   Jump:
     total: 16
     typed:
       ability_mod: 7
       ranks: 9
+      Jump (ranks): 9
 carrying_capacity:
   light: 233
   medium: 466

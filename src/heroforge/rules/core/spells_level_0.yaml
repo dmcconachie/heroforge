@@ -179,3 +179,4 @@ Virtue:
     - target: hp_bonus
       bonus_type: untyped
       value: 1
+      source_label: virtue_temp_hp

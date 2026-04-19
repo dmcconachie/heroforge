@@ -12,6 +12,7 @@ Cowering:
     - target: ac
       bonus_type: untyped
       value: -2
+      source_label: cowering
 Deafened:
   note: >-
     -4 initiative; automatically fails Listen checks; 20% arcane spell failure
@@ -20,6 +21,7 @@ Deafened:
     - target: initiative
       bonus_type: untyped
       value: -4
+      source_label: deafened
 Energy Drained:
   requires_caster_level: true
   note: >-
@@ -32,18 +34,23 @@ Energy Drained:
     - target: attack_all
       bonus_type: untyped
       value: -caster_level
+      source_label: energy_drained
     - target: fort_save
       bonus_type: untyped
       value: -caster_level
+      source_label: energy_drained
     - target: ref_save
       bonus_type: untyped
       value: -caster_level
+      source_label: energy_drained
     - target: will_save
       bonus_type: untyped
       value: -caster_level
+      source_label: energy_drained
     - target: hp_bonus
       bonus_type: untyped
       value: -5 * caster_level
+      source_label: energy_drained
 Invisible:
   note: >-
     +2 on attack rolls; ignore opponent Dex bonus to AC; 50% miss chance for
@@ -52,6 +59,7 @@ Invisible:
     - target: attack_all
       bonus_type: untyped
       value: 2
+      source_label: invisible
 Prone:
   note: >-
     -4 melee attack penalty; cannot use ranged weapons (except crossbow); +4 AC
@@ -60,6 +68,7 @@ Prone:
     - target: attack_melee
       bonus_type: untyped
       value: -4
+      source_label: prone
 Confused:
   note: >-
     '''''''Each round roll d%%: 01-10 attack caster, 11-20 act normally, 21-50

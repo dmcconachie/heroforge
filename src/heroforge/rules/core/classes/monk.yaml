@@ -47,6 +47,7 @@ Monk:
         - target: effective_monk_level_ac
           bonus_type: untyped
           value: monk_level
+          source_label: monk_class
     - level: 1
       feature: unarmed_strike
       description: Unarmed deals 1d6; increases per level

@@ -50,7 +50,7 @@ combat:
     typed:
       base: 67
       con: 32
-      untyped: 3
+      toughness: 3
   bab:
     total: 13
     typed:
@@ -59,7 +59,7 @@ combat:
     total: 5
     typed:
       dex: 1
-      untyped: 4
+      improved_initiative: 4
   speed:
     total: 30
     typed:
@@ -85,13 +85,13 @@ combat:
     typed:
       base: 13
       str: 2
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 15
     typed:
       base: 13
       dex: 1
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 2
     typed:
@@ -116,62 +116,74 @@ skills:
     typed:
       ability_mod: 2
       ranks: 4
+      Climb (ranks): 4
   Concentration:
     total: 20
     typed:
       ability_mod: 2
       ranks: 18
+      Concentration (ranks): 18
   Decipher Script:
     total: 9
     typed:
       ability_mod: 3
       ranks: 6
+      Decipher Script (ranks): 6
   Handle Animal:
     total: 3
     typed:
       ability_mod: -1
       ranks: 4
+      Handle Animal (ranks): 4
   Intimidate:
     total: 3
     typed:
       ability_mod: -1
       ranks: 4
+      Intimidate (ranks): 4
   Jump:
     total: 16
     typed:
       ability_mod: 2
       ranks: 14
+      Jump (ranks): 14
   Knowledge (Arcana):
     total: 17
     typed:
       ability_mod: 3
       ranks: 14
+      Knowledge (Arcana) (ranks): 14
   Knowledge (Religion):
     total: 7
     typed:
       ability_mod: 3
       ranks: 4
+      Knowledge (Religion) (ranks): 4
   Knowledge (The Planes):
     total: 5
     typed:
       ability_mod: 3
       ranks: 2
+      Knowledge (The Planes) (ranks): 2
   Ride:
     total: 15
     typed:
       ability_mod: 1
       ranks: 14
+      Ride (ranks): 14
   Spellcraft:
     total: 21
     typed:
       ability_mod: 3
       ranks: 16
       synergy: 2
+      Spellcraft (ranks): 16
   Swim:
     total: 16
     typed:
       ability_mod: 2
       ranks: 14
+      Swim (ranks): 14
 carrying_capacity:
   light: 58
   medium: 116

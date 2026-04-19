@@ -17,13 +17,13 @@ abilities:
     mod: 3
     typed:
       base: 14
-      racial: 2
+      Elf: 2
   con:
     score: 12
     mod: 1
     typed:
       base: 14
-      racial: -2
+      Elf: -2
   int:
     score: 12
     mod: 1
@@ -60,7 +60,7 @@ combat:
     total: 7
     typed:
       dex: 3
-      untyped: 4
+      improved_initiative: 4
   speed:
     total: 30
     typed:
@@ -86,13 +86,13 @@ combat:
     typed:
       base: 16
       str: 2
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 20
     typed:
       base: 16
       dex: 3
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 2
     typed:
@@ -119,48 +119,58 @@ skills:
     typed:
       ability_mod: 2
       ranks: 9
+      Climb (ranks): 9
   Concentration:
     total: 3
     typed:
       ability_mod: 1
       ranks: 2
+      Concentration (ranks): 2
   Hide:
     total: 15
     typed:
       ability_mod: 3
       ranks: 12
+      Hide (ranks): 12
   Jump:
     total: 11
     typed:
       ability_mod: 2
       ranks: 9
+      Jump (ranks): 9
   Listen:
     total: 11
     typed:
       ranks: 11
+      Listen (ranks): 11
   Move Silently:
     total: 12
     typed:
       ability_mod: 3
       ranks: 9
+      Move Silently (ranks): 9
   Spellcraft:
     total: 2
     typed:
       ability_mod: 1
       ranks: 1
+      Spellcraft (ranks): 1
   Spot:
     total: 9
     typed:
       ranks: 9
+      Spot (ranks): 9
   Survival:
     total: 9
     typed:
       ranks: 9
+      Survival (ranks): 9
   Swim:
     total: 11
     typed:
       ability_mod: 2
       ranks: 9
+      Swim (ranks): 9
 carrying_capacity:
   light: 58
   medium: 116

@@ -24,12 +24,23 @@ effective_monk_level_ac:
   description: >-
     Effective monk level for the monk AC bonus formula.
     Contributors: Monk class (contributes monk_level);
-    Monk's Belt (+5). Consumed by the AC formula which
-    also gates on unarmored + no shield + light load.
+    Monk's Belt (+5). Consumed by two separate formulas
+    so the sheet's AC typed-breakdown shows the Wis
+    contribution and the level-based chunk as distinct
+    lines rather than collapsing into one `untyped:`.
   consumers:
     - target: ac
       bonus_type: untyped
-      compute: monk_ac_bonus_formula
+      compute: monk_ac_wis_bonus
+      source_label: monk_wis_ac_bonus
+      gate:
+        - unarmored
+        - no_shield
+        - light_load_or_less
+    - target: ac
+      bonus_type: untyped
+      compute: monk_ac_level_bonus
+      source_label: monk_ac_bonus
       gate:
         - unarmored
         - no_shield

@@ -45,12 +45,15 @@ Paladin:
         - target: fort_save
           bonus_type: untyped
           value: cha_mod
+          source_label: divine_grace_cha
         - target: ref_save
           bonus_type: untyped
           value: cha_mod
+          source_label: divine_grace_cha
         - target: will_save
           bonus_type: untyped
           value: cha_mod
+          source_label: divine_grace_cha
     - level: 2
       feature: lay_on_hands
       description: Heal HP per day = Paladin level × CHA modifier

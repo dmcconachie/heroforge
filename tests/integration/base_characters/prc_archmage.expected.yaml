@@ -110,42 +110,50 @@ skills:
     typed:
       ability_mod: 2
       ranks: 23
+      Concentration (ranks): 23
   Decipher Script:
     total: 22
     typed:
       ability_mod: 4
       ranks: 18
+      Decipher Script (ranks): 18
   Knowledge (Arcana):
     total: 27
     typed:
       ability_mod: 4
       ranks: 23
+      Knowledge (Arcana) (ranks): 23
   Knowledge (History):
     total: 27
     typed:
       ability_mod: 4
       ranks: 23
+      Knowledge (History) (ranks): 23
   Knowledge (Religion):
     total: 27
     typed:
       ability_mod: 4
       ranks: 23
+      Knowledge (Religion) (ranks): 23
   Knowledge (The Planes):
     total: 27
     typed:
       ability_mod: 4
       ranks: 23
+      Knowledge (The Planes) (ranks): 23
   Search:
     total: 9
     typed:
       ability_mod: 4
       ranks: 5
+      Search (ranks): 5
   Spellcraft:
     total: 29
     typed:
       ability_mod: 4
       ranks: 23
       synergy: 2
+      Spellcraft (ranks): 23
   Survival:
     total: 4
     typed:

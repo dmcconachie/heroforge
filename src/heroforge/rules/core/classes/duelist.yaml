@@ -47,6 +47,7 @@ Duelist:
         - target: ac
           bonus_type: untyped
           value: max(0, int_mod)
+          source_label: canny_defense_int
     - level: 2
       feature: improved_reaction
       description: +2 initiative
@@ -54,6 +55,7 @@ Duelist:
         - target: initiative
           bonus_type: untyped
           value: 2
+          source_label: improved_reaction_init
     - level: 2
       feature: enhanced_mobility
       description: +4 AC vs AoO

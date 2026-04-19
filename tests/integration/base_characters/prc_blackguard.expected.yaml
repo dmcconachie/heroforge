@@ -58,7 +58,7 @@ combat:
     total: 5
     typed:
       dex: 1
-      untyped: 4
+      improved_initiative: 4
   speed:
     total: 30
     typed:
@@ -70,35 +70,36 @@ combat:
       typed:
         base: 12
         con: 2
-        untyped: 2
+        dark_blessing_cha: 2
     ref:
       total: 8
       typed:
         base: 5
         dex: 1
-        untyped: 2
+        dark_blessing_cha: 2
     will:
       total: 9
       typed:
         base: 5
-        untyped: 4
+        dark_blessing_cha: 2
+        iron_will: 2
   attack_melee:
     total: 21
     typed:
       base: 17
       str: 3
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 19
     typed:
       base: 17
       dex: 1
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 5
     typed:
       str: 3
-      untyped: 2
+      weapon_specialization: 2
   grapple:
     total: 20
     typed:
@@ -121,25 +122,30 @@ skills:
     typed:
       ability_mod: 3
       ranks: 4
+      Climb (ranks): 4
   Hide:
     total: 16
     typed:
       ability_mod: 1
       ranks: 15
+      Hide (ranks): 15
   Intimidate:
     total: 21
     typed:
       ability_mod: 2
       ranks: 19
+      Intimidate (ranks): 19
   Jump:
     total: 6
     typed:
       ability_mod: 3
       ranks: 3
+      Jump (ranks): 3
   Knowledge (Religion):
     total: 12
     typed:
       ranks: 12
+      Knowledge (Religion) (ranks): 12
 carrying_capacity:
   light: 76
   medium: 153

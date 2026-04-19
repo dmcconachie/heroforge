@@ -74,7 +74,7 @@ combat:
       typed:
         base: 12
         dex: 4
-        untyped: 2
+        lightning_reflexes: 2
     will:
       total: 5
       typed:
@@ -110,26 +110,31 @@ skills:
       ability_mod: 4
       ranks: 20
       synergy: 2
+      Balance (ranks): 20
   Bluff:
     total: 0
     typed:
       ability_mod: -1
       ranks: 1
+      Bluff (ranks): 1
   Disable Device:
     total: 6
     typed:
       ability_mod: 1
       ranks: 5
+      Disable Device (ranks): 5
   Escape Artist:
     total: 14
     typed:
       ability_mod: 4
       ranks: 10
+      Escape Artist (ranks): 10
   Hide:
     total: 24
     typed:
       ability_mod: 4
       ranks: 20
+      Hide (ranks): 20
   Jump:
     total: 2
     typed:
@@ -138,30 +143,36 @@ skills:
     total: 20
     typed:
       ranks: 20
+      Listen (ranks): 20
   Move Silently:
     total: 23
     typed:
       ability_mod: 4
       ranks: 19
+      Move Silently (ranks): 19
   Open Lock:
     total: 14
     typed:
       ability_mod: 4
       ranks: 10
+      Open Lock (ranks): 10
   Perform:
     total: 14
     typed:
       ability_mod: -1
       ranks: 15
+      Perform (ranks): 15
   Search:
     total: 21
     typed:
       ability_mod: 1
       ranks: 20
+      Search (ranks): 20
   Spot:
     total: 20
     typed:
       ranks: 20
+      Spot (ranks): 20
   Survival:
     total: 2
     typed:
@@ -171,6 +182,7 @@ skills:
     typed:
       ability_mod: 4
       ranks: 20
+      Tumble (ranks): 20
   Use Rope:
     total: 6
     typed:

@@ -22,7 +22,7 @@ abilities:
     mod: 3
     typed:
       base: 14
-      racial: 2
+      Dwarf: 2
   int:
     score: 10
     mod: 0
@@ -38,7 +38,7 @@ abilities:
     mod: -1
     typed:
       base: 10
-      racial: -2
+      Dwarf: -2
 combat:
   ac:
     total: 12
@@ -52,7 +52,7 @@ combat:
     typed:
       base: 140
       con: 51
-      untyped: 3
+      toughness: 3
   bab:
     total: 17
     typed:
@@ -72,7 +72,7 @@ combat:
       typed:
         base: 12
         con: 3
-        untyped: 2
+        great_fortitude: 2
     ref:
       total: 7
       typed:
@@ -83,24 +83,24 @@ combat:
       typed:
         base: 9
         wis: 1
-        untyped: 2
+        iron_will: 2
   attack_melee:
     total: 21
     typed:
       base: 17
       str: 3
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 20
     typed:
       base: 17
       dex: 2
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 5
     typed:
       str: 3
-      untyped: 2
+      weapon_specialization: 2
   grapple:
     total: 20
     typed:
@@ -123,37 +123,44 @@ skills:
     typed:
       ability_mod: 3
       ranks: 8
+      Climb (ranks): 8
   Intimidate:
     total: 7
     typed:
       ability_mod: -1
       ranks: 8
+      Intimidate (ranks): 8
   Jump:
     total: 0
     typed:
       ability_mod: 3
       ranks: 3
       speed_mod: -6
+      Jump (ranks): 3
   Listen:
     total: 11
     typed:
       ability_mod: 1
       ranks: 10
+      Listen (ranks): 10
   Sense Motive:
     total: 5
     typed:
       ability_mod: 1
       ranks: 4
+      Sense Motive (ranks): 4
   Spot:
     total: 7
     typed:
       ability_mod: 1
       ranks: 6
+      Spot (ranks): 6
   Swim:
     total: 4
     typed:
       ability_mod: 3
       ranks: 1
+      Swim (ranks): 1
 carrying_capacity:
   light: 76
   medium: 153

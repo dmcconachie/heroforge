@@ -66,29 +66,29 @@ combat:
       typed:
         base: 12
         con: 2
-        untyped: 2
+        divine_grace_cha: 2
     ref:
       total: 8
       typed:
         base: 6
-        untyped: 2
+        divine_grace_cha: 2
     will:
       total: 9
       typed:
         base: 6
         wis: 1
-        untyped: 2
+        divine_grace_cha: 2
   attack_melee:
     total: 24
     typed:
       base: 20
       str: 3
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 21
     typed:
       base: 20
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 3
     typed:
@@ -115,26 +115,31 @@ skills:
     typed:
       ability_mod: 2
       ranks: 14
+      Concentration (ranks): 14
   Diplomacy:
     total: 20
     typed:
       ability_mod: 2
       ranks: 16
       synergy: 2
+      Diplomacy (ranks): 16
   Heal:
     total: 21
     typed:
       ability_mod: 1
       ranks: 20
+      Heal (ranks): 20
   Ride:
     total: 10
     typed:
       ranks: 10
+      Ride (ranks): 10
   Sense Motive:
     total: 10
     typed:
       ability_mod: 1
       ranks: 9
+      Sense Motive (ranks): 9
 carrying_capacity:
   light: 76
   medium: 153

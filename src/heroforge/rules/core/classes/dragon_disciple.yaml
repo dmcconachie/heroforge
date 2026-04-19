@@ -41,6 +41,7 @@ Dragon Disciple:
         - target: str_score
           bonus_type: untyped
           value: 2
+          source_label: dragon_disciple_str
     - level: 2
       feature: claws_and_bite
       description: Natural weapons
@@ -51,6 +52,7 @@ Dragon Disciple:
         - target: str_score
           bonus_type: untyped
           value: 2
+          source_label: dragon_disciple_str
     - level: 4
       feature: natural_armor_4
       description: +3 natural armor (cumulative)

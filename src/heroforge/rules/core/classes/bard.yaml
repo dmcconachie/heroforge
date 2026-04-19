@@ -111,6 +111,7 @@ Bard:
         - target: hp_bonus
           bonus_type: untyped
           value: 20
+          source_label: inspire_greatness_bonus_hd
     - level: 12
       feature: song_of_freedom
       description: Break enchantment via music

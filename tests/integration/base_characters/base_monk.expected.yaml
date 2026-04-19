@@ -17,13 +17,13 @@ abilities:
     mod: 4
     typed:
       base: 16
-      racial: 2
+      Elf: 2
   con:
     score: 8
     mod: -1
     typed:
       base: 10
-      racial: -2
+      Elf: -2
   int:
     score: 10
     mod: 0
@@ -45,7 +45,8 @@ combat:
     typed:
       base: 10
       dex: 4
-      untyped: 7
+      monk_wis_ac_bonus: 3
+      monk_ac_bonus: 4
   touch_ac: 21
   flatfooted_ac: 17
   hp_max:
@@ -61,7 +62,7 @@ combat:
     total: 8
     typed:
       dex: 4
-      untyped: 4
+      improved_initiative: 4
   speed:
     total: 90
     typed:
@@ -119,11 +120,13 @@ skills:
       ability_mod: 4
       ranks: 14
       synergy: 2
+      Balance (ranks): 14
   Hide:
     total: 13
     typed:
       ability_mod: 4
       ranks: 9
+      Hide (ranks): 9
   Jump:
     total: 41
     typed:
@@ -131,27 +134,32 @@ skills:
       ranks: 14
       synergy: 2
       speed_mod: 24
+      Jump (ranks): 14
   Listen:
     total: 21
     typed:
       ability_mod: 3
       ranks: 18
+      Listen (ranks): 18
   Move Silently:
     total: 13
     typed:
       ability_mod: 4
       ranks: 9
+      Move Silently (ranks): 9
   Spot:
     total: 17
     typed:
       ability_mod: 3
       ranks: 14
+      Spot (ranks): 14
   Tumble:
     total: 20
     typed:
       ability_mod: 4
       ranks: 14
       synergy: 2
+      Tumble (ranks): 14
 carrying_capacity:
   light: 43
   medium: 86

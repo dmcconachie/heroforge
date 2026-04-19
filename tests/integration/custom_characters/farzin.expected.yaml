@@ -13,41 +13,41 @@ abilities:
     typed:
       base: 14
       level_bumps: 2
-      racial: 4
+      Half-Celestial: 4
       enhancement: 6
   dex:
     score: 14
     mod: 2
     typed:
       base: 12
-      racial: 2
+      Half-Celestial: 2
   con:
     score: 20
     mod: 5
     typed:
       base: 14
-      racial: 4
+      Half-Celestial: 4
       enhancement: 2
   int:
     score: 14
     mod: 2
     typed:
       base: 12
-      racial: 2
+      Half-Celestial: 2
   wis:
     score: 26
     mod: 8
     typed:
       base: 15
       level_bumps: 1
-      racial: 4
+      Half-Celestial: 4
       enhancement: 6
   cha:
     score: 12
     mod: 1
     typed:
       base: 8
-      racial: 4
+      Half-Celestial: 4
 combat:
   ac:
     total: 30
@@ -79,7 +79,7 @@ combat:
     total: 20
     typed:
       base: 30
-      untyped: -10
+      equip:armor: -10
   sr: 0
   saves:
     fort:
@@ -139,7 +139,7 @@ skills:
     total: -2
     typed:
       ability_mod: 2
-      untyped: -5
+      equip:armor: -5
       luck: 1
   Bluff:
     total: 2
@@ -150,13 +150,14 @@ skills:
     total: 4
     typed:
       ability_mod: 8
-      untyped: -5
+      equip:armor: -5
       luck: 1
   Concentration:
     total: 22
     typed:
       ability_mod: 5
       ranks: 16
+      Concentration (ranks): 16
       luck: 1
   Craft:
     total: 3
@@ -177,7 +178,7 @@ skills:
     total: -2
     typed:
       ability_mod: 2
-      untyped: -5
+      equip:armor: -5
       luck: 1
   Forgery:
     total: 3
@@ -194,6 +195,7 @@ skills:
     typed:
       ability_mod: 1
       ranks: 5
+      Handle Animal (ranks): 5
       luck: 1
   Heal:
     total: 9
@@ -204,7 +206,7 @@ skills:
     total: -2
     typed:
       ability_mod: 2
-      untyped: -5
+      equip:armor: -5
       luck: 1
   Intimidate:
     total: 2
@@ -216,7 +218,7 @@ skills:
     typed:
       ability_mod: 8
       speed_mod: -6
-      untyped: -5
+      equip:armor: -5
       luck: 1
   Knowledge (Nature):
     total: 21
@@ -224,18 +226,20 @@ skills:
       ability_mod: 2
       ranks: 16
       synergy: 2
+      Knowledge (Nature) (ranks): 16
       luck: 1
   Listen:
     total: 25
     typed:
       ability_mod: 8
       ranks: 16
+      Listen (ranks): 16
       luck: 1
   Move Silently:
     total: -2
     typed:
       ability_mod: 2
-      untyped: -5
+      equip:armor: -5
       luck: 1
   Perform:
     total: 2
@@ -247,6 +251,7 @@ skills:
     typed:
       ability_mod: 8
       ranks: 6
+      Profession (Soldier) (ranks): 6
       luck: 1
   Ride:
     total: 21
@@ -254,6 +259,7 @@ skills:
       ability_mod: 2
       ranks: 16
       synergy: 2
+      Ride (ranks): 16
       luck: 1
   Search:
     total: 3
@@ -270,12 +276,14 @@ skills:
     typed:
       ability_mod: 2
       ranks: 12
+      Spellcraft (ranks): 12
       luck: 1
   Spot:
     total: 25
     typed:
       ability_mod: 8
       ranks: 16
+      Spot (ranks): 16
       luck: 1
   Survival:
     total: 16
@@ -283,12 +291,13 @@ skills:
       ability_mod: 8
       ranks: 5
       synergy: 2
+      Survival (ranks): 5
       luck: 1
   Swim:
     total: -1
     typed:
       ability_mod: 8
-      untyped: -10
+      equip:armor: -10
       luck: 1
   Use Rope:
     total: 3

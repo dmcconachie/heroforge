@@ -58,7 +58,7 @@ combat:
     total: 6
     typed:
       dex: 2
-      untyped: 4
+      improved_initiative: 4
   speed:
     total: 30
     typed:
@@ -115,16 +115,19 @@ skills:
     total: 6
     typed:
       ranks: 6
+      Bluff (ranks): 6
   Concentration:
     total: 6
     typed:
       ability_mod: 1
       ranks: 5
+      Concentration (ranks): 5
   Decipher Script:
     total: 14
     typed:
       ability_mod: 4
       ranks: 10
+      Decipher Script (ranks): 10
   Diplomacy:
     total: 2
     typed:
@@ -134,6 +137,7 @@ skills:
     typed:
       ability_mod: 4
       ranks: 17
+      Disable Device (ranks): 17
   Disguise:
     total: 2
     typed:
@@ -143,6 +147,7 @@ skills:
     typed:
       ability_mod: 2
       ranks: 17
+      Escape Artist (ranks): 17
   Gather Information:
     total: 2
     typed:
@@ -152,6 +157,7 @@ skills:
     typed:
       ability_mod: 2
       ranks: 16
+      Hide (ranks): 16
   Intimidate:
     total: 2
     typed:
@@ -166,66 +172,79 @@ skills:
     typed:
       ability_mod: 4
       ranks: 5
+      Knowledge (Arcana) (ranks): 5
   Knowledge (History):
     total: 5
     typed:
       ability_mod: 4
       ranks: 1
+      Knowledge (History) (ranks): 1
   Knowledge (Local):
     total: 10
     typed:
       ability_mod: 4
       ranks: 6
+      Knowledge (Local) (ranks): 6
   Knowledge (Nature):
     total: 7
     typed:
       ability_mod: 4
       ranks: 3
+      Knowledge (Nature) (ranks): 3
   Knowledge (Religion):
     total: 8
     typed:
       ability_mod: 4
       ranks: 4
+      Knowledge (Religion) (ranks): 4
   Knowledge (The Planes):
     total: 8
     typed:
       ability_mod: 4
       ranks: 4
+      Knowledge (The Planes) (ranks): 4
   Listen:
     total: 16
     typed:
       ranks: 16
+      Listen (ranks): 16
   Move Silently:
     total: 18
     typed:
       ability_mod: 2
       ranks: 16
+      Move Silently (ranks): 16
   Open Lock:
     total: 18
     typed:
       ability_mod: 2
       ranks: 16
+      Open Lock (ranks): 16
   Search:
     total: 20
     typed:
       ability_mod: 4
       ranks: 16
+      Search (ranks): 16
   Sleight of Hand:
     total: 10
     typed:
       ability_mod: 2
       ranks: 6
       synergy: 2
+      Sleight of Hand (ranks): 6
   Spellcraft:
     total: 11
     typed:
       ability_mod: 4
       ranks: 5
       synergy: 2
+      Spellcraft (ranks): 5
   Spot:
     total: 16
     typed:
       ranks: 16
+      Spot (ranks): 16
   Survival:
     total: 2
     typed:
@@ -235,6 +254,7 @@ skills:
     typed:
       ability_mod: 2
       ranks: 16
+      Tumble (ranks): 16
   Use Rope:
     total: 4
     typed:

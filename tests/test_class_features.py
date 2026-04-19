@@ -660,3 +660,38 @@ class TestMonkFastMovement:
         assert types["enhancement"] >= 1, (
             f"expected enhancement bonus in speed pool; got {types}"
         )
+
+
+class TestMonkAcBreakdown:
+    """
+    The sheet's AC breakdown should show the monk AC
+    formula's two components separately (monk_wis_ac_bonus
+    and monk_ac_bonus) rather than lumping them into a
+    single `untyped` line."""
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def test_monk_5_wis_14_ac_breakdown(self) -> None:
+        from heroforge.engine.sheet import gather_sheet
+
+        state = self._state()
+        c = _make_monk(state, level=5, wis=14)
+        sheet = gather_sheet(c, state)  # type: ignore[arg-type]
+        typed = sheet.combat.ac.typed
+        # Wis 14 (+2 mod) + L5 monk bonus (+1) should
+        # appear as two separate lines, not as
+        # `untyped: 3`.
+        assert typed.get("monk_wis_ac_bonus") == 2, (
+            f"expected monk_wis_ac_bonus=2, typed={typed}"
+        )
+        assert typed.get("monk_ac_bonus") == 1, (
+            f"expected monk_ac_bonus=1, typed={typed}"
+        )
+        assert "untyped" not in typed, (
+            f"should not see aggregated untyped; typed={typed}"
+        )

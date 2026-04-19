@@ -32,6 +32,7 @@ Barbarian:
         - target: speed
           bonus_type: untyped
           value: 10
+          source_label: barbarian_fast_movement
     - level: 1
       feature: illiteracy
       description: Cannot read unless spending 2 skill points
@@ -59,6 +60,7 @@ Barbarian:
         - target: ac
           bonus_type: untyped
           value: -2
+          source_label: rage_ac_penalty
     - level: 2
       feature: uncanny_dodge
       description: Retain DEX bonus to AC when flat-footed
@@ -110,6 +112,7 @@ Barbarian:
         - target: ac
           bonus_type: untyped
           value: -2
+          source_label: rage_ac_penalty
     - level: 12
       feature: trap_sense_4
       description: +4 Reflex and AC vs traps
@@ -164,3 +167,4 @@ Barbarian:
         - target: ac
           bonus_type: untyped
           value: -2
+          source_label: rage_ac_penalty

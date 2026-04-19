@@ -12,7 +12,7 @@ abilities:
     mod: 9
     typed:
       base: 18
-      racial: 2
+      Half-Orc: 2
       morale: 8
   dex:
     score: 14
@@ -30,7 +30,7 @@ abilities:
     mod: -2
     typed:
       base: 8
-      racial: -2
+      Half-Orc: -2
   wis:
     score: 12
     mod: 1
@@ -41,14 +41,14 @@ abilities:
     mod: -3
     typed:
       base: 6
-      racial: -2
+      Half-Orc: -2
 combat:
   ac:
     total: 10
     typed:
       base: 10
       dex: 2
-      untyped: -2
+      rage_ac_penalty: -2
   touch_ac: 10
   flatfooted_ac: 10
   hp_max:
@@ -56,7 +56,7 @@ combat:
     typed:
       base: 164
       con: 120
-      untyped: 3
+      toughness: 3
   bab:
     total: 20
     typed:
@@ -69,7 +69,7 @@ combat:
     total: 40
     typed:
       base: 30
-      untyped: 10
+      barbarian_fast_movement: 10
   sr: 0
   saves:
     fort:
@@ -124,32 +124,38 @@ skills:
     typed:
       ability_mod: 9
       ranks: 14
+      Climb (ranks): 14
   Intimidate:
     total: 10
     typed:
       ability_mod: -3
       ranks: 13
+      Intimidate (ranks): 13
   Jump:
     total: 26
     typed:
       ability_mod: 9
       ranks: 13
       speed_mod: 4
+      Jump (ranks): 13
   Listen:
     total: 11
     typed:
       ability_mod: 1
       ranks: 10
+      Listen (ranks): 10
   Survival:
     total: 11
     typed:
       ability_mod: 1
       ranks: 10
+      Survival (ranks): 10
   Swim:
     total: 18
     typed:
       ability_mod: 9
       ranks: 9
+      Swim (ranks): 9
 carrying_capacity:
   light: 400
   medium: 800

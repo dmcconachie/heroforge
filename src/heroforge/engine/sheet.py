@@ -73,9 +73,22 @@ def _pool_breakdown(
 ) -> dict[str, int]:
     """
     Break down a BonusPool into effective contributions
-    per bonus type (keyed by BonusType.value so it can
-    merge directly into a Breakdown.typed dict). Applies
-    stacking rules. Returns only non-zero entries.
+    for the sheet's `typed:` dict. Applies stacking rules.
+
+    - Non-stacking types (enhancement, morale, competence,
+      etc.) are grouped by BonusType.value and only the
+      highest per type counts.
+    - Always-stacking types (untyped, dodge, racial) are
+      grouped by each entry's `source` label so the sheet
+      shows *where* each contribution came from rather
+      than collapsing everything into a single `untyped`
+      line. Entries with no explicit source fall back to
+      their bonus_type name.
+    - Penalties (value < 0) always stack and are grouped
+      by bonus_type name (shared line for all penalties of
+      a given type).
+
+    Returns only non-zero entries.
     """
     if pool is None:
         return {}
@@ -83,19 +96,30 @@ def _pool_breakdown(
     if not active:
         return {}
 
-    stacking: dict[BonusType, int] = defaultdict(int)
+    penalty_bucket: dict[BonusType, int] = defaultdict(int)
+    by_source: dict[str, int] = defaultdict(int)
     typed_buckets: dict[BonusType, list[int]] = defaultdict(list)
 
     for e in active:
-        if e.value < 0 or e.bonus_type in ALWAYS_STACKING:
-            stacking[e.bonus_type] += e.value
+        if e.bonus_type in ALWAYS_STACKING:
+            # Untyped / dodge / racial: always stack, and
+            # always display per-source regardless of sign.
+            label = e.source or e.bonus_type.value
+            by_source[label] += e.value
+        elif e.value < 0:
+            # Typed penalties stack with everything per
+            # SRD; group by type for the display.
+            penalty_bucket[e.bonus_type] += e.value
         else:
             typed_buckets[e.bonus_type].append(e.value)
 
     result: dict[str, int] = {}
-    for bt, val in stacking.items():
+    for bt, val in penalty_bucket.items():
         if val != 0:
             result[bt.value] = val
+    for label, val in by_source.items():
+        if val != 0:
+            result[label] = val
     for bt, vals in typed_buckets.items():
         best = max(vals)
         if best != 0:

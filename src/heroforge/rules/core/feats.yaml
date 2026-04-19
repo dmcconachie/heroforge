@@ -57,11 +57,11 @@ Acrobatic:
     - target: skill_jump
       bonus_type: untyped
       value: 2
-      source_label: Acrobatic
+      source_label: acrobatic
     - target: skill_tumble
       bonus_type: untyped
       value: 2
-      source_label: Acrobatic
+      source_label: acrobatic
 Agile:
   kind: always_on
   source_book: PHB
@@ -71,11 +71,11 @@ Agile:
     - target: skill_balance
       bonus_type: untyped
       value: 2
-      source_label: Agile
+      source_label: agile
     - target: skill_escape_artist
       bonus_type: untyped
       value: 2
-      source_label: Agile
+      source_label: agile
 Alertness:
   kind: always_on
   source_book: PHB
@@ -85,11 +85,11 @@ Alertness:
     - target: skill_listen
       bonus_type: untyped
       value: 2
-      source_label: Alertness
+      source_label: alertness
     - target: skill_spot
       bonus_type: untyped
       value: 2
-      source_label: Alertness
+      source_label: alertness
 Animal Affinity:
   kind: always_on
   source_book: PHB
@@ -99,11 +99,11 @@ Animal Affinity:
     - target: skill_handle_animal
       bonus_type: untyped
       value: 2
-      source_label: Animal Affinity
+      source_label: animal_affinity
     - target: skill_ride
       bonus_type: untyped
       value: 2
-      source_label: Animal Affinity
+      source_label: animal_affinity
 Armor Proficiency (Heavy):
   kind: passive
   source_book: PHB
@@ -133,11 +133,11 @@ Athletic:
     - target: skill_climb
       bonus_type: untyped
       value: 2
-      source_label: Athletic
+      source_label: athletic
     - target: skill_swim
       bonus_type: untyped
       value: 2
-      source_label: Athletic
+      source_label: athletic
 Augment Summoning:
   kind: passive
   source_book: SRD
@@ -181,7 +181,7 @@ Combat Casting:
     - target: skill_concentration
       bonus_type: circumstance
       value: 4
-      source_label: Combat Casting
+      source_label: combat_casting
 Combat Expertise:
   kind: conditional
   source_book: PHB
@@ -200,11 +200,11 @@ Combat Expertise:
     - target: attack_all
       bonus_type: untyped
       value: -$parameter
-      source_label: Combat Expertise (penalty)
+      source_label: combat_expertise_penalty
     - target: ac
       bonus_type: dodge
       value: $parameter
-      source_label: Combat Expertise (bonus)
+      source_label: combat_expertise
 Combat Reflexes:
   kind: passive
   source_book: SRD
@@ -267,11 +267,11 @@ Deceitful:
     - target: skill_disguise
       bonus_type: untyped
       value: 2
-      source_label: Deceitful
+      source_label: deceitful
     - target: skill_forgery
       bonus_type: untyped
       value: 2
-      source_label: Deceitful
+      source_label: deceitful
 Deflect Arrows:
   kind: passive
   source_book: PHB
@@ -292,11 +292,11 @@ Deft Hands:
     - target: skill_sleight_of_hand
       bonus_type: untyped
       value: 2
-      source_label: Deft Hands
+      source_label: deft_hands
     - target: skill_use_rope
       bonus_type: untyped
       value: 2
-      source_label: Deft Hands
+      source_label: deft_hands
 Diehard:
   kind: passive
   source_book: PHB
@@ -313,11 +313,11 @@ Diligent:
     - target: skill_appraise
       bonus_type: untyped
       value: 2
-      source_label: Diligent
+      source_label: diligent
     - target: skill_decipher_script
       bonus_type: untyped
       value: 2
-      source_label: Diligent
+      source_label: diligent
 Dodge:
   kind: passive
   source_book: PHB
@@ -412,7 +412,7 @@ Great Fortitude:
     - target: fort_save
       bonus_type: untyped
       value: 2
-      source_label: Great Fortitude
+      source_label: great_fortitude
 Greater Spell Focus:
   kind: passive
   source_book: PHB
@@ -460,7 +460,7 @@ Greater Weapon Focus:
     - target: attack_all
       bonus_type: untyped
       value: 1
-      source_label: Greater Weapon Focus
+      source_label: greater_weapon_focus
 Greater Weapon Specialization:
   kind: always_on
   source_book: PHB
@@ -480,7 +480,7 @@ Greater Weapon Specialization:
     - target: damage_all
       bonus_type: untyped
       value: 2
-      source_label: Greater Weapon Specialization
+      source_label: greater_weapon_specialization
 Heighten Spell:
   kind: passive
   source_book: PHB
@@ -567,7 +567,7 @@ Improved Initiative:
     - target: initiative
       bonus_type: untyped
       value: 4
-      source_label: Improved Initiative
+      source_label: improved_initiative
 Improved Overrun:
   kind: passive
   source_book: PHB
@@ -665,11 +665,11 @@ Investigator:
     - target: skill_gather_information
       bonus_type: untyped
       value: 2
-      source_label: Investigator
+      source_label: investigator
     - target: skill_search
       bonus_type: untyped
       value: 2
-      source_label: Investigator
+      source_label: investigator
 Iron Will:
   kind: always_on
   source_book: PHB
@@ -679,7 +679,7 @@ Iron Will:
     - target: will_save
       bonus_type: untyped
       value: 2
-      source_label: Iron Will
+      source_label: iron_will
 Leadership:
   kind: passive
   source_book: SRD
@@ -699,7 +699,7 @@ Lightning Reflexes:
     - target: ref_save
       bonus_type: untyped
       value: 2
-      source_label: Lightning Reflexes
+      source_label: lightning_reflexes
 Magical Aptitude:
   kind: always_on
   source_book: PHB
@@ -709,11 +709,11 @@ Magical Aptitude:
     - target: skill_spellcraft
       bonus_type: untyped
       value: 2
-      source_label: Magical Aptitude
+      source_label: magical_aptitude
     - target: skill_use_magic_device
       bonus_type: untyped
       value: 2
-      source_label: Magical Aptitude
+      source_label: magical_aptitude
 Manyshot:
   kind: passive
   source_book: PHB
@@ -792,11 +792,11 @@ Negotiator:
     - target: skill_diplomacy
       bonus_type: untyped
       value: 2
-      source_label: Negotiator
+      source_label: negotiator
     - target: skill_sense_motive
       bonus_type: untyped
       value: 2
-      source_label: Negotiator
+      source_label: negotiator
 Nimble Fingers:
   kind: always_on
   source_book: PHB
@@ -806,11 +806,11 @@ Nimble Fingers:
     - target: skill_disable_device
       bonus_type: untyped
       value: 2
-      source_label: Nimble Fingers
+      source_label: nimble_fingers
     - target: skill_open_lock
       bonus_type: untyped
       value: 2
-      source_label: Nimble Fingers
+      source_label: nimble_fingers
 Persuasive:
   kind: always_on
   source_book: PHB
@@ -820,11 +820,11 @@ Persuasive:
     - target: skill_bluff
       bonus_type: untyped
       value: 2
-      source_label: Persuasive
+      source_label: persuasive
     - target: skill_intimidate
       bonus_type: untyped
       value: 2
-      source_label: Persuasive
+      source_label: persuasive
 Point Blank Shot:
   kind: passive
   source_book: PHB
@@ -850,11 +850,11 @@ Power Attack:
     - target: attack_all
       bonus_type: untyped
       value: -$parameter
-      source_label: Power Attack (penalty)
+      source_label: power_attack_penalty
     - target: damage_all
       bonus_type: untyped
       value: $parameter
-      source_label: Power Attack (bonus)
+      source_label: power_attack
 Precise Shot:
   kind: passive
   source_book: PHB
@@ -934,11 +934,11 @@ Self-Sufficient:
     - target: skill_heal
       bonus_type: untyped
       value: 2
-      source_label: Self-Sufficient
+      source_label: self_sufficient
     - target: skill_survival
       bonus_type: untyped
       value: 2
-      source_label: Self-Sufficient
+      source_label: self_sufficient
 Shield Proficiency:
   kind: passive
   source_book: PHB
@@ -1045,11 +1045,11 @@ Stealthy:
     - target: skill_hide
       bonus_type: untyped
       value: 2
-      source_label: Stealthy
+      source_label: stealthy
     - target: skill_move_silently
       bonus_type: untyped
       value: 2
-      source_label: Stealthy
+      source_label: stealthy
 Still Spell:
   kind: passive
   source_book: PHB
@@ -1083,7 +1083,7 @@ Toughness:
     - target: hp_bonus
       bonus_type: untyped
       value: 3
-      source_label: Toughness
+      source_label: toughness
 Tower Shield Proficiency:
   kind: passive
   source_book: PHB
@@ -1158,7 +1158,7 @@ Weapon Focus:
     - target: attack_all
       bonus_type: untyped
       value: 1
-      source_label: Weapon Focus
+      source_label: weapon_focus
 Weapon Specialization:
   kind: always_on
   source_book: PHB
@@ -1177,7 +1177,7 @@ Weapon Specialization:
     - target: damage_all
       bonus_type: untyped
       value: 2
-      source_label: Weapon Specialization
+      source_label: weapon_specialization
 Whirlwind Attack:
   kind: passive
   source_book: PHB

@@ -12,7 +12,7 @@ abilities:
     mod: 4
     typed:
       base: 14
-      untyped: 4
+      dragon_disciple_str: 4
   dex:
     score: 12
     mod: 1
@@ -52,7 +52,7 @@ combat:
     typed:
       base: 89
       con: 24
-      untyped: 3
+      toughness: 3
   bab:
     total: 8
     typed:
@@ -72,7 +72,7 @@ combat:
       typed:
         base: 7
         con: 2
-        untyped: 2
+        great_fortitude: 2
     ref:
       total: 4
       typed:
@@ -82,7 +82,7 @@ combat:
       total: 12
       typed:
         base: 10
-        untyped: 2
+        iron_will: 2
   attack_melee:
     total: 12
     typed:
@@ -115,23 +115,28 @@ skills:
     typed:
       ability_mod: 2
       ranks: 15
+      Concentration (ranks): 15
   Knowledge (Arcana):
     total: 9
     typed:
       ranks: 9
+      Knowledge (Arcana) (ranks): 9
   Listen:
     total: 5
     typed:
       ranks: 5
+      Listen (ranks): 5
   Spellcraft:
     total: 13
     typed:
       ranks: 11
       synergy: 2
+      Spellcraft (ranks): 11
   Spot:
     total: 5
     typed:
       ranks: 5
+      Spot (ranks): 5
 carrying_capacity:
   light: 100
   medium: 200

@@ -58,7 +58,7 @@ combat:
     total: 7
     typed:
       dex: 3
-      untyped: 4
+      improved_initiative: 4
   speed:
     total: 30
     typed:
@@ -108,11 +108,13 @@ skills:
       ability_mod: 3
       ranks: 8
       synergy: 2
+      Balance (ranks): 8
   Bluff:
     total: 17
     typed:
       ability_mod: -1
       ranks: 18
+      Bluff (ranks): 18
   Diplomacy:
     total: 1
     typed:
@@ -123,17 +125,20 @@ skills:
     typed:
       ability_mod: 2
       ranks: 8
+      Disable Device (ranks): 8
   Disguise:
     total: 19
     typed:
       ability_mod: -1
       ranks: 18
       synergy: 2
+      Disguise (ranks): 18
   Hide:
     total: 21
     typed:
       ability_mod: 3
       ranks: 18
+      Hide (ranks): 18
   Intimidate:
     total: 1
     typed:
@@ -147,25 +152,30 @@ skills:
     total: 18
     typed:
       ranks: 18
+      Listen (ranks): 18
   Move Silently:
     total: 21
     typed:
       ability_mod: 3
       ranks: 18
+      Move Silently (ranks): 18
   Open Lock:
     total: 11
     typed:
       ability_mod: 3
       ranks: 8
+      Open Lock (ranks): 8
   Search:
     total: 10
     typed:
       ability_mod: 2
       ranks: 8
+      Search (ranks): 8
   Spot:
     total: 18
     typed:
       ranks: 18
+      Spot (ranks): 18
   Survival:
     total: 2
     typed:
@@ -175,6 +185,7 @@ skills:
     typed:
       ability_mod: 3
       ranks: 18
+      Tumble (ranks): 18
 carrying_capacity:
   light: 33
   medium: 66

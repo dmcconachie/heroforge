@@ -100,18 +100,22 @@ skills:
     typed:
       ability_mod: 2
       ranks: 13
+      Concentration (ranks): 13
   Knowledge (Religion):
     total: 8
     typed:
       ranks: 8
+      Knowledge (Religion) (ranks): 8
   Knowledge (The Planes):
     total: 10
     typed:
       ranks: 10
+      Knowledge (The Planes) (ranks): 10
   Spellcraft:
     total: 8
     typed:
       ranks: 8
+      Spellcraft (ranks): 8
   Survival:
     total: 5
     typed:

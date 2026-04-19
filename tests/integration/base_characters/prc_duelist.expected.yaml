@@ -17,13 +17,13 @@ abilities:
     mod: 3
     typed:
       base: 14
-      racial: 2
+      Elf: 2
   con:
     score: 12
     mod: 1
     typed:
       base: 14
-      racial: -2
+      Elf: -2
   int:
     score: 14
     mod: 2
@@ -45,7 +45,7 @@ combat:
     typed:
       base: 10
       dex: 3
-      untyped: 2
+      canny_defense_int: 2
   touch_ac: 15
   flatfooted_ac: 12
   hp_max:
@@ -61,7 +61,8 @@ combat:
     total: 9
     typed:
       dex: 3
-      untyped: 6
+      improved_reaction_init: 2
+      improved_initiative: 4
   speed:
     total: 30
     typed:
@@ -78,7 +79,7 @@ combat:
       typed:
         base: 11
         dex: 3
-        untyped: 2
+        lightning_reflexes: 2
         competence: 2
     will:
       total: 5
@@ -89,13 +90,13 @@ combat:
     typed:
       base: 16
       str: 2
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 20
     typed:
       base: 16
       dex: 3
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 2
     typed:
@@ -123,16 +124,19 @@ skills:
       ability_mod: 3
       ranks: 10
       synergy: 2
+      Balance (ranks): 10
   Bluff:
     total: 0
     typed:
       ability_mod: -1
       ranks: 1
+      Bluff (ranks): 1
   Climb:
     total: 10
     typed:
       ability_mod: 2
       ranks: 8
+      Climb (ranks): 8
   Diplomacy:
     total: 1
     typed:
@@ -143,60 +147,72 @@ skills:
     typed:
       ability_mod: 3
       ranks: 10
+      Escape Artist (ranks): 10
   Hide:
     total: 4
     typed:
       ability_mod: 3
       ranks: 1
+      Hide (ranks): 1
   Intimidate:
     total: 3
     typed:
       ability_mod: -1
       ranks: 4
+      Intimidate (ranks): 4
   Jump:
     total: 12
     typed:
       ability_mod: 2
       ranks: 8
       synergy: 2
+      Jump (ranks): 8
   Listen:
     total: 11
     typed:
       ranks: 11
+      Listen (ranks): 11
   Move Silently:
     total: 4
     typed:
       ability_mod: 3
       ranks: 1
+      Move Silently (ranks): 1
   Perform:
     total: 9
     typed:
       ability_mod: -1
       ranks: 10
+      Perform (ranks): 10
   Search:
     total: 3
     typed:
       ability_mod: 2
       ranks: 1
+      Search (ranks): 1
   Sense Motive:
     total: 11
     typed:
       ranks: 11
+      Sense Motive (ranks): 11
   Spot:
     total: 5
     typed:
       ranks: 5
+      Spot (ranks): 5
   Swim:
     total: 6
     typed:
       ability_mod: 2
       ranks: 4
+      Swim (ranks): 4
   Tumble:
     total: 20
     typed:
       ability_mod: 3
       ranks: 15
       synergy: 2
+      Tumble (ranks): 15
   Use Rope:
     total: 5
     typed:

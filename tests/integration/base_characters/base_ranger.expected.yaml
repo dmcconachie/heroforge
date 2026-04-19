@@ -12,13 +12,13 @@ abilities:
     mod: 0
     typed:
       base: 12
-      racial: -2
+      Halfling: -2
   dex:
     score: 20
     mod: 5
     typed:
       base: 18
-      racial: 2
+      Halfling: 2
   con:
     score: 12
     mod: 1
@@ -87,14 +87,14 @@ combat:
     typed:
       base: 20
       size: 1
-      untyped: 1
+      weapon_focus: 1
   attack_ranged:
     total: 27
     typed:
       base: 20
       dex: 5
       size: 1
-      untyped: 1
+      weapon_focus: 1
   damage_melee:
     total: 0
   grapple:
@@ -118,17 +118,20 @@ skills:
     total: 16
     typed:
       ranks: 16
+      Climb (ranks): 16
   Heal:
     total: 17
     typed:
       ability_mod: 2
       ranks: 13
-      untyped: 2
+      self_sufficient: 2
+      Heal (ranks): 13
   Hide:
     total: 28
     typed:
       ability_mod: 5
       ranks: 23
+      Hide (ranks): 23
   Jump:
     total: -6
     typed:
@@ -138,28 +141,33 @@ skills:
     typed:
       ability_mod: 2
       ranks: 23
+      Listen (ranks): 23
   Move Silently:
     total: 28
     typed:
       ability_mod: 5
       ranks: 23
+      Move Silently (ranks): 23
   Search:
     total: 18
     typed:
       ability_mod: 1
       ranks: 17
+      Search (ranks): 17
   Spot:
     total: 25
     typed:
       ability_mod: 2
       ranks: 23
+      Spot (ranks): 23
   Survival:
     total: 29
     typed:
       ability_mod: 2
       ranks: 23
       synergy: 2
-      untyped: 2
+      self_sufficient: 2
+      Survival (ranks): 23
 carrying_capacity:
   light: 24
   medium: 49

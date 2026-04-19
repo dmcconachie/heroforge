@@ -65,24 +65,29 @@ def registered_names() -> list[str]:
 # ---------------------------------------------------------------------------
 
 
-@register_compute("monk_ac_bonus_formula")
-def _monk_ac_bonus_formula(character: "Character") -> int:
+@register_compute("monk_ac_wis_bonus")
+def _monk_ac_wis_bonus(character: "Character") -> int:
     """
-    PHB p.40 + Monk's Belt (DMG): Wis mod (if positive)
-    + effective_monk_level // 5.
-
-    Only applies when the character has a non-zero
-    effective monk level — i.e. some source (monk class,
-    Monk's Belt, etc.) has contributed to the pool. A
-    Fighter with Wis 18 should NOT get +4 AC just because
-    his gates hold; he needs a monk-level contribution
-    first.
-    """
+    Wis-mod half of the monk AC bonus formula
+    (PHB p.40). Only applies when some source has
+    contributed monk levels to the pool — a Fighter with
+    Wis 18 but no Monk's Belt should NOT get +4 AC just
+    because his gates hold."""
     pool = character.get("effective_monk_level_ac")
     if pool <= 0:
         return 0
-    wis_mod = max(0, character.get_ability_modifier(Ability.WIS))
-    return wis_mod + pool // 5
+    return max(0, character.get_ability_modifier(Ability.WIS))
+
+
+@register_compute("monk_ac_level_bonus")
+def _monk_ac_level_bonus(character: "Character") -> int:
+    """
+    Level-based half of the monk AC bonus formula
+    (PHB p.40): effective_monk_level // 5."""
+    pool = character.get("effective_monk_level_ac")
+    if pool <= 0:
+        return 0
+    return pool // 5
 
 
 @register_compute("monk_fast_movement_bonus")
@@ -139,7 +144,15 @@ def install_consumers(
             gate = consumer.get("gate") or []
             condition = make_condition(tuple(gate))
             src = f"{_SOURCE_PREFIX}:{pool_name}:{idx}"
-            label = f"derived:{pool_name}:{compute_name}"
+            # `source_label:` lets the sheet show this
+            # contribution with a specific name in the
+            # `typed:` breakdown for untyped / dodge /
+            # racial entries (which group by source rather
+            # than bonus type). Falls back to the pool
+            # name + compute strategy when omitted.
+            label = consumer.get("source_label") or (
+                f"derived:{pool_name}:{compute_name}"
+            )
             character._derived_consumer_specs.append(
                 {
                     "src": src,

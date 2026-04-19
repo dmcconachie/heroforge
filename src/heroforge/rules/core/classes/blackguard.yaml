@@ -51,12 +51,15 @@ Blackguard:
         - target: fort_save
           bonus_type: untyped
           value: cha_mod
+          source_label: dark_blessing_cha
         - target: ref_save
           bonus_type: untyped
           value: cha_mod
+          source_label: dark_blessing_cha
         - target: will_save
           bonus_type: untyped
           value: cha_mod
+          source_label: dark_blessing_cha
     - level: 2
       feature: smite_good
       description: Smite good 1/day
