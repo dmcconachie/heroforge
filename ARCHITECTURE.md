@@ -361,7 +361,7 @@ already-loaded Character.
 
 CLI entry points: `uv run charsheet input.char.yaml` and
 `python -m heroforge.engine.sheet input.char.yaml` both
-serialise the Sheet via the shared cattrs converter
+serialize the Sheet via the shared cattrs converter
 (`rules/schema.py`) and print YAML to stdout; `-o file.yaml`
 writes to file.
 
@@ -485,12 +485,16 @@ keeps working.
 Magic items have their own domain:
 `MagicItemDefinition` and `MagicItemRegistry` live in
 `engine/magic_items.py`. The `MagicItemLoader` reads
-`magic_items.yaml` (which uses a `magic_items:`
-top-level key), structures each entry as a
-`MagicItemDefinition`, and also registers a
-`BuffDefinition` in the `BuffRegistry` via
-`build_buff_from_effects()` so the buff-toggle UI
-keeps working.
+`magic_items.yaml` (a flat mapping keyed by item name)
+and structures each entry as a `MagicItemDefinition`.
+Magic items are NOT buffs — when equipped, effects
+flow into the character's BonusPools via
+`engine.equipment.equip_item()`, not through the
+buff-toggle system. Transitory item activations
+(e.g. Boots of Speed's 10 rd/day haste) reuse the
+corresponding spell buff where one exists, or are
+tracked via `ResourceTracker` and handled manually
+by the player.
 
 YAML files under `rules/core/` contain full SRD data:
 - 16 base classes (11 PHB + 5 NPC) + 15 prestige classes

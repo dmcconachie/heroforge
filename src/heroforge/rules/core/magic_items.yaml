@@ -4,9 +4,9 @@
 # SRD magic items that grant stat bonuses.
 # Loaded via MagicItemLoader.
 #
-# Items are modeled as buff definitions -- when
-# equipped (toggled on), their effects feed into
-# the character's BonusPools.
+# Items are NOT buffs. When equipped, effects feed
+# into the character's BonusPools via
+# engine.equipment.equip_item().
 #
 # Sorted by slot, then alphabetically.
 # Slot order: head, eyes, neck, shoulders, body,
