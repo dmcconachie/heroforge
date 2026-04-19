@@ -22,7 +22,12 @@ Barbarian:
   class_features:
     - level: 1
       feature: fast_movement
-      description: +10 ft speed (not in medium/heavy armor)
+      description: >-
+        +10 ft speed (applies only when not wearing heavy
+        armor and not carrying a heavy load; PHB p.25)
+      gate:
+        - not_heavy_armor
+        - not_heavy_load
       effects:
         - target: speed
           bonus_type: untyped

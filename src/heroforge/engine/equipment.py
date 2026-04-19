@@ -63,6 +63,12 @@ class ArmorCategory(enum.Enum):
     TOWER_SHIELD = "tower_shield"
 
 
+class LoadCategory(enum.Enum):
+    LIGHT = "light"
+    MEDIUM = "medium"
+    HEAVY = "heavy"
+
+
 _SHIELD_CATS = {
     ArmorCategory.SHIELD,
     ArmorCategory.TOWER_SHIELD,
@@ -296,6 +302,7 @@ def equip_armor(
     # Store armor data for max DEX and ACP
     character.equipment["armor"] = {
         "name": armor.name,
+        "category": armor.category.value,
         "max_dex_bonus": max_dex,
         "armor_check_penalty": acp,
         "arcane_spell_failure": asf,

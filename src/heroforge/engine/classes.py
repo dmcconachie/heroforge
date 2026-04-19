@@ -103,6 +103,11 @@ class ClassFeature:
     note: str = ""
     requires_caster_level: bool = False
     mutually_exclusive_with: tuple[str, ...] = ()
+    # Gate keys (KnownCoreGate values) governing when this
+    # feature's effects contribute. Empty = unconditional.
+    # Only meaningful for passive features (buff_name=="")
+    # today.
+    gate: tuple[str, ...] = ()
 
 
 # -----------------------------------------------------------

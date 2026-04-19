@@ -396,6 +396,77 @@ class BuffRegistry:
 
 
 # ---------------------------------------------------------------------------
+# pool_entries_from_effects — passive-path utility
+# ---------------------------------------------------------------------------
+
+
+def pool_entries_from_effects(
+    effects_raw: list[dict],
+    source_label: str,
+    character: "Character | None" = None,
+    caster_level: int = 0,
+    condition: Callable | None = None,
+) -> list[tuple[PoolKey, BonusEntry]]:
+    """
+    Convert raw YAML effect dicts into (pool_key,
+    BonusEntry) pairs, ready for direct registration into
+    BonusPools. Bypasses BuffDefinition — used by passive
+    class features and derived-pool consumers.
+
+    Each resulting BonusEntry gets `condition` attached
+    if provided (None = unconditionally active). Formula
+    values are resolved at call time. Multi-target pool
+    keys (attack_all, damage_all) are expanded.
+    """
+    from heroforge.engine.bonus import BonusType
+
+    if not effects_raw:
+        return []
+
+    bt_map: dict[str, BonusType] = {bt.value: bt for bt in BonusType}
+
+    pairs: list[tuple[PoolKey, BonusEntry]] = []
+    for eff_decl in effects_raw:
+        target = eff_decl.get("target")
+        if not target:
+            continue
+        try:
+            target_key = (
+                target if isinstance(target, PoolKey) else PoolKey(target)
+            )
+        except ValueError as exc:
+            raise ValueError(
+                f"{source_label!r}: effect target {target!r} "
+                f"is not a known PoolKey"
+            ) from exc
+
+        bt_str = eff_decl.get("bonus_type", "untyped")
+        bonus_type = bt_map.get(bt_str, BonusType.UNTYPED)
+
+        raw_value = eff_decl.get("value", 0)
+        if isinstance(raw_value, bool):
+            raw_value = int(raw_value)
+        if isinstance(raw_value, str):
+            resolved = evaluate_formula(raw_value, caster_level, character)
+        else:
+            resolved = int(raw_value)
+
+        label = eff_decl.get("source_label") or source_label
+
+        entry = BonusEntry(
+            value=resolved,
+            bonus_type=bonus_type,
+            source=label,
+            condition=condition,
+        )
+
+        for expanded in _MULTI_TARGET_EXPANSIONS.get(target_key, [target_key]):
+            pairs.append((expanded, entry))
+
+    return pairs
+
+
+# ---------------------------------------------------------------------------
 # build_buff_from_effects — shared by all domain loaders
 # ---------------------------------------------------------------------------
 

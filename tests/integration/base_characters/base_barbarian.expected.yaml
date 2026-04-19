@@ -164,7 +164,8 @@ feats:
   - Toughness
 class_features:
   - >-
-    fast_movement: +10 ft speed (not in medium/heavy armor)
+    fast_movement: +10 ft speed (applies only when not wearing heavy armor
+    and not carrying a heavy load; PHB p.25)
   - >-
     illiteracy: Cannot read unless spending 2 skill points
   - 'rage: +4 STR/CON, +2 Will, -2 AC; 1/day'

@@ -40,6 +40,7 @@ if TYPE_CHECKING:
 
     from heroforge.engine.bonus import BonusEntry
     from heroforge.engine.effects import BuffDefinition
+    from heroforge.engine.equipment import ArmorCategory, LoadCategory
     from heroforge.engine.feats import FeatDefinition
 
 from heroforge.engine.bonus import BonusPool
@@ -283,6 +284,14 @@ class Character:
         # --- Equipment (simplified for now) --------------------------------
         self.equipment: dict[str, Any] = {}
         # slot_name → item dict; populated by equipment manager
+
+        # --- Current load (lbs carried) ------------------------------------
+        # Used by current_load_category() to evaluate load
+        # gates (Barbarian fast movement, Monk fast
+        # movement, etc.). A full inventory-weight summing
+        # system is separate — for now, this is explicitly
+        # settable via set_current_weight().
+        self._current_weight: int = 0
 
         # --- Buff management ------------------------------------------------
         self._buff_states: dict[str, BuffState] = {}
@@ -748,6 +757,62 @@ class Character:
             int(med * size_mult),
             int(heavy * size_mult),
         )
+
+    # -------------------------------------------------------
+    # Equipment / load query helpers (used by gate predicates)
+    # -------------------------------------------------------
+
+    def equipped_armor_category(self) -> "ArmorCategory | None":
+        """
+        Return the ArmorCategory of currently-equipped
+        armor, or None if unarmored. Shields do not count
+        as armor here — see has_shield()."""
+        from heroforge.engine.equipment import ArmorCategory
+
+        armor = self.equipment.get("armor")
+        if armor is None:
+            return None
+        cat = armor.get("category")
+        if cat is None:
+            return None
+        try:
+            return ArmorCategory(cat)
+        except ValueError:
+            return None
+
+    def has_shield(self) -> bool:
+        # Treat missing, None, and empty-dict slots all as
+        # "no shield". Persistence stores empty slots as
+        # `shield: {}` in the YAML, which should not gate
+        # shield-dependent abilities off.
+        shield = self.equipment.get("shield")
+        return bool(shield)
+
+    def set_current_weight(self, weight: int) -> None:
+        """
+        Override the tracked carried weight. Invalidates
+        any stat whose gate depends on load (e.g. speed for
+        barbarian fast movement)."""
+        self._current_weight = max(0, int(weight))
+        # Anything that gates on load category must be
+        # recomputed. `speed` is the main one today; add
+        # to this list as more load-gated features land.
+        self._graph.invalidate("speed")
+        self.on_change.notify({"speed", "load"})
+
+    def current_load_category(self) -> "LoadCategory":
+        """
+        Return LoadCategory based on current weight vs
+        the character's carrying capacity thresholds."""
+        from heroforge.engine.equipment import LoadCategory
+
+        light, med, _heavy = self.carrying_capacity()
+        w = self._current_weight
+        if w <= light:
+            return LoadCategory.LIGHT
+        if w <= med:
+            return LoadCategory.MEDIUM
+        return LoadCategory.HEAVY
 
     def touch_ac(self) -> int:
         """
@@ -1466,16 +1531,23 @@ class Character:
 
     def _apply_class_feature_effects(self) -> None:
         """
-        Auto-apply always-on class feature effects
-        based on current class levels.
+        Auto-apply always-on class feature effects based on
+        current class levels. Clears stale features and
+        applies current ones whenever class levels change.
 
-        Called whenever class levels change. Clears
-        stale features and applies current ones.
+        Features with a `buff_name:` are skipped — those are
+        user-toggleable buffs, not passives.
+
+        Features with a `gate:` (equipment predicates) have
+        a condition lambda attached to each BonusEntry so
+        they only contribute when the gates hold. The
+        gates are re-evaluated on every pool read via
+        BonusEntry.condition.
         """
         from heroforge.engine.effects import (
-            BuffCategory,
-            build_buff_from_effects,
+            pool_entries_from_effects,
         )
+        from heroforge.engine.gates import make_condition
 
         reg = self._class_registry_ref
         if reg is None:
@@ -1499,14 +1571,13 @@ class Character:
                     continue
                 src = f"classfeature:{cn}:{feat.feature}"
                 active_keys.add(src)
-                buff = build_buff_from_effects(
-                    name=src,
-                    category=BuffCategory.CLASS,
+                condition = make_condition(feat.gate)
+                pairs = pool_entries_from_effects(
                     effects_raw=list(feat.effects),
+                    source_label=src,
+                    character=self,
+                    condition=condition,
                 )
-                if buff is None:
-                    continue
-                pairs = buff.pool_entries(0, self)
                 pool_map: dict[str, list] = {}
                 for pk, entry in pairs:
                     pool_map.setdefault(pk, []).append(entry)
@@ -1516,6 +1587,7 @@ class Character:
                         continue
                     p.set_source(src, entries)
                     self._graph.invalidate_pool(pk)
+
 
         # Clear features that no longer apply
         prefix = "classfeature:"

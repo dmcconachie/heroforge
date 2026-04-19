@@ -7,12 +7,18 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from heroforge.engine.character import Character
+from heroforge.engine.character import Character, ClassLevel
 from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.effects import (
     BuffRegistry,
     apply_buff,
     remove_buff,
+)
+from heroforge.engine.equipment import (
+    ArmorCategory,
+    ArmorDefinition,
+    equip_armor,
+    unequip_armor,
 )
 from heroforge.engine.resources import (
     ResourceTracker,
@@ -268,3 +274,125 @@ class TestPassiveFeaturesNotInBuffRegistry:
         assert c.get("fort_save") == 5
         assert c.get("ref_save") == 2  # 0 base + 2 cha
         assert c.get("will_save") == 2  # 0 base + 2 cha
+
+
+# Medium armor definition for gate tests (SRD Scale Mail
+# stats).
+_SCALE_MAIL = ArmorDefinition(
+    name="Scale Mail",
+    category=ArmorCategory.MEDIUM,
+    armor_bonus=4,
+    max_dex_bonus=3,
+    armor_check_penalty=-4,
+    arcane_spell_failure=25,
+    speed_30=20,
+    speed_20=15,
+)
+
+_CHAIN_SHIRT = ArmorDefinition(
+    name="Chain Shirt",
+    category=ArmorCategory.LIGHT,
+    armor_bonus=4,
+    max_dex_bonus=4,
+    armor_check_penalty=-2,
+    arcane_spell_failure=20,
+    speed_30=30,
+    speed_20=20,
+)
+
+_FULL_PLATE = ArmorDefinition(
+    name="Full Plate",
+    category=ArmorCategory.HEAVY,
+    armor_bonus=8,
+    max_dex_bonus=1,
+    armor_check_penalty=-6,
+    arcane_spell_failure=35,
+    speed_30=20,
+    speed_20=15,
+)
+
+
+def _make_barbarian_1(state: object) -> Character:
+    """Construct a Human barbarian 1 via AppState, with
+    the class_registry wired so passive class-feature
+    effects apply."""
+    state.new_character()  # type: ignore[attr-defined]
+    c = state.character  # type: ignore[attr-defined]
+    c.race = "Human"
+    c.set_ability_score("str", 14)
+    c.set_ability_score("dex", 10)
+    c.set_ability_score("con", 12)
+    c.set_class_levels(
+        [
+            ClassLevel(
+                class_name="Barbarian",
+                level=1,
+                hp_rolls=[12],
+                bab_contribution=1,
+                fort_contribution=2,
+                ref_contribution=0,
+                will_contribution=0,
+            )
+        ]
+    )
+    return c
+
+
+class TestBarbarianFastMovementGate:
+    """Barbarian fast movement: +10 ft land speed.
+    SRD (PHB p.25): applies only when wearing no / light /
+    medium armor AND not carrying a heavy load.
+    """
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def test_bare_barbarian_speed_40(self) -> None:
+        state = self._state()
+        c = _make_barbarian_1(state)
+        # Human base speed 30 + barbarian fast move 10 = 40.
+        assert c.get("speed") == 40
+
+    def test_light_armor_keeps_fast_movement(self) -> None:
+        state = self._state()
+        c = _make_barbarian_1(state)
+        equip_armor(c, _CHAIN_SHIRT)
+        # Light armor doesn't slow; fast move still applies.
+        assert c.get("speed") == 40
+
+    def test_medium_armor_keeps_fast_movement(self) -> None:
+        state = self._state()
+        c = _make_barbarian_1(state)
+        equip_armor(c, _SCALE_MAIL)
+        # SRD: medium armor still allows fast movement.
+        # Scale mail speed_30 = 20 (armor reduces base 30
+        # to 20). Plus the +10 from fast movement → 30.
+        assert c.get("speed") == 30
+
+    def test_heavy_armor_removes_fast_movement(self) -> None:
+        state = self._state()
+        c = _make_barbarian_1(state)
+        equip_armor(c, _FULL_PLATE)
+        # Full plate reduces speed 30 -> 20; no fast move.
+        assert c.get("speed") == 20
+
+    def test_heavy_load_removes_fast_movement(self) -> None:
+        state = self._state()
+        c = _make_barbarian_1(state)
+        # STR 14: heavy load threshold = 175 lbs. Push
+        # current weight above heavy so the load gate
+        # fails.
+        c.set_current_weight(200)
+        assert c.get("speed") == 30  # base, no fast move
+
+    def test_remove_armor_restores_fast_movement(self) -> None:
+        state = self._state()
+        c = _make_barbarian_1(state)
+        equip_armor(c, _FULL_PLATE)
+        assert c.get("speed") == 20
+        unequip_armor(c)
+        assert c.get("speed") == 40

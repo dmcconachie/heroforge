@@ -20,6 +20,7 @@ from heroforge.rules.core.classes import KnownCoreClass
 from heroforge.rules.core.conditions_srd import KnownCoreCondition
 from heroforge.rules.core.domains import KnownCoreDomain
 from heroforge.rules.core.feats import KnownCoreFeat
+from heroforge.rules.core.gates import KnownCoreGate
 from heroforge.rules.core.magic_items import KnownCoreMagicItem
 from heroforge.rules.core.materials import KnownCoreMaterial
 from heroforge.rules.core.races import KnownCoreRace
@@ -58,3 +59,4 @@ KnownMaterial = _combine(
 )
 KnownDomain = _combine("KnownDomain", KnownCoreDomain)
 KnownCondition = _combine("KnownCondition", KnownCoreCondition)
+KnownGate = _combine("KnownGate", KnownCoreGate)
