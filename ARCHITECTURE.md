@@ -663,3 +663,68 @@ Reusable components in `widgets/`: `LabeledField`,
   use CharacterLevel.inherent_bumps. See
   rules/core/buffs.py for the full list of
   entries that need reclassification.
+- **Conditional effects sheet panel** — UI that
+  surfaces effects which only apply under specific
+  conditions (gate state, spell target alignment,
+  creature type, one-shot activation). Two
+  sub-sections: "currently applied" (gate on / buff
+  active) and "not applied" (gate off / inactive).
+  Gated passives whose gate is currently on still
+  appear on the main stat sheet; everything appears
+  in this panel regardless of state. Data sources:
+  the gate system introduced alongside this panel,
+  plus alignment-conditional spells (Magic Circle
+  ×4, Protection from X ×4), one-shots (Smite Evil,
+  Bless Weapon, Moment of Prescience), conditional
+  feats (Dodge), ranger Favored Enemy tiers.
+- **Attack-routine panel** — per-weapon attack
+  breakdown hosting Flurry of Blows, Rapid Strike,
+  Manyshot, Smite Evil, two-weapon fighting, and
+  parameterized combat feats.
+- **ResourceTracker wire-up** —
+  `engine/resources.py` defines `ResourceTracker`
+  but nothing consumes it yet. Needs to be attached
+  to uses-per-day features (Rage, Turn Undead,
+  Bardic Music, Wild Shape, Smite Evil, Stunning
+  Fist). The Layer 14 description above overstates
+  current functionality — correct when the wire-up
+  lands.
+- **Monk Stunning Fist** — L1 monk bonus feat (PHB).
+  Activated attack with uses/day (monk level + Wis
+  mod). Depends on ResourceTracker wire-up and the
+  attack-routine panel. Separate item interaction:
+  the Monk's Belt description in some sources
+  mentions a Stunning Fist aspect not in the DMG
+  SRD entry — verify the source before implementing
+  that half.
+- **Monk unarmed-damage progression** — die-size
+  table by monk level + size (1d6 → 2d10 for a
+  Medium monk). Not a bonus-pool effect; needs
+  weapon-damage-table support. Used also by Monk's
+  Belt (L5 monk damage for non-monks; +5 effective
+  levels for monks).
+- **Monk's Belt unarmed-damage boost** — the
+  "+5 effective monk levels for unarmed damage"
+  half of the belt. Waiting on the damage-table
+  support above. Analogous to
+  `effective_monk_level_ac` but targeting a
+  weapon-damage pool.
+- **Gloves of the Balanced Hand** — grants
+  TWF-like benefits. Gate semantics debatable (does
+  it gate like TWF itself?) — rules decision needed
+  before implementation.
+- **Future derived pools** — the
+  `derived_pools.yaml` mechanism landing alongside
+  this work will also host:
+  `effective_paladin_level_lay_on_hands` (paladin
+  levels + hospitaler levels contribute per
+  Complete Divine p.48; consumed by the
+  healing-per-day formula) and
+  `caster_level_<class>` pools (base casting class +
+  PrCs that advance casting: Eldritch Knight skips
+  only L1 per DMG p.187; Hospitaler skips L1/L5/L9
+  per CDiv p.48; Mystic Theurge; etc.). When a
+  character has multiple base casting classes and a
+  PrC that could advance any of them, we'll need a
+  per-level "which base caster does this level
+  advance?" selector — not yet designed.
