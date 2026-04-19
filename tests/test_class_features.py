@@ -396,3 +396,125 @@ class TestBarbarianFastMovementGate:
         assert c.get("speed") == 20
         unequip_armor(c)
         assert c.get("speed") == 40
+
+
+def _make_duelist_1(state: object) -> Character:
+    """Construct a Human duelist 1 with Int 14 (+2 mod)."""
+    state.new_character()  # type: ignore[attr-defined]
+    c = state.character  # type: ignore[attr-defined]
+    c.race = "Human"
+    c.set_ability_score("str", 12)
+    c.set_ability_score("dex", 14)
+    c.set_ability_score("con", 12)
+    c.set_ability_score("int", 14)  # +2 mod
+    c.set_class_levels(
+        [
+            ClassLevel(
+                class_name="Duelist",
+                level=1,
+                hp_rolls=[10],
+                bab_contribution=1,
+                fort_contribution=0,
+                ref_contribution=2,
+                will_contribution=0,
+            )
+        ]
+    )
+    return c
+
+
+class TestDuelistCannyDefenseGate:
+    """Duelist Canny Defense (DMG p.185): INT bonus to AC
+    only when not wearing armor and not using a shield.
+    (Plan note: the SRD also requires "wielding a melee
+    weapon" — weapon-wielding state isn't modelled yet,
+    so that third gate is deferred.)
+    """
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def test_bare_gets_int_to_ac(self) -> None:
+        state = self._state()
+        c = _make_duelist_1(state)
+        # Base AC: 10 + Dex(2) + Int(2) = 14.
+        assert c.get("ac") == 14
+
+    def test_armor_removes_int_to_ac(self) -> None:
+        state = self._state()
+        c = _make_duelist_1(state)
+        equip_armor(c, _CHAIN_SHIRT)
+        # Armor gates off canny defense. Base AC:
+        # 10 + Dex(2) + armor(4) = 16, no Int bonus.
+        assert c.get("ac") == 16
+
+    def test_shield_removes_int_to_ac(self) -> None:
+        state = self._state()
+        c = _make_duelist_1(state)
+        # Manually mark shield as equipped without
+        # bothering with shield AC bonuses.
+        c.equipment["shield"] = {
+            "name": "Heavy Steel Shield",
+            "armor_bonus": 0,  # not modelled here
+        }
+        # No armor, but shield = no canny defense.
+        # Expected AC: 10 + Dex(2) + 0 shield_bonus = 12.
+        assert c.get("ac") == 12
+
+
+class TestDuelistGraceGate:
+    """Duelist Grace (DMG p.185): +2 competence on Reflex
+    saves at L4, only when not wearing armor and not using
+    a shield.
+    """
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def _l4_duelist(self, state: object) -> Character:
+        state.new_character()  # type: ignore[attr-defined]
+        c = state.character  # type: ignore[attr-defined]
+        c.race = "Human"
+        c.set_ability_score("dex", 14)  # +2 Ref base
+        c.set_class_levels(
+            [
+                ClassLevel(
+                    class_name="Duelist",
+                    level=4,
+                    hp_rolls=[10, 10, 10, 10],
+                    bab_contribution=4,
+                    fort_contribution=1,
+                    ref_contribution=4,
+                    will_contribution=1,
+                )
+            ]
+        )
+        return c
+
+    def test_bare_gets_grace(self) -> None:
+        state = self._state()
+        c = self._l4_duelist(state)
+        # Ref = 4 (base) + 2 (Dex) + 2 (grace) = 8.
+        assert c.get("ref_save") == 8
+
+    def test_armor_removes_grace(self) -> None:
+        state = self._state()
+        c = self._l4_duelist(state)
+        equip_armor(c, _CHAIN_SHIRT)
+        # Armor gates off grace: Ref = 4 + 2 + 0 = 6.
+        assert c.get("ref_save") == 6
+
+    def test_shield_removes_grace(self) -> None:
+        state = self._state()
+        c = self._l4_duelist(state)
+        c.equipment["shield"] = {"name": "Buckler"}
+        # Shield gates off grace: Ref = 4 + 2 + 0 = 6.
+        assert c.get("ref_save") == 6

@@ -224,11 +224,16 @@ class_features:
   - 'bonus_feat_6: Bonus fighter feat'
   - 'sneak_attack_1d6: Sneak attack +1d6'
   - 'trapfinding: Find and disable magical traps'
-  - 'canny_defense: INT to AC (unarmored)'
+  - >-
+    canny_defense: INT bonus to AC while unarmored, no shield (DMG p.185).
+    Caps at duelist level — not yet modelled here. "Wielding a melee weapon"
+    gate also deferred until weapon-wielding state exists.
   - 'improved_reaction: +2 initiative'
   - 'enhanced_mobility: +4 AC vs AoO'
   - 'precise_strike: +1d6 damage (light)'
-  - 'grace: +2 Reflex saves'
+  - >-
+    grace: +2 competence on Reflex saves while unarmored and not using a shield
+    (DMG p.185).
   - 'acrobatic_charge: Charge in difficult terrain'
   - 'deflect_arrows: Deflect one ranged/round'
   - 'crippling_critical: Critical hit debuff'

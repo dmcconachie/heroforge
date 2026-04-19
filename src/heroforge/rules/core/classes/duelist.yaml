@@ -35,7 +35,14 @@ Duelist:
   class_features:
     - level: 1
       feature: canny_defense
-      description: INT to AC (unarmored)
+      description: >-
+        INT bonus to AC while unarmored, no shield
+        (DMG p.185). Caps at duelist level — not yet
+        modelled here. "Wielding a melee weapon" gate
+        also deferred until weapon-wielding state exists.
+      gate:
+        - unarmored
+        - no_shield
       effects:
         - target: ac
           bonus_type: untyped
@@ -55,7 +62,12 @@ Duelist:
       description: +1d6 damage (light)
     - level: 4
       feature: grace
-      description: +2 Reflex saves
+      description: >-
+        +2 competence on Reflex saves while unarmored
+        and not using a shield (DMG p.185).
+      gate:
+        - unarmored
+        - no_shield
       effects:
         - target: ref_save
           bonus_type: competence

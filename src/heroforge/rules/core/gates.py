@@ -18,3 +18,7 @@ class KnownCoreGate(StrEnum):
     # Barbarian fast movement (PHB p.25) gates.
     NOT_HEAVY_ARMOR = "not_heavy_armor"
     NOT_HEAVY_LOAD = "not_heavy_load"
+    # Duelist canny defense / grace (DMG p.185);
+    # also monk AC bonus / fast movement, etc.
+    UNARMORED = "unarmored"
+    NO_SHIELD = "no_shield"

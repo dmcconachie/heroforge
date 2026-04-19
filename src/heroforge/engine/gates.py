@@ -38,9 +38,19 @@ def _not_heavy_load(c: "Character") -> bool:
     return c.current_load_category() != LoadCategory.HEAVY
 
 
+def _unarmored(c: "Character") -> bool:
+    return c.equipped_armor_category() is None
+
+
+def _no_shield(c: "Character") -> bool:
+    return not c.has_shield()
+
+
 GATE_PREDICATES: dict[KnownCoreGate, Callable[["Character"], bool]] = {
     KnownCoreGate.NOT_HEAVY_ARMOR: _not_heavy_armor,
     KnownCoreGate.NOT_HEAVY_LOAD: _not_heavy_load,
+    KnownCoreGate.UNARMORED: _unarmored,
+    KnownCoreGate.NO_SHIELD: _no_shield,
 }
 
 
