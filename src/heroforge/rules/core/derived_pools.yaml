@@ -1,0 +1,36 @@
+# rules/core/derived_pools.yaml
+#
+# Derived pools: named pools that aggregate contributions
+# from multiple sources (class features, magic items,
+# feats) and are consumed by one or more formulas.
+#
+# Each entry declares:
+#   description: human-readable summary
+#   consumers:   list of {target, bonus_type, compute,
+#                gate?} — the formulas that read this
+#                pool and contribute to a target stat.
+#
+# Contributors do NOT appear here — they declare
+# themselves in their source YAML (class feature, magic
+# item, feat) by targeting the pool name in their
+# effects list.
+#
+# The pool itself is declared as a stat node in
+# stats.yaml so its value is queryable via
+# character.get("<pool_name>"). Named compute strategies
+# are registered in engine/derived_pools.py.
+
+effective_monk_level_ac:
+  description: >-
+    Effective monk level for the monk AC bonus formula.
+    Contributors: Monk class (contributes monk_level);
+    Monk's Belt (+5). Consumed by the AC formula which
+    also gates on unarmored + no shield + light load.
+  consumers:
+    - target: ac
+      bonus_type: untyped
+      compute: monk_ac_bonus_formula
+      gate:
+        - unarmored
+        - no_shield
+        - light_load_or_less

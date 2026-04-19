@@ -40,6 +40,7 @@ from heroforge.engine.templates import TemplateRegistry
 from heroforge.rules.loader import (
     ClassesLoader,
     ConditionLoader,
+    DerivedPoolsLoader,
     DomainsLoader,
     EquipmentLoader,
     FeatsLoader,
@@ -86,6 +87,7 @@ class AppState:
         self.domain_registry = DomainRegistry()
         self.skill_registry = SkillRegistry()
         self.template_registry = TemplateRegistry()
+        self.derived_pools: dict = {}
         self.class_registry = ClassRegistry()
         self.race_registry = RaceRegistry()
         self.character: Character = Character()
@@ -201,6 +203,14 @@ class AppState:
         # Store prereq checker for UI access
         self.prereq_checker = prereq_checker
 
+        # Load derived pools (pool declarations + consumer
+        # formulas). Contributors live in their source
+        # YAMLs (class / item / feat) and target pool names
+        # declared here.
+        self.derived_pools = DerivedPoolsLoader(rd).load(
+            "core/derived_pools.yaml"
+        )
+
         self._loaded = True
 
     # ------------------------------------------------------------------
@@ -223,6 +233,12 @@ class AppState:
             self.character._class_registry_ref = self.class_registry
             self.character._feat_registry_ref = self.feat_registry
             register_skills_on_character(self.skill_registry, self.character)
+            if self.derived_pools:
+                from heroforge.engine.derived_pools import (
+                    install_consumers,
+                )
+
+                install_consumers(self.character, self.derived_pools)
 
     # ------------------------------------------------------------------
     # Convenience accessors

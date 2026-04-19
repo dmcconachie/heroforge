@@ -41,12 +41,13 @@ abilities:
       base: 8
 combat:
   ac:
-    total: 14
+    total: 21
     typed:
       base: 10
       dex: 4
-  touch_ac: 14
-  flatfooted_ac: 10
+      untyped: 7
+  touch_ac: 21
+  flatfooted_ac: 17
   hp_max:
     total: 92
     typed:
@@ -62,9 +63,10 @@ combat:
       dex: 4
       untyped: 4
   speed:
-    total: 30
+    total: 90
     typed:
       base: 30
+      untyped: 60
   sr: 0
   saves:
     fort:
@@ -123,11 +125,12 @@ skills:
       ability_mod: 4
       ranks: 9
   Jump:
-    total: 17
+    total: 41
     typed:
       ability_mod: 1
       ranks: 14
       synergy: 2
+      speed_mod: 24
   Listen:
     total: 21
     typed:
@@ -169,6 +172,11 @@ class_features:
   - >-
     flurry_of_blows: Extra attack with -2 to all attacks
   - >-
+    ac_bonus_contribution: Contributes monk level to effective_monk_level_ac
+    pool. The AC formula itself (WIS mod + effective_monk_level_ac/5) lives
+    in derived_pools.yaml and is gated by unarmored, no shield, light load
+    or less.
+  - >-
     unarmed_strike: Unarmed deals 1d6; increases per level
   - >-
     bonus_feat_monk_1: Improved Unarmed Strike + choice of Combat Reflexes,
@@ -176,6 +184,10 @@ class_features:
   - 'evasion: No damage on successful Reflex saves'
   - >-
     bonus_feat_monk_2: Combat Reflexes, Deflect Arrows, or Improved Trip
+  - >-
+    fast_movement: Monk fast movement (PHB Table 3-10 p.40): +10 ft at L3,
+    scaling to +60 at L20. Applies only while unarmored, no shield, light
+    load or less.
   - 'still_mind: +2 saves vs enchantments'
   - 'ki_strike_magic: Unarmed strike treated as magic'
   - 'slow_fall_20: Slow fall up to 20 ft'

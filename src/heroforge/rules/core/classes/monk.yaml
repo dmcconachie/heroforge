@@ -36,6 +36,18 @@ Monk:
         attacks during flurry (removed at monk level 5).
         Attack-routine choice — not on main sheet.
     - level: 1
+      feature: ac_bonus_contribution
+      description: >-
+        Contributes monk level to effective_monk_level_ac
+        pool. The AC formula itself (WIS mod +
+        effective_monk_level_ac/5) lives in
+        derived_pools.yaml and is gated by unarmored,
+        no shield, light load or less.
+      effects:
+        - target: effective_monk_level_ac
+          bonus_type: untyped
+          value: monk_level
+    - level: 1
       feature: unarmed_strike
       description: Unarmed deals 1d6; increases per level
     - level: 1
@@ -50,6 +62,20 @@ Monk:
     - level: 2
       feature: bonus_feat_monk_2
       description: Combat Reflexes, Deflect Arrows, or Improved Trip
+    - level: 3
+      feature: fast_movement
+      description: >-
+        Monk fast movement (PHB Table 3-10 p.40): +10 ft
+        at L3, scaling to +60 at L20. Applies only while
+        unarmored, no shield, light load or less.
+      gate:
+        - unarmored
+        - no_shield
+        - light_load_or_less
+      effects:
+        - target: speed
+          bonus_type: untyped
+          compute: monk_fast_movement_bonus
     - level: 3
       feature: still_mind
       description: +2 saves vs enchantments

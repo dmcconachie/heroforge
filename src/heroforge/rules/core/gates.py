@@ -22,3 +22,6 @@ class KnownCoreGate(StrEnum):
     # also monk AC bonus / fast movement, etc.
     UNARMORED = "unarmored"
     NO_SHIELD = "no_shield"
+    # Monk AC bonus / fast movement (PHB p.40):
+    # "medium or heavy load" gates the bonus off.
+    LIGHT_LOAD_OR_LESS = "light_load_or_less"

@@ -366,6 +366,7 @@ class Character:
             PoolKey.SR,
             PoolKey.BAB_MISC,
             PoolKey.GRAPPLE,
+            PoolKey.EFFECTIVE_MONK_LEVEL_AC,
         ]
         for pk in pools:
             pool = BonusPool(pk)
@@ -516,6 +517,19 @@ class Character:
                     + bt
                 ),
                 description="Maximum hit points",
+            )
+        )
+
+        # ---- Derived pools -------------------------------------------------
+        # Pools fed by multiple sources (class features,
+        # magic items) and consumed by named formulas
+        # registered in engine/derived_pools.py.
+        g.register_node(
+            StatNode(
+                key="effective_monk_level_ac",
+                pools=[PoolKey.EFFECTIVE_MONK_LEVEL_AC],
+                compute=compute_sum,
+                description=("Effective monk level for AC bonus calc"),
             )
         )
 
@@ -1061,7 +1075,22 @@ class Character:
         # The score node's compute fn reads directly from _ability_scores,
         # so we just need to invalidate it.
         self._graph.invalidate(f"{ability}_score")
+        self._refresh_derived_pool_consumers()
         self._notify({f"{ability}_score", f"{ability}_mod"})
+
+    def _refresh_derived_pool_consumers(self) -> None:
+        """
+        Recompute any installed derived-pool consumer
+        BonusEntries and re-register them on their target
+        pools. Called after any mutation that might change
+        the value a consumer formula would produce (ability
+        score change, class level change, etc.)."""
+        with contextlib.suppress(ImportError):
+            from heroforge.engine.derived_pools import (
+                refresh_derived_consumers,
+            )
+
+            refresh_derived_consumers(self)
 
     def get_ability_score(self, ability: Ability) -> int:
         """Return total ability score (base + all)."""
@@ -1588,6 +1617,10 @@ class Character:
                     p.set_source(src, entries)
                     self._graph.invalidate_pool(pk)
 
+        # Class-level contributions to derived pools may
+        # have just changed; refresh consumers so their
+        # cached values reflect the new pool sums.
+        self._refresh_derived_pool_consumers()
 
         # Clear features that no longer apply
         prefix = "classfeature:"

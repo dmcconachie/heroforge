@@ -518,3 +518,119 @@ class TestDuelistGraceGate:
         c.equipment["shield"] = {"name": "Buckler"}
         # Shield gates off grace: Ref = 4 + 2 + 0 = 6.
         assert c.get("ref_save") == 6
+
+
+def _make_monk(state: object, level: int, wis: int = 14) -> Character:
+    state.new_character()  # type: ignore[attr-defined]
+    c = state.character  # type: ignore[attr-defined]
+    c.race = "Human"
+    c.set_ability_score("dex", 14)
+    c.set_ability_score("wis", wis)
+    c.set_class_levels(
+        [
+            ClassLevel(
+                class_name="Monk",
+                level=level,
+                hp_rolls=[8] * level,
+                bab_contribution=(level * 3) // 4,
+                fort_contribution=2 + level // 2,
+                ref_contribution=2 + level // 2,
+                will_contribution=2 + level // 2,
+            )
+        ]
+    )
+    return c
+
+
+class TestMonkAcBonus:
+    """Monk AC bonus (PHB p.40): WIS mod + monk_level//5,
+    gated by unarmored / no-shield / not medium-or-heavy
+    load. AC bonus table from PHB p.40:
+      L1-4: +0; L5-9: +1; L10-14: +2; L15-19: +3; L20: +4.
+    """
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def test_monk_5_wis_14_bare(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=5, wis=14)
+        # 10 base + 2 Dex + 2 Wis + 1 (L5 table) = 15.
+        assert c.get("ac") == 15
+
+    def test_monk_5_plate_no_monk_bonus(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=5, wis=14)
+        equip_armor(c, _FULL_PLATE)
+        # Wis + L5 monk bonus gated off; keep Dex + armor.
+        # 10 base + 1 Dex (plate caps at 1) + 8 armor = 19.
+        assert c.get("ac") == 19
+
+    def test_monk_5_shield_no_monk_bonus(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=5, wis=14)
+        c.equipment["shield"] = {"name": "Buckler"}
+        # 10 + 2 Dex + 0 = 12 (no Wis, no L5 bonus).
+        assert c.get("ac") == 12
+
+    def test_monk_10_wis_14_bare(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=10, wis=14)
+        # 10 + 2 Dex + 2 Wis + 2 (L10) = 16.
+        assert c.get("ac") == 16
+
+    def test_monk_20_wis_18_bare(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=20, wis=18)
+        # 10 + 2 Dex + 4 Wis + 4 (L20) = 20.
+        assert c.get("ac") == 20
+
+
+class TestMonkFastMovement:
+    """Monk fast movement (PHB Table 3-10 p.40). Starts
+    at L3 (+10), scaling +10 per three levels to +60 at
+    L20. Gated by unarmored / no-shield / not
+    medium-or-heavy load.
+    """
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def test_monk_1_bare_speed_30(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=1)
+        # No fast movement at L1.
+        assert c.get("speed") == 30
+
+    def test_monk_3_bare_speed_40(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=3)
+        assert c.get("speed") == 40
+
+    def test_monk_9_bare_speed_60(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=9)
+        # PHB Table 3-10: L9-11 fast move = +30.
+        # Base 30 + 30 = 60.
+        assert c.get("speed") == 60
+
+    def test_monk_20_bare_speed_90(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=20)
+        assert c.get("speed") == 90
+
+    def test_monk_20_plate_no_fast(self) -> None:
+        state = self._state()
+        c = _make_monk(state, level=20)
+        equip_armor(c, _FULL_PLATE)
+        # Plate reduces speed_30 -> 20 and gates off fast
+        # movement.
+        assert c.get("speed") == 20

@@ -579,6 +579,97 @@ class MagicItemLoader:
 
 
 # ---------------------------------------------------------------------------
+# DerivedPoolsLoader
+# ---------------------------------------------------------------------------
+
+
+class DerivedPoolsLoader:
+    """
+    Reads rules/core/derived_pools.yaml.
+
+    The loaded dict is held on AppState and installed onto
+    each Character via
+    heroforge.engine.derived_pools.install_consumers()
+    when the character is wired up.
+
+    Loader-time validation:
+      - every pool name must be a known PoolKey
+        (stats.yaml should declare a sum stat for it)
+      - every `compute:` name must be registered in
+        engine.derived_pools._REGISTRY
+      - every `gate:` entry must coerce to KnownCoreGate
+      - every consumer `target:` must be a known PoolKey
+    """
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load(self, relative_path: str) -> dict:
+        from heroforge.engine.derived_pools import get_compute
+        from heroforge.rules.core.gates import KnownCoreGate
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Derived pools file not found: {path}")
+
+        try:
+            with open(path) as f:
+                data = yaml.safe_load(f) or {}
+        except yaml.YAMLError as e:
+            raise LoaderError(f"YAML parse error in {path}: {e}") from e
+
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path}: expected a mapping")
+
+        for pool_name, entry in data.items():
+            # Pool name must resolve to a known PoolKey.
+            try:
+                PoolKey(pool_name)
+            except ValueError as exc:
+                raise LoaderError(
+                    f"{path}: derived pool {pool_name!r} is "
+                    f"not declared in stats.yaml / pool_keys.py"
+                ) from exc
+
+            if not isinstance(entry, dict):
+                raise LoaderError(f"{path}: {pool_name!r} must be a mapping")
+
+            for idx, consumer in enumerate(entry.get("consumers") or []):
+                target = consumer.get("target")
+                try:
+                    PoolKey(target)
+                except ValueError as exc:
+                    raise LoaderError(
+                        f"{path}: {pool_name!r} consumer "
+                        f"{idx} target {target!r} is not a "
+                        f"known PoolKey"
+                    ) from exc
+
+                compute_name = consumer.get("compute")
+                if not compute_name:
+                    raise LoaderError(
+                        f"{path}: {pool_name!r} consumer "
+                        f"{idx} missing `compute:` field"
+                    )
+                try:
+                    get_compute(compute_name)
+                except KeyError as exc:
+                    raise LoaderError(str(exc)) from exc
+
+                for g in consumer.get("gate") or []:
+                    try:
+                        KnownCoreGate(g)
+                    except ValueError as exc:
+                        raise LoaderError(
+                            f"{path}: {pool_name!r} consumer "
+                            f"{idx} gate {g!r} is not a "
+                            f"known gate"
+                        ) from exc
+
+        return data
+
+
+# ---------------------------------------------------------------------------
 # TemplatesLoader
 # ---------------------------------------------------------------------------
 
@@ -819,7 +910,8 @@ class ClassesLoader:
         defn: "ClassDefinition",
         buff_registry: "BuffRegistry",
     ) -> None:
-        """Register BuffDefinitions for class features that
+        """
+        Register BuffDefinitions for class features that
         explicitly declare a `buff_name:` — i.e. features
         that are meant to be toggleable effects (Rage,
         Inspire Courage, etc.).

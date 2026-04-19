@@ -528,6 +528,14 @@ def load_character(
     # Notes
     c.notes = cf.notes
 
+    # Derived pool consumers (monk AC formula, etc.).
+    # Needs app_state.derived_pools loaded.
+    dp = getattr(app_state, "derived_pools", None)
+    if dp:
+        from heroforge.engine.derived_pools import install_consumers
+
+        install_consumers(c, dp)
+
     return c
 
 

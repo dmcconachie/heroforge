@@ -138,6 +138,10 @@ def evaluate_formula(
         for ab in Ability:
             namespace[f"{ab}_mod"] = character.get_ability_modifier(ab)
         namespace["bab"] = character.get("bab")
+        # Per-class levels as `<class>_level`, e.g.
+        # `monk_level`. Missing classes resolve to 0.
+        for cn, lvl in character.class_level_map.items():
+            namespace[f"{cn.lower()}_level"] = lvl
     else:
         namespace["character_level"] = 0
         for ab in Ability:
@@ -443,13 +447,20 @@ def pool_entries_from_effects(
         bt_str = eff_decl.get("bonus_type", "untyped")
         bonus_type = bt_map.get(bt_str, BonusType.UNTYPED)
 
-        raw_value = eff_decl.get("value", 0)
-        if isinstance(raw_value, bool):
-            raw_value = int(raw_value)
-        if isinstance(raw_value, str):
-            resolved = evaluate_formula(raw_value, caster_level, character)
+        compute_name = eff_decl.get("compute")
+        if compute_name:
+            from heroforge.engine.derived_pools import get_compute
+
+            fn = get_compute(compute_name)
+            resolved = fn(character) if character is not None else 0
         else:
-            resolved = int(raw_value)
+            raw_value = eff_decl.get("value", 0)
+            if isinstance(raw_value, bool):
+                raw_value = int(raw_value)
+            if isinstance(raw_value, str):
+                resolved = evaluate_formula(raw_value, caster_level, character)
+            else:
+                resolved = int(raw_value)
 
         label = eff_decl.get("source_label") or source_label
 

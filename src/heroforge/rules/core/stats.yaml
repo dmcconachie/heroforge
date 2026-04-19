@@ -209,3 +209,13 @@
     - damage_all
   description: STR bonus to melee damage
   sheet: 1
+
+# Derived pools — aggregated from multiple sources; read
+# by named consumer formulas registered in
+# engine/derived_pools.py. Companion declarations live in
+# rules/core/derived_pools.yaml.
+- key: effective_monk_level_ac
+  compute: sum
+  pools:
+    - effective_monk_level_ac
+  description: Effective monk level (AC bonus calc input)
