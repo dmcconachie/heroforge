@@ -534,12 +534,18 @@ class Character:
         )
 
         # ---- Spell resistance ----------------------------------------------
+        # SR does not stack: different sources each state
+        # an SR value and the character uses the highest.
+        # We still declare the SR pool here so pool
+        # invalidation cascades to this node; the compute
+        # ignores the default-summed bonus_total and reads
+        # the pool directly for the max.
         g.register_node(
             StatNode(
                 key="sr",
                 pools=[PoolKey.SR],
-                compute=compute_sum,
-                description="Spell Resistance",
+                compute=lambda _bt: self._compute_sr_max(),
+                description="Spell Resistance (highest wins)",
             )
         )
 
@@ -651,6 +657,20 @@ class Character:
         # Returns the race's base speed (set by apply_race()).
         # Armour speed penalties go through the speed pool, not here.
         return self._race_base_speed
+
+    def _compute_sr_max(self) -> int:
+        """
+        Spell resistance does not stack — return the
+        highest active SR-contributing entry rather than
+        the sum. Entries whose condition is inactive are
+        skipped."""
+        pool = self._pools.get(PoolKey.SR)
+        if pool is None:
+            return 0
+        entries = pool.active_entries(self)
+        if not entries:
+            return 0
+        return max(e.value for e in entries)
 
     def _compute_size_mod_attack(self) -> int:
         # Size modifiers to attack: Fine+8, Diminutive+4, Tiny+2, Small+1,

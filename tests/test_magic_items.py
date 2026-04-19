@@ -310,6 +310,53 @@ class TestMonksBeltGate:
         assert c.get("ac") == base
 
 
+class TestSpellResistanceNonStacking:
+    """
+    Per 3.5e rules, spell resistance from different
+    sources does not stack. Item descriptions say 'SR 21'
+    or 'SR HD+5' rather than '+N to SR', because only the
+    highest applicable SR counts.
+    """
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def test_two_sr_items_take_highest(self) -> None:
+        state = self._state()
+        state.new_character()  # type: ignore[attr-defined]
+        c = state.character  # type: ignore[attr-defined]
+        c.race = "Human"
+        # Robe of the Archmagi (SR 18) + Mantle of Spell
+        # Resistance (SR 21) → SR 21, not 39.
+        robe = state.magic_item_registry.get("Robe of the Archmagi")
+        mantle = state.magic_item_registry.get("Mantle of Spell Resistance")
+        assert robe is not None
+        assert mantle is not None
+        equip_item(c, robe)
+        equip_item(c, mantle)
+        assert c.get("sr") == 21
+
+    def test_single_sr_source(self) -> None:
+        state = self._state()
+        state.new_character()  # type: ignore[attr-defined]
+        c = state.character  # type: ignore[attr-defined]
+        c.race = "Human"
+        mantle = state.magic_item_registry.get("Mantle of Spell Resistance")
+        equip_item(c, mantle)
+        assert c.get("sr") == 21
+
+    def test_no_sr_sources(self) -> None:
+        state = self._state()
+        state.new_character()  # type: ignore[attr-defined]
+        c = state.character  # type: ignore[attr-defined]
+        c.race = "Human"
+        assert c.get("sr") == 0
+
+
 class TestMagicItemsSort:
     """
     Within each slot yaml file, every item's
