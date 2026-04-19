@@ -551,39 +551,35 @@ def equip_item(
     """
     Wire a worn magic item's effects into pools.
 
-    Items are permanent — they use set_source()
-    directly, NOT the buff toggle system.
+    Items are permanent — they use set_source() directly,
+    NOT the buff toggle system.
+
+    Each effect may carry a `gate: [...]` list (same
+    gate vocabulary as class features). Gated effects
+    attach a condition lambda to their BonusEntry so the
+    pool's aggregate() skips them when the gate is off.
     """
-    from heroforge.engine.bonus import BonusType
     from heroforge.engine.effects import (
-        BonusEffect,
+        pool_entries_from_effects,
     )
+    from heroforge.engine.gates import make_condition
 
     if not item.effects:
         return
 
-    bt_map = {bt.value: bt for bt in BonusType}
     source_key = f"item:{item.name}"
 
     pool_entries: dict[str, list] = {}
     for eff_decl in item.effects:
-        target = eff_decl.get("target", "")
-        bt_str = eff_decl.get("bonus_type", "untyped")
-        bonus_type = bt_map.get(bt_str)
-        if not target or bonus_type is None:
-            continue
-        raw_value = eff_decl.get("value", 0)
-        if isinstance(raw_value, bool):
-            raw_value = int(raw_value)
-
-        effect = BonusEffect(
-            target=target,
-            bonus_type=bonus_type,
-            value=raw_value,
+        gate = eff_decl.get("gate") or []
+        condition = make_condition(tuple(gate))
+        pairs = pool_entries_from_effects(
+            effects_raw=[eff_decl],
+            source_label=item.name,
+            character=character,
+            condition=condition,
         )
-        entry = effect.to_bonus_entry(item.name)
-        targets = _MULTI_TARGET_EXPANSIONS.get(target, [target])
-        for tgt in targets:
+        for tgt, entry in pairs:
             pool_entries.setdefault(tgt, []).append(entry)
 
     affected: set[str] = set()
@@ -596,6 +592,11 @@ def equip_item(
 
     for pk in affected:
         character._graph.invalidate_pool(pk)
+    # The item may have contributed to a derived pool
+    # (e.g. Monk's Belt → effective_monk_level_ac). Those
+    # consumers need refreshing so their cached values see
+    # the new pool sum.
+    character._refresh_derived_pool_consumers()
     if affected:
         character.on_change.notify(affected | {"equipment"})
 
@@ -613,6 +614,7 @@ def unequip_item(
             affected.add(pool.stat_key)
     for pk in affected:
         character._graph.invalidate_pool(pk)
+    character._refresh_derived_pool_consumers()
     if affected:
         character.on_change.notify(affected | {"equipment"})
 

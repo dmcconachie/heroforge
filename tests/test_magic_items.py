@@ -6,8 +6,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from heroforge.engine.character import Character
-from heroforge.engine.equipment import equip_item
+from heroforge.engine.character import Character, ClassLevel
+from heroforge.engine.equipment import (
+    ArmorCategory,
+    ArmorDefinition,
+    equip_armor,
+    equip_item,
+    unequip_item,
+)
 from heroforge.engine.magic_items import (
     MagicItemRegistry,
 )
@@ -98,6 +104,210 @@ class TestMagicItemEffects:
         assert belt is not None
         equip_item(c, belt)
         assert c.get("str_score") == 18
+
+
+_FULL_PLATE = ArmorDefinition(
+    name="Full Plate",
+    category=ArmorCategory.HEAVY,
+    armor_bonus=8,
+    max_dex_bonus=1,
+    armor_check_penalty=-6,
+    arcane_spell_failure=35,
+    speed_30=20,
+    speed_20=15,
+)
+
+
+class TestMonksBeltGate:
+    """
+    Monk's Belt (DMG p.?): grants AC bonus and unarmed
+    damage as a 5th-level monk; for a monk, adds 5 to
+    effective monk level. The AC bonus itself gates on
+    unarmored, no shield, light load or less (inherited
+    from the derived_pools consumer formula).
+    """
+
+    def _state(self) -> object:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        return state
+
+    def _fighter(
+        self, state: object, level: int = 5, wis: int = 10
+    ) -> Character:
+        state.new_character()  # type: ignore[attr-defined]
+        c: Character = state.character  # type: ignore[attr-defined]
+        c.race = "Human"
+        c.set_ability_score("dex", 10)
+        c.set_ability_score("wis", wis)
+        c.set_class_levels(
+            [
+                ClassLevel(
+                    class_name="Fighter",
+                    level=level,
+                    hp_rolls=[10] * level,
+                    bab_contribution=level,
+                    fort_contribution=2 + level // 2,
+                    ref_contribution=0,
+                    will_contribution=0,
+                )
+            ]
+        )
+        return c
+
+    def _monk(self, state: object, level: int, wis: int = 14) -> Character:
+        state.new_character()  # type: ignore[attr-defined]
+        c: Character = state.character  # type: ignore[attr-defined]
+        c.race = "Human"
+        c.set_ability_score("dex", 14)
+        c.set_ability_score("wis", wis)
+        c.set_class_levels(
+            [
+                ClassLevel(
+                    class_name="Monk",
+                    level=level,
+                    hp_rolls=[8] * level,
+                    bab_contribution=(level * 3) // 4,
+                    fort_contribution=2 + level // 2,
+                    ref_contribution=2 + level // 2,
+                    will_contribution=2 + level // 2,
+                )
+            ]
+        )
+        return c
+
+    def _multiclass(
+        self, state: object, fighter_level: int, monk_level: int, wis: int = 14
+    ) -> Character:
+        state.new_character()  # type: ignore[attr-defined]
+        c: Character = state.character  # type: ignore[attr-defined]
+        c.race = "Human"
+        c.set_ability_score("dex", 14)
+        c.set_ability_score("wis", wis)
+        levels = [
+            ClassLevel(
+                class_name="Fighter",
+                level=fighter_level,
+                hp_rolls=[10] * fighter_level,
+                bab_contribution=fighter_level,
+                fort_contribution=2 + fighter_level // 2,
+            ),
+            ClassLevel(
+                class_name="Monk",
+                level=monk_level,
+                hp_rolls=[8] * monk_level,
+                bab_contribution=(monk_level * 3) // 4,
+                fort_contribution=2 + monk_level // 2,
+                ref_contribution=2 + monk_level // 2,
+                will_contribution=2 + monk_level // 2,
+            ),
+        ]
+        c.set_class_levels(levels)
+        return c
+
+    def _belt(self, state: object) -> object:
+        return state.magic_item_registry.get("Monk's Belt")  # type: ignore[attr-defined]
+
+    # Non-monk cases -------------------------------------
+
+    def test_fighter_5_wis_10_bare_belt_gives_plus_1(self) -> None:
+        state = self._state()
+        c = self._fighter(state, level=5, wis=10)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # eff monk level = 5; formula = max(0, 0) + 5//5 = 1.
+        assert c.get("ac") == base + 1
+
+    def test_fighter_5_wis_14_bare_belt_gives_plus_3(self) -> None:
+        state = self._state()
+        c = self._fighter(state, level=5, wis=14)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # eff monk level = 5; formula = 2 (Wis) + 1 = 3.
+        assert c.get("ac") == base + 3
+
+    def test_fighter_plate_belt_gives_nothing(self) -> None:
+        state = self._state()
+        c = self._fighter(state, level=5, wis=14)
+        equip_armor(c, _FULL_PLATE)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # Plate gates off monk AC formula → no delta.
+        assert c.get("ac") == base
+
+    def test_fighter_shield_belt_gives_nothing(self) -> None:
+        state = self._state()
+        c = self._fighter(state, level=5, wis=14)
+        c.equipment["shield"] = {"name": "Buckler"}
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        assert c.get("ac") == base
+
+    # Monk cases -----------------------------------------
+
+    def test_monk_1_wis_14_belt_delta_plus_1(self) -> None:
+        state = self._state()
+        c = self._monk(state, level=1, wis=14)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # eff level 1 → 1+5=6 w/ belt; formula
+        # 2 (Wis) + 6//5=1 = 3 vs baseline 2+0=2. Δ = 1.
+        assert c.get("ac") - base == 1
+
+    def test_monk_5_wis_14_belt_delta_plus_1(self) -> None:
+        state = self._state()
+        c = self._monk(state, level=5, wis=14)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # eff level 5 → 10; formula 2+2=4 vs 2+1=3. Δ=1.
+        assert c.get("ac") - base == 1
+
+    def test_monk_10_wis_14_belt_delta_plus_1(self) -> None:
+        state = self._state()
+        c = self._monk(state, level=10, wis=14)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # eff level 10 → 15; formula 2+3=5 vs 2+2=4. Δ=1.
+        assert c.get("ac") - base == 1
+
+    def test_monk_5_plate_belt_delta_zero(self) -> None:
+        state = self._state()
+        c = self._monk(state, level=5, wis=14)
+        equip_armor(c, _FULL_PLATE)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # Both the monk's own AC bonus and the belt's
+        # contribution are gated off by plate; Δ = 0.
+        assert c.get("ac") - base == 0
+
+    # Multiclass -----------------------------------------
+
+    def test_fighter3_monk2_belt_delta_plus_1(self) -> None:
+        state = self._state()
+        c = self._multiclass(state, fighter_level=3, monk_level=2, wis=14)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        # eff level 2 → 2+5=7; formula 2+1=3 vs 2+0=2.
+        assert c.get("ac") - base == 1
+
+    def test_fighter5_monk0_belt_gives_plus_3(self) -> None:
+        # This is really _fighter(); included for parity
+        # with the plan's multiclass coverage.
+        state = self._state()
+        c = self._fighter(state, level=5, wis=14)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        assert c.get("ac") - base == 3
+
+    def test_belt_removal_restores_baseline(self) -> None:
+        state = self._state()
+        c = self._monk(state, level=5, wis=14)
+        base = c.get("ac")
+        equip_item(c, self._belt(state))
+        unequip_item(c, "Monk's Belt")
+        assert c.get("ac") == base
 
 
 class TestMagicItemsSort:

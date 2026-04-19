@@ -37,9 +37,13 @@ Belt of Giant Strength +6:
 Monk's Belt:
   slot: waist
   note: >-
-    AC bonus as 5th-level monk (+1); effective monk
-    level +5 for unarmed damage if already a monk
+    Wearer gets the AC bonus and unarmed damage of a
+    5th-level monk (DMG). For a monk, adds 5 to effective
+    monk level for AC (and unarmed damage; damage table
+    not yet implemented). Contribution to the AC formula
+    flows through the effective_monk_level_ac derived
+    pool; see rules/core/derived_pools.yaml.
   effects:
-    - target: ac
+    - target: effective_monk_level_ac
       bonus_type: untyped
-      value: 1
+      value: 5
