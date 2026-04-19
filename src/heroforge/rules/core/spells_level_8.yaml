@@ -129,12 +129,10 @@ Moment of Prescience:
   level:
     Sorcerer: 8
     Wizard: 8
-  note: +1/CL insight bonus (max +25) to one attack, check, or save (one use)
-  requires_caster_level: true
-  effects:
-    - target: attack_all
-      bonus_type: insight
-      value: min(25, caster_level)
+  note: >-
+    +1/CL insight bonus (max +25) to one attack, check,
+    or save. Single-use, player-triggered — not on main
+    sheet.
 Planar Ally (Greater):
   level:
     Cleric: 8

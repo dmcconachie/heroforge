@@ -81,13 +81,15 @@ class TestCompendiumBuffRegistration:
     ) -> None:
         assert "Shield of Faith" in self.reg
 
-    def test_protection_from_evil_effects(
+    def test_protection_from_evil_not_a_buff(
         self,
     ) -> None:
-        defn = self.reg.get("Protection from Evil")
-        assert defn is not None
-        targets = {e.target for e in defn.effects}
-        assert "ac" in targets
+        # Protection from X is alignment-conditional — its
+        # +2 deflection / +2 resistance only apply vs the
+        # opposed alignment. Removed from the buff registry
+        # in Phase 1; a future conditional-effects panel
+        # will surface it.
+        assert self.reg.get("Protection from Evil") is None
 
     def test_barkskin_is_formula(self) -> None:
         defn = self.reg.require("Barkskin")

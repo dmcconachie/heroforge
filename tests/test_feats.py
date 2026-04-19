@@ -513,7 +513,6 @@ class TestFeatsLoader:
         feat_reg, _, _ = loaded_registries()
         for feat_name in (
             "Combat Expertise",
-            "Dodge",
             "Power Attack",
         ):
             defn = feat_reg.require(feat_name)
@@ -556,11 +555,14 @@ class TestFeatsLoader:
         assert "Toughness" not in buff_reg
         assert "Iron Will" not in buff_reg
 
-    def test_conditional_buffs_registered_in_buff_registry(
+    def test_dodge_not_registered_as_buff(
         self,
     ) -> None:
+        # Dodge was reclassified in the Phase 1 cleanup:
+        # target-specific, not on the main stat sheet,
+        # so it's not a buff anymore.
         _, _, buff_reg = loaded_registries()
-        assert "Dodge" in buff_reg
+        assert "Dodge" not in buff_reg
 
     def test_load_raises_on_missing_file(self, tmp_path: Path) -> None:
         from heroforge.rules.loader import FeatsLoader, LoaderError
@@ -726,29 +728,29 @@ class TestCharacterAddRemoveFeat:
         assert pool is not None
         assert "feat:Iron Will" not in pool._sources
 
-    def test_dodge_is_conditional(self) -> None:
+    def test_dodge_is_passive(self) -> None:
+        # Dodge was reclassified in Phase 1 cleanup:
+        # target-specific (+1 vs one opponent), no effect
+        # on the main stat sheet, so it's now passive with
+        # no effects. A future conditional-effects panel
+        # will surface it.
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Dodge")
-        assert defn.kind == FeatKind.CONDITIONAL
+        assert defn.kind == FeatKind.PASSIVE
+        assert defn.effects == []
 
-    def test_dodge_requires_toggle_for_bonus(self) -> None:
+    def test_dodge_does_not_change_ac(self) -> None:
         c = fresh_char()
         base_ac = c.ac
         feat_reg, _, _ = loaded_registries()
         defn = feat_reg.require("Dodge")
         c.add_feat("Dodge", defn, level=1, source="character")
-        # Not activated yet — AC unchanged
-        assert c.ac == base_ac
-        # Toggle on
-        c.toggle_buff("Dodge", True)
-        assert c.ac == base_ac + 1
-        # Toggle off
-        c.toggle_buff("Dodge", False)
+        # No main-sheet impact (target-specific rule).
         assert c.ac == base_ac
 
-    def test_dodge_in_buff_registry(self) -> None:
+    def test_dodge_not_in_buff_registry(self) -> None:
         _, _, buff_reg = loaded_registries()
-        assert "Dodge" in buff_reg
+        assert "Dodge" not in buff_reg
 
     def test_remove_feat_removes_from_feats_list(
         self,
@@ -767,27 +769,6 @@ class TestCharacterAddRemoveFeat:
 
 
 class TestConditionalFeatActivation:
-    def test_toggle_dodge_on(self) -> None:
-        c = fresh_char()
-        base_ac = c.ac
-        feat_reg, _, _ = loaded_registries()
-        c.add_feat(
-            "Dodge", feat_reg.require("Dodge"), level=1, source="character"
-        )
-        c.toggle_buff("Dodge", True)
-        assert c.ac == base_ac + 1
-
-    def test_toggle_dodge_off_reverts(self) -> None:
-        c = fresh_char()
-        base_ac = c.ac
-        feat_reg, _, _ = loaded_registries()
-        c.add_feat(
-            "Dodge", feat_reg.require("Dodge"), level=1, source="character"
-        )
-        c.toggle_buff("Dodge", True)
-        c.toggle_buff("Dodge", False)
-        assert c.ac == base_ac
-
     def test_power_attack_with_parameter_3(self) -> None:
         """
         Power Attack for 3 points:
@@ -919,7 +900,9 @@ class TestMultipleAlwaysOnFeats:
         assert c.ref == base_ref + 2
 
     def test_dodge_and_improved_initiative(self) -> None:
-        """Dodge (conditional) + Improved Init (always-on)."""
+        """
+        Dodge (passive, no sheet effect) +
+        Improved Init (always-on)."""
         c = fresh_char()
         feat_reg, _, _ = loaded_registries()
         base_ac = c.ac
@@ -935,13 +918,11 @@ class TestMultipleAlwaysOnFeats:
             source="character",
         )
 
-        # Dodge not toggled — AC unchanged
+        # Dodge is target-specific — no main-sheet AC
+        # contribution.
         assert c.ac == base_ac
-        # Improved Initiative always-on — +4
+        # Improved Initiative always-on — +4.
         assert c.get("initiative") == base_init + 4
-        # Toggle Dodge on
-        c.toggle_buff("Dodge", True)
-        assert c.ac == base_ac + 1
 
     def test_three_toughness_feats_stack(self) -> None:
         """Three Toughness feats (different sources) — untyped HP all stack."""

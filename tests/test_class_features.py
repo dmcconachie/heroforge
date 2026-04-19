@@ -111,12 +111,73 @@ class TestClassBuffsLoader:
         assert reg.get("Barbarian Rage") is not None
         assert reg.get("Greater Rage") is not None
         assert reg.get("Mighty Rage") is not None
-        assert reg.get("Flurry of Blows") is not None
-        assert reg.get("Smite Evil") is not None
         assert reg.get("Inspire Courage +1") is not None
 
-    def test_at_least_10_buffs(self) -> None:
+    def test_at_least_some_class_buffs(self) -> None:
         reg = _load_class_buffs()
-        # Count class category buffs
+        # Count class category buffs. Phase 1 trimmed
+        # non-passive buffs (Flurry of Blows, Smite Evil,
+        # Favored Enemy tiers); remaining class buffs are
+        # the explicit buff_name:-declared transitory ones.
         count = sum(1 for n in reg._defs if reg.get(n) is not None)
-        assert count >= 10
+        assert count >= 5
+
+
+# Names removed from the buff registry in Phase 1 of the
+# passive-features cleanup. Alignment-conditional spells
+# (Magic Circle, Protection from X), one-shots (Smite Evil,
+# Bless Weapon), conditional feats (Dodge), ranger Favored
+# Enemy tiers, and a few others don't belong on the buff
+# toggle panel. They will surface in the future conditional
+# effects sheet panel; for now they are note-only and are
+# NOT registered as BuffDefinitions.
+_REMOVED_NON_PASSIVE_BUFF_NAMES: tuple[str, ...] = (
+    "Bless Weapon",
+    "Dodge",
+    "Favored Enemy +2",
+    "Favored Enemy +4",
+    "Favored Enemy +6",
+    "Flurry of Blows",
+    "Invisibility",
+    "Magic Circle against Chaos",
+    "Magic Circle against Evil",
+    "Magic Circle against Good",
+    "Magic Circle against Law",
+    "Moment of Prescience",
+    "Protection from Chaos",
+    "Protection from Evil",
+    "Protection from Good",
+    "Protection from Law",
+    "Smite Evil",
+)
+
+
+class TestRemovedNonPassiveBuffs:
+    """
+    Buffs removed from KnownCoreBuff in Phase 1.
+
+    These names must not appear in the full buff registry
+    (loaded via AppState.load_rules) and must not appear
+    in the KnownCoreBuff enum.
+    """
+
+    def test_removed_names_not_in_buff_registry(self) -> None:
+        from heroforge.ui.app_state import AppState
+
+        state = AppState()
+        state.load_rules()
+        for name in _REMOVED_NON_PASSIVE_BUFF_NAMES:
+            assert state.buff_registry.get(name) is None, (
+                f"{name!r} should not be registered as a buff"
+            )
+
+    def test_removed_names_not_in_known_core_buff_enum(
+        self,
+    ) -> None:
+        from heroforge.rules.core.buffs import KnownCoreBuff
+
+        enum_values = {m.value for m in KnownCoreBuff}
+        for name in _REMOVED_NON_PASSIVE_BUFF_NAMES:
+            assert name not in enum_values, (
+                f"{name!r} should not be in KnownCoreBuff"
+            )

@@ -31,15 +31,10 @@ Monk:
     - level: 1
       feature: flurry_of_blows
       description: Extra attack with -2 to all attacks
-      buff_name: Flurry of Blows
       note: >-
-        Extra attack at highest BAB; -2 penalty on all attacks during flurry
-        (removed
-        at monk level 5)
-      effects:
-        - target: attack_all
-          bonus_type: untyped
-          value: -2
+        Extra attack at highest BAB; -2 penalty on all
+        attacks during flurry (removed at monk level 5).
+        Attack-routine choice — not on main sheet.
     - level: 1
       feature: unarmed_strike
       description: Unarmed deals 1d6; increases per level

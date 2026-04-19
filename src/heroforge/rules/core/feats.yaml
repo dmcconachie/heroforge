@@ -319,18 +319,16 @@ Diligent:
       value: 2
       source_label: Diligent
 Dodge:
-  kind: conditional
+  kind: passive
   source_book: PHB
-  note: +1 dodge bonus to AC vs one opponent
+  note: >-
+    +1 dodge bonus to AC vs one designated opponent.
+    Target-specific — not on main sheet.
   prerequisites:
     ability:
       key: dex_score
       min: 13
-  effects:
-    - target: ac
-      bonus_type: dodge
-      value: 1
-      source_label: Dodge
+  effects: []
 Empower Spell:
   kind: passive
   source_book: PHB

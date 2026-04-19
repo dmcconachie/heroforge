@@ -38,14 +38,9 @@ Bless Water:
 Bless Weapon:
   level:
     Paladin: 1
-  note: Weapon is +1 enhancement and good- aligned for overcoming DR
-  effects:
-    - target: attack_all
-      bonus_type: enhancement
-      value: 1
-    - target: damage_all
-      bonus_type: enhancement
-      value: 1
+  note: >-
+    Weapon is +1 enhancement and good-aligned vs evil
+    outsiders / undead (conditional — not on main sheet).
 Burning Hands:
   level:
     Sorcerer: 1
@@ -365,78 +360,34 @@ Protection from Chaos:
     Paladin: 1
     Sorcerer: 1
     Wizard: 1
-  note: +2 deflection AC, +2 resistance on saves vs chaotic creatures
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance on saves vs chaotic
+    creatures. Alignment-conditional — not on main sheet.
 Protection from Evil:
   level:
     Cleric: 1
     Paladin: 1
     Sorcerer: 1
     Wizard: 1
-  note: +2 deflection AC, +2 resistance on saves vs evil creatures
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance on saves vs evil
+    creatures. Alignment-conditional — not on main sheet.
 Protection from Good:
   level:
     Cleric: 1
     Sorcerer: 1
     Wizard: 1
-  note: +2 deflection AC, +2 resistance on saves vs good creatures
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance on saves vs good
+    creatures. Alignment-conditional — not on main sheet.
 Protection from Law:
   level:
     Cleric: 1
     Sorcerer: 1
     Wizard: 1
-  note: +2 deflection AC, +2 resistance on saves vs lawful creatures
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance on saves vs lawful
+    creatures. Alignment-conditional — not on main sheet.
 Ray of Enfeeblement:
   level:
     Sorcerer: 1

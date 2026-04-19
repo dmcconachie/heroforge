@@ -219,78 +219,38 @@ Magic Circle against Chaos:
     Paladin: 3
     Sorcerer: 3
     Wizard: 3
-  note: +2 deflection AC, +2 resistance saves vs chaotic; 10 ft. radius
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance saves vs chaotic;
+    10 ft. radius. Alignment-conditional — not on main
+    sheet.
 Magic Circle against Evil:
   level:
     Cleric: 3
     Paladin: 3
     Sorcerer: 3
     Wizard: 3
-  note: +2 deflection AC, +2 resistance saves vs evil; 10 ft. radius
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance saves vs evil;
+    10 ft. radius. Alignment-conditional — not on main
+    sheet.
 Magic Circle against Good:
   level:
     Cleric: 3
     Sorcerer: 3
     Wizard: 3
-  note: +2 deflection AC, +2 resistance saves vs good; 10 ft. radius
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance saves vs good;
+    10 ft. radius. Alignment-conditional — not on main
+    sheet.
 Magic Circle against Law:
   level:
     Cleric: 3
     Sorcerer: 3
     Wizard: 3
-  note: +2 deflection AC, +2 resistance saves vs lawful; 10 ft. radius
-  effects:
-    - target: ac
-      bonus_type: deflection
-      value: 2
-    - target: fort_save
-      bonus_type: resistance
-      value: 2
-    - target: ref_save
-      bonus_type: resistance
-      value: 2
-    - target: will_save
-      bonus_type: resistance
-      value: 2
+  note: >-
+    +2 deflection AC, +2 resistance saves vs lawful;
+    10 ft. radius. Alignment-conditional — not on main
+    sheet.
 Magic Fang (Greater):
   level:
     Druid: 3

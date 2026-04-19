@@ -37,18 +37,11 @@ Ranger:
     - level: 1
       feature: favored_enemy_1
       description: 'Favored enemy 1: +2 vs type'
-      buff_name: Favored Enemy +2
       note: >-
-        +2 on Bluff, Listen, Sense Motive, Spot, Survival checks and weapon
-        damage
-        against favored enemy type
-      mutually_exclusive_with:
-        - Favored Enemy +4
-        - Favored Enemy +6
-      effects:
-        - target: damage_all
-          bonus_type: untyped
-          value: 2
+        +2 on Bluff, Listen, Sense Motive, Spot, Survival
+        checks and weapon damage against favored enemy
+        type. Creature-type-conditional — not on main
+        sheet.
     - level: 1
       feature: track
       description: Track feat for free
@@ -67,15 +60,10 @@ Ranger:
     - level: 5
       feature: favored_enemy_2
       description: Favored enemy 2; +4 vs type
-      buff_name: Favored Enemy +4
-      note: +4 on checks and damage against favored enemy type
-      mutually_exclusive_with:
-        - Favored Enemy +2
-        - Favored Enemy +6
-      effects:
-        - target: damage_all
-          bonus_type: untyped
-          value: 4
+      note: >-
+        +4 on checks and damage against favored enemy
+        type. Creature-type-conditional — not on main
+        sheet.
     - level: 6
       feature: improved_combat_style
       description: Manyshot or Improved Two-Weapon Fighting
@@ -91,15 +79,10 @@ Ranger:
     - level: 10
       feature: favored_enemy_3
       description: Favored enemy 3; +6 vs type
-      buff_name: Favored Enemy +6
-      note: +6 on checks and damage against favored enemy type
-      mutually_exclusive_with:
-        - Favored Enemy +2
-        - Favored Enemy +4
-      effects:
-        - target: damage_all
-          bonus_type: untyped
-          value: 6
+      note: >-
+        +6 on checks and damage against favored enemy
+        type. Creature-type-conditional — not on main
+        sheet.
     - level: 11
       feature: combat_style_mastery
       description: Improved Precise Shot or Greater Two-Weapon Fighting

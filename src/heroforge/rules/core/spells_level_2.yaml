@@ -267,11 +267,10 @@ Invisibility:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
-  note: Invisible; +2 attack vs sighted foes; broken by attacking
-  effects:
-    - target: attack_all
-      bonus_type: untyped
-      value: 2
+  note: >-
+    Applies the Invisible condition (see conditions).
+    Broken by attacking. Sheet effects handled by the
+    Invisible condition, not this spell.
 Knock:
   level:
     Sorcerer: 2

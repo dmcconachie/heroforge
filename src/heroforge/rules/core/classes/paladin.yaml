@@ -34,17 +34,10 @@ Paladin:
     - level: 1
       feature: smite_evil_1
       description: Smite evil 1/day
-      buff_name: Smite Evil
       note: >-
-        Add CHA mod to attack roll, paladin level to damage against evil target
-        (one attack)
-      effects:
-        - target: attack_all
-          bonus_type: untyped
-          value: cha_mod
-        - target: damage_all
-          bonus_type: untyped
-          value: character_level
+        Add CHA mod to attack roll, paladin level to
+        damage against evil target (one attack). One-shot,
+        resource-tracked — not on main sheet.
     - level: 2
       feature: divine_grace
       description: +CHA modifier to all saves
