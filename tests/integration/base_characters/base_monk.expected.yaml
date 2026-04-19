@@ -66,7 +66,7 @@ combat:
     total: 90
     typed:
       base: 30
-      untyped: 60
+      enhancement: 60
   sr: 0
   saves:
     fort:

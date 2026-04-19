@@ -313,7 +313,8 @@ _FULL_PLATE = ArmorDefinition(
 
 
 def _make_barbarian_1(state: object) -> Character:
-    """Construct a Human barbarian 1 via AppState, with
+    """
+    Construct a Human barbarian 1 via AppState, with
     the class_registry wired so passive class-feature
     effects apply."""
     state.new_character()  # type: ignore[attr-defined]
@@ -339,7 +340,8 @@ def _make_barbarian_1(state: object) -> Character:
 
 
 class TestBarbarianFastMovementGate:
-    """Barbarian fast movement: +10 ft land speed.
+    """
+    Barbarian fast movement: +10 ft land speed.
     SRD (PHB p.25): applies only when wearing no / light /
     medium armor AND not carrying a heavy load.
     """
@@ -424,7 +426,8 @@ def _make_duelist_1(state: object) -> Character:
 
 
 class TestDuelistCannyDefenseGate:
-    """Duelist Canny Defense (DMG p.185): INT bonus to AC
+    """
+    Duelist Canny Defense (DMG p.185): INT bonus to AC
     only when not wearing armor and not using a shield.
     (Plan note: the SRD also requires "wielding a melee
     weapon" — weapon-wielding state isn't modelled yet,
@@ -467,7 +470,8 @@ class TestDuelistCannyDefenseGate:
 
 
 class TestDuelistGraceGate:
-    """Duelist Grace (DMG p.185): +2 competence on Reflex
+    """
+    Duelist Grace (DMG p.185): +2 competence on Reflex
     saves at L4, only when not wearing armor and not using
     a shield.
     """
@@ -543,7 +547,8 @@ def _make_monk(state: object, level: int, wis: int = 14) -> Character:
 
 
 class TestMonkAcBonus:
-    """Monk AC bonus (PHB p.40): WIS mod + monk_level//5,
+    """
+    Monk AC bonus (PHB p.40): WIS mod + monk_level//5,
     gated by unarmored / no-shield / not medium-or-heavy
     load. AC bonus table from PHB p.40:
       L1-4: +0; L5-9: +1; L10-14: +2; L15-19: +3; L20: +4.
@@ -591,7 +596,8 @@ class TestMonkAcBonus:
 
 
 class TestMonkFastMovement:
-    """Monk fast movement (PHB Table 3-10 p.40). Starts
+    """
+    Monk fast movement (PHB Table 3-10 p.40). Starts
     at L3 (+10), scaling +10 per three levels to +60 at
     L20. Gated by unarmored / no-shield / not
     medium-or-heavy load.
@@ -634,3 +640,23 @@ class TestMonkFastMovement:
         # Plate reduces speed_30 -> 20 and gates off fast
         # movement.
         assert c.get("speed") == 20
+
+    def test_monk_fast_movement_is_enhancement_type(self) -> None:
+        """
+        PHB p.41: 'a monk gains an enhancement bonus to
+        her speed'. Verify the contribution lands as
+        enhancement, not untyped — matters for stacking
+        with other enhancement-typed speed bonuses like
+        Longstrider."""
+        from collections import Counter
+
+        state = self._state()
+        c = _make_monk(state, level=20)
+        pool = c.get_pool("speed")
+        assert pool is not None
+        types = Counter(e.bonus_type.value for e in pool.active_entries(c))
+        # Fast movement entry should be present as
+        # enhancement, not as untyped.
+        assert types["enhancement"] >= 1, (
+            f"expected enhancement bonus in speed pool; got {types}"
+        )

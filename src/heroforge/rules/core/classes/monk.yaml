@@ -74,7 +74,7 @@ Monk:
         - light_load_or_less
       effects:
         - target: speed
-          bonus_type: untyped
+          bonus_type: enhancement
           compute: monk_fast_movement_bonus
     - level: 3
       feature: still_mind
