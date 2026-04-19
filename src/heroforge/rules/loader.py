@@ -819,7 +819,16 @@ class ClassesLoader:
         defn: "ClassDefinition",
         buff_registry: "BuffRegistry",
     ) -> None:
-        """Register BuffDefinitions for features with effects."""
+        """Register BuffDefinitions for class features that
+        explicitly declare a `buff_name:` — i.e. features
+        that are meant to be toggleable effects (Rage,
+        Inspire Courage, etc.).
+
+        Features with effects but no buff_name are
+        permanent/passive; they are applied by
+        `Character._apply_class_feature_effects` and must
+        NOT be wrapped in zombie BuffDefinitions.
+        """
         from heroforge.engine.effects import (
             BuffCategory,
             build_buff_from_effects,
@@ -828,9 +837,10 @@ class ClassesLoader:
         for feat in defn.class_features:
             if not feat.effects:
                 continue
-            buff_name = feat.buff_name or (f"{defn.name} {feat.feature}")
+            if not feat.buff_name:
+                continue
             buff = build_buff_from_effects(
-                name=buff_name,
+                name=feat.buff_name,
                 category=BuffCategory.CLASS,
                 effects_raw=list(feat.effects),
                 source_book=defn.source_book,
