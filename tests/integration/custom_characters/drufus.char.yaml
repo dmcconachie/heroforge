@@ -301,7 +301,6 @@ equipment:
     - Vest of Resistance +5
     - Belt of Magnificence +6
     - Phoenix Cloak
-    - Holocaust Cloak
     - Gloves of the Balanced Hand
     - Deathstrike Bracers
     - Chronocharm of the Horizon Walker
@@ -314,7 +313,7 @@ equipment:
     - Chronocharm of the Laughing Rogue
     - Quicksilver Boots
     - Quicksilver Boots
-    - Crystal of Mind Cloaking (Greater)
+    - Crystal of Mind Cloaking, Greater
     - Gemstone of Heavy Fortification
     - Heartstone
     - Earthsilk Rope
@@ -341,13 +340,8 @@ equipment:
     - Eternal Wand of Magic Aura
     - Eternal Wand of Magic Aura
     - Eternal Wand of Magic Aura
-    - Revelation Crystal (Greater)
-    - Truedeath Crystal (Greater)
-    - Truedeath Crystal (Greater)
-    - Demolition Crystal (Greater)
-    - Demolition Crystal (Greater)
-    - Fiendslayer Crystal (Least)
-    - Fiendslayer Crystal (Least)
+    - Demolition Crystal, Greater
+    - Demolition Crystal, Greater
     - Horn of Plenty
     - Githborn Talisman
     - Szirb's Shining Helm
@@ -355,6 +349,7 @@ equipment:
     - Xan ibn'Duman
   weapons:
     - base: Dagger
+      enhancement: 5
       properties:
         - TWF (primary)
         - sacred
@@ -362,28 +357,36 @@ equipment:
         - vanishing
         - fiendslayer (least)
         - weapon bond
+        - Starmetal
     - base: Dagger
+      enhancement: 5
       properties:
         - TWF (secondary)
         - sacred
         - wounding
         - vanishing
         - fiendslayer (least)
+        - Starmetal
     - base: Light Mace
+      material: Alchemical Silver
+      enhancement: 5
       properties:
         - TWF (primary)
         - sacred
         - bane (undead)
         - truedeath (greater)
     - base: Light Mace
+      material: Alchemical Silver
+      enhancement: 5
       properties:
         - TWF (secondary)
         - sacred
         - bane (undead)
         - truedeath (greater)
     - base: Composite Longbow
+      enhancement: 3
       properties:
         - sacred
         - precise
-        - truedeath (greater)
+        - revelation (greater)
 notes: ''

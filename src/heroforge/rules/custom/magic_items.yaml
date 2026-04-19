@@ -9,7 +9,7 @@ Armbands of Might:
   note: +2 to damage when power attacking by at least 2
 Belt of Magnificence +2:
   slot: waist
-  note: +2 enhancement to all six ability scores
+  note: +2 enhancement to all six ability scores (Min.HB p.42)
   effects:
     - target: str_score
       bonus_type: enhancement
@@ -31,7 +31,7 @@ Belt of Magnificence +2:
       value: 2
 Belt of Magnificence +4:
   slot: waist
-  note: +4 enhancement to all six ability scores
+  note: +4 enhancement to all six ability scores (Min.HB p.42)
   effects:
     - target: str_score
       bonus_type: enhancement
@@ -53,7 +53,7 @@ Belt of Magnificence +4:
       value: 4
 Belt of Magnificence +6:
   slot: waist
-  note: +6 enhancement to all six ability scores
+  note: +6 enhancement to all six ability scores (Min.HB p.42)
   effects:
     - target: str_score
       bonus_type: enhancement
@@ -76,13 +76,11 @@ Belt of Magnificence +6:
 Chronocharm of the Horizon Walker:
   slot: throat
   note: >-
-    1/day swift action, treat all terrain as normal for 1 round
-    (ignore difficult terrain movement penalties). MIC p. 79.
+    1/day swift action, move up to half your speed (no AoO)
+    as part of the same swift action. MIC p. 86.
 Chronocharm of the Laughing Rogue:
   slot: throat
-  note: >-
-    1/day swift action, take an extra move action during your
-    turn. MIC p. 79.
+  note: 1/day reroll one Disable Device check. MIC p. 86.
 Cloak of Comfort +1:
   slot: torso
   note: +1 resistance to all saves, endure elements
@@ -150,83 +148,89 @@ Cloak of Comfort +5:
       value: 5
 Crystal Mask of Insight:
   slot: face
-  note: >-
-    +5 competence bonus on a single Knowledge skill chosen
-    when the mask is created. MIC p. 85.
-Crystal of Mind Cloaking (Greater):
+  note: +9 insight bonus on Search and Spot checks. MIC p. 91.
+  effects:
+    - target: skill_search
+      bonus_type: insight
+      value: 9
+    - target: skill_spot
+      bonus_type: insight
+      value: 9
+Crystal of Mind Cloaking, Greater:
   slot: slotless
   note: >-
-    Armor/shield augment crystal; +5 competence on saves vs.
-    mind-affecting, and 1/day reroll a failed save vs.
-    mind-affecting as an immediate action. Requires +3 host
-    item. MIC p. 22.
+    Shield augment crystal. +5 competence bonus on saves
+    vs. mind-affecting; 1/day if you fail such a save,
+    reroll it as an immediate action. Requires +3 host
+    shield. MIC p. 26.
 Deathstrike Bracers:
   slot: arms
   note: >-
-    3/day swift action; next melee attack before start of
-    next turn treats target (undead/construct/elemental/
-    plant/ooze/vermin) as a normal creature for crits and
-    precision damage (sneak attack, skirmish, etc.).
-    MIC p. 78.
-Demolition Crystal (Greater):
+    3/day swift action; for 1 round, melee attacks deal
+    extra damage from crits and sneak attacks to
+    constructs, elementals, oozes, plants, and undead as
+    if they were not immune. MIC p. 93.
+Demolition Crystal, Greater:
   slot: slotless
   note: >-
-    Weapon augment crystal; +1d6 damage to constructs,
+    Weapon augment crystal. +1d6 damage to constructs,
     treated as adamantine for bypassing construct DR, and
-    can deliver sneak attacks/criticals against constructs
+    can deliver sneak attacks/crits against constructs
     as if they were living. Requires +3 host weapon.
-    MIC p. 67.
+    MIC p. 65.
 Earthsilk Rope:
   slot: tool
   note: >-
-    50-ft rope of deep-spider silk. Hardness 10, 12 hp
-    (vs normal 0/2). +2 circumstance on Use Rope checks;
-    masterwork for binding (+2 DC to escape). Underdark
-    p. 78.
+    50-ft rope woven from earthsilk (dwarven fungus
+    fiber). Hardness 1, 10 hp; DC 26 Strength check to
+    burst. Stronger than silk rope. Races of Stone p. 159.
 Eternal Wand of Magic Aura:
   slot: tool
   note: >-
     Eternal wand; casts Nystul's magic aura 2/day at
-    CL 3. Usable by any character with the spell on any
-    class list. MIC p. 159.
+    CL 1. Usable by any arcane caster regardless of class
+    list. MIC p. 159.
 Eternal Wand of Prestidigitation:
   slot: tool
   note: >-
     Eternal wand usable by any character (no UMD). Casts
     prestidigitation 2/day at CL 1. MIC p. 159.
-Fiendslayer Crystal (Least):
+Fiendslayer Crystal, Least:
   slot: slotless
   note: >-
-    Weapon augment crystal; +1d6 damage to evil
-    outsiders. MIC p. 67.
+    Weapon augment crystal. +1d6 damage to evil
+    outsiders. Requires masterwork or magical host
+    weapon. MIC p. 65.
 Gauntlets of Ghost Fighting:
   slot: hands
   note: ghost touch weapon
 Gemstone of Heavy Fortification:
   slot: slotless
   note: >-
-    Armor gemstone; grants heavy fortification (75% chance
-    to negate extra damage from critical hits and sneak
+    Armor gemstone; grants heavy fortification (100%
+    chance to negate extra damage from crits and sneak
     attacks) to the attached armor. Draconomicon p. 83.
 Githborn Talisman:
-  slot: slotless
+  slot: throat
   note: >-
-    SR 13 vs. spells and spell-like abilities from
-    aberrations. 1/day immediate action reroll a failed
-    Will save vs. a mind-affecting effect from an
-    aberration. MIC p. 206.
+    3/day standard action, for 1 round gain +2 insight on
+    attack and weapon damage rolls vs. aberrations, and
+    +2 insight on Will saves vs. aberration Ex/Su/Sp
+    abilities. Githyanki/githzerai gain +4 instead.
+    MIC p. 105.
 Gloves of the Balanced Hand:
   slot: hands
   note: >-
-    Wearer is treated as having Improved Two-Weapon
-    Fighting (extra off-hand attack at -5). Requires
-    Two-Weapon Fighting feat to function. MIC p. 102.
+    Wearer fights as if possessing Two-Weapon Fighting;
+    if they already have TWF, also gain Improved
+    Two-Weapon Fighting. MIC p. 105.
 Heartstone:
   slot: slotless
   note: >-
-    Grants immunity to all diseases while carried. Allows
-    true seeing 3/day (1 minute duration). DMG p. 269
-    (hag item).
+    Night hag periapt. Instantly cures any disease
+    contracted by the holder, and grants +2 resistance
+    bonus on all saving throws. Shatters after 10 uses
+    by a non-hag bearer. MM p. 194.
 Heraldic Crest of Courage:
   slot: head
   effects:
@@ -237,43 +241,39 @@ Heraldic Crest of Courage:
 Heward's Fortifying Bedroll:
   slot: tool
   note: >-
-    Sleeping 8 hours in the bedroll gives a full night's
-    rest plus a lesser restoration on waking. One use
-    per day. MIC p. 159.
-Holocaust Cloak:
-  slot: shoulders
-  note: >-
-    1/day immediate action, erupt in flames dealing 3d6
-    fire damage to all adjacent creatures (Reflex DC 13
-    half). MIC p. 102.
+    1/day, climb in (move action) and rest 1 uninterrupted
+    hour to gain the benefits of a full 8 hours of rest:
+    eliminates fatigue/exhaustion, natural healing, and
+    lets arcane casters prepare/ready spells in that hour.
+    Spells cast within the last 8 hours still count against
+    daily limits. 3,000 gp. Complete Mage p. 132.
 Horn of Plenty:
   slot: tool
   note: >-
-    1/day on command, produces a meal sufficient to feed
-    up to eight Medium creatures (nourishment only, no
-    heroes' feast combat bonuses). MIC p. 111.
+    1/day on command, creates a heroes' feast (as the
+    spell) for twelve participants. CL 12th. MIC p. 162.
 Phoenix Cloak:
   slot: shoulders
   note: >-
-    Fire resistance 5. When the wearer drops to -10 hp or
-    is slain, body immolates once per day dealing 4d6
-    fire damage in a 10-ft burst (Reflex half).
-    MIC p. 117.
+    Fly speed equal to your land speed, perfect
+    maneuverability. Regalia of the Phoenix set piece.
+    MIC p. 210.
 Quicksilver Boots:
   slot: feet
   note: >-
-    1/day swift action; move up to your speed as if via
-    dimension door (no attack after). Does not provoke
-    AoO. MIC p. 85.
-Revelation Crystal (Greater):
+    2/day swift action; move up to your land speed
+    (normal movement rules; can cross liquid without
+    falling). Provokes AoOs, but rapid travel gives
+    concealment vs. those attacks. MIC p. 119.
+Revelation Crystal, Greater:
   slot: slotless
   note: >-
-    Weapon augment crystal; damaging an invisible creature
-    suppresses its invisibility for 1 round (still 50%
-    miss chance) and outlines it in a golden aura; also
-    suppresses concealment/displacement-like effects
-    (blur, displacement) on a damaged creature for 1
-    round. Requires +3 host weapon. MIC p. 68.
+    Weapon augment crystal. When you damage an invisible
+    creature, it is outlined in a golden aura for 1 round
+    and its invisibility is suppressed for 1 round;
+    additionally, concealment effects (blur, displacement)
+    on the damaged creature are suppressed for 1 round.
+    Requires +3 host weapon. MIC p. 66.
 Ring of Tharizdun:
   slot: ring
   note: Casts CL 9 delay death on the wearer if needed
@@ -287,9 +287,10 @@ Rod of Extend, Lesser:
 Sun Lenses:
   slot: face
   note: >-
-    Negates the dazzled condition from bright light. +2
-    circumstance on saves vs. visual effects (gaze
-    attacks, patterns, blinding). MIC p. 143.
+    Mundane gear (10 gp). Protects the eyes from being
+    dazzled by bright light/glare; if already dazzled,
+    recover from dazzled after 1 hour while worn.
+    Sandstorm p. 101.
 Szirb's Shining Helm:
   slot: head
   note: +2 sacred bonus to AC
@@ -312,13 +313,13 @@ Thieves' Tools, Masterwork:
 Third Eye (Clarity):
   slot: face
   note: Imm. action negate confused, etc.
-Truedeath Crystal (Greater):
+Truedeath Crystal, Greater:
   slot: slotless
   note: >-
-    Weapon augment crystal; +1d6 damage to undead,
+    Weapon augment crystal. +1d6 damage to undead,
     functions as ghost touch, and can deliver sneak
-    attacks/criticals against undead as if they were
-    living. Requires +3 host weapon. MIC p. 68.
+    attacks/crits against undead as if they were living.
+    Requires +3 host weapon. MIC p. 66.
 Vest of Resistance +1:
   slot: torso
   note: +1 resistance to all saves

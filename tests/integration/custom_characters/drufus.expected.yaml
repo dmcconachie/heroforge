@@ -278,11 +278,12 @@ skills:
       ability_mod: 11
       luck: 1
   Search:
-    total: 33
+    total: 42
     typed:
       ability_mod: 7
       ranks: 25
       luck: 1
+      insight: 9
   Sense Motive:
     total: 3
     typed:
@@ -302,11 +303,12 @@ skills:
       synergy: 4
       luck: 1
   Spot:
-    total: 28
+    total: 37
     typed:
       ability_mod: 2
       ranks: 25
       luck: 1
+      insight: 9
   Survival:
     total: 5
     typed:
@@ -444,7 +446,6 @@ equipment:
     - Vest of Resistance +5
     - Belt of Magnificence +6
     - Phoenix Cloak
-    - Holocaust Cloak
     - Gloves of the Balanced Hand
     - Deathstrike Bracers
     - Chronocharm of the Horizon Walker
@@ -457,7 +458,7 @@ equipment:
     - Chronocharm of the Laughing Rogue
     - Quicksilver Boots
     - Quicksilver Boots
-    - Crystal of Mind Cloaking (Greater)
+    - Crystal of Mind Cloaking, Greater
     - Gemstone of Heavy Fortification
     - Heartstone
     - Earthsilk Rope
@@ -484,20 +485,15 @@ equipment:
     - Eternal Wand of Magic Aura
     - Eternal Wand of Magic Aura
     - Eternal Wand of Magic Aura
-    - Revelation Crystal (Greater)
-    - Truedeath Crystal (Greater)
-    - Truedeath Crystal (Greater)
-    - Demolition Crystal (Greater)
-    - Demolition Crystal (Greater)
-    - Fiendslayer Crystal (Least)
-    - Fiendslayer Crystal (Least)
+    - Demolition Crystal, Greater
+    - Demolition Crystal, Greater
     - Horn of Plenty
     - Githborn Talisman
     - Szirb's Shining Helm
     - Thieves' Tools, Masterwork
     - Xan ibn'Duman
   weapons:
-    - name: Dagger
+    - name: +5 Dagger
       properties:
         - TWF (primary)
         - sacred
@@ -505,27 +501,29 @@ equipment:
         - vanishing
         - fiendslayer (least)
         - weapon bond
-    - name: Dagger
+        - Starmetal
+    - name: +5 Dagger
       properties:
         - TWF (secondary)
         - sacred
         - wounding
         - vanishing
         - fiendslayer (least)
-    - name: Light Mace
+        - Starmetal
+    - name: +5 Alchemical Silver Light Mace
       properties:
         - TWF (primary)
         - sacred
         - bane (undead)
         - truedeath (greater)
-    - name: Light Mace
+    - name: +5 Alchemical Silver Light Mace
       properties:
         - TWF (secondary)
         - sacred
         - bane (undead)
         - truedeath (greater)
-    - name: Composite Longbow
+    - name: +3 Composite Longbow
       properties:
         - sacred
         - precise
-        - truedeath (greater)
+        - revelation (greater)
