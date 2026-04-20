@@ -110,7 +110,11 @@ def _generate() -> dict[Path, str]:
     return {OUT_FILE: _render()}
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    """
+    Check that pool_keys.py matches its YAML sources.
+    Pass --fix to regenerate.
+    """
     parser = argparse.ArgumentParser(
         description=(
             "Check that pool_keys.py matches its YAML sources. "
@@ -125,7 +129,7 @@ def main() -> int:
             "Default (no flag) is read-only: exit 1 if stale."
         ),
     )
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     desired = _generate()
     check_ok = check_or_fix(desired, args.fix, "check-pool-keys", RULES_DIR)

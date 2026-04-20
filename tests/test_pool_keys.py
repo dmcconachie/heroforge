@@ -22,6 +22,7 @@ Until the refactor lands these tests are expected to be RED.
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pytest
@@ -29,8 +30,8 @@ import yaml
 
 from heroforge.engine.bonus import BonusPool, BonusType
 from heroforge.engine.effects import BonusEffect
-from heroforge.rules._gen_magic_item_enums import enum_ident
-from heroforge.rules._gen_pool_keys import generate as generate_pool_keys
+from heroforge.rules._gen_common import enum_ident
+from heroforge.rules._gen_pool_keys import main as check_pool_keys
 from heroforge.rules.core.pool_keys import PoolKey
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
@@ -134,13 +135,10 @@ def test_generator_is_idempotent() -> None:
     Running _gen_pool_keys.generate() should return content that
     matches what is currently committed, byte-for-byte.
     """
-    desired = generate_pool_keys()
-    for path, content in desired.items():
-        assert path.exists(), f"Generated file {path} is not committed"
-        assert path.read_text() == content, (
-            f"{path} is out of sync with YAML — "
-            f"run `uv run check-pool-keys --fix`"
-        )
+    assert check_pool_keys() == os.EX_OK, (
+        "pool_keys.py is out of sync with YAML — "
+        "run `uv run check-pool-keys --fix`"
+    )
 
 
 # ---------------------------------------------------------------------------
