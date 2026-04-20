@@ -16,18 +16,6 @@ if ! uv run ruff check; then
 fi
 
 echo ""
-echo "=== check-pool-keys ==="
-if ! uv run check-pool-keys; then
-    failures+=("check-pool-keys: pool keys need regeneration")
-fi
-
-echo ""
-echo "=== check-magic-items ==="
-if ! uv run check-magic-items; then
-    failures+=("check-magic-items: magic items need regeneration")
-fi
-
-echo ""
 echo "=== yamllint ==="
 if ! uv run yamllint .; then
     failures+=("yamllint: YAML lint errors found")

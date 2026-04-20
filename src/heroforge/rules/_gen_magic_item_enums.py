@@ -158,7 +158,11 @@ def _generate() -> dict[Path, str]:
     return out
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    """
+    Check that magic-item StrEnum modules match their YAML sources.
+    Pass --fix to regenerate.
+    """
     parser = argparse.ArgumentParser(
         description=(
             "Check that magic-item StrEnum modules match their YAML sources. "
@@ -173,7 +177,7 @@ def main() -> int:
             "Default (no flag) is read-only: exit 1 if any file is stale."
         ),
     )
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     _validate_slots()
     desired = _generate()

@@ -135,7 +135,7 @@ def test_generator_is_idempotent() -> None:
     Running _gen_pool_keys.generate() should return content that
     matches what is currently committed, byte-for-byte.
     """
-    assert check_pool_keys() == os.EX_OK, (
+    assert check_pool_keys(argv=[]) == os.EX_OK, (
         "pool_keys.py is out of sync with YAML — "
         "run `uv run check-pool-keys --fix`"
     )
