@@ -34,7 +34,7 @@ from heroforge.rules._gen_common import enum_ident
 from heroforge.rules._gen_pool_keys import main as check_pool_keys
 from heroforge.rules.core.pool_keys import PoolKey
 
-RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+RULES_DIR = Path(__file__).parent.parent
 CORE_DIR = RULES_DIR / "core"
 
 

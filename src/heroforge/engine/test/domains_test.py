@@ -11,7 +11,7 @@ from heroforge.engine.domains import (
 )
 from heroforge.rules.loader import DomainsLoader
 
-RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 class TestDomainsLoader:

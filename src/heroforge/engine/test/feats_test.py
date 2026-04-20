@@ -36,7 +36,7 @@ from heroforge.engine.feats import (
 )
 from heroforge.engine.prerequisites import FeatAvailability, PrerequisiteChecker
 
-RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 # ===========================================================================

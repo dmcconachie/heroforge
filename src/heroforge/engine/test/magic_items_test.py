@@ -19,7 +19,7 @@ from heroforge.engine.magic_items import (
 )
 from heroforge.rules.loader import MagicItemLoader
 
-RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 SLOT_FILES = [
     "head",

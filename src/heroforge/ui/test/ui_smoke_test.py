@@ -1,7 +1,11 @@
 """
-tests/test_ui_smoke.py
------------------------
+ui/test/ui_smoke_test.py
+------------------------
 Smoke tests for the UI layer.
+
+TODO: revisit whether a single smoke file is the right
+shape, or whether to split across
+main_window_test.py / sheets/*_test.py / widgets/*_test.py.
 
 These tests construct the main window and individual sheet
 widgets using Qt's offscreen platform, verifying that:

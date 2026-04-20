@@ -31,7 +31,7 @@ from heroforge.engine.races import (
     remove_race,
 )
 
-RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 # ===============================================================

@@ -34,7 +34,7 @@ from heroforge.engine.classes import (
     save_at_level,
 )
 
-RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 # ===============================================================

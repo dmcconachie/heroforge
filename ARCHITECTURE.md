@@ -113,37 +113,56 @@ src/heroforge/
         ├── combat_stats.py     # AC, saves, BAB, HP, init
         └── buff_panel.py       # Scrollable buff toggle list
 
-tests/
-├── conftest.py             # QT_QPA_PLATFORM=offscreen, qapp
-├── integration/            # golden-file char sheets
-│   ├── conftest.py         #   app_state fixture
-│   ├── test_golden.py      #   parametrized golden tests
-│   └── characters/         #   29 .char.yaml + .expected.yaml
-│                           #   (11 base + 3 archetype + 15 PrC)
-├── test_bonus.py
-├── test_stat.py
-├── test_character.py
-├── test_effects.py
-├── test_classes_races.py
-├── test_skills.py
-├── test_skill_allocation.py # Per-level skill budget/ranks
-├── test_feats.py
-├── test_prerequisites.py
-├── test_templates.py
-├── test_persistence.py
-├── test_stats_yaml.py
-├── test_spells_yaml.py
-├── test_export.py
-├── test_ui_smoke.py
-├── test_combat.py          # Grapple, carrying capacity
-├── test_equipment.py       # Armor, shields, weapons
-├── test_spellcasting.py    # Spell slots, DCs
-├── test_domains.py         # Cleric domains
-├── test_class_features.py  # Rage, inspire courage, etc.
-├── test_magic_items.py     # Magic item buffs
-├── test_conditions_srd_yaml.py
-├── test_feats_srd_yaml.py
-└── test_spells_srd_yaml.py
+Tests co-locate with the package they cover, under a
+per-subpackage `test/` directory (`foo_test.py`, Go-
+style). The legacy top-level `tests/` directory still
+hosts cross-cutting and integration tests pending
+placement decisions.
+
+src/heroforge/engine/test/      # unit tests for engine/
+  bonus_test.py
+  stat_test.py
+  character_test.py
+  effects_test.py
+  skills_test.py
+  feats_test.py
+  prerequisites_test.py
+  templates_test.py
+  persistence_test.py
+  equipment_test.py
+  spellcasting_test.py
+  domains_test.py
+  magic_items_test.py
+  races_test.py
+  classes_test.py
+  charopt_builds_test.py     # end-to-end character math
+  yaml_errors_test.py        # malformed-YAML error cases
+  bad_yaml/                  # fixtures for yaml_errors_test
+
+src/heroforge/rules/test/       # unit tests for rules/
+  gen_common_test.py
+  magic_item_enums_test.py
+  pool_keys_test.py
+  known_test.py              # KnownXxx enum congruence
+
+src/heroforge/ui/test/          # unit tests for ui/
+  conftest.py                # QT_QPA_PLATFORM=offscreen, qapp
+  ui_smoke_test.py           # TODO: split per sheet/widget
+
+tests/                          # pending placement / integration
+  test_combat.py             # grapple/carrying capacity
+  test_skill_allocation.py   # per-level skill budget
+  test_class_features.py     # rage, inspire courage
+  test_export.py             # sheet_data + renderer
+  test_stats_yaml.py
+  test_spells_yaml.py
+  test_spells_srd_yaml.py
+  test_conditions_srd_yaml.py
+  test_feats_srd_yaml.py
+  integration/
+    test_full_builds.py      # charsheet CLI subprocess
+    base_characters/         # 28 .char.yaml + .expected.yaml
+    custom_characters/       # drufus, farzin
 ```
 
 ---

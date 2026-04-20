@@ -49,7 +49,7 @@ from heroforge.engine.races import (
 )
 from heroforge.ui.app_state import AppState
 
-RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
+RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 def make_state() -> AppState:

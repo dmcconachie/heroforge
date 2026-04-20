@@ -23,7 +23,7 @@ from heroforge.engine.persistence import (
 if TYPE_CHECKING:
     from heroforge.ui.app_state import AppState
 
-BAD_YAML = Path(__file__).parent / "fixtures" / "bad_yaml"
+BAD_YAML = Path(__file__).parent / "bad_yaml"
 
 
 @pytest.fixture(scope="module")
