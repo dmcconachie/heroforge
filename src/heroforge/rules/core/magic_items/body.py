@@ -7,8 +7,6 @@ Edit the matching YAML and rerun
 ``uv run check-magic-items --fix``.
 """
 
-from __future__ import annotations
-
 from enum import StrEnum
 
 

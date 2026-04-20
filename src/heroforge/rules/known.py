@@ -10,10 +10,7 @@ To add a splatbook:
 3. The congruence test catches any drift.
 """
 
-from __future__ import annotations
-
-from enum import StrEnum
-
+from heroforge.rules.combine_str_enum import combine
 from heroforge.rules.core.armor import KnownCoreArmor
 from heroforge.rules.core.buffs import KnownCoreBuff
 from heroforge.rules.core.classes import KnownCoreClass
@@ -32,31 +29,20 @@ from heroforge.rules.custom.feats import KnownCustomFeat
 from heroforge.rules.custom.magic_items import KnownCustomMagicItem
 from heroforge.rules.custom.materials import KnownCustomMaterial
 
-
-def _combine(name: str, *sources: type[StrEnum]) -> type[StrEnum]:
-    members: dict[str, str] = {}
-    for src in sources:
-        for m in src:
-            members[m.name] = m.value
-    return StrEnum(name, members)
-
-
 # --- Combined enums from rule sources --------------
 
-KnownRace = _combine("KnownRace", KnownCoreRace)
-KnownClass = _combine("KnownClass", KnownCoreClass, KnownCustomClass)
-KnownFeat = _combine("KnownFeat", KnownCoreFeat, KnownCustomFeat)
-KnownSkill = _combine("KnownSkill", KnownCoreSkill)
-KnownBuff = _combine("KnownBuff", KnownCoreBuff)
-KnownTemplate = _combine("KnownTemplate", KnownCoreTemplate)
-KnownArmor = _combine("KnownArmor", KnownCoreArmor)
-KnownWeapon = _combine("KnownWeapon", KnownCoreWeapon)
-KnownMagicItem = _combine(
+KnownRace = combine("KnownRace", KnownCoreRace)
+KnownClass = combine("KnownClass", KnownCoreClass, KnownCustomClass)
+KnownFeat = combine("KnownFeat", KnownCoreFeat, KnownCustomFeat)
+KnownSkill = combine("KnownSkill", KnownCoreSkill)
+KnownBuff = combine("KnownBuff", KnownCoreBuff)
+KnownTemplate = combine("KnownTemplate", KnownCoreTemplate)
+KnownArmor = combine("KnownArmor", KnownCoreArmor)
+KnownWeapon = combine("KnownWeapon", KnownCoreWeapon)
+KnownMagicItem = combine(
     "KnownMagicItem", KnownCoreMagicItem, KnownCustomMagicItem
 )
-KnownMaterial = _combine(
-    "KnownMaterial", KnownCoreMaterial, KnownCustomMaterial
-)
-KnownDomain = _combine("KnownDomain", KnownCoreDomain)
-KnownCondition = _combine("KnownCondition", KnownCoreCondition)
-KnownGate = _combine("KnownGate", KnownCoreGate)
+KnownMaterial = combine("KnownMaterial", KnownCoreMaterial, KnownCustomMaterial)
+KnownDomain = combine("KnownDomain", KnownCoreDomain)
+KnownCondition = combine("KnownCondition", KnownCoreCondition)
+KnownGate = combine("KnownGate", KnownCoreGate)

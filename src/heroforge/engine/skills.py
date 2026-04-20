@@ -24,15 +24,14 @@ from typing import TYPE_CHECKING
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
 from heroforge.engine.character import Ability
 from heroforge.engine.stat import StatNode
-from heroforge.rules.core.pool_keys import PoolKey, pool_key_for_skill
+from heroforge.rules.core.pool_keys import PoolKey
+from heroforge.rules.core.skills import KnownCoreSkill
 
 if TYPE_CHECKING:
     from typing import Callable
 
     from heroforge.engine.character import Character
-    from heroforge.engine.classes import (
-        ClassDefinition,
-    )
+    from heroforge.engine.classes import ClassDefinition
 
 
 # ---------------------------------------------------------------------------
@@ -64,7 +63,8 @@ class SkillDefinition:
     @property
     def pool_key(self) -> PoolKey:
         """BonusPool identifier for this skill (derived from name)."""
-        return pool_key_for_skill(self.name)
+        skill = KnownCoreSkill(self.name)
+        return PoolKey[f"SKILL_{skill.name}"]
 
 
 # ---------------------------------------------------------------------------
