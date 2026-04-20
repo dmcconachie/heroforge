@@ -115,28 +115,23 @@ skills:
     typed:
       ability_mod: 2
       ranks: 15
-      Concentration (ranks): 15
   Knowledge (Arcana):
     total: 9
     typed:
       ranks: 9
-      Knowledge (Arcana) (ranks): 9
   Listen:
     total: 5
     typed:
       ranks: 5
-      Listen (ranks): 5
   Spellcraft:
     total: 13
     typed:
       ranks: 11
       synergy: 2
-      Spellcraft (ranks): 11
   Spot:
     total: 5
     typed:
       ranks: 5
-      Spot (ranks): 5
 carrying_capacity:
   light: 100
   medium: 200

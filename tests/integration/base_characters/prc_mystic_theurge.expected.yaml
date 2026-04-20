@@ -102,57 +102,48 @@ skills:
     typed:
       ability_mod: 2
       ranks: 19
-      Concentration (ranks): 19
   Decipher Script:
     total: 17
     typed:
       ability_mod: 3
       ranks: 14
-      Decipher Script (ranks): 14
   Diplomacy:
     total: 7
     typed:
       ability_mod: -1
       ranks: 6
       synergy: 2
-      Diplomacy (ranks): 6
   Heal:
     total: 9
     typed:
       ability_mod: 3
       ranks: 6
-      Heal (ranks): 6
   Knowledge (Arcana):
     total: 22
     typed:
       ability_mod: 3
       ranks: 19
-      Knowledge (Arcana) (ranks): 19
   Knowledge (Religion):
     total: 21
     typed:
       ability_mod: 3
       ranks: 18
-      Knowledge (Religion) (ranks): 18
   Knowledge (The Planes):
     total: 6
     typed:
       ability_mod: 3
       ranks: 3
-      Knowledge (The Planes) (ranks): 3
   Sense Motive:
     total: 13
     typed:
       ability_mod: 3
       ranks: 10
-      Sense Motive (ranks): 10
   Spellcraft:
     total: 24
     typed:
       ability_mod: 3
       ranks: 19
       synergy: 2
-      Spellcraft (ranks): 19
 carrying_capacity:
   light: 33
   medium: 66

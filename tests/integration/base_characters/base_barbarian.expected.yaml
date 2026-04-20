@@ -124,38 +124,32 @@ skills:
     typed:
       ability_mod: 9
       ranks: 14
-      Climb (ranks): 14
   Intimidate:
     total: 10
     typed:
       ability_mod: -3
       ranks: 13
-      Intimidate (ranks): 13
   Jump:
     total: 26
     typed:
       ability_mod: 9
       ranks: 13
       speed_mod: 4
-      Jump (ranks): 13
   Listen:
     total: 11
     typed:
       ability_mod: 1
       ranks: 10
-      Listen (ranks): 10
   Survival:
     total: 11
     typed:
       ability_mod: 1
       ranks: 10
-      Survival (ranks): 10
   Swim:
     total: 18
     typed:
       ability_mod: 9
       ranks: 9
-      Swim (ranks): 9
 carrying_capacity:
   light: 400
   medium: 800

@@ -118,20 +118,17 @@ skills:
     total: 16
     typed:
       ranks: 16
-      Climb (ranks): 16
   Heal:
     total: 17
     typed:
       ability_mod: 2
       ranks: 13
       self_sufficient: 2
-      Heal (ranks): 13
   Hide:
     total: 28
     typed:
       ability_mod: 5
       ranks: 23
-      Hide (ranks): 23
   Jump:
     total: -6
     typed:
@@ -141,25 +138,21 @@ skills:
     typed:
       ability_mod: 2
       ranks: 23
-      Listen (ranks): 23
   Move Silently:
     total: 28
     typed:
       ability_mod: 5
       ranks: 23
-      Move Silently (ranks): 23
   Search:
     total: 18
     typed:
       ability_mod: 1
       ranks: 17
-      Search (ranks): 17
   Spot:
     total: 25
     typed:
       ability_mod: 2
       ranks: 23
-      Spot (ranks): 23
   Survival:
     total: 29
     typed:
@@ -167,7 +160,6 @@ skills:
       ranks: 23
       synergy: 2
       self_sufficient: 2
-      Survival (ranks): 23
 carrying_capacity:
   light: 24
   medium: 49

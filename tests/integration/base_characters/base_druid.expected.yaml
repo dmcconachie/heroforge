@@ -119,12 +119,10 @@ skills:
     typed:
       ability_mod: 3
       ranks: 23
-      Concentration (ranks): 23
   Handle Animal:
     total: 14
     typed:
       ranks: 14
-      Handle Animal (ranks): 14
   Jump:
     total: -8
     typed:
@@ -136,13 +134,11 @@ skills:
       ability_mod: 1
       ranks: 13
       synergy: 2
-      Knowledge (Nature) (ranks): 13
   Listen:
     total: 13
     typed:
       ability_mod: 3
       ranks: 10
-      Listen (ranks): 10
   Ride:
     total: 4
     typed:
@@ -153,20 +149,17 @@ skills:
     typed:
       ability_mod: 1
       ranks: 13
-      Spellcraft (ranks): 13
   Spot:
     total: 22
     typed:
       ability_mod: 3
       ranks: 19
-      Spot (ranks): 19
   Survival:
     total: 28
     typed:
       ability_mod: 3
       ranks: 23
       synergy: 2
-      Survival (ranks): 23
 carrying_capacity:
   light: 15
   medium: 30

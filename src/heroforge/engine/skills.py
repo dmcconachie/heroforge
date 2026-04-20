@@ -168,7 +168,7 @@ def _make_skill_compute(
 
 def register_skills_on_character(
     skill_registry: SkillRegistry,
-    character: "Character",
+    character: Character,
 ) -> None:
     """
     Register all skills as StatNodes on the character's stat graph.
@@ -176,7 +176,7 @@ def register_skills_on_character(
     For each skill:
       1. Create a BonusPool keyed by the skill's pool key.
       2. Create a StatNode that computes: ability_mod + pool_total.
-         Ranks are contributed to the pool as an UNTYPED entry under
+         Ranks are contributed to the pool as a RANKS entry under
          source key "ranks" — updated when set_skill_ranks() is called.
       3. Register both with the stat graph.
 
@@ -222,7 +222,7 @@ def register_skills_on_character(
 
 
 def set_skill_ranks(
-    character: "Character",
+    character: Character,
     skill_name: str,
     ranks: int,
 ) -> None:
@@ -252,8 +252,8 @@ def set_skill_ranks(
     if ranks > 0:
         entry = BonusEntry(
             value=ranks,
-            bonus_type=BonusType.UNTYPED,
-            source=f"{skill_name} (ranks)",
+            bonus_type=BonusType.RANKS,
+            source="ranks",
         )
         pool.set_source("ranks", [entry])
     else:
@@ -298,7 +298,7 @@ def max_skill_ranks(char_level: int, is_class_skill: bool) -> float:
 
 
 def validate_skill_allocation(
-    character: "Character",
+    character: Character,
     char_level: int,
     skill_ranks: dict[str, int],
     class_defn: "ClassDefinition | None" = None,
@@ -347,47 +347,8 @@ def validate_skill_allocation(
     return errors
 
 
-def recompute_skills_from_levels(
-    character: "Character",
-) -> None:
-    """
-    Recompute character.skills from all levels.
-
-    Sums skill_ranks across all CharacterLevel entries,
-    applying class/cross-class conversion, and updates
-    the skill pools accordingly.
-    """
-    totals: dict[str, int] = {}
-    for lv in character.levels:
-        for skill_name, pts in lv.skill_ranks.items():
-            totals[skill_name] = totals.get(skill_name, 0) + pts
-    # Update character.skills and pools
-    skill_reg: SkillRegistry | None = getattr(
-        character, "_skill_registry", None
-    )
-    character.skills = {}
-    for skill_name, pts in totals.items():
-        character.skills[skill_name] = pts
-        if skill_reg is not None:
-            defn = skill_reg.get(skill_name)
-            if defn is not None:
-                pool_key = defn.pool_key
-                pool = character.get_pool(pool_key)
-                if pool is not None:
-                    if pts > 0:
-                        entry = BonusEntry(
-                            value=pts,
-                            bonus_type=BonusType.UNTYPED,
-                            source=f"{skill_name} (ranks)",
-                        )
-                        pool.set_source("ranks", [entry])
-                    else:
-                        pool.clear_source("ranks")
-                    character._graph.invalidate_pool(pool_key)
-
-
 def compute_skill_total(
-    character: "Character",
+    character: Character,
     skill_def: SkillDefinition,
     armor_check_penalty: int = 0,
 ) -> SkillTotal:

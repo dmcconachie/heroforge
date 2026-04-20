@@ -119,51 +119,43 @@ skills:
     typed:
       ability_mod: 3
       ranks: 21
-      Climb (ranks): 21
   Hide:
     total: 20
     typed:
       ability_mod: 2
       ranks: 18
-      Hide (ranks): 18
   Knowledge (Geography):
     total: 22
     typed:
       ability_mod: 1
       ranks: 21
-      Knowledge (Geography) (ranks): 21
   Listen:
     total: 25
     typed:
       ability_mod: 2
       ranks: 21
       alertness: 2
-      Listen (ranks): 21
   Move Silently:
     total: 16
     typed:
       ability_mod: 2
       ranks: 14
-      Move Silently (ranks): 14
   Spot:
     total: 25
     typed:
       ability_mod: 2
       ranks: 21
       alertness: 2
-      Spot (ranks): 21
   Survival:
     total: 23
     typed:
       ability_mod: 2
       ranks: 21
-      Survival (ranks): 21
   Swim:
     total: 14
     typed:
       ability_mod: 3
       ranks: 11
-      Swim (ranks): 11
 carrying_capacity:
   light: 76
   medium: 153

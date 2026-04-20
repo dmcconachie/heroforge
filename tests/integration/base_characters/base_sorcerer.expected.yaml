@@ -112,13 +112,11 @@ skills:
     typed:
       ability_mod: 4
       ranks: 13
-      Bluff (ranks): 13
   Concentration:
     total: 25
     typed:
       ability_mod: 2
       ranks: 23
-      Concentration (ranks): 23
   Diplomacy:
     total: 6
     typed:
@@ -138,13 +136,11 @@ skills:
     total: 10
     typed:
       ranks: 10
-      Knowledge (Arcana) (ranks): 10
   Spellcraft:
     total: 25
     typed:
       ranks: 23
       synergy: 2
-      Spellcraft (ranks): 23
 carrying_capacity:
   light: 26
   medium: 53

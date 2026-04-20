@@ -115,31 +115,26 @@ skills:
     typed:
       ability_mod: 2
       ranks: 14
-      Concentration (ranks): 14
   Diplomacy:
     total: 20
     typed:
       ability_mod: 2
       ranks: 16
       synergy: 2
-      Diplomacy (ranks): 16
   Heal:
     total: 21
     typed:
       ability_mod: 1
       ranks: 20
-      Heal (ranks): 20
   Ride:
     total: 10
     typed:
       ranks: 10
-      Ride (ranks): 10
   Sense Motive:
     total: 10
     typed:
       ability_mod: 1
       ranks: 9
-      Sense Motive (ranks): 9
 carrying_capacity:
   light: 76
   medium: 153

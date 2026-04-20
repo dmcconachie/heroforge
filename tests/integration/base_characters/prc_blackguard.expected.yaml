@@ -122,30 +122,25 @@ skills:
     typed:
       ability_mod: 3
       ranks: 4
-      Climb (ranks): 4
   Hide:
     total: 16
     typed:
       ability_mod: 1
       ranks: 15
-      Hide (ranks): 15
   Intimidate:
     total: 21
     typed:
       ability_mod: 2
       ranks: 19
-      Intimidate (ranks): 19
   Jump:
     total: 6
     typed:
       ability_mod: 3
       ranks: 3
-      Jump (ranks): 3
   Knowledge (Religion):
     total: 12
     typed:
       ranks: 12
-      Knowledge (Religion) (ranks): 12
 carrying_capacity:
   light: 76
   medium: 153

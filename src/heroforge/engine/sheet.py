@@ -382,21 +382,13 @@ def _skills(
 
         pool_bd = _pool_breakdown(c.get_pool(sd.pool_key), c)
 
-        # Pool's untyped bucket includes ranks — subtract so only
-        # genuine untyped bonuses from the pool remain.
-        untyped_key = BonusType.UNTYPED.value
-        if pool_bd.get(untyped_key, 0):
-            remaining = pool_bd[untyped_key] - st.ranks
-            if remaining:
-                pool_bd[untyped_key] = remaining
-            else:
-                del pool_bd[untyped_key]
-
         typed: dict[str, int] = {}
         if st.ability_mod:
             typed["ability_mod"] = st.ability_mod
-        if st.ranks:
-            typed["ranks"] = st.ranks
+        # Ranks is the primary skill investment; show it before
+        # the derived summaries and other pool contributions.
+        if "ranks" in pool_bd:
+            typed["ranks"] = pool_bd.pop("ranks")
         if st.synergy_bonus:
             typed["synergy"] = st.synergy_bonus
         if st.armor_penalty:

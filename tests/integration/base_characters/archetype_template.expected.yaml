@@ -119,18 +119,15 @@ skills:
     typed:
       ability_mod: 7
       ranks: 9
-      Climb (ranks): 9
   Intimidate:
     total: 9
     typed:
       ranks: 9
-      Intimidate (ranks): 9
   Jump:
     total: 16
     typed:
       ability_mod: 7
       ranks: 9
-      Jump (ranks): 9
 carrying_capacity:
   light: 233
   medium: 466

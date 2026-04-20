@@ -120,13 +120,11 @@ skills:
       ability_mod: 4
       ranks: 14
       synergy: 2
-      Balance (ranks): 14
   Hide:
     total: 13
     typed:
       ability_mod: 4
       ranks: 9
-      Hide (ranks): 9
   Jump:
     total: 41
     typed:
@@ -134,32 +132,27 @@ skills:
       ranks: 14
       synergy: 2
       speed_mod: 24
-      Jump (ranks): 14
   Listen:
     total: 21
     typed:
       ability_mod: 3
       ranks: 18
-      Listen (ranks): 18
   Move Silently:
     total: 13
     typed:
       ability_mod: 4
       ranks: 9
-      Move Silently (ranks): 9
   Spot:
     total: 17
     typed:
       ability_mod: 3
       ranks: 14
-      Spot (ranks): 14
   Tumble:
     total: 20
     typed:
       ability_mod: 4
       ranks: 14
       synergy: 2
-      Tumble (ranks): 14
 carrying_capacity:
   light: 43
   medium: 86

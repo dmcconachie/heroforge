@@ -109,29 +109,24 @@ skills:
     typed:
       ability_mod: 2
       ranks: 11
-      Concentration (ranks): 11
   Diplomacy:
     total: 4
     typed:
       ability_mod: 1
       ranks: 3
-      Diplomacy (ranks): 3
   Heal:
     total: 14
     typed:
       ability_mod: 3
       ranks: 11
-      Heal (ranks): 11
   Knowledge (Religion):
     total: 6
     typed:
       ranks: 6
-      Knowledge (Religion) (ranks): 6
   Spellcraft:
     total: 2
     typed:
       ranks: 2
-      Spellcraft (ranks): 2
 carrying_capacity:
   light: 100
   medium: 200

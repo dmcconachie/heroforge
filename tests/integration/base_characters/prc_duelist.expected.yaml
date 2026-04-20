@@ -124,19 +124,16 @@ skills:
       ability_mod: 3
       ranks: 10
       synergy: 2
-      Balance (ranks): 10
   Bluff:
     total: 0
     typed:
       ability_mod: -1
       ranks: 1
-      Bluff (ranks): 1
   Climb:
     total: 10
     typed:
       ability_mod: 2
       ranks: 8
-      Climb (ranks): 8
   Diplomacy:
     total: 1
     typed:
@@ -147,72 +144,60 @@ skills:
     typed:
       ability_mod: 3
       ranks: 10
-      Escape Artist (ranks): 10
   Hide:
     total: 4
     typed:
       ability_mod: 3
       ranks: 1
-      Hide (ranks): 1
   Intimidate:
     total: 3
     typed:
       ability_mod: -1
       ranks: 4
-      Intimidate (ranks): 4
   Jump:
     total: 12
     typed:
       ability_mod: 2
       ranks: 8
       synergy: 2
-      Jump (ranks): 8
   Listen:
     total: 11
     typed:
       ranks: 11
-      Listen (ranks): 11
   Move Silently:
     total: 4
     typed:
       ability_mod: 3
       ranks: 1
-      Move Silently (ranks): 1
   Perform:
     total: 9
     typed:
       ability_mod: -1
       ranks: 10
-      Perform (ranks): 10
   Search:
     total: 3
     typed:
       ability_mod: 2
       ranks: 1
-      Search (ranks): 1
   Sense Motive:
     total: 11
     typed:
       ranks: 11
-      Sense Motive (ranks): 11
   Spot:
     total: 5
     typed:
       ranks: 5
-      Spot (ranks): 5
   Swim:
     total: 6
     typed:
       ability_mod: 2
       ranks: 4
-      Swim (ranks): 4
   Tumble:
     total: 20
     typed:
       ability_mod: 3
       ranks: 15
       synergy: 2
-      Tumble (ranks): 15
   Use Rope:
     total: 5
     typed:

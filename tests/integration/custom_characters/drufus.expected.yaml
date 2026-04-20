@@ -183,7 +183,6 @@ skills:
     typed:
       ability_mod: 7
       ranks: 25
-      Disable Device (ranks): 25
       luck: 1
       circumstance: 2
   Disguise:
@@ -201,7 +200,6 @@ skills:
     typed:
       ability_mod: 7
       ranks: 1
-      Forgery (ranks): 1
       luck: 1
   Gather Information:
     total: 3
@@ -218,7 +216,6 @@ skills:
     typed:
       ability_mod: 11
       ranks: 25
-      Hide (ranks): 25
       luck: 1
       circumstance: 4
   Intimidate:
@@ -237,14 +234,12 @@ skills:
     typed:
       ability_mod: 7
       ranks: 8
-      Knowledge (Arcana) (ranks): 8
       luck: 1
   Knowledge (Local):
     total: 13
     typed:
       ability_mod: 7
       ranks: 1
-      Knowledge (Local) (ranks): 1
       luck: 1
       circumstance: 4
   Listen:
@@ -252,14 +247,12 @@ skills:
     typed:
       ability_mod: 2
       ranks: 25
-      Listen (ranks): 25
       luck: 1
   Move Silently:
     total: 41
     typed:
       ability_mod: 11
       ranks: 25
-      Move Silently (ranks): 25
       luck: 1
       circumstance: 4
   Open Lock:
@@ -267,7 +260,6 @@ skills:
     typed:
       ability_mod: 11
       ranks: 14
-      Open Lock (ranks): 14
       luck: 1
       circumstance: 2
   Perform:
@@ -280,7 +272,6 @@ skills:
     typed:
       ability_mod: 2
       ranks: 5
-      Perform (Dance) (ranks): 5
   Ride:
     total: 12
     typed:
@@ -291,7 +282,6 @@ skills:
     typed:
       ability_mod: 7
       ranks: 25
-      Search (ranks): 25
       luck: 1
       insight: 9
   Sense Motive:
@@ -304,7 +294,6 @@ skills:
     typed:
       ability_mod: 11
       ranks: 25
-      Sleight of Hand (ranks): 25
       luck: 1
   Spellcraft:
     total: 32
@@ -312,14 +301,12 @@ skills:
       ability_mod: 7
       ranks: 20
       synergy: 4
-      Spellcraft (ranks): 20
       luck: 1
   Spot:
     total: 37
     typed:
       ability_mod: 2
       ranks: 25
-      Spot (ranks): 25
       luck: 1
       insight: 9
   Survival:
@@ -338,14 +325,12 @@ skills:
     typed:
       ability_mod: 11
       ranks: 16
-      Tumble (ranks): 16
       luck: 1
   Use Magic Device:
     total: 28
     typed:
       ability_mod: 2
       ranks: 25
-      Use Magic Device (ranks): 25
       luck: 1
   Use Rope:
     total: 12

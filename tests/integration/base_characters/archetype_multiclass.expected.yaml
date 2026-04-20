@@ -115,67 +115,56 @@ skills:
     typed:
       ability_mod: 2
       ranks: 12
-      Climb (ranks): 12
   Disable Device:
     total: 5
     typed:
       ability_mod: 1
       ranks: 4
-      Disable Device (ranks): 4
   Hide:
     total: 7
     typed:
       ability_mod: 2
       ranks: 5
-      Hide (ranks): 5
   Intimidate:
     total: 8
     typed:
       ability_mod: -1
       ranks: 9
-      Intimidate (ranks): 9
   Jump:
     total: 5
     typed:
       ability_mod: 2
       ranks: 9
       speed_mod: -6
-      Jump (ranks): 9
   Listen:
     total: 3
     typed:
       ranks: 3
-      Listen (ranks): 3
   Move Silently:
     total: 7
     typed:
       ability_mod: 2
       ranks: 5
-      Move Silently (ranks): 5
   Open Lock:
     total: 7
     typed:
       ability_mod: 2
       ranks: 5
-      Open Lock (ranks): 5
   Search:
     total: 5
     typed:
       ability_mod: 1
       ranks: 4
-      Search (ranks): 4
   Spot:
     total: 3
     typed:
       ranks: 3
-      Spot (ranks): 3
   Tumble:
     total: 8
     typed:
       ability_mod: 2
       ranks: 4
       synergy: 2
-      Tumble (ranks): 4
 carrying_capacity:
   light: 58
   medium: 116

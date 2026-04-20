@@ -110,32 +110,27 @@ skills:
       ability_mod: 4
       ranks: 4
       synergy: 2
-      Balance (ranks): 4
   Bluff:
     total: 12
     typed:
       ability_mod: -1
       ranks: 13
-      Bluff (ranks): 13
   Climb:
     total: 4
     typed:
       ranks: 4
-      Climb (ranks): 4
   Diplomacy:
     total: 13
     typed:
       ability_mod: -1
       ranks: 10
       synergy: 4
-      Diplomacy (ranks): 10
   Disable Device:
     total: 27
     typed:
       ability_mod: 2
       ranks: 23
       nimble_fingers: 2
-      Disable Device (ranks): 23
   Disguise:
     total: 1
     typed:
@@ -146,20 +141,17 @@ skills:
     typed:
       ability_mod: 4
       ranks: 7
-      Escape Artist (ranks): 7
   Gather Information:
     total: 9
     typed:
       ability_mod: -1
       ranks: 10
-      Gather Information (ranks): 10
   Hide:
     total: 29
     typed:
       ability_mod: 4
       ranks: 23
       stealthy: 2
-      Hide (ranks): 23
   Intimidate:
     total: 1
     typed:
@@ -173,44 +165,37 @@ skills:
     total: 23
     typed:
       ranks: 23
-      Listen (ranks): 23
   Move Silently:
     total: 29
     typed:
       ability_mod: 4
       ranks: 23
       stealthy: 2
-      Move Silently (ranks): 23
   Open Lock:
     total: 28
     typed:
       ability_mod: 4
       ranks: 22
       nimble_fingers: 2
-      Open Lock (ranks): 22
   Search:
     total: 24
     typed:
       ability_mod: 2
       ranks: 22
-      Search (ranks): 22
   Sense Motive:
     total: 9
     typed:
       ranks: 9
-      Sense Motive (ranks): 9
   Sleight of Hand:
     total: 12
     typed:
       ability_mod: 4
       ranks: 6
       synergy: 2
-      Sleight of Hand (ranks): 6
   Spot:
     total: 23
     typed:
       ranks: 23
-      Spot (ranks): 23
   Survival:
     total: 2
     typed:
@@ -220,13 +205,11 @@ skills:
     typed:
       ability_mod: 4
       ranks: 22
-      Tumble (ranks): 22
   Use Magic Device:
     total: 8
     typed:
       ability_mod: -1
       ranks: 9
-      Use Magic Device (ranks): 9
   Use Rope:
     total: 6
     typed:

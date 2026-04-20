@@ -157,7 +157,6 @@ skills:
     typed:
       ability_mod: 5
       ranks: 16
-      Concentration (ranks): 16
       luck: 1
   Craft:
     total: 3
@@ -195,7 +194,6 @@ skills:
     typed:
       ability_mod: 1
       ranks: 5
-      Handle Animal (ranks): 5
       luck: 1
   Heal:
     total: 9
@@ -226,14 +224,12 @@ skills:
       ability_mod: 2
       ranks: 16
       synergy: 2
-      Knowledge (Nature) (ranks): 16
       luck: 1
   Listen:
     total: 25
     typed:
       ability_mod: 8
       ranks: 16
-      Listen (ranks): 16
       luck: 1
   Move Silently:
     total: -2
@@ -251,7 +247,6 @@ skills:
     typed:
       ability_mod: 8
       ranks: 6
-      Profession (Soldier) (ranks): 6
       luck: 1
   Ride:
     total: 21
@@ -259,7 +254,6 @@ skills:
       ability_mod: 2
       ranks: 16
       synergy: 2
-      Ride (ranks): 16
       luck: 1
   Search:
     total: 3
@@ -276,14 +270,12 @@ skills:
     typed:
       ability_mod: 2
       ranks: 12
-      Spellcraft (ranks): 12
       luck: 1
   Spot:
     total: 25
     typed:
       ability_mod: 8
       ranks: 16
-      Spot (ranks): 16
       luck: 1
   Survival:
     total: 16
@@ -291,7 +283,6 @@ skills:
       ability_mod: 8
       ranks: 5
       synergy: 2
-      Survival (ranks): 5
       luck: 1
   Swim:
     total: -1

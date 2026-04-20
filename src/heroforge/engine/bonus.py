@@ -61,6 +61,8 @@ class BonusType(enum.Enum):
     DODGE = "dodge"
     RACIAL = "racial"
     UNTYPED = "untyped"
+    # --- Skill ranks (dedicated slot; not ALWAYS_STACKING) ------------------
+    RANKS = "ranks"
 
 
 # Types whose positive values always stack with each other.

@@ -60,7 +60,7 @@ class StatNode:
                   Receives resolved values of all declared inputs, plus the
                   pre-aggregated total of all attached BonusPools.
                   Default: base + bonus_total (simple accumulator).
-    pools   : Keys of BonusPools (looked up in StatGraph.pools) that
+    pools       : Keys of BonusPools (looked up in StatGraph.pools) that
                   feed into this node's bonus_total.
     description : Human-readable description for UI tooltips.
     """

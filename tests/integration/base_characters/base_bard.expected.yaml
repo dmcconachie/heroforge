@@ -113,20 +113,17 @@ skills:
     typed:
       ability_mod: 3
       ranks: 23
-      Bluff (ranks): 23
   Concentration:
     total: 24
     typed:
       ability_mod: 1
       ranks: 23
-      Concentration (ranks): 23
   Diplomacy:
     total: 28
     typed:
       ability_mod: 3
       ranks: 23
       synergy: 2
-      Diplomacy (ranks): 23
   Disguise:
     total: 5
     typed:
@@ -137,7 +134,6 @@ skills:
     typed:
       ability_mod: 3
       ranks: 9
-      Gather Information (ranks): 9
   Intimidate:
     total: 5
     typed:
@@ -152,37 +148,31 @@ skills:
     typed:
       ability_mod: 2
       ranks: 23
-      Knowledge (Arcana) (ranks): 23
   Listen:
     total: 10
     typed:
       ranks: 10
-      Listen (ranks): 10
   Perform:
     total: 26
     typed:
       ability_mod: 3
       ranks: 23
-      Perform (ranks): 23
   Spellcraft:
     total: 27
     typed:
       ability_mod: 2
       ranks: 23
       synergy: 2
-      Spellcraft (ranks): 23
   Tumble:
     total: 25
     typed:
       ability_mod: 2
       ranks: 23
-      Tumble (ranks): 23
   Use Magic Device:
     total: 7
     typed:
       ability_mod: 3
       ranks: 4
-      Use Magic Device (ranks): 4
 carrying_capacity:
   light: 33
   medium: 66
