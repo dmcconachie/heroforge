@@ -240,10 +240,10 @@ class Sheet1Summary(QWidget):
 
 
 def _class_summary(character: Character) -> str:
-    if not character.class_levels:
+    clm = character.class_level_map
+    if not clm:
         return "—"
-    parts = [f"{cl.class_name} {cl.level}" for cl in character.class_levels]
-    return " / ".join(parts)
+    return " / ".join(f"{cn} {lvl}" for cn, lvl in clm.items())
 
 
 def _signed(value: int) -> str:

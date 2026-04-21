@@ -54,8 +54,18 @@ def full_char(state: AppState) -> Character:
     c.deity = "St. Cuthbert"
 
     apply_race(state.race_registry.require("Human"), c)
-    cl = state.class_registry.require("Fighter").make_class_level(6)
-    c.set_class_levels([cl])
+    from heroforge.engine.character import CharacterLevel
+
+    c.set_class_levels(
+        [
+            CharacterLevel(
+                character_level=i + 1,
+                class_name="Fighter",
+                hp_roll=10,
+            )
+            for i in range(6)
+        ]
+    )
 
     for ab, score in [
         ("str", 16),
@@ -261,17 +271,35 @@ class TestGatherSkills:
         assert climb.total == 9  # 6 + 3
 
     def test_class_skill_marked(self) -> None:
+        from heroforge.engine.character import CharacterLevel
+
         state = make_state()
-        cl = state.class_registry.require("Fighter").make_class_level(1)
-        state.character.set_class_levels([cl])
+        state.character.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=1,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            ]
+        )
         data = gather(state.character, state)
         climb = next(s for s in data.skills if s.name == "Climb")
         assert climb.class_skill is True  # Fighter class skill
 
     def test_non_class_skill_not_marked(self) -> None:
+        from heroforge.engine.character import CharacterLevel
+
         state = make_state()
-        cl = state.class_registry.require("Fighter").make_class_level(1)
-        state.character.set_class_levels([cl])
+        state.character.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=1,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            ]
+        )
         data = gather(state.character, state)
         spellcraft = next(s for s in data.skills if s.name == "Spellcraft")
         assert spellcraft.class_skill is False  # not a Fighter skill
@@ -462,12 +490,27 @@ class TestRenderPdf:
         assert path.stat().st_size > 5_000
 
     def test_multiclass_character_renders(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import CharacterLevel
+
         state = make_state()
         c = state.character
         c.name = "Multiclass Hero"
-        f_cl = state.class_registry.require("Fighter").make_class_level(4)
-        w_cl = state.class_registry.require("Wizard").make_class_level(4)
-        c.set_class_levels([f_cl, w_cl])
+        levels = [
+            CharacterLevel(
+                character_level=i + 1,
+                class_name="Fighter",
+                hp_roll=10,
+            )
+            for i in range(4)
+        ] + [
+            CharacterLevel(
+                character_level=4 + i + 1,
+                class_name="Wizard",
+                hp_roll=4,
+            )
+            for i in range(4)
+        ]
+        c.set_class_levels(levels)
         from heroforge.export.renderer import render_pdf
 
         data = gather(c, state)

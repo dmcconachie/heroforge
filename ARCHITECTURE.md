@@ -16,9 +16,10 @@ src/heroforge/
 │   ├── bonus.py            # BonusType, BonusEntry, BonusPool
 │   ├── stat.py             # StatNode, StatGraph: lazy DAG
 │   ├── character.py        # Character, ChangeNotifier,
-│   │                       #   CharacterLevel, ClassLevel,
-│   │                       #   BuffState, DmOverride,
-│   │                       #   grapple, carrying capacity
+│   │                       #   CharacterLevel, BuffState,
+│   │                       #   DmOverride, grapple,
+│   │                       #   carrying capacity
+│   ├── enums.py            # Ability, Alignment, Save, Size
 │   ├── effects.py          # BuffDefinition, BuffCategory,
 │   │                       #   formula evaluation
 │   ├── classes_races.py    # ClassDefinition, RaceDefinition,
@@ -212,8 +213,6 @@ Supporting dataclasses:
   at that level (with source tag), an optional
   `ability_bump` (every-4th-level +1), and
   `inherent_bumps` (consumed Tomes/Manuals).
-- `ClassLevel` — legacy cumulative model, now a computed
-  property that aggregates `CharacterLevel` entries.
 - `BuffState` — per-buff persistent state: active flag,
   optional caster level, optional parameter value.
 - `DmOverride` — a DM-granted override: target name + note.

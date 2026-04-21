@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from heroforge.engine.character import Character, ClassLevel
+from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.effects import (
     BuffRegistry,
@@ -248,7 +248,6 @@ class TestPassiveFeaturesNotInBuffRegistry:
         # L2) must still apply. Verified via the live stat
         # pipeline — a paladin L2 with Cha 14 gets +2 on
         # every save from divine grace (passive).
-        from heroforge.engine.character import ClassLevel
         from heroforge.ui.app_state import AppState
 
         state = AppState()
@@ -258,15 +257,12 @@ class TestPassiveFeaturesNotInBuffRegistry:
         c.set_ability_score("cha", 14)
         c.set_class_levels(
             [
-                ClassLevel(
+                CharacterLevel(
+                    character_level=i + 1,
                     class_name="Paladin",
-                    level=2,
-                    hp_rolls=[10, 10],
-                    bab_contribution=2,
-                    fort_contribution=3,
-                    ref_contribution=0,
-                    will_contribution=0,
+                    hp_roll=10,
                 )
+                for i in range(2)
             ]
         )
         # Without divine grace: fort_save = 3 (base).
@@ -325,14 +321,10 @@ def _make_barbarian_1(state: object) -> Character:
     c.set_ability_score("con", 12)
     c.set_class_levels(
         [
-            ClassLevel(
+            CharacterLevel(
+                character_level=1,
                 class_name="Barbarian",
-                level=1,
-                hp_rolls=[12],
-                bab_contribution=1,
-                fort_contribution=2,
-                ref_contribution=0,
-                will_contribution=0,
+                hp_roll=12,
             )
         ]
     )
@@ -411,14 +403,10 @@ def _make_duelist_1(state: object) -> Character:
     c.set_ability_score("int", 14)  # +2 mod
     c.set_class_levels(
         [
-            ClassLevel(
+            CharacterLevel(
+                character_level=1,
                 class_name="Duelist",
-                level=1,
-                hp_rolls=[10],
-                bab_contribution=1,
-                fort_contribution=0,
-                ref_contribution=2,
-                will_contribution=0,
+                hp_roll=10,
             )
         ]
     )
@@ -490,15 +478,12 @@ class TestDuelistGraceGate:
         c.set_ability_score("dex", 14)  # +2 Ref base
         c.set_class_levels(
             [
-                ClassLevel(
+                CharacterLevel(
+                    character_level=i + 1,
                     class_name="Duelist",
-                    level=4,
-                    hp_rolls=[10, 10, 10, 10],
-                    bab_contribution=4,
-                    fort_contribution=1,
-                    ref_contribution=4,
-                    will_contribution=1,
+                    hp_roll=10,
                 )
+                for i in range(4)
             ]
         )
         return c
@@ -532,15 +517,12 @@ def _make_monk(state: object, level: int, wis: int = 14) -> Character:
     c.set_ability_score("wis", wis)
     c.set_class_levels(
         [
-            ClassLevel(
+            CharacterLevel(
+                character_level=i + 1,
                 class_name="Monk",
-                level=level,
-                hp_rolls=[8] * level,
-                bab_contribution=(level * 3) // 4,
-                fort_contribution=2 + level // 2,
-                ref_contribution=2 + level // 2,
-                will_contribution=2 + level // 2,
+                hp_roll=8,
             )
+            for i in range(level)
         ]
     )
     return c

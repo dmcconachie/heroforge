@@ -20,7 +20,7 @@ Covers:
 
 from __future__ import annotations
 
-from heroforge.engine.character import Character, ClassLevel
+from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.prerequisites import (
     AbilityPrereq,
     AlignmentPrereq,
@@ -62,28 +62,28 @@ def with_class(
     fort: int = 0,
     ref: int = 0,
     will: int = 0,
-) -> ClassLevel:
-    return ClassLevel(
-        class_name=name,
-        level=level,
-        hp_rolls=[8] * level,
-        bab_contribution=bab,
-        fort_contribution=fort,
-        ref_contribution=ref,
-        will_contribution=will,
-    )
+) -> list[CharacterLevel]:
+    """
+    Return per-level CharacterLevel entries for ``level`` levels in
+    ``name``. The bab/fort/ref/will kwargs are accepted for call-site
+    compatibility but ignored — base attack bonus and base saves are
+    read from the rules registry via class_name + level count.
+    """
+    del bab, fort, ref, will
+    return [
+        CharacterLevel(
+            character_level=i + 1,
+            class_name=name,
+            hp_roll=8,
+        )
+        for i in range(level)
+    ]
 
 
 def fighter(n: int) -> Character:
     c = Character()
     c.race = "Human"
-    c.set_class_levels(
-        [
-            with_class(
-                "Fighter", n, bab=n, fort=2 + n // 2, ref=n // 3, will=n // 3
-            )
-        ]
-    )
+    c.set_class_levels(with_class("Fighter", n))
     return c
 
 
@@ -367,18 +367,18 @@ class TestCapabilityCheckerProficiency:
 
     def test_wizard_not_proficient_with_longsword(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Wizard", 3)])
+        c.set_class_levels(with_class("Wizard", 3))
         assert self._cap().is_proficient(c, "Longsword") is False
 
     def test_wizard_proficient_with_dagger(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Wizard", 3)])
+        c.set_class_levels(with_class("Wizard", 3))
         assert self._cap().is_proficient(c, "Dagger") is True
 
     def test_gnome_proficient_with_gnome_hooked_hammer(self) -> None:
         c = Character()
         c.race = "Gnome"
-        c.set_class_levels([with_class("Fighter", 1, bab=1)])
+        c.set_class_levels(with_class("Fighter", 1, bab=1))
         # Gnome treats gnome hooked hammer as martial
         assert self._cap().is_proficient(c, "Gnome Hooked Hammer") is True
 
@@ -388,7 +388,7 @@ class TestCapabilityCheckerProficiency:
 
     def test_ewp_feat_grants_exotic_proficiency(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Fighter", 1, bab=1)])
+        c.set_class_levels(with_class("Fighter", 1, bab=1))
         c.feats = [{"name": "Exotic Weapon Proficiency (Bastard Sword)"}]
         assert self._cap().is_proficient(c, "Bastard Sword") is True
 
@@ -402,19 +402,19 @@ class TestCapabilityCheckerProficiency:
     def test_elf_proficient_with_longsword_even_as_wizard(self) -> None:
         c = Character()
         c.race = "Elf"
-        c.set_class_levels([with_class("Wizard", 5)])
+        c.set_class_levels(with_class("Wizard", 5))
         assert self._cap().is_proficient(c, "Longsword") is True
 
     def test_elf_proficient_with_longbow(self) -> None:
         c = Character()
         c.race = "Elf"
-        c.set_class_levels([with_class("Wizard", 1)])
+        c.set_class_levels(with_class("Wizard", 1))
         assert self._cap().is_proficient(c, "Longbow") is True
 
     def test_dwarf_proficient_with_dwarven_waraxe(self) -> None:
         c = Character()
         c.race = "Dwarf"
-        c.set_class_levels([with_class("Fighter", 1, bab=1)])
+        c.set_class_levels(with_class("Fighter", 1, bab=1))
         assert self._cap().is_proficient(c, "Dwarven Waraxe") is True
 
 
@@ -429,12 +429,12 @@ class TestCapabilityCheckerSpellcasting:
 
     def test_wizard_5_can_cast_level_3(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Wizard", 5)])
+        c.set_class_levels(with_class("Wizard", 5))
         assert self._cap().can_cast(c, 3, "arcane") is True
 
     def test_wizard_1_can_cast_level_1(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Wizard", 1)])
+        c.set_class_levels(with_class("Wizard", 1))
         assert self._cap().can_cast(c, 1, "arcane") is True
 
     def test_fighter_cannot_cast(self) -> None:
@@ -443,33 +443,33 @@ class TestCapabilityCheckerSpellcasting:
 
     def test_paladin_4_can_cast_divine_1(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Paladin", 4)])
+        c.set_class_levels(with_class("Paladin", 4))
         assert self._cap().can_cast(c, 1, "divine") is True
 
     def test_paladin_3_cannot_cast(self) -> None:
         """Paladin gets spells at level 4."""
         c = Character()
-        c.set_class_levels([with_class("Paladin", 3)])
+        c.set_class_levels(with_class("Paladin", 3))
         assert self._cap().can_cast(c, 1, "divine") is False
 
     def test_cleric_1_can_cast_divine(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Cleric", 1)])
+        c.set_class_levels(with_class("Cleric", 1))
         assert self._cap().can_cast(c, 1, "divine") is True
 
     def test_cleric_cannot_cast_arcane(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Cleric", 10)])
+        c.set_class_levels(with_class("Cleric", 10))
         assert self._cap().can_cast(c, 1, "arcane") is False
 
     def test_either_accepts_arcane_caster(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Sorcerer", 3)])
+        c.set_class_levels(with_class("Sorcerer", 3))
         assert self._cap().can_cast(c, 1, "either") is True
 
     def test_either_accepts_divine_caster(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Cleric", 3)])
+        c.set_class_levels(with_class("Cleric", 3))
         assert self._cap().can_cast(c, 1, "either") is True
 
 
@@ -484,17 +484,17 @@ class TestCapabilityCheckerClassFeatures:
 
     def test_rogue_has_sneak_attack(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Rogue", 1)])
+        c.set_class_levels(with_class("Rogue", 1))
         assert self._cap().has_class_feature(c, "sneak_attack") is True
 
     def test_rogue_1_does_not_have_sneak_2d6(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Rogue", 1)])
+        c.set_class_levels(with_class("Rogue", 1))
         assert self._cap().has_class_feature(c, "sneak_attack", "2d6") is False
 
     def test_rogue_3_has_sneak_2d6(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Rogue", 3)])
+        c.set_class_levels(with_class("Rogue", 3))
         assert self._cap().has_class_feature(c, "sneak_attack", "2d6") is True
 
     def test_fighter_no_sneak_attack(self) -> None:
@@ -503,7 +503,7 @@ class TestCapabilityCheckerClassFeatures:
 
     def test_cleric_has_turn_undead(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Cleric", 1)])
+        c.set_class_levels(with_class("Cleric", 1))
         assert self._cap().has_class_feature(c, "turn_undead") is True
 
     def test_fighter_no_turn_undead(self) -> None:
@@ -512,12 +512,12 @@ class TestCapabilityCheckerClassFeatures:
 
     def test_druid_5_has_wild_shape(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Druid", 5)])
+        c.set_class_levels(with_class("Druid", 5))
         assert self._cap().has_class_feature(c, "wild_shape") is True
 
     def test_druid_4_no_wild_shape(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Druid", 4)])
+        c.set_class_levels(with_class("Druid", 4))
         assert self._cap().has_class_feature(c, "wild_shape") is False
 
 
@@ -718,7 +718,7 @@ class TestPrcAvailability:
     def test_available_when_prereqs_met(self) -> None:
         c = Character()
         c.race = "Elf"
-        c.set_class_levels([with_class("Fighter", 6, bab=6)])
+        c.set_class_levels(with_class("Fighter", 6, bab=6))
         c.feats = [{"name": "Point Blank Shot"}, {"name": "Precise Shot"}]
         c.set_ability_score("dex", 10)
 
@@ -747,10 +747,7 @@ class TestPrcAvailability:
         c = Character()
         c.race = "Elf"
         c.set_class_levels(
-            [
-                with_class("Fighter", 6, bab=6),
-                with_class("Wizard", 1),
-            ]
+            with_class("Fighter", 6, bab=6) + with_class("Wizard", 1)
         )
         c.feats = [{"name": "Point Blank Shot"}, {"name": "Precise Shot"}]
 
@@ -774,7 +771,7 @@ class TestPrcAvailability:
 
     def test_taken_when_already_in_class_list(self) -> None:
         c = Character()
-        c.set_class_levels([with_class("Arcane Archer", 3, bab=3)])
+        c.set_class_levels(with_class("Arcane Archer", 3, bab=3))
 
         chk = PrerequisiteChecker()
         chk.register_prc("Arcane Archer", None)
@@ -800,7 +797,7 @@ class TestOngoingViolations:
     def test_no_violations_when_all_ongoing_met(self) -> None:
         c = Character()
         c.alignment = "lawful_good"
-        c.set_class_levels([with_class("Paladin", 5)])
+        c.set_class_levels(with_class("Paladin", 5))
 
         chk = PrerequisiteChecker()
         chk.register_prc(
@@ -812,7 +809,7 @@ class TestOngoingViolations:
     def test_violation_when_ongoing_unmet(self) -> None:
         c = Character()
         c.alignment = "chaotic_evil"
-        c.set_class_levels([with_class("Paladin", 5)])
+        c.set_class_levels(with_class("Paladin", 5))
 
         chk = PrerequisiteChecker()
         chk.register_prc(

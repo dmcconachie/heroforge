@@ -7,7 +7,7 @@ and ClassesLoader.
 Covers:
   - BAB and save progression helper functions at key level
     boundaries
-  - ClassDefinition construction and make_class_level()
+  - ClassDefinition construction and BAB/save contributions
   - ClassRegistry: register, get, require
   - build_class_from_yaml
   - ClassesLoader: YAML validation, registration, all core
@@ -22,7 +22,7 @@ from pathlib import Path
 
 import pytest
 
-from heroforge.engine.character import Character
+from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.classes import (
     BABProgression,
     ClassDefinition,
@@ -168,17 +168,6 @@ class TestClassDefinition:
     def test_will_contribution(self) -> None:
         f = self._fighter()
         assert f.will_contribution(3) == 1  # floor(3/3)
-
-    def test_make_class_level_correct_bab(self) -> None:
-        f = self._fighter()
-        cl = f.make_class_level(5)
-        assert cl.bab_contribution == 5
-        assert cl.fort_contribution == 4  # 2 + 5//2 = 4
-
-    def test_make_class_level_default_max_hp(self) -> None:
-        f = self._fighter()
-        cl = f.make_class_level(3)
-        assert cl.hp_rolls == [10, 10, 10]
 
     def test_features_at_level(self) -> None:
         f = ClassDefinition(
@@ -334,19 +323,6 @@ class TestClassesLoader:
         assert "bonus_feat_1" in feats
         assert "bonus_feat_2" in feats
 
-    def test_make_class_level_from_registry(self) -> None:
-        reg = loaded_class_registry()
-        cl = reg.require("Fighter").make_class_level(8)
-        assert cl.bab_contribution == 8
-        assert cl.fort_contribution == 6  # 2 + 8//2
-
-    def test_cleric_make_class_level(self) -> None:
-        reg = loaded_class_registry()
-        cl = reg.require("Cleric").make_class_level(5)
-        # medium: floor(5*3/4)
-        assert cl.bab_contribution == 3
-        assert cl.fort_contribution == 4  # good: 2 + 5//2
-
     def test_no_duplicate_class_names(self) -> None:
         """
         Loading with overwrite=False would raise on
@@ -392,7 +368,7 @@ class TestCharacterIntegration:
           Ref  = base(1) + dex_mod(0) = 1 (poor ref)
           Will = base(1) + wis_mod(0) = 1 (poor will)
         """
-        race_reg, class_reg, apply_race, _ = self._load_registries()
+        race_reg, _class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         c.set_ability_score("str", 14)
@@ -401,8 +377,16 @@ class TestCharacterIntegration:
         apply_race(race_reg.require("Dwarf"), c)
         assert c.con_score == 16  # 14 + 2 racial
 
-        cl = class_reg.require("Fighter").make_class_level(4)
-        c.set_class_levels([cl])
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+                for i in range(4)
+            ]
+        )
 
         assert c.fort == 7  # good 4 + con_mod 3
         assert c.ref == 1  # poor 4//3 + dex 0
@@ -414,12 +398,20 @@ class TestCharacterIntegration:
           BAB = poor floor(6/2) = 3
           Will = good 2+6//2=5 + wis_mod(0) = 5
         """
-        race_reg, class_reg, apply_race, _ = self._load_registries()
+        race_reg, _class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         apply_race(race_reg.require("Elf"), c)
-        cl = class_reg.require("Wizard").make_class_level(6)
-        c.set_class_levels([cl])
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Wizard",
+                    hp_roll=4,
+                )
+                for i in range(6)
+            ]
+        )
 
         assert c.bab == 3
         assert c.will == 5
@@ -428,12 +420,20 @@ class TestCharacterIntegration:
         """
         Halfling has base speed 20; should be
         reflected."""
-        race_reg, class_reg, apply_race, _ = self._load_registries()
+        race_reg, _class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         apply_race(race_reg.require("Halfling"), c)
-        cl = class_reg.require("Rogue").make_class_level(3)
-        c.set_class_levels([cl])
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Rogue",
+                    hp_roll=6,
+                )
+                for i in range(3)
+            ]
+        )
 
         assert c._race_base_speed == 20
 
@@ -443,15 +443,23 @@ class TestCharacterIntegration:
           +2 STR racial. STR 14 base -> 16.
           STR mod = 3. Attack = bab(5) + str_mod(3) = 8.
         """
-        race_reg, class_reg, apply_race, _ = self._load_registries()
+        race_reg, _class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         c.set_ability_score("str", 14)
         apply_race(race_reg.require("Half-Orc"), c)
         assert c.str_score == 16
 
-        cl = class_reg.require("Barbarian").make_class_level(5)
-        c.set_class_levels([cl])
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Barbarian",
+                    hp_roll=12,
+                )
+                for i in range(5)
+            ]
+        )
         assert c.get("attack_melee") == 8  # bab 5 + str 3
 
     def test_human_fighter_multiclass_bab(self) -> None:
@@ -461,14 +469,27 @@ class TestCharacterIntegration:
           Wizard BAB = 2 (poor).
           Combined BAB = 6.
         """
-        race_reg, class_reg, apply_race, _ = self._load_registries()
+        race_reg, _class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
         apply_race(race_reg.require("Human"), c)
 
-        f_cl = class_reg.require("Fighter").make_class_level(4)
-        w_cl = class_reg.require("Wizard").make_class_level(4)
-        c.set_class_levels([f_cl, w_cl])
+        levels = [
+            CharacterLevel(
+                character_level=i + 1,
+                class_name="Fighter",
+                hp_roll=10,
+            )
+            for i in range(4)
+        ] + [
+            CharacterLevel(
+                character_level=4 + i + 1,
+                class_name="Wizard",
+                hp_roll=4,
+            )
+            for i in range(4)
+        ]
+        c.set_class_levels(levels)
 
         assert c.bab == 6
 

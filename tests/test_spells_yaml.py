@@ -20,7 +20,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from heroforge.engine.bonus import BonusType
-from heroforge.engine.character import Character, ClassLevel
+from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.effects import (
     BuffCategory,
     BuffRegistry,
@@ -49,17 +49,14 @@ def loaded_registries() -> tuple[SpellCompendium, BuffRegistry]:
     return comp, reg
 
 
-def fighter(n: int) -> list[ClassLevel]:
+def fighter(n: int) -> list[CharacterLevel]:
     return [
-        ClassLevel(
+        CharacterLevel(
+            character_level=i + 1,
             class_name="Fighter",
-            level=n,
-            hp_rolls=[10] * n,
-            bab_contribution=n,
-            fort_contribution=2 + n // 2,
-            ref_contribution=n // 3,
-            will_contribution=n // 3,
+            hp_roll=10,
         )
+        for i in range(n)
     ]
 
 

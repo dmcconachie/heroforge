@@ -24,15 +24,9 @@ import enum
 import math
 from dataclasses import dataclass, field
 from enum import StrEnum
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
 from heroforge.engine.enums import Ability
-
-if TYPE_CHECKING:
-    from heroforge.engine.character import (
-        ClassLevel,
-    )
-
 
 # -----------------------------------------------------------
 # Enumerations
@@ -176,27 +170,6 @@ class ClassDefinition:
 
     def will_contribution(self, level: int) -> int:
         return save_at_level(self.save_progressions.will, level)
-
-    def make_class_level(
-        self,
-        level: int,
-        hp_rolls: list[int] | None = None,
-    ) -> "ClassLevel":
-        from heroforge.engine.character import (
-            ClassLevel,
-        )
-
-        if hp_rolls is None:
-            hp_rolls = [self.hit_die] * level
-        return ClassLevel(
-            class_name=self.name,
-            level=level,
-            hp_rolls=hp_rolls,
-            bab_contribution=self.bab_contribution(level),
-            fort_contribution=self.fort_contribution(level),
-            ref_contribution=self.ref_contribution(level),
-            will_contribution=self.will_contribution(level),
-        )
 
     def features_at_level(self, level: int) -> list[ClassFeature]:
         return [f for f in self.class_features if f.level == level]

@@ -180,9 +180,21 @@ class TestSaveCharacter:
         assert data["ability_scores"]["dex"] == 16
 
     def test_levels_saved(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
         state = make_app_state()
-        cl = state.class_registry.require("Fighter").make_class_level(4)
-        state.character.set_class_levels([cl])
+        state.character.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+                for i in range(4)
+            ]
+        )
         path = tmp_path / "c.char.yaml"
         save_character(state.character, path)
         with open(path) as f:
@@ -276,22 +288,51 @@ class TestLoadCharacter:
         assert loaded.wis_score == 16
 
     def test_class_levels_restored(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
         state = make_app_state()
-        cl = state.class_registry.require("Rogue").make_class_level(5)
-        state.character.set_class_levels([cl])
+        state.character.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Rogue",
+                    hp_roll=6,
+                )
+                for i in range(5)
+            ]
+        )
         loaded, _ = self._save_and_load(tmp_path, state.character)
         assert loaded.total_level == 5
-        assert loaded.class_levels[0].class_name == "Rogue"
+        assert loaded.levels[0].class_name == "Rogue"
         assert loaded.bab == 3  # medium BAB level 5
 
     def test_multiclass_levels_restored(self, tmp_path: Path) -> None:
+        from heroforge.engine.character import (
+            CharacterLevel,
+        )
+
         state = make_app_state()
-        f_cl = state.class_registry.require("Fighter").make_class_level(4)
-        w_cl = state.class_registry.require("Wizard").make_class_level(4)
-        state.character.set_class_levels([f_cl, w_cl])
+        levels = [
+            CharacterLevel(
+                character_level=i + 1,
+                class_name="Fighter",
+                hp_roll=10,
+            )
+            for i in range(4)
+        ] + [
+            CharacterLevel(
+                character_level=4 + i + 1,
+                class_name="Wizard",
+                hp_roll=4,
+            )
+            for i in range(4)
+        ]
+        state.character.set_class_levels(levels)
         loaded, _ = self._save_and_load(tmp_path, state.character)
         assert loaded.total_level == 8
-        names = {cl.class_name for cl in loaded.class_levels}
+        names = {lv.class_name for lv in loaded.levels}
         assert "Fighter" in names
         assert "Wizard" in names
 

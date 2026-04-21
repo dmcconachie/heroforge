@@ -84,9 +84,9 @@ class ClassDialog(QDialog):
         layout.addWidget(buttons)
 
         # Populate from current character
-        for cl in app_state.character.class_levels:
-            self._entries.append((cl.class_name, cl.level))
-            self._class_list.addItem(f"{cl.class_name} {cl.level}")
+        for cn, lvl in app_state.character.class_level_map.items():
+            self._entries.append((cn, lvl))
+            self._class_list.addItem(f"{cn} {lvl}")
 
     def _add_class(self) -> None:
         name = self._class_combo.currentText()
@@ -110,25 +110,23 @@ class ClassDialog(QDialog):
         if not self._entries:
             self.reject()
             return
-        class_reg = self._state.class_registry
-        class_levels = []
-        for class_name, level in self._entries:
-            defn = class_reg.get(class_name)
-            if defn:
-                cl = defn.make_class_level(level)
-            else:
-                # Unknown class — build a default ClassLevel
-                from heroforge.engine.character import ClassLevel
+        from heroforge.engine.character import CharacterLevel
+        from heroforge.rules.rules import get_rules
 
-                cl = ClassLevel(
-                    class_name=class_name,
-                    level=level,
-                    hp_rolls=[8] * level,
-                    bab_contribution=level,
-                    fort_contribution=2 + level // 2,
-                    ref_contribution=level // 3,
-                    will_contribution=level // 3,
+        class_reg = get_rules().classes
+        levels: list[CharacterLevel] = []
+        idx = 1
+        for class_name, level_count in self._entries:
+            defn = class_reg.get(class_name)
+            hit_die = defn.hit_die if defn else 8
+            for _ in range(level_count):
+                levels.append(
+                    CharacterLevel(
+                        character_level=idx,
+                        class_name=class_name,
+                        hp_roll=hit_die,
+                    )
                 )
-            class_levels.append(cl)
-        self._state.character.set_class_levels(class_levels)
+                idx += 1
+        self._state.character.set_class_levels(levels)
         self.accept()

@@ -25,7 +25,6 @@ from heroforge.engine.character import (
     Character,
     CharacterError,
     CharacterLevel,
-    ClassLevel,
 )
 
 # ===========================================================================
@@ -49,26 +48,17 @@ def simple_buff(
     char.register_buff_definition(name, [(pool_key, entry)])
 
 
-def fighter_levels(n: int) -> list[ClassLevel]:
+def fighter_levels(n: int) -> list[CharacterLevel]:
     """
-    Create n Fighter levels with full BAB (1 per level),
-    good Fort (2+1/2 per level), poor Ref and Will.
-    HP rolls are maximum (d10 each).
-    """
-    bab = n
-    fort = 2 + (n // 2)  # good save: +2 at 1st, +1 every 2 levels
-    ref = n // 3  # poor save: +1 every 3 levels
-    will = n // 3
+    n Fighter levels, HP 10 each. Real Fighter class from
+    the rules registry supplies BAB / save progressions."""
     return [
-        ClassLevel(
+        CharacterLevel(
+            character_level=i + 1,
             class_name="Fighter",
-            level=n,
-            hp_rolls=[10] * n,
-            bab_contribution=bab,
-            fort_contribution=fort,
-            ref_contribution=ref,
-            will_contribution=will,
+            hp_roll=10,
         )
+        for i in range(n)
     ]
 
 
@@ -491,52 +481,47 @@ class TestClassLevels:
 
     def test_total_level_sums_all_classes(self) -> None:
         c = make_char()
-        c.class_levels = [
-            ClassLevel(
-                "Fighter",
-                5,
-                [10] * 5,
-                bab_contribution=5,
-                fort_contribution=4,
-                ref_contribution=1,
-                will_contribution=1,
-            ),
-            ClassLevel(
-                "Wizard",
-                3,
-                [4] * 3,
-                bab_contribution=1,
-                fort_contribution=1,
-                ref_contribution=1,
-                will_contribution=3,
-            ),
-        ]
+        levels: list[CharacterLevel] = []
+        for i in range(5):
+            levels.append(
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            )
+        for i in range(3):
+            levels.append(
+                CharacterLevel(
+                    character_level=5 + i + 1,
+                    class_name="Wizard",
+                    hp_roll=4,
+                )
+            )
+        c.set_class_levels(levels)
         assert c.total_level == 8
 
     def test_multiclass_bab_sums(self) -> None:
         c = make_char()
-        c.set_class_levels(
-            [
-                ClassLevel(
-                    "Fighter",
-                    5,
-                    [10] * 5,
-                    bab_contribution=5,
-                    fort_contribution=4,
-                    ref_contribution=1,
-                    will_contribution=1,
-                ),
-                ClassLevel(
-                    "Wizard",
-                    3,
-                    [4] * 3,
-                    bab_contribution=1,
-                    fort_contribution=1,
-                    ref_contribution=1,
-                    will_contribution=3,
-                ),
-            ]
-        )
+        levels: list[CharacterLevel] = []
+        for i in range(5):
+            levels.append(
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Fighter",
+                    hp_roll=10,
+                )
+            )
+        for i in range(3):
+            levels.append(
+                CharacterLevel(
+                    character_level=5 + i + 1,
+                    class_name="Wizard",
+                    hp_roll=4,
+                )
+            )
+        c.set_class_levels(levels)
+        # Fighter 5 = +5 BAB, Wizard 3 = +1 BAB (half)
         assert c.bab == 6
 
     def test_attack_melee_includes_bab_and_str(self) -> None:

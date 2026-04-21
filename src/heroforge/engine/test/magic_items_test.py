@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from heroforge.engine.character import Character, ClassLevel
+from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.equipment import (
     ArmorCategory,
     ArmorDefinition,
@@ -144,15 +144,12 @@ class TestMonksBeltGate:
         c.set_ability_score("wis", wis)
         c.set_class_levels(
             [
-                ClassLevel(
+                CharacterLevel(
+                    character_level=i + 1,
                     class_name="Fighter",
-                    level=level,
-                    hp_rolls=[10] * level,
-                    bab_contribution=level,
-                    fort_contribution=2 + level // 2,
-                    ref_contribution=0,
-                    will_contribution=0,
+                    hp_roll=10,
                 )
+                for i in range(level)
             ]
         )
         return c
@@ -165,15 +162,12 @@ class TestMonksBeltGate:
         c.set_ability_score("wis", wis)
         c.set_class_levels(
             [
-                ClassLevel(
+                CharacterLevel(
+                    character_level=i + 1,
                     class_name="Monk",
-                    level=level,
-                    hp_rolls=[8] * level,
-                    bab_contribution=(level * 3) // 4,
-                    fort_contribution=2 + level // 2,
-                    ref_contribution=2 + level // 2,
-                    will_contribution=2 + level // 2,
+                    hp_roll=8,
                 )
+                for i in range(level)
             ]
         )
         return c
@@ -186,23 +180,20 @@ class TestMonksBeltGate:
         c.race = "Human"
         c.set_ability_score("dex", 14)
         c.set_ability_score("wis", wis)
-        levels = [
-            ClassLevel(
+        levels: list[CharacterLevel] = [
+            CharacterLevel(
+                character_level=i + 1,
                 class_name="Fighter",
-                level=fighter_level,
-                hp_rolls=[10] * fighter_level,
-                bab_contribution=fighter_level,
-                fort_contribution=2 + fighter_level // 2,
-            ),
-            ClassLevel(
+                hp_roll=10,
+            )
+            for i in range(fighter_level)
+        ] + [
+            CharacterLevel(
+                character_level=fighter_level + i + 1,
                 class_name="Monk",
-                level=monk_level,
-                hp_rolls=[8] * monk_level,
-                bab_contribution=(monk_level * 3) // 4,
-                fort_contribution=2 + monk_level // 2,
-                ref_contribution=2 + monk_level // 2,
-                will_contribution=2 + monk_level // 2,
-            ),
+                hp_roll=8,
+            )
+            for i in range(monk_level)
         ]
         c.set_class_levels(levels)
         return c

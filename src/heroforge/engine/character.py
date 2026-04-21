@@ -20,10 +20,9 @@ What this module does NOT do:
   - No prerequisite checking (engine/prerequisites.py)
 
 Public API:
-  Ability             — StrEnum for ability scores
-  Alignment           — StrEnum for alignments
-  Save                — StrEnum for saving throws
+  CharacterLevel      — one entry per character level
   BuffState           — persisted per-buff toggle state
+  DmOverride          — DM-granted prerequisite override
   Character           — the main class
   CharacterError      — raised on invalid operations
 """
@@ -58,24 +57,6 @@ from heroforge.rules.rules import get_rules
 # ---------------------------------------------------------------------------
 # Supporting types
 # ---------------------------------------------------------------------------
-
-
-@dataclass
-class ClassLevel:
-    """
-    One class entry (cumulative levels per class).
-
-    TODO: remove this legacy dataclass. New code
-    should use CharacterLevel and Character.levels.
-    """
-
-    class_name: str
-    level: int
-    hp_rolls: list[int] = field(default_factory=list)
-    bab_contribution: int = 0
-    fort_contribution: int = 0
-    ref_contribution: int = 0
-    will_contribution: int = 0
 
 
 @dataclass
@@ -230,7 +211,6 @@ class Character:
         self._race_subtypes: list = []
         self._race_favored_class: str = "any"
 
-        self.enabled_sources: list[str] = ["PHB"]
         self.notes: str = ""
 
         # --- Equipment (simplified for now) --------------------------------
@@ -260,10 +240,6 @@ class Character:
         # --- HP tracking ----------------------------------------------------
         self.hp_current: int = 0
         # hp_max is computed from class_levels + con_mod
-
-        # --- Companion sub-objects ------------------------------------------
-        self.familiar: Any | None = None
-        self.animal_companion: Any | None = None
 
         # --- Stat graph & pools ---------------------------------------------
         self._graph: StatGraph = StatGraph()
@@ -367,9 +343,9 @@ class Character:
             )
 
         # ---- BAB -----------------------------------------------------------
-        # bab is computed from class contributions; starts at 0.
-        # Class engine will update bab_contribution on ClassLevel objects
-        # and call invalidate("bab") when levels change.
+        # bab is computed from class contributions via
+        # _compute_bab → get_rules().classes; invalidate("bab")
+        # is called whenever self.levels changes.
         g.register_node(
             StatNode(
                 key="bab",
@@ -906,55 +882,6 @@ class Character:
         return counts
 
     @property
-    def class_levels(self) -> list[ClassLevel]:
-        """
-        Legacy compat: aggregate levels into
-        cumulative ClassLevel objects."""
-        counts: dict[str, int] = {}
-        hp_map: dict[str, list[int]] = {}
-        for lv in self.levels:
-            cn = lv.class_name
-            counts[cn] = counts.get(cn, 0) + 1
-            hp_map.setdefault(cn, []).append(lv.hp_roll)
-        result: list[ClassLevel] = []
-        reg = get_rules().classes
-        for cn, lvl in counts.items():
-            cl = ClassLevel(
-                class_name=cn,
-                level=lvl,
-                hp_rolls=hp_map.get(cn, []),
-            )
-            defn = reg.get(cn)
-            if defn is not None:
-                cl.bab_contribution = defn.bab_contribution(lvl)
-                cl.fort_contribution = defn.fort_contribution(lvl)
-                cl.ref_contribution = defn.ref_contribution(lvl)
-                cl.will_contribution = defn.will_contribution(lvl)
-            result.append(cl)
-        return result
-
-    @class_levels.setter
-    def class_levels(self, value: list[ClassLevel]) -> None:
-        """
-        Legacy compat: set levels from ClassLevel
-        objects (expands into per-level entries).
-        """
-        new_levels: list[CharacterLevel] = []
-        idx = 1
-        for cl in value:
-            for i in range(cl.level):
-                hp = cl.hp_rolls[i] if i < len(cl.hp_rolls) else 0
-                new_levels.append(
-                    CharacterLevel(
-                        character_level=idx,
-                        class_name=cl.class_name,
-                        hp_roll=hp,
-                    )
-                )
-                idx += 1
-        self.levels = new_levels
-
-    @property
     def size(self) -> str:
         """Current size category. Overridden by templates."""
         return getattr(self, "_size_override", None) or self._base_size
@@ -1475,14 +1402,20 @@ class Character:
     # Class levels
     # -----------------------------------------------------------------------
 
-    def set_class_levels(self, levels: list[ClassLevel]) -> None:
+    def set_class_levels(self, levels: list[CharacterLevel]) -> None:
         """
-        Replace class levels (legacy API).
+        Bulk-replace all character levels.
 
-        Expands ClassLevel objects into per-character-level
-        CharacterLevel entries via the class_levels setter.
+        Takes a sequence of CharacterLevel entries and renumbers
+        their ``character_level`` fields so callers don't have to.
+        Prefer ``add_level()`` for single additions — this is the
+        bulk entry point used by persistence and tests.
         """
-        self.class_levels = levels
+        from dataclasses import replace
+
+        self.levels = [
+            replace(lv, character_level=i + 1) for i, lv in enumerate(levels)
+        ]
         self._invalidate_class_stats()
 
     def _invalidate_class_stats(self) -> None:

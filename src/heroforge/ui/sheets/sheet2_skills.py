@@ -158,14 +158,12 @@ class Sheet2Skills(QWidget):
         return result.total
 
     def _is_class_skill(self, skill_name: str) -> bool:
+        from heroforge.rules.rules import get_rules
+
         c = self._state.character
-        if not c.class_levels:
-            return False
-        class_reg = getattr(self._state, "class_registry", None)
-        if class_reg is None:
-            return False
-        for cl in c.class_levels:
-            defn = class_reg.get(cl.class_name)
+        class_reg = get_rules().classes
+        for cn in c.class_level_map:
+            defn = class_reg.get(cn)
             if defn and skill_name in defn.class_skills:
                 return True
         return False
