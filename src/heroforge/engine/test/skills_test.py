@@ -7,7 +7,7 @@ and the UI AppState's skill integration.
 Covers:
   - YAML validation
   - SkillRegistry: register, get, get_by_pool_key, all_skills
-  - register_skills_on_character: nodes, pools, _skill_registry
+  - register_skills_on_character: nodes, pools
   - set_skill_ranks: pool update, stat graph cascade
   - compute_skill_total: ranks + ability mod + misc + synergy + ACP
   - Skill totals update when ability scores change
@@ -56,7 +56,7 @@ def char_with_skills() -> tuple[Character, SkillRegistry]:
     """Character with skills registered."""
     c = fresh_char()
     reg = loaded_skill_registry()
-    register_skills_on_character(reg, c)
+    register_skills_on_character(c)
     return c, reg
 
 
@@ -170,18 +170,13 @@ class TestRegisterSkills:
         pool = c.get_pool("skill_hide")
         assert pool is not None
 
-    def test_skill_registry_stored_on_character(self) -> None:
-        c, reg = char_with_skills()
-        assert hasattr(c, "_skill_registry")
-        assert c._skill_registry is reg
-
     def test_idempotent_second_register(self) -> None:
         """Calling register twice should not add duplicate nodes."""
         c, reg = char_with_skills()
         count_before = len(
             [k for k in c._graph._nodes if k.startswith("skill_")]
         )
-        register_skills_on_character(reg, c)
+        register_skills_on_character(c)
         count_after = len(
             [k for k in c._graph._nodes if k.startswith("skill_")]
         )

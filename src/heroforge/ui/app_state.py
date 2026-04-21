@@ -1,19 +1,18 @@
 """
 ui/app_state.py
 ---------------
-Central application state object.
+Holds the active mutable Character and exposes registry shims
+that forward to the module-level Rules singleton
+(``heroforge.rules.rules.get_rules``).
 
-Holds the loaded rule registries (read-only after startup) and the
-mutable active character.  All UI widgets take a reference to AppState
-and read/write through it rather than keeping their own copies.
-
-This is intentionally not a singleton — tests can create multiple
-independent instances.
+Rule-definition registries are loaded once per process by
+``Rules.load`` and live on the Rules object, not on AppState.
+The shims below are a migration aid for UI code that still
+reads ``app_state.feat_registry`` / ``app_state.class_registry``
+/ etc. — new code should call ``get_rules()`` directly.
 """
 
 from __future__ import annotations
-
-from pathlib import Path
 
 from heroforge.engine.character import Character
 from heroforge.engine.classes import ClassRegistry
@@ -27,9 +26,7 @@ from heroforge.engine.equipment import (
 )
 from heroforge.engine.feats import FeatRegistry
 from heroforge.engine.magic_items import MagicItemRegistry
-from heroforge.engine.prerequisites import (
-    PrerequisiteChecker,
-)
+from heroforge.engine.prerequisites import PrerequisiteChecker
 from heroforge.engine.races import RaceRegistry
 from heroforge.engine.skills import (
     SkillRegistry,
@@ -37,181 +34,89 @@ from heroforge.engine.skills import (
 )
 from heroforge.engine.spells import SpellCompendium
 from heroforge.engine.templates import TemplateRegistry
-from heroforge.rules.loader import (
-    ClassesLoader,
-    ConditionLoader,
-    DerivedPoolsLoader,
-    DomainsLoader,
-    EquipmentLoader,
-    FeatsLoader,
-    MagicItemLoader,
-    RacesLoader,
-    SkillsLoader,
-    SpellCompendiumLoader,
-    TemplatesLoader,
-)
-
-RULES_DIR = Path(__file__).parent.parent / "rules"
+from heroforge.rules.rules import get_rules
 
 
 class AppState:
     """
-    Loaded once at startup; shared across all UI widgets.
-
-    Attributes
-    ----------
-    buff_registry      : BuffRegistry — buff spells, conditions, items
-    magic_item_registry: MagicItemRegistry
-    spell_compendium   : SpellCompendium — all 601 SRD spells
-    feat_registry      : FeatRegistry
-    armor_registry     : ArmorRegistry
-    weapon_registry    : WeaponRegistry
-    domain_registry    : DomainRegistry
-    skill_registry     : SkillRegistry
-    template_registry  : TemplateRegistry
-    class_registry     : ClassRegistry
-    race_registry      : RaceRegistry
-    prereq_checker     : PrerequisiteChecker
-    character          : Character — the active character
-    """
+    Owns the active Character; forwards registry reads to
+    the process-wide Rules via ``get_rules()``."""
 
     def __init__(self) -> None:
-        self.buff_registry = BuffRegistry()
-        self.condition_registry = ConditionRegistry()
-        self.magic_item_registry = MagicItemRegistry()
-        self.spell_compendium = SpellCompendium()
-        self.feat_registry = FeatRegistry()
-        self.armor_registry = ArmorRegistry()
-        self.weapon_registry = WeaponRegistry()
-        self.material_registry = MaterialRegistry()
-        self.domain_registry = DomainRegistry()
-        self.skill_registry = SkillRegistry()
-        self.template_registry = TemplateRegistry()
-        self.derived_pools: dict = {}
-        self.class_registry = ClassRegistry()
-        self.race_registry = RaceRegistry()
         self.character: Character = Character()
         self._loaded = False
 
-    # ------------------------------------------------------------------
-    # Loading
-    # ------------------------------------------------------------------
-
-    def load_rules(self, rules_dir: Path | None = None) -> None:
-        """
-        Load all rule YAML files from rules_dir (defaults to RULES_DIR).
-        Idempotent — subsequent calls are no-ops.
-        """
+    def load_rules(self) -> None:
+        """Trigger the lazy Rules load (idempotent)."""
         if self._loaded:
             return
-
-        rd = rules_dir or RULES_DIR
-
-        prereq_checker = PrerequisiteChecker()
-
-        ConditionLoader(rd).load(
-            self.condition_registry,
-            self.buff_registry,
-            "core/conditions_srd.yaml",
-        )
-        _mi_loader = MagicItemLoader(rd)
-        for _mi_file in (
-            "head",
-            "face",
-            "throat",
-            "shoulders",
-            "body",
-            "torso",
-            "arms",
-            "hands",
-            "ring",
-            "waist",
-            "feet",
-            "slotless",
-            "tool",
-            "consumable",
-        ):
-            _mi_loader.load(
-                self.magic_item_registry,
-                f"core/magic_items/{_mi_file}.yaml",
-            )
-        _mi_loader.load(
-            self.magic_item_registry,
-            "custom/magic_items.yaml",
-        )
-        FeatsLoader(rd).load(
-            self.feat_registry,
-            "core/feats.yaml",
-            prereq_checker,
-            self.buff_registry,
-        )
-        FeatsLoader(rd).load(
-            self.feat_registry,
-            "custom/feats.yaml",
-            prereq_checker,
-            self.buff_registry,
-        )
-        SkillsLoader(rd).load(self.skill_registry, "core/skills.yaml")
-        TemplatesLoader(rd).load(self.template_registry, "core/templates.yaml")
-        ClassesLoader(rd).load(
-            self.class_registry,
-            "core/classes",
-            prereq_checker=prereq_checker,
-            buff_registry=self.buff_registry,
-        )
-        ClassesLoader(rd).load(
-            self.class_registry,
-            "custom/classes",
-            prereq_checker=prereq_checker,
-            buff_registry=self.buff_registry,
-        )
-        RacesLoader(rd).load(self.race_registry, "core/races.yaml")
-
-        # Load domains
-        DomainsLoader(rd).load(self.domain_registry, "core/domains.yaml")
-
-        # Load equipment
-        eq_loader = EquipmentLoader(rd)
-        eq_loader.load_armor(self.armor_registry, "core/armor.yaml")
-        eq_loader.load_weapons(self.weapon_registry, "core/weapons.yaml")
-        eq_loader.load_materials(
-            self.material_registry,
-            "core/materials.yaml",
-        )
-        eq_loader.load_materials(
-            self.material_registry,
-            "custom/materials.yaml",
-        )
-        # Set module-level registry for adjust_for_material
-        from heroforge.engine.equipment import (
-            set_material_registry,
-        )
-
-        set_material_registry(self.material_registry)
-
-        # Load spell compendium (all spells, with
-        # dual registration of buff effects)
-        scl = SpellCompendiumLoader(rd)
-        for lvl in range(10):
-            sp_file = f"core/spells_level_{lvl}.yaml"
-            scl.load(
-                self.spell_compendium,
-                sp_file,
-                buff_registry=self.buff_registry,
-            )
-
-        # Store prereq checker for UI access
-        self.prereq_checker = prereq_checker
-
-        # Load derived pools (pool declarations + consumer
-        # formulas). Contributors live in their source
-        # YAMLs (class / item / feat) and target pool names
-        # declared here.
-        self.derived_pools = DerivedPoolsLoader(rd).load(
-            "core/derived_pools.yaml"
-        )
-
+        get_rules()
         self._loaded = True
+
+    # ------------------------------------------------------------------
+    # Registry shims — forward to the process-wide Rules singleton.
+    # UI code should migrate to calling get_rules() directly.
+    # ------------------------------------------------------------------
+
+    @property
+    def buff_registry(self) -> BuffRegistry:
+        return get_rules().buffs
+
+    @property
+    def condition_registry(self) -> ConditionRegistry:
+        return get_rules().conditions
+
+    @property
+    def magic_item_registry(self) -> MagicItemRegistry:
+        return get_rules().magic_items
+
+    @property
+    def spell_compendium(self) -> SpellCompendium:
+        return get_rules().spells
+
+    @property
+    def feat_registry(self) -> FeatRegistry:
+        return get_rules().feats
+
+    @property
+    def armor_registry(self) -> ArmorRegistry:
+        return get_rules().armor
+
+    @property
+    def weapon_registry(self) -> WeaponRegistry:
+        return get_rules().weapons
+
+    @property
+    def material_registry(self) -> MaterialRegistry:
+        return get_rules().materials
+
+    @property
+    def domain_registry(self) -> DomainRegistry:
+        return get_rules().domains
+
+    @property
+    def skill_registry(self) -> SkillRegistry:
+        return get_rules().skills
+
+    @property
+    def template_registry(self) -> TemplateRegistry:
+        return get_rules().templates
+
+    @property
+    def class_registry(self) -> ClassRegistry:
+        return get_rules().classes
+
+    @property
+    def race_registry(self) -> RaceRegistry:
+        return get_rules().races
+
+    @property
+    def prereq_checker(self) -> PrerequisiteChecker | None:
+        return get_rules().prereq_checker
+
+    @property
+    def derived_pools(self) -> dict:
+        return get_rules().derived_pools
 
     # ------------------------------------------------------------------
     # Character management
@@ -228,17 +133,15 @@ class AppState:
         self._wire_character()
 
     def _wire_character(self) -> None:
-        """Wire registries onto the character."""
-        if self._loaded:
-            self.character._class_registry_ref = self.class_registry
-            self.character._feat_registry_ref = self.feat_registry
-            register_skills_on_character(self.skill_registry, self.character)
-            if self.derived_pools:
-                from heroforge.engine.derived_pools import (
-                    install_consumers,
-                )
+        """Wire skills and derived-pool consumers onto the character."""
+        if not self._loaded:
+            return
+        register_skills_on_character(self.character)
+        dp = get_rules().derived_pools
+        if dp:
+            from heroforge.engine.derived_pools import install_consumers
 
-                install_consumers(self.character, self.derived_pools)
+            install_consumers(self.character, dp)
 
     # ------------------------------------------------------------------
     # Convenience accessors
@@ -248,7 +151,7 @@ class AppState:
         """Return the computed total for a named skill."""
         from heroforge.engine.skills import compute_skill_total
 
-        defn = self.skill_registry.get(skill_name)
+        defn = get_rules().skills.get(skill_name)
         if defn is None:
             return 0
         result = compute_skill_total(self.character, defn)

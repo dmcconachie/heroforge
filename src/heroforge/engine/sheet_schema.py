@@ -20,15 +20,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from heroforge.engine.character import (
+from heroforge.engine.classes import (
+    CastType,
+    SpellPreparation,
+)
+from heroforge.engine.enums import (
     Ability,
     Alignment,
     Save,
     Size,
-)
-from heroforge.engine.classes import (
-    CastType,
-    SpellPreparation,
 )
 from heroforge.rules.known import (
     KnownClass,

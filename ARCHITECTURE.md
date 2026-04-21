@@ -52,6 +52,8 @@ src/heroforge/
 │   └── resources.py        # ResourceTracker (uses/day)
 │
 ├── rules/
+│   ├── rules.py            # Rules dataclass, get_rules(),
+│   │                       #   set_rules(), reset_rules()
 │   ├── schema.py           # cattrs Converter + hooks
 │   ├── loader.py           # StatsLoader,
 │   │                       #   ConditionLoader,
@@ -472,6 +474,27 @@ max uses (formula), current uses, use/reset/exhaust.
 
 ## Rules layer (`rules/`)
 
+`rules/rules.py` defines the `Rules` dataclass — a single
+container for every rule-definition registry
+(feats, classes, races, skills, templates, buffs,
+conditions, domains, magic items, spell compendium, armor,
+weapons, materials, derived pools, and the
+`PrerequisiteChecker`) plus a lazy module-level accessor:
+
+- `get_rules()` returns the process-wide `Rules`, calling
+  `Rules.load()` (which runs every loader in `rules/loader.py`
+  against the YAML files under `rules/core/` and
+  `rules/custom/`) on first access.
+- `set_rules(r)` / `reset_rules()` let tests swap or clear
+  the singleton.
+
+Engine and export code reads rules via `get_rules()` — there
+is no wiring of registry references onto `Character` or
+`AppState`. Tests isolate via the autouse fixture in the
+project-root `conftest.py`, which pointer-swaps a
+session-scoped cached `Rules` around each test so YAML is
+parsed once per test run.
+
 `rules/schema.py` defines a pre-configured `cattrs.Converter`
 with `forbid_extra_keys=True` and custom structure hooks for
 all enums plus frozen dataclasses that need type coercion
@@ -566,23 +589,17 @@ ReportLab.
 
 ### AppState (`app_state.py`)
 
-Single object holding all registries and the active
-`Character`. Created by `MainWindow`. Methods: `load_rules()`,
-`new_character()`, `set_character()`, `skill_total()`.
+Holds the active mutable `Character`. Created by
+`MainWindow`. Methods: `load_rules()`, `new_character()`,
+`set_character()`, `skill_total()`.
 
-Registries:
-`buff_registry` (BuffRegistry),
-`condition_registry` (ConditionRegistry),
-`magic_item_registry` (MagicItemRegistry),
-`spell_compendium` (SpellCompendium),
-`feat_registry` (FeatRegistry),
-`armor_registry` (ArmorRegistry),
-`weapon_registry` (WeaponRegistry),
-`domain_registry` (DomainRegistry),
-`skill_registry` (SkillRegistry),
-`template_registry` (TemplateRegistry),
-`class_registry` (ClassRegistry),
-`race_registry` (RaceRegistry).
+Rule-definition registries (feat, class, skill, etc.) live
+on the process-wide `Rules` singleton in
+`heroforge.rules.rules`; AppState exposes each one as a
+`@property` shim that forwards to `get_rules()` so existing
+UI code that reads `app_state.feat_registry` / etc.
+continues to work. New code should call `get_rules()`
+directly.
 
 ### MainWindow (`main_window.py`)
 

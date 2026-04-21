@@ -32,7 +32,6 @@ from __future__ import annotations
 
 import contextlib
 from dataclasses import dataclass, field
-from enum import StrEnum
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -44,6 +43,7 @@ if TYPE_CHECKING:
     from heroforge.engine.feats import FeatDefinition
 
 from heroforge.engine.bonus import BonusPool
+from heroforge.engine.enums import SAVE_ABILITY, Ability, Alignment
 from heroforge.engine.stat import (
     StatError,
     StatGraph,
@@ -53,56 +53,11 @@ from heroforge.engine.stat import (
     compute_sum,
 )
 from heroforge.rules.core.pool_keys import PoolKey
+from heroforge.rules.rules import get_rules
 
 # ---------------------------------------------------------------------------
 # Supporting types
 # ---------------------------------------------------------------------------
-
-
-class Ability(StrEnum):
-    STR = "str"
-    DEX = "dex"
-    CON = "con"
-    INT = "int"
-    WIS = "wis"
-    CHA = "cha"
-
-
-class Alignment(StrEnum):
-    LAWFUL_GOOD = "lawful_good"
-    LAWFUL_NEUTRAL = "lawful_neutral"
-    LAWFUL_EVIL = "lawful_evil"
-    NEUTRAL_GOOD = "neutral_good"
-    NEUTRAL = "neutral"
-    NEUTRAL_EVIL = "neutral_evil"
-    CHAOTIC_GOOD = "chaotic_good"
-    CHAOTIC_NEUTRAL = "chaotic_neutral"
-    CHAOTIC_EVIL = "chaotic_evil"
-
-
-class Save(StrEnum):
-    FORT = "fort"
-    REF = "ref"
-    WILL = "will"
-
-
-class Size(StrEnum):
-    FINE = "Fine"
-    DIMINUTIVE = "Diminutive"
-    TINY = "Tiny"
-    SMALL = "Small"
-    MEDIUM = "Medium"
-    LARGE = "Large"
-    HUGE = "Huge"
-    GARGANTUAN = "Gargantuan"
-    COLOSSAL = "Colossal"
-
-
-SAVE_ABILITY: dict[Save, Ability] = {
-    Save.FORT: Ability.CON,
-    Save.REF: Ability.DEX,
-    Save.WILL: Ability.WIS,
-}
 
 
 @dataclass
@@ -252,9 +207,6 @@ class Character:
         # --- Raw inputs (persisted) -----------------------------------------
         self._ability_scores: dict[Ability, int] = {ab: 10 for ab in Ability}
         self.levels: list[CharacterLevel] = []
-        self._cached_class_levels: list[ClassLevel] = []
-        self._class_registry_ref: Any = None
-        self._feat_registry_ref: Any = None
         self.race: str = ""
         self.alignment: Alignment | str = ""
         self.deity: str = ""
@@ -615,31 +567,23 @@ class Character:
     # -----------------------------------------------------------------------
 
     def _compute_bab(self) -> int:
-        reg = self._class_registry_ref
-        if reg is not None:
-            total = 0
-            for cn, lvl in self.class_level_map.items():
-                defn = reg.get(cn)
-                if defn is not None:
-                    total += defn.bab_contribution(lvl)
-            return total
-        # Fallback: use cached ClassLevel contributions
-        cached = getattr(self, "_cached_class_levels", [])
-        return sum(cl.bab_contribution for cl in cached)
+        reg = get_rules().classes
+        total = 0
+        for cn, lvl in self.class_level_map.items():
+            defn = reg.get(cn)
+            if defn is not None:
+                total += defn.bab_contribution(lvl)
+        return total
 
     def _compute_base_save(self, save: str) -> int:
-        reg = self._class_registry_ref
+        reg = get_rules().classes
         method = f"{save}_contribution"
-        if reg is not None:
-            total = 0
-            for cn, lvl in self.class_level_map.items():
-                defn = reg.get(cn)
-                if defn is not None:
-                    total += getattr(defn, method)(lvl)
-            return total
-        attr = f"{save}_contribution"
-        cached = getattr(self, "_cached_class_levels", [])
-        return sum(getattr(cl, attr, 0) for cl in cached)
+        total = 0
+        for cn, lvl in self.class_level_map.items():
+            defn = reg.get(cn)
+            if defn is not None:
+                total += getattr(defn, method)(lvl)
+        return total
 
     def _compute_max_dex_bonus(self) -> int:
         """
@@ -894,9 +838,7 @@ class Character:
 
     def has_class_feature(self, feature_key: str) -> bool:
         """Check if this character has a class feature."""
-        reg = self._class_registry_ref
-        if reg is None:
-            return False
+        reg = get_rules().classes
         for cn, lvl in self.class_level_map.items():
             defn = reg.get(cn)
             if defn is None:
@@ -975,20 +917,19 @@ class Character:
             counts[cn] = counts.get(cn, 0) + 1
             hp_map.setdefault(cn, []).append(lv.hp_roll)
         result: list[ClassLevel] = []
-        reg = self._class_registry_ref
+        reg = get_rules().classes
         for cn, lvl in counts.items():
             cl = ClassLevel(
                 class_name=cn,
                 level=lvl,
                 hp_rolls=hp_map.get(cn, []),
             )
-            if reg is not None:
-                defn = reg.get(cn)
-                if defn is not None:
-                    cl.bab_contribution = defn.bab_contribution(lvl)
-                    cl.fort_contribution = defn.fort_contribution(lvl)
-                    cl.ref_contribution = defn.ref_contribution(lvl)
-                    cl.will_contribution = defn.will_contribution(lvl)
+            defn = reg.get(cn)
+            if defn is not None:
+                cl.bab_contribution = defn.bab_contribution(lvl)
+                cl.fort_contribution = defn.fort_contribution(lvl)
+                cl.ref_contribution = defn.ref_contribution(lvl)
+                cl.will_contribution = defn.will_contribution(lvl)
             result.append(cl)
         return result
 
@@ -997,10 +938,7 @@ class Character:
         """
         Legacy compat: set levels from ClassLevel
         objects (expands into per-level entries).
-        Also caches the original ClassLevel data for
-        fallback BAB/save computation without registry.
         """
-        self._cached_class_levels = list(value)
         new_levels: list[CharacterLevel] = []
         idx = 1
         for cl in value:
@@ -1065,15 +1003,14 @@ class Character:
         else:
             favored = None
         # Check non-favored, non-prestige levels
-        reg = self._class_registry_ref
+        reg = get_rules().classes
         levels = []
         for cn, lvl in clm.items():
             if cn == favored:
                 continue
-            if reg:
-                defn = reg.get(cn)
-                if defn and defn.is_prestige:
-                    continue
+            defn = reg.get(cn)
+            if defn and defn.is_prestige:
+                continue
             levels.append(lvl)
         if len(levels) <= 1:
             return False
@@ -1598,9 +1535,7 @@ class Character:
         )
         from heroforge.engine.gates import make_condition
 
-        reg = self._class_registry_ref
-        if reg is None:
-            return
+        reg = get_rules().classes
 
         # Track which feature keys are currently valid
         active_keys: set[str] = set()
@@ -1705,12 +1640,8 @@ class Character:
         if idx < 0 or idx >= len(self.levels):
             return 0
         lv = self.levels[idx]
-        reg = self._class_registry_ref
-        base = 2  # default
-        if reg is not None:
-            defn = reg.get(lv.class_name)
-            if defn is not None:
-                base = defn.skills_per_level
+        defn = get_rules().classes.get(lv.class_name)
+        base = defn.skills_per_level if defn is not None else 2
         int_mod = self.int_mod_at_level(char_level)
         pts = base + int_mod
         # Humans get +1 skill point per level

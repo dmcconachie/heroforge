@@ -717,7 +717,7 @@ class TestAbilityBumpRoundTrip:
         path = tmp_path / "inherent.char.yaml"
         save_character(c, path)
         loaded = load_character(path, make_app_state())
-        from heroforge.engine.character import Ability
+        from heroforge.engine.enums import Ability
 
         assert loaded.levels[4].inherent_bumps == {Ability.INT: 2}
         assert loaded.get_ability_score("int") == 16

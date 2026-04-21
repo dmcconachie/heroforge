@@ -26,7 +26,7 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import TYPE_CHECKING, Any
 
-from heroforge.engine.character import Ability
+from heroforge.engine.enums import Ability
 
 if TYPE_CHECKING:
     from heroforge.engine.character import (

@@ -25,7 +25,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Callable
 
 from heroforge.engine.bonus import BonusEntry, BonusType
-from heroforge.engine.character import Ability
+from heroforge.engine.enums import Ability
 from heroforge.engine.gates import make_condition
 from heroforge.rules.core.pool_keys import PoolKey
 

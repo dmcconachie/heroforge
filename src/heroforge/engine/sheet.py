@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import ALWAYS_STACKING, BonusPool, BonusType
-from heroforge.engine.character import (
+from heroforge.engine.enums import (
     SAVE_ABILITY,
     Ability,
     Alignment,
@@ -154,20 +154,20 @@ def extract_sheet(
 
 def gather_sheet(
     character: "Character",
-    app_state: "AppState",
+    app_state: "AppState",  # noqa: ARG001  # kept for API compat
 ) -> Sheet:
     """Build a Sheet from a Character + loaded rules."""
     return Sheet(
-        identity=_identity(character, app_state),
+        identity=_identity(character),
         abilities=_abilities(character),
         combat=_combat(character),
         attack_iteratives=_iteratives(character),
-        skills=_skills(character, app_state),
+        skills=_skills(character),
         carrying_capacity=_carrying(character),
         feats=_feats(character),
-        class_features=_class_features(character, app_state),
-        spellcasting=_spellcasting(character, app_state),
-        special_qualities=_special_qualities(character, app_state),
+        class_features=_class_features(character),
+        spellcasting=_spellcasting(character),
+        special_qualities=_special_qualities(character),
         equipment=_equipment(character),
     )
 
@@ -177,14 +177,16 @@ def gather_sheet(
 # -----------------------------------------------------------
 
 
-def _identity(c: "Character", app_state: "AppState") -> SheetIdentity:
+def _identity(c: "Character") -> SheetIdentity:
     clm = c.class_level_map
     if clm:
         class_str = " / ".join(f"{cn} {lvl}" for cn, lvl in clm.items())
     else:
         class_str = ""
 
-    race_defn = app_state.race_registry.get(c.race)
+    from heroforge.rules.rules import get_rules
+
+    race_defn = get_rules().races.get(c.race)
     size = Size(race_defn.size) if race_defn else Size.MEDIUM
 
     return SheetIdentity(
@@ -366,12 +368,12 @@ def _iteratives(c: "Character") -> Iteratives:
 
 def _skills(
     c: "Character",
-    app_state: "AppState",
 ) -> dict[KnownSkill, SkillEntry]:
     from heroforge.engine.skills import compute_skill_total
+    from heroforge.rules.rules import get_rules
 
     result: dict[KnownSkill, SkillEntry] = {}
-    for sd in app_state.skill_registry.all_skills():
+    for sd in get_rules().skills.all_skills():
         st = compute_skill_total(c, sd)
 
         # Trained-only skills (which also covers all parenthesized
@@ -434,10 +436,13 @@ def _feats(c: "Character") -> list[str]:
 # -----------------------------------------------------------
 
 
-def _class_features(c: "Character", app_state: "AppState") -> list[str]:
+def _class_features(c: "Character") -> list[str]:
+    from heroforge.rules.rules import get_rules
+
+    class_reg = get_rules().classes
     features: list[str] = []
     for class_name, level in c.class_level_map.items():
-        defn = app_state.class_registry.get(class_name)
+        defn = class_reg.get(class_name)
         if defn is None:
             continue
         for feat in defn.class_features:
@@ -453,7 +458,6 @@ def _class_features(c: "Character", app_state: "AppState") -> list[str]:
 
 def _spellcasting(
     c: "Character",
-    app_state: "AppState",
 ) -> dict[KnownClass, SpellcastingEntry]:
     from heroforge.engine.classes import SpellPreparation
     from heroforge.engine.spellcasting import (
@@ -461,10 +465,12 @@ def _spellcasting(
         spell_save_dc,
         spells_known,
     )
+    from heroforge.rules.rules import get_rules
 
+    class_reg = get_rules().classes
     result: dict[KnownClass, SpellcastingEntry] = {}
     for class_name, level in c.class_level_map.items():
-        defn = app_state.class_registry.get(class_name)
+        defn = class_reg.get(class_name)
         if defn is None or defn.spellcasting is None:
             continue
         sc = defn.spellcasting
@@ -526,10 +532,13 @@ def _spellcasting(
 # -----------------------------------------------------------
 
 
-def _special_qualities(c: "Character", app_state: "AppState") -> list[str]:
+def _special_qualities(c: "Character") -> list[str]:
+    from heroforge.rules.rules import get_rules
+
+    tpl_reg = get_rules().templates
     result: list[str] = []
     for app in c.templates:
-        defn = app_state.template_registry.get(app.template_name)
+        defn = tpl_reg.get(app.template_name)
         if defn is None:
             continue
         result.extend(defn.special_qualities)

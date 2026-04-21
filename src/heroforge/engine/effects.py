@@ -55,7 +55,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry
-from heroforge.engine.character import Ability
+from heroforge.engine.enums import Ability
 from heroforge.rules.core.pool_keys import PoolKey
 
 if TYPE_CHECKING:

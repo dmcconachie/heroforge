@@ -223,18 +223,6 @@ def adjust_for_material(
     return acp, max_dex, asf
 
 
-# Fallback registry for when AppState isn't available.
-_material_registry: MaterialRegistry | None = None
-
-
-def set_material_registry(
-    reg: MaterialRegistry,
-) -> None:
-    """Set the module-level material registry."""
-    global _material_registry  # noqa: PLW0603
-    _material_registry = reg
-
-
 def _resolve_material(
     material: str | MaterialDefinition,
 ) -> MaterialDefinition | None:
@@ -242,9 +230,9 @@ def _resolve_material(
         return material
     if not material:
         return None
-    if _material_registry is not None:
-        return _material_registry.get(material)
-    return None
+    from heroforge.rules.rules import get_rules
+
+    return get_rules().materials.get(material)
 
 
 # -------------------------------------------------------

@@ -28,8 +28,8 @@ import enum
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from heroforge.engine.character import Ability
 from heroforge.engine.classes import CastType
+from heroforge.engine.enums import Ability
 
 if TYPE_CHECKING:
     from typing import Any

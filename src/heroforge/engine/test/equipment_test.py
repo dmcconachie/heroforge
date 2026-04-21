@@ -13,14 +13,12 @@ from heroforge.engine.equipment import (
     ArmorCategory,
     ArmorDefinition,
     ArmorRegistry,
-    MaterialRegistry,
     WeaponRegistry,
     adjust_for_material,
     equip_armor,
     equip_item,
     equip_shield,
     equipment_display_name,
-    set_material_registry,
     unequip_armor,
     unequip_item,
     unequip_shield,
@@ -28,15 +26,6 @@ from heroforge.engine.equipment import (
 from heroforge.rules.loader import EquipmentLoader
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
-
-
-@pytest.fixture(autouse=True)
-def _load_materials() -> None:
-    """Ensure material registry is available."""
-    reg = MaterialRegistry()
-    loader = EquipmentLoader(RULES_DIR)
-    loader.load_materials(reg, "core/materials.yaml")
-    set_material_registry(reg)
 
 
 @pytest.fixture()

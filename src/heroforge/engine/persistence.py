@@ -24,7 +24,7 @@ from typing import TYPE_CHECKING
 
 import yaml
 
-from heroforge.engine.character import Ability, Alignment
+from heroforge.engine.enums import Ability, Alignment
 from heroforge.rules.known import (
     KnownArmor,
     KnownBuff,
@@ -389,7 +389,7 @@ def _flatten_cattrs_error(e: BaseException) -> str:
 
 def load_character(
     path: Path | str,
-    app_state: "AppState",
+    app_state: "AppState",  # noqa: ARG001  # kept for API compat
 ) -> "Character":
     """
     Deserialize a .char.yaml file into a Character.
@@ -421,11 +421,11 @@ def load_character(
     from heroforge.engine.templates import (
         apply_template,
     )
+    from heroforge.rules.rules import get_rules
 
+    rules = get_rules()
     c = Character()
-    c._class_registry_ref = app_state.class_registry
-    c._feat_registry_ref = app_state.feat_registry
-    register_skills_on_character(app_state.skill_registry, c)
+    register_skills_on_character(c)
 
     # Identity
     c.name = cf.identity.name
@@ -438,7 +438,7 @@ def load_character(
         c.set_ability_score(ab, val)
 
     # Race (validated by KnownRace)
-    race_defn = app_state.race_registry.get(str(cf.identity.race))
+    race_defn = rules.races.get(str(cf.identity.race))
     apply_race(race_defn, c)
 
     # Levels (class validated by KnownClass)
@@ -472,7 +472,7 @@ def load_character(
             feat_name = feat_dict.get("name", "")
             if not feat_name:
                 continue
-            feat_defn = app_state.feat_registry.get(feat_name)
+            feat_defn = rules.feats.get(feat_name)
             c.add_feat(
                 feat_name,
                 feat_defn,
@@ -493,7 +493,7 @@ def load_character(
     # Buffs (validated by KnownBuff)
     for buff_name, be in cf.buffs.items():
         name = str(buff_name)
-        buff_defn = app_state.buff_registry.get(name)
+        buff_defn = rules.buffs.get(name)
         cl_val = be.caster_level if be.caster_level is not None else 0
         pairs = buff_defn.pool_entries(cl_val, c)
         c.register_buff_definition(name, pairs)
@@ -514,7 +514,7 @@ def load_character(
 
     # Templates (validated by KnownTemplate)
     for tpl_name, te in cf.templates.items():
-        tpl_defn = app_state.template_registry.get(str(tpl_name))
+        tpl_defn = rules.templates.get(str(tpl_name))
         apply_template(tpl_defn, c, level=te.level)
 
     # DM overrides
@@ -523,18 +523,16 @@ def load_character(
             c.add_dm_override(ov.target, note=ov.note)
 
     # Equipment
-    _load_equipment(cf.equipment, c, app_state)
+    _load_equipment(cf.equipment, c)
 
     # Notes
     c.notes = cf.notes
 
     # Derived pool consumers (monk AC formula, etc.).
-    # Needs app_state.derived_pools loaded.
-    dp = getattr(app_state, "derived_pools", None)
-    if dp:
+    if rules.derived_pools:
         from heroforge.engine.derived_pools import install_consumers
 
-        install_consumers(c, dp)
+        install_consumers(c, rules.derived_pools)
 
     return c
 
@@ -542,7 +540,6 @@ def load_character(
 def _load_equipment(
     eq: EquipmentSection,
     c: "Character",
-    app_state: "AppState",
 ) -> None:
     """Apply equipment from parsed schema."""
     from heroforge.engine.equipment import (
@@ -550,10 +547,13 @@ def _load_equipment(
         equip_item,
         equip_shield,
     )
+    from heroforge.rules.rules import get_rules
+
+    rules = get_rules()
 
     if eq.armor is not None:
         base = str(eq.armor.base or eq.armor.name)
-        defn = app_state.armor_registry.get(base)
+        defn = rules.armor.get(base)
         equip_armor(
             c,
             defn,
@@ -566,7 +566,7 @@ def _load_equipment(
 
     if eq.shield is not None:
         base = str(eq.shield.base or eq.shield.name)
-        defn = app_state.armor_registry.get(base)
+        defn = rules.armor.get(base)
         equip_shield(
             c,
             defn,
@@ -578,7 +578,7 @@ def _load_equipment(
             c.equipment["shield"]["properties"] = list(eq.shield.properties)
 
     for item_name in eq.worn:
-        item_defn = app_state.magic_item_registry.get(str(item_name))
+        item_defn = rules.magic_items.get(str(item_name))
         equip_item(c, item_defn)
     if eq.worn:
         c.equipment["worn"] = [str(n) for n in eq.worn]

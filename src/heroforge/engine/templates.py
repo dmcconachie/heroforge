@@ -41,7 +41,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusType
-from heroforge.engine.character import Ability
+from heroforge.engine.enums import Ability
 
 if TYPE_CHECKING:
     from typing import Any
@@ -268,13 +268,14 @@ def apply_template(
         character._template_subtypes = existing
 
     # --- Granted feats ---------------------------------------------------
+    from heroforge.rules.rules import get_rules
+
+    feat_reg = get_rules().feats
     for feat_name in defn.grants_feats:
         # Use add_feat so always-on effects apply
-        feat_reg = getattr(character, "_feat_registry_ref", None)
-        feat_defn = feat_reg.get(feat_name) if feat_reg else None
         character.add_feat(
             feat_name,
-            feat_defn,
+            feat_reg.get(feat_name),
             level=level,
             source=f"template:{defn.name}",
         )
@@ -350,10 +351,11 @@ def remove_template(
     character._template_subtypes = existing
 
     # --- Granted feats ---------------------------------------------------
-    feat_reg = getattr(character, "_feat_registry_ref", None)
+    from heroforge.rules.rules import get_rules
+
+    feat_reg = get_rules().feats
     for feat_name in defn.grants_feats:
-        feat_defn = feat_reg.get(feat_name) if feat_reg else None
-        character.remove_feat(feat_name, feat_defn)
+        character.remove_feat(feat_name, feat_reg.get(feat_name))
 
     # --- Update application list -----------------------------------------
     character.templates = [

@@ -21,7 +21,7 @@ from heroforge.engine.bonus import (
     BonusEntry,
     BonusType,
 )
-from heroforge.engine.character import Ability
+from heroforge.engine.enums import Ability
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character

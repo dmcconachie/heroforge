@@ -25,13 +25,13 @@ from cattrs.gen import (
 )
 
 from heroforge.engine.bonus import BonusType
-from heroforge.engine.character import Ability
 from heroforge.engine.classes import (
     ClassDefinition,
     ClassFeature,
     SpellcastingInfo,
 )
 from heroforge.engine.domains import DomainDefinition
+from heroforge.engine.enums import Ability
 from heroforge.engine.equipment import (
     ArmorDefinition,
     DamageType,

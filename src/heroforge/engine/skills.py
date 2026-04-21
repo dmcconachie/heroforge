@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
-from heroforge.engine.character import Ability
+from heroforge.engine.enums import Ability
 from heroforge.engine.stat import StatNode
 from heroforge.rules.core.pool_keys import PoolKey
 from heroforge.rules.core.skills import KnownCoreSkill
@@ -167,7 +167,6 @@ def _make_skill_compute(
 
 
 def register_skills_on_character(
-    skill_registry: SkillRegistry,
     character: Character,
 ) -> None:
     """
@@ -182,7 +181,9 @@ def register_skills_on_character(
 
     This is idempotent: if the node is already registered it is skipped.
     """
-    for skill_def in skill_registry.all_skills():
+    from heroforge.rules.rules import get_rules
+
+    for skill_def in get_rules().skills.all_skills():
         key = skill_def.pool_key
 
         # Skip already-registered skills
@@ -212,9 +213,6 @@ def register_skills_on_character(
         )
         character._graph.register_node(node)
 
-    # Store skill registry on character for rank management
-    character._skill_registry = skill_registry
-
 
 # ---------------------------------------------------------------------------
 # Rank management helpers
@@ -232,12 +230,9 @@ def set_skill_ranks(
     Updates both character.skills[skill_name] and the corresponding
     BonusPool entry so the stat graph reflects the change.
     """
-    skill_reg: SkillRegistry = getattr(character, "_skill_registry", None)
-    if skill_reg is None:
-        character.skills[skill_name] = ranks
-        return
+    from heroforge.rules.rules import get_rules
 
-    defn = skill_reg.get(skill_name)
+    defn = get_rules().skills.get(skill_name)
     if defn is None:
         character.skills[skill_name] = ranks
         return
@@ -308,14 +303,16 @@ def validate_skill_allocation(
 
     Returns a list of error strings (empty = valid).
     """
+    from heroforge.rules.rules import get_rules
+
     errors: list[str] = []
     # Compute budget
-    reg = character._class_registry_ref
+    reg = get_rules().classes
     lv = character.levels[char_level - 1]
     spl = 2
     if class_defn is not None:
         spl = class_defn.skills_per_level
-    elif reg is not None:
+    else:
         defn = reg.get(lv.class_name)
         if defn is not None:
             spl = defn.skills_per_level
@@ -329,7 +326,7 @@ def validate_skill_allocation(
     class_skills: set[str] = set()
     if class_defn is not None:
         class_skills = set(class_defn.class_skills)
-    elif reg is not None:
+    else:
         defn = reg.get(lv.class_name)
         if defn is not None:
             class_skills = set(defn.class_skills)
@@ -374,17 +371,15 @@ def compute_skill_total(
     # TO this skill when the character has 5+ ranks in the SOURCE skill.
     # e.g. Tumble.synergies = [{skill: Balance, bonus: 2}]
     # means: 5 ranks in Tumble → +2 to Balance.
+    from heroforge.rules.rules import get_rules
+
     synergy_bonus = 0
-    skill_reg: SkillRegistry | None = getattr(
-        character, "_skill_registry", None
-    )
-    if skill_reg is not None:
-        for source_defn in skill_reg.all_skills():
-            if character.skills.get(source_defn.name, 0) < 5:
-                continue
-            for syn in source_defn.synergies:
-                if syn.get("skill", "") == skill_def.name:
-                    synergy_bonus += syn.get("bonus", 2)
+    for source_defn in get_rules().skills.all_skills():
+        if character.skills.get(source_defn.name, 0) < 5:
+            continue
+        for syn in source_defn.synergies:
+            if syn.get("skill", "") == skill_def.name:
+                synergy_bonus += syn.get("bonus", 2)
 
     # Armor check penalty (only if skill has armor_check=True)
     acp = armor_check_penalty if skill_def.armor_check else 0

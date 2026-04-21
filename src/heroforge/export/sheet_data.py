@@ -115,9 +115,12 @@ class SheetData:
 # ---------------------------------------------------------------------------
 
 
-def gather(character: "Character", app_state: "AppState") -> SheetData:
+def gather(
+    character: "Character",
+    app_state: "AppState",  # noqa: ARG001  # kept for API compat
+) -> SheetData:
     """
-    Extract all display data from a Character + AppState into a SheetData.
+    Extract all display data from a Character into a SheetData.
     Pure function — no side effects.
     """
     from heroforge.engine.skills import compute_skill_total
@@ -138,7 +141,7 @@ def gather(character: "Character", app_state: "AppState") -> SheetData:
         level=character.total_level,
         alignment=character.alignment,
         deity=character.deity,
-        size=_race_size(character, app_state),
+        size=_race_size(character),
     )
 
     # ── Abilities ────────────────────────────────────────────────────────
@@ -174,8 +177,10 @@ def gather(character: "Character", app_state: "AppState") -> SheetData:
     )
 
     # ── Skills ───────────────────────────────────────────────────────────
-    skill_reg = app_state.skill_registry
-    class_skills = _class_skill_names(character, app_state)
+    from heroforge.rules.rules import get_rules
+
+    skill_reg = get_rules().skills
+    class_skills = _class_skill_names(character)
 
     for skill_def in skill_reg.all_skills():
         result = compute_skill_total(character, skill_def)
@@ -196,7 +201,7 @@ def gather(character: "Character", app_state: "AppState") -> SheetData:
         )
 
     # ── Feats ────────────────────────────────────────────────────────────
-    feat_reg = app_state.feat_registry
+    feat_reg = get_rules().feats
     for feat_dict in character.feats:
         name = feat_dict.get("name", "")
         source = feat_dict.get("source", "")
@@ -246,18 +251,20 @@ def _class_summary(character: "Character") -> str:
     return " / ".join(f"{cn} {lvl}" for cn, lvl in clm.items())
 
 
-def _race_size(character: "Character", app_state: "AppState") -> str:
-    race_defn = app_state.race_registry.get(character.race)
+def _race_size(character: "Character") -> str:
+    from heroforge.rules.rules import get_rules
+
+    race_defn = get_rules().races.get(character.race)
     return race_defn.size if race_defn else "Medium"
 
 
-def _class_skill_names(
-    character: "Character",
-    app_state: "AppState",
-) -> set[str]:
+def _class_skill_names(character: "Character") -> set[str]:
+    from heroforge.rules.rules import get_rules
+
+    class_reg = get_rules().classes
     names: set[str] = set()
     for cn in character.class_level_map:
-        defn = app_state.class_registry.get(cn)
+        defn = class_reg.get(cn)
         if defn:
             names.update(defn.class_skills)
     return names
