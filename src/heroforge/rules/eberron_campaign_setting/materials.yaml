@@ -1,0 +1,10 @@
+# rules/eberron_campaign_setting/materials.yaml
+#
+# Materials from the Eberron Campaign Setting.
+#
+# Sorted alphabetically.
+
+Bronzewood:
+  source_book: Eberron Campaign Setting
+  note: >-
+    Wood as hard as iron; druids can use. Weighs 3/4.

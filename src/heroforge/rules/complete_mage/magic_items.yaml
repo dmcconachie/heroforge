@@ -1,0 +1,86 @@
+# rules/complete_mage/magic_items.yaml
+#
+# Magic items from Complete Mage.
+#
+# Sorted alphabetically.
+
+Cloak of Comfort +1:
+  slot: torso
+  source_book: Complete Mage
+  note: +1 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+Cloak of Comfort +2:
+  slot: torso
+  source_book: Complete Mage
+  note: +2 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+Cloak of Comfort +3:
+  slot: torso
+  source_book: Complete Mage
+  note: +3 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+Cloak of Comfort +4:
+  slot: torso
+  source_book: Complete Mage
+  note: +4 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+Cloak of Comfort +5:
+  slot: torso
+  source_book: Complete Mage
+  note: +5 resistance to all saves, endure elements
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5
+Heward's Fortifying Bedroll:
+  slot: tool
+  source_book: Complete Mage
+  note: >-
+    1/day, climb in (move action) and rest 1 uninterrupted
+    hour to gain the benefits of a full 8 hours of rest:
+    eliminates fatigue/exhaustion, natural healing, and
+    lets arcane casters prepare/ready spells in that hour.
+    Spells cast within the last 8 hours still count against
+    daily limits. 3,000 gp. Complete Mage p. 132.

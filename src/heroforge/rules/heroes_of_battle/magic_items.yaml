@@ -1,0 +1,14 @@
+# rules/heroes_of_battle/magic_items.yaml
+#
+# Magic items from Heroes of Battle.
+#
+# Sorted alphabetically.
+
+Heraldic Crest of Courage:
+  slot: head
+  source_book: Heroes of Battle
+  effects:
+    - target: initiative
+      bonus_type: morale
+      value: 1
+  note: +1 morale bonus to initiative, CL 5th aid 1/day as a free action

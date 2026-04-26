@@ -1,0 +1,209 @@
+# rules/magic_item_compendium/magic_items.yaml
+#
+# Magic items from the Magic Item Compendium.
+#
+# Sorted alphabetically.
+
+Armbands of Might:
+  slot: arms
+  source_book: Magic Item Compendium
+  note: +2 to damage when power attacking by at least 2
+Chronocharm of the Horizon Walker:
+  slot: throat
+  source_book: Magic Item Compendium
+  note: >-
+    1/day swift action, move up to half your speed (no AoO)
+    as part of the same swift action. MIC p. 86.
+Chronocharm of the Laughing Rogue:
+  slot: throat
+  source_book: Magic Item Compendium
+  note: 1/day reroll one Disable Device check. MIC p. 86.
+Crystal Mask of Insight:
+  slot: face
+  source_book: Magic Item Compendium
+  note: +9 insight bonus on Search and Spot checks. MIC p. 91.
+  effects:
+    - target: skill_search
+      bonus_type: insight
+      value: 9
+    - target: skill_spot
+      bonus_type: insight
+      value: 9
+Crystal of Mind Cloaking, Greater:
+  slot: slotless
+  source_book: Magic Item Compendium
+  note: >-
+    Shield augment crystal. +5 competence bonus on saves
+    vs. mind-affecting; 1/day if you fail such a save,
+    reroll it as an immediate action. Requires +3 host
+    shield. MIC p. 26.
+Deathstrike Bracers:
+  slot: arms
+  source_book: Magic Item Compendium
+  note: >-
+    3/day swift action; for 1 round, melee attacks deal
+    extra damage from crits and sneak attacks to
+    constructs, elementals, oozes, plants, and undead as
+    if they were not immune. MIC p. 93.
+Demolition Crystal, Greater:
+  slot: slotless
+  source_book: Magic Item Compendium
+  note: >-
+    Weapon augment crystal. +1d6 damage to constructs,
+    treated as adamantine for bypassing construct DR, and
+    can deliver sneak attacks/crits against constructs
+    as if they were living. Requires +3 host weapon.
+    MIC p. 65.
+Eternal Wand of Magic Aura:
+  slot: tool
+  source_book: Magic Item Compendium
+  note: >-
+    Eternal wand; casts Nystul's magic aura 2/day at
+    CL 1. Usable by any arcane caster regardless of class
+    list. MIC p. 159.
+Eternal Wand of Prestidigitation:
+  slot: tool
+  source_book: Magic Item Compendium
+  note: >-
+    Eternal wand usable by any character (no UMD). Casts
+    prestidigitation 2/day at CL 1. MIC p. 159.
+Fiendslayer Crystal, Least:
+  slot: slotless
+  source_book: Magic Item Compendium
+  note: >-
+    Weapon augment crystal. +1d6 damage to evil
+    outsiders. Requires masterwork or magical host
+    weapon. MIC p. 65.
+Gauntlets of Ghost Fighting:
+  slot: hands
+  source_book: Magic Item Compendium
+  note: ghost touch weapon
+Githborn Talisman:
+  slot: throat
+  source_book: Magic Item Compendium
+  note: >-
+    3/day standard action, for 1 round gain +2 insight on
+    attack and weapon damage rolls vs. aberrations, and
+    +2 insight on Will saves vs. aberration Ex/Su/Sp
+    abilities. Githyanki/githzerai gain +4 instead.
+    MIC p. 105.
+Gloves of the Balanced Hand:
+  slot: hands
+  source_book: Magic Item Compendium
+  note: >-
+    Wearer fights as if possessing Two-Weapon Fighting;
+    if they already have TWF, also gain Improved
+    Two-Weapon Fighting. MIC p. 105.
+Horn of Plenty:
+  slot: tool
+  source_book: Magic Item Compendium
+  note: >-
+    1/day on command, creates a heroes' feast (as the
+    spell) for twelve participants. CL 12th. MIC p. 162.
+Phoenix Cloak:
+  slot: shoulders
+  source_book: Magic Item Compendium
+  note: >-
+    Fly speed equal to your land speed, perfect
+    maneuverability. Regalia of the Phoenix set piece.
+    MIC p. 210.
+Quicksilver Boots:
+  slot: feet
+  source_book: Magic Item Compendium
+  note: >-
+    2/day swift action; move up to your land speed
+    (normal movement rules; can cross liquid without
+    falling). Provokes AoOs, but rapid travel gives
+    concealment vs. those attacks. MIC p. 119.
+Revelation Crystal, Greater:
+  slot: slotless
+  source_book: Magic Item Compendium
+  note: >-
+    Weapon augment crystal. When you damage an invisible
+    creature, it is outlined in a golden aura for 1 round
+    and its invisibility is suppressed for 1 round;
+    additionally, concealment effects (blur, displacement)
+    on the damaged creature are suppressed for 1 round.
+    Requires +3 host weapon. MIC p. 66.
+Third Eye (Clarity):
+  slot: face
+  source_book: Magic Item Compendium
+  note: Imm. action negate confused, etc.
+Truedeath Crystal, Greater:
+  slot: slotless
+  source_book: Magic Item Compendium
+  note: >-
+    Weapon augment crystal. +1d6 damage to undead,
+    functions as ghost touch, and can deliver sneak
+    attacks/crits against undead as if they were living.
+    Requires +3 host weapon. MIC p. 66.
+Vest of Resistance +1:
+  slot: torso
+  source_book: Magic Item Compendium
+  note: +1 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 1
+    - target: ref_save
+      bonus_type: resistance
+      value: 1
+    - target: will_save
+      bonus_type: resistance
+      value: 1
+Vest of Resistance +2:
+  slot: torso
+  source_book: Magic Item Compendium
+  note: +2 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 2
+    - target: ref_save
+      bonus_type: resistance
+      value: 2
+    - target: will_save
+      bonus_type: resistance
+      value: 2
+Vest of Resistance +3:
+  slot: torso
+  source_book: Magic Item Compendium
+  note: +3 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 3
+    - target: ref_save
+      bonus_type: resistance
+      value: 3
+    - target: will_save
+      bonus_type: resistance
+      value: 3
+Vest of Resistance +4:
+  slot: torso
+  source_book: Magic Item Compendium
+  note: +4 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 4
+    - target: ref_save
+      bonus_type: resistance
+      value: 4
+    - target: will_save
+      bonus_type: resistance
+      value: 4
+Vest of Resistance +5:
+  slot: torso
+  source_book: Magic Item Compendium
+  note: +5 resistance to all saves
+  effects:
+    - target: fort_save
+      bonus_type: resistance
+      value: 5
+    - target: ref_save
+      bonus_type: resistance
+      value: 5
+    - target: will_save
+      bonus_type: resistance
+      value: 5

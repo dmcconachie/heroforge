@@ -11,6 +11,7 @@ from enum import StrEnum
 
 
 class KnownCoreMagicItemSlotless(StrEnum):
+    HEARTSTONE = "Heartstone"
     IOUN_STONE_CLEAR_SPINDLE = "Ioun Stone (Clear Spindle)"
     IOUN_STONE_DARK_BLUE_RHOMBOID = "Ioun Stone (Dark Blue Rhomboid)"
     IOUN_STONE_DEEP_RED_SPHERE = "Ioun Stone (Deep Red Sphere)"

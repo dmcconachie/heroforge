@@ -471,6 +471,13 @@ Ring Gates:
   note: >-
     Pair of linked 3 ft rings; pass small objects
     or a creature through, unlimited distance
+Rod of Extend, Lesser:
+  slot: tool
+  note: >-
+    Metamagic rod. 3/day, cast a spell of 3rd level or
+    lower as if modified by Extend Spell (duration
+    doubled) without increasing level or casting time.
+    DMG p. 236.
 Rope of Climbing:
   slot: tool
   note: >-

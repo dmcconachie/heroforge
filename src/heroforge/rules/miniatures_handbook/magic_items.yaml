@@ -1,0 +1,75 @@
+# rules/miniatures_handbook/magic_items.yaml
+#
+# Magic items from the Miniatures Handbook.
+#
+# Sorted alphabetically.
+
+Belt of Magnificence +2:
+  slot: waist
+  source_book: Miniatures Handbook
+  note: +2 enhancement to all six ability scores (Min.HB p.42)
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 2
+    - target: dex_score
+      bonus_type: enhancement
+      value: 2
+    - target: con_score
+      bonus_type: enhancement
+      value: 2
+    - target: int_score
+      bonus_type: enhancement
+      value: 2
+    - target: wis_score
+      bonus_type: enhancement
+      value: 2
+    - target: cha_score
+      bonus_type: enhancement
+      value: 2
+Belt of Magnificence +4:
+  slot: waist
+  source_book: Miniatures Handbook
+  note: +4 enhancement to all six ability scores (Min.HB p.42)
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 4
+    - target: dex_score
+      bonus_type: enhancement
+      value: 4
+    - target: con_score
+      bonus_type: enhancement
+      value: 4
+    - target: int_score
+      bonus_type: enhancement
+      value: 4
+    - target: wis_score
+      bonus_type: enhancement
+      value: 4
+    - target: cha_score
+      bonus_type: enhancement
+      value: 4
+Belt of Magnificence +6:
+  slot: waist
+  source_book: Miniatures Handbook
+  note: +6 enhancement to all six ability scores (Min.HB p.42)
+  effects:
+    - target: str_score
+      bonus_type: enhancement
+      value: 6
+    - target: dex_score
+      bonus_type: enhancement
+      value: 6
+    - target: con_score
+      bonus_type: enhancement
+      value: 6
+    - target: int_score
+      bonus_type: enhancement
+      value: 6
+    - target: wis_score
+      bonus_type: enhancement
+      value: 6
+    - target: cha_score
+      bonus_type: enhancement
+      value: 6

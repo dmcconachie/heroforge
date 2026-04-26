@@ -1,6 +1,6 @@
-# rules/custom/materials.yaml
+# rules/races_of_the_wild/materials.yaml
 #
-# Custom materials from splatbooks.
+# Materials from Races of the Wild.
 #
 # acp_adjust is positive (toward 0).
 # asf_adjust is negative (less spell failure).
@@ -9,10 +9,8 @@
 # includes_masterwork=true means the acp_adjust
 # already accounts for the masterwork -1 ACP.
 
-Bronzewood:
-  note: >-
-    Wood as hard as iron; druids can use. Weighs 3/4.
 Wildwood:
+  source_book: Races of the Wild
   acp_adjust: 1
   max_dex_adjust: 1
   asf_adjust: -5

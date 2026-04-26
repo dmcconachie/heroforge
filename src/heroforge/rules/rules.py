@@ -12,6 +12,24 @@ Usage:
 
 Tests override via ``set_rules(r)`` and reset with
 ``reset_rules()``.
+
+Per-book layout
+---------------
+Each top-level subdirectory of ``rules/`` is a "book": ``core/``
+(SRD), ``custom/`` (homebrew), and one folder per published
+splatbook. ``Rules.load()`` discovers books by globbing
+``rules/`` — adding a splatbook means dropping in a new folder
+that follows the per-book file convention; no changes here.
+
+Per-book file convention:
+    <book>/feats.yaml          (optional)
+    <book>/classes/*.yaml      (optional)
+    <book>/magic_items.yaml    (optional; core uses per-slot files)
+    <book>/materials.yaml      (optional)
+
+Core-only categories (stats, skills, templates, races, domains,
+armor, weapons, spells, conditions, derived pools) live solely
+under ``core/`` and load directly.
 """
 
 from __future__ import annotations
@@ -51,6 +69,55 @@ from heroforge.rules.loader import (
 
 RULES_DIR = Path(__file__).parent
 
+CORE = "core"
+CUSTOM = "custom"
+
+# Subdirectory names under rules/ that are not books.
+_NON_BOOK_DIRS = frozenset({"test", "__pycache__"})
+
+# Magic-item slot files under rules/core/magic_items/. Non-core
+# books use a single flat magic_items.yaml instead.
+MAGIC_ITEM_SLOTS: tuple[str, ...] = (
+    "head",
+    "face",
+    "throat",
+    "shoulders",
+    "body",
+    "torso",
+    "arms",
+    "hands",
+    "ring",
+    "waist",
+    "feet",
+    "slotless",
+    "tool",
+    "consumable",
+)
+
+
+def book_dirs(rules_dir: Path | None = None) -> list[str]:
+    """
+    Names of book subdirectories under ``rules_dir``.
+
+    Order: ``core`` first, ``custom`` last, all other books
+    alphabetical between. Custom is loaded last so its entries
+    can override published-book entries on name collision.
+
+    Hidden directories, dunder dirs, and ``test`` are skipped.
+    """
+    rd = rules_dir or RULES_DIR
+    names = [
+        p.name
+        for p in rd.iterdir()
+        if p.is_dir()
+        and not p.name.startswith((".", "_"))
+        and p.name not in _NON_BOOK_DIRS
+    ]
+    middle = sorted(n for n in names if n not in (CORE, CUSTOM))
+    head = [CORE] if CORE in names else []
+    tail = [CUSTOM] if CUSTOM in names else []
+    return head + middle + tail
+
 
 @dataclass
 class Rules:
@@ -83,84 +150,114 @@ class Rules:
 
         prereq_checker = PrerequisiteChecker()
 
+        # --- Core-only categories -----------------------------
         ConditionLoader(rd).load(
             self.conditions,
             self.buffs,
-            "core/conditions_srd.yaml",
+            f"{CORE}/conditions_srd.yaml",
         )
-        mi_loader = MagicItemLoader(rd)
-        for mi_file in (
-            "head",
-            "face",
-            "throat",
-            "shoulders",
-            "body",
-            "torso",
-            "arms",
-            "hands",
-            "ring",
-            "waist",
-            "feet",
-            "slotless",
-            "tool",
-            "consumable",
-        ):
-            mi_loader.load(
-                self.magic_items,
-                f"core/magic_items/{mi_file}.yaml",
-            )
-        mi_loader.load(self.magic_items, "custom/magic_items.yaml")
-
-        FeatsLoader(rd).load(
-            self.feats,
-            "core/feats.yaml",
-            prereq_checker,
-            self.buffs,
-        )
-        FeatsLoader(rd).load(
-            self.feats,
-            "custom/feats.yaml",
-            prereq_checker,
-            self.buffs,
-        )
-        SkillsLoader(rd).load(self.skills, "core/skills.yaml")
-        TemplatesLoader(rd).load(self.templates, "core/templates.yaml")
-        ClassesLoader(rd).load(
-            self.classes,
-            "core/classes",
-            prereq_checker=prereq_checker,
-            buff_registry=self.buffs,
-        )
-        ClassesLoader(rd).load(
-            self.classes,
-            "custom/classes",
-            prereq_checker=prereq_checker,
-            buff_registry=self.buffs,
-        )
-        RacesLoader(rd).load(self.races, "core/races.yaml")
-        DomainsLoader(rd).load(self.domains, "core/domains.yaml")
+        SkillsLoader(rd).load(self.skills, f"{CORE}/skills.yaml")
+        TemplatesLoader(rd).load(self.templates, f"{CORE}/templates.yaml")
+        RacesLoader(rd).load(self.races, f"{CORE}/races.yaml")
+        DomainsLoader(rd).load(self.domains, f"{CORE}/domains.yaml")
 
         eq_loader = EquipmentLoader(rd)
-        eq_loader.load_armor(self.armor, "core/armor.yaml")
-        eq_loader.load_weapons(self.weapons, "core/weapons.yaml")
-        eq_loader.load_materials(self.materials, "core/materials.yaml")
-        eq_loader.load_materials(
-            self.materials,
-            "custom/materials.yaml",
-        )
+        eq_loader.load_armor(self.armor, f"{CORE}/armor.yaml")
+        eq_loader.load_weapons(self.weapons, f"{CORE}/weapons.yaml")
 
         scl = SpellCompendiumLoader(rd)
         for lvl in range(10):
             scl.load(
                 self.spells,
-                f"core/spells_level_{lvl}.yaml",
+                f"{CORE}/spells_level_{lvl}.yaml",
                 buff_registry=self.buffs,
             )
 
+        # --- Per-book categories ------------------------------
+        # Iterate each category once across all books so that
+        # later-loading books (e.g. ``custom``) override earlier
+        # ones, and within a book all feats load before any
+        # class definitions reference them.
+        books = book_dirs(rd)
+        mi_loader = MagicItemLoader(rd)
+
+        for book in books:
+            self._load_book_magic_items(rd, mi_loader, book)
+
+        for book in books:
+            self._load_book_feats(rd, book, prereq_checker)
+
+        for book in books:
+            self._load_book_classes(rd, book, prereq_checker)
+
+        for book in books:
+            self._load_book_materials(rd, eq_loader, book)
+
+        # --- Final wiring -------------------------------------
         self.prereq_checker = prereq_checker
         self.derived_pools = DerivedPoolsLoader(rd).load(
-            "core/derived_pools.yaml"
+            f"{CORE}/derived_pools.yaml"
         )
+
+    def _load_book_magic_items(
+        self,
+        rd: Path,
+        mi_loader: MagicItemLoader,
+        book: str,
+    ) -> None:
+        if book == CORE:
+            for slot in MAGIC_ITEM_SLOTS:
+                mi_loader.load(
+                    self.magic_items,
+                    f"{book}/magic_items/{slot}.yaml",
+                )
+            return
+        mi_yaml = rd / book / "magic_items.yaml"
+        if mi_yaml.exists():
+            mi_loader.load(self.magic_items, f"{book}/magic_items.yaml")
+
+    def _load_book_feats(
+        self,
+        rd: Path,
+        book: str,
+        prereq_checker: PrerequisiteChecker,
+    ) -> None:
+        f_yaml = rd / book / "feats.yaml"
+        if not f_yaml.exists():
+            return
+        FeatsLoader(rd).load(
+            self.feats,
+            f"{book}/feats.yaml",
+            prereq_checker,
+            self.buffs,
+        )
+
+    def _load_book_classes(
+        self,
+        rd: Path,
+        book: str,
+        prereq_checker: PrerequisiteChecker,
+    ) -> None:
+        c_dir = rd / book / "classes"
+        if not c_dir.is_dir():
+            return
+        ClassesLoader(rd).load(
+            self.classes,
+            f"{book}/classes",
+            prereq_checker=prereq_checker,
+            buff_registry=self.buffs,
+        )
+
+    def _load_book_materials(
+        self,
+        rd: Path,
+        eq_loader: EquipmentLoader,
+        book: str,
+    ) -> None:
+        m_yaml = rd / book / "materials.yaml"
+        if not m_yaml.exists():
+            return
+        eq_loader.load_materials(self.materials, f"{book}/materials.yaml")
 
 
 _rules: Rules | None = None

@@ -127,6 +127,7 @@ class KnownCoreMagicItemTool(StrEnum):
     PIPES_OF_THE_SEWERS = "Pipes of the Sewers"
     PORTABLE_HOLE = "Portable Hole"
     RING_GATES = "Ring Gates"
+    ROD_OF_EXTEND_LESSER = "Rod of Extend, Lesser"
     ROPE_OF_CLIMBING = "Rope of Climbing"
     ROPE_OF_ENTANGLEMENT = "Rope of Entanglement"
     SCABBARD_OF_KEEN_EDGES = "Scabbard of Keen Edges"

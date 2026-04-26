@@ -1,0 +1,22 @@
+# rules/complete_scoundrel/feats.yaml
+#
+# Feats from Complete Scoundrel.
+#
+# Sorted alphabetically.
+
+Daring Outlaw:
+  kind: passive
+  source_book: Complete Scoundrel
+  note: >-
+    Rogue and swashbuckler levels stack for sneak attack
+    damage, grace (Reflex save bonus), and swashbuckler
+    dodge bonus to AC.
+    TODO: wire rogue/swashbuckler level stacking for sneak
+    attack and class features
+  prerequisites:
+    all_of:
+      - has_class_feature:
+          feature: sneak_attack_2d6
+      - has_class_feature:
+          feature: grace_1
+  effects: []

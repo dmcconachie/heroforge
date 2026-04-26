@@ -1,0 +1,13 @@
+# rules/draconomicon/magic_items.yaml
+#
+# Magic items from Draconomicon.
+#
+# Sorted alphabetically.
+
+Gemstone of Heavy Fortification:
+  slot: slotless
+  source_book: Draconomicon
+  note: >-
+    Armor gemstone; grants heavy fortification (100%
+    chance to negate extra damage from crits and sneak
+    attacks) to the attached armor. Draconomicon p. 83.

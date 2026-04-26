@@ -1,6 +1,6 @@
 """
 materials.py
-Custom materials from splatbooks.
+Materials from the Eberron Campaign Setting.
 """
 
 from __future__ import annotations
@@ -8,6 +8,5 @@ from __future__ import annotations
 from enum import StrEnum
 
 
-class KnownCustomMaterial(StrEnum):
+class KnownEberronCampaignSettingMaterial(StrEnum):
     BRONZEWOOD = "Bronzewood"
-    WILDWOOD = "Wildwood"

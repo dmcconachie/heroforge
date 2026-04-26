@@ -1,9 +1,12 @@
 """Tests for the Rules container and module-level accessor."""
 
+from pathlib import Path
+
 import pytest
 
 from heroforge.rules.rules import (
     Rules,
+    book_dirs,
     get_rules,
     reset_rules,
     set_rules,
@@ -83,3 +86,65 @@ def test_set_rules_from_prior_test_does_not_leak(
     Autouse teardown must clear any prior set_rules call so
     this test sees the cached Rules, not a leaked custom one."""
     assert get_rules() is _cached_rules
+
+
+# --- book_dirs ----------------------------------------------
+
+
+def _mk_dirs(parent: Path, names: list[str]) -> None:
+    for n in names:
+        (parent / n).mkdir()
+
+
+def test_book_dirs_orders_core_first_custom_last(tmp_path: Path) -> None:
+    _mk_dirs(
+        tmp_path,
+        ["custom", "magic_item_compendium", "complete_warrior", "core"],
+    )
+    assert book_dirs(tmp_path) == [
+        "core",
+        "complete_warrior",
+        "magic_item_compendium",
+        "custom",
+    ]
+
+
+def test_book_dirs_alphabetises_middle(tmp_path: Path) -> None:
+    _mk_dirs(
+        tmp_path,
+        ["core", "spell_compendium", "complete_mage", "custom", "draconomicon"],
+    )
+    assert book_dirs(tmp_path) == [
+        "core",
+        "complete_mage",
+        "draconomicon",
+        "spell_compendium",
+        "custom",
+    ]
+
+
+def test_book_dirs_skips_hidden_dunder_and_test(tmp_path: Path) -> None:
+    _mk_dirs(
+        tmp_path,
+        ["core", "custom", "__pycache__", ".git", "_private", "test"],
+    )
+    assert book_dirs(tmp_path) == ["core", "custom"]
+
+
+def test_book_dirs_ignores_files(tmp_path: Path) -> None:
+    _mk_dirs(tmp_path, ["core", "custom"])
+    (tmp_path / "README.md").write_text("hi")
+    (tmp_path / "rules.py").write_text("x = 1")
+    assert book_dirs(tmp_path) == ["core", "custom"]
+
+
+def test_book_dirs_handles_missing_core_or_custom(tmp_path: Path) -> None:
+    _mk_dirs(tmp_path, ["complete_warrior", "spell_compendium"])
+    assert book_dirs(tmp_path) == ["complete_warrior", "spell_compendium"]
+
+
+def test_book_dirs_real_rules_dir_includes_core_and_custom() -> None:
+    """Sanity check against the actual rules directory."""
+    books = book_dirs()
+    assert books[0] == "core"
+    assert books[-1] == "custom"

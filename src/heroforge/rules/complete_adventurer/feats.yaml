@@ -1,0 +1,35 @@
+# rules/complete_adventurer/feats.yaml
+#
+# Feats from Complete Adventurer.
+#
+# Sorted alphabetically.
+
+Staggering Strike:
+  kind: passive
+  source_book: Complete Adventurer
+  note: >-
+    Requires sneak attack +2d6. On a melee sneak attack
+    hit, target is treated as staggered for 1 round (Fort
+    save DC = damage dealt negates; ends early on DC 15
+    Heal check or any magical healing). Does not stack; no
+    effect vs. creatures immune to sneak attack.
+    TODO: wire staggered condition on sneak attack hit.
+  prerequisites:
+    all_of:
+      - stat:
+          key: bab
+          min: 6
+          label: BAB
+  effects: []
+Tactile Trapsmith:
+  kind: passive
+  source_book: Complete Adventurer
+  note: >-
+    Use DEX bonus instead of INT bonus on Search and
+    Disable Device checks; ignore darkness/blindness
+    penalties on those checks.
+    TODO: wire DEX-for-INT ability swap on Search/Disable
+    Device and darkness/blindness immunity for those
+    checks.
+  prerequisites: null
+  effects: []

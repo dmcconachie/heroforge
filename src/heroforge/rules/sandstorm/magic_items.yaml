@@ -1,0 +1,14 @@
+# rules/sandstorm/magic_items.yaml
+#
+# Magic items from Sandstorm.
+#
+# Sorted alphabetically.
+
+Sun Lenses:
+  slot: face
+  source_book: Sandstorm
+  note: >-
+    Mundane gear (10 gp). Protects the eyes from being
+    dazzled by bright light/glare; if already dazzled,
+    recover from dazzled after 1 hour while worn.
+    Sandstorm p. 101.

@@ -1,0 +1,20 @@
+# rules/races_of_the_wild/feats.yaml
+#
+# Feats from Races of the Wild.
+#
+# Sorted alphabetically.
+
+Expeditious Dodge:
+  kind: passive
+  source_book: Races of the Wild
+  note: >-
+    When you move 40 ft or more in a single turn, gain a
+    +2 dodge bonus to AC until the beginning of your next
+    turn. Can substitute for Dodge as a prerequisite.
+    TODO: wire conditional +2 dodge AC bonus when moving
+    40+ ft.
+  prerequisites:
+    ability:
+      key: dex_score
+      min: 13
+  effects: []

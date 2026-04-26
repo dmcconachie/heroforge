@@ -13,6 +13,13 @@
 #
 # Sorted alphabetically.
 
+Heartstone:
+  slot: slotless
+  note: >-
+    Night hag periapt. Instantly cures any disease
+    contracted by the holder, and grants +2 resistance
+    bonus on all saving throws. Shatters after 10 uses
+    by a non-hag bearer. MM p. 194.
 Ioun Stone (Clear Spindle):
   slot: slotless
   note: Sustains creature without food or water

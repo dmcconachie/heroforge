@@ -156,6 +156,7 @@ class MaterialDefinition:
     category_shift: int = 0  # -1 = one lighter
     includes_masterwork: bool = False
     note: str = ""
+    source_book: str = ""
 
 
 class MaterialRegistry:

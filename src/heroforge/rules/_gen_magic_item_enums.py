@@ -7,6 +7,13 @@ their YAML sources.
 Usage:
     uv run check-magic-items          # exit 1 if stale
     uv run check-magic-items --fix    # regenerate
+
+Generates:
+    rules/core/magic_items/<slot>.py     (per-slot, from
+                                          per-slot YAML files)
+    rules/core/magic_items/__init__.py   (combined KnownCoreMagicItem)
+    rules/<book>/magic_items.py          (one per non-core book
+                                          with a magic_items.yaml)
 """
 
 import argparse
@@ -23,11 +30,9 @@ from heroforge.rules._gen_common import (
     emit_member,
     enum_ident,
 )
+from heroforge.rules.rules import CORE, RULES_DIR, book_dirs
 
-RULES_DIR = Path(__file__).parent
-CORE_MI = RULES_DIR / "core" / "magic_items"
-CUSTOM_YAML = RULES_DIR / "custom" / "magic_items.yaml"
-CUSTOM_PY = RULES_DIR / "custom" / "magic_items.py"
+CORE_MI = RULES_DIR / CORE / "magic_items"
 
 # Fixed load order — mirrors app_state.py and
 # determines slot enum ordering in the combined
@@ -48,6 +53,11 @@ SLOTS: tuple[str, ...] = (
     "torso",
     "waist",
 )
+
+
+def _book_camel(book: str) -> str:
+    """``"complete_warrior"`` -> ``"CompleteWarrior"``."""
+    return "".join(part.capitalize() for part in book.split("_"))
 
 
 def _validate_slots() -> None:
@@ -82,13 +92,21 @@ def _render_slot_module(slot: str, names: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _render_custom(names: list[str]) -> str:
+def _render_book_module(book: str, names: list[str]) -> str:
+    """Render the combined ``Known<Book>MagicItem`` enum file."""
+    cls = f"Known{_book_camel(book)}MagicItem"
+    if book == "custom":
+        description = "Custom magic items."
+    else:
+        nice = book.replace("_", " ").title()
+        description = f"Magic items from {nice}."
+
     lines = emit_header(
         filename="magic_items.py",
-        description="Custom magic items.",
+        description=description,
         generator_file="_gen_magic_item_enums.py",
         toml_command="check-magic-items",
-        cls_name="KnownCustomMagicItem",
+        cls_name=cls,
     )
 
     seen: set[str] = set()
@@ -97,7 +115,7 @@ def _render_custom(names: list[str]) -> str:
         if ident in seen:
             raise RuntimeError(
                 f"Duplicate ident {ident!r} in "
-                f"custom/magic_items.yaml "
+                f"{book}/magic_items.yaml "
                 f"(from {name!r})"
             )
         seen.add(ident)
@@ -148,13 +166,26 @@ def _generate() -> dict[Path, str]:
     Return {path: desired_content} for every
     generated file."""
     out: dict[Path, str] = {}
+
+    # core/ uses per-slot files plus a combined __init__.py.
     for slot in SLOTS:
         yaml_path = CORE_MI / f"{slot}.yaml"
         names = _load_names(yaml_path)
         out[CORE_MI / f"{slot}.py"] = _render_slot_module(slot, names)
     out[CORE_MI / "__init__.py"] = _render_init()
-    custom_names = _load_names(CUSTOM_YAML)
-    out[CUSTOM_PY] = _render_custom(custom_names)
+
+    # Every non-core book with a magic_items.yaml gets a single
+    # combined magic_items.py.
+    for book in book_dirs(RULES_DIR):
+        if book == CORE:
+            continue
+        mi_yaml = RULES_DIR / book / "magic_items.yaml"
+        if not mi_yaml.exists():
+            continue
+        names = _load_names(mi_yaml)
+        out[RULES_DIR / book / "magic_items.py"] = _render_book_module(
+            book, names
+        )
     return out
 
 
