@@ -1,6 +1,6 @@
 """
 feats.py
-Homebrew feats.
+Feats from Complete Divine.
 """
 
 from __future__ import annotations
@@ -8,5 +8,5 @@ from __future__ import annotations
 from enum import StrEnum
 
 
-class KnownCustomFeat(StrEnum):
+class KnownCompleteDivineFeat(StrEnum):
     LIONS_POUNCE = "Lion's Pounce"

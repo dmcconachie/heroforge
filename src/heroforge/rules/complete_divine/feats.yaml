@@ -1,0 +1,18 @@
+# rules/complete_divine/feats.yaml
+#
+# Feats from Complete Divine.
+#
+# Sorted alphabetically.
+
+Lion's Pounce:
+  kind: passive
+  source_book: Complete Divine
+  note: >-
+    Wild feat. When you charge, you may spend a wild shape as
+    a free action to make a full attack at the end of the
+    charge instead of the usual single attack.
+    Complete Divine p. 82.
+  prerequisites:
+    has_class_feature:
+      feature: wild_shape_1
+  effects: []
