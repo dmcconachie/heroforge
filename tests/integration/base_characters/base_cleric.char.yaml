@@ -63,9 +63,8 @@ levels:
       Heal: 1
       Knowledge (Religion): 1
     feats:
-      - name: Spell Focus
+      - name: Spell Focus (Conjuration)
         source: character
-        parameter: Conjuration
   - level: 7
     class: Cleric
     hp_roll: 5
@@ -136,9 +135,8 @@ levels:
       Spellcraft: 1
       Diplomacy: 1
     feats:
-      - name: Greater Spell Focus
+      - name: Greater Spell Focus (Conjuration)
         source: character
-        parameter: Conjuration
   - level: 16
     class: Cleric
     hp_roll: 6

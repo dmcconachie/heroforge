@@ -1,0 +1,76 @@
+Shadowcraft Mage:
+  source_book: Races of Stone
+  hit_die: 4
+  max_level: 5
+  bab_progression: poor
+  save_progressions:
+    fort: poor
+    ref: poor
+    will: good
+  skills_per_level: 4
+  class_skills:
+    - Bluff
+    - Concentration
+    - Disguise
+    - Hide
+    - Knowledge (Arcana)
+    - Move Silently
+    - Perform
+    - Search
+    - Spellcraft
+    - Spot
+  entry_prerequisites:
+    all_of:
+      - race: Gnome
+      - skill:
+          name: Bluff
+          min_ranks: 4
+      - skill:
+          name: Hide
+          min_ranks: 4
+      - feat: Spell Focus (Illusion)
+      # Also requires: cast 3+ illusion spells, including at
+      # least one shadow spell of 4th level or higher. The
+      # engine has no spell-list prereq, so this isn't enforced.
+  class_features:
+    - level: 1
+      feature: cloak_of_shadow
+      description: >-
+        Su, free action to dismiss/resume. Attacks against the
+        shadowcraft mage have a 15% + 5%/class level miss chance
+        (max 40% at 5th level). Doesn't function in daylight;
+        equivalent to a 3rd-level darkness effect. Hide checks as
+        if she had concealment while active. (TODO: wire effect)
+    - level: 2
+      feature: silent_illusion
+      description: >-
+        Ex, illusion-school spells the shadowcraft mage casts no
+        longer require a verbal component (as if Silent Spell were
+        applied). Levels and casting times are unchanged. Doesn't
+        affect spells that can't accept Silent Spell (e.g. bard
+        illusions). (TODO: wire effect)
+    - level: 3
+      feature: shadow_illusion
+      description: >-
+        Su, certain figment spells (silent image, minor image,
+        major image, persistent image, programmed image) can
+        mimic any sorcerer/wizard conjuration (summoning),
+        conjuration (creation), or evocation spell at least one
+        level lower than the figment. Effective strength is 10%
+        per level of the figment used. (TODO: wire effect)
+    - level: 4
+      feature: extended_illusion
+      description: >-
+        Ex, doubles the duration of any illusion spell or
+        spell-like ability the shadowcraft mage casts (as Extend
+        Spell). Levels and casting times unchanged. Stacks with
+        the actual Extend Spell feat. (TODO: wire effect)
+    - level: 5
+      feature: powerful_shadow_magic
+      description: >-
+        Su, shadow conjuration, shadow evocation, greater shadow
+        conjuration, greater shadow evocation, and shades spells
+        increase in strength by 20% (more likely to affect
+        disbelievers; +20% damage). Stacks with the shadow_illusion
+        figment-substitution. (TODO: wire effect)
+  is_prestige: true

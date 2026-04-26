@@ -148,9 +148,9 @@ carrying_capacity:
 feats:
   - Toughness
   - Combat Casting
-  - Spell Focus
+  - Spell Focus (Evocation)
   - Spell Penetration
-  - Greater Spell Focus
+  - Greater Spell Focus (Evocation)
   - Greater Spell Penetration
   - Iron Will
   - Empower Spell

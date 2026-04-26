@@ -134,10 +134,10 @@ feats:
   - Combat Casting
   - Extra Turning
   - Improved Turning
-  - Spell Focus
+  - Spell Focus (Conjuration)
   - Augment Summoning
   - Spell Penetration
-  - Greater Spell Focus
+  - Greater Spell Focus (Conjuration)
   - Greater Spell Penetration
 class_features:
   - 'turn_undead: Turn or rebuke undead'

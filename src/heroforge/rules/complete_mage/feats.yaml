@@ -4,6 +4,102 @@
 #
 # Sorted alphabetically.
 
+Metamagic School Focus (Abjuration):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to an Abjuration spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Abjuration)
+  effects: []
+Metamagic School Focus (Conjuration):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to a Conjuration spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Conjuration)
+  effects: []
+Metamagic School Focus (Divination):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to a Divination spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Divination)
+  effects: []
+Metamagic School Focus (Enchantment):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to an Enchantment spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Enchantment)
+  effects: []
+Metamagic School Focus (Evocation):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to an Evocation spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Evocation)
+  effects: []
+Metamagic School Focus (Illusion):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to an Illusion spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Illusion)
+  effects: []
+Metamagic School Focus (Necromancy):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to a Necromancy spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Necromancy)
+  effects: []
+Metamagic School Focus (Transmutation):
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    3/day reduce by 1 the metamagic level cost of a metamagic
+    feat applied to a Transmutation spell. Prepared casters can
+    have at most 3 such reduced-cost spells prepared at once.
+    Wizards may take this as a wizard bonus feat. Complete
+    Mage p. 45.
+  prerequisites:
+    feat: Spell Focus (Transmutation)
+  effects: []
 Retributive Spell:
   kind: passive
   source_book: Complete Mage

@@ -149,13 +149,13 @@ carrying_capacity:
   medium: 66
   heavy: 100
 feats:
-  - Spell Focus
+  - Spell Focus (Conjuration)
   - Combat Casting
   - Augment Summoning
   - Scribe Scroll
   - Extend Spell
   - Spell Penetration
-  - Greater Spell Focus
+  - Greater Spell Focus (Conjuration)
   - Greater Spell Penetration
 class_features:
   - 'turn_undead: Turn or rebuke undead'

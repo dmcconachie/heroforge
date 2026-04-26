@@ -117,7 +117,7 @@ carrying_capacity:
   medium: 66
   heavy: 100
 feats:
-  - Spell Focus
+  - Spell Focus (Conjuration)
   - Augment Summoning
   - Combat Casting
   - Extend Spell

@@ -1,0 +1,46 @@
+# rules/races_of_stone/feats.yaml
+#
+# Feats from Races of Stone.
+#
+# Sorted alphabetically.
+
+Earth Sense:
+  kind: passive
+  source_book: Races of Stone
+  note: >-
+    While touching the ground, move action to sense the
+    number of creatures within 20 ft that are also
+    touching the ground and the direction to each. Does
+    not pinpoint location. Air or aquatic subtype
+    creatures cannot select this feat.
+    Races of Stone p. 138.
+  prerequisites:
+    all_of:
+      - ability:
+          key: con_score
+          min: 13
+      - ability:
+          key: wis_score
+          min: 13
+  effects: []
+Earth Spell:
+  kind: passive
+  source_book: Races of Stone
+  note: >-
+    While standing on stone or unworked earth (including
+    normal soil), Heighten Spell adds an extra +1 spell
+    level of effective level and +1 caster level beyond
+    the heightened level. Casting at +2 slot heightens to
+    +3 effective level and +2 CL, and so on.
+    Races of Stone p. 138.
+  prerequisites:
+    all_of:
+      - ability:
+          key: con_score
+          min: 13
+      - ability:
+          key: wis_score
+          min: 13
+      - feat: Earth Sense
+      - feat: Heighten Spell
+  effects: []

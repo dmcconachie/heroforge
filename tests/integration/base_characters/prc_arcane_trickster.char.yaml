@@ -106,9 +106,8 @@ levels:
       Decipher Script: 1
       Knowledge (Nature): 1
     feats:
-      - name: Spell Focus
+      - name: Spell Focus (Enchantment)
         source: character
-        parameter: Enchantment
   - level: 7
     class: Wizard
     hp_roll: 3

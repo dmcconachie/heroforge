@@ -164,11 +164,11 @@ carrying_capacity:
   medium: 30
   heavy: 45
 feats:
-  - Spell Focus
+  - Spell Focus (Conjuration)
   - Augment Summoning
   - Natural Spell
   - Spell Penetration
-  - Greater Spell Focus
+  - Greater Spell Focus (Conjuration)
   - Greater Spell Penetration
   - Combat Casting
 class_features:

@@ -26,9 +26,8 @@ levels:
     feats:
       - name: Scribe Scroll
         source: wizard_bonus
-      - name: Spell Focus
+      - name: Spell Focus (Evocation)
         source: character
-        parameter: Evocation
       - name: Skill Focus
         source: human_bonus
         parameter: Spellcraft
@@ -130,9 +129,8 @@ levels:
       Knowledge (Religion): 1
       Decipher Script: 1
     feats:
-      - name: Greater Spell Focus
+      - name: Greater Spell Focus (Evocation)
         source: character
-        parameter: Evocation
   - level: 10
     class: Wizard
     hp_roll: 3

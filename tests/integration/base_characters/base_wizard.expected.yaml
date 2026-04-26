@@ -150,11 +150,11 @@ carrying_capacity:
   medium: 53
   heavy: 80
 feats:
-  - Spell Focus
+  - Spell Focus (Evocation)
   - Scribe Scroll
   - Spell Penetration
   - Extend Spell
-  - Greater Spell Focus
+  - Greater Spell Focus (Evocation)
   - Greater Spell Penetration
   - Empower Spell
   - Iron Will

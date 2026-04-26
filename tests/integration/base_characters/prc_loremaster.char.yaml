@@ -26,9 +26,8 @@ levels:
     feats:
       - name: Scribe Scroll
         source: wizard_bonus
-      - name: Spell Focus
+      - name: Spell Focus (Conjuration)
         source: character
-        parameter: Conjuration
       - name: Toughness
         source: human_bonus
   - level: 2
@@ -129,9 +128,8 @@ levels:
       Knowledge (The Planes): 1
       Decipher Script: 1
     feats:
-      - name: Greater Spell Focus
+      - name: Greater Spell Focus (Conjuration)
         source: character
-        parameter: Conjuration
   - level: 10
     class: Wizard
     hp_roll: 3

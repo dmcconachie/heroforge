@@ -23,7 +23,7 @@ levels:
       Decipher Script: 4
       Knowledge (Religion): 4
     feats:
-      - name: Spell Focus
+      - name: Spell Focus (Evocation)
         source: character
       - name: Scribe Scroll
         source: wizard_bonus
@@ -84,7 +84,7 @@ levels:
       Decipher Script: 1
       Knowledge (Nature): 1
     feats:
-      - name: Greater Spell Focus
+      - name: Greater Spell Focus (Evocation)
         source: character
   - level: 7
     class: Wizard

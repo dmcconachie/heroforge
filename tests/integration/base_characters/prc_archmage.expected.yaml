@@ -152,12 +152,12 @@ carrying_capacity:
   heavy: 80
 feats:
   - Scribe Scroll
-  - Spell Focus
+  - Spell Focus (Evocation)
   - Skill Focus
   - Combat Casting
   - Extend Spell
   - Spell Penetration
-  - Greater Spell Focus
+  - Greater Spell Focus (Evocation)
   - Empower Spell
   - Greater Spell Penetration
   - Maximize Spell

@@ -23,9 +23,8 @@ levels:
       Heal: 4
       Diplomacy: 4
     feats:
-      - name: Spell Focus
+      - name: Spell Focus (Conjuration)
         source: character
-        parameter: Conjuration
       - name: Combat Casting
         source: human_bonus
   - level: 2
@@ -150,9 +149,8 @@ levels:
       Decipher Script: 1
       Sense Motive: 1
     feats:
-      - name: Greater Spell Focus
+      - name: Greater Spell Focus (Conjuration)
         source: character
-        parameter: Conjuration
   - level: 13
     class: Mystic Theurge
     hp_roll: 3

@@ -143,7 +143,7 @@ Augment Summoning:
   source_book: SRD
   note: Summoned creatures gain +4 enhancement to STR and CON
   prerequisites:
-    feat: Spell Focus
+    feat: Spell Focus (Conjuration)
   effects: []
 Blind-Fight:
   kind: passive
@@ -413,12 +413,61 @@ Great Fortitude:
       bonus_type: untyped
       value: 2
       source_label: great_fortitude
-Greater Spell Focus:
+Greater Spell Focus (Abjuration):
   kind: passive
   source_book: PHB
-  note: +1 additional spell save DC for chosen school
+  note: +1 additional spell save DC for Abjuration
   prerequisites:
-    feat: Spell Focus
+    feat: Spell Focus (Abjuration)
+  effects: []
+Greater Spell Focus (Conjuration):
+  kind: passive
+  source_book: PHB
+  note: +1 additional spell save DC for Conjuration
+  prerequisites:
+    feat: Spell Focus (Conjuration)
+  effects: []
+Greater Spell Focus (Divination):
+  kind: passive
+  source_book: PHB
+  note: +1 additional spell save DC for Divination
+  prerequisites:
+    feat: Spell Focus (Divination)
+  effects: []
+Greater Spell Focus (Enchantment):
+  kind: passive
+  source_book: PHB
+  note: +1 additional spell save DC for Enchantment
+  prerequisites:
+    feat: Spell Focus (Enchantment)
+  effects: []
+Greater Spell Focus (Evocation):
+  kind: passive
+  source_book: PHB
+  note: +1 additional spell save DC for Evocation
+  prerequisites:
+    feat: Spell Focus (Evocation)
+  effects: []
+Greater Spell Focus (Illusion):
+  kind: passive
+  source_book: PHB
+  note: +1 additional spell save DC for Illusion
+  prerequisites:
+    feat: Spell Focus (Illusion)
+  effects: []
+Greater Spell Focus (Necromancy):
+  kind: passive
+  source_book: PHB
+  note: +1 additional spell save DC for Necromancy
+  prerequisites:
+    feat: Spell Focus (Necromancy)
+  effects: []
+Greater Spell Focus (Transmutation):
+  kind: passive
+  source_book: PHB
+  note: +1 additional spell save DC for Transmutation
+  prerequisites:
+    feat: Spell Focus (Transmutation)
   effects: []
 Greater Spell Penetration:
   kind: passive
@@ -990,10 +1039,52 @@ Snatch Arrows:
           key: dex_score
           min: 15
   effects: []
-Spell Focus:
+Spell Focus (Abjuration):
   kind: passive
   source_book: PHB
-  note: +1 to spell save DCs for chosen school; no pool bonus (spell-specific)
+  note: +1 to spell save DCs for Abjuration; no pool bonus (spell-specific)
+  prerequisites: null
+  effects: []
+Spell Focus (Conjuration):
+  kind: passive
+  source_book: PHB
+  note: +1 to spell save DCs for Conjuration; no pool bonus (spell-specific)
+  prerequisites: null
+  effects: []
+Spell Focus (Divination):
+  kind: passive
+  source_book: PHB
+  note: +1 to spell save DCs for Divination; no pool bonus (spell-specific)
+  prerequisites: null
+  effects: []
+Spell Focus (Enchantment):
+  kind: passive
+  source_book: PHB
+  note: +1 to spell save DCs for Enchantment; no pool bonus (spell-specific)
+  prerequisites: null
+  effects: []
+Spell Focus (Evocation):
+  kind: passive
+  source_book: PHB
+  note: +1 to spell save DCs for Evocation; no pool bonus (spell-specific)
+  prerequisites: null
+  effects: []
+Spell Focus (Illusion):
+  kind: passive
+  source_book: PHB
+  note: +1 to spell save DCs for Illusion; no pool bonus (spell-specific)
+  prerequisites: null
+  effects: []
+Spell Focus (Necromancy):
+  kind: passive
+  source_book: PHB
+  note: +1 to spell save DCs for Necromancy; no pool bonus (spell-specific)
+  prerequisites: null
+  effects: []
+Spell Focus (Transmutation):
+  kind: passive
+  source_book: PHB
+  note: +1 to spell save DCs for Transmutation; no pool bonus (spell-specific)
   prerequisites: null
   effects: []
 Spell Mastery:

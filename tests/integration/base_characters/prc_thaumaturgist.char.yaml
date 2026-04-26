@@ -20,9 +20,8 @@ levels:
       Knowledge (Religion): 4
       Knowledge (The Planes): 4
     feats:
-      - name: Spell Focus
+      - name: Spell Focus (Conjuration)
         source: character
-        parameter: Conjuration
       - name: Augment Summoning
         source: human_bonus
   - level: 2
