@@ -28,6 +28,33 @@ from pathlib import Path
 BOOKS_DIR = Path.home() / "DnD" / "3.5 Books"
 CACHE_DIR = Path.home() / ".cache" / "heroforge-rules-lookup"
 
+# PDF text extraction often turns ASCII ' into a curly quote
+# (U+2019), or strips it entirely. We normalise away every
+# apostrophe-like character before matching so a search for
+# "Lion's Pounce" still finds "Lion’s Pounce" and
+# "Lions Pounce".
+_APOSTROPHES = "'‘’ʼ"
+
+
+def _normalize_for_search(s: str) -> str:
+    """Lowercase the string and drop apostrophe-like characters."""
+    return s.lower().translate({ord(c): None for c in _APOSTROPHES})
+
+
+def _compile_pattern(term: str) -> re.Pattern[str]:
+    """Regex matching against ``_normalize_for_search`` output."""
+    return re.compile(re.escape(_normalize_for_search(term)))
+
+
+def _find_matches(pages: list[str], term: str) -> list[int]:
+    """1-indexed page numbers where ``term`` occurs (apostrophe-fuzzy)."""
+    pattern = _compile_pattern(term)
+    return [
+        i
+        for i, text in enumerate(pages, start=1)
+        if pattern.search(_normalize_for_search(text))
+    ]
+
 
 def _extract_pdf(pdf: Path) -> list[str]:
     """Return per-page text, caching to CACHE_DIR."""
@@ -73,13 +100,13 @@ def search(
         print(f"No PDFs matched in {BOOKS_DIR}", file=sys.stderr)
         return 1
 
-    pattern = re.compile(re.escape(term), re.IGNORECASE)
+    pattern = _compile_pattern(term)
     total = 0
 
     for pdf in pdfs:
         pages = _extract_pdf(pdf)
         for page_num, text in enumerate(pages, start=1):
-            if not pattern.search(text):
+            if not pattern.search(_normalize_for_search(text)):
                 continue
             total += 1
             print(f"\n=== {pdf.name} · page {page_num} ===")
@@ -103,11 +130,15 @@ def _snippet(
     pattern: re.Pattern[str],
     context_lines: int,
 ) -> str:
-    """Return lines around each match, with match lines highlighted."""
+    """
+    Return lines around each match, preserving the original
+    text so apostrophes and casing survive into the citation.
+    Matching itself runs against the apostrophe-normalised form.
+    """
     lines = text.splitlines()
     keep: set[int] = set()
     for i, line in enumerate(lines):
-        if pattern.search(line):
+        if pattern.search(_normalize_for_search(line)):
             for j in range(
                 max(0, i - context_lines),
                 min(len(lines), i + context_lines + 1),

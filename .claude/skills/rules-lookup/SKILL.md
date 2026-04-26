@@ -59,6 +59,21 @@ Each match prints:
   split words across lines. If a match looks truncated, read
   more context with `--context 8`.
 
+## Apostrophe matching
+
+Searches are case-insensitive and apostrophe-fuzzy: the term and
+the page text are both lowercased and have apostrophe-like
+characters (`'`, `‘`, `’`, `ʼ`) stripped before matching. So all
+of these queries find the same entry:
+
+- `"Lion's Pounce"` (ASCII)
+- `"Lion’s Pounce"` (curly — what most PDFs actually contain)
+- `"Lions Pounce"` (no apostrophe — extraction sometimes drops it)
+
+A "no matches" result is a real absence, not an apostrophe
+mismatch. If you still want to be paranoid, also try the bare
+non-possessive root (e.g. `"Lion"`, `"Murlynd"`) once.
+
 ## First-call cost
 
 Extracting a full sourcebook takes 10–30 seconds. Extraction is
