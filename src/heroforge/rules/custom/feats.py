@@ -1,6 +1,6 @@
 """
 feats.py
-Feats from Spell Compendium.
+Homebrew feats.
 """
 
 from __future__ import annotations
@@ -8,5 +8,5 @@ from __future__ import annotations
 from enum import StrEnum
 
 
-class KnownSpellCompendiumFeat(StrEnum):
+class KnownCustomFeat(StrEnum):
     LIONS_POUNCE = "Lion's Pounce"

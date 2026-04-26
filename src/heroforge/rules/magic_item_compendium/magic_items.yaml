@@ -14,7 +14,11 @@ Arcanist's Gloves:
 Armbands of Might:
   slot: arms
   source_book: Magic Item Compendium
-  note: +2 to damage when power attacking by at least 2
+  note: >-
+    Always-on +2 enhancement bonus on Strength checks and
+    Strength-based skill checks. If you have Power Attack
+    and take at least -2 on the attack roll, +2 to melee
+    damage on that attack. MIC p. 72.
 Chronocharm of the Horizon Walker:
   slot: throat
   source_book: Magic Item Compendium
@@ -40,10 +44,10 @@ Crystal of Mind Cloaking, Greater:
   slot: slotless
   source_book: Magic Item Compendium
   note: >-
-    Shield augment crystal. +5 competence bonus on saves
+    Armor augment crystal. +5 competence bonus on saves
     vs. mind-affecting; 1/day if you fail such a save,
     reroll it as an immediate action. Requires +3 host
-    shield. MIC p. 26.
+    armor. MIC p. 25.
 Deathstrike Bracers:
   slot: arms
   source_book: Magic Item Compendium
@@ -72,8 +76,9 @@ Eternal Wand of Prestidigitation:
   slot: tool
   source_book: Magic Item Compendium
   note: >-
-    Eternal wand usable by any character (no UMD). Casts
-    prestidigitation 2/day at CL 1. MIC p. 159.
+    Eternal wand; any arcane caster can activate it
+    regardless of class spell list. Casts prestidigitation
+    2/day at CL 1. MIC p. 159.
 Fiendslayer Crystal, Least:
   slot: slotless
   source_book: Magic Item Compendium
@@ -84,12 +89,15 @@ Fiendslayer Crystal, Least:
 Gauntlets of Ghost Fighting:
   slot: hands
   source_book: Magic Item Compendium
-  note: ghost touch weapon
+  note: >-
+    Ignore the miss chance against incorporeal creatures;
+    +1d6 damage with melee attacks vs. incorporeal
+    creatures. Wraith's Woe set piece. MIC p. 216.
 Githborn Talisman:
   slot: throat
   source_book: Magic Item Compendium
   note: >-
-    3/day standard action, for 1 round gain +2 insight on
+    3/day immediate action, for 1 round gain +2 insight on
     attack and weapon damage rolls vs. aberrations, and
     +2 insight on Will saves vs. aberration Ex/Su/Sp
     abilities. Githyanki/githzerai gain +4 instead.
@@ -135,7 +143,10 @@ Revelation Crystal, Greater:
 Third Eye (Clarity):
   slot: face
   source_book: Magic Item Compendium
-  note: Imm. action negate confused, etc.
+  note: >-
+    1/day immediate action; negate one of the following
+    conditions affecting the wearer: confused, dazed,
+    fascinated, or stunned. MIC p. 141.
 Truedeath Crystal, Greater:
   slot: slotless
   source_book: Magic Item Compendium
@@ -143,11 +154,13 @@ Truedeath Crystal, Greater:
     Weapon augment crystal. +1d6 damage to undead,
     functions as ghost touch, and can deliver sneak
     attacks/crits against undead as if they were living.
-    Requires +3 host weapon. MIC p. 66.
+    Requires +3 host weapon (greater augment crystals only
+    function on weapons with a +3 enhancement or higher).
+    MIC p. 66.
 Vest of Resistance +1:
   slot: torso
   source_book: Magic Item Compendium
-  note: +1 resistance to all saves
+  note: +1 resistance to all saves. MIC p. 147.
   effects:
     - target: fort_save
       bonus_type: resistance
@@ -161,7 +174,7 @@ Vest of Resistance +1:
 Vest of Resistance +2:
   slot: torso
   source_book: Magic Item Compendium
-  note: +2 resistance to all saves
+  note: +2 resistance to all saves. MIC p. 147.
   effects:
     - target: fort_save
       bonus_type: resistance
@@ -175,7 +188,7 @@ Vest of Resistance +2:
 Vest of Resistance +3:
   slot: torso
   source_book: Magic Item Compendium
-  note: +3 resistance to all saves
+  note: +3 resistance to all saves. MIC p. 147.
   effects:
     - target: fort_save
       bonus_type: resistance
@@ -189,7 +202,7 @@ Vest of Resistance +3:
 Vest of Resistance +4:
   slot: torso
   source_book: Magic Item Compendium
-  note: +4 resistance to all saves
+  note: +4 resistance to all saves. MIC p. 147.
   effects:
     - target: fort_save
       bonus_type: resistance
@@ -203,7 +216,7 @@ Vest of Resistance +4:
 Vest of Resistance +5:
   slot: torso
   source_book: Magic Item Compendium
-  note: +5 resistance to all saves
+  note: +5 resistance to all saves. MIC p. 147.
   effects:
     - target: fort_save
       bonus_type: resistance

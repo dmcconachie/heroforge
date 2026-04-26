@@ -19,6 +19,13 @@ Hospitaler:
     - Ride
   entry_prerequisites:
     all_of:
+      - alignment:
+          - Lawful Good
+          - Lawful Neutral
+          - Lawful Evil
+          - Neutral Good
+          - Neutral
+          - Neutral Evil
       - stat:
           key: bab
           min: 5
@@ -31,6 +38,9 @@ Hospitaler:
       - skill:
           name: Ride
           min_ranks: 5
+      - spellcasting:
+          cast_type: divine
+          min_level: 1
   class_features:
     - level: 1
       feature: bonus_feat_1

@@ -7,4 +7,9 @@
 Bronzewood:
   source_book: Eberron Campaign Setting
   note: >-
-    Wood as hard as iron; druids can use. Weighs 3/4.
+    Wood as hard as iron (hardness 10, 20 hp/inch); can replace
+    metal in heavy armor and most weapons. Druids can wear
+    bronzewood armor without violating their class restrictions.
+    Items weigh 10% less than metal equivalents. Bronzewood
+    armor's ACP does not apply to Hide checks in woodland
+    environments. Eberron Campaign Setting p. 126.

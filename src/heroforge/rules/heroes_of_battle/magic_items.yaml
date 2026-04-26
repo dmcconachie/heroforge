@@ -5,10 +5,16 @@
 # Sorted alphabetically.
 
 Heraldic Crest of Courage:
-  slot: head
+  slot: slotless
   source_book: Heroes of Battle
   effects:
     - target: initiative
       bonus_type: morale
       value: 1
-  note: +1 morale bonus to initiative, CL 5th aid 1/day as a free action
+  note: >-
+    Shield enhancement (depicts a pouncing lion). Wearer gains
+    +1 morale bonus on initiative; once per day on command, the
+    shield casts aid (CL 5th) on the bearer. Activating the
+    1/day power requires meeting the crest's eligibility (e.g.
+    Leadership feat, commander aura, or being granted the
+    crest by an authority). Heroes of Battle p. 130.

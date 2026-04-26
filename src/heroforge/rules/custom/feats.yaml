@@ -1,0 +1,18 @@
+# rules/custom/feats.yaml
+#
+# Homebrew feats. There is no published 3.5 feat by these names;
+# they are local house rules carried in the lexicon so existing
+# characters that reference them keep building.
+#
+# Sorted alphabetically.
+
+Lion's Pounce:
+  kind: passive
+  source_book: Homebrew
+  note: >-
+    Make a full attack at the end of a charge. (Mechanically
+    equivalent to the Spell Compendium spell "Lion's Charge"
+    but kept as a feat for backwards compatibility with
+    existing character data.)
+  prerequisites: null
+  effects: []
