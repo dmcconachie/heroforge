@@ -147,10 +147,11 @@ skills:
       ability_mod: 1
       luck: 1
   Climb:
-    total: 4
+    total: 6
     typed:
       ability_mod: 8
       equip:armor: -5
+      Armbands of Might: 2
       luck: 1
   Concentration:
     total: 22
@@ -212,11 +213,12 @@ skills:
       ability_mod: 1
       luck: 1
   Jump:
-    total: -2
+    total: 0
     typed:
       ability_mod: 8
       speed_mod: -6
       equip:armor: -5
+      Armbands of Might: 2
       luck: 1
   Knowledge (Nature):
     total: 21
@@ -284,10 +286,11 @@ skills:
       ranks: 5
       luck: 1
   Swim:
-    total: -1
+    total: 1
     typed:
       ability_mod: 8
       equip:armor: -10
+      Armbands of Might: 2
       luck: 1
   Use Rope:
     total: 3

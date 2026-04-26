@@ -15,10 +15,21 @@ Armbands of Might:
   slot: arms
   source_book: Magic Item Compendium
   note: >-
-    Always-on +2 enhancement bonus on Strength checks and
-    Strength-based skill checks. If you have Power Attack
-    and take at least -2 on the attack roll, +2 to melee
-    damage on that attack. MIC p. 72.
+    Always-on +2 untyped bonus on Strength checks and
+    Strength-based skill checks (Climb, Jump, Swim). If
+    you have Power Attack and take at least -2 on the
+    attack roll, +2 to melee damage on that attack.
+    MIC p. 72.
+  effects:
+    - target: skill_climb
+      bonus_type: untyped
+      value: 2
+    - target: skill_jump
+      bonus_type: untyped
+      value: 2
+    - target: skill_swim
+      bonus_type: untyped
+      value: 2
 Chronocharm of the Horizon Walker:
   slot: throat
   source_book: Magic Item Compendium
