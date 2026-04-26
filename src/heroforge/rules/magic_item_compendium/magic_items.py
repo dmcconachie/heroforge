@@ -11,6 +11,7 @@ from enum import StrEnum
 
 
 class KnownMagicItemCompendiumMagicItem(StrEnum):
+    ARCANISTS_GLOVES = "Arcanist's Gloves"
     ARMBANDS_OF_MIGHT = "Armbands of Might"
     CHRONOCHARM_OF_THE_HORIZON_WALKER = "Chronocharm of the Horizon Walker"
     CHRONOCHARM_OF_THE_LAUGHING_ROGUE = "Chronocharm of the Laughing Rogue"
@@ -18,7 +19,7 @@ class KnownMagicItemCompendiumMagicItem(StrEnum):
     CRYSTAL_OF_MIND_CLOAKING_GREATER = "Crystal of Mind Cloaking, Greater"
     DEATHSTRIKE_BRACERS = "Deathstrike Bracers"
     DEMOLITION_CRYSTAL_GREATER = "Demolition Crystal, Greater"
-    ETERNAL_WAND_OF_MAGIC_AURA = "Eternal Wand of Magic Aura"
+    ETERNAL_WAND_OF_NYSTULS_MAGIC_AURA = "Eternal Wand of Nystul's Magic Aura"
     ETERNAL_WAND_OF_PRESTIDIGITATION = "Eternal Wand of Prestidigitation"
     FIENDSLAYER_CRYSTAL_LEAST = "Fiendslayer Crystal, Least"
     GAUNTLETS_OF_GHOST_FIGHTING = "Gauntlets of Ghost Fighting"

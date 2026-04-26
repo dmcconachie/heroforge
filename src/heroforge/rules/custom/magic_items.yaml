@@ -5,6 +5,21 @@
 #
 # Sorted alphabetically.
 
+Boneblood Scalpel:
+  slot: tool
+  note: >-
+    1/day speak with dead on a corpse the scalpel is
+    used to incise.
+Planar Fork (Beastlands):
+  slot: tool
+  note: >-
+    Tuning fork attuned to the Beastlands; serves as
+    the focus component for plane shift to that plane.
+Planar Fork (Ethereal):
+  slot: tool
+  note: >-
+    Tuning fork attuned to the Ethereal Plane; serves
+    as the focus component for plane shift to that plane.
 Ring of Tharizdun:
   slot: ring
   note: Casts CL 9 delay death on the wearer if needed

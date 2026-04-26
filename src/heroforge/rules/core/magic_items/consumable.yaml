@@ -85,35 +85,6 @@ Elixir of Truth:
 Elixir of Vision:
   slot: consumable
   note: +10 competence on Search checks for 1 hour
-Feather Token (Anchor):
-  slot: consumable
-  note: >-
-    Tossed at boat: moors it in place for 1 day
-Feather Token (Bird):
-  slot: consumable
-  note: >-
-    Tossed: summons 1 bird (as summon nature's
-    ally; 24 hrs) to carry small items
-Feather Token (Fan):
-  slot: consumable
-  note: >-
-    Tossed: creates gust of wind (15 mph breeze
-    or stronger gust) in direction
-Feather Token (Swan Boat):
-  slot: consumable
-  note: >-
-    Tossed in water: creates swan-prowed boat
-    that carries 32 Medium creatures for 1 day
-Feather Token (Tree):
-  slot: consumable
-  note: >-
-    Tossed: grows into mature 60 ft oak in
-    1 round (permanent tree)
-Feather Token (Whip):
-  slot: consumable
-  note: >-
-    Tossed: creates animate whip that strikes
-    targets within 10 ft for 1 hour
 Manual of Bodily Health +1:
   slot: consumable
   note: >-
@@ -190,6 +161,35 @@ Manual of Quickness of Action +5:
   note: >-
     Inherent +5 DEX (permanent, read once).
     Tracked via level inherent_bumps.
+Quaal's Feather Token (Anchor):
+  slot: consumable
+  note: >-
+    Tossed at boat: moors it in place for 1 day
+Quaal's Feather Token (Bird):
+  slot: consumable
+  note: >-
+    Tossed: summons 1 bird (as summon nature's
+    ally; 24 hrs) to carry small items
+Quaal's Feather Token (Fan):
+  slot: consumable
+  note: >-
+    Tossed: creates gust of wind (15 mph breeze
+    or stronger gust) in direction
+Quaal's Feather Token (Swan Boat):
+  slot: consumable
+  note: >-
+    Tossed in water: creates swan-prowed boat
+    that carries 32 Medium creatures for 1 day
+Quaal's Feather Token (Tree):
+  slot: consumable
+  note: >-
+    Tossed: grows into mature 60 ft oak in
+    1 round (permanent tree)
+Quaal's Feather Token (Whip):
+  slot: consumable
+  note: >-
+    Tossed: creates animate whip that strikes
+    targets within 10 ft for 1 hour
 Restorative Ointment:
   slot: consumable
   note: >-

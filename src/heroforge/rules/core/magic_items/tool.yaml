@@ -151,6 +151,11 @@ Cubic Gate:
   note: >-
     Six faces; press to plane shift self/group,
     or press twice to summon creature from plane
+Daern's Instant Fortress:
+  slot: tool
+  note: >-
+    1-inch metal cube expands to 20 ft x 20 ft x
+    30 ft tower (AC 20, hp 800, hardness 20)
 Darkskull:
   slot: tool
   note: >-
@@ -281,16 +286,16 @@ Golem Manual (Stone):
   note: >-
     Contains instructions to create a stone
     golem (reduces crafting cost/time by 50%)
-Handy Haversack:
-  slot: tool
-  note: >-
-    Central pouch plus 2 side pouches; 8 cu ft /
-    80 lb; always retrieves item as free action
 Harp of Charming:
   slot: tool
   note: >-
     Enthrall effect 1/day per charge (up to 14
     charges) when played successfully
+Heward's Handy Haversack:
+  slot: tool
+  note: >-
+    Central pouch plus 2 side pouches; 8 cu ft /
+    80 lb; always retrieves item as free action
 Horn of Blasting:
   slot: tool
   note: >-
@@ -326,11 +331,6 @@ Incense of Meditation:
   note: >-
     Burned for 8 hours before prayer; maximizes
     divine spells prepared that day
-Instant Fortress:
-  slot: tool
-  note: >-
-    1-inch metal cube expands to 20 ft x 20 ft x
-    30 ft tower (AC 20, hp 800, hardness 20)
 Iron Bands of Binding:
   slot: tool
   note: >-
@@ -381,6 +381,11 @@ Mirror of Opposition:
   note: >-
     Creates a duplicate of reflected creature
     with reversed alignment; fights original
+Murlynd's Spoon:
+  slot: tool
+  note: >-
+    Generates enough soup/gruel to sustain 4
+    humans/day with water
 Orb of Storms:
   slot: tool
   note: >-
@@ -513,11 +518,6 @@ Stone of Controlling Earth Elementals:
   note: >-
     Summons a Large earth elemental (as summon
     monster) to obey commands (24 hr duration)
-Sustaining Spoon:
-  slot: tool
-  note: >-
-    Generates enough soup/gruel to sustain 4
-    humans/day with water
 Well of Many Worlds:
   slot: tool
   note: >-

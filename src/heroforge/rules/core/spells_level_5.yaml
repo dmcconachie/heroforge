@@ -110,15 +110,15 @@ Insect Plague:
   level:
     Cleric: 5
     Druid: 5
-Interposing Hand:
+Bigby's Interposing Hand:
   level:
     Sorcerer: 5
     Wizard: 5
-Mage's Faithful Hound:
+Mordenkainen's Faithful Hound:
   level:
     Sorcerer: 5
     Wizard: 5
-Mage's Private Sanctum:
+Mordenkainen's Private Sanctum:
   level:
     Sorcerer: 5
     Wizard: 5
@@ -196,7 +196,7 @@ Righteous Might:
     - target: con_score
       bonus_type: enhancement
       value: 2
-Secret Chest:
+Leomund's Secret Chest:
   level:
     Sorcerer: 5
     Wizard: 5
@@ -258,7 +258,7 @@ Telekinesis:
   level:
     Sorcerer: 5
     Wizard: 5
-Telepathic Bond:
+Rary's Telepathic Bond:
   level:
     Sorcerer: 5
     Wizard: 5

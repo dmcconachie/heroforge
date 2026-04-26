@@ -52,6 +52,11 @@ Craft:
   trained_only: false
   armor_check: false
   description: Create items (each Craft is a separate skill)
+Craft (Conspiracy):
+  ability: int
+  trained_only: true
+  armor_check: false
+  description: Plan and orchestrate intricate schemes
 Decipher Script:
   ability: int
   trained_only: true
@@ -76,9 +81,6 @@ Escape Artist:
   ability: dex
   trained_only: false
   armor_check: true
-  synergies:
-    - skill: Use Rope
-      bonus: 2
   description: Escape grapples, bonds, and tight spaces
 Forgery:
   ability: int
@@ -159,13 +161,34 @@ Knowledge (Local):
     - skill: Gather Information
       bonus: 2
   description: Legends, personalities, inhabitants, laws, customs
-Knowledge (Nature):
+Knowledge (Local Core):
   ability: int
   trained_only: true
   armor_check: false
   synergies:
-    - skill: Survival
+    - skill: Gather Information
       bonus: 2
+  description: Local lore for the Core (Greyhawk) campaign region
+Knowledge (Local Iuz):
+  ability: int
+  trained_only: true
+  armor_check: false
+  synergies:
+    - skill: Gather Information
+      bonus: 2
+  description: Local lore for the Empire of Iuz
+Knowledge (Local VTF):
+  ability: int
+  trained_only: true
+  armor_check: false
+  synergies:
+    - skill: Gather Information
+      bonus: 2
+  description: Local lore for the Vesve / Tangles / Flanaess region
+Knowledge (Nature):
+  ability: int
+  trained_only: true
+  armor_check: false
   description: Animals, fey, giants, monstrous humanoids, plants, seasons
 Knowledge (Nobility and Royalty):
   ability: int
@@ -186,9 +209,6 @@ Knowledge (The Planes):
   ability: int
   trained_only: true
   armor_check: false
-  synergies:
-    - skill: Survival
-      bonus: 2
   description: The Inner Planes, Outer Planes, Astral Plane, Ethereal Plane
 Listen:
   ability: wis
@@ -234,9 +254,6 @@ Search:
   ability: int
   trained_only: false
   armor_check: false
-  synergies:
-    - skill: Survival
-      bonus: 2
   description: Find secret doors, traps, and concealed items
 Sense Motive:
   ability: wis
@@ -294,17 +311,9 @@ Use Magic Device:
   ability: cha
   trained_only: true
   armor_check: false
-  synergies:
-    - skill: Spellcraft
-      bonus: 2
   description: Use magic items regardless of class or alignment
 Use Rope:
   ability: dex
   trained_only: false
   armor_check: false
-  synergies:
-    - skill: Climb
-      bonus: 2
-    - skill: Escape Artist
-      bonus: 2
   description: Bind, splice, and tie with rope

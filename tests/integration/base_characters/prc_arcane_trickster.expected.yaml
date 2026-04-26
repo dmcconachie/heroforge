@@ -226,20 +226,11 @@ skills:
     total: 16
     typed:
       ranks: 16
-  Survival:
-    total: 2
-    typed:
-      synergy: 2
   Tumble:
     total: 18
     typed:
       ability_mod: 2
       ranks: 16
-  Use Rope:
-    total: 4
-    typed:
-      ability_mod: 2
-      synergy: 2
 carrying_capacity:
   light: 26
   medium: 53

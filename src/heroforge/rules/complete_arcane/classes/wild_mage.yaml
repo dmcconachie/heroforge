@@ -1,0 +1,87 @@
+Wild Mage:
+  source_book: Complete Arcane
+  hit_die: 4
+  max_level: 10
+  bab_progression: poor
+  save_progressions:
+    fort: poor
+    ref: good
+    will: poor
+  skills_per_level: 2
+  class_skills:
+    - Bluff
+    - Concentration
+    - Craft
+    - Intimidate
+    - Knowledge (all)
+    - Profession
+    - Spellcraft
+    - Use Magic Device
+  entry_prerequisites:
+    all_of:
+      - alignment:
+          - Chaotic Good
+          - Chaotic Neutral
+          - Chaotic Evil
+      - skill:
+          name: Knowledge (The Planes)
+          min_ranks: 4
+      - skill:
+          name: Spellcraft
+          min_ranks: 8
+      - skill:
+          name: Use Magic Device
+          min_ranks: 4
+      - feat: Magical Aptitude
+      # Also requires any metamagic feat. The engine has no
+      # "any feat from category" prereq, so this isn't enforced.
+      - spellcasting:
+          cast_type: arcane
+          min_level: 1
+  class_features:
+    - level: 1
+      feature: wild_magic
+      description: >-
+        Casts spells with caster level reduced by 3, but adds 1d6
+        to the adjusted caster level on each spell cast.
+        (TODO: wire effect)
+    - level: 2
+      feature: random_deflector_1
+      description: >-
+        1/day immediate action; ranged attacks, ranged touch
+        attacks, and individually targeted spells are redirected
+        to a random target within 20 ft of the wild mage until
+        her next turn. (TODO: wire effect)
+    - level: 3
+      feature: student_of_chaos
+      description: >-
+        When using a magic item with a randomly determined
+        effect (bag of tricks, rod of wonder, etc.), roll twice
+        and choose between the results. (TODO: wire effect)
+    - level: 5
+      feature: random_deflector_2
+      description: >-
+        Random deflector usable 2/day. (TODO: wire effect)
+    - level: 6
+      feature: chaotic_mind
+      description: >-
+        Immunity to confusion and insanity spells/effects;
+        continuous nondetection effect on self. (TODO: wire effect)
+    - level: 8
+      feature: random_deflector_3
+      description: >-
+        Random deflector usable 3/day. (TODO: wire effect)
+    - level: 9
+      feature: reckless_dweomer
+      description: >-
+        Standard action; eliminate a prepared spell or spell slot
+        of at least 1st level to create a random rod-of-wonder-
+        like effect. (TODO: wire effect)
+    - level: 10
+      feature: wildstrike
+      description: >-
+        1/day target one creature within 60 ft for 2d6 rounds;
+        50% chance each of the target's spells or spell-like
+        abilities fails and triggers a rod of wonder result
+        instead. (TODO: wire effect)
+  is_prestige: true

@@ -1,0 +1,259 @@
+identity:
+  name: Elbirg ibn'Htib
+  race: Human
+  class_str: Wizard 5 / Wild Mage 3
+  level: 8
+  alignment: chaotic_neutral
+  deity: ''
+  size: Medium
+abilities:
+  str:
+    score: 8
+    mod: -1
+    typed:
+      base: 8
+  dex:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+  con:
+    score: 16
+    mod: 3
+    typed:
+      base: 14
+      enhancement: 2
+  int:
+    score: 25
+    mod: 7
+    typed:
+      base: 18
+      level_bumps: 2
+      inherent: 1
+      enhancement: 4
+  wis:
+    score: 18
+    mod: 4
+    typed:
+      base: 18
+  cha:
+    score: 8
+    mod: -1
+    typed:
+      base: 8
+combat:
+  ac:
+    total: 12
+    typed:
+      base: 10
+      dex: 2
+  touch_ac: 12
+  flatfooted_ac: 10
+  hp_max:
+    total: 49
+    typed:
+      base: 25
+      con: 24
+  bab:
+    total: 3
+    typed:
+      base: 3
+  initiative:
+    total: 2
+    typed:
+      dex: 2
+  speed:
+    total: 30
+    typed:
+      base: 30
+  sr: 0
+  saves:
+    fort:
+      total: 7
+      typed:
+        base: 2
+        con: 3
+        resistance: 2
+    ref:
+      total: 8
+      typed:
+        base: 4
+        dex: 2
+        resistance: 2
+    will:
+      total: 11
+      typed:
+        base: 5
+        wis: 4
+        resistance: 2
+  attack_melee:
+    total: 2
+    typed:
+      base: 3
+      str: -1
+  attack_ranged:
+    total: 5
+    typed:
+      base: 3
+      dex: 2
+  damage_melee:
+    total: -1
+    typed:
+      str: -1
+  grapple:
+    total: 2
+    typed:
+      base: 3
+      str: -1
+attack_iteratives:
+  melee:
+    - 2
+  ranged:
+    - 5
+skills:
+  Concentration:
+    total: 14
+    typed:
+      ability_mod: 3
+      ranks: 11
+  Craft (Conspiracy):
+    total: 12
+    typed:
+      ability_mod: 7
+      ranks: 5
+  Decipher Script:
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Arcana):
+    total: 18
+    typed:
+      ability_mod: 7
+      ranks: 11
+  Knowledge (Architecture and Engineering):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Dungeoneering):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Geography):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (History):
+    total: 9
+    typed:
+      ability_mod: 7
+      ranks: 2
+  Knowledge (Local Core):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Local Iuz):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Local VTF):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Nature):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Nobility and Royalty):
+    total: 8
+    typed:
+      ability_mod: 7
+      ranks: 1
+  Knowledge (Religion):
+    total: 14
+    typed:
+      ability_mod: 7
+      ranks: 7
+  Knowledge (The Planes):
+    total: 18
+    typed:
+      ability_mod: 7
+      ranks: 11
+  Spellcraft:
+    total: 22
+    typed:
+      ability_mod: 7
+      ranks: 11
+      synergy: 2
+      magical_aptitude: 2
+  Use Magic Device:
+    total: 10
+    typed:
+      ability_mod: -1
+      ranks: 9
+      magical_aptitude: 2
+carrying_capacity:
+  light: 26
+  medium: 53
+  heavy: 80
+feats:
+  - Scribe Scroll
+  - Magical Aptitude
+  - Retributive Spell
+  - Craft Wondrous Item
+  - Spontaneous Divination
+class_features:
+  - 'summon_familiar: Summon a familiar'
+  - 'scribe_scroll: Scribe scroll feat for free'
+  - >-
+    bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)
+  - >-
+    wild_magic: Casts spells with caster level reduced by 3, but adds 1d6
+    to the adjusted caster level on each spell cast. (TODO: wire effect)
+  - >-
+    random_deflector_1: 1/day immediate action; ranged attacks, ranged touch
+    attacks, and individually targeted spells are redirected to a random target
+    within 20 ft of the wild mage until her next turn. (TODO: wire effect)
+  - >-
+    student_of_chaos: When using a magic item with a randomly determined effect
+    (bag of tricks, rod of wonder, etc.), roll twice and choose between the
+    results. (TODO: wire effect)
+spellcasting:
+  Wizard:
+    caster_level: 5
+    key_ability: int
+    cast_type: arcane
+    preparation: prepared
+    slots_per_day:
+      - 4
+      - 5
+      - 4
+      - 3
+    spell_save_dc:
+      0: 17
+      1: 18
+      2: 19
+      3: 20
+equipment:
+  worn:
+    - Heward's Handy Haversack
+    - Pearl of Power (1st Level)
+    - Pearl of Power (1st Level)
+    - Pearl of Power (1st Level)
+    - Pearl of Power (1st Level)
+    - Rod of Extend, Lesser
+    - Boneblood Scalpel
+    - Planar Fork (Beastlands)
+    - Planar Fork (Ethereal)
+    - Headband of Intellect +4
+    - Amulet of Health +2
+    - Vest of Resistance +2
+    - Arcanist's Gloves
+    - Arcanist's Gloves

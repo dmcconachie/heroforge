@@ -4,6 +4,13 @@
 #
 # Sorted alphabetically.
 
+Arcanist's Gloves:
+  slot: hands
+  source_book: Magic Item Compendium
+  note: >-
+    2/day swift action; +2 to caster level of the next
+    1st-level arcane spell cast before the end of your
+    turn. CL 3rd. MIC p. 72.
 Armbands of Might:
   slot: arms
   source_book: Magic Item Compendium
@@ -54,7 +61,7 @@ Demolition Crystal, Greater:
     can deliver sneak attacks/crits against constructs
     as if they were living. Requires +3 host weapon.
     MIC p. 65.
-Eternal Wand of Magic Aura:
+Eternal Wand of Nystul's Magic Aura:
   slot: tool
   source_book: Magic Item Compendium
   note: >-

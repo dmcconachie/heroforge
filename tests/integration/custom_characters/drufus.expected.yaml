@@ -296,11 +296,11 @@ skills:
       ranks: 25
       luck: 1
   Spellcraft:
-    total: 32
+    total: 30
     typed:
       ability_mod: 7
       ranks: 20
-      synergy: 4
+      synergy: 2
       luck: 1
   Spot:
     total: 37
@@ -310,10 +310,9 @@ skills:
       luck: 1
       insight: 9
   Survival:
-    total: 5
+    total: 3
     typed:
       ability_mod: 2
-      synergy: 2
       luck: 1
   Swim:
     total: 6
@@ -428,7 +427,7 @@ equipment:
     - Ring of Freedom of Movement
     - Ring of Spell Storing
     - Hat of Disguise
-    - Handy Haversack
+    - Heward's Handy Haversack
     - Boots of Speed
     - Stone of Good Luck (Luckstone)
     - Ioun Stone (Dusty Rose Prism)
@@ -465,26 +464,26 @@ equipment:
     - Heward's Fortifying Bedroll
     - Rod of Extend, Lesser
     - Eternal Wand of Prestidigitation
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
-    - Eternal Wand of Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
+    - Eternal Wand of Nystul's Magic Aura
     - Demolition Crystal, Greater
     - Demolition Crystal, Greater
     - Horn of Plenty

@@ -154,10 +154,6 @@ skills:
       ability_mod: 4
       ranks: 26
       synergy: 2
-  Survival:
-    total: 2
-    typed:
-      synergy: 2
 carrying_capacity:
   light: 26
   medium: 53

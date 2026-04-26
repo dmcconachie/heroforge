@@ -182,7 +182,7 @@ Magic:
     Use scrolls, wands, and other spell-completion/trigger items as a
     wizard of half your cleric level (min 1st).
   domain_spells:
-    1: Magic Aura
+    1: Nystul's Magic Aura
     2: Identify
     3: Dispel Magic
     4: Imbue with Spell Ability
@@ -190,7 +190,7 @@ Magic:
     6: Antimagic Field
     7: Spell Turning
     8: Protection from Spells
-    9: Mage's Disjunction
+    9: Mordenkainen's Disjunction
 Plant:
   granted_power: >-
     Rebuke or command plant creatures as evil cleric rebukes undead.
@@ -230,9 +230,9 @@ Strength:
     4: Spell Immunity
     5: Righteous Might
     6: Stoneskin
-    7: Grasping Hand
-    8: Clenched Fist
-    9: Crushing Hand
+    7: Bigby's Grasping Hand
+    8: Bigby's Clenched Fist
+    9: Bigby's Crushing Hand
 Sun:
   granted_power: >-
     '''''''Greater turning 1/day: undead that would be turned are destroyed

@@ -1,0 +1,17 @@
+# rules/complete_mage/feats.yaml
+#
+# Feats from Complete Mage.
+#
+# Sorted alphabetically.
+
+Retributive Spell:
+  kind: passive
+  source_book: Complete Mage
+  note: >-
+    Metamagic (+1 spell slot): cast a spell with no immediate
+    effect; for the next 24 hours, when struck in melee, cast
+    the spell on the attacker as an immediate action. Only
+    one retributive spell can be active at a time. Targets a
+    single creature only. Complete Mage p. 47.
+  prerequisites: null
+  effects: []

@@ -3,7 +3,7 @@
 # Map keyed by spell name.
 # See spells_level_0.yaml for field schema.
 
-Acid Arrow:
+Melf's Acid Arrow:
   level:
     Sorcerer: 2
     Wizard: 2

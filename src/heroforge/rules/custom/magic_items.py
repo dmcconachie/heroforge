@@ -11,6 +11,9 @@ from enum import StrEnum
 
 
 class KnownCustomMagicItem(StrEnum):
+    BONEBLOOD_SCALPEL = "Boneblood Scalpel"
+    PLANAR_FORK_BEASTLANDS = "Planar Fork (Beastlands)"
+    PLANAR_FORK_ETHEREAL = "Planar Fork (Ethereal)"
     RING_OF_THARIZDUN = "Ring of Tharizdun"
     SZIRBS_SHINING_HELM = "Szirb's Shining Helm"
     THIEVES_TOOLS_MASTERWORK = "Thieves' Tools, Masterwork"

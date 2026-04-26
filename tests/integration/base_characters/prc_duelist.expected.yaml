@@ -198,11 +198,6 @@ skills:
       ability_mod: 3
       ranks: 15
       synergy: 2
-  Use Rope:
-    total: 5
-    typed:
-      ability_mod: 3
-      synergy: 2
 carrying_capacity:
   light: 58
   medium: 116

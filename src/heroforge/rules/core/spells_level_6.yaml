@@ -108,7 +108,7 @@ Flesh to Stone:
 Forbiddance:
   level:
     Cleric: 6
-Forceful Hand:
+Bigby's Forceful Hand:
   level:
     Sorcerer: 6
     Wizard: 6
@@ -117,7 +117,7 @@ Fox's Cunning (Mass):
     Bard: 6
     Sorcerer: 6
     Wizard: 6
-Freezing Sphere:
+Otiluke's Freezing Sphere:
   level:
     Sorcerer: 6
     Wizard: 6
@@ -155,7 +155,7 @@ Inflict Moderate Wounds (Mass):
 Ironwood:
   level:
     Druid: 6
-Irresistible Dance:
+Otto's Irresistible Dance:
   level:
     Bard: 6
     Sorcerer: 8
@@ -163,7 +163,7 @@ Irresistible Dance:
 Liveoak:
   level:
     Druid: 6
-Mage's Lucubration:
+Mordenkainen's Lucubration:
   level:
     Sorcerer: 6
     Wizard: 6
@@ -252,7 +252,7 @@ Symbol of Persuasion:
 Sympathetic Vibration:
   level:
     Bard: 6
-Transformation:
+Tenser's Transformation:
   level:
     Sorcerer: 6
     Wizard: 6

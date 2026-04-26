@@ -278,11 +278,10 @@ skills:
       ranks: 16
       luck: 1
   Survival:
-    total: 16
+    total: 14
     typed:
       ability_mod: 8
       ranks: 5
-      synergy: 2
       luck: 1
   Swim:
     total: -1

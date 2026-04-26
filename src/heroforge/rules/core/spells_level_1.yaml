@@ -224,7 +224,7 @@ Feather Fall:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
-Floating Disk:
+Tenser's Floating Disk:
   level:
     Sorcerer: 1
     Wizard: 1
@@ -295,7 +295,7 @@ Mage Armor:
     - target: ac
       bonus_type: armor
       value: 4
-Magic Aura:
+Nystul's Magic Aura:
   level:
     Bard: 1
     Sorcerer: 1

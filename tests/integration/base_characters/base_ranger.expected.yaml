@@ -154,11 +154,10 @@ skills:
       ability_mod: 2
       ranks: 23
   Survival:
-    total: 29
+    total: 27
     typed:
       ability_mod: 2
       ranks: 23
-      synergy: 2
       self_sufficient: 2
 carrying_capacity:
   light: 24

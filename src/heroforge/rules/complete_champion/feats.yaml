@@ -1,0 +1,23 @@
+# rules/complete_champion/feats.yaml
+#
+# Feats from Complete Champion. Several entries are
+# Alternative Class Features (ACFs) modelled as feats so
+# they can be slotted into the existing feat-selection UI.
+#
+# Sorted alphabetically.
+
+Spontaneous Divination:
+  kind: passive
+  source_book: Complete Champion
+  note: >-
+    Wizard ACF replacing a 5th/10th/15th/20th-level wizard
+    bonus feat. You can spontaneously cast any spell you
+    know from the divination school by sacrificing a
+    prepared spell of equal or greater level. Complete
+    Champion p. 52 (errata p. 4). ACF modelled as a feat.
+  prerequisites:
+    all_of:
+      - class_level:
+          class: Wizard
+          min: 5
+  effects: []
