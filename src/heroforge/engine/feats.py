@@ -141,26 +141,33 @@ class FeatDefinition:
     def is_parameterized(self) -> bool:
         return self.parameter is not None
 
+    @property
+    def has_selection(self) -> bool:
+        """True for feats with a weapon/skill choice."""
+        return self.parameterized_selection is not None
+
     def build_buff_definition(
         self,
         parameter: int | None = None,
+        selection: str | None = None,
     ) -> BuffDefinition | None:
         """
-        Build a BuffDefinition for this feat, substituting $parameter.
+        Build a BuffDefinition for this feat, substituting $parameter
+        (integer) and $selection (chosen skill/weapon name).
 
-        For non-parameterized feats: returns self.buff_definition (cached).
-        For parameterized feats: builds a fresh BuffDefinition with the
-        given parameter value substituted into effect values.
+        For plain feats: returns self.buff_definition (cached).
+        For parameterized or selection feats: builds a fresh
+        BuffDefinition with the value/target substitutions applied.
         Returns None for passive feats.
         """
         if self.kind == FeatKind.PASSIVE:
             return None
 
-        if not self.is_parameterized:
+        if not self.is_parameterized and not self.has_selection:
             return self.buff_definition
 
-        # Parameterized: build fresh with substituted values
-        effects = resolve_feat_effects(self.effects, parameter or 1)
+        # Build fresh with substituted values/targets
+        effects = resolve_feat_effects(self.effects, parameter or 1, selection)
         category = (
             BuffCategory.FEAT
             if self.kind == FeatKind.ALWAYS_ON
@@ -223,13 +230,19 @@ class FeatRegistry:
 def resolve_feat_effects(
     raw_effects: list[dict],
     parameter: int = 1,
+    selection: str | None = None,
 ) -> list[BonusEffect]:
     """
     Build a list of BonusEffect from raw YAML-parsed effect declarations,
-    substituting $parameter with the given integer value.
+    substituting $parameter (an integer) into effect values and $selection
+    (a chosen skill/weapon name) into effect targets.
 
     raw_effects: list of dicts with keys: target, bonus_type, value,
                  source_label (optional), condition_key (optional).
+
+    $selection in a target is replaced with the pool-key form of the
+    chosen name (e.g. "skill_$selection" + "Knowledge (Religion)" ->
+    "skill_knowledge_religion"), matching SkillDefinition.pool_key.
 
     The value field may be:
       - An integer: used as-is.
@@ -248,6 +261,10 @@ def resolve_feat_effects(
 
     for eff in raw_effects:
         target = eff.get("target", "")
+        if selection is not None and "$selection" in target:
+            from heroforge.rules._gen_common import enum_ident
+
+            target = target.replace("$selection", enum_ident(selection).lower())
         bt_str = eff.get("bonus_type", "untyped")
         bonus_type = bonus_type_map.get(bt_str, BonusType.UNTYPED)
         raw_value = eff.get("value", 0)
@@ -332,9 +349,16 @@ def build_feat_from_yaml(
         parameterized_selection=decl.get("parameterized_selection"),
     )
 
-    # Build BuffDefinition for non-parameterized
-    # feats with effects (derived, not from YAML)
-    if kind != FeatKind.PASSIVE and raw_effects and param_spec is None:
+    # Build BuffDefinition for plain (non-parameterized,
+    # non-selection) feats with effects (derived, not from YAML).
+    # Selection feats are built per-character once the choice is
+    # known (their target embeds $selection).
+    if (
+        kind != FeatKind.PASSIVE
+        and raw_effects
+        and param_spec is None
+        and defn.parameterized_selection is None
+    ):
         resolved = resolve_feat_effects(raw_effects)
         defn.buff_definition = BuffDefinition(
             name=name,

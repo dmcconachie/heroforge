@@ -1,0 +1,58 @@
+identity:
+  name: Barzay 'ibn Drogath al-Sayorada
+  player: ''
+  race: Human
+  alignment: neutral_good
+  deity: 'Istus'
+ability_scores:
+  str: 8
+  dex: 10
+  con: 14
+  int: 14
+  wis: 16
+  cha: 14
+levels:
+  - level: 1
+    class: Cleric
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 4
+      Decipher Script: 1
+      Diplomacy: 4
+      Knowledge (Arcana): 3
+      Knowledge (Architecture and Engineering): 1
+      Knowledge (Dungeoneering): 1
+      Knowledge (Geography): 1
+      Knowledge (History): 1
+      Knowledge (Local VTF): 1
+      Knowledge (Nature): 1
+      Knowledge (Nobility and Royalty): 1
+      Knowledge (Religion): 4
+      Knowledge (The Planes): 4
+      Profession (Beggar): 1
+      Sense Motive: 4
+      Spellcraft: 4
+    feats:
+      - name: Skill Focus
+        source: character
+        parameter: Knowledge (Religion)
+      - name: Orc-blooded
+        source: human_bonus
+  - level: 2
+    class: Cleric
+    hp_roll: 5
+    skill_ranks:
+      Concentration: 1
+      Diplomacy: 1
+      Knowledge (Arcana): 2
+      Knowledge (History): 1
+      Knowledge (Religion): 1
+      Knowledge (The Planes): 1
+      Sense Motive: 1
+      Spellcraft: 1
+domains:
+  - Knowledge
+  - Luck
+equipment:
+  armor:
+    base: Chain Shirt

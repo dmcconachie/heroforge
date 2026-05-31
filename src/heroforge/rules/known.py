@@ -35,6 +35,7 @@ from heroforge.rules.combine_str_enum import combine
 from heroforge.rules.core.armor import KnownCoreArmor
 from heroforge.rules.core.buffs import KnownCoreBuff
 from heroforge.rules.core.conditions_srd import KnownCoreCondition
+from heroforge.rules.core.deities import KnownCoreDeity
 from heroforge.rules.core.domains import KnownCoreDomain
 from heroforge.rules.core.gates import KnownCoreGate
 from heroforge.rules.core.races import KnownCoreRace
@@ -85,6 +86,7 @@ def _collect(category: str) -> list[type[StrEnum]]:
 KnownArmor = combine("KnownArmor", KnownCoreArmor)
 KnownBuff = combine("KnownBuff", KnownCoreBuff)
 KnownCondition = combine("KnownCondition", KnownCoreCondition)
+KnownDeity = combine("KnownDeity", KnownCoreDeity)
 KnownDomain = combine("KnownDomain", KnownCoreDomain)
 KnownGate = combine("KnownGate", KnownCoreGate)
 KnownRace = combine("KnownRace", KnownCoreRace)

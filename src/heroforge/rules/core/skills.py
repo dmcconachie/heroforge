@@ -49,6 +49,7 @@ class KnownCoreSkill(StrEnum):
     PERFORM = "Perform"
     PERFORM_DANCE = "Perform (Dance)"
     PROFESSION = "Profession"
+    PROFESSION_BEGGAR = "Profession (Beggar)"
     PROFESSION_SOLDIER = "Profession (Soldier)"
     RIDE = "Ride"
     SEARCH = "Search"

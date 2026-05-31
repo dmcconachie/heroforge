@@ -50,6 +50,8 @@ src/heroforge/
 │   │                       #   ConditionRegistry
 │   ├── magic_items.py      # MagicItemDefinition,
 │   │                       #   MagicItemRegistry
+│   ├── deities.py          # DeityDefinition,
+│   │                       #   DeityRegistry
 │   └── resources.py        # ResourceTracker (uses/day)
 │
 ├── rules/
@@ -83,6 +85,7 @@ src/heroforge/
 │       ├── conditions_srd.yaml  # 20 conditions
 │       ├── templates.yaml    # 12 creature templates
 │       ├── domains.yaml      # 22 cleric domains
+│       ├── deities.yaml      # 194 LG deities
 │       ├── armor.yaml        # 18 armor/shields
 │       ├── weapons.yaml      # 63 weapons
 │       └── magic_items.yaml  # ~70 magic items
@@ -165,7 +168,7 @@ tests/                          # pending placement / integration
   integration/
     test_full_builds.py      # charsheet CLI subprocess
     base_characters/         # 28 .char.yaml + .expected.yaml
-    custom_characters/       # drufus, farzin
+    custom_characters/       # drufus, farzin, barzay
 ```
 
 ---
@@ -287,6 +290,17 @@ subtypes, and racial features.
 domain spells (levels 1-9). `DomainRegistry` provides
 name-based lookup for all 22 SRD cleric domains.
 
+`DeityDefinition` (`engine/deities.py`) holds a deity's
+alignment, favored weapon, and available domains;
+`DeityRegistry` provides name-based lookup over the full
+Living Greyhawk roster (194 deities, `core/deities.yaml`).
+The War domain consults it: a War-domain cleric's deity's
+favored weapon drives a granted Weapon Focus. A character's
+`deity:` is validated against `KnownDeity` on load (empty
+is allowed); the `KnownCoreDeity` enum (`core/deities.py`)
+mirrors the YAML keys and the congruence test enforces
+parity.
+
 `apply_race()` wires racial ability bonuses into the
 Character's pools. `bab_at_level()` and `save_at_level()`
 compute progression values.
@@ -324,6 +338,18 @@ pools via `_apply_feat_pool_bonuses()` using source key
 Conditional feats register their buff for user toggling
 via the buffs panel. Dodge is conditional (per 3.5e rules
 the player designates one opponent per action).
+
+Selection feats (Skill Focus, Weapon Focus) carry a
+`parameterized_selection` block describing the choice
+(weapon/skill) the player makes. The chosen name is stored
+on the feat entry's `parameter:` field and substituted into
+effect *targets*: `resolve_feat_effects(..., selection=...)`
+replaces `$selection` in a target with the pool-key form of
+the choice (e.g. `skill_$selection` + "Knowledge (Religion)"
+→ `skill_knowledge_religion`, matching
+`SkillDefinition.pool_key`). These feats build their buff
+per-character once the choice is known, so the cached
+`buff_definition` is skipped at load (`has_selection`).
 
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 
@@ -366,6 +392,9 @@ class name, HP roll, skill point allocation, and feats
 acquired at that level (each with name, source, optional
 parameter). Feats, skills, and class_levels are all
 derived from `levels:` — no redundant top-level keys.
+A top-level `domains:` list holds cleric domain choices
+(validated against `KnownDomain`); the domains' granted
+powers are display-only (not yet mechanically wired).
 `load_character()` deserializes and re-applies race,
 template, and feat effects through the normal engine
 methods so all derived stats recompute correctly.
@@ -391,7 +420,8 @@ bonuses + score + mod), combat stats (base + typed bonuses
 speed, SR), attack iteratives, skills (ranks + ability_mod
 + typed bonuses), carrying capacity, feats, class
 features, spellcasting (slots, DCs, spells known),
-special qualities, and equipment.
+domains (granted power + domain spells per chosen
+domain), special qualities, and equipment.
 
 The cattrs converter has per-class `omit_if_default`
 unstructure hooks registered for every sheet dataclass,
@@ -542,7 +572,7 @@ YAML files under `rules/core/` contain full SRD data:
 - 7 races, 36 skills
 - 110 feats (alphabetically sorted in feats.yaml)
 - 601 spell compendium entries (with inline buff effects)
-- 22 cleric domains
+- 22 cleric domains, 194 deities
 - 18 armor/shields, 63 weapons
 - ~70 magic items
 - 12 creature templates
@@ -583,6 +613,7 @@ Currently populated splatbook directories:
 `complete_adventurer/`, `complete_divine/`,
 `complete_mage/`, `complete_scoundrel/`,
 `complete_warrior/`, `draconomicon/`,
+`dragon_magazine/`,
 `dungeon_master_guide/`, `eberron_campaign_setting/`,
 `heroes_of_battle/`, `magic_item_compendium/`,
 `miniatures_handbook/`, `monster_manual/`,
@@ -699,14 +730,38 @@ Reusable components in `widgets/`: `LabeledField`,
   attack penalties not applied; tower shield proficiency
   not distinguished from regular shield proficiency)
 - Weapon proficiency checks (nonproficiency penalties not applied)
-- War domain granted power: free Martial Weapon
-  Proficiency and Weapon Focus with deity's favored
-  weapon (requires deity → favored weapon mapping)
+- Domain mechanical effects: cleric domains persist in
+  `.char.yaml` and render in the sheet (granted-power text
+  + domain spell list). The **War** domain is wired —
+  it grants Weapon Focus with the deity's favored weapon
+  (via `deities.yaml`), applied as a +1 attack-pool bonus
+  on load (source `domain:War`, not a saved feat). Still
+  display-only: bonus domain spell slot per level, domain
+  spells added to the prepared-spell list, and the
+  conditional/activated powers — Knowledge's +1 caster
+  level on divinations (and the other +1-CL-for-a-spell-
+  subset domains, which the single flat `caster_level`
+  field can't express), Luck's reroll, Travel's freedom
+  of movement, etc. War's Martial Weapon Proficiency half
+  is a no-op (nonproficiency penalties aren't modelled).
+- Class-skill vs cross-class is not modelled
+  (`Character.validate()` treats every skill as a class
+  skill), so the class-skill-granting domains (Animal,
+  Knowledge, Plant, Travel, Trickery) have no expressible
+  effect yet.
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
 - Per-weapon attack/damage breakdowns (weapon
   enhancement, masterwork, keen, speed properties
   need per-weapon stat nodes)
+- Weapon Focus / Weapon Specialization selection
+  routing: these carry a chosen weapon in
+  `parameterized_selection`, but their effects target the
+  shared `attack_all` / `damage_all` pools, so the bonus
+  applies to *every* weapon, not the chosen one. The
+  `$selection` target-substitution mechanism (used by Skill
+  Focus) is ready to route them once per-weapon attack
+  pools exist.
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)

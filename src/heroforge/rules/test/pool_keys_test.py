@@ -71,7 +71,11 @@ def _iter_yaml_target_values() -> list[tuple[Path, str]]:
         if isinstance(obj, dict):
             for k, v in obj.items():
                 if k == "target" and isinstance(v, str):
-                    hits.append((path, v))
+                    # Templated targets (e.g. "skill_$selection" on
+                    # selection feats) resolve to a real PoolKey
+                    # per-character at apply time, not statically.
+                    if "$" not in v:
+                        hits.append((path, v))
                 else:
                     _walk(v, path)
         elif isinstance(obj, list):
