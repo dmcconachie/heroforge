@@ -1021,13 +1021,21 @@ Simple Weapon Proficiency:
   prerequisites: null
   effects: []
 Skill Focus:
-  kind: passive
+  kind: always_on
   source_book: SRD
   note: >-
     +3 bonus on all checks with chosen skill; may be taken multiple times for
     different skills
   prerequisites: null
-  effects: []
+  parameterized_selection:
+    name: skill
+    label: Skill
+    type: skill_list
+  effects:
+    - target: skill_$selection
+      bonus_type: untyped
+      value: 3
+      source_label: skill_focus
 Snatch Arrows:
   kind: passive
   source_book: PHB

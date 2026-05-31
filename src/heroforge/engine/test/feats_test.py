@@ -203,6 +203,59 @@ class TestResolveEffects:
         effects = resolve_feat_effects(raw)
         assert effects[0].bonus_type == BonusType.UNTYPED
 
+    def test_selection_substituted_into_target(self) -> None:
+        raw = [
+            {"target": "skill_$selection", "bonus_type": "untyped", "value": 3}
+        ]
+        effects = resolve_feat_effects(raw, selection="Knowledge (Religion)")
+        assert effects[0].target == "skill_knowledge_religion"
+
+    def test_selection_absent_leaves_target_literal(self) -> None:
+        raw = [{"target": "attack_all", "bonus_type": "untyped", "value": 1}]
+        effects = resolve_feat_effects(raw, selection="Dwarven Waraxe")
+        assert effects[0].target == "attack_all"
+
+
+# ===========================================================================
+# Skill Focus — selection routes +3 to the chosen skill only
+# ===========================================================================
+
+
+class TestSkillFocusSelection:
+    def _char_with_skill_focus(self, selection: str) -> Character:
+        from heroforge.engine.skills import register_skills_on_character
+        from heroforge.rules.rules import get_rules
+
+        c = Character()
+        register_skills_on_character(c)
+        defn = get_rules().feats.get("Skill Focus")
+        c.add_feat(
+            "Skill Focus",
+            defn,
+            level=1,
+            source="character",
+            parameter=selection,
+        )
+        return c
+
+    def test_chosen_skill_gets_plus_three(self) -> None:
+        c = self._char_with_skill_focus("Knowledge (Religion)")
+        pool = c.get_pool("skill_knowledge_religion")
+        assert pool.total(c) == 3
+
+    def test_chosen_skill_bonus_is_untyped(self) -> None:
+        c = self._char_with_skill_focus("Knowledge (Religion)")
+        entries = c.get_pool("skill_knowledge_religion").entries_for(
+            "feat:Skill Focus"
+        )
+        assert len(entries) == 1
+        assert entries[0].value == 3
+        assert entries[0].bonus_type == BonusType.UNTYPED
+
+    def test_other_skills_unaffected(self) -> None:
+        c = self._char_with_skill_focus("Knowledge (Religion)")
+        assert c.get_pool("skill_spellcraft").total(c) == 0
+
 
 # ===========================================================================
 # FeatDefinition

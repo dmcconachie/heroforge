@@ -1,0 +1,274 @@
+identity:
+  name: Barzay 'ibn Drogath al-Sayorada
+  race: Human
+  class_str: Cleric 2
+  level: 2
+  alignment: neutral_good
+  deity: Istus
+  size: Medium
+abilities:
+  str:
+    score: 8
+    mod: -1
+    typed:
+      base: 8
+  dex:
+    score: 10
+    mod: 0
+    typed:
+      base: 10
+  con:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+  int:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+  wis:
+    score: 16
+    mod: 3
+    typed:
+      base: 16
+  cha:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+combat:
+  ac:
+    total: 14
+    typed:
+      base: 10
+      armor: 4
+  touch_ac: 10
+  flatfooted_ac: 14
+  hp_max:
+    total: 17
+    typed:
+      base: 13
+      con: 4
+  bab:
+    total: 1
+    typed:
+      base: 1
+  initiative:
+    total: 0
+  speed:
+    total: 30
+    typed:
+      base: 30
+  sr: 0
+  saves:
+    fort:
+      total: 5
+      typed:
+        base: 3
+        con: 2
+    ref:
+      total: 0
+    will:
+      total: 6
+      typed:
+        base: 3
+        wis: 3
+  attack_melee:
+    total: 0
+    typed:
+      base: 1
+      str: -1
+  attack_ranged:
+    total: 1
+    typed:
+      base: 1
+  damage_melee:
+    total: -1
+    typed:
+      str: -1
+  grapple:
+    total: 0
+    typed:
+      base: 1
+      str: -1
+attack_iteratives:
+  melee:
+    - 0
+  ranged:
+    - 1
+skills:
+  Balance:
+    total: -2
+    typed:
+      equip:armor: -2
+  Climb:
+    total: -3
+    typed:
+      ability_mod: -1
+      equip:armor: -2
+  Concentration:
+    total: 7
+    typed:
+      ability_mod: 2
+      ranks: 5
+  Decipher Script:
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Diplomacy:
+    total: 9
+    typed:
+      ability_mod: 2
+      ranks: 5
+      synergy: 2
+  Escape Artist:
+    total: -2
+    typed:
+      equip:armor: -2
+  Hide:
+    total: -2
+    typed:
+      equip:armor: -2
+  Jump:
+    total: -3
+    typed:
+      ability_mod: -1
+      equip:armor: -2
+  Knowledge (Arcana):
+    total: 7
+    typed:
+      ability_mod: 2
+      ranks: 5
+  Knowledge (Architecture and Engineering):
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Knowledge (Dungeoneering):
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Knowledge (Geography):
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Knowledge (History):
+    total: 4
+    typed:
+      ability_mod: 2
+      ranks: 2
+  Knowledge (Local VTF):
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Knowledge (Nature):
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Knowledge (Nobility and Royalty):
+    total: 3
+    typed:
+      ability_mod: 2
+      ranks: 1
+  Knowledge (Religion):
+    total: 10
+    typed:
+      ability_mod: 2
+      ranks: 5
+      skill_focus: 3
+  Knowledge (The Planes):
+    total: 7
+    typed:
+      ability_mod: 2
+      ranks: 5
+  Move Silently:
+    total: -2
+    typed:
+      equip:armor: -2
+  Profession (Beggar):
+    total: 4
+    typed:
+      ability_mod: 3
+      ranks: 1
+  Sense Motive:
+    total: 8
+    typed:
+      ability_mod: 3
+      ranks: 5
+  Spellcraft:
+    total: 9
+    typed:
+      ability_mod: 2
+      ranks: 5
+      synergy: 2
+  Swim:
+    total: -5
+    typed:
+      ability_mod: -1
+      equip:armor: -4
+carrying_capacity:
+  light: 26
+  medium: 53
+  heavy: 80
+feats:
+  - Skill Focus
+  - Orc-blooded
+class_features:
+  - 'turn_undead: Turn or rebuke undead'
+  - >-
+    spontaneous_casting: Convert prepared spells to cure/inflict
+  - >-
+    domains: Two domains granting bonus spells and powers
+spellcasting:
+  Cleric:
+    caster_level: 2
+    key_ability: wis
+    cast_type: divine
+    preparation: prepared
+    slots_per_day:
+      - 4
+      - 3
+    spell_save_dc:
+      0: 13
+      1: 14
+domains:
+  Knowledge:
+    granted_power: >-
+      All Knowledge skills are class skills. Cast divinations at +1 caster
+      level.
+    domain_spells:
+      1: Detect Secret Doors
+      2: Detect Thoughts
+      3: Clairaudience/Clairvoyance
+      4: Divination
+      5: True Seeing
+      6: Find the Path
+      7: Legend Lore
+      8: Discern Location
+      9: Foresight
+  Luck:
+    granted_power: >-
+      Reroll one roll per day before success/failure is declared; must keep
+      reroll.
+    domain_spells:
+      1: Entropic Shield
+      2: Aid
+      3: Protection from Energy
+      4: Freedom of Movement
+      5: Break Enchantment
+      6: Mislead
+      7: Spell Turning
+      8: Moment of Prescience
+      9: Miracle
+equipment:
+  armor:
+    name: Chain Shirt
+    acp: -2
+    max_dex: 4
+    asf: 20

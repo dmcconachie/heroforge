@@ -20,6 +20,7 @@ from heroforge.rules.known import (
     KnownBuff,
     KnownClass,
     KnownCondition,
+    KnownDeity,
     KnownDomain,
     KnownFeat,
     KnownMagicItem,
@@ -61,6 +62,7 @@ _CASES = [
     ("magic_item_registry", "all_items", KnownMagicItem),
     ("material_registry", "all_materials", KnownMaterial),
     ("domain_registry", "all_domains", KnownDomain),
+    ("deity_registry", "all_deities", KnownDeity),
     ("condition_registry", "all_conditions", KnownCondition),
 ]
 

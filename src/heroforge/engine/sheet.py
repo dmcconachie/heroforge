@@ -41,6 +41,7 @@ from heroforge.engine.sheet_schema import (
     Breakdown,
     CarryingCapacity,
     CombatSection,
+    DomainEntry,
     EquipmentSection,
     Iteratives,
     Sheet,
@@ -51,6 +52,7 @@ from heroforge.engine.sheet_schema import (
 )
 from heroforge.rules.known import (
     KnownClass,
+    KnownDomain,
     KnownMagicItem,
     KnownRace,
     KnownSkill,
@@ -167,6 +169,7 @@ def gather_sheet(
         feats=_feats(character),
         class_features=_class_features(character),
         spellcasting=_spellcasting(character),
+        domains=_domains(character),
         special_qualities=_special_qualities(character),
         equipment=_equipment(character),
     )
@@ -530,6 +533,22 @@ def _spellcasting(
 # -----------------------------------------------------------
 # Special qualities (from templates)
 # -----------------------------------------------------------
+
+
+def _domains(c: "Character") -> dict[KnownDomain, DomainEntry]:
+    from heroforge.rules.rules import get_rules
+
+    reg = get_rules().domains
+    result: dict[KnownDomain, DomainEntry] = {}
+    for name in c.domains:
+        defn = reg.get(name)
+        if defn is None:
+            continue
+        result[KnownDomain(name)] = DomainEntry(
+            granted_power=defn.granted_power,
+            domain_spells=dict(defn.domain_spells),
+        )
+    return result
 
 
 def _special_qualities(c: "Character") -> list[str]:

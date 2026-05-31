@@ -17,6 +17,7 @@ from __future__ import annotations
 from heroforge.engine.character import Character
 from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.conditions import ConditionRegistry
+from heroforge.engine.deities import DeityRegistry
 from heroforge.engine.domains import DomainRegistry
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.equipment import (
@@ -93,6 +94,10 @@ class AppState:
     @property
     def domain_registry(self) -> DomainRegistry:
         return get_rules().domains
+
+    @property
+    def deity_registry(self) -> DeityRegistry:
+        return get_rules().deities
 
     @property
     def skill_registry(self) -> SkillRegistry:

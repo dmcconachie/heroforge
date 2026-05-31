@@ -240,6 +240,11 @@ Profession:
   trained_only: true
   armor_check: false
   description: Work a non-adventuring job to earn money
+Profession (Beggar):
+  ability: wis
+  trained_only: true
+  armor_check: false
+  description: Work as a beggar
 Profession (Soldier):
   ability: wis
   trained_only: true

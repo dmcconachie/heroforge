@@ -30,8 +30,9 @@ from heroforge.engine.classes import (
     ClassFeature,
     SpellcastingInfo,
 )
+from heroforge.engine.deities import DeityDefinition
 from heroforge.engine.domains import DomainDefinition
-from heroforge.engine.enums import Ability
+from heroforge.engine.enums import Ability, Alignment
 from heroforge.engine.equipment import (
     ArmorDefinition,
     DamageType,
@@ -47,6 +48,7 @@ from heroforge.engine.sheet_schema import (
     Breakdown,
     CarryingCapacity,
     CombatSection,
+    DomainEntry,
     Iteratives,
     Sheet,
     SheetIdentity,
@@ -224,6 +226,30 @@ converter.register_structure_hook(
     _structure_domain,
 )
 
+
+# ---------------------------------------------------
+# DeityDefinition: name is injected by the loader and
+# alignment is an Alignment enum; structure explicitly.
+# ---------------------------------------------------
+
+
+def _structure_deity(val: object, _: type) -> DeityDefinition:
+    if not isinstance(val, dict):
+        msg = f"Cannot structure {type(val)} as DeityDefinition"
+        raise TypeError(msg)
+    return DeityDefinition(
+        name=val["name"],
+        alignment=Alignment(val["alignment"]),
+        favored_weapon=val.get("favored_weapon", ""),
+        domains=list(val.get("domains", [])),
+    )
+
+
+converter.register_structure_hook(
+    DeityDefinition,
+    _structure_deity,
+)
+
 # ---------------------------------------------------
 # SpellEntry: level dict needs str keys coerced,
 # and effects/mutually_exclusive_with need defaults.
@@ -382,6 +408,7 @@ for _sheet_cls in (
     Breakdown,
     SkillEntry,
     SpellcastingEntry,
+    DomainEntry,
     ArmorDisplay,
     WeaponDisplay,
     SheetIdentity,

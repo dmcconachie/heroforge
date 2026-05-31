@@ -29,6 +29,8 @@ from heroforge.rules.known import (
     KnownArmor,
     KnownBuff,
     KnownClass,
+    KnownDeity,
+    KnownDomain,
     KnownFeat,
     KnownMagicItem,
     KnownMaterial,
@@ -41,6 +43,9 @@ from heroforge.rules.known import (
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
+
+
+_KNOWN_DEITY_VALUES = frozenset(d.value for d in KnownDeity)
 
 
 # -----------------------------------------------------------
@@ -170,6 +175,7 @@ class CharFile:
     identity: CharIdentity
     ability_scores: dict[Ability, int] = field(default_factory=dict)
     levels: list[CharLevelEntry] = field(default_factory=list)
+    domains: list[KnownDomain] = field(default_factory=list)
     buffs: dict[KnownBuff, BuffEntry] = field(default_factory=dict)
     templates: dict[KnownTemplate, TemplateEntry] = field(default_factory=dict)
     dm_overrides: list[DmOverrideEntry] = field(default_factory=list)
@@ -332,6 +338,7 @@ def _character_to_charfile(
             )
         },
         levels=levels,
+        domains=[KnownDomain(d) for d in c.domains],
         buffs=buffs,
         templates=templates,
         dm_overrides=dm_overrides,
@@ -382,6 +389,40 @@ def _flatten_cattrs_error(e: BaseException) -> str:
     return "\n" + "\n".join(f"  - {m}" for m in leaves)
 
 
+def _primary_favored_weapon(favored: str) -> str:
+    """First favored weapon, stripped of '(...)' qualifiers and 'Any'."""
+    import re
+
+    first = favored.split(" or ")[0].strip()
+    first = re.sub(r"\s*\([^)]*\)", "", first).strip()
+    first = re.sub(r"^[Aa]ny\s+", "", first).strip()
+    return first
+
+
+def _apply_domain_effects(c: "Character", rules: object) -> None:
+    """
+    Apply persistent, sheet-expressible cleric domain granted powers.
+
+    Currently only the War domain qualifies: it grants Weapon Focus
+    (and Martial Weapon Proficiency, a mechanical no-op here) with the
+    deity's favored weapon. The Weapon Focus +1 is applied straight to
+    the attack pool under source 'domain:War' — it is NOT added as a
+    feat, so it does not round-trip into the saved feat list.
+    """
+    if "War" not in c.domains:
+        return
+    deity = rules.deities.get(c.deity)  # type: ignore[attr-defined]
+    if deity is None or not deity.favored_weapon:
+        return
+    weapon = _primary_favored_weapon(deity.favored_weapon)
+    wf = rules.feats.get("Weapon Focus")  # type: ignore[attr-defined]
+    if wf is None:
+        return
+    buff = wf.build_buff_definition(selection=weapon)
+    if buff is not None:
+        c._apply_feat_pool_bonuses("War", buff)
+
+
 # -----------------------------------------------------------
 # Load
 # -----------------------------------------------------------
@@ -409,6 +450,15 @@ def load_character(
         detail = _flatten_cattrs_error(e)
         raise ValueError(f"Invalid YAML in {path}: {detail}") from e
 
+    # Deity is optional (may be empty) but, when set, must be a
+    # known deity. Validated here rather than via the field type so
+    # the empty-string "no deity" case stays legal.
+    deity = cf.identity.deity
+    if deity and deity not in _KNOWN_DEITY_VALUES:
+        raise ValueError(
+            f"Invalid YAML in {path}: \n  - {deity!r} is not a valid KnownDeity"
+        )
+
     from heroforge.engine.character import (
         Character,
         CharacterLevel,
@@ -432,6 +482,9 @@ def load_character(
     c.player = cf.identity.player
     c.alignment = cf.identity.alignment
     c.deity = cf.identity.deity
+
+    # Cleric domains (validated by KnownDomain)
+    c.domains = [str(d) for d in cf.domains]
 
     # Ability scores
     for ab, val in cf.ability_scores.items():
@@ -480,6 +533,9 @@ def load_character(
                 source=feat_dict.get("source", ""),
                 parameter=feat_dict.get("parameter"),
             )
+
+    # Cleric domain granted powers (e.g. War → Weapon Focus)
+    _apply_domain_effects(c, rules)
 
     # Skills (validated by KnownSkill)
     for lv in c.levels:

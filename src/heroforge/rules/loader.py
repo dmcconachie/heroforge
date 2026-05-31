@@ -56,6 +56,7 @@ if TYPE_CHECKING:
     from heroforge.engine.conditions import (
         ConditionRegistry,
     )
+    from heroforge.engine.deities import DeityRegistry
     from heroforge.engine.domains import DomainRegistry
     from heroforge.engine.effects import BuffRegistry
     from heroforge.engine.equipment import (
@@ -1099,6 +1100,45 @@ class DomainsLoader:
                 defn = converter.structure(decl, DomainDefinition)
             except Exception as e:
                 raise LoaderError(f"Failed to load domain {name!r}: {e}") from e
+            registry.register(defn)
+            registered.append(name)
+        return registered
+
+
+# -----------------------------------------------------------
+# Deity loader
+# -----------------------------------------------------------
+
+
+class DeitiesLoader:
+    """Reads deities.yaml and populates a DeityRegistry."""
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load(
+        self,
+        registry: "DeityRegistry",
+        relative_path: str,
+    ) -> list[str]:
+        from heroforge.engine.deities import DeityDefinition
+        from heroforge.rules.schema import converter
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Deities file not found: {path}")
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
+
+        registered: list[str] = []
+        for name, decl in data.items():
+            decl["name"] = name
+            try:
+                defn = converter.structure(decl, DeityDefinition)
+            except Exception as e:
+                raise LoaderError(f"Failed to load deity {name!r}: {e}") from e
             registry.register(defn)
             registered.append(name)
         return registered

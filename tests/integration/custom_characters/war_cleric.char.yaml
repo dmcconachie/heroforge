@@ -1,0 +1,25 @@
+identity:
+  name: Sir Garron
+  player: ''
+  race: Human
+  alignment: lawful_good
+  deity: Heironeous
+ability_scores:
+  str: 15
+  dex: 12
+  con: 13
+  int: 10
+  wis: 16
+  cha: 8
+levels:
+  - level: 1
+    class: Cleric
+    hp_roll: 8
+    skill_ranks:
+      Concentration: 4
+      Diplomacy: 4
+      Knowledge (Religion): 4
+      Spellcraft: 2
+domains:
+  - Good
+  - War

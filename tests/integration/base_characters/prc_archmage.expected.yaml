@@ -141,11 +141,12 @@ skills:
       ability_mod: 4
       ranks: 5
   Spellcraft:
-    total: 29
+    total: 32
     typed:
       ability_mod: 4
       ranks: 23
       synergy: 2
+      skill_focus: 3
 carrying_capacity:
   light: 26
   medium: 53

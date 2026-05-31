@@ -39,6 +39,7 @@ from pathlib import Path
 
 from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.conditions import ConditionRegistry
+from heroforge.engine.deities import DeityRegistry
 from heroforge.engine.domains import DomainRegistry
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.equipment import (
@@ -56,6 +57,7 @@ from heroforge.engine.templates import TemplateRegistry
 from heroforge.rules.loader import (
     ClassesLoader,
     ConditionLoader,
+    DeitiesLoader,
     DerivedPoolsLoader,
     DomainsLoader,
     EquipmentLoader,
@@ -134,6 +136,7 @@ class Rules:
     weapons: WeaponRegistry = field(default_factory=WeaponRegistry)
     materials: MaterialRegistry = field(default_factory=MaterialRegistry)
     domains: DomainRegistry = field(default_factory=DomainRegistry)
+    deities: DeityRegistry = field(default_factory=DeityRegistry)
     skills: SkillRegistry = field(default_factory=SkillRegistry)
     templates: TemplateRegistry = field(default_factory=TemplateRegistry)
     classes: ClassRegistry = field(default_factory=ClassRegistry)
@@ -160,6 +163,7 @@ class Rules:
         TemplatesLoader(rd).load(self.templates, f"{CORE}/templates.yaml")
         RacesLoader(rd).load(self.races, f"{CORE}/races.yaml")
         DomainsLoader(rd).load(self.domains, f"{CORE}/domains.yaml")
+        DeitiesLoader(rd).load(self.deities, f"{CORE}/deities.yaml")
 
         eq_loader = EquipmentLoader(rd)
         eq_loader.load_armor(self.armor, f"{CORE}/armor.yaml")

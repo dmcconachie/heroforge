@@ -32,6 +32,7 @@ from heroforge.engine.enums import (
 )
 from heroforge.rules.known import (
     KnownClass,
+    KnownDomain,
     KnownMagicItem,
     KnownRace,
     KnownSkill,
@@ -186,6 +187,17 @@ class EquipmentSection:
 
 
 # ---------------------------------------------------
+# Domains
+# ---------------------------------------------------
+
+
+@dataclass
+class DomainEntry:
+    granted_power: str = ""
+    domain_spells: dict[int, str] = field(default_factory=dict)
+
+
+# ---------------------------------------------------
 # Top-level sheet
 # ---------------------------------------------------
 
@@ -203,5 +215,6 @@ class Sheet:
     spellcasting: dict[KnownClass, SpellcastingEntry] = field(
         default_factory=dict,
     )
+    domains: dict[KnownDomain, DomainEntry] = field(default_factory=dict)
     special_qualities: list[str] = field(default_factory=list)
     equipment: EquipmentSection = field(default_factory=EquipmentSection)

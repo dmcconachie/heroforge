@@ -1,0 +1,1885 @@
+# rules/core/deities.yaml
+#
+# Living Greyhawk deity roster (LG_Deities v2.0).
+# Map keyed by deity name. Fields per entry:
+#   alignment      : primary alignment (Alignment enum value)
+#   favored_weapon : the deity's favored weapon
+#   domains        : domains a cleric of this deity may choose
+#                    (includes non-SRD domains as reference)
+
+Aasterinian:
+  alignment: chaotic_neutral
+  favored_weapon: Scimitar or claw
+  domains:
+    - Chaos
+    - Dragon
+    - Luck
+    - Travel
+    - Trickery
+Abbathor:
+  alignment: neutral_evil
+  favored_weapon: Dagger
+  domains:
+    - Evil
+    - Greed
+    - Luck
+    - Madness
+    - Pact
+    - Trickery
+Aerdrie Faenya:
+  alignment: chaotic_good
+  favored_weapon: Quarterstaff
+  domains:
+    - Air
+    - Animal
+    - Chaos
+    - Good
+    - Liberation
+    - Sky
+    - Weather
+'Al''Akbar':
+  alignment: lawful_good
+  favored_weapon: Falchion
+  domains:
+    - Community
+    - Good
+    - Healing
+    - Law
+    - Protection
+Allitur:
+  alignment: lawful_good
+  favored_weapon: Spear
+  domains:
+    - Community
+    - Good
+    - Inquisition
+    - Knowledge
+    - Law
+    - Purification
+Annam:
+  alignment: neutral
+  favored_weapon: Unarmed strike
+  domains:
+    - Creation
+    - Force
+    - Knowledge
+    - Magic
+    - Plant
+    - Sun
+Arvoreen:
+  alignment: lawful_good
+  favored_weapon: Longsword or short sword
+  domains:
+    - Courage
+    - Good
+    - Law
+    - Nobility
+    - Protection
+    - Purification
+    - War
+Atroa:
+  alignment: neutral_good
+  favored_weapon: Sling
+  domains:
+    - Air
+    - Good
+    - Plant
+    - Sun
+    - Travel
+'Azor''alq':
+  alignment: neutral_good
+  favored_weapon: Scimitar
+  domains:
+    - Good
+    - Sun
+    - War
+Baervan Wildwanderer:
+  alignment: neutral_good
+  favored_weapon: Spear
+  domains:
+    - Animal
+    - Celerity
+    - Good
+    - Plant
+    - Travel
+    - Trickery
+Bahamut:
+  alignment: lawful_good
+  favored_weapon: Heavy pick or bite
+  domains:
+    - Air
+    - Cold
+    - Dragon
+    - Good
+    - Law
+    - Luck
+    - Protection
+Bahgtru:
+  alignment: chaotic_evil
+  favored_weapon: Spiked gauntlet
+  domains:
+    - Chaos
+    - Competition
+    - Courage
+    - Destruction
+    - Evil
+    - Strength
+Baravar Cloakshadow:
+  alignment: neutral_good
+  favored_weapon: Dagger
+  domains:
+    - Good
+    - Magic
+    - Mind
+    - Protection
+    - Trickery
+Bargrivyek:
+  alignment: neutral_evil
+  favored_weapon: Any flail
+  domains:
+    - Community
+    - Evil
+    - Knowledge
+    - Protection
+    - Travel
+Beltar:
+  alignment: chaotic_evil
+  favored_weapon: Claws of Beltar (unarmed strike or spiked gauntlet)
+  domains:
+    - Chaos
+    - Earth
+    - Evil
+    - Mysticism
+    - Summoner
+    - War
+Beory:
+  alignment: neutral
+  favored_weapon: Club
+  domains:
+    - Animal
+    - Creation
+    - Earth
+    - Plant
+    - Water
+    - Weather
+Berei:
+  alignment: neutral_good
+  favored_weapon: Sickle
+  domains:
+    - Community
+    - Creation
+    - Good
+    - Plant
+    - Protection
+Berna:
+  alignment: chaotic_neutral
+  favored_weapon: Club
+  domains:
+    - Chaos
+    - Courage
+    - Healing
+    - Protection
+Berronar Truesilver:
+  alignment: lawful_good
+  favored_weapon: Heavy mace
+  domains:
+    - Community
+    - Good
+    - Healing
+    - Inquisition
+    - Law
+    - Protection
+    - Purification
+Bleredd:
+  alignment: neutral
+  favored_weapon: Warhammer
+  domains:
+    - Creation
+    - Earth
+    - Fire
+    - Strength
+Blibdoolpoolp:
+  alignment: chaotic_evil
+  favored_weapon: Pincer staff
+  domains:
+    - Chaos
+    - Destruction
+    - Evil
+    - Madness
+    - Mysticism
+    - Oracle
+    - Water
+Boccob:
+  alignment: neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Force
+    - Knowledge
+    - Magic
+    - Mind
+    - Oracle
+    - Rune
+    - Trickery
+Bralm:
+  alignment: neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Animal
+    - Community
+    - Law
+    - Pact
+    - Strength
+Brandobaris:
+  alignment: neutral
+  favored_weapon: Short sword or dagger
+  domains:
+    - Celerity
+    - Luck
+    - Travel
+    - Trickery
+Breeka:
+  alignment: neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Air
+    - Animal
+    - Earth
+    - Plant
+    - Water
+Callarduran Smoothhands:
+  alignment: neutral
+  favored_weapon: Greataxe
+  domains:
+    - Community
+    - Earth
+    - Healing
+    - Protection
+    - Summoner
+Camazotz:
+  alignment: chaotic_evil
+  favored_weapon: Javelin
+  domains:
+    - Animal
+    - Chaos
+    - Destruction
+    - Evil
+    - Pestilence
+    - Protection
+Celestian:
+  alignment: neutral
+  favored_weapon: Spear
+  domains:
+    - Destiny
+    - Knowledge
+    - Oracle
+    - Protection
+    - Travel
+Charmalaine:
+  alignment: neutral
+  favored_weapon: Heavy mace
+  domains:
+    - Luck
+    - Protection
+Chitza-Atlan:
+  alignment: lawful_evil
+  favored_weapon: Spear
+  domains:
+    - Evil
+    - Law
+    - Pestilence
+    - Protection
+    - Repose
+Chronepsis:
+  alignment: neutral
+  favored_weapon: Scythe or claw
+  domains:
+    - Destiny
+    - Dragon
+    - Knowledge
+    - Repose
+Clangeddin Silverbeard:
+  alignment: lawful_good
+  favored_weapon: Battleaxe
+  domains:
+    - Competition
+    - Courage
+    - Good
+    - Inquisition
+    - Law
+    - Strength
+    - War
+Corellon Larethian:
+  alignment: chaotic_good
+  favored_weapon: Longsword
+  domains:
+    - Celerity
+    - Chaos
+    - Community
+    - Good
+    - Liberation
+    - Magic
+    - Protection
+    - War
+Cyndor:
+  alignment: lawful_neutral
+  favored_weapon: Sling
+  domains:
+    - Destiny
+    - Law
+    - Oracle
+    - Protection
+    - Rune
+    - Travel
+Cyrrollalee:
+  alignment: lawful_good
+  favored_weapon: Club
+  domains:
+    - Community
+    - Good
+    - Healing
+    - Inquisition
+    - Law
+    - Pact
+    - Protection
+Daern:
+  alignment: lawful_neutral
+  favored_weapon: Shortspear
+  domains:
+    - Earth
+    - Law
+    - Protection
+Dalt:
+  alignment: chaotic_good
+  favored_weapon: Dagger
+  domains:
+    - Chaos
+    - Good
+    - Liberation
+    - Protection
+    - Travel
+    - Trickery
+Damaran:
+  alignment: neutral_evil
+  favored_weapon: Javelin
+  domains:
+    - Animal
+    - Evil
+    - Pestilence
+    - Travel
+Daoud:
+  alignment: neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Magic
+    - Travel
+Deep Sashelas:
+  alignment: chaotic_good
+  favored_weapon: Trident
+  domains:
+    - Animal
+    - Chaos
+    - Creation
+    - Earth
+    - Good
+    - Protection
+    - Water
+Delleb:
+  alignment: lawful_good
+  favored_weapon: Dart
+  domains:
+    - Good
+    - Knowledge
+    - Law
+    - Magic
+    - Mind
+    - Oracle
+    - Rune
+Diirinka:
+  alignment: chaotic_evil
+  favored_weapon: Dagger
+  domains:
+    - Chaos
+    - Domination
+    - Dream
+    - Evil
+    - Madness
+    - Magic
+    - Trickery
+Doresain:
+  alignment: chaotic_evil
+  favored_weapon: Scimitar
+  domains:
+    - Chaos
+    - Death
+    - Evil
+    - Hunger
+    - Pestilence
+Dugmaren Brightmantle:
+  alignment: chaotic_good
+  favored_weapon: Short sword
+  domains:
+    - Chaos
+    - Good
+    - Knowledge
+    - Magic
+    - Mind
+    - Oracle
+    - Rune
+Dumathoin:
+  alignment: neutral
+  favored_weapon: Warhammer or any pick
+  domains:
+    - Community
+    - Earth
+    - Knowledge
+    - Oracle
+    - Protection
+Eadro:
+  alignment: neutral
+  favored_weapon: Spear
+  domains:
+    - Animal
+    - Community
+    - Protection
+    - Summoner
+    - Water
+Earth Dragon:
+  alignment: lawful_evil
+  favored_weapon: Heavy pick or light pick
+  domains:
+    - Earth
+    - Evil
+    - Law
+    - Protection
+    - Weather
+Ehlonna:
+  alignment: neutral_good
+  favored_weapon: Longbow or longsword
+  domains:
+    - Animal
+    - Celerity
+    - Good
+    - Plant
+    - Purification
+    - Sun
+Elder Elemental Eye:
+  alignment: neutral_evil
+  favored_weapon: Dagger
+  domains:
+    - Air
+    - Chaos
+    - Earth
+    - Evil
+    - Fire
+    - Madness
+    - Water
+Erevan Ilesere:
+  alignment: chaotic_neutral
+  favored_weapon: Short sword
+  domains:
+    - Celerity
+    - Chaos
+    - Domination
+    - Luck
+    - Madness
+    - Trickery
+Erythnul:
+  alignment: chaotic_evil
+  favored_weapon: Heavy mace
+  domains:
+    - Chaos
+    - Evil
+    - Greed
+    - Madness
+    - Mysticism
+    - Trickery
+    - War
+Falazure:
+  alignment: neutral_evil
+  favored_weapon: Scimitar or claw
+  domains:
+    - Death
+    - Destruction
+    - Dragon
+    - Evil
+    - Pestilence
+Fenmarel Mestarine:
+  alignment: chaotic_neutral
+  favored_weapon: Dagger
+  domains:
+    - Animal
+    - Chaos
+    - Plant
+    - Travel
+    - Trickery
+Fharlanghn:
+  alignment: neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Celerity
+    - Luck
+    - Protection
+    - Travel
+    - Weather
+Flandal Steelskin:
+  alignment: neutral_good
+  favored_weapon: Warhammer
+  domains:
+    - Creation
+    - Earth
+    - Fire
+    - Good
+    - Oracle
+    - Strength
+Fortubo:
+  alignment: lawful_good
+  favored_weapon: Warhammer
+  domains:
+    - Community
+    - Earth
+    - Good
+    - Law
+    - Mysticism
+    - Protection
+Gadhelyn:
+  alignment: chaotic_neutral
+  favored_weapon: Longbow
+  domains:
+    - Animal
+    - Chaos
+    - Plant
+Gaerdal Ironhand:
+  alignment: lawful_good
+  favored_weapon: Warhammer
+  domains:
+    - Courage
+    - Good
+    - Law
+    - Nobility
+    - Protection
+    - War
+Gaknulak:
+  alignment: lawful_evil
+  favored_weapon: Battleaxe
+  domains:
+    - Dream
+    - Evil
+    - Law
+    - Protection
+    - Trickery
+Garl Glittergold:
+  alignment: neutral_good
+  favored_weapon: Greataxe
+  domains:
+    - Community
+    - Creation
+    - Earth
+    - Good
+    - Liberation
+    - Protection
+    - Trickery
+Gendwar Argrim:
+  alignment: lawful_neutral
+  favored_weapon: Dwarven waraxe
+  domains:
+    - Destruction
+    - Law
+    - War
+Geshtai:
+  alignment: neutral
+  favored_weapon: Spear
+  domains:
+    - Plant
+    - Travel
+    - Water
+    - Weather
+Grankhul:
+  alignment: chaotic_evil
+  favored_weapon: Longsword
+  domains:
+    - Celerity
+    - Chaos
+    - Evil
+    - Knowledge
+    - Travel
+    - Trickery
+Great Mother:
+  alignment: chaotic_evil
+  favored_weapon: Bite
+  domains:
+    - Chaos
+    - Death
+    - Evil
+    - Mysticism
+    - Protection
+    - Strength
+    - Summoner
+    - Tyranny
+Grolantor:
+  alignment: chaotic_evil
+  favored_weapon: Club
+  domains:
+    - Chaos
+    - Competition
+    - Death
+    - Earth
+    - Evil
+    - Madness
+    - Mysticism
+Gruumsh:
+  alignment: chaotic_evil
+  favored_weapon: Spear
+  domains:
+    - Chaos
+    - Destruction
+    - Domination
+    - Evil
+    - Mysticism
+    - Strength
+    - Tyranny
+    - War
+Hanali Celanil:
+  alignment: chaotic_good
+  favored_weapon: Dagger
+  domains:
+    - Chaos
+    - Community
+    - Domination
+    - Good
+    - Magic
+    - Nobility
+    - Protection
+Heironeous:
+  alignment: lawful_good
+  favored_weapon: Battleaxe or longsword
+  domains:
+    - Courage
+    - Glory
+    - Good
+    - Inquisition
+    - Law
+    - Nobility
+    - War
+Heward:
+  alignment: neutral_good
+  favored_weapon: Quarterstaff
+  domains:
+    - Good
+    - Knowledge
+    - Travel
+Hextor:
+  alignment: lawful_evil
+  favored_weapon: Any flail
+  domains:
+    - Competition
+    - Destruction
+    - Domination
+    - Evil
+    - Law
+    - Tyranny
+    - War
+Hiatea:
+  alignment: neutral_good
+  favored_weapon: Spear
+  domains:
+    - Animal
+    - Community
+    - Fire
+    - Good
+    - Plant
+    - Sun
+    - Weather
+Hruggek:
+  alignment: chaotic_evil
+  favored_weapon: Morningstar
+  domains:
+    - Chaos
+    - Evil
+    - Knowledge
+    - Magic
+    - Mysticism
+    - Strength
+    - Tyranny
+Huhueteotl:
+  alignment: chaotic_evil
+  favored_weapon: Javelin
+  domains:
+    - Celerity
+    - Chaos
+    - Destiny
+    - Destruction
+    - Evil
+    - Fire
+    - Mysticism
+Hurakon:
+  alignment: chaotic_neutral
+  favored_weapon: Spear
+  domains:
+    - Chaos
+    - Destruction
+    - Water
+    - Weather
+Iallanis:
+  alignment: neutral_good
+  favored_weapon: Unarmed strike
+  domains:
+    - Community
+    - Good
+    - Healing
+    - Strength
+    - Sun
+Ilneval:
+  alignment: neutral_evil
+  favored_weapon: Longsword
+  domains:
+    - Courage
+    - Destruction
+    - Evil
+    - Mysticism
+    - War
+Ilsensine:
+  alignment: lawful_evil
+  favored_weapon: Unarmed strike or tentacle
+  domains:
+    - Domination
+    - Dream
+    - Evil
+    - Knowledge
+    - Law
+    - Magic
+    - Mind
+    - Tyranny
+Incabulos:
+  alignment: neutral_evil
+  favored_weapon: Quarterstaff
+  domains:
+    - Death
+    - Destruction
+    - Dream
+    - Evil
+    - Hunger
+    - Madness
+    - Pestilence
+Io:
+  alignment: neutral
+  favored_weapon: Scimitar or claw
+  domains:
+    - Dragon
+    - Knowledge
+    - Magic
+    - Strength
+    - Travel
+Istus:
+  alignment: neutral
+  favored_weapon: Web of Istus (net)
+  domains:
+    - Celerity
+    - Chaos
+    - Destiny
+    - Knowledge
+    - Law
+    - Luck
+    - Mind
+    - Oracle
+Iuz:
+  alignment: chaotic_evil
+  favored_weapon: Greatsword
+  domains:
+    - Chaos
+    - Evil
+    - Mind
+    - Trickery
+    - Tyranny
+Jascar:
+  alignment: lawful_good
+  favored_weapon: Warhammer
+  domains:
+    - Earth
+    - Glory
+    - Good
+    - Law
+    - Mysticism
+    - Protection
+Johydee:
+  alignment: neutral_good
+  favored_weapon: Short sword
+  domains:
+    - Good
+    - Mind
+    - Trickery
+Joramy:
+  alignment: neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Competition
+    - Destruction
+    - Fire
+    - War
+Karontor:
+  alignment: neutral_evil
+  favored_weapon: Club
+  domains:
+    - Animal
+    - Cold
+    - Evil
+    - Madness
+    - Strength
+Katay:
+  alignment: lawful_neutral
+  favored_weapon: Dagger
+  domains:
+    - Destruction
+    - Knowledge
+    - Law
+    - Oracle
+    - Repose
+    - Rune
+Kelanen:
+  alignment: neutral
+  favored_weapon: Any martial sword
+  domains:
+    - Travel
+    - War
+Keoghtom:
+  alignment: neutral_good
+  favored_weapon: Short sword
+  domains:
+    - Good
+    - Knowledge
+    - Travel
+Keptolo:
+  alignment: chaotic_evil
+  favored_weapon: Longsword
+  domains:
+    - Chaos
+    - Domination
+    - Evil
+    - Knowledge
+    - Travel
+Khurgorbaeyag:
+  alignment: lawful_evil
+  favored_weapon: Whip
+  domains:
+    - Domination
+    - Evil
+    - Inquisition
+    - Law
+    - Protection
+    - Tyranny
+Kiaransali:
+  alignment: chaotic_evil
+  favored_weapon: Dagger
+  domains:
+    - Chaos
+    - Death
+    - Evil
+    - Madness
+    - Pestilence
+Kord:
+  alignment: chaotic_good
+  favored_weapon: Greatsword
+  domains:
+    - Chaos
+    - Competition
+    - Courage
+    - Good
+    - Luck
+    - Nobility
+    - Strength
+Kundo:
+  alignment: lawful_good
+  favored_weapon: Short sword
+  domains:
+    - Community
+    - Earth
+    - Good
+    - Law
+    - Nobility
+    - Protection
+Kurell:
+  alignment: chaotic_neutral
+  favored_weapon: Short sword
+  domains:
+    - Chaos
+    - Greed
+    - Luck
+    - Madness
+    - Trickery
+Kuroth:
+  alignment: chaotic_neutral
+  favored_weapon: Dagger
+  domains:
+    - Chaos
+    - Luck
+    - Trickery
+Kurtulmak:
+  alignment: lawful_evil
+  favored_weapon: Spear
+  domains:
+    - Competition
+    - Earth
+    - Evil
+    - Law
+    - Madness
+    - Trickery
+    - War
+Kyuss:
+  alignment: neutral_evil
+  favored_weapon: Club
+  domains:
+    - Death
+    - Evil
+    - Pestilence
+Labelas Enoreth:
+  alignment: chaotic_good
+  favored_weapon: Quarterstaff
+  domains:
+    - Celerity
+    - Chaos
+    - Destiny
+    - Good
+    - Knowledge
+    - Mind
+    - Oracle
+    - Rune
+Laduguer:
+  alignment: lawful_evil
+  favored_weapon: Warhammer
+  domains:
+    - Domination
+    - Earth
+    - Evil
+    - Law
+    - Magic
+    - Mind
+    - Protection
+Laogzed:
+  alignment: chaotic_evil
+  favored_weapon: Javelin
+  domains:
+    - Chaos
+    - Death
+    - Destruction
+    - Evil
+    - Madness
+Lendor:
+  alignment: lawful_neutral
+  favored_weapon: Greatsword
+  domains:
+    - Destiny
+    - Knowledge
+    - Law
+    - Mind
+    - Oracle
+    - Protection
+    - Rune
+Lirr:
+  alignment: chaotic_good
+  favored_weapon: Spear
+  domains:
+    - Chaos
+    - Good
+    - Knowledge
+    - Liberation
+    - Magic
+    - Rune
+    - Travel
+Llerg:
+  alignment: chaotic_neutral
+  favored_weapon: Battleaxe or longsword
+  domains:
+    - Animal
+    - Chaos
+    - Competition
+    - Courage
+    - Strength
+Lolth:
+  alignment: chaotic_evil
+  favored_weapon: Whip
+  domains:
+    - Chaos
+    - Destruction
+    - Domination
+    - Evil
+    - Oracle
+    - Pestilence
+    - Trickery
+Luthic:
+  alignment: neutral_evil
+  favored_weapon: Spiked gauntlet
+  domains:
+    - Community
+    - Earth
+    - Evil
+    - Healing
+    - Protection
+Lydia:
+  alignment: neutral_good
+  favored_weapon: Shaft of light (spear)
+  domains:
+    - Good
+    - Knowledge
+    - Liberation
+    - Sun
+    - Travel
+Maglubiyet:
+  alignment: neutral_evil
+  favored_weapon: Greataxe or battleaxe
+  domains:
+    - Competition
+    - Destruction
+    - Evil
+    - Strength
+    - Trickery
+    - Tyranny
+    - War
+Mayaheine:
+  alignment: lawful_good
+  favored_weapon: Bastard sword
+  domains:
+    - Good
+    - Law
+    - Nobility
+    - Protection
+    - War
+Memnor:
+  alignment: neutral_evil
+  favored_weapon: Morningstar
+  domains:
+    - Death
+    - Domination
+    - Evil
+    - Mind
+    - Sky
+    - Trickery
+Merikka:
+  alignment: lawful_good
+  favored_weapon: Sickle
+  domains:
+    - Community
+    - Good
+    - Law
+    - Plant
+    - Protection
+Merrshaulk:
+  alignment: chaotic_evil
+  favored_weapon: Scimitar or longsword
+  domains:
+    - Chaos
+    - Destruction
+    - Domination
+    - Evil
+    - Mind
+    - Plant
+    - Tyranny
+Meyanok:
+  alignment: neutral_evil
+  favored_weapon: Dagger
+  domains:
+    - Animal
+    - Destruction
+    - Evil
+    - Pestilence
+    - Trickery
+Mictlantecuhtli:
+  alignment: lawful_evil
+  favored_weapon: Dagger
+  domains:
+    - Death
+    - Destruction
+    - Evil
+    - Law
+    - Mysticism
+    - Pestilence
+    - Tyranny
+    - War
+Moradin:
+  alignment: lawful_good
+  favored_weapon: Warhammer
+  domains:
+    - Creation
+    - Earth
+    - Fire
+    - Good
+    - Law
+    - Protection
+    - Strength
+    - War
+Mouqol:
+  alignment: neutral
+  favored_weapon: Dagger
+  domains:
+    - Knowledge
+    - Pact
+    - Travel
+    - Trickery
+Muamman Duathal:
+  alignment: neutral_good
+  favored_weapon: Heavy mace
+  domains:
+    - City
+    - Community
+    - Good
+    - Protection
+    - Travel
+Murlynd:
+  alignment: lawful_good
+  favored_weapon: Longsword
+  domains:
+    - Good
+    - Knowledge
+    - Law
+    - Nobility
+Myrhiss:
+  alignment: neutral_good
+  favored_weapon: Shortbow or whip
+  domains:
+    - Community
+    - Domination
+    - Good
+    - Healing
+    - Protection
+Nazarn:
+  alignment: neutral
+  favored_weapon: Short sword
+  domains:
+    - Luck
+    - War
+Nerull:
+  alignment: neutral_evil
+  favored_weapon: Scythe
+  domains:
+    - Cold
+    - Death
+    - Evil
+    - Mysticism
+    - Pestilence
+    - Trickery
+    - Winter
+Nola:
+  alignment: neutral_good
+  favored_weapon: Javelin
+  domains:
+    - Air
+    - Fire
+    - Glory
+    - Good
+    - Healing
+    - Sun
+Nomog-Geaya:
+  alignment: lawful_evil
+  favored_weapon: Longsword or handaxe
+  domains:
+    - Courage
+    - Evil
+    - Law
+    - Strength
+    - Tyranny
+    - War
+Norebo:
+  alignment: chaotic_neutral
+  favored_weapon: Dagger
+  domains:
+    - Chaos
+    - Competition
+    - Courage
+    - Luck
+    - Trickery
+Obad-Hai:
+  alignment: neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Air
+    - Animal
+    - Earth
+    - Fire
+    - Plant
+    - Water
+Olidammara:
+  alignment: chaotic_neutral
+  favored_weapon: Rapier
+  domains:
+    - Celerity
+    - Chaos
+    - City
+    - Luck
+    - Mind
+    - Trickery
+Osprem:
+  alignment: lawful_neutral
+  favored_weapon: Trident
+  domains:
+    - Law
+    - Protection
+    - Travel
+    - Water
+    - Weather
+Panzuriel:
+  alignment: neutral_evil
+  favored_weapon: Quarterstaff
+  domains:
+    - Destruction
+    - Evil
+    - Madness
+    - Mind
+    - War
+    - Water
+Pelor:
+  alignment: neutral_good
+  favored_weapon: Heavy mace
+  domains:
+    - Glory
+    - Good
+    - Healing
+    - Nobility
+    - Purification
+    - Strength
+    - Sun
+Phaulkon:
+  alignment: chaotic_good
+  favored_weapon: Longbow
+  domains:
+    - Air
+    - Animal
+    - Chaos
+    - Good
+    - Sky
+    - War
+Pholtus:
+  alignment: lawful_good
+  favored_weapon: Quarterstaff
+  domains:
+    - Glory
+    - Good
+    - Inquisition
+    - Knowledge
+    - Law
+    - Purification
+    - Sun
+Phyton:
+  alignment: chaotic_good
+  favored_weapon: Scimitar
+  domains:
+    - Chaos
+    - Community
+    - Good
+    - Plant
+    - Sun
+    - Water
+Procan:
+  alignment: chaotic_neutral
+  favored_weapon: Trident
+  domains:
+    - Animal
+    - Chaos
+    - Luck
+    - Travel
+    - Water
+    - Weather
+Pyremius:
+  alignment: neutral_evil
+  favored_weapon: Longsword
+  domains:
+    - Destruction
+    - Evil
+    - Fire
+    - Madness
+    - Mysticism
+Quetzalcoatl:
+  alignment: lawful_neutral
+  favored_weapon: Dagger
+  domains:
+    - Air
+    - Animal
+    - Domination
+    - Knowledge
+    - Law
+    - Protection
+    - Sky
+Ralishaz:
+  alignment: chaotic_neutral
+  favored_weapon: Quarterstaff
+  domains:
+    - Chaos
+    - Destruction
+    - Liberation
+    - Luck
+    - Madness
+    - Oracle
+Rao:
+  alignment: lawful_good
+  favored_weapon: Light mace
+  domains:
+    - Community
+    - Glory
+    - Good
+    - Inquisition
+    - Knowledge
+    - Law
+    - Mind
+    - Pact
+Raxivort:
+  alignment: chaotic_evil
+  favored_weapon: Scimitar
+  domains:
+    - Animal
+    - Chaos
+    - Evil
+    - Mysticism
+    - Pestilence
+    - Trickery
+Rillifane Rallathil:
+  alignment: chaotic_good
+  favored_weapon: Quarterstaff
+  domains:
+    - Celerity
+    - Chaos
+    - Good
+    - Mysticism
+    - Plant
+    - Protection
+    - Travel
+Roykyn:
+  alignment: neutral_evil
+  favored_weapon: Spiked gauntlet
+  domains:
+    - Evil
+    - Madness
+    - Trickery
+Rudd:
+  alignment: chaotic_neutral
+  favored_weapon: Rapier
+  domains:
+    - Chaos
+    - Competition
+    - Destiny
+    - Luck
+Segojan Earthcaller:
+  alignment: neutral_good
+  favored_weapon: Heavy mace
+  domains:
+    - Animal
+    - Community
+    - Earth
+    - Good
+    - Mysticism
+    - Summoner
+Sehanine Moonbow:
+  alignment: chaotic_good
+  favored_weapon: Quarterstaff
+  domains:
+    - Chaos
+    - Dream
+    - Good
+    - Knowledge
+    - Oracle
+    - Repose
+    - Travel
+    - Trickery
+Sekolah:
+  alignment: lawful_evil
+  favored_weapon: Trident
+  domains:
+    - Competition
+    - Evil
+    - Law
+    - Mysticism
+    - Strength
+    - Tyranny
+    - War
+Semuanya:
+  alignment: neutral
+  favored_weapon: Greatclub
+  domains:
+    - Animal
+    - Creation
+    - Plant
+    - Water
+Shargaas:
+  alignment: chaotic_evil
+  favored_weapon: Short sword
+  domains:
+    - Chaos
+    - Death
+    - Evil
+    - Mysticism
+    - Pestilence
+    - Trickery
+Sheela Peryroyl:
+  alignment: neutral
+  favored_weapon: Sickle
+  domains:
+    - Air
+    - Celerity
+    - Earth
+    - Plant
+    - Weather
+Shekinester:
+  alignment: neutral
+  favored_weapon: Bite
+  domains:
+    - Chaos
+    - Destruction
+    - Evil
+    - Good
+    - Knowledge
+    - Law
+    - Magic
+    - Mind
+    - Oracle
+    - Protection
+Sixin:
+  alignment: lawful_evil
+  favored_weapon: Short sword
+  domains:
+    - Evil
+    - Law
+    - Strength
+    - Travel
+    - Trickery
+    - War
+Skerrit:
+  alignment: neutral_good
+  favored_weapon: Shortspear
+  domains:
+    - Animal
+    - Good
+    - Healing
+    - Plant
+    - Sun
+Skoraeus Stonebones:
+  alignment: neutral
+  favored_weapon: Warhammer
+  domains:
+    - Earth
+    - Healing
+    - Knowledge
+    - Protection
+    - Summoner
+Solonor Thelandira:
+  alignment: chaotic_good
+  favored_weapon: Longbow
+  domains:
+    - Animal
+    - Celerity
+    - Chaos
+    - Good
+    - Plant
+    - War
+    - Weather
+Sotillion:
+  alignment: chaotic_good
+  favored_weapon: Net
+  domains:
+    - Air
+    - Chaos
+    - Dream
+    - Good
+    - Healing
+    - Plant
+    - Summer
+Squerrik:
+  alignment: lawful_evil
+  favored_weapon: Short sword
+  domains:
+    - Evil
+    - Law
+    - Mind
+    - Pestilence
+    - Protection
+    - Trickery
+St. Cuthbert:
+  alignment: lawful_good
+  favored_weapon: Club or mace
+  domains:
+    - Destruction
+    - Domination
+    - Good
+    - Inquisition
+    - Law
+    - Protection
+    - Strength
+Stern Alia:
+  alignment: lawful_neutral
+  favored_weapon: Heavy mace
+  domains:
+    - Inquisition
+    - Knowledge
+    - Law
+    - Protection
+Stronmaus:
+  alignment: neutral_good
+  favored_weapon: Warhammer
+  domains:
+    - Air
+    - Good
+    - Protection
+    - Sky
+    - Sun
+    - War
+    - Weather
+Surtr:
+  alignment: lawful_evil
+  favored_weapon: Greatsword
+  domains:
+    - Destruction
+    - Evil
+    - Fire
+    - Law
+    - Purification
+    - Strength
+    - War
+Syrul:
+  alignment: neutral_evil
+  favored_weapon: Dagger
+  domains:
+    - Domination
+    - Evil
+    - Knowledge
+    - Mind
+    - Trickery
+Telchur:
+  alignment: chaotic_neutral
+  favored_weapon: Spear
+  domains:
+    - Air
+    - Chaos
+    - Cold
+    - Strength
+    - Winter
+Tezcatlipoca:
+  alignment: chaotic_evil
+  favored_weapon: Longsword
+  domains:
+    - Air
+    - Chaos
+    - Evil
+    - Mysticism
+    - Sun
+    - Trickery
+    - War
+    - Weather
+Tharizdun:
+  alignment: neutral_evil
+  favored_weapon: Dagger
+  domains:
+    - Chaos
+    - Destruction
+    - Dream
+    - Evil
+    - Force
+    - Knowledge
+    - Madness
+    - Rune
+Thrym:
+  alignment: chaotic_evil
+  favored_weapon: Greataxe
+  domains:
+    - Chaos
+    - Cold
+    - Destruction
+    - Earth
+    - Evil
+    - Strength
+    - War
+Tiamat:
+  alignment: lawful_evil
+  favored_weapon: Heavy pick or bite
+  domains:
+    - Destruction
+    - Dragon
+    - Evil
+    - Greed
+    - Law
+    - Trickery
+    - Tyranny
+Tlaloc:
+  alignment: lawful_evil
+  favored_weapon: Javelin
+  domains:
+    - Air
+    - Evil
+    - Law
+    - Pestilence
+    - Plant
+    - Water
+    - Weather
+Tlazoteotl:
+  alignment: neutral
+  favored_weapon: Sickle
+  domains:
+    - Animal
+    - Community
+    - Earth
+    - Plant
+    - Water
+Trithereon:
+  alignment: chaotic_good
+  favored_weapon: Spear
+  domains:
+    - Chaos
+    - Good
+    - Liberation
+    - Mysticism
+    - Protection
+    - Strength
+    - Summoner
+Tsolorandril:
+  alignment: lawful_neutral
+  favored_weapon: Spiked chain
+  domains:
+    - Knowledge
+    - Law
+    - Oracle
+Ulaa:
+  alignment: lawful_good
+  favored_weapon: Warhammer
+  domains:
+    - Earth
+    - Good
+    - Law
+    - Liberation
+    - Mysticism
+    - Protection
+    - Summoner
+Urdlen:
+  alignment: chaotic_evil
+  favored_weapon: Spiked gauntlet
+  domains:
+    - Chaos
+    - Destruction
+    - Earth
+    - Evil
+    - Greed
+    - Madness
+    - Pestilence
+Urogalan:
+  alignment: lawful_neutral
+  favored_weapon: Any flail
+  domains:
+    - Earth
+    - Law
+    - Protection
+    - Repose
+Uvot:
+  alignment: neutral_good
+  favored_weapon: Scythe
+  domains:
+    - Community
+    - Creation
+    - Good
+    - Knowledge
+    - Luck
+    - Plant
+    - Protection
+Vaprak:
+  alignment: chaotic_evil
+  favored_weapon: Greatclub
+  domains:
+    - Chaos
+    - Destruction
+    - Evil
+    - Greed
+    - Madness
+    - Strength
+Vara:
+  alignment: neutral_evil
+  favored_weapon: Javelin
+  domains:
+    - Destruction
+    - Dream
+    - Evil
+    - Trickery
+Vathris:
+  alignment: lawful_neutral
+  favored_weapon: Longspear
+  domains:
+    - Destruction
+    - Law
+    - War
+Vatun:
+  alignment: chaotic_neutral
+  favored_weapon: Battleaxe
+  domains:
+    - Air
+    - Animal
+    - Chaos
+    - Cold
+    - Strength
+    - Winter
+Vecna:
+  alignment: neutral_evil
+  favored_weapon: Dagger
+  domains:
+    - Destiny
+    - Dream
+    - Evil
+    - Knowledge
+    - Madness
+    - Magic
+    - Mind
+    - Oracle
+    - Tyranny
+Velnius:
+  alignment: neutral
+  favored_weapon: Spear
+  domains:
+    - Air
+    - Travel
+    - Water
+    - Weather
+Vergadain:
+  alignment: neutral
+  favored_weapon: Longsword
+  domains:
+    - Knowledge
+    - Luck
+    - Mind
+    - Pact
+    - Trickery
+Vhaeraun:
+  alignment: chaotic_evil
+  favored_weapon: Short sword
+  domains:
+    - Celerity
+    - Chaos
+    - Evil
+    - Mysticism
+    - Travel
+    - Trickery
+Vogan:
+  alignment: chaotic_good
+  favored_weapon: Shortspear
+  domains:
+    - Air
+    - Chaos
+    - Good
+    - Healing
+    - Sky
+    - Water
+    - Weather
+Wastri:
+  alignment: lawful_neutral
+  favored_weapon: Glaive or guisarme
+  domains:
+    - Animal
+    - Law
+    - Purification
+    - War
+Wee Jas:
+  alignment: lawful_neutral
+  favored_weapon: Dagger
+  domains:
+    - Domination
+    - Inquisition
+    - Law
+    - Magic
+    - Mind
+    - Repose
+Wenta:
+  alignment: chaotic_good
+  favored_weapon: Club
+  domains:
+    - Air
+    - Chaos
+    - Creation
+    - Good
+    - Liberation
+    - Plant
+Xan Yae:
+  alignment: neutral
+  favored_weapon: Falchion
+  domains:
+    - Knowledge
+    - Mind
+    - Trickery
+    - War
+Xanag:
+  alignment: neutral
+  favored_weapon: Short sword
+  domains:
+    - Creation
+    - Domination
+    - Earth
+    - Fire
+Xerbo:
+  alignment: neutral
+  favored_weapon: Trident
+  domains:
+    - Animal
+    - Knowledge
+    - Pact
+    - Water
+'Ye''Cind':
+  alignment: chaotic_good
+  favored_weapon: Longsword
+  domains:
+    - Chaos
+    - Good
+    - Knowledge
+    - Magic
+    - Travel
+Yondalla:
+  alignment: lawful_good
+  favored_weapon: Longsword or short sword
+  domains:
+    - Animal
+    - Community
+    - Creation
+    - Good
+    - Law
+    - Mysticism
+    - Plant
+    - Protection
+Yurtrus:
+  alignment: neutral_evil
+  favored_weapon: Unarmed strike
+  domains:
+    - Death
+    - Destruction
+    - Evil
+    - Madness
+    - Pestilence
+Zagyg:
+  alignment: chaotic_neutral
+  favored_weapon: Club
+  domains:
+    - Chaos
+    - Knowledge
+    - Madness
+    - Magic
+    - Trickery
+Zilchus:
+  alignment: lawful_neutral
+  favored_weapon: Dagger
+  domains:
+    - City
+    - Knowledge
+    - Law
+    - Mind
+    - Pact
+    - Trickery
+Zinzerena:
+  alignment: chaotic_neutral
+  favored_weapon: Short sword
+  domains:
+    - Chaos
+    - Luck
+    - Trickery
+Zodal:
+  alignment: neutral_good
+  favored_weapon: Hand of Zodal (unarmed strike - inflicts nonlethal damage)
+  domains:
+    - Community
+    - Good
+    - Healing
+    - Liberation
+    - Protection
+Zuoken:
+  alignment: neutral
+  favored_weapon: Fist of Zuoken (unarmed strike)
+  domains:
+    - Celerity
+    - Mind
+    - Strength
+    - War

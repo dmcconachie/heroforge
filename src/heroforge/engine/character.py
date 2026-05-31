@@ -197,6 +197,9 @@ class Character:
         self.skills: dict[str, int] = {}
         # skill_name → ranks invested
 
+        self.domains: list[str] = []
+        # cleric domain names (validated against KnownDomain on load)
+
         # --- Template tracking ----------------------------------------------
         self.templates: list = []
         # list of TemplateApplication objects (from engine/templates.py)
@@ -1350,8 +1353,16 @@ class Character:
         if hasattr(kind_val, "value"):
             kind_val = kind_val.value
 
-        if kind_val == "always_on" and defn.buff_definition is not None:
-            self._apply_feat_pool_bonuses(feat_name, defn.buff_definition)
+        if kind_val == "always_on":
+            # Selection feats (Skill Focus, Weapon Focus) build their
+            # buff once the chosen skill/weapon is known; the choice
+            # arrives via the `parameter` argument.
+            if defn.has_selection:
+                buff = defn.build_buff_definition(selection=parameter)
+            else:
+                buff = defn.buff_definition
+            if buff is not None:
+                self._apply_feat_pool_bonuses(feat_name, buff)
 
         elif kind_val == "conditional" and defn.buff_definition is not None:
             # Register but do NOT activate — user toggles from Buffs panel
@@ -1370,6 +1381,16 @@ class Character:
         Reverses always_on stat effects and deactivates
         any conditional buff that was active.
         """
+        # Capture the selection (if any) before dropping the entry, so a
+        # selection feat clears the same pool it was applied to.
+        selection = next(
+            (
+                f.get("parameter")
+                for f in self.feats
+                if f.get("name") == feat_name
+            ),
+            None,
+        )
         self.feats = [f for f in self.feats if f.get("name") != feat_name]
 
         if defn is None:
@@ -1379,8 +1400,13 @@ class Character:
         if hasattr(kind_val, "value"):
             kind_val = kind_val.value
 
-        if kind_val == "always_on" and defn.buff_definition is not None:
-            self._remove_feat_pool_bonuses(feat_name, defn.buff_definition)
+        if kind_val == "always_on":
+            if defn.has_selection:
+                buff = defn.build_buff_definition(selection=selection)
+            else:
+                buff = defn.buff_definition
+            if buff is not None:
+                self._remove_feat_pool_bonuses(feat_name, buff)
         elif kind_val == "conditional" and feat_name in self._buff_states:
             self.toggle_buff(feat_name, False)
             del self._buff_states[feat_name]
