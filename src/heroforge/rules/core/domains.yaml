@@ -25,6 +25,8 @@ Animal:
     is a class skill.
   class_skills:
     - Knowledge (Nature)
+  resource:
+    name: Speak with Animals
   domain_spells:
     1: Calm Animals
     2: Hold Animal
@@ -50,6 +52,8 @@ Chaos:
 Death:
   granted_power: >-
     Death touch 1/day: melee touch deals 1d6 per cleric level damage.
+  resource:
+    name: Death Touch
   domain_spells:
     1: Cause Fear
     2: Death Knell
@@ -63,6 +67,8 @@ Death:
 Destruction:
   granted_power: >-
     Smite 1/day: +4 attack, +cleric level damage on one melee attack.
+  resource:
+    name: Smite
   domain_spells:
     1: Inflict Light Wounds
     2: Shatter
@@ -169,6 +175,8 @@ Luck:
   granted_power: >-
     Reroll one roll per day before success/failure is declared; must
     keep reroll.
+  resource:
+    name: Reroll
   domain_spells:
     1: Entropic Shield
     2: Aid
@@ -213,6 +221,8 @@ Protection:
   granted_power: >-
     Grant resistance bonus on next saving throw equal to cleric level
     (touch, 1/day).
+  resource:
+    name: Protective Ward
   domain_spells:
     1: Sanctuary
     2: Shield Other
@@ -227,6 +237,8 @@ Strength:
   granted_power: >-
     Enhancement bonus to STR equal to cleric level for 1 round, 1/day
     (free action).
+  resource:
+    name: Feat of Strength
   domain_spells:
     1: Enlarge Person
     2: Bull's Strength
@@ -240,6 +252,8 @@ Strength:
 Sun:
   granted_power: >-
     Greater turning 1/day: undead that would be turned are destroyed instead.
+  resource:
+    name: Greater Turning
   domain_spells:
     1: Endure Elements
     2: Heat Metal
@@ -256,6 +270,10 @@ Travel:
     a class skill.
   class_skills:
     - Survival
+  resource:
+    name: Freedom of Movement
+    max_formula: cleric_level
+    unit: round
   domain_spells:
     1: Longstrider
     2: Locate Object

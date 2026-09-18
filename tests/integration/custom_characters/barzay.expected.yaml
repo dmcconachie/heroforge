@@ -269,6 +269,9 @@ domains:
       7: Spell Turning
       8: Moment of Prescience
       9: Miracle
+resources:
+  Reroll:
+    max_uses: 1
 equipment:
   armor:
     name: Chain Shirt

@@ -12,6 +12,7 @@ from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.domains import (
     DomainDefinition,
     DomainRegistry,
+    refresh_domain_resources,
 )
 from heroforge.engine.persistence import load_character, save_character
 from heroforge.engine.sheet import gather_sheet
@@ -375,3 +376,94 @@ class TestDomainSchemaRejectsUnknownKeys:
         defn = converter.structure(decl, DomainDefinition)
         assert defn.class_skills == ["Knowledge (Nature)"]
         assert defn.domain_spells[1] == "Calm Animals"
+
+
+class TestDomainResources:
+    """
+    Domain granted powers with a daily limit become real
+    ResourceTrackers (PHB pp. 186-187). Seven domains are strictly
+    once per day; Travel is a duration pool of 1 round per cleric
+    level, so the unit has to be carried or the sheet misreports.
+    """
+
+    def _cleric(self, levels: int, domains: list[str]) -> Character:
+        c = Character()
+        c.name = "Resource Cleric"
+        c.race = "Human"
+        c.alignment = "neutral_good"
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Cleric",
+                    hp_roll=8,
+                )
+                for i in range(levels)
+            ]
+        )
+        c.domains = list(domains)
+        refresh_domain_resources(c)
+        return c
+
+    def test_death_touch_once_per_day(self) -> None:
+        c = self._cleric(7, ["Death", "War"])
+        r = c.resources["Death Touch"]
+        assert r.current == 1
+        assert r.unit == "use"
+
+    def test_travel_scales_with_cleric_level(self) -> None:
+        c = self._cleric(7, ["Travel"])
+        r = c.resources["Freedom of Movement"]
+        assert r.current == 7
+        assert r.unit == "round"
+
+    def test_domain_without_resource_adds_nothing(self) -> None:
+        c = self._cleric(7, ["War", "Good"])
+        assert c.resources == {}
+
+    def test_tracker_is_consumable(self) -> None:
+        c = self._cleric(5, ["Luck"])
+        r = c.resources["Reroll"]
+        assert r.use()
+        assert r.exhausted
+        assert not r.use()
+
+    def test_refresh_replaces_stale_resources(self) -> None:
+        """Dropping a domain drops its resource."""
+        c = self._cleric(5, ["Death"])
+        assert "Death Touch" in c.resources
+        c.domains = ["War"]
+        refresh_domain_resources(c)
+        assert "Death Touch" not in c.resources
+
+    def test_sheet_emits_resources(self) -> None:
+        c = self._cleric(7, ["Death", "Travel"])
+        sheet = gather_sheet(c, None)
+        assert sheet.resources["Death Touch"].max_uses == 1
+        fom = sheet.resources["Freedom of Movement"]
+        assert fom.max_uses == 7
+        assert fom.unit == "round"
+
+    def test_sheet_omits_resources_when_none(self) -> None:
+        c = self._cleric(7, ["War"])
+        assert gather_sheet(c, None).resources == {}
+
+    def test_all_declared_resources_load(self) -> None:
+        """Every domain resource in the YAML is well-formed."""
+        from heroforge.rules.rules import get_rules
+
+        named = {
+            d.name: d.resource
+            for d in get_rules().domains.all_domains()
+            if d.resource is not None
+        }
+        assert set(named) == {
+            "Animal",
+            "Death",
+            "Destruction",
+            "Luck",
+            "Protection",
+            "Strength",
+            "Sun",
+            "Travel",
+        }

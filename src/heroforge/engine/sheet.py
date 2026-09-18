@@ -45,6 +45,7 @@ from heroforge.engine.sheet_schema import (
     DomainEntry,
     EquipmentSection,
     Iteratives,
+    ResourceEntry,
     Sheet,
     SheetIdentity,
     SkillEntry,
@@ -171,6 +172,7 @@ def gather_sheet(
         class_features=_class_features(character),
         spellcasting=_spellcasting(character),
         domains=_domains(character),
+        resources=_resources(character),
         special_qualities=_special_qualities(character),
         equipment=_equipment(character),
     )
@@ -548,6 +550,14 @@ def _spellcasting(
 # -----------------------------------------------------------
 # Special qualities (from templates)
 # -----------------------------------------------------------
+
+
+def _resources(c: "Character") -> dict[str, ResourceEntry]:
+    """Daily-limited powers, currently sourced from domains."""
+    return {
+        name: ResourceEntry(max_uses=r.current, unit=r.unit)
+        for name, r in c.resources.items()
+    }
 
 
 def _domains(c: "Character") -> dict[KnownDomain, DomainEntry]:

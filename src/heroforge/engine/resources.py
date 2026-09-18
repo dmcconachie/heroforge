@@ -36,6 +36,11 @@ class ResourceTracker:
     name: str
     max_formula: str = "1"
     current: int = 0
+    # What one point of this resource buys. Most abilities are
+    # counted in uses; a few (the Travel domain's freedom of
+    # movement) are a pool of rounds, and a sheet that prints
+    # "7 uses" for those is simply wrong.
+    unit: str = "use"
 
     def reset(self, max_uses: int) -> None:
         """Reset current uses to computed maximum."""

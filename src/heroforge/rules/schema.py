@@ -31,7 +31,7 @@ from heroforge.engine.classes import (
     SpellcastingInfo,
 )
 from heroforge.engine.deities import DeityDefinition
-from heroforge.engine.domains import DomainDefinition
+from heroforge.engine.domains import DomainDefinition, DomainResource
 from heroforge.engine.enums import Ability, Alignment
 from heroforge.engine.equipment import (
     ArmorDefinition,
@@ -50,6 +50,7 @@ from heroforge.engine.sheet_schema import (
     CombatSection,
     DomainEntry,
     Iteratives,
+    ResourceEntry,
     Sheet,
     SheetIdentity,
     SkillEntry,
@@ -209,8 +210,15 @@ converter.register_structure_hook(
 
 
 _DOMAIN_KEYS = frozenset(
-    {"name", "granted_power", "domain_spells", "class_skills"}
+    {
+        "name",
+        "granted_power",
+        "domain_spells",
+        "class_skills",
+        "resource",
+    }
 )
+_RESOURCE_KEYS = frozenset({"name", "max_formula", "unit"})
 
 
 def _structure_domain(val: object, _: type) -> DomainDefinition:
@@ -231,6 +239,24 @@ def _structure_domain(val: object, _: type) -> DomainDefinition:
         granted_power=val.get("granted_power", ""),
         domain_spells=domain_spells,
         class_skills=list(val.get("class_skills", [])),
+        resource=_structure_domain_resource(val.get("resource")),
+    )
+
+
+def _structure_domain_resource(raw: object) -> DomainResource | None:
+    if raw is None:
+        return None
+    if not isinstance(raw, dict):
+        msg = f"Domain resource must be a mapping, got {type(raw)}"
+        raise TypeError(msg)
+    unknown = sorted(set(raw) - _RESOURCE_KEYS)
+    if unknown:
+        msg = f"Unknown domain resource key(s): {', '.join(unknown)}"
+        raise ValueError(msg)
+    return DomainResource(
+        name=str(raw["name"]),
+        max_formula=str(raw.get("max_formula", "1")),
+        unit=str(raw.get("unit", "use")),
     )
 
 
@@ -422,6 +448,7 @@ for _sheet_cls in (
     SkillEntry,
     SpellcastingEntry,
     DomainEntry,
+    ResourceEntry,
     ArmorDisplay,
     WeaponDisplay,
     SheetIdentity,

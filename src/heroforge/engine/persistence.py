@@ -24,6 +24,7 @@ from typing import TYPE_CHECKING
 
 import yaml
 
+from heroforge.engine.domains import refresh_domain_resources
 from heroforge.engine.enums import Ability, Alignment
 from heroforge.rules.known import (
     KnownArmor,
@@ -543,6 +544,7 @@ def load_character(
 
     # Cleric domain granted powers (e.g. War → Weapon Focus)
     _apply_domain_effects(c, rules)
+    refresh_domain_resources(c)
 
     # Skills (validated by KnownSkill)
     for lv in c.levels:

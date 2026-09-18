@@ -190,6 +190,19 @@ class EquipmentSection:
 
 
 # ---------------------------------------------------
+# Resources
+# ---------------------------------------------------
+
+
+@dataclass
+class ResourceEntry:
+    max_uses: int
+    # "use" for most daily powers; "round" for pools like the
+    # Travel domain's freedom of movement.
+    unit: str = "use"
+
+
+# ---------------------------------------------------
 # Domains
 # ---------------------------------------------------
 
@@ -219,5 +232,6 @@ class Sheet:
         default_factory=dict,
     )
     domains: dict[KnownDomain, DomainEntry] = field(default_factory=dict)
+    resources: dict[str, ResourceEntry] = field(default_factory=dict)
     special_qualities: list[str] = field(default_factory=list)
     equipment: EquipmentSection = field(default_factory=EquipmentSection)

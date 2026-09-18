@@ -11,6 +11,19 @@ Public API:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from heroforge.engine.character import Character
+
+
+@dataclass(frozen=True)
+class DomainResource:
+    """A daily-limited granted power (PHB pp. 186-187)."""
+
+    name: str
+    max_formula: str = "1"
+    unit: str = "use"
 
 
 @dataclass(frozen=True)
@@ -26,6 +39,8 @@ class DomainDefinition:
     # (PHB p. 31). Entries follow class-skill syntax, so
     # "Knowledge (all)" is a legal wildcard.
     class_skills: list[str] = field(default_factory=list)
+    # Daily-limited granted power, if the domain has one.
+    resource: DomainResource | None = None
 
 
 class DomainRegistry:
@@ -48,3 +63,32 @@ class DomainRegistry:
 
     def __len__(self) -> int:
         return len(self._entries)
+
+
+def refresh_domain_resources(character: "Character") -> None:
+    """
+    Rebuild ``character.resources`` from the character's domains.
+
+    Replaces the whole domain-derived set rather than merging, so
+    dropping a domain drops its resource instead of stranding it.
+    Each tracker starts full; spending is the caller's business.
+    """
+    from heroforge.engine.effects import evaluate_formula
+    from heroforge.engine.resources import ResourceTracker
+    from heroforge.rules.rules import get_rules
+
+    registry = get_rules().domains
+    resources: dict[str, ResourceTracker] = {}
+    for domain_name in character.domains:
+        defn = registry.get(domain_name)
+        if defn is None or defn.resource is None:
+            continue
+        spec = defn.resource
+        max_uses = evaluate_formula(spec.max_formula, character=character)
+        resources[spec.name] = ResourceTracker(
+            name=spec.name,
+            max_formula=spec.max_formula,
+            current=max_uses,
+            unit=spec.unit,
+        )
+    character.resources = resources

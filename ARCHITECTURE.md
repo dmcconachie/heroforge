@@ -764,13 +764,21 @@ Reusable components in `widgets/`: `LabeledField`,
   from the character's domains. It is keyed off the
   `domains` class feature rather than the class name, so a
   PrC advancing domain casting picks it up by declaring the
-  feature. Still display-only: domain
+  feature. The eight daily-limited granted powers are
+  real `ResourceTracker`s, built by
+  `domains.refresh_domain_resources()` and emitted as the
+  sheet's `resources:` block: Animal, Death, Destruction,
+  Luck, Protection, Strength and Sun are once per day,
+  while Travel is a pool of 1 round per cleric level, so
+  `ResourceTracker.unit` distinguishes rounds from uses.
+  Trackers are derived, not saved — remaining uses do not
+  round-trip yet. Still display-only: domain
   spells added to the prepared-spell list, and the
-  conditional/activated powers — Knowledge's +1 caster
+  *effects* of the activated powers — Knowledge's +1 caster
   level on divinations (and the other +1-CL-for-a-spell-
   subset domains, which the single flat `caster_level`
-  field can't express), Luck's reroll, Travel's freedom
-  of movement, etc. War's Martial Weapon Proficiency half
+  field can't express), Strength's and Protection's
+  scaling bonuses. War's Martial Weapon Proficiency half
   is a no-op (nonproficiency penalties aren't modelled).
 - Cross-class skill *cost* is not modelled (a cross-class
   rank costs 2 points and caps at a half number); see
