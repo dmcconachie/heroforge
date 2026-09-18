@@ -376,6 +376,7 @@ equipment:
     properties:
       - animated
   worn:
+    - Circlet of Rapid Casting
     - Ring of Counterspells
     - Ring of Tharizdun
     - Gauntlets of Ghost Fighting

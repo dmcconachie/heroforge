@@ -40,6 +40,15 @@ Chronocharm of the Laughing Rogue:
   slot: throat
   source_book: Magic Item Compendium
   note: 1/day reroll one Disable Device check. MIC p. 86.
+Circlet of Rapid Casting:
+  slot: head
+  source_book: Magic Item Compendium
+  note: >-
+    3 charges/day, renewed at dawn: cast one spell as part of
+    the swift action that activates the circlet. Spell must
+    normally take 1 standard action or less to cast; the slot
+    is expended as normal. 1 charge = spell up to 2nd level,
+    2 charges = 3rd, 3 charges = 4th. MIC p. 86.
 Crystal Mask of Insight:
   slot: face
   source_book: Magic Item Compendium
@@ -168,6 +177,14 @@ Truedeath Crystal, Greater:
     Requires +3 host weapon (greater augment crystals only
     function on weapons with a +3 enhancement or higher).
     MIC p. 66.
+Tunic of Steady Spellcasting:
+  slot: torso
+  source_book: Magic Item Compendium
+  note: +5 competence bonus on Concentration checks. MIC p. 144.
+  effects:
+    - target: skill_concentration
+      bonus_type: competence
+      value: 5
 Vest of Resistance +1:
   slot: torso
   source_book: Magic Item Compendium

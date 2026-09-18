@@ -182,6 +182,7 @@ equipment:
     properties:
       - animated
   worn:
+    - Circlet of Rapid Casting
     - Ring of Counterspells
     - Ring of Tharizdun
     - Gauntlets of Ghost Fighting
@@ -207,6 +208,7 @@ equipment:
     # - Pearl of Power 2 x4
     # - Rod of Extend, lesser
     # - Rod of Extend, lesser
+    # - Rod of Slient Spells, lesser
 
     # - Orb of Mental Renewal (heal mental stats)
     # - Rod of Bodily Restoration (heal phys stats)
@@ -226,7 +228,6 @@ equipment:
     # - Battal: Periapt of Health +6
     # - Battal: Chain Shirt +1
     # - Battal: Horseshoes of the Zephyr
-
   weapons:
     - base: Lance
       material: Bronzewood
