@@ -10,11 +10,18 @@ import pytest
 
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.domains import (
+    DomainDefinition,
     DomainRegistry,
 )
 from heroforge.engine.persistence import load_character, save_character
 from heroforge.engine.sheet import gather_sheet
-from heroforge.rules.loader import DomainsLoader
+from heroforge.engine.spells import SpellCompendium, SpellEntry
+from heroforge.rules.loader import (
+    DomainsLoader,
+    LoaderError,
+    SpellCompendiumLoader,
+    validate_domain_spells,
+)
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -49,6 +56,73 @@ class TestDomainsLoader:
         assert names == sorted(names)
         assert "Air" in names
         assert "Water" in names
+
+
+def _compendium(*names: str) -> SpellCompendium:
+    """A SpellCompendium holding exactly the named spells."""
+    comp = SpellCompendium()
+    for name in names:
+        comp.register(SpellEntry(name=name))
+    return comp
+
+
+def _domains(**spells_by_domain: dict[int, str]) -> DomainRegistry:
+    """A DomainRegistry built from plain dicts."""
+    reg = DomainRegistry()
+    for name, spells in spells_by_domain.items():
+        reg.register(DomainDefinition(name=name, domain_spells=spells))
+    return reg
+
+
+@pytest.mark.no_cached_rules
+class TestDomainSpellValidation:
+    """
+    Every domain spell must name a spell in the compendium.
+
+    These exercise the loader against fresh registries, so they
+    opt out of the session-cached Rules (see conftest.py).
+    """
+
+    def test_all_known_passes(self) -> None:
+        reg = _domains(Air={1: "Obscuring Mist", 2: "Wind Wall"})
+        comp = _compendium("Obscuring Mist", "Wind Wall")
+        validate_domain_spells(reg, comp)  # must not raise
+
+    def test_unknown_spell_raises(self) -> None:
+        reg = _domains(Air={1: "Obscurring Mist"})
+        with pytest.raises(LoaderError, match="Obscurring Mist"):
+            validate_domain_spells(reg, _compendium("Obscuring Mist"))
+
+    def test_error_names_domain_and_level(self) -> None:
+        reg = _domains(Air={4: "Air Walkk"})
+        with pytest.raises(LoaderError) as exc:
+            validate_domain_spells(reg, _compendium())
+        msg = str(exc.value)
+        assert "Air" in msg
+        assert "4" in msg
+
+    def test_reports_every_unknown_at_once(self) -> None:
+        reg = _domains(
+            Air={1: "Obscurring Mist", 2: "Wind Wall"},
+            Water={1: "Obscuring Mist", 3: "Watter Breathing"},
+        )
+        comp = _compendium("Obscuring Mist", "Wind Wall")
+        with pytest.raises(LoaderError) as exc:
+            validate_domain_spells(reg, comp)
+        msg = str(exc.value)
+        assert "Obscurring Mist" in msg
+        assert "Watter Breathing" in msg
+        assert "Wind Wall" not in msg
+
+    def test_core_domain_spells_all_known(self) -> None:
+        """Regression: core/domains.yaml vs the real compendium."""
+        reg = DomainRegistry()
+        DomainsLoader(RULES_DIR).load(reg, "core/domains.yaml")
+        comp = SpellCompendium()
+        scl = SpellCompendiumLoader(RULES_DIR)
+        for lvl in range(10):
+            scl.load(comp, f"core/spells_level_{lvl}.yaml")
+        validate_domain_spells(reg, comp)  # must not raise
 
 
 def _cleric_with_domains(domains: list[str]) -> Character:
@@ -158,11 +232,39 @@ class TestWarDomainEffect:
         save_character(c, path)
         return load_character(path, None)
 
-    def test_weapon_focus_plus_one_on_attacks(self, tmp_path: Path) -> None:
+    def test_grants_deity_specific_weapon_focus(self, tmp_path: Path) -> None:
+        """The sheet shows the specific weapon, not the generic feat."""
         c = self._war_cleric("Heironeous", tmp_path)
         sheet = gather_sheet(c, None)
-        assert sheet.combat.attack_melee.typed.get("weapon_focus") == 1
-        assert sheet.combat.attack_ranged.typed.get("weapon_focus") == 1
+        assert "Weapon Focus (Battleaxe)" in sheet.feats
+        assert "Weapon Focus" not in sheet.feats
+
+    def test_granted_feat_follows_deity(self, tmp_path: Path) -> None:
+        """
+        Derived, not stored: switching deity switches the granted
+        feat and leaves no stale one behind.
+        """
+        c = self._war_cleric("Heironeous", tmp_path)
+        assert "Weapon Focus (Battleaxe)" in gather_sheet(c, None).feats
+
+        c.deity = "Kord"
+        path = tmp_path / "rededicated.char.yaml"
+        save_character(c, path)
+        feats = gather_sheet(load_character(path, None), None).feats
+        assert "Weapon Focus (Greatsword)" in feats
+        assert "Weapon Focus (Battleaxe)" not in feats
+
+    def test_weapon_focus_adds_no_generic_attack_bonus(
+        self, tmp_path: Path
+    ) -> None:
+        """
+        Weapon Focus applies only to the favored weapon, so it must
+        not inflate the weapon-agnostic attack lines.
+        """
+        c = self._war_cleric("Heironeous", tmp_path)
+        sheet = gather_sheet(c, None)
+        assert "weapon_focus" not in sheet.combat.attack_melee.typed
+        assert "weapon_focus" not in sheet.combat.attack_ranged.typed
 
     def test_not_persisted_as_feat(self, tmp_path: Path) -> None:
         c = _cleric_with_domains(["War"])
@@ -178,14 +280,14 @@ class TestWarDomainEffect:
         save_character(c, path)
         loaded = load_character(path, None)
         sheet = gather_sheet(loaded, None)
-        assert "weapon_focus" not in sheet.combat.attack_melee.typed
+        assert not [f for f in sheet.feats if f.startswith("Weapon Focus")]
 
     def test_war_with_no_deity_no_crash(self, tmp_path: Path) -> None:
-        # War domain but no deity → no favored weapon → no effect.
+        # War domain but no deity → no favored weapon → no feat.
         c = _cleric_with_domains(["War"])
         c.deity = ""
         path = tmp_path / "war.char.yaml"
         save_character(c, path)
         loaded = load_character(path, None)  # must not raise
         sheet = gather_sheet(loaded, None)
-        assert "weapon_focus" not in sheet.combat.attack_melee.typed
+        assert not [f for f in sheet.feats if f.startswith("Weapon Focus")]

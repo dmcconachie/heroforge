@@ -405,9 +405,11 @@ def _apply_domain_effects(c: "Character", rules: object) -> None:
 
     Currently only the War domain qualifies: it grants Weapon Focus
     (and Martial Weapon Proficiency, a mechanical no-op here) with the
-    deity's favored weapon. The Weapon Focus +1 is applied straight to
-    the attack pool under source 'domain:War' — it is NOT added as a
-    feat, so it does not round-trip into the saved feat list.
+    deity's favored weapon. The feat is *derived* on every load from
+    `domains` plus `deity`, so it shows on the sheet as the specific
+    Weapon Focus (<favored weapon>) but is never written back to the
+    character file. Changing deity therefore changes the granted feat
+    and cannot leave a stale one behind.
     """
     if "War" not in c.domains:
         return
@@ -418,9 +420,14 @@ def _apply_domain_effects(c: "Character", rules: object) -> None:
     wf = rules.feats.get("Weapon Focus")  # type: ignore[attr-defined]
     if wf is None:
         return
-    buff = wf.build_buff_definition(selection=weapon)
-    if buff is not None:
-        c._apply_feat_pool_bonuses("War", buff)
+    c.add_feat(
+        "Weapon Focus",
+        wf,
+        level=1,
+        source="domain:War",
+        parameter=weapon,
+        derived=True,
+    )
 
 
 # -----------------------------------------------------------

@@ -84,22 +84,19 @@ combat:
         dark_blessing_cha: 2
         iron_will: 2
   attack_melee:
-    total: 21
+    total: 20
     typed:
       base: 17
       str: 3
-      weapon_focus: 1
   attack_ranged:
-    total: 19
+    total: 18
     typed:
       base: 17
       dex: 1
-      weapon_focus: 1
   damage_melee:
-    total: 5
+    total: 3
     typed:
       str: 3
-      weapon_specialization: 2
   grapple:
     total: 20
     typed:
@@ -107,15 +104,15 @@ combat:
       str: 3
 attack_iteratives:
   melee:
-    - 21
-    - 16
-    - 11
-    - 6
+    - 20
+    - 15
+    - 10
+    - 5
   ranged:
-    - 19
-    - 14
-    - 9
-    - 4
+    - 18
+    - 13
+    - 8
+    - 3
 skills:
   Climb:
     total: 7
@@ -148,12 +145,12 @@ carrying_capacity:
 feats:
   - Power Attack
   - Cleave
-  - Weapon Focus
+  - Weapon Focus (Longsword)
   - Improved Initiative
   - Dodge
   - Blind-Fight
   - Great Cleave
-  - Weapon Specialization
+  - Weapon Specialization (Longsword)
   - Iron Will
   - Improved Bull Rush
   - Improved Sunder

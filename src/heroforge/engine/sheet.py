@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import ALWAYS_STACKING, BonusPool, BonusType
+from heroforge.engine.character import feat_key_of
 from heroforge.engine.enums import (
     SAVE_ABILITY,
     Ability,
@@ -431,7 +432,9 @@ def _carrying(c: "Character") -> CarryingCapacity:
 
 
 def _feats(c: "Character") -> list[str]:
-    return [f.get("name", "") for f in c.feats]
+    # Selection feats render with their choice, so a War cleric of
+    # Heironeous shows "Weapon Focus (Longsword)", not the generic feat.
+    return [feat_key_of(f) for f in c.feats]
 
 
 # -----------------------------------------------------------

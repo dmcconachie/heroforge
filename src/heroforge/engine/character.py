@@ -120,6 +120,36 @@ class CharacterError(Exception):
 
 
 # ---------------------------------------------------------------------------
+# Feat identity
+# ---------------------------------------------------------------------------
+
+
+def feat_instance_key(
+    feat_name: str,
+    defn: "FeatDefinition | None" = None,
+    parameter: int | str | None = None,
+) -> str:
+    """
+    Identity of a single feat instance.
+
+    Selection feats are distinct per choice: Weapon Focus
+    (Longsword) and Weapon Focus (Greatsword) are two separate
+    feats, each with its own prerequisites and its own bonus.
+    Feats with a numeric parameter (Power Attack) are one feat
+    whose parameter varies, so the parameter is not part of
+    their identity.
+    """
+    if defn is not None and defn.has_selection and parameter is not None:
+        return f"{feat_name} ({parameter})"
+    return feat_name
+
+
+def feat_key_of(entry: dict) -> str:
+    """Identity of a stored feat entry, falling back to its name."""
+    return entry.get("key") or entry.get("name", "")
+
+
+# ---------------------------------------------------------------------------
 # Change notification
 # ---------------------------------------------------------------------------
 
@@ -1295,7 +1325,8 @@ class Character:
         *,
         level: int,
         source: str,
-        parameter: int | None = None,
+        parameter: int | str | None = None,
+        derived: bool = False,
     ) -> None:
         """
         Add a feat to this character.
@@ -1321,13 +1352,15 @@ class Character:
               None, the feat is recorded but no effects are
               applied.
         """
-        # Avoid duplicate feat entries
-        existing = {f.get("name") for f in self.feats}
-        if feat_name in existing:
+        # Avoid duplicate feat entries. Selection feats are
+        # distinct per choice, so identity is (name, selection).
+        key = feat_instance_key(feat_name, defn, parameter)
+        if any(feat_key_of(f) == key for f in self.feats):
             return
 
         entry: dict = {
             "name": feat_name,
+            "key": key,
             "level": level,
             "source": source,
         }
@@ -1336,13 +1369,16 @@ class Character:
         self.feats.append(entry)
 
         # Also store in the matching CharacterLevel
-        # (skip if already present, e.g. during load)
-        for lv in self.levels:
-            if lv.character_level == level:
-                names = {f.get("name") for f in lv.feats}
-                if feat_name not in names:
-                    lv.feats.append(entry)
-                break
+        # (skip if already present, e.g. during load).
+        # Derived feats (e.g. a domain granted feat) are
+        # recomputed on every load and must never be saved.
+        if not derived:
+            for lv in self.levels:
+                if lv.character_level == level:
+                    keys = {feat_key_of(f) for f in lv.feats}
+                    if key not in keys:
+                        lv.feats.append(entry)
+                    break
 
         if defn is None:
             return
@@ -1362,36 +1398,41 @@ class Character:
             else:
                 buff = defn.buff_definition
             if buff is not None:
-                self._apply_feat_pool_bonuses(feat_name, buff)
+                self._apply_feat_pool_bonuses(key, buff)
 
         elif kind_val == "conditional" and defn.buff_definition is not None:
             # Register but do NOT activate — user toggles from Buffs panel
             pairs = defn.buff_definition.pool_entries(0, self)
-            if feat_name not in self._buff_states:
-                self.register_buff_definition(feat_name, pairs)
+            if key not in self._buff_states:
+                self.register_buff_definition(key, pairs)
 
     def remove_feat(
         self,
         feat_name: str,
         defn: FeatDefinition | None = None,
+        *,
+        selection: str | None = None,
     ) -> None:
         """
         Remove a feat from this character.
 
+        With ``selection``, drops only that instance of a
+        selection feat (e.g. Weapon Focus (Longsword)); without
+        it, every instance sharing ``feat_name`` goes.
+
         Reverses always_on stat effects and deactivates
         any conditional buff that was active.
         """
-        # Capture the selection (if any) before dropping the entry, so a
-        # selection feat clears the same pool it was applied to.
-        selection = next(
-            (
-                f.get("parameter")
-                for f in self.feats
-                if f.get("name") == feat_name
-            ),
-            None,
-        )
-        self.feats = [f for f in self.feats if f.get("name") != feat_name]
+        if selection is None:
+            targets = [f for f in self.feats if f.get("name") == feat_name]
+        else:
+            key = feat_instance_key(feat_name, defn, selection)
+            targets = [f for f in self.feats if feat_key_of(f) == key]
+        if not targets:
+            return
+
+        doomed = {feat_key_of(f) for f in targets}
+        self.feats = [f for f in self.feats if feat_key_of(f) not in doomed]
 
         if defn is None:
             return
@@ -1400,17 +1441,23 @@ class Character:
         if hasattr(kind_val, "value"):
             kind_val = kind_val.value
 
-        if kind_val == "always_on":
-            if defn.has_selection:
-                buff = defn.build_buff_definition(selection=selection)
-            else:
-                buff = defn.buff_definition
-            if buff is not None:
-                self._remove_feat_pool_bonuses(feat_name, buff)
-        elif kind_val == "conditional" and feat_name in self._buff_states:
-            self.toggle_buff(feat_name, False)
-            del self._buff_states[feat_name]
-            self._buff_entries.pop(feat_name, None)
+        # Each instance owns its own pool source, so reverse them
+        # one at a time using that instance's own selection.
+        for entry in targets:
+            key = feat_key_of(entry)
+            if kind_val == "always_on":
+                if defn.has_selection:
+                    buff = defn.build_buff_definition(
+                        selection=entry.get("parameter")
+                    )
+                else:
+                    buff = defn.buff_definition
+                if buff is not None:
+                    self._remove_feat_pool_bonuses(key, buff)
+            elif kind_val == "conditional" and key in self._buff_states:
+                self.toggle_buff(key, False)
+                del self._buff_states[key]
+                self._buff_entries.pop(key, None)
 
     # -----------------------------------------------------------------------
     # Pool access (for rules registry and equipment manager)

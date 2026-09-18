@@ -334,7 +334,18 @@ parameterized feats (e.g. Power Attack amount).
 
 Always-on feats apply bonuses directly to the relevant
 pools via `_apply_feat_pool_bonuses()` using source key
-`"feat:<name>"` — they never appear in the buff panel.
+`"feat:<instance key>"` — they never appear in the buff
+panel.
+
+A feat's *instance key* (`character.feat_instance_key()`)
+is its name, plus the selection for selection feats:
+`Weapon Focus (Longsword)` and `Weapon Focus (Greatsword)`
+are two distinct feats, each with its own entry, its own
+pool source and its own removal. Feats with a numeric
+parameter (Power Attack) are one feat whose parameter
+varies, so the parameter is not part of their identity.
+`remove_feat(..., selection=...)` targets one instance;
+without a selection it removes every instance of the name.
 Conditional feats register their buff for user toggling
 via the buffs panel. Dodge is conditional (per 3.5e rules
 the player designates one opponent per action).
@@ -544,6 +555,12 @@ YAML-to-dataclass mapping. Complex loaders (Feats,
 Templates) still use `build_*_from_yaml()` builders but
 delegate key validation to `_forbid_extra()`.
 
+`validate_domain_spells()` cross-checks every spell named in
+`domains.yaml` against the loaded `SpellCompendium` and raises a
+single `LoaderError` listing every unknown name. `Rules.load()`
+calls it in the final-wiring step rather than inside
+`DomainsLoader`, because domains load before the compendium.
+
 Conditions have their own domain: `ConditionDefinition`
 and `ConditionRegistry` live in `engine/conditions.py`.
 The `ConditionLoader` reads `conditions_srd.yaml` (which
@@ -734,8 +751,12 @@ Reusable components in `widgets/`: `LabeledField`,
   `.char.yaml` and render in the sheet (granted-power text
   + domain spell list). The **War** domain is wired —
   it grants Weapon Focus with the deity's favored weapon
-  (via `deities.yaml`), applied as a +1 attack-pool bonus
-  on load (source `domain:War`, not a saved feat). Still
+  (via `deities.yaml`) as a *derived* feat: added to
+  `Character.feats` on load with source `domain:War` and
+  `derived=True`, so it renders on the sheet as
+  `Weapon Focus (<weapon>)` but is never written to
+  `lv.feats` and so never saved. Changing deity changes the
+  granted feat and cannot strand a stale one. Still
   display-only: bonus domain spell slot per level, domain
   spells added to the prepared-spell list, and the
   conditional/activated powers — Knowledge's +1 caster
@@ -754,14 +775,16 @@ Reusable components in `widgets/`: `LabeledField`,
 - Per-weapon attack/damage breakdowns (weapon
   enhancement, masterwork, keen, speed properties
   need per-weapon stat nodes)
-- Weapon Focus / Weapon Specialization selection
-  routing: these carry a chosen weapon in
-  `parameterized_selection`, but their effects target the
-  shared `attack_all` / `damage_all` pools, so the bonus
-  applies to *every* weapon, not the chosen one. The
-  `$selection` target-substitution mechanism (used by Skill
-  Focus) is ready to route them once per-weapon attack
-  pools exist.
+- Weapon Focus / Specialization numeric effects. All four
+  (Weapon Focus, Greater Weapon Focus, Weapon
+  Specialization, Greater Weapon Specialization) apply only
+  to the chosen weapon, so they are `passive` and carry no
+  effects: a Weapon Focus (Longsword) must not buff a bow,
+  and the shared `attack_all` / `damage_all` pools are the
+  wrong home for a per-weapon bonus. They record the choice
+  and show it on the sheet; the bonus lands once per-weapon
+  attack pools exist. The `$selection` target-substitution
+  mechanism (used by Skill Focus) is ready to route them.
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)

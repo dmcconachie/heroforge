@@ -86,17 +86,15 @@ combat:
       typed:
         base: 5
   attack_melee:
-    total: 19
+    total: 18
     typed:
       base: 16
       str: 2
-      weapon_focus: 1
   attack_ranged:
-    total: 20
+    total: 19
     typed:
       base: 16
       dex: 3
-      weapon_focus: 1
   damage_melee:
     total: 2
     typed:
@@ -108,15 +106,15 @@ combat:
       str: 2
 attack_iteratives:
   melee:
+    - 18
+    - 13
+    - 8
+    - 3
+  ranged:
     - 19
     - 14
     - 9
     - 4
-  ranged:
-    - 20
-    - 15
-    - 10
-    - 5
 skills:
   Balance:
     total: 15
@@ -204,7 +202,7 @@ carrying_capacity:
   heavy: 175
 feats:
   - Dodge
-  - Weapon Focus
+  - Weapon Focus (Rapier)
   - Mobility
   - Combat Expertise
   - Improved Initiative

@@ -36,6 +36,9 @@ Break Enchantment:
     Paladin: 4
     Sorcerer: 5
     Wizard: 5
+Chaos Hammer:
+  level:
+    Chaos: 4
 Commune with Nature:
   level:
     Druid: 5
@@ -150,6 +153,9 @@ Hold Monster:
     Bard: 4
     Sorcerer: 5
     Wizard: 5
+Holy Smite:
+  level:
+    Good: 4
 Holy Sword:
   level:
     Paladin: 4
@@ -198,6 +204,9 @@ Rary's Mnemonic Enhancer:
 Modify Memory:
   level:
     Bard: 4
+Order's Wrath:
+  level:
+    Law: 4
 Phantasmal Killer:
   level:
     Sorcerer: 4
@@ -283,6 +292,9 @@ Tree Stride:
   level:
     Druid: 5
     Ranger: 4
+Unholy Blight:
+  level:
+    Evil: 4
 Wall of Fire:
   level:
     Druid: 5

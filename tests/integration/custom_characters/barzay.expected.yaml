@@ -217,7 +217,7 @@ carrying_capacity:
   medium: 53
   heavy: 80
 feats:
-  - Skill Focus
+  - Skill Focus (Knowledge (Religion))
   - Orc-blooded
 class_features:
   - 'turn_undead: Turn or rebuke undead'

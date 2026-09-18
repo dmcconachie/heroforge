@@ -85,22 +85,19 @@ combat:
       typed:
         base: 2
   attack_melee:
-    total: 14
+    total: 13
     typed:
       base: 6
       str: 7
-      weapon_focus: 1
   attack_ranged:
-    total: 8
+    total: 7
     typed:
       base: 6
       dex: 1
-      weapon_focus: 1
   damage_melee:
-    total: 9
+    total: 7
     typed:
       str: 7
-      weapon_specialization: 2
   grapple:
     total: 13
     typed:
@@ -108,11 +105,11 @@ combat:
       str: 7
 attack_iteratives:
   melee:
-    - 14
-    - 9
-  ranged:
+    - 13
     - 8
-    - 3
+  ranged:
+    - 7
+    - 2
 skills:
   Climb:
     total: 16
@@ -135,10 +132,10 @@ carrying_capacity:
 feats:
   - Power Attack
   - Cleave
-  - Weapon Focus
+  - Weapon Focus (Greatsword)
   - Improved Initiative
   - Great Cleave
-  - Weapon Specialization
+  - Weapon Specialization (Greatsword)
   - Blind-Fight
   - Improved Bull Rush
 class_features:

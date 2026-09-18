@@ -246,7 +246,7 @@ class TestSkillFocusSelection:
     def test_chosen_skill_bonus_is_untyped(self) -> None:
         c = self._char_with_skill_focus("Knowledge (Religion)")
         entries = c.get_pool("skill_knowledge_religion").entries_for(
-            "feat:Skill Focus"
+            "feat:Skill Focus (Knowledge (Religion))"
         )
         assert len(entries) == 1
         assert entries[0].value == 3
@@ -987,3 +987,172 @@ class TestMultipleAlwaysOnFeats:
         c.add_feat("Toughness", defn, level=1, source="character")
         # Re-adding is a no-op due to deduplication
         assert c.hp_max == base_hp + 3
+
+
+# ===========================================================================
+# Selection feat isolation
+# ===========================================================================
+
+
+class TestSelectionFeatIsolation:
+    """
+    A selection feat is identified by (name, selection).
+
+    Weapon Focus (Longsword) and Weapon Focus (Greatsword) are two
+    different feats; taking one must not block the other, and each
+    must own its pool contribution. Feats with a numeric parameter
+    (Power Attack) remain a single feat whose parameter varies.
+    """
+
+    def _weapon_focus_char(self) -> tuple[Character, FeatDefinition]:
+        c = fighter(1)
+        feat_reg, _, _ = loaded_registries()
+        return c, feat_reg.require("Weapon Focus")
+
+    def test_two_selections_both_recorded(self) -> None:
+        c, defn = self._weapon_focus_char()
+        for weapon in ("Longsword", "Greatsword"):
+            c.add_feat(
+                "Weapon Focus",
+                defn,
+                level=1,
+                source="character",
+                parameter=weapon,
+            )
+        picks = [
+            f.get("parameter") for f in c.feats if f["name"] == "Weapon Focus"
+        ]
+        assert picks == ["Longsword", "Greatsword"]
+
+    def test_same_selection_twice_deduped(self) -> None:
+        c, defn = self._weapon_focus_char()
+        for _ in range(2):
+            c.add_feat(
+                "Weapon Focus",
+                defn,
+                level=1,
+                source="character",
+                parameter="Longsword",
+            )
+        matches = [f for f in c.feats if f["name"] == "Weapon Focus"]
+        assert len(matches) == 1
+
+    def test_numeric_parameter_feat_still_deduped(self) -> None:
+        """Power Attack at 3 and at 5 is one feat, not two."""
+        c = fighter(1)
+        feat_reg, _, _ = loaded_registries()
+        defn = feat_reg.require("Power Attack")
+        c.add_feat(
+            "Power Attack", defn, level=1, source="character", parameter=3
+        )
+        c.add_feat(
+            "Power Attack", defn, level=1, source="character", parameter=5
+        )
+        matches = [f for f in c.feats if f["name"] == "Power Attack"]
+        assert len(matches) == 1
+
+    def test_two_skill_focus_selections_apply_separately(self) -> None:
+        """Skill Focus is explicitly repeatable for different skills."""
+        from heroforge.engine.skills import register_skills_on_character
+
+        c = fighter(1)
+        register_skills_on_character(c)
+        feat_reg, _, _ = loaded_registries()
+        defn = feat_reg.require("Skill Focus")
+        for skill in ("Bluff", "Hide"):
+            c.add_feat(
+                "Skill Focus",
+                defn,
+                level=1,
+                source="character",
+                parameter=skill,
+            )
+        bluff = c.get_pool("skill_bluff")
+        hide = c.get_pool("skill_hide")
+        assert bluff is not None and hide is not None
+        assert "feat:Skill Focus (Bluff)" in bluff.source_keys()
+        assert "feat:Skill Focus (Hide)" in hide.source_keys()
+
+    def test_remove_targets_one_selection(self) -> None:
+        c, defn = self._weapon_focus_char()
+        for weapon in ("Longsword", "Greatsword"):
+            c.add_feat(
+                "Weapon Focus",
+                defn,
+                level=1,
+                source="character",
+                parameter=weapon,
+            )
+        c.remove_feat("Weapon Focus", defn, selection="Longsword")
+        picks = [
+            f.get("parameter") for f in c.feats if f["name"] == "Weapon Focus"
+        ]
+        assert picks == ["Greatsword"]
+
+    def test_remove_without_selection_removes_all(self) -> None:
+        c, defn = self._weapon_focus_char()
+        for weapon in ("Longsword", "Greatsword"):
+            c.add_feat(
+                "Weapon Focus",
+                defn,
+                level=1,
+                source="character",
+                parameter=weapon,
+            )
+        c.remove_feat("Weapon Focus", defn)
+        assert not [f for f in c.feats if f["name"] == "Weapon Focus"]
+
+
+class TestWeaponSelectionFeatsSkipGenericPools:
+    """
+    Weapon Focus and Weapon Specialization apply only to the
+    chosen weapon. Until per-weapon attack and damage lines
+    exist there is nowhere for them to land, so they must not
+    inflate the weapon-agnostic attack_all/damage_all pools —
+    a Weapon Focus (Longsword) must not buff a bow.
+    """
+
+    # attack_all/damage_all are expanded into the melee and
+    # ranged pools at resolution time, so assert on those.
+    WEAPON_FEATS = [
+        ("Weapon Focus", ("attack_melee", "attack_ranged")),
+        ("Greater Weapon Focus", ("attack_melee", "attack_ranged")),
+        ("Weapon Specialization", ("damage_melee", "damage_ranged")),
+        (
+            "Greater Weapon Specialization",
+            ("damage_melee", "damage_ranged"),
+        ),
+    ]
+
+    @pytest.mark.parametrize(("feat_name", "pool_keys"), WEAPON_FEATS)
+    def test_generic_pools_untouched(
+        self, feat_name: str, pool_keys: tuple[str, ...]
+    ) -> None:
+        c = fighter(12)
+        feat_reg, _, _ = loaded_registries()
+        before = {k: c.get_pool(k).total(c) for k in pool_keys}
+        c.add_feat(
+            feat_name,
+            feat_reg.require(feat_name),
+            level=1,
+            source="character",
+            parameter="Longsword",
+        )
+        after = {k: c.get_pool(k).total(c) for k in pool_keys}
+        assert after == before
+
+    @pytest.mark.parametrize(("feat_name", "_pools"), WEAPON_FEATS)
+    def test_feat_is_still_recorded(
+        self, feat_name: str, _pools: tuple[str, ...]
+    ) -> None:
+        c = fighter(12)
+        feat_reg, _, _ = loaded_registries()
+        c.add_feat(
+            feat_name,
+            feat_reg.require(feat_name),
+            level=1,
+            source="character",
+            parameter="Longsword",
+        )
+        entry = next(f for f in c.feats if f["name"] == feat_name)
+        assert entry["parameter"] == "Longsword"

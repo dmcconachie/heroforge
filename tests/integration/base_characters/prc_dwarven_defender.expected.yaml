@@ -85,22 +85,19 @@ combat:
         wis: 1
         iron_will: 2
   attack_melee:
-    total: 21
-    typed:
-      base: 17
-      str: 3
-      weapon_focus: 1
-  attack_ranged:
     total: 20
     typed:
       base: 17
+      str: 3
+  attack_ranged:
+    total: 19
+    typed:
+      base: 17
       dex: 2
-      weapon_focus: 1
   damage_melee:
-    total: 5
+    total: 3
     typed:
       str: 3
-      weapon_specialization: 2
   grapple:
     total: 20
     typed:
@@ -108,15 +105,15 @@ combat:
       str: 3
 attack_iteratives:
   melee:
-    - 21
-    - 16
-    - 11
-    - 6
-  ranged:
     - 20
     - 15
     - 10
     - 5
+  ranged:
+    - 19
+    - 14
+    - 9
+    - 4
 skills:
   Climb:
     total: 11
@@ -162,8 +159,8 @@ feats:
   - Dodge
   - Toughness
   - Power Attack
-  - Weapon Focus
-  - Weapon Specialization
+  - Weapon Focus (Dwarven Waraxe)
+  - Weapon Specialization (Dwarven Waraxe)
   - Cleave
   - Blind-Fight
   - Great Fortitude

@@ -79,16 +79,14 @@ combat:
         wis: 1
         divine_grace_cha: 2
   attack_melee:
-    total: 24
+    total: 23
     typed:
       base: 20
       str: 3
-      weapon_focus: 1
   attack_ranged:
-    total: 21
+    total: 20
     typed:
       base: 20
-      weapon_focus: 1
   damage_melee:
     total: 3
     typed:
@@ -100,15 +98,15 @@ combat:
       str: 3
 attack_iteratives:
   melee:
-    - 24
-    - 19
-    - 14
-    - 9
+    - 23
+    - 18
+    - 13
+    - 8
   ranged:
-    - 21
-    - 16
-    - 11
-    - 6
+    - 20
+    - 15
+    - 10
+    - 5
 skills:
   Concentration:
     total: 16
@@ -141,7 +139,7 @@ carrying_capacity:
   heavy: 230
 feats:
   - Power Attack
-  - Weapon Focus
+  - Weapon Focus (Longsword)
   - Cleave
   - Extra Turning
   - Improved Bull Rush

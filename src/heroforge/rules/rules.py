@@ -67,6 +67,7 @@ from heroforge.rules.loader import (
     SkillsLoader,
     SpellCompendiumLoader,
     TemplatesLoader,
+    validate_domain_spells,
 )
 
 RULES_DIR = Path(__file__).parent
@@ -198,6 +199,9 @@ class Rules:
             self._load_book_materials(rd, eq_loader, book)
 
         # --- Final wiring -------------------------------------
+        # Domains load before the spell compendium, so the
+        # cross-check runs here, once every book has been read.
+        validate_domain_spells(self.domains, self.spells)
         self.prereq_checker = prereq_checker
         self.derived_pools = DerivedPoolsLoader(rd).load(
             f"{CORE}/derived_pools.yaml"

@@ -27,6 +27,7 @@ Public API:
   DomainsLoader          — domains YAML
   EquipmentLoader        — armor/weapons YAML
   SpellCompendiumLoader  — spell compendium YAML
+  validate_domain_spells — domains vs. spell compendium
 """
 
 from __future__ import annotations
@@ -1103,6 +1104,31 @@ class DomainsLoader:
             registry.register(defn)
             registered.append(name)
         return registered
+
+
+def validate_domain_spells(
+    domains: "DomainRegistry",
+    spells: "SpellCompendium",
+) -> None:
+    """
+    Cross-check every domain spell against the compendium.
+
+    A domain spell that names no known spell is a bug in our
+    own data, so this fails loudly. Every offender is reported
+    in one error rather than one per run.
+    """
+    known = spells.names()
+    bad = [
+        f"{defn.name} level {lvl}: {name!r}"
+        for defn in domains.all_domains()
+        for lvl, name in sorted(defn.domain_spells.items())
+        if name not in known
+    ]
+    if bad:
+        raise LoaderError(
+            f"Unknown domain spell(s) ({len(bad)}) — not in the "
+            "spell compendium:\n  " + "\n  ".join(bad)
+        )
 
 
 # -----------------------------------------------------------

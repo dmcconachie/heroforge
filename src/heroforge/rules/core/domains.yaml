@@ -47,8 +47,7 @@ Chaos:
     9: Summon Monster IX
 Death:
   granted_power: >-
-    '''''''Death touch 1/day: melee touch deals 1d6 per cleric level
-    damage.'''''''
+    Death touch 1/day: melee touch deals 1d6 per cleric level damage.
   domain_spells:
     1: Cause Fear
     2: Death Knell
@@ -61,8 +60,7 @@ Death:
     9: Wail of the Banshee
 Destruction:
   granted_power: >-
-    '''''''Smite 1/day: +4 attack, +cleric level damage on one melee
-    attack.'''''''
+    Smite 1/day: +4 attack, +cleric level damage on one melee attack.
   domain_spells:
     1: Inflict Light Wounds
     2: Shatter
@@ -235,8 +233,7 @@ Strength:
     9: Bigby's Crushing Hand
 Sun:
   granted_power: >-
-    '''''''Greater turning 1/day: undead that would be turned are destroyed
-    instead.'''''''
+    Greater turning 1/day: undead that would be turned are destroyed instead.
   domain_spells:
     1: Endure Elements
     2: Heat Metal

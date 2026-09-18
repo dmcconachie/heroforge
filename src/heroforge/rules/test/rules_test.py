@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from heroforge.rules import rules as rules_module
 from heroforge.rules.rules import (
     Rules,
     book_dirs,
@@ -86,6 +87,29 @@ def test_set_rules_from_prior_test_does_not_leak(
     Autouse teardown must clear any prior set_rules call so
     this test sees the cached Rules, not a leaked custom one."""
     assert get_rules() is _cached_rules
+
+
+@pytest.mark.no_cached_rules
+def test_load_validates_domain_spells(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """load() cross-checks domain spells against the compendium."""
+    seen: dict[str, object] = {}
+
+    def fake_validate(domains: object, spells: object) -> None:
+        seen["domains"] = domains
+        seen["spells"] = spells
+
+    monkeypatch.setattr(rules_module, "validate_domain_spells", fake_validate)
+    rules = Rules()
+    rules.load()
+    # Identity, not counts: the check must receive the registries
+    # load() populated, and the assertion must not rot every time
+    # a spell is added to the compendium.
+    assert seen["domains"] is rules.domains
+    assert seen["spells"] is rules.spells
+    assert len(rules.domains) == 22
+    assert len(rules.spells) > 0
 
 
 # --- book_dirs ----------------------------------------------

@@ -83,18 +83,16 @@ combat:
         base: 6
         wis: 2
   attack_melee:
-    total: 22
+    total: 21
     typed:
       base: 20
       size: 1
-      weapon_focus: 1
   attack_ranged:
-    total: 27
+    total: 26
     typed:
       base: 20
       dex: 5
       size: 1
-      weapon_focus: 1
   damage_melee:
     total: 0
   grapple:
@@ -104,15 +102,15 @@ combat:
       size: -4
 attack_iteratives:
   melee:
-    - 22
-    - 17
-    - 12
-    - 7
+    - 21
+    - 16
+    - 11
+    - 6
   ranged:
-    - 27
-    - 22
-    - 17
-    - 12
+    - 26
+    - 21
+    - 16
+    - 11
 skills:
   Climb:
     total: 16
@@ -170,7 +168,7 @@ feats:
   - Precise Shot
   - Endurance
   - Manyshot
-  - Weapon Focus
+  - Weapon Focus (Longbow)
   - Far Shot
   - Improved Precise Shot
   - Dodge

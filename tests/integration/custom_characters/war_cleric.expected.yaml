@@ -77,15 +77,13 @@ combat:
         base: 2
         wis: 3
   attack_melee:
-    total: 3
-    typed:
-      str: 2
-      weapon_focus: 1
-  attack_ranged:
     total: 2
     typed:
+      str: 2
+  attack_ranged:
+    total: 1
+    typed:
       dex: 1
-      weapon_focus: 1
   damage_melee:
     total: 2
     typed:
@@ -96,9 +94,9 @@ combat:
       str: 2
 attack_iteratives:
   melee:
-    - 3
-  ranged:
     - 2
+  ranged:
+    - 1
 skills:
   Concentration:
     total: 5
@@ -106,10 +104,10 @@ skills:
       ability_mod: 1
       ranks: 4
   Diplomacy:
-    total: 3
+    total: 1
     typed:
       ability_mod: -1
-      ranks: 4
+      ranks: 2
   Knowledge (Religion):
     total: 4
     typed:
@@ -122,6 +120,8 @@ carrying_capacity:
   light: 66
   medium: 133
   heavy: 200
+feats:
+  - Weapon Focus (Battleaxe)
 class_features:
   - 'turn_undead: Turn or rebuke undead'
   - >-

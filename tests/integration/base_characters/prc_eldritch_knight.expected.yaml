@@ -81,17 +81,15 @@ combat:
       typed:
         base: 7
   attack_melee:
-    total: 16
-    typed:
-      base: 13
-      str: 2
-      weapon_focus: 1
-  attack_ranged:
     total: 15
     typed:
       base: 13
+      str: 2
+  attack_ranged:
+    total: 14
+    typed:
+      base: 13
       dex: 1
-      weapon_focus: 1
   damage_melee:
     total: 2
     typed:
@@ -103,13 +101,13 @@ combat:
       str: 2
 attack_iteratives:
   melee:
-    - 16
-    - 11
-    - 6
-  ranged:
     - 15
     - 10
     - 5
+  ranged:
+    - 14
+    - 9
+    - 4
 skills:
   Climb:
     total: 6
@@ -178,7 +176,7 @@ carrying_capacity:
   heavy: 175
 feats:
   - Power Attack
-  - Weapon Focus
+  - Weapon Focus (Longsword)
   - Combat Casting
   - Scribe Scroll
   - Dodge

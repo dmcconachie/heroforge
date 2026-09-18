@@ -492,9 +492,13 @@ Greater Two-Weapon Fighting:
           label: BAB
   effects: []
 Greater Weapon Focus:
-  kind: always_on
+  kind: passive
   source_book: PHB
-  note: +1 additional attack with chosen weapon (stacks with Weapon Focus)
+  note: >-
+    +1 additional attack with chosen weapon (stacks with Weapon
+    Focus). Applies only to the chosen weapon, so it contributes no
+    bonus to the weapon-agnostic attack/damage lines; it lands
+    once per-weapon attack lines exist.
   prerequisites:
     all_of:
       - feat: Weapon Focus
@@ -505,15 +509,13 @@ Greater Weapon Focus:
     name: weapon
     label: Weapon
     type: weapon_list
-  effects:
-    - target: attack_all
-      bonus_type: untyped
-      value: 1
-      source_label: greater_weapon_focus
 Greater Weapon Specialization:
-  kind: always_on
+  kind: passive
   source_book: PHB
-  note: +2 additional damage with chosen weapon (stacks)
+  note: >-
+    +2 additional damage with chosen weapon (stacks). Applies only to the
+    chosen weapon, so it contributes no bonus to the weapon-agnostic
+    attack/damage lines; it lands once per-weapon attack lines exist.
   prerequisites:
     all_of:
       - feat: Weapon Specialization
@@ -525,11 +527,6 @@ Greater Weapon Specialization:
     name: weapon
     label: Weapon
     type: weapon_list
-  effects:
-    - target: damage_all
-      bonus_type: untyped
-      value: 2
-      source_label: greater_weapon_specialization
 Heighten Spell:
   kind: passive
   source_book: PHB
@@ -1236,11 +1233,12 @@ Weapon Finesse:
       label: BAB
   effects: []
 Weapon Focus:
-  kind: always_on
+  kind: passive
   source_book: PHB
   note: >-
-    +1 attack with chosen weapon (applied as untyped to attack_all for
-    simplicity)
+    +1 attack with chosen weapon. Applies only to the chosen weapon, so it
+    contributes no bonus to the weapon-agnostic attack/damage lines; it
+    lands once per-weapon attack lines exist.
   prerequisites:
     all_of:
       - stat:
@@ -1253,15 +1251,13 @@ Weapon Focus:
     name: weapon
     label: Weapon
     type: weapon_list
-  effects:
-    - target: attack_all
-      bonus_type: untyped
-      value: 1
-      source_label: weapon_focus
 Weapon Specialization:
-  kind: always_on
+  kind: passive
   source_book: PHB
-  note: +2 damage with chosen weapon
+  note: >-
+    +2 damage with chosen weapon. Applies only to the chosen weapon, so it
+    contributes no bonus to the weapon-agnostic attack/damage lines; it
+    lands once per-weapon attack lines exist.
   prerequisites:
     all_of:
       - feat: Weapon Focus
@@ -1272,11 +1268,6 @@ Weapon Specialization:
     name: weapon
     label: Weapon
     type: weapon_list
-  effects:
-    - target: damage_all
-      bonus_type: untyped
-      value: 2
-      source_label: weapon_specialization
 Whirlwind Attack:
   kind: passive
   source_book: PHB

@@ -17,7 +17,7 @@ levels:
     hp_roll: 8
     skill_ranks:
       Concentration: 4
-      Diplomacy: 4
+      Diplomacy: 2
       Knowledge (Religion): 4
       Spellcraft: 2
 domains:
