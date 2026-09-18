@@ -259,12 +259,6 @@ def _race_size(character: "Character") -> str:
 
 
 def _class_skill_names(character: "Character") -> set[str]:
-    from heroforge.rules.rules import get_rules
+    from heroforge.engine.skills import class_skills_for_character
 
-    class_reg = get_rules().classes
-    names: set[str] = set()
-    for cn in character.class_level_map:
-        defn = class_reg.get(cn)
-        if defn:
-            names.update(defn.class_skills)
-    return names
+    return class_skills_for_character(character)

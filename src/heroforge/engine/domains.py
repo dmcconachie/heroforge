@@ -22,6 +22,10 @@ class DomainDefinition:
     domain_spells: dict[int, str] = field(
         default_factory=dict
     )  # level 1-9 -> spell name
+    # Skills this domain adds to the cleric's class skill list
+    # (PHB p. 31). Entries follow class-skill syntax, so
+    # "Knowledge (all)" is a legal wildcard.
+    class_skills: list[str] = field(default_factory=list)
 
 
 class DomainRegistry:

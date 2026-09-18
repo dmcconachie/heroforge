@@ -501,3 +501,104 @@ class TestSkillBudgetIntAtLevel:
         # Level 4: INT 14 → mod +2
         # Budget: 2 + 2 = 4
         assert c.skill_points_for_level(4) == 4
+
+
+# ===========================================================================
+# Class skills: umbrella expansion and domain grants
+# ===========================================================================
+
+
+class TestClassSkillsForCharacter:
+    """
+    A class-skill list entry may be an exact skill, an umbrella
+    ("Craft" covering "Craft (Conspiracy)"), or an explicit
+    "X (all)" wildcard as the class YAMLs write Knowledge.
+    Cleric domains extend the list (PHB p. 31).
+    """
+
+    def _char(self, *classes: tuple[str, int]) -> Character:
+        from heroforge.engine.character import CharacterLevel
+
+        c = Character()
+        c.race = "Human"
+        levels, n = [], 0
+        for name, count in classes:
+            for _ in range(count):
+                n += 1
+                levels.append(
+                    CharacterLevel(
+                        character_level=n, class_name=name, hp_roll=4
+                    )
+                )
+        c.set_class_levels(levels)
+        return c
+
+    def test_exact_entry_matches(self) -> None:
+        from heroforge.engine.skills import class_skills_for_character
+
+        cs = class_skills_for_character(self._char(("Wizard", 1)))
+        assert "Spellcraft" in cs
+
+    def test_knowledge_all_expands(self) -> None:
+        """Wizards list 'Knowledge (all)'; every Knowledge counts."""
+        from heroforge.engine.skills import class_skills_for_character
+
+        cs = class_skills_for_character(self._char(("Wizard", 1)))
+        assert "Knowledge (Arcana)" in cs
+        assert "Knowledge (The Planes)" in cs
+
+    def test_umbrella_entry_expands(self) -> None:
+        """A bare 'Craft' entry covers its specialisations."""
+        from heroforge.engine.skills import class_skills_for_character
+
+        cs = class_skills_for_character(self._char(("Wizard", 1)))
+        assert "Craft (Conspiracy)" in cs
+
+    def test_unrelated_skill_excluded(self) -> None:
+        from heroforge.engine.skills import class_skills_for_character
+
+        cs = class_skills_for_character(self._char(("Wizard", 1)))
+        assert "Use Magic Device" not in cs
+        assert "Survival" not in cs
+
+    def test_multiclass_union(self) -> None:
+        """Class skill for any class counts (PHB p. 60)."""
+        from heroforge.engine.skills import class_skills_for_character
+
+        c = self._char(("Wizard", 5), ("Wild Mage", 3))
+        cs = class_skills_for_character(c)
+        assert "Use Magic Device" in cs  # Wild Mage only
+        assert "Decipher Script" in cs  # Wizard only
+
+    def test_animal_domain_grants_knowledge_nature(self) -> None:
+        c = self._char(("Cleric", 1))
+        from heroforge.engine.skills import class_skills_for_character
+
+        assert "Knowledge (Nature)" not in class_skills_for_character(c)
+        c.domains = ["Animal", "War"]
+        assert "Knowledge (Nature)" in class_skills_for_character(c)
+
+    def test_knowledge_domain_grants_all_knowledge(self) -> None:
+        from heroforge.engine.skills import class_skills_for_character
+
+        c = self._char(("Cleric", 1))
+        c.domains = ["Knowledge"]
+        cs = class_skills_for_character(c)
+        assert "Knowledge (Nature)" in cs
+        assert "Knowledge (Geography)" in cs
+
+    def test_travel_and_trickery_grants(self) -> None:
+        from heroforge.engine.skills import class_skills_for_character
+
+        c = self._char(("Cleric", 1))
+        c.domains = ["Travel", "Trickery"]
+        cs = class_skills_for_character(c)
+        assert {"Survival", "Bluff", "Disguise", "Hide"} <= cs
+
+    def test_domain_without_grant_adds_nothing(self) -> None:
+        from heroforge.engine.skills import class_skills_for_character
+
+        c = self._char(("Cleric", 1))
+        base = class_skills_for_character(c)
+        c.domains = ["War", "Good"]
+        assert class_skills_for_character(c) == base

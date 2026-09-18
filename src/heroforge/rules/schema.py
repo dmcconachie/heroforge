@@ -208,16 +208,29 @@ converter.register_structure_hook(
 # ---------------------------------------------------
 
 
+_DOMAIN_KEYS = frozenset(
+    {"name", "granted_power", "domain_spells", "class_skills"}
+)
+
+
 def _structure_domain(val: object, _: type) -> DomainDefinition:
     if not isinstance(val, dict):
         msg = f"Cannot structure {type(val)} as DomainDefinition"
         raise TypeError(msg)
+    # This hook bypasses the converter's forbid_extra_keys, so it
+    # must reject unknown keys itself — otherwise a typo in
+    # domains.yaml is silently dropped.
+    unknown = sorted(set(val) - _DOMAIN_KEYS)
+    if unknown:
+        msg = f"Unknown domain key(s): {', '.join(unknown)}"
+        raise ValueError(msg)
     spells_raw = val.get("domain_spells", {})
     domain_spells = {int(k): str(v) for k, v in spells_raw.items()}
     return DomainDefinition(
         name=val["name"],
         granted_power=val.get("granted_power", ""),
         domain_spells=domain_spells,
+        class_skills=list(val.get("class_skills", [])),
     )
 
 

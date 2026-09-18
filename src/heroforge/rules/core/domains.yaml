@@ -23,6 +23,8 @@ Animal:
   granted_power: >-
     Speak with animals 1/day as spell-like ability. Knowledge (Nature)
     is a class skill.
+  class_skills:
+    - Knowledge (Nature)
   domain_spells:
     1: Calm Animals
     2: Hold Animal
@@ -139,6 +141,8 @@ Knowledge:
   granted_power: >-
     All Knowledge skills are class skills. Cast divinations at +1 caster
     level.
+  class_skills:
+    - Knowledge (all)
   domain_spells:
     1: Detect Secret Doors
     2: Detect Thoughts
@@ -193,6 +197,8 @@ Plant:
   granted_power: >-
     Rebuke or command plant creatures as evil cleric rebukes undead.
     Knowledge (Nature) is a class skill.
+  class_skills:
+    - Knowledge (Nature)
   domain_spells:
     1: Entangle
     2: Barkskin
@@ -248,6 +254,8 @@ Travel:
   granted_power: >-
     Freedom of movement for 1 round/cleric level per day. Survival is
     a class skill.
+  class_skills:
+    - Survival
   domain_spells:
     1: Longstrider
     2: Locate Object
@@ -260,6 +268,10 @@ Travel:
     9: Astral Projection
 Trickery:
   granted_power: Bluff, Disguise, and Hide are class skills.
+  class_skills:
+    - Bluff
+    - Disguise
+    - Hide
   domain_spells:
     1: Disguise Self
     2: Invisibility

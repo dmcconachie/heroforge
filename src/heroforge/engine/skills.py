@@ -279,6 +279,57 @@ def compute_skill_budget(
     return pts
 
 
+def class_skill_matches(entry: str, skill_name: str) -> bool:
+    """
+    True if a class-skill list *entry* covers *skill_name*.
+
+    Three forms, all of which appear in the class YAMLs:
+      - exact           "Spellcraft" covers "Spellcraft"
+      - "X (all)"       "Knowledge (all)" covers every Knowledge
+      - bare umbrella   "Craft" covers "Craft (Conspiracy)"
+    """
+    if entry == skill_name:
+        return True
+    if entry.endswith(" (all)"):
+        return skill_name.startswith(entry[: -len(" (all)")] + " (")
+    if "(" not in entry:
+        return skill_name.startswith(entry + " (")
+    return False
+
+
+def class_skills_for_character(character: Character) -> set[str]:
+    """
+    Every skill that is a class skill for this character.
+
+    PHB p. 60: a skill counts if it is a class skill for *any* of a
+    multiclass character's classes. Cleric domains extend the list
+    (PHB p. 31), so the Knowledge domain makes every Knowledge
+    skill a class skill.
+
+    Returns concrete skill names, with umbrella and "(all)" entries
+    already expanded against the skill registry.
+    """
+    from heroforge.rules.rules import get_rules
+
+    rules = get_rules()
+    entries: set[str] = set()
+    for class_name in character.class_level_map:
+        defn = rules.classes.get(class_name)
+        if defn is not None:
+            entries.update(defn.class_skills)
+    for domain_name in getattr(character, "domains", []):
+        domain = rules.domains.get(domain_name)
+        if domain is not None:
+            entries.update(domain.class_skills)
+
+    known = [s.name for s in rules.skills.all_skills()]
+    return {
+        name
+        for name in known
+        if any(class_skill_matches(e, name) for e in entries)
+    }
+
+
 def max_skill_ranks(char_level: int, is_class_skill: bool) -> float:
     """
     Max ranks in a skill at a given character level.

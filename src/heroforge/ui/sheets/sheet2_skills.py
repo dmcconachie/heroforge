@@ -158,15 +158,9 @@ class Sheet2Skills(QWidget):
         return result.total
 
     def _is_class_skill(self, skill_name: str) -> bool:
-        from heroforge.rules.rules import get_rules
+        from heroforge.engine.skills import class_skills_for_character
 
-        c = self._state.character
-        class_reg = get_rules().classes
-        for cn in c.class_level_map:
-            defn = class_reg.get(cn)
-            if defn and skill_name in defn.class_skills:
-                return True
-        return False
+        return skill_name in class_skills_for_character(self._state.character)
 
     def _on_rank_changed(self, skill_name: str, ranks: int) -> None:
         if self._building:

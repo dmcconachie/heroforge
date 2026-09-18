@@ -772,11 +772,20 @@ Reusable components in `widgets/`: `LabeledField`,
   field can't express), Luck's reroll, Travel's freedom
   of movement, etc. War's Martial Weapon Proficiency half
   is a no-op (nonproficiency penalties aren't modelled).
-- Class-skill vs cross-class is not modelled
-  (`Character.validate()` treats every skill as a class
-  skill), so the class-skill-granting domains (Animal,
-  Knowledge, Plant, Travel, Trickery) have no expressible
-  effect yet.
+- Cross-class skill *cost* is not modelled (a cross-class
+  rank costs 2 points and caps at a half number); see
+  `docs/plans/skill-points-and-cross-class.md`. Which
+  skills *are* class skills is resolved by
+  `skills.class_skills_for_character()`: the union across
+  the character's classes (PHB p. 60) plus the grants from
+  the Animal, Knowledge, Plant, Travel and Trickery domains
+  (PHB p. 31). It expands umbrella entries, so a bare
+  `Craft` covers `Craft (Conspiracy)` and `Knowledge (all)`
+  covers every Knowledge skill. Note the per-level variant
+  used by `validate_skill_allocation` and the class sheet
+  answers a different question — the class taken *at that
+  level*, which is what cost and cap depend on — and is
+  deliberately left separate.
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
 - Per-weapon attack/damage breakdowns (weapon

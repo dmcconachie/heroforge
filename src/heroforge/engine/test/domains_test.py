@@ -347,3 +347,31 @@ class TestDomainSpellSlots:
         c.domains = ["Good"]  # nonsensical, but must not grant slots
         entry = gather_sheet(c, None).spellcasting["Wizard"]
         assert entry.domain_slots_per_day is None
+
+
+class TestDomainSchemaRejectsUnknownKeys:
+    """
+    The DomainDefinition hook bypasses forbid_extra_keys, so it
+    must reject unknown keys itself — a silently dropped key is
+    how `class_skills` went missing when it was first added.
+    """
+
+    def test_unknown_key_raises(self) -> None:
+        from heroforge.rules.schema import converter
+
+        decl = {"name": "Bogus", "granted_powr": "typo"}
+        with pytest.raises(ValueError, match="granted_powr"):
+            converter.structure(decl, DomainDefinition)
+
+    def test_known_keys_structure(self) -> None:
+        from heroforge.rules.schema import converter
+
+        decl = {
+            "name": "Animal",
+            "granted_power": "x",
+            "domain_spells": {1: "Calm Animals"},
+            "class_skills": ["Knowledge (Nature)"],
+        }
+        defn = converter.structure(decl, DomainDefinition)
+        assert defn.class_skills == ["Knowledge (Nature)"]
+        assert defn.domain_spells[1] == "Calm Animals"
