@@ -291,3 +291,59 @@ class TestWarDomainEffect:
         loaded = load_character(path, None)  # must not raise
         sheet = gather_sheet(loaded, None)
         assert not [f for f in sheet.feats if f.startswith("Weapon Focus")]
+
+
+class TestDomainSpellSlots:
+    """
+    The domain slot is a separate restricted track: it appears
+    alongside the general allotment on the sheet and never
+    inflates it.
+    """
+
+    def _cleric(self, levels: int, domains: list[str]) -> Character:
+        c = Character()
+        c.name = "Slot Cleric"
+        c.race = "Human"
+        c.alignment = "neutral_good"
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Cleric",
+                    hp_roll=8,
+                )
+                for i in range(levels)
+            ]
+        )
+        c.domains = list(domains)
+        return c
+
+    def test_cleric_with_domains_gets_domain_slots(self) -> None:
+        c = self._cleric(1, ["Good", "War"])
+        entry = gather_sheet(c, None).spellcasting["Cleric"]
+        assert entry.domain_slots_per_day is not None
+        assert entry.domain_slots_per_day[0] is None
+        assert entry.domain_slots_per_day[1] == 1
+
+    def test_general_allotment_unchanged_by_domains(self) -> None:
+        without = gather_sheet(self._cleric(5, []), None)
+        with_dom = gather_sheet(self._cleric(5, ["Good", "War"]), None)
+        assert (
+            with_dom.spellcasting["Cleric"].slots_per_day
+            == without.spellcasting["Cleric"].slots_per_day
+        )
+
+    def test_no_domains_no_domain_slots(self) -> None:
+        c = self._cleric(5, [])
+        entry = gather_sheet(c, None).spellcasting["Cleric"]
+        assert entry.domain_slots_per_day is None
+
+    def test_non_domain_caster_has_none(self) -> None:
+        c = Character()
+        c.race = "Human"
+        c.set_class_levels(
+            [CharacterLevel(character_level=1, class_name="Wizard", hp_roll=4)]
+        )
+        c.domains = ["Good"]  # nonsensical, but must not grant slots
+        entry = gather_sheet(c, None).spellcasting["Wizard"]
+        assert entry.domain_slots_per_day is None

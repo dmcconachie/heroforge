@@ -237,6 +237,9 @@ spellcasting:
     spell_save_dc:
       0: 13
       1: 14
+    domain_slots_per_day:
+      - null
+      - 1
 domains:
   Knowledge:
     granted_power: >-

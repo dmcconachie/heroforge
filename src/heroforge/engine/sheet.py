@@ -467,6 +467,7 @@ def _spellcasting(
 ) -> dict[KnownClass, SpellcastingEntry]:
     from heroforge.engine.classes import SpellPreparation
     from heroforge.engine.spellcasting import (
+        domain_slots_per_day,
         slots_per_day,
         spell_save_dc,
         spells_known,
@@ -493,6 +494,16 @@ def _spellcasting(
         for spell_lvl in range(len(slots)):
             if slots[spell_lvl] is not None:
                 dcs[spell_lvl] = spell_save_dc(ab_mod, spell_lvl)
+
+        # The domain slot rides on the class feature, not the
+        # class name, so a PrC that advances domain casting picks
+        # it up by declaring the feature.
+        domain_slots: list[int | None] | None = None
+        grants_domains = any(
+            f.feature == "domains" for f in defn.features_up_to_level(level)
+        )
+        if grants_domains and c.domains:
+            domain_slots = domain_slots_per_day(slots)
 
         known_count: list[int | None] | None = None
         known_spells: dict[int, list[str]] | None = None
@@ -527,6 +538,7 @@ def _spellcasting(
             preparation=sc.preparation,
             slots_per_day=slots,
             spell_save_dc=dcs,
+            domain_slots_per_day=domain_slots,
             spells_known_count=known_count,
             spells_known=known_spells,
         )

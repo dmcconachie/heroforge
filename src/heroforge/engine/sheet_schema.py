@@ -147,6 +147,9 @@ class SpellcastingEntry:
     preparation: SpellPreparation
     slots_per_day: list[int | None]
     spell_save_dc: dict[int, int] = field(default_factory=dict)
+    # Restricted slots, tracked apart from slots_per_day: one per
+    # castable spell level, fillable only from the cleric's domains.
+    domain_slots_per_day: list[int | None] | None = None
     spells_known_count: list[int | None] | None = None
     spells_known: dict[int, list[str]] | None = None
 

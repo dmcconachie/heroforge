@@ -287,6 +287,28 @@ def slots_per_day(
     return result
 
 
+def domain_slots_per_day(
+    total_slots: list[int | None],
+) -> list[int | None]:
+    """
+    Domain spell slots, indexed by spell level.
+
+    PHB p. 32: "A cleric also gets one domain spell of each spell
+    level he can cast, starting at 1st level." The slot must be
+    filled from one of the cleric's domains, so it is a separate
+    restricted track — never added to the general allotment, and
+    never granted for orisons. Per Table 3-7 it is also on top of
+    any bonus spells from a high Wisdom, so the count does not
+    scale with the key ability.
+
+    Returns 1 at each castable spell level >= 1, None elsewhere.
+    """
+    return [
+        1 if lvl > 0 and count is not None and count >= 1 else None
+        for lvl, count in enumerate(total_slots)
+    ]
+
+
 def spells_known(class_name: str, class_level: int) -> list[int | None]:
     """
     Spells known for spontaneous casters.

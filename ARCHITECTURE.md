@@ -756,8 +756,15 @@ Reusable components in `widgets/`: `LabeledField`,
   `derived=True`, so it renders on the sheet as
   `Weapon Focus (<weapon>)` but is never written to
   `lv.feats` and so never saved. Changing deity changes the
-  granted feat and cannot strand a stale one. Still
-  display-only: bonus domain spell slot per level, domain
+  granted feat and cannot strand a stale one. The domain
+  spell slot is modelled: `domain_slots_per_day` on the
+  sheet's `SpellcastingEntry` carries one restricted slot
+  per castable spell level from 1st up (PHB p. 32), kept
+  apart from `slots_per_day` because it can only be filled
+  from the character's domains. It is keyed off the
+  `domains` class feature rather than the class name, so a
+  PrC advancing domain casting picks it up by declaring the
+  feature. Still display-only: domain
   spells added to the prepared-spell list, and the
   conditional/activated powers — Knowledge's +1 caster
   level on divinations (and the other +1-CL-for-a-spell-
