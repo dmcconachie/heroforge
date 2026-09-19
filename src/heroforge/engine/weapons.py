@@ -86,6 +86,13 @@ def feat_applies_to_weapon(
     match = applies.get("match", "name")
     if match == "name":
         return bool(selection) and selection == item.get("base", "")
+    if match == "wield_class":
+        wdef = weapon_definition(item)
+        if wdef is None:
+            return False
+        if item.get("base", "") in applies.get("also", []):
+            return True
+        return wdef.wield_class == applies.get("wield_class")
     if match == "damage_type":
         wdef = weapon_definition(item)
         if wdef is None or not selection:
@@ -143,6 +150,31 @@ def range_increment_bonus(character: "Character", item: dict) -> int:
     return total
 
 
+def attack_ability_override(
+    character: "Character",
+    item: dict,
+) -> str | None:
+    """
+    The ability a feat substitutes on this weapon's attack roll.
+
+    Weapon Finesse swaps Dexterity for Strength; that is an
+    ability swap, not a bonus, so it cannot be a pool entry.
+    """
+    from heroforge.rules.rules import get_rules
+
+    registry = get_rules().feats
+    for entry in character.feats:
+        defn = registry.get(entry.get("name", ""))
+        if not feat_applies_to_weapon(defn, entry.get("parameter"), item):
+            continue
+        ability = defn.weapon_effects.get(  # type: ignore[union-attr]
+            "attack_ability"
+        )
+        if ability:
+            return str(ability)
+    return None
+
+
 def _enhancement_entry(item: dict) -> BonusEntry | None:
     """
     The weapon's own enhancement bonus.
@@ -186,6 +218,21 @@ def _make_compute(
     return compute
 
 
+def _make_swap_compute(
+    base_key: str,
+    ability: str,
+) -> "Callable[[dict[str, int], int], int]":
+    """Base line, with its Strength term replaced by *ability*."""
+
+    def compute(inputs: dict[str, int], bonus_total: int) -> int:
+        base = inputs.get(base_key, 0)
+        base -= inputs.get("str_mod", 0)
+        base += inputs.get(f"{ability}_mod", 0)
+        return base + bonus_total
+
+    return compute
+
+
 def register_weapons_on_character(character: "Character") -> None:
     """
     Rebuild the per-weapon pools and nodes from equipped weapons.
@@ -217,8 +264,17 @@ def register_weapons_on_character(character: "Character") -> None:
             if which == ATTACK:
                 # attack_melee/_ranged are nodes, so the weapon
                 # line takes the whole computed line as its base.
-                inputs, pools = [atk_base], [key]
-                compute = _make_compute(atk_base)
+                # An ability override (Weapon Finesse) subtracts
+                # the ability the base line used and adds the
+                # substitute, so the graph still drives both.
+                override = attack_ability_override(character, item)
+                if override and not ranged:
+                    inputs = [atk_base, "str_mod", f"{override}_mod"]
+                    pools = [key]
+                    compute = _make_swap_compute(atk_base, override)
+                else:
+                    inputs, pools = [atk_base], [key]
+                    compute = _make_compute(atk_base)
             else:
                 # Damage has no single node: the Strength bonus
                 # is its own node and the rest is pools, so the

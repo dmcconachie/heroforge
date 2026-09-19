@@ -347,7 +347,7 @@ feats:
   - Improved Two-Weapon Fighting
   - Staggering Strike
   - Tactile Trapsmith
-  - Weapon Focus
+  - Weapon Focus (Dagger)
   - Daring Outlaw
   - Expeditious Dodge
   - Weapon Finesse
@@ -493,11 +493,12 @@ equipment:
   weapons:
     - name: +5 Dagger
       attack:
-        total: 28
+        total: 35
         typed:
           base: 17
-          str: 5
           competence: 1
+          dex: 11
+          weapon_focus: 1
           enhancement: 5
       damage:
         total: 10
@@ -505,10 +506,10 @@ equipment:
           str: 5
           enhancement: 5
       attack_iteratives:
-        - 28
-        - 23
-        - 18
-        - 13
+        - 35
+        - 30
+        - 25
+        - 20
       range_inc: 10
       properties:
         - TWF (primary)
@@ -520,11 +521,12 @@ equipment:
         - Starmetal
     - name: +5 Dagger
       attack:
-        total: 28
+        total: 35
         typed:
           base: 17
-          str: 5
           competence: 1
+          dex: 11
+          weapon_focus: 1
           enhancement: 5
       damage:
         total: 10
@@ -532,10 +534,10 @@ equipment:
           str: 5
           enhancement: 5
       attack_iteratives:
-        - 28
-        - 23
-        - 18
-        - 13
+        - 35
+        - 30
+        - 25
+        - 20
       range_inc: 10
       properties:
         - TWF (secondary)
@@ -546,11 +548,11 @@ equipment:
         - Starmetal
     - name: +5 Alchemical Silver Light Mace
       attack:
-        total: 28
+        total: 34
         typed:
           base: 17
-          str: 5
           competence: 1
+          dex: 11
           enhancement: 5
       damage:
         total: 10
@@ -558,10 +560,10 @@ equipment:
           str: 5
           enhancement: 5
       attack_iteratives:
-        - 28
-        - 23
-        - 18
-        - 13
+        - 34
+        - 29
+        - 24
+        - 19
       properties:
         - TWF (primary)
         - sacred
@@ -569,11 +571,11 @@ equipment:
         - truedeath (greater)
     - name: +5 Alchemical Silver Light Mace
       attack:
-        total: 28
+        total: 34
         typed:
           base: 17
-          str: 5
           competence: 1
+          dex: 11
           enhancement: 5
       damage:
         total: 10
@@ -581,10 +583,10 @@ equipment:
           str: 5
           enhancement: 5
       attack_iteratives:
-        - 28
-        - 23
-        - 18
-        - 13
+        - 34
+        - 29
+        - 24
+        - 19
       properties:
         - TWF (secondary)
         - sacred

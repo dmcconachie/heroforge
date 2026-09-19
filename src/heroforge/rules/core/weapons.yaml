@@ -10,6 +10,7 @@
 #   weight, cost_gp
 
 Gauntlet:
+  wield_class: light
   category: simple
   damage_dice: 1d3
   critical_range: 20
@@ -18,6 +19,7 @@ Gauntlet:
   weight: 1
   cost_gp: 2
 Unarmed Strike:
+  wield_class: light
   category: simple
   damage_dice: 1d3
   critical_range: 20
@@ -26,6 +28,7 @@ Unarmed Strike:
   weight: 0
   cost_gp: 0
 Dagger:
+  wield_class: light
   category: simple
   damage_dice: 1d4
   critical_range: 19
@@ -35,6 +38,7 @@ Dagger:
   weight: 1
   cost_gp: 2
 Punching Dagger:
+  wield_class: light
   category: simple
   damage_dice: 1d4
   critical_range: 20
@@ -43,6 +47,7 @@ Punching Dagger:
   weight: 1
   cost_gp: 2
 Spiked Gauntlet:
+  wield_class: light
   category: simple
   damage_dice: 1d4
   critical_range: 20
@@ -51,6 +56,7 @@ Spiked Gauntlet:
   weight: 1
   cost_gp: 5
 Light Mace:
+  wield_class: light
   category: simple
   damage_dice: 1d6
   critical_range: 20
@@ -59,6 +65,7 @@ Light Mace:
   weight: 4
   cost_gp: 5
 Sickle:
+  wield_class: light
   category: simple
   damage_dice: 1d6
   critical_range: 20
@@ -67,6 +74,7 @@ Sickle:
   weight: 2
   cost_gp: 6
 Club:
+  wield_class: one_handed
   category: simple
   damage_dice: 1d6
   critical_range: 20
@@ -76,6 +84,7 @@ Club:
   weight: 3
   cost_gp: 0
 Heavy Mace:
+  wield_class: one_handed
   category: simple
   damage_dice: 1d8
   critical_range: 20
@@ -84,6 +93,7 @@ Heavy Mace:
   weight: 8
   cost_gp: 12
 Morningstar:
+  wield_class: one_handed
   category: simple
   damage_dice: 1d8
   critical_range: 20
@@ -92,6 +102,7 @@ Morningstar:
   weight: 6
   cost_gp: 8
 Shortspear:
+  wield_class: one_handed
   category: simple
   damage_dice: 1d6
   critical_range: 20
@@ -101,6 +112,7 @@ Shortspear:
   weight: 3
   cost_gp: 1
 Longspear:
+  wield_class: two_handed
   category: simple
   damage_dice: 1d8
   critical_range: 20
@@ -109,6 +121,7 @@ Longspear:
   weight: 9
   cost_gp: 5
 Quarterstaff:
+  wield_class: two_handed
   category: simple
   damage_dice: 1d6
   critical_range: 20
@@ -117,6 +130,7 @@ Quarterstaff:
   weight: 4
   cost_gp: 0
 Spear:
+  wield_class: two_handed
   category: simple
   damage_dice: 1d8
   critical_range: 20
@@ -126,6 +140,7 @@ Spear:
   weight: 6
   cost_gp: 2
 Heavy Crossbow:
+  wield_class: ranged
   category: simple
   damage_dice: 1d10
   critical_range: 19
@@ -136,6 +151,7 @@ Heavy Crossbow:
   weight: 8
   cost_gp: 50
 Light Crossbow:
+  wield_class: ranged
   category: simple
   damage_dice: 1d8
   critical_range: 19
@@ -146,6 +162,7 @@ Light Crossbow:
   weight: 4
   cost_gp: 35
 Dart:
+  wield_class: ranged
   category: simple
   damage_dice: 1d4
   critical_range: 20
@@ -156,6 +173,7 @@ Dart:
   weight: 0.5
   cost_gp: 0
 Javelin:
+  wield_class: ranged
   category: simple
   damage_dice: 1d6
   critical_range: 20
@@ -166,6 +184,7 @@ Javelin:
   weight: 2
   cost_gp: 1
 Sling:
+  wield_class: ranged
   category: simple
   damage_dice: 1d4
   critical_range: 20
@@ -176,6 +195,7 @@ Sling:
   weight: 0
   cost_gp: 0
 Throwing Axe:
+  wield_class: light
   category: martial
   damage_dice: 1d6
   critical_range: 20
@@ -185,6 +205,7 @@ Throwing Axe:
   weight: 2
   cost_gp: 8
 Light Hammer:
+  wield_class: light
   category: martial
   damage_dice: 1d4
   critical_range: 20
@@ -194,6 +215,7 @@ Light Hammer:
   weight: 2
   cost_gp: 1
 Handaxe:
+  wield_class: light
   category: martial
   damage_dice: 1d6
   critical_range: 20
@@ -202,6 +224,7 @@ Handaxe:
   weight: 3
   cost_gp: 6
 Kukri:
+  wield_class: light
   category: martial
   damage_dice: 1d4
   critical_range: 18
@@ -210,6 +233,7 @@ Kukri:
   weight: 2
   cost_gp: 8
 Light Pick:
+  wield_class: light
   category: martial
   damage_dice: 1d4
   critical_range: 20
@@ -218,6 +242,7 @@ Light Pick:
   weight: 3
   cost_gp: 4
 Sap:
+  wield_class: light
   category: martial
   damage_dice: 1d6
   critical_range: 20
@@ -226,6 +251,7 @@ Sap:
   weight: 2
   cost_gp: 1
 Short Sword:
+  wield_class: light
   category: martial
   damage_dice: 1d6
   critical_range: 19
@@ -234,6 +260,7 @@ Short Sword:
   weight: 2
   cost_gp: 10
 Battleaxe:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d8
   critical_range: 20
@@ -242,6 +269,7 @@ Battleaxe:
   weight: 6
   cost_gp: 10
 Flail:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d8
   critical_range: 20
@@ -250,6 +278,7 @@ Flail:
   weight: 5
   cost_gp: 8
 Longsword:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d8
   critical_range: 19
@@ -258,6 +287,7 @@ Longsword:
   weight: 4
   cost_gp: 15
 Heavy Pick:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d6
   critical_range: 20
@@ -266,6 +296,7 @@ Heavy Pick:
   weight: 6
   cost_gp: 8
 Rapier:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d6
   critical_range: 18
@@ -274,6 +305,7 @@ Rapier:
   weight: 2
   cost_gp: 20
 Scimitar:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d6
   critical_range: 18
@@ -282,6 +314,7 @@ Scimitar:
   weight: 4
   cost_gp: 15
 Trident:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d8
   critical_range: 20
@@ -291,6 +324,7 @@ Trident:
   weight: 4
   cost_gp: 15
 Warhammer:
+  wield_class: one_handed
   category: martial
   damage_dice: 1d8
   critical_range: 20
@@ -299,6 +333,7 @@ Warhammer:
   weight: 5
   cost_gp: 12
 Falchion:
+  wield_class: two_handed
   category: martial
   damage_dice: 2d4
   critical_range: 18
@@ -307,6 +342,7 @@ Falchion:
   weight: 8
   cost_gp: 75
 Glaive:
+  wield_class: two_handed
   category: martial
   damage_dice: 1d10
   critical_range: 20
@@ -315,6 +351,7 @@ Glaive:
   weight: 10
   cost_gp: 8
 Greataxe:
+  wield_class: two_handed
   category: martial
   damage_dice: 1d12
   critical_range: 20
@@ -323,6 +360,7 @@ Greataxe:
   weight: 12
   cost_gp: 20
 Greatclub:
+  wield_class: two_handed
   category: martial
   damage_dice: 1d10
   critical_range: 20
@@ -331,6 +369,7 @@ Greatclub:
   weight: 8
   cost_gp: 5
 Heavy Flail:
+  wield_class: two_handed
   category: martial
   damage_dice: 1d10
   critical_range: 19
@@ -339,6 +378,7 @@ Heavy Flail:
   weight: 10
   cost_gp: 15
 Greatsword:
+  wield_class: two_handed
   category: martial
   damage_dice: 2d6
   critical_range: 19
@@ -347,6 +387,7 @@ Greatsword:
   weight: 8
   cost_gp: 50
 Guisarme:
+  wield_class: two_handed
   category: martial
   damage_dice: 2d4
   critical_range: 20
@@ -355,6 +396,7 @@ Guisarme:
   weight: 12
   cost_gp: 9
 Halberd:
+  wield_class: two_handed
   category: martial
   damage_dice: 1d10
   critical_range: 20
@@ -363,6 +405,7 @@ Halberd:
   weight: 12
   cost_gp: 10
 Lance:
+  wield_class: two_handed
   category: martial
   damage_dice: 1d8
   critical_range: 20
@@ -371,6 +414,7 @@ Lance:
   weight: 10
   cost_gp: 10
 Ranseur:
+  wield_class: two_handed
   category: martial
   damage_dice: 2d4
   critical_range: 20
@@ -379,6 +423,7 @@ Ranseur:
   weight: 12
   cost_gp: 10
 Scythe:
+  wield_class: two_handed
   category: martial
   damage_dice: 2d4
   critical_range: 20
@@ -387,6 +432,7 @@ Scythe:
   weight: 10
   cost_gp: 18
 Longbow:
+  wield_class: ranged
   category: martial
   damage_dice: 1d8
   critical_range: 20
@@ -397,6 +443,7 @@ Longbow:
   weight: 3
   cost_gp: 75
 Composite Longbow:
+  wield_class: ranged
   category: martial
   damage_dice: 1d8
   critical_range: 20
@@ -407,6 +454,7 @@ Composite Longbow:
   weight: 3
   cost_gp: 100
 Shortbow:
+  wield_class: ranged
   category: martial
   damage_dice: 1d6
   critical_range: 20
@@ -417,6 +465,7 @@ Shortbow:
   weight: 2
   cost_gp: 30
 Composite Shortbow:
+  wield_class: ranged
   category: martial
   damage_dice: 1d6
   critical_range: 20
@@ -427,6 +476,7 @@ Composite Shortbow:
   weight: 2
   cost_gp: 75
 Kama:
+  wield_class: light
   category: exotic
   damage_dice: 1d6
   critical_range: 20
@@ -435,6 +485,7 @@ Kama:
   weight: 2
   cost_gp: 2
 Nunchaku:
+  wield_class: light
   category: exotic
   damage_dice: 1d6
   critical_range: 20
@@ -443,6 +494,7 @@ Nunchaku:
   weight: 2
   cost_gp: 2
 Sai:
+  wield_class: light
   category: exotic
   damage_dice: 1d4
   critical_range: 20
@@ -452,6 +504,7 @@ Sai:
   weight: 1
   cost_gp: 1
 Siangham:
+  wield_class: light
   category: exotic
   damage_dice: 1d6
   critical_range: 20
@@ -460,6 +513,7 @@ Siangham:
   weight: 1
   cost_gp: 3
 Bastard Sword:
+  wield_class: one_handed
   category: exotic
   damage_dice: 1d10
   critical_range: 19
@@ -468,6 +522,7 @@ Bastard Sword:
   weight: 6
   cost_gp: 35
 Dwarven Waraxe:
+  wield_class: one_handed
   category: exotic
   damage_dice: 1d10
   critical_range: 20
@@ -476,6 +531,7 @@ Dwarven Waraxe:
   weight: 8
   cost_gp: 30
 Whip:
+  wield_class: one_handed
   category: exotic
   damage_dice: 1d3
   critical_range: 20
@@ -484,6 +540,7 @@ Whip:
   weight: 2
   cost_gp: 1
 Spiked Chain:
+  wield_class: two_handed
   category: exotic
   damage_dice: 2d4
   critical_range: 20
@@ -492,6 +549,7 @@ Spiked Chain:
   weight: 10
   cost_gp: 25
 Hand Crossbow:
+  wield_class: ranged
   category: exotic
   damage_dice: 1d4
   critical_range: 19
@@ -502,6 +560,7 @@ Hand Crossbow:
   weight: 2
   cost_gp: 100
 Repeating Heavy Crossbow:
+  wield_class: ranged
   category: exotic
   damage_dice: 1d10
   critical_range: 19
@@ -512,6 +571,7 @@ Repeating Heavy Crossbow:
   weight: 12
   cost_gp: 400
 Repeating Light Crossbow:
+  wield_class: ranged
   category: exotic
   damage_dice: 1d8
   critical_range: 19
@@ -522,6 +582,7 @@ Repeating Light Crossbow:
   weight: 6
   cost_gp: 250
 Net:
+  wield_class: ranged
   category: exotic
   damage_dice: '0'
   critical_range: 20
@@ -532,6 +593,7 @@ Net:
   cost_gp: 20
   special: entangle
 Shuriken:
+  wield_class: ranged
   category: exotic
   damage_dice: 1d2
   critical_range: 20
@@ -542,6 +604,7 @@ Shuriken:
   weight: 0.1
   cost_gp: 0
 Bolas:
+  wield_class: ranged
   category: exotic
   damage_dice: 1d4
   critical_range: 20

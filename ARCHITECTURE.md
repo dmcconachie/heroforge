@@ -874,6 +874,19 @@ Reusable components in `widgets/`: `LabeledField`,
   extends the range increment, which is a weapon property
   rather than a bonus pool and so is resolved directly by
   `range_increment_bonus()`.
+  A `weapon_effects` block may also declare
+  `attack_ability:`, which substitutes an ability rather
+  than adding a bonus: Weapon Finesse rolls Dexterity in
+  place of Strength on a light weapon, rapier, whip or
+  spiked chain (PHB p. 102), and only on attack rolls —
+  damage keeps Strength. Because it is a swap rather than a
+  bonus it cannot be a pool entry, so the weapon node takes
+  the ability modifiers as graph inputs and exchanges them.
+  Eligibility uses `WeaponDefinition.wield_class`
+  (light / one_handed / two_handed / ranged, from the SRD
+  weapons table); rapier, whip and spiked chain are not
+  light, so the rule names them and the feat data lists
+  them under `applies.also`.
   Not yet routed per weapon: critical threat ranges
   (Improved Critical, keen), two-weapon fighting penalties,
   and weapon material/property effects.

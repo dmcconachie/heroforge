@@ -250,12 +250,13 @@ equipment:
   weapons:
     - name: Short Sword
       attack:
-        total: 15
+        total: 19
         typed:
           base: 15
+          dex: 4
       damage:
         total: 0
       attack_iteratives:
-        - 15
-        - 10
-        - 5
+        - 19
+        - 14
+        - 9

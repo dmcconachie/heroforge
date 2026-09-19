@@ -235,17 +235,17 @@ equipment:
   weapons:
     - name: Rapier
       attack:
-        total: 19
+        total: 20
         typed:
           base: 16
-          str: 2
+          dex: 3
           weapon_focus: 1
       damage:
         total: 2
         typed:
           str: 2
       attack_iteratives:
-        - 19
-        - 14
-        - 9
-        - 4
+        - 20
+        - 15
+        - 10
+        - 5

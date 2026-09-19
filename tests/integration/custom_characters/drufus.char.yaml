@@ -195,6 +195,7 @@ levels:
     feats:
       - name: Weapon Focus
         source: fighter_bonus
+        parameter: Dagger
   - level: 17
     class: Rogue
     hp_roll: 4

@@ -116,6 +116,10 @@ class WeaponDefinition:
     weight: float = 0.0
     cost_gp: int = 0
     is_ranged: bool = False
+    # light / one_handed / two_handed / ranged (SRD weapons
+    # table). Determines Weapon Finesse eligibility and the
+    # two-weapon fighting penalty.
+    wield_class: str = ""
     special: str = ""
 
 

@@ -247,3 +247,69 @@ class TestWeaponMastery:
         w = gather_sheet(c, None).equipment.weapons[0]
         assert w.attack.typed.get("weapon_focus") == 1
         assert w.attack.typed.get("melee_weapon_mastery") == 2
+
+
+def finesse_rogue() -> Character:
+    """High Dex, low Str — finesse is a clear win."""
+    c = Character()
+    c.race = "Human"
+    c.alignment = "neutral"
+    c.set_ability_score("str", 10)
+    c.set_ability_score("dex", 20)
+    c.set_class_levels(
+        [
+            CharacterLevel(character_level=i + 1, class_name="Rogue", hp_roll=6)
+            for i in range(8)
+        ]
+    )
+    return c
+
+
+class TestWeaponFinesse:
+    """
+    PHB p. 102: with a light weapon, rapier, whip or spiked chain
+    you may use Dexterity instead of Strength on attack rolls.
+    Rapier, whip and spiked chain are not light, so the rule names
+    them explicitly.
+    """
+
+    def _with_finesse(self, *weapons: dict) -> Character:
+        c = finesse_rogue()
+        take(c, "Weapon Finesse", None)
+        arm(c, *weapons)
+        return c
+
+    def test_light_weapon_uses_dex(self) -> None:
+        c = self._with_finesse({"base": "Dagger"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.attack.typed.get("dex") == 5
+        assert "str" not in w.attack.typed
+
+    def test_rapier_qualifies_though_not_light(self) -> None:
+        c = self._with_finesse({"base": "Rapier"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.attack.typed.get("dex") == 5
+
+    def test_heavy_weapon_still_uses_str(self) -> None:
+        c = self._with_finesse({"base": "Greatsword"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert "dex" not in w.attack.typed
+
+    def test_without_the_feat_str_is_used(self) -> None:
+        c = finesse_rogue()
+        arm(c, {"base": "Dagger"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert "dex" not in w.attack.typed
+
+    def test_damage_still_uses_strength(self) -> None:
+        """Finesse changes attack rolls only, never damage."""
+        c = self._with_finesse({"base": "Dagger"})
+        c.set_ability_score("str", 16)
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.damage.typed.get("str") == 3
+        assert "dex" not in w.damage.typed
+
+    def test_total_matches_breakdown(self) -> None:
+        c = self._with_finesse({"base": "Dagger"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.attack.total == sum(w.attack.typed.values())

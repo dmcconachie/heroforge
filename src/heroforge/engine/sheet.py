@@ -54,6 +54,7 @@ from heroforge.engine.sheet_schema import (
     WeaponDisplay,
 )
 from heroforge.engine.weapons import (
+    attack_ability_override,
     range_increment_bonus,
     weapon_definition,
     weapon_pool_keys,
@@ -643,6 +644,7 @@ def _weapon_breakdown(
     c: "Character",
     key: str,
     ranged: bool,
+    item: dict,
 ) -> Breakdown | None:
     """
     One weapon's line: the generic attack or damage breakdown it
@@ -654,6 +656,14 @@ def _weapon_breakdown(
         base_key = "attack_ranged" if ranged else "attack_melee"
         ability = Ability.DEX if ranged else Ability.STR
         typed = dict(_attack_breakdown(c, base_key, ability).typed)
+        # Weapon Finesse and friends substitute the ability, so
+        # the breakdown must show the one actually rolled.
+        override = attack_ability_override(c, item)
+        if override and not ranged:
+            typed.pop(Ability.STR.value, None)
+            swapped = c.get_ability_modifier(Ability(override))
+            if swapped:
+                typed[override] = swapped
     else:
         typed = {}
         str_mod = c.get_ability_modifier(Ability.STR)
@@ -728,8 +738,8 @@ def _equipment(c: "Character") -> EquipmentSection:
                     material=w.get("material", ""),
                     name=w.get("name", ""),
                 ),
-                attack=_weapon_breakdown(c, atk_key, ranged),
-                damage=_weapon_breakdown(c, dmg_key, ranged),
+                attack=_weapon_breakdown(c, atk_key, ranged, w),
+                damage=_weapon_breakdown(c, dmg_key, ranged, w),
                 attack_iteratives=_weapon_iteratives(c, atk_key),
                 damage_dice=w.get("damage_dice", ""),
                 crit_range=w.get("crit_range", ""),

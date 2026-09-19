@@ -1231,8 +1231,20 @@ Weapon Finesse:
   kind: passive
   source_book: SRD
   note: >-
-    Use DEX modifier instead of STR on attack rolls with light weapons, rapier,
-    whip, or spiked chain
+    Use DEX instead of STR on attack rolls with a light weapon,
+    rapier, whip, or spiked chain. Affects attack rolls only —
+    damage still uses STR. PHB p. 102.
+  weapon_effects:
+    applies:
+      match: wield_class
+      wield_class: light
+      # Not light, but named by the rule.
+      also:
+        - Rapier
+        - Whip
+        - Spiked Chain
+      ranged: false
+    attack_ability: dex
   prerequisites:
     stat:
       key: bab

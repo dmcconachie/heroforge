@@ -205,12 +205,13 @@ equipment:
   weapons:
     - name: Rapier
       attack:
-        total: 12
+        total: 16
         typed:
           base: 12
+          dex: 4
       damage:
         total: 0
       attack_iteratives:
-        - 12
-        - 7
-        - 2
+        - 16
+        - 11
+        - 6
