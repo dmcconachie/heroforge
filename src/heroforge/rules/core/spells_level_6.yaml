@@ -4,211 +4,288 @@
 # See spells_level_0.yaml for field schema.
 
 Acid Fog:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Acid
   level:
     Sorcerer: 6
     Wizard: 6
 Analyze Dweomer:
+  school: Divination
   level:
     Bard: 6
     Sorcerer: 6
     Wizard: 6
 Animate Objects:
+  school: Transmutation
   level:
     Bard: 6
     Cleric: 6
 Antilife Shell:
+  school: Abjuration
   level:
     Cleric: 6
     Druid: 6
 Antimagic Field:
+  school: Abjuration
   level:
     Cleric: 8
     Sorcerer: 6
     Wizard: 6
 Banishment:
+  school: Abjuration
   level:
     Cleric: 6
     Sorcerer: 7
     Wizard: 7
 Bear's Endurance (Mass):
+  school: Transmutation
   level:
     Cleric: 6
     Druid: 6
     Sorcerer: 6
     Wizard: 6
 Blade Barrier:
+  school: Evocation
+  descriptor: Force
   level:
     Cleric: 6
 Bull's Strength (Mass):
+  school: Transmutation
   level:
     Cleric: 6
     Druid: 6
     Sorcerer: 6
     Wizard: 6
 Cat's Grace (Mass):
+  school: Transmutation
   level:
     Bard: 6
     Druid: 6
     Sorcerer: 6
     Wizard: 6
 Chain Lightning:
+  school: Evocation
+  descriptor: Electricity
   level:
     Sorcerer: 6
     Wizard: 6
 Charm Monster (Mass):
+  school: Enchantment
+  subschool: Charm
+  descriptor: Mind-Affecting
   level:
     Bard: 6
     Sorcerer: 8
     Wizard: 8
 Circle of Death:
+  school: Necromancy
+  descriptor: Death
   level:
     Sorcerer: 6
     Wizard: 6
 Contingency:
+  school: Evocation
   level:
     Sorcerer: 6
     Wizard: 6
 Create Undead:
+  school: Necromancy
+  descriptor: Evil
   level:
     Cleric: 6
     Sorcerer: 6
     Wizard: 6
 Cure Moderate Wounds (Mass):
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 6
     Cleric: 6
     Druid: 7
 Disintegrate:
+  school: Transmutation
   level:
     Sorcerer: 6
     Wizard: 6
 Eagle's Splendor (Mass):
+  school: Transmutation
   level:
     Bard: 6
     Cleric: 6
     Sorcerer: 6
     Wizard: 6
 Eyebite:
+  school: Necromancy
+  descriptor: Evil
   level:
     Bard: 6
     Sorcerer: 6
     Wizard: 6
 Find the Path:
+  school: Divination
   level:
     Bard: 6
     Cleric: 6
     Druid: 6
 Fire Seeds:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Fire
   level:
     Druid: 6
 Flesh to Stone:
+  school: Transmutation
   level:
     Sorcerer: 6
     Wizard: 6
 Forbiddance:
+  school: Abjuration
   level:
     Cleric: 6
 Bigby's Forceful Hand:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 6
     Wizard: 6
 Fox's Cunning (Mass):
+  school: Transmutation
   level:
     Bard: 6
     Sorcerer: 6
     Wizard: 6
 Otiluke's Freezing Sphere:
+  school: Evocation
+  descriptor: Cold
   level:
     Sorcerer: 6
     Wizard: 6
 Geas/Quest:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Language-Dependent, Mind-Affecting
   level:
     Bard: 6
     Cleric: 6
     Sorcerer: 6
     Wizard: 6
 Globe of Invulnerability:
+  school: Abjuration
   level:
     Sorcerer: 6
     Wizard: 6
 Glyph of Warding (Greater):
+  school: Abjuration
   level:
     Cleric: 6
 Guards and Wards:
+  school: Abjuration
   level:
     Sorcerer: 6
     Wizard: 6
 Harm:
+  school: Necromancy
   level:
     Cleric: 6
 Heal:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 6
     Druid: 7
 Heroes' Feast:
+  school: Conjuration
+  subschool: Creation
   level:
     Bard: 6
     Cleric: 6
 Inflict Moderate Wounds (Mass):
+  school: Necromancy
   level:
     Cleric: 6
 Ironwood:
+  school: Transmutation
   level:
     Druid: 6
 Otto's Irresistible Dance:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 6
     Sorcerer: 8
     Wizard: 8
 Liveoak:
+  school: Transmutation
   level:
     Druid: 6
 Mordenkainen's Lucubration:
+  school: Transmutation
   level:
     Sorcerer: 6
     Wizard: 6
 Move Earth:
+  school: Transmutation
+  descriptor: Earth
   level:
     Druid: 6
     Sorcerer: 6
     Wizard: 6
 Owl's Wisdom (Mass):
+  school: Transmutation
   level:
     Cleric: 6
     Druid: 6
     Sorcerer: 6
     Wizard: 6
 Permanent Image:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 6
     Sorcerer: 6
     Wizard: 6
 Planar Ally:
+  school: Conjuration
+  subschool: Calling
+  descriptor: see text for lesser planar ally
   level:
     Cleric: 6
 Planar Binding:
+  school: Conjuration
+  subschool: Calling
+  descriptor: see text for lesser planar binding
   level:
     Sorcerer: 6
     Wizard: 6
 Programmed Image:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 6
     Sorcerer: 6
     Wizard: 6
 Project Image:
+  school: Illusion
+  subschool: Shadow
   level:
     Bard: 6
     Sorcerer: 7
     Wizard: 7
 Repel Wood:
+  school: Transmutation
   level:
     Druid: 6
 Repulsion:
+  school: Abjuration
   level:
     Cleric: 7
     Sorcerer: 6
     Wizard: 6
 Scrying (Greater):
+  school: Divination
+  subschool: Scrying
   level:
     Bard: 6
     Cleric: 7
@@ -216,43 +293,62 @@ Scrying (Greater):
     Sorcerer: 7
     Wizard: 7
 Shout (Greater):
+  school: Evocation
+  descriptor: Sonic
   level:
     Bard: 6
     Sorcerer: 8
     Wizard: 8
 Spellstaff:
+  school: Transmutation
   level:
     Druid: 6
 Stone Tell:
+  school: Divination
   level:
     Druid: 6
 Stone to Flesh:
+  school: Transmutation
   level:
     Sorcerer: 6
     Wizard: 6
 Summon Monster VI:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Bard: 6
     Cleric: 6
     Sorcerer: 6
     Wizard: 6
 Summon Nature's Ally VI:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 6
 Symbol of Fear:
+  school: Necromancy
+  descriptor: Fear, Mind-Affecting
   level:
     Cleric: 6
     Sorcerer: 6
     Wizard: 6
 Symbol of Persuasion:
+  school: Enchantment
+  subschool: Charm
+  descriptor: Mind-Affecting
   level:
     Cleric: 6
     Sorcerer: 6
     Wizard: 6
 Sympathetic Vibration:
+  school: Evocation
+  descriptor: Sonic
   level:
     Bard: 6
 Tenser's Transformation:
+  school: Transmutation
   level:
     Sorcerer: 6
     Wizard: 6
@@ -273,27 +369,38 @@ Tenser's Transformation:
       bonus_type: natural_armor
       value: 4
 Transport via Plants:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Druid: 6
 Undeath to Death:
+  school: Necromancy
   level:
     Cleric: 6
     Sorcerer: 6
     Wizard: 6
 Veil:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 6
     Sorcerer: 6
     Wizard: 6
 Wall of Iron:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 6
     Wizard: 6
 Wind Walk:
+  school: Transmutation
+  descriptor: Air
   level:
     Cleric: 6
     Druid: 7
 Word of Recall:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Cleric: 6
     Druid: 8

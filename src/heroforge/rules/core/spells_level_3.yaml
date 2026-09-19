@@ -4,61 +4,86 @@
 # See spells_level_0.yaml for field schema.
 
 Animate Dead:
+  school: Necromancy
+  descriptor: Evil
   level:
     Cleric: 3
     Sorcerer: 4
     Wizard: 4
 Arcane Sight:
+  school: Divination
   level:
     Sorcerer: 3
     Wizard: 3
 Bestow Curse:
+  school: Necromancy
   level:
     Cleric: 3
     Sorcerer: 4
     Wizard: 4
 Blink:
+  school: Transmutation
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Call Lightning:
+  school: Evocation
+  descriptor: Electricity
   level:
     Druid: 3
 Charm Monster:
+  school: Enchantment
+  subschool: Charm
+  descriptor: Mind-Affecting
   level:
     Bard: 3
     Sorcerer: 4
     Wizard: 4
 Clairaudience/Clairvoyance:
+  school: Divination
+  subschool: Scrying
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Command Plants:
+  school: Transmutation
   level:
     Druid: 4
     Ranger: 3
 Confusion:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 3
     Sorcerer: 4
     Wizard: 4
 Contagion:
+  school: Necromancy
+  descriptor: Evil
   level:
     Cleric: 3
     Druid: 3
     Sorcerer: 4
     Wizard: 4
 Create Food and Water:
+  school: Conjuration
+  subschool: Creation
   level:
     Cleric: 3
 Crushing Despair:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 3
     Sorcerer: 4
     Wizard: 4
 Cure Serious Wounds:
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 3
     Cleric: 3
@@ -66,6 +91,8 @@ Cure Serious Wounds:
     Paladin: 4
     Ranger: 4
 Daylight:
+  school: Evocation
+  descriptor: Light
   level:
     Bard: 3
     Cleric: 3
@@ -74,22 +101,30 @@ Daylight:
     Sorcerer: 3
     Wizard: 3
 Deep Slumber:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Deeper Darkness:
+  school: Evocation
+  descriptor: Darkness
   level:
     Cleric: 3
 Diminish Plants:
+  school: Transmutation
   level:
     Druid: 3
     Ranger: 3
 Discern Lies:
+  school: Divination
   level:
     Cleric: 4
     Paladin: 3
 Dispel Magic:
+  school: Abjuration
   level:
     Bard: 3
     Cleric: 3
@@ -98,52 +133,75 @@ Dispel Magic:
     Sorcerer: 3
     Wizard: 3
 Displacement:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
   note: 50%% miss chance for attacks against you (note only)
 Dominate Animal:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Druid: 3
 Explosive Runes:
+  school: Abjuration
+  descriptor: Force
   level:
     Sorcerer: 3
     Wizard: 3
 Fear:
+  school: Necromancy
+  descriptor: Fear, Mind-Affecting
   level:
     Bard: 3
     Sorcerer: 4
     Wizard: 4
 Fireball:
+  school: Evocation
+  descriptor: Fire
   level:
     Sorcerer: 3
     Wizard: 3
 Flame Arrow:
+  school: Transmutation
+  descriptor: Fire
   level:
     Sorcerer: 3
     Wizard: 3
 Fly:
+  school: Transmutation
   level:
     Sorcerer: 3
     Wizard: 3
 Gaseous Form:
+  school: Transmutation
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Geas (Lesser):
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Language-Dependent, Mind-Affecting
   level:
     Bard: 3
     Sorcerer: 4
     Wizard: 4
 Glibness:
+  school: Transmutation
   level:
     Bard: 3
 Glyph of Warding:
+  school: Abjuration
   level:
     Cleric: 3
 Good Hope:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 3
   note: +2 morale on attack rolls, damage, saves, skill checks, ability checks
@@ -164,10 +222,12 @@ Good Hope:
       bonus_type: morale
       value: 2
 Halt Undead:
+  school: Necromancy
   level:
     Sorcerer: 3
     Wizard: 3
 Haste:
+  school: Transmutation
   level:
     Bard: 3
     Sorcerer: 3
@@ -184,36 +244,51 @@ Haste:
       bonus_type: untyped
       value: 1
 Heal Mount:
+  school: Conjuration
+  subschool: Healing
   level:
     Paladin: 3
 Helping Hand:
+  school: Evocation
   level:
     Cleric: 3
 Illusory Script:
+  school: Illusion
+  subschool: Phantasm
+  descriptor: Mind-Affecting
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Inflict Serious Wounds:
+  school: Necromancy
   level:
     Cleric: 3
 Invisibility Purge:
+  school: Evocation
   level:
     Cleric: 3
 Invisibility Sphere:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Keen Edge:
+  school: Transmutation
   level:
     Sorcerer: 3
     Wizard: 3
 Lightning Bolt:
+  school: Evocation
+  descriptor: Electricity
   level:
     Sorcerer: 3
     Wizard: 3
 Magic Circle against Chaos:
+  school: Abjuration
+  descriptor: Lawful
   level:
     Cleric: 3
     Paladin: 3
@@ -224,6 +299,8 @@ Magic Circle against Chaos:
     10 ft. radius. Alignment-conditional — not on main
     sheet.
 Magic Circle against Evil:
+  school: Abjuration
+  descriptor: Good
   level:
     Cleric: 3
     Paladin: 3
@@ -234,6 +311,8 @@ Magic Circle against Evil:
     10 ft. radius. Alignment-conditional — not on main
     sheet.
 Magic Circle against Good:
+  school: Abjuration
+  descriptor: Evil
   level:
     Cleric: 3
     Sorcerer: 3
@@ -243,6 +322,8 @@ Magic Circle against Good:
     10 ft. radius. Alignment-conditional — not on main
     sheet.
 Magic Circle against Law:
+  school: Abjuration
+  descriptor: Chaotic
   level:
     Cleric: 3
     Sorcerer: 3
@@ -252,10 +333,12 @@ Magic Circle against Law:
     10 ft. radius. Alignment-conditional — not on main
     sheet.
 Magic Fang (Greater):
+  school: Transmutation
   level:
     Druid: 3
     Ranger: 3
 Magic Vestment:
+  school: Transmutation
   level:
     Cleric: 3
   note: Enhancement bonus to armor/shield; scales with CL
@@ -265,6 +348,7 @@ Magic Vestment:
       bonus_type: enhancement
       value: max(1, caster_level // 4)
 Magic Weapon (Greater):
+  school: Transmutation
   level:
     Cleric: 4
     Paladin: 3
@@ -280,15 +364,21 @@ Magic Weapon (Greater):
       bonus_type: enhancement
       value: max(1, caster_level // 4)
 Major Image:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Meld into Stone:
+  school: Transmutation
+  descriptor: Earth
   level:
     Cleric: 3
     Druid: 3
 Neutralize Poison:
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 4
     Cleric: 4
@@ -296,24 +386,32 @@ Neutralize Poison:
     Paladin: 4
     Ranger: 3
 Nondetection:
+  school: Abjuration
   level:
     Ranger: 4
     Sorcerer: 3
     Wizard: 3
 Phantom Steed:
+  school: Conjuration
+  subschool: Creation
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Plant Growth:
+  school: Transmutation
   level:
     Druid: 3
     Ranger: 3
 Poison:
+  school: Necromancy
   level:
     Cleric: 4
     Druid: 3
 Prayer:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Cleric: 3
     Paladin: 3
@@ -335,17 +433,22 @@ Prayer:
       bonus_type: luck
       value: 1
 Quench:
+  school: Transmutation
   level:
     Druid: 3
 Ray of Exhaustion:
+  school: Necromancy
   level:
     Sorcerer: 3
     Wizard: 3
 Remove Blindness/Deafness:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 3
     Paladin: 3
 Remove Curse:
+  school: Abjuration
   level:
     Bard: 3
     Cleric: 3
@@ -353,17 +456,22 @@ Remove Curse:
     Sorcerer: 4
     Wizard: 4
 Remove Disease:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 3
     Druid: 3
     Ranger: 3
 Repel Vermin:
+  school: Abjuration
   level:
     Bard: 4
     Cleric: 4
     Druid: 4
     Ranger: 3
 Scrying:
+  school: Divination
+  subschool: Scrying
   level:
     Bard: 3
     Cleric: 5
@@ -371,74 +479,103 @@ Scrying:
     Sorcerer: 4
     Wizard: 4
 Sculpt Sound:
+  school: Transmutation
   level:
     Bard: 3
 Searing Light:
+  school: Evocation
   level:
     Cleric: 3
 Secret Page:
+  school: Transmutation
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Sepia Snake Sigil:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Force
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Shrink Item:
+  school: Transmutation
   level:
     Sorcerer: 3
     Wizard: 3
 Sleet Storm:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Cold
   level:
     Druid: 3
     Sorcerer: 3
     Wizard: 3
 Slow:
+  school: Transmutation
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Speak with Dead:
+  school: Necromancy
+  descriptor: Language-Dependent
   level:
     Cleric: 3
 Stinking Cloud:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 3
     Wizard: 3
 Stone Shape:
+  school: Transmutation
+  descriptor: Earth
   level:
     Cleric: 3
     Druid: 3
     Sorcerer: 4
     Wizard: 4
 Summon Monster III:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Bard: 3
     Cleric: 3
     Sorcerer: 3
     Wizard: 3
 Summon Nature's Ally III:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 3
     Ranger: 3
 Leomund's Tiny Hut:
+  school: Evocation
+  descriptor: Force
   level:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
 Vampiric Touch:
+  school: Necromancy
   level:
     Sorcerer: 3
     Wizard: 3
 Water Breathing:
+  school: Transmutation
   level:
     Cleric: 3
     Druid: 3
     Sorcerer: 3
     Wizard: 3
 Water Walk:
+  school: Transmutation
+  descriptor: Water
   level:
     Cleric: 3
     Ranger: 3

@@ -2,39 +2,60 @@
 #
 # Map keyed by spell name.
 # Fields per entry:
-#   school, level (dict of class -> int),
+#   school, subschool, descriptor,
+#   level (dict of class -> int),
 #   duration, range, components, save,
 #   spell_resistance, description,
 #   effects (optional: list of stat effects)
+#
+# school/subschool/descriptor follow PHB pp. 172-175. A
+# subschool or descriptor cell may hold more than one value
+# ("Figment, Glamer") or an either/or ("Fire or Cold"), as the
+# books print them.
 
 Acid Splash:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Acid
   level:
     Sorcerer: 0
     Wizard: 0
 Arcane Mark:
+  school: Universal
   level:
     Sorcerer: 0
     Wizard: 0
 Create Water:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Water
   level:
     Cleric: 0
     Druid: 0
     Paladin: 1
 Cure Minor Wounds:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 0
     Druid: 0
 Dancing Lights:
+  school: Evocation
+  descriptor: Light
   level:
     Bard: 0
     Sorcerer: 0
     Wizard: 0
 Daze:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 0
     Sorcerer: 0
     Wizard: 0
 Detect Magic:
+  school: Divination
   level:
     Bard: 0
     Cleric: 0
@@ -42,6 +63,7 @@ Detect Magic:
     Sorcerer: 0
     Wizard: 0
 Detect Poison:
+  school: Divination
   level:
     Cleric: 0
     Druid: 0
@@ -50,21 +72,27 @@ Detect Poison:
     Sorcerer: 0
     Wizard: 0
 Disrupt Undead:
+  school: Necromancy
   level:
     Sorcerer: 0
     Wizard: 0
 Flare:
+  school: Evocation
+  descriptor: Light
   level:
     Bard: 0
     Druid: 0
     Sorcerer: 0
     Wizard: 0
 Ghost Sound:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 0
     Sorcerer: 0
     Wizard: 0
 Guidance:
+  school: Divination
   level:
     Cleric: 0
     Druid: 0
@@ -83,13 +111,17 @@ Guidance:
       bonus_type: competence
       value: 1
 Inflict Minor Wounds:
+  school: Necromancy
   level:
     Cleric: 0
 Know Direction:
+  school: Divination
   level:
     Bard: 0
     Druid: 0
 Light:
+  school: Evocation
+  descriptor: Light
   level:
     Bard: 0
     Cleric: 0
@@ -97,14 +129,19 @@ Light:
     Sorcerer: 0
     Wizard: 0
 Lullaby:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 0
 Mage Hand:
+  school: Transmutation
   level:
     Bard: 0
     Sorcerer: 0
     Wizard: 0
 Mending:
+  school: Transmutation
   level:
     Bard: 0
     Cleric: 0
@@ -112,29 +149,37 @@ Mending:
     Sorcerer: 0
     Wizard: 0
 Message:
+  school: Transmutation
+  descriptor: Language-Dependent
   level:
     Bard: 0
     Sorcerer: 0
     Wizard: 0
 Open/Close:
+  school: Transmutation
   level:
     Bard: 0
     Sorcerer: 0
     Wizard: 0
 Prestidigitation:
+  school: Universal
   level:
     Bard: 0
     Sorcerer: 0
     Wizard: 0
 Purify Food and Drink:
+  school: Transmutation
   level:
     Cleric: 0
     Druid: 0
 Ray of Frost:
+  school: Evocation
+  descriptor: Cold
   level:
     Sorcerer: 0
     Wizard: 0
 Read Magic:
+  school: Divination
   level:
     Bard: 0
     Cleric: 0
@@ -144,6 +189,7 @@ Read Magic:
     Sorcerer: 0
     Wizard: 0
 Resistance:
+  school: Abjuration
   level:
     Bard: 0
     Cleric: 0
@@ -163,13 +209,17 @@ Resistance:
       bonus_type: resistance
       value: 1
 Summon Instrument:
+  school: Conjuration
+  subschool: Summoning
   level:
     Bard: 0
 Touch of Fatigue:
+  school: Necromancy
   level:
     Sorcerer: 0
     Wizard: 0
 Virtue:
+  school: Transmutation
   level:
     Cleric: 0
     Druid: 0

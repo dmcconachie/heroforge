@@ -4,53 +4,76 @@
 # See spells_level_0.yaml for field schema.
 
 Atonement:
+  school: Abjuration
   level:
     Cleric: 5
     Druid: 5
 Awaken:
+  school: Transmutation
   level:
     Druid: 5
 Baleful Polymorph:
+  school: Transmutation
   level:
     Druid: 5
     Sorcerer: 5
     Wizard: 5
 Call Lightning Storm:
+  school: Evocation
+  descriptor: Electricity
   level:
     Druid: 5
 Cloudkill:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 5
     Wizard: 5
 Command (Greater):
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Language-Dependent, Mind-Affecting
   level:
     Cleric: 5
 Commune:
+  school: Divination
   level:
     Cleric: 5
 Cone of Cold:
+  school: Evocation
+  descriptor: Cold
   level:
     Sorcerer: 5
     Wizard: 5
 Contact Other Plane:
+  school: Divination
   level:
     Sorcerer: 5
     Wizard: 5
 Control Winds:
+  school: Transmutation
+  descriptor: Air
   level:
     Druid: 5
 Cure Light Wounds (Mass):
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 5
     Cleric: 5
     Druid: 6
 Dispel Good:
+  school: Abjuration
+  descriptor: Evil
   level:
     Cleric: 5
 Dispel Law:
+  school: Abjuration
+  descriptor: Chaotic
   level:
     Cleric: 5
 Dispel Magic (Greater):
+  school: Abjuration
   level:
     Bard: 5
     Cleric: 6
@@ -58,31 +81,46 @@ Dispel Magic (Greater):
     Sorcerer: 6
     Wizard: 6
 Disrupting Weapon:
+  school: Transmutation
   level:
     Cleric: 5
 Dream:
+  school: Illusion
+  subschool: Phantasm
+  descriptor: Mind-Affecting
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Fabricate:
+  school: Transmutation
   level:
     Sorcerer: 5
     Wizard: 5
 False Vision:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Feeblemind:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 5
     Wizard: 5
 Hallow:
+  school: Evocation
+  descriptor: Good
   level:
     Cleric: 5
     Druid: 5
 Heroism (Greater):
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 5
     Sorcerer: 6
@@ -104,87 +142,122 @@ Heroism (Greater):
       bonus_type: morale
       value: 4
 Inflict Light Wounds (Mass):
+  school: Necromancy
   level:
     Cleric: 5
 Insect Plague:
+  school: Conjuration
+  subschool: Summoning
   level:
     Cleric: 5
     Druid: 5
 Bigby's Interposing Hand:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 5
     Wizard: 5
 Mordenkainen's Faithful Hound:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 5
     Wizard: 5
 Mordenkainen's Private Sanctum:
+  school: Abjuration
   level:
     Sorcerer: 5
     Wizard: 5
 Magic Jar:
+  school: Necromancy
   level:
     Sorcerer: 5
     Wizard: 5
 Major Creation:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 5
     Wizard: 5
 Mind Fog:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Mirage Arcana:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Mislead:
+  school: Illusion
+  subschool: Figment, Glamer
   level:
     Bard: 5
     Sorcerer: 6
     Wizard: 6
 Nightmare:
+  school: Illusion
+  subschool: Phantasm
+  descriptor: Mind-Affecting, Evil
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Overland Flight:
+  school: Transmutation
   level:
     Sorcerer: 5
     Wizard: 5
   note: Fly speed 40 ft. (good maneuverability); note only
 Passwall:
+  school: Transmutation
   level:
     Sorcerer: 5
     Wizard: 5
 Permanency:
+  school: Universal
   level:
     Sorcerer: 5
     Wizard: 5
 Persistent Image:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Planar Binding (Lesser):
+  school: Conjuration
+  subschool: Calling
+  descriptor: see text
   level:
     Sorcerer: 5
     Wizard: 5
 Plane Shift:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Cleric: 5
     Sorcerer: 7
     Wizard: 7
 Prying Eyes:
+  school: Divination
   level:
     Sorcerer: 5
     Wizard: 5
 Raise Dead:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 5
 Righteous Might:
+  school: Transmutation
   level:
     Cleric: 5
   note: +4 STR, +2 CON, natural armor; size increase handled separately
@@ -197,31 +270,45 @@ Righteous Might:
       bonus_type: enhancement
       value: 2
 Leomund's Secret Chest:
+  school: Conjuration
+  subschool: Summoning
   level:
     Sorcerer: 5
     Wizard: 5
 Seeming:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Shadow Evocation:
+  school: Illusion
+  subschool: Shadow
   level:
     Bard: 5
     Sorcerer: 5
     Wizard: 5
 Shadow Walk:
+  school: Illusion
+  subschool: Shadow
   level:
     Bard: 5
     Sorcerer: 6
     Wizard: 6
 Slay Living:
+  school: Necromancy
+  descriptor: Death
   level:
     Cleric: 5
 Song of Discord:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting, Sonic
   level:
     Bard: 5
 Spell Resistance:
+  school: Abjuration
   level:
     Cleric: 5
   note: SR = 12 + caster level
@@ -231,75 +318,108 @@ Spell Resistance:
       bonus_type: untyped
       value: 12 + caster_level
 Suggestion (Mass):
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Language-Dependent, Mind-Affecting
   level:
     Bard: 5
     Sorcerer: 6
     Wizard: 6
 Summon Monster V:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Bard: 5
     Cleric: 5
     Sorcerer: 5
     Wizard: 5
 Summon Nature's Ally V:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 5
 Symbol of Pain:
+  school: Necromancy
+  descriptor: Evil
   level:
     Cleric: 5
     Sorcerer: 5
     Wizard: 5
 Symbol of Sleep:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Cleric: 5
     Sorcerer: 5
     Wizard: 5
 Telekinesis:
+  school: Transmutation
   level:
     Sorcerer: 5
     Wizard: 5
 Rary's Telepathic Bond:
+  school: Divination
   level:
     Sorcerer: 5
     Wizard: 5
 Teleport:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Sorcerer: 5
     Wizard: 5
 Transmute Mud to Rock:
+  school: Transmutation
+  descriptor: Earth
   level:
     Druid: 5
     Sorcerer: 5
     Wizard: 5
 Transmute Rock to Mud:
+  school: Transmutation
+  descriptor: Earth
   level:
     Druid: 5
     Sorcerer: 5
     Wizard: 5
 True Seeing:
+  school: Divination
   level:
     Cleric: 5
     Druid: 7
     Sorcerer: 6
     Wizard: 6
 Unhallow:
+  school: Evocation
+  descriptor: Evil
   level:
     Cleric: 5
     Druid: 5
 Wall of Force:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 5
     Wizard: 5
 Wall of Stone:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Earth
   level:
     Cleric: 5
     Druid: 6
     Sorcerer: 5
     Wizard: 5
 Wall of Thorns:
+  school: Conjuration
+  subschool: Creation
   level:
     Druid: 5
 Waves of Fatigue:
+  school: Necromancy
   level:
     Sorcerer: 5
     Wizard: 5

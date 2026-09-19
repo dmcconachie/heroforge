@@ -4,25 +4,36 @@
 # See spells_level_0.yaml for field schema.
 
 Alarm:
+  school: Abjuration
   level:
     Bard: 1
     Ranger: 1
     Sorcerer: 1
     Wizard: 1
 Animal Messenger:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Druid: 2
     Ranger: 1
 Animate Rope:
+  school: Transmutation
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Bane:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Fear, Mind-Affecting
   level:
     Cleric: 1
 Bless:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Cleric: 1
     Paladin: 1
@@ -32,59 +43,88 @@ Bless:
       bonus_type: morale
       value: 1
 Bless Water:
+  school: Transmutation
+  descriptor: Good
   level:
     Cleric: 1
     Paladin: 1
 Bless Weapon:
+  school: Transmutation
   level:
     Paladin: 1
   note: >-
     Weapon is +1 enhancement and good-aligned vs evil
     outsiders / undead (conditional — not on main sheet).
 Burning Hands:
+  school: Evocation
+  descriptor: Fire
   level:
     Sorcerer: 1
     Wizard: 1
 Calm Animals:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Druid: 1
     Ranger: 1
 Cause Fear:
+  school: Necromancy
+  descriptor: Fear, Mind-Affecting
   level:
     Bard: 1
     Cleric: 1
     Sorcerer: 1
     Wizard: 1
 Charm Animal:
+  school: Enchantment
+  subschool: Charm
+  descriptor: Mind-Affecting
   level:
     Druid: 1
     Ranger: 1
 Charm Person:
+  school: Enchantment
+  subschool: Charm
+  descriptor: Mind-Affecting
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Chill Touch:
+  school: Necromancy
   level:
     Sorcerer: 1
     Wizard: 1
 Color Spray:
+  school: Illusion
+  subschool: Pattern
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 1
     Wizard: 1
 Command:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Language-Dependent, Mind-Affecting
   level:
     Cleric: 1
 Comprehend Languages:
+  school: Divination
   level:
     Bard: 1
     Cleric: 1
     Sorcerer: 1
     Wizard: 1
 Confusion (Lesser):
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 1
 Cure Light Wounds:
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 1
     Cleric: 1
@@ -92,12 +132,18 @@ Cure Light Wounds:
     Paladin: 1
     Ranger: 2
 Curse Water:
+  school: Necromancy
+  descriptor: Evil
   level:
     Cleric: 1
 Deathwatch:
+  school: Necromancy
+  descriptor: Evil
   level:
     Cleric: 1
 Delay Poison:
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 2
     Cleric: 2
@@ -105,42 +151,53 @@ Delay Poison:
     Paladin: 2
     Ranger: 1
 Detect Animals or Plants:
+  school: Divination
   level:
     Druid: 1
     Ranger: 1
 Detect Chaos:
+  school: Divination
   level:
     Cleric: 1
 Detect Evil:
+  school: Divination
   level:
     Cleric: 1
 Detect Good:
+  school: Divination
   level:
     Cleric: 1
 Detect Law:
+  school: Divination
   level:
     Cleric: 1
 Detect Secret Doors:
+  school: Divination
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Detect Snares and Pits:
+  school: Divination
   level:
     Druid: 1
     Ranger: 1
 Detect Undead:
+  school: Divination
   level:
     Cleric: 1
     Paladin: 1
     Sorcerer: 1
     Wizard: 1
 Disguise Self:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Divine Favor:
+  school: Evocation
   level:
     Cleric: 1
     Paladin: 1
@@ -154,6 +211,8 @@ Divine Favor:
       bonus_type: luck
       value: max(1, caster_level // 3)
 Doom:
+  school: Necromancy
+  descriptor: Fear, Mind-Affecting
   level:
     Cleric: 1
   note: 'Target is shaken: -2 on attacks, saves, skill checks, ability checks'
@@ -171,6 +230,7 @@ Doom:
       bonus_type: morale
       value: -2
 Endure Elements:
+  school: Abjuration
   level:
     Cleric: 1
     Druid: 1
@@ -179,6 +239,7 @@ Endure Elements:
     Sorcerer: 1
     Wizard: 1
 Enlarge Person:
+  school: Transmutation
   level:
     Sorcerer: 1
     Wizard: 1
@@ -194,19 +255,23 @@ Enlarge Person:
       value: -2
       condition_key: humanoid_only
 Entangle:
+  school: Transmutation
   level:
     Druid: 1
     Ranger: 1
 Entropic Shield:
+  school: Abjuration
   level:
     Cleric: 1
   note: 20%% miss chance on ranged attacks against you (note only)
 Erase:
+  school: Transmutation
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Expeditious Retreat:
+  school: Transmutation
   level:
     Bard: 1
     Sorcerer: 1
@@ -217,55 +282,75 @@ Expeditious Retreat:
       bonus_type: enhancement
       value: 30
 Faerie Fire:
+  school: Evocation
+  descriptor: Light
   level:
     Druid: 1
 Feather Fall:
+  school: Transmutation
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Tenser's Floating Disk:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 1
     Wizard: 1
 Goodberry:
+  school: Transmutation
   level:
     Druid: 1
 Grease:
+  school: Conjuration
+  subschool: Creation
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Hide from Animals:
+  school: Abjuration
   level:
     Druid: 1
     Ranger: 1
 Hide from Undead:
+  school: Abjuration
   level:
     Cleric: 1
 Hideous Laughter:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 1
     Sorcerer: 2
     Wizard: 2
 Hold Portal:
+  school: Abjuration
   level:
     Sorcerer: 1
     Wizard: 1
 Hypnotism:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Identify:
+  school: Divination
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Inflict Light Wounds:
+  school: Necromancy
   level:
     Cleric: 1
 Jump:
+  school: Transmutation
   level:
     Druid: 1
     Ranger: 1
@@ -278,6 +363,7 @@ Jump:
       bonus_type: enhancement
       value: 10 + 10 * min(2, (caster_level - 1) // 4)
 Longstrider:
+  school: Transmutation
   level:
     Druid: 1
     Ranger: 1
@@ -287,6 +373,9 @@ Longstrider:
       bonus_type: enhancement
       value: 10
 Mage Armor:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Force
   level:
     Sorcerer: 1
     Wizard: 1
@@ -296,28 +385,37 @@ Mage Armor:
       bonus_type: armor
       value: 4
 Nystul's Magic Aura:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Magic Fang:
+  school: Transmutation
   level:
     Druid: 1
     Ranger: 1
 Magic Missile:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 1
     Wizard: 1
 Magic Mouth:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 1
     Sorcerer: 2
     Wizard: 2
 Magic Stone:
+  school: Transmutation
   level:
     Cleric: 1
     Druid: 1
 Magic Weapon:
+  school: Transmutation
   level:
     Cleric: 1
     Paladin: 1
@@ -332,29 +430,39 @@ Magic Weapon:
       bonus_type: enhancement
       value: 1
 Mount:
+  school: Conjuration
+  subschool: Summoning
   level:
     Sorcerer: 1
     Wizard: 1
 Obscure Object:
+  school: Abjuration
   level:
     Bard: 1
     Cleric: 3
     Sorcerer: 2
     Wizard: 2
 Obscuring Mist:
+  school: Conjuration
+  subschool: Creation
   level:
     Cleric: 1
     Druid: 1
     Sorcerer: 1
     Wizard: 1
 Pass without Trace:
+  school: Transmutation
   level:
     Druid: 1
     Ranger: 1
 Produce Flame:
+  school: Evocation
+  descriptor: Fire
   level:
     Druid: 1
 Protection from Chaos:
+  school: Abjuration
+  descriptor: Lawful
   level:
     Cleric: 1
     Paladin: 1
@@ -364,6 +472,8 @@ Protection from Chaos:
     +2 deflection AC, +2 resistance on saves vs chaotic
     creatures. Alignment-conditional — not on main sheet.
 Protection from Evil:
+  school: Abjuration
+  descriptor: Good
   level:
     Cleric: 1
     Paladin: 1
@@ -373,6 +483,8 @@ Protection from Evil:
     +2 deflection AC, +2 resistance on saves vs evil
     creatures. Alignment-conditional — not on main sheet.
 Protection from Good:
+  school: Abjuration
+  descriptor: Evil
   level:
     Cleric: 1
     Sorcerer: 1
@@ -381,6 +493,8 @@ Protection from Good:
     +2 deflection AC, +2 resistance on saves vs good
     creatures. Alignment-conditional — not on main sheet.
 Protection from Law:
+  school: Abjuration
+  descriptor: Chaotic
   level:
     Cleric: 1
     Sorcerer: 1
@@ -389,6 +503,7 @@ Protection from Law:
     +2 deflection AC, +2 resistance on saves vs lawful
     creatures. Alignment-conditional — not on main sheet.
 Ray of Enfeeblement:
+  school: Necromancy
   level:
     Sorcerer: 1
     Wizard: 1
@@ -399,6 +514,7 @@ Ray of Enfeeblement:
       bonus_type: untyped
       value: -(1 + min(5, caster_level // 2))
 Reduce Person:
+  school: Transmutation
   level:
     Sorcerer: 1
     Wizard: 1
@@ -414,10 +530,12 @@ Reduce Person:
       value: 2
       condition_key: humanoid_only
 Remove Fear:
+  school: Abjuration
   level:
     Bard: 1
     Cleric: 1
 Resist Energy:
+  school: Abjuration
   level:
     Cleric: 2
     Druid: 2
@@ -427,14 +545,19 @@ Resist Energy:
     Wizard: 2
   note: Resist 10 points of chosen energy type per attack (note only)
 Restoration (Lesser):
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 2
     Druid: 2
     Paladin: 1
 Sanctuary:
+  school: Abjuration
   level:
     Cleric: 1
 Shield:
+  school: Abjuration
+  descriptor: Force
   level:
     Sorcerer: 1
     Wizard: 1
@@ -444,6 +567,7 @@ Shield:
       bonus_type: shield
       value: 4
 Shield of Faith:
+  school: Abjuration
   level:
     Cleric: 1
   note: Deflection bonus to AC; scales with CL
@@ -453,52 +577,72 @@ Shield of Faith:
       bonus_type: deflection
       value: 2 + caster_level // 6
 Shillelagh:
+  school: Transmutation
   level:
     Druid: 1
 Shocking Grasp:
+  school: Evocation
+  descriptor: Electricity
   level:
     Sorcerer: 1
     Wizard: 1
 Silent Image:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Sleep:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Speak with Animals:
+  school: Divination
   level:
     Bard: 3
     Druid: 1
     Ranger: 1
 Summon Monster I:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Bard: 1
     Cleric: 1
     Sorcerer: 1
     Wizard: 1
 Summon Nature's Ally I:
+  school: Conjuration
+  subschool: Summoning
   level:
     Druid: 1
     Ranger: 1
 True Strike:
+  school: Divination
   level:
     Sorcerer: 1
     Wizard: 1
 Undetectable Alignment:
+  school: Abjuration
   level:
     Bard: 1
     Cleric: 2
     Paladin: 2
 Unseen Servant:
+  school: Conjuration
+  subschool: Creation
   level:
     Bard: 1
     Sorcerer: 1
     Wizard: 1
 Ventriloquism:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 1
     Sorcerer: 1

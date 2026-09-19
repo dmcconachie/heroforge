@@ -4,193 +4,280 @@
 # See spells_level_0.yaml for field schema.
 
 Animate Plants:
+  school: Transmutation
   level:
     Druid: 7
 Arcane Sight (Greater):
+  school: Divination
   level:
     Sorcerer: 7
     Wizard: 7
 Blasphemy:
+  school: Evocation
+  descriptor: Evil, Sonic
   level:
     Cleric: 7
 Changestaff:
+  school: Transmutation
   level:
     Druid: 7
 Control Undead:
+  school: Necromancy
   level:
     Sorcerer: 7
     Wizard: 7
 Control Weather:
+  school: Transmutation
   level:
     Cleric: 7
     Druid: 7
     Sorcerer: 7
     Wizard: 7
 Creeping Doom:
+  school: Conjuration
+  subschool: Summoning
   level:
     Druid: 7
 Cure Serious Wounds (Mass):
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 7
     Druid: 8
 Delayed Blast Fireball:
+  school: Evocation
+  descriptor: Fire
   level:
     Sorcerer: 7
     Wizard: 7
 Destruction:
+  school: Necromancy
+  descriptor: Death
   level:
     Cleric: 7
 Dictum:
+  school: Evocation
+  descriptor: Lawful, Sonic
   level:
     Cleric: 7
 Ethereal Jaunt:
+  school: Transmutation
   level:
     Cleric: 7
     Sorcerer: 7
     Wizard: 7
 Finger of Death:
+  school: Necromancy
+  descriptor: Death
   level:
     Druid: 8
     Sorcerer: 7
     Wizard: 7
 Fire Storm:
+  school: Evocation
+  descriptor: Fire
   level:
     Cleric: 8
     Druid: 7
 Forcecage:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 7
     Wizard: 7
 Bigby's Grasping Hand:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 7
     Wizard: 7
 Hold Person (Mass):
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 7
     Wizard: 7
 Holy Word:
+  school: Evocation
+  descriptor: Good, Sonic
   level:
     Cleric: 7
 Inflict Serious Wounds (Mass):
+  school: Necromancy
   level:
     Cleric: 7
 Insanity:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 7
     Wizard: 7
 Drawmij's Instant Summons:
+  school: Conjuration
+  subschool: Summoning
   level:
     Sorcerer: 7
     Wizard: 7
 Invisibility (Mass):
+  school: Illusion
+  subschool: Glamer
   level:
     Sorcerer: 7
     Wizard: 7
 Limited Wish:
+  school: Universal
   level:
     Sorcerer: 7
     Wizard: 7
 Mordenkainen's Magnificent Mansion:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 7
     Wizard: 7
 Mordenkainen's Sword:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 7
     Wizard: 7
 Phase Door:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 7
     Wizard: 7
 Power Word Blind:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 7
     Wizard: 7
 Prismatic Spray:
+  school: Evocation
   level:
     Sorcerer: 7
     Wizard: 7
 Refuge:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Cleric: 7
     Sorcerer: 9
     Wizard: 9
 Regenerate:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 7
     Druid: 9
 Restoration (Greater):
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 7
 Resurrection:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 7
 Reverse Gravity:
+  school: Transmutation
   level:
     Druid: 8
     Sorcerer: 7
     Wizard: 7
 Sequester:
+  school: Abjuration
   level:
     Sorcerer: 7
     Wizard: 7
 Shadow Conjuration (Greater):
+  school: Illusion
+  subschool: Shadow
   level:
     Sorcerer: 7
     Wizard: 7
 Simulacrum:
+  school: Illusion
+  subschool: Shadow
   level:
     Sorcerer: 7
     Wizard: 7
 Spell Turning:
+  school: Abjuration
   level:
     Sorcerer: 7
     Wizard: 7
 Statue:
+  school: Transmutation
   level:
     Sorcerer: 7
     Wizard: 7
 Summon Monster VII:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Cleric: 7
     Sorcerer: 7
     Wizard: 7
 Summon Nature's Ally VII:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 7
 Sunbeam:
+  school: Evocation
+  descriptor: Light
   level:
     Druid: 7
 Symbol of Stunning:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Cleric: 7
     Sorcerer: 7
     Wizard: 7
 Symbol of Weakness:
+  school: Necromancy
   level:
     Cleric: 7
     Sorcerer: 7
     Wizard: 7
 Teleport (Greater):
+  school: Conjuration
+  subschool: Teleportation
   level:
     Sorcerer: 7
     Wizard: 7
 Teleport Object:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Sorcerer: 7
     Wizard: 7
 Transmute Metal to Wood:
+  school: Transmutation
   level:
     Druid: 7
 Vision:
+  school: Divination
   level:
     Sorcerer: 7
     Wizard: 7
 Waves of Exhaustion:
+  school: Necromancy
   level:
     Sorcerer: 7
     Wizard: 7
 Word of Chaos:
+  school: Evocation
+  descriptor: Chaotic, Sonic
   level:
     Cleric: 7

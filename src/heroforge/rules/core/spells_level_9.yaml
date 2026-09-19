@@ -4,32 +4,44 @@
 # See spells_level_0.yaml for field schema.
 
 Astral Projection:
+  school: Necromancy
   level:
     Cleric: 9
     Sorcerer: 9
     Wizard: 9
 Bigby's Crushing Hand:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 9
     Wizard: 9
 Dominate Monster:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 9
     Wizard: 9
 Elemental Swarm:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 9
 Energy Drain:
+  school: Necromancy
   level:
     Cleric: 9
     Sorcerer: 9
     Wizard: 9
 Etherealness:
+  school: Transmutation
   level:
     Cleric: 9
     Sorcerer: 9
     Wizard: 9
 Foresight:
+  school: Divination
   level:
     Druid: 9
     Sorcerer: 9
@@ -43,96 +55,139 @@ Foresight:
       bonus_type: insight
       value: 2
 Freedom:
+  school: Abjuration
   level:
     Sorcerer: 9
     Wizard: 9
 Gate:
+  school: Conjuration
+  subschool: Creation or Calling
   level:
     Cleric: 9
     Sorcerer: 9
     Wizard: 9
 Heal (Mass):
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 9
 Hold Monster (Mass):
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 9
     Wizard: 9
 Implosion:
+  school: Evocation
   level:
     Cleric: 9
 Imprisonment:
+  school: Abjuration
   level:
     Sorcerer: 9
     Wizard: 9
 Mordenkainen's Disjunction:
+  school: Abjuration
   level:
     Sorcerer: 9
     Wizard: 9
 Meteor Swarm:
+  school: Evocation
+  descriptor: Fire
   level:
     Sorcerer: 9
     Wizard: 9
 Miracle:
+  school: Evocation
   level:
     Cleric: 9
 Power Word Kill:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Death, Mind-Affecting
   level:
     Sorcerer: 9
     Wizard: 9
 Prismatic Sphere:
+  school: Abjuration
   level:
     Sorcerer: 9
     Wizard: 9
 Shades:
+  school: Illusion
+  subschool: Shadow
   level:
     Sorcerer: 9
     Wizard: 9
 Shambler:
+  school: Conjuration
+  subschool: Creation
   level:
     Druid: 9
 Shapechange:
+  school: Transmutation
   level:
     Druid: 9
     Sorcerer: 9
     Wizard: 9
 Soul Bind:
+  school: Necromancy
   level:
     Cleric: 9
     Sorcerer: 9
     Wizard: 9
 Storm of Vengeance:
+  school: Conjuration
+  subschool: Summoning
   level:
     Cleric: 9
     Druid: 9
 Summon Monster IX:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Cleric: 9
     Sorcerer: 9
     Wizard: 9
 Summon Nature's Ally IX:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 9
 Teleportation Circle:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Sorcerer: 9
     Wizard: 9
 Time Stop:
+  school: Transmutation
   level:
     Sorcerer: 9
     Wizard: 9
 True Resurrection:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 9
 Wail of the Banshee:
+  school: Necromancy
+  descriptor: Death, Sonic
   level:
     Sorcerer: 9
     Wizard: 9
 Weird:
+  school: Illusion
+  subschool: Phantasm
+  descriptor: Fear, Mind-Affecting
   level:
     Sorcerer: 9
     Wizard: 9
 Wish:
+  school: Universal
   level:
     Sorcerer: 9
     Wizard: 9

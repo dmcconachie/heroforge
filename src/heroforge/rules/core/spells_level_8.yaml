@@ -4,22 +4,33 @@
 # See spells_level_0.yaml for field schema.
 
 Animal Shapes:
+  school: Transmutation
   level:
     Druid: 8
 Antipathy:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Druid: 9
     Sorcerer: 8
     Wizard: 8
 Binding:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 8
     Wizard: 8
 Bigby's Clenched Fist:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 8
     Wizard: 8
 Cloak of Chaos:
+  school: Abjuration
+  descriptor: Chaotic
   level:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (chaotic characters)
@@ -37,40 +48,55 @@ Cloak of Chaos:
       bonus_type: resistance
       value: 4
 Clone:
+  school: Necromancy
   level:
     Sorcerer: 8
     Wizard: 8
 Control Plants:
+  school: Transmutation
   level:
     Druid: 8
 Create Greater Undead:
+  school: Necromancy
+  descriptor: Evil
   level:
     Cleric: 8
     Sorcerer: 8
     Wizard: 8
 Cure Critical Wounds (Mass):
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 8
     Druid: 9
 Demand:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 8
     Wizard: 8
 Dimensional Lock:
+  school: Abjuration
   level:
     Cleric: 8
     Sorcerer: 8
     Wizard: 8
 Discern Location:
+  school: Divination
   level:
     Cleric: 8
     Sorcerer: 8
     Wizard: 8
 Earthquake:
+  school: Evocation
+  descriptor: Earth
   level:
     Cleric: 8
     Druid: 8
 Holy Aura:
+  school: Abjuration
+  descriptor: Good
   level:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (good characters)
@@ -88,17 +114,23 @@ Holy Aura:
       bonus_type: resistance
       value: 4
 Horrid Wilting:
+  school: Necromancy
   level:
     Sorcerer: 8
     Wizard: 8
 Incendiary Cloud:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Fire
   level:
     Sorcerer: 8
     Wizard: 8
 Inflict Critical Wounds (Mass):
+  school: Necromancy
   level:
     Cleric: 8
 Iron Body:
+  school: Transmutation
   level:
     Sorcerer: 8
     Wizard: 8
@@ -115,10 +147,13 @@ Iron Body:
       bonus_type: untyped
       value: -6
 Maze:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Sorcerer: 8
     Wizard: 8
 Mind Blank:
+  school: Abjuration
   level:
     Sorcerer: 8
     Wizard: 8
@@ -126,6 +161,7 @@ Mind Blank:
     Immune to divination and mental effects; +8 resistance vs mind- affecting
     (note only)
 Moment of Prescience:
+  school: Divination
   level:
     Sorcerer: 8
     Wizard: 8
@@ -134,52 +170,78 @@ Moment of Prescience:
     or save. Single-use, player-triggered — not on main
     sheet.
 Planar Ally (Greater):
+  school: Conjuration
+  subschool: Calling
+  descriptor: see text for lesser planar ally
   level:
     Cleric: 8
 Planar Binding (Greater):
+  school: Conjuration
+  subschool: Calling
+  descriptor: see text for lesser planar binding
   level:
     Sorcerer: 8
     Wizard: 8
 Polar Ray:
+  school: Evocation
+  descriptor: Cold
   level:
     Sorcerer: 8
     Wizard: 8
 Polymorph Any Object:
+  school: Transmutation
   level:
     Sorcerer: 8
     Wizard: 8
 Power Word Stun:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 8
     Wizard: 8
 Prismatic Wall:
+  school: Abjuration
   level:
     Sorcerer: 8
     Wizard: 8
 Protection from Spells:
+  school: Abjuration
   level:
     Sorcerer: 8
     Wizard: 8
 Prying Eyes (Greater):
+  school: Divination
   level:
     Sorcerer: 8
     Wizard: 8
 Repel Metal or Stone:
+  school: Abjuration
+  descriptor: Earth
   level:
     Druid: 8
 Scintillating Pattern:
+  school: Illusion
+  subschool: Pattern
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 8
     Wizard: 8
 Screen:
+  school: Illusion
+  subschool: Glamer
   level:
     Sorcerer: 8
     Wizard: 8
 Shadow Evocation (Greater):
+  school: Illusion
+  subschool: Shadow
   level:
     Sorcerer: 8
     Wizard: 8
 Shield of Law:
+  school: Abjuration
+  descriptor: Lawful
   level:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (lawful characters)
@@ -197,49 +259,73 @@ Shield of Law:
       bonus_type: resistance
       value: 4
 Spell Immunity (Greater):
+  school: Abjuration
   level:
     Cleric: 8
 Summon Monster VIII:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Cleric: 8
     Sorcerer: 8
     Wizard: 8
 Summon Nature's Ally VIII:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 8
 Sunburst:
+  school: Evocation
+  descriptor: Light
   level:
     Druid: 8
     Sorcerer: 8
     Wizard: 8
 Symbol of Death:
+  school: Necromancy
+  descriptor: Death
   level:
     Cleric: 8
     Sorcerer: 8
     Wizard: 8
 Symbol of Insanity:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Cleric: 8
     Sorcerer: 8
     Wizard: 8
 Sympathy:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Druid: 9
     Sorcerer: 8
     Wizard: 8
 Otiluke's Telekinetic Sphere:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 8
     Wizard: 8
 Temporal Stasis:
+  school: Transmutation
   level:
     Sorcerer: 8
     Wizard: 8
 Trap the Soul:
+  school: Conjuration
+  subschool: Summoning
   level:
     Sorcerer: 8
     Wizard: 8
 Unholy Aura:
+  school: Abjuration
+  descriptor: Evil
   level:
     Cleric: 8
   note: +4 deflection to AC, +4 resistance on saves (evil characters)
@@ -257,5 +343,7 @@ Unholy Aura:
       bonus_type: resistance
       value: 4
 Whirlwind:
+  school: Evocation
+  descriptor: Air
   level:
     Druid: 8

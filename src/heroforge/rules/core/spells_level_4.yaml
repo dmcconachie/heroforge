@@ -4,32 +4,42 @@
 # See spells_level_0.yaml for field schema.
 
 Air Walk:
+  school: Transmutation
+  descriptor: Air
   level:
     Cleric: 4
     Druid: 4
 Animal Growth:
+  school: Transmutation
   level:
     Druid: 5
     Ranger: 4
     Sorcerer: 5
     Wizard: 5
 Antiplant Shell:
+  school: Abjuration
   level:
     Druid: 4
 Arcane Eye:
+  school: Divination
+  subschool: Scrying
   level:
     Sorcerer: 4
     Wizard: 4
 Evard's Black Tentacles:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 4
     Wizard: 4
 Blight:
+  school: Necromancy
   level:
     Druid: 4
     Sorcerer: 5
     Wizard: 5
 Break Enchantment:
+  school: Abjuration
   level:
     Bard: 4
     Cleric: 5
@@ -37,24 +47,32 @@ Break Enchantment:
     Sorcerer: 5
     Wizard: 5
 Chaos Hammer:
+  school: Evocation
+  descriptor: Chaotic
   level:
     Chaos: 4
 Commune with Nature:
+  school: Divination
   level:
     Druid: 5
     Ranger: 4
 Control Water:
+  school: Transmutation
+  descriptor: Water
   level:
     Cleric: 4
     Druid: 4
     Sorcerer: 6
     Wizard: 6
 Cure Critical Wounds:
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 4
     Cleric: 4
     Druid: 5
 Death Ward:
+  school: Necromancy
   level:
     Cleric: 4
     Druid: 5
@@ -62,37 +80,48 @@ Death Ward:
   note: >-
     Immune to death effects, energy drain, negative energy effects (note only)
 Detect Scrying:
+  school: Divination
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Dimension Door:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Dimensional Anchor:
+  school: Abjuration
   level:
     Cleric: 4
     Sorcerer: 4
     Wizard: 4
 Dismissal:
+  school: Abjuration
   level:
     Cleric: 4
     Sorcerer: 5
     Wizard: 5
 Dispel Chaos:
+  school: Abjuration
+  descriptor: Lawful
   level:
     Cleric: 5
     Paladin: 4
 Dispel Evil:
+  school: Abjuration
+  descriptor: Good
   level:
     Cleric: 5
     Paladin: 4
 Divination:
+  school: Divination
   level:
     Cleric: 4
 Divine Power:
+  school: Evocation
   level:
     Cleric: 4
   note: >-
@@ -103,19 +132,26 @@ Divine Power:
       bonus_type: enhancement
       value: 6
 Dominate Person:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 4
     Sorcerer: 5
     Wizard: 5
 Enervation:
+  school: Necromancy
   level:
     Sorcerer: 4
     Wizard: 4
 Enlarge Person (Mass):
+  school: Transmutation
   level:
     Sorcerer: 4
     Wizard: 4
 Fire Shield:
+  school: Evocation
+  descriptor: Fire or Cold
   level:
     Sorcerer: 4
     Wizard: 4
@@ -123,10 +159,13 @@ Fire Shield:
     '''''''Warm shield: resist cold 10, deal 1d6+1/CL fire to melee attackers.
     Chill shield: resist fire 10, deal 1d6+1/CL cold. Note only.'''''''
 Flame Strike:
+  school: Evocation
+  descriptor: Fire
   level:
     Cleric: 5
     Druid: 4
 Freedom of Movement:
+  school: Abjuration
   level:
     Bard: 4
     Cleric: 4
@@ -136,174 +175,250 @@ Freedom of Movement:
     Move and attack normally despite impediments (grapple, web, slow, paralysis,
     etc.); note only
 Giant Vermin:
+  school: Transmutation
   level:
     Cleric: 4
     Druid: 4
 Globe of Invulnerability (Lesser):
+  school: Abjuration
   level:
     Sorcerer: 4
     Wizard: 4
 Hallucinatory Terrain:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Hold Monster:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 4
     Sorcerer: 5
     Wizard: 5
 Holy Smite:
+  school: Evocation
+  descriptor: Good
   level:
     Good: 4
 Holy Sword:
+  school: Evocation
+  descriptor: Good
   level:
     Paladin: 4
 Ice Storm:
+  school: Evocation
+  descriptor: Cold
   level:
     Druid: 4
     Sorcerer: 4
     Wizard: 4
 Illusory Wall:
+  school: Illusion
+  subschool: Figment
   level:
     Sorcerer: 4
     Wizard: 4
 Imbue with Spell Ability:
+  school: Evocation
   level:
     Cleric: 4
 Inflict Critical Wounds:
+  school: Necromancy
   level:
     Cleric: 4
 Invisibility (Greater):
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Legend Lore:
+  school: Divination
   level:
     Bard: 4
     Sorcerer: 6
     Wizard: 6
 Locate Creature:
+  school: Divination
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Mark of Justice:
+  school: Necromancy
   level:
     Cleric: 5
     Paladin: 4
 Minor Creation:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 4
     Wizard: 4
 Rary's Mnemonic Enhancer:
+  school: Transmutation
   level:
     Sorcerer: 4
     Wizard: 4
 Modify Memory:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 4
 Order's Wrath:
+  school: Evocation
+  descriptor: Lawful
   level:
     Law: 4
 Phantasmal Killer:
+  school: Illusion
+  subschool: Phantasm
+  descriptor: Fear, Mind-Affecting
   level:
     Sorcerer: 4
     Wizard: 4
 Planar Ally (Lesser):
+  school: Conjuration
+  subschool: Calling
+  descriptor: see text
   level:
     Cleric: 4
 Polymorph:
+  school: Transmutation
   level:
     Sorcerer: 4
     Wizard: 4
 Rainbow Pattern:
+  school: Illusion
+  subschool: Pattern
+  descriptor: Mind-Affecting
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Reduce Person (Mass):
+  school: Transmutation
   level:
     Sorcerer: 4
     Wizard: 4
 Reincarnate:
+  school: Transmutation
   level:
     Druid: 4
 Otiluke's Resilient Sphere:
+  school: Evocation
+  descriptor: Force
   level:
     Sorcerer: 4
     Wizard: 4
 Restoration:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 4
     Paladin: 4
 Rusting Grasp:
+  school: Transmutation
   level:
     Druid: 4
 Leomund's Secure Shelter:
+  school: Conjuration
+  subschool: Creation
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Sending:
+  school: Evocation
   level:
     Cleric: 4
     Sorcerer: 5
     Wizard: 5
 Shadow Conjuration:
+  school: Illusion
+  subschool: Shadow
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Shout:
+  school: Evocation
+  descriptor: Sonic
   level:
     Bard: 4
     Sorcerer: 4
     Wizard: 4
 Solid Fog:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 4
     Wizard: 4
 Spell Immunity:
+  school: Abjuration
   level:
     Cleric: 4
   note: Immune to 1 spell per 4 CL (note only)
 Spike Stones:
+  school: Transmutation
+  descriptor: Earth
   level:
     Druid: 4
 Stoneskin:
+  school: Abjuration
   level:
     Druid: 5
     Sorcerer: 4
     Wizard: 4
   note: DR 10/adamantine (max 10 points per CL absorbed); note only
 Summon Monster IV:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Bard: 4
     Cleric: 4
     Sorcerer: 4
     Wizard: 4
 Summon Nature's Ally IV:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text
   level:
     Druid: 4
     Ranger: 4
 Tree Stride:
+  school: Conjuration
+  subschool: Teleportation
   level:
     Druid: 5
     Ranger: 4
 Unholy Blight:
+  school: Evocation
+  descriptor: Evil
   level:
     Evil: 4
 Wall of Fire:
+  school: Evocation
+  descriptor: Fire
   level:
     Druid: 5
     Sorcerer: 4
     Wizard: 4
 Wall of Ice:
+  school: Evocation
+  descriptor: Cold
   level:
     Sorcerer: 4
     Wizard: 4
 Zone of Silence:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 4

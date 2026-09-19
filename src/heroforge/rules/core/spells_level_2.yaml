@@ -4,10 +4,16 @@
 # See spells_level_0.yaml for field schema.
 
 Melf's Acid Arrow:
+  school: Conjuration
+  subschool: Creation
+  descriptor: Acid
   level:
     Sorcerer: 2
     Wizard: 2
 Aid:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Cleric: 2
   note: +1 morale on attack/saves vs fear; +1d8+CL temporary HP
@@ -16,25 +22,34 @@ Aid:
       bonus_type: morale
       value: 1
 Align Weapon:
+  school: Transmutation
+  descriptor: see text
   level:
     Cleric: 2
 Alter Self:
+  school: Transmutation
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Animal Trance:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting, Sonic
   level:
     Bard: 2
     Druid: 2
 Arcane Lock:
+  school: Abjuration
   level:
     Sorcerer: 2
     Wizard: 2
 Augury:
+  school: Divination
   level:
     Cleric: 2
 Barkskin:
+  school: Transmutation
   level:
     Druid: 2
     Ranger: 2
@@ -45,6 +60,7 @@ Barkskin:
       bonus_type: natural_armor_enhancement
       value: max(2, 1 + caster_level // 3)
 Bear's Endurance:
+  school: Transmutation
   level:
     Cleric: 2
     Druid: 2
@@ -57,18 +73,22 @@ Bear's Endurance:
       bonus_type: enhancement
       value: 4
 Blindness/Deafness:
+  school: Necromancy
   level:
     Bard: 2
     Cleric: 3
     Sorcerer: 2
     Wizard: 2
 Blur:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
   note: 20%% miss chance for attacks against you (note only)
 Bull's Strength:
+  school: Transmutation
   level:
     Cleric: 2
     Druid: 2
@@ -81,10 +101,14 @@ Bull's Strength:
       bonus_type: enhancement
       value: 4
 Calm Emotions:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Cleric: 2
 Cat's Grace:
+  school: Transmutation
   level:
     Bard: 2
     Druid: 2
@@ -97,21 +121,30 @@ Cat's Grace:
       bonus_type: enhancement
       value: 4
 Chill Metal:
+  school: Transmutation
+  descriptor: Cold
   level:
     Druid: 2
 Command Undead:
+  school: Necromancy
   level:
     Sorcerer: 2
     Wizard: 2
 Consecrate:
+  school: Evocation
+  descriptor: Good
   level:
     Cleric: 2
 Continual Flame:
+  school: Evocation
+  descriptor: Light
   level:
     Cleric: 3
     Sorcerer: 2
     Wizard: 2
 Cure Moderate Wounds:
+  school: Conjuration
+  subschool: Healing
   level:
     Bard: 2
     Cleric: 2
@@ -119,33 +152,46 @@ Cure Moderate Wounds:
     Paladin: 3
     Ranger: 3
 Darkness:
+  school: Evocation
+  descriptor: Darkness
   level:
     Bard: 2
     Cleric: 2
     Sorcerer: 2
     Wizard: 2
 Darkvision:
+  school: Transmutation
   level:
     Ranger: 3
     Sorcerer: 2
     Wizard: 2
 Daze Monster:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Death Knell:
+  school: Necromancy
+  descriptor: Death, Evil
   level:
     Cleric: 2
 Desecrate:
+  school: Evocation
+  descriptor: Evil
   level:
     Cleric: 2
 Detect Thoughts:
+  school: Divination
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Eagle's Splendor:
+  school: Transmutation
   level:
     Bard: 2
     Cleric: 2
@@ -158,10 +204,14 @@ Eagle's Splendor:
       bonus_type: enhancement
       value: 4
 Enthrall:
+  school: Enchantment
+  subschool: Charm
+  descriptor: Language-Dependent, Mind-Affecting, Sonic
   level:
     Bard: 2
     Cleric: 2
 False Life:
+  school: Necromancy
   level:
     Sorcerer: 2
     Wizard: 2
@@ -173,27 +223,37 @@ False Life:
       value: min(caster_level, 10)
       source_label: False Life (temp HP)
 Find Traps:
+  school: Divination
   level:
     Cleric: 2
 Fire Trap:
+  school: Abjuration
+  descriptor: Fire
   level:
     Druid: 2
     Sorcerer: 4
     Wizard: 4
 Flame Blade:
+  school: Evocation
+  descriptor: Fire
   level:
     Druid: 2
 Flaming Sphere:
+  school: Evocation
+  descriptor: Fire
   level:
     Druid: 2
     Sorcerer: 2
     Wizard: 2
 Fog Cloud:
+  school: Conjuration
+  subschool: Creation
   level:
     Druid: 2
     Sorcerer: 2
     Wizard: 2
 Fox's Cunning:
+  school: Transmutation
   level:
     Bard: 2
     Sorcerer: 2
@@ -204,28 +264,39 @@ Fox's Cunning:
       bonus_type: enhancement
       value: 4
 Gentle Repose:
+  school: Necromancy
   level:
     Cleric: 2
     Sorcerer: 3
     Wizard: 3
 Ghoul Touch:
+  school: Necromancy
   level:
     Sorcerer: 2
     Wizard: 2
 Glitterdust:
+  school: Conjuration
+  subschool: Creation
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Gust of Wind:
+  school: Evocation
+  descriptor: Air
   level:
     Druid: 2
     Sorcerer: 2
     Wizard: 2
 Heat Metal:
+  school: Transmutation
+  descriptor: Fire
   level:
     Druid: 2
 Heroism:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Sorcerer: 3
@@ -245,24 +316,36 @@ Heroism:
       bonus_type: morale
       value: 2
 Hold Animal:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Druid: 2
     Ranger: 2
 Hold Person:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Cleric: 2
     Sorcerer: 3
     Wizard: 3
 Hypnotic Pattern:
+  school: Illusion
+  subschool: Pattern
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Inflict Moderate Wounds:
+  school: Necromancy
   level:
     Cleric: 2
 Invisibility:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 2
     Sorcerer: 2
@@ -272,38 +355,49 @@ Invisibility:
     Broken by attacking. Sheet effects handled by the
     Invisible condition, not this spell.
 Knock:
+  school: Transmutation
   level:
     Sorcerer: 2
     Wizard: 2
 Levitate:
+  school: Transmutation
   level:
     Sorcerer: 2
     Wizard: 2
 Locate Object:
+  school: Divination
   level:
     Bard: 2
     Cleric: 3
     Sorcerer: 2
     Wizard: 2
 Make Whole:
+  school: Transmutation
   level:
     Cleric: 2
 Minor Image:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Mirror Image:
+  school: Illusion
+  subschool: Figment
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Misdirection:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Owl's Wisdom:
+  school: Transmutation
   level:
     Cleric: 2
     Druid: 2
@@ -317,14 +411,18 @@ Owl's Wisdom:
       bonus_type: enhancement
       value: 4
 Phantom Trap:
+  school: Illusion
+  subschool: Glamer
   level:
     Sorcerer: 2
     Wizard: 2
 Protection from Arrows:
+  school: Abjuration
   level:
     Sorcerer: 2
     Wizard: 2
 Protection from Energy:
+  school: Abjuration
   level:
     Cleric: 3
     Druid: 3
@@ -332,11 +430,15 @@ Protection from Energy:
     Sorcerer: 3
     Wizard: 3
 Pyrotechnics:
+  school: Transmutation
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Rage:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Bard: 2
     Sorcerer: 3
@@ -353,109 +455,149 @@ Rage:
       bonus_type: untyped
       value: -2
 Reduce Animal:
+  school: Transmutation
   level:
     Druid: 2
     Ranger: 3
 Remove Paralysis:
+  school: Conjuration
+  subschool: Healing
   level:
     Cleric: 2
     Paladin: 2
 Rope Trick:
+  school: Transmutation
   level:
     Sorcerer: 2
     Wizard: 2
 Scare:
+  school: Necromancy
+  descriptor: Fear, Mind-Affecting
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Scorching Ray:
+  school: Evocation
+  descriptor: Fire
   level:
     Sorcerer: 2
     Wizard: 2
 See Invisibility:
+  school: Divination
   level:
     Bard: 3
     Sorcerer: 2
     Wizard: 2
 Shatter:
+  school: Evocation
+  descriptor: Sonic
   level:
     Bard: 2
     Cleric: 2
     Sorcerer: 2
     Wizard: 2
 Shield Other:
+  school: Abjuration
   level:
     Cleric: 2
     Paladin: 2
 Silence:
+  school: Illusion
+  subschool: Glamer
   level:
     Bard: 2
     Cleric: 2
 Snare:
+  school: Transmutation
   level:
     Druid: 3
     Ranger: 2
 Soften Earth and Stone:
+  school: Transmutation
+  descriptor: Earth
   level:
     Druid: 2
 Sound Burst:
+  school: Evocation
+  descriptor: Sonic
   level:
     Bard: 2
     Cleric: 2
 Speak with Plants:
+  school: Divination
   level:
     Bard: 4
     Druid: 3
     Ranger: 2
 Spectral Hand:
+  school: Necromancy
   level:
     Sorcerer: 2
     Wizard: 2
 Spider Climb:
+  school: Transmutation
   level:
     Druid: 2
     Sorcerer: 2
     Wizard: 2
   note: Climb speed 20 ft.; +8 racial bonus on Climb checks (note only)
 Spike Growth:
+  school: Transmutation
   level:
     Druid: 3
     Ranger: 2
 Spiritual Weapon:
+  school: Evocation
+  descriptor: Force
   level:
     Cleric: 2
 Status:
+  school: Divination
   level:
     Cleric: 2
 Suggestion:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Language-Dependent, Mind-Affecting
   level:
     Bard: 2
     Sorcerer: 3
     Wizard: 3
 Summon Monster II:
+  school: Conjuration
+  subschool: Summoning
+  descriptor: see text for summon monster I
   level:
     Bard: 2
     Cleric: 2
     Sorcerer: 2
     Wizard: 2
 Summon Nature's Ally II:
+  school: Conjuration
+  subschool: Summoning
   level:
     Druid: 2
     Ranger: 2
 Summon Swarm:
+  school: Conjuration
+  subschool: Summoning
   level:
     Bard: 2
     Druid: 2
     Sorcerer: 2
     Wizard: 2
 Tongues:
+  school: Divination
   level:
     Bard: 2
     Cleric: 4
     Sorcerer: 3
     Wizard: 3
 Touch of Idiocy:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Sorcerer: 2
     Wizard: 2
@@ -471,22 +613,30 @@ Touch of Idiocy:
       bonus_type: untyped
       value: -4
 Tree Shape:
+  school: Transmutation
   level:
     Druid: 2
     Ranger: 3
 Warp Wood:
+  school: Transmutation
   level:
     Druid: 2
 Web:
+  school: Conjuration
+  subschool: Creation
   level:
     Sorcerer: 2
     Wizard: 2
 Whispering Wind:
+  school: Transmutation
+  descriptor: Air
   level:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
 Wind Wall:
+  school: Evocation
+  descriptor: Air
   level:
     Cleric: 3
     Druid: 3
@@ -494,9 +644,13 @@ Wind Wall:
     Sorcerer: 3
     Wizard: 3
 Wood Shape:
+  school: Transmutation
   level:
     Druid: 2
 Zone of Truth:
+  school: Enchantment
+  subschool: Compulsion
+  descriptor: Mind-Affecting
   level:
     Cleric: 2
     Paladin: 2
