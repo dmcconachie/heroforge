@@ -562,15 +562,24 @@ Improved Critical:
   kind: passive
   source_book: SRD
   note: >-
-    Double threat range with chosen weapon type; does not stack with other
-    threat-range
-    expansions (e.g. keen)
+    Double the threat range of the chosen weapon. Does not stack
+    with any other effect that expands a threat range, such as
+    keen or keen edge. May be taken more than once for different
+    weapons. PHB p. 96.
   prerequisites:
     all_of:
       - stat:
           key: bab
           min: 8
           label: BAB
+  parameterized_selection:
+    name: weapon
+    label: Weapon
+    type: weapon_list
+  weapon_effects:
+    applies:
+      match: name
+    doubles_threat_range: true
   effects: []
 Improved Disarm:
   kind: passive

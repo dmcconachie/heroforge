@@ -56,6 +56,7 @@ from heroforge.engine.sheet_schema import (
 from heroforge.engine.weapons import (
     attack_ability_override,
     range_increment_bonus,
+    threat_range,
     weapon_definition,
     weapon_pool_keys,
 )
@@ -631,6 +632,12 @@ def _special_qualities(c: "Character") -> list[str]:
 # -----------------------------------------------------------
 
 
+def _crit_range_display(c: "Character", item: dict) -> str:
+    """ "20" for a single number, "17-20" for a widened range."""
+    low, high = threat_range(c, item)
+    return str(high) if low >= high else f"{low}-{high}"
+
+
 def _weapon_range_increment(c: "Character", item: dict) -> int | None:
     """Base range increment plus any feat that extends it."""
     wdef = weapon_definition(item)
@@ -741,9 +748,10 @@ def _equipment(c: "Character") -> EquipmentSection:
                 attack=_weapon_breakdown(c, atk_key, ranged, w),
                 damage=_weapon_breakdown(c, dmg_key, ranged, w),
                 attack_iteratives=_weapon_iteratives(c, atk_key),
-                damage_dice=w.get("damage_dice", ""),
-                crit_range=w.get("crit_range", ""),
-                crit_mult=w.get("crit_mult", ""),
+                damage_dice=w.get("damage_dice", "")
+                or (wdef.damage_dice if wdef else ""),
+                crit_range=_crit_range_display(c, w),
+                crit_mult=(f"x{wdef.critical_multiplier}" if wdef else ""),
                 range_inc=_weapon_range_increment(c, w),
                 damage_types=list(w.get("damage_types", [])),
                 weapon_type=w.get("weapon_type", ""),

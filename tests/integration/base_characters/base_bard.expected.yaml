@@ -295,3 +295,6 @@ equipment:
         - 15
         - 10
         - 5
+      damage_dice: 1d6
+      crit_range: 18-20
+      crit_mult: x2

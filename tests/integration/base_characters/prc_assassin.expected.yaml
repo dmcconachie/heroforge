@@ -215,3 +215,6 @@ equipment:
       attack_iteratives:
         - 13
         - 8
+      damage_dice: 1d6
+      crit_range: 19-20
+      crit_mult: x2

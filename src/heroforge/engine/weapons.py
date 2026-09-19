@@ -175,6 +175,39 @@ def attack_ability_override(
     return None
 
 
+def threat_range(character: "Character", item: dict) -> tuple[int, int]:
+    """
+    (low, high) of this weapon's critical threat range.
+
+    Improved Critical (PHB p. 96) and keen (DMG p. 225) each
+    double the range and explicitly do not stack with each other,
+    so it doubles at most once however many sources apply.
+    """
+    wdef = weapon_definition(item)
+    if wdef is None:
+        return (20, 20)
+    low = wdef.critical_range
+    doubled = any(
+        "keen" in str(prop).lower() for prop in item.get("properties", [])
+    )
+    if not doubled:
+        from heroforge.rules.rules import get_rules
+
+        registry = get_rules().feats
+        for entry in character.feats:
+            defn = registry.get(entry.get("name", ""))
+            if not feat_applies_to_weapon(defn, entry.get("parameter"), item):
+                continue
+            if defn.weapon_effects.get(  # type: ignore[union-attr]
+                "doubles_threat_range"
+            ):
+                doubled = True
+                break
+    if doubled:
+        low = 21 - 2 * (21 - low)
+    return (max(low, 2), 20)
+
+
 def _enhancement_entry(item: dict) -> BonusEntry | None:
     """
     The weapon's own enhancement bonus.

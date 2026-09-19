@@ -887,9 +887,15 @@ Reusable components in `widgets/`: `LabeledField`,
   weapons table); rapier, whip and spiked chain are not
   light, so the rule names them and the feat data lists
   them under `applies.also`.
-  Not yet routed per weapon: critical threat ranges
-  (Improved Critical, keen), two-weapon fighting penalties,
-  and weapon material/property effects.
+  Critical threat ranges are resolved by
+  `weapons.threat_range()`. Improved Critical (PHB p. 96)
+  declares `doubles_threat_range` and the keen weapon
+  property does the same; neither stacks with the other, so
+  a range doubles at most once however many sources apply.
+  Doubling widens the range and never touches the
+  multiplier.
+  Not yet routed per weapon: two-weapon fighting penalties,
+  and weapon material/property effects beyond keen.
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)

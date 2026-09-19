@@ -408,6 +408,9 @@ equipment:
       attack_iteratives:
         - 19
         - 14
+      damage_dice: 1d8
+      crit_range: '20'
+      crit_mult: x3
       properties:
         - illusion bane
     - name: Composite Longbow
@@ -421,4 +424,7 @@ equipment:
       attack_iteratives:
         - 12
         - 7
+      damage_dice: 1d8
+      crit_range: '20'
+      crit_mult: x3
       range_inc: 110

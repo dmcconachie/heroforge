@@ -313,3 +313,61 @@ class TestWeaponFinesse:
         c = self._with_finesse({"base": "Dagger"})
         w = gather_sheet(c, None).equipment.weapons[0]
         assert w.attack.total == sum(w.attack.typed.values())
+
+
+class TestCriticalThreatRange:
+    """
+    Improved Critical (PHB p. 96) and keen (DMG p. 225) each
+    double a weapon's threat range, and explicitly do not stack
+    with each other: doubled once, however many sources apply.
+    """
+
+    def test_base_threat_range(self) -> None:
+        c = arm(fighter(), {"base": "Longsword"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.crit_range == "19-20"
+        assert w.crit_mult == "x2"
+
+    def test_single_number_threat_range(self) -> None:
+        c = arm(fighter(), {"base": "Heavy Mace"})
+        assert gather_sheet(c, None).equipment.weapons[0].crit_range == "20"
+
+    def test_improved_critical_doubles(self) -> None:
+        """PHB's own example: a longsword goes 19-20 to 17-20."""
+        c = fighter()
+        take(c, "Improved Critical", "Longsword")
+        arm(c, {"base": "Longsword"})
+        assert gather_sheet(c, None).equipment.weapons[0].crit_range == "17-20"
+
+    def test_improved_critical_only_its_weapon(self) -> None:
+        c = fighter()
+        take(c, "Improved Critical", "Longsword")
+        arm(c, {"base": "Longsword"}, {"base": "Greatsword"})
+        sword, great = gather_sheet(c, None).equipment.weapons
+        assert sword.crit_range == "17-20"
+        assert great.crit_range == "19-20"
+
+    def test_keen_doubles(self) -> None:
+        c = arm(fighter(), {"base": "Longsword", "properties": ["keen"]})
+        assert gather_sheet(c, None).equipment.weapons[0].crit_range == "17-20"
+
+    def test_keen_and_improved_critical_do_not_stack(self) -> None:
+        c = fighter()
+        take(c, "Improved Critical", "Longsword")
+        arm(c, {"base": "Longsword", "properties": ["keen"]})
+        assert gather_sheet(c, None).equipment.weapons[0].crit_range == "17-20"
+
+    def test_doubling_a_single_number(self) -> None:
+        c = fighter()
+        take(c, "Improved Critical", "Heavy Mace")
+        arm(c, {"base": "Heavy Mace"})
+        assert gather_sheet(c, None).equipment.weapons[0].crit_range == "19-20"
+
+    def test_multiplier_is_untouched(self) -> None:
+        """Doubling widens the range; it never changes the multiplier."""
+        c = fighter()
+        take(c, "Improved Critical", "Heavy Pick")
+        arm(c, {"base": "Heavy Pick"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.crit_mult == "x4"
+        assert w.crit_range == "19-20"
