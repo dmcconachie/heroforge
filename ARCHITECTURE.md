@@ -840,19 +840,26 @@ Reusable components in `widgets/`: `LabeledField`,
   they are absent rather than guessed.
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
-- Per-weapon attack/damage breakdowns (weapon
-  enhancement, masterwork, keen, speed properties
-  need per-weapon stat nodes)
-- Weapon Focus / Specialization numeric effects. All four
-  (Weapon Focus, Greater Weapon Focus, Weapon
-  Specialization, Greater Weapon Specialization) apply only
-  to the chosen weapon, so they are `passive` and carry no
-  effects: a Weapon Focus (Longsword) must not buff a bow,
-  and the shared `attack_all` / `damage_all` pools are the
-  wrong home for a per-weapon bonus. They record the choice
-  and show it on the sheet; the bonus lands once per-weapon
-  attack pools exist. The `$selection` target-substitution
-  mechanism (used by Skill Focus) is ready to route them.
+- Per-weapon attack and damage lines live in
+  `engine/weapons.py`. Each equipped weapon gets its own
+  BonusPool and StatNode
+  (`weapon_<i>_attack` / `weapon_<i>_damage`), registered by
+  `register_weapons_on_character()` and rebuilt whenever the
+  equipped set changes, so a Strength change cascades into
+  every weapon line through the graph like any other stat.
+  An attack line builds on the `attack_melee`/`attack_ranged`
+  node; a damage line sums the `damage_str_bonus` node (melee
+  only) with the damage pools, because damage has no single
+  node of its own.
+  Which feats reach a weapon is data: a `weapon_effects:`
+  block declares `applies.match: name` (the selection names
+  the weapon, as for Weapon Focus and Weapon Specialization
+  and their Greater forms) or `applies.match: damage_type`,
+  optionally constrained by `applies.ranged`. A feat with no
+  such block never applies to a weapon.
+  Not yet routed per weapon: critical threat ranges
+  (Improved Critical, keen), two-weapon fighting penalties,
+  and weapon material/property effects.
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)

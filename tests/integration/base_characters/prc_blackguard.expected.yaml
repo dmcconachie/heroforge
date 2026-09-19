@@ -179,3 +179,19 @@ spellcasting:
 equipment:
   weapons:
     - name: Longsword
+      attack:
+        total: 21
+        typed:
+          base: 17
+          str: 3
+          weapon_focus: 1
+      damage:
+        total: 5
+        typed:
+          str: 3
+          weapon_specialization: 2
+      attack_iteratives:
+        - 21
+        - 16
+        - 11
+        - 6

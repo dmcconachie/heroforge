@@ -205,3 +205,12 @@ class_features:
 equipment:
   weapons:
     - name: Short Sword
+      attack:
+        total: 10
+        typed:
+          base: 10
+      damage:
+        total: 0
+      attack_iteratives:
+        - 10
+        - 5

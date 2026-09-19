@@ -1481,6 +1481,12 @@ class Character:
         self._pools[pool.stat_key] = pool
         self._graph.register_pool(pool)
 
+    def remove_pool(self, key: str) -> None:
+        """Drop a dynamic pool and its node (e.g. an unequipped weapon)."""
+        self._pools.pop(key, None)
+        self._graph.unregister_pool(key)
+        self._graph.unregister_node(key)
+
     # -----------------------------------------------------------------------
     # Class levels
     # -----------------------------------------------------------------------

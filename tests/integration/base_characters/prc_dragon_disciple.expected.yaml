@@ -182,3 +182,15 @@ spellcasting:
 equipment:
   weapons:
     - name: Quarterstaff
+      attack:
+        total: 12
+        typed:
+          base: 8
+          str: 4
+      damage:
+        total: 4
+        typed:
+          str: 4
+      attack_iteratives:
+        - 12
+        - 7

@@ -1,0 +1,193 @@
+"""
+Per-weapon attack and damage lines.
+
+A weapon's line is the generic attack/damage pool plus everything
+that applies to *that* weapon: its enhancement bonus, and only
+those feats whose selection matches it. Weapon Focus (Longsword)
+must not touch a bow.
+"""
+
+from __future__ import annotations
+
+import pytest
+
+from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.sheet import gather_sheet
+from heroforge.engine.weapons import (
+    feat_applies_to_weapon,
+    register_weapons_on_character,
+)
+from heroforge.rules.rules import get_rules
+
+
+def fighter(level: int = 12) -> Character:
+    c = Character()
+    c.race = "Human"
+    c.set_ability_score("str", 18)
+    c.set_ability_score("dex", 14)
+    c.set_class_levels(
+        [
+            CharacterLevel(
+                character_level=i + 1, class_name="Fighter", hp_roll=10
+            )
+            for i in range(level)
+        ]
+    )
+    return c
+
+
+def arm(c: Character, *weapons: dict) -> Character:
+    c.equipment["weapons"] = list(weapons)
+    register_weapons_on_character(c)
+    return c
+
+
+def take(c: Character, feat: str, selection: str) -> None:
+    c.add_feat(
+        feat,
+        get_rules().feats.get(feat),
+        level=1,
+        source="character",
+        parameter=selection,
+    )
+
+
+class TestFeatApplicability:
+    """Which feats reach which weapon."""
+
+    def _w(self, base: str) -> dict:
+        return {"base": base}
+
+    def test_name_match_applies(self) -> None:
+        defn = get_rules().feats.get("Weapon Focus")
+        assert feat_applies_to_weapon(defn, "Longsword", self._w("Longsword"))
+
+    def test_name_mismatch_does_not_apply(self) -> None:
+        defn = get_rules().feats.get("Weapon Focus")
+        assert not feat_applies_to_weapon(defn, "Longsword", self._w("Longbow"))
+
+    def test_feat_without_weapon_effects_never_applies(self) -> None:
+        defn = get_rules().feats.get("Iron Will")
+        assert not feat_applies_to_weapon(defn, None, self._w("Longsword"))
+
+
+class TestPerWeaponAttack:
+    def test_base_line_matches_generic_pool(self) -> None:
+        c = arm(fighter(), {"base": "Longsword"})
+        sheet = gather_sheet(c, None)
+        w = sheet.equipment.weapons[0]
+        assert w.attack.total == sheet.combat.attack_melee.total
+
+    def test_enhancement_applies_to_its_own_weapon(self) -> None:
+        c = arm(
+            fighter(),
+            {"base": "Longsword", "enhancement": 3},
+            {"base": "Dagger"},
+        )
+        sword, dagger = gather_sheet(c, None).equipment.weapons
+        assert sword.attack.typed.get("enhancement") == 3
+        assert "enhancement" not in dagger.attack.typed
+        assert sword.attack.total == dagger.attack.total + 3
+
+    def test_weapon_focus_reaches_only_its_weapon(self) -> None:
+        c = fighter()
+        take(c, "Weapon Focus", "Longsword")
+        arm(c, {"base": "Longsword"}, {"base": "Longbow"})
+        sword, bow = gather_sheet(c, None).equipment.weapons
+        assert sword.attack.typed.get("weapon_focus") == 1
+        assert "weapon_focus" not in bow.attack.typed
+
+    def test_ranged_weapon_uses_ranged_base(self) -> None:
+        c = arm(fighter(), {"base": "Longbow"})
+        sheet = gather_sheet(c, None)
+        assert (
+            sheet.equipment.weapons[0].attack.total
+            == sheet.combat.attack_ranged.total
+        )
+
+    def test_greater_weapon_focus_stacks(self) -> None:
+        c = fighter()
+        take(c, "Weapon Focus", "Longsword")
+        take(c, "Greater Weapon Focus", "Longsword")
+        arm(c, {"base": "Longsword"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.attack.typed.get("weapon_focus") == 1
+        assert w.attack.typed.get("greater_weapon_focus") == 1
+
+    def test_two_selections_do_not_cross_contaminate(self) -> None:
+        """The bug that motivated per-weapon lines."""
+        c = fighter()
+        take(c, "Weapon Focus", "Longsword")
+        take(c, "Weapon Focus", "Greatsword")
+        arm(
+            c, {"base": "Longsword"}, {"base": "Greatsword"}, {"base": "Dagger"}
+        )
+        sword, great, dagger = gather_sheet(c, None).equipment.weapons
+        assert sword.attack.typed.get("weapon_focus") == 1
+        assert great.attack.typed.get("weapon_focus") == 1
+        assert "weapon_focus" not in dagger.attack.typed
+
+
+class TestPerWeaponDamage:
+    def test_weapon_specialization_reaches_only_its_weapon(self) -> None:
+        c = fighter()
+        take(c, "Weapon Specialization", "Longsword")
+        arm(c, {"base": "Longsword"}, {"base": "Dagger"})
+        sword, dagger = gather_sheet(c, None).equipment.weapons
+        assert sword.damage.typed.get("weapon_specialization") == 2
+        assert "weapon_specialization" not in dagger.damage.typed
+
+    def test_enhancement_adds_damage(self) -> None:
+        c = arm(fighter(), {"base": "Longsword", "enhancement": 2})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.damage.typed.get("enhancement") == 2
+
+
+class TestWeaponPoolLifecycle:
+    def test_reregistering_drops_stale_weapons(self) -> None:
+        c = arm(fighter(), {"base": "Longsword"}, {"base": "Dagger"})
+        assert len(gather_sheet(c, None).equipment.weapons) == 2
+        arm(c, {"base": "Longsword"})
+        assert len(gather_sheet(c, None).equipment.weapons) == 1
+        assert c.get_pool("weapon_1_attack") is None
+
+    def test_unarmed_character_has_no_weapon_lines(self) -> None:
+        c = fighter()
+        register_weapons_on_character(c)
+        assert gather_sheet(c, None).equipment.weapons == []
+
+
+class TestWeaponLineCascades:
+    def test_strength_change_moves_the_weapon_line(self) -> None:
+        """Graph-backed: the generic pool feeds the weapon node."""
+        c = arm(fighter(), {"base": "Longsword"})
+        before = gather_sheet(c, None).equipment.weapons[0].attack.total
+        c.set_ability_score("str", 20)
+        after = gather_sheet(c, None).equipment.weapons[0].attack.total
+        assert after == before + 1
+
+
+class TestBreakdownConsistency:
+    """
+    A line's total must equal the sum of its parts. The damage
+    node once omitted the Strength bonus that the breakdown
+    listed, so the sheet showed 4 = 3 + 2 + 2.
+    """
+
+    @pytest.mark.parametrize(
+        "weapon", [{"base": "Longsword"}, {"base": "Longbow"}]
+    )
+    def test_totals_match_typed_sum(self, weapon: dict) -> None:
+        c = fighter()
+        take(c, "Weapon Focus", weapon["base"])
+        take(c, "Weapon Specialization", weapon["base"])
+        arm(c, weapon)
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.attack.total == sum(w.attack.typed.values())
+        assert w.damage.total == sum(w.damage.typed.values())
+
+    def test_strength_reaches_melee_damage_only(self) -> None:
+        c = arm(fighter(), {"base": "Longsword"}, {"base": "Longbow"})
+        sword, bow = gather_sheet(c, None).equipment.weapons
+        assert sword.damage.typed.get("str") == 4
+        assert "str" not in bow.damage.typed

@@ -495,16 +495,19 @@ Greater Weapon Focus:
   kind: passive
   source_book: PHB
   note: >-
-    +1 additional attack with chosen weapon (stacks with Weapon
-    Focus). Applies only to the chosen weapon, so it contributes no
-    bonus to the weapon-agnostic attack/damage lines; it lands
-    once per-weapon attack lines exist.
+    +1 additional attack with the chosen weapon, stacking with Weapon
+    Focus. Applies to that weapon's own attack line only.
   prerequisites:
     all_of:
       - feat: Weapon Focus
       - class_level:
           class: Fighter
           min: 8
+  weapon_effects:
+    applies:
+      match: name
+    attack: 1
+    source_label: greater_weapon_focus
   parameterized_selection:
     name: weapon
     label: Weapon
@@ -513,9 +516,8 @@ Greater Weapon Specialization:
   kind: passive
   source_book: PHB
   note: >-
-    +2 additional damage with chosen weapon (stacks). Applies only to the
-    chosen weapon, so it contributes no bonus to the weapon-agnostic
-    attack/damage lines; it lands once per-weapon attack lines exist.
+    +2 additional damage with the chosen weapon, stacking with Weapon
+    Specialization. Applies to that weapon's own damage line only.
   prerequisites:
     all_of:
       - feat: Weapon Specialization
@@ -523,6 +525,11 @@ Greater Weapon Specialization:
       - class_level:
           class: Fighter
           min: 12
+  weapon_effects:
+    applies:
+      match: name
+    damage: 2
+    source_label: greater_weapon_specialization
   parameterized_selection:
     name: weapon
     label: Weapon
@@ -1236,9 +1243,8 @@ Weapon Focus:
   kind: passive
   source_book: PHB
   note: >-
-    +1 attack with chosen weapon. Applies only to the chosen weapon, so it
-    contributes no bonus to the weapon-agnostic attack/damage lines; it
-    lands once per-weapon attack lines exist.
+    +1 attack with the chosen weapon. Applies to that weapon's own
+    attack line only, never to the weapon-agnostic totals.
   prerequisites:
     all_of:
       - stat:
@@ -1247,6 +1253,11 @@ Weapon Focus:
           label: BAB
       - proficient_with:
           weapon: $weapon
+  weapon_effects:
+    applies:
+      match: name
+    attack: 1
+    source_label: weapon_focus
   parameterized_selection:
     name: weapon
     label: Weapon
@@ -1255,15 +1266,19 @@ Weapon Specialization:
   kind: passive
   source_book: PHB
   note: >-
-    +2 damage with chosen weapon. Applies only to the chosen weapon, so it
-    contributes no bonus to the weapon-agnostic attack/damage lines; it
-    lands once per-weapon attack lines exist.
+    +2 damage with the chosen weapon. Applies to that weapon's own
+    damage line only, never to the weapon-agnostic totals.
   prerequisites:
     all_of:
       - feat: Weapon Focus
       - class_level:
           class: Fighter
           min: 4
+  weapon_effects:
+    applies:
+      match: name
+    damage: 2
+    source_label: weapon_specialization
   parameterized_selection:
     name: weapon
     label: Weapon

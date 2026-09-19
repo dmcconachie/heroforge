@@ -53,6 +53,10 @@ from heroforge.engine.sheet_schema import (
     SpellcastingEntry,
     WeaponDisplay,
 )
+from heroforge.engine.weapons import (
+    weapon_definition,
+    weapon_pool_keys,
+)
 from heroforge.rules.known import (
     KnownClass,
     KnownDomain,
@@ -625,6 +629,47 @@ def _special_qualities(c: "Character") -> list[str]:
 # -----------------------------------------------------------
 
 
+def _weapon_breakdown(
+    c: "Character",
+    key: str,
+    ranged: bool,
+) -> Breakdown | None:
+    """
+    One weapon's line: the generic attack or damage breakdown it
+    is built on, plus this weapon's own pool.
+    """
+    if not c._graph.has_node(key):
+        return None
+    if key.endswith("_attack"):
+        base_key = "attack_ranged" if ranged else "attack_melee"
+        ability = Ability.DEX if ranged else Ability.STR
+        typed = dict(_attack_breakdown(c, base_key, ability).typed)
+    else:
+        typed = {}
+        str_mod = c.get_ability_modifier(Ability.STR)
+        if str_mod and not ranged:
+            typed[Ability.STR.value] = str_mod
+        pool_key = "damage_ranged" if ranged else "damage_melee"
+        _merge(typed, _pool_breakdown(c.get_pool(pool_key), c))
+        _merge(typed, _pool_breakdown(c.get_pool("damage_all"), c))
+    _merge(typed, _pool_breakdown(c.get_pool(key), c))
+    return Breakdown(total=c.get(key), typed=_drop_zeros(typed))
+
+
+def _weapon_iteratives(c: "Character", key: str) -> list[int]:
+    """Iterative attacks from this weapon's own line."""
+    if not c._graph.has_node(key) or not key.endswith("_attack"):
+        return []
+    base = c.get(key)
+    bab = c.bab
+    attacks = [base]
+    extra = bab - 5
+    while extra >= 1:
+        attacks.append(base - (bab - extra))
+        extra -= 5
+    return attacks
+
+
 def _equipment(c: "Character") -> EquipmentSection:
     from heroforge.engine.equipment import equipment_display_name
 
@@ -661,7 +706,10 @@ def _equipment(c: "Character") -> EquipmentSection:
 
     section.worn = [KnownMagicItem(n) for n in eq.get("worn", [])]
 
-    for w in eq.get("weapons", []):
+    for index, w in enumerate(eq.get("weapons", [])):
+        atk_key, dmg_key = weapon_pool_keys(index)
+        wdef = weapon_definition(w)
+        ranged = bool(wdef and wdef.is_ranged)
         section.weapons.append(
             WeaponDisplay(
                 name=equipment_display_name(
@@ -670,6 +718,9 @@ def _equipment(c: "Character") -> EquipmentSection:
                     material=w.get("material", ""),
                     name=w.get("name", ""),
                 ),
+                attack=_weapon_breakdown(c, atk_key, ranged),
+                damage=_weapon_breakdown(c, dmg_key, ranged),
+                attack_iteratives=_weapon_iteratives(c, atk_key),
                 damage_dice=w.get("damage_dice", ""),
                 crit_range=w.get("crit_range", ""),
                 crit_mult=w.get("crit_mult", ""),

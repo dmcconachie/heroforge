@@ -491,6 +491,23 @@ equipment:
     - Xan ibn'Duman
   weapons:
     - name: +5 Dagger
+      attack:
+        total: 28
+        typed:
+          base: 17
+          str: 5
+          competence: 1
+          enhancement: 5
+      damage:
+        total: 10
+        typed:
+          str: 5
+          enhancement: 5
+      attack_iteratives:
+        - 28
+        - 23
+        - 18
+        - 13
       properties:
         - TWF (primary)
         - sacred
@@ -500,6 +517,23 @@ equipment:
         - weapon bond
         - Starmetal
     - name: +5 Dagger
+      attack:
+        total: 28
+        typed:
+          base: 17
+          str: 5
+          competence: 1
+          enhancement: 5
+      damage:
+        total: 10
+        typed:
+          str: 5
+          enhancement: 5
+      attack_iteratives:
+        - 28
+        - 23
+        - 18
+        - 13
       properties:
         - TWF (secondary)
         - sacred
@@ -508,18 +542,68 @@ equipment:
         - fiendslayer (least)
         - Starmetal
     - name: +5 Alchemical Silver Light Mace
+      attack:
+        total: 28
+        typed:
+          base: 17
+          str: 5
+          competence: 1
+          enhancement: 5
+      damage:
+        total: 10
+        typed:
+          str: 5
+          enhancement: 5
+      attack_iteratives:
+        - 28
+        - 23
+        - 18
+        - 13
       properties:
         - TWF (primary)
         - sacred
         - bane (undead)
         - truedeath (greater)
     - name: +5 Alchemical Silver Light Mace
+      attack:
+        total: 28
+        typed:
+          base: 17
+          str: 5
+          competence: 1
+          enhancement: 5
+      damage:
+        total: 10
+        typed:
+          str: 5
+          enhancement: 5
+      attack_iteratives:
+        - 28
+        - 23
+        - 18
+        - 13
       properties:
         - TWF (secondary)
         - sacred
         - bane (undead)
         - truedeath (greater)
     - name: +3 Composite Longbow
+      attack:
+        total: 32
+        typed:
+          base: 17
+          dex: 11
+          competence: 1
+          enhancement: 3
+      damage:
+        total: 3
+        typed:
+          enhancement: 3
+      attack_iteratives:
+        - 32
+        - 27
+        - 22
+        - 17
       properties:
         - sacred
         - precise

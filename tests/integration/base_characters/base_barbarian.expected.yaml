@@ -197,3 +197,17 @@ class_features:
 equipment:
   weapons:
     - name: Greataxe
+      attack:
+        total: 29
+        typed:
+          base: 20
+          str: 9
+      damage:
+        total: 9
+        typed:
+          str: 9
+      attack_iteratives:
+        - 29
+        - 24
+        - 19
+        - 14

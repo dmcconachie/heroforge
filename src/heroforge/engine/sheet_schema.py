@@ -177,6 +177,11 @@ class ArmorDisplay:
 @dataclass
 class WeaponDisplay:
     name: str
+    # This weapon's own attack and damage lines: the generic
+    # pool plus whatever applies to this weapon specifically.
+    attack: Breakdown | None = None
+    damage: Breakdown | None = None
+    attack_iteratives: list[int] = field(default_factory=list)
     damage_dice: str = ""
     crit_range: str = ""
     crit_mult: str = ""

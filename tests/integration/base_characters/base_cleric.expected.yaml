@@ -176,3 +176,16 @@ spellcasting:
 equipment:
   weapons:
     - name: Heavy Mace
+      attack:
+        total: 17
+        typed:
+          base: 15
+          str: 2
+      damage:
+        total: 2
+        typed:
+          str: 2
+      attack_iteratives:
+        - 17
+        - 12
+        - 7

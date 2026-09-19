@@ -34,6 +34,7 @@ from heroforge.engine.spellcasting import (
     Specialization,
     validate_specialization,
 )
+from heroforge.engine.weapons import register_weapons_on_character
 from heroforge.rules.known import (
     KnownAcf,
     KnownArmor,
@@ -653,6 +654,9 @@ def load_character(
 
     # Equipment
     _load_equipment(cf.equipment, c)
+    # Per-weapon attack/damage lines depend on both the equipped
+    # weapons and the character's feats, so build them last.
+    register_weapons_on_character(c)
 
     # Notes
     c.notes = cf.notes

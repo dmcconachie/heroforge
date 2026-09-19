@@ -150,3 +150,17 @@ special_qualities:
 equipment:
   weapons:
     - name: Greatsword
+      attack:
+        total: 14
+        typed:
+          base: 6
+          str: 7
+          weapon_focus: 1
+      damage:
+        total: 9
+        typed:
+          str: 7
+          weapon_specialization: 2
+      attack_iteratives:
+        - 14
+        - 9

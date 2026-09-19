@@ -201,3 +201,15 @@ spellcasting:
 equipment:
   weapons:
     - name: Quarterstaff
+      attack:
+        total: 9
+        typed:
+          base: 10
+          str: -1
+      damage:
+        total: -1
+        typed:
+          str: -1
+      attack_iteratives:
+        - 9
+        - 4

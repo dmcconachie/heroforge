@@ -134,6 +134,11 @@ class FeatDefinition:
     effects: list[dict] = field(default_factory=list)
     snapshot: bool = False
     parameterized_selection: dict | None = None
+    # Per-weapon effects: which weapons this feat reaches and
+    # what it adds to their attack/damage lines. See
+    # engine/weapons.py. Absent means the feat is not
+    # weapon-specific.
+    weapon_effects: dict | None = None
     # Derived (not from YAML):
     buff_definition: BuffDefinition | None = field(default=None, init=False)
 
@@ -347,6 +352,7 @@ def build_feat_from_yaml(
         effects=raw_effects,
         snapshot=bool(decl.get("snapshot", False)),
         parameterized_selection=decl.get("parameterized_selection"),
+        weapon_effects=decl.get("weapon_effects"),
     )
 
     # Build BuffDefinition for plain (non-parameterized,

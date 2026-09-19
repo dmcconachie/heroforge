@@ -205,6 +205,14 @@ class StatGraph:
     def has_pool(self, key: str) -> bool:
         return key in self._pools
 
+    def unregister_node(self, key: str) -> None:
+        """Drop a node. Idempotent. Symmetric with register_node."""
+        self._nodes.pop(key, None)
+
+    def unregister_pool(self, key: str) -> None:
+        """Drop a pool. Idempotent. Symmetric with register_pool."""
+        self._pools.pop(key, None)
+
     # ------------------------------------------------------------------
     # Resolution
     # ------------------------------------------------------------------

@@ -216,3 +216,17 @@ spellcasting:
 equipment:
   weapons:
     - name: Longbow
+      attack:
+        total: 27
+        typed:
+          base: 20
+          dex: 5
+          size: 1
+          weapon_focus: 1
+      damage:
+        total: 0
+      attack_iteratives:
+        - 27
+        - 22
+        - 17
+        - 12
