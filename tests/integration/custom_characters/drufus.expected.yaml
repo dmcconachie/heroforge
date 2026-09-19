@@ -493,12 +493,13 @@ equipment:
   weapons:
     - name: +5 Dagger
       attack:
-        total: 35
+        total: 33
         typed:
           base: 17
           competence: 1
           dex: 11
           weapon_focus: 1
+          two_weapon_fighting: -2
           enhancement: 5
       damage:
         total: 10
@@ -506,10 +507,10 @@ equipment:
           str: 5
           enhancement: 5
       attack_iteratives:
-        - 35
-        - 30
-        - 25
-        - 20
+        - 33
+        - 28
+        - 23
+        - 18
       damage_dice: 1d4
       crit_range: 19-20
       crit_mult: x2
@@ -524,23 +525,24 @@ equipment:
         - Starmetal
     - name: +5 Dagger
       attack:
-        total: 35
+        total: 33
         typed:
           base: 17
           competence: 1
           dex: 11
           weapon_focus: 1
+          two_weapon_fighting: -2
           enhancement: 5
       damage:
-        total: 10
+        total: 7
         typed:
-          str: 5
+          str: 2
           enhancement: 5
       attack_iteratives:
-        - 35
-        - 30
-        - 25
-        - 20
+        - 33
+        - 28
+        - 23
+        - 18
       damage_dice: 1d4
       crit_range: 19-20
       crit_mult: x2
@@ -554,11 +556,12 @@ equipment:
         - Starmetal
     - name: +5 Alchemical Silver Light Mace
       attack:
-        total: 34
+        total: 32
         typed:
           base: 17
           competence: 1
           dex: 11
+          two_weapon_fighting: -2
           enhancement: 5
       damage:
         total: 10
@@ -566,10 +569,10 @@ equipment:
           str: 5
           enhancement: 5
       attack_iteratives:
-        - 34
-        - 29
-        - 24
-        - 19
+        - 32
+        - 27
+        - 22
+        - 17
       damage_dice: 1d6
       crit_range: '20'
       crit_mult: x2
@@ -580,22 +583,23 @@ equipment:
         - truedeath (greater)
     - name: +5 Alchemical Silver Light Mace
       attack:
-        total: 34
+        total: 32
         typed:
           base: 17
           competence: 1
           dex: 11
+          two_weapon_fighting: -2
           enhancement: 5
       damage:
-        total: 10
+        total: 7
         typed:
-          str: 5
+          str: 2
           enhancement: 5
       attack_iteratives:
-        - 34
-        - 29
-        - 24
-        - 19
+        - 32
+        - 27
+        - 22
+        - 17
       damage_dice: 1d6
       crit_range: '20'
       crit_mult: x2

@@ -208,6 +208,75 @@ def threat_range(character: "Character", item: dict) -> tuple[int, int]:
     return (max(low, 2), 20)
 
 
+# PHB Table 8-10, keyed (off_hand_is_light, has_twf_feat).
+_TWF_PENALTIES = {
+    (False, False): (-6, -10),
+    (True, False): (-4, -8),
+    (False, True): (-4, -4),
+    (True, True): (-2, -2),
+}
+
+
+def _is_light(item: dict) -> bool:
+    defn = weapon_definition(item)
+    return bool(defn and defn.wield_class == "light")
+
+
+def two_weapon_penalty(
+    character: "Character",
+    item: dict,
+    weapons: list[dict],
+) -> int:
+    """
+    This weapon's two-weapon fighting penalty, or 0.
+
+    Applies only to weapons declared part of a pairing via
+    ``hand: primary`` / ``hand: off_hand``, because fighting with two
+    weapons is a choice made per full attack rather than a
+    property of carrying two.
+
+    The primary penalty depends on the off-hand weapon. A
+    character may declare more than one pairing, and nothing
+    records which weapon pairs with which, so the primary is
+    treated as light-handed only when every declared off-hand
+    weapon is light.
+    """
+    hand = item.get("hand", "")
+    if hand not in ("primary", "off_hand"):
+        return 0
+    off_hands = [w for w in weapons if w.get("hand") == "off_hand"]
+    if not off_hands:
+        return 0
+    if hand == "off_hand":
+        light = _is_light(item)
+    else:
+        light = all(_is_light(w) for w in off_hands)
+    has_feat = character.has_feat("Two-Weapon Fighting")
+    primary, off = _TWF_PENALTIES[(light, has_feat)]
+    return primary if hand == "primary" else off
+
+
+def off_hand_strength_penalty(character: "Character", item: dict) -> int:
+    """
+    Correction applied to reach half Strength in the off hand.
+
+    PHB p. 113: an off-hand weapon adds one-half the wielder's
+    Strength bonus to damage. The damage line starts from the
+    full bonus, so this subtracts the difference.
+    """
+    if item.get("hand") != "off_hand":
+        return 0
+    defn = weapon_definition(item)
+    if defn is not None and defn.is_ranged:
+        return 0
+    from heroforge.engine.enums import Ability
+
+    str_mod = character.get_ability_modifier(Ability.STR)
+    if str_mod <= 0:
+        return 0
+    return (str_mod // 2) - str_mod
+
+
 def _enhancement_entry(item: dict) -> BonusEntry | None:
     """
     The weapon's own enhancement bonus.
@@ -293,6 +362,32 @@ def register_weapons_on_character(character: "Character") -> None:
                 pool.set_source("enhancement", [enh])
             for e in _feat_entries(character, item, which):
                 pool.set_source(f"feat:{e.source}", [e])
+            if which == ATTACK:
+                twf = two_weapon_penalty(character, item, weapons)
+                if twf:
+                    pool.set_source(
+                        "two_weapon_fighting",
+                        [
+                            BonusEntry(
+                                value=twf,
+                                bonus_type=BonusType.UNTYPED,
+                                source="two_weapon_fighting",
+                            )
+                        ],
+                    )
+            else:
+                half = off_hand_strength_penalty(character, item)
+                if half:
+                    pool.set_source(
+                        "off_hand_strength",
+                        [
+                            BonusEntry(
+                                value=half,
+                                bonus_type=BonusType.UNTYPED,
+                                source="off_hand_strength",
+                            )
+                        ],
+                    )
             character.add_pool(pool)
             if which == ATTACK:
                 # attack_melee/_ranged are nodes, so the weapon

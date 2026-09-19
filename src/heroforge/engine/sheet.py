@@ -55,6 +55,7 @@ from heroforge.engine.sheet_schema import (
 )
 from heroforge.engine.weapons import (
     attack_ability_override,
+    off_hand_strength_penalty,
     range_increment_bonus,
     threat_range,
     weapon_definition,
@@ -675,11 +676,20 @@ def _weapon_breakdown(
         typed = {}
         str_mod = c.get_ability_modifier(Ability.STR)
         if str_mod and not ranged:
-            typed[Ability.STR.value] = str_mod
+            # An off-hand weapon adds half Strength (PHB p. 113).
+            # The pool carries the correction; show the halved
+            # figure rather than a full bonus and a subtraction.
+            if item.get("hand") == "off_hand":
+                str_mod += off_hand_strength_penalty(c, item)
+            if str_mod:
+                typed[Ability.STR.value] = str_mod
         pool_key = "damage_ranged" if ranged else "damage_melee"
         _merge(typed, _pool_breakdown(c.get_pool(pool_key), c))
         _merge(typed, _pool_breakdown(c.get_pool("damage_all"), c))
-    _merge(typed, _pool_breakdown(c.get_pool(key), c))
+    own = _pool_breakdown(c.get_pool(key), c)
+    # Already folded into the Strength figure above.
+    own.pop("off_hand_strength", None)
+    _merge(typed, own)
     return Breakdown(total=c.get(key), typed=_drop_zeros(typed))
 
 

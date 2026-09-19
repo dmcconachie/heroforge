@@ -350,6 +350,7 @@ equipment:
     - Xan ibn'Duman
   weapons:
     - base: Dagger
+      hand: primary
       enhancement: 5
       properties:
         - TWF (primary)
@@ -360,6 +361,7 @@ equipment:
         - weapon bond
         - Starmetal
     - base: Dagger
+      hand: off_hand
       enhancement: 5
       properties:
         - TWF (secondary)
@@ -369,6 +371,7 @@ equipment:
         - fiendslayer (least)
         - Starmetal
     - base: Light Mace
+      hand: primary
       material: Alchemical Silver
       enhancement: 5
       properties:
@@ -377,6 +380,7 @@ equipment:
         - bane (undead)
         - truedeath (greater)
     - base: Light Mace
+      hand: off_hand
       material: Alchemical Silver
       enhancement: 5
       properties:

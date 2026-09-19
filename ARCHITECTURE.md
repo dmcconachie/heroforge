@@ -894,8 +894,22 @@ Reusable components in `widgets/`: `LabeledField`,
   a range doubles at most once however many sources apply.
   Doubling widens the range and never touches the
   multiplier.
-  Not yet routed per weapon: two-weapon fighting penalties,
-  and weapon material/property effects beyond keen.
+  Two-weapon fighting penalties follow PHB Table 8-10,
+  keyed on whether the off-hand weapon is light (hence
+  `wield_class`) and whether the character has the
+  Two-Weapon Fighting feat. They apply only to weapons that
+  declare `hand: primary` / `hand: off_hand`, because
+  fighting with two weapons is a choice made per full attack
+  rather than a property of carrying two. An off-hand weapon
+  adds half Strength to damage. `off_hand` is spelled out
+  because YAML reads a bare `off` as false.
+  A character may declare more than one pairing and nothing
+  records which weapon pairs with which, so a primary counts
+  as light-handed only when every declared off-hand weapon
+  is light.
+  Not yet routed per weapon: Improved/Greater Two-Weapon
+  Fighting's extra off-hand attacks, and weapon
+  material/property effects beyond keen.
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)

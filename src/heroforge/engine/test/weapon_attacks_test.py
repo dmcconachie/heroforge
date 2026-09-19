@@ -371,3 +371,74 @@ class TestCriticalThreatRange:
         w = gather_sheet(c, None).equipment.weapons[0]
         assert w.crit_mult == "x4"
         assert w.crit_range == "19-20"
+
+
+class TestTwoWeaponFighting:
+    """
+    PHB Table 8-10. The penalty depends on whether the off-hand
+    weapon is light and whether the character has the Two-Weapon
+    Fighting feat:
+
+        normal                    -6 / -10
+        off-hand light            -4 /  -8
+        TWF feat                  -4 /  -4
+        off-hand light + feat     -2 /  -2
+
+    Penalties apply only to weapons declared as a pairing, since
+    fighting with two weapons is a choice made per full attack,
+    not a property of carrying two.
+    """
+
+    def _pair(self, off: str, feat: bool = False) -> Character:
+        c = fighter()
+        if feat:
+            take(c, "Two-Weapon Fighting", None)
+        arm(
+            c,
+            {"base": "Longsword", "hand": "primary"},
+            {"base": off, "hand": "off_hand"},
+        )
+        return c
+
+    def test_normal_penalties(self) -> None:
+        c = self._pair("Warhammer")  # one-handed off-hand
+        primary, off = gather_sheet(c, None).equipment.weapons
+        assert primary.attack.typed.get("two_weapon_fighting") == -6
+        assert off.attack.typed.get("two_weapon_fighting") == -10
+
+    def test_light_off_hand(self) -> None:
+        c = self._pair("Dagger")
+        primary, off = gather_sheet(c, None).equipment.weapons
+        assert primary.attack.typed.get("two_weapon_fighting") == -4
+        assert off.attack.typed.get("two_weapon_fighting") == -8
+
+    def test_with_the_feat(self) -> None:
+        c = self._pair("Warhammer", feat=True)
+        primary, off = gather_sheet(c, None).equipment.weapons
+        assert primary.attack.typed.get("two_weapon_fighting") == -4
+        assert off.attack.typed.get("two_weapon_fighting") == -4
+
+    def test_light_off_hand_with_the_feat(self) -> None:
+        c = self._pair("Dagger", feat=True)
+        primary, off = gather_sheet(c, None).equipment.weapons
+        assert primary.attack.typed.get("two_weapon_fighting") == -2
+        assert off.attack.typed.get("two_weapon_fighting") == -2
+
+    def test_undeclared_weapons_take_no_penalty(self) -> None:
+        """Carrying two weapons is not fighting with two."""
+        c = arm(fighter(), {"base": "Longsword"}, {"base": "Dagger"})
+        for w in gather_sheet(c, None).equipment.weapons:
+            assert "two_weapon_fighting" not in w.attack.typed
+
+    def test_off_hand_damage_is_half_strength(self) -> None:
+        """PHB p. 113: one-half the Strength bonus in the off hand."""
+        c = self._pair("Dagger")
+        primary, off = gather_sheet(c, None).equipment.weapons
+        assert primary.damage.typed.get("str") == 4
+        assert off.damage.typed.get("str") == 2
+
+    def test_off_hand_half_strength_rounds_down(self) -> None:
+        c = self._pair("Dagger")
+        c.set_ability_score("str", 19)  # +4 -> +2
+        off = gather_sheet(c, None).equipment.weapons[1]
+        assert off.damage.typed.get("str") == 2

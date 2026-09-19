@@ -168,6 +168,10 @@ class WeaponSlotEntry:
     material: KnownMaterial | None = None
     properties: list[str] = field(default_factory=list)
     name: str = ""  # display name override
+    # "primary" / "off_hand" declares a two-weapon pairing and
+    # brings the Table 8-10 penalties with it. Spelled off_hand
+    # because YAML reads a bare `off` as false.
+    hand: str = ""
 
 
 @dataclass
@@ -351,6 +355,7 @@ def _character_to_charfile(
                     ),
                     properties=list(w.get("properties", [])),
                     name=w.get("name", ""),
+                    hand=w.get("hand", ""),
                 )
             )
 
@@ -730,6 +735,7 @@ def _load_equipment(
                     "material": w.material,
                     "properties": w.properties,
                     "name": w.name,
+                    "hand": w.hand,
                 }.items()
                 if v
             }
