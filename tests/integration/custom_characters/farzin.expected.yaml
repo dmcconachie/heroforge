@@ -421,3 +421,4 @@ equipment:
       attack_iteratives:
         - 12
         - 7
+      range_inc: 110

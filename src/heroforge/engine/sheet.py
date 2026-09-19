@@ -54,6 +54,7 @@ from heroforge.engine.sheet_schema import (
     WeaponDisplay,
 )
 from heroforge.engine.weapons import (
+    range_increment_bonus,
     weapon_definition,
     weapon_pool_keys,
 )
@@ -629,6 +630,15 @@ def _special_qualities(c: "Character") -> list[str]:
 # -----------------------------------------------------------
 
 
+def _weapon_range_increment(c: "Character", item: dict) -> int | None:
+    """Base range increment plus any feat that extends it."""
+    wdef = weapon_definition(item)
+    base = item.get("range_inc") or (wdef.range_increment if wdef else 0)
+    if not base:
+        return None
+    return base + range_increment_bonus(c, item)
+
+
 def _weapon_breakdown(
     c: "Character",
     key: str,
@@ -724,7 +734,7 @@ def _equipment(c: "Character") -> EquipmentSection:
                 damage_dice=w.get("damage_dice", ""),
                 crit_range=w.get("crit_range", ""),
                 crit_mult=w.get("crit_mult", ""),
-                range_inc=w.get("range_inc") or None,
+                range_inc=_weapon_range_increment(c, w),
                 damage_types=list(w.get("damage_types", [])),
                 weapon_type=w.get("weapon_type", ""),
                 weight=w.get("weight") or None,

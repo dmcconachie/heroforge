@@ -191,3 +191,59 @@ class TestBreakdownConsistency:
         sword, bow = gather_sheet(c, None).equipment.weapons
         assert sword.damage.typed.get("str") == 4
         assert "str" not in bow.damage.typed
+
+
+class TestWeaponMastery:
+    """
+    Melee/Ranged Weapon Mastery (PHB II) select a *damage type*,
+    not a weapon, so they reach every weapon of that type — and
+    only on the right side of the melee/ranged divide.
+    """
+
+    def test_melee_mastery_covers_matching_damage_type(self) -> None:
+        c = fighter()
+        take(c, "Melee Weapon Mastery", "Slashing")
+        arm(c, {"base": "Longsword"}, {"base": "Greatsword"})
+        for w in gather_sheet(c, None).equipment.weapons:
+            assert w.attack.typed.get("melee_weapon_mastery") == 2
+            assert w.damage.typed.get("melee_weapon_mastery") == 2
+
+    def test_melee_mastery_skips_other_damage_types(self) -> None:
+        c = fighter()
+        take(c, "Melee Weapon Mastery", "Slashing")
+        arm(c, {"base": "Heavy Mace"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert "melee_weapon_mastery" not in w.attack.typed
+
+    def test_melee_mastery_does_not_reach_ranged(self) -> None:
+        """A longbow is piercing, but Melee Mastery is melee-only."""
+        c = fighter()
+        take(c, "Melee Weapon Mastery", "Piercing")
+        arm(c, {"base": "Longbow"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert "melee_weapon_mastery" not in w.attack.typed
+
+    def test_ranged_mastery_applies_to_ranged_only(self) -> None:
+        c = fighter()
+        take(c, "Ranged Weapon Mastery", "Piercing")
+        arm(c, {"base": "Longbow"}, {"base": "Dagger"})
+        bow, dagger = gather_sheet(c, None).equipment.weapons
+        assert bow.attack.typed.get("ranged_weapon_mastery") == 2
+        assert bow.damage.typed.get("ranged_weapon_mastery") == 2
+        assert "ranged_weapon_mastery" not in dagger.attack.typed
+
+    def test_ranged_mastery_extends_range_increment(self) -> None:
+        c = fighter()
+        take(c, "Ranged Weapon Mastery", "Piercing")
+        arm(c, {"base": "Longbow"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.range_inc == 120  # 100 + 20
+
+    def test_mastery_stacks_with_weapon_focus(self) -> None:
+        c = fighter()
+        take(c, "Weapon Focus", "Longsword")
+        take(c, "Melee Weapon Mastery", "Slashing")
+        arm(c, {"base": "Longsword"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.attack.typed.get("weapon_focus") == 1
+        assert w.attack.typed.get("melee_weapon_mastery") == 2

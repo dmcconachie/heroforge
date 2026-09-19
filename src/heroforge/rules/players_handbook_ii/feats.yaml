@@ -1,0 +1,64 @@
+# rules/players_handbook_ii/feats.yaml
+#
+# Feats from Player's Handbook II.
+#
+# Sorted alphabetically.
+
+Melee Weapon Mastery:
+  kind: passive
+  source_book: Player's Handbook II
+  note: >-
+    +2 attack and +2 damage with any melee weapon dealing the
+    chosen damage type. Unlike Weapon Focus this selects a damage
+    type rather than a weapon, so it covers every melee weapon of
+    that type. May be taken more than once for different types.
+    PHB II p. 78.
+  prerequisites:
+    all_of:
+      - feat: Weapon Focus
+      - feat: Weapon Specialization
+      - stat:
+          key: bab
+          min: 8
+          label: BAB
+  parameterized_selection:
+    name: damage_type
+    label: Damage Type
+    type: damage_type_list
+  weapon_effects:
+    applies:
+      match: damage_type
+      ranged: false
+    attack: 2
+    damage: 2
+    source_label: melee_weapon_mastery
+  effects: []
+Ranged Weapon Mastery:
+  kind: passive
+  source_book: Player's Handbook II
+  note: >-
+    +2 attack and +2 damage with any ranged weapon dealing the
+    chosen damage type, and its range increment grows by 20 feet.
+    Selects a damage type rather than a weapon. May be taken more
+    than once for different types. PHB II p. 80.
+  prerequisites:
+    all_of:
+      - feat: Weapon Focus
+      - feat: Weapon Specialization
+      - stat:
+          key: bab
+          min: 8
+          label: BAB
+  parameterized_selection:
+    name: damage_type
+    label: Damage Type
+    type: damage_type_list
+  weapon_effects:
+    applies:
+      match: damage_type
+      ranged: true
+    attack: 2
+    damage: 2
+    range_increment: 20
+    source_label: ranged_weapon_mastery
+  effects: []

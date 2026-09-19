@@ -220,3 +220,4 @@ equipment:
         - 15
         - 10
         - 5
+      range_inc: 100

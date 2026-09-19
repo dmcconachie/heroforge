@@ -122,6 +122,27 @@ def _feat_entries(
     return out
 
 
+def range_increment_bonus(character: "Character", item: dict) -> int:
+    """
+    Extra range increment from feats (Ranged Weapon Mastery).
+
+    Range is a weapon property rather than a bonus pool, so it is
+    resolved directly rather than through the stat graph.
+    """
+    from heroforge.rules.rules import get_rules
+
+    registry = get_rules().feats
+    total = 0
+    for entry in character.feats:
+        defn = registry.get(entry.get("name", ""))
+        if not feat_applies_to_weapon(defn, entry.get("parameter"), item):
+            continue
+        total += int(
+            defn.weapon_effects.get("range_increment", 0)  # type: ignore[union-attr]
+        )
+    return total
+
+
 def _enhancement_entry(item: dict) -> BonusEntry | None:
     """
     The weapon's own enhancement bonus.

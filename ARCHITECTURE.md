@@ -856,7 +856,13 @@ Reusable components in `widgets/`: `LabeledField`,
   the weapon, as for Weapon Focus and Weapon Specialization
   and their Greater forms) or `applies.match: damage_type`,
   optionally constrained by `applies.ranged`. A feat with no
-  such block never applies to a weapon.
+  such block never applies to a weapon. Melee and Ranged
+  Weapon Mastery (PHB II) are the damage-type case: they
+  reach every weapon of the chosen type on their own side
+  of the melee/ranged divide. Ranged Weapon Mastery also
+  extends the range increment, which is a weapon property
+  rather than a bonus pool and so is resolved directly by
+  `range_increment_bonus()`.
   Not yet routed per weapon: critical threat ranges
   (Improved Critical, keen), two-weapon fighting penalties,
   and weapon material/property effects.

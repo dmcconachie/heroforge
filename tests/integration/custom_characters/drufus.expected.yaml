@@ -508,6 +508,7 @@ equipment:
         - 23
         - 18
         - 13
+      range_inc: 10
       properties:
         - TWF (primary)
         - sacred
@@ -534,6 +535,7 @@ equipment:
         - 23
         - 18
         - 13
+      range_inc: 10
       properties:
         - TWF (secondary)
         - sacred
@@ -604,6 +606,7 @@ equipment:
         - 27
         - 22
         - 17
+      range_inc: 110
       properties:
         - sacred
         - precise
