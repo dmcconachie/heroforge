@@ -1,0 +1,16 @@
+# rules/lords_of_madness/feats.yaml
+#
+# Feats from Lords of Madness: The Book of Aberrations.
+#
+# Sorted alphabetically.
+
+Darkstalker:
+  kind: passive
+  source_book: Lords of Madness
+  note: >-
+    When you hide, creatures with blindsense, blindsight, scent
+    or tremorsense must make a Listen or Spot check (whichever DC
+    is higher) to notice you, as sighted creatures would. You can
+    also flank creatures with all-around vision. Does not grant
+    hide in plain sight. Lords of Madness p. 179.
+  effects: []

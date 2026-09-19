@@ -442,3 +442,83 @@ class TestTwoWeaponFighting:
         c.set_ability_score("str", 19)  # +4 -> +2
         off = gather_sheet(c, None).equipment.weapons[1]
         assert off.damage.typed.get("str") == 2
+
+
+class TestOffHandAttackCount:
+    """
+    PHB p. 160: an off-hand weapon gets one extra attack, not the
+    full iterative sequence. Improved Two-Weapon Fighting adds a
+    second at -5 and Greater adds a third at -10.
+    """
+
+    def _pair(self, *feats: str) -> Character:
+        c = fighter(16)  # BAB 16 -> four primary iteratives
+        take(c, "Two-Weapon Fighting", None)
+        for f in feats:
+            take(c, f, None)
+        arm(
+            c,
+            {"base": "Longsword", "hand": "primary"},
+            {"base": "Dagger", "hand": "off_hand"},
+        )
+        return c
+
+    def test_primary_keeps_full_iteratives(self) -> None:
+        primary = gather_sheet(self._pair(), None).equipment.weapons[0]
+        assert len(primary.attack_iteratives) == 4
+
+    def test_off_hand_gets_one_attack(self) -> None:
+        off = gather_sheet(self._pair(), None).equipment.weapons[1]
+        assert len(off.attack_iteratives) == 1
+
+    def test_improved_adds_a_second_at_minus_five(self) -> None:
+        c = self._pair("Improved Two-Weapon Fighting")
+        off = gather_sheet(c, None).equipment.weapons[1]
+        assert len(off.attack_iteratives) == 2
+        assert off.attack_iteratives[1] == off.attack_iteratives[0] - 5
+
+    def test_greater_adds_a_third_at_minus_ten(self) -> None:
+        c = self._pair(
+            "Improved Two-Weapon Fighting", "Greater Two-Weapon Fighting"
+        )
+        off = gather_sheet(c, None).equipment.weapons[1]
+        assert len(off.attack_iteratives) == 3
+        assert off.attack_iteratives[2] == off.attack_iteratives[0] - 10
+
+    def test_undeclared_weapon_keeps_iteratives(self) -> None:
+        c = fighter(16)
+        arm(c, {"base": "Longsword"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert len(w.attack_iteratives) == 4
+
+
+class TestConditionalItemGrant:
+    """
+    Gloves of the Balanced Hand (MIC p. 105) confer Two-Weapon
+    Fighting, and Improved Two-Weapon Fighting as well if the
+    wearer already had TWF of their own.
+    """
+
+    def _wearer(self, own_twf: bool) -> Character:
+        c = fighter(16)
+        if own_twf:
+            take(c, "Two-Weapon Fighting", None)
+        c.equipment["worn"] = ["Gloves of the Balanced Hand"]
+        from heroforge.engine.feats import refresh_granted_feats
+
+        refresh_granted_feats(c)
+        return c
+
+    def test_grants_twf_to_someone_without_it(self) -> None:
+        c = self._wearer(own_twf=False)
+        assert c.has_feat("Two-Weapon Fighting")
+        assert not c.has_feat("Improved Two-Weapon Fighting")
+
+    def test_grants_improved_when_already_had_twf(self) -> None:
+        c = self._wearer(own_twf=True)
+        assert c.has_feat("Improved Two-Weapon Fighting")
+
+    def test_gloves_own_grant_does_not_satisfy_the_condition(self) -> None:
+        """The gloves must not bootstrap themselves to Improved."""
+        c = self._wearer(own_twf=False)
+        assert not c.has_feat("Improved Two-Weapon Fighting")

@@ -846,10 +846,13 @@ Reusable components in `widgets/`: `LabeledField`,
   from Gloves of the Balanced Hand satisfy prerequisites and
   reach per-weapon attack lines. Derived means recomputed on
   load and never written to the character file, so dropping
-  the class or the item drops the feat. Conditional grants
-  are not modelled — the Gloves' "if you already have TWF,
-  also gain Improved TWF" confers only the base feat.
-- Two-weapon fighting penalty tables
+  the class or the item drops the feat. A grant may be
+  conditional: Gloves of the Balanced Hand confer Two-Weapon
+  Fighting, and Improved Two-Weapon Fighting as well when the
+  wearer already had TWF of their own. The condition is judged
+  against the feats held before that item granted anything, so
+  the Gloves cannot bootstrap their own grant into the
+  improved version.
 - Splatbook YAML files beyond SRD core
 - Per-weapon attack and damage lines live in
   `engine/weapons.py`. Each equipped weapon gets its own
@@ -907,9 +910,12 @@ Reusable components in `widgets/`: `LabeledField`,
   records which weapon pairs with which, so a primary counts
   as light-handed only when every declared off-hand weapon
   is light.
-  Not yet routed per weapon: Improved/Greater Two-Weapon
-  Fighting's extra off-hand attacks, and weapon
-  material/property effects beyond keen.
+  An off-hand weapon does not get the iterative sequence: it
+  gets one extra attack, two with Improved Two-Weapon
+  Fighting and three with Greater, each 5 lower than the last
+  (PHB p. 160).
+  Not yet routed per weapon: weapon material/property effects
+  beyond keen.
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)

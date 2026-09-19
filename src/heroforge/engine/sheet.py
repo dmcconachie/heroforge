@@ -55,6 +55,7 @@ from heroforge.engine.sheet_schema import (
 )
 from heroforge.engine.weapons import (
     attack_ability_override,
+    off_hand_attack_count,
     off_hand_strength_penalty,
     range_increment_bonus,
     threat_range,
@@ -693,11 +694,24 @@ def _weapon_breakdown(
     return Breakdown(total=c.get(key), typed=_drop_zeros(typed))
 
 
-def _weapon_iteratives(c: "Character", key: str) -> list[int]:
-    """Iterative attacks from this weapon's own line."""
+def _weapon_iteratives(
+    c: "Character",
+    key: str,
+    item: dict,
+) -> list[int]:
+    """
+    Iterative attacks from this weapon's own line.
+
+    An off-hand weapon does not get the iterative sequence: it
+    gets one extra attack, or more with Improved and Greater
+    Two-Weapon Fighting, each 5 lower than the last.
+    """
     if not c._graph.has_node(key) or not key.endswith("_attack"):
         return []
     base = c.get(key)
+    if item.get("hand") == "off_hand":
+        count = off_hand_attack_count(c)
+        return [base - 5 * i for i in range(count)]
     bab = c.bab
     attacks = [base]
     extra = bab - 5
@@ -757,7 +771,7 @@ def _equipment(c: "Character") -> EquipmentSection:
                 ),
                 attack=_weapon_breakdown(c, atk_key, ranged, w),
                 damage=_weapon_breakdown(c, dmg_key, ranged, w),
-                attack_iteratives=_weapon_iteratives(c, atk_key),
+                attack_iteratives=_weapon_iteratives(c, atk_key, w),
                 damage_dice=w.get("damage_dice", "")
                 or (wdef.damage_dice if wdef else ""),
                 crit_range=_crit_range_display(c, w),

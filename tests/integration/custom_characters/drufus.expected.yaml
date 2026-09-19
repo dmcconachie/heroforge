@@ -57,8 +57,8 @@ combat:
       dex: 6
       armor: 9
       shield: 7
-      insight: 1
       sacred: 2
+      insight: 1
   touch_ac: 19
   flatfooted_ac: 35
   hp_max:
@@ -86,25 +86,25 @@ combat:
       typed:
         base: 11
         con: 7
+        resistance: 5
         luck: 1
         competence: 1
-        resistance: 5
     ref:
       total: 30
       typed:
         base: 12
         dex: 11
+        resistance: 5
         luck: 1
         competence: 1
-        resistance: 5
     will:
       total: 17
       typed:
         base: 8
         wis: 2
+        resistance: 5
         luck: 1
         competence: 1
-        resistance: 5
   attack_melee:
     total: 23
     typed:
@@ -280,8 +280,8 @@ skills:
     typed:
       ability_mod: 7
       ranks: 25
-      luck: 1
       insight: 9
+      luck: 1
   Sense Motive:
     total: 3
     typed:
@@ -305,8 +305,8 @@ skills:
     typed:
       ability_mod: 2
       ranks: 25
-      luck: 1
       insight: 9
+      luck: 1
   Survival:
     total: 3
     typed:
@@ -339,18 +339,20 @@ carrying_capacity:
   medium: 266
   heavy: 400
 feats:
-  - Combat Reflexes
-  - Mobility
-  - Improved Initiative
-  - Two-Weapon Fighting
-  - Leadership
-  - Improved Two-Weapon Fighting
-  - Staggering Strike
-  - Tactile Trapsmith
-  - Weapon Focus (Dagger)
-  - Daring Outlaw
   - Expeditious Dodge
+  - Mobility
+  - Combat Reflexes
+  - Two-Weapon Fighting
+  - Daring Outlaw
+  - Tactile Trapsmith
+  - Darkstalker
+  - Staggering Strike
+  - Weapon Focus (Dagger)
+  - Improved Initiative
+  - Leadership
+  - Epic Leadership
   - Weapon Finesse
+  - Improved Two-Weapon Fighting
 class_features:
   - 'sneak_attack_1d6: Sneak attack +1d6'
   - 'trapfinding: Find and disable magical traps'
@@ -423,45 +425,48 @@ equipment:
       - deathward
       - arrow deflection
   worn:
+    - Szirb's Shining Helm
+    - Hat of Disguise
+    - Crystal Mask of Insight
+    - Vest of Resistance +5
+    - Phoenix Cloak
+    - Deathstrike Bracers
+    - Gloves of the Balanced Hand
     - Ring of Freedom of Movement
     - Ring of Spell Storing
-    - Hat of Disguise
-    - Heward's Handy Haversack
-    - Boots of Speed
-    - Stone of Good Luck (Luckstone)
-    - Ioun Stone (Dusty Rose Prism)
-    - Ioun Stone (Pale Green Prism)
-    - Pearl of Power (1st Level)
-    - Pearl of Power (1st Level)
-    - Pearl of Power (2nd Level)
-    - Pearl of Power (2nd Level)
-    - Pearl of Power (2nd Level)
-    - Pearl of Power (3rd Level)
-    - Pearl of Power (3rd Level)
-    - Pearl of Power (3rd Level)
-    - Crystal Mask of Insight
-    - Sun Lenses
-    - Vest of Resistance +5
     - Belt of Magnificence +6
-    - Phoenix Cloak
-    - Gloves of the Balanced Hand
-    - Deathstrike Bracers
-    - Chronocharm of the Horizon Walker
-    - Chronocharm of the Horizon Walker
-    - Chronocharm of the Horizon Walker
-    - Chronocharm of the Horizon Walker
-    - Chronocharm of the Laughing Rogue
-    - Chronocharm of the Laughing Rogue
-    - Chronocharm of the Laughing Rogue
-    - Chronocharm of the Laughing Rogue
+    - Boots of Speed
     - Quicksilver Boots
     - Quicksilver Boots
     - Crystal of Mind Cloaking, Greater
+    - Demolition Crystal, Greater
+    - Demolition Crystal, Greater
+    - Fiendslayer Crystal, Least
+    - Fiendslayer Crystal, Least
+    - Truedeath Crystal, Greater
+    - Truedeath Crystal, Greater
     - Gemstone of Heavy Fortification
     - Heartstone
-    - Earthsilk Rope
-    - Heward's Fortifying Bedroll
+    - Stone of Good Luck (Luckstone)
+    - Ioun Stone (Dusty Rose Prism)
+    - Ioun Stone (Pale Green Prism)
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Horizon Walker
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
+    - Chronocharm of the Laughing Rogue
     - Rod of Extend, Lesser
+    - Pearl of Power (1st Level)
+    - Pearl of Power (1st Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (3rd Level)
+    - Pearl of Power (3rd Level)
+    - Pearl of Power (3rd Level)
     - Eternal Wand of Prestidigitation
     - Eternal Wand of Nystul's Magic Aura
     - Eternal Wand of Nystul's Magic Aura
@@ -483,11 +488,12 @@ equipment:
     - Eternal Wand of Nystul's Magic Aura
     - Eternal Wand of Nystul's Magic Aura
     - Eternal Wand of Nystul's Magic Aura
-    - Demolition Crystal, Greater
-    - Demolition Crystal, Greater
+    - Heward's Handy Haversack
     - Horn of Plenty
     - Githborn Talisman
-    - Szirb's Shining Helm
+    - Sun Lenses
+    - Earthsilk Rope
+    - Heward's Fortifying Bedroll
     - Thieves' Tools, Masterwork
     - Xan ibn'Duman
   weapons:
@@ -541,8 +547,6 @@ equipment:
       attack_iteratives:
         - 33
         - 28
-        - 23
-        - 18
       damage_dice: 1d4
       crit_range: 19-20
       crit_mult: x2
@@ -598,8 +602,6 @@ equipment:
       attack_iteratives:
         - 32
         - 27
-        - 22
-        - 17
       damage_dice: 1d6
       crit_range: '20'
       crit_mult: x2

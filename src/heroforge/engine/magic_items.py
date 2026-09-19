@@ -43,9 +43,12 @@ class MagicItemDefinition:
     source_book: str = "SRD"
     slot: str = ""
     cost_gp: int = 0
-    # A feat wearing this item confers (e.g. Gloves of the
-    # Balanced Hand). Derived, never saved.
-    grants_feat: str = ""
+    # Feats wearing this item confers, each optionally gated on
+    # a feat the wearer already has of their own (Gloves of the
+    # Balanced Hand grant Improved Two-Weapon Fighting only to
+    # someone who already had Two-Weapon Fighting). Derived,
+    # never saved.
+    grants_feats: list[dict] = field(default_factory=list)
 
 
 class MagicItemRegistry:

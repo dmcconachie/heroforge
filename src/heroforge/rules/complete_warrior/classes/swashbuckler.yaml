@@ -25,7 +25,8 @@ Swashbuckler:
     - level: 1
       feature: weapon_finesse
       description: Gains Weapon Finesse as a bonus feat
-      grants_feat: Weapon Finesse
+      grants_feats:
+        - feat: Weapon Finesse
     - level: 2
       feature: grace_1
       description: >-

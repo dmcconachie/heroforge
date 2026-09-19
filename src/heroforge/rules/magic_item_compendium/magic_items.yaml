@@ -125,7 +125,10 @@ Githborn Talisman:
 Gloves of the Balanced Hand:
   slot: hands
   source_book: Magic Item Compendium
-  grants_feat: Two-Weapon Fighting
+  grants_feats:
+    - feat: Two-Weapon Fighting
+    - feat: Improved Two-Weapon Fighting
+      requires_feat: Two-Weapon Fighting
   note: >-
     Wearer fights as if possessing Two-Weapon Fighting;
     if they already have TWF, also gain Improved

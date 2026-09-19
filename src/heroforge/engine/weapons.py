@@ -256,6 +256,21 @@ def two_weapon_penalty(
     return primary if hand == "primary" else off
 
 
+def off_hand_attack_count(character: "Character") -> int:
+    """
+    How many attacks an off-hand weapon gets.
+
+    PHB p. 160: one extra attack with an off-hand weapon, not the
+    full iterative sequence. Improved Two-Weapon Fighting adds a
+    second at -5 and Greater Two-Weapon Fighting a third at -10.
+    """
+    if character.has_feat("Greater Two-Weapon Fighting"):
+        return 3
+    if character.has_feat("Improved Two-Weapon Fighting"):
+        return 2
+    return 1
+
+
 def off_hand_strength_penalty(character: "Character", item: dict) -> int:
     """
     Correction applied to reach half Strength in the off hand.

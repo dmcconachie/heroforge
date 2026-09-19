@@ -30,7 +30,7 @@ levels:
       Tumble: 2
       Use Magic Device: 4
     feats:
-      - name: Combat Reflexes
+      - name: Expeditious Dodge
         source: character
       - name: Mobility
         source: human_bonus
@@ -52,7 +52,7 @@ levels:
       Search: 2
       Spot: 2
     feats:
-      - name: Improved Initiative
+      - name: Combat Reflexes
         source: character
   - level: 4
     class: Fighter
@@ -82,7 +82,7 @@ levels:
       Knowledge (Arcana): 3
       Tumble: 4
     feats:
-      - name: Leadership
+      - name: Daring Outlaw
         source: character
   - level: 7
     class: Rogue
@@ -116,7 +116,7 @@ levels:
       Search: 1
       Spot: 1
     feats:
-      - name: Improved Two-Weapon Fighting
+      - name: Tactile Trapsmith
         source: character
   - level: 10
     class: Rogue
@@ -155,7 +155,7 @@ levels:
       Spot: 1
       Use Magic Device: 5
     feats:
-      - name: Staggering Strike
+      - name: Darkstalker
         source: character
   - level: 13
     class: Swashbuckler
@@ -184,7 +184,7 @@ levels:
       Spot: 1
       Use Magic Device: 4
     feats:
-      - name: Tactile Trapsmith
+      - name: Staggering Strike
         source: character
   - level: 16
     class: Fighter
@@ -215,7 +215,7 @@ levels:
     skill_ranks:
       Spellcraft: 7
     feats:
-      - name: Daring Outlaw
+      - name: Improved Initiative
         source: character
   - level: 19
     class: Occult Slayer
@@ -236,11 +236,14 @@ levels:
       Move Silently: 3
       Search: 3
       Spot: 1
+    feats:
+      - name: Leadership
+        source: rogue_special_ability
   - level: 21
     class: Occult Slayer
     hp_roll: 5
     feats:
-      - name: Expeditious Dodge
+      - name: Epic Leadership
         source: character
   - level: 22
     class: Rogue
@@ -281,29 +284,34 @@ equipment:
       - deathward
       - arrow deflection
   worn:
+    - Szirb's Shining Helm
+    - Hat of Disguise
+    - Crystal Mask of Insight
+    - Vest of Resistance +5
+    - Phoenix Cloak
+    - Deathstrike Bracers
+    - Gloves of the Balanced Hand
     - Ring of Freedom of Movement
     - Ring of Spell Storing
-    - Hat of Disguise
-    - Heward's Handy Haversack
+    - Belt of Magnificence +6
     - Boots of Speed
+    - Quicksilver Boots
+    - Quicksilver Boots
+
+    - Crystal of Mind Cloaking, Greater
+    - Demolition Crystal, Greater
+    - Demolition Crystal, Greater
+    - Fiendslayer Crystal, Least
+    - Fiendslayer Crystal, Least
+    - Truedeath Crystal, Greater
+    - Truedeath Crystal, Greater
+
+    - Gemstone of Heavy Fortification
+    - Heartstone
     - Stone of Good Luck (Luckstone)
     - Ioun Stone (Dusty Rose Prism)
     - Ioun Stone (Pale Green Prism)
-    - Pearl of Power (1st Level)
-    - Pearl of Power (1st Level)
-    - Pearl of Power (2nd Level)
-    - Pearl of Power (2nd Level)
-    - Pearl of Power (2nd Level)
-    - Pearl of Power (3rd Level)
-    - Pearl of Power (3rd Level)
-    - Pearl of Power (3rd Level)
-    - Crystal Mask of Insight
-    - Sun Lenses
-    - Vest of Resistance +5
-    - Belt of Magnificence +6
-    - Phoenix Cloak
-    - Gloves of the Balanced Hand
-    - Deathstrike Bracers
+
     - Chronocharm of the Horizon Walker
     - Chronocharm of the Horizon Walker
     - Chronocharm of the Horizon Walker
@@ -312,14 +320,17 @@ equipment:
     - Chronocharm of the Laughing Rogue
     - Chronocharm of the Laughing Rogue
     - Chronocharm of the Laughing Rogue
-    - Quicksilver Boots
-    - Quicksilver Boots
-    - Crystal of Mind Cloaking, Greater
-    - Gemstone of Heavy Fortification
-    - Heartstone
-    - Earthsilk Rope
-    - Heward's Fortifying Bedroll
+
     - Rod of Extend, Lesser
+    - Pearl of Power (1st Level)
+    - Pearl of Power (1st Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (2nd Level)
+    - Pearl of Power (3rd Level)
+    - Pearl of Power (3rd Level)
+    - Pearl of Power (3rd Level)
+
     - Eternal Wand of Prestidigitation
     - Eternal Wand of Nystul's Magic Aura
     - Eternal Wand of Nystul's Magic Aura
@@ -341,11 +352,13 @@ equipment:
     - Eternal Wand of Nystul's Magic Aura
     - Eternal Wand of Nystul's Magic Aura
     - Eternal Wand of Nystul's Magic Aura
-    - Demolition Crystal, Greater
-    - Demolition Crystal, Greater
+
+    - Heward's Handy Haversack
     - Horn of Plenty
     - Githborn Talisman
-    - Szirb's Shining Helm
+    - Sun Lenses
+    - Earthsilk Rope
+    - Heward's Fortifying Bedroll
     - Thieves' Tools, Masterwork
     - Xan ibn'Duman
   weapons:

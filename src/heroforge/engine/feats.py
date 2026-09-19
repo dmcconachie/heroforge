@@ -391,22 +391,14 @@ def refresh_granted_feats(character: "Character") -> None:
     from heroforge.rules.rules import get_rules
 
     rules = get_rules()
-    granted: list[tuple[str, str]] = []
 
-    for class_name, level in character.class_level_map.items():
-        defn = rules.classes.get(class_name)
-        if defn is None:
-            continue
-        for feature in defn.features_up_to_level(level):
-            if feature.grants_feat:
-                granted.append((feature.grants_feat, f"class:{class_name}"))
-
-    for item_name in character.equipment.get("worn", []) or []:
-        item = rules.magic_items.get(item_name)
-        if item is not None and item.grants_feat:
-            granted.append((item.grants_feat, f"item:{item_name}"))
-
-    for feat_name, source in granted:
+    def grant(spec: dict, source: str, held: set[str]) -> None:
+        required = spec.get("requires_feat")
+        if required and required not in held:
+            return
+        feat_name = spec.get("feat", "")
+        if not feat_name:
+            return
         character.add_feat(
             feat_name,
             rules.feats.get(feat_name),
@@ -414,3 +406,23 @@ def refresh_granted_feats(character: "Character") -> None:
             source=source,
             derived=True,
         )
+
+    for class_name, level in character.class_level_map.items():
+        defn = rules.classes.get(class_name)
+        if defn is None:
+            continue
+        held = {f.get("name", "") for f in character.feats}
+        for feature in defn.features_up_to_level(level):
+            for spec in feature.grants_feats:
+                grant(dict(spec), f"class:{class_name}", held)
+
+    # An item's condition is judged against what the wearer had
+    # before that item granted anything, so the Gloves cannot
+    # bootstrap their own Two-Weapon Fighting into Improved.
+    for item_name in character.equipment.get("worn", []) or []:
+        item = rules.magic_items.get(item_name)
+        if item is None:
+            continue
+        held = {f.get("name", "") for f in character.feats}
+        for spec in item.grants_feats:
+            grant(dict(spec), f"item:{item_name}", held)

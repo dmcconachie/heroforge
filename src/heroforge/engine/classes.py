@@ -92,11 +92,11 @@ class ClassFeature:
     level: int
     feature: str
     description: str
-    # A feat this feature confers (e.g. the Swashbuckler's
-    # Weapon Finesse). Materialised as a derived feat, so it
-    # counts for prerequisites and per-weapon lines but is never
+    # Feats this feature confers (e.g. the Swashbuckler's
+    # Weapon Finesse). Materialised as derived feats, so they
+    # count for prerequisites and per-weapon lines but are never
     # written to the character file.
-    grants_feat: str = ""
+    grants_feats: tuple[dict, ...] = ()
     buff_name: str = ""
     effects: tuple[dict, ...] = ()
     note: str = ""

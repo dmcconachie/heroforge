@@ -1,0 +1,19 @@
+# rules/epic_level_handbook/feats.yaml
+#
+# Epic feats (SRD epic rules).
+#
+# Sorted alphabetically.
+
+Epic Leadership:
+  kind: passive
+  source_book: Epic Level Handbook
+  note: >-
+    Attracts a cohort and followers per the Epic Leadership
+    table. In all other ways functions as the Leadership feat.
+  prerequisites:
+    all_of:
+      - feat: Leadership
+      - ability:
+          key: cha_score
+          min: 25
+  effects: []
