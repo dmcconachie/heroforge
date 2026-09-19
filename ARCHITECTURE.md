@@ -914,8 +914,19 @@ Reusable components in `widgets/`: `LabeledField`,
   gets one extra attack, two with Improved Two-Weapon
   Fighting and three with Greater, each 5 lower than the last
   (PHB p. 160).
-  Not yet routed per weapon: weapon material/property effects
-  beyond keen.
+  Rapid Shot adds one ranged attack at the highest bonus and
+  -2 on every ranged attack that round. It requires a full
+  attack, so it shapes the iterative sequence rather than the
+  single-attack total.
+  Weapon materials contribute through
+  `MaterialDefinition.damage_adjust`, which only alchemical
+  silver has (-1, DMG p. 285); its minimum-1-damage floor
+  applies to a rolled total and is not modelled. Every other
+  material bypasses damage reduction or changes hardness,
+  neither of which moves a number here.
+  Not yet routed per weapon: conditional weapon properties
+  (bane, wounding, the augment crystals), which only apply
+  against particular targets, and Power Attack.
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)

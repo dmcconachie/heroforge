@@ -58,6 +58,7 @@ from heroforge.engine.weapons import (
     off_hand_attack_count,
     off_hand_strength_penalty,
     range_increment_bonus,
+    rapid_shot_applies,
     threat_range,
     weapon_definition,
     weapon_pool_keys,
@@ -718,6 +719,12 @@ def _weapon_iteratives(
     while extra >= 1:
         attacks.append(base - (bab - extra))
         extra -= 5
+    if rapid_shot_applies(c, item):
+        # One more at the highest bonus, and -2 on every attack
+        # that round. Full attack only, so it shapes the
+        # sequence rather than the single-attack total.
+        attacks = [base, *attacks]
+        attacks = [a - 2 for a in attacks]
     return attacks
 
 

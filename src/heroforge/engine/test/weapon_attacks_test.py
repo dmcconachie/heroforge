@@ -522,3 +522,82 @@ class TestConditionalItemGrant:
         """The gloves must not bootstrap themselves to Improved."""
         c = self._wearer(own_twf=False)
         assert not c.has_feat("Improved Two-Weapon Fighting")
+
+
+class TestWeaponMaterials:
+    """
+    Most special materials bypass damage reduction or change
+    hardness, which are conditional and do not move a number on
+    the sheet. Alchemical silver is the exception: DMG p. 285
+    gives a -1 penalty on the damage roll.
+    """
+
+    def test_alchemical_silver_penalises_damage(self) -> None:
+        c = arm(
+            fighter(),
+            {"base": "Light Mace", "material": "Alchemical Silver"},
+            {"base": "Light Mace"},
+        )
+        silver, plain = gather_sheet(c, None).equipment.weapons
+        assert silver.damage.typed.get("material") == -1
+        assert "material" not in plain.damage.typed
+        assert silver.damage.total == plain.damage.total - 1
+
+    def test_silver_does_not_touch_attack(self) -> None:
+        c = arm(
+            fighter(), {"base": "Light Mace", "material": "Alchemical Silver"}
+        )
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert "material" not in w.attack.typed
+
+    def test_other_materials_move_no_number(self) -> None:
+        """Adamantine and cold iron bypass DR; they add nothing."""
+        c = arm(
+            fighter(),
+            {"base": "Longsword", "material": "Adamantine"},
+            {"base": "Longsword", "material": "Cold Iron"},
+        )
+        for w in gather_sheet(c, None).equipment.weapons:
+            assert "material" not in w.damage.typed
+            assert "material" not in w.attack.typed
+
+
+class TestRapidShot:
+    """
+    PHB: Rapid Shot grants one extra ranged attack at the highest
+    base attack bonus, and every ranged attack that round takes
+    -2. It requires a full attack, so it shapes the iterative
+    sequence rather than the single-attack total.
+    """
+
+    def _archer(self, rapid: bool) -> Character:
+        c = fighter(11)  # BAB 11 -> three iteratives
+        take(c, "Point Blank Shot", None)
+        if rapid:
+            take(c, "Rapid Shot", None)
+        arm(c, {"base": "Longbow"})
+        return c
+
+    def test_without_rapid_shot(self) -> None:
+        w = gather_sheet(self._archer(False), None).equipment.weapons[0]
+        assert len(w.attack_iteratives) == 3
+
+    def test_adds_one_attack_at_highest_bonus(self) -> None:
+        w = gather_sheet(self._archer(True), None).equipment.weapons[0]
+        assert len(w.attack_iteratives) == 4
+        assert w.attack_iteratives[0] == w.attack_iteratives[1]
+
+    def test_every_attack_takes_minus_two(self) -> None:
+        plain = gather_sheet(self._archer(False), None).equipment.weapons[0]
+        rapid = gather_sheet(self._archer(True), None).equipment.weapons[0]
+        assert rapid.attack_iteratives[0] == plain.attack_iteratives[0] - 2
+        assert rapid.attack_iteratives[2] == plain.attack_iteratives[1] - 2
+        assert rapid.attack_iteratives[3] == plain.attack_iteratives[2] - 2
+
+    def test_melee_weapons_unaffected(self) -> None:
+        c = fighter(11)
+        take(c, "Point Blank Shot", None)
+        take(c, "Rapid Shot", None)
+        arm(c, {"base": "Longsword"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert len(w.attack_iteratives) == 3

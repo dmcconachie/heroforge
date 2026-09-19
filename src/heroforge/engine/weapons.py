@@ -256,6 +256,35 @@ def two_weapon_penalty(
     return primary if hand == "primary" else off
 
 
+def material_damage_entry(item: dict) -> BonusEntry | None:
+    """
+    A weapon material's damage adjustment, if any.
+
+    Only alchemical silver has one. Its "minimum 1 point of
+    damage" floor applies to the rolled total, not to this
+    static line, so it is not modelled here.
+    """
+    from heroforge.rules.rules import get_rules
+
+    name = item.get("material", "")
+    if not name:
+        return None
+    mat = get_rules().materials.get(name)
+    if mat is None or not mat.damage_adjust:
+        return None
+    return BonusEntry(
+        value=mat.damage_adjust,
+        bonus_type=BonusType.UNTYPED,
+        source="material",
+    )
+
+
+def rapid_shot_applies(character: "Character", item: dict) -> bool:
+    """Rapid Shot shapes the full-attack sequence of a ranged weapon."""
+    defn = weapon_definition(item)
+    return bool(defn and defn.is_ranged and character.has_feat("Rapid Shot"))
+
+
 def off_hand_attack_count(character: "Character") -> int:
     """
     How many attacks an off-hand weapon gets.
@@ -391,6 +420,9 @@ def register_weapons_on_character(character: "Character") -> None:
                         ],
                     )
             else:
+                mat = material_damage_entry(item)
+                if mat is not None:
+                    pool.set_source("material", [mat])
                 half = off_hand_strength_penalty(character, item)
                 if half:
                     pool.set_source(

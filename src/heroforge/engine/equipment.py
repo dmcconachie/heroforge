@@ -158,6 +158,10 @@ class MaterialDefinition:
     asf_adjust: int = 0  # negative = less failure
     armor_bonus_adjust: int = 0  # typically 0 or -1
     category_shift: int = 0  # -1 = one lighter
+    # Weapon damage adjustment. Only alchemical silver has one
+    # (-1, DMG p. 285); other materials bypass damage reduction
+    # or change hardness, which move no number here.
+    damage_adjust: int = 0
     includes_masterwork: bool = False
     note: str = ""
     source_book: str = ""

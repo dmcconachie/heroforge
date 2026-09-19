@@ -10,7 +10,11 @@ Adamantine:
   note: >-
     DR 1/- (light), 2/- (medium), 3/- (heavy)
 Alchemical Silver:
-  note: Weapon material only; -1 damage
+  damage_adjust: -1
+  note: >-
+    Weapon material only. -1 penalty on damage rolls, with the
+    usual minimum of 1 point of damage. Bypasses DR/silver.
+    DMG p. 285.
 Cold Iron:
   note: >-
     Bypasses DR/cold iron; costs double

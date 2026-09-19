@@ -568,9 +568,10 @@ equipment:
           two_weapon_fighting: -2
           enhancement: 5
       damage:
-        total: 10
+        total: 9
         typed:
           str: 5
+          material: -1
           enhancement: 5
       attack_iteratives:
         - 32
@@ -595,9 +596,10 @@ equipment:
           two_weapon_fighting: -2
           enhancement: 5
       damage:
-        total: 7
+        total: 6
         typed:
           str: 2
+          material: -1
           enhancement: 5
       attack_iteratives:
         - 32
