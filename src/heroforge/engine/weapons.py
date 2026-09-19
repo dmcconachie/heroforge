@@ -256,6 +256,30 @@ def two_weapon_penalty(
     return primary if hand == "primary" else off
 
 
+_HAND_LABELS = {"primary": "TWF: Primary", "off_hand": "TWF: Off-hand"}
+
+
+def weapon_stances(character: "Character", item: dict) -> list[str]:
+    """
+    How this weapon is being used, for the display name.
+
+    A stance changes how the iterative sequence reads — which
+    hand it is in, whether Rapid Shot is adding an attack, how
+    much Power Attack is trading — so it belongs next to the
+    weapon rather than buried in a breakdown.
+    """
+    out: list[str] = []
+    label = _HAND_LABELS.get(item.get("hand", ""))
+    if label:
+        out.append(label)
+    if rapid_shot_applies(character, item):
+        out.append("Rapid Shot")
+    for name, state in character._buff_states.items():
+        if state.active and state.parameter is not None:
+            out.append(f"{name}: {state.parameter}")
+    return out
+
+
 def material_damage_entry(item: dict) -> BonusEntry | None:
     """
     A weapon material's damage adjustment, if any.
@@ -407,6 +431,20 @@ def register_weapons_on_character(character: "Character") -> None:
             for e in _feat_entries(character, item, which):
                 pool.set_source(f"feat:{e.source}", [e])
             if which == ATTACK:
+                if rapid_shot_applies(character, item):
+                    # -2 on every ranged attack that round, so it
+                    # belongs on the line itself and not only on
+                    # the sequence.
+                    pool.set_source(
+                        "rapid_shot",
+                        [
+                            BonusEntry(
+                                value=-2,
+                                bonus_type=BonusType.UNTYPED,
+                                source="rapid_shot",
+                            )
+                        ],
+                    )
                 twf = two_weapon_penalty(character, item, weapons)
                 if twf:
                     pool.set_source(

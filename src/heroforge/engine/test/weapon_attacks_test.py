@@ -52,6 +52,23 @@ def take(c: Character, feat: str, selection: str) -> None:
     )
 
 
+def atk_sources(c: Character, index: int = 0) -> dict[str, int]:
+    """
+    Named contributions to a weapon's attack pool.
+
+    The sheet reports attacks as the iterative sequence rather
+    than a breakdown, so tests that care which source
+    contributed read the pool directly.
+    """
+    pool = c.get_pool(f"weapon_{index}_attack")
+    return pool.breakdown(c) if pool else {}
+
+
+def atk_total(c: Character, index: int = 0) -> int:
+    """A weapon's single-attack bonus: the first iterative."""
+    return gather_sheet(c, None).equipment.weapons[index].attack_iteratives[0]
+
+
 class TestFeatApplicability:
     """Which feats reach which weapon."""
 
@@ -76,7 +93,7 @@ class TestPerWeaponAttack:
         c = arm(fighter(), {"base": "Longsword"})
         sheet = gather_sheet(c, None)
         w = sheet.equipment.weapons[0]
-        assert w.attack.total == sheet.combat.attack_melee.total
+        assert w.attack_iteratives[0] == sheet.combat.attack_melee.total
 
     def test_enhancement_applies_to_its_own_weapon(self) -> None:
         c = arm(
@@ -85,23 +102,22 @@ class TestPerWeaponAttack:
             {"base": "Dagger"},
         )
         sword, dagger = gather_sheet(c, None).equipment.weapons
-        assert sword.attack.typed.get("enhancement") == 3
-        assert "enhancement" not in dagger.attack.typed
-        assert sword.attack.total == dagger.attack.total + 3
+        assert atk_sources(c, 0).get("enhancement") == 3
+        assert "enhancement" not in atk_sources(c, 1)
+        assert atk_total(c, 0) == atk_total(c, 1) + 3
 
     def test_weapon_focus_reaches_only_its_weapon(self) -> None:
         c = fighter()
         take(c, "Weapon Focus", "Longsword")
         arm(c, {"base": "Longsword"}, {"base": "Longbow"})
-        sword, bow = gather_sheet(c, None).equipment.weapons
-        assert sword.attack.typed.get("weapon_focus") == 1
-        assert "weapon_focus" not in bow.attack.typed
+        assert atk_sources(c, 0).get("weapon_focus") == 1
+        assert "weapon_focus" not in atk_sources(c, 1)
 
     def test_ranged_weapon_uses_ranged_base(self) -> None:
         c = arm(fighter(), {"base": "Longbow"})
         sheet = gather_sheet(c, None)
         assert (
-            sheet.equipment.weapons[0].attack.total
+            sheet.equipment.weapons[0].attack_iteratives[0]
             == sheet.combat.attack_ranged.total
         )
 
@@ -110,9 +126,8 @@ class TestPerWeaponAttack:
         take(c, "Weapon Focus", "Longsword")
         take(c, "Greater Weapon Focus", "Longsword")
         arm(c, {"base": "Longsword"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert w.attack.typed.get("weapon_focus") == 1
-        assert w.attack.typed.get("greater_weapon_focus") == 1
+        assert atk_sources(c, 0).get("weapon_focus") == 1
+        assert atk_sources(c, 0).get("greater_weapon_focus") == 1
 
     def test_two_selections_do_not_cross_contaminate(self) -> None:
         """The bug that motivated per-weapon lines."""
@@ -122,10 +137,9 @@ class TestPerWeaponAttack:
         arm(
             c, {"base": "Longsword"}, {"base": "Greatsword"}, {"base": "Dagger"}
         )
-        sword, great, dagger = gather_sheet(c, None).equipment.weapons
-        assert sword.attack.typed.get("weapon_focus") == 1
-        assert great.attack.typed.get("weapon_focus") == 1
-        assert "weapon_focus" not in dagger.attack.typed
+        assert atk_sources(c, 0).get("weapon_focus") == 1
+        assert atk_sources(c, 1).get("weapon_focus") == 1
+        assert "weapon_focus" not in atk_sources(c, 2)
 
 
 class TestPerWeaponDamage:
@@ -161,9 +175,9 @@ class TestWeaponLineCascades:
     def test_strength_change_moves_the_weapon_line(self) -> None:
         """Graph-backed: the generic pool feeds the weapon node."""
         c = arm(fighter(), {"base": "Longsword"})
-        before = gather_sheet(c, None).equipment.weapons[0].attack.total
+        before = atk_total(c)
         c.set_ability_score("str", 20)
-        after = gather_sheet(c, None).equipment.weapons[0].attack.total
+        after = atk_total(c)
         assert after == before + 1
 
 
@@ -183,7 +197,6 @@ class TestBreakdownConsistency:
         take(c, "Weapon Specialization", weapon["base"])
         arm(c, weapon)
         w = gather_sheet(c, None).equipment.weapons[0]
-        assert w.attack.total == sum(w.attack.typed.values())
         assert w.damage.total == sum(w.damage.typed.values())
 
     def test_strength_reaches_melee_damage_only(self) -> None:
@@ -204,33 +217,32 @@ class TestWeaponMastery:
         c = fighter()
         take(c, "Melee Weapon Mastery", "Slashing")
         arm(c, {"base": "Longsword"}, {"base": "Greatsword"})
-        for w in gather_sheet(c, None).equipment.weapons:
-            assert w.attack.typed.get("melee_weapon_mastery") == 2
+        weapons = gather_sheet(c, None).equipment.weapons
+        for index, w in enumerate(weapons):
+            assert atk_sources(c, index).get("melee_weapon_mastery") == 2
             assert w.damage.typed.get("melee_weapon_mastery") == 2
 
     def test_melee_mastery_skips_other_damage_types(self) -> None:
         c = fighter()
         take(c, "Melee Weapon Mastery", "Slashing")
         arm(c, {"base": "Heavy Mace"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert "melee_weapon_mastery" not in w.attack.typed
+        assert "melee_weapon_mastery" not in atk_sources(c, 0)
 
     def test_melee_mastery_does_not_reach_ranged(self) -> None:
         """A longbow is piercing, but Melee Mastery is melee-only."""
         c = fighter()
         take(c, "Melee Weapon Mastery", "Piercing")
         arm(c, {"base": "Longbow"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert "melee_weapon_mastery" not in w.attack.typed
+        assert "melee_weapon_mastery" not in atk_sources(c, 0)
 
     def test_ranged_mastery_applies_to_ranged_only(self) -> None:
         c = fighter()
         take(c, "Ranged Weapon Mastery", "Piercing")
         arm(c, {"base": "Longbow"}, {"base": "Dagger"})
         bow, dagger = gather_sheet(c, None).equipment.weapons
-        assert bow.attack.typed.get("ranged_weapon_mastery") == 2
+        assert atk_sources(c, 0).get("ranged_weapon_mastery") == 2
         assert bow.damage.typed.get("ranged_weapon_mastery") == 2
-        assert "ranged_weapon_mastery" not in dagger.attack.typed
+        assert "ranged_weapon_mastery" not in atk_sources(c, 1)
 
     def test_ranged_mastery_extends_range_increment(self) -> None:
         c = fighter()
@@ -244,9 +256,8 @@ class TestWeaponMastery:
         take(c, "Weapon Focus", "Longsword")
         take(c, "Melee Weapon Mastery", "Slashing")
         arm(c, {"base": "Longsword"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert w.attack.typed.get("weapon_focus") == 1
-        assert w.attack.typed.get("melee_weapon_mastery") == 2
+        assert atk_sources(c, 0).get("weapon_focus") == 1
+        assert atk_sources(c, 0).get("melee_weapon_mastery") == 2
 
 
 def finesse_rogue() -> Character:
@@ -280,26 +291,26 @@ class TestWeaponFinesse:
         return c
 
     def test_light_weapon_uses_dex(self) -> None:
+        # Dex 20 (+5) against Str 10 (+0): finesse is worth +5.
         c = self._with_finesse({"base": "Dagger"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert w.attack.typed.get("dex") == 5
-        assert "str" not in w.attack.typed
+        generic = gather_sheet(c, None).combat.attack_melee.total
+        assert atk_total(c) == generic + 5
 
     def test_rapier_qualifies_though_not_light(self) -> None:
         c = self._with_finesse({"base": "Rapier"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert w.attack.typed.get("dex") == 5
+        generic = gather_sheet(c, None).combat.attack_melee.total
+        assert atk_total(c) == generic + 5
 
     def test_heavy_weapon_still_uses_str(self) -> None:
         c = self._with_finesse({"base": "Greatsword"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert "dex" not in w.attack.typed
+        generic = gather_sheet(c, None).combat.attack_melee.total
+        assert atk_total(c) == generic
 
     def test_without_the_feat_str_is_used(self) -> None:
         c = finesse_rogue()
         arm(c, {"base": "Dagger"})
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert "dex" not in w.attack.typed
+        generic = gather_sheet(c, None).combat.attack_melee.total
+        assert atk_total(c) == generic
 
     def test_damage_still_uses_strength(self) -> None:
         """Finesse changes attack rolls only, never damage."""
@@ -312,7 +323,7 @@ class TestWeaponFinesse:
     def test_total_matches_breakdown(self) -> None:
         c = self._with_finesse({"base": "Dagger"})
         w = gather_sheet(c, None).equipment.weapons[0]
-        assert w.attack.total == sum(w.attack.typed.values())
+        assert w.damage.total == sum(w.damage.typed.values())
 
 
 class TestCriticalThreatRange:
@@ -403,32 +414,32 @@ class TestTwoWeaponFighting:
     def test_normal_penalties(self) -> None:
         c = self._pair("Warhammer")  # one-handed off-hand
         primary, off = gather_sheet(c, None).equipment.weapons
-        assert primary.attack.typed.get("two_weapon_fighting") == -6
-        assert off.attack.typed.get("two_weapon_fighting") == -10
+        assert atk_sources(c, 0).get("two_weapon_fighting") == -6
+        assert atk_sources(c, 1).get("two_weapon_fighting") == -10
 
     def test_light_off_hand(self) -> None:
         c = self._pair("Dagger")
         primary, off = gather_sheet(c, None).equipment.weapons
-        assert primary.attack.typed.get("two_weapon_fighting") == -4
-        assert off.attack.typed.get("two_weapon_fighting") == -8
+        assert atk_sources(c, 0).get("two_weapon_fighting") == -4
+        assert atk_sources(c, 1).get("two_weapon_fighting") == -8
 
     def test_with_the_feat(self) -> None:
         c = self._pair("Warhammer", feat=True)
         primary, off = gather_sheet(c, None).equipment.weapons
-        assert primary.attack.typed.get("two_weapon_fighting") == -4
-        assert off.attack.typed.get("two_weapon_fighting") == -4
+        assert atk_sources(c, 0).get("two_weapon_fighting") == -4
+        assert atk_sources(c, 1).get("two_weapon_fighting") == -4
 
     def test_light_off_hand_with_the_feat(self) -> None:
         c = self._pair("Dagger", feat=True)
         primary, off = gather_sheet(c, None).equipment.weapons
-        assert primary.attack.typed.get("two_weapon_fighting") == -2
-        assert off.attack.typed.get("two_weapon_fighting") == -2
+        assert atk_sources(c, 0).get("two_weapon_fighting") == -2
+        assert atk_sources(c, 1).get("two_weapon_fighting") == -2
 
     def test_undeclared_weapons_take_no_penalty(self) -> None:
         """Carrying two weapons is not fighting with two."""
         c = arm(fighter(), {"base": "Longsword"}, {"base": "Dagger"})
-        for w in gather_sheet(c, None).equipment.weapons:
-            assert "two_weapon_fighting" not in w.attack.typed
+        for index in range(2):
+            assert "two_weapon_fighting" not in atk_sources(c, index)
 
     def test_off_hand_damage_is_half_strength(self) -> None:
         """PHB p. 113: one-half the Strength bonus in the off hand."""
@@ -547,8 +558,7 @@ class TestWeaponMaterials:
         c = arm(
             fighter(), {"base": "Light Mace", "material": "Alchemical Silver"}
         )
-        w = gather_sheet(c, None).equipment.weapons[0]
-        assert "material" not in w.attack.typed
+        assert "material" not in atk_sources(c, 0)
 
     def test_other_materials_move_no_number(self) -> None:
         """Adamantine and cold iron bypass DR; they add nothing."""
@@ -557,9 +567,10 @@ class TestWeaponMaterials:
             {"base": "Longsword", "material": "Adamantine"},
             {"base": "Longsword", "material": "Cold Iron"},
         )
-        for w in gather_sheet(c, None).equipment.weapons:
+        weapons = gather_sheet(c, None).equipment.weapons
+        for index, w in enumerate(weapons):
             assert "material" not in w.damage.typed
-            assert "material" not in w.attack.typed
+            assert "material" not in atk_sources(c, index)
 
 
 class TestRapidShot:
@@ -601,3 +612,131 @@ class TestRapidShot:
         arm(c, {"base": "Longsword"})
         w = gather_sheet(c, None).equipment.weapons[0]
         assert len(w.attack_iteratives) == 3
+
+
+class TestWeaponStanceInName:
+    """
+    The stance a weapon is being used in rides in its display
+    name, since it changes how the iteratives read:
+
+        +5 Dagger (TWF: Primary)
+        +3 Longbow (Rapid Shot)
+        +1 Greatsword (Power Attack: 5)
+    """
+
+    def test_twf_primary(self) -> None:
+        c = fighter()
+        take(c, "Two-Weapon Fighting", None)
+        arm(
+            c,
+            {"base": "Dagger", "enhancement": 5, "hand": "primary"},
+            {"base": "Dagger", "hand": "off_hand"},
+        )
+        primary, off = gather_sheet(c, None).equipment.weapons
+        assert primary.name == "+5 Dagger (TWF: Primary)"
+        assert off.name == "Dagger (TWF: Off-hand)"
+
+    def test_rapid_shot(self) -> None:
+        c = fighter()
+        take(c, "Point Blank Shot", None)
+        take(c, "Rapid Shot", None)
+        arm(c, {"base": "Longbow", "enhancement": 3})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.name == "+3 Longbow (Rapid Shot)"
+
+    def test_no_stance_leaves_the_name_alone(self) -> None:
+        c = arm(fighter(), {"base": "Longsword", "enhancement": 1})
+        assert gather_sheet(c, None).equipment.weapons[0].name == (
+            "+1 Longsword"
+        )
+
+    def test_rapid_shot_not_shown_on_a_melee_weapon(self) -> None:
+        c = fighter()
+        take(c, "Point Blank Shot", None)
+        take(c, "Rapid Shot", None)
+        arm(c, {"base": "Longsword"})
+        assert gather_sheet(c, None).equipment.weapons[0].name == "Longsword"
+
+    def test_parameterised_buff_shows_its_value(self) -> None:
+        """Power Attack: 5, once such a buff is active."""
+        from heroforge.engine.bonus import BonusEntry, BonusType
+
+        c = arm(fighter(), {"base": "Greatsword", "enhancement": 1})
+        c.register_buff_definition(
+            "Power Attack",
+            [
+                (
+                    "attack_melee",
+                    BonusEntry(
+                        value=-5,
+                        bonus_type=BonusType.UNTYPED,
+                        source="power_attack",
+                    ),
+                )
+            ],
+        )
+        c.toggle_buff("Power Attack", True, parameter=5)
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.name == "+1 Greatsword (Power Attack: 5)"
+
+    def test_stances_combine(self) -> None:
+        c = fighter()
+        take(c, "Two-Weapon Fighting", None)
+        arm(
+            c,
+            {"base": "Dagger", "hand": "primary"},
+            {"base": "Dagger", "hand": "off_hand"},
+        )
+        assert gather_sheet(c, None).equipment.weapons[0].name == (
+            "Dagger (TWF: Primary)"
+        )
+
+
+class TestAttackTotalMatchesFirstIterative:
+    """
+    The breakdown and the sequence are the same number seen two
+    ways, so anything shaping the sequence has to show in the
+    breakdown as well. Rapid Shot's -2 is the case that forced
+    this: it applies to every attack that round, so it belongs
+    on the line and not only on the iteratives.
+    """
+
+    def _check(self, c: Character) -> None:
+        for w in gather_sheet(c, None).equipment.weapons:
+            assert w.attack.total == w.attack_iteratives[0]
+            assert w.attack.total == sum(w.attack.typed.values())
+
+    def test_plain_weapon(self) -> None:
+        self._check(arm(fighter(), {"base": "Longsword"}))
+
+    def test_with_feats_and_enhancement(self) -> None:
+        c = fighter()
+        take(c, "Weapon Focus", "Longsword")
+        take(c, "Melee Weapon Mastery", "Slashing")
+        arm(c, {"base": "Longsword", "enhancement": 3})
+        self._check(c)
+
+    def test_rapid_shot_penalty_is_on_the_line(self) -> None:
+        c = fighter(11)
+        take(c, "Point Blank Shot", None)
+        take(c, "Rapid Shot", None)
+        arm(c, {"base": "Longbow"})
+        w = gather_sheet(c, None).equipment.weapons[0]
+        assert w.attack.typed.get("rapid_shot") == -2
+        self._check(c)
+
+    def test_two_weapon_pairing(self) -> None:
+        c = fighter()
+        take(c, "Two-Weapon Fighting", None)
+        arm(
+            c,
+            {"base": "Longsword", "hand": "primary"},
+            {"base": "Dagger", "hand": "off_hand"},
+        )
+        self._check(c)
+
+    def test_finesse_weapon(self) -> None:
+        c = finesse_rogue()
+        take(c, "Weapon Finesse", None)
+        arm(c, {"base": "Dagger"})
+        self._check(c)

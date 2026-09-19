@@ -215,14 +215,15 @@ spellcasting:
       3: 15
 equipment:
   weapons:
-    - name: Longbow
+    - name: Longbow (Rapid Shot)
       attack:
-        total: 27
+        total: 25
         typed:
           base: 20
           dex: 5
           size: 1
           weapon_focus: 1
+          rapid_shot: -2
       damage:
         total: 0
       attack_iteratives:

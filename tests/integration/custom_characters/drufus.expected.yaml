@@ -497,7 +497,7 @@ equipment:
     - Thieves' Tools, Masterwork
     - Xan ibn'Duman
   weapons:
-    - name: +5 Dagger
+    - name: '+5 Dagger (TWF: Primary)'
       attack:
         total: 33
         typed:
@@ -522,14 +522,13 @@ equipment:
       crit_mult: x2
       range_inc: 10
       properties:
-        - TWF (primary)
         - sacred
         - wounding
         - vanishing
         - fiendslayer (least)
         - weapon bond
         - Starmetal
-    - name: +5 Dagger
+    - name: '+5 Dagger (TWF: Off-hand)'
       attack:
         total: 33
         typed:
@@ -552,13 +551,12 @@ equipment:
       crit_mult: x2
       range_inc: 10
       properties:
-        - TWF (secondary)
         - sacred
         - wounding
         - vanishing
         - fiendslayer (least)
         - Starmetal
-    - name: +5 Alchemical Silver Light Mace
+    - name: '+5 Alchemical Silver Light Mace (TWF: Primary)'
       attack:
         total: 32
         typed:
@@ -582,11 +580,10 @@ equipment:
       crit_range: '20'
       crit_mult: x2
       properties:
-        - TWF (primary)
         - sacred
         - bane (undead)
         - truedeath (greater)
-    - name: +5 Alchemical Silver Light Mace
+    - name: '+5 Alchemical Silver Light Mace (TWF: Off-hand)'
       attack:
         total: 32
         typed:

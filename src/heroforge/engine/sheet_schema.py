@@ -179,6 +179,10 @@ class WeaponDisplay:
     name: str
     # This weapon's own attack and damage lines: the generic
     # pool plus whatever applies to this weapon specifically.
+    # attack.total is always the first entry of
+    # attack_iteratives — the two are the same number seen two
+    # ways, so anything shaping the sequence (Rapid Shot, a
+    # two-weapon penalty) shows in the breakdown too.
     attack: Breakdown | None = None
     damage: Breakdown | None = None
     attack_iteratives: list[int] = field(default_factory=list)

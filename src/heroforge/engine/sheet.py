@@ -62,6 +62,7 @@ from heroforge.engine.weapons import (
     threat_range,
     weapon_definition,
     weapon_pool_keys,
+    weapon_stances,
 )
 from heroforge.rules.known import (
     KnownClass,
@@ -635,6 +636,22 @@ def _special_qualities(c: "Character") -> list[str]:
 # -----------------------------------------------------------
 
 
+def _weapon_name(c: "Character", item: dict) -> str:
+    """Display name, with any stance the weapon is being used in."""
+    from heroforge.engine.equipment import equipment_display_name
+
+    name = equipment_display_name(
+        base=item.get("base", ""),
+        enhancement=item.get("enhancement", 0),
+        material=item.get("material", ""),
+        name=item.get("name", ""),
+    )
+    stances = weapon_stances(c, item)
+    if stances:
+        name = f"{name} ({', '.join(stances)})"
+    return name
+
+
 def _crit_range_display(c: "Character", item: dict) -> str:
     """ "20" for a single number, "17-20" for a widened range."""
     low, high = threat_range(c, item)
@@ -720,11 +737,9 @@ def _weapon_iteratives(
         attacks.append(base - (bab - extra))
         extra -= 5
     if rapid_shot_applies(c, item):
-        # One more at the highest bonus, and -2 on every attack
-        # that round. Full attack only, so it shapes the
-        # sequence rather than the single-attack total.
+        # One more attack at the highest bonus. The -2 is already
+        # on the line, so it needs no second application here.
         attacks = [base, *attacks]
-        attacks = [a - 2 for a in attacks]
     return attacks
 
 
@@ -770,12 +785,7 @@ def _equipment(c: "Character") -> EquipmentSection:
         ranged = bool(wdef and wdef.is_ranged)
         section.weapons.append(
             WeaponDisplay(
-                name=equipment_display_name(
-                    base=w.get("base", ""),
-                    enhancement=w.get("enhancement", 0),
-                    material=w.get("material", ""),
-                    name=w.get("name", ""),
-                ),
+                name=_weapon_name(c, w),
                 attack=_weapon_breakdown(c, atk_key, ranged, w),
                 damage=_weapon_breakdown(c, dmg_key, ranged, w),
                 attack_iteratives=_weapon_iteratives(c, atk_key, w),

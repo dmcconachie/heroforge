@@ -915,9 +915,16 @@ Reusable components in `widgets/`: `LabeledField`,
   Fighting and three with Greater, each 5 lower than the last
   (PHB p. 160).
   Rapid Shot adds one ranged attack at the highest bonus and
-  -2 on every ranged attack that round. It requires a full
-  attack, so it shapes the iterative sequence rather than the
-  single-attack total.
+  -2 on every ranged attack that round; the penalty sits on
+  the weapon's line, and only the extra attack is added to
+  the sequence.
+  A weapon's `attack.total` is always the first entry of its
+  `attack_iteratives`, and equals the sum of its breakdown.
+  Anything that shapes the sequence therefore has to appear
+  in the breakdown as well. The display name carries the
+  stance the weapon is used in — "+5 Dagger (TWF: Primary)",
+  "Longbow (Rapid Shot)", "+1 Greatsword (Power Attack: 5)" —
+  since that is what explains the shape of the sequence.
   Weapon materials contribute through
   `MaterialDefinition.damage_adjust`, which only alchemical
   silver has (-1, DMG p. 285); its minimum-1-damage floor

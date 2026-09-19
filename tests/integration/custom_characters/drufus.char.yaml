@@ -377,7 +377,6 @@ equipment:
       hand: off_hand
       enhancement: 5
       properties:
-        - TWF (secondary)
         - sacred
         - wounding
         - vanishing
@@ -388,7 +387,6 @@ equipment:
       material: Alchemical Silver
       enhancement: 5
       properties:
-        - TWF (primary)
         - sacred
         - bane (undead)
         - truedeath (greater)
@@ -397,7 +395,6 @@ equipment:
       material: Alchemical Silver
       enhancement: 5
       properties:
-        - TWF (secondary)
         - sacred
         - bane (undead)
         - truedeath (greater)
