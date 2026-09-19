@@ -44,6 +44,7 @@ if TYPE_CHECKING:
 from heroforge.engine.bonus import BonusPool
 from heroforge.engine.enums import SAVE_ABILITY, Ability, Alignment
 from heroforge.engine.resources import ResourceTracker
+from heroforge.engine.spellcasting import Specialization
 from heroforge.engine.stat import (
     StatError,
     StatGraph,
@@ -230,6 +231,8 @@ class Character:
 
         self.domains: list[str] = []
         # cleric domain names (validated against KnownDomain on load)
+        self.specialization: Specialization | None = None
+        # wizard school specialization; None for a generalist
         self.resources: dict[str, ResourceTracker] = {}
         # uses/day trackers derived from domains; see
         # domains.refresh_domain_resources()

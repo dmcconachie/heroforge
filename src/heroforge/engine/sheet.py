@@ -471,6 +471,7 @@ def _spellcasting(
     from heroforge.engine.spellcasting import (
         domain_slots_per_day,
         slots_per_day,
+        specialist_slots_per_day,
         spell_save_dc,
         spells_known,
     )
@@ -507,6 +508,17 @@ def _spellcasting(
         if grants_domains and c.domains:
             domain_slots = domain_slots_per_day(slots)
 
+        # School specialization applies to the wizard's own
+        # spellcasting only.
+        spec = c.specialization
+        specialty = None
+        prohibited: list = []
+        specialist_slots: list[int | None] | None = None
+        if spec is not None and class_name == "Wizard":
+            specialty = spec.school
+            prohibited = list(spec.prohibited)
+            specialist_slots = specialist_slots_per_day(slots)
+
         known_count: list[int | None] | None = None
         known_spells: dict[int, list[str]] | None = None
         if sc.preparation == SpellPreparation.SPONTANEOUS:
@@ -541,6 +553,9 @@ def _spellcasting(
             slots_per_day=slots,
             spell_save_dc=dcs,
             domain_slots_per_day=domain_slots,
+            specialty_school=specialty,
+            prohibited_schools=prohibited,
+            specialist_slots_per_day=specialist_slots,
             spells_known_count=known_count,
             spells_known=known_spells,
         )

@@ -25,7 +25,11 @@ from typing import TYPE_CHECKING
 import yaml
 
 from heroforge.engine.domains import refresh_domain_resources
-from heroforge.engine.enums import Ability, Alignment
+from heroforge.engine.enums import Ability, Alignment, School
+from heroforge.engine.spellcasting import (
+    Specialization,
+    validate_specialization,
+)
 from heroforge.rules.known import (
     KnownArmor,
     KnownBuff,
@@ -170,6 +174,14 @@ class EquipmentSection:
 
 
 @dataclass
+class SpecializationEntry:
+    """.char.yaml wizard specialization block."""
+
+    school: School
+    prohibited: list[School] = field(default_factory=list)
+
+
+@dataclass
 class CharFile:
     """Top-level .char.yaml schema."""
 
@@ -177,6 +189,7 @@ class CharFile:
     ability_scores: dict[Ability, int] = field(default_factory=dict)
     levels: list[CharLevelEntry] = field(default_factory=list)
     domains: list[KnownDomain] = field(default_factory=list)
+    specialization: SpecializationEntry | None = None
     buffs: dict[KnownBuff, BuffEntry] = field(default_factory=dict)
     templates: dict[KnownTemplate, TemplateEntry] = field(default_factory=dict)
     dm_overrides: list[DmOverrideEntry] = field(default_factory=list)
@@ -340,6 +353,14 @@ def _character_to_charfile(
         },
         levels=levels,
         domains=[KnownDomain(d) for d in c.domains],
+        specialization=(
+            None
+            if c.specialization is None
+            else SpecializationEntry(
+                school=c.specialization.school,
+                prohibited=list(c.specialization.prohibited),
+            )
+        ),
         buffs=buffs,
         templates=templates,
         dm_overrides=dm_overrides,
@@ -493,6 +514,15 @@ def load_character(
 
     # Cleric domains (validated by KnownDomain)
     c.domains = [str(d) for d in cf.domains]
+
+    # Wizard school specialization (validated against PHB p. 57)
+    if cf.specialization is not None:
+        spec = Specialization(
+            school=cf.specialization.school,
+            prohibited=tuple(cf.specialization.prohibited),
+        )
+        validate_specialization(spec)
+        c.specialization = spec
 
     # Ability scores
     for ab, val in cf.ability_scores.items():

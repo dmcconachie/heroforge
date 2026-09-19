@@ -56,3 +56,22 @@ SAVE_ABILITY: dict[Save, Ability] = {
     Save.REF: Ability.DEX,
     Save.WILL: Ability.WIS,
 }
+
+
+class School(StrEnum):
+    """
+    The eight schools of magic (PHB p. 57).
+
+    Universal is deliberately absent: it is not a school for
+    specialization purposes and can be neither chosen nor
+    prohibited.
+    """
+
+    ABJURATION = "Abjuration"
+    CONJURATION = "Conjuration"
+    DIVINATION = "Divination"
+    ENCHANTMENT = "Enchantment"
+    EVOCATION = "Evocation"
+    ILLUSION = "Illusion"
+    NECROMANCY = "Necromancy"
+    TRANSMUTATION = "Transmutation"

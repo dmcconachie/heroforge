@@ -14,7 +14,10 @@ Public API:
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from math import floor
+
+from heroforge.engine.enums import School
 
 # ---------------------------------------------------------
 # Spell slot tables: class -> level -> [slots by spell lvl]
@@ -285,6 +288,75 @@ def slots_per_day(
         else:
             result.append(b)
     return result
+
+
+@dataclass(frozen=True)
+class Specialization:
+    """
+    A wizard's school specialization (PHB p. 57).
+
+    Alternative class features that alter specialization (the
+    Focused Specialist ACF, Complete Mage p. 34) need an ACF
+    mechanism, which does not exist yet.
+    """
+
+    school: School
+    prohibited: tuple[School, ...] = ()
+
+
+def required_prohibited_count(spec: Specialization) -> int:
+    """
+    How many schools this specialization must give up.
+
+    Two normally, one for a diviner (PHB p. 57).
+    """
+    return 1 if spec.school == School.DIVINATION else 2
+
+
+def validate_specialization(spec: Specialization) -> None:
+    """
+    Raise ValueError if a specialization is illegal.
+
+    A wizard can never give up divination, cannot prohibit her
+    own specialty, and must give up exactly the required number
+    of distinct schools.
+    """
+    if School.DIVINATION in spec.prohibited:
+        msg = "A wizard can never give up divination (PHB p. 57)."
+        raise ValueError(msg)
+    if spec.school in spec.prohibited:
+        msg = f"A wizard cannot prohibit her own specialty ({spec.school})."
+        raise ValueError(msg)
+    if len(set(spec.prohibited)) != len(spec.prohibited):
+        msg = f"Duplicate prohibited schools: {list(spec.prohibited)}"
+        raise ValueError(msg)
+    needed = required_prohibited_count(spec)
+    if len(spec.prohibited) != needed:
+        msg = (
+            f"{spec.school} specialist must give up {needed} prohibited "
+            f"school(s), got {len(spec.prohibited)}."
+        )
+        raise ValueError(msg)
+
+
+def specialist_slots_per_day(
+    total_slots: list[int | None],
+) -> list[int | None]:
+    """
+    Specialty-school slots, indexed by spell level.
+
+    PHB p. 57: "A specialist wizard can prepare one additional
+    spell of her specialty school per spell level each day."
+    Level 0 is a spell level — the prohibited-school rule reaches
+    cantrips too (PHB p. 57, spellbook) — so the bonus starts
+    there.
+
+    These slots are restricted to the specialty school, so like
+    domain slots they are a separate track and are never folded
+    into the general allotment. The count does not scale with
+    Intelligence.
+    """
+    return [1 if n is not None and n >= 1 else None for n in total_slots]
 
 
 def domain_slots_per_day(

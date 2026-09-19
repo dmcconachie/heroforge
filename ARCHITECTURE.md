@@ -801,6 +801,22 @@ Reusable components in `widgets/`: `LabeledField`,
   answers a different question — the class taken *at that
   level*, which is what cost and cap depend on — and is
   deliberately left separate.
+- Wizard school specialization is modelled as far as the
+  data allows: `Specialization` (school + prohibited
+  schools) is character state, validated on load against
+  PHB p. 57 — divination can never be given up, the
+  specialty cannot be prohibited, and a diviner gives up
+  one school where everyone else gives up two. The
+  specialty slot is a separate restricted track
+  (`specialist_slots_per_day`), one per castable spell
+  level including cantrips, alongside the general
+  allotment rather than folded into it.
+  **Not** enforced: which spells may fill a specialty slot,
+  and the bar on preparing prohibited-school spells. Every
+  spell in the compendium has an empty `school` field, so
+  there is nothing to check against. The +2 Spellcraft
+  bonus is also absent: it applies only when learning
+  specialty-school spells, and a flat +2 would be wrong.
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
 - Per-weapon attack/damage breakdowns (weapon
