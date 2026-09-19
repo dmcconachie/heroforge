@@ -1,0 +1,24 @@
+# rules/complete_mage/acfs.yaml
+#
+# Alternative class features from Complete Mage.
+# See engine/acfs.py for what a `replaces:` block can express.
+
+Focused Specialist:
+  source_book: Complete Mage
+  classes:
+    - Wizard
+  levels:
+    - 1
+  requires:
+    specialist: true
+  replaces:
+    spell_slots_per_level: 1
+    prohibited_schools: 1
+  grants:
+    specialty_slots_per_level: 2
+  note: >-
+    Lose one spell slot from each level of wizard spells you can
+    cast and take one further prohibited school, which cannot be
+    divination. In exchange, prepare two additional specialty
+    school spells per spell level each day, on top of the one a
+    specialist already gets. Complete Mage p. 34.

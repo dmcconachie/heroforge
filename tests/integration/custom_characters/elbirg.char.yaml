@@ -84,9 +84,6 @@ levels:
       Knowledge (The Planes): 1
       Spellcraft: 1
       Use Magic Device: 1
-    feats:
-      - name: Spontaneous Divination
-        source: character
   - level: 6
     class: Wild Mage
     hp_roll: 3
@@ -117,6 +114,9 @@ levels:
       Knowledge (The Planes): 1
       Spellcraft: 1
       Use Magic Device: 1
+acfs:
+  - name: Spontaneous Divination
+    level: 5
 equipment:
   worn:
     - Heward's Handy Haversack

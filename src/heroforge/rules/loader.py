@@ -49,6 +49,7 @@ from heroforge.rules.core.pool_keys import PoolKey
 if TYPE_CHECKING:
     from collections.abc import Callable
 
+    from heroforge.engine.acfs import AcfRegistry
     from heroforge.engine.character import Character
     from heroforge.engine.classes import (
         ClassDefinition,
@@ -1101,6 +1102,40 @@ class DomainsLoader:
                 defn = converter.structure(decl, DomainDefinition)
             except Exception as e:
                 raise LoaderError(f"Failed to load domain {name!r}: {e}") from e
+            registry.register(defn)
+            registered.append(name)
+        return registered
+
+
+class AcfsLoader:
+    """Reads a book's acfs.yaml and populates an AcfRegistry."""
+
+    def __init__(self, rules_dir: Path | str) -> None:
+        self.rules_dir = Path(rules_dir)
+
+    def load(
+        self,
+        registry: "AcfRegistry",
+        relative_path: str,
+    ) -> list[str]:
+        from heroforge.engine.acfs import AcfDefinition
+        from heroforge.rules.schema import converter
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"ACF file not found: {path}")
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
+
+        registered: list[str] = []
+        for name, decl in data.items():
+            decl["name"] = name
+            try:
+                defn = converter.structure(decl, AcfDefinition)
+            except Exception as e:
+                raise LoaderError(f"Failed to load ACF {name!r}: {e}") from e
             registry.register(defn)
             registered.append(name)
         return registered

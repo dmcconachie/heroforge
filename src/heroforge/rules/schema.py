@@ -24,6 +24,7 @@ from cattrs.gen import (
     override,
 )
 
+from heroforge.engine.acfs import AcfDefinition
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.classes import (
     ClassDefinition,
@@ -207,6 +208,43 @@ converter.register_structure_hook(
 # fields and forbid_extra_keys would reject the
 # name field injected by the loader.
 # ---------------------------------------------------
+
+
+_ACF_KEYS = frozenset(
+    {
+        "name",
+        "source_book",
+        "classes",
+        "levels",
+        "requires",
+        "replaces",
+        "grants",
+        "note",
+    }
+)
+
+
+def _structure_acf(val: object, _: type) -> AcfDefinition:
+    if not isinstance(val, dict):
+        msg = f"Cannot structure {type(val)} as AcfDefinition"
+        raise TypeError(msg)
+    unknown = sorted(set(val) - _ACF_KEYS)
+    if unknown:
+        msg = f"Unknown ACF key(s): {', '.join(unknown)}"
+        raise ValueError(msg)
+    return AcfDefinition(
+        name=str(val["name"]),
+        source_book=str(val.get("source_book", "")),
+        classes=tuple(val.get("classes", ())),
+        levels=tuple(int(x) for x in val.get("levels", ())),
+        requires=dict(val.get("requires", {})),
+        replaces=dict(val.get("replaces", {})),
+        grants=dict(val.get("grants", {})),
+        note=str(val.get("note", "")),
+    )
+
+
+converter.register_structure_hook(AcfDefinition, _structure_acf)
 
 
 _DOMAIN_KEYS = frozenset(

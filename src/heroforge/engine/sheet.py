@@ -26,6 +26,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from heroforge.engine.acfs import acf_slot_deltas, replaced_feature_keys
 from heroforge.engine.bonus import ALWAYS_STACKING, BonusPool, BonusType
 from heroforge.engine.character import feat_key_of
 from heroforge.engine.enums import (
@@ -169,6 +170,7 @@ def gather_sheet(
         skills=_skills(character),
         carrying_capacity=_carrying(character),
         feats=_feats(character),
+        acfs=_acfs(character),
         class_features=_class_features(character),
         spellcasting=_spellcasting(character),
         domains=_domains(character),
@@ -444,17 +446,23 @@ def _feats(c: "Character") -> list[str]:
 # -----------------------------------------------------------
 
 
+def _acfs(c: "Character") -> list[str]:
+    """Selected ACFs, shown with the level they were taken at."""
+    return [f"{a['name']} ({a['level']})" for a in c.acfs]
+
+
 def _class_features(c: "Character") -> list[str]:
     from heroforge.rules.rules import get_rules
 
     class_reg = get_rules().classes
+    replaced = replaced_feature_keys(c)
     features: list[str] = []
     for class_name, level in c.class_level_map.items():
         defn = class_reg.get(class_name)
         if defn is None:
             continue
         for feat in defn.class_features:
-            if feat.level <= level:
+            if feat.level <= level and feat.feature not in replaced:
                 features.append(f"{feat.feature}: {feat.description}")
     return features
 
@@ -490,6 +498,12 @@ def _spellcasting(
         ab_score = c.get_ability_score(sc.stat)
         ab_mod = c.get_ability_modifier(sc.stat)
         slots = slots_per_day(class_name, level, ab_score)
+        # ACFs may trade general slots away (Focused Specialist)
+        general_delta, specialty_delta = acf_slot_deltas(c)
+        if general_delta and class_name == "Wizard":
+            slots = [
+                None if n is None else max(n + general_delta, 0) for n in slots
+            ]
         while slots and slots[-1] is None:
             slots.pop()
 
@@ -517,7 +531,9 @@ def _spellcasting(
         if spec is not None and class_name == "Wizard":
             specialty = spec.school
             prohibited = list(spec.prohibited)
-            specialist_slots = specialist_slots_per_day(slots)
+            specialist_slots = specialist_slots_per_day(
+                slots, extra=specialty_delta
+            )
 
         known_count: list[int | None] | None = None
         known_spells: dict[int, list[str]] | None = None

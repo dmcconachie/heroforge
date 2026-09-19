@@ -304,16 +304,25 @@ class Specialization:
     prohibited: tuple[School, ...] = ()
 
 
-def required_prohibited_count(spec: Specialization) -> int:
+def required_prohibited_count(
+    spec: Specialization,
+    extra: int = 0,
+) -> int:
     """
     How many schools this specialization must give up.
 
-    Two normally, one for a diviner (PHB p. 57).
+    Two normally, one for a diviner (PHB p. 57). ``extra`` carries
+    surcharges from alternative class features — Focused
+    Specialist demands one more (Complete Mage p. 34).
     """
-    return 1 if spec.school == School.DIVINATION else 2
+    base = 1 if spec.school == School.DIVINATION else 2
+    return base + extra
 
 
-def validate_specialization(spec: Specialization) -> None:
+def validate_specialization(
+    spec: Specialization,
+    extra_prohibited: int = 0,
+) -> None:
     """
     Raise ValueError if a specialization is illegal.
 
@@ -330,7 +339,7 @@ def validate_specialization(spec: Specialization) -> None:
     if len(set(spec.prohibited)) != len(spec.prohibited):
         msg = f"Duplicate prohibited schools: {list(spec.prohibited)}"
         raise ValueError(msg)
-    needed = required_prohibited_count(spec)
+    needed = required_prohibited_count(spec, extra_prohibited)
     if len(spec.prohibited) != needed:
         msg = (
             f"{spec.school} specialist must give up {needed} prohibited "
@@ -341,6 +350,7 @@ def validate_specialization(spec: Specialization) -> None:
 
 def specialist_slots_per_day(
     total_slots: list[int | None],
+    extra: int = 0,
 ) -> list[int | None]:
     """
     Specialty-school slots, indexed by spell level.
@@ -349,14 +359,16 @@ def specialist_slots_per_day(
     spell of her specialty school per spell level each day."
     Level 0 is a spell level — the prohibited-school rule reaches
     cantrips too (PHB p. 57, spellbook) — so the bonus starts
-    there.
+    there. ``extra`` carries additional specialty slots from an
+    ACF (Focused Specialist grants two more).
 
     These slots are restricted to the specialty school, so like
     domain slots they are a separate track and are never folded
     into the general allotment. The count does not scale with
     Intelligence.
     """
-    return [1 if n is not None and n >= 1 else None for n in total_slots]
+    count = 1 + extra
+    return [count if n is not None and n >= 1 else None for n in total_slots]
 
 
 def domain_slots_per_day(

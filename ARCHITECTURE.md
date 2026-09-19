@@ -817,6 +817,27 @@ Reusable components in `widgets/`: `LabeledField`,
   there is nothing to check against. The +2 Spellcraft
   bonus is also absent: it applies only when learning
   specialty-school spells, and a flat +2 would be wrong.
+- Alternative class features live in `engine/acfs.py` plus
+  a per-book `acfs.yaml`, loaded into `Rules.acfs`. An
+  entry carries `classes`, `levels`, `requires`,
+  `replaces` and `grants`; a character selects them as
+  `{name, level}` pairs, validated on load once class
+  levels and race are known. `replaces: feature:` names a
+  class feature key and may template the chosen level
+  (`bonus_feat_wizard_{level}`), which works because every
+  replaceable slot already has its own key in the class
+  YAML — `bonus_feat_1..20` for fighters,
+  `special_ability_2/3/4` for rogues. Suppressed features
+  drop out of the sheet. Numeric forms
+  (`spell_slots_per_level`, `prohibited_schools`,
+  `specialty_slots_per_level`) cover what is not a class
+  feature at all, which is what Focused Specialist needs.
+  Racial substitution levels are the same shape with a
+  `requires: race:` gate and need no separate subsystem;
+  the predicate exists, the data does not yet.
+  Proficiency and selection-style replacements (a ranger's
+  favored enemy) appear in print but have no consumer, so
+  they are absent rather than guessed.
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
 - Per-weapon attack/damage breakdowns (weapon

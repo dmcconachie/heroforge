@@ -48,6 +48,7 @@ from heroforge.rules.rules import book_dirs
 # Known* StrEnum class. e.g. "feats" -> a class named
 # "Known<Book>Feat" is expected in the module.
 _PER_BOOK_CATEGORIES: dict[str, str] = {
+    "acfs": "Acf",
     "feats": "Feat",
     "classes": "Class",
     "magic_items": "MagicItem",
@@ -95,6 +96,7 @@ KnownTemplate = combine("KnownTemplate", KnownCoreTemplate)
 KnownWeapon = combine("KnownWeapon", KnownCoreWeapon)
 
 # Per-book categories: discovered across every book directory.
+KnownAcf = combine("KnownAcf", *_collect("acfs"))
 KnownClass = combine("KnownClass", *_collect("classes"))
 KnownFeat = combine("KnownFeat", *_collect("feats"))
 KnownMagicItem = combine("KnownMagicItem", *_collect("magic_items"))

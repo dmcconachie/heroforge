@@ -208,12 +208,11 @@ feats:
   - Magical Aptitude
   - Retributive Spell
   - Craft Wondrous Item
-  - Spontaneous Divination
+acfs:
+  - Spontaneous Divination (5)
 class_features:
   - 'summon_familiar: Summon a familiar'
   - 'scribe_scroll: Scribe scroll feat for free'
-  - >-
-    bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)
   - >-
     wild_magic: Casts spells with caster level reduced by 3, but adds 1d6
     to the adjusted caster level on each spell cast. (TODO: wire effect)

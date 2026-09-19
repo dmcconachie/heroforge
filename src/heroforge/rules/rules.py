@@ -37,6 +37,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from heroforge.engine.acfs import AcfRegistry
 from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.conditions import ConditionRegistry
 from heroforge.engine.deities import DeityRegistry
@@ -55,6 +56,7 @@ from heroforge.engine.skills import SkillRegistry
 from heroforge.engine.spells import SpellCompendium
 from heroforge.engine.templates import TemplateRegistry
 from heroforge.rules.loader import (
+    AcfsLoader,
     ClassesLoader,
     ConditionLoader,
     DeitiesLoader,
@@ -137,6 +139,7 @@ class Rules:
     weapons: WeaponRegistry = field(default_factory=WeaponRegistry)
     materials: MaterialRegistry = field(default_factory=MaterialRegistry)
     domains: DomainRegistry = field(default_factory=DomainRegistry)
+    acfs: AcfRegistry = field(default_factory=AcfRegistry)
     deities: DeityRegistry = field(default_factory=DeityRegistry)
     skills: SkillRegistry = field(default_factory=SkillRegistry)
     templates: TemplateRegistry = field(default_factory=TemplateRegistry)
@@ -197,6 +200,7 @@ class Rules:
 
         for book in books:
             self._load_book_materials(rd, eq_loader, book)
+            self._load_book_acfs(rd, book)
 
         # --- Final wiring -------------------------------------
         # Domains load before the spell compendium, so the
@@ -223,6 +227,12 @@ class Rules:
         mi_yaml = rd / book / "magic_items.yaml"
         if mi_yaml.exists():
             mi_loader.load(self.magic_items, f"{book}/magic_items.yaml")
+
+    def _load_book_acfs(self, rd: Path, book: str) -> None:
+        a_yaml = rd / book / "acfs.yaml"
+        if not a_yaml.exists():
+            return
+        AcfsLoader(rd).load(self.acfs, f"{book}/acfs.yaml")
 
     def _load_book_feats(
         self,

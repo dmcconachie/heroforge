@@ -231,6 +231,9 @@ class Character:
 
         self.domains: list[str] = []
         # cleric domain names (validated against KnownDomain on load)
+        self.acfs: list[dict[str, Any]] = []
+        # selected alternative class features:
+        #   [{'name': ..., 'level': int}]
         self.specialization: Specialization | None = None
         # wizard school specialization; None for a generalist
         self.resources: dict[str, ResourceTracker] = {}

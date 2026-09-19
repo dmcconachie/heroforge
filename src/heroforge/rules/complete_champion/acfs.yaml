@@ -1,0 +1,20 @@
+# rules/complete_champion/acfs.yaml
+#
+# Alternative class features from Complete Champion.
+
+Spontaneous Divination:
+  source_book: Complete Champion
+  classes:
+    - Wizard
+  levels:
+    - 5
+    - 10
+    - 15
+    - 20
+  replaces:
+    feature: bonus_feat_wizard_{level}
+  note: >-
+    Spontaneously cast any divination spell you know by
+    sacrificing a prepared spell of equal or greater level, in
+    place of one wizard bonus feat. Complete Champion p. 52
+    (errata p. 4).

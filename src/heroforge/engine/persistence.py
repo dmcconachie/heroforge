@@ -24,6 +24,10 @@ from typing import TYPE_CHECKING
 
 import yaml
 
+from heroforge.engine.acfs import (
+    extra_prohibited_schools,
+    validate_acf_selection,
+)
 from heroforge.engine.domains import refresh_domain_resources
 from heroforge.engine.enums import Ability, Alignment, School
 from heroforge.engine.spellcasting import (
@@ -31,6 +35,7 @@ from heroforge.engine.spellcasting import (
     validate_specialization,
 )
 from heroforge.rules.known import (
+    KnownAcf,
     KnownArmor,
     KnownBuff,
     KnownClass,
@@ -174,6 +179,14 @@ class EquipmentSection:
 
 
 @dataclass
+class AcfEntry:
+    """.char.yaml alternative class feature selection."""
+
+    name: KnownAcf
+    level: int = 1
+
+
+@dataclass
 class SpecializationEntry:
     """.char.yaml wizard specialization block."""
 
@@ -190,6 +203,7 @@ class CharFile:
     levels: list[CharLevelEntry] = field(default_factory=list)
     domains: list[KnownDomain] = field(default_factory=list)
     specialization: SpecializationEntry | None = None
+    acfs: list[AcfEntry] = field(default_factory=list)
     buffs: dict[KnownBuff, BuffEntry] = field(default_factory=dict)
     templates: dict[KnownTemplate, TemplateEntry] = field(default_factory=dict)
     dm_overrides: list[DmOverrideEntry] = field(default_factory=list)
@@ -353,6 +367,10 @@ def _character_to_charfile(
         },
         levels=levels,
         domains=[KnownDomain(d) for d in c.domains],
+        acfs=[
+            AcfEntry(name=KnownAcf(a["name"]), level=int(a.get("level", 1)))
+            for a in c.acfs
+        ],
         specialization=(
             None
             if c.specialization is None
@@ -515,14 +533,13 @@ def load_character(
     # Cleric domains (validated by KnownDomain)
     c.domains = [str(d) for d in cf.domains]
 
-    # Wizard school specialization (validated against PHB p. 57)
+    # Wizard school specialization (validated against PHB p. 57).
+    # Set before ACFs so a specialist requirement can see it.
     if cf.specialization is not None:
-        spec = Specialization(
+        c.specialization = Specialization(
             school=cf.specialization.school,
             prohibited=tuple(cf.specialization.prohibited),
         )
-        validate_specialization(spec)
-        c.specialization = spec
 
     # Ability scores
     for ab, val in cf.ability_scores.items():
@@ -571,6 +588,23 @@ def load_character(
                 source=feat_dict.get("source", ""),
                 parameter=feat_dict.get("parameter"),
             )
+
+    # Alternative class features. Validated here rather than
+    # earlier because the checks need the character's class
+    # levels and race, which are applied above.
+    c.acfs = [{"name": str(a.name), "level": a.level} for a in cf.acfs]
+    for entry in c.acfs:
+        acf_defn = rules.acfs.get(entry["name"])  # type: ignore[attr-defined]
+        if acf_defn is None:
+            msg = f"Unknown alternative class feature: {entry['name']}"
+            raise ValueError(msg)
+        validate_acf_selection(c, acf_defn, entry["level"])
+
+    # An ACF may demand a further prohibited school (Focused
+    # Specialist), so specialization is validated once ACFs are
+    # known.
+    if c.specialization is not None:
+        validate_specialization(c.specialization, extra_prohibited_schools(c))
 
     # Cleric domain granted powers (e.g. War → Weapon Focus)
     _apply_domain_effects(c, rules)

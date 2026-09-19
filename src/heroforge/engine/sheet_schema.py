@@ -233,6 +233,7 @@ class Sheet:
     skills: dict[KnownSkill, SkillEntry]
     carrying_capacity: CarryingCapacity
     feats: list[str] = field(default_factory=list)
+    acfs: list[str] = field(default_factory=list)
     class_features: list[str] = field(default_factory=list)
     spellcasting: dict[KnownClass, SpellcastingEntry] = field(
         default_factory=dict,
