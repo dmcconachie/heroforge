@@ -223,6 +223,16 @@ Protection:
     (touch, 1/day).
   resource:
     name: Protective Ward
+    effects:
+      - target: fort_save
+        bonus_type: resistance
+        value: cleric_level
+      - target: ref_save
+        bonus_type: resistance
+        value: cleric_level
+      - target: will_save
+        bonus_type: resistance
+        value: cleric_level
   domain_spells:
     1: Sanctuary
     2: Shield Other
@@ -239,6 +249,10 @@ Strength:
     (free action).
   resource:
     name: Feat of Strength
+    effects:
+      - target: str_score
+        bonus_type: enhancement
+        value: cleric_level
   domain_spells:
     1: Enlarge Person
     2: Bull's Strength

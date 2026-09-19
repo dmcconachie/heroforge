@@ -467,3 +467,65 @@ class TestDomainResources:
             "Sun",
             "Travel",
         }
+
+
+class TestDomainToggleableBuffs:
+    """
+    Strength and Protection grant a scaling bonus when activated
+    (PHB p. 187). Both are registered as toggleable buffs so the
+    player turns them on for the round/save they apply to, rather
+    than the sheet pretending they are always on.
+    """
+
+    def _cleric(self, levels: int, domains: list[str]) -> Character:
+        c = Character()
+        c.race = "Human"
+        c.alignment = "neutral_good"
+        c.set_ability_score("str", 12)
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Cleric",
+                    hp_roll=8,
+                )
+                for i in range(levels)
+            ]
+        )
+        c.domains = list(domains)
+        refresh_domain_resources(c)
+        return c
+
+    def test_feat_of_strength_registered_inactive(self) -> None:
+        c = self._cleric(6, ["Strength"])
+        assert "Feat of Strength" in c._buff_states
+        assert not c._buff_states["Feat of Strength"].active
+        assert c.get_ability_score("str") == 12
+
+    def test_feat_of_strength_scales_with_cleric_level(self) -> None:
+        c = self._cleric(6, ["Strength"])
+        c.toggle_buff("Feat of Strength", True)
+        assert c.get_ability_score("str") == 18  # 12 + 6
+
+    def test_feat_of_strength_toggles_off(self) -> None:
+        c = self._cleric(6, ["Strength"])
+        c.toggle_buff("Feat of Strength", True)
+        c.toggle_buff("Feat of Strength", False)
+        assert c.get_ability_score("str") == 12
+
+    def test_protective_ward_covers_all_saves(self) -> None:
+        c = self._cleric(4, ["Protection"])
+        before = (c.fort, c.ref, c.will)
+        c.toggle_buff("Protective Ward", True)
+        assert (c.fort, c.ref, c.will) == tuple(x + 4 for x in before)
+
+    def test_buff_absent_without_the_domain(self) -> None:
+        c = self._cleric(6, ["War", "Luck"])
+        assert "Feat of Strength" not in c._buff_states
+        assert "Protective Ward" not in c._buff_states
+
+    def test_resource_without_effects_registers_no_buff(self) -> None:
+        """Luck has a daily limit but no expressible bonus."""
+        c = self._cleric(6, ["Luck"])
+        assert "Reroll" in c.resources
+        assert "Reroll" not in c._buff_states

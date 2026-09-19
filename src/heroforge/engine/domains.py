@@ -24,6 +24,10 @@ class DomainResource:
     name: str
     max_formula: str = "1"
     unit: str = "use"
+    # Stat effects the power confers while active. Present only
+    # for powers whose benefit the engine can express; the buff
+    # is registered under the resource's own name.
+    effects: tuple[dict, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -73,7 +77,11 @@ def refresh_domain_resources(character: "Character") -> None:
     dropping a domain drops its resource instead of stranding it.
     Each tracker starts full; spending is the caller's business.
     """
-    from heroforge.engine.effects import evaluate_formula
+    from heroforge.engine.effects import (
+        BuffCategory,
+        build_buff_from_effects,
+        evaluate_formula,
+    )
     from heroforge.engine.resources import ResourceTracker
     from heroforge.rules.rules import get_rules
 
@@ -91,4 +99,15 @@ def refresh_domain_resources(character: "Character") -> None:
             current=max_uses,
             unit=spec.unit,
         )
+        if spec.effects:
+            buff = build_buff_from_effects(
+                name=spec.name,
+                category=BuffCategory.CLASS,
+                effects_raw=[dict(e) for e in spec.effects],
+                note=defn.granted_power,
+            )
+            if buff is not None:
+                character.register_buff_definition(
+                    spec.name, buff.pool_entries(0, character)
+                )
     character.resources = resources

@@ -772,14 +772,21 @@ Reusable components in `widgets/`: `LabeledField`,
   while Travel is a pool of 1 round per cleric level, so
   `ResourceTracker.unit` distinguishes rounds from uses.
   Trackers are derived, not saved — remaining uses do not
-  round-trip yet. Still display-only: domain
-  spells added to the prepared-spell list, and the
-  *effects* of the activated powers — Knowledge's +1 caster
-  level on divinations (and the other +1-CL-for-a-spell-
-  subset domains, which the single flat `caster_level`
-  field can't express), Strength's and Protection's
-  scaling bonuses. War's Martial Weapon Proficiency half
-  is a no-op (nonproficiency penalties aren't modelled).
+  round-trip yet. A resource that also declares `effects:`
+  is registered as a toggleable buff under its own name,
+  so Strength's feat of strength and Protection's ward
+  apply their cleric-level-scaled bonus when the player
+  activates them rather than always-on. Protective Ward is
+  approximated: RAW it wards one touched creature's *next*
+  save, so modelling it as a self-buff on all three saves
+  is right only when the cleric wards himself. Still
+  display-only: domain
+  spells added to the prepared-spell list, and Knowledge's
+  +1 caster level on divinations (and the other
+  +1-CL-for-a-spell-subset domains, which the single flat
+  `caster_level` field can't express). War's Martial
+  Weapon Proficiency half is a no-op (nonproficiency
+  penalties aren't modelled).
 - Cross-class skill *cost* is not modelled (a cross-class
   rank costs 2 points and caps at a half number); see
   `docs/plans/skill-points-and-cross-class.md`. Which

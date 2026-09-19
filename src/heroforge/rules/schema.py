@@ -218,7 +218,7 @@ _DOMAIN_KEYS = frozenset(
         "resource",
     }
 )
-_RESOURCE_KEYS = frozenset({"name", "max_formula", "unit"})
+_RESOURCE_KEYS = frozenset({"name", "max_formula", "unit", "effects"})
 
 
 def _structure_domain(val: object, _: type) -> DomainDefinition:
@@ -257,6 +257,7 @@ def _structure_domain_resource(raw: object) -> DomainResource | None:
         name=str(raw["name"]),
         max_formula=str(raw.get("max_formula", "1")),
         unit=str(raw.get("unit", "use")),
+        effects=tuple(raw.get("effects", ())),
     )
 
 
