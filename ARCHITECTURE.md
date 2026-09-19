@@ -838,6 +838,17 @@ Reusable components in `widgets/`: `LabeledField`,
   Proficiency and selection-style replacements (a ranger's
   favored enemy) appear in print but have no consumer, so
   they are absent rather than guessed.
+- Feats granted by a class feature or a worn item are
+  materialised by `feats.refresh_granted_feats()`: a
+  `grants_feat:` key on a ClassFeature or
+  MagicItemDefinition produces a derived feat, so a
+  Swashbuckler's Weapon Finesse and the Two-Weapon Fighting
+  from Gloves of the Balanced Hand satisfy prerequisites and
+  reach per-weapon attack lines. Derived means recomputed on
+  load and never written to the character file, so dropping
+  the class or the item drops the feat. Conditional grants
+  are not modelled — the Gloves' "if you already have TWF,
+  also gain Improved TWF" confers only the base feat.
 - Two-weapon fighting penalty tables
 - Splatbook YAML files beyond SRD core
 - Per-weapon attack and damage lines live in

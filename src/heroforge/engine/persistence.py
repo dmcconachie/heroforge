@@ -30,6 +30,7 @@ from heroforge.engine.acfs import (
 )
 from heroforge.engine.domains import refresh_domain_resources
 from heroforge.engine.enums import Ability, Alignment, School
+from heroforge.engine.feats import refresh_granted_feats
 from heroforge.engine.spellcasting import (
     Specialization,
     validate_specialization,
@@ -654,6 +655,9 @@ def load_character(
 
     # Equipment
     _load_equipment(cf.equipment, c)
+    # Feats conferred by class features and worn items. Must run
+    # before the weapon lines, which depend on the feat list.
+    refresh_granted_feats(c)
     # Per-weapon attack/damage lines depend on both the equipped
     # weapons and the character's feats, so build them last.
     register_weapons_on_character(c)

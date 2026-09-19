@@ -375,3 +375,42 @@ def build_feat_from_yaml(
         )
 
     return defn
+
+
+def refresh_granted_feats(character: "Character") -> None:
+    """
+    Materialise feats conferred by class features and worn items.
+
+    A Swashbuckler's Weapon Finesse and the Two-Weapon Fighting
+    from Gloves of the Balanced Hand are real feats: they satisfy
+    prerequisites and they reach per-weapon attack lines. They are
+    derived, so they are recomputed from class levels and worn
+    items on every load and never written to the character file —
+    change class or take the gloves off and the feat goes with it.
+    """
+    from heroforge.rules.rules import get_rules
+
+    rules = get_rules()
+    granted: list[tuple[str, str]] = []
+
+    for class_name, level in character.class_level_map.items():
+        defn = rules.classes.get(class_name)
+        if defn is None:
+            continue
+        for feature in defn.features_up_to_level(level):
+            if feature.grants_feat:
+                granted.append((feature.grants_feat, f"class:{class_name}"))
+
+    for item_name in character.equipment.get("worn", []) or []:
+        item = rules.magic_items.get(item_name)
+        if item is not None and item.grants_feat:
+            granted.append((item.grants_feat, f"item:{item_name}"))
+
+    for feat_name, source in granted:
+        character.add_feat(
+            feat_name,
+            rules.feats.get(feat_name),
+            level=1,
+            source=source,
+            derived=True,
+        )

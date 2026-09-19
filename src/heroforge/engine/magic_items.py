@@ -43,6 +43,9 @@ class MagicItemDefinition:
     source_book: str = "SRD"
     slot: str = ""
     cost_gp: int = 0
+    # A feat wearing this item confers (e.g. Gloves of the
+    # Balanced Hand). Derived, never saved.
+    grants_feat: str = ""
 
 
 class MagicItemRegistry:

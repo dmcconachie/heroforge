@@ -350,6 +350,7 @@ feats:
   - Weapon Focus
   - Daring Outlaw
   - Expeditious Dodge
+  - Weapon Finesse
 class_features:
   - 'sneak_attack_1d6: Sneak attack +1d6'
   - 'trapfinding: Find and disable magical traps'
