@@ -626,9 +626,17 @@ because the material alone does not know which: adamantine
 and starmetal are 1/- light, 2/- medium, 3/- heavy (DMG
 p. 284).
 
-Not yet reaching it: the Celestial and Fiendish Creature
-templates, whose resistance scales with Hit Dice on a table
-that has not been verified.
+The Celestial and Fiendish Creature templates scale both
+resistance and DR with Hit Dice on the same table (MM): no
+DR below 4 HD, 5/magic at 4-11 and 10/magic at 12 or more,
+with resistance 5 up to 7 HD and 10 from 8. Their formulas
+read character level, which equals HD for a character with
+no racial Hit Dice.
+
+Spell resistance is the one defensive quality a template
+still cannot express — "HD + 5" and "character level + 11"
+remain display text, because `TemplateDefinition` has no
+generic `effects:` block to put an `sr` contribution in.
 
 ### Class features that designate a weapon
 

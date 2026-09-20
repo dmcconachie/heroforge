@@ -154,11 +154,10 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
 - **Fortification's chance to negate a critical** is the last
   permanent property with nowhere to go. Energy resistance
   and damage reduction now have a home (`engine/defenses.py`).
-- **Defense sources still unconnected**: the Celestial and
-  Fiendish Creature templates, whose resistance scales with
-  Hit Dice on a table not yet verified, and adamantine or
-  starmetal armour, whose DR depends on the armour category
-  rather than the material alone.
+- **Template spell resistance** is still display text
+  ("HD + 5", "character level + 11"). SR itself is modelled;
+  `TemplateDefinition` just has no generic `effects:` block
+  to contribute through, which is also what fly speed needs.
 Both of the previous entries here are done: Nimbleness is
 implemented through property-level armour-stat adjustments,
 and weapon bond is a class feature that designates a weapon.

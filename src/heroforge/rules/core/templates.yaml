@@ -180,6 +180,19 @@ Half-Dragon (White):
   grants_feats: []
   note: Becomes Dragon type
 Fiendish Creature:
+  defenses:
+    # MM: resistance 5 at HD 1-7 and 10 at 8+; damage
+    # reduction none below 4 HD, 5/magic at 4-11 and 10/magic
+    # at 12 or more. Read off character level, which equals HD
+    # for a character with no racial Hit Dice.
+    damage_reduction:
+      - amount: >-
+          5 * (character_level >= 4)
+          + 5 * (character_level >= 12)
+        bypassed_by: magic
+    energy_resistance:
+      cold: 5 + 5 * (character_level >= 8)
+      fire: 5 + 5 * (character_level >= 8)
   source_book: MM
   cr_adjustment: varies
   la_adjustment: '+2'
@@ -199,12 +212,26 @@ Fiendish Creature:
   natural_armor_bonus: 0
   special_qualities:
     - Darkvision 60 ft.
-    - Resistance to cold 5, fire 5
+    - Resistance to cold and fire, 5 or 10 by HD
     - 'Spell resistance: HD + 5'
     - Smite good 1/day
   grants_feats: []
   note: Denizen of lower planes; relatively minor modifications
 Celestial Creature:
+  defenses:
+    # MM: resistance 5 at HD 1-7 and 10 at 8+; damage
+    # reduction none below 4 HD, 5/magic at 4-11 and 10/magic
+    # at 12 or more. Read off character level, which equals HD
+    # for a character with no racial Hit Dice.
+    damage_reduction:
+      - amount: >-
+          5 * (character_level >= 4)
+          + 5 * (character_level >= 12)
+        bypassed_by: magic
+    energy_resistance:
+      acid: 5 + 5 * (character_level >= 8)
+      cold: 5 + 5 * (character_level >= 8)
+      electricity: 5 + 5 * (character_level >= 8)
   source_book: MM
   cr_adjustment: varies
   la_adjustment: '+2'
@@ -224,7 +251,7 @@ Celestial Creature:
   natural_armor_bonus: 0
   special_qualities:
     - Darkvision 60 ft.
-    - Resistance to acid 5, cold 5, electricity 5
+    - Resistance to acid, cold and electricity, 5 or 10 by HD
     - 'Spell resistance: HD + 5'
     - Smite evil 1/day
   grants_feats: []

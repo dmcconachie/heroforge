@@ -322,3 +322,70 @@ class TestArmourMaterialDamageReduction:
         assert collect_defenses(c).damage_reduction == (
             DamageReduction(5, "-"),
         )
+
+
+class TestCreatureTemplateTables:
+    """
+    MM: the Celestial and Fiendish Creature templates scale
+    both resistance and DR with Hit Dice, on the same table.
+
+        HD        resistance   damage reduction
+        1-3       5            --
+        4-7       5            5/magic
+        8-11      10           5/magic
+        12+       10           10/magic
+
+    Celestial resists acid, cold and electricity; fiendish
+    resists cold and fire.
+    """
+
+    def _templated(self, name: str, level: int) -> Character:
+        from heroforge.engine.templates import apply_template
+
+        c = _char(cls="Fighter", level=level)
+        defn = get_rules().templates.get(name)
+        assert defn is not None, name
+        apply_template(defn, c)
+        return c
+
+    @pytest.mark.parametrize(
+        ("level", "resist", "dr"),
+        [
+            (1, 5, None),
+            (3, 5, None),
+            (4, 5, 5),
+            (7, 5, 5),
+            (8, 10, 5),
+            (11, 10, 5),
+            (12, 10, 10),
+            (20, 10, 10),
+        ],
+    )
+    def test_celestial_creature(
+        self, level: int, resist: int, dr: int | None
+    ) -> None:
+        d = collect_defenses(self._templated("Celestial Creature", level))
+        assert d.energy_resistance == {
+            "acid": resist,
+            "cold": resist,
+            "electricity": resist,
+        }
+        expected = () if dr is None else (DamageReduction(dr, "magic"),)
+        assert d.damage_reduction == expected
+
+    @pytest.mark.parametrize(
+        ("level", "resist", "dr"),
+        [(1, 5, None), (4, 5, 5), (8, 10, 5), (12, 10, 10)],
+    )
+    def test_fiendish_creature(
+        self, level: int, resist: int, dr: int | None
+    ) -> None:
+        d = collect_defenses(self._templated("Fiendish Creature", level))
+        assert d.energy_resistance == {"cold": resist, "fire": resist}
+        expected = () if dr is None else (DamageReduction(dr, "magic"),)
+        assert d.damage_reduction == expected
+
+    def test_below_four_hit_dice_there_is_no_dr(self) -> None:
+        """The table's first row is an em dash, not a zero."""
+        d = collect_defenses(self._templated("Fiendish Creature", 3))
+        assert d.damage_reduction == ()
