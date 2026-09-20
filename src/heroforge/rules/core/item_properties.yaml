@@ -1,91 +1,436 @@
 # rules/core/item_properties.yaml
 #
-# Armour, shield and weapon special properties from the DMG.
+# Armour, shield and weapon special abilities from the DMG
+# (SRD: magicArmor.htm and magicWeapons.htm). Specific named
+# items (Holy Avenger, Flame Tongue, ...) are magic items and
+# live under magic_items/, not here.
 #
 # Fields per entry:
 #   applies_to   : armor / shield / weapon
-#   source_book  : book abbreviation
-#   note         : what the property does
-#   effects      : permanent stat contributions (omit when
-#                  the benefit is activated, reactive or
-#                  conditional -- see engine/item_properties.py)
+#   note         : what it does, and why it is or is not wired
+#   effects      : permanent contributions; present only when
+#                  the benefit is always on AND the stat is
+#                  modelled
 #   extra_attack : true for speed-like properties
+#   doubles_range_increment : true for distance
+#
+# Three categories, deliberately distinguished in the notes:
+#   wired       -- permanent, and the stat exists
+#   unmodelled  -- permanent, but the stat does not exist yet
+#                  (energy resistance, damage reduction,
+#                  fortification)
+#   conditional -- activated, reactive, or dependent on the
+#                  target or the roll
 
+Distance:
+  applies_to: weapon
+  note: >-
+    Ranged weapons only: double the range increment of other weapons of
+    its kind (DMG p. 224).
+  doubles_range_increment: true
 Shadow:
   applies_to: armor
   note: >-
-    +5 competence bonus on Hide checks (DMG p. 219). The
-    armour check penalty still applies normally.
+    +5 competence bonus on Hide checks (DMG p. 219). The armour check
+    penalty still applies normally.
   effects:
     - target: skill_hide
       bonus_type: competence
       value: 5
-Improved Shadow:
+Shadow, Greater:
   applies_to: armor
-  note: +10 competence bonus on Hide checks (DMG p. 219)
-  effects:
-    - target: skill_hide
-      bonus_type: competence
-      value: 10
-Greater Shadow:
-  applies_to: armor
-  note: +15 competence bonus on Hide checks (DMG p. 219)
+  note: >-
+    +15 competence bonus on Hide checks (DMG p. 219). The armour check
+    penalty still applies normally.
   effects:
     - target: skill_hide
       bonus_type: competence
       value: 15
+Shadow, Improved:
+  applies_to: armor
+  note: >-
+    +10 competence bonus on Hide checks (DMG p. 219). The armour check
+    penalty still applies normally.
+  effects:
+    - target: skill_hide
+      bonus_type: competence
+      value: 10
 Silent Moves:
   applies_to: armor
   note: >-
-    +5 competence bonus on Move Silently checks (DMG p. 219).
-    The armour check penalty still applies normally.
+    +5 competence bonus on Move Silently checks (DMG p. 219). The armour
+    check penalty still applies normally.
   effects:
     - target: skill_move_silently
       bonus_type: competence
       value: 5
-Improved Silent Moves:
+Silent Moves, Greater:
   applies_to: armor
-  note: +10 competence bonus on Move Silently (DMG p. 219)
-  effects:
-    - target: skill_move_silently
-      bonus_type: competence
-      value: 10
-Greater Silent Moves:
-  applies_to: armor
-  note: +15 competence bonus on Move Silently (DMG p. 219)
+  note: >-
+    +15 competence bonus on Move Silently checks (DMG p. 219). The
+    armour check penalty still applies normally.
   effects:
     - target: skill_move_silently
       bonus_type: competence
       value: 15
+Silent Moves, Improved:
+  applies_to: armor
+  note: >-
+    +10 competence bonus on Move Silently checks (DMG p. 219). The
+    armour check penalty still applies normally.
+  effects:
+    - target: skill_move_silently
+      bonus_type: competence
+      value: 10
+Slick:
+  applies_to: armor
+  note: >-
+    +5 competence bonus on Escape Artist checks (DMG p. 219). The armour
+    check penalty still applies normally.
+  effects:
+    - target: skill_escape_artist
+      bonus_type: competence
+      value: 5
+Slick, Greater:
+  applies_to: armor
+  note: >-
+    +15 competence bonus on Escape Artist checks (DMG p. 219). The
+    armour check penalty still applies normally.
+  effects:
+    - target: skill_escape_artist
+      bonus_type: competence
+      value: 15
+Slick, Improved:
+  applies_to: armor
+  note: >-
+    +10 competence bonus on Escape Artist checks (DMG p. 219). The
+    armour check penalty still applies normally.
+  effects:
+    - target: skill_escape_artist
+      bonus_type: competence
+      value: 10
 Speed:
   applies_to: weapon
   note: >-
-    One extra attack at full base attack bonus when making a
-    full attack (DMG p. 226). Not cumulative with haste.
+    One extra attack at full base attack bonus when making a full attack
+    (DMG p. 226). Not cumulative with haste.
   extra_attack: true
+Spell Resistance (13):
+  applies_to: armor
+  note: >-
+    Grants spell resistance 13 (DMG p. 219). Spell resistance does not
+    stack; the highest applies.
+  effects:
+    - target: sr
+      bonus_type: untyped
+      value: 13
+Spell Resistance (15):
+  applies_to: armor
+  note: >-
+    Grants spell resistance 15 (DMG p. 219). Spell resistance does not
+    stack; the highest applies.
+  effects:
+    - target: sr
+      bonus_type: untyped
+      value: 15
+Spell Resistance (17):
+  applies_to: armor
+  note: >-
+    Grants spell resistance 17 (DMG p. 219). Spell resistance does not
+    stack; the highest applies.
+  effects:
+    - target: sr
+      bonus_type: untyped
+      value: 17
+Spell Resistance (19):
+  applies_to: armor
+  note: >-
+    Grants spell resistance 19 (DMG p. 219). Spell resistance does not
+    stack; the highest applies.
+  effects:
+    - target: sr
+      bonus_type: untyped
+      value: 19
+Acid Resistance:
+  applies_to: armor
+  note: >-
+    Absorbs the first 10 points of acid damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Acid Resistance, Greater:
+  applies_to: armor
+  note: >-
+    Absorbs the first 30 points of acid damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Acid Resistance, Improved:
+  applies_to: armor
+  note: >-
+    Absorbs the first 20 points of acid damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Cold Resistance:
+  applies_to: armor
+  note: >-
+    Absorbs the first 10 points of cold damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Cold Resistance, Greater:
+  applies_to: armor
+  note: >-
+    Absorbs the first 30 points of cold damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Cold Resistance, Improved:
+  applies_to: armor
+  note: >-
+    Absorbs the first 20 points of cold damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Electricity Resistance:
+  applies_to: armor
+  note: >-
+    Absorbs the first 10 points of electricity damage per attack (DMG p.
+    219). Permanent, but energy resistance is not a modelled stat.
+Electricity Resistance, Greater:
+  applies_to: armor
+  note: >-
+    Absorbs the first 30 points of electricity damage per attack (DMG p.
+    219). Permanent, but energy resistance is not a modelled stat.
+Electricity Resistance, Improved:
+  applies_to: armor
+  note: >-
+    Absorbs the first 20 points of electricity damage per attack (DMG p.
+    219). Permanent, but energy resistance is not a modelled stat.
+Fire Resistance:
+  applies_to: armor
+  note: >-
+    Absorbs the first 10 points of fire damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Fire Resistance, Greater:
+  applies_to: armor
+  note: >-
+    Absorbs the first 30 points of fire damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Fire Resistance, Improved:
+  applies_to: armor
+  note: >-
+    Absorbs the first 20 points of fire damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Fortification, Heavy:
+  applies_to: armor
+  note: >-
+    100% chance to negate a critical hit or sneak attack (DMG p. 219).
+    Permanent, but a chance to negate is not a stat on the sheet.
+Fortification, Light:
+  applies_to: armor
+  note: >-
+    25% chance to negate a critical hit or sneak attack (DMG p. 219).
+    Permanent, but a chance to negate is not a stat on the sheet.
+Fortification, Moderate:
+  applies_to: armor
+  note: >-
+    75% chance to negate a critical hit or sneak attack (DMG p. 219).
+    Permanent, but a chance to negate is not a stat on the sheet.
+Invulnerability:
+  applies_to: armor
+  note: >-
+    Damage reduction 5/magic (DMG p. 219). Permanent, but damage
+    reduction is not a modelled stat.
+Sonic Resistance:
+  applies_to: armor
+  note: >-
+    Absorbs the first 10 points of sonic damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Sonic Resistance, Greater:
+  applies_to: armor
+  note: >-
+    Absorbs the first 30 points of sonic damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Sonic Resistance, Improved:
+  applies_to: armor
+  note: >-
+    Absorbs the first 20 points of sonic damage per attack (DMG p. 219).
+    Permanent, but energy resistance is not a modelled stat.
+Anarchic:
+  applies_to: weapon
+  note: >-
+    +2d6 damage against lawful creatures (DMG p. 224). Conditional on
+    the target's alignment.
 Animated:
   applies_to: shield
   note: >-
-    On command the shield floats and protects without being
-    held. Activated, and it changes no number: the shield
-    bonus applies either way (DMG p. 219).
+    On command the shield floats and protects without being held (DMG p.
+    219). Activated, and it changes no number: the shield bonus applies
+    either way.
+Arrow Catching:
+  applies_to: shield
+  note: >-
+    Draws ranged weapons toward it, and grants its bonus against them
+    even when it would not normally apply (DMG p. 219). Reactive.
 Arrow Deflection:
   applies_to: shield
   note: >-
-    Once per round, a Reflex save to deflect one ranged
-    attack that would have hit. Reactive (DMG p. 219).
-Wounding:
+    Once per round, a Reflex save to deflect one ranged attack that
+    would have hit (DMG p. 219). Reactive.
+Axiomatic:
   applies_to: weapon
   note: >-
-    1 point of Constitution damage per hit. Conditional on
-    hitting, and ability damage is not modelled (DMG p. 226).
+    +2d6 damage against chaotic creatures (DMG p. 224). Conditional on
+    the target's alignment.
 Bane:
   applies_to: weapon
   note: >-
-    +2 enhancement and +2d6 damage against one creature type.
-    Conditional on the target (DMG p. 224).
+    +2 enhancement and +2d6 damage against one creature type (DMG p.
+    224). Conditional on the target.
+Bashing:
+  applies_to: shield
+  note: >-
+    Deals damage as a weapon two size categories larger when shield
+    bashing (DMG p. 219). Conditional on making a shield bash.
+Blinding:
+  applies_to: shield
+  note: >-
+    2/day, flashes and blinds opponents (DMG p. 219). Activated.
+Brilliant Energy:
+  applies_to: weapon
+  note: >-
+    Ignores armour, natural armour and shield bonuses to AC (DMG p.
+    224). Conditional on what the target's AC is made of.
+Dancing:
+  applies_to: weapon
+  note: >-
+    4 rounds per day, fights on its own (DMG p. 224). Activated.
+Defending:
+  applies_to: weapon
+  note: >-
+    Transfer any part of the enhancement bonus to AC, chosen each round
+    (DMG p. 224). An allocation made per round, not a fixed bonus.
+Disruption:
+  applies_to: weapon
+  note: >-
+    Undead struck must save or be destroyed (DMG p. 224). Conditional on
+    the target.
+Etherealness:
+  applies_to: armor
+  note: >-
+    On command, makes the wearer ethereal (DMG p. 219). Activated.
+Flaming:
+  applies_to: weapon
+  note: >-
+    +1d6 fire damage on a hit (DMG p. 224). Conditional on hitting, and
+    extra damage dice are not a bonus the damage line can carry.
+Flaming Burst:
+  applies_to: weapon
+  note: >-
+    As the non-burst version, plus extra fire damage on a critical hit
+    (DMG p. 224). Conditional on a critical.
+Frost:
+  applies_to: weapon
+  note: >-
+    +1d6 cold damage on a hit (DMG p. 224). Conditional on hitting, and
+    extra damage dice are not a bonus the damage line can carry.
+Ghost Touch:
+  applies_to: armor
+  note: >-
+    Works fully against and for incorporeal creatures (DMG p. 219).
+    Conditional on the opponent being incorporeal.
+Ghost Touch (Weapon):
+  applies_to: weapon
+  note: >-
+    Deals damage normally against incorporeal creatures (DMG p. 225).
+    Conditional on the target.
+Glamered:
+  applies_to: armor
+  note: >-
+    On command, appears as ordinary clothing (DMG p. 219). Activated,
+    and cosmetic.
+Holy:
+  applies_to: weapon
+  note: >-
+    +2d6 damage against evil creatures (DMG p. 224). Conditional on the
+    target's alignment.
+Icy Burst:
+  applies_to: weapon
+  note: >-
+    As the non-burst version, plus extra cold damage on a critical hit
+    (DMG p. 224). Conditional on a critical.
 Keen:
   applies_to: weapon
   note: >-
-    Doubles the threat range. Resolved by weapons.threat_range()
-    rather than here, because it is not a bonus (DMG p. 225).
+    Doubles the threat range. Resolved by weapons.threat_range() rather
+    than here, because a threat range is not a bonus (DMG p. 225).
+Merciful:
+  applies_to: weapon
+  note: >-
+    +1d6 damage, all of it nonlethal (DMG p. 225). Changes the damage
+    type and adds dice, neither of which the damage line carries.
+Mighty Cleaving:
+  applies_to: weapon
+  note: >-
+    One extra cleave attempt per round (DMG p. 225). Conditional on
+    dropping a foe and on having Cleave.
+Reflecting:
+  applies_to: shield
+  note: >-
+    1/day, reflects one spell back at its caster (DMG p. 219).
+    Activated.
+Returning:
+  applies_to: weapon
+  note: >-
+    A thrown weapon returns to the thrower (DMG p. 225). Not a number.
+Seeking:
+  applies_to: weapon
+  note: >-
+    Ranged weapons only: negates miss chances from concealment (DMG p.
+    225). Conditional on the situation.
+Shock:
+  applies_to: weapon
+  note: >-
+    +1d6 electricity damage on a hit (DMG p. 224). Conditional on
+    hitting, and extra damage dice are not a bonus the damage line can
+    carry.
+Shocking Burst:
+  applies_to: weapon
+  note: >-
+    As the non-burst version, plus extra electricity damage on a
+    critical hit (DMG p. 224). Conditional on a critical.
+Spell Storing:
+  applies_to: weapon
+  note: >-
+    Holds one spell of 3rd level or lower, released on a hit (DMG p.
+    225). Activated.
+Throwing:
+  applies_to: weapon
+  note: >-
+    Melee weapons only: gains a 10 ft range increment and can be thrown
+    (DMG p. 226). A mode of use rather than a bonus.
+Thundering:
+  applies_to: weapon
+  note: >-
+    Extra sonic damage and a deafening save on a critical hit (DMG p.
+    226). Conditional on a critical.
+Undead Controlling:
+  applies_to: armor
+  note: >-
+    Controls up to 26 HD of undead, 1/day (DMG p. 220). Activated.
+Unholy:
+  applies_to: weapon
+  note: >-
+    +2d6 damage against good creatures (DMG p. 224). Conditional on the
+    target's alignment.
+Vicious:
+  applies_to: weapon
+  note: >-
+    +2d6 damage to the target and 1d6 to the wielder (DMG p. 226). Extra
+    dice on both sides, which the damage line does not carry.
+Vorpal:
+  applies_to: weapon
+  note: >-
+    Slashing weapons only: a natural 20 followed by a confirmed critical
+    severs the head (DMG p. 226). Conditional on a critical.
+Wild:
+  applies_to: armor
+  note: >-
+    The wearer keeps the armour's benefits while in a wild shape form
+    (DMG p. 220). Conditional on being wild shaped, which is not
+    modelled.
+Wounding:
+  applies_to: weapon
+  note: >-
+    1 point of Constitution damage per hit (DMG p. 226). Conditional on
+    hitting, and ability damage is not modelled.

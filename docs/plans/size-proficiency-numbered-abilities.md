@@ -147,10 +147,15 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
   `engine-rules-import-cycle.md`. Deliberately deferred.
 - **Ability checks** have no representation, so the Pale
   Green Prism's fourth clause is still unmodelled.
-- **Conditional item properties.** The permanent ones are
-  wired (`engine/item_properties.py`); the activated,
-  reactive and target-conditional ones are defined but carry
-  no effects, and want the conditional-effects panel.
+- **Conditional item properties.** Both SRD special-ability
+  lists are defined in full; the permanent ones are wired.
+  The activated, reactive and target-conditional ones carry
+  no effects and want the conditional-effects panel.
+- **Stats that would let more properties be wired**: energy
+  resistance (5 families x 3 grades), damage reduction
+  (invulnerability) and a chance to negate a critical
+  (fortification) are all permanent, and all blocked on the
+  stat not existing.
   `Nimbleness` is defined without effects because its rules
   text could not be found in the MIC armour-property list —
   the only match is a body-slot item — and guessing seemed

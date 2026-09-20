@@ -37,6 +37,7 @@ Public API:
                              a list of property names
   grants_extra_attack()   -- True if any name is a speed-like
                              property
+  doubles_range_increment() -- True if any name is distance
 """
 
 from __future__ import annotations
@@ -67,6 +68,10 @@ class ItemPropertyDefinition:
     # attack bonus on a full attack. Not a bonus, so not an
     # effect.
     extra_attack: bool = False
+    # A distance weapon has double the range increment of
+    # other weapons of its kind. Multiplicative, so it cannot
+    # be a pool entry either.
+    doubles_range_increment: bool = False
 
 
 class ItemPropertyRegistry:
@@ -80,17 +85,37 @@ class ItemPropertyRegistry:
 
     def get(self, name: str) -> ItemPropertyDefinition | None:
         """
-        Look up *name*, ignoring case and any parenthetical
-        grade. Character files write "truedeath (greater)"
-        and "bane (undead)"; the definition is keyed on the
-        property itself.
+        Look up *name* the way people actually write it.
+
+        The books name grades with a trailing comma -- "Shadow,
+        Greater" -- while character files write "greater
+        shadow". Parenthetical grades and qualifiers appear
+        too: "truedeath (greater)", "bane (undead)". All of
+        those resolve to the one definition.
         """
-        key = name.lower().strip()
-        defn = self._entries.get(key)
-        if defn is not None:
-            return defn
-        base = key.split("(")[0].strip()
-        return self._entries.get(base)
+        for candidate in self._candidates(name):
+            defn = self._entries.get(candidate)
+            if defn is not None:
+                return defn
+        return None
+
+    @staticmethod
+    def _candidates(name: str) -> list[str]:
+        key = " ".join(name.lower().split())
+        forms = [key]
+        # "greater shadow" -> "shadow, greater"
+        for grade in ("greater", "improved", "lesser", "least"):
+            prefix = grade + " "
+            if key.startswith(prefix):
+                forms.append(f"{key[len(prefix) :]}, {grade}")
+        # drop a parenthetical, then try the same swap again
+        if "(" in key:
+            bare = key.split("(")[0].strip()
+            forms.append(bare)
+            inner = key[key.index("(") + 1 :].rstrip(") ").strip()
+            if inner in ("greater", "improved", "lesser", "least"):
+                forms.append(f"{bare}, {inner}")
+        return forms
 
     def all_properties(self) -> list[ItemPropertyDefinition]:
         return list(self._entries.values())
@@ -141,5 +166,21 @@ def grants_extra_attack(names: list[str] | tuple[str, ...]) -> bool:
     for name in names or ():
         defn = property_definition(str(name))
         if defn is not None and defn.extra_attack:
+            return True
+    return False
+
+
+def doubles_range_increment(
+    names: list[str] | tuple[str, ...],
+) -> bool:
+    """
+    True if any of *names* doubles the range increment.
+
+    Doubling at most once however many sources apply, the
+    same way threat ranges behave.
+    """
+    for name in names or ():
+        defn = property_definition(str(name))
+        if defn is not None and defn.doubles_range_increment:
             return True
     return False

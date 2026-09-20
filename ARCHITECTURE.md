@@ -526,13 +526,25 @@ All three appear in the sheet's breakdowns as
 The `properties:` list on an equipment entry, loaded from a
 per-book `item_properties.yaml` into `Rules.item_properties`.
 
-Only properties that apply **permanently** reach a stat. A
-property is wired when its benefit is always on for whoever
-wears or wields the item: greater shadow's +15 competence on
-Hide, a speed weapon's extra attack. Everything else is
-defined so the name is recognised and described, and carries
-no effects, because a number on the sheet would be wrong most
-of the time:
+Both SRD lists are covered in full (magicArmor.htm and
+magicWeapons.htm; the specific named items belong under
+`magic_items/`, not here). Entries fall into three groups,
+distinguished in their notes:
+
+**Wired** — permanent, and the stat exists: the shadow,
+silent moves and slick families (+5/+10/+15 competence on
+Hide, Move Silently and Escape Artist), spell resistance
+13/15/17/19, blueshine, speed and distance.
+
+**Permanent but unmodelled** — the benefit is always on,
+but the sheet has no such stat: the five energy resistances
+at three grades each, invulnerability's damage reduction,
+and fortification's chance to negate a critical. These are
+blocked on modelling work, not on a decision.
+
+**Conditional** — defined so the name is recognised and
+described, and carrying no effects, because a number would be
+wrong most of the time:
 
 - activated — blinking (1/day), vanishing (2/day), mindarmor
   (3/day), deathward (1/day), animated (on command)
@@ -545,19 +557,24 @@ of the time:
 
 Those belong in the conditional-effects panel, not a pool.
 
-Lookup ignores case and any parenthetical grade, so a
-character file writing `truedeath (greater)` or
-`bane (undead)` finds the definition keyed on the property
-itself. An unrecognised name is deliberately **not** an
-error: the vocabulary is open and books arrive piecemeal, so
-an unknown property displays and does nothing. Making it an
-error needs complete coverage first.
+Lookup resolves the forms people actually write. The books
+name grades with a trailing comma — `Shadow, Greater` — while
+character files write `greater shadow`; parenthetical grades
+and qualifiers appear too, as in `truedeath (greater)` and
+`bane (undead)`. All of those reach the one definition.
+
+An unrecognised name is deliberately **not** an error: the
+vocabulary is open and books arrive piecemeal, so an unknown
+property displays and does nothing. Making it an error needs
+complete coverage across every book first.
 
 `equipment._apply_properties()` installs an armour or
 shield's effects under `<slot>:properties`, replacing the
 whole set so re-equipping or unequipping drops the old one.
-A speed-like property is not a bonus, so it is resolved in
-the weapon's iterative sequence rather than a pool.
+Two properties are not bonuses and so are resolved directly
+rather than through a pool: speed adds an attack to the
+weapon's iterative sequence, and distance doubles the
+weapon's own range increment before any feat extends it.
 
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 

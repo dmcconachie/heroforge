@@ -197,3 +197,132 @@ equipment:
         sheet = gather_sheet(c, None)
         assert sheet.skills["Hide"].typed["competence"] == 15
         assert len(sheet.equipment.weapons[0].attack_iteratives) == 2
+
+
+class TestTheRestOfTheSrdList:
+    """
+    The SRD's armour and weapon special-ability lists in full.
+    Three of them are permanent and land on a stat the engine
+    already models; the rest are defined but inert.
+    """
+
+    @pytest.mark.parametrize(
+        ("prop", "bonus"),
+        [("slick", 5), ("improved slick", 10), ("greater slick", 15)],
+    )
+    def test_slick_family_bonuses_escape_artist(
+        self, prop: str, bonus: int
+    ) -> None:
+        plain = _skill(_wear(_char()), "Escape Artist")
+        assert _skill(_wear(_char(), prop), "Escape Artist") == (plain + bonus)
+
+    @pytest.mark.parametrize("sr", [13, 15, 17, 19])
+    def test_spell_resistance_grades(self, sr: int) -> None:
+        c = _wear(_char(), f"spell resistance ({sr})")
+        assert c.get("sr") == sr
+
+    def test_spell_resistance_does_not_stack(self) -> None:
+        """The highest applies, which the sr node already does."""
+        c = _wear(_char(), "spell resistance (13)", "spell resistance (19)")
+        assert c.get("sr") == 19
+
+    def test_distance_doubles_a_range_increment(self) -> None:
+        from heroforge.engine.sheet import gather_sheet
+
+        def inc(*props: str) -> int:
+            c = _char()
+            c.equipment["weapons"] = [
+                {"base": "Longbow", "properties": list(props)}
+            ]
+            register_weapons_on_character(c)
+            return gather_sheet(c, None).equipment.weapons[0].range_inc
+
+        assert inc() == 100
+        assert inc("distance") == 200
+
+    def test_distance_is_written_either_way(self) -> None:
+        assert property_definition("Distance") is not None
+
+    @pytest.mark.parametrize(
+        "prop",
+        ["shadow, greater", "greater shadow", "Shadow, Greater"],
+    )
+    def test_grade_forms_all_resolve(self, prop: str) -> None:
+        defn = property_definition(prop)
+        assert defn is not None
+        assert defn.name == "Shadow, Greater"
+
+    @pytest.mark.parametrize(
+        "prop",
+        ["fire resistance", "invulnerability", "fortification, light"],
+    )
+    def test_permanent_but_unmodelled_are_inert(self, prop: str) -> None:
+        """
+        Energy resistance, damage reduction and a chance to
+        negate a critical are permanent, but none of them is a
+        stat the sheet carries. Defined, described, inert.
+        """
+        defn = property_definition(prop)
+        assert defn is not None
+        assert defn.effects == ()
+
+    def test_every_srd_ability_is_defined(self) -> None:
+        """Nothing on the two SRD pages is missing."""
+        registry = get_rules().item_properties
+        missing = [
+            n
+            for n in (
+                "Animated",
+                "Arrow Catching",
+                "Arrow Deflection",
+                "Bashing",
+                "Blinding",
+                "Etherealness",
+                "Fortification, Light",
+                "Ghost Touch",
+                "Glamered",
+                "Invulnerability",
+                "Reflecting",
+                "Shadow",
+                "Silent Moves",
+                "Slick",
+                "Spell Resistance (13)",
+                "Undead Controlling",
+                "Wild",
+                "Acid Resistance",
+                "Cold Resistance",
+                "Electricity Resistance",
+                "Fire Resistance",
+                "Sonic Resistance",
+                "Anarchic",
+                "Axiomatic",
+                "Bane",
+                "Brilliant Energy",
+                "Dancing",
+                "Defending",
+                "Disruption",
+                "Distance",
+                "Flaming",
+                "Flaming Burst",
+                "Frost",
+                "Holy",
+                "Icy Burst",
+                "Keen",
+                "Merciful",
+                "Mighty Cleaving",
+                "Returning",
+                "Seeking",
+                "Shock",
+                "Shocking Burst",
+                "Speed",
+                "Spell Storing",
+                "Throwing",
+                "Thundering",
+                "Unholy",
+                "Vicious",
+                "Vorpal",
+                "Wounding",
+            )
+            if registry.get(n) is None
+        ]
+        assert missing == []

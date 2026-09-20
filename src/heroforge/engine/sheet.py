@@ -37,7 +37,10 @@ from heroforge.engine.enums import (
     Save,
     Size,
 )
-from heroforge.engine.item_properties import grants_extra_attack
+from heroforge.engine.item_properties import (
+    doubles_range_increment,
+    grants_extra_attack,
+)
 from heroforge.engine.persistence import load_character, yaml_dump
 from heroforge.engine.sheet_schema import (
     AbilityEntry,
@@ -696,11 +699,20 @@ def _crit_range_display(c: "Character", item: dict) -> str:
 
 
 def _weapon_range_increment(c: "Character", item: dict) -> int | None:
-    """Base range increment plus any feat that extends it."""
+    """
+    Base range increment, doubled by distance, plus any feat
+    that extends it.
+
+    Distance doubles "the range increment of other weapons of
+    its kind" (DMG p. 224), so it applies to the weapon's own
+    figure before a feat adds to it.
+    """
     wdef = weapon_definition(item)
     base = item.get("range_inc") or (wdef.range_increment if wdef else 0)
     if not base:
         return None
+    if doubles_range_increment(item.get("properties", [])):
+        base *= 2
     return base + range_increment_bonus(c, item)
 
 
