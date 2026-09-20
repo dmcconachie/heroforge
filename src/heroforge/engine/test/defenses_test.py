@@ -279,3 +279,46 @@ class TestEnergyImmunity:
         d = collect_defenses(c)
         assert "fire" in d.immunities
         assert "fire" not in d.energy_resistance
+
+
+class TestArmourMaterialDamageReduction:
+    """
+    DMG p. 284: adamantine armour grants DR 1/- (light),
+    2/- (medium) or 3/- (heavy). Starmetal is equal to
+    adamantine for all purposes (Complete Arcane p. 141).
+    """
+
+    def _in(self, armour: str, material: str) -> Character:
+        c = _char(cls="Fighter", level=1)
+        equip_armor(c, get_rules().armor.get(armour), material=material)
+        return c
+
+    @pytest.mark.parametrize(
+        ("armour", "amount"),
+        [("Chain Shirt", 1), ("Breastplate", 2), ("Full Plate", 3)],
+    )
+    def test_adamantine_by_category(self, armour: str, amount: int) -> None:
+        d = collect_defenses(self._in(armour, "Adamantine"))
+        assert d.damage_reduction == (DamageReduction(amount, "-"),)
+
+    def test_starmetal_matches_adamantine(self) -> None:
+        d = collect_defenses(self._in("Full Plate", "Starmetal"))
+        assert d.damage_reduction == (DamageReduction(3, "-"),)
+
+    def test_a_plain_material_grants_none(self) -> None:
+        d = collect_defenses(self._in("Full Plate", "Mithral"))
+        assert d.damage_reduction == ()
+
+    def test_it_takes_the_best_against_a_class_feature(self) -> None:
+        """
+        A barbarian's DR and the armour's are both x/-, so the
+        better one applies rather than the two adding.
+        """
+        c = _char(level=19)
+        equip_armor(
+            c, get_rules().armor.get("Chain Shirt"), material="Adamantine"
+        )
+        # Barbarian 19 is DR 5/-; adamantine light armour is 1/-.
+        assert collect_defenses(c).damage_reduction == (
+            DamageReduction(5, "-"),
+        )

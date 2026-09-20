@@ -5,6 +5,10 @@
 Starmetal:
   acp_adjust: 1
   includes_masterwork: true
+  armor_damage_reduction:
+    light: 1
+    medium: 2
+    heavy: 3
   note: >-
     Refined meteoric iron. Equal to adamantine for all
     purposes, including overcoming damage reduction and

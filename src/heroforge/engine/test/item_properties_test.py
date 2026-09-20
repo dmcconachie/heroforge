@@ -364,3 +364,42 @@ equipment:
         sheet = gather_sheet(c, None)
         assert sheet.skills["Hide"].typed["competence"] == 15
         assert len(sheet.equipment.weapons[0].attack_iteratives) == 2
+
+
+class TestPropertiesThatAdjustTheArmour:
+    """
+    Nimbleness raises the armour's maximum Dexterity bonus and
+    cuts its check penalty. Those are adjustments to the
+    armour's own figures, like a material's, not bonuses -- so
+    they are applied when the armour is equipped, before the
+    slot's numbers are stored.
+    """
+
+    def _slot(self, *properties: str) -> dict:
+        c = _char()
+        _wear(c, *properties)
+        return c.equipment["armor"]
+
+    def test_plain_chain_shirt(self) -> None:
+        slot = self._slot()
+        assert slot["max_dex_bonus"] == 4
+        assert slot["armor_check_penalty"] == -2
+
+    def test_nimbleness_raises_max_dex_and_cuts_the_penalty(
+        self,
+    ) -> None:
+        slot = self._slot("Nimbleness")
+        assert slot["max_dex_bonus"] == 5
+        assert slot["armor_check_penalty"] == 0
+
+    def test_the_penalty_never_goes_positive(self) -> None:
+        """A -2 penalty cut by 2 is 0, not +0 turning into a bonus."""
+        assert self._slot("Nimbleness")["armor_check_penalty"] == 0
+
+    def test_it_reaches_the_dex_cap_on_ac(self) -> None:
+        c = _char()
+        for ab in ("dex",):
+            c.set_ability_score(ab, 20)
+        _wear(c, "Nimbleness")
+        # DEX +5 against a cap raised from 4 to 5.
+        assert c.get("ac_dex_contribution") == 5

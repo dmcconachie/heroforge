@@ -35,6 +35,7 @@ Public API:
   property_definition()   -- look one up in the loaded rules
   property_pool_entries() -- (pool_key, BonusEntry) pairs for
                              a list of property names
+  adjust_for_properties() -- apply armour-stat adjustments
   grants_extra_attack()   -- True if any name is a speed-like
                              property
   doubles_range_increment() -- True if any name is distance
@@ -77,6 +78,15 @@ class ItemPropertyDefinition:
     # Damage reduction, resistance to energy and immunity.
     # See engine/defenses.py for the shape.
     defenses: dict = field(default_factory=dict)
+    # Adjustments to the armour's own figures, with the same
+    # sign convention as MaterialDefinition: acp_adjust is
+    # positive toward zero, asf_adjust negative for less
+    # failure. Nimbleness is the reason these exist -- it
+    # raises max Dex and cuts the check penalty, which is not
+    # a bonus and cannot be a pool entry.
+    acp_adjust: int = 0
+    max_dex_adjust: int = 0
+    asf_adjust: int = 0
     # The property names an argument the books leave open, so
     # "<name> <argument>" resolves to it. Bane is the only
     # one: its designated foe is any creature type or subtype.
@@ -172,6 +182,32 @@ def property_pool_entries(
             )
         )
     return pairs
+
+
+def adjust_for_properties(
+    acp: int,
+    max_dex: int,
+    asf: int,
+    names: list[str] | tuple[str, ...],
+) -> tuple[int, int, int]:
+    """
+    Apply every named property's armour-stat adjustments.
+
+    Mirrors ``equipment.adjust_for_material``: the check
+    penalty moves toward zero and never past it, and a
+    max Dex of -1 means uncapped and stays that way.
+    """
+    for name in names or ():
+        defn = property_definition(str(name))
+        if defn is None:
+            continue
+        if defn.acp_adjust:
+            acp = min(acp + defn.acp_adjust, 0)
+        if defn.max_dex_adjust and max_dex >= 0:
+            max_dex += defn.max_dex_adjust
+        if defn.asf_adjust:
+            asf = max(asf + defn.asf_adjust, 0)
+    return acp, max_dex, asf
 
 
 def grants_extra_attack(names: list[str] | tuple[str, ...]) -> bool:

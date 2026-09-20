@@ -47,13 +47,12 @@ Nimbleness:
   source_book: MIC
   note: >-
     Raises the armour's maximum Dexterity bonus by 1 and
-    reduces its armour check penalty by 2. Not wired: those
-    are adjustments to the armour's own figures, the way a
-    material's acp_adjust and max_dex_adjust are, and they
-    have to be applied in adjust_for_material() before the
-    slot's numbers are stored. A property cannot reach that
-    yet, so this needs properties to adjust armour stats
-    rather than contribute bonuses.
+    reduces its armour check penalty by 2 (MIC p. 10). These
+    adjust the armour's own figures rather than contributing
+    a bonus, so they use the same sign convention as a
+    material's.
+  max_dex_adjust: 1
+  acp_adjust: 2
 Crystal of Mind Cloaking, Least:
   applies_to: armor
   source_book: MIC

@@ -573,10 +573,15 @@ complete coverage across every book first.
 `equipment._apply_properties()` installs an armour or
 shield's effects under `<slot>:properties`, replacing the
 whole set so re-equipping or unequipping drops the old one.
-Two properties are not bonuses and so are resolved directly
-rather than through a pool: speed adds an attack to the
-weapon's iterative sequence, and distance doubles the
-weapon's own range increment before any feat extends it.
+Three kinds of property are not bonuses and so are resolved
+directly rather than through a pool. Speed adds an attack to
+the weapon's iterative sequence; distance doubles the
+weapon's own range increment before any feat extends it; and
+`acp_adjust` / `max_dex_adjust` / `asf_adjust` adjust the
+armour's own figures with the same sign convention a material
+uses, applied in `adjust_for_properties()` beside
+`adjust_for_material()`. Nimbleness is the last of these —
++1 maximum Dexterity bonus, -2 armour check penalty.
 
 ## Layer 7d: Defenses (`engine/defenses.py`)
 
@@ -616,11 +621,14 @@ and removes the matching resistance, so a red half-dragon
 wearing a ring of fire resistance shows immunity alone rather
 than both.
 
+A material may grant DR too, keyed by armour category
+because the material alone does not know which: adamantine
+and starmetal are 1/- light, 2/- medium, 3/- heavy (DMG
+p. 284).
+
 Not yet reaching it: the Celestial and Fiendish Creature
 templates, whose resistance scales with Hit Dice on a table
-that has not been verified, and adamantine or starmetal
-armour, whose DR depends on the armour's category rather than
-on the material alone.
+that has not been verified.
 
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 

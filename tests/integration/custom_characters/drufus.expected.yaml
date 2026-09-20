@@ -51,16 +51,16 @@ abilities:
       enhancement: 6
 combat:
   ac:
-    total: 35
+    total: 36
     typed:
       base: 10
-      dex: 6
+      dex: 7
       armor: 9
       shield: 7
       sacred: 2
       insight: 1
-  touch_ac: 19
-  flatfooted_ac: 35
+  touch_ac: 20
+  flatfooted_ac: 36
   hp_max:
     total: 255
     typed:
@@ -465,7 +465,7 @@ class_features:
 equipment:
   armor:
     name: +5 Mithral Chain Shirt
-    max_dex: 6
+    max_dex: 7
     asf: 10
     properties:
       - Blinking

@@ -42,11 +42,14 @@ Public API:
 from __future__ import annotations
 
 import enum
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import TYPE_CHECKING
 
-from heroforge.engine.item_properties import property_pool_entries
+from heroforge.engine.item_properties import (
+    adjust_for_properties,
+    property_pool_entries,
+)
 from heroforge.engine.proficiency import refresh_proficiency_penalties
 from heroforge.rules.core.pool_keys import PoolKey
 
@@ -169,6 +172,11 @@ class MaterialDefinition:
     # (-1, DMG p. 285); other materials bypass damage reduction
     # or change hardness, which move no number here.
     damage_adjust: int = 0
+    # Damage reduction the material grants when the item is
+    # armour, keyed by armour category -- adamantine is
+    # 1/- light, 2/- medium, 3/- heavy (DMG p. 284). Keyed
+    # because the material alone does not know which.
+    armor_damage_reduction: dict[str, int] = field(default_factory=dict)
     includes_masterwork: bool = False
     note: str = ""
     source_book: str = ""
@@ -287,6 +295,12 @@ def equip_armor(
     mat_is_mw = mat_def.includes_masterwork if mat_def else False
     if (enhancement > 0 or masterwork) and not mat_is_mw:
         acp = min(acp + 1, 0)
+    # Properties that adjust the armour's own figures
+    # (Nimbleness) apply here, alongside the material's,
+    # rather than as bonuses.
+    acp, max_dex, asf = adjust_for_properties(
+        acp, max_dex, asf, properties or []
+    )
 
     total_ac = armor_bonus + enhancement
 
@@ -373,6 +387,12 @@ def equip_shield(
     mat_is_mw = mat_def.includes_masterwork if mat_def else False
     if (enhancement > 0 or masterwork) and not mat_is_mw:
         acp = min(acp + 1, 0)
+    # Properties that adjust the armour's own figures
+    # (Nimbleness) apply here, alongside the material's,
+    # rather than as bonuses.
+    acp, max_dex, asf = adjust_for_properties(
+        acp, max_dex, asf, properties or []
+    )
 
     total_ac = shield.armor_bonus + enhancement
 

@@ -159,8 +159,9 @@ def collect_defenses(character: "Character") -> Defenses:
     """
     Aggregate every source of DR, resistance and immunity.
 
-    Sources are equipped item properties, worn magic items,
-    creature templates and class features.
+    Sources are equipped item properties, the armour's
+    material, worn magic items, creature templates and class
+    features.
     """
     # Only get_rules has to be deferred: engine <- rules is a
     # cycle. See docs/plans/engine-rules-import-cycle.md.
@@ -176,6 +177,15 @@ def collect_defenses(character: "Character") -> Defenses:
             _read_block(defn.defenses, character, drs, resist, immune)
 
     rules = get_rules()
+
+    armor = character.equipment.get("armor") or {}
+    material = rules.materials.get(armor.get("material", ""))
+    if material is not None and material.armor_damage_reduction:
+        amount = material.armor_damage_reduction.get(
+            armor.get("category", ""), 0
+        )
+        if amount > 0:
+            drs.append(DamageReduction(amount, NOTHING))
 
     for entry in character.equipment.get("worn", []) or []:
         item = rules.magic_items.get(entry["name"])
