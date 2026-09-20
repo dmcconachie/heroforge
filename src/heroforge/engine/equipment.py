@@ -46,6 +46,7 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import TYPE_CHECKING
 
+from heroforge.engine.proficiency import refresh_proficiency_penalties
 from heroforge.rules.core.pool_keys import PoolKey
 
 if TYPE_CHECKING:
@@ -108,7 +109,12 @@ class ArmorDefinition:
 class WeaponDefinition:
     name: str
     category: WeaponCategory
-    damage_dice: str  # e.g. "1d8", "2d6"
+    damage_dice: str  # Dmg (M), e.g. "1d8", "2d6"
+    # Dmg (S) from PHB Table 7-5. Not derivable from the
+    # Medium value — a heavy crossbow steps 1d8 -> 1d10 where
+    # a greatsword steps 1d10 -> 2d6 — so the book's number is
+    # carried rather than computed.
+    damage_dice_small: str = ""
     critical_range: int = 20  # threat range start
     critical_multiplier: int = 2
     damage_type: DamageType | str = ""
@@ -309,6 +315,7 @@ def equip_armor(
 
     # Push ACP into skill pools
     _apply_acp(character, _ARMOR_SRC, acp)
+    refresh_proficiency_penalties(character)
 
     # Speed penalty from medium/heavy armor
     _apply_armor_speed(character, armor, material)
@@ -326,6 +333,7 @@ def unequip_armor(character: Character) -> None:
 
     character.equipment.pop("armor", None)
     _clear_acp(character, _ARMOR_SRC)
+    refresh_proficiency_penalties(character)
 
     # Remove speed penalty
     sp = character._pools.get("speed")
@@ -384,6 +392,7 @@ def equip_shield(
     }
 
     _apply_acp(character, _SHIELD_SRC, acp)
+    refresh_proficiency_penalties(character)
 
     character._graph.invalidate("ac")
     character.on_change.notify({"ac", "equipment"})
@@ -397,6 +406,7 @@ def unequip_shield(character: Character) -> None:
 
     character.equipment.pop("shield", None)
     _clear_acp(character, _SHIELD_SRC)
+    refresh_proficiency_penalties(character)
 
     character._graph.invalidate("ac")
     character.on_change.notify({"ac", "equipment"})
@@ -535,10 +545,8 @@ def _clear_acp(character: Character, source: str) -> None:
 # Worn magic items
 # -------------------------------------------------------
 
-_MULTI_TARGET_EXPANSIONS: dict[PoolKey, list[PoolKey]] = {
-    PoolKey.ATTACK_ALL: [PoolKey.ATTACK_MELEE, PoolKey.ATTACK_RANGED],
-    PoolKey.DAMAGE_ALL: [PoolKey.DAMAGE_MELEE, PoolKey.DAMAGE_RANGED],
-}
+# Target-alias expansion is defined once in engine/effects.py
+# and imported at the top of this module.
 
 
 def equip_item(

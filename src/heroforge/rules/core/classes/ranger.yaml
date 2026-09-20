@@ -33,15 +33,31 @@ Ranger:
     preparation: prepared
     max_spell_level: 4
     starts_at_level: 4
+  proficiencies:
+    weapons:
+      - simple
+      - martial
+    armor:
+      - light
+    shields: true
   class_features:
     - level: 1
-      feature: favored_enemy_1
-      description: 'Favored enemy 1: +2 vs type'
+      feature: favored_enemy
+      description: Bonus against each chosen favored enemy
+      values:
+        count: 1 + ranger_level // 5
+        base_bonus: '2'
+        best_bonus: 2 + 2 * (ranger_level // 5)
+      when: >-
+        on Bluff, Listen, Sense Motive, Spot and Survival
+        checks against that creature type, and on weapon
+        damage against it
       note: >-
-        +2 on Bluff, Listen, Sense Motive, Spot, Survival
-        checks and weapon damage against favored enemy
-        type. Creature-type-conditional — not on main
-        sheet.
+        A new favored enemy is chosen at 5th level and every
+        five levels after, and at each of those the bonus
+        against any one favored enemy rises by 2.
+        `best_bonus` assumes every rise was spent on the same
+        enemy; the others stay at `base_bonus`.
     - level: 1
       feature: track
       description: Track feat for free
@@ -57,13 +73,6 @@ Ranger:
     - level: 4
       feature: animal_companion
       description: Special animal companion
-    - level: 5
-      feature: favored_enemy_2
-      description: Favored enemy 2; +4 vs type
-      note: >-
-        +4 on checks and damage against favored enemy
-        type. Creature-type-conditional — not on main
-        sheet.
     - level: 6
       feature: improved_combat_style
       description: Manyshot or Improved Two-Weapon Fighting
@@ -76,25 +85,12 @@ Ranger:
     - level: 9
       feature: evasion
       description: No damage on successful Reflex save
-    - level: 10
-      feature: favored_enemy_3
-      description: Favored enemy 3; +6 vs type
-      note: >-
-        +6 on checks and damage against favored enemy
-        type. Creature-type-conditional — not on main
-        sheet.
     - level: 11
       feature: combat_style_mastery
       description: Improved Precise Shot or Greater Two-Weapon Fighting
     - level: 12
       feature: camouflage
       description: Hide in natural terrain without cover
-    - level: 15
-      feature: favored_enemy_4
-      description: Favored enemy 4
     - level: 17
       feature: hide_in_plain_sight
       description: Hide while observed in natural terrain
-    - level: 20
-      feature: favored_enemy_5
-      description: Favored enemy 5

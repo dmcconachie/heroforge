@@ -172,13 +172,18 @@ feats:
   - Quicken Spell
   - Heighten Spell
 class_features:
-  - 'summon_familiar: Summon a familiar'
-  - 'scribe_scroll: Scribe scroll feat for free'
-  - >-
-    bonus_feat_wizard_5: Bonus wizard feat (Item Creation or Metamagic)
-  - 'bonus_feat_wizard_10: Bonus wizard feat'
-  - 'secret: Choose lore secret'
-  - 'lore: Lore check (like bard)'
+  summon_familiar:
+    description: Summon a familiar
+  scribe_scroll:
+    description: Scribe scroll feat for free
+  bonus_feat_wizard_5:
+    description: Bonus wizard feat (Item Creation or Metamagic)
+  bonus_feat_wizard_10:
+    description: Bonus wizard feat
+  secret:
+    description: Choose lore secret
+  lore:
+    description: Lore check (like bard)
 spellcasting:
   Wizard:
     caster_level: 13

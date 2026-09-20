@@ -158,13 +158,21 @@ feats:
   - Greater Spell Focus (Conjuration)
   - Greater Spell Penetration
 class_features:
-  - 'turn_undead: Turn or rebuke undead'
-  - >-
-    spontaneous_casting: Convert prepared spells to cure/inflict
-  - >-
-    domains: Two domains granting bonus spells and powers
-  - 'summon_familiar: Summon a familiar'
-  - 'scribe_scroll: Scribe scroll feat for free'
+  domains:
+    description: Two domains granting bonus spells and powers
+  spontaneous_casting:
+    description: Convert prepared spells to cure/inflict
+  turn_undead:
+    description: Turn or rebuke undead
+    uses:
+      max: 2
+    values:
+      turning_check: -1
+      turning_damage_bonus: 2
+  summon_familiar:
+    description: Summon a familiar
+  scribe_scroll:
+    description: Scribe scroll feat for free
 spellcasting:
   Cleric:
     caster_level: 3

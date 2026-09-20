@@ -162,17 +162,28 @@ feats:
   - Lightning Reflexes
   - Quick Draw
 class_features:
-  - 'bonus_feat_1: Bonus fighter feat'
-  - 'bonus_feat_2: Bonus fighter feat'
-  - 'bonus_feat_4: Bonus fighter feat'
-  - 'bonus_feat_6: Bonus fighter feat'
-  - 'bonus_feat_8: Bonus fighter feat'
-  - 'bonus_feat_10: Bonus fighter feat'
-  - 'bonus_feat_12: Bonus fighter feat'
-  - 'bonus_feat_14: Bonus fighter feat'
-  - 'bonus_feat_16: Bonus fighter feat'
-  - 'bonus_feat_18: Bonus fighter feat'
-  - 'bonus_feat_20: Bonus fighter feat'
+  bonus_feat_1:
+    description: Bonus fighter feat
+  bonus_feat_2:
+    description: Bonus fighter feat
+  bonus_feat_4:
+    description: Bonus fighter feat
+  bonus_feat_6:
+    description: Bonus fighter feat
+  bonus_feat_8:
+    description: Bonus fighter feat
+  bonus_feat_10:
+    description: Bonus fighter feat
+  bonus_feat_12:
+    description: Bonus fighter feat
+  bonus_feat_14:
+    description: Bonus fighter feat
+  bonus_feat_16:
+    description: Bonus fighter feat
+  bonus_feat_18:
+    description: Bonus fighter feat
+  bonus_feat_20:
+    description: Bonus fighter feat
 equipment:
   weapons:
     - name: Dwarven Waraxe

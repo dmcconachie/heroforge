@@ -260,8 +260,12 @@ Righteous Might:
   school: Transmutation
   level:
     Cleric: 5
-  note: +4 STR, +2 CON, natural armor; size increase handled separately
+  note: >-
+    One size category larger, +4 STR, +2 CON, natural armor. The bonus
+    types here are unverified against the book — the PHB extraction
+    carries only the summary line for this spell.
   requires_caster_level: true
+  size_steps: 1
   effects:
     - target: str_score
       bonus_type: enhancement

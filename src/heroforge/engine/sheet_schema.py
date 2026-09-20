@@ -205,6 +205,29 @@ class EquipmentSection:
 
 
 # ---------------------------------------------------
+# Class features
+# ---------------------------------------------------
+
+
+@dataclass
+class FeatureUses:
+    max: int
+    unit: str = "use"
+
+
+@dataclass
+class ClassFeatureEntry:
+    description: str = ""
+    uses: FeatureUses | None = None
+    # Named numbers, already computed for this character.
+    values: dict[str, int] = field(default_factory=dict)
+    # A target-side condition the engine cannot evaluate.
+    when: str = ""
+    # Gate keys that must hold for the feature to apply.
+    gated_by: list[str] = field(default_factory=list)
+
+
+# ---------------------------------------------------
 # Resources
 # ---------------------------------------------------
 
@@ -243,7 +266,9 @@ class Sheet:
     carrying_capacity: CarryingCapacity
     feats: list[str] = field(default_factory=list)
     acfs: list[str] = field(default_factory=list)
-    class_features: list[str] = field(default_factory=list)
+    class_features: dict[str, ClassFeatureEntry] = field(
+        default_factory=dict,
+    )
     spellcasting: dict[KnownClass, SpellcastingEntry] = field(
         default_factory=dict,
     )

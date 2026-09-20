@@ -243,15 +243,19 @@ Enlarge Person:
   level:
     Sorcerer: 1
     Wizard: 1
-  note: +2 STR, -2 DEX (humanoids only; size change handled separately)
+  note: >-
+    One size category larger; +2 size bonus STR, -2 size penalty DEX
+    (humanoids only). The -1 on attack rolls and AC follows from the
+    size change and is not listed separately.
   condition_key: humanoid_only
+  size_steps: 1
   effects:
     - target: str_score
-      bonus_type: enhancement
+      bonus_type: size
       value: 2
       condition_key: humanoid_only
     - target: dex_score
-      bonus_type: enhancement
+      bonus_type: size
       value: -2
       condition_key: humanoid_only
 Entangle:
@@ -518,15 +522,19 @@ Reduce Person:
   level:
     Sorcerer: 1
     Wizard: 1
-  note: -2 STR, +2 DEX (humanoids only; size change handled separately)
+  note: >-
+    One size category smaller; +2 size bonus DEX, -2 size penalty STR
+    (humanoids only). The +1 on attack rolls and AC follows from the
+    size change and is not listed separately.
   condition_key: humanoid_only
+  size_steps: -1
   effects:
     - target: str_score
-      bonus_type: enhancement
+      bonus_type: size
       value: -2
       condition_key: humanoid_only
     - target: dex_score
-      bonus_type: enhancement
+      bonus_type: size
       value: 2
       condition_key: humanoid_only
 Remove Fear:

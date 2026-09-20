@@ -147,30 +147,42 @@ feats:
   - Ride-By Attack
   - Spirited Charge
 class_features:
-  - >-
-    aura_of_good: Aura of good (equal to Paladin level)
-  - 'detect_evil: Detect evil at will'
-  - 'smite_evil_1: Smite evil 1/day'
-  - 'divine_grace: +CHA modifier to all saves'
-  - >-
-    lay_on_hands: Heal HP per day = Paladin level × CHA modifier
-  - >-
-    aura_of_courage: Immune to fear; allies +4 morale vs fear
-  - 'divine_health: Immune to all diseases'
-  - >-
-    turn_undead: Turn undead as Cleric of (Paladin level - 3)
-  - 'smite_evil_2: Smite evil 2/day'
-  - 'special_mount: Celestial heavy warhorse or pony'
-  - 'remove_disease_1: Remove disease 1/week'
-  - 'smite_evil_3: Smite evil 3/day'
-  - 'remove_disease_2: Remove disease 2/week'
-  - 'smite_evil_4: Smite evil 4/day'
-  - 'remove_disease_3: Remove disease 3/week'
-  - 'smite_evil_5: Smite evil 5/day'
-  - 'remove_disease_4: Remove disease 4/week'
-  - 'smite_evil_6: Smite evil 6/day'
-  - 'remove_disease_5: Remove disease 5/week'
-  - 'smite_evil_7: Smite evil 7/day'
+  aura_of_good:
+    description: Aura of good (equal to Paladin level)
+  detect_evil:
+    description: Detect evil at will
+  smite_evil:
+    description: Smite evil; +CHA on attack, +level on damage
+    uses:
+      max: 5
+    values:
+      attack: 2
+      damage: 20
+  divine_grace:
+    description: +CHA modifier to all saves
+  lay_on_hands:
+    description: Heal hit points per day equal to level x CHA
+    uses:
+      max: 40
+      unit: hit point
+  aura_of_courage:
+    description: Immune to fear; allies +4 morale vs fear
+  divine_health:
+    description: Immune to all diseases
+  turn_undead:
+    description: Turn undead as a cleric of three levels lower
+    uses:
+      max: 5
+    values:
+      turning_check: 2
+      turning_damage_bonus: 19
+  special_mount:
+    description: Celestial heavy warhorse or pony
+  remove_disease:
+    description: Remove disease, a number of times per week
+    uses:
+      max: 5
+      unit: use/week
 spellcasting:
   Paladin:
     caster_level: 20

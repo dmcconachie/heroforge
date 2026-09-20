@@ -50,12 +50,18 @@ def _light_load_or_less(c: "Character") -> bool:
     return c.current_load_category() == LoadCategory.LIGHT
 
 
+def _light_armor_or_less(c: "Character") -> bool:
+    cat = c.equipped_armor_category()
+    return cat is None or cat == ArmorCategory.LIGHT
+
+
 GATE_PREDICATES: dict[KnownCoreGate, Callable[["Character"], bool]] = {
     KnownCoreGate.NOT_HEAVY_ARMOR: _not_heavy_armor,
     KnownCoreGate.NOT_HEAVY_LOAD: _not_heavy_load,
     KnownCoreGate.UNARMORED: _unarmored,
     KnownCoreGate.NO_SHIELD: _no_shield,
     KnownCoreGate.LIGHT_LOAD_OR_LESS: _light_load_or_less,
+    KnownCoreGate.LIGHT_ARMOR_OR_LESS: _light_armor_or_less,
 }
 
 

@@ -170,46 +170,66 @@ feats:
   - Snatch Arrows
   - Improved Grapple
 class_features:
-  - >-
-    flurry_of_blows: Extra attack with -2 to all attacks
-  - >-
-    ac_bonus_contribution: Contributes monk level to effective_monk_level_ac
-    pool. The AC formula itself (WIS mod + effective_monk_level_ac/5) lives
-    in derived_pools.yaml and is gated by unarmored, no shield, light load
-    or less.
-  - >-
-    unarmed_strike: Unarmed deals 1d6; increases per level
-  - >-
-    bonus_feat_monk_1: Improved Unarmed Strike + choice of Combat Reflexes,
-    Deflect Arrows, or Improved Grapple
-  - 'evasion: No damage on successful Reflex saves'
-  - >-
-    bonus_feat_monk_2: Combat Reflexes, Deflect Arrows, or Improved Trip
-  - >-
-    fast_movement: Monk fast movement (PHB Table 3-10 p.40): +10 ft at L3,
-    scaling to +60 at L20. Applies only while unarmored, no shield, light
-    load or less.
-  - 'still_mind: +2 saves vs enchantments'
-  - 'ki_strike_magic: Unarmed strike treated as magic'
-  - 'slow_fall_20: Slow fall up to 20 ft'
-  - 'purity_of_body: Immune to natural disease'
-  - 'slow_fall_30: Slow fall up to 30 ft'
-  - >-
-    bonus_feat_monk_3: Improved Disarm, Improved Trip, or Stunning Fist
-  - >-
-    wholeness_of_body: Heal own HP equal to 2× Monk level/day
-  - 'slow_fall_50: Slow fall up to 50 ft'
-  - >-
-    improved_evasion: Half damage on failed Reflex saves
-  - >-
-    ki_strike_lawful: Unarmed strike treated as lawful-aligned
-  - 'diamond_body: Immune to all poisons'
-  - 'abundant_step: Dimension door 1/day'
-  - 'diamond_soul: SR 10 + Monk level'
-  - 'quivering_palm: Set lethal vibrations in target'
-  - >-
-    ki_strike_adamantine: Unarmed strike bypasses DR/adamantine
-  - 'timeless_body: No aging penalties'
-  - 'tongue_of_sun_moon: Speak with any living creature'
-  - 'empty_body: Etherealness 1 min/day per Monk level'
-  - 'perfect_self: Outsider type; DR 10/magic'
+  ac_bonus_contribution:
+    description: >-
+      Contributes monk level to effective_monk_level_ac pool. The AC formula
+      itself (WIS mod + effective_monk_level_ac/5) lives in derived_pools.yaml
+      and is gated by unarmored, no shield, light load or less.
+    values:
+      ac: 7
+  bonus_feat_monk_1:
+    description: >-
+      Improved Unarmed Strike + choice of Combat Reflexes, Deflect Arrows,
+      or Improved Grapple
+  flurry_of_blows:
+    description: Extra attack with -2 to all attacks
+  unarmed_strike:
+    description: Unarmed deals 1d6; increases per level
+  bonus_feat_monk_2:
+    description: Combat Reflexes, Deflect Arrows, or Improved Trip
+  evasion:
+    description: No damage on successful Reflex saves
+  fast_movement:
+    description: >-
+      Monk fast movement (PHB Table 3-10 p.40): +10 ft at L3, scaling to +60
+      at L20. Applies only while unarmored, no shield, light load or less.
+    gated_by:
+      - unarmored
+      - no_shield
+      - light_load_or_less
+  still_mind:
+    description: +2 saves vs enchantments
+  ki_strike_magic:
+    description: Unarmed strike treated as magic
+  slow_fall:
+    description: Treat a fall as shorter when next to a wall
+    values:
+      distance_ft: 90
+  purity_of_body:
+    description: Immune to natural disease
+  bonus_feat_monk_3:
+    description: Improved Disarm, Improved Trip, or Stunning Fist
+  wholeness_of_body:
+    description: Heal own HP equal to 2× Monk level/day
+  improved_evasion:
+    description: Half damage on failed Reflex saves
+  ki_strike_lawful:
+    description: Unarmed strike treated as lawful-aligned
+  diamond_body:
+    description: Immune to all poisons
+  abundant_step:
+    description: Dimension door 1/day
+  diamond_soul:
+    description: SR 10 + Monk level
+  quivering_palm:
+    description: Set lethal vibrations in target
+  ki_strike_adamantine:
+    description: Unarmed strike bypasses DR/adamantine
+  timeless_body:
+    description: No aging penalties
+  tongue_of_sun_moon:
+    description: Speak with any living creature
+  empty_body:
+    description: Etherealness 1 min/day per Monk level
+  perfect_self:
+    description: Outsider type; DR 10/magic

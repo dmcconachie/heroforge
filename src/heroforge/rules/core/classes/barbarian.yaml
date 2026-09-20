@@ -19,6 +19,14 @@ Barbarian:
     - Swim
     - Wilderness Lore
   spellcasting: null
+  proficiencies:
+    weapons:
+      - simple
+      - martial
+    armor:
+      - light
+      - medium
+    shields: true
   class_features:
     - level: 1
       feature: fast_movement
@@ -61,36 +69,32 @@ Barbarian:
           bonus_type: untyped
           value: -2
           source_label: rage_ac_penalty
+      uses:
+        max: >-
+          1 + (barbarian_level >= 4) + (barbarian_level >= 8)
+          + (barbarian_level >= 12) + (barbarian_level >= 16)
+          + (barbarian_level >= 20)
+      values:
+        rounds: 3 + con_mod
     - level: 2
       feature: uncanny_dodge
       description: Retain DEX bonus to AC when flat-footed
     - level: 3
-      feature: trap_sense_1
-      description: +1 Reflex and AC vs traps
-    - level: 4
-      feature: rage_2
-      description: Rage 2/day
+      feature: trap_sense
+      description: Bonus on Reflex saves and AC against traps
+      values:
+        reflex: barbarian_level // 3
+        ac: barbarian_level // 3
     - level: 5
       feature: improved_uncanny_dodge
       description: Cannot be flanked
-    - level: 6
-      feature: trap_sense_2
-      description: +2 Reflex and AC vs traps
     - level: 7
-      feature: damage_reduction_1
-      description: DR 1/—
-    - level: 7
-      feature: rage_3
-      description: Rage 3/day
-    - level: 9
-      feature: trap_sense_3
-      description: +3 Reflex and AC vs traps
-    - level: 10
-      feature: rage_4
-      description: Rage 4/day
-    - level: 10
-      feature: damage_reduction_2
-      description: DR 2/—
+      feature: damage_reduction
+      description: Damage reduction x/-
+      values:
+        damage_reduction: >-
+          1 + (barbarian_level >= 10) + (barbarian_level >= 13)
+          + (barbarian_level >= 16) + (barbarian_level >= 19)
     - level: 11
       feature: greater_rage
       description: +6 STR/CON, +3 Will, -2 AC
@@ -113,39 +117,12 @@ Barbarian:
           bonus_type: untyped
           value: -2
           source_label: rage_ac_penalty
-    - level: 12
-      feature: trap_sense_4
-      description: +4 Reflex and AC vs traps
-    - level: 13
-      feature: rage_5
-      description: Rage 5/day
-    - level: 13
-      feature: damage_reduction_3
-      description: DR 3/—
     - level: 14
       feature: indomitable_will
       description: +4 Will vs enchantments while raging
-    - level: 15
-      feature: trap_sense_5
-      description: +5 Reflex and AC vs traps
-    - level: 16
-      feature: rage_6
-      description: Rage 6/day
-    - level: 16
-      feature: damage_reduction_4
-      description: DR 4/—
     - level: 17
       feature: tireless_rage
       description: No longer fatigued after rage
-    - level: 18
-      feature: trap_sense_6
-      description: +6 Reflex and AC vs traps
-    - level: 19
-      feature: rage_7
-      description: Rage 7/day
-    - level: 19
-      feature: damage_reduction_5
-      description: DR 5/—
     - level: 20
       feature: mighty_rage
       description: +8 STR/CON, +4 Will, -2 AC

@@ -31,6 +31,7 @@ from heroforge.engine.acfs import (
 from heroforge.engine.domains import refresh_domain_resources
 from heroforge.engine.enums import Ability, Alignment, School
 from heroforge.engine.feats import refresh_granted_feats
+from heroforge.engine.proficiency import refresh_proficiency_penalties
 from heroforge.engine.spellcasting import (
     Specialization,
     validate_specialization,
@@ -632,7 +633,7 @@ def load_character(
         buff_defn = rules.buffs.get(name)
         cl_val = be.caster_level if be.caster_level is not None else 0
         pairs = buff_defn.pool_entries(cl_val, c)
-        c.register_buff_definition(name, pairs)
+        c.register_buff_definition(name, pairs, size_steps=buff_defn.size_steps)
         if be.active:
             c.toggle_buff(
                 name,
@@ -665,6 +666,7 @@ def load_character(
     refresh_granted_feats(c)
     # Per-weapon attack/damage lines depend on both the equipped
     # weapons and the character's feats, so build them last.
+    refresh_proficiency_penalties(c)
     register_weapons_on_character(c)
 
     # Notes

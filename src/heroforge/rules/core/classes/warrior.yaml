@@ -15,4 +15,14 @@ Warrior:
     - Ride
     - Swim
   spellcasting: null
+  proficiencies:
+    weapons:
+      - simple
+      - martial
+    armor:
+      - light
+      - medium
+      - heavy
+    shields: true
+    tower_shields: true
   class_features: []

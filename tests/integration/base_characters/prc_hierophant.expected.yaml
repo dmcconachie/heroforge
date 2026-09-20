@@ -140,12 +140,19 @@ feats:
   - Empower Spell
   - Quicken Spell
 class_features:
-  - 'turn_undead: Turn or rebuke undead'
-  - >-
-    spontaneous_casting: Convert prepared spells to cure/inflict
-  - >-
-    domains: Two domains granting bonus spells and powers
-  - 'special_ability: Choose hierophant ability'
+  domains:
+    description: Two domains granting bonus spells and powers
+  spontaneous_casting:
+    description: Convert prepared spells to cure/inflict
+  turn_undead:
+    description: Turn or rebuke undead
+    uses:
+      max: 4
+    values:
+      turning_check: 1
+      turning_damage_bonus: 14
+  special_ability:
+    description: Choose hierophant ability
 spellcasting:
   Cleric:
     caster_level: 13

@@ -139,201 +139,235 @@ attack_iteratives:
     - 14
 skills:
   Appraise:
-    total: 12
+    total: 13
     typed:
       ability_mod: 7
       luck: 1
+      competence: 1
       circumstance: 4
   Balance:
-    total: 14
+    total: 15
     typed:
       ability_mod: 11
       synergy: 2
       luck: 1
+      competence: 1
   Bluff:
-    total: 7
+    total: 8
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
       circumstance: 4
   Climb:
-    total: 6
+    total: 7
     typed:
       ability_mod: 5
       luck: 1
+      competence: 1
   Concentration:
-    total: 8
+    total: 9
     typed:
       ability_mod: 7
       luck: 1
+      competence: 1
   Craft:
-    total: 8
+    total: 9
     typed:
       ability_mod: 7
       luck: 1
+      competence: 1
   Diplomacy:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Disable Device:
-    total: 35
+    total: 36
     typed:
       ability_mod: 7
       ranks: 25
       luck: 1
+      competence: 1
       circumstance: 2
   Disguise:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Escape Artist:
-    total: 12
+    total: 13
     typed:
       ability_mod: 11
       luck: 1
+      competence: 1
   Forgery:
-    total: 9
+    total: 10
     typed:
       ability_mod: 7
       ranks: 1
       luck: 1
+      competence: 1
   Gather Information:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Heal:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Hide:
-    total: 41
+    total: 42
     typed:
       ability_mod: 11
       ranks: 25
       luck: 1
+      competence: 1
       circumstance: 4
   Intimidate:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Jump:
-    total: 8
+    total: 9
     typed:
       ability_mod: 5
       synergy: 2
       luck: 1
+      competence: 1
   Knowledge (Arcana):
-    total: 16
+    total: 17
     typed:
       ability_mod: 7
       ranks: 8
       luck: 1
+      competence: 1
   Knowledge (Local):
-    total: 13
+    total: 14
     typed:
       ability_mod: 7
       ranks: 1
       luck: 1
+      competence: 1
       circumstance: 4
   Listen:
-    total: 28
+    total: 29
     typed:
       ability_mod: 2
       ranks: 25
       luck: 1
+      competence: 1
   Move Silently:
-    total: 41
+    total: 42
     typed:
       ability_mod: 11
       ranks: 25
       luck: 1
+      competence: 1
       circumstance: 4
   Open Lock:
-    total: 28
+    total: 29
     typed:
       ability_mod: 11
       ranks: 14
       luck: 1
+      competence: 1
       circumstance: 2
   Perform:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Perform (Dance):
-    total: 7
+    total: 8
     typed:
       ability_mod: 2
       ranks: 5
+      competence: 1
   Ride:
-    total: 12
+    total: 13
     typed:
       ability_mod: 11
       luck: 1
+      competence: 1
   Search:
-    total: 42
+    total: 43
     typed:
       ability_mod: 7
       ranks: 25
       insight: 9
       luck: 1
+      competence: 1
   Sense Motive:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Sleight of Hand:
-    total: 37
+    total: 38
     typed:
       ability_mod: 11
       ranks: 25
       luck: 1
+      competence: 1
   Spellcraft:
-    total: 30
+    total: 31
     typed:
       ability_mod: 7
       ranks: 20
       synergy: 2
       luck: 1
+      competence: 1
   Spot:
-    total: 37
+    total: 38
     typed:
       ability_mod: 2
       ranks: 25
       insight: 9
       luck: 1
+      competence: 1
   Survival:
-    total: 3
+    total: 4
     typed:
       ability_mod: 2
       luck: 1
+      competence: 1
   Swim:
-    total: 6
+    total: 7
     typed:
       ability_mod: 5
       luck: 1
+      competence: 1
   Tumble:
-    total: 28
+    total: 29
     typed:
       ability_mod: 11
       ranks: 16
       luck: 1
+      competence: 1
   Use Magic Device:
-    total: 28
+    total: 29
     typed:
       ability_mod: 2
       ranks: 25
       luck: 1
+      competence: 1
   Use Rope:
-    total: 12
+    total: 13
     typed:
       ability_mod: 11
       luck: 1
+      competence: 1
 carrying_capacity:
   light: 133
   medium: 266
@@ -354,54 +388,80 @@ feats:
   - Weapon Finesse
   - Improved Two-Weapon Fighting
 class_features:
-  - 'sneak_attack_1d6: Sneak attack +1d6'
-  - 'trapfinding: Find and disable magical traps'
-  - 'evasion: No damage on successful Reflex save'
-  - 'sneak_attack_2d6: Sneak attack +2d6'
-  - 'trap_sense_1: +1 Reflex and AC vs traps'
-  - >-
-    uncanny_dodge: Retain DEX bonus to AC when flat-footed
-  - 'sneak_attack_3d6: Sneak attack +3d6'
-  - 'trap_sense_2: +2 Reflex and AC vs traps'
-  - 'sneak_attack_4d6: Sneak attack +4d6'
-  - 'improved_uncanny_dodge: Cannot be flanked'
-  - 'sneak_attack_5d6: Sneak attack +5d6'
-  - 'trap_sense_3: +3 Reflex and AC vs traps'
-  - >-
-    special_ability: Rogue special ability (crippling strike, etc.)
-  - 'sneak_attack_6d6: Sneak attack +6d6'
-  - 'trap_sense_4: +4 Reflex and AC vs traps'
-  - 'sneak_attack_7d6: Sneak attack +7d6'
-  - >-
-    weapon_finesse: Gains Weapon Finesse as a bonus feat
-  - >-
-    grace_1: +1 competence bonus on Reflex saves (lost in medium/heavy armor
-    or load) (TODO: wire up effect)
-  - >-
-    insightful_strike: Add INT bonus to damage with light/finesse weapons
-    (TODO: wire up effect)
-  - 'bonus_feat_1: Bonus fighter feat'
-  - 'bonus_feat_2: Bonus fighter feat'
-  - 'hide_in_plain_sight: Hide while observed'
-  - >-
-    magical_defense_1: +1 bonus on saves vs spells and spell-like abilities
-    (TODO: wire up effect)
-  - >-
-    weapon_bond: Bond with masterwork weapon; +1d6 damage vs spellcasters
-    and creatures with spell-like abilities (TODO: wire up effect)
-  - >-
-    vicious_strike: Readied attack to disrupt a spellcaster deals double damage
-    on hit (TODO: wire up effect)
-  - >-
-    mind_over_magic_1: Rebound a spell or spell-like ability onto originator
-    as spell turning, 1/day (CL = occult slayer level + 5) (TODO: wire up
-    effect)
-  - >-
-    auravision: See magical auras out to 60 ft as detect magic (number of
-    auras only) (TODO: wire up effect)
-  - >-
-    magical_defense_2: Magical defense bonus increases to +2 (TODO: wire up
-    effect)
+  sneak_attack:
+    description: Extra damage when the target is flat-footed
+    values:
+      dice: 7
+    when: >-
+      when the target is denied its DEX bonus to AC, or is flanked; targets
+      immune to critical hits are immune
+  trapfinding:
+    description: Find and disable magical traps
+  evasion:
+    description: No damage on successful Reflex save
+  trap_sense:
+    description: Bonus on Reflex saves and AC against traps
+    values:
+      reflex: 4
+      ac: 4
+  uncanny_dodge:
+    description: Retain DEX bonus to AC when flat-footed
+  improved_uncanny_dodge:
+    description: Cannot be flanked
+  special_ability:
+    description: Rogue special ability (crippling strike, etc.)
+  weapon_finesse:
+    description: Gains Weapon Finesse as a bonus feat
+  grace:
+    description: Competence bonus on Reflex saves
+    values:
+      reflex: 1
+    gated_by:
+      - light_armor_or_less
+      - light_load_or_less
+  insightful_strike:
+    description: >-
+      Add INT bonus to damage with any light weapon, and any other weapon
+      usable with Weapon Finesse
+    values:
+      damage: 7
+    when: >-
+      against targets that are subject to critical hits and sneak attacks
+    gated_by:
+      - light_armor_or_less
+      - light_load_or_less
+  bonus_feat_1:
+    description: Bonus fighter feat
+  bonus_feat_2:
+    description: Bonus fighter feat
+  hide_in_plain_sight:
+    description: Hide while observed
+  magical_defense:
+    description: Bonus on saves against magic
+    values:
+      saves: 2
+    when: on saves against spells and spell-like abilities
+  weapon_bond:
+    description: Bonded masterwork weapon deals extra damage
+    values:
+      damage_dice: 1
+    when: >-
+      against spellcasters and creatures with spell-like abilities
+  mind_over_magic:
+    description: Rebound a spell onto its originator
+    uses:
+      max: 1
+    values:
+      caster_level: 8
+  vicious_strike:
+    description: Readied attack to disrupt a caster
+    values:
+      damage_multiplier: 2
+    when: on a readied attack that disrupts a spellcaster
+  auravision:
+    description: See magical auras as detect magic
+    values:
+      range_ft: 60
 equipment:
   armor:
     name: +5 Mithral Chain Shirt
@@ -416,7 +476,7 @@ equipment:
       - mind cloaking
       - greater shadow
       - greater silent moves
-      - nimble
+      - nimbleness
   shield:
     name: +5 Mithral Heavy Steel Shield
     asf: 5

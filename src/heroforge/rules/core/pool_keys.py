@@ -37,6 +37,7 @@ class _StatPoolKey(StrEnum):
     EFFECTIVE_MONK_LEVEL_AC = "effective_monk_level_ac"
     GRAPPLE = "grapple"
     DAMAGE_RANGED = "damage_ranged"
+    SKILL_ALL = "skill_all"
 
 
 _SkillPoolKey = StrEnum(

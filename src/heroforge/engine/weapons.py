@@ -32,6 +32,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
+from heroforge.engine.proficiency import is_proficient_with_weapon
+from heroforge.engine.size import damage_dice_for_size
 from heroforge.engine.stat import StatNode
 
 if TYPE_CHECKING:
@@ -280,6 +282,27 @@ def weapon_stances(character: "Character", item: dict) -> list[str]:
     return out
 
 
+def damage_dice(character: "Character", item: dict) -> str:
+    """
+    This weapon's damage dice at the wielder's current size.
+
+    An explicit ``damage_dice`` on the equipment entry wins:
+    it is an author override for a weapon the rules data does
+    not describe, and second-guessing its size would be wrong.
+    """
+    override = item.get("damage_dice", "")
+    if override:
+        return override
+    defn = weapon_definition(item)
+    if defn is None:
+        return ""
+    return damage_dice_for_size(
+        defn.damage_dice,
+        defn.damage_dice_small or defn.damage_dice,
+        character.size,
+    )
+
+
 def material_damage_entry(item: dict) -> BonusEntry | None:
     """
     A weapon material's damage adjustment, if any.
@@ -442,6 +465,19 @@ def register_weapons_on_character(character: "Character") -> None:
                                 value=-2,
                                 bonus_type=BonusType.UNTYPED,
                                 source="rapid_shot",
+                            )
+                        ],
+                    )
+                if not is_proficient_with_weapon(
+                    character, weapon_definition(item)
+                ):
+                    pool.set_source(
+                        "nonproficient",
+                        [
+                            BonusEntry(
+                                value=-4,
+                                bonus_type=BonusType.UNTYPED,
+                                source="nonproficient",
                             )
                         ],
                     )

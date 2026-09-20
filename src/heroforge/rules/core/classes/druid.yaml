@@ -27,6 +27,21 @@ Druid:
     preparation: prepared
     max_spell_level: 9
     starts_at_level: 1
+  proficiencies:
+    armor:
+      - light
+      - medium
+    weapon_names:
+      - Club
+      - Dagger
+      - Dart
+      - Quarterstaff
+      - Scimitar
+      - Sickle
+      - Shortspear
+      - Sling
+      - Spear
+    shields: true
   class_features:
     - level: 1
       feature: animal_companion
@@ -46,36 +61,40 @@ Druid:
     - level: 4
       feature: resist_natures_lure
       description: +4 saves vs fey spell-like abilities
-    - level: 4
-      feature: wild_shape_1
-      description: Wild Shape 1/day (Small or Medium animal)
     - level: 5
-      feature: wild_shape_2
-      description: Wild Shape 2/day
-    - level: 6
-      feature: wild_shape_3
-      description: Wild Shape 3/day; Large animal
-    - level: 7
-      feature: wild_shape_4
-      description: Wild Shape 4/day; Tiny animal
+      feature: wild_shape
+      description: Turn into an animal and back
+      uses:
+        max: >-
+          1 + (druid_level >= 6) + (druid_level >= 7)
+          + (druid_level >= 10) + (druid_level >= 14)
+          + (druid_level >= 18)
+      values:
+        hours: druid_level
+      note: >-
+        Small or Medium animals at 5th; the larger and smaller
+        forms unlock separately.
     - level: 8
-      feature: wild_shape_5
-      description: Wild Shape 5/day; plant form
+      feature: wild_shape_large
+      description: Wild shape into a Large animal
     - level: 9
       feature: venom_immunity
       description: Immune to all natural poisons
-    - level: 10
-      feature: wild_shape_6
-      description: Wild Shape 6/day; elemental form
     - level: 11
-      feature: wild_shape_huge
-      description: 'Wild Shape: Huge animal'
+      feature: wild_shape_tiny
+      description: Wild shape into a Tiny animal
+    - level: 12
+      feature: wild_shape_plant
+      description: Wild shape into a plant creature
     - level: 13
       feature: a_thousand_faces
       description: Alter self at will
     - level: 15
       feature: timeless_body
       description: No penalties for aging
+    - level: 15
+      feature: wild_shape_huge
+      description: Wild shape into a Huge animal
     - level: 20
       feature: wild_shape_at_will
       description: Wild Shape at will

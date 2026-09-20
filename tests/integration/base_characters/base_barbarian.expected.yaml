@@ -163,37 +163,42 @@ feats:
   - Blind-Fight
   - Toughness
 class_features:
-  - >-
-    fast_movement: +10 ft speed (applies only when not wearing heavy armor
-    and not carrying a heavy load; PHB p.25)
-  - >-
-    illiteracy: Cannot read unless spending 2 skill points
-  - 'rage: +4 STR/CON, +2 Will, -2 AC; 1/day'
-  - >-
-    uncanny_dodge: Retain DEX bonus to AC when flat-footed
-  - 'trap_sense_1: +1 Reflex and AC vs traps'
-  - 'rage_2: Rage 2/day'
-  - 'improved_uncanny_dodge: Cannot be flanked'
-  - 'trap_sense_2: +2 Reflex and AC vs traps'
-  - 'damage_reduction_1: DR 1/—'
-  - 'rage_3: Rage 3/day'
-  - 'trap_sense_3: +3 Reflex and AC vs traps'
-  - 'rage_4: Rage 4/day'
-  - 'damage_reduction_2: DR 2/—'
-  - 'greater_rage: +6 STR/CON, +3 Will, -2 AC'
-  - 'trap_sense_4: +4 Reflex and AC vs traps'
-  - 'rage_5: Rage 5/day'
-  - 'damage_reduction_3: DR 3/—'
-  - >-
-    indomitable_will: +4 Will vs enchantments while raging
-  - 'trap_sense_5: +5 Reflex and AC vs traps'
-  - 'rage_6: Rage 6/day'
-  - 'damage_reduction_4: DR 4/—'
-  - 'tireless_rage: No longer fatigued after rage'
-  - 'trap_sense_6: +6 Reflex and AC vs traps'
-  - 'rage_7: Rage 7/day'
-  - 'damage_reduction_5: DR 5/—'
-  - 'mighty_rage: +8 STR/CON, +4 Will, -2 AC'
+  fast_movement:
+    description: >-
+      +10 ft speed (applies only when not wearing heavy armor and not carrying
+      a heavy load; PHB p.25)
+    gated_by:
+      - not_heavy_armor
+      - not_heavy_load
+  illiteracy:
+    description: Cannot read unless spending 2 skill points
+  rage:
+    description: +4 STR/CON, +2 Will, -2 AC; 1/day
+    uses:
+      max: 6
+    values:
+      rounds: 9
+  uncanny_dodge:
+    description: Retain DEX bonus to AC when flat-footed
+  trap_sense:
+    description: Bonus on Reflex saves and AC against traps
+    values:
+      reflex: 6
+      ac: 6
+  improved_uncanny_dodge:
+    description: Cannot be flanked
+  damage_reduction:
+    description: Damage reduction x/-
+    values:
+      damage_reduction: 5
+  greater_rage:
+    description: +6 STR/CON, +3 Will, -2 AC
+  indomitable_will:
+    description: +4 Will vs enchantments while raging
+  tireless_rage:
+    description: No longer fatigued after rage
+  mighty_rage:
+    description: +8 STR/CON, +4 Will, -2 AC
 equipment:
   weapons:
     - name: Greataxe

@@ -184,24 +184,42 @@ feats:
   - Blind-Fight
   - Combat Reflexes
 class_features:
-  - 'sneak_attack_1d6: Sneak attack +1d6'
-  - 'trapfinding: Find and disable magical traps'
-  - 'evasion: No damage on successful Reflex save'
-  - 'sneak_attack_2d6: Sneak attack +2d6'
-  - 'trap_sense_1: +1 Reflex and AC vs traps'
-  - >-
-    uncanny_dodge: Retain DEX bonus to AC when flat-footed
-  - 'sneak_attack_3d6: Sneak attack +3d6'
-  - 'sneak_attack_1d6: +1d6 sneak attack'
-  - 'death_attack: Study + kill'
-  - 'poison_use: Never poison self'
-  - 'uncanny_dodge: Never flat-footed'
-  - 'sneak_attack_2d6: +2d6 sneak attack'
-  - 'sneak_attack_3d6: +3d6 sneak attack'
-  - 'improved_uncanny_dodge: Cannot be flanked'
-  - 'sneak_attack_4d6: +4d6 sneak attack'
-  - 'hide_in_plain_sight: Hide while observed'
-  - 'sneak_attack_5d6: +5d6 sneak attack'
+  sneak_attack:
+    description: Extra damage when the target is flat-footed
+    values:
+      dice: 3
+    when: >-
+      when the target is denied its DEX bonus to AC, or is flanked; targets
+      immune to critical hits are immune
+  trapfinding:
+    description: Find and disable magical traps
+  evasion:
+    description: No damage on successful Reflex save
+  trap_sense:
+    description: Bonus on Reflex saves and AC against traps
+    values:
+      reflex: 1
+      ac: 1
+  uncanny_dodge:
+    description: Never flat-footed
+  sneak_attack_1d6:
+    description: +1d6 sneak attack
+  death_attack:
+    description: Study + kill
+  poison_use:
+    description: Never poison self
+  sneak_attack_2d6:
+    description: +2d6 sneak attack
+  sneak_attack_3d6:
+    description: +3d6 sneak attack
+  improved_uncanny_dodge:
+    description: Cannot be flanked
+  sneak_attack_4d6:
+    description: +4d6 sneak attack
+  hide_in_plain_sight:
+    description: Hide while observed
+  sneak_attack_5d6:
+    description: +5d6 sneak attack
 equipment:
   weapons:
     - name: Short Sword

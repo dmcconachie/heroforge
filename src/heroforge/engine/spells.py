@@ -50,6 +50,9 @@ class SpellEntry:
     # If the spell just applies a condition, name it
     # here instead of using effects:
     applies_condition: str = ""
+    # Whole size categories the spell moves its target,
+    # e.g. Enlarge Person +1, Reduce Person -1.
+    size_steps: int = 0
 
 
 class SpellCompendium:

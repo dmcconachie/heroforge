@@ -211,19 +211,27 @@ feats:
 acfs:
   - Spontaneous Divination (5)
 class_features:
-  - 'summon_familiar: Summon a familiar'
-  - 'scribe_scroll: Scribe scroll feat for free'
-  - >-
-    wild_magic: Casts spells with caster level reduced by 3, but adds 1d6
-    to the adjusted caster level on each spell cast. (TODO: wire effect)
-  - >-
-    random_deflector_1: 1/day immediate action; ranged attacks, ranged touch
-    attacks, and individually targeted spells are redirected to a random target
-    within 20 ft of the wild mage until her next turn. (TODO: wire effect)
-  - >-
-    student_of_chaos: When using a magic item with a randomly determined effect
-    (bag of tricks, rod of wonder, etc.), roll twice and choose between the
-    results. (TODO: wire effect)
+  summon_familiar:
+    description: Summon a familiar
+  scribe_scroll:
+    description: Scribe scroll feat for free
+  wild_magic:
+    description: >-
+      Casts spells with caster level reduced by 3, but adds 1d6 to the adjusted
+      caster level on each spell cast.
+  random_deflector:
+    description: Redirect an attack to a random nearby target
+    uses:
+      max: 1
+    values:
+      radius_ft: 20
+    when: >-
+      against ranged attacks, ranged touch attacks and individually targeted
+      spells, until her next turn
+  student_of_chaos:
+    description: >-
+      When using a magic item with a randomly determined effect (bag of tricks,
+      rod of wonder, etc.), roll twice and choose between the results.
 spellcasting:
   Wizard:
     caster_level: 5

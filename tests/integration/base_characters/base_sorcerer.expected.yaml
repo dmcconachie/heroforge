@@ -155,7 +155,8 @@ feats:
   - Iron Will
   - Empower Spell
 class_features:
-  - 'summon_familiar: Summon a familiar'
+  summon_familiar:
+    description: Summon a familiar
 spellcasting:
   Sorcerer:
     caster_level: 20

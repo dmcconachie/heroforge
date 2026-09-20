@@ -180,27 +180,42 @@ feats:
   - Blind-Fight
   - Lightning Reflexes
 class_features:
-  - 'sneak_attack_1d6: Sneak attack +1d6'
-  - 'trapfinding: Find and disable magical traps'
-  - 'evasion: No damage on successful Reflex save'
-  - 'sneak_attack_2d6: Sneak attack +2d6'
-  - 'trap_sense_1: +1 Reflex and AC vs traps'
-  - >-
-    uncanny_dodge: Retain DEX bonus to AC when flat-footed
-  - 'sneak_attack_3d6: Sneak attack +3d6'
-  - 'trap_sense_2: +2 Reflex and AC vs traps'
-  - 'sneak_attack_4d6: Sneak attack +4d6'
-  - 'hide_in_plain_sight: Hide while observed'
-  - 'evasion: No damage on Ref save'
-  - 'darkvision: Darkvision 60 ft'
-  - 'uncanny_dodge: Never flat-footed'
-  - 'shadow_illusion: Silent image 1/day'
-  - 'summon_shadow: Summon shadow companion'
-  - 'shadow_jump_20: Teleport 20 ft/day'
-  - 'defensive_roll: Avoid lethal blow'
-  - 'improved_uncanny_dodge: Cannot be flanked'
-  - 'slippery_mind: Re-roll enchantment save'
-  - 'improved_evasion: Half damage on failed save'
+  sneak_attack:
+    description: Extra damage when the target is flat-footed
+    values:
+      dice: 4
+    when: >-
+      when the target is denied its DEX bonus to AC, or is flanked; targets
+      immune to critical hits are immune
+  trapfinding:
+    description: Find and disable magical traps
+  evasion:
+    description: No damage on Ref save
+  trap_sense:
+    description: Bonus on Reflex saves and AC against traps
+    values:
+      reflex: 2
+      ac: 2
+  uncanny_dodge:
+    description: Never flat-footed
+  hide_in_plain_sight:
+    description: Hide while observed
+  darkvision:
+    description: Darkvision 60 ft
+  shadow_illusion:
+    description: Silent image 1/day
+  summon_shadow:
+    description: Summon shadow companion
+  shadow_jump_20:
+    description: Teleport 20 ft/day
+  defensive_roll:
+    description: Avoid lethal blow
+  improved_uncanny_dodge:
+    description: Cannot be flanked
+  slippery_mind:
+    description: Re-roll enchantment save
+  improved_evasion:
+    description: Half damage on failed save
 equipment:
   weapons:
     - name: Rapier

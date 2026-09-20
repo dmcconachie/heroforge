@@ -36,10 +36,9 @@ Duelist:
     - level: 1
       feature: canny_defense
       description: >-
-        INT bonus to AC while unarmored, no shield
-        (DMG p.185). Caps at duelist level — not yet
-        modelled here. "Wielding a melee weapon" gate
-        also deferred until weapon-wielding state exists.
+        INT bonus to AC while unarmored and without a
+        shield (DMG p.185). The cap at duelist level is not
+        modelled, nor is the need to wield a melee weapon.
       gate:
         - unarmored
         - no_shield

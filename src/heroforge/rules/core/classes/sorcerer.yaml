@@ -20,6 +20,9 @@ Sorcerer:
     preparation: spontaneous
     max_spell_level: 9
     starts_at_level: 1
+  proficiencies:
+    weapons:
+      - simple
   class_features:
     - level: 1
       feature: summon_familiar

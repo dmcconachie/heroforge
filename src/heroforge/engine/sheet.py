@@ -29,6 +29,7 @@ from typing import TYPE_CHECKING
 from heroforge.engine.acfs import acf_slot_deltas, replaced_feature_keys
 from heroforge.engine.bonus import ALWAYS_STACKING, BonusPool, BonusType
 from heroforge.engine.character import feat_key_of
+from heroforge.engine.effects import evaluate_formula
 from heroforge.engine.enums import (
     SAVE_ABILITY,
     Ability,
@@ -42,9 +43,11 @@ from heroforge.engine.sheet_schema import (
     ArmorDisplay,
     Breakdown,
     CarryingCapacity,
+    ClassFeatureEntry,
     CombatSection,
     DomainEntry,
     EquipmentSection,
+    FeatureUses,
     Iteratives,
     ResourceEntry,
     Sheet,
@@ -63,6 +66,9 @@ from heroforge.engine.weapons import (
     weapon_definition,
     weapon_pool_keys,
     weapon_stances,
+)
+from heroforge.engine.weapons import (
+    damage_dice as weapon_damage_dice,
 )
 from heroforge.rules.known import (
     KnownClass,
@@ -203,10 +209,9 @@ def _identity(c: "Character") -> SheetIdentity:
     else:
         class_str = ""
 
-    from heroforge.rules.rules import get_rules
-
-    race_defn = get_rules().races.get(c.race)
-    size = Size(race_defn.size) if race_defn else Size.MEDIUM
+    # c.size, not the race definition: templates override it
+    # and Enlarge/Reduce Person move it.
+    size = Size(c.size)
 
     return SheetIdentity(
         name=c.name,
@@ -416,6 +421,8 @@ def _skills(
             typed["armor_penalty"] = st.armor_penalty
         if st.speed_mod:
             typed["speed_mod"] = st.speed_mod
+        if st.size_mod:
+            typed["size_mod"] = st.size_mod
         _merge(typed, pool_bd)
 
         # Only export skills with a modifier beyond the base
@@ -462,20 +469,49 @@ def _acfs(c: "Character") -> list[str]:
     return [f"{a['name']} ({a['level']})" for a in c.acfs]
 
 
-def _class_features(c: "Character") -> list[str]:
+def _class_features(
+    c: "Character",
+) -> dict[str, ClassFeatureEntry]:
+    """
+    Every class feature the character has, keyed by feature
+    name, with its formulas resolved against this character.
+
+    A feature that scales is one entry whose formulas do the
+    scaling, so a later level replaces an earlier one rather
+    than listing both.
+    """
     from heroforge.rules.rules import get_rules
 
     class_reg = get_rules().classes
     replaced = replaced_feature_keys(c)
-    features: list[str] = []
+    out: dict[str, ClassFeatureEntry] = {}
     for class_name, level in c.class_level_map.items():
         defn = class_reg.get(class_name)
         if defn is None:
             continue
         for feat in defn.class_features:
-            if feat.level <= level and feat.feature not in replaced:
-                features.append(f"{feat.feature}: {feat.description}")
-    return features
+            if feat.level > level or feat.feature in replaced:
+                continue
+            uses = None
+            if feat.uses:
+                uses = FeatureUses(
+                    max=evaluate_formula(
+                        feat.uses.get("max", "0"), character=c
+                    ),
+                    unit=feat.uses.get("unit", "use"),
+                )
+            values = {
+                key: evaluate_formula(formula, character=c)
+                for key, formula in feat.values.items()
+            }
+            out[feat.feature] = ClassFeatureEntry(
+                description=feat.description,
+                uses=uses,
+                values=values,
+                when=feat.when,
+                gated_by=list(feat.gate),
+            )
+    return out
 
 
 # -----------------------------------------------------------
@@ -789,8 +825,7 @@ def _equipment(c: "Character") -> EquipmentSection:
                 attack=_weapon_breakdown(c, atk_key, ranged, w),
                 damage=_weapon_breakdown(c, dmg_key, ranged, w),
                 attack_iteratives=_weapon_iteratives(c, atk_key, w),
-                damage_dice=w.get("damage_dice", "")
-                or (wdef.damage_dice if wdef else ""),
+                damage_dice=weapon_damage_dice(c, w),
                 crit_range=_crit_range_display(c, w),
                 crit_mult=(f"x{wdef.critical_multiplier}" if wdef else ""),
                 range_inc=_weapon_range_increment(c, w),

@@ -232,7 +232,9 @@ class BuffPanel(QWidget):
         if name not in char._buff_states:
             defn = self._registry.require(name)
             pairs = defn.pool_entries(cl or 0, char)
-            char.register_buff_definition(name, pairs)
+            char.register_buff_definition(
+                name, pairs, size_steps=defn.size_steps
+            )
 
         # For parameterized feats, rebuild the entries with new parameter
         if parameter > 0:

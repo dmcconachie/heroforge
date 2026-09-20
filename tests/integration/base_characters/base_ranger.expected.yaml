@@ -123,10 +123,11 @@ skills:
       ranks: 13
       self_sufficient: 2
   Hide:
-    total: 28
+    total: 32
     typed:
       ability_mod: 5
       ranks: 23
+      size_mod: 4
   Jump:
     total: -6
     typed:
@@ -175,28 +176,40 @@ feats:
   - Mobility
   - Self-Sufficient
 class_features:
-  - 'favored_enemy_1: Favored enemy 1: +2 vs type'
-  - 'track: Track feat for free'
-  - 'wild_empathy: Improve attitude of animals'
-  - >-
-    combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)
-  - 'endurance: Endurance feat for free'
-  - 'animal_companion: Special animal companion'
-  - 'favored_enemy_2: Favored enemy 2; +4 vs type'
-  - >-
-    improved_combat_style: Manyshot or Improved Two-Weapon Fighting
-  - >-
-    woodland_stride: Move through natural undergrowth at full speed
-  - 'swift_tracker: Track at full speed without penalty'
-  - 'evasion: No damage on successful Reflex save'
-  - 'favored_enemy_3: Favored enemy 3; +6 vs type'
-  - >-
-    combat_style_mastery: Improved Precise Shot or Greater Two-Weapon Fighting
-  - 'camouflage: Hide in natural terrain without cover'
-  - 'favored_enemy_4: Favored enemy 4'
-  - >-
-    hide_in_plain_sight: Hide while observed in natural terrain
-  - 'favored_enemy_5: Favored enemy 5'
+  favored_enemy:
+    description: Bonus against each chosen favored enemy
+    values:
+      count: 5
+      base_bonus: 2
+      best_bonus: 10
+    when: >-
+      on Bluff, Listen, Sense Motive, Spot and Survival checks against that
+      creature type, and on weapon damage against it
+  track:
+    description: Track feat for free
+  wild_empathy:
+    description: Improve attitude of animals
+  combat_style_archery:
+    description: Rapid Shot or Two-Weapon Fighting (no prereq)
+  endurance:
+    description: Endurance feat for free
+  animal_companion:
+    description: Special animal companion
+  improved_combat_style:
+    description: Manyshot or Improved Two-Weapon Fighting
+  woodland_stride:
+    description: Move through natural undergrowth at full speed
+  swift_tracker:
+    description: Track at full speed without penalty
+  evasion:
+    description: No damage on successful Reflex save
+  combat_style_mastery:
+    description: >-
+      Improved Precise Shot or Greater Two-Weapon Fighting
+  camouflage:
+    description: Hide in natural terrain without cover
+  hide_in_plain_sight:
+    description: Hide while observed in natural terrain
 spellcasting:
   Ranger:
     caster_level: 20
@@ -232,7 +245,7 @@ equipment:
         - 20
         - 15
         - 10
-      damage_dice: 1d8
+      damage_dice: 1d6
       crit_range: '20'
       crit_mult: x3
       range_inc: 100

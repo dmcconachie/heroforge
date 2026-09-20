@@ -302,7 +302,13 @@ class TestWeaponFinesse:
         assert atk_total(c) == generic + 5
 
     def test_heavy_weapon_still_uses_str(self) -> None:
+        # A rogue is not proficient with a greatsword, so the
+        # proficiency feat is taken here to keep the only
+        # difference between the two totals the ability the
+        # attack rolls on.
         c = self._with_finesse({"base": "Greatsword"})
+        take(c, "Martial Weapon Proficiency", "Greatsword")
+        arm(c, {"base": "Greatsword"})
         generic = gather_sheet(c, None).combat.attack_melee.total
         assert atk_total(c) == generic
 

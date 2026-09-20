@@ -220,11 +220,17 @@ feats:
   - Skill Focus (Knowledge (Religion))
   - Orc-blooded
 class_features:
-  - 'turn_undead: Turn or rebuke undead'
-  - >-
-    spontaneous_casting: Convert prepared spells to cure/inflict
-  - >-
-    domains: Two domains granting bonus spells and powers
+  domains:
+    description: Two domains granting bonus spells and powers
+  spontaneous_casting:
+    description: Convert prepared spells to cure/inflict
+  turn_undead:
+    description: Turn or rebuke undead
+    uses:
+      max: 5
+    values:
+      turning_check: 2
+      turning_damage_bonus: 4
 spellcasting:
   Cleric:
     caster_level: 2

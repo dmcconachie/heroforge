@@ -35,6 +35,12 @@ from heroforge.engine.effects import (
     evaluate_formula,
     remove_buff,
 )
+from heroforge.engine.equipment import equip_item
+from heroforge.engine.skills import (
+    compute_skill_total,
+    register_skills_on_character,
+)
+from heroforge.rules.rules import get_rules
 
 # ===========================================================================
 # Helpers
@@ -799,3 +805,76 @@ class TestRealBuffScenarios:
         apply_buff(haste, c)
         # morale +2, untyped +1 → total +3 from buffs
         assert c.get("attack_melee") == base + 3
+
+
+class TestSkillAllExpansion:
+    """
+    `skill_all` is a target alias, not a pool: an effect
+    naming it lands in every skill pool. It exists for the
+    handful of things that genuinely bonus every skill at
+    once — the Pale Green Prism, a bardic-style morale bonus,
+    competence from an item.
+    """
+
+    def _character(self) -> Character:
+        c = Character(name="T")
+        register_skills_on_character(c)
+        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+            c.set_ability_score(ab, 10)
+        c.levels = [
+            CharacterLevel(character_level=1, class_name="Fighter", hp_roll=10)
+        ]
+        c._invalidate_class_stats()
+        return c
+
+    def test_it_is_not_itself_a_pool(self) -> None:
+        c = self._character()
+        assert c.get_pool("skill_all") is None
+
+    def test_one_effect_reaches_every_skill(self) -> None:
+        defn = BuffDefinition(
+            name="Test All-Skills",
+            category=BuffCategory.ITEM,
+            effects=[
+                BonusEffect(
+                    target="skill_all",
+                    bonus_type=BonusType.COMPETENCE,
+                    value=1,
+                )
+            ],
+        )
+        c = self._character()
+        apply_buff(defn, c)
+        for sd in get_rules().skills.all_skills():
+            assert compute_skill_total(c, sd).misc_bonus == 1, sd.name
+
+
+class TestPaleGreenPrism:
+    """
+    DMG: "+1 competence bonus on attack rolls, saves, skill
+    checks, and ability checks". The skill half was missing.
+    """
+
+    def _worn(self) -> Character:
+        c = Character(name="T")
+        register_skills_on_character(c)
+        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+            c.set_ability_score(ab, 10)
+        c.levels = [
+            CharacterLevel(character_level=1, class_name="Fighter", hp_roll=10)
+        ]
+        c._invalidate_class_stats()
+        item = get_rules().magic_items.get("Ioun Stone (Pale Green Prism)")
+        assert item is not None
+        equip_item(c, item)
+        return c
+
+    def test_it_bonuses_skills(self) -> None:
+        c = self._worn()
+        climb = get_rules().skills.get("Climb")
+        assert compute_skill_total(c, climb).misc_bonus == 1
+
+    def test_it_still_bonuses_attacks_and_saves(self) -> None:
+        c = self._worn()
+        assert c.get("attack_melee") == c.get("bab") + 1
+        assert c.get("fort_save") == 2 + 1

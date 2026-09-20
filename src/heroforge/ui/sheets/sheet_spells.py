@@ -230,7 +230,9 @@ class SheetSpells(QWidget):
         # Register if not yet known
         if defn.name not in char._buff_states:
             pairs = defn.pool_entries(cl, char)
-            char.register_buff_definition(defn.name, pairs)
+            char.register_buff_definition(
+                defn.name, pairs, size_steps=defn.size_steps
+            )
 
         # If CL changed, update registered entries
         if active and cl:

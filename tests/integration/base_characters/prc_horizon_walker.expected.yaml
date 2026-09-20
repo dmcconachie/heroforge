@@ -171,20 +171,33 @@ feats:
   - Diehard
   - Lightning Reflexes
 class_features:
-  - 'favored_enemy_1: Favored enemy 1: +2 vs type'
-  - 'track: Track feat for free'
-  - 'wild_empathy: Improve attitude of animals'
-  - >-
-    combat_style_archery: Rapid Shot or Two-Weapon Fighting (no prereq)
-  - 'endurance: Endurance feat for free'
-  - 'animal_companion: Special animal companion'
-  - 'favored_enemy_2: Favored enemy 2; +4 vs type'
-  - >-
-    improved_combat_style: Manyshot or Improved Two-Weapon Fighting
-  - >-
-    woodland_stride: Move through natural undergrowth at full speed
-  - 'swift_tracker: Track at full speed without penalty'
-  - 'terrain_mastery: Choose terrain mastery'
+  favored_enemy:
+    description: Bonus against each chosen favored enemy
+    values:
+      count: 2
+      base_bonus: 2
+      best_bonus: 4
+    when: >-
+      on Bluff, Listen, Sense Motive, Spot and Survival checks against that
+      creature type, and on weapon damage against it
+  track:
+    description: Track feat for free
+  wild_empathy:
+    description: Improve attitude of animals
+  combat_style_archery:
+    description: Rapid Shot or Two-Weapon Fighting (no prereq)
+  endurance:
+    description: Endurance feat for free
+  animal_companion:
+    description: Special animal companion
+  improved_combat_style:
+    description: Manyshot or Improved Two-Weapon Fighting
+  woodland_stride:
+    description: Move through natural undergrowth at full speed
+  swift_tracker:
+    description: Track at full speed without penalty
+  terrain_mastery:
+    description: Choose terrain mastery
 spellcasting:
   Ranger:
     caster_level: 8

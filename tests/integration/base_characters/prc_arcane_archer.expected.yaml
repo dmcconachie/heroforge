@@ -176,22 +176,38 @@ feats:
   - Improved Critical
   - Improved Precise Shot
 class_features:
-  - 'bonus_feat_1: Bonus fighter feat'
-  - 'bonus_feat_2: Bonus fighter feat'
-  - 'bonus_feat_4: Bonus fighter feat'
-  - 'bonus_feat_6: Bonus fighter feat'
-  - 'summon_familiar: Summon a familiar'
-  - 'scribe_scroll: Scribe scroll feat for free'
-  - 'enhance_arrows_1: +1 enhancement bonus'
-  - 'enhance_arrows_2: +2 enhancement bonus'
-  - 'enhance_arrows_3: +3 enhancement bonus'
-  - 'enhance_arrows_4: +4 enhancement bonus'
-  - 'enhance_arrows_5: +5 enhancement bonus'
-  - 'imbue_arrow: Place spell on arrow'
-  - 'seeker_arrow: Arrow ignores cover'
-  - 'phase_arrow: Arrow phases through walls'
-  - 'hail_of_arrows: One arrow per enemy'
-  - 'death_arrow: Arrow of death 1/day'
+  bonus_feat_1:
+    description: Bonus fighter feat
+  bonus_feat_2:
+    description: Bonus fighter feat
+  bonus_feat_4:
+    description: Bonus fighter feat
+  bonus_feat_6:
+    description: Bonus fighter feat
+  summon_familiar:
+    description: Summon a familiar
+  scribe_scroll:
+    description: Scribe scroll feat for free
+  enhance_arrows_1:
+    description: +1 enhancement bonus
+  enhance_arrows_2:
+    description: +2 enhancement bonus
+  enhance_arrows_3:
+    description: +3 enhancement bonus
+  enhance_arrows_4:
+    description: +4 enhancement bonus
+  enhance_arrows_5:
+    description: +5 enhancement bonus
+  imbue_arrow:
+    description: Place spell on arrow
+  seeker_arrow:
+    description: Arrow ignores cover
+  phase_arrow:
+    description: Arrow phases through walls
+  hail_of_arrows:
+    description: One arrow per enemy
+  death_arrow:
+    description: Arrow of death 1/day
 spellcasting:
   Wizard:
     caster_level: 1

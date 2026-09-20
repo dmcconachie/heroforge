@@ -130,15 +130,14 @@ Elf:
     - Goblin
     - Orc
     - Sylvan
-  weapon_familiarity:
+  weapon_proficiencies:
     - Longsword
     - Rapier
     - Longbow
-    - Longbow
-    - Composite
+    - Composite Longbow
     - Shortbow
-    - Shortbow
-    - Composite
+    - Composite Shortbow
+  weapon_familiarity: []
   low_light_vision: true
   darkvision: 0
 Gnome:
@@ -206,15 +205,7 @@ Half-Elf:
     - Elven
   languages_bonus:
     - any
-  weapon_familiarity:
-    - Longsword
-    - Rapier
-    - Longbow
-    - Longbow
-    - Composite
-    - Shortbow
-    - Shortbow
-    - Composite
+  weapon_familiarity: []
   low_light_vision: true
   darkvision: 0
 Half-Orc:

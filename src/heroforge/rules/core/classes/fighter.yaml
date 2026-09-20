@@ -17,6 +17,16 @@ Fighter:
     - Ride
     - Swim
   spellcasting: null
+  proficiencies:
+    weapons:
+      - simple
+      - martial
+    armor:
+      - light
+      - medium
+      - heavy
+    shields: true
+    tower_shields: true
   class_features:
     - level: 1
       feature: bonus_feat_1

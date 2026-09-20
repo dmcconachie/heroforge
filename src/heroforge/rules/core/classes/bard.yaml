@@ -39,10 +39,25 @@ Bard:
     preparation: spontaneous
     max_spell_level: 6
     starts_at_level: 1
+  proficiencies:
+    weapons:
+      - simple
+    weapon_names:
+      - Longsword
+      - Rapier
+      - Sap
+      - Short Sword
+      - Shortbow
+      - Whip
+    armor:
+      - light
+    shields: true
   class_features:
     - level: 1
       feature: bardic_music
       description: Bardic music abilities; uses/day = Bard level
+      uses:
+        max: bard_level
     - level: 1
       feature: bardic_knowledge
       description: Bardic knowledge check (Bard level + INT)
@@ -71,6 +86,8 @@ Bard:
         - target: will_save
           bonus_type: morale
           value: 1
+      values:
+        bonus: '1'
     - level: 5
       feature: inspire_competence
       description: +2 competence bonus on skill checks
@@ -96,6 +113,8 @@ Bard:
         - target: will_save
           bonus_type: morale
           value: 2
+      values:
+        bonus: '2'
     - level: 9
       feature: inspire_greatness
       description: +2 HD, +2 attack, +1 Fort
@@ -134,6 +153,8 @@ Bard:
         - target: will_save
           bonus_type: morale
           value: 3
+      values:
+        bonus: '3'
     - level: 15
       feature: inspire_heroics
       description: +4 AC and saves for one creature
@@ -159,3 +180,5 @@ Bard:
         - target: will_save
           bonus_type: morale
           value: 4
+      values:
+        bonus: '4'

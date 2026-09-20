@@ -126,6 +126,7 @@ class SkillTotal:
     synergy_bonus: int  # from synergies
     armor_penalty: int  # negative or 0
     speed_mod: int = 0  # Jump speed modifier
+    size_mod: int = 0  # Hide size modifier
     total: int = 0
 
     @property
@@ -446,7 +447,21 @@ def compute_skill_total(
         elif diff < 0:
             speed_mod = (diff // 10) * 6
 
-    total = ranks + ability_mod + misc_bonus + synergy_bonus + acp + speed_mod
+    # Hide scales with how big the hider is (PHB Table 8-1):
+    # +4 per category below Medium, -4 per category above.
+    size_mod = 0
+    if skill_def.pool_key is PoolKey.SKILL_HIDE:
+        size_mod = character._compute_size_mod_hide()
+
+    total = (
+        ranks
+        + ability_mod
+        + misc_bonus
+        + synergy_bonus
+        + acp
+        + speed_mod
+        + size_mod
+    )
 
     return SkillTotal(
         skill_name=skill_def.name,
@@ -456,5 +471,6 @@ def compute_skill_total(
         synergy_bonus=synergy_bonus,
         armor_penalty=acp,
         speed_mod=speed_mod,
+        size_mod=size_mod,
         total=total,
     )

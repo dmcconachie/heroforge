@@ -44,44 +44,40 @@ Wild Mage:
       description: >-
         Casts spells with caster level reduced by 3, but adds 1d6
         to the adjusted caster level on each spell cast.
-        (TODO: wire effect)
+
     - level: 2
-      feature: random_deflector_1
-      description: >-
-        1/day immediate action; ranged attacks, ranged touch
-        attacks, and individually targeted spells are redirected
-        to a random target within 20 ft of the wild mage until
-        her next turn. (TODO: wire effect)
+      feature: random_deflector
+      description: Redirect an attack to a random nearby target
+      uses:
+        max: >-
+          1 + (wild_mage_level >= 6) + (wild_mage_level >= 9)
+      values:
+        radius_ft: '20'
+      when: >-
+        against ranged attacks, ranged touch attacks and
+        individually targeted spells, until her next turn
     - level: 3
       feature: student_of_chaos
       description: >-
         When using a magic item with a randomly determined
         effect (bag of tricks, rod of wonder, etc.), roll twice
-        and choose between the results. (TODO: wire effect)
-    - level: 5
-      feature: random_deflector_2
-      description: >-
-        Random deflector usable 2/day. (TODO: wire effect)
+        and choose between the results.
     - level: 6
       feature: chaotic_mind
       description: >-
         Immunity to confusion and insanity spells/effects;
-        continuous nondetection effect on self. (TODO: wire effect)
-    - level: 8
-      feature: random_deflector_3
-      description: >-
-        Random deflector usable 3/day. (TODO: wire effect)
+        continuous nondetection effect on self.
     - level: 9
       feature: reckless_dweomer
       description: >-
         Standard action; eliminate a prepared spell or spell slot
         of at least 1st level to create a random rod-of-wonder-
-        like effect. (TODO: wire effect)
+        like effect.
     - level: 10
       feature: wildstrike
       description: >-
         1/day target one creature within 60 ft for 2d6 rounds;
         50% chance each of the target's spells or spell-like
         abilities fails and triggers a rod of wonder result
-        instead. (TODO: wire effect)
+        instead.
   is_prestige: true

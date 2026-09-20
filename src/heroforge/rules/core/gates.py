@@ -25,3 +25,6 @@ class KnownCoreGate(StrEnum):
     # Monk AC bonus / fast movement (PHB p.40):
     # "medium or heavy load" gates the bonus off.
     LIGHT_LOAD_OR_LESS = "light_load_or_less"
+    # Swashbuckler grace / insightful strike / dodge bonus
+    # (Complete Warrior p.12): lost in medium or heavy armor.
+    LIGHT_ARMOR_OR_LESS = "light_armor_or_less"

@@ -62,6 +62,12 @@ class RaceDefinition:
     racial_traits: list[str] = field(default_factory=list)
     languages_auto: list[str] = field(default_factory=list)
     languages_bonus: list[str] = field(default_factory=list)
+    # Weapons the race is outright proficient with: an elf's
+    # Martial Weapon Proficiency bonus feats (PHB p. 16).
+    weapon_proficiencies: list[str] = field(default_factory=list)
+    # Exotic weapons the race treats as martial instead — a
+    # different rule (PHB p. 15), which is why it is a
+    # different field.
     weapon_familiarity: list[str] = field(default_factory=list)
     low_light_vision: bool = False
     darkvision: int = 0

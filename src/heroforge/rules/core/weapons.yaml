@@ -13,6 +13,7 @@ Gauntlet:
   wield_class: light
   category: simple
   damage_dice: 1d3
+  damage_dice_small: 1d2
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -22,6 +23,7 @@ Unarmed Strike:
   wield_class: light
   category: simple
   damage_dice: 1d3
+  damage_dice_small: 1d2
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -31,6 +33,7 @@ Dagger:
   wield_class: light
   category: simple
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 19
   critical_multiplier: 2
   damage_type: piercing
@@ -41,6 +44,7 @@ Punching Dagger:
   wield_class: light
   category: simple
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -50,6 +54,7 @@ Spiked Gauntlet:
   wield_class: light
   category: simple
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -59,6 +64,7 @@ Light Mace:
   wield_class: light
   category: simple
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -68,6 +74,7 @@ Sickle:
   wield_class: light
   category: simple
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: slashing
@@ -77,6 +84,7 @@ Club:
   wield_class: one_handed
   category: simple
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -87,6 +95,7 @@ Heavy Mace:
   wield_class: one_handed
   category: simple
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -96,6 +105,7 @@ Morningstar:
   wield_class: one_handed
   category: simple
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning and piercing
@@ -105,6 +115,7 @@ Shortspear:
   wield_class: one_handed
   category: simple
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -115,6 +126,7 @@ Longspear:
   wield_class: two_handed
   category: simple
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -124,6 +136,7 @@ Quarterstaff:
   wield_class: two_handed
   category: simple
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -133,6 +146,7 @@ Spear:
   wield_class: two_handed
   category: simple
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -143,6 +157,7 @@ Heavy Crossbow:
   wield_class: ranged
   category: simple
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 19
   critical_multiplier: 2
   damage_type: piercing
@@ -154,6 +169,7 @@ Light Crossbow:
   wield_class: ranged
   category: simple
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 19
   critical_multiplier: 2
   damage_type: piercing
@@ -165,6 +181,7 @@ Dart:
   wield_class: ranged
   category: simple
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -176,6 +193,7 @@ Javelin:
   wield_class: ranged
   category: simple
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -187,6 +205,7 @@ Sling:
   wield_class: ranged
   category: simple
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -198,6 +217,7 @@ Throwing Axe:
   wield_class: light
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: slashing
@@ -208,6 +228,7 @@ Light Hammer:
   wield_class: light
   category: martial
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -218,6 +239,7 @@ Handaxe:
   wield_class: light
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 3
   damage_type: slashing
@@ -227,6 +249,7 @@ Kukri:
   wield_class: light
   category: martial
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 18
   critical_multiplier: 2
   damage_type: slashing
@@ -236,6 +259,7 @@ Light Pick:
   wield_class: light
   category: martial
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 4
   damage_type: piercing
@@ -245,6 +269,7 @@ Sap:
   wield_class: light
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -254,6 +279,7 @@ Short Sword:
   wield_class: light
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 19
   critical_multiplier: 2
   damage_type: piercing
@@ -263,6 +289,7 @@ Battleaxe:
   wield_class: one_handed
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: slashing
@@ -272,6 +299,7 @@ Flail:
   wield_class: one_handed
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -281,6 +309,7 @@ Longsword:
   wield_class: one_handed
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 19
   critical_multiplier: 2
   damage_type: slashing
@@ -290,6 +319,7 @@ Heavy Pick:
   wield_class: one_handed
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 4
   damage_type: piercing
@@ -299,6 +329,7 @@ Rapier:
   wield_class: one_handed
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 18
   critical_multiplier: 2
   damage_type: piercing
@@ -308,6 +339,7 @@ Scimitar:
   wield_class: one_handed
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 18
   critical_multiplier: 2
   damage_type: slashing
@@ -317,6 +349,7 @@ Trident:
   wield_class: one_handed
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -327,6 +360,7 @@ Warhammer:
   wield_class: one_handed
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: bludgeoning
@@ -336,6 +370,7 @@ Falchion:
   wield_class: two_handed
   category: martial
   damage_dice: 2d4
+  damage_dice_small: 1d6
   critical_range: 18
   critical_multiplier: 2
   damage_type: slashing
@@ -345,6 +380,7 @@ Glaive:
   wield_class: two_handed
   category: martial
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 20
   critical_multiplier: 3
   damage_type: slashing
@@ -354,6 +390,7 @@ Greataxe:
   wield_class: two_handed
   category: martial
   damage_dice: 1d12
+  damage_dice_small: 1d10
   critical_range: 20
   critical_multiplier: 3
   damage_type: slashing
@@ -363,6 +400,7 @@ Greatclub:
   wield_class: two_handed
   category: martial
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -372,6 +410,7 @@ Heavy Flail:
   wield_class: two_handed
   category: martial
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 19
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -381,6 +420,7 @@ Greatsword:
   wield_class: two_handed
   category: martial
   damage_dice: 2d6
+  damage_dice_small: 1d10
   critical_range: 19
   critical_multiplier: 2
   damage_type: slashing
@@ -390,6 +430,7 @@ Guisarme:
   wield_class: two_handed
   category: martial
   damage_dice: 2d4
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: slashing
@@ -399,6 +440,7 @@ Halberd:
   wield_class: two_handed
   category: martial
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing or slashing
@@ -408,6 +450,7 @@ Lance:
   wield_class: two_handed
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -417,6 +460,7 @@ Ranseur:
   wield_class: two_handed
   category: martial
   damage_dice: 2d4
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -426,6 +470,7 @@ Scythe:
   wield_class: two_handed
   category: martial
   damage_dice: 2d4
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 4
   damage_type: piercing or slashing
@@ -435,6 +480,7 @@ Longbow:
   wield_class: ranged
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -446,6 +492,7 @@ Composite Longbow:
   wield_class: ranged
   category: martial
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -457,6 +504,7 @@ Shortbow:
   wield_class: ranged
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -468,6 +516,7 @@ Composite Shortbow:
   wield_class: ranged
   category: martial
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 3
   damage_type: piercing
@@ -479,6 +528,7 @@ Kama:
   wield_class: light
   category: exotic
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: slashing
@@ -488,6 +538,7 @@ Nunchaku:
   wield_class: light
   category: exotic
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -497,6 +548,7 @@ Sai:
   wield_class: light
   category: exotic
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning
@@ -507,6 +559,7 @@ Siangham:
   wield_class: light
   category: exotic
   damage_dice: 1d6
+  damage_dice_small: 1d4
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -516,6 +569,7 @@ Bastard Sword:
   wield_class: one_handed
   category: exotic
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 19
   critical_multiplier: 2
   damage_type: slashing
@@ -525,6 +579,7 @@ Dwarven Waraxe:
   wield_class: one_handed
   category: exotic
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 20
   critical_multiplier: 3
   damage_type: slashing
@@ -534,6 +589,7 @@ Whip:
   wield_class: one_handed
   category: exotic
   damage_dice: 1d3
+  damage_dice_small: 1d2
   critical_range: 20
   critical_multiplier: 2
   damage_type: slashing
@@ -543,6 +599,7 @@ Spiked Chain:
   wield_class: two_handed
   category: exotic
   damage_dice: 2d4
+  damage_dice_small: 1d6
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -552,6 +609,7 @@ Hand Crossbow:
   wield_class: ranged
   category: exotic
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 19
   critical_multiplier: 2
   damage_type: piercing
@@ -563,6 +621,7 @@ Repeating Heavy Crossbow:
   wield_class: ranged
   category: exotic
   damage_dice: 1d10
+  damage_dice_small: 1d8
   critical_range: 19
   critical_multiplier: 2
   damage_type: piercing
@@ -574,6 +633,7 @@ Repeating Light Crossbow:
   wield_class: ranged
   category: exotic
   damage_dice: 1d8
+  damage_dice_small: 1d6
   critical_range: 19
   critical_multiplier: 2
   damage_type: piercing
@@ -585,6 +645,7 @@ Net:
   wield_class: ranged
   category: exotic
   damage_dice: '0'
+  damage_dice_small: 0
   critical_range: 20
   critical_multiplier: 2
   range_increment: 10
@@ -596,6 +657,7 @@ Shuriken:
   wield_class: ranged
   category: exotic
   damage_dice: 1d2
+  damage_dice_small: 1
   critical_range: 20
   critical_multiplier: 2
   damage_type: piercing
@@ -607,6 +669,7 @@ Bolas:
   wield_class: ranged
   category: exotic
   damage_dice: 1d4
+  damage_dice_small: 1d3
   critical_range: 20
   critical_multiplier: 2
   damage_type: bludgeoning

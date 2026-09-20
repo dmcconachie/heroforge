@@ -51,6 +51,7 @@ from __future__ import annotations
 
 import enum
 import math
+import re
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
@@ -140,8 +141,12 @@ def evaluate_formula(
         namespace["bab"] = character.get("bab")
         # Per-class levels as `<class>_level`, e.g.
         # `monk_level`. Missing classes resolve to 0.
+        # Non-identifier characters collapse to underscores so
+        # a multi-word class name is usable in a formula:
+        # "Wild Mage" -> wild_mage_level.
         for cn, lvl in character.class_level_map.items():
-            namespace[f"{cn.lower()}_level"] = lvl
+            key = re.sub(r"\W+", "_", cn.lower()).strip("_")
+            namespace[f"{key}_level"] = lvl
     else:
         namespace["character_level"] = 0
         for ab in Ability:
@@ -267,9 +272,21 @@ class BonusEffect:
 # ---------------------------------------------------------------------------
 
 # Special pool-key aliases expanded at application time
+# Every skill pool, which is what `skill_all` fans out to.
+# SKILL_ALL is itself an alias rather than a pool, so it is
+# excluded from its own expansion.
+_ALL_SKILL_POOLS: list[PoolKey] = [
+    key
+    for key in PoolKey
+    if key.value.startswith("skill_") and key is not PoolKey.SKILL_ALL
+]
+
+# Target aliases. A single effect naming one of these lands in
+# every pool it expands to; the alias itself is never a pool.
 _MULTI_TARGET_EXPANSIONS: dict[PoolKey, list[PoolKey]] = {
     PoolKey.ATTACK_ALL: [PoolKey.ATTACK_MELEE, PoolKey.ATTACK_RANGED],
     PoolKey.DAMAGE_ALL: [PoolKey.DAMAGE_MELEE, PoolKey.DAMAGE_RANGED],
+    PoolKey.SKILL_ALL: _ALL_SKILL_POOLS,
 }
 
 
@@ -303,6 +320,10 @@ class BuffDefinition:
     mutually_exclusive_with: list[str] = field(default_factory=list)
     note: str = ""
     condition_key: str = ""
+    # Whole size categories this buff moves the character.
+    # Not a bonus, so it is not a BonusEffect: see
+    # engine/size.py.
+    size_steps: int = 0
     # Derived (set by loader from condition_key):
     ongoing_condition: Callable | None = field(default=None, init=False)
 
@@ -499,16 +520,18 @@ def build_buff_from_effects(
     requires_caster_level: bool = False,
     mutually_exclusive_with: (list[str] | None) = None,
     condition_key: str = "",
+    size_steps: int = 0,
 ) -> BuffDefinition | None:
     """
     Build a BuffDefinition from raw effect dicts.
 
-    Returns None if *effects_raw* is empty.
+    Returns None if there is nothing to build: no effects and
+    no size change.
     Resolves BonusType enums and condition_keys.
     Raises ValueError on unknown bonus_type or
     condition_key.
     """
-    if not effects_raw:
+    if not effects_raw and not size_steps:
         return None
 
     from heroforge.engine.bonus import BonusType
@@ -571,6 +594,7 @@ def build_buff_from_effects(
         mutually_exclusive_with=(mutually_exclusive_with or []),
         note=note,
         condition_key=condition_key,
+        size_steps=size_steps,
     )
     if ongoing is not None:
         defn.ongoing_condition = ongoing
@@ -600,7 +624,9 @@ def apply_buff(
 
     # Register if the character hasn't seen this buff yet
     if defn.name not in character._buff_states:
-        character.register_buff_definition(defn.name, pairs)
+        character.register_buff_definition(
+            defn.name, pairs, size_steps=defn.size_steps
+        )
     else:
         # Update the registered entries in case CL changed the values
         character._buff_entries[defn.name] = pairs

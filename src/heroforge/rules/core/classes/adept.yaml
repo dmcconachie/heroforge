@@ -31,6 +31,9 @@ Adept:
     preparation: prepared
     max_spell_level: 5
     starts_at_level: 1
+  proficiencies:
+    weapons:
+      - simple
   class_features:
     - level: 2
       feature: summon_familiar

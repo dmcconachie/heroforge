@@ -44,6 +44,7 @@ if TYPE_CHECKING:
 from heroforge.engine.bonus import BonusPool
 from heroforge.engine.enums import SAVE_ABILITY, Ability, Alignment
 from heroforge.engine.resources import ResourceTracker
+from heroforge.engine.size import net_size_steps, step_size
 from heroforge.engine.spellcasting import Specialization
 from heroforge.engine.stat import (
     StatError,
@@ -55,6 +56,16 @@ from heroforge.engine.stat import (
 )
 from heroforge.rules.core.pool_keys import PoolKey
 from heroforge.rules.rules import get_rules
+
+# Stat nodes whose compute reads self.size. A size change is
+# not a pool entry, so pool-driven invalidation never reaches
+# them and they have to be invalidated explicitly.
+SIZE_DEPENDENT_NODES: tuple[str, ...] = (
+    "ac",
+    "attack_melee",
+    "attack_ranged",
+    "grapple",
+)
 
 # ---------------------------------------------------------------------------
 # Supporting types
@@ -275,6 +286,10 @@ class Character:
         # Entries contributed by each active buff, indexed by buff name.
         # When a buff is deactivated its entries are removed from the pools.
         self._buff_entries: dict[str, list[tuple[str, BonusEntry]]] = {}
+        # Size categories each registered buff moves the
+        # character by. Not a bonus pool: size is a category,
+        # not a modifier. See engine/size.py.
+        self._buff_size_steps: dict[str, int] = {}
         # buff_name → [(pool_key, BonusEntry), ...]
 
         # --- DM overrides ---------------------------------------------------
@@ -926,8 +941,26 @@ class Character:
 
     @property
     def size(self) -> str:
-        """Current size category. Overridden by templates."""
-        return getattr(self, "_size_override", None) or self._base_size
+        """
+        Current size category.
+
+        Race sets it, a template overrides it, and active
+        effects (Enlarge Person, Reduce Person, Righteous
+        Might) move it by whole categories on top.
+        """
+        base = getattr(self, "_size_override", None) or self._base_size
+        steps = net_size_steps(self._active_size_steps())
+        if steps == 0:
+            return base
+        return step_size(base, steps).value
+
+    def _active_size_steps(self) -> list[int]:
+        """Size steps contributed by every active buff."""
+        return [
+            steps
+            for name, steps in self._buff_size_steps.items()
+            if steps and self.is_buff_active(name)
+        ]
 
     @property
     def _base_size(self) -> str:
@@ -1168,6 +1201,7 @@ class Character:
         self,
         buff_name: str,
         entries: list[tuple[str, BonusEntry]],
+        size_steps: int = 0,
     ) -> None:
         """
         Tell the character about a buff and the pool entries it contributes.
@@ -1175,11 +1209,16 @@ class Character:
         Called by the rules registry when a buff definition is loaded.
         Does NOT activate the buff — that is toggle_buff's job.
 
-        entries: list of (pool_key, BonusEntry) pairs
+        entries:    list of (pool_key, BonusEntry) pairs
+        size_steps: whole size categories the buff moves the
+                    character (Enlarge Person +1, Reduce
+                    Person -1). Size is a category rather than
+                    a bonus, so it cannot ride in `entries`.
         """
         # Store the template entries; actual pool registration happens
         # only when the buff is activated.
         self._buff_entries[buff_name] = entries
+        self._buff_size_steps[buff_name] = size_steps
         # Initialise buff state if not already present (e.g. on load the
         # YAML provides the state, so we don't overwrite it).
         if buff_name not in self._buff_states:
@@ -1249,6 +1288,15 @@ class Character:
                 if pk in node.pools:
                     invalidated.add(node.key)
                     invalidated.update(self._graph.dependents_of(node.key))
+
+        # A size change is not a pool entry, so nothing above
+        # sees it. Every node that reads self.size has to be
+        # invalidated by hand.
+        if self._buff_size_steps.get(buff_name):
+            for key in SIZE_DEPENDENT_NODES:
+                self._graph.invalidate(key)
+                invalidated.add(key)
+                invalidated.update(self._graph.dependents_of(key))
 
         if invalidated:
             self._notify(invalidated)

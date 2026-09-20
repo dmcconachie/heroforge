@@ -32,55 +32,50 @@ Occult Slayer:
       - feat: Weapon Focus
   class_features:
     - level: 1
-      feature: magical_defense_1
-      description: >-
-        +1 bonus on saves vs spells and spell-like abilities
-        (TODO: wire up effect)
+      feature: magical_defense
+      description: Bonus on saves against magic
+      values:
+        saves: >-
+          1 + (occult_slayer_level >= 3)
+          + (occult_slayer_level >= 5)
+      when: on saves against spells and spell-like abilities
     - level: 1
       feature: weapon_bond
-      description: >-
-        Bond with masterwork weapon; +1d6 damage vs spellcasters
-        and creatures with spell-like abilities
-        (TODO: wire up effect)
+      description: Bonded masterwork weapon deals extra damage
+      values:
+        damage_dice: '1'
+      when: >-
+        against spellcasters and creatures with spell-like
+        abilities
+      note: Extra damage is the shown number of d6.
+    - level: 2
+      feature: mind_over_magic
+      description: Rebound a spell onto its originator
+      uses:
+        max: 1 + (occult_slayer_level >= 4)
+      values:
+        caster_level: occult_slayer_level + 5
+      note: Functions as spell turning.
     - level: 2
       feature: vicious_strike
-      description: >-
-        Readied attack to disrupt a spellcaster deals double
-        damage on hit (TODO: wire up effect)
-    - level: 2
-      feature: mind_over_magic_1
-      description: >-
-        Rebound a spell or spell-like ability onto originator as
-        spell turning, 1/day (CL = occult slayer level + 5)
-        (TODO: wire up effect)
+      description: Readied attack to disrupt a caster
+      values:
+        damage_multiplier: '2'
+      when: on a readied attack that disrupts a spellcaster
     - level: 3
       feature: auravision
-      description: >-
-        See magical auras out to 60 ft as detect magic (number of
-        auras only) (TODO: wire up effect)
-    - level: 3
-      feature: magical_defense_2
-      description: >-
-        Magical defense bonus increases to +2
-        (TODO: wire up effect)
-    - level: 4
-      feature: mind_over_magic_2
-      description: >-
-        Mind over magic usable 2/day
-        (TODO: wire up effect)
+      description: See magical auras as detect magic
+      values:
+        range_ft: '60'
+      note: Number of auras only, not their strength or school.
     - level: 4
       feature: nondetection_cloak
-      description: >-
-        Constant nondetection effect on self and gear
-        (CL = occult slayer level) (TODO: wire up effect)
+      description: Constant nondetection on self and gear
+      values:
+        caster_level: occult_slayer_level
     - level: 5
       feature: blank_thoughts
       description: >-
         Immune to mind-affecting effects; suppress or resume as a
-        free action (TODO: wire up effect)
-    - level: 5
-      feature: magical_defense_3
-      description: >-
-        Magical defense bonus increases to +3
-        (TODO: wire up effect)
+        free action
   is_prestige: true

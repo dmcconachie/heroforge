@@ -86,6 +86,33 @@ def save_at_level(progression: SaveProgression, level: int) -> int:
 
 
 @dataclass(frozen=True)
+class Proficiencies:
+    """
+    What one source (a class, a race) grants proficiency with.
+
+    ``weapons`` names whole categories; ``weapon_names`` names
+    individual weapons, which is how the wizard's short list
+    and the monk's special weapons are expressed.
+
+    This lives here rather than in engine/proficiency.py so
+    that module can stay a consumer of the rules registry
+    without ClassDefinition having to import it. See
+    docs/plans/engine-rules-import-cycle.md.
+    """
+
+    armor: tuple[str, ...] = ()
+    shields: bool = False
+    tower_shields: bool = False
+    weapons: tuple[str, ...] = ()
+    weapon_names: tuple[str, ...] = ()
+    # Exotic weapons this source lets the character treat as
+    # martial (dwarven waraxe for a dwarf). Not the same rule
+    # as proficiency: familiarity only reclassifies, so a
+    # character still needs martial proficiency to use it.
+    weapon_familiarity: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
 class ClassFeature:
     """One class feature at a specific level."""
 
@@ -107,6 +134,20 @@ class ClassFeature:
     # Only meaningful for passive features (buff_name=="")
     # today.
     gate: tuple[str, ...] = ()
+    # Uses per day: {"max": "<formula>", "unit": "use"}.
+    # The formula is evaluated per character, so a feature
+    # that scales with level or an ability has one entry
+    # rather than one per level.
+    uses: dict[str, str] | None = None
+    # Named numbers the player needs at the table, as
+    # formulas: {"attack": "max(0, cha_mod)", "damage":
+    # "paladin_level"}.
+    values: dict[str, str] = field(default_factory=dict)
+    # A condition the engine cannot evaluate because it is
+    # about the *target*, not the character — insightful
+    # strike only applies to creatures that can be critically
+    # hit. Recorded as text so the sheet can say so.
+    when: str = ""
 
 
 # -----------------------------------------------------------
@@ -159,6 +200,11 @@ class ClassDefinition:
     class_skills: list[str] = field(default_factory=list)
     spellcasting: SpellcastingInfo | None = None
     class_features: list[ClassFeature] = field(default_factory=list)
+    # Weapon and armor proficiency the class grants. None means
+    # "not stated": base classes must declare a block, because
+    # an omission would silently make every character of that
+    # class nonproficient with everything.
+    proficiencies: Proficiencies | None = None
     max_level: int = 20
     is_prestige: bool = False
     entry_prerequisites: Any = None

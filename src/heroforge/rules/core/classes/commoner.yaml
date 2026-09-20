@@ -19,4 +19,5 @@ Commoner:
     - Swim
     - Use Rope
   spellcasting: null
+  proficiencies: {}
   class_features: []

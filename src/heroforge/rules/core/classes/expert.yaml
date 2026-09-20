@@ -54,4 +54,9 @@ Expert:
     - Use Magic Device
     - Use Rope
   spellcasting: null
+  proficiencies:
+    weapons:
+      - simple
+    armor:
+      - light
   class_features: []

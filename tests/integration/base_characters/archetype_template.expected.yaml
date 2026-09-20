@@ -139,10 +139,14 @@ feats:
   - Blind-Fight
   - Improved Bull Rush
 class_features:
-  - 'bonus_feat_1: Bonus fighter feat'
-  - 'bonus_feat_2: Bonus fighter feat'
-  - 'bonus_feat_4: Bonus fighter feat'
-  - 'bonus_feat_6: Bonus fighter feat'
+  bonus_feat_1:
+    description: Bonus fighter feat
+  bonus_feat_2:
+    description: Bonus fighter feat
+  bonus_feat_4:
+    description: Bonus fighter feat
+  bonus_feat_6:
+    description: Bonus fighter feat
 special_qualities:
   - Darkvision 60 ft., low-light vision
   - Immunity to fire, sleep, paralysis

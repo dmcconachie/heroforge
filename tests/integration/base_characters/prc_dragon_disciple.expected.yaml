@@ -144,16 +144,26 @@ feats:
   - Great Fortitude
   - Blind-Fight
 class_features:
-  - 'summon_familiar: Summon a familiar'
-  - 'natural_armor_1: +1 natural armor'
-  - 'str_increase_2: +2 STR'
-  - 'claws_and_bite: Natural weapons'
-  - 'str_increase_4: +2 STR (cumulative)'
-  - 'natural_armor_4: +3 natural armor (cumulative)'
-  - 'blindsense: Blindsense 30 ft'
-  - 'natural_armor_7: +6 natural armor (cumulative)'
-  - 'wings: Fly speed 30 ft'
-  - 'dragon_apotheosis: Become half-dragon'
+  summon_familiar:
+    description: Summon a familiar
+  natural_armor_1:
+    description: +1 natural armor
+  str_increase_2:
+    description: +2 STR
+  claws_and_bite:
+    description: Natural weapons
+  str_increase_4:
+    description: +2 STR (cumulative)
+  natural_armor_4:
+    description: +3 natural armor (cumulative)
+  blindsense:
+    description: Blindsense 30 ft
+  natural_armor_7:
+    description: +6 natural armor (cumulative)
+  wings:
+    description: Fly speed 30 ft
+  dragon_apotheosis:
+    description: Become half-dragon
 spellcasting:
   Sorcerer:
     caster_level: 2

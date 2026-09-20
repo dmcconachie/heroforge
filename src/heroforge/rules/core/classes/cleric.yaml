@@ -24,13 +24,29 @@ Cleric:
     preparation: prepared
     max_spell_level: 9
     starts_at_level: 1
+  proficiencies:
+    weapons:
+      - simple
+    armor:
+      - light
+      - medium
+      - heavy
+    shields: true
   class_features:
     - level: 1
-      feature: turn_undead
-      description: Turn or rebuke undead
+      feature: domains
+      description: Two domains granting bonus spells and powers
     - level: 1
       feature: spontaneous_casting
       description: Convert prepared spells to cure/inflict
     - level: 1
-      feature: domains
-      description: Two domains granting bonus spells and powers
+      feature: turn_undead
+      description: Turn or rebuke undead
+      uses:
+        max: max(0, 3 + cha_mod)
+      values:
+        turning_check: cha_mod
+        turning_damage_bonus: cleric_level + cha_mod
+      note: >-
+        Turning check is 1d20 + CHA modifier against Table 8-9;
+        turning damage is 2d6 + the bonus shown.

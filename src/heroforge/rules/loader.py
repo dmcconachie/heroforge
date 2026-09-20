@@ -1387,7 +1387,9 @@ class SpellCompendiumLoader:
 
             # Dual registration: if the spell has
             # effects, also register a buff.
-            if buff_registry is not None and entry.effects:
+            if buff_registry is not None and (
+                entry.effects or entry.size_steps
+            ):
                 buff = build_buff_from_effects(
                     name=name,
                     category=BuffCategory.SPELL,
@@ -1397,6 +1399,7 @@ class SpellCompendiumLoader:
                     requires_caster_level=(entry.requires_caster_level),
                     mutually_exclusive_with=(entry.mutually_exclusive_with),
                     condition_key=(entry.condition_key),
+                    size_steps=entry.size_steps,
                 )
                 if buff is not None:
                     with contextlib.suppress(ValueError):
