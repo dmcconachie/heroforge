@@ -20,6 +20,10 @@ src/heroforge/
 │   │                       #   DmOverride, grapple,
 │   │                       #   carrying capacity
 │   ├── enums.py            # Ability, Alignment, Save, Size
+│   ├── size.py             # Size ladder, step_size(),
+│   │                       #   PHB Table 7-4 damage steps
+│   ├── proficiency.py      # Proficiencies, nonproficiency
+│   │                       #   penalties
 │   ├── effects.py          # BuffDefinition, BuffCategory,
 │   │                       #   formula evaluation
 │   ├── classes_races.py    # ClassDefinition, RaceDefinition,
@@ -240,6 +244,13 @@ per class), `total_level`, `attack_iteratives()`,
 Combat helpers: `_compute_size_mod_grapple()`,
 `_compute_size_mod_hide()`, `carrying_capacity()`.
 
+`size` is a computed property, not stored state: race sets
+the base, a template overrides it, and active effects move it
+by whole categories on top (`_active_size_steps()`). Because a
+size change is not a pool entry, nothing in the pool cascade
+sees it, so `toggle_buff` invalidates `SIZE_DEPENDENT_NODES`
+(`ac`, `attack_melee`, `attack_ranged`, `grapple`) by hand.
+
 Grapple stat node: BAB + STR mod + size grapple modifier.
 
 Placeholder fields (defined but not yet wired to logic):
@@ -257,6 +268,52 @@ notification via `ChangeNotifier`.
 `ChangeNotifier` is a simple observer list — the UI subscribes
 callbacks; the Character calls `notify(changed_keys)` on
 mutation. Keeps the engine decoupled from Qt signals.
+
+## Layer 3b: Size (`engine/size.py`)
+
+`SIZE_ORDER` is the Fine..Colossal ladder; `step_size()` moves
+a category along it, clamped at both ends. `net_size_steps()`
+combines competing effects the way `bonus.aggregate()` treats
+a size-typed bonus — largest increase plus largest decrease —
+so two +1 effects are one category and Enlarge Person cancels
+Reduce Person. The PHB states no general rule for stacking
+size changes; this is an engine decision, chosen to match how
+the same spells' size bonuses to STR and DEX already combine.
+
+An effect declares `size_steps:` on its YAML entry, which
+becomes `BuffDefinition.size_steps` and is handed to
+`Character.register_buff_definition()`. Enlarge Person is
+`+1`, Reduce Person `-1`, Righteous Might `+1`. The `-1` (or
+`+1`) those spells print for attack rolls and AC is *not* in
+their effects list: it falls out of the size table, and
+listing it as well would count it twice.
+
+Weapon damage by size is deliberately two mechanisms, because
+PHB p. 114 is:
+
+- Small and Medium are printed per weapon in Table 7-5 and are
+  not derivable from one another (heavy crossbow 1d8 -> 1d10,
+  greatsword 1d10 -> 2d6), so `WeaponDefinition` carries both
+  `damage_dice` and `damage_dice_small`.
+- Large and Tiny are the two columns of Table 7-4, keyed by
+  the Medium value, via `large_damage_dice()` and
+  `tiny_damage_dice()`.
+
+The two Table 7-4 columns are **not** symmetric about Medium.
+Large is one size category up. Tiny is *two* down, because
+Small sits between Medium and Tiny and has its own printed
+column in Table 7-5 — so a weapon's Tiny damage is one step
+below its **Small** damage, not one step below its Medium
+damage. An API taking a signed `steps` would have to make -1
+mean two categories, so the columns are named lookups
+instead. `size_test.py` checks the two printed tables agree,
+asserting for every weapon in the data that the Tiny value is
+exactly one rung below the Small value on `DAMAGE_LADDER`.
+
+`damage_dice_for_size()` picks between them; sizes outside
+Tiny..Large raise rather than extrapolate. `weapons.damage_dice()`
+applies it per equipped weapon, and an explicit `damage_dice`
+on the equipment entry still wins as an author override.
 
 ## Layer 4: Effects (`engine/effects.py`)
 
@@ -276,12 +333,50 @@ like `"2 + caster_level // 6"` in a restricted namespace.
 
 `ClassDefinition` holds BAB/save progressions, hit die,
 class skills, `skills_per_level`, optional spellcasting
-info, and prestige class fields (`max_level`,
-`is_prestige`, `entry_prerequisites`,
+info, `proficiencies`, and prestige class fields
+(`max_level`, `is_prestige`, `entry_prerequisites`,
 `ongoing_prerequisites`). `SpellcastingInfo` records cast
 type (arcane/divine), key ability, preparation mode, max
 spell level, and starting level. `ClassFeature` records a
-feature gained at a specific class level.
+feature gained at a specific class level, and carries the
+numbers that feature is worth: `uses` (a formula for uses
+per day plus a unit) and `values` (named formulas — smite's
+`attack` and `damage`, a turning check, sneak attack dice).
+Both are evaluated per character by `evaluate_formula`, so a
+feature that scales with level or an ability is **one**
+entry whose formulas do the scaling rather than one entry
+per tier.
+
+Two kinds of feature deliberately keep their per-tier
+entries instead:
+
+- Those that define a toggleable buff. A bard's Inspire
+  Courage +1..+4 and a barbarian's rage / greater rage /
+  mighty rage are separate `BuffDefinition`s with mutual
+  exclusion between them; folding them together would
+  delete that wiring. They keep their tiers and each gains
+  its own number.
+- Those an ACF names. Fighter and wizard bonus feat slots
+  are keyed `bonus_feat_1..20` and `bonus_feat_wizard_{level}`
+  precisely so `replaces:` can target one, so they stay.
+
+`when` records a condition the engine cannot evaluate
+because it is about the *target* rather than the character —
+insightful strike applies only to creatures that can be
+critically hit, sneak attack only when the target is denied
+its DEX bonus. It is text, not a predicate, until the
+conditional-effects panel lands. `gate` remains for
+conditions that *are* about the character (armor worn, load
+carried) and is evaluated.
+
+Consolidating these tiers corrected several progressions
+that had drifted from the book: paladin smite evil was at
+levels 1/5/8/11/14/17/20 rather than PHB Table 3-12's
+1/5/10/15/20; barbarian rage at 1/4/7/10/13/16/19 rather
+than Table 3-3's 1/4/8/12/16/20; druid wild shape at 4-10
+rather than Table 3-8's 5/6/7/10/14/18; and monk slow fall
+at 4/5/8 rather than Table 3-10's every second level from
+4th.
 
 `RaceDefinition` holds ability modifiers, size, speed,
 subtypes, and racial features.
@@ -315,7 +410,10 @@ lookup. Both base and prestige classes live in the same
 armor check penalty flag, and synergy declarations.
 `register_skills_on_character()` creates a pool and stat
 node per skill. `set_skill_ranks()` updates ranks.
-`compute_skill_total()` returns a full breakdown.
+`compute_skill_total()` returns a full breakdown, including
+the two modifiers that are neither ranks nor pool entries:
+Jump's speed modifier and Hide's size modifier (PHB Table
+8-1), which a Small race and Enlarge/Reduce Person both move.
 
 Per-level helpers: `compute_skill_budget()` computes
 points per level (skills_per_level + INT mod, x4 at
@@ -362,6 +460,54 @@ the choice (e.g. `skill_$selection` + "Knowledge (Religion)"
 per-character once the choice is known, so the cached
 `buff_definition` is skipped at load (`has_selection`).
 
+## Layer 7b: Proficiency (`engine/proficiency.py`)
+
+A character's proficiencies are derived, never stored: the
+union of every class they have levels in, their race, and the
+proficiency feats they hold. Dropping a class or a feat drops
+the proficiency with it.
+
+`Proficiencies` names whole categories (`weapons: [simple,
+martial]`, `armor: [light, medium, heavy]`, `shields`,
+`tower_shields`) plus `weapon_names` for the individual
+weapons that the wizard's short list, the monk's special
+weapons and the bard's and rogue's extras are printed as.
+
+`ClassDefinition.proficiencies` is `None` for a class that
+does not state a block. Prestige classes normally grant
+nothing and leave it unset; every *base* class must declare
+one, which `proficiency_test.py` enforces — an omission would
+silently make every character of that class nonproficient
+with everything, which is a much worse failure than a loud
+missing-data test.
+
+Races contribute through two different fields because they
+are two different rules: `weapon_proficiencies` is outright
+proficiency (an elf's Martial Weapon Proficiency bonus feats,
+PHB p. 16), while `weapon_familiarity` only moves an exotic
+weapon into the martial category (a dwarf's waraxe, PHB
+p. 15) — a dwarf still needs martial proficiency to use it.
+
+Penalties:
+
+- Armor or a shield the character is not proficient with
+  applies **its own armor check penalty** to attack rolls and
+  to every STR- and DEX-based ability and skill check (PHB
+  p. 122). Armor and shield nonproficiency stack, and they
+  reach skills that carry no armor check penalty of their own
+  — Ride takes the hit here and nowhere else.
+  `refresh_proficiency_penalties()` installs both from
+  scratch, so it is idempotent and safe to call on any
+  equipment, feat or level change.
+- A weapon the character is not proficient with costs -4 on
+  attack rolls with that weapon (PHB p. 113). That one is
+  applied per weapon in `engine/weapons.py`, where the
+  weapon's own pool lives.
+
+All three appear in the sheet's breakdowns as
+`nonproficient_armor`, `nonproficient_shield` and
+`nonproficient`.
+
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 
 Prerequisite types: `StatPrereq`, `AbilityPrereq`,
@@ -382,6 +528,22 @@ to enter; `ongoing_violations()` checks whether a
 character in a PrC still meets ongoing requirements.
 PrCs are loaded from `classes.yaml` by `ClassesLoader`
 and registered with the checker automatically.
+
+### Gates (`engine/gates.py`)
+
+A gate is a named `Callable[[Character], bool]` deciding
+when an effect applies: `not_heavy_armor`, `not_heavy_load`,
+`unarmored`, `no_shield`, `light_load_or_less` and
+`light_armor_or_less` (the swashbuckler's grace, insightful
+strike and dodge bonus are all lost in medium or heavy
+armor). Each key is a `KnownCoreGate` member with a
+predicate in `GATE_PREDICATES`; the congruence tests catch
+drift between the two.
+
+A gate answers a question about the *character*. A question
+about the *target* — "is this creature subject to critical
+hits?" — cannot be a gate, and is recorded as
+`ClassFeature.when` text instead.
 
 ## Layer 9: Templates (`engine/templates.py`)
 
@@ -430,7 +592,9 @@ bonuses + score + mod), combat stats (base + typed bonuses
 + total for AC, saves, attacks, grapple, HP, initiative,
 speed, SR), attack iteratives, skills (ranks + ability_mod
 + typed bonuses), carrying capacity, feats, class
-features, spellcasting (slots, DCs, spells known),
+features (a mapping keyed by feature name, each with its
+description and its resolved `uses` / `values` / `when` /
+`gated_by`), spellcasting (slots, DCs, spells known),
 domains (granted power + domain spells per chosen
 domain), special qualities, and equipment.
 
@@ -486,8 +650,9 @@ equipment:
       properties: [Keen]
 ```
 
-Weapons are display-only (no stat wiring yet —
-deferred to per-weapon attack nodes).
+Weapons get per-weapon attack and damage lines — see
+`engine/weapons.py` under "Not yet implemented" below for
+what is and is not routed through them.
 
 ## Layer 12: Spellcasting (`engine/spellcasting.py`)
 
@@ -595,9 +760,12 @@ YAML files under `rules/core/` contain full SRD data:
 - 12 creature templates
 - ~15 class feature buffs (rage, inspire courage, etc.)
 
-`classes/` directory has one YAML per class. Base/NPC
-classes use a `classes:` key; prestige classes use
-`prestige_classes:`.
+`classes/` directory has one YAML per class. Each file is
+a mapping keyed by the class name directly; prestige
+classes are marked with `is_prestige: true` rather than
+living under a separate top-level key. (`ClassesLoader`'s
+docstring still describes an older `classes:` /
+`prestige_classes:` layout that no file uses.)
 
 ### Per-book layout
 
@@ -743,10 +911,6 @@ Reusable components in `widgets/`: `LabeledField`,
   (ResourceTracker not yet wired to Character)
 - Companion/familiar sub-objects (placeholder fields
   exist on Character but no logic)
-- Armor/shield/weapon proficiency checks (nonproficiency
-  attack penalties not applied; tower shield proficiency
-  not distinguished from regular shield proficiency)
-- Weapon proficiency checks (nonproficiency penalties not applied)
 - Domain mechanical effects: cleric domains persist in
   `.char.yaml` and render in the sheet (granted-power text
   + domain spell list). The **War** domain is wired —
@@ -784,9 +948,11 @@ Reusable components in `widgets/`: `LabeledField`,
   spells added to the prepared-spell list, and Knowledge's
   +1 caster level on divinations (and the other
   +1-CL-for-a-spell-subset domains, which the single flat
-  `caster_level` field can't express). War's Martial
-  Weapon Proficiency half is a no-op (nonproficiency
-  penalties aren't modelled).
+  `caster_level` field can't express). War's Martial Weapon
+  Proficiency half is still a no-op: the domain does not yet
+  add the deity's favored weapon to the cleric's
+  proficiencies, though the machinery to honour it now
+  exists.
 - Cross-class skill *cost* is not modelled (a cross-class
   rank costs 2 points and caps at a half number); see
   `docs/plans/skill-points-and-cross-class.md`. Which
@@ -812,11 +978,12 @@ Reusable components in `widgets/`: `LabeledField`,
   level including cantrips, alongside the general
   allotment rather than folded into it.
   **Not** enforced: which spells may fill a specialty slot,
-  and the bar on preparing prohibited-school spells. Every
-  spell in the compendium has an empty `school` field, so
-  there is nothing to check against. The +2 Spellcraft
-  bonus is also absent: it applies only when learning
-  specialty-school spells, and a flat +2 would be wrong.
+  and the bar on preparing prohibited-school spells. The data
+  is in place — every spell carries a validated `school` —
+  but nothing models a prepared-spell list to check against.
+  The +2 Spellcraft bonus is also absent: it applies only when
+  learning specialty-school spells, and a flat +2 would be
+  wrong.
 - Alternative class features live in `engine/acfs.py` plus
   a per-book `acfs.yaml`, loaded into `Rules.acfs`. An
   entry carries `classes`, `levels`, `requires`,
@@ -937,16 +1104,18 @@ Reusable components in `widgets/`: `LabeledField`,
 - Template special qualities as mechanical effects:
   fly speed, spell resistance, damage reduction,
   energy resistances (currently display-only text)
-- Buff registry conflates three distinct concepts:
-  transitory effects (spells, conditions, rage),
-  always-on item effects (Amulet of Health), and
-  single-use permanent effects (Tome of
-  Understanding). Only transitory effects belong
-  in the buff system. Always-on items should use
-  equipment.equip_item() and consumed items should
-  use CharacterLevel.inherent_bumps. See
-  rules/core/buffs.py for the full list of
-  entries that need reclassification.
+- **Class features still describing numbers in prose** —
+  72 features across 16 classes carry a number in their
+  description but no structured `values`, so the sheet
+  prints the sentence rather than the figure. Densest are
+  Monk (9), Dragon Disciple (7), Arcane Archer (6) and
+  Dwarven Defender (6). The mechanism is in place; these
+  need the book checked and the formula written.
+- **Monk unarmed damage and flurry** — the unarmed damage
+  die and the flurry attack-bonus column of PHB Table 3-10
+  are per-level tables rather than formulas, so they need
+  the weapon-damage-table support noted below before they
+  can become `values`.
 - **Conditional effects sheet panel** — UI that
   surfaces effects which only apply under specific
   conditions (gate state, spell target alignment,
