@@ -29,6 +29,7 @@ from typing import TYPE_CHECKING
 from heroforge.engine.acfs import acf_slot_deltas, replaced_feature_keys
 from heroforge.engine.bonus import ALWAYS_STACKING, BonusPool, BonusType
 from heroforge.engine.character import feat_key_of
+from heroforge.engine.defenses import collect_defenses
 from heroforge.engine.effects import evaluate_formula
 from heroforge.engine.enums import (
     SAVE_ABILITY,
@@ -261,6 +262,7 @@ def _abilities(c: "Character") -> dict[Ability, AbilityEntry]:
 
 def _combat(c: "Character") -> CombatSection:
     str_mod = c.get_ability_modifier(Ability.STR)
+    defenses = collect_defenses(c)
 
     # AC
     ac_typed: dict[str, int] = {"base": 10}
@@ -357,6 +359,9 @@ def _combat(c: "Character") -> CombatSection:
         attack_ranged=_attack_breakdown(c, "attack_ranged", Ability.DEX),
         damage_melee=damage_melee,
         grapple=grapple,
+        damage_reduction=[str(dr) for dr in defenses.damage_reduction],
+        energy_resistance=dict(defenses.energy_resistance),
+        immunities=list(defenses.immunities),
     )
 
 

@@ -151,11 +151,14 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
   lists are defined in full; the permanent ones are wired.
   The activated, reactive and target-conditional ones carry
   no effects and want the conditional-effects panel.
-- **Stats that would let more properties be wired**: energy
-  resistance (5 families x 3 grades), damage reduction
-  (invulnerability) and a chance to negate a critical
-  (fortification) are all permanent, and all blocked on the
-  stat not existing.
+- **Fortification's chance to negate a critical** is the last
+  permanent property with nowhere to go. Energy resistance
+  and damage reduction now have a home (`engine/defenses.py`).
+- **Two defense sources are still unconnected**: creature
+  templates keep theirs as display text in
+  `special_qualities`, and a ring of energy resistance names
+  its energy per item, which needs the parameter mechanism
+  `Bane` uses.
   `Nimbleness` is defined without effects because its rules
   text could not be found in the MIC armour-property list —
   the only match is a body-slot item — and guessing seemed

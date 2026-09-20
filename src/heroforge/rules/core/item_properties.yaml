@@ -155,62 +155,89 @@ Acid Resistance:
   applies_to: armor
   note: >-
     Absorbs the first 10 points of acid damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      acid: 10
 Acid Resistance, Greater:
   applies_to: armor
   note: >-
     Absorbs the first 30 points of acid damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      acid: 30
 Acid Resistance, Improved:
   applies_to: armor
   note: >-
     Absorbs the first 20 points of acid damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      acid: 20
 Cold Resistance:
   applies_to: armor
   note: >-
     Absorbs the first 10 points of cold damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      cold: 10
 Cold Resistance, Greater:
   applies_to: armor
   note: >-
     Absorbs the first 30 points of cold damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      cold: 30
 Cold Resistance, Improved:
   applies_to: armor
   note: >-
     Absorbs the first 20 points of cold damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      cold: 20
 Electricity Resistance:
   applies_to: armor
   note: >-
     Absorbs the first 10 points of electricity damage per attack (DMG p.
     219). Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      electricity: 10
 Electricity Resistance, Greater:
   applies_to: armor
   note: >-
     Absorbs the first 30 points of electricity damage per attack (DMG p.
     219). Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      electricity: 30
 Electricity Resistance, Improved:
   applies_to: armor
   note: >-
     Absorbs the first 20 points of electricity damage per attack (DMG p.
     219). Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      electricity: 20
 Fire Resistance:
   applies_to: armor
   note: >-
     Absorbs the first 10 points of fire damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      fire: 10
 Fire Resistance, Greater:
   applies_to: armor
   note: >-
     Absorbs the first 30 points of fire damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      fire: 30
 Fire Resistance, Improved:
   applies_to: armor
   note: >-
     Absorbs the first 20 points of fire damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      fire: 20
 Fortification, Heavy:
   applies_to: armor
   note: >-
@@ -231,21 +258,31 @@ Invulnerability:
   note: >-
     Damage reduction 5/magic (DMG p. 219). Permanent, but damage
     reduction is not a modelled stat.
+  defenses:
+    damage_reduction:
+      - amount: 5
+        bypassed_by: magic
 Sonic Resistance:
   applies_to: armor
   note: >-
     Absorbs the first 10 points of sonic damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      sonic: 10
 Sonic Resistance, Greater:
   applies_to: armor
   note: >-
     Absorbs the first 30 points of sonic damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      sonic: 30
 Sonic Resistance, Improved:
   applies_to: armor
   note: >-
     Absorbs the first 20 points of sonic damage per attack (DMG p. 219).
-    Permanent, but energy resistance is not a modelled stat.
+  defenses:
+    energy_resistance:
+      sonic: 20
 Anarchic:
   applies_to: weapon
   note: >-

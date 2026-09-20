@@ -143,6 +143,9 @@ class ClassFeature:
     # formulas: {"attack": "max(0, cha_mod)", "damage":
     # "paladin_level"}.
     values: dict[str, str] = field(default_factory=dict)
+    # Damage reduction, resistance to energy and immunity.
+    # See engine/defenses.py for the shape.
+    defenses: dict = field(default_factory=dict)
     # A condition the engine cannot evaluate because it is
     # about the *target*, not the character — insightful
     # strike only applies to creatures that can be critically

@@ -26,6 +26,8 @@ src/heroforge/
 │   │                       #   penalties
 │   ├── item_properties.py  # Armour/shield/weapon special
 │   │                       #   properties
+│   ├── defenses.py         # Damage reduction, energy
+│   │                       #   resistance, immunity
 │   ├── effects.py          # BuffDefinition, BuffCategory,
 │   │                       #   formula evaluation
 │   ├── classes_races.py    # ClassDefinition, RaceDefinition,
@@ -536,11 +538,11 @@ silent moves and slick families (+5/+10/+15 competence on
 Hide, Move Silently and Escape Artist), spell resistance
 13/15/17/19, blueshine, speed and distance.
 
-**Permanent but unmodelled** — the benefit is always on,
-but the sheet has no such stat: the five energy resistances
-at three grades each, invulnerability's damage reduction,
-and fortification's chance to negate a critical. These are
-blocked on modelling work, not on a decision.
+**Permanent but unmodelled** — the benefit is always on, but
+the sheet has no such stat. Only fortification's chance to
+negate a critical is left here; the energy resistances and
+invulnerability's damage reduction now land in the defenses
+section (Layer 7d).
 
 **Conditional** — defined so the name is recognised and
 described, and carrying no effects, because a number would be
@@ -575,6 +577,34 @@ Two properties are not bonuses and so are resolved directly
 rather than through a pool: speed adds an attack to the
 weapon's iterative sequence, and distance doubles the
 weapon's own range increment before any feat extends it.
+
+## Layer 7d: Defenses (`engine/defenses.py`)
+
+Damage reduction, resistance to energy and immunity. None of
+them is a bonus, so none can live in a BonusPool: DR is keyed
+by what bypasses it and resistance by which energy, and in
+both cases the best single source applies rather than a sum
+(DMG p. 291; Rules Compendium p. 48).
+
+DR keeps **one entry per bypass** rather than collapsing to a
+number, because "the best in a given situation" depends on
+what is attacking — DR 2/- and DR 5/magic are both worth
+knowing. The sheet prints them as `2/-` and `5/magic`.
+Immunity to an energy type supersedes resistance to it, so
+the resistance entry is dropped rather than shown beside it.
+
+A source declares them with a `defenses:` block carrying
+`damage_reduction`, `energy_resistance` and `immunities`; an
+`amount` may be a formula, which is how the barbarian's
+progression is written. `ItemPropertyDefinition` and
+`ClassFeature` both accept one, and `collect_defenses()`
+aggregates across everything equipped and every class feature
+at level.
+
+Two sources do not reach it yet: creature templates carry
+theirs as display text in `special_qualities`, and a ring of
+energy resistance names its energy per item, which needs the
+same parameter mechanism `Bane` uses.
 
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 
@@ -1169,9 +1199,12 @@ Reusable components in `widgets/`: `LabeledField`,
   Not yet routed per weapon: conditional weapon properties
   (bane, wounding, the augment crystals), which only apply
   against particular targets, and Power Attack.
-- Template special qualities as mechanical effects:
-  fly speed, spell resistance, damage reduction,
-  energy resistances (currently display-only text)
+- Template special qualities as mechanical effects: fly
+  speed, spell resistance, damage reduction, energy
+  resistances. Still display-only text in
+  `special_qualities`, though DR, resistance and immunity now
+  have somewhere to go — a template needs a `defenses:` block
+  like the one item properties and class features use.
 - **Class features still describing numbers in prose** —
   72 features across 16 classes carry a number in their
   description but no structured `values`, so the sheet

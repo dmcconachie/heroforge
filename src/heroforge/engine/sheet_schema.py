@@ -104,6 +104,12 @@ class CombatSection:
     attack_ranged: Breakdown
     damage_melee: Breakdown
     grapple: Breakdown
+    # What the character shrugs off. DR keeps one entry per
+    # bypass ("2/-", "5/magic") because which one helps
+    # depends on what is attacking.
+    damage_reduction: list[str] = field(default_factory=list)
+    energy_resistance: dict[str, int] = field(default_factory=dict)
+    immunities: list[str] = field(default_factory=list)
 
 
 @dataclass

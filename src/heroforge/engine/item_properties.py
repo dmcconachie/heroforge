@@ -42,7 +42,7 @@ Public API:
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -72,6 +72,9 @@ class ItemPropertyDefinition:
     # other weapons of its kind. Multiplicative, so it cannot
     # be a pool entry either.
     doubles_range_increment: bool = False
+    # Damage reduction, resistance to energy and immunity.
+    # See engine/defenses.py for the shape.
+    defenses: dict = field(default_factory=dict)
     # The property names an argument the books leave open, so
     # "<name> <argument>" resolves to it. Bane is the only
     # one: its designated foe is any creature type or subtype.

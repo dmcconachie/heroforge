@@ -107,6 +107,8 @@ combat:
     typed:
       base: 20
       str: 9
+  damage_reduction:
+    - 5/-
 attack_iteratives:
   melee:
     - 29
@@ -189,8 +191,6 @@ class_features:
     description: Cannot be flanked
   damage_reduction:
     description: Damage reduction x/-
-    values:
-      damage_reduction: 5
   greater_rage:
     description: +6 STR/CON, +3 Will, -2 AC
   indomitable_will:
