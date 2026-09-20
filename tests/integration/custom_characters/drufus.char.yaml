@@ -274,7 +274,7 @@ equipment:
       - mind cloaking
       - greater shadow
       - greater silent moves
-      - nimble
+      - nimbleness
   shield:
     base: Heavy Steel Shield
     material: Mithral
@@ -366,7 +366,6 @@ equipment:
       hand: primary
       enhancement: 5
       properties:
-        - TWF (primary)
         - sacred
         - wounding
         - vanishing

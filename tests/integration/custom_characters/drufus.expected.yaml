@@ -605,7 +605,6 @@ equipment:
       crit_range: '20'
       crit_mult: x2
       properties:
-        - TWF (secondary)
         - sacred
         - bane (undead)
         - truedeath (greater)
