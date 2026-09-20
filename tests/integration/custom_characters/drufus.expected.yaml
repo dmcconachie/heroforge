@@ -597,7 +597,6 @@ equipment:
         total: 7
         typed:
           str: 2
-          strength_hands: -3
           enhancement: 5
       attack_iteratives:
         - 33
@@ -652,7 +651,6 @@ equipment:
         typed:
           str: 2
           material: -1
-          strength_hands: -3
           enhancement: 5
       attack_iteratives:
         - 32

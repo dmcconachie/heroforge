@@ -210,8 +210,7 @@ equipment:
       damage:
         total: 13
         typed:
-          str: 9
-          strength_hands: 4
+          str: 13
       attack_iteratives:
         - 29
         - 24

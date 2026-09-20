@@ -278,3 +278,175 @@ class TestDoubleWeapons:
         path.write_text(body)
         with pytest.raises(Exception, match="Greatsword"):
             load_character(path, None)
+
+
+class TestFlurryAndTwoWeaponFighting:
+    """
+    The two combine. 3.5 FAQ: "a monk can combine two-weapon
+    fighting with a flurry of blows to gain an extra attack
+    with her off hand (but remember that she can use only
+    unarmed strikes or special monk weapons as part of the
+    flurry). The penalties for two-weapon fighting stack with
+    the penalties for flurry of blows."
+    """
+
+    def _monk(
+        self, level: int, strength: int, *weapons: dict, feat: bool = True
+    ) -> Character:
+        c = _char("Monk", level, *weapons, strength=strength)
+        if feat:
+            c.add_feat("Two-Weapon Fighting", level=1, source="")
+        register_weapons_on_character(c)
+        return c
+
+    def test_the_faq_worked_example(self) -> None:
+        """
+        3.5 FAQ, verbatim: a 4th-level monk with the
+        Two-Weapon Fighting feat and Strength 14, flurrying
+        unarmed with an off-hand attack thrown in.
+
+        "The monk has a base attack bonus of +3 and a +2
+        Strength bonus. With a flurry, the character can make
+        two attacks, each at +3 (base +3, -2 flurry, +2
+        Strength). An unarmed strike is a light weapon, so the
+        monk suffers an additional -2 penalty for both the
+        flurry and the off-hand attack, and the monk makes
+        three attacks, each at an attack bonus of +1. The two
+        attacks from the flurry are primary attacks and add
+        the monk's full Strength bonus to damage of +2. The
+        single off-hand attack adds half the monk's Strength
+        bonus to damage (+1)."
+        """
+        c = self._monk(
+            4,
+            14,
+            {"base": "Unarmed Strike", "stances": ["flurry", "primary"]},
+            {"base": "Unarmed Strike", "stances": ["flurry", "off_hand"]},
+        )
+        primary, off = _weapons(c)
+
+        assert primary.attack_iteratives == [1, 1]
+        assert off.attack_iteratives == [1]
+        assert primary.damage.total == 2
+        assert off.damage.total == 1
+
+    def test_the_penalties_stack(self) -> None:
+        """Both the flurry's -2 and the pairing's -2 appear."""
+        c = self._monk(
+            4,
+            14,
+            {"base": "Unarmed Strike", "stances": ["flurry", "primary"]},
+            {"base": "Unarmed Strike", "stances": ["flurry", "off_hand"]},
+        )
+        typed = _weapons(c)[0].attack.typed
+        assert typed["flurry_of_blows"] == -2
+        assert typed["two_weapon_fighting"] == -2
+
+    def test_a_quarterstaff_fought_with_both_ends_while_flurrying(
+        self,
+    ) -> None:
+        """
+        The hardest case: a quarterstaff is a special monk
+        weapon, so it may be used in a flurry, and a double
+        weapon, so both ends may be fought with as two
+        weapons. Fighting with both ends is the
+        one-handed-plus-light use, so no end gets one and a
+        half Strength -- full on the primary, half on the
+        other -- and the far end counts as light for the
+        pairing penalty.
+        """
+        c = self._monk(
+            11,
+            16,
+            {"base": "Quarterstaff", "stances": ["flurry", "primary"]},
+            {"base": "Quarterstaff", "stances": ["flurry", "off_hand"]},
+        )
+        primary, off = _weapons(c)
+
+        # Monk 11: base attack +8, no flurry penalty by 9th,
+        # -2 from the pairing, +3 Strength.
+        assert primary.attack.total == 9
+        # Greater flurry from 11th: two extra attacks at full
+        # base attack bonus, on top of the +8/+3 sequence.
+        assert primary.attack_iteratives == [9, 9, 9, 4]
+        # One off-hand attack, at the same bonus.
+        assert off.attack_iteratives == [9]
+
+        # Full Strength on the primary end, half on the other,
+        # and one and a half on neither.
+        assert primary.damage.total == 3
+        assert off.damage.total == 1
+
+    def test_both_stances_are_named(self) -> None:
+        c = self._monk(
+            11,
+            16,
+            {"base": "Quarterstaff", "stances": ["flurry", "primary"]},
+            {"base": "Quarterstaff", "stances": ["flurry", "off_hand"]},
+        )
+        names = [w.name for w in _weapons(c)]
+        assert names[0] == "Quarterstaff (TWF: Primary, Flurry of Blows)"
+        assert names[1] == "Quarterstaff (TWF: Off-hand, Flurry of Blows)"
+
+    def test_without_the_feat_the_pairing_costs_more(self) -> None:
+        """
+        Table 8-10 with a light off-hand and no feat: -4 on
+        the primary, -8 on the off hand, stacking with the
+        flurry as before.
+        """
+        c = self._monk(
+            4,
+            14,
+            {"base": "Unarmed Strike", "stances": ["flurry", "primary"]},
+            {"base": "Unarmed Strike", "stances": ["flurry", "off_hand"]},
+            feat=False,
+        )
+        primary, off = _weapons(c)
+        assert primary.attack.typed["two_weapon_fighting"] == -4
+        assert off.attack.typed["two_weapon_fighting"] == -8
+
+
+class TestTheDamageBreakdownSums:
+    """
+    Regression: the grip's Strength correction was both folded
+    into the `str` line and listed beside it, so an off-hand
+    weapon's damage breakdown read `str: 1, strength_hands:
+    -2` against a total of 1. The breakdown and the total are
+    the same number seen two ways.
+    """
+
+    def _check(self, c: Character) -> None:
+        for w in _weapons(c):
+            assert sum(w.damage.typed.values()) == w.damage.total, w.name
+
+    def test_two_handed(self) -> None:
+        self._check(_char("Fighter", 6, {"base": "Greatsword"}))
+
+    def test_one_handed_in_two(self) -> None:
+        self._check(
+            _char(
+                "Fighter",
+                6,
+                {"base": "Longsword", "stances": ["two_handed"]},
+            )
+        )
+
+    def test_a_pairing(self) -> None:
+        self._check(
+            _char(
+                "Fighter",
+                6,
+                {"base": "Short Sword", "stances": ["primary"]},
+                {"base": "Dagger", "stances": ["off_hand"]},
+            )
+        )
+
+    def test_a_double_weapon_pairing(self) -> None:
+        self._check(
+            _char(
+                "Fighter",
+                6,
+                {"base": "Quarterstaff", "stances": ["primary"]},
+                {"base": "Quarterstaff", "stances": ["off_hand"]},
+            )
+        )

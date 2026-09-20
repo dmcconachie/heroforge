@@ -417,8 +417,7 @@ equipment:
       damage:
         total: 13
         typed:
-          str: 8
-          strength_hands: 4
+          str: 12
           enhancement: 1
       attack_iteratives:
         - 19

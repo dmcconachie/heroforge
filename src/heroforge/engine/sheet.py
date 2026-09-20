@@ -754,11 +754,12 @@ def _weapon_breakdown(
         typed = {}
         str_mod = c.get_ability_modifier(Ability.STR)
         if str_mod and not ranged:
-            # An off-hand weapon adds half Strength (PHB p. 113).
-            # The pool carries the correction; show the halved
-            # figure rather than a full bonus and a subtraction.
-            if has_stance(item, "off_hand"):
-                str_mod += strength_damage_adjust(c, item)
+            # How much Strength reaches damage depends on the
+            # grip: half in the off hand, one and a half in
+            # two hands (PHB p. 113). The pool carries the
+            # correction; show the figure actually added
+            # rather than a full bonus and an adjustment.
+            str_mod += strength_damage_adjust(c, item)
             if str_mod:
                 typed[Ability.STR.value] = str_mod
         pool_key = "damage_ranged" if ranged else "damage_melee"
@@ -766,7 +767,7 @@ def _weapon_breakdown(
         _merge(typed, _pool_breakdown(c.get_pool("damage_all"), c))
     own = _pool_breakdown(c.get_pool(key), c)
     # Already folded into the Strength figure above.
-    own.pop("off_hand_strength", None)
+    own.pop("strength_hands", None)
     _merge(typed, own)
     return Breakdown(total=c.get(key), typed=_drop_zeros(typed))
 

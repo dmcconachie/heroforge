@@ -1,0 +1,123 @@
+# The hardest attack routine the engine models.
+#
+# A monk flurrying with a quarterstaff and fighting with both
+# ends of it at once. Every stance interacts:
+#
+#   - a quarterstaff is a special monk weapon, so it may be
+#     used in a flurry
+#   - it is also a double weapon, so both ends may be fought
+#     with as two weapons
+#   - fighting with both ends is the one-handed-plus-light
+#     use, so neither end gets one and a half Strength, and
+#     the far end counts as light for Table 8-10
+#   - the flurry penalty and the pairing penalty stack
+#     (3.5 FAQ)
+#
+# At 11th level greater flurry adds a second extra attack and
+# the flurry penalty is already gone, so the primary end runs
+# four attacks and the off end one.
+identity:
+  name: Kessa Two-Ends
+  player: ''
+  race: Human
+  alignment: lawful_neutral
+  deity: ''
+ability_scores:
+  str: 16
+  dex: 16
+  con: 12
+  int: 10
+  wis: 14
+  cha: 8
+levels:
+  - level: 1
+    class: Monk
+    hp_roll: 8
+    feats:
+      - name: Two-Weapon Fighting
+    skill_ranks:
+      Balance: 4
+      Tumble: 4
+  - level: 2
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 3
+    class: Monk
+    hp_roll: 5
+    feats:
+      - name: Dodge
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 4
+    class: Monk
+    hp_roll: 5
+    ability_bump: wis
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 5
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 6
+    class: Monk
+    hp_roll: 5
+    feats:
+      - name: Mobility
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 7
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 8
+    class: Monk
+    hp_roll: 5
+    ability_bump: wis
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 9
+    class: Monk
+    hp_roll: 5
+    feats:
+      - name: Improved Two-Weapon Fighting
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 10
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 11
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - base: Quarterstaff
+      stances:
+        - flurry
+        - primary
+    - base: Quarterstaff
+      stances:
+        - flurry
+        - off_hand
+notes: >-
+  Both entries are the same quarterstaff, one end each.
