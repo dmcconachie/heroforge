@@ -42,6 +42,7 @@ from heroforge.engine.equipment import (
 from heroforge.engine.persistence import (
     ArmorSlotEntry,
     CharLevelEntry,
+    WornEntry,
 )
 from heroforge.engine.sheet_schema import (
     AbilityEntry,
@@ -65,9 +66,31 @@ from heroforge.engine.sheet_schema import (
 )
 from heroforge.engine.skills import SkillDefinition
 from heroforge.engine.spells import SpellEntry
-from heroforge.rules.known import KnownMaterial
+from heroforge.rules.known import KnownMagicItem, KnownMaterial
 
 converter = cattrs.Converter(forbid_extra_keys=True)
+
+
+# ---------------------------------------------------
+# A worn item is usually just a name. It becomes a
+# mapping only when the item names something chosen
+# when it was made -- a ring of energy resistance
+# picks its energy.
+# ---------------------------------------------------
+
+
+def _structure_worn(value: object, _type: type) -> WornEntry:
+    if isinstance(value, str):
+        return WornEntry(name=KnownMagicItem(value))
+    if isinstance(value, dict):
+        return WornEntry(
+            name=KnownMagicItem(value["name"]),
+            parameter=str(value.get("parameter", "")),
+        )
+    raise ValueError(f"Bad worn entry: {value!r}")
+
+
+converter.register_structure_hook(WornEntry, _structure_worn)
 
 
 # ---------------------------------------------------

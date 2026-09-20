@@ -79,7 +79,7 @@ class TestClassGrantedFeats:
 class TestItemGrantedFeats:
     def test_gloves_grant_two_weapon_fighting(self, tmp_path: Path) -> None:
         c = swashbuckler()
-        c.equipment["worn"] = ["Gloves of the Balanced Hand"]
+        c.equipment["worn"] = [{"name": "Gloves of the Balanced Hand"}]
         loaded = _round_trip(c, tmp_path)
         assert loaded.has_feat("Two-Weapon Fighting")
 

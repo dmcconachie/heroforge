@@ -35,6 +35,13 @@ class MagicItemDefinition:
     source_book : Rulebook abbreviation (default "SRD").
     slot        : Equipment slot (e.g. "ring", "cloak").
     cost_gp     : Gold piece cost.
+    defenses    : Damage reduction / energy resistance /
+                  immunity block (see engine/defenses.py).
+    takes_parameter : The item names something chosen when it
+                  is made -- a ring of energy resistance picks
+                  its energy. `$parameter` in a defenses key
+                  or value is replaced with the choice.
+    parameter_label : What the choice is, for the UI.
     """
 
     name: str
@@ -43,6 +50,9 @@ class MagicItemDefinition:
     source_book: str = "SRD"
     slot: str = ""
     cost_gp: int = 0
+    defenses: dict = field(default_factory=dict)
+    takes_parameter: bool = False
+    parameter_label: str = ""
     # Feats wearing this item confers, each optionally gated on
     # a feat the wearer already has of their own (Gloves of the
     # Balanced Hand grant Improved Two-Weapon Fighting only to

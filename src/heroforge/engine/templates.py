@@ -113,6 +113,9 @@ class TemplateDefinition:
         default_factory=list
     )
     natural_armor_bonus: int = 0
+    # Damage reduction / energy resistance / immunity.
+    # See engine/defenses.py for the shape.
+    defenses: dict = field(default_factory=dict)
     special_qualities: list[str] = field(default_factory=list)
     grants_feats: list[str] = field(default_factory=list)
     note: str = ""
@@ -461,6 +464,7 @@ def build_template_from_yaml(
         subtype_remove=decl.get("subtype_remove", []),
         ability_modifiers=ability_mods,
         natural_armor_bonus=int(decl.get("natural_armor_bonus", 0)),
+        defenses=decl.get("defenses", {}),
         special_qualities=decl.get("special_qualities", []),
         grants_feats=decl.get("grants_feats", []),
         note=decl.get("note", ""),

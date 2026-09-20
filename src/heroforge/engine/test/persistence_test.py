@@ -844,14 +844,15 @@ class TestEquipmentRoundTrip:
         belt = state.magic_item_registry.get("Belt of Giant Strength +4")
         assert belt is not None
         equip_item(c, belt)
-        c.equipment.setdefault("worn", []).append(belt.name)
+        c.equipment.setdefault("worn", []).append({"name": belt.name})
         assert c.get_ability_score("str") == 18
 
         path = tmp_path / "worn.char.yaml"
         save_character(c, path)
         loaded = load_character(path, make_app_state())
         assert loaded.get_ability_score("str") == 18
-        assert "Belt of Giant Strength +4" in (loaded.equipment.get("worn", []))
+        worn = [w["name"] for w in loaded.equipment.get("worn", [])]
+        assert "Belt of Giant Strength +4" in worn
 
     def test_weapon_data_round_trips(self, tmp_path: Path) -> None:
         state = make_app_state()

@@ -21,6 +21,19 @@
 #   note                  : display hint
 
 Half-Celestial:
+  defenses:
+    # MM: 5/magic at HD 11 or less, 10/magic at 12 or more.
+    # Read off character level, which equals HD for a
+    # character with no racial Hit Dice.
+    damage_reduction:
+      - amount: 5 + 5 * (character_level >= 12)
+        bypassed_by: magic
+    energy_resistance:
+      acid: 10
+      cold: 10
+      electricity: 10
+    immunities:
+      - disease
   source_book: MM
   cr_adjustment: varies
   la_adjustment: '+4'
@@ -62,6 +75,17 @@ Half-Celestial:
     Outsider heritage; retains base type but
     gains Good and Extraplanar subtypes
 Half-Fiend:
+  defenses:
+    damage_reduction:
+      - amount: 5 + 5 * (character_level >= 12)
+        bypassed_by: magic
+    energy_resistance:
+      acid: 10
+      cold: 10
+      electricity: 10
+      fire: 10
+    immunities:
+      - poison
   source_book: MM
   cr_adjustment: varies
   la_adjustment: '+4'
@@ -87,13 +111,18 @@ Half-Fiend:
     - Darkvision 60 ft.
     - Immunity to poison
     - Resistance to acid 10, cold 10, electricity 10, fire 10
-    - Damage reduction 5/magic (if 5 HD or less) or 10/magic
+    - Damage reduction 5/magic (HD 11 or less) or 10/magic (HD 12+)
     - 'Spell resistance: character level + 11'
     - Smite good 1/day (as blackguard)
   grants_feats: []
   note: >-
     Fiendish heritage; retains base type but gains Evil and Extraplanar subtypes
 Half-Dragon (Red):
+  defenses:
+    immunities:
+      - fire
+      - sleep
+      - paralysis
   source_book: MM
   cr_adjustment: '+2'
   la_adjustment: '+3'
@@ -120,6 +149,11 @@ Half-Dragon (Red):
   grants_feats: []
   note: Becomes Dragon type
 Half-Dragon (White):
+  defenses:
+    immunities:
+      - cold
+      - sleep
+      - paralysis
   source_book: MM
   cr_adjustment: '+2'
   la_adjustment: '+3'

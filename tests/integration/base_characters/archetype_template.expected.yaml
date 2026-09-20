@@ -103,6 +103,10 @@ combat:
     typed:
       base: 6
       str: 7
+  immunities:
+    - fire
+    - paralysis
+    - sleep
 attack_iteratives:
   melee:
     - 13

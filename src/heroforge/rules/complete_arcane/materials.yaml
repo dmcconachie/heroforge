@@ -1,0 +1,15 @@
+# rules/complete_arcane/materials.yaml
+#
+# Special materials from Complete Arcane.
+
+Starmetal:
+  acp_adjust: 1
+  includes_masterwork: true
+  note: >-
+    Refined meteoric iron. Equal to adamantine for all
+    purposes, including overcoming damage reduction and
+    granting it when used in armour: DR 1/- (light), 2/-
+    (medium), 3/- (heavy). A starmetal weapon deals an extra
+    1d6 damage to extraplanar creatures while they are on the
+    Material Plane, which is conditional on the target and so
+    moves no number here. Complete Arcane p. 141.

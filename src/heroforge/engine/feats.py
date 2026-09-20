@@ -419,7 +419,8 @@ def refresh_granted_feats(character: "Character") -> None:
     # An item's condition is judged against what the wearer had
     # before that item granted anything, so the Gloves cannot
     # bootstrap their own Two-Weapon Fighting into Improved.
-    for item_name in character.equipment.get("worn", []) or []:
+    for entry in character.equipment.get("worn", []) or []:
+        item_name = entry["name"]
         item = rules.magic_items.get(item_name)
         if item is None:
             continue

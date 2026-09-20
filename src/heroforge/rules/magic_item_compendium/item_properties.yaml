@@ -46,11 +46,14 @@ Nimbleness:
   applies_to: armor
   source_book: MIC
   note: >-
-    Recognised so the name displays, but its rules text has
-    not been located in the MIC armour-property list -- the
-    only "Nimbleness" found is a body-slot item, not an
-    armour property. Left without effects rather than
-    guessed at.
+    Raises the armour's maximum Dexterity bonus by 1 and
+    reduces its armour check penalty by 2. Not wired: those
+    are adjustments to the armour's own figures, the way a
+    material's acp_adjust and max_dex_adjust are, and they
+    have to be applied in adjust_for_material() before the
+    slot's numbers are stored. A property cannot reach that
+    yet, so this needs properties to adjust armour stats
+    rather than contribute bonuses.
 Crystal of Mind Cloaking, Least:
   applies_to: armor
   source_book: MIC

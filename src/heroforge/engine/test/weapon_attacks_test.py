@@ -520,7 +520,7 @@ class TestConditionalItemGrant:
         c = fighter(16)
         if own_twf:
             take(c, "Two-Weapon Fighting", None)
-        c.equipment["worn"] = ["Gloves of the Balanced Hand"]
+        c.equipment["worn"] = [{"name": "Gloves of the Balanced Hand"}]
         from heroforge.engine.feats import refresh_granted_feats
 
         refresh_granted_feats(c)

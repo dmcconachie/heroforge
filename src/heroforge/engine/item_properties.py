@@ -45,6 +45,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
+from heroforge.engine.effects import pool_entries_from_effects
+
 if TYPE_CHECKING:
     from heroforge.engine.bonus import BonusEntry
 
@@ -157,8 +159,6 @@ def property_pool_entries(
     Unknown names and properties with no permanent effect
     contribute nothing.
     """
-    from heroforge.engine.effects import pool_entries_from_effects
-
     pairs: list[tuple[str, BonusEntry]] = []
     for name in names or ():
         defn = property_definition(str(name))

@@ -176,12 +176,23 @@ class WeaponSlotEntry:
 
 
 @dataclass
+class WornEntry:
+    """.char.yaml worn-item entry."""
+
+    name: KnownMagicItem
+    parameter: str = ""
+
+
+@dataclass
 class EquipmentSection:
     """.char.yaml equipment section."""
 
     armor: ArmorSlotEntry | None = None
     shield: ArmorSlotEntry | None = None
-    worn: list[KnownMagicItem] = field(default_factory=list)
+    # A worn item is a name, or {name, parameter} when the
+    # item names something chosen when it was made (a ring of
+    # energy resistance picks its energy).
+    worn: list[WornEntry] = field(default_factory=list)
     weapons: list[WeaponSlotEntry] = field(default_factory=list)
 
 
@@ -341,7 +352,13 @@ def _character_to_charfile(
     eq = c.equipment
     armor = _armor_to_entry(eq.get("armor"))
     shield = _armor_to_entry(eq.get("shield"))
-    worn = [KnownMagicItem(n) for n in eq.get("worn", [])]
+    worn = [
+        WornEntry(
+            name=KnownMagicItem(w["name"]),
+            parameter=w.get("parameter", ""),
+        )
+        for w in eq.get("worn", [])
+    ]
     weapons = []
     for w in eq.get("weapons", []):
         if isinstance(w, dict) and w.get("base"):
@@ -719,11 +736,17 @@ def _load_equipment(
             properties=list(eq.shield.properties),
         )
 
-    for item_name in eq.worn:
+    for entry in eq.worn:
+        item_name = entry.name
         item_defn = rules.magic_items.get(str(item_name))
         equip_item(c, item_defn)
     if eq.worn:
-        c.equipment["worn"] = [str(n) for n in eq.worn]
+        c.equipment["worn"] = [
+            {"name": str(w.name), "parameter": w.parameter}
+            if w.parameter
+            else {"name": str(w.name)}
+            for w in eq.worn
+        ]
 
     if eq.weapons:
         c.equipment["weapons"] = [

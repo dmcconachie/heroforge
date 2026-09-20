@@ -74,19 +74,37 @@ Ring of Elemental Command (Water):
     of ice, control water (charged)
 Ring of Energy Resistance, Greater:
   slot: ring
+  takes_parameter: true
+  parameter_label: energy type
   note: >-
     Resist 30 against one specified energy type
-    (acid, cold, electricity, fire, or sonic)
+    (acid, cold, electricity, fire, or sonic), named when the
+    ring is made
+  defenses:
+    energy_resistance:
+      $parameter: 30
 Ring of Energy Resistance, Major:
   slot: ring
+  takes_parameter: true
+  parameter_label: energy type
   note: >-
     Resist 20 against one specified energy type
-    (acid, cold, electricity, fire, or sonic)
+    (acid, cold, electricity, fire, or sonic), named when the
+    ring is made
+  defenses:
+    energy_resistance:
+      $parameter: 20
 Ring of Energy Resistance, Minor:
   slot: ring
+  takes_parameter: true
+  parameter_label: energy type
   note: >-
     Resist 10 against one specified energy type
-    (acid, cold, electricity, fire, or sonic)
+    (acid, cold, electricity, fire, or sonic), named when the
+    ring is made
+  defenses:
+    energy_resistance:
+      $parameter: 10
 Ring of Evasion:
   slot: ring
   note: >-

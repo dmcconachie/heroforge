@@ -498,13 +498,8 @@ equipment:
     - Boots of Speed
     - Quicksilver Boots
     - Quicksilver Boots
-    - Crystal of Mind Cloaking, Greater
     - Demolition Crystal, Greater
     - Demolition Crystal, Greater
-    - Fiendslayer Crystal, Least
-    - Fiendslayer Crystal, Least
-    - Truedeath Crystal, Greater
-    - Truedeath Crystal, Greater
     - Gemstone of Heavy Fortification
     - Heartstone
     - Stone of Good Luck (Luckstone)
@@ -557,7 +552,7 @@ equipment:
     - Thieves' Tools, Masterwork
     - Xan ibn'Duman
   weapons:
-    - name: '+5 Dagger (TWF: Primary)'
+    - name: '+5 Starmetal Dagger (TWF: Primary)'
       attack:
         total: 33
         typed:
@@ -587,8 +582,7 @@ equipment:
         - Vanishing
         - Fiendslayer Crystal, Least
         - weapon bond
-        - Starmetal
-    - name: '+5 Dagger (TWF: Off-hand)'
+    - name: '+5 Starmetal Dagger (TWF: Off-hand)'
       attack:
         total: 33
         typed:
@@ -615,7 +609,6 @@ equipment:
         - Wounding
         - Vanishing
         - Fiendslayer Crystal, Least
-        - Starmetal
     - name: '+5 Alchemical Silver Light Mace (TWF: Primary)'
       attack:
         total: 32

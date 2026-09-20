@@ -601,10 +601,26 @@ progression is written. `ItemPropertyDefinition` and
 aggregates across everything equipped and every class feature
 at level.
 
-Two sources do not reach it yet: creature templates carry
-theirs as display text in `special_qualities`, and a ring of
-energy resistance names its energy per item, which needs the
-same parameter mechanism `Bane` uses.
+Four sources feed it: equipped item properties, worn magic
+items, creature templates and class features. A worn item may
+name something chosen when it was made — a ring of energy
+resistance picks its energy — so a `worn:` entry can be
+`{name, parameter}` instead of a bare name, and `$parameter`
+in a defenses key is replaced with the choice. Template
+amounts may be formulas, which is how the half-outsiders'
+"5/magic at HD 11 or less, 10/magic at 12 or more" is
+written.
+
+Immunity to an energy type is listed in `combat.immunities`
+and removes the matching resistance, so a red half-dragon
+wearing a ring of fire resistance shows immunity alone rather
+than both.
+
+Not yet reaching it: the Celestial and Fiendish Creature
+templates, whose resistance scales with Hit Dice on a table
+that has not been verified, and adamantine or starmetal
+armour, whose DR depends on the armour's category rather than
+on the material alone.
 
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 
@@ -1199,12 +1215,11 @@ Reusable components in `widgets/`: `LabeledField`,
   Not yet routed per weapon: conditional weapon properties
   (bane, wounding, the augment crystals), which only apply
   against particular targets, and Power Attack.
-- Template special qualities as mechanical effects: fly
-  speed, spell resistance, damage reduction, energy
-  resistances. Still display-only text in
-  `special_qualities`, though DR, resistance and immunity now
-  have somewhere to go — a template needs a `defenses:` block
-  like the one item properties and class features use.
+- Template special qualities as mechanical effects: fly speed
+  and spell resistance are still display-only text in
+  `special_qualities`. Damage reduction, energy resistance and
+  immunity now have a `defenses:` block and are wired for the
+  half-outsiders and half-dragons.
 - **Class features still describing numbers in prose** —
   72 features across 16 classes carry a number in their
   description but no structured `values`, so the sheet

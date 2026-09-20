@@ -298,13 +298,8 @@ equipment:
     - Quicksilver Boots
     - Quicksilver Boots
 
-    - Crystal of Mind Cloaking, Greater
     - Demolition Crystal, Greater
     - Demolition Crystal, Greater
-    - Fiendslayer Crystal, Least
-    - Fiendslayer Crystal, Least
-    - Truedeath Crystal, Greater
-    - Truedeath Crystal, Greater
 
     - Gemstone of Heavy Fortification
     - Heartstone
@@ -364,6 +359,7 @@ equipment:
   weapons:
     - base: Dagger
       hand: primary
+      material: Starmetal
       enhancement: 5
       properties:
         - Sacred
@@ -371,16 +367,15 @@ equipment:
         - Vanishing
         - Fiendslayer Crystal, Least
         - weapon bond
-        - Starmetal
     - base: Dagger
       hand: off_hand
+      material: Starmetal
       enhancement: 5
       properties:
         - Sacred
         - Wounding
         - Vanishing
         - Fiendslayer Crystal, Least
-        - Starmetal
     - base: Light Mace
       hand: primary
       material: Alchemical Silver

@@ -836,7 +836,7 @@ def _equipment(c: "Character") -> EquipmentSection:
             properties=list(shield.get("properties", [])),
         )
 
-    section.worn = [KnownMagicItem(n) for n in eq.get("worn", [])]
+    section.worn = [KnownMagicItem(w["name"]) for w in eq.get("worn", [])]
 
     for index, w in enumerate(eq.get("weapons", [])):
         atk_key, dmg_key = weapon_pool_keys(index)

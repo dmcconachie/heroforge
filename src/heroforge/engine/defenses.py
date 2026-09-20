@@ -49,6 +49,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.effects import evaluate_formula
+from heroforge.engine.item_properties import property_definition
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
@@ -92,12 +93,27 @@ def best_damage_reduction(
     return tuple(DamageReduction(best[key], key) for key in sorted(best))
 
 
+PARAMETER = "$parameter"
+
+
+def _substitute(token: str, parameter: str) -> str:
+    """
+    Replace `$parameter` with the item's chosen argument.
+
+    A ring of energy resistance picks its energy when it is
+    made, so its declaration says `$parameter: 10` rather
+    than naming one.
+    """
+    return parameter if token == PARAMETER else token
+
+
 def _read_block(
     block: dict,
     character: "Character",
     drs: list[DamageReduction],
     resist: list[tuple[str, int]],
     immune: set[str],
+    parameter: str = "",
 ) -> None:
     """Accumulate one `defenses:` declaration."""
     for entry in block.get("damage_reduction", ()) or ():
@@ -109,7 +125,10 @@ def _read_block(
         )
         if amount > 0:
             drs.append(
-                DamageReduction(amount, entry.get("bypassed_by", NOTHING))
+                DamageReduction(
+                    amount,
+                    _substitute(entry.get("bypassed_by", NOTHING), parameter),
+                )
             )
     for energy, raw in (block.get("energy_resistance", {}) or {}).items():
         points = (
@@ -118,8 +137,11 @@ def _read_block(
             else int(raw)
         )
         if points > 0:
-            resist.append((str(energy), points))
-    immune.update(str(x) for x in block.get("immunities", ()) or ())
+            resist.append((_substitute(str(energy), parameter), points))
+    immune.update(
+        _substitute(str(x), parameter)
+        for x in block.get("immunities", ()) or ()
+    )
 
 
 def _equipped_property_names(character: "Character") -> list[str]:
@@ -137,12 +159,11 @@ def collect_defenses(character: "Character") -> Defenses:
     """
     Aggregate every source of DR, resistance and immunity.
 
-    Sources today are equipped item properties and class
-    features. Creature templates carry theirs as display text
-    and rings of energy resistance name their energy per
-    item, so neither reaches this yet.
+    Sources are equipped item properties, worn magic items,
+    creature templates and class features.
     """
-    from heroforge.engine.item_properties import property_definition
+    # Only get_rules has to be deferred: engine <- rules is a
+    # cycle. See docs/plans/engine-rules-import-cycle.md.
     from heroforge.rules.rules import get_rules
 
     drs: list[DamageReduction] = []
@@ -154,7 +175,26 @@ def collect_defenses(character: "Character") -> Defenses:
         if defn is not None and defn.defenses:
             _read_block(defn.defenses, character, drs, resist, immune)
 
-    classes = get_rules().classes
+    rules = get_rules()
+
+    for entry in character.equipment.get("worn", []) or []:
+        item = rules.magic_items.get(entry["name"])
+        if item is not None and item.defenses:
+            _read_block(
+                item.defenses,
+                character,
+                drs,
+                resist,
+                immune,
+                entry.get("parameter", ""),
+            )
+
+    for application in character.templates or ():
+        template = rules.templates.get(application.template_name)
+        if template is not None and template.defenses:
+            _read_block(template.defenses, character, drs, resist, immune)
+
+    classes = rules.classes
     for class_name, level in character.class_level_map.items():
         defn = classes.get(class_name)
         if defn is None:

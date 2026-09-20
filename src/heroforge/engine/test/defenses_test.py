@@ -167,3 +167,115 @@ levels:
         sheet = gather_sheet(load_character(path, None), None)
         assert sorted(sheet.combat.damage_reduction) == ["2/-", "5/magic"]
         assert sheet.combat.energy_resistance == {"fire": 30}
+
+
+class TestWornItems:
+    """
+    A ring of energy resistance names its energy when it is
+    made, so the item declares `$parameter` and the character
+    file supplies the choice.
+    """
+
+    def _ringed(self, grade: str, energy: str) -> Character:
+        from heroforge.engine.equipment import equip_item
+
+        c = _char(cls="Fighter", level=1)
+        name = f"Ring of Energy Resistance, {grade}"
+        item = get_rules().magic_items.get(name)
+        assert item is not None
+        equip_item(c, item)
+        c.equipment["worn"] = [{"name": name, "parameter": energy}]
+        return c
+
+    @pytest.mark.parametrize(
+        ("grade", "points"),
+        [("Minor", 10), ("Major", 20), ("Greater", 30)],
+    )
+    def test_the_ring_resists_its_chosen_energy(
+        self, grade: str, points: int
+    ) -> None:
+        d = collect_defenses(self._ringed(grade, "fire"))
+        assert d.energy_resistance == {"fire": points}
+
+    def test_a_different_choice_gives_a_different_energy(self) -> None:
+        d = collect_defenses(self._ringed("Minor", "sonic"))
+        assert d.energy_resistance == {"sonic": 10}
+
+    def test_the_item_declares_what_the_choice_is(self) -> None:
+        item = get_rules().magic_items.get("Ring of Energy Resistance, Minor")
+        assert item.takes_parameter
+        assert item.parameter_label == "energy type"
+
+
+class TestTemplates:
+    def _templated(self, name: str, level: int = 1) -> Character:
+        from heroforge.engine.templates import apply_template
+
+        c = _char(cls="Fighter", level=level)
+        defn = get_rules().templates.get(name)
+        assert defn is not None, name
+        apply_template(defn, c)
+        return c
+
+    def test_half_celestial_resistances(self) -> None:
+        d = collect_defenses(self._templated("Half-Celestial"))
+        assert d.energy_resistance == {
+            "acid": 10,
+            "cold": 10,
+            "electricity": 10,
+        }
+
+    def test_half_celestial_immunity(self) -> None:
+        d = collect_defenses(self._templated("Half-Celestial"))
+        assert "disease" in d.immunities
+
+    def test_half_fiend_adds_fire(self) -> None:
+        d = collect_defenses(self._templated("Half-Fiend"))
+        assert d.energy_resistance["fire"] == 10
+        assert "poison" in d.immunities
+
+    def test_damage_reduction_scales_with_hit_dice(self) -> None:
+        """MM: 5/magic at HD 11 or less, 10/magic at 12 or more."""
+        low = collect_defenses(self._templated("Half-Celestial", 11))
+        high = collect_defenses(self._templated("Half-Celestial", 12))
+        assert low.damage_reduction == (DamageReduction(5, "magic"),)
+        assert high.damage_reduction == (DamageReduction(10, "magic"),)
+
+
+class TestEnergyImmunity:
+    """
+    Immunity to a damage type has to be visible, and it
+    supersedes resistance to the same type rather than being
+    listed beside it.
+    """
+
+    def _red_dragon(self) -> Character:
+        from heroforge.engine.templates import apply_template
+
+        c = _char(cls="Fighter", level=1)
+        apply_template(get_rules().templates.get("Half-Dragon (Red)"), c)
+        return c
+
+    def test_fire_immunity_is_listed(self) -> None:
+        d = collect_defenses(self._red_dragon())
+        assert "fire" in d.immunities
+
+    def test_it_reaches_the_sheet(self) -> None:
+        sheet = gather_sheet(self._red_dragon(), None)
+        assert "fire" in sheet.combat.immunities
+
+    def test_immunity_supersedes_resistance(self) -> None:
+        """
+        A red half-dragon wearing a ring of fire resistance is
+        immune, so showing "resist fire 10" beside it would
+        only mislead.
+        """
+        from heroforge.engine.equipment import equip_item
+
+        c = self._red_dragon()
+        name = "Ring of Energy Resistance, Minor"
+        equip_item(c, get_rules().magic_items.get(name))
+        c.equipment["worn"] = [{"name": name, "parameter": "fire"}]
+        d = collect_defenses(c)
+        assert "fire" in d.immunities
+        assert "fire" not in d.energy_resistance

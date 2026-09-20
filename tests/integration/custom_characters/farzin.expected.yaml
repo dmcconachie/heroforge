@@ -122,6 +122,14 @@ combat:
     typed:
       base: 10
       str: 8
+  damage_reduction:
+    - 10/magic
+  energy_resistance:
+    acid: 10
+    cold: 10
+    electricity: 10
+  immunities:
+    - disease
 attack_iteratives:
   melee:
     - 18
