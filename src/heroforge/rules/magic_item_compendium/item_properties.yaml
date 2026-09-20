@@ -1,0 +1,96 @@
+# rules/magic_item_compendium/item_properties.yaml
+#
+# Armour, shield and weapon properties, and the augment
+# crystals that behave like them, from the Magic Item
+# Compendium. See rules/core/item_properties.yaml for the
+# field list.
+
+Blueshine:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    Never tarnishes, immune to acid damage and rusting, and
+    grants a +2 competence bonus on Hide checks. Metal armour
+    only (MIC p. 9).
+  effects:
+    - target: skill_hide
+      bonus_type: competence
+      value: 2
+Blinking:
+  applies_to: armor
+  source_book: MIC
+  note: 1/day blink. Activated (MIC p. 9).
+Vanishing:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    2/day, completely undetectable for up to 3 minutes.
+    Activated (MIC p. 11).
+Mindarmor:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    3/day, +5 on Will saves against mind-affecting spells and
+    abilities. Activated, and conditional on the effect being
+    mind-affecting (MIC p. 6).
+Deathward:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    1/day, ignore a death effect or negative energy effect.
+    Activated (MIC p. 10).
+Mind Cloaking:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    Augment crystal: competence bonus on saves against
+    mind-affecting spells and abilities, +1 least to +5
+    greater. Conditional on the effect being mind-affecting,
+    so it is not a flat save bonus (MIC p. 26).
+Nimbleness:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    Recognised so the name displays, but its rules text has
+    not been located in the MIC armour-property list -- the
+    only "Nimbleness" found is a body-slot item, not an
+    armour property. Left without effects rather than
+    guessed at.
+Sacred:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Extra damage against targets whose alignment opposes the
+    wielder's deity. Conditional on the target (MIC p. 42).
+Precise:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Ranged attacks ignore the miss chance from concealment
+    and the bonus from cover. Conditional on the situation
+    rather than a bonus on the line (MIC p. 36).
+Illusion Bane:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Ignores any miss chance created by an illusion effect.
+    Conditional on the target (MIC p. 33).
+Revelation:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Augment crystal: marks an invisible creature you damage.
+    Conditional on the target (MIC p. 68).
+Fiendslayer:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Augment crystal: extra damage and other benefits against
+    evil outsiders. Conditional on the target (MIC p. 66).
+Truedeath:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Augment crystal: extra damage against undead, and at
+    greater it bypasses undead turn resistance. Conditional
+    on the target (MIC p. 68).

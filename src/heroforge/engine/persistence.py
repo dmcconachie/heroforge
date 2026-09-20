@@ -704,9 +704,8 @@ def _load_equipment(
             eq.armor.enhancement,
             material=(str(eq.armor.material) if eq.armor.material else ""),
             masterwork=eq.armor.masterwork,
+            properties=list(eq.armor.properties),
         )
-        if eq.armor.properties:
-            c.equipment["armor"]["properties"] = list(eq.armor.properties)
 
     if eq.shield is not None:
         base = str(eq.shield.base or eq.shield.name)
@@ -717,9 +716,8 @@ def _load_equipment(
             eq.shield.enhancement,
             material=(str(eq.shield.material) if eq.shield.material else ""),
             masterwork=eq.shield.masterwork,
+            properties=list(eq.shield.properties),
         )
-        if eq.shield.properties:
-            c.equipment["shield"]["properties"] = list(eq.shield.properties)
 
     for item_name in eq.worn:
         item_defn = rules.magic_items.get(str(item_name))

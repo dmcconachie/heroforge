@@ -46,6 +46,7 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import TYPE_CHECKING
 
+from heroforge.engine.item_properties import property_pool_entries
 from heroforge.engine.proficiency import refresh_proficiency_penalties
 from heroforge.rules.core.pool_keys import PoolKey
 
@@ -264,6 +265,7 @@ def equip_armor(
     enhancement: int = 0,
     material: str = "",
     masterwork: bool = False,
+    properties: list[str] | None = None,
 ) -> None:
     """Wire armor bonuses into Character pools."""
     from heroforge.engine.bonus import (
@@ -311,10 +313,12 @@ def equip_armor(
         "arcane_spell_failure": asf,
         "enhancement": enhancement,
         "material": material,
+        "properties": list(properties or []),
     }
 
     # Push ACP into skill pools
     _apply_acp(character, _ARMOR_SRC, acp)
+    _apply_properties(character, _ARMOR_SRC, properties)
     refresh_proficiency_penalties(character)
 
     # Speed penalty from medium/heavy armor
@@ -333,6 +337,7 @@ def unequip_armor(character: Character) -> None:
 
     character.equipment.pop("armor", None)
     _clear_acp(character, _ARMOR_SRC)
+    _apply_properties(character, _ARMOR_SRC, None)
     refresh_proficiency_penalties(character)
 
     # Remove speed penalty
@@ -351,6 +356,7 @@ def equip_shield(
     enhancement: int = 0,
     material: str = "",
     masterwork: bool = False,
+    properties: list[str] | None = None,
 ) -> None:
     """Wire shield bonuses into Character pools."""
     from heroforge.engine.bonus import (
@@ -389,9 +395,11 @@ def equip_shield(
         "arcane_spell_failure": asf,
         "enhancement": enhancement,
         "material": material,
+        "properties": list(properties or []),
     }
 
     _apply_acp(character, _SHIELD_SRC, acp)
+    _apply_properties(character, _SHIELD_SRC, properties)
     refresh_proficiency_penalties(character)
 
     character._graph.invalidate("ac")
@@ -406,6 +414,7 @@ def unequip_shield(character: Character) -> None:
 
     character.equipment.pop("shield", None)
     _clear_acp(character, _SHIELD_SRC)
+    _apply_properties(character, _SHIELD_SRC, None)
     refresh_proficiency_penalties(character)
 
     character._graph.invalidate("ac")
@@ -531,6 +540,33 @@ def _apply_acp(
                     )
                 ],
             )
+
+
+_PROPERTY_SRC_SUFFIX = ":properties"
+
+
+def _apply_properties(
+    character: Character,
+    source: str,
+    properties: list[str] | None,
+) -> None:
+    """
+    Install the permanent effects of an item's properties.
+
+    Replaces whatever the slot had rather than merging, so
+    re-equipping or unequipping drops the old set. Properties
+    with no permanent effect contribute nothing.
+    """
+    src = source + _PROPERTY_SRC_SUFFIX
+    pairs = property_pool_entries(list(properties or []), character)
+    by_pool: dict[str, list] = {}
+    for pool_key, entry in pairs:
+        by_pool.setdefault(pool_key, []).append(entry)
+    for key, pool in character._pools.items():
+        if key in by_pool:
+            pool.set_source(src, by_pool[key])
+        else:
+            pool.clear_source(src)
 
 
 def _clear_acp(character: Character, source: str) -> None:

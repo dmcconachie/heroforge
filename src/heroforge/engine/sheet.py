@@ -37,6 +37,7 @@ from heroforge.engine.enums import (
     Save,
     Size,
 )
+from heroforge.engine.item_properties import grants_extra_attack
 from heroforge.engine.persistence import load_character, yaml_dump
 from heroforge.engine.sheet_schema import (
     AbilityEntry,
@@ -775,6 +776,11 @@ def _weapon_iteratives(
     if rapid_shot_applies(c, item):
         # One more attack at the highest bonus. The -2 is already
         # on the line, so it needs no second application here.
+        attacks = [base, *attacks]
+    if grants_extra_attack(item.get("properties", [])):
+        # A speed weapon: one extra attack at full base attack
+        # bonus on a full attack, with no penalty attached
+        # (DMG p. 226).
         attacks = [base, *attacks]
     return attacks
 

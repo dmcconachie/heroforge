@@ -223,12 +223,12 @@ skills:
       luck: 1
       competence: 1
   Hide:
-    total: 42
+    total: 56
     typed:
       ability_mod: 11
       ranks: 25
+      competence: 15
       luck: 1
-      competence: 1
       circumstance: 4
   Intimidate:
     total: 4
@@ -266,12 +266,12 @@ skills:
       luck: 1
       competence: 1
   Move Silently:
-    total: 42
+    total: 56
     typed:
       ability_mod: 11
       ranks: 25
+      competence: 15
       luck: 1
-      competence: 1
       circumstance: 4
   Open Lock:
     total: 29

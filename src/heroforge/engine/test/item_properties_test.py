@@ -1,0 +1,199 @@
+"""
+Armour, shield and weapon special properties.
+
+Only properties that apply permanently are wired to stats.
+Anything activated (blinking, 1/day), reactive (arrow
+deflection) or conditional on the target (bane, wounding)
+stays display-only, because a number on the sheet would be
+wrong most of the time.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+import pytest
+
+from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.equipment import equip_armor, unequip_armor
+from heroforge.engine.item_properties import (
+    ItemPropertyDefinition,
+    property_definition,
+)
+from heroforge.engine.persistence import load_character
+from heroforge.engine.sheet import gather_sheet
+from heroforge.engine.skills import (
+    compute_skill_total,
+    register_skills_on_character,
+)
+from heroforge.engine.weapons import register_weapons_on_character
+from heroforge.rules.rules import get_rules
+
+
+def _char(cls: str = "Rogue", level: int = 12) -> Character:
+    c = Character(name="Sneak")
+    register_skills_on_character(c)
+    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        c.set_ability_score(ab, 10)
+    c.levels = [
+        CharacterLevel(character_level=i + 1, class_name=cls, hp_roll=6)
+        for i in range(level)
+    ]
+    c._invalidate_class_stats()
+    return c
+
+
+def _skill(c: Character, name: str) -> int:
+    defn = get_rules().skills.get(name)
+    assert defn is not None
+    return compute_skill_total(c, defn).total
+
+
+def _wear(c: Character, *properties: str) -> Character:
+    armor = get_rules().armor.get("Chain Shirt")
+    equip_armor(c, armor, properties=list(properties))
+    return c
+
+
+class TestRegistry:
+    def test_lookup_is_case_insensitive(self) -> None:
+        assert property_definition("Greater Shadow") is not None
+        assert property_definition("greater shadow") is not None
+
+    def test_an_unknown_property_is_none(self) -> None:
+        assert property_definition("not a real property") is None
+
+    def test_definitions_declare_what_they_apply_to(self) -> None:
+        defn = property_definition("greater shadow")
+        assert isinstance(defn, ItemPropertyDefinition)
+        assert defn.applies_to == "armor"
+
+
+class TestPermanentArmourProperties:
+    """DMG p. 219; the armour check penalty still applies."""
+
+    @pytest.mark.parametrize(
+        ("prop", "bonus"),
+        [("shadow", 5), ("improved shadow", 10), ("greater shadow", 15)],
+    )
+    def test_shadow_family_bonuses_hide(self, prop: str, bonus: int) -> None:
+        plain = _skill(_wear(_char()), "Hide")
+        assert _skill(_wear(_char(), prop), "Hide") == plain + bonus
+
+    @pytest.mark.parametrize(
+        ("prop", "bonus"),
+        [
+            ("silent moves", 5),
+            ("improved silent moves", 10),
+            ("greater silent moves", 15),
+        ],
+    )
+    def test_silent_moves_family(self, prop: str, bonus: int) -> None:
+        plain = _skill(_wear(_char()), "Move Silently")
+        assert _skill(_wear(_char(), prop), "Move Silently") == (plain + bonus)
+
+    def test_blueshine_bonuses_hide(self) -> None:
+        """MIC: +2 competence on Hide."""
+        plain = _skill(_wear(_char()), "Hide")
+        assert _skill(_wear(_char(), "blueshine"), "Hide") == plain + 2
+
+    def test_they_do_not_stack_with_each_other(self) -> None:
+        """Both are competence bonuses, so only the best counts."""
+        plain = _skill(_wear(_char()), "Hide")
+        both = _wear(_char(), "greater shadow", "blueshine")
+        assert _skill(both, "Hide") == plain + 15
+
+    def test_removing_the_armour_removes_the_bonus(self) -> None:
+        bare = _skill(_char(), "Hide")
+        c = _wear(_char(), "greater shadow")
+        assert _skill(c, "Hide") > bare
+        unequip_armor(c)
+        # Back to the unarmoured baseline: the property's
+        # bonus went with the armour, as did its check penalty.
+        assert _skill(c, "Hide") == bare
+
+
+class TestActivatedPropertiesAreNotWired:
+    """
+    These are real properties with real numbers, but the
+    numbers apply only when used or against certain targets.
+    They are defined so the name is recognised, and carry no
+    effects.
+    """
+
+    @pytest.mark.parametrize(
+        "prop",
+        [
+            "blinking",
+            "vanishing",
+            "mindarmor",
+            "animated",
+            "arrow deflection",
+            "mind cloaking",
+        ],
+    )
+    def test_no_stat_change(self, prop: str) -> None:
+        assert property_definition(prop) is not None
+        plain = _skill(_wear(_char()), "Hide")
+        assert _skill(_wear(_char(), prop), "Hide") == plain
+
+    def test_they_still_show_on_the_sheet(self) -> None:
+        c = _wear(_char(), "blinking")
+        assert "blinking" in gather_sheet(c, None).equipment.armor.properties
+
+
+class TestSpeedWeapon:
+    """
+    DMG: one extra attack at the wielder's full base attack
+    bonus when making a full attack."""
+
+    def _armed(self, *props: str) -> Character:
+        c = _char(cls="Fighter", level=6)
+        c.equipment["weapons"] = [
+            {"base": "Longsword", "properties": list(props)}
+        ]
+        register_weapons_on_character(c)
+        return c
+
+    def test_plain_weapon_iteratives(self) -> None:
+        w = gather_sheet(self._armed(), None).equipment.weapons[0]
+        assert len(w.attack_iteratives) == 2
+
+    def test_speed_adds_one_attack_at_the_top(self) -> None:
+        w = gather_sheet(self._armed("speed"), None).equipment.weapons[0]
+        assert len(w.attack_iteratives) == 3
+        assert w.attack_iteratives[0] == w.attack_iteratives[1]
+
+    def test_speed_is_not_a_bonus_on_the_line(self) -> None:
+        plain = gather_sheet(self._armed(), None).equipment.weapons[0]
+        fast = gather_sheet(self._armed("speed"), None).equipment.weapons[0]
+        assert fast.attack.total == plain.attack.total
+
+
+class TestItPersists:
+    CHAR = """
+identity:
+  name: Shady
+  race: Human
+  alignment: neutral
+ability_scores: {str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10}
+levels:
+  - {level: 1, class: Rogue, hp_roll: 6}
+equipment:
+  armor:
+    base: Chain Shirt
+    properties:
+      - greater shadow
+  weapons:
+    - base: Longsword
+      properties:
+        - speed
+"""
+
+    def test_properties_survive_a_load(self, tmp_path: Path) -> None:
+        path = tmp_path / "s.char.yaml"
+        path.write_text(self.CHAR)
+        c = load_character(path, None)
+        sheet = gather_sheet(c, None)
+        assert sheet.skills["Hide"].typed["competence"] == 15
+        assert len(sheet.equipment.weapons[0].attack_iteratives) == 2

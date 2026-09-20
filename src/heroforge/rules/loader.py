@@ -67,6 +67,9 @@ if TYPE_CHECKING:
         WeaponRegistry,
     )
     from heroforge.engine.feats import FeatRegistry
+    from heroforge.engine.item_properties import (
+        ItemPropertyRegistry,
+    )
     from heroforge.engine.magic_items import (
         MagicItemRegistry,
     )
@@ -1305,6 +1308,39 @@ class EquipmentLoader:
             except Exception as e:
                 raise LoaderError(
                     f"Failed to load material {name!r}: {e}"
+                ) from e
+            registry.register(defn)
+            registered.append(name)
+        return registered
+
+    def load_item_properties(
+        self,
+        registry: "ItemPropertyRegistry",
+        relative_path: str,
+    ) -> list[str]:
+        from heroforge.engine.item_properties import (
+            ItemPropertyDefinition,
+        )
+        from heroforge.rules.schema import converter
+
+        path = self.rules_dir / relative_path
+        if not path.exists():
+            raise LoaderError(f"Item properties file not found: {path}")
+        with open(path) as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict):
+            raise LoaderError(f"{path} must be a YAML mapping.")
+
+        registered: list[str] = []
+        for name, decl in data.items():
+            if decl is None:
+                decl = {}
+            decl["name"] = name
+            try:
+                defn = converter.structure(decl, ItemPropertyDefinition)
+            except Exception as e:
+                raise LoaderError(
+                    f"Failed to load item property {name!r}: {e}"
                 ) from e
             registry.register(defn)
             registered.append(name)

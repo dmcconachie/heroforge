@@ -24,6 +24,8 @@ src/heroforge/
 │   │                       #   PHB Table 7-4 damage steps
 │   ├── proficiency.py      # Proficiencies, nonproficiency
 │   │                       #   penalties
+│   ├── item_properties.py  # Armour/shield/weapon special
+│   │                       #   properties
 │   ├── effects.py          # BuffDefinition, BuffCategory,
 │   │                       #   formula evaluation
 │   ├── classes_races.py    # ClassDefinition, RaceDefinition,
@@ -518,6 +520,44 @@ Penalties:
 All three appear in the sheet's breakdowns as
 `nonproficient_armor`, `nonproficient_shield` and
 `nonproficient`.
+
+## Layer 7c: Item properties (`engine/item_properties.py`)
+
+The `properties:` list on an equipment entry, loaded from a
+per-book `item_properties.yaml` into `Rules.item_properties`.
+
+Only properties that apply **permanently** reach a stat. A
+property is wired when its benefit is always on for whoever
+wears or wields the item: greater shadow's +15 competence on
+Hide, a speed weapon's extra attack. Everything else is
+defined so the name is recognised and described, and carries
+no effects, because a number on the sheet would be wrong most
+of the time:
+
+- activated — blinking (1/day), vanishing (2/day), mindarmor
+  (3/day), deathward (1/day), animated (on command)
+- reactive — arrow deflection
+- conditional on the target — bane, fiendslayer, truedeath,
+  illusion bane, revelation
+- conditional on the roll or situation — wounding (on a hit),
+  mind cloaking (only against mind-affecting effects), precise
+  (only against cover and concealment)
+
+Those belong in the conditional-effects panel, not a pool.
+
+Lookup ignores case and any parenthetical grade, so a
+character file writing `truedeath (greater)` or
+`bane (undead)` finds the definition keyed on the property
+itself. An unrecognised name is deliberately **not** an
+error: the vocabulary is open and books arrive piecemeal, so
+an unknown property displays and does nothing. Making it an
+error needs complete coverage first.
+
+`equipment._apply_properties()` installs an armour or
+shield's effects under `<slot>:properties`, replacing the
+whole set so re-equipping or unequipping drops the old one.
+A speed-like property is not a bonus, so it is resolved in
+the weapon's iterative sequence rather than a pool.
 
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 

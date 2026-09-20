@@ -147,8 +147,13 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
   `engine-rules-import-cycle.md`. Deliberately deferred.
 - **Ability checks** have no representation, so the Pale
   Green Prism's fourth clause is still unmodelled.
-- **Armour and weapon special properties are unwired.**
-  `properties:` is a display-only string list; only `keen` is
-  read anywhere. This is why drufus gets no competence bonus
-  on Hide or Move Silently from `greater shadow` and
-  `greater silent moves`.
+- **Conditional item properties.** The permanent ones are
+  wired (`engine/item_properties.py`); the activated,
+  reactive and target-conditional ones are defined but carry
+  no effects, and want the conditional-effects panel.
+  `Nimbleness` is defined without effects because its rules
+  text could not be found in the MIC armour-property list —
+  the only match is a body-slot item — and guessing seemed
+  worse than recording the gap.
+- **Unknown property names do nothing silently.** Validating
+  them needs complete coverage across the books first.

@@ -26,6 +26,7 @@ Per-book file convention:
     <book>/classes/*.yaml      (optional)
     <book>/magic_items.yaml    (optional; core uses per-slot files)
     <book>/materials.yaml      (optional)
+    <book>/item_properties.yaml (optional)
 
 Core-only categories (stats, skills, templates, races, domains,
 armor, weapons, spells, conditions, derived pools) live solely
@@ -49,6 +50,7 @@ from heroforge.engine.equipment import (
     WeaponRegistry,
 )
 from heroforge.engine.feats import FeatRegistry
+from heroforge.engine.item_properties import ItemPropertyRegistry
 from heroforge.engine.magic_items import MagicItemRegistry
 from heroforge.engine.prerequisites import PrerequisiteChecker
 from heroforge.engine.races import RaceRegistry
@@ -138,6 +140,9 @@ class Rules:
     armor: ArmorRegistry = field(default_factory=ArmorRegistry)
     weapons: WeaponRegistry = field(default_factory=WeaponRegistry)
     materials: MaterialRegistry = field(default_factory=MaterialRegistry)
+    item_properties: ItemPropertyRegistry = field(
+        default_factory=ItemPropertyRegistry,
+    )
     domains: DomainRegistry = field(default_factory=DomainRegistry)
     acfs: AcfRegistry = field(default_factory=AcfRegistry)
     deities: DeityRegistry = field(default_factory=DeityRegistry)
@@ -200,6 +205,7 @@ class Rules:
 
         for book in books:
             self._load_book_materials(rd, eq_loader, book)
+            self._load_book_item_properties(rd, eq_loader, book)
             self._load_book_acfs(rd, book)
 
         # --- Final wiring -------------------------------------
@@ -276,6 +282,20 @@ class Rules:
         if not m_yaml.exists():
             return
         eq_loader.load_materials(self.materials, f"{book}/materials.yaml")
+
+    def _load_book_item_properties(
+        self,
+        rd: Path,
+        eq_loader: EquipmentLoader,
+        book: str,
+    ) -> None:
+        p_yaml = rd / book / "item_properties.yaml"
+        if not p_yaml.exists():
+            return
+        eq_loader.load_item_properties(
+            self.item_properties,
+            f"{book}/item_properties.yaml",
+        )
 
 
 _rules: Rules | None = None
