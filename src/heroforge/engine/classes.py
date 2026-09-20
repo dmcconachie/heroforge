@@ -146,6 +146,12 @@ class ClassFeature:
     # Damage reduction, resistance to energy and immunity.
     # See engine/defenses.py for the shape.
     defenses: dict = field(default_factory=dict)
+    # The feature attaches to one thing the character picks.
+    # "weapon" is the only kind so far: an occult slayer bonds
+    # one weapon. The designation is written on the weapon
+    # slot, where "which one" is unambiguous even between two
+    # identical daggers.
+    designates: str = ""
     # A condition the engine cannot evaluate because it is
     # about the *target*, not the character — insightful
     # strike only applies to creatures that can be critically

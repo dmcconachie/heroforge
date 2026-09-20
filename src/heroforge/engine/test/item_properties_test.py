@@ -311,16 +311,15 @@ class TestSrdCoverage:
         With both SRD lists and the MIC entries in place, a
         property no definition recognises is a data error.
 
-        The two exemptions are miscategorised fixture data,
-        not properties: Starmetal is a *material* and belongs
-        in `material:`, and `weapon bond` is the occult
-        slayer's class feature.
+        Nothing is exempt: Starmetal moved to `material:`
+        and the occult slayer's weapon bond moved to the
+        weapon's `features:`, where a class feature that
+        designates a weapon belongs.
         """
         import glob
 
         import yaml
 
-        exempt = {"Starmetal", "weapon bond"}
         registry = get_rules().item_properties
         unresolved: set[str] = set()
         for path in glob.glob("tests/integration/*/*.char.yaml"):
@@ -331,9 +330,7 @@ class TestSrdCoverage:
                 names += (eq.get(slot) or {}).get("properties", []) or []
             for w in eq.get("weapons") or []:
                 names += w.get("properties", []) or []
-            unresolved |= {
-                n for n in names if n not in exempt and registry.get(n) is None
-            }
+            unresolved |= {n for n in names if registry.get(n) is None}
         assert unresolved == set()
 
 

@@ -36,7 +36,10 @@ from heroforge.engine.spellcasting import (
     Specialization,
     validate_specialization,
 )
-from heroforge.engine.weapons import register_weapons_on_character
+from heroforge.engine.weapons import (
+    register_weapons_on_character,
+    validate_weapon_features,
+)
 from heroforge.rules.known import (
     KnownAcf,
     KnownArmor,
@@ -169,6 +172,10 @@ class WeaponSlotEntry:
     material: KnownMaterial | None = None
     properties: list[str] = field(default_factory=list)
     name: str = ""  # display name override
+    # Class features that designate this weapon, by feature
+    # key (e.g. weapon_bond). Validated on load against the
+    # features the character actually has.
+    features: list[str] = field(default_factory=list)
     # "primary" / "off_hand" declares a two-weapon pairing and
     # brings the Table 8-10 penalties with it. Spelled off_hand
     # because YAML reads a bare `off` as false.
@@ -372,6 +379,7 @@ def _character_to_charfile(
                         else None
                     ),
                     properties=list(w.get("properties", [])),
+                    features=list(w.get("features", [])),
                     name=w.get("name", ""),
                     hand=w.get("hand", ""),
                 )
@@ -684,6 +692,7 @@ def load_character(
     # Per-weapon attack/damage lines depend on both the equipped
     # weapons and the character's feats, so build them last.
     refresh_proficiency_penalties(c)
+    validate_weapon_features(c)
     register_weapons_on_character(c)
 
     # Notes
@@ -757,6 +766,7 @@ def _load_equipment(
                     "enhancement": w.enhancement,
                     "material": w.material,
                     "properties": w.properties,
+                    "features": w.features,
                     "name": w.name,
                     "hand": w.hand,
                 }.items()

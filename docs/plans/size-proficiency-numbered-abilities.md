@@ -159,16 +159,11 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
   Hit Dice on a table not yet verified, and adamantine or
   starmetal armour, whose DR depends on the armour category
   rather than the material alone.
-- **Nimbleness** (MIC) raises an armour's maximum Dexterity
-  bonus by 1 and cuts its check penalty by 2. That is an
-  adjustment to the armour's own figures, like a material's
-  `acp_adjust`, and needs item properties to reach
-  `adjust_for_material()` before the slot is stored.
-- **`weapon bond`** on drufus is the occult slayer's class
-  feature written as a weapon property. It is exempted from
-  the property-resolution test pending a decision on how a
-  class feature that attaches to one weapon should be
-  modelled.
+Both of the previous entries here are done: Nimbleness is
+implemented through property-level armour-stat adjustments,
+and weapon bond is a class feature that designates a weapon.
+No fixture property is exempt from the resolution test any
+more.
   `Nimbleness` is defined without effects because its rules
   text could not be found in the MIC armour-property list —
   the only match is a body-slot item — and guessing seemed

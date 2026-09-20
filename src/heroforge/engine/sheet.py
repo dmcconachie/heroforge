@@ -69,6 +69,7 @@ from heroforge.engine.weapons import (
     rapid_shot_applies,
     threat_range,
     weapon_definition,
+    weapon_feature_names,
     weapon_pool_keys,
     weapon_stances,
 )
@@ -855,7 +856,9 @@ def _equipment(c: "Character") -> EquipmentSection:
                 damage_types=list(w.get("damage_types", [])),
                 weapon_type=w.get("weapon_type", ""),
                 weight=w.get("weight") or None,
-                properties=list(w.get("properties", [])),
+                properties=(
+                    list(w.get("properties", [])) + weapon_feature_names(w)
+                ),
             )
         )
 

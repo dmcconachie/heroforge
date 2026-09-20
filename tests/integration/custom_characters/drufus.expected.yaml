@@ -581,7 +581,7 @@ equipment:
         - Wounding
         - Vanishing
         - Fiendslayer Crystal, Least
-        - weapon bond
+        - Weapon Bond
     - name: '+5 Starmetal Dagger (TWF: Off-hand)'
       attack:
         total: 33

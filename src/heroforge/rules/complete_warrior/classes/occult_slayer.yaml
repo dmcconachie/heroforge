@@ -42,6 +42,7 @@ Occult Slayer:
     - level: 1
       feature: weapon_bond
       description: Bonded masterwork weapon deals extra damage
+      designates: weapon
       values:
         damage_dice: '1'
       when: >-

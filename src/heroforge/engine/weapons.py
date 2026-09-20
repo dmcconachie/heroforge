@@ -330,6 +330,22 @@ def monk_unarmed_damage(
     return row[size]
 
 
+def weapon_feature_names(item: dict) -> list[str]:
+    """
+    Display names for the class features designating this
+    weapon, e.g. ["Weapon Bond"].
+
+    The sheet lists these beside the weapon's item properties,
+    because from the player's side a bonded weapon and an
+    enchanted one both read as "what is special about this
+    weapon".
+    """
+    return [
+        str(key).replace("_", " ").title()
+        for key in item.get("features", []) or []
+    ]
+
+
 def damage_dice(character: "Character", item: dict) -> str:
     """
     This weapon's damage dice at the wielder's current size.
@@ -600,3 +616,38 @@ def register_weapons_on_character(character: "Character") -> None:
                     description=f"{item.get('base', '')} {which}",
                 )
             )
+
+
+def validate_weapon_features(character: "Character") -> None:
+    """
+    Check every class feature a weapon slot designates.
+
+    A name that is not a feature, or is a feature the
+    character does not have, or is a feature that designates
+    nothing, is a data error rather than something to ignore
+    quietly: the sheet would simply drop it.
+    """
+    from heroforge.rules.rules import get_rules  # cycle; see docs
+
+    classes = get_rules().classes
+    available: dict[str, str] = {}
+    for class_name, level in character.class_level_map.items():
+        defn = classes.get(class_name)
+        if defn is None:
+            continue
+        for feature in defn.class_features:
+            if feature.level <= level:
+                available[feature.feature] = feature.designates
+
+    for item in character.equipment.get("weapons", []) or []:
+        for key in item.get("features", []) or []:
+            if key not in available:
+                raise ValueError(
+                    f"Weapon names class feature {key!r}, which this "
+                    f"character does not have."
+                )
+            if available[key] != "weapon":
+                raise ValueError(
+                    f"Class feature {key!r} does not designate a "
+                    f"weapon, so a weapon cannot name it."
+                )

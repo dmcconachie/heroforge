@@ -630,6 +630,28 @@ Not yet reaching it: the Celestial and Fiendish Creature
 templates, whose resistance scales with Hit Dice on a table
 that has not been verified.
 
+### Class features that designate a weapon
+
+A `ClassFeature` may declare `designates: weapon`. The
+occult slayer's weapon bond is the case: the weapon has not
+been enchanted, the character has picked it, so it is not an
+item property.
+
+The designation is written on the **weapon slot**
+(`features: [weapon_bond]`) rather than on the feature,
+because that is where "which one" is unambiguous — drufus
+carries two identical Starmetal daggers and has bonded one.
+`weapons.validate_weapon_features()` refuses a name that is
+not a feature, is a feature the character lacks, or is a
+feature that designates nothing; the sheet would otherwise
+drop it silently.
+
+`weapons.weapon_feature_names()` renders them into the
+weapon's `properties:` list beside the item properties,
+because from the player's side a bonded weapon and an
+enchanted one both answer "what is special about this
+weapon".
+
 ## Layer 8: Prerequisites (`engine/prerequisites.py`)
 
 Prerequisite types: `StatPrereq`, `AbilityPrereq`,
