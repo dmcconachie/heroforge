@@ -184,7 +184,9 @@ class_features:
   flurry_of_blows:
     description: Extra attack with -2 to all attacks
   unarmed_strike:
-    description: Unarmed deals 1d6; increases per level
+    description: >-
+      Unarmed strike damage by monk level and size (PHB Tables 3-10 and 3-11);
+      shown on the weapon line when an Unarmed Strike is equipped
   bonus_feat_monk_2:
     description: Combat Reflexes, Deflect Arrows, or Improved Trip
   evasion:

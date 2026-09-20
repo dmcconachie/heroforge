@@ -73,7 +73,20 @@ Monk:
         Attack-routine choice — not on main sheet.
     - level: 1
       feature: unarmed_strike
-      description: Unarmed deals 1d6; increases per level
+      description: >-
+        Unarmed strike damage by monk level and size (PHB
+        Tables 3-10 and 3-11); shown on the weapon line when
+        an Unarmed Strike is equipped
+      effects:
+        - target: effective_monk_level_damage
+          bonus_type: untyped
+          value: monk_level
+          source_label: monk_class
+      note: >-
+        The die comes from a printed table rather than a
+        formula, so it is selected in weapons.damage_dice()
+        off the effective_monk_level_damage pool rather than
+        appearing as a value here.
     - level: 2
       feature: bonus_feat_monk_2
       description: Combat Reflexes, Deflect Arrows, or Improved Trip

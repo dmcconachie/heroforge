@@ -219,3 +219,12 @@
   pools:
     - effective_monk_level_ac
   description: Effective monk level (AC bonus calc input)
+- key: effective_monk_level_damage
+  compute: sum
+  pools:
+    - effective_monk_level_damage
+  description: >-
+    Effective monk level for unarmed damage. Read directly by
+    weapons.damage_dice() rather than by a derived-pool
+    consumer, because it selects a damage die rather than
+    contributing a bonus.

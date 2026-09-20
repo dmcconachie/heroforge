@@ -139,9 +139,10 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
   Arcane Trickster, Assassin, Barbarian, Blackguard and
   Duelist (5 each). The machinery needs no further change;
   each needs its book checked and a formula written.
-- **Monk unarmed damage and the flurry attack column** are
-  per-level tables rather than formulas, so they wait on
-  weapon-damage-table support.
+- **The flurry attack-bonus column** of PHB Table 3-10 is
+  still a per-level table with no consumer. Monk unarmed
+  damage itself is done — see `weapons.monk_unarmed_damage()`
+  and the `effective_monk_level_damage` pool.
 - **The engine/rules import cycle** — see
   `engine-rules-import-cycle.md`. Deliberately deferred.
 - **Ability checks** have no representation, so the Pale

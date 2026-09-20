@@ -315,6 +315,17 @@ Tiny..Large raise rather than extrapolate. `weapons.damage_dice()`
 applies it per equipped weapon, and an explicit `damage_dice`
 on the equipment entry still wins as an author override.
 
+A monk's unarmed strike *replaces* that lookup rather than
+modifying it: `weapons.monk_unarmed_damage()` is PHB Table
+3-10 (Medium) and Table 3-11 (Small and Large), indexed by
+the `effective_monk_level_damage` derived pool. The Monk
+class contributes its level and the Monk's Belt contributes
+5, so DMG p. 248's two cases — "five levels higher" for a
+monk and "a 5th-level monk" for anyone else — both fall out
+of the pool with no special casing. Only Small, Medium and
+Large are printed, so anything else raises. Levels past 20
+hold at the last row.
+
 ## Layer 4: Effects (`engine/effects.py`)
 
 `BuffDefinition` models any source of stat bonuses: spells,
@@ -1143,25 +1154,12 @@ Reusable components in `widgets/`: `LabeledField`,
   current functionality — correct when the wire-up
   lands.
 - **Monk Stunning Fist** — L1 monk bonus feat (PHB).
-  Activated attack with uses/day (monk level + Wis
-  mod). Depends on ResourceTracker wire-up and the
-  attack-routine panel. Separate item interaction:
-  the Monk's Belt description in some sources
-  mentions a Stunning Fist aspect not in the DMG
-  SRD entry — verify the source before implementing
-  that half.
-- **Monk unarmed-damage progression** — die-size
-  table by monk level + size (1d6 → 2d10 for a
-  Medium monk). Not a bonus-pool effect; needs
-  weapon-damage-table support. Used also by Monk's
-  Belt (L5 monk damage for non-monks; +5 effective
-  levels for monks).
-- **Monk's Belt unarmed-damage boost** — the
-  "+5 effective monk levels for unarmed damage"
-  half of the belt. Waiting on the damage-table
-  support above. Analogous to
-  `effective_monk_level_ac` but targeting a
-  weapon-damage pool.
+  Activated attack with uses/day. Depends on the
+  ResourceTracker wire-up and the attack-routine
+  panel. The Monk's Belt's extra stunning attack per
+  day *is* in the DMG entry (p. 248) — the earlier
+  doubt here was unfounded — but it waits on the
+  same uses tracking.
 - **Gloves of the Balanced Hand** — grants
   TWF-like benefits. Gate semantics debatable (does
   it gate like TWF itself?) — rules decision needed

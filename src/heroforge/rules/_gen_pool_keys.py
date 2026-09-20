@@ -40,6 +40,7 @@ OUT_FILE = CORE_DIR / "pool_keys.py"
 _EXTRA_POOL_KEYS: tuple[str, ...] = (
     "grapple",
     "damage_ranged",
+    "effective_monk_level_damage",
     # Target aliases: never a real pool, but a legal effect
     # target that expands to several pools. `skill_all` fans
     # out to every skill; see _MULTI_TARGET_EXPANSIONS in

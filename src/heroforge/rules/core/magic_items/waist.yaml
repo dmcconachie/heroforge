@@ -37,13 +37,17 @@ Belt of Giant Strength +6:
 Monk's Belt:
   slot: waist
   note: >-
-    Wearer gets the AC bonus and unarmed damage of a
-    5th-level monk (DMG). For a monk, adds 5 to effective
-    monk level for AC (and unarmed damage; damage table
-    not yet implemented). Contribution to the AC formula
-    flows through the effective_monk_level_ac derived
-    pool; see rules/core/derived_pools.yaml.
+    AC and unarmed damage as a monk of five levels higher;
+    a non-monk counts as a 5th-level monk (DMG p. 248).
+    Both flow through derived pools, so the non-monk case
+    needs no special handling: the class contributes
+    nothing and the belt's 5 stands alone. The belt's
+    extra stunning attack per day is not modelled, because
+    Stunning Fist uses are not tracked.
   effects:
     - target: effective_monk_level_ac
+      bonus_type: untyped
+      value: 5
+    - target: effective_monk_level_damage
       bonus_type: untyped
       value: 5

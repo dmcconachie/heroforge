@@ -32,6 +32,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
+from heroforge.engine.enums import Size
 from heroforge.engine.proficiency import is_proficient_with_weapon
 from heroforge.engine.size import damage_dice_for_size
 from heroforge.engine.stat import StatNode
@@ -282,6 +283,53 @@ def weapon_stances(character: "Character", item: dict) -> list[str]:
     return out
 
 
+# PHB Table 3-10 (Medium) and Table 3-11 (Small and Large),
+# p. 40-41. Indexed by the top of each level band.
+_MONK_UNARMED_DAMAGE: tuple[tuple[int, dict[Size, str]], ...] = (
+    (3, {Size.SMALL: "1d4", Size.MEDIUM: "1d6", Size.LARGE: "1d8"}),
+    (7, {Size.SMALL: "1d6", Size.MEDIUM: "1d8", Size.LARGE: "2d6"}),
+    (11, {Size.SMALL: "1d8", Size.MEDIUM: "1d10", Size.LARGE: "2d8"}),
+    (15, {Size.SMALL: "1d10", Size.MEDIUM: "2d6", Size.LARGE: "3d6"}),
+    (19, {Size.SMALL: "2d6", Size.MEDIUM: "2d8", Size.LARGE: "3d8"}),
+    (20, {Size.SMALL: "2d8", Size.MEDIUM: "2d10", Size.LARGE: "4d8"}),
+)
+
+MONK_UNARMED_WEAPON = "Unarmed Strike"
+
+
+def monk_unarmed_damage(
+    effective_level: int,
+    size: "Size | str",
+) -> str | None:
+    """
+    A monk's unarmed strike damage at *effective_level*.
+
+    Returns None below 1st level, which is how a character
+    with no monk levels and no Monk's Belt is distinguished
+    from one with them — such a character deals the plain
+    weapon's damage instead.
+
+    This is a printed table, not a formula, and the PHB gives
+    it only for Small, Medium and Large. Anything else raises
+    rather than guess. Levels past 20 hold at the last row.
+    """
+    if effective_level < 1:
+        return None
+    size = Size(size)
+    row = _MONK_UNARMED_DAMAGE[-1][1]
+    for top, candidate in _MONK_UNARMED_DAMAGE:
+        if effective_level <= top:
+            row = candidate
+            break
+    if size not in row:
+        raise ValueError(
+            f"Monk unarmed damage for a {size.value} monk is not "
+            f"printed (PHB Tables 3-10 and 3-11 cover Small, "
+            f"Medium and Large)."
+        )
+    return row[size]
+
+
 def damage_dice(character: "Character", item: dict) -> str:
     """
     This weapon's damage dice at the wielder's current size.
@@ -296,6 +344,16 @@ def damage_dice(character: "Character", item: dict) -> str:
     defn = weapon_definition(item)
     if defn is None:
         return ""
+    # A monk's unarmed strike has its own table by level and
+    # size, which replaces the weapon's printed damage rather
+    # than modifying it.
+    if defn.name == MONK_UNARMED_WEAPON:
+        monk = monk_unarmed_damage(
+            character.get("effective_monk_level_damage"),
+            character.size,
+        )
+        if monk is not None:
+            return monk
     return damage_dice_for_size(
         defn.damage_dice,
         defn.damage_dice_small or defn.damage_dice,

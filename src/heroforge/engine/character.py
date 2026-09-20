@@ -353,6 +353,7 @@ class Character:
             PoolKey.BAB_MISC,
             PoolKey.GRAPPLE,
             PoolKey.EFFECTIVE_MONK_LEVEL_AC,
+            PoolKey.EFFECTIVE_MONK_LEVEL_DAMAGE,
         ]
         for pk in pools:
             pool = BonusPool(pk)
@@ -516,6 +517,14 @@ class Character:
                 pools=[PoolKey.EFFECTIVE_MONK_LEVEL_AC],
                 compute=compute_sum,
                 description=("Effective monk level for AC bonus calc"),
+            )
+        )
+        g.register_node(
+            StatNode(
+                key="effective_monk_level_damage",
+                pools=[PoolKey.EFFECTIVE_MONK_LEVEL_DAMAGE],
+                compute=compute_sum,
+                description=("Effective monk level for unarmed damage"),
             )
         )
 

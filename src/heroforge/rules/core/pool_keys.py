@@ -35,6 +35,7 @@ class _StatPoolKey(StrEnum):
     DAMAGE_MELEE = "damage_melee"
     DAMAGE_ALL = "damage_all"
     EFFECTIVE_MONK_LEVEL_AC = "effective_monk_level_ac"
+    EFFECTIVE_MONK_LEVEL_DAMAGE = "effective_monk_level_damage"
     GRAPPLE = "grapple"
     DAMAGE_RANGED = "damage_ranged"
     SKILL_ALL = "skill_all"
