@@ -72,3 +72,8 @@ class KnownCoreWeapon(StrEnum):
     NET = "Net"
     SHURIKEN = "Shuriken"
     BOLAS = "Bolas"
+    ORC_DOUBLE_AXE = "Orc Double Axe"
+    DIRE_FLAIL = "Dire Flail"
+    TWO_BLADED_SWORD = "Two-Bladed Sword"
+    GNOME_HOOKED_HAMMER = "Gnome Hooked Hammer"
+    DWARVEN_URGROSH = "Dwarven Urgrosh"

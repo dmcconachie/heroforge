@@ -110,6 +110,25 @@ class ArmorDefinition:
 
 
 @dataclass(frozen=True)
+class WeaponEnd:
+    """
+    The far end of a double weapon, where it differs.
+
+    Only the gnome hooked hammer and the dwarven urgrosh need
+    one: the hammer's hook differs from its head in die,
+    critical multiplier and damage type, and the urgrosh's
+    spear head differs from its axe head in die and type. A
+    field left unset means the end matches the weapon's own.
+    """
+
+    damage_dice: str = ""
+    damage_dice_small: str = ""
+    critical_range: int = 0
+    critical_multiplier: int = 0
+    damage_type: DamageType | str = ""
+
+
+@dataclass(frozen=True)
 class WeaponDefinition:
     name: str
     category: WeaponCategory
@@ -135,6 +154,8 @@ class WeaponDefinition:
     # one-handed weapon and the other as a light one
     # (PHB p. 113). The two uses are exclusive.
     double: bool = False
+    # Present only when the far end differs from this one.
+    off_end: WeaponEnd | None = None
     special: str = ""
 
 

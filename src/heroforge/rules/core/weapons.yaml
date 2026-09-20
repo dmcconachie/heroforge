@@ -4,10 +4,20 @@
 #
 # Fields per entry:
 #   category (simple/martial/exotic),
-#   damage_dice, critical_range (threat start),
-#   critical_multiplier, damage_type,
+#   damage_dice, damage_dice_small, critical_range
+#   (threat start), critical_multiplier, damage_type,
 #   range_increment (0=melee), is_ranged,
-#   weight, cost_gp
+#   weight, cost_gp, double, off_end
+#
+# The full SRD table, 19 simple + 30 martial + 19 exotic.
+#
+# `double: true` marks the six double weapons. All six are
+# two-handed, and all six carry the same clause: a creature
+# wielding one in one hand cannot use it as a double weapon,
+# only one end in any given round. `off_end` describes the
+# far end where it differs, which is only the gnome hooked
+# hammer (die, crit and damage type) and the dwarven urgrosh
+# (die and damage type).
 
 Gauntlet:
   wield_class: light
@@ -678,3 +688,76 @@ Bolas:
   is_ranged: true
   weight: 2
   cost_gp: 5
+Orc Double Axe:
+  wield_class: two_handed
+  category: exotic
+  double: true
+  damage_dice: 1d8
+  damage_dice_small: 1d6
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 15
+  cost_gp: 60
+Dire Flail:
+  wield_class: two_handed
+  category: exotic
+  double: true
+  damage_dice: 1d8
+  damage_dice_small: 1d6
+  critical_range: 20
+  critical_multiplier: 2
+  damage_type: bludgeoning
+  weight: 10
+  cost_gp: 90
+Two-Bladed Sword:
+  wield_class: two_handed
+  category: exotic
+  double: true
+  damage_dice: 1d8
+  damage_dice_small: 1d6
+  critical_range: 19
+  critical_multiplier: 2
+  damage_type: slashing
+  weight: 10
+  cost_gp: 100
+Gnome Hooked Hammer:
+  wield_class: two_handed
+  category: exotic
+  double: true
+  damage_dice: 1d8
+  damage_dice_small: 1d6
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: bludgeoning
+  weight: 6
+  cost_gp: 20
+  special: >-
+    The hammer head is bludgeoning and crits x3; the hook is
+    piercing and crits x4. Either end may be the primary.
+    Gnomes treat it as a martial weapon, and it may be used
+    to trip.
+  off_end:
+    damage_dice: 1d6
+    damage_dice_small: 1d4
+    critical_multiplier: 4
+    damage_type: piercing
+Dwarven Urgrosh:
+  wield_class: two_handed
+  category: exotic
+  double: true
+  damage_dice: 1d8
+  damage_dice_small: 1d6
+  critical_range: 20
+  critical_multiplier: 3
+  damage_type: slashing
+  weight: 12
+  cost_gp: 50
+  special: >-
+    The axe head is slashing; the spear head is piercing and
+    deals one die less. Either end may be the primary. Set
+    against a charge it deals double damage.
+  off_end:
+    damage_dice: 1d6
+    damage_dice_small: 1d4
+    damage_type: piercing

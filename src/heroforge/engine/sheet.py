@@ -77,6 +77,9 @@ from heroforge.engine.weapons import (
     weapon_stances,
 )
 from heroforge.engine.weapons import (
+    critical_multiplier as weapon_critical_multiplier,
+)
+from heroforge.engine.weapons import (
     damage_dice as weapon_damage_dice,
 )
 from heroforge.rules.known import (
@@ -861,7 +864,7 @@ def _equipment(c: "Character") -> EquipmentSection:
                 attack_iteratives=_weapon_iteratives(c, atk_key, w),
                 damage_dice=weapon_damage_dice(c, w),
                 crit_range=_crit_range_display(c, w),
-                crit_mult=(f"x{wdef.critical_multiplier}" if wdef else ""),
+                crit_mult=(f"x{weapon_critical_multiplier(w)}" if wdef else ""),
                 range_inc=_weapon_range_increment(c, w),
                 damage_types=list(w.get("damage_types", [])),
                 weapon_type=w.get("weapon_type", ""),

@@ -95,7 +95,7 @@ src/heroforge/
 │       ├── domains.yaml      # 22 cleric domains
 │       ├── deities.yaml      # 194 LG deities
 │       ├── armor.yaml        # 18 armor/shields
-│       ├── weapons.yaml      # 63 weapons
+│       ├── weapons.yaml      # 68 weapons (full SRD)
 │       └── magic_items.yaml  # ~70 magic items
 │
 ├── export/
@@ -919,7 +919,7 @@ YAML files under `rules/core/` contain full SRD data:
 - 110 feats (alphabetically sorted in feats.yaml)
 - 601 spell compendium entries (with inline buff effects)
 - 22 cleric domains, 194 deities
-- 18 armor/shields, 63 weapons
+- 18 armor/shields, 68 weapons (the full SRD table)
 - ~70 magic items
 - 12 creature templates
 - ~15 class feature buffs (rage, inspire courage, etc.)
@@ -1274,11 +1274,18 @@ Reusable components in `widgets/`: `LabeledField`,
   wielded two-handed: full Strength on one end, half on the
   other, one and a half on neither. Its off end also counts
   as light for Table 8-10, which is the lighter penalty pair.
-  `WeaponDefinition.double` marks them; only the quarterstaff
-  is in the data so far, the other five (dire flail, dwarven
-  urgrosh, gnome hooked hammer, orc double axe, two-bladed
-  sword) not being present yet. A two-handed weapon that is
-  not double cannot be paired at all.
+  `WeaponDefinition.double` marks all six. A two-handed
+  weapon that is not double cannot be paired at all.
+
+  Two of them are asymmetric, so the far end needs its own
+  stats rather than just its own Strength share:
+  `WeaponDefinition.off_end` carries them, and a field left
+  unset means that end matches the weapon's own. The gnome
+  hooked hammer's hook differs from its head in die,
+  critical multiplier *and* damage type (1d6 piercing x4
+  against 1d8 bludgeoning x3); the dwarven urgrosh's spear
+  head differs from its axe head in die and type. The other
+  four are symmetric and need no `off_end`.
 
   Two-weapon fighting penalties follow PHB Table 8-10, keyed
   on whether the off-hand weapon is light (hence

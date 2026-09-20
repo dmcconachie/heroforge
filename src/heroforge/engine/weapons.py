@@ -41,7 +41,10 @@ if TYPE_CHECKING:
     from typing import Callable
 
     from heroforge.engine.character import Character
-    from heroforge.engine.equipment import WeaponDefinition
+    from heroforge.engine.equipment import (
+        WeaponDefinition,
+        WeaponEnd,
+    )
     from heroforge.engine.feats import FeatDefinition
 
 ATTACK = "attack"
@@ -401,6 +404,37 @@ def weapon_feature_names(item: dict) -> list[str]:
     ]
 
 
+def critical_multiplier(item: dict) -> int:
+    """
+    The multiplier of the end being used.
+
+    The gnome hooked hammer's hook crits x4 where its head
+    crits x3 (PHB p. 118).
+    """
+    defn = weapon_definition(item)
+    if defn is None:
+        return 2
+    end = _end_of(item)
+    if end is not None and end.critical_multiplier:
+        return end.critical_multiplier
+    return defn.critical_multiplier
+
+
+def _end_of(item: dict) -> "WeaponEnd | None":
+    """
+    The far end's stats, when this slot is the off end of an
+    asymmetric double weapon.
+
+    The gnome hooked hammer's hook and the dwarven urgrosh's
+    spear head differ from the other end; the four symmetric
+    double weapons have no separate description.
+    """
+    defn = weapon_definition(item)
+    if defn is None or not has_stance(item, "off_hand"):
+        return None
+    return defn.off_end
+
+
 def damage_dice(character: "Character", item: dict) -> str:
     """
     This weapon's damage dice at the wielder's current size.
@@ -415,6 +449,13 @@ def damage_dice(character: "Character", item: dict) -> str:
     defn = weapon_definition(item)
     if defn is None:
         return ""
+    end = _end_of(item)
+    if end is not None and end.damage_dice:
+        return damage_dice_for_size(
+            end.damage_dice,
+            end.damage_dice_small or end.damage_dice,
+            character.size,
+        )
     # A monk's unarmed strike has its own table by level and
     # size, which replaces the weapon's printed damage rather
     # than modifying it.
