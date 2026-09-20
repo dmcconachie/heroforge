@@ -1,0 +1,229 @@
+identity:
+  name: Sekhet of the Open Palm
+  race: Human
+  class_str: Monk 5
+  level: 5
+  alignment: lawful_good
+  deity: ''
+  size: Medium
+abilities:
+  str:
+    score: 14
+    mod: 2
+    typed:
+      base: 14
+  dex:
+    score: 16
+    mod: 3
+    typed:
+      base: 16
+  con:
+    score: 12
+    mod: 1
+    typed:
+      base: 12
+  int:
+    score: 10
+    mod: 0
+    typed:
+      base: 10
+  wis:
+    score: 15
+    mod: 2
+    typed:
+      base: 14
+      level_bumps: 1
+  cha:
+    score: 8
+    mod: -1
+    typed:
+      base: 8
+combat:
+  ac:
+    total: 16
+    typed:
+      base: 10
+      dex: 3
+      monk_wis_ac_bonus: 2
+      monk_ac_bonus: 1
+  touch_ac: 16
+  flatfooted_ac: 13
+  hp_max:
+    total: 33
+    typed:
+      base: 28
+      con: 5
+  bab:
+    total: 3
+    typed:
+      base: 3
+  initiative:
+    total: 3
+    typed:
+      dex: 3
+  speed:
+    total: 40
+    typed:
+      base: 30
+      enhancement: 10
+  sr: 0
+  saves:
+    fort:
+      total: 5
+      typed:
+        base: 4
+        con: 1
+    ref:
+      total: 7
+      typed:
+        base: 4
+        dex: 3
+    will:
+      total: 6
+      typed:
+        base: 4
+        wis: 2
+  attack_melee:
+    total: 5
+    typed:
+      base: 3
+      str: 2
+  attack_ranged:
+    total: 6
+    typed:
+      base: 3
+      dex: 3
+  damage_melee:
+    total: 2
+    typed:
+      str: 2
+  grapple:
+    total: 5
+    typed:
+      base: 3
+      str: 2
+attack_iteratives:
+  melee:
+    - 5
+  ranged:
+    - 6
+skills:
+  Balance:
+    total: 13
+    typed:
+      ability_mod: 3
+      ranks: 8
+      synergy: 2
+  Jump:
+    total: 8
+    typed:
+      ability_mod: 2
+      synergy: 2
+      speed_mod: 4
+  Tumble:
+    total: 11
+    typed:
+      ability_mod: 3
+      ranks: 8
+carrying_capacity:
+  light: 58
+  medium: 116
+  heavy: 175
+feats:
+  - Improved Unarmed Strike
+class_features:
+  ac_bonus_contribution:
+    description: >-
+      Contributes monk level to effective_monk_level_ac pool. The AC formula
+      itself (WIS mod + effective_monk_level_ac/5) lives in derived_pools.yaml
+      and is gated by unarmored, no shield, light load or less.
+    values:
+      ac: 3
+  bonus_feat_monk_1:
+    description: >-
+      Improved Unarmed Strike + choice of Combat Reflexes, Deflect Arrows,
+      or Improved Grapple
+  flurry_of_blows:
+    description: >-
+      One extra attack at full base attack bonus, with a penalty on every
+      attack that round
+    values:
+      extra_attacks: 1
+      penalty: -1
+  unarmed_strike:
+    description: >-
+      Unarmed strike damage by monk level and size (PHB Tables 3-10 and 3-11);
+      shown on the weapon line when an Unarmed Strike is equipped
+  bonus_feat_monk_2:
+    description: Combat Reflexes, Deflect Arrows, or Improved Trip
+  evasion:
+    description: No damage on successful Reflex saves
+  fast_movement:
+    description: >-
+      Monk fast movement (PHB Table 3-10 p.40): +10 ft at L3, scaling to +60
+      at L20. Applies only while unarmored, no shield, light load or less.
+    gated_by:
+      - unarmored
+      - no_shield
+      - light_load_or_less
+  still_mind:
+    description: +2 saves vs enchantments
+  ki_strike_magic:
+    description: Unarmed strike treated as magic
+  slow_fall:
+    description: Treat a fall as shorter when next to a wall
+    values:
+      distance_ft: 20
+  purity_of_body:
+    description: Immune to natural disease
+equipment:
+  weapons:
+    - name: Unarmed Strike (Flurry of Blows)
+      attack:
+        total: 4
+        typed:
+          base: 3
+          str: 2
+          flurry_of_blows: -1
+      damage:
+        total: 2
+        typed:
+          str: 2
+      attack_iteratives:
+        - 4
+        - 4
+      damage_dice: 1d8
+      crit_range: '20'
+      crit_mult: x2
+    - name: Quarterstaff (Flurry of Blows)
+      attack:
+        total: 4
+        typed:
+          base: 3
+          str: 2
+          flurry_of_blows: -1
+      damage:
+        total: 2
+        typed:
+          str: 2
+      attack_iteratives:
+        - 4
+        - 4
+      damage_dice: 1d6
+      crit_range: '20'
+      crit_mult: x2
+    - name: Longbow
+      attack:
+        total: 2
+        typed:
+          base: 3
+          dex: 3
+          nonproficient: -4
+      damage:
+        total: 0
+      attack_iteratives:
+        - 2
+      damage_dice: 1d8
+      crit_range: '20'
+      crit_mult: x3
+      range_inc: 100

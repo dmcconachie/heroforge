@@ -1,0 +1,65 @@
+# A mid-level monk mid-flurry.
+#
+# base_monk covers the top of PHB Table 3-10: 20th level,
+# greater flurry, no penalty. This one covers the tier in
+# between, where the penalty has eased to -1 but the second
+# extra attack has not arrived, and where the unarmed damage
+# die is still 1d8.
+identity:
+  name: Sekhet of the Open Palm
+  player: ''
+  race: Human
+  alignment: lawful_good
+  deity: ''
+ability_scores:
+  str: 14
+  dex: 16
+  con: 12
+  int: 10
+  wis: 14
+  cha: 8
+levels:
+  - level: 1
+    class: Monk
+    hp_roll: 8
+    skill_ranks:
+      Balance: 4
+      Tumble: 4
+  - level: 2
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 3
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 4
+    class: Monk
+    hp_roll: 5
+    ability_bump: wis
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+  - level: 5
+    class: Monk
+    hp_roll: 5
+    skill_ranks:
+      Balance: 1
+      Tumble: 1
+equipment:
+  armor: {}
+  shield: {}
+  worn: []
+  weapons:
+    - base: Unarmed Strike
+      flurry: true
+    - base: Quarterstaff
+      flurry: true
+    - base: Longbow
+notes: >-
+  The longbow carries no flurry: a flurry may use only unarmed
+  strikes and the special monk weapons.

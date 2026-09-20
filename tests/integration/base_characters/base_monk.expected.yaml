@@ -182,7 +182,12 @@ class_features:
       Improved Unarmed Strike + choice of Combat Reflexes, Deflect Arrows,
       or Improved Grapple
   flurry_of_blows:
-    description: Extra attack with -2 to all attacks
+    description: >-
+      One extra attack at full base attack bonus, with a penalty on every
+      attack that round
+    values:
+      extra_attacks: 2
+      penalty: 0
   unarmed_strike:
     description: >-
       Unarmed strike damage by monk level and size (PHB Tables 3-10 and 3-11);
@@ -235,3 +240,43 @@ class_features:
     description: Etherealness 1 min/day per Monk level
   perfect_self:
     description: Outsider type; DR 10/magic
+equipment:
+  weapons:
+    - name: Unarmed Strike (Flurry of Blows)
+      attack:
+        total: 16
+        typed:
+          base: 15
+          str: 1
+      damage:
+        total: 1
+        typed:
+          str: 1
+      attack_iteratives:
+        - 16
+        - 16
+        - 16
+        - 11
+        - 6
+      damage_dice: 2d10
+      crit_range: '20'
+      crit_mult: x2
+    - name: Kama (Flurry of Blows)
+      attack:
+        total: 16
+        typed:
+          base: 15
+          str: 1
+      damage:
+        total: 1
+        typed:
+          str: 1
+      attack_iteratives:
+        - 16
+        - 16
+        - 16
+        - 11
+        - 6
+      damage_dice: 1d6
+      crit_range: '20'
+      crit_mult: x2

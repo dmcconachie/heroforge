@@ -1249,6 +1249,18 @@ Reusable components in `widgets/`: `LabeledField`,
   -2 on every ranged attack that round; the penalty sits on
   the weapon's line, and only the extra attack is added to
   the sequence.
+  Flurry of blows is the same shape but asked for rather than
+  inferred: a flurry is a choice made per full attack, so the
+  weapon slot carries `flurry: true` the way a pairing
+  carries `hand:`. It adds one extra attack at full base
+  attack bonus, two from 11th level (greater flurry), and a
+  penalty on every attack that round -- -2, easing to -1 at
+  5th level and gone at 9th (PHB p. 40). Together those
+  reproduce Table 3-10's flurry column at every level, which
+  `flurry_test.py` checks row by row. It is refused on
+  anything but an unarmed strike or a special monk weapon,
+  and switches off while armoured, the ability reading "when
+  unarmored".
   A weapon's `attack.total` is always the first entry of its
   `attack_iteratives`, and equals the sum of its breakdown.
   Anything that shapes the sequence therefore has to appear

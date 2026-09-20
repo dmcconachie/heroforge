@@ -317,3 +317,25 @@ class TestNonproficiencyDoesNotDouble:
             assert self._total("Rogue", skill) == (
                 self._total("Fighter", skill) - 6
             ), skill
+
+
+class TestMonkUnarmedProficiency:
+    def test_a_monk_is_proficient_with_her_own_fists(self) -> None:
+        """
+        Regression: the PHB's monk weapon list omits the
+        unarmed strike, because it is a simple weapon covered
+        by the class's own unarmed strike feature. Taking that
+        list literally left a monk nonproficient with her
+        fists, costing -4 on every unarmed attack.
+        """
+        assert is_proficient_with_weapon(
+            _char("Monk"), _weapon("Unarmed Strike")
+        )
+
+    def test_she_gets_improved_unarmed_strike(self) -> None:
+        """PHB p. 41: a bonus feat at 1st level."""
+        c = _char("Monk")
+        from heroforge.engine.feats import refresh_granted_feats
+
+        refresh_granted_feats(c)
+        assert c.has_feat("Improved Unarmed Strike")

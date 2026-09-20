@@ -63,6 +63,8 @@ from heroforge.engine.sheet_schema import (
 )
 from heroforge.engine.weapons import (
     attack_ability_override,
+    flurry_applies,
+    flurry_extra_attacks,
     off_hand_attack_count,
     off_hand_strength_penalty,
     range_increment_bonus,
@@ -792,6 +794,11 @@ def _weapon_iteratives(
     while extra >= 1:
         attacks.append(base - (bab - extra))
         extra -= 5
+    if flurry_applies(c, item):
+        # One extra attack at full base attack bonus, two from
+        # 11th level. The penalty is already on the line, so it
+        # needs no second application here.
+        attacks = [base] * flurry_extra_attacks(c) + attacks
     if rapid_shot_applies(c, item):
         # One more attack at the highest bonus. The -2 is already
         # on the line, so it needs no second application here.

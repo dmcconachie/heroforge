@@ -275,6 +275,8 @@ def weapon_stances(character: "Character", item: dict) -> list[str]:
     label = _HAND_LABELS.get(item.get("hand", ""))
     if label:
         out.append(label)
+    if flurry_applies(character, item):
+        out.append("Flurry of Blows")
     if rapid_shot_applies(character, item):
         out.append("Rapid Shot")
     for name, state in character._buff_states.items():
@@ -398,6 +400,60 @@ def material_damage_entry(item: dict) -> BonusEntry | None:
         bonus_type=BonusType.UNTYPED,
         source="material",
     )
+
+
+# PHB p. 40: a flurry may use unarmed strikes or the special
+# monk weapons, and nothing else.
+FLURRY_WEAPONS: frozenset[str] = frozenset(
+    {
+        MONK_UNARMED_WEAPON,
+        "Kama",
+        "Nunchaku",
+        "Quarterstaff",
+        "Sai",
+        "Shuriken",
+        "Siangham",
+    }
+)
+
+
+def flurry_penalty(character: "Character") -> int:
+    """
+    The penalty a flurry puts on every attack that round.
+
+    -2 to begin with, easing to -1 at 5th level and gone at
+    9th (PHB p. 40).
+    """
+    level = character.class_level_map.get("Monk", 0)
+    if level >= 9:
+        return 0
+    if level >= 5:
+        return -1
+    return -2
+
+
+def flurry_extra_attacks(character: "Character") -> int:
+    """
+    Extra attacks a flurry grants, both at full base attack.
+
+    One, and a second from 11th level -- greater flurry.
+    """
+    return 2 if character.class_level_map.get("Monk", 0) >= 11 else 1
+
+
+def flurry_applies(character: "Character", item: dict) -> bool:
+    """
+    Whether this weapon is being used in a flurry.
+
+    Asked for on the weapon slot rather than inferred, because
+    a flurry is a choice made per full attack. It is off while
+    armoured: the ability reads "when unarmored".
+    """
+    if not item.get("flurry"):
+        return False
+    if not character.has_class_feature("flurry_of_blows"):
+        return False
+    return character.equipped_armor_category() is None
 
 
 def rapid_shot_applies(character: "Character", item: dict) -> bool:
@@ -555,6 +611,22 @@ def register_weapons_on_character(character: "Character") -> None:
                             )
                         ],
                     )
+                if flurry_applies(character, item):
+                    penalty = flurry_penalty(character)
+                    if penalty:
+                        # Applies to every attack that round,
+                        # so it belongs on the line and not
+                        # only on the sequence.
+                        pool.set_source(
+                            "flurry_of_blows",
+                            [
+                                BonusEntry(
+                                    value=penalty,
+                                    bonus_type=BonusType.UNTYPED,
+                                    source="flurry_of_blows",
+                                )
+                            ],
+                        )
                 twf = two_weapon_penalty(character, item, weapons)
                 if twf:
                     pool.set_source(
@@ -640,6 +712,19 @@ def validate_weapon_features(character: "Character") -> None:
                 available[feature.feature] = feature.designates
 
     for item in character.equipment.get("weapons", []) or []:
+        if item.get("flurry"):
+            if "flurry_of_blows" not in available:
+                raise ValueError(
+                    "Weapon declares flurry, but this character has "
+                    "no flurry of blows."
+                )
+            base = str(item.get("base", ""))
+            if base not in FLURRY_WEAPONS:
+                raise ValueError(
+                    f"{base!r} cannot be used in a flurry: only "
+                    f"unarmed strikes and the special monk weapons "
+                    f"can (PHB p. 40)."
+                )
         for key in item.get("features", []) or []:
             if key not in available:
                 raise ValueError(

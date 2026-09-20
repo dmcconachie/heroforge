@@ -209,5 +209,9 @@ equipment:
   armor: {}
   shield: {}
   worn: []
-  weapons: []
+  weapons:
+    - base: Unarmed Strike
+      flurry: true
+    - base: Kama
+      flurry: true
 notes: ''
