@@ -12,3 +12,5 @@ from enum import StrEnum
 
 class KnownDraconomiconMagicItem(StrEnum):
     GEMSTONE_OF_HEAVY_FORTIFICATION = "Gemstone of Heavy Fortification"
+    GEMSTONE_OF_LIGHT_FORTIFICATION = "Gemstone of Light Fortification"
+    GEMSTONE_OF_MODERATE_FORTIFICATION = "Gemstone of Moderate Fortification"

@@ -110,6 +110,9 @@ class CombatSection:
     damage_reduction: list[str] = field(default_factory=list)
     energy_resistance: dict[str, int] = field(default_factory=dict)
     immunities: list[str] = field(default_factory=list)
+    # Percentage chance to negate a critical hit or sneak
+    # attack.
+    fortification: int = 0
 
 
 @dataclass

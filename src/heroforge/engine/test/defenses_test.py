@@ -389,3 +389,116 @@ class TestCreatureTemplateTables:
         """The table's first row is an em dash, not a zero."""
         d = collect_defenses(self._templated("Fiendish Creature", 3))
         assert d.damage_reduction == ()
+
+
+class TestFortification:
+    """
+    A chance to negate a critical hit or sneak attack. Not a
+    bonus and not a reduction, but a defensive number the
+    player needs, so it sits with the other defenses.
+
+    DMG p. 219 and Draconomicon p. 83 both use the same
+    grades: light 25%, moderate 75%, heavy 100%.
+    """
+
+    def _wear(self, *properties: str) -> Character:
+        c = _char(cls="Fighter", level=1)
+        equip_armor(
+            c,
+            get_rules().armor.get("Chain Shirt"),
+            properties=list(properties),
+        )
+        return c
+
+    @pytest.mark.parametrize(
+        ("prop", "pct"),
+        [
+            ("Fortification, Light", 25),
+            ("Fortification, Moderate", 75),
+            ("Fortification, Heavy", 100),
+        ],
+    )
+    def test_the_armour_property(self, prop: str, pct: int) -> None:
+        assert collect_defenses(self._wear(prop)).fortification == pct
+
+    @pytest.mark.parametrize(
+        ("item", "pct"),
+        [
+            ("Gemstone of Light Fortification", 25),
+            ("Gemstone of Moderate Fortification", 75),
+            ("Gemstone of Heavy Fortification", 100),
+        ],
+    )
+    def test_the_draconomicon_gemstones(self, item: str, pct: int) -> None:
+        from heroforge.engine.equipment import equip_item
+
+        c = _char(cls="Fighter", level=1)
+        defn = get_rules().magic_items.get(item)
+        assert defn is not None, item
+        equip_item(c, defn)
+        c.equipment["worn"] = [{"name": item}]
+        assert collect_defenses(c).fortification == pct
+
+    def test_none_by_default(self) -> None:
+        assert collect_defenses(self._wear()).fortification == 0
+
+    def test_the_best_applies(self) -> None:
+        c = self._wear("Fortification, Light", "Fortification, Heavy")
+        assert collect_defenses(c).fortification == 100
+
+    def test_it_reaches_the_sheet(self) -> None:
+        sheet = gather_sheet(self._wear("Fortification, Heavy"), None)
+        assert sheet.combat.fortification == 100
+
+    def test_it_is_omitted_when_there_is_none(self) -> None:
+        sheet = gather_sheet(self._wear(), None)
+        assert sheet.combat.fortification == 0
+
+
+class TestTemplateSpellResistance:
+    """
+    MM: the half-outsiders are HD + 10 (maximum 35); the
+    Celestial and Fiendish Creature templates are HD + 5
+    (maximum 25).
+    """
+
+    def _templated(self, name: str, level: int) -> Character:
+        from heroforge.engine.templates import apply_template
+
+        c = _char(cls="Fighter", level=level)
+        apply_template(get_rules().templates.get(name), c)
+        return c
+
+    @pytest.mark.parametrize(
+        ("name", "level", "sr"),
+        [
+            ("Half-Celestial", 5, 15),
+            ("Half-Celestial", 20, 30),
+            ("Half-Fiend", 12, 22),
+            ("Celestial Creature", 5, 10),
+            ("Fiendish Creature", 12, 17),
+        ],
+    )
+    def test_spell_resistance(self, name: str, level: int, sr: int) -> None:
+        assert self._templated(name, level).get("sr") == sr
+
+    def test_the_half_outsider_cap(self) -> None:
+        c = self._templated("Half-Celestial", 30)
+        assert c.get("sr") == 35
+
+    def test_the_creature_template_cap(self) -> None:
+        c = self._templated("Celestial Creature", 30)
+        assert c.get("sr") == 25
+
+    def test_removing_the_template_removes_it(self) -> None:
+        from heroforge.engine.templates import (
+            apply_template,
+            remove_template,
+        )
+
+        c = _char(cls="Fighter", level=5)
+        defn = get_rules().templates.get("Half-Celestial")
+        apply_template(defn, c)
+        assert c.get("sr") == 15
+        remove_template(defn, c)
+        assert c.get("sr") == 0

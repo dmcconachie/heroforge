@@ -243,16 +243,22 @@ Fortification, Heavy:
   note: >-
     100% chance to negate a critical hit or sneak attack (DMG p. 219).
     Permanent, but a chance to negate is not a stat on the sheet.
+  defenses:
+    fortification: 100
 Fortification, Light:
   applies_to: armor
   note: >-
     25% chance to negate a critical hit or sneak attack (DMG p. 219).
     Permanent, but a chance to negate is not a stat on the sheet.
+  defenses:
+    fortification: 25
 Fortification, Moderate:
   applies_to: armor
   note: >-
     75% chance to negate a critical hit or sneak attack (DMG p. 219).
     Permanent, but a chance to negate is not a stat on the sheet.
+  defenses:
+    fortification: 75
 Invulnerability:
   applies_to: armor
   note: >-

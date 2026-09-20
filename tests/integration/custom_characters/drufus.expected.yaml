@@ -126,6 +126,7 @@ combat:
     typed:
       base: 17
       str: 5
+  fortification: 100
 attack_iteratives:
   melee:
     - 23

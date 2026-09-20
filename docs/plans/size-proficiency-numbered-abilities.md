@@ -154,10 +154,11 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
 - **Fortification's chance to negate a critical** is the last
   permanent property with nowhere to go. Energy resistance
   and damage reduction now have a home (`engine/defenses.py`).
-- **Template spell resistance** is still display text
-  ("HD + 5", "character level + 11"). SR itself is modelled;
-  `TemplateDefinition` just has no generic `effects:` block
-  to contribute through, which is also what fly speed needs.
+- **Template fly speed** is the last template quality still
+  display-only. Templates now take a generic `effects:`
+  block, so the blocker is no longer the template side: there
+  is no movement mode other than land speed to contribute
+  to.
 Both of the previous entries here are done: Nimbleness is
 implemented through property-level armour-stat adjustments,
 and weapon bond is a class feature that designates a weapon.

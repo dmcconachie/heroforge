@@ -363,6 +363,7 @@ def _combat(c: "Character") -> CombatSection:
         damage_reduction=[str(dr) for dr in defenses.damage_reduction],
         energy_resistance=dict(defenses.energy_resistance),
         immunities=list(defenses.immunities),
+        fortification=defenses.fortification,
     )
 
 

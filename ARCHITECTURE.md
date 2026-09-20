@@ -633,10 +633,22 @@ with resistance 5 up to 7 HD and 10 from 8. Their formulas
 read character level, which equals HD for a character with
 no racial Hit Dice.
 
-Spell resistance is the one defensive quality a template
-still cannot express — "HD + 5" and "character level + 11"
-remain display text, because `TemplateDefinition` has no
-generic `effects:` block to put an `sr` contribution in.
+`TemplateDefinition` also takes a generic `effects:` block,
+the same shape a magic item's or class feature's, whose
+values may be formulas. Spell resistance uses it: the
+half-outsiders are `min(35, character_level + 10)` and the
+Celestial and Fiendish Creature templates are
+`min(25, character_level + 5)`, both per the MM. The same
+block is what fly speed will need, once a movement mode
+other than land speed exists to contribute to.
+
+`Defenses` also carries `fortification`, the percentage
+chance to negate a critical hit or sneak attack — neither a
+bonus nor a reduction, but a defensive number the player
+needs, so it sits with the rest. Best source wins. It comes
+from the armour property at light/moderate/heavy (25/75/100%,
+DMG p. 219) and from the Draconomicon's gemstones of
+fortification at the same three grades (p. 83).
 
 ### Class features that designate a weapon
 

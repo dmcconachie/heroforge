@@ -21,6 +21,11 @@
 #   note                  : display hint
 
 Half-Celestial:
+  effects:
+    # MM: spell resistance equal to HD + 10, maximum 35.
+    - target: sr
+      bonus_type: untyped
+      value: min(35, character_level + 10)
   defenses:
     # MM: 5/magic at HD 11 or less, 10/magic at 12 or more.
     # Read off character level, which equals HD for a
@@ -68,13 +73,18 @@ Half-Celestial:
     - >-
       Damage reduction 5/magic (if 5 HD or less)
       or 10/magic (if more)
-    - 'Spell resistance: character level + 11'
+    - 'Spell resistance: HD + 10 (max 35)'
     - +4 racial bonus on saving throws vs. poison
   grants_feats: []
   note: >-
     Outsider heritage; retains base type but
     gains Good and Extraplanar subtypes
 Half-Fiend:
+  effects:
+    # MM: spell resistance equal to HD + 10, maximum 35.
+    - target: sr
+      bonus_type: untyped
+      value: min(35, character_level + 10)
   defenses:
     damage_reduction:
       - amount: 5 + 5 * (character_level >= 12)
@@ -112,7 +122,7 @@ Half-Fiend:
     - Immunity to poison
     - Resistance to acid 10, cold 10, electricity 10, fire 10
     - Damage reduction 5/magic (HD 11 or less) or 10/magic (HD 12+)
-    - 'Spell resistance: character level + 11'
+    - 'Spell resistance: HD + 10 (max 35)'
     - Smite good 1/day (as blackguard)
   grants_feats: []
   note: >-
@@ -180,6 +190,11 @@ Half-Dragon (White):
   grants_feats: []
   note: Becomes Dragon type
 Fiendish Creature:
+  effects:
+    # MM: spell resistance equal to HD + 5, maximum 25.
+    - target: sr
+      bonus_type: untyped
+      value: min(25, character_level + 5)
   defenses:
     # MM: resistance 5 at HD 1-7 and 10 at 8+; damage
     # reduction none below 4 HD, 5/magic at 4-11 and 10/magic
@@ -213,11 +228,16 @@ Fiendish Creature:
   special_qualities:
     - Darkvision 60 ft.
     - Resistance to cold and fire, 5 or 10 by HD
-    - 'Spell resistance: HD + 5'
+    - 'Spell resistance: HD + 5 (max 25)'
     - Smite good 1/day
   grants_feats: []
   note: Denizen of lower planes; relatively minor modifications
 Celestial Creature:
+  effects:
+    # MM: spell resistance equal to HD + 5, maximum 25.
+    - target: sr
+      bonus_type: untyped
+      value: min(25, character_level + 5)
   defenses:
     # MM: resistance 5 at HD 1-7 and 10 at 8+; damage
     # reduction none below 4 HD, 5/magic at 4-11 and 10/magic
@@ -252,7 +272,7 @@ Celestial Creature:
   special_qualities:
     - Darkvision 60 ft.
     - Resistance to acid, cold and electricity, 5 or 10 by HD
-    - 'Spell resistance: HD + 5'
+    - 'Spell resistance: HD + 5 (max 25)'
     - Smite evil 1/day
   grants_feats: []
   note: Denizen of upper planes

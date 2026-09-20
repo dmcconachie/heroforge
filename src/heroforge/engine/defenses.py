@@ -76,6 +76,10 @@ class Defenses:
     damage_reduction: tuple[DamageReduction, ...] = ()
     energy_resistance: dict[str, int] = field(default_factory=dict)
     immunities: tuple[str, ...] = ()
+    # Percentage chance to negate a critical hit or sneak
+    # attack. Neither a bonus nor a reduction, but a
+    # defensive number the player needs. Best source wins.
+    fortification: int = 0
 
 
 def best_damage_reduction(
@@ -113,6 +117,7 @@ def _read_block(
     drs: list[DamageReduction],
     resist: list[tuple[str, int]],
     immune: set[str],
+    fortify: list[int],
     parameter: str = "",
 ) -> None:
     """Accumulate one `defenses:` declaration."""
@@ -142,6 +147,13 @@ def _read_block(
         _substitute(str(x), parameter)
         for x in block.get("immunities", ()) or ()
     )
+    raw = block.get("fortification", 0)
+    if raw:
+        fortify.append(
+            evaluate_formula(raw, character=character)
+            if isinstance(raw, str)
+            else int(raw)
+        )
 
 
 def _equipped_property_names(character: "Character") -> list[str]:
@@ -170,11 +182,12 @@ def collect_defenses(character: "Character") -> Defenses:
     drs: list[DamageReduction] = []
     resist: list[tuple[str, int]] = []
     immune: set[str] = set()
+    fortify: list[int] = []
 
     for name in _equipped_property_names(character):
         defn = property_definition(str(name))
         if defn is not None and defn.defenses:
-            _read_block(defn.defenses, character, drs, resist, immune)
+            _read_block(defn.defenses, character, drs, resist, immune, fortify)
 
     rules = get_rules()
 
@@ -196,13 +209,21 @@ def collect_defenses(character: "Character") -> Defenses:
                 drs,
                 resist,
                 immune,
+                fortify,
                 entry.get("parameter", ""),
             )
 
     for application in character.templates or ():
         template = rules.templates.get(application.template_name)
         if template is not None and template.defenses:
-            _read_block(template.defenses, character, drs, resist, immune)
+            _read_block(
+                template.defenses,
+                character,
+                drs,
+                resist,
+                immune,
+                fortify,
+            )
 
     classes = rules.classes
     for class_name, level in character.class_level_map.items():
@@ -211,7 +232,14 @@ def collect_defenses(character: "Character") -> Defenses:
             continue
         for feature in defn.class_features:
             if feature.level <= level and feature.defenses:
-                _read_block(feature.defenses, character, drs, resist, immune)
+                _read_block(
+                    feature.defenses,
+                    character,
+                    drs,
+                    resist,
+                    immune,
+                    fortify,
+                )
 
     best_resist: dict[str, int] = {}
     for energy, points in resist:
@@ -226,4 +254,5 @@ def collect_defenses(character: "Character") -> Defenses:
         damage_reduction=best_damage_reduction(drs),
         energy_resistance={k: best_resist[k] for k in sorted(best_resist)},
         immunities=tuple(sorted(immune)),
+        fortification=max(fortify, default=0),
     )

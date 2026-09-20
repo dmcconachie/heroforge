@@ -41,6 +41,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusType
+from heroforge.engine.effects import pool_entries_from_effects
 from heroforge.engine.enums import Ability
 
 if TYPE_CHECKING:
@@ -116,6 +117,11 @@ class TemplateDefinition:
     # Damage reduction / energy resistance / immunity.
     # See engine/defenses.py for the shape.
     defenses: dict = field(default_factory=dict)
+    # Ordinary pool contributions, same shape as a magic
+    # item's or a class feature's. Values may be formulas, so
+    # a template's spell resistance is written as
+    # "min(35, character_level + 10)".
+    effects: list[dict] = field(default_factory=list)
     special_qualities: list[str] = field(default_factory=list)
     grants_feats: list[str] = field(default_factory=list)
     note: str = ""
@@ -256,6 +262,23 @@ def apply_template(
             ac_pool.set_source(ac_source_key, [entry])
             character._graph.invalidate_pool("ac")
 
+    # --- Pool effects -----------------------------------------------------
+    if defn.effects:
+        pairs = pool_entries_from_effects(
+            [dict(e) for e in defn.effects],
+            source_label=defn.name,
+            character=character,
+        )
+        by_pool: dict[str, list] = {}
+        for pool_key, bonus in pairs:
+            by_pool.setdefault(pool_key, []).append(bonus)
+        effects_key = f"{source_key}:effects"
+        for pool_key, entries in by_pool.items():
+            pool = character.get_pool(pool_key)
+            if pool is not None:
+                pool.set_source(effects_key, entries)
+                character._graph.invalidate_pool(pool_key)
+
     # --- Type / subtype changes ------------------------------------------
     if defn.type_change:
         character._creature_type_override = defn.type_change
@@ -330,6 +353,12 @@ def remove_template(
         ac_source_key = f"{source_key}:natural_armor"
         ac_pool.clear_source(ac_source_key)
         character._graph.invalidate_pool("ac")
+
+    # --- Pool effects -----------------------------------------------------
+    effects_key = f"{source_key}:effects"
+    for pool_key, pool in character._pools.items():
+        pool.clear_source(effects_key)
+        character._graph.invalidate_pool(pool_key)
 
     # --- Type / subtype changes ------------------------------------------
     # Only clear type override if no other template sets it
@@ -465,6 +494,7 @@ def build_template_from_yaml(
         ability_modifiers=ability_mods,
         natural_armor_bonus=int(decl.get("natural_armor_bonus", 0)),
         defenses=decl.get("defenses", {}),
+        effects=decl.get("effects", []),
         special_qualities=decl.get("special_qualities", []),
         grants_feats=decl.get("grants_feats", []),
         note=decl.get("note", ""),

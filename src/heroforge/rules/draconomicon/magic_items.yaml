@@ -10,6 +10,27 @@ Gemstone of Heavy Fortification:
   note: >-
     Embedded gemstone; must be set into the wearer's hide to
     function (trivial for true dragons; requires limited wish
-    or similar for other creatures). Grants the wearer 100%
-    chance to negate extra damage from critical hits and sneak
-    attacks. Draconomicon p. 83.
+    or similar for other creatures). 100% chance to negate a
+    critical hit or sneak attack. Draconomicon p. 83.
+  defenses:
+    fortification: 100
+Gemstone of Light Fortification:
+  slot: slotless
+  source_book: Draconomicon
+  note: >-
+    Embedded gemstone; must be set into the wearer's hide to
+    function (trivial for true dragons; requires limited wish
+    or similar for other creatures). 25% chance to negate a
+    critical hit or sneak attack. Draconomicon p. 83.
+  defenses:
+    fortification: 25
+Gemstone of Moderate Fortification:
+  slot: slotless
+  source_book: Draconomicon
+  note: >-
+    Embedded gemstone; must be set into the wearer's hide to
+    function (trivial for true dragons; requires limited wish
+    or similar for other creatures). 75% chance to negate a
+    critical hit or sneak attack. Draconomicon p. 83.
+  defenses:
+    fortification: 75

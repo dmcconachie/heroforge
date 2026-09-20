@@ -80,7 +80,7 @@ combat:
     typed:
       base: 30
       equip:armor: -10
-  sr: 0
+  sr: 23
   saves:
     fort:
       total: 22
@@ -376,7 +376,7 @@ special_qualities:
   - Resistance to acid 10, cold 10, electricity 10
   - >-
     Damage reduction 5/magic (if 5 HD or less) or 10/magic (if more)
-  - 'Spell resistance: character level + 11'
+  - 'Spell resistance: HD + 10 (max 35)'
   - +4 racial bonus on saving throws vs. poison
 equipment:
   armor:
