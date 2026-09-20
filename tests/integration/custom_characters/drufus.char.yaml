@@ -266,23 +266,23 @@ equipment:
     material: Mithral
     enhancement: 5
     properties:
-      - blinking
-      - vanishing
-      - blueshine
-      - mindarmor
-      - deathward
-      - mind cloaking
-      - greater shadow
-      - greater silent moves
-      - nimbleness
+      - Blinking
+      - Vanishing
+      - Blueshine
+      - Mindarmor
+      - Deathward
+      - Crystal of Mind Cloaking, Greater
+      - Shadow, Greater
+      - Silent Moves, Greater
+      - Nimbleness
   shield:
     base: Heavy Steel Shield
     material: Mithral
     enhancement: 5
     properties:
-      - animated
-      - deathward
-      - arrow deflection
+      - Animated
+      - Deathward
+      - Arrow Deflection
   worn:
     - Szirb's Shining Helm
     - Hat of Disguise
@@ -366,41 +366,41 @@ equipment:
       hand: primary
       enhancement: 5
       properties:
-        - sacred
-        - wounding
-        - vanishing
-        - fiendslayer (least)
+        - Sacred
+        - Wounding
+        - Vanishing
+        - Fiendslayer Crystal, Least
         - weapon bond
         - Starmetal
     - base: Dagger
       hand: off_hand
       enhancement: 5
       properties:
-        - sacred
-        - wounding
-        - vanishing
-        - fiendslayer (least)
+        - Sacred
+        - Wounding
+        - Vanishing
+        - Fiendslayer Crystal, Least
         - Starmetal
     - base: Light Mace
       hand: primary
       material: Alchemical Silver
       enhancement: 5
       properties:
-        - sacred
-        - bane (undead)
-        - truedeath (greater)
+        - Sacred
+        - Bane Undead
+        - Truedeath Crystal, Greater
     - base: Light Mace
       hand: off_hand
       material: Alchemical Silver
       enhancement: 5
       properties:
-        - sacred
-        - bane (undead)
-        - truedeath (greater)
+        - Sacred
+        - Bane Undead
+        - Truedeath Crystal, Greater
     - base: Composite Longbow
       enhancement: 3
       properties:
-        - sacred
-        - precise
-        - revelation (greater)
+        - Sacred
+        - Precise
+        - Revelation Crystal, Greater
 notes: ''

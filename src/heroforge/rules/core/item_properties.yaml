@@ -274,6 +274,7 @@ Axiomatic:
     the target's alignment.
 Bane:
   applies_to: weapon
+  takes_parameter: true
   note: >-
     +2 enhancement and +2d6 damage against one creature type (DMG p.
     224). Conditional on the target.

@@ -180,7 +180,7 @@ equipment:
     material: Darkwood
     enhancement: 1
     properties:
-      - animated
+      - Animated
   worn:
     - Circlet of Rapid Casting
     - Ring of Counterspells
@@ -233,6 +233,6 @@ equipment:
       material: Bronzewood
       enhancement: 1
       properties:
-        - illusion bane
+        - Illusion Bane
     - base: Composite Longbow
 notes: ''

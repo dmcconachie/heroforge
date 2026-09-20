@@ -6,6 +6,8 @@ Anything activated (blinking, 1/day), reactive (arrow
 deflection) or conditional on the target (bane, wounding)
 stays display-only, because a number on the sheet would be
 wrong most of the time.
+
+Names are the book's own, one canonical spelling each.
 """
 
 from __future__ import annotations
@@ -55,16 +57,46 @@ def _wear(c: Character, *properties: str) -> Character:
     return c
 
 
-class TestRegistry:
-    def test_lookup_is_case_insensitive(self) -> None:
-        assert property_definition("Greater Shadow") is not None
-        assert property_definition("greater shadow") is not None
+class TestCanonicalNames:
+    def test_only_the_book_spelling_resolves(self) -> None:
+        assert property_definition("Shadow, Greater") is not None
+        for wrong in (
+            "greater shadow",
+            "shadow, greater",
+            "Greater Shadow",
+            "truedeath (greater)",
+        ):
+            assert property_definition(wrong) is None, wrong
+
+    def test_crystals_use_their_full_names(self) -> None:
+        for name in (
+            "Truedeath Crystal, Least",
+            "Truedeath Crystal, Lesser",
+            "Truedeath Crystal, Greater",
+            "Fiendslayer Crystal, Least",
+            "Revelation Crystal, Greater",
+            "Crystal of Mind Cloaking, Greater",
+        ):
+            assert property_definition(name) is not None, name
+
+    def test_bane_takes_its_foe_as_a_parameter(self) -> None:
+        """
+        Bane is the one property with an open argument: its
+        designated foe is any creature type or subtype, so
+        "Bane Undead" resolves and carries "Undead".
+        """
+        registry = get_rules().item_properties
+        defn = registry.get("Bane Undead")
+        assert defn is not None
+        assert defn.name == "Bane"
+        assert registry.parameter_of("Bane Undead") == "Undead"
+        assert registry.parameter_of("Shadow, Greater") == ""
 
     def test_an_unknown_property_is_none(self) -> None:
         assert property_definition("not a real property") is None
 
     def test_definitions_declare_what_they_apply_to(self) -> None:
-        defn = property_definition("greater shadow")
+        defn = property_definition("Shadow, Greater")
         assert isinstance(defn, ItemPropertyDefinition)
         assert defn.applies_to == "armor"
 
@@ -74,7 +106,11 @@ class TestPermanentArmourProperties:
 
     @pytest.mark.parametrize(
         ("prop", "bonus"),
-        [("shadow", 5), ("improved shadow", 10), ("greater shadow", 15)],
+        [
+            ("Shadow", 5),
+            ("Shadow, Improved", 10),
+            ("Shadow, Greater", 15),
+        ],
     )
     def test_shadow_family_bonuses_hide(self, prop: str, bonus: int) -> None:
         plain = _skill(_wear(_char()), "Hide")
@@ -83,53 +119,62 @@ class TestPermanentArmourProperties:
     @pytest.mark.parametrize(
         ("prop", "bonus"),
         [
-            ("silent moves", 5),
-            ("improved silent moves", 10),
-            ("greater silent moves", 15),
+            ("Silent Moves", 5),
+            ("Silent Moves, Improved", 10),
+            ("Silent Moves, Greater", 15),
         ],
     )
     def test_silent_moves_family(self, prop: str, bonus: int) -> None:
         plain = _skill(_wear(_char()), "Move Silently")
         assert _skill(_wear(_char(), prop), "Move Silently") == (plain + bonus)
 
+    @pytest.mark.parametrize(
+        ("prop", "bonus"),
+        [("Slick", 5), ("Slick, Improved", 10), ("Slick, Greater", 15)],
+    )
+    def test_slick_family_bonuses_escape_artist(
+        self, prop: str, bonus: int
+    ) -> None:
+        plain = _skill(_wear(_char()), "Escape Artist")
+        assert _skill(_wear(_char(), prop), "Escape Artist") == (plain + bonus)
+
     def test_blueshine_bonuses_hide(self) -> None:
-        """MIC: +2 competence on Hide."""
         plain = _skill(_wear(_char()), "Hide")
-        assert _skill(_wear(_char(), "blueshine"), "Hide") == plain + 2
+        assert _skill(_wear(_char(), "Blueshine"), "Hide") == plain + 2
 
     def test_they_do_not_stack_with_each_other(self) -> None:
         """Both are competence bonuses, so only the best counts."""
         plain = _skill(_wear(_char()), "Hide")
-        both = _wear(_char(), "greater shadow", "blueshine")
+        both = _wear(_char(), "Shadow, Greater", "Blueshine")
         assert _skill(both, "Hide") == plain + 15
 
     def test_removing_the_armour_removes_the_bonus(self) -> None:
         bare = _skill(_char(), "Hide")
-        c = _wear(_char(), "greater shadow")
+        c = _wear(_char(), "Shadow, Greater")
         assert _skill(c, "Hide") > bare
         unequip_armor(c)
-        # Back to the unarmoured baseline: the property's
-        # bonus went with the armour, as did its check penalty.
         assert _skill(c, "Hide") == bare
+
+    @pytest.mark.parametrize("sr", [13, 15, 17, 19])
+    def test_spell_resistance_grades(self, sr: int) -> None:
+        c = _wear(_char(), f"Spell Resistance ({sr})")
+        assert c.get("sr") == sr
+
+    def test_spell_resistance_does_not_stack(self) -> None:
+        c = _wear(_char(), "Spell Resistance (13)", "Spell Resistance (19)")
+        assert c.get("sr") == 19
 
 
 class TestActivatedPropertiesAreNotWired:
-    """
-    These are real properties with real numbers, but the
-    numbers apply only when used or against certain targets.
-    They are defined so the name is recognised, and carry no
-    effects.
-    """
-
     @pytest.mark.parametrize(
         "prop",
         [
-            "blinking",
-            "vanishing",
-            "mindarmor",
-            "animated",
-            "arrow deflection",
-            "mind cloaking",
+            "Blinking",
+            "Vanishing",
+            "Mindarmor",
+            "Animated",
+            "Arrow Deflection",
+            "Crystal of Mind Cloaking, Greater",
         ],
     )
     def test_no_stat_change(self, prop: str) -> None:
@@ -138,14 +183,26 @@ class TestActivatedPropertiesAreNotWired:
         assert _skill(_wear(_char(), prop), "Hide") == plain
 
     def test_they_still_show_on_the_sheet(self) -> None:
-        c = _wear(_char(), "blinking")
-        assert "blinking" in gather_sheet(c, None).equipment.armor.properties
+        c = _wear(_char(), "Blinking")
+        assert "Blinking" in gather_sheet(c, None).equipment.armor.properties
+
+    @pytest.mark.parametrize(
+        "prop",
+        ["Fire Resistance", "Invulnerability", "Fortification, Light"],
+    )
+    def test_permanent_but_unmodelled_are_inert_for_skills(
+        self, prop: str
+    ) -> None:
+        defn = property_definition(prop)
+        assert defn is not None
+        plain = _skill(_wear(_char()), "Hide")
+        assert _skill(_wear(_char(), prop), "Hide") == plain
 
 
 class TestSpeedWeapon:
     """
-    DMG: one extra attack at the wielder's full base attack
-    bonus when making a full attack."""
+    DMG p. 226: one extra attack at full base attack bonus
+    when making a full attack."""
 
     def _armed(self, *props: str) -> Character:
         c = _char(cls="Fighter", level=6)
@@ -160,114 +217,36 @@ class TestSpeedWeapon:
         assert len(w.attack_iteratives) == 2
 
     def test_speed_adds_one_attack_at_the_top(self) -> None:
-        w = gather_sheet(self._armed("speed"), None).equipment.weapons[0]
+        w = gather_sheet(self._armed("Speed"), None).equipment.weapons[0]
         assert len(w.attack_iteratives) == 3
         assert w.attack_iteratives[0] == w.attack_iteratives[1]
 
     def test_speed_is_not_a_bonus_on_the_line(self) -> None:
         plain = gather_sheet(self._armed(), None).equipment.weapons[0]
-        fast = gather_sheet(self._armed("speed"), None).equipment.weapons[0]
+        fast = gather_sheet(self._armed("Speed"), None).equipment.weapons[0]
         assert fast.attack.total == plain.attack.total
 
 
-class TestItPersists:
-    CHAR = """
-identity:
-  name: Shady
-  race: Human
-  alignment: neutral
-ability_scores: {str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10}
-levels:
-  - {level: 1, class: Rogue, hp_roll: 6}
-equipment:
-  armor:
-    base: Chain Shirt
-    properties:
-      - greater shadow
-  weapons:
-    - base: Longsword
-      properties:
-        - speed
-"""
+class TestDistance:
+    """DMG p. 224: double the range increment."""
 
-    def test_properties_survive_a_load(self, tmp_path: Path) -> None:
-        path = tmp_path / "s.char.yaml"
-        path.write_text(self.CHAR)
-        c = load_character(path, None)
-        sheet = gather_sheet(c, None)
-        assert sheet.skills["Hide"].typed["competence"] == 15
-        assert len(sheet.equipment.weapons[0].attack_iteratives) == 2
+    def _inc(self, *props: str) -> int:
+        c = _char()
+        c.equipment["weapons"] = [
+            {"base": "Longbow", "properties": list(props)}
+        ]
+        register_weapons_on_character(c)
+        return gather_sheet(c, None).equipment.weapons[0].range_inc
+
+    def test_plain_longbow(self) -> None:
+        assert self._inc() == 100
+
+    def test_distance_doubles_it(self) -> None:
+        assert self._inc("Distance") == 200
 
 
-class TestTheRestOfTheSrdList:
-    """
-    The SRD's armour and weapon special-ability lists in full.
-    Three of them are permanent and land on a stat the engine
-    already models; the rest are defined but inert.
-    """
-
-    @pytest.mark.parametrize(
-        ("prop", "bonus"),
-        [("slick", 5), ("improved slick", 10), ("greater slick", 15)],
-    )
-    def test_slick_family_bonuses_escape_artist(
-        self, prop: str, bonus: int
-    ) -> None:
-        plain = _skill(_wear(_char()), "Escape Artist")
-        assert _skill(_wear(_char(), prop), "Escape Artist") == (plain + bonus)
-
-    @pytest.mark.parametrize("sr", [13, 15, 17, 19])
-    def test_spell_resistance_grades(self, sr: int) -> None:
-        c = _wear(_char(), f"spell resistance ({sr})")
-        assert c.get("sr") == sr
-
-    def test_spell_resistance_does_not_stack(self) -> None:
-        """The highest applies, which the sr node already does."""
-        c = _wear(_char(), "spell resistance (13)", "spell resistance (19)")
-        assert c.get("sr") == 19
-
-    def test_distance_doubles_a_range_increment(self) -> None:
-        from heroforge.engine.sheet import gather_sheet
-
-        def inc(*props: str) -> int:
-            c = _char()
-            c.equipment["weapons"] = [
-                {"base": "Longbow", "properties": list(props)}
-            ]
-            register_weapons_on_character(c)
-            return gather_sheet(c, None).equipment.weapons[0].range_inc
-
-        assert inc() == 100
-        assert inc("distance") == 200
-
-    def test_distance_is_written_either_way(self) -> None:
-        assert property_definition("Distance") is not None
-
-    @pytest.mark.parametrize(
-        "prop",
-        ["shadow, greater", "greater shadow", "Shadow, Greater"],
-    )
-    def test_grade_forms_all_resolve(self, prop: str) -> None:
-        defn = property_definition(prop)
-        assert defn is not None
-        assert defn.name == "Shadow, Greater"
-
-    @pytest.mark.parametrize(
-        "prop",
-        ["fire resistance", "invulnerability", "fortification, light"],
-    )
-    def test_permanent_but_unmodelled_are_inert(self, prop: str) -> None:
-        """
-        Energy resistance, damage reduction and a chance to
-        negate a critical are permanent, but none of them is a
-        stat the sheet carries. Defined, described, inert.
-        """
-        defn = property_definition(prop)
-        assert defn is not None
-        assert defn.effects == ()
-
+class TestSrdCoverage:
     def test_every_srd_ability_is_defined(self) -> None:
-        """Nothing on the two SRD pages is missing."""
         registry = get_rules().item_properties
         missing = [
             n
@@ -326,3 +305,62 @@ class TestTheRestOfTheSrdList:
             if registry.get(n) is None
         ]
         assert missing == []
+
+    def test_every_property_a_fixture_names_resolves(self) -> None:
+        """
+        With both SRD lists and the MIC entries in place, a
+        property no definition recognises is a data error.
+
+        The two exemptions are miscategorised fixture data,
+        not properties: Starmetal is a *material* and belongs
+        in `material:`, and `weapon bond` is the occult
+        slayer's class feature.
+        """
+        import glob
+
+        import yaml
+
+        exempt = {"Starmetal", "weapon bond"}
+        registry = get_rules().item_properties
+        unresolved: set[str] = set()
+        for path in glob.glob("tests/integration/*/*.char.yaml"):
+            data = yaml.safe_load(Path(path).read_text()) or {}
+            eq = data.get("equipment") or {}
+            names = []
+            for slot in ("armor", "shield"):
+                names += (eq.get(slot) or {}).get("properties", []) or []
+            for w in eq.get("weapons") or []:
+                names += w.get("properties", []) or []
+            unresolved |= {
+                n for n in names if n not in exempt and registry.get(n) is None
+            }
+        assert unresolved == set()
+
+
+class TestItPersists:
+    CHAR = """
+identity:
+  name: Shady
+  race: Human
+  alignment: neutral
+ability_scores: {str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10}
+levels:
+  - {level: 1, class: Rogue, hp_roll: 6}
+equipment:
+  armor:
+    base: Chain Shirt
+    properties:
+      - Shadow, Greater
+  weapons:
+    - base: Longsword
+      properties:
+        - Speed
+"""
+
+    def test_properties_survive_a_load(self, tmp_path: Path) -> None:
+        path = tmp_path / "s.char.yaml"
+        path.write_text(self.CHAR)
+        c = load_character(path, None)
+        sheet = gather_sheet(c, None)
+        assert sheet.skills["Hide"].typed["competence"] == 15
+        assert len(sheet.equipment.weapons[0].attack_iteratives) == 2

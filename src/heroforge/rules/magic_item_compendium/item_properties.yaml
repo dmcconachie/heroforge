@@ -1,9 +1,12 @@
 # rules/magic_item_compendium/item_properties.yaml
 #
-# Armour, shield and weapon properties, and the augment
-# crystals that behave like them, from the Magic Item
-# Compendium. See rules/core/item_properties.yaml for the
-# field list.
+# Armour and weapon properties, and the augment crystals that
+# attach to them, from the Magic Item Compendium.
+#
+# Names are the book's own, including the trailing-comma grade
+# ("Truedeath Crystal, Greater"). There is one canonical form
+# per property and lookup is exact -- see
+# rules/core/item_properties.yaml for the field list.
 
 Blueshine:
   applies_to: armor
@@ -39,14 +42,6 @@ Deathward:
   note: >-
     1/day, ignore a death effect or negative energy effect.
     Activated (MIC p. 10).
-Mind Cloaking:
-  applies_to: armor
-  source_book: MIC
-  note: >-
-    Augment crystal: competence bonus on saves against
-    mind-affecting spells and abilities, +1 least to +5
-    greater. Conditional on the effect being mind-affecting,
-    so it is not a flat save bonus (MIC p. 26).
 Nimbleness:
   applies_to: armor
   source_book: MIC
@@ -56,6 +51,28 @@ Nimbleness:
     only "Nimbleness" found is a body-slot item, not an
     armour property. Left without effects rather than
     guessed at.
+Crystal of Mind Cloaking, Least:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    Augment crystal: +1 competence on saves against
+    mind-affecting spells and abilities. Conditional on the
+    effect being mind-affecting, so not a flat save bonus
+    (MIC p. 26).
+Crystal of Mind Cloaking, Lesser:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    As least, except +3 competence (MIC p. 26). Conditional on
+    the effect being mind-affecting.
+Crystal of Mind Cloaking, Greater:
+  applies_to: armor
+  source_book: MIC
+  note: >-
+    As lesser, except +5 competence, and one failed save
+    against a mind-affecting effect may be rerolled
+    (MIC p. 26). Conditional on the effect being
+    mind-affecting.
 Sacred:
   applies_to: weapon
   source_book: MIC
@@ -75,22 +92,58 @@ Illusion Bane:
   note: >-
     Ignores any miss chance created by an illusion effect.
     Conditional on the target (MIC p. 33).
-Revelation:
+Revelation Crystal, Least:
   applies_to: weapon
   source_book: MIC
   note: >-
-    Augment crystal: marks an invisible creature you damage.
-    Conditional on the target (MIC p. 68).
-Fiendslayer:
+    Augment crystal: an invisible creature you damage is
+    surrounded by a glowing aura for 1 round. Conditional on
+    the target (MIC p. 64).
+Revelation Crystal, Lesser:
   applies_to: weapon
   source_book: MIC
   note: >-
-    Augment crystal: extra damage and other benefits against
-    evil outsiders. Conditional on the target (MIC p. 66).
-Truedeath:
+    As least, and the target's invisibility is suppressed for
+    1 round. Conditional on the target (MIC p. 66).
+Revelation Crystal, Greater:
   applies_to: weapon
   source_book: MIC
   note: >-
-    Augment crystal: extra damage against undead, and at
-    greater it bypasses undead turn resistance. Conditional
-    on the target (MIC p. 68).
+    As lesser, and concealment effects are suppressed for
+    1 round. Conditional on the target (MIC p. 66).
+Fiendslayer Crystal, Least:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Augment crystal: extra damage against evil outsiders.
+    Conditional on the target (MIC p. 66).
+Fiendslayer Crystal, Lesser:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    As least, with a further benefit against evil outsiders.
+    Conditional on the target (MIC p. 66).
+Fiendslayer Crystal, Greater:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    As lesser, and a struck evil outsider cannot teleport.
+    Conditional on the target (MIC p. 66).
+Truedeath Crystal, Least:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    Augment crystal: extra damage against undead. Conditional
+    on the target (MIC p. 66).
+Truedeath Crystal, Lesser:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    As least, with a further benefit against undead.
+    Conditional on the target (MIC p. 66).
+Truedeath Crystal, Greater:
+  applies_to: weapon
+  source_book: MIC
+  note: >-
+    As lesser, and it bypasses undead turn resistance.
+    Conditional on the target (MIC p. 66).

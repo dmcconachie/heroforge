@@ -380,7 +380,7 @@ equipment:
     name: +1 Darkwood Heavy Wooden Shield
     asf: 15
     properties:
-      - animated
+      - Animated
   worn:
     - Circlet of Rapid Casting
     - Ring of Counterspells
@@ -418,7 +418,7 @@ equipment:
       crit_range: '20'
       crit_mult: x3
       properties:
-        - illusion bane
+        - Illusion Bane
     - name: Composite Longbow
       attack:
         total: 12

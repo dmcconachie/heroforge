@@ -468,22 +468,22 @@ equipment:
     max_dex: 6
     asf: 10
     properties:
-      - blinking
-      - vanishing
-      - blueshine
-      - mindarmor
-      - deathward
-      - mind cloaking
-      - greater shadow
-      - greater silent moves
-      - nimbleness
+      - Blinking
+      - Vanishing
+      - Blueshine
+      - Mindarmor
+      - Deathward
+      - Crystal of Mind Cloaking, Greater
+      - Shadow, Greater
+      - Silent Moves, Greater
+      - Nimbleness
   shield:
     name: +5 Mithral Heavy Steel Shield
     asf: 5
     properties:
-      - animated
-      - deathward
-      - arrow deflection
+      - Animated
+      - Deathward
+      - Arrow Deflection
   worn:
     - Szirb's Shining Helm
     - Hat of Disguise
@@ -582,10 +582,10 @@ equipment:
       crit_mult: x2
       range_inc: 10
       properties:
-        - sacred
-        - wounding
-        - vanishing
-        - fiendslayer (least)
+        - Sacred
+        - Wounding
+        - Vanishing
+        - Fiendslayer Crystal, Least
         - weapon bond
         - Starmetal
     - name: '+5 Dagger (TWF: Off-hand)'
@@ -611,10 +611,10 @@ equipment:
       crit_mult: x2
       range_inc: 10
       properties:
-        - sacred
-        - wounding
-        - vanishing
-        - fiendslayer (least)
+        - Sacred
+        - Wounding
+        - Vanishing
+        - Fiendslayer Crystal, Least
         - Starmetal
     - name: '+5 Alchemical Silver Light Mace (TWF: Primary)'
       attack:
@@ -640,9 +640,9 @@ equipment:
       crit_range: '20'
       crit_mult: x2
       properties:
-        - sacred
-        - bane (undead)
-        - truedeath (greater)
+        - Sacred
+        - Bane Undead
+        - Truedeath Crystal, Greater
     - name: '+5 Alchemical Silver Light Mace (TWF: Off-hand)'
       attack:
         total: 32
@@ -665,9 +665,9 @@ equipment:
       crit_range: '20'
       crit_mult: x2
       properties:
-        - sacred
-        - bane (undead)
-        - truedeath (greater)
+        - Sacred
+        - Bane Undead
+        - Truedeath Crystal, Greater
     - name: +3 Composite Longbow
       attack:
         total: 32
@@ -690,6 +690,6 @@ equipment:
       crit_mult: x3
       range_inc: 110
       properties:
-        - sacred
-        - precise
-        - revelation (greater)
+        - Sacred
+        - Precise
+        - Revelation Crystal, Greater

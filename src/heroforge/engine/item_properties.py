@@ -72,6 +72,10 @@ class ItemPropertyDefinition:
     # other weapons of its kind. Multiplicative, so it cannot
     # be a pool entry either.
     doubles_range_increment: bool = False
+    # The property names an argument the books leave open, so
+    # "<name> <argument>" resolves to it. Bane is the only
+    # one: its designated foe is any creature type or subtype.
+    takes_parameter: bool = False
 
 
 class ItemPropertyRegistry:
@@ -81,41 +85,47 @@ class ItemPropertyRegistry:
         self._entries: dict[str, ItemPropertyDefinition] = {}
 
     def register(self, defn: ItemPropertyDefinition) -> None:
-        self._entries[defn.name.lower()] = defn
+        self._entries[defn.name] = defn
 
     def get(self, name: str) -> ItemPropertyDefinition | None:
         """
-        Look up *name* the way people actually write it.
+        Look up *name*.
 
-        The books name grades with a trailing comma -- "Shadow,
-        Greater" -- while character files write "greater
-        shadow". Parenthetical grades and qualifiers appear
-        too: "truedeath (greater)", "bane (undead)". All of
-        those resolve to the one definition.
+        There is one canonical spelling per property -- the
+        book's own, grade included, as in "Shadow, Greater"
+        and "Truedeath Crystal, Least" -- and only that
+        spelling resolves. Whitespace is normalised; nothing
+        else is.
+
+        The single exception is a property that takes an
+        argument. Bane designates a creature type, which is
+        unbounded, so `Bane` is declared `takes_parameter`
+        and "Bane Undead" resolves to it. That is one named
+        mechanism, not an open field of aliases.
         """
-        for candidate in self._candidates(name):
-            defn = self._entries.get(candidate)
-            if defn is not None:
-                return defn
+        key = " ".join(name.split())
+        defn = self._entries.get(key)
+        if defn is not None:
+            return defn
+        head = key.split(" ")[0] if key else ""
+        defn = self._entries.get(head)
+        if defn is not None and defn.takes_parameter:
+            return defn
         return None
 
-    @staticmethod
-    def _candidates(name: str) -> list[str]:
-        key = " ".join(name.lower().split())
-        forms = [key]
-        # "greater shadow" -> "shadow, greater"
-        for grade in ("greater", "improved", "lesser", "least"):
-            prefix = grade + " "
-            if key.startswith(prefix):
-                forms.append(f"{key[len(prefix) :]}, {grade}")
-        # drop a parenthetical, then try the same swap again
-        if "(" in key:
-            bare = key.split("(")[0].strip()
-            forms.append(bare)
-            inner = key[key.index("(") + 1 :].rstrip(") ").strip()
-            if inner in ("greater", "improved", "lesser", "least"):
-                forms.append(f"{bare}, {inner}")
-        return forms
+    def parameter_of(self, name: str) -> str:
+        """
+        The argument in a parameterised property's name, e.g.
+        "Undead" from "Bane Undead". Empty for anything else.
+        """
+        key = " ".join(name.split())
+        if key in self._entries:
+            return ""
+        head = key.split(" ")[0] if key else ""
+        defn = self._entries.get(head)
+        if defn is not None and defn.takes_parameter:
+            return key[len(head) :].strip()
+        return ""
 
     def all_properties(self) -> list[ItemPropertyDefinition]:
         return list(self._entries.values())
