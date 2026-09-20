@@ -134,6 +134,7 @@ Longspear:
   cost_gp: 5
 Quarterstaff:
   wield_class: two_handed
+  double: true
   category: simple
   damage_dice: 1d6
   damage_dice_small: 1d4

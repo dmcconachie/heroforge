@@ -206,3 +206,75 @@ equipment:
     ) -> None:
         with pytest.raises(Exception, match="rapid_shot"):
             self._load(tmp_path, "Longsword", "[rapid_shot]")
+
+
+class TestDoubleWeapons:
+    """
+    PHB p. 113: a character "can fight with both ends of a
+    double weapon as if fighting with two weapons ... just as
+    though the character were wielding a one-handed weapon and
+    a light weapon. The character can also choose to use a
+    double weapon two handed, attacking with only one end."
+
+    So the two uses are exclusive, and which one is chosen
+    decides the Strength on each end.
+    """
+
+    def _staff_pair(self) -> Character:
+        return _char(
+            "Fighter",
+            6,
+            {"base": "Quarterstaff", "stances": ["primary"]},
+            {"base": "Quarterstaff", "stances": ["off_hand"]},
+        )
+
+    def test_two_handed_is_one_and_a_half(self) -> None:
+        c = _char("Fighter", 6, {"base": "Quarterstaff"})
+        assert strength_damage_adjust(c, c.equipment["weapons"][0]) == 1
+
+    def test_fought_as_two_weapons_the_primary_end_is_full(
+        self,
+    ) -> None:
+        """
+        Not one and a half: fighting with both ends is the
+        one-handed-plus-light case, not the two-handed one.
+        """
+        c = self._staff_pair()
+        assert strength_damage_adjust(c, c.equipment["weapons"][0]) == 0
+
+    def test_and_the_other_end_is_half(self) -> None:
+        c = self._staff_pair()
+        assert strength_damage_adjust(c, c.equipment["weapons"][1]) == -2
+
+    def test_the_off_end_counts_as_light_for_the_penalty(self) -> None:
+        """
+        PHB Table 8-10: the penalty is the one for an off-hand
+        light weapon, -4/-8 without the feat, not the -6/-10
+        a heavier off-hand would cost.
+        """
+        from heroforge.engine.weapons import two_weapon_penalty
+
+        c = self._staff_pair()
+        weapons = c.equipment["weapons"]
+        assert two_weapon_penalty(c, weapons[0], weapons) == -4
+        assert two_weapon_penalty(c, weapons[1], weapons) == -8
+
+    def test_the_definition_knows_it_is_double(self) -> None:
+        from heroforge.rules.rules import get_rules
+
+        assert get_rules().weapons.get("Quarterstaff").double
+        assert not get_rules().weapons.get("Greatsword").double
+
+    def test_a_non_double_two_hander_cannot_be_paired(
+        self, tmp_path: Path
+    ) -> None:
+        """
+        You cannot fight with both ends of a greatsword.
+        """
+        body = TestIncompatibleStances.HEAD.replace(
+            "WEAPON", "Greatsword"
+        ).replace("STANCES", "[primary]")
+        path = tmp_path / "g.char.yaml"
+        path.write_text(body)
+        with pytest.raises(Exception, match="Greatsword"):
+            load_character(path, None)

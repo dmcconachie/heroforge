@@ -130,6 +130,11 @@ class WeaponDefinition:
     # table). Determines Weapon Finesse eligibility and the
     # two-weapon fighting penalty.
     wield_class: str = ""
+    # A double weapon may be used two-handed, attacking with
+    # one end, or fought with as two weapons -- one end as a
+    # one-handed weapon and the other as a light one
+    # (PHB p. 113). The two uses are exclusive.
+    double: bool = False
     special: str = ""
 
 

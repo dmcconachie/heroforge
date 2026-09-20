@@ -221,8 +221,18 @@ _TWF_PENALTIES = {
 
 
 def _is_light(item: dict) -> bool:
+    """
+    Whether an off-hand weapon counts as light for PHB Table
+    8-10.
+
+    The far end of a double weapon does: fighting with both
+    ends is "just as though the character were wielding a
+    one-handed weapon and a light weapon" (PHB p. 113).
+    """
     defn = weapon_definition(item)
-    return bool(defn and defn.wield_class == "light")
+    if defn is None:
+        return False
+    return defn.wield_class == "light" or defn.double
 
 
 def two_weapon_penalty(
@@ -524,9 +534,16 @@ def two_handed_applies(
     required to use one at all. A one-handed weapon may be
     wielded in two by saying so. A light weapon gains nothing
     either way, and neither does a ranged weapon (PHB p. 113).
+
+    Fighting with both ends of a double weapon is the other
+    use, and it is one-handed-plus-light rather than
+    two-handed: full Strength on one end, half on the other,
+    and one and a half on neither.
     """
     defn = weapon_definition(item)
     if defn is None or defn.is_ranged:
+        return False
+    if has_stance(item, "primary") or has_stance(item, "off_hand"):
         return False
     if defn.wield_class == "two_handed":
         return True
@@ -815,6 +832,17 @@ def _validate_stances(
                 f"{base!r} is not a ranged weapon, so it cannot take "
                 f"the rapid_shot stance."
             )
+
+    if (
+        declared & {"primary", "off_hand"}
+        and defn is not None
+        and defn.wield_class == "two_handed"
+        and not defn.double
+    ):
+        raise ValueError(
+            f"{base!r} is two-handed and not a double weapon, so it "
+            f"cannot be fought with as two weapons (PHB p. 113)."
+        )
 
     if (
         "two_handed" in declared

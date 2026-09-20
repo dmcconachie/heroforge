@@ -1266,6 +1266,20 @@ Reusable components in `widgets/`: `LabeledField`,
   choice for a one-handed weapon. A light weapon gains
   nothing either way.
 
+  A **double weapon** has two uses and they are exclusive:
+  two-handed attacking with one end, or fighting with both
+  ends "just as though the character were wielding a
+  one-handed weapon and a light weapon" (PHB p. 113). So a
+  double weapon declaring `primary` or `off_hand` is *not*
+  wielded two-handed: full Strength on one end, half on the
+  other, one and a half on neither. Its off end also counts
+  as light for Table 8-10, which is the lighter penalty pair.
+  `WeaponDefinition.double` marks them; only the quarterstaff
+  is in the data so far, the other five (dire flail, dwarven
+  urgrosh, gnome hooked hammer, orc double axe, two-bladed
+  sword) not being present yet. A two-handed weapon that is
+  not double cannot be paired at all.
+
   Two-weapon fighting penalties follow PHB Table 8-10, keyed
   on whether the off-hand weapon is light (hence
   `wield_class`) and whether the character has the Two-Weapon
