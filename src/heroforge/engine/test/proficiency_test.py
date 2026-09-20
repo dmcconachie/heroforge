@@ -7,6 +7,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.equipment import (
     ArmorDefinition,
@@ -339,3 +341,86 @@ class TestMonkUnarmedProficiency:
 
         refresh_granted_feats(c)
         assert c.has_feat("Improved Unarmed Strike")
+
+
+class TestRacialWeaponFamiliarity:
+    """
+    PHB p. 15/17: dwarves may treat dwarven waraxes and
+    dwarven urgroshes as martial weapons rather than exotic,
+    and gnomes may treat gnome hooked hammers likewise.
+
+    Familiarity only reclassifies. A character still needs
+    martial proficiency to use the weapon, which is why these
+    are tested against a fighter and not a wizard.
+    """
+
+    @pytest.mark.parametrize(
+        ("race", "weapon"),
+        [
+            ("Dwarf", "Dwarven Waraxe"),
+            ("Dwarf", "Dwarven Urgrosh"),
+            ("Gnome", "Gnome Hooked Hammer"),
+        ],
+    )
+    def test_the_race_may_treat_it_as_martial(
+        self, race: str, weapon: str
+    ) -> None:
+        assert is_proficient_with_weapon(
+            _char("Fighter", race=race), _weapon(weapon)
+        )
+
+    @pytest.mark.parametrize(
+        "weapon",
+        ["Dwarven Waraxe", "Dwarven Urgrosh", "Gnome Hooked Hammer"],
+    )
+    def test_everyone_else_still_needs_the_exotic_feat(
+        self, weapon: str
+    ) -> None:
+        c = _char("Fighter", race="Human")
+        assert not is_proficient_with_weapon(c, _weapon(weapon))
+        c.add_feat(
+            "Exotic Weapon Proficiency",
+            parameter=weapon,
+            level=1,
+            source="",
+        )
+        assert is_proficient_with_weapon(c, _weapon(weapon))
+
+    def test_a_gnome_is_not_familiar_with_dwarven_weapons(self) -> None:
+        assert not is_proficient_with_weapon(
+            _char("Fighter", race="Gnome"), _weapon("Dwarven Urgrosh")
+        )
+
+    def test_familiarity_alone_is_not_proficiency(self) -> None:
+        """
+        A gnome wizard has no martial proficiency, so treating
+        the hammer as martial gains nothing.
+        """
+        assert not is_proficient_with_weapon(
+            _char("Wizard", race="Gnome"), _weapon("Gnome Hooked Hammer")
+        )
+
+    def test_no_race_names_a_weapon_that_does_not_exist(self) -> None:
+        """
+        Regression: the dwarven urgrosh was named in the dwarf's
+        familiarity list for as long as it was absent from the
+        weapon table, so the entry silently did nothing.
+        """
+        rules = get_rules()
+        dangling = {
+            (race, name)
+            for race in rules.races.all_names()
+            for name in rules.races.get(race).weapon_familiarity
+            if rules.weapons.get(name) is None
+        }
+        assert dangling == set()
+
+    def test_no_race_grants_a_weapon_that_does_not_exist(self) -> None:
+        rules = get_rules()
+        dangling = {
+            (race, name)
+            for race in rules.races.all_names()
+            for name in rules.races.get(race).weapon_proficiencies
+            if rules.weapons.get(name) is None
+        }
+        assert dangling == set()
