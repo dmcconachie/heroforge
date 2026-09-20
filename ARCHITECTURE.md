@@ -1228,15 +1228,49 @@ Reusable components in `widgets/`: `LabeledField`,
   a range doubles at most once however many sources apply.
   Doubling widens the range and never touches the
   multiplier.
-  Two-weapon fighting penalties follow PHB Table 8-10,
-  keyed on whether the off-hand weapon is light (hence
-  `wield_class`) and whether the character has the
-  Two-Weapon Fighting feat. They apply only to weapons that
-  declare `hand: primary` / `hand: off_hand`, because
-  fighting with two weapons is a choice made per full attack
-  rather than a property of carrying two. An off-hand weapon
-  adds half Strength to damage. `off_hand` is spelled out
-  because YAML reads a bare `off` as false.
+  **Stances.** Two-handed, two-weapon fighting, flurry of
+  blows and Rapid Shot are the same shape: a choice the
+  character makes for one full attack, about one weapon.
+  None follows from owning a feat or a weapon, so all four
+  are declared on the slot and none is inferred, in one
+  closed vocabulary (`weapons.STANCES`):
+
+  ```yaml
+  weapons:
+    - base: Greatsword
+    - base: Longsword
+      stances: [two_handed]
+    - base: Longbow
+      stances: [rapid_shot]
+    - base: Quarterstaff
+      stances: [two_handed, flurry]
+    - base: Dagger
+      stances: [primary]
+  ```
+
+  It is a list because the axes are independent: a monk may
+  flurry with a quarterstaff held in both hands. Combinations
+  that cannot be held at once are refused
+  (`two_handed` with either pairing, `primary` with
+  `off_hand`, `flurry` with `rapid_shot`), as is a stance the
+  character cannot take -- `rapid_shot` without the feat or
+  on a melee weapon, `flurry` without the class feature or on
+  a weapon that is not an unarmed strike or special monk
+  weapon.
+
+  Strength on the damage line follows the grip (PHB p. 113):
+  half in the off hand, one and a half in two hands, full
+  otherwise, via `strength_damage_adjust()`. A two-handed
+  weapon needs no declaration -- two hands are required to
+  use one at all -- so `stances: [two_handed]` is only a
+  choice for a one-handed weapon. A light weapon gains
+  nothing either way.
+
+  Two-weapon fighting penalties follow PHB Table 8-10, keyed
+  on whether the off-hand weapon is light (hence
+  `wield_class`) and whether the character has the Two-Weapon
+  Fighting feat. `off_hand` is spelled out because YAML reads
+  a bare `off` as false.
   A character may declare more than one pairing and nothing
   records which weapon pairs with which, so a primary counts
   as light-handed only when every declared off-hand weapon
@@ -1249,18 +1283,13 @@ Reusable components in `widgets/`: `LabeledField`,
   -2 on every ranged attack that round; the penalty sits on
   the weapon's line, and only the extra attack is added to
   the sequence.
-  Flurry of blows is the same shape but asked for rather than
-  inferred: a flurry is a choice made per full attack, so the
-  weapon slot carries `flurry: true` the way a pairing
-  carries `hand:`. It adds one extra attack at full base
-  attack bonus, two from 11th level (greater flurry), and a
-  penalty on every attack that round -- -2, easing to -1 at
-  5th level and gone at 9th (PHB p. 40). Together those
-  reproduce Table 3-10's flurry column at every level, which
-  `flurry_test.py` checks row by row. It is refused on
-  anything but an unarmed strike or a special monk weapon,
-  and switches off while armoured, the ability reading "when
-  unarmored".
+  Flurry of blows adds one extra attack at full base attack
+  bonus, two from 11th level (greater flurry), and a penalty
+  on every attack that round -- -2, easing to -1 at 5th level
+  and gone at 9th (PHB p. 40). Together those reproduce Table
+  3-10's flurry column at every level, which
+  `flurry_test.py` checks row by row. It switches off while
+  armoured, the ability reading "when unarmored".
   A weapon's `attack.total` is always the first entry of its
   `attack_iteratives`, and equals the sum of its breakdown.
   Anything that shapes the sequence therefore has to appear

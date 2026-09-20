@@ -211,7 +211,9 @@ equipment:
   worn: []
   weapons:
     - base: Unarmed Strike
-      flurry: true
+      stances:
+        - flurry
     - base: Kama
-      flurry: true
+      stances:
+        - flurry
 notes: ''

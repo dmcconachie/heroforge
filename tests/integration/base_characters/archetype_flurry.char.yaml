@@ -56,9 +56,12 @@ equipment:
   worn: []
   weapons:
     - base: Unarmed Strike
-      flurry: true
+      stances:
+        - flurry
     - base: Quarterstaff
-      flurry: true
+      stances:
+        - flurry
+        - two_handed
     - base: Longbow
 notes: >-
   The longbow carries no flurry: a flurry may use only unarmed

@@ -412,8 +412,8 @@ class TestTwoWeaponFighting:
             take(c, "Two-Weapon Fighting", None)
         arm(
             c,
-            {"base": "Longsword", "hand": "primary"},
-            {"base": off, "hand": "off_hand"},
+            {"base": "Longsword", "stances": ["primary"]},
+            {"base": off, "stances": ["off_hand"]},
         )
         return c
 
@@ -475,8 +475,8 @@ class TestOffHandAttackCount:
             take(c, f, None)
         arm(
             c,
-            {"base": "Longsword", "hand": "primary"},
-            {"base": "Dagger", "hand": "off_hand"},
+            {"base": "Longsword", "stances": ["primary"]},
+            {"base": "Dagger", "stances": ["off_hand"]},
         )
         return c
 
@@ -590,9 +590,12 @@ class TestRapidShot:
     def _archer(self, rapid: bool) -> Character:
         c = fighter(11)  # BAB 11 -> three iteratives
         take(c, "Point Blank Shot", None)
-        if rapid:
-            take(c, "Rapid Shot", None)
-        arm(c, {"base": "Longbow"})
+        take(c, "Rapid Shot", None)
+        # Rapid Shot needs the full attack action, so holding
+        # the feat is not the same as using it: the weapon
+        # says whether this full attack is one.
+        stances = ["rapid_shot"] if rapid else []
+        arm(c, {"base": "Longbow", "stances": stances})
         return c
 
     def test_without_rapid_shot(self) -> None:
@@ -635,8 +638,8 @@ class TestWeaponStanceInName:
         take(c, "Two-Weapon Fighting", None)
         arm(
             c,
-            {"base": "Dagger", "enhancement": 5, "hand": "primary"},
-            {"base": "Dagger", "hand": "off_hand"},
+            {"base": "Dagger", "enhancement": 5, "stances": ["primary"]},
+            {"base": "Dagger", "stances": ["off_hand"]},
         )
         primary, off = gather_sheet(c, None).equipment.weapons
         assert primary.name == "+5 Dagger (TWF: Primary)"
@@ -646,7 +649,14 @@ class TestWeaponStanceInName:
         c = fighter()
         take(c, "Point Blank Shot", None)
         take(c, "Rapid Shot", None)
-        arm(c, {"base": "Longbow", "enhancement": 3})
+        arm(
+            c,
+            {
+                "base": "Longbow",
+                "enhancement": 3,
+                "stances": ["rapid_shot"],
+            },
+        )
         w = gather_sheet(c, None).equipment.weapons[0]
         assert w.name == "+3 Longbow (Rapid Shot)"
 
@@ -690,8 +700,8 @@ class TestWeaponStanceInName:
         take(c, "Two-Weapon Fighting", None)
         arm(
             c,
-            {"base": "Dagger", "hand": "primary"},
-            {"base": "Dagger", "hand": "off_hand"},
+            {"base": "Dagger", "stances": ["primary"]},
+            {"base": "Dagger", "stances": ["off_hand"]},
         )
         assert gather_sheet(c, None).equipment.weapons[0].name == (
             "Dagger (TWF: Primary)"
@@ -726,7 +736,7 @@ class TestAttackTotalMatchesFirstIterative:
         c = fighter(11)
         take(c, "Point Blank Shot", None)
         take(c, "Rapid Shot", None)
-        arm(c, {"base": "Longbow"})
+        arm(c, {"base": "Longbow", "stances": ["rapid_shot"]})
         w = gather_sheet(c, None).equipment.weapons[0]
         assert w.attack.typed.get("rapid_shot") == -2
         self._check(c)
@@ -736,8 +746,8 @@ class TestAttackTotalMatchesFirstIterative:
         take(c, "Two-Weapon Fighting", None)
         arm(
             c,
-            {"base": "Longsword", "hand": "primary"},
-            {"base": "Dagger", "hand": "off_hand"},
+            {"base": "Longsword", "stances": ["primary"]},
+            {"base": "Dagger", "stances": ["off_hand"]},
         )
         self._check(c)
 

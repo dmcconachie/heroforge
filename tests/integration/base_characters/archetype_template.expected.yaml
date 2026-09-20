@@ -165,10 +165,11 @@ equipment:
           str: 7
           weapon_focus: 1
       damage:
-        total: 9
+        total: 12
         typed:
           str: 7
           weapon_specialization: 2
+          strength_hands: 3
       attack_iteratives:
         - 14
         - 9

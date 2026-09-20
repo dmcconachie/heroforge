@@ -172,18 +172,15 @@ class WeaponSlotEntry:
     material: KnownMaterial | None = None
     properties: list[str] = field(default_factory=list)
     name: str = ""  # display name override
-    # Used in a flurry of blows. A choice made per full
-    # attack, like a two-weapon pairing, so it lives on the
-    # slot rather than being inferred.
-    flurry: bool = False
+    # How the weapon is being used for one full attack:
+    # two_handed, primary, off_hand, flurry, rapid_shot. All
+    # four mechanics are the same shape, so they share one
+    # closed vocabulary -- see weapons.STANCES.
+    stances: list[str] = field(default_factory=list)
     # Class features that designate this weapon, by feature
     # key (e.g. weapon_bond). Validated on load against the
     # features the character actually has.
     features: list[str] = field(default_factory=list)
-    # "primary" / "off_hand" declares a two-weapon pairing and
-    # brings the Table 8-10 penalties with it. Spelled off_hand
-    # because YAML reads a bare `off` as false.
-    hand: str = ""
 
 
 @dataclass
@@ -384,9 +381,8 @@ def _character_to_charfile(
                     ),
                     properties=list(w.get("properties", [])),
                     features=list(w.get("features", [])),
-                    flurry=bool(w.get("flurry", False)),
+                    stances=list(w.get("stances", [])),
                     name=w.get("name", ""),
-                    hand=w.get("hand", ""),
                 )
             )
 
@@ -772,9 +768,8 @@ def _load_equipment(
                     "material": w.material,
                     "properties": w.properties,
                     "features": w.features,
-                    "flurry": w.flurry,
+                    "stances": w.stances,
                     "name": w.name,
-                    "hand": w.hand,
                 }.items()
                 if v
             }

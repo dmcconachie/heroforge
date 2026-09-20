@@ -208,9 +208,10 @@ equipment:
           base: 20
           str: 9
       damage:
-        total: 9
+        total: 13
         typed:
           str: 9
+          strength_hands: 4
       attack_iteratives:
         - 29
         - 24

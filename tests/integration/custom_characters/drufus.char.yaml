@@ -358,7 +358,8 @@ equipment:
     - Xan ibn'Duman
   weapons:
     - base: Dagger
-      hand: primary
+      stances:
+        - primary
       material: Starmetal
       enhancement: 5
       features:
@@ -369,7 +370,8 @@ equipment:
         - Vanishing
         - Fiendslayer Crystal, Least
     - base: Dagger
-      hand: off_hand
+      stances:
+        - off_hand
       material: Starmetal
       enhancement: 5
       properties:
@@ -378,7 +380,8 @@ equipment:
         - Vanishing
         - Fiendslayer Crystal, Least
     - base: Light Mace
-      hand: primary
+      stances:
+        - primary
       material: Alchemical Silver
       enhancement: 5
       properties:
@@ -386,7 +389,8 @@ equipment:
         - Bane Undead
         - Truedeath Crystal, Greater
     - base: Light Mace
-      hand: off_hand
+      stances:
+        - off_hand
       material: Alchemical Silver
       enhancement: 5
       properties:

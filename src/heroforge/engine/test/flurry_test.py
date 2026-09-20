@@ -39,7 +39,7 @@ def _monk(
     c._invalidate_class_stats()
     item = {"base": weapon}
     if flurry:
-        item["flurry"] = True
+        item["stances"] = ["flurry"]
     c.equipment["weapons"] = [item]
     register_weapons_on_character(c)
     return c
@@ -158,7 +158,8 @@ levels:
             + f"""equipment:
   weapons:
     - base: {weapon}
-      flurry: true
+      stances:
+        - flurry
 """
         )
         path = tmp_path / "m.char.yaml"

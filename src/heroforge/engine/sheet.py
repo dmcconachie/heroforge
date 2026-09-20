@@ -65,10 +65,11 @@ from heroforge.engine.weapons import (
     attack_ability_override,
     flurry_applies,
     flurry_extra_attacks,
+    has_stance,
     off_hand_attack_count,
-    off_hand_strength_penalty,
     range_increment_bonus,
     rapid_shot_applies,
+    strength_damage_adjust,
     threat_range,
     weapon_definition,
     weapon_feature_names,
@@ -756,8 +757,8 @@ def _weapon_breakdown(
             # An off-hand weapon adds half Strength (PHB p. 113).
             # The pool carries the correction; show the halved
             # figure rather than a full bonus and a subtraction.
-            if item.get("hand") == "off_hand":
-                str_mod += off_hand_strength_penalty(c, item)
+            if has_stance(item, "off_hand"):
+                str_mod += strength_damage_adjust(c, item)
             if str_mod:
                 typed[Ability.STR.value] = str_mod
         pool_key = "damage_ranged" if ranged else "damage_melee"
@@ -785,7 +786,7 @@ def _weapon_iteratives(
     if not c._graph.has_node(key) or not key.endswith("_attack"):
         return []
     base = c.get(key)
-    if item.get("hand") == "off_hand":
+    if has_stance(item, "off_hand"):
         count = off_hand_attack_count(c)
         return [base - 5 * i for i in range(count)]
     bab = c.bab

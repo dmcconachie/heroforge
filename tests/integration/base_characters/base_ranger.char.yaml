@@ -276,4 +276,6 @@ equipment:
   weapons:
     - name: Longbow
       base: Longbow
+      stances:
+        - rapid_shot
 notes: ''
