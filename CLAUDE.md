@@ -12,12 +12,13 @@ output YAML then you're not done.
 
 ## Project
 
-HeroForge Anew — a D&D 3.5e character sheet application built with PyQt6 and 
-Python 3.12. The rules for D&D 3.5e can be found at https://www.d20srd.org/
+HeroForge Anew — a D&D 3.5e character engine in Python 3.12. The
+front end is the `charsheet` CLI; a PyQt6 desktop UI was removed
+on 2026-09-21. The rules for D&D 3.5e can be found at https://www.d20srd.org/
 
 ## Build & Run
 
-- **Run the app:** `uv run app`
+- **Build a sheet:** `uv run charsheet <file>.char.yaml`
 - **Run all python tests:** `uv run pytest`
 - **Run specific tests:** 
   - `uv run pytest tests/test_foo.py`

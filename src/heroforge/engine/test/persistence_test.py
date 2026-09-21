@@ -26,9 +26,9 @@ import yaml
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
-    from heroforge.ui.app_state import AppState
 
-from heroforge.engine.character import CharacterLevel
+from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.derived_pools import install_consumers
 from heroforge.engine.effects import (
     apply_buff,
 )
@@ -39,9 +39,13 @@ from heroforge.engine.persistence import (
     save_character,
 )
 from heroforge.engine.races import apply_race
-from heroforge.engine.skills import set_skill_ranks
+from heroforge.engine.skills import (
+    compute_skill_total,
+    register_skills_on_character,
+    set_skill_ranks,
+)
 from heroforge.engine.templates import apply_template
-from heroforge.ui.app_state import AppState
+from heroforge.rules.rules import get_rules
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -51,22 +55,32 @@ RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 # ===========================================================================
 
 
-def make_app_state() -> AppState:
+def new_character() -> Character:
+    """A blank Character with skills and derived pools wired."""
+    c = Character()
+    register_skills_on_character(c)
+    dp = get_rules().derived_pools
+    if dp:
+        install_consumers(c, dp)
+    return c
 
-    state = AppState()
-    state.load_rules()
-    state.new_character()
-    # Set required fields so save/load works
-    c = state.character
+
+def _skill_total(c: Character, skill_name: str) -> int:
+    """The computed total for a named skill."""
+    return compute_skill_total(c, get_rules().skills.require(skill_name)).total
+
+
+def make_char() -> Character:
+    """A wired Character with the fields save/load requires."""
+    c = new_character()
     c.alignment = "neutral"
-    apply_race(state.race_registry.require("Human"), c)
-    return state
+    apply_race(get_rules().races.require("Human"), c)
+    return c
 
 
-def fighter_char(app_state: AppState) -> Character:
+def fighter_char(c: Character) -> Character:
     """A fully built Fighter 6 for round-trip tests."""
 
-    c = app_state.character
     c.name = "Aldric Vane"
     c.player = "Test Player"
     c.alignment = "lawful_good"
@@ -79,7 +93,7 @@ def fighter_char(app_state: AppState) -> Character:
     c.set_ability_score(Ability.WIS, 10)
     c.set_ability_score(Ability.CHA, 8)
 
-    apply_race(app_state.race_registry.require("Human"), c)
+    apply_race(get_rules().races.require("Human"), c)
 
     # Build levels with per-level skill ranks
     c.levels = [
@@ -123,11 +137,11 @@ def fighter_char(app_state: AppState) -> Character:
     set_skill_ranks(c, "Swim", 5)
 
     # Add a feat
-    iw = app_state.feat_registry.require("Iron Will")
+    iw = get_rules().feats.require("Iron Will")
     c.add_feat("Iron Will", iw, level=1, source="character")
 
     # Activate Bless (CL 5)
-    bless = app_state.buff_registry.require("Bless")
+    bless = get_rules().buffs.require("Bless")
     apply_buff(bless, c, caster_level=5)
 
     return c
@@ -140,16 +154,16 @@ def fighter_char(app_state: AppState) -> Character:
 
 class TestSaveCharacter:
     def test_creates_yaml_file(self, tmp_path: Path) -> None:
-        state = make_app_state()
+        c = make_char()
         path = tmp_path / "test.char.yaml"
-        save_character(state.character, path)
+        save_character(c, path)
         assert path.exists()
         assert path.stat().st_size > 100
 
     def test_yaml_is_valid(self, tmp_path: Path) -> None:
-        state = make_app_state()
+        c = make_char()
         path = tmp_path / "test.char.yaml"
-        save_character(state.character, path)
+        save_character(c, path)
         with open(path) as f:
             data = yaml.safe_load(f)
         assert isinstance(data, dict)
@@ -157,8 +171,8 @@ class TestSaveCharacter:
         assert "ability_scores" in data
 
     def test_identity_fields_saved(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.name = "Elara Swift"
         c.alignment = "chaotic_good"
         path = tmp_path / "c.char.yaml"
@@ -169,8 +183,8 @@ class TestSaveCharacter:
         assert data["identity"]["alignment"] == "chaotic_good"
 
     def test_ability_scores_saved(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.set_ability_score(Ability.STR, 18)
         c.set_ability_score(Ability.DEX, 16)
         path = tmp_path / "c.char.yaml"
@@ -182,8 +196,8 @@ class TestSaveCharacter:
 
     def test_levels_saved(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        state.character.set_class_levels(
+        c = make_char()
+        c.set_class_levels(
             [
                 CharacterLevel(
                     character_level=i + 1,
@@ -194,7 +208,7 @@ class TestSaveCharacter:
             ]
         )
         path = tmp_path / "c.char.yaml"
-        save_character(state.character, path)
+        save_character(c, path)
         with open(path) as f:
             data = yaml.safe_load(f)
         levels = data["levels"]
@@ -202,11 +216,11 @@ class TestSaveCharacter:
         assert levels[0]["class"] == "Fighter"
 
     def test_active_buff_saved_with_cl(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        bless = state.buff_registry.require("Bless")
-        apply_buff(bless, state.character, caster_level=7)
+        c = make_char()
+        bless = get_rules().buffs.require("Bless")
+        apply_buff(bless, c, caster_level=7)
         path = tmp_path / "c.char.yaml"
-        save_character(state.character, path)
+        save_character(c, path)
         with open(path) as f:
             data = yaml.safe_load(f)
         bless_data = data["buffs"].get("Bless")
@@ -215,8 +229,8 @@ class TestSaveCharacter:
 
     def test_skill_ranks_in_levels(self, tmp_path: Path) -> None:
         """Skill ranks are stored per-level, not top-level."""
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         # Add a level with skill ranks
 
         c.levels.append(
@@ -236,12 +250,10 @@ class TestSaveCharacter:
         assert "skills" not in data
 
     def test_dm_override_saved(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        state.character.add_dm_override(
-            "Improved Precise Shot", note="Campaign"
-        )
+        c = make_char()
+        c.add_dm_override("Improved Precise Shot", note="Campaign")
         path = tmp_path / "c.char.yaml"
-        save_character(state.character, path)
+        save_character(c, path)
         with open(path) as f:
             data = yaml.safe_load(f)
         overrides = data.get("dm_overrides", [])
@@ -254,38 +266,33 @@ class TestSaveCharacter:
 
 
 class TestLoadCharacter:
-    def _save_and_load(
-        self, tmp_path: Path, character: Character
-    ) -> tuple[Character, AppState]:
-        state = make_app_state()
+    def _save_and_load(self, tmp_path: Path, character: Character) -> Character:
         path = tmp_path / "c.char.yaml"
         save_character(character, path)
-        loaded = load_character(path)
-        state.set_character(loaded)
-        return loaded, state
+        return load_character(path)
 
     def test_identity_restored(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.name = "Thalindra"
         c.alignment = "neutral_good"
-        loaded, _ = self._save_and_load(tmp_path, c)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.name == "Thalindra"
         assert loaded.alignment == "neutral_good"
 
     def test_ability_scores_restored(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.set_ability_score(Ability.STR, 18)
         c.set_ability_score(Ability.WIS, 16)
-        loaded, _ = self._save_and_load(tmp_path, c)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.str_score == 18
         assert loaded.wis_score == 16
 
     def test_class_levels_restored(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        state.character.set_class_levels(
+        c = make_char()
+        c.set_class_levels(
             [
                 CharacterLevel(
                     character_level=i + 1,
@@ -295,14 +302,14 @@ class TestLoadCharacter:
                 for i in range(5)
             ]
         )
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.total_level == 5
         assert loaded.levels[0].class_name == "Rogue"
         assert loaded.bab == 3  # medium BAB level 5
 
     def test_multiclass_levels_restored(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
+        c = make_char()
         levels = [
             CharacterLevel(
                 character_level=i + 1,
@@ -318,25 +325,25 @@ class TestLoadCharacter:
             )
             for i in range(4)
         ]
-        state.character.set_class_levels(levels)
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        c.set_class_levels(levels)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.total_level == 8
         names = {lv.class_name for lv in loaded.levels}
         assert "Fighter" in names
         assert "Wizard" in names
 
     def test_race_applied_on_load(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        apply_race(state.race_registry.require("Dwarf"), state.character)
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        c = make_char()
+        apply_race(get_rules().races.require("Dwarf"), c)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.race == "Dwarf"
         # Dwarf gets +2 CON
         assert loaded.con_score == 12  # 10 + 2 racial
 
     def test_always_on_feat_effect_restored(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.levels = [
             CharacterLevel(
                 character_level=1,
@@ -347,18 +354,18 @@ class TestLoadCharacter:
         c._invalidate_class_stats()
         c.add_feat(
             "Iron Will",
-            state.feat_registry.require("Iron Will"),
+            get_rules().feats.require("Iron Will"),
             level=1,
             source="character",
         )
         will_with_feat = c.will
-        loaded, new_state = self._save_and_load(tmp_path, c)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.will == will_with_feat
 
     def test_skill_ranks_restored(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.levels = [
             CharacterLevel(
                 character_level=1,
@@ -376,14 +383,14 @@ class TestLoadCharacter:
         c._invalidate_class_stats()
         set_skill_ranks(c, "Hide", 8)
         set_skill_ranks(c, "Climb", 4)
-        loaded, _ = self._save_and_load(tmp_path, c)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.skills.get("Hide") == 8
         assert loaded.skills.get("Climb") == 4
 
     def test_skill_total_correct_after_load(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.set_ability_score(Ability.DEX, 16)
         c.levels = [
             CharacterLevel(
@@ -395,50 +402,48 @@ class TestLoadCharacter:
         ]
         c._invalidate_class_stats()
         set_skill_ranks(c, "Hide", 6)
-        loaded, new_state = self._save_and_load(tmp_path, c)
+        loaded = self._save_and_load(tmp_path, c)
         # 6 ranks + 3 dex mod (dex 16, no race)
-        assert new_state.skill_total("Hide") == 9
+        assert _skill_total(loaded, "Hide") == 9
 
     def test_active_buff_restored(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        apply_buff(state.buff_registry.require("Bless"), state.character)
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        c = make_char()
+        apply_buff(get_rules().buffs.require("Bless"), c)
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.is_buff_active("Bless")
 
     def test_inactive_buff_state_preserved(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         # Register Bless but don't activate it
-        bless = state.buff_registry.require("Bless")
+        bless = get_rules().buffs.require("Bless")
         pairs = bless.pool_entries(0, c)
         c.register_buff_definition("Bless", pairs)
         # Don't toggle it
-        loaded, _ = self._save_and_load(tmp_path, c)
+        loaded = self._save_and_load(tmp_path, c)
         assert not loaded.is_buff_active("Bless")
 
     def test_buff_caster_level_preserved(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        sof = state.buff_registry.require("Shield of Faith")
-        apply_buff(sof, state.character, caster_level=12)
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        c = make_char()
+        sof = get_rules().buffs.require("Shield of Faith")
+        apply_buff(sof, c, caster_level=12)
+        loaded = self._save_and_load(tmp_path, c)
         state_obj = loaded.get_buff_state("Shield of Faith")
         assert state_obj is not None
         assert state_obj.caster_level == 12
 
     def test_buff_value_correct_after_load(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        sof = state.buff_registry.require("Shield of Faith")
-        apply_buff(sof, state.character, caster_level=12)
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        c = make_char()
+        sof = get_rules().buffs.require("Shield of Faith")
+        apply_buff(sof, c, caster_level=12)
+        loaded = self._save_and_load(tmp_path, c)
         # Shield of Faith CL12 = 2 + 12//6 = 4 deflection
         assert loaded.ac == 14  # 10 + deflection 4
 
     def test_dm_override_restored(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        state.character.add_dm_override(
-            "Improved Precise Shot", note="Campaign"
-        )
-        loaded, _ = self._save_and_load(tmp_path, state.character)
+        c = make_char()
+        c.add_dm_override("Improved Precise Shot", note="Campaign")
+        loaded = self._save_and_load(tmp_path, c)
         assert loaded.has_dm_override("Improved Precise Shot")
 
     def test_unknown_race_raises(self, tmp_path: Path) -> None:
@@ -455,7 +460,7 @@ class TestLoadCharacter:
             "templates: {}\n"
             "dm_overrides: []\nequipment: {}\n"
         )
-        make_app_state()
+        make_char()
         with pytest.raises(ValueError, match="Githzerai"):
             load_character(path)
 
@@ -477,7 +482,7 @@ class TestLoadCharacter:
             "templates: {}\n"
             "dm_overrides: []\nequipment: {}\n"
         )
-        make_app_state()
+        make_char()
         with pytest.raises(ValueError, match="Homebrew Buff"):
             load_character(path)
 
@@ -570,8 +575,7 @@ class TestRoundTrip:
         """
         Build a complete Fighter 6, save, load, and compare every major stat.
         """
-        state = make_app_state()
-        c = fighter_char(state)
+        c = fighter_char(make_char())
 
         # Snapshot stats before save
         before = {
@@ -591,9 +595,7 @@ class TestRoundTrip:
         path = tmp_path / "fighter.char.yaml"
         save_character(c, path)
 
-        new_state = make_app_state()
         loaded = load_character(path)
-        new_state.set_character(loaded)
 
         after = {
             "ac": loaded.ac,
@@ -616,9 +618,9 @@ class TestRoundTrip:
 
     def test_skill_totals_match_after_round_trip(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        c = state.character
-        apply_race(state.race_registry.require("Elf"), c)
+        c = make_char()
+        c = c
+        apply_race(get_rules().races.require("Elf"), c)
         c.set_ability_score(Ability.DEX, 16)
         c.levels = [
             CharacterLevel(
@@ -647,25 +649,23 @@ class TestRoundTrip:
         set_skill_ranks(c, "Move Silently", 6)
         set_skill_ranks(c, "Tumble", 5)
 
-        before_hide = state.skill_total("Hide")
-        before_balance = state.skill_total("Balance")
+        before_hide = _skill_total(c, "Hide")
+        before_balance = _skill_total(c, "Balance")
 
         path = tmp_path / "elf.char.yaml"
         save_character(c, path)
 
-        new_state = make_app_state()
         loaded = load_character(path)
-        new_state.set_character(loaded)
 
-        assert new_state.skill_total("Hide") == before_hide
-        assert new_state.skill_total("Balance") == before_balance
+        assert _skill_total(loaded, "Hide") == before_hide
+        assert _skill_total(loaded, "Balance") == before_balance
 
     def test_template_effects_preserved(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.set_ability_score(Ability.STR, 14)
 
-        hc = state.template_registry.require("Half-Celestial")
+        hc = get_rules().templates.require("Half-Celestial")
 
         apply_template(hc, c)
 
@@ -674,7 +674,7 @@ class TestRoundTrip:
         path = tmp_path / "hc.char.yaml"
         save_character(c, path)
 
-        make_app_state()
+        make_char()
         loaded = load_character(path)
         assert loaded.str_score == before_str
 
@@ -687,8 +687,8 @@ class TestRoundTrip:
 class TestAbilityBumpRoundTrip:
     def test_ability_bump_round_trips(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.set_ability_score(Ability.STR, 14)
         for i in range(1, 5):
             c.levels.append(
@@ -710,8 +710,8 @@ class TestAbilityBumpRoundTrip:
 
     def test_inherent_bumps_round_trips(self, tmp_path: Path) -> None:
 
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.set_ability_score(Ability.INT, 14)
         for i in range(1, 6):
             c.levels.append(
@@ -766,10 +766,10 @@ class TestAbilityBumpRoundTrip:
 
 class TestEquipmentRoundTrip:
     def test_armor_round_trips(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
 
-        fp = state.armor_registry.get("Full Plate")
+        fp = get_rules().armor.get("Full Plate")
         assert fp is not None
         equip_armor(c, fp, enhancement=1)
         before_ac = c.get("ac")
@@ -780,10 +780,10 @@ class TestEquipmentRoundTrip:
         assert loaded.get("ac") == before_ac
 
     def test_mithral_armor_round_trips(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
 
-        fp = state.armor_registry.get("Full Plate")
+        fp = get_rules().armor.get("Full Plate")
         assert fp is not None
         equip_armor(c, fp, enhancement=1, material="Mithral")
         before_ac = c.get("ac")
@@ -797,11 +797,11 @@ class TestEquipmentRoundTrip:
         assert loaded.equipment["armor"]["armor_check_penalty"] == -3
 
     def test_worn_item_round_trips(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.set_ability_score(Ability.STR, 14)
 
-        belt = state.magic_item_registry.get("Belt of Giant Strength +4")
+        belt = get_rules().magic_items.get("Belt of Giant Strength +4")
         assert belt is not None
         equip_item(c, belt)
         c.equipment.setdefault("worn", []).append({"name": belt.name})
@@ -815,8 +815,8 @@ class TestEquipmentRoundTrip:
         assert "Belt of Giant Strength +4" in worn
 
     def test_weapon_data_round_trips(self, tmp_path: Path) -> None:
-        state = make_app_state()
-        c = state.character
+        c = make_char()
+        c = c
         c.equipment["weapons"] = [
             {
                 "base": "Lance",

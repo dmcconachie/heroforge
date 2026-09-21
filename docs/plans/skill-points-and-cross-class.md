@@ -57,8 +57,9 @@ Any fix touches all of these, which read
 
 - `src/heroforge/engine/skills.py:326`
 - `src/heroforge/export/sheet_data.py:261`
-- `src/heroforge/ui/sheets/sheet2_skills.py:160`
-- `src/heroforge/ui/sheets/sheet_class.py:196`
+
+(Two more call sites lived in the PyQt6 UI, removed
+2026-09-21. A rebuilt front end will need the same hook.)
 
 Worth consolidating before adding per-character inputs (domain
 granted class skills need the same hook — see the domains work).

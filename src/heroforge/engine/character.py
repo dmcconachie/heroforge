@@ -191,7 +191,7 @@ class ChangeNotifier:
     Minimal observer pattern.  The UI registers callbacks here; the
     Character calls notify() when stats change.
 
-    Keeps the Character decoupled from PyQt6 signals — the UI layer wraps
+    Keeps the Character decoupled from any GUI toolkit — a UI wraps
     this in a QObject signal if needed, or the Character can be used
     headlessly in tests without any Qt dependency.
     """

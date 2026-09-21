@@ -92,7 +92,6 @@ from heroforge.rules.known import (
     KnownSkill,
 )
 from heroforge.rules.schema import converter
-from heroforge.ui.app_state import AppState
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
@@ -879,6 +878,10 @@ def _equipment(c: "Character") -> EquipmentSection:
 
 def main() -> None:
     """CLI entry point: uv run charsheet."""
+    # Only get_rules has to be deferred: engine <- rules is a
+    # cycle. See docs/plans/engine-rules-import-cycle.md.
+    from heroforge.rules.rules import get_rules
+
     parser = argparse.ArgumentParser(
         description="Build a character sheet from YAML",
     )
@@ -896,8 +899,8 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    state = AppState()
-    state.load_rules()
+    # Force the lazy rules load before extraction.
+    get_rules()
 
     sheet = extract_sheet(args.input)
     out = yaml_dump(converter.unstructure(sheet))

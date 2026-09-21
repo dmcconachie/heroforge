@@ -43,27 +43,32 @@ from __future__ import annotations
 from pathlib import Path
 
 from heroforge.engine.character import Character
+from heroforge.engine.derived_pools import install_consumers
 from heroforge.engine.effects import apply_buff
 from heroforge.engine.enums import Ability, CreatureType
 from heroforge.engine.races import (
     apply_race,
     remove_race,
 )
+from heroforge.engine.skills import register_skills_on_character
 from heroforge.engine.templates import apply_template, effective_type
-from heroforge.ui.app_state import AppState
+from heroforge.rules.rules import get_rules
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
-def make_state() -> AppState:
-    s = AppState()
-    s.load_rules()
-    s.new_character()
-    return s
+def new_character() -> Character:
+    """A blank Character with skills and derived pools wired."""
+    c = Character()
+    register_skills_on_character(c)
+    dp = get_rules().derived_pools
+    if dp:
+        install_consumers(c, dp)
+    return c
 
 
 def build_char(
-    state: AppState,
+    c: Character,
     race: str,
     abilities: dict[str, int],
     class_levels: list[tuple[str, int]],
@@ -73,20 +78,19 @@ def build_char(
 
     class_levels: list of (class_name, num_levels)
     """
-    c = state.character
     # Set abilities BEFORE race (race adds bonuses)
     for ab, val in abilities.items():
         c.set_ability_score(Ability(ab), val)
     # Apply race
-    race_defn = state.race_registry.require(race)
+    race_defn = get_rules().races.require(race)
     if c.race:
-        old_defn = state.race_registry.get(c.race)
+        old_defn = get_rules().races.get(c.race)
         if old_defn:
             remove_race(old_defn, c)
     apply_race(race_defn, c)
     # Add class levels one at a time
     for class_name, count in class_levels:
-        defn = state.class_registry.require(class_name)
+        defn = get_rules().classes.require(class_name)
         for _ in range(count):
             c.add_level(class_name, defn.hit_die)
     return c
@@ -117,9 +121,9 @@ class TestHumanFighter8:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Human",
             abilities={
                 "str": 16,
@@ -182,13 +186,13 @@ class TestHumanFighter8:
 
     def test_toughness_adds_hp(self) -> None:
         base_hp = self.c.hp_max
-        defn = self.state.feat_registry.require("Toughness")
+        defn = get_rules().feats.require("Toughness")
         self.c.add_feat("Toughness", defn, level=1, source="character")
         assert self.c.hp_max == base_hp + 3
 
     def test_iron_will_adds_will(self) -> None:
         base_will = self.c.will
-        defn = self.state.feat_registry.require("Iron Will")
+        defn = get_rules().feats.require("Iron Will")
         self.c.add_feat("Iron Will", defn, level=1, source="character")
         assert self.c.will == base_will + 2
 
@@ -221,9 +225,9 @@ class TestElfWizard10:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Elf",
             abilities={
                 "str": 8,
@@ -311,9 +315,9 @@ class TestDwarfFighter6Rogue4:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Dwarf",
             abilities={
                 "str": 14,
@@ -419,9 +423,9 @@ class TestHalfOrcBarbarian10:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Half-Orc",
             abilities={
                 "str": 18,
@@ -493,9 +497,9 @@ class TestHalflingRogue8:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Halfling",
             abilities={
                 "str": 10,
@@ -579,9 +583,9 @@ class TestCleric8WithBuffs:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Human",
             abilities={
                 "str": 14,
@@ -609,14 +613,14 @@ class TestCleric8WithBuffs:
     def test_bless_attack_bonus(self) -> None:
 
         base_atk = self.c.get("attack_melee")
-        bless = self.state.buff_registry.require("Bless")
+        bless = get_rules().buffs.require("Bless")
         apply_buff(bless, self.c, caster_level=8)
         # Bless: +1 morale to attack
         assert self.c.get("attack_melee") == base_atk + 1
 
     def test_bulls_strength_str_cascade(self) -> None:
 
-        bulls = self.state.buff_registry.require("Bull's Strength")
+        bulls = get_rules().buffs.require("Bull's Strength")
         apply_buff(bulls, self.c, caster_level=8)
         # +4 enhancement to STR → STR 18 → mod 4
         assert self.c.str_score == 18
@@ -633,9 +637,8 @@ class TestMulticlassXPPenalty:
     """Test multiclass XP penalty detection."""
 
     def test_no_penalty_single_class(self) -> None:
-        state = make_state()
-        build_char(
-            state,
+        c = build_char(
+            new_character(),
             race="Human",
             abilities={
                 "str": 10,
@@ -647,12 +650,11 @@ class TestMulticlassXPPenalty:
             },
             class_levels=[("Fighter", 5)],
         )
-        assert not state.character.multiclass_xp_penalty()
+        assert not c.multiclass_xp_penalty()
 
     def test_no_penalty_balanced(self) -> None:
-        state = make_state()
-        build_char(
-            state,
+        c = build_char(
+            new_character(),
             race="Human",
             abilities={
                 "str": 10,
@@ -670,12 +672,11 @@ class TestMulticlassXPPenalty:
         # Human: highest class is favored
         # Excluding Fighter(5), only Rogue(4)
         # Only one non-favored → no penalty
-        assert not state.character.multiclass_xp_penalty()
+        assert not c.multiclass_xp_penalty()
 
     def test_penalty_when_unbalanced(self) -> None:
-        state = make_state()
-        build_char(
-            state,
+        c = build_char(
+            new_character(),
             race="Elf",
             abilities={
                 "str": 10,
@@ -692,7 +693,7 @@ class TestMulticlassXPPenalty:
         )
         # Elf favored class is Wizard (not in build)
         # Fighter 6 vs Rogue 2 → diff 4 > 1
-        assert state.character.multiclass_xp_penalty()
+        assert c.multiclass_xp_penalty()
 
 
 # ===================================================
@@ -706,9 +707,8 @@ class TestSkillPointBudgets:
     def test_fighter_skill_points_level_1(
         self,
     ) -> None:
-        state = make_state()
         c = build_char(
-            state,
+            new_character(),
             race="Human",
             abilities={
                 "str": 14,
@@ -727,9 +727,8 @@ class TestSkillPointBudgets:
     def test_rogue_skill_points_level_1(
         self,
     ) -> None:
-        state = make_state()
         c = build_char(
-            state,
+            new_character(),
             race="Human",
             abilities={
                 "str": 10,
@@ -748,9 +747,8 @@ class TestSkillPointBudgets:
     def test_wizard_skill_points_level_2(
         self,
     ) -> None:
-        state = make_state()
         c = build_char(
-            state,
+            new_character(),
             race="Elf",
             abilities={
                 "str": 8,
@@ -794,9 +792,9 @@ class TestHalfDragonFighter6:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Human",
             abilities={
                 "str": 16,
@@ -809,7 +807,7 @@ class TestHalfDragonFighter6:
             class_levels=[("Fighter", 6)],
         )
 
-        tpl = self.state.template_registry.require("Half-Dragon (Red)")
+        tpl = get_rules().templates.require("Half-Dragon (Red)")
         apply_template(tpl, self.c)
 
     def test_str_with_template(self) -> None:
@@ -885,9 +883,9 @@ class TestVampireRogue8:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Human",
             abilities={
                 "str": 10,
@@ -900,7 +898,7 @@ class TestVampireRogue8:
             class_levels=[("Rogue", 8)],
         )
 
-        tpl = self.state.template_registry.require("Vampire")
+        tpl = get_rules().templates.require("Vampire")
         apply_template(tpl, self.c)
 
     def test_str(self) -> None:
@@ -988,9 +986,9 @@ class TestHalfCelestialCleric6:
     """
 
     def setup_method(self) -> None:
-        self.state = make_state()
+        self.c = new_character()
         self.c = build_char(
-            self.state,
+            self.c,
             race="Human",
             abilities={
                 "str": 14,
@@ -1003,7 +1001,7 @@ class TestHalfCelestialCleric6:
             class_levels=[("Cleric", 6)],
         )
 
-        tpl = self.state.template_registry.require("Half-Celestial")
+        tpl = get_rules().templates.require("Half-Celestial")
         apply_template(tpl, self.c)
 
     def test_str(self) -> None:

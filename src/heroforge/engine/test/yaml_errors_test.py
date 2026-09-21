@@ -12,7 +12,6 @@ contains both the file path and the schema location.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING
 
 import pytest
 
@@ -20,19 +19,7 @@ from heroforge.engine.persistence import (
     load_character,
 )
 
-if TYPE_CHECKING:
-    from heroforge.ui.app_state import AppState
-from heroforge.ui.app_state import AppState
-
 BAD_YAML = Path(__file__).parent / "bad_yaml"
-
-
-@pytest.fixture(scope="module", autouse=True)
-def app_state() -> "AppState":
-
-    state = AppState()
-    state.load_rules()
-    return state
 
 
 class TestUnknownNames:

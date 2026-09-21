@@ -2,7 +2,7 @@
 tests/test_skills.py
 --------------------
 Test suite for engine/skills.py, rules/core/skills.yaml, SkillsLoader,
-and the UI AppState's skill integration.
+and wiring skills onto a Character.
 
 Covers:
   - YAML validation
@@ -12,8 +12,7 @@ Covers:
   - compute_skill_total: ranks + ability mod + misc + synergy + ACP
   - Skill totals update when ability scores change
   - Skill totals update when buff changes ability scores
-  - AppState.load_rules() wires skills
-  - AppState.new_character() registers skills
+  - register_skills_on_character() adds the skill nodes
 """
 
 from __future__ import annotations
@@ -43,7 +42,7 @@ from heroforge.engine.skills import (
 from heroforge.rules.core.pool_keys import PoolKey
 from heroforge.rules.known import KnownSkill
 from heroforge.rules.loader import LoaderError, SkillsLoader
-from heroforge.ui.app_state import AppState
+from heroforge.rules.rules import get_rules
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -403,36 +402,37 @@ class TestSkillsLoader:
 
 
 # ===========================================================================
-# AppState integration
+# Wiring skills onto a fresh Character
 # ===========================================================================
 
 
-class TestAppStateSkills:
-    def test_new_character_has_skills_registered(self) -> None:
+class TestSkillWiring:
+    """
+    register_skills_on_character is what puts the skill_*
+    nodes on the graph. Nothing does it implicitly, so a
+    hand-built Character has none until it is called.
+    """
 
-        state = AppState()
-        state.load_rules()
-        state.new_character()
-        c = state.character
+    def test_a_bare_character_has_no_skill_nodes(self) -> None:
+        c = Character()
+        assert not [k for k in c._graph._nodes if k.startswith("skill_")]
+
+    def test_registering_adds_the_skill_nodes(self) -> None:
+        c = Character()
+        register_skills_on_character(c)
         skill_nodes = [k for k in c._graph._nodes if k.startswith("skill_")]
         assert len(skill_nodes) > 0
 
-    def test_skill_total_via_app_state(self) -> None:
-
-        state = AppState()
-        state.load_rules()
-        state.new_character()
-        c = state.character
+    def test_total_after_registering(self) -> None:
+        c = Character()
+        register_skills_on_character(c)
         c.set_ability_score(Ability.DEX, 16)
         set_skill_ranks(c, "Hide", 5)
-        assert state.skill_total("Hide") == 8  # 5 + 3
+        hide = get_rules().skills.require("Hide")
+        assert compute_skill_total(c, hide).total == 8  # 5 + 3
 
-    def test_skill_total_unknown_returns_zero(self) -> None:
-
-        state = AppState()
-        state.load_rules()
-        state.new_character()
-        assert state.skill_total("Nonexistent Skill") == 0
+    def test_an_unknown_skill_is_not_in_the_registry(self) -> None:
+        assert get_rules().skills.get("Nonexistent Skill") is None
 
 
 # =======================================================

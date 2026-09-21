@@ -11,6 +11,7 @@ import yaml
 from cattrs.errors import ClassValidationError
 
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.derived_pools import install_consumers
 from heroforge.engine.enums import Ability, ArmorCategory
 from heroforge.engine.equipment import (
     ArmorDefinition,
@@ -23,9 +24,21 @@ from heroforge.engine.magic_items import (
     MagicItemDefinition,
     MagicItemRegistry,
 )
+from heroforge.engine.skills import register_skills_on_character
 from heroforge.rules.loader import MagicItemLoader
+from heroforge.rules.rules import get_rules
 from heroforge.rules.schema import converter
-from heroforge.ui.app_state import AppState
+
+
+def new_character() -> Character:
+    """A blank Character with skills and derived pools wired."""
+    c = Character()
+    register_skills_on_character(c)
+    dp = get_rules().derived_pools
+    if dp:
+        install_consumers(c, dp)
+    return c
+
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -139,17 +152,8 @@ class TestMonksBeltGate:
     from the derived_pools consumer formula).
     """
 
-    def _state(self) -> AppState:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
-    def _fighter(
-        self, state: AppState, level: int = 5, wis: int = 10
-    ) -> Character:
-        state.new_character()
-        c: Character = state.character
+    def _fighter(self, level: int = 5, wis: int = 10) -> Character:
+        c = new_character()
         c.race = "Human"
         c.set_ability_score(Ability.DEX, 10)
         c.set_ability_score(Ability.WIS, wis)
@@ -165,9 +169,8 @@ class TestMonksBeltGate:
         )
         return c
 
-    def _monk(self, state: AppState, level: int, wis: int = 14) -> Character:
-        state.new_character()
-        c: Character = state.character
+    def _monk(self, level: int, wis: int = 14) -> Character:
+        c = new_character()
         c.race = "Human"
         c.set_ability_score(Ability.DEX, 14)
         c.set_ability_score(Ability.WIS, wis)
@@ -185,13 +188,11 @@ class TestMonksBeltGate:
 
     def _multiclass(
         self,
-        state: AppState,
         fighter_level: int,
         monk_level: int,
         wis: int = 14,
     ) -> Character:
-        state.new_character()
-        c: Character = state.character
+        c = new_character()
         c.race = "Human"
         c.set_ability_score(Ability.DEX, 14)
         c.set_ability_score(Ability.WIS, wis)
@@ -213,77 +214,69 @@ class TestMonksBeltGate:
         c.set_class_levels(levels)
         return c
 
-    def _belt(self, state: AppState) -> MagicItemDefinition:
-        return state.magic_item_registry.require("Monk's Belt")
+    def _belt(self) -> MagicItemDefinition:
+        return get_rules().magic_items.require("Monk's Belt")
 
     # Non-monk cases -------------------------------------
 
     def test_fighter_5_wis_10_bare_belt_gives_plus_1(self) -> None:
-        state = self._state()
-        c = self._fighter(state, level=5, wis=10)
+        c = self._fighter(level=5, wis=10)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # eff monk level = 5; formula = max(0, 0) + 5//5 = 1.
         assert c.get("ac") == base + 1
 
     def test_fighter_5_wis_14_bare_belt_gives_plus_3(self) -> None:
-        state = self._state()
-        c = self._fighter(state, level=5, wis=14)
+        c = self._fighter(level=5, wis=14)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # eff monk level = 5; formula = 2 (Wis) + 1 = 3.
         assert c.get("ac") == base + 3
 
     def test_fighter_plate_belt_gives_nothing(self) -> None:
-        state = self._state()
-        c = self._fighter(state, level=5, wis=14)
+        c = self._fighter(level=5, wis=14)
         equip_armor(c, _FULL_PLATE)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # Plate gates off monk AC formula → no delta.
         assert c.get("ac") == base
 
     def test_fighter_shield_belt_gives_nothing(self) -> None:
-        state = self._state()
-        c = self._fighter(state, level=5, wis=14)
+        c = self._fighter(level=5, wis=14)
         c.equipment["shield"] = {"name": "Buckler"}
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         assert c.get("ac") == base
 
     # Monk cases -----------------------------------------
 
     def test_monk_1_wis_14_belt_delta_plus_1(self) -> None:
-        state = self._state()
-        c = self._monk(state, level=1, wis=14)
+        c = self._monk(level=1, wis=14)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # eff level 1 → 1+5=6 w/ belt; formula
         # 2 (Wis) + 6//5=1 = 3 vs baseline 2+0=2. Δ = 1.
         assert c.get("ac") - base == 1
 
     def test_monk_5_wis_14_belt_delta_plus_1(self) -> None:
-        state = self._state()
-        c = self._monk(state, level=5, wis=14)
+        c = self._monk(level=5, wis=14)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # eff level 5 → 10; formula 2+2=4 vs 2+1=3. Δ=1.
         assert c.get("ac") - base == 1
 
     def test_monk_10_wis_14_belt_delta_plus_1(self) -> None:
-        state = self._state()
-        c = self._monk(state, level=10, wis=14)
+        c = self._monk(level=10, wis=14)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # eff level 10 → 15; formula 2+3=5 vs 2+2=4. Δ=1.
         assert c.get("ac") - base == 1
 
     def test_monk_5_plate_belt_delta_zero(self) -> None:
-        state = self._state()
-        c = self._monk(state, level=5, wis=14)
+        c = self._monk(level=5, wis=14)
         equip_armor(c, _FULL_PLATE)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # Both the monk's own AC bonus and the belt's
         # contribution are gated off by plate; Δ = 0.
         assert c.get("ac") - base == 0
@@ -291,27 +284,24 @@ class TestMonksBeltGate:
     # Multiclass -----------------------------------------
 
     def test_fighter3_monk2_belt_delta_plus_1(self) -> None:
-        state = self._state()
-        c = self._multiclass(state, fighter_level=3, monk_level=2, wis=14)
+        c = self._multiclass(fighter_level=3, monk_level=2, wis=14)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         # eff level 2 → 2+5=7; formula 2+1=3 vs 2+0=2.
         assert c.get("ac") - base == 1
 
     def test_fighter5_monk0_belt_gives_plus_3(self) -> None:
         # This is really _fighter(); included for parity
         # with the plan's multiclass coverage.
-        state = self._state()
-        c = self._fighter(state, level=5, wis=14)
+        c = self._fighter(level=5, wis=14)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         assert c.get("ac") - base == 3
 
     def test_belt_removal_restores_baseline(self) -> None:
-        state = self._state()
-        c = self._monk(state, level=5, wis=14)
+        c = self._monk(level=5, wis=14)
         base = c.get("ac")
-        equip_item(c, self._belt(state))
+        equip_item(c, self._belt())
         unequip_item(c, "Monk's Belt")
         assert c.get("ac") == base
 
@@ -324,21 +314,13 @@ class TestSpellResistanceNonStacking:
     highest applicable SR counts.
     """
 
-    def _state(self) -> AppState:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
     def test_two_sr_items_take_highest(self) -> None:
-        state = self._state()
-        state.new_character()
-        c = state.character
+        c = new_character()
         c.race = "Human"
         # Robe of the Archmagi (SR 18) + Mantle of Spell
         # Resistance (SR 21) → SR 21, not 39.
-        robe = state.magic_item_registry.get("Robe of the Archmagi")
-        mantle = state.magic_item_registry.require("Mantle of Spell Resistance")
+        robe = get_rules().magic_items.get("Robe of the Archmagi")
+        mantle = get_rules().magic_items.require("Mantle of Spell Resistance")
         assert robe is not None
         assert mantle is not None
         equip_item(c, robe)
@@ -346,18 +328,14 @@ class TestSpellResistanceNonStacking:
         assert c.get("sr") == 21
 
     def test_single_sr_source(self) -> None:
-        state = self._state()
-        state.new_character()
-        c = state.character
+        c = new_character()
         c.race = "Human"
-        mantle = state.magic_item_registry.require("Mantle of Spell Resistance")
+        mantle = get_rules().magic_items.require("Mantle of Spell Resistance")
         equip_item(c, mantle)
         assert c.get("sr") == 21
 
     def test_no_sr_sources(self) -> None:
-        state = self._state()
-        state.new_character()
-        c = state.character
+        c = new_character()
         c.race = "Human"
         assert c.get("sr") == 0
 

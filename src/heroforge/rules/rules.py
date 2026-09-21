@@ -3,7 +3,7 @@ rules/rules.py
 --------------
 Single container for every rule-definition artifact loaded from
 YAML at startup, plus a module-level accessor so engine code can
-reach rules without wiring through Character or AppState.
+reach rules without wiring them through Character.
 
 Usage:
     from heroforge.rules.rules import get_rules

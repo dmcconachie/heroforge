@@ -1,10 +1,15 @@
 # HeroForge Anew — Architecture
 
-A PyQt6 desktop application for D&D 3.5e character management.
-Clean separation between the **rules engine** (pure Python, no
-GUI), the **data layer** (YAML rulebook definitions), the
-**export layer** (PDF via ReportLab), and the **presentation
-layer** (PyQt6 widgets).
+A D&D 3.5e character engine. Clean separation between the
+**rules engine** (pure Python), the **data layer** (YAML
+rulebook definitions) and the **export layer** (PDF via
+ReportLab).
+
+The front end is `charsheet`, a CLI that reads a
+`.char.yaml` and emits the computed sheet as YAML. A PyQt6
+desktop UI lived under `ui/` and was removed on 2026-09-21
+to leave a clean slate; nothing outside it depended on Qt,
+and the engine never did.
 
 ---
 
@@ -102,34 +107,9 @@ src/heroforge/
 │       ├── weapons.yaml      # 68 weapons (full SRD)
 │       └── magic_items.yaml  # ~70 magic items
 │
-├── export/
-│   ├── sheet_data.py       # gather(): Character → SheetData
-│   └── renderer.py         # render_pdf(): SheetData → PDF
-│
-└── ui/                     # PyQt6 — never imported by
-    │                       #   engine/ or export/
-    ├── app.py              # QApplication entry point,
-    │                       #   Ctrl+C handling
-    ├── app_state.py        # AppState: registries + Character
-    ├── main_window.py      # MainWindow: tabs, menus, I/O
-    ├── sheets/
-    │   ├── sheet1_summary.py   # Identity, abilities, combat
-    │   ├── sheet_race.py       # Race selection tab
-    │   ├── sheet_class.py      # Per-level class tab
-    │   ├── sheet2_skills.py    # Full skill table
-    │   ├── sheet3_feats.py     # Taken feats + feat picker
-    │   ├── sheet_spells.py     # Spell buff toggles
-    │   ├── sheet_equipment.py  # Equipment slots table
-    │   └── sheet_notes.py      # Free-form notes
-    ├── dialogs/
-    │   ├── class_dialog.py     # Legacy class dialog
-    │   └── race_dialog.py      # Legacy race dialog
-    └── widgets/
-        ├── common.py           # LabeledField, StatDisplay,
-        │                       #   SectionHeader, etc.
-        ├── ability_block.py    # Six ability score rows
-        ├── combat_stats.py     # AC, saves, BAB, HP, init
-        └── buff_panel.py       # Scrollable buff toggle list
+└── export/
+    ├── sheet_data.py       # gather(): Character → SheetData
+    └── renderer.py         # render_pdf(): SheetData → PDF
 
 Tests co-locate with the package they cover, under a
 per-subpackage `test/` directory (`foo_test.py`, Go-
@@ -162,10 +142,6 @@ src/heroforge/rules/test/       # unit tests for rules/
   magic_item_enums_test.py
   pool_keys_test.py
   known_test.py              # KnownXxx enum congruence
-
-src/heroforge/ui/test/          # unit tests for ui/
-  conftest.py                # QT_QPA_PLATFORM=offscreen, qapp
-  ui_smoke_test.py           # TODO: split per sheet/widget
 
 tests/                          # pending placement / integration
   test_combat.py             # grapple/carrying capacity
@@ -876,9 +852,9 @@ weapons, materials, derived pools, and the
   the singleton.
 
 Engine and export code reads rules via `get_rules()` — there
-is no wiring of registry references onto `Character` or
-`AppState`. Tests isolate via the autouse fixture in the
-project-root `conftest.py`, which pointer-swaps a
+is no wiring of registry references onto `Character`. Tests
+isolate via the autouse fixture in the project-root
+`conftest.py`, which pointer-swaps a
 session-scoped cached `Rules` around each test so YAML is
 parsed once per test run.
 
@@ -1035,8 +1011,7 @@ and `conftest.py` in `standard` mode, configured in
 `pyproject.toml` and wired into `test_all.sh`. It is the
 check that keeps the enum discipline above honest: a bare
 string passed where a `StrEnum` is declared is an error,
-not a value that quietly compares unequal. `src/heroforge/ui`
-is excluded pending the removal of the PyQt6 layer.
+not a value that quietly compares unequal.
 
 Two things pyright cannot see, both deliberate:
 
@@ -1074,85 +1049,15 @@ ReportLab.
 
 ---
 
-## UI layer (`ui/`)
-
-### AppState (`app_state.py`)
-
-Holds the active mutable `Character`. Created by
-`MainWindow`. Methods: `load_rules()`, `new_character()`,
-`set_character()`, `skill_total()`.
-
-Rule-definition registries (feat, class, skill, etc.) live
-on the process-wide `Rules` singleton in
-`heroforge.rules.rules`; AppState exposes each one as a
-`@property` shim that forwards to `get_rules()` so existing
-UI code that reads `app_state.feat_registry` / etc.
-continues to work. New code should call `get_rules()`
-directly.
-
-### MainWindow (`main_window.py`)
-
-Top-level `QMainWindow` with a tab widget. Owns the
-`AppState`. Subscribes to `character.on_change` and routes
-notifications to the active sheet tab.
-
-Tabs: Summary, Race, Class, Skills, Feats, Spells,
-Equipment, Notes.
-
-File menu: New, Open, Save, Save As, Export PDF.
-
-`closeEvent` prompts to save if modified.
-
-### Sheets
-
-Each sheet takes an `AppState` reference. A `_building` flag
-suppresses signal feedback during construction.
-
-- **Sheet1Summary** — three-column layout: identity
-  fields, ability block + combat stats + validation
-  warnings, buff panel. Shows iterative attack bonuses.
-- **SheetRace** — race selection tab: filterable list
-  (left) + detail panel (right). Immediate apply.
-- **SheetClass** — per-level class tab: level
-  progression table, add/remove level buttons, class
-  combo (base + prestige with availability), HP roll
-  spinbox, per-level skill allocation panel.
-- **Sheet2Skills** — table widget with columns for
-  class-skill marker, name, ability, ranks, misc, total.
-- **Sheet3Feats** — splitter with taken-feats list
-  (left) and filterable available-feats picker (right)
-  with color-coded availability.
-- **SheetSpells** — spell buff toggles with CL spinbox.
-- **SheetEquipment** — table of equipment slots with
-  editable Item Name and Notes columns.
-- **SheetNotes** — free-form text editor bound to
-  `character.notes`.
-
-### Dialogs (legacy, unused)
-
-- **ClassDialog** — set class levels via combo + spinbox.
-- **RaceDialog** — pick a race from a filterable list.
-
-### Widgets
-
-Reusable components in `widgets/`: `LabeledField`,
-`StatDisplay`, `CompactSpinBox`, `ModifierLabel`,
-`SectionHeader`, `HRule`, `AbilityBlock`, `CombatStats`,
-`BuffPanel`.
-
----
-
 ## Key design constraints
 
-- `engine/` has **zero imports from `ui/`**. The engine is
-  testable headlessly. *Currently violated:*
-  `engine/sheet.py` imports `AppState`, used only in
-  `main()` to force the rules load.
-- `export/` has **zero imports from `ui/`**. PDF output
-  matches UI display because both use the same Character data.
-  *Currently violated:* `export/sheet_data.py` imports
-  `_compute_flatfooted` and `_compute_touch` from
-  `ui/widgets/combat_stats.py` at runtime.
+- The engine is testable headlessly and has no GUI
+  dependency. When a UI returns it imports the engine, never
+  the other way round — the removed PyQt6 layer had drifted
+  into two violations of this, and both were real bugs.
+- `export/` and `engine/sheet.py` answer the same question
+  the same way: both read `Character.touch_ac()` and
+  `.flatfooted_ac()` rather than keeping their own copies.
 - YAML data files contain **no Python code**. Formulas are
   strings evaluated in a sandboxed context.
 - Adding a new sourcebook = adding YAML files. No Python

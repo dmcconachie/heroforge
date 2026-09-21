@@ -25,16 +25,15 @@ Pinned in `pyproject.toml` beside the pytest config:
 ```toml
 [tool.pyright]
 include = ["src", "tests", "conftest.py"]
-exclude = ["src/heroforge/ui"]
 pythonVersion = "3.12"
 typeCheckingMode = "standard"
 venvPath = "."
 venv = ".venv"
 ```
 
-`ui/` is excluded because the PyQt6 layer is slated for
-removal; the 13 errors left there were all one bug (below)
-in code about to be deleted.
+`ui/` was excluded while it still existed, because the 13
+errors left there were one bug in code about to be deleted.
+The exclude went when the UI did, on 2026-09-21.
 
 Measured: basic 878, standard 880, strict 3805. Standard
 now; raising `src/heroforge` to strict is left for later —
@@ -183,23 +182,16 @@ test:
   `Chaotic Good` where `Alignment` is `chaotic_good`. D3's
   coercion turned that into a load error, and
   `rules_test.py` now checks every alignment in the data.
-- **A UI crash.** `sheet_race.py` reads
+- **A UI crash.** `sheet_race.py` read
   `partially_applicable` and `max_level`, which
   `TemplateDefinition` has never had, so selecting any
-  template raised `AttributeError`. Left alone: the UI is
-  being removed.
+  template raised `AttributeError`. Left alone, then
+  deleted with the UI. If partial templates are ever
+  wanted, `templates.py`'s docstring still describes them
+  and the dataclass still lacks the fields.
 
-## Still open
+## Follow-on
 
-`ARCHITECTURE.md` says `engine/` and `export/` have zero
-imports from `ui/`. Both do:
-
-- `engine/sheet.py:95` imports `AppState`, used only in
-  `main()` to force the rules load — `get_rules()` does the
-  same thing.
-- `export/sheet_data.py:29` imports `_compute_flatfooted`
-  and `_compute_touch` from `ui/widgets/combat_stats.py`,
-  at runtime. Two private UI helpers the PDF export needs.
-
-Both break when the UI is purged, and the `charsheet`
-entry point goes with them.
+Two violations of the documented "no imports from `ui/`"
+rule turned up here and were fixed by the UI removal that
+followed — see `ui-removal.md`.

@@ -1,5 +1,17 @@
 # Rules() container + get_rules() refactor
 
+> **Done.** Every step of this plan has landed. The
+> registries live on `Rules`, `get_rules()` is the single
+> access path, `Character` holds no registry references,
+> and `equipment.set_material_registry` is gone. The last
+> step — deleting the property shims — happened on
+> 2026-09-21 when the PyQt6 UI and `AppState` with it were
+> removed, which also answers open question 3 (AppState
+> does not need to exist) and retires question 4 (no Qt).
+>
+> Kept for the reasoning. The `ui/` and `AppState`
+> file:line references below point at deleted code.
+
 ## Context / why
 
 Today, `Character` reaches outward to three separately-attached

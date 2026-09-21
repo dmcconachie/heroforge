@@ -10,6 +10,7 @@ from pathlib import Path
 
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.classes import ClassRegistry
+from heroforge.engine.derived_pools import install_consumers
 from heroforge.engine.effects import (
     BuffRegistry,
     apply_buff,
@@ -28,9 +29,21 @@ from heroforge.engine.resources import (
     ResourceTracker,
 )
 from heroforge.engine.sheet import gather_sheet
+from heroforge.engine.skills import register_skills_on_character
 from heroforge.rules.core.buffs import KnownCoreBuff
 from heroforge.rules.loader import ClassesLoader
-from heroforge.ui.app_state import AppState
+from heroforge.rules.rules import get_rules
+
+
+def new_character() -> Character:
+    """A blank Character with skills and derived pools wired."""
+    c = Character()
+    register_skills_on_character(c)
+    dp = get_rules().derived_pools
+    if dp:
+        install_consumers(c, dp)
+    return c
+
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
@@ -170,16 +183,14 @@ class TestRemovedNonPassiveBuffs:
     Buffs removed from KnownCoreBuff in Phase 1.
 
     These names must not appear in the full buff registry
-    (loaded via AppState.load_rules) and must not appear
+    (loaded via get_rules) and must not appear
     in the KnownCoreBuff enum.
     """
 
     def test_removed_names_not_in_buff_registry(self) -> None:
 
-        state = AppState()
-        state.load_rules()
         for name in _REMOVED_NON_PASSIVE_BUFF_NAMES:
-            assert state.buff_registry.get(name) is None, (
+            assert get_rules().buffs.get(name) is None, (
                 f"{name!r} should not be registered as a buff"
             )
 
@@ -226,10 +237,8 @@ class TestPassiveFeaturesNotInBuffRegistry:
 
     def test_passive_names_not_in_buff_registry(self) -> None:
 
-        state = AppState()
-        state.load_rules()
         for name in _PHASE3_PASSIVE_FEATURE_BUFF_NAMES:
-            assert state.buff_registry.get(name) is None, (
+            assert get_rules().buffs.get(name) is None, (
                 f"{name!r} should not be registered as a buff"
             )
 
@@ -252,10 +261,7 @@ class TestPassiveFeaturesNotInBuffRegistry:
         # pipeline — a paladin L2 with Cha 14 gets +2 on
         # every save from divine grace (passive).
 
-        state = AppState()
-        state.load_rules()
-        state.new_character()
-        c = state.character
+        c = new_character()
         c.set_ability_score(Ability.CHA, 14)
         c.set_class_levels(
             [
@@ -310,17 +316,15 @@ _FULL_PLATE = ArmorDefinition(
 )
 
 
-def _make_barbarian_1(state: object) -> Character:
+def _make_barbarian_1() -> Character:
     """
-    Construct a Human barbarian 1 via AppState, with
-    the class_registry wired so passive class-feature
-    effects apply."""
-    state.new_character()  # type: ignore[attr-defined]
-    c = state.character  # type: ignore[attr-defined]
+    Construct a Human barbarian 1 with skills and derived
+    pools wired so passive class-feature effects apply."""
+    c = new_character()
     c.race = "Human"
-    c.set_ability_score("str", 14)
-    c.set_ability_score("dex", 10)
-    c.set_ability_score("con", 12)
+    c.set_ability_score(Ability.STR, 14)
+    c.set_ability_score(Ability.DEX, 10)
+    c.set_ability_score(Ability.CON, 12)
     c.set_class_levels(
         [
             CharacterLevel(
@@ -340,28 +344,19 @@ class TestBarbarianFastMovementGate:
     medium armor AND not carrying a heavy load.
     """
 
-    def _state(self) -> object:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
     def test_bare_barbarian_speed_40(self) -> None:
-        state = self._state()
-        c = _make_barbarian_1(state)
+        c = _make_barbarian_1()
         # Human base speed 30 + barbarian fast move 10 = 40.
         assert c.get("speed") == 40
 
     def test_light_armor_keeps_fast_movement(self) -> None:
-        state = self._state()
-        c = _make_barbarian_1(state)
+        c = _make_barbarian_1()
         equip_armor(c, _CHAIN_SHIRT)
         # Light armor doesn't slow; fast move still applies.
         assert c.get("speed") == 40
 
     def test_medium_armor_keeps_fast_movement(self) -> None:
-        state = self._state()
-        c = _make_barbarian_1(state)
+        c = _make_barbarian_1()
         equip_armor(c, _SCALE_MAIL)
         # SRD: medium armor still allows fast movement.
         # Scale mail speed_30 = 20 (armor reduces base 30
@@ -369,15 +364,13 @@ class TestBarbarianFastMovementGate:
         assert c.get("speed") == 30
 
     def test_heavy_armor_removes_fast_movement(self) -> None:
-        state = self._state()
-        c = _make_barbarian_1(state)
+        c = _make_barbarian_1()
         equip_armor(c, _FULL_PLATE)
         # Full plate reduces speed 30 -> 20; no fast move.
         assert c.get("speed") == 20
 
     def test_heavy_load_removes_fast_movement(self) -> None:
-        state = self._state()
-        c = _make_barbarian_1(state)
+        c = _make_barbarian_1()
         # STR 14: heavy load threshold = 175 lbs. Push
         # current weight above heavy so the load gate
         # fails.
@@ -385,23 +378,21 @@ class TestBarbarianFastMovementGate:
         assert c.get("speed") == 30  # base, no fast move
 
     def test_remove_armor_restores_fast_movement(self) -> None:
-        state = self._state()
-        c = _make_barbarian_1(state)
+        c = _make_barbarian_1()
         equip_armor(c, _FULL_PLATE)
         assert c.get("speed") == 20
         unequip_armor(c)
         assert c.get("speed") == 40
 
 
-def _make_duelist_1(state: object) -> Character:
+def _make_duelist_1() -> Character:
     """Construct a Human duelist 1 with Int 14 (+2 mod)."""
-    state.new_character()  # type: ignore[attr-defined]
-    c = state.character  # type: ignore[attr-defined]
+    c = new_character()
     c.race = "Human"
-    c.set_ability_score("str", 12)
-    c.set_ability_score("dex", 14)
-    c.set_ability_score("con", 12)
-    c.set_ability_score("int", 14)  # +2 mod
+    c.set_ability_score(Ability.STR, 12)
+    c.set_ability_score(Ability.DEX, 14)
+    c.set_ability_score(Ability.CON, 12)
+    c.set_ability_score(Ability.INT, 14)  # +2 mod
     c.set_class_levels(
         [
             CharacterLevel(
@@ -423,29 +414,20 @@ class TestDuelistCannyDefenseGate:
     so that third gate is deferred.)
     """
 
-    def _state(self) -> object:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
     def test_bare_gets_int_to_ac(self) -> None:
-        state = self._state()
-        c = _make_duelist_1(state)
+        c = _make_duelist_1()
         # Base AC: 10 + Dex(2) + Int(2) = 14.
         assert c.get("ac") == 14
 
     def test_armor_removes_int_to_ac(self) -> None:
-        state = self._state()
-        c = _make_duelist_1(state)
+        c = _make_duelist_1()
         equip_armor(c, _CHAIN_SHIRT)
         # Armor gates off canny defense. Base AC:
         # 10 + Dex(2) + armor(4) = 16, no Int bonus.
         assert c.get("ac") == 16
 
     def test_shield_removes_int_to_ac(self) -> None:
-        state = self._state()
-        c = _make_duelist_1(state)
+        c = _make_duelist_1()
         # Manually mark shield as equipped without
         # bothering with shield AC bonuses.
         c.equipment["shield"] = {
@@ -464,17 +446,10 @@ class TestDuelistGraceGate:
     a shield.
     """
 
-    def _state(self) -> object:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
-    def _l4_duelist(self, state: object) -> Character:
-        state.new_character()  # type: ignore[attr-defined]
-        c = state.character  # type: ignore[attr-defined]
+    def _l4_duelist(self) -> Character:
+        c = new_character()
         c.race = "Human"
-        c.set_ability_score("dex", 14)  # +2 Ref base
+        c.set_ability_score(Ability.DEX, 14)  # +2 Ref base
         c.set_class_levels(
             [
                 CharacterLevel(
@@ -488,32 +463,28 @@ class TestDuelistGraceGate:
         return c
 
     def test_bare_gets_grace(self) -> None:
-        state = self._state()
-        c = self._l4_duelist(state)
+        c = self._l4_duelist()
         # Ref = 4 (base) + 2 (Dex) + 2 (grace) = 8.
         assert c.get("ref_save") == 8
 
     def test_armor_removes_grace(self) -> None:
-        state = self._state()
-        c = self._l4_duelist(state)
+        c = self._l4_duelist()
         equip_armor(c, _CHAIN_SHIRT)
         # Armor gates off grace: Ref = 4 + 2 + 0 = 6.
         assert c.get("ref_save") == 6
 
     def test_shield_removes_grace(self) -> None:
-        state = self._state()
-        c = self._l4_duelist(state)
+        c = self._l4_duelist()
         c.equipment["shield"] = {"name": "Buckler"}
         # Shield gates off grace: Ref = 4 + 2 + 0 = 6.
         assert c.get("ref_save") == 6
 
 
-def _make_monk(state: object, level: int, wis: int = 14) -> Character:
-    state.new_character()  # type: ignore[attr-defined]
-    c = state.character  # type: ignore[attr-defined]
+def _make_monk(level: int, wis: int = 14) -> Character:
+    c = new_character()
     c.race = "Human"
-    c.set_ability_score("dex", 14)
-    c.set_ability_score("wis", wis)
+    c.set_ability_score(Ability.DEX, 14)
+    c.set_ability_score(Ability.WIS, wis)
     c.set_class_levels(
         [
             CharacterLevel(
@@ -535,42 +506,31 @@ class TestMonkAcBonus:
       L1-4: +0; L5-9: +1; L10-14: +2; L15-19: +3; L20: +4.
     """
 
-    def _state(self) -> object:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
     def test_monk_5_wis_14_bare(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=5, wis=14)
+        c = _make_monk(level=5, wis=14)
         # 10 base + 2 Dex + 2 Wis + 1 (L5 table) = 15.
         assert c.get("ac") == 15
 
     def test_monk_5_plate_no_monk_bonus(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=5, wis=14)
+        c = _make_monk(level=5, wis=14)
         equip_armor(c, _FULL_PLATE)
         # Wis + L5 monk bonus gated off; keep Dex + armor.
         # 10 base + 1 Dex (plate caps at 1) + 8 armor = 19.
         assert c.get("ac") == 19
 
     def test_monk_5_shield_no_monk_bonus(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=5, wis=14)
+        c = _make_monk(level=5, wis=14)
         c.equipment["shield"] = {"name": "Buckler"}
         # 10 + 2 Dex + 0 = 12 (no Wis, no L5 bonus).
         assert c.get("ac") == 12
 
     def test_monk_10_wis_14_bare(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=10, wis=14)
+        c = _make_monk(level=10, wis=14)
         # 10 + 2 Dex + 2 Wis + 2 (L10) = 16.
         assert c.get("ac") == 16
 
     def test_monk_20_wis_18_bare(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=20, wis=18)
+        c = _make_monk(level=20, wis=18)
         # 10 + 2 Dex + 4 Wis + 4 (L20) = 20.
         assert c.get("ac") == 20
 
@@ -583,38 +543,27 @@ class TestMonkFastMovement:
     medium-or-heavy load.
     """
 
-    def _state(self) -> object:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
     def test_monk_1_bare_speed_30(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=1)
+        c = _make_monk(level=1)
         # No fast movement at L1.
         assert c.get("speed") == 30
 
     def test_monk_3_bare_speed_40(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=3)
+        c = _make_monk(level=3)
         assert c.get("speed") == 40
 
     def test_monk_9_bare_speed_60(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=9)
+        c = _make_monk(level=9)
         # PHB Table 3-10: L9-11 fast move = +30.
         # Base 30 + 30 = 60.
         assert c.get("speed") == 60
 
     def test_monk_20_bare_speed_90(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=20)
+        c = _make_monk(level=20)
         assert c.get("speed") == 90
 
     def test_monk_20_plate_no_fast(self) -> None:
-        state = self._state()
-        c = _make_monk(state, level=20)
+        c = _make_monk(level=20)
         equip_armor(c, _FULL_PLATE)
         # Plate reduces speed_30 -> 20 and gates off fast
         # movement.
@@ -628,8 +577,7 @@ class TestMonkFastMovement:
         with other enhancement-typed speed bonuses like
         Longstrider."""
 
-        state = self._state()
-        c = _make_monk(state, level=20)
+        c = _make_monk(level=20)
         pool = c.get_pool("speed")
         assert pool is not None
         types = Counter(e.bonus_type.value for e in pool.active_entries(c))
@@ -647,16 +595,9 @@ class TestMonkAcBreakdown:
     and monk_ac_bonus) rather than lumping them into a
     single `untyped` line."""
 
-    def _state(self) -> object:
-
-        state = AppState()
-        state.load_rules()
-        return state
-
     def test_monk_5_wis_14_ac_breakdown(self) -> None:
 
-        state = self._state()
-        c = _make_monk(state, level=5, wis=14)
+        c = _make_monk(level=5, wis=14)
         sheet = gather_sheet(c)
         typed = sheet.combat.ac.typed
         # Wis 14 (+2 mod) + L5 monk bonus (+1) should

@@ -8,12 +8,8 @@ match the live registries exactly.
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import TYPE_CHECKING
 
 import pytest
-
-if TYPE_CHECKING:
-    from heroforge.ui.app_state import AppState
 
 from heroforge.rules.known import (
     KnownArmor,
@@ -30,20 +26,12 @@ from heroforge.rules.known import (
     KnownTemplate,
     KnownWeapon,
 )
-from heroforge.ui.app_state import AppState
+from heroforge.rules.rules import get_rules
 
 
-@pytest.fixture(scope="module")
-def app_state() -> AppState:
-
-    state = AppState()
-    state.load_rules()
-    return state
-
-
-def _registry_names(app_state: AppState, attr: str, method: str) -> set[str]:
+def _registry_names(attr: str, method: str) -> set[str]:
     """Extract name set from a registry."""
-    reg = getattr(app_state, attr)
+    reg = getattr(get_rules(), attr)
     items = getattr(reg, method)()
     if items and hasattr(items[0], "name"):
         return {item.name for item in items}
@@ -51,19 +39,19 @@ def _registry_names(app_state: AppState, attr: str, method: str) -> set[str]:
 
 
 _CASES = [
-    ("race_registry", "all_names", KnownRace),
-    ("class_registry", "all_names", KnownClass),
-    ("feat_registry", "all_names", KnownFeat),
-    ("skill_registry", "all_skills", KnownSkill),
-    ("buff_registry", "all_names", KnownBuff),
-    ("template_registry", "all_names", KnownTemplate),
-    ("armor_registry", "all_entries", KnownArmor),
-    ("weapon_registry", "all_weapons", KnownWeapon),
-    ("magic_item_registry", "all_items", KnownMagicItem),
-    ("material_registry", "all_materials", KnownMaterial),
-    ("domain_registry", "all_domains", KnownDomain),
-    ("deity_registry", "all_deities", KnownDeity),
-    ("condition_registry", "all_conditions", KnownCondition),
+    ("races", "all_names", KnownRace),
+    ("classes", "all_names", KnownClass),
+    ("feats", "all_names", KnownFeat),
+    ("skills", "all_skills", KnownSkill),
+    ("buffs", "all_names", KnownBuff),
+    ("templates", "all_names", KnownTemplate),
+    ("armor", "all_entries", KnownArmor),
+    ("weapons", "all_weapons", KnownWeapon),
+    ("magic_items", "all_items", KnownMagicItem),
+    ("materials", "all_materials", KnownMaterial),
+    ("domains", "all_domains", KnownDomain),
+    ("deities", "all_deities", KnownDeity),
+    ("conditions", "all_conditions", KnownCondition),
 ]
 
 _IDS = [c[0] for c in _CASES]
@@ -75,13 +63,12 @@ class TestCongruence:
 
     def test_no_missing_enum_members(
         self,
-        app_state: AppState,
         reg_attr: str,
         method: str,
         enum_cls: type[StrEnum],
     ) -> None:
         """Registry entries all in enum."""
-        reg_names = _registry_names(app_state, reg_attr, method)
+        reg_names = _registry_names(reg_attr, method)
         enum_vals = {m.value for m in enum_cls}
         missing = reg_names - enum_vals
         assert not missing, (
@@ -90,13 +77,12 @@ class TestCongruence:
 
     def test_no_stale_enum_members(
         self,
-        app_state: AppState,
         reg_attr: str,
         method: str,
         enum_cls: type[StrEnum],
     ) -> None:
         """Enum members all in registry."""
-        reg_names = _registry_names(app_state, reg_attr, method)
+        reg_names = _registry_names(reg_attr, method)
         enum_vals = {m.value for m in enum_cls}
         stale = enum_vals - reg_names
         assert not stale, f"Stale enum members in {enum_cls.__name__}: {stale}"

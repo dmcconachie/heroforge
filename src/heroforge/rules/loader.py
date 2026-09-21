@@ -607,7 +607,7 @@ class DerivedPoolsLoader:
     """
     Reads rules/core/derived_pools.yaml.
 
-    The loaded dict is held on AppState and installed onto
+    The loaded dict is held on Rules and installed onto
     each Character via
     heroforge.engine.derived_pools.install_consumers()
     when the character is wired up.

@@ -6,7 +6,7 @@ PDF-renderer-agnostic dicts.
 
 The renderer (renderer.py) knows nothing about the engine — it only
 draws what this module hands it.  This separation means the renderer
-can be swapped or tested without an AppState.
+can be swapped or tested without a front end.
 
 Public API:
   SheetData         — dataclass carrying all page sections
@@ -26,10 +26,6 @@ from heroforge.engine.skills import (
     compute_skill_total,
 )
 from heroforge.rules.rules import get_rules
-from heroforge.ui.widgets.combat_stats import (
-    _compute_flatfooted,
-    _compute_touch,
-)
 
 # ---------------------------------------------------------------------------
 # Sub-section dataclasses
@@ -161,8 +157,8 @@ def gather(character: "Character") -> SheetData:
     # ── Combat ───────────────────────────────────────────────────────────
     data.combat = CombatData(
         ac=character.ac,
-        touch_ac=_compute_touch(character),
-        flatfooted_ac=_compute_flatfooted(character),
+        touch_ac=character.touch_ac(),
+        flatfooted_ac=character.flatfooted_ac(),
         hp_max=character.hp_max,
         bab=character.bab,
         initiative=character.get("initiative"),
