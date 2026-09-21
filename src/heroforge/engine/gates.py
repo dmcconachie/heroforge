@@ -22,7 +22,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Callable
 
-from heroforge.engine.equipment import ArmorCategory, LoadCategory
+from heroforge.engine.enums import (
+    ArmorCategory,
+    LoadCategory,
+)
 from heroforge.rules.core.gates import KnownCoreGate
 
 if TYPE_CHECKING:

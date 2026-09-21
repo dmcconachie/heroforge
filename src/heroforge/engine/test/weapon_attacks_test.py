@@ -11,7 +11,9 @@ from __future__ import annotations
 
 import pytest
 
+from heroforge.engine.bonus import BonusEntry, BonusType
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.feats import refresh_granted_feats
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.weapons import (
     feat_applies_to_weapon,
@@ -521,7 +523,6 @@ class TestConditionalItemGrant:
         if own_twf:
             take(c, "Two-Weapon Fighting", None)
         c.equipment["worn"] = [{"name": "Gloves of the Balanced Hand"}]
-        from heroforge.engine.feats import refresh_granted_feats
 
         refresh_granted_feats(c)
         return c
@@ -675,7 +676,6 @@ class TestWeaponStanceInName:
 
     def test_parameterised_buff_shows_its_value(self) -> None:
         """Power Attack: 5, once such a buff is active."""
-        from heroforge.engine.bonus import BonusEntry, BonusType
 
         c = arm(fighter(), {"base": "Greatsword", "enhancement": 1})
         c.register_buff_definition(

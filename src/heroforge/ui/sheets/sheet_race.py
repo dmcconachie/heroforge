@@ -27,6 +27,8 @@ from PyQt6.QtWidgets import (
 
 if TYPE_CHECKING:
     from heroforge.ui.app_state import AppState
+from heroforge.engine.races import apply_race, remove_race
+from heroforge.engine.templates import apply_template, remove_template
 
 
 class SheetRace(QWidget):
@@ -167,10 +169,6 @@ class SheetRace(QWidget):
         defn = self._state.race_registry.get(name)
         if defn is None:
             return
-        from heroforge.engine.races import (
-            apply_race,
-            remove_race,
-        )
 
         c = self._state.character
         old = c.race
@@ -302,10 +300,6 @@ class SheetRace(QWidget):
         if defn is None:
             return
 
-        from heroforge.engine.templates import (
-            apply_template,
-        )
-
         level = 0
         if defn.partially_applicable and defn.max_level > 0:
             level = self._tpl_level_spin.value()
@@ -322,10 +316,6 @@ class SheetRace(QWidget):
         defn = self._state.template_registry.get(name)
         if defn is None:
             return
-
-        from heroforge.engine.templates import (
-            remove_template,
-        )
 
         remove_template(defn, self._state.character)
         self._refresh_active_label()

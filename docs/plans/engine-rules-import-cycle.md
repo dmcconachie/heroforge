@@ -97,3 +97,28 @@ a rule the linter can check.
 import the module that resolves proficiency against the
 whole registry. That removes the newest edge; the underlying
 inversion stands.
+
+## Audit, 2026-09-20
+
+A sweep hoisted every function-scope import the project could
+take: **293 down to 48**. Each survivor was tested on its
+own, and every one is genuinely cycle-bound.
+
+- **30x `rules.rules.get_rules`.** `rules.rules` imports all
+  18 engine registries at module level, so no engine module
+  can name the accessor at the top of the file.
+- **15x `rules.schema.converter`.** Two loops:
+  `loader -> schema -> known -> rules -> loader`, and
+  `persistence -> schema -> persistence`.
+- **1x `engine.effects` and 1x `engine.gates`**, both in
+  `equipment`: `equipment -> gates -> equipment`.
+- **1x `engine.derived_pools`** in `effects`:
+  `effects -> derived_pools -> effects`.
+
+Everything else now imports at the top, including all 21
+test files. The three non-`get_rules` groups each carry a
+comment naming their cycle.
+
+The `get_rules` group is what option 1 fixes: moving the
+accessor into a leaf module clears 30 of the 48 in one
+change.

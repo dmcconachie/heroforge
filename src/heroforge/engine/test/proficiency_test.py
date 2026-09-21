@@ -8,14 +8,18 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from cattrs.errors import ClassValidationError
 
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.classes import Proficiencies
+from heroforge.engine.enums import ArmorCategory, WeaponCategory
 from heroforge.engine.equipment import (
     ArmorDefinition,
     WeaponDefinition,
     equip_armor,
     equip_shield,
 )
+from heroforge.engine.feats import refresh_granted_feats
 from heroforge.engine.persistence import load_character
 from heroforge.engine.proficiency import (
     is_proficient_with_armor,
@@ -30,6 +34,7 @@ from heroforge.engine.skills import (
 )
 from heroforge.engine.weapons import register_weapons_on_character
 from heroforge.rules.rules import get_rules
+from heroforge.rules.schema import converter
 
 
 def _char(class_name: str, race: str = "Human") -> Character:
@@ -70,6 +75,25 @@ class TestClassProficiencyData:
             and get_rules().classes.require(name).proficiencies is None
         ]
         assert missing == []
+
+    def test_the_categories_are_enums(self) -> None:
+        """
+        Armour and weapon categories are closed sets, so a
+        misspelling in a class entry must fail at load rather
+        than silently granting nothing.
+        """
+        for name in get_rules().classes.all_names():
+            prof = get_rules().classes.require(name).proficiencies
+            if prof is None:
+                continue
+            for cat in prof.armor:
+                assert isinstance(cat, ArmorCategory), name
+            for cat in prof.weapons:
+                assert isinstance(cat, WeaponCategory), name
+
+    def test_a_misspelled_category_is_refused_at_load(self) -> None:
+        with pytest.raises(ClassValidationError):
+            converter.structure({"armor": ["lite"]}, Proficiencies)
 
     def test_fighter_has_everything(self) -> None:
         p = get_rules().classes.require("Fighter").proficiencies
@@ -337,7 +361,6 @@ class TestMonkUnarmedProficiency:
     def test_she_gets_improved_unarmed_strike(self) -> None:
         """PHB p. 41: a bonus feat at 1st level."""
         c = _char("Monk")
-        from heroforge.engine.feats import refresh_granted_feats
 
         refresh_granted_feats(c)
         assert c.has_feat("Improved Unarmed Strike")

@@ -12,14 +12,18 @@ Names are the book's own, one canonical spelling each.
 
 from __future__ import annotations
 
+import glob
 from pathlib import Path
 
 import pytest
+import yaml
+from cattrs.errors import ClassValidationError
 
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.equipment import equip_armor, unequip_armor
 from heroforge.engine.item_properties import (
     ItemPropertyDefinition,
+    ItemPropertyKind,
     property_definition,
 )
 from heroforge.engine.persistence import load_character
@@ -30,6 +34,7 @@ from heroforge.engine.skills import (
 )
 from heroforge.engine.weapons import register_weapons_on_character
 from heroforge.rules.rules import get_rules
+from heroforge.rules.schema import converter
 
 
 def _char(cls: str = "Rogue", level: int = 12) -> Character:
@@ -316,9 +321,6 @@ class TestSrdCoverage:
         weapon's `features:`, where a class feature that
         designates a weapon belongs.
         """
-        import glob
-
-        import yaml
 
         registry = get_rules().item_properties
         unresolved: set[str] = set()
@@ -400,3 +402,22 @@ class TestPropertiesThatAdjustTheArmour:
         _wear(c, "Nimbleness")
         # DEX +5 against a cap raised from 4 to 5.
         assert c.get("ac_dex_contribution") == 5
+
+
+class TestTheKinds:
+    """
+    A property attaches to armour, a shield or a weapon --
+    a closed set, so a typo must fail at load rather than
+    quietly attaching the property to nothing.
+    """
+
+    def test_every_loaded_property_names_a_kind(self) -> None:
+        for defn in get_rules().item_properties.all_properties():
+            assert isinstance(defn.applies_to, ItemPropertyKind), defn.name
+
+    def test_a_misspelled_kind_is_refused_at_load(self) -> None:
+        with pytest.raises(ClassValidationError):
+            converter.structure(
+                {"name": "Zap", "applies_to": "wepon"},
+                ItemPropertyDefinition,
+            )

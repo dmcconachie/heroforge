@@ -29,10 +29,20 @@ Public API:
 
 from __future__ import annotations
 
+from enum import StrEnum
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
-from heroforge.engine.enums import Ability, Size
+from heroforge.engine.classes import Designation
+from heroforge.engine.enums import (
+    Ability,
+    Size,
+    WieldClass,
+)
+from heroforge.engine.equipment import (
+    WeaponDefinition,
+    WeaponEnd,
+)
 from heroforge.engine.proficiency import is_proficient_with_weapon
 from heroforge.engine.size import damage_dice_for_size
 from heroforge.engine.stat import StatNode
@@ -41,14 +51,55 @@ if TYPE_CHECKING:
     from typing import Callable
 
     from heroforge.engine.character import Character
-    from heroforge.engine.equipment import (
-        WeaponDefinition,
-        WeaponEnd,
-    )
     from heroforge.engine.feats import FeatDefinition
 
-ATTACK = "attack"
-DAMAGE = "damage"
+
+class WeaponLine(StrEnum):
+    """Which of a weapon's two numbers is being built."""
+
+    ATTACK = "attack"
+    DAMAGE = "damage"
+
+
+ATTACK = WeaponLine.ATTACK
+DAMAGE = WeaponLine.DAMAGE
+
+
+class Stance(StrEnum):
+    """
+    How a weapon is being used for one full attack.
+
+    Two-handed, two-weapon fighting, flurry and Rapid Shot are
+    the same shape: a choice made for one full attack about one
+    weapon, declared on the slot rather than inferred from a
+    feat or a weapon's own properties.
+    """
+
+    TWO_HANDED = "two_handed"
+    PRIMARY = "primary"
+    OFF_HAND = "off_hand"
+    FLURRY = "flurry"
+    RAPID_SHOT = "rapid_shot"
+
+
+# Stances that cannot be held at once with the same weapon.
+_INCOMPATIBLE: tuple[frozenset[Stance], ...] = (
+    # Both hands on one weapon is not a pairing.
+    frozenset({Stance.TWO_HANDED, Stance.PRIMARY}),
+    frozenset({Stance.TWO_HANDED, Stance.OFF_HAND}),
+    # A weapon is in one hand or the other.
+    frozenset({Stance.PRIMARY, Stance.OFF_HAND}),
+    # One is a melee routine, the other a ranged one.
+    frozenset({Stance.FLURRY, Stance.RAPID_SHOT}),
+)
+
+_STANCE_LABELS: dict[Stance, str] = {
+    Stance.TWO_HANDED: "Two-Handed",
+    Stance.PRIMARY: "TWF: Primary",
+    Stance.OFF_HAND: "TWF: Off-hand",
+    Stance.FLURRY: "Flurry of Blows",
+    Stance.RAPID_SHOT: "Rapid Shot",
+}
 
 
 def weapon_pool_keys(index: int) -> tuple[str, str]:
@@ -56,7 +107,7 @@ def weapon_pool_keys(index: int) -> tuple[str, str]:
     return f"weapon_{index}_attack", f"weapon_{index}_damage"
 
 
-def weapon_definition(item: dict) -> "WeaponDefinition | None":
+def weapon_definition(item: dict) -> WeaponDefinition | None:
     from heroforge.rules.rules import get_rules
 
     return get_rules().weapons.get(item.get("base", ""))
@@ -98,7 +149,7 @@ def feat_applies_to_weapon(
             return False
         if item.get("base", "") in applies.get("also", []):
             return True
-        return wdef.wield_class == applies.get("wield_class")
+        return wdef.wield_class.value == applies.get("wield_class")
     if match == "damage_type":
         wdef = weapon_definition(item)
         if wdef is None or not selection:
@@ -235,7 +286,7 @@ def _is_light(item: dict) -> bool:
     defn = weapon_definition(item)
     if defn is None:
         return False
-    return defn.wield_class == "light" or defn.double
+    return defn.wield_class is WieldClass.LIGHT or defn.double
 
 
 def two_weapon_penalty(
@@ -257,63 +308,31 @@ def two_weapon_penalty(
     treated as light-handed only when every declared off-hand
     weapon is light.
     """
-    hand = (
-        "off_hand"
-        if has_stance(item, "off_hand")
-        else "primary"
-        if has_stance(item, "primary")
-        else ""
+    hand = next(
+        (s for s in (Stance.OFF_HAND, Stance.PRIMARY) if has_stance(item, s)),
+        None,
     )
-    if hand not in ("primary", "off_hand"):
+    if hand is None:
         return 0
-    off_hands = [w for w in weapons if has_stance(w, "off_hand")]
+    off_hands = [w for w in weapons if has_stance(w, Stance.OFF_HAND)]
     if not off_hands:
         return 0
-    if hand == "off_hand":
+    if hand is Stance.OFF_HAND:
         light = _is_light(item)
     else:
         light = all(_is_light(w) for w in off_hands)
     has_feat = character.has_feat("Two-Weapon Fighting")
     primary, off = _TWF_PENALTIES[(light, has_feat)]
-    return primary if hand == "primary" else off
+    return primary if hand is Stance.PRIMARY else off
 
 
-# Full-attack stances. Two-handed, two-weapon fighting,
-# flurry and Rapid Shot are the same shape: a choice made for
-# one full attack about one weapon, declared on the slot
-# rather than inferred from a feat or a weapon's own
-# properties.
-STANCES: frozenset[str] = frozenset(
-    {"two_handed", "primary", "off_hand", "flurry", "rapid_shot"}
-)
-
-# Stances that cannot be held at once with the same weapon.
-_INCOMPATIBLE: tuple[frozenset[str], ...] = (
-    # Both hands on one weapon is not a pairing.
-    frozenset({"two_handed", "primary"}),
-    frozenset({"two_handed", "off_hand"}),
-    # A weapon is in one hand or the other.
-    frozenset({"primary", "off_hand"}),
-    # One is a melee routine, the other a ranged one.
-    frozenset({"flurry", "rapid_shot"}),
-)
-
-_STANCE_LABELS = {
-    "two_handed": "Two-Handed",
-    "primary": "TWF: Primary",
-    "off_hand": "TWF: Off-hand",
-    "flurry": "Flurry of Blows",
-    "rapid_shot": "Rapid Shot",
-}
-
-
-def stances_of(item: dict) -> tuple[str, ...]:
+def stances_of(item: dict) -> tuple[Stance, ...]:
     """The stances a weapon slot declares, in a stable order."""
     declared = set(item.get("stances", []) or [])
-    return tuple(s for s in _STANCE_LABELS if s in declared)
+    return tuple(s for s in Stance if s in declared)
 
 
-def has_stance(item: dict, name: str) -> bool:
+def has_stance(item: dict, name: Stance) -> bool:
     return name in (item.get("stances", []) or [])
 
 
@@ -328,11 +347,15 @@ def weapon_stances(character: "Character", item: dict) -> list[str]:
     """
     out: list[str] = []
     for stance in stances_of(item):
-        if stance == "two_handed" and not two_handed_applies(character, item):
+        if stance is Stance.TWO_HANDED and not two_handed_applies(
+            character, item
+        ):
             continue
-        if stance == "flurry" and not flurry_applies(character, item):
+        if stance is Stance.FLURRY and not flurry_applies(character, item):
             continue
-        if stance == "rapid_shot" and not rapid_shot_applies(character, item):
+        if stance is Stance.RAPID_SHOT and not rapid_shot_applies(
+            character, item
+        ):
             continue
         out.append(_STANCE_LABELS[stance])
     for name, state in character._buff_states.items():
@@ -420,7 +443,7 @@ def critical_multiplier(item: dict) -> int:
     return defn.critical_multiplier
 
 
-def _end_of(item: dict) -> "WeaponEnd | None":
+def _end_of(item: dict) -> WeaponEnd | None:
     """
     The far end's stats, when this slot is the off end of an
     asymmetric double weapon.
@@ -430,7 +453,7 @@ def _end_of(item: dict) -> "WeaponEnd | None":
     double weapons have no separate description.
     """
     defn = weapon_definition(item)
-    if defn is None or not has_stance(item, "off_hand"):
+    if defn is None or not has_stance(item, Stance.OFF_HAND):
         return None
     return defn.off_end
 
@@ -543,7 +566,7 @@ def flurry_applies(character: "Character", item: dict) -> bool:
     a flurry is a choice made per full attack. It is off while
     armoured: the ability reads "when unarmored".
     """
-    if not has_stance(item, "flurry"):
+    if not has_stance(item, Stance.FLURRY):
         return False
     if not character.has_class_feature("flurry_of_blows"):
         return False
@@ -557,7 +580,7 @@ def rapid_shot_applies(character: "Character", item: dict) -> bool:
     Asked for rather than inferred: the feat needs the full
     attack action, so holding it is not the same as using it.
     """
-    if not has_stance(item, "rapid_shot"):
+    if not has_stance(item, Stance.RAPID_SHOT):
         return False
     defn = weapon_definition(item)
     return bool(defn and defn.is_ranged and character.has_feat("Rapid Shot"))
@@ -584,11 +607,13 @@ def two_handed_applies(
     defn = weapon_definition(item)
     if defn is None or defn.is_ranged:
         return False
-    if has_stance(item, "primary") or has_stance(item, "off_hand"):
+    if has_stance(item, Stance.PRIMARY) or has_stance(item, Stance.OFF_HAND):
         return False
-    if defn.wield_class == "two_handed":
+    if defn.wield_class is WieldClass.TWO_HANDED:
         return True
-    return defn.wield_class == "one_handed" and has_stance(item, "two_handed")
+    return defn.wield_class is WieldClass.ONE_HANDED and has_stance(
+        item, Stance.TWO_HANDED
+    )
 
 
 def off_hand_attack_count(character: "Character") -> int:
@@ -621,7 +646,7 @@ def strength_damage_adjust(character: "Character", item: dict) -> int:
     str_mod = character.get_ability_modifier(Ability.STR)
     if str_mod <= 0:
         return 0
-    if has_stance(item, "off_hand"):
+    if has_stance(item, Stance.OFF_HAND):
         return (str_mod // 2) - str_mod
     if two_handed_applies(character, item):
         return (str_mod + str_mod // 2) - str_mod
@@ -702,18 +727,21 @@ def register_weapons_on_character(character: "Character") -> None:
         atk_key, dmg_key = weapon_pool_keys(index)
         atk_base = "attack_ranged" if ranged else "attack_melee"
         dmg_pool = "damage_ranged" if ranged else "damage_melee"
-        for key, which in ((atk_key, ATTACK), (dmg_key, DAMAGE)):
+        for key, which in (
+            (atk_key, WeaponLine.ATTACK),
+            (dmg_key, WeaponLine.DAMAGE),
+        ):
             pool = BonusPool(key)
             enh = (
                 _enhancement_entry(item)
-                if which == ATTACK
+                if which is WeaponLine.ATTACK
                 else _damage_enhancement_entry(item)
             )
             if enh is not None:
                 pool.set_source("enhancement", [enh])
             for e in _feat_entries(character, item, which):
                 pool.set_source(f"feat:{e.source}", [e])
-            if which == ATTACK:
+            if which is WeaponLine.ATTACK:
                 if rapid_shot_applies(character, item):
                     # -2 on every ranged attack that round, so it
                     # belongs on the line itself and not only on
@@ -786,7 +814,7 @@ def register_weapons_on_character(character: "Character") -> None:
                         ],
                     )
             character.add_pool(pool)
-            if which == ATTACK:
+            if which is WeaponLine.ATTACK:
                 # attack_melee/_ranged are nodes, so the weapon
                 # line takes the whole computed line as its base.
                 # An ability override (Weapon Finesse) subtracts
@@ -833,11 +861,11 @@ def _validate_stances(
     drop it and quietly print a weaker weapon.
     """
     declared = set(item.get("stances", []) or [])
-    unknown = declared - STANCES
+    unknown = declared - set(Stance)
     if unknown:
         raise ValueError(
             f"Unknown weapon stance(s) {sorted(unknown)!r}. "
-            f"Known: {sorted(STANCES)!r}."
+            f"Known: {sorted(s.value for s in Stance)!r}."
         )
     for pair in _INCOMPATIBLE:
         if pair <= declared:
@@ -849,7 +877,7 @@ def _validate_stances(
     base = str(item.get("base", ""))
     defn = weapon_definition(item)
 
-    if "flurry" in declared:
+    if Stance.FLURRY in declared:
         if "flurry_of_blows" not in available:
             raise ValueError(
                 "Weapon declares the flurry stance, but this "
@@ -862,7 +890,7 @@ def _validate_stances(
                 f"(PHB p. 40)."
             )
 
-    if "rapid_shot" in declared:
+    if Stance.RAPID_SHOT in declared:
         if not character.has_feat("Rapid Shot"):
             raise ValueError(
                 "Weapon declares the rapid_shot stance, but this "
@@ -875,9 +903,9 @@ def _validate_stances(
             )
 
     if (
-        declared & {"primary", "off_hand"}
+        declared & {Stance.PRIMARY, Stance.OFF_HAND}
         and defn is not None
-        and defn.wield_class == "two_handed"
+        and defn.wield_class is WieldClass.TWO_HANDED
         and not defn.double
     ):
         raise ValueError(
@@ -886,9 +914,9 @@ def _validate_stances(
         )
 
     if (
-        "two_handed" in declared
+        Stance.TWO_HANDED in declared
         and defn is not None
-        and (defn.is_ranged or defn.wield_class == "light")
+        and (defn.is_ranged or defn.wield_class is WieldClass.LIGHT)
     ):
         raise ValueError(
             f"{base!r} gains nothing from two hands: a light or "
@@ -909,7 +937,7 @@ def validate_weapon_features(character: "Character") -> None:
     from heroforge.rules.rules import get_rules  # cycle; see docs
 
     classes = get_rules().classes
-    available: dict[str, str] = {}
+    available: dict[str, Designation] = {}
     for class_name, level in character.class_level_map.items():
         defn = classes.get(class_name)
         if defn is None:
@@ -926,7 +954,7 @@ def validate_weapon_features(character: "Character") -> None:
                     f"Weapon names class feature {key!r}, which this "
                     f"character does not have."
                 )
-            if available[key] != "weapon":
+            if available[key] is not Designation.WEAPON:
                 raise ValueError(
                     f"Class feature {key!r} does not designate a "
                     f"weapon, so a weapon cannot name it."

@@ -43,10 +43,13 @@ from __future__ import annotations
 from pathlib import Path
 
 from heroforge.engine.character import Character
+from heroforge.engine.effects import apply_buff
+from heroforge.engine.enums import CreatureType
 from heroforge.engine.races import (
     apply_race,
     remove_race,
 )
+from heroforge.engine.templates import apply_template, effective_type
 from heroforge.ui.app_state import AppState
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
@@ -604,7 +607,6 @@ class TestCleric8WithBuffs:
         assert self.c.will == 9
 
     def test_bless_attack_bonus(self) -> None:
-        from heroforge.engine.effects import apply_buff
 
         base_atk = self.c.get("attack_melee")
         bless = self.state.buff_registry.require("Bless")
@@ -613,7 +615,6 @@ class TestCleric8WithBuffs:
         assert self.c.get("attack_melee") == base_atk + 1
 
     def test_bulls_strength_str_cascade(self) -> None:
-        from heroforge.engine.effects import apply_buff
 
         bulls = self.state.buff_registry.require("Bull's Strength")
         apply_buff(bulls, self.c, caster_level=8)
@@ -807,9 +808,6 @@ class TestHalfDragonFighter6:
             },
             class_levels=[("Fighter", 6)],
         )
-        from heroforge.engine.templates import (
-            apply_template,
-        )
 
         tpl = self.state.template_registry.require("Half-Dragon (Red)")
         apply_template(tpl, self.c)
@@ -831,9 +829,6 @@ class TestHalfDragonFighter6:
         assert self.c.cha_score == 10
 
     def test_type_change(self) -> None:
-        from heroforge.engine.templates import (
-            effective_type,
-        )
 
         assert effective_type(self.c) == "Dragon"
 
@@ -904,9 +899,6 @@ class TestVampireRogue8:
             },
             class_levels=[("Rogue", 8)],
         )
-        from heroforge.engine.templates import (
-            apply_template,
-        )
 
         tpl = self.state.template_registry.require("Vampire")
         apply_template(tpl, self.c)
@@ -921,9 +913,6 @@ class TestVampireRogue8:
         assert self.c.cha_score == 18  # 14 + 4
 
     def test_type_change(self) -> None:
-        from heroforge.engine.templates import (
-            effective_type,
-        )
 
         assert effective_type(self.c) == "Undead"
 
@@ -1013,9 +1002,6 @@ class TestHalfCelestialCleric6:
             },
             class_levels=[("Cleric", 6)],
         )
-        from heroforge.engine.templates import (
-            apply_template,
-        )
 
         tpl = self.state.template_registry.require("Half-Celestial")
         apply_template(tpl, self.c)
@@ -1054,4 +1040,7 @@ class TestHalfCelestialCleric6:
         assert self.c.get("attack_melee") == 8
 
     def test_type_change(self) -> None:
-        assert getattr(self.c, "_creature_type_override", None) == "outsider"
+        assert (
+            getattr(self.c, "_creature_type_override", None)
+            is CreatureType.OUTSIDER
+        )

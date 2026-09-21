@@ -28,15 +28,20 @@ if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
 
+from heroforge.engine.character import CharacterLevel
 from heroforge.engine.effects import (
     apply_buff,
 )
+from heroforge.engine.enums import Ability
+from heroforge.engine.equipment import equip_armor, equip_item
 from heroforge.engine.persistence import (
     load_character,
     save_character,
 )
 from heroforge.engine.races import apply_race
 from heroforge.engine.skills import set_skill_ranks
+from heroforge.engine.templates import apply_template
+from heroforge.ui.app_state import AppState
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -47,7 +52,6 @@ RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 def make_app_state() -> AppState:
-    from heroforge.ui.app_state import AppState
 
     state = AppState()
     state.load_rules()
@@ -61,9 +65,6 @@ def make_app_state() -> AppState:
 
 def fighter_char(app_state: AppState) -> Character:
     """A fully built Fighter 6 for round-trip tests."""
-    from heroforge.engine.character import (
-        CharacterLevel,
-    )
 
     c = app_state.character
     c.name = "Aldric Vane"
@@ -180,9 +181,6 @@ class TestSaveCharacter:
         assert data["ability_scores"]["dex"] == 16
 
     def test_levels_saved(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         state.character.set_class_levels(
@@ -220,9 +218,6 @@ class TestSaveCharacter:
         state = make_app_state()
         c = state.character
         # Add a level with skill ranks
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         c.levels.append(
             CharacterLevel(
@@ -288,9 +283,6 @@ class TestLoadCharacter:
         assert loaded.wis_score == 16
 
     def test_class_levels_restored(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         state.character.set_class_levels(
@@ -309,9 +301,6 @@ class TestLoadCharacter:
         assert loaded.bab == 3  # medium BAB level 5
 
     def test_multiclass_levels_restored(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         levels = [
@@ -345,9 +334,6 @@ class TestLoadCharacter:
         assert loaded.con_score == 12  # 10 + 2 racial
 
     def test_always_on_feat_effect_restored(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         c = state.character
@@ -370,9 +356,6 @@ class TestLoadCharacter:
         assert loaded.will == will_with_feat
 
     def test_skill_ranks_restored(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         c = state.character
@@ -398,9 +381,6 @@ class TestLoadCharacter:
         assert loaded.skills.get("Climb") == 4
 
     def test_skill_total_correct_after_load(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         c = state.character
@@ -635,9 +615,6 @@ class TestRoundTrip:
             )
 
     def test_skill_totals_match_after_round_trip(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         c = state.character
@@ -689,7 +666,6 @@ class TestRoundTrip:
         c.set_ability_score("str", 14)
 
         hc = state.template_registry.require("Half-Celestial")
-        from heroforge.engine.templates import apply_template
 
         apply_template(hc, c)
 
@@ -710,9 +686,6 @@ class TestRoundTrip:
 
 class TestAbilityBumpRoundTrip:
     def test_ability_bump_round_trips(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         c = state.character
@@ -736,9 +709,6 @@ class TestAbilityBumpRoundTrip:
         assert loaded.get_ability_score("str") == 15
 
     def test_inherent_bumps_round_trips(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         state = make_app_state()
         c = state.character
@@ -758,7 +728,6 @@ class TestAbilityBumpRoundTrip:
         path = tmp_path / "inherent.char.yaml"
         save_character(c, path)
         loaded = load_character(path, make_app_state())
-        from heroforge.engine.enums import Ability
 
         assert loaded.levels[4].inherent_bumps == {Ability.INT: 2}
         assert loaded.get_ability_score("int") == 16
@@ -799,9 +768,6 @@ class TestEquipmentRoundTrip:
     def test_armor_round_trips(self, tmp_path: Path) -> None:
         state = make_app_state()
         c = state.character
-        from heroforge.engine.equipment import (
-            equip_armor,
-        )
 
         fp = state.armor_registry.get("Full Plate")
         assert fp is not None
@@ -816,9 +782,6 @@ class TestEquipmentRoundTrip:
     def test_mithral_armor_round_trips(self, tmp_path: Path) -> None:
         state = make_app_state()
         c = state.character
-        from heroforge.engine.equipment import (
-            equip_armor,
-        )
 
         fp = state.armor_registry.get("Full Plate")
         assert fp is not None
@@ -837,9 +800,6 @@ class TestEquipmentRoundTrip:
         state = make_app_state()
         c = state.character
         c.set_ability_score("str", 14)
-        from heroforge.engine.equipment import (
-            equip_item,
-        )
 
         belt = state.magic_item_registry.get("Belt of Giant Strength +4")
         assert belt is not None

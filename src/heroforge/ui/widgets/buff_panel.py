@@ -36,6 +36,7 @@ if TYPE_CHECKING:
         BuffDefinition,
         BuffRegistry,
     )
+from heroforge.engine.effects import BuffCategory
 
 
 class _BuffRow(QWidget):
@@ -192,7 +193,6 @@ class BuffPanel(QWidget):
 
     def _populate(self) -> None:
         """Build the buff list from the registry, grouped by category."""
-        from heroforge.engine.effects import BuffCategory
 
         sections: dict[str, list[BuffDefinition]] = {
             "Spells": [],

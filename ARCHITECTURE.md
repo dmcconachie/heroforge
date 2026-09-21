@@ -19,7 +19,11 @@ src/heroforge/
 │   │                       #   CharacterLevel, BuffState,
 │   │                       #   DmOverride, grapple,
 │   │                       #   carrying capacity
-│   ├── enums.py            # Ability, Alignment, Save, Size
+│   ├── enums.py            # leaf enums: Ability, Alignment,
+│   │                       #   Save, Size, School, SpellSchool,
+│   │                       #   CreatureType/Subtype, SourceBook,
+│   │                       #   Armor/Weapon/Load category,
+│   │                       #   WieldClass, DamageType
 │   ├── size.py             # Size ladder, step_size(),
 │   │                       #   PHB Table 7-4 damage steps
 │   ├── proficiency.py      # Proficiencies, nonproficiency
@@ -693,6 +697,20 @@ character in a PrC still meets ongoing requirements.
 PrCs are loaded from `classes.yaml` by `ClassesLoader`
 and registered with the checker automatically.
 
+`CapabilityChecker` answers the derived questions
+(proficiency, spellcasting, class features, creature type)
+from tables written in Python rather than from the
+registries, and those tables have drifted from the YAML
+everywhere they overlap. The wrong answers are recorded as
+**D1**-**D12** in `docs/defects.md`; the cleanup is
+`docs/plans/prerequisites-hardcoded-tables.md`. Prefer
+`engine/proficiency.py` and the registries when reaching
+for any of these answers elsewhere.
+
+`build_prereq_from_yaml` also discards prerequisite keys it
+does not recognise, which currently leaves two prestige
+classes with no entry requirements (D1, D2).
+
 ### Gates (`engine/gates.py`)
 
 A gate is a named `Callable[[Character], bool]` deciding
@@ -971,6 +989,55 @@ Currently populated splatbook directories:
 needed by existing custom-character integration tests;
 the rest of each book remains to be added when
 demanded by a character.
+
+
+## Closed sets are enums
+
+Any field whose value comes from a closed set is typed with
+a `StrEnum`, never a bare `str`. cattrs then rejects a bad
+value when the YAML loads, instead of letting a typo compare
+unequal forever and silently drop a bonus.
+
+Leaf enums live in `engine/enums.py` so that any layer can
+name one without dragging in a heavy module. The rest sit
+beside the dataclass that owns them:
+
+- `engine/weapons.py` — `Stance` (the four full-attack
+  choices), `WeaponLine` (attack vs damage).
+- `engine/defenses.py` — `EnergyType` (the five energies),
+  `DrBypass` (what beats damage reduction).
+- `engine/magic_items.py` — `BodySlot`: the Magic Item
+  Compendium's eleven slots, plus slotless, tool and
+  consumable.
+- `engine/item_properties.py` — `ItemPropertyKind`:
+  armor / shield / weapon.
+- `engine/classes.py` — `Designation`: what a class feature
+  attaches itself to.
+- `engine/resources.py` — `UseUnit`: use, round, hit point,
+  use per week.
+
+Two deliberate exceptions. `immunities` stays text because
+immunity targets are open-ended (energy types, conditions,
+whole schools, one-off phrases). `SpellEntry.subschool` and
+`descriptor` stay text because they hold disjunctions --
+"Creation or Calling", "Fire or Cold" -- and a list of enum
+members would assert that both apply where the book says
+either.
+
+`DrBypass` enumerates only the atoms. Printed DR is
+sometimes a combination ("10/magic and silver"); when a
+rules file first needs one, that is the moment to add a type
+that holds a combination rather than reopening the field to
+arbitrary text.
+
+**Serialisation hazard.** PyYAML cannot represent a
+`StrEnum`: it emits `!!python/object/apply` instead of the
+value. Nothing dumped by `yaml_dump` may carry an enum that
+cattrs has not unstructured first, which means every sheet
+field holding one must be *declared* with the enum type --
+declaring it `str` makes cattrs pass the member through
+untouched. `tests/integration/test_full_builds.py` asserts
+no `!!python/` appears in any rendered sheet.
 
 ---
 

@@ -5,6 +5,7 @@ courage, resource tracking, etc.
 
 from __future__ import annotations
 
+from collections import Counter
 from pathlib import Path
 
 from heroforge.engine.character import Character, CharacterLevel
@@ -14,8 +15,10 @@ from heroforge.engine.effects import (
     apply_buff,
     remove_buff,
 )
-from heroforge.engine.equipment import (
+from heroforge.engine.enums import (
     ArmorCategory,
+)
+from heroforge.engine.equipment import (
     ArmorDefinition,
     equip_armor,
     unequip_armor,
@@ -23,7 +26,10 @@ from heroforge.engine.equipment import (
 from heroforge.engine.resources import (
     ResourceTracker,
 )
+from heroforge.engine.sheet import gather_sheet
+from heroforge.rules.core.buffs import KnownCoreBuff
 from heroforge.rules.loader import ClassesLoader
+from heroforge.ui.app_state import AppState
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
@@ -168,7 +174,6 @@ class TestRemovedNonPassiveBuffs:
     """
 
     def test_removed_names_not_in_buff_registry(self) -> None:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -180,7 +185,6 @@ class TestRemovedNonPassiveBuffs:
     def test_removed_names_not_in_known_core_buff_enum(
         self,
     ) -> None:
-        from heroforge.rules.core.buffs import KnownCoreBuff
 
         enum_values = {m.value for m in KnownCoreBuff}
         for name in _REMOVED_NON_PASSIVE_BUFF_NAMES:
@@ -220,7 +224,6 @@ class TestPassiveFeaturesNotInBuffRegistry:
     """
 
     def test_passive_names_not_in_buff_registry(self) -> None:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -232,7 +235,6 @@ class TestPassiveFeaturesNotInBuffRegistry:
     def test_passive_names_not_in_known_core_buff_enum(
         self,
     ) -> None:
-        from heroforge.rules.core.buffs import KnownCoreBuff
 
         enum_values = {m.value for m in KnownCoreBuff}
         for name in _PHASE3_PASSIVE_FEATURE_BUFF_NAMES:
@@ -248,7 +250,6 @@ class TestPassiveFeaturesNotInBuffRegistry:
         # L2) must still apply. Verified via the live stat
         # pipeline — a paladin L2 with Cha 14 gets +2 on
         # every save from divine grace (passive).
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -339,7 +340,6 @@ class TestBarbarianFastMovementGate:
     """
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -423,7 +423,6 @@ class TestDuelistCannyDefenseGate:
     """
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -465,7 +464,6 @@ class TestDuelistGraceGate:
     """
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -537,7 +535,6 @@ class TestMonkAcBonus:
     """
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -586,7 +583,6 @@ class TestMonkFastMovement:
     """
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -630,7 +626,6 @@ class TestMonkFastMovement:
         enhancement, not untyped — matters for stacking
         with other enhancement-typed speed bonuses like
         Longstrider."""
-        from collections import Counter
 
         state = self._state()
         c = _make_monk(state, level=20)
@@ -652,14 +647,12 @@ class TestMonkAcBreakdown:
     single `untyped` line."""
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
         return state
 
     def test_monk_5_wis_14_ac_breakdown(self) -> None:
-        from heroforge.engine.sheet import gather_sheet
 
         state = self._state()
         c = _make_monk(state, level=5, wis=14)

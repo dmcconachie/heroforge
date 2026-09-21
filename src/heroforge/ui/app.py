@@ -10,6 +10,7 @@ or:
     python3 ui/app.py
 """
 
+import os
 import signal
 import sys
 import time
@@ -105,7 +106,6 @@ def main() -> None:
         signum: int,
         frame: FrameType | None,
     ) -> None:
-        import os
 
         where = f"{frame.f_code.co_name}" if frame is not None else "<unknown>"
         now = time.monotonic()

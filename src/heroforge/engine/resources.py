@@ -16,6 +16,22 @@ Public API:
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import StrEnum
+
+
+class UseUnit(StrEnum):
+    """
+    What one point of a resource buys.
+
+    Most abilities are counted in uses; a few (the Travel
+    domain's freedom of movement) are a pool of rounds, and a
+    sheet that prints "7 uses" for those is simply wrong.
+    """
+
+    USE = "use"
+    ROUND = "round"
+    HIT_POINT = "hit point"
+    USE_PER_WEEK = "use/week"
 
 
 @dataclass
@@ -40,7 +56,7 @@ class ResourceTracker:
     # counted in uses; a few (the Travel domain's freedom of
     # movement) are a pool of rounds, and a sheet that prints
     # "7 uses" for those is simply wrong.
-    unit: str = "use"
+    unit: UseUnit = UseUnit.USE
 
     def reset(self, max_uses: int) -> None:
         """Reset current uses to computed maximum."""

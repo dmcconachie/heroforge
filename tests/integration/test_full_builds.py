@@ -57,4 +57,9 @@ def test_character(build: str, char_dir: Path) -> None:
         text=True,
         check=True,
     )
+    # A StrEnum reaching yaml_dump through a field declared
+    # `str` serialises as !!python/object/apply instead of its
+    # value. Catch that here rather than in a golden diff.
+    assert "!!python/" not in result.stdout
+
     assert result.stdout == expected_path.read_text()

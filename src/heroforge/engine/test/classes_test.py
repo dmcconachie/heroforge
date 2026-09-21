@@ -33,6 +33,8 @@ from heroforge.engine.classes import (
     bab_at_level,
     save_at_level,
 )
+from heroforge.engine.races import RaceRegistry, apply_race, remove_race
+from heroforge.rules.loader import ClassesLoader, LoaderError, RacesLoader
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -43,7 +45,6 @@ RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 def loaded_class_registry() -> ClassRegistry:
-    from heroforge.rules.loader import ClassesLoader
 
     reg = ClassRegistry()
     ClassesLoader(RULES_DIR).load(reg, "core/classes")
@@ -233,7 +234,6 @@ class TestClassRegistry:
 
 class TestClassesLoader:
     def test_load_registers_all_classes(self) -> None:
-        from heroforge.rules.loader import ClassesLoader
 
         reg = ClassRegistry()
         ClassesLoader(RULES_DIR).load(reg, "core/classes")
@@ -331,10 +331,6 @@ class TestClassesLoader:
         assert len(reg) == 31
 
     def test_load_missing_file_raises(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import (
-            ClassesLoader,
-            LoaderError,
-        )
 
         with pytest.raises(LoaderError, match="not found"):
             ClassesLoader(tmp_path).load(ClassRegistry(), "core/classes")
@@ -347,12 +343,6 @@ class TestClassesLoader:
 
 class TestCharacterIntegration:
     def _load_registries(self) -> tuple:
-        from heroforge.engine.races import (
-            RaceRegistry,
-            apply_race,
-            remove_race,
-        )
-        from heroforge.rules.loader import RacesLoader
 
         race_reg = RaceRegistry()
         RacesLoader(RULES_DIR).load(race_reg, "core/races.yaml")

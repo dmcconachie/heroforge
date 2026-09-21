@@ -20,9 +20,12 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+import yaml
+from cattrs.errors import ClassValidationError
 
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character
+from heroforge.engine.enums import CreatureSubtype, CreatureType, Size
 from heroforge.engine.races import (
     RaceAbilityMod,
     RaceDefinition,
@@ -30,6 +33,8 @@ from heroforge.engine.races import (
     apply_race,
     remove_race,
 )
+from heroforge.rules.loader import LoaderError, RacesLoader
+from heroforge.rules.schema import converter
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -40,7 +45,6 @@ RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
 
 def loaded_race_registry() -> RaceRegistry:
-    from heroforge.rules.loader import RacesLoader
 
     reg = RaceRegistry()
     RacesLoader(RULES_DIR).load(reg, "core/races.yaml")
@@ -54,6 +58,30 @@ def fresh_char() -> Character:
 # ===============================================================
 # RaceDefinition
 # ===============================================================
+
+
+class TestTheVocabularies:
+    """
+    A race names its creature type, subtypes and size from
+    closed sets, so all three are enums: prerequisites and the
+    size tables compare them exactly.
+    """
+
+    def test_every_core_race_uses_them(self) -> None:
+        reg = loaded_race_registry()
+        for name in reg.all_names():
+            defn = reg.require(name)
+            assert isinstance(defn.creature_type, CreatureType), name
+            assert isinstance(defn.size, Size), name
+            for sub in defn.subtypes:
+                assert isinstance(sub, CreatureSubtype), name
+
+    def test_a_misspelled_size_is_refused_at_load(self) -> None:
+
+        with pytest.raises(ClassValidationError):
+            converter.structure(
+                {"name": "Hobbit", "size": "Smal"}, RaceDefinition
+            )
 
 
 class TestRaceDefinition:
@@ -192,9 +220,6 @@ class TestApplyRace:
 
 class TestRacesLoader:
     def test_load_registers_all_races(self) -> None:
-        import yaml
-
-        from heroforge.rules.loader import RacesLoader
 
         with open(RULES_DIR / "core" / "races.yaml") as f:
             data = yaml.safe_load(f)
@@ -298,10 +323,6 @@ class TestRacesLoader:
         assert len(reg) == 7
 
     def test_load_missing_file_raises(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import (
-            LoaderError,
-            RacesLoader,
-        )
 
         with pytest.raises(LoaderError, match="not found"):
             RacesLoader(tmp_path).load(RaceRegistry(), "core/races.yaml")

@@ -16,11 +16,15 @@ import pytest
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.defenses import (
     DamageReduction,
+    DrBypass,
+    EnergyType,
+    best_damage_reduction,
     collect_defenses,
 )
-from heroforge.engine.equipment import equip_armor
+from heroforge.engine.equipment import equip_armor, equip_item
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
+from heroforge.engine.templates import apply_template, remove_template
 from heroforge.rules.rules import get_rules
 
 
@@ -73,7 +77,6 @@ class TestDamageReduction:
         }
 
     def test_the_same_bypass_takes_the_best(self) -> None:
-        from heroforge.engine.defenses import best_damage_reduction
 
         got = best_damage_reduction(
             [
@@ -86,6 +89,47 @@ class TestDamageReduction:
             DamageReduction(10, "magic"),
             DamageReduction(2, "-"),
         }
+
+
+class TestTheVocabularies:
+    """
+    Both keys are closed sets, so both are enums: a typo in a
+    rules file must not silently create a sixth energy or a
+    DR entry nothing can bypass.
+    """
+
+    def test_the_five_energy_types(self) -> None:
+        """
+        Update booklet, p. 17: acid, cold, electricity,
+        fire and sonic."""
+        assert {e.value for e in EnergyType} == {
+            "acid",
+            "cold",
+            "electricity",
+            "fire",
+            "sonic",
+        }
+
+    def test_the_dr_bypass_atoms(self) -> None:
+        assert {b.value for b in DrBypass} == {
+            "-",
+            "magic",
+            "epic",
+            "silver",
+            "cold iron",
+            "adamantine",
+            "good",
+            "evil",
+            "lawful",
+            "chaotic",
+            "bludgeoning",
+            "piercing",
+            "slashing",
+        }
+
+    def test_an_unknown_energy_is_refused(self) -> None:
+        with pytest.raises(ValueError):
+            EnergyType("radiance")
 
 
 class TestEnergyResistance:
@@ -177,7 +221,6 @@ class TestWornItems:
     """
 
     def _ringed(self, grade: str, energy: str) -> Character:
-        from heroforge.engine.equipment import equip_item
 
         c = _char(cls="Fighter", level=1)
         name = f"Ring of Energy Resistance, {grade}"
@@ -209,7 +252,6 @@ class TestWornItems:
 
 class TestTemplates:
     def _templated(self, name: str, level: int = 1) -> Character:
-        from heroforge.engine.templates import apply_template
 
         c = _char(cls="Fighter", level=level)
         defn = get_rules().templates.get(name)
@@ -250,7 +292,6 @@ class TestEnergyImmunity:
     """
 
     def _red_dragon(self) -> Character:
-        from heroforge.engine.templates import apply_template
 
         c = _char(cls="Fighter", level=1)
         apply_template(get_rules().templates.get("Half-Dragon (Red)"), c)
@@ -270,7 +311,6 @@ class TestEnergyImmunity:
         immune, so showing "resist fire 10" beside it would
         only mislead.
         """
-        from heroforge.engine.equipment import equip_item
 
         c = self._red_dragon()
         name = "Ring of Energy Resistance, Minor"
@@ -340,7 +380,6 @@ class TestCreatureTemplateTables:
     """
 
     def _templated(self, name: str, level: int) -> Character:
-        from heroforge.engine.templates import apply_template
 
         c = _char(cls="Fighter", level=level)
         defn = get_rules().templates.get(name)
@@ -430,7 +469,6 @@ class TestFortification:
         ],
     )
     def test_the_draconomicon_gemstones(self, item: str, pct: int) -> None:
-        from heroforge.engine.equipment import equip_item
 
         c = _char(cls="Fighter", level=1)
         defn = get_rules().magic_items.get(item)
@@ -463,7 +501,6 @@ class TestTemplateSpellResistance:
     """
 
     def _templated(self, name: str, level: int) -> Character:
-        from heroforge.engine.templates import apply_template
 
         c = _char(cls="Fighter", level=level)
         apply_template(get_rules().templates.get(name), c)
@@ -491,10 +528,6 @@ class TestTemplateSpellResistance:
         assert c.get("sr") == 25
 
     def test_removing_the_template_removes_it(self) -> None:
-        from heroforge.engine.templates import (
-            apply_template,
-            remove_template,
-        )
 
         c = _char(cls="Fighter", level=5)
         defn = get_rules().templates.get("Half-Celestial")

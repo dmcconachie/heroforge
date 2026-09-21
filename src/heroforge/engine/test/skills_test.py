@@ -21,16 +21,22 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+import yaml
 
-from heroforge.engine.bonus import BonusType
-from heroforge.engine.character import Character
+from heroforge.engine.bonus import BonusEntry, BonusType
+from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.effects import BonusEffect, BuffDefinition, apply_buff
 from heroforge.engine.skills import (
     SkillDefinition,
     SkillRegistry,
+    class_skills_for_character,
     compute_skill_total,
     register_skills_on_character,
     set_skill_ranks,
 )
+from heroforge.rules.core.pool_keys import PoolKey
+from heroforge.rules.loader import LoaderError, SkillsLoader
+from heroforge.ui.app_state import AppState
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -45,7 +51,6 @@ def fresh_char() -> Character:
 
 
 def loaded_skill_registry() -> SkillRegistry:
-    from heroforge.rules.loader import SkillsLoader
 
     reg = SkillRegistry()
     SkillsLoader(RULES_DIR).load(reg, "core/skills.yaml")
@@ -67,7 +72,6 @@ def char_with_skills() -> tuple[Character, SkillRegistry]:
 
 class TestSkillsYaml:
     def test_no_duplicate_names(self) -> None:
-        import yaml
 
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
@@ -76,7 +80,6 @@ class TestSkillsYaml:
         assert len(names) == len(set(names))
 
     def test_all_abilities_valid(self) -> None:
-        import yaml
 
         valid = {
             "str",
@@ -128,7 +131,6 @@ class TestSkillRegistry:
         assert reg.get("Hide") is defn
 
     def test_get_by_pool_key(self) -> None:
-        from heroforge.rules.core.pool_keys import PoolKey
 
         reg = SkillRegistry()
         defn = SkillDefinition("Hide", "dex")
@@ -247,7 +249,6 @@ class TestComputeSkillTotal:
     def test_misc_bonus_from_feat(self) -> None:
         """A feat adding +2 to Hide shows up as misc_bonus."""
         c, reg = char_with_skills()
-        from heroforge.engine.bonus import BonusEntry, BonusType
 
         pool = c.get_pool("skill_hide")
         pool.set_source(
@@ -317,11 +318,6 @@ class TestSkillCascade:
 
     def test_buff_ability_change_cascades_to_skill(self) -> None:
         """Bull's Strength raises STR → Climb and Swim totals update."""
-        from heroforge.engine.effects import (
-            BonusEffect,
-            BuffDefinition,
-            apply_buff,
-        )
 
         c, _ = char_with_skills()
         c.set_ability_score("str", 12)  # mod +1
@@ -357,9 +353,6 @@ class TestSkillCascade:
 
 class TestSkillsLoader:
     def test_load_registers_all_skills(self) -> None:
-        import yaml
-
-        from heroforge.rules.loader import SkillsLoader
 
         with open(RULES_DIR / "core" / "skills.yaml") as f:
             data = yaml.safe_load(f)
@@ -396,7 +389,6 @@ class TestSkillsLoader:
         assert "Intimidate" in synergy_targets
 
     def test_load_missing_file_raises(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import LoaderError, SkillsLoader
 
         with pytest.raises(LoaderError, match="not found"):
             SkillsLoader(tmp_path).load(SkillRegistry(), "core/skills.yaml")
@@ -409,7 +401,6 @@ class TestSkillsLoader:
 
 class TestAppStateSkills:
     def test_new_character_has_skills_registered(self) -> None:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -419,7 +410,6 @@ class TestAppStateSkills:
         assert len(skill_nodes) > 0
 
     def test_skill_total_via_app_state(self) -> None:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -430,7 +420,6 @@ class TestAppStateSkills:
         assert state.skill_total("Hide") == 8  # 5 + 3
 
     def test_skill_total_unknown_returns_zero(self) -> None:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -449,9 +438,6 @@ class TestSkillBudgetIntAtLevel:
     not current INT."""
 
     def test_int_bump_does_not_retroact(self) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         c = fresh_char()
         c.set_ability_score("int", 12)  # mod +1
@@ -478,9 +464,6 @@ class TestSkillBudgetIntAtLevel:
         assert c.skill_points_for_level(4) == 3
 
     def test_int_bump_crosses_threshold(self) -> None:
-        from heroforge.engine.character import (
-            CharacterLevel,
-        )
 
         c = fresh_char()
         c.set_ability_score("int", 13)  # mod +1
@@ -517,7 +500,6 @@ class TestClassSkillsForCharacter:
     """
 
     def _char(self, *classes: tuple[str, int]) -> Character:
-        from heroforge.engine.character import CharacterLevel
 
         c = Character()
         c.race = "Human"
@@ -534,14 +516,12 @@ class TestClassSkillsForCharacter:
         return c
 
     def test_exact_entry_matches(self) -> None:
-        from heroforge.engine.skills import class_skills_for_character
 
         cs = class_skills_for_character(self._char(("Wizard", 1)))
         assert "Spellcraft" in cs
 
     def test_knowledge_all_expands(self) -> None:
         """Wizards list 'Knowledge (all)'; every Knowledge counts."""
-        from heroforge.engine.skills import class_skills_for_character
 
         cs = class_skills_for_character(self._char(("Wizard", 1)))
         assert "Knowledge (Arcana)" in cs
@@ -549,13 +529,11 @@ class TestClassSkillsForCharacter:
 
     def test_umbrella_entry_expands(self) -> None:
         """A bare 'Craft' entry covers its specialisations."""
-        from heroforge.engine.skills import class_skills_for_character
 
         cs = class_skills_for_character(self._char(("Wizard", 1)))
         assert "Craft (Conspiracy)" in cs
 
     def test_unrelated_skill_excluded(self) -> None:
-        from heroforge.engine.skills import class_skills_for_character
 
         cs = class_skills_for_character(self._char(("Wizard", 1)))
         assert "Use Magic Device" not in cs
@@ -563,7 +541,6 @@ class TestClassSkillsForCharacter:
 
     def test_multiclass_union(self) -> None:
         """Class skill for any class counts (PHB p. 60)."""
-        from heroforge.engine.skills import class_skills_for_character
 
         c = self._char(("Wizard", 5), ("Wild Mage", 3))
         cs = class_skills_for_character(c)
@@ -572,14 +549,12 @@ class TestClassSkillsForCharacter:
 
     def test_animal_domain_grants_knowledge_nature(self) -> None:
         c = self._char(("Cleric", 1))
-        from heroforge.engine.skills import class_skills_for_character
 
         assert "Knowledge (Nature)" not in class_skills_for_character(c)
         c.domains = ["Animal", "War"]
         assert "Knowledge (Nature)" in class_skills_for_character(c)
 
     def test_knowledge_domain_grants_all_knowledge(self) -> None:
-        from heroforge.engine.skills import class_skills_for_character
 
         c = self._char(("Cleric", 1))
         c.domains = ["Knowledge"]
@@ -588,7 +563,6 @@ class TestClassSkillsForCharacter:
         assert "Knowledge (Geography)" in cs
 
     def test_travel_and_trickery_grants(self) -> None:
-        from heroforge.engine.skills import class_skills_for_character
 
         c = self._char(("Cleric", 1))
         c.domains = ["Travel", "Trickery"]
@@ -596,7 +570,6 @@ class TestClassSkillsForCharacter:
         assert {"Survival", "Bluff", "Disguise", "Hide"} <= cs
 
     def test_domain_without_grant_adds_nothing(self) -> None:
-        from heroforge.engine.skills import class_skills_for_character
 
         c = self._char(("Cleric", 1))
         base = class_skills_for_character(c)

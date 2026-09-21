@@ -21,7 +21,15 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
-
+from heroforge.engine.skills import (
+    class_skills_for_character,
+    compute_skill_total,
+)
+from heroforge.rules.rules import get_rules
+from heroforge.ui.widgets.combat_stats import (
+    _compute_flatfooted,
+    _compute_touch,
+)
 
 # ---------------------------------------------------------------------------
 # Sub-section dataclasses
@@ -123,11 +131,6 @@ def gather(
     Extract all display data from a Character into a SheetData.
     Pure function — no side effects.
     """
-    from heroforge.engine.skills import compute_skill_total
-    from heroforge.ui.widgets.combat_stats import (
-        _compute_flatfooted,
-        _compute_touch,
-    )
 
     data = SheetData()
 
@@ -177,7 +180,6 @@ def gather(
     )
 
     # ── Skills ───────────────────────────────────────────────────────────
-    from heroforge.rules.rules import get_rules
 
     skill_reg = get_rules().skills
     class_skills = _class_skill_names(character)
@@ -252,13 +254,11 @@ def _class_summary(character: "Character") -> str:
 
 
 def _race_size(character: "Character") -> str:
-    from heroforge.rules.rules import get_rules
 
     race_defn = get_rules().races.get(character.race)
     return race_defn.size if race_defn else "Medium"
 
 
 def _class_skill_names(character: "Character") -> set[str]:
-    from heroforge.engine.skills import class_skills_for_character
 
     return class_skills_for_character(character)

@@ -26,7 +26,13 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Any
 
-from heroforge.engine.enums import Ability
+from heroforge.engine.enums import (
+    Ability,
+    ArmorCategory,
+    SourceBook,
+    WeaponCategory,
+)
+from heroforge.rules.core.gates import KnownCoreGate
 
 # -----------------------------------------------------------
 # Enumerations
@@ -85,6 +91,19 @@ def save_at_level(progression: SaveProgression, level: int) -> int:
 # -----------------------------------------------------------
 
 
+class Designation(StrEnum):
+    """
+    What a class feature attaches itself to.
+
+    A weapon bond names one weapon, and the designation is
+    written on the weapon slot where "which one" is
+    unambiguous even between two identical daggers.
+    """
+
+    NOTHING = ""
+    WEAPON = "weapon"
+
+
 @dataclass(frozen=True)
 class Proficiencies:
     """
@@ -100,10 +119,10 @@ class Proficiencies:
     docs/plans/engine-rules-import-cycle.md.
     """
 
-    armor: tuple[str, ...] = ()
+    armor: tuple[ArmorCategory, ...] = ()
     shields: bool = False
     tower_shields: bool = False
-    weapons: tuple[str, ...] = ()
+    weapons: tuple[WeaponCategory, ...] = ()
     weapon_names: tuple[str, ...] = ()
     # Exotic weapons this source lets the character treat as
     # martial (dwarven waraxe for a dwarf). Not the same rule
@@ -133,7 +152,7 @@ class ClassFeature:
     # feature's effects contribute. Empty = unconditional.
     # Only meaningful for passive features (buff_name=="")
     # today.
-    gate: tuple[str, ...] = ()
+    gate: tuple[KnownCoreGate, ...] = ()
     # Uses per day: {"max": "<formula>", "unit": "use"}.
     # The formula is evaluated per character, so a feature
     # that scales with level or an ability has one entry
@@ -151,7 +170,7 @@ class ClassFeature:
     # one weapon. The designation is written on the weapon
     # slot, where "which one" is unambiguous even between two
     # identical daggers.
-    designates: str = ""
+    designates: Designation = Designation.NOTHING
     # A condition the engine cannot evaluate because it is
     # about the *target*, not the character — insightful
     # strike only applies to creatures that can be critically
@@ -199,7 +218,7 @@ class ClassDefinition:
     """Complete description of a character class."""
 
     name: str
-    source_book: str = "PHB"
+    source_book: SourceBook = SourceBook.PHB
     hit_die: int = 8
     bab_progression: BABProgression = BABProgression.MEDIUM
     save_progressions: SaveProgressions = field(

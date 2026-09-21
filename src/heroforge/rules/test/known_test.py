@@ -30,11 +30,11 @@ from heroforge.rules.known import (
     KnownTemplate,
     KnownWeapon,
 )
+from heroforge.ui.app_state import AppState
 
 
 @pytest.fixture(scope="module")
 def app_state() -> AppState:
-    from heroforge.ui.app_state import AppState
 
     state = AppState()
     state.load_rules()

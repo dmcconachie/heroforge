@@ -44,6 +44,9 @@ from heroforge.ui.sheets.sheet_spells import SheetSpells
 
 if TYPE_CHECKING:
     from PyQt6.QtGui import QCloseEvent
+from heroforge.engine.persistence import load_character, save_character
+from heroforge.export.renderer import render_pdf
+from heroforge.export.sheet_data import gather
 
 
 class MainWindow(QMainWindow):
@@ -258,8 +261,6 @@ class MainWindow(QMainWindow):
         if not path:
             return
         try:
-            from heroforge.engine.persistence import load_character
-
             loaded = load_character(Path(path), self._state)
             self._unwire()
             self._state.set_character(loaded)
@@ -297,8 +298,6 @@ class MainWindow(QMainWindow):
 
     def _do_save(self, path: Path) -> None:
         try:
-            from heroforge.engine.persistence import save_character
-
             save_character(self._state.character, path)
             self._current_path = path
             self._modified = False
@@ -326,9 +325,6 @@ class MainWindow(QMainWindow):
         if not path.endswith(".pdf"):
             path += ".pdf"
         try:
-            from heroforge.export.renderer import render_pdf
-            from heroforge.export.sheet_data import gather
-
             sheet_data = gather(self._state.character, self._state)
             render_pdf(sheet_data, path)
             self._status.showMessage(f"PDF exported to {Path(path).name}", 4000)

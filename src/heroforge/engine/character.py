@@ -38,13 +38,29 @@ if TYPE_CHECKING:
 
     from heroforge.engine.bonus import BonusEntry
     from heroforge.engine.effects import BuffDefinition
-    from heroforge.engine.equipment import ArmorCategory, LoadCategory
+    from heroforge.engine.enums import (
+        ArmorCategory,
+        LoadCategory,
+    )
     from heroforge.engine.feats import FeatDefinition
 
-from heroforge.engine.bonus import BonusPool
-from heroforge.engine.enums import SAVE_ABILITY, Ability, Alignment
+from collections import defaultdict
+from dataclasses import replace
+
+from heroforge.engine.bonus import ALWAYS_STACKING, BonusPool, BonusType
+from heroforge.engine.derived_pools import refresh_derived_consumers
+from heroforge.engine.effects import pool_entries_from_effects
+from heroforge.engine.enums import (
+    SAVE_ABILITY,
+    Ability,
+    Alignment,
+    ArmorCategory,
+    LoadCategory,
+)
+from heroforge.engine.gates import make_condition
 from heroforge.engine.resources import ResourceTracker
 from heroforge.engine.size import net_size_steps, step_size
+from heroforge.engine.skills import max_skill_ranks
 from heroforge.engine.spellcasting import Specialization
 from heroforge.engine.stat import (
     StatError,
@@ -788,7 +804,6 @@ class Character:
         Return the ArmorCategory of currently-equipped
         armor, or None if unarmored. Shields do not count
         as armor here — see has_shield()."""
-        from heroforge.engine.equipment import ArmorCategory
 
         armor = self.equipment.get("armor")
         if armor is None:
@@ -825,7 +840,6 @@ class Character:
         """
         Return LoadCategory based on current weight vs
         the character's carrying capacity thresholds."""
-        from heroforge.engine.equipment import LoadCategory
 
         light, med, _heavy = self.carrying_capacity()
         w = self._current_weight
@@ -841,7 +855,6 @@ class Character:
         + untyped + luck/insight/sacred/profane/morale/
         competence. Excludes armor, shield, natural armor.
         """
-        from collections import defaultdict
 
         ac_pool = self.get_pool("ac")
         if ac_pool is None:
@@ -849,10 +862,6 @@ class Character:
 
         touch = 10 + self.get("ac_dex_contribution")
         active = ac_pool.active_entries(self)
-        from heroforge.engine.bonus import (
-            ALWAYS_STACKING,
-            BonusType,
-        )
 
         touch_types = {
             BonusType.DODGE,
@@ -896,7 +905,6 @@ class Character:
         Flat-footed AC = AC without DEX or dodge bonuses.
         If character has Uncanny Dodge, retains DEX bonus.
         """
-        from collections import defaultdict
 
         ac_pool = self.get_pool("ac")
         if ac_pool is None:
@@ -911,10 +919,6 @@ class Character:
             flat += self.get("ac_dex_contribution")
 
         active = ac_pool.active_entries(self)
-        from heroforge.engine.bonus import (
-            ALWAYS_STACKING,
-            BonusType,
-        )
 
         excluded = {BonusType.DODGE}
 
@@ -1055,10 +1059,6 @@ class Character:
         the value a consumer formula would produce (ability
         score change, class level change, etc.)."""
         with contextlib.suppress(ImportError):
-            from heroforge.engine.derived_pools import (
-                refresh_derived_consumers,
-            )
-
             refresh_derived_consumers(self)
 
     def get_ability_score(self, ability: Ability) -> int:
@@ -1557,7 +1557,6 @@ class Character:
         Prefer ``add_level()`` for single additions — this is the
         bulk entry point used by persistence and tests.
         """
-        from dataclasses import replace
 
         self.levels = [
             replace(lv, character_level=i + 1) for i, lv in enumerate(levels)
@@ -1609,10 +1608,6 @@ class Character:
         gates are re-evaluated on every pool read via
         BonusEntry.condition.
         """
-        from heroforge.engine.effects import (
-            pool_entries_from_effects,
-        )
-        from heroforge.engine.gates import make_condition
 
         reg = get_rules().classes
 
@@ -1853,9 +1848,6 @@ class Character:
                 "Multiclass XP penalty: class levels differ by more than 1"
             )
         # Check skill rank caps
-        from heroforge.engine.skills import (
-            max_skill_ranks,
-        )
 
         for skill_name, ranks in self.skills.items():
             # Use total_level for max rank check

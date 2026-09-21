@@ -30,6 +30,7 @@ from heroforge.ui.widgets.common import (
 
 if TYPE_CHECKING:
     from heroforge.ui.app_state import AppState
+from heroforge.engine.prerequisites import FeatAvailability
 
 
 class SheetClass(QWidget):
@@ -133,10 +134,6 @@ class SheetClass(QWidget):
             for name in prestige:
                 label = name
                 if chk is not None:
-                    from heroforge.engine.prerequisites import (
-                        FeatAvailability,
-                    )
-
                     avail, _ = chk.prc_availability(name, c)
                     if avail == FeatAvailability.UNAVAILABLE:
                         label = f"{name} (locked)"

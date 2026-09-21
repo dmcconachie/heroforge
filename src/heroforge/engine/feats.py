@@ -33,12 +33,15 @@ from heroforge.engine.effects import (
     BuffCategory,
     BuffDefinition,
 )
+from heroforge.engine.enums import SourceBook
 
 if TYPE_CHECKING:
     from typing import Any
 
     from heroforge.engine.character import Character
-
+from heroforge.engine.effects import evaluate_formula
+from heroforge.engine.prerequisites import build_prereq_from_yaml
+from heroforge.rules._gen_common import enum_ident
 
 # ---------------------------------------------------------------------------
 # FeatKind
@@ -83,7 +86,6 @@ class FeatParameterSpec:
         """Evaluate max_formula against the character."""
         if character is None:
             return self.min
-        from heroforge.engine.effects import evaluate_formula
 
         try:
             return max(
@@ -127,7 +129,7 @@ class FeatDefinition:
 
     name: str
     kind: FeatKind
-    source_book: str = "PHB"
+    source_book: SourceBook = SourceBook.PHB
     note: str = ""
     prerequisites: Any | None = None
     parameter: FeatParameterSpec | None = None
@@ -267,8 +269,6 @@ def resolve_feat_effects(
     for eff in raw_effects:
         target = eff.get("target", "")
         if selection is not None and "$selection" in target:
-            from heroforge.rules._gen_common import enum_ident
-
             target = target.replace("$selection", enum_ident(selection).lower())
         bt_str = eff.get("bonus_type", "untyped")
         bonus_type = bonus_type_map.get(bt_str, BonusType.UNTYPED)
@@ -284,8 +284,6 @@ def resolve_feat_effects(
             try:
                 resolved: int | str = int(substituted)
             except ValueError:
-                from heroforge.engine.effects import evaluate_formula
-
                 try:
                     resolved = evaluate_formula(substituted)
                 except Exception:
@@ -316,9 +314,6 @@ def build_feat_from_yaml(
     decl: dict,
 ) -> FeatDefinition:
     """Build a FeatDefinition from a YAML dict."""
-    from heroforge.engine.prerequisites import (
-        build_prereq_from_yaml,
-    )
 
     name = decl["name"]
     kind_str = decl.get("kind", "passive")

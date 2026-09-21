@@ -32,6 +32,7 @@ from heroforge.engine.skills import compute_skill_total
 if TYPE_CHECKING:
     from heroforge.engine.skills import SkillDefinition
     from heroforge.ui.app_state import AppState
+from heroforge.engine.skills import class_skills_for_character, set_skill_ranks
 
 _HEADERS = ["CS", "Skill", "Ability", "Ranks", "Misc", "Total"]
 _COL_CS = 0
@@ -158,14 +159,12 @@ class Sheet2Skills(QWidget):
         return result.total
 
     def _is_class_skill(self, skill_name: str) -> bool:
-        from heroforge.engine.skills import class_skills_for_character
 
         return skill_name in class_skills_for_character(self._state.character)
 
     def _on_rank_changed(self, skill_name: str, ranks: int) -> None:
         if self._building:
             return
-        from heroforge.engine.skills import set_skill_ranks
 
         set_skill_ranks(self._state.character, skill_name, ranks)
         self.refresh_totals()

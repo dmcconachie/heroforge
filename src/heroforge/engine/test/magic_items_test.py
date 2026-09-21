@@ -6,37 +6,31 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+import yaml
+from cattrs.errors import ClassValidationError
+
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.enums import ArmorCategory
 from heroforge.engine.equipment import (
-    ArmorCategory,
     ArmorDefinition,
     equip_armor,
     equip_item,
     unequip_item,
 )
 from heroforge.engine.magic_items import (
+    BodySlot,
+    MagicItemDefinition,
     MagicItemRegistry,
 )
 from heroforge.rules.loader import MagicItemLoader
+from heroforge.rules.schema import converter
+from heroforge.ui.app_state import AppState
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
-SLOT_FILES = [
-    "head",
-    "face",
-    "throat",
-    "shoulders",
-    "body",
-    "torso",
-    "arms",
-    "hands",
-    "ring",
-    "waist",
-    "feet",
-    "slotless",
-    "tool",
-    "consumable",
-]
+# One YAML file per slot, named after it.
+SLOT_FILES = [s.value for s in BodySlot if s is not BodySlot.NONE]
 
 
 def _load_items() -> MagicItemRegistry:
@@ -48,6 +42,24 @@ def _load_items() -> MagicItemRegistry:
             f"core/magic_items/{slot_file}.yaml",
         )
     return item_reg
+
+
+class TestTheBodySlots:
+    """
+    Where an item is worn is a closed set: the eleven body
+    slots of the Magic Item Compendium plus the three ways of
+    occupying none of them.
+    """
+
+    def test_every_loaded_item_names_a_real_slot(self) -> None:
+        for defn in _load_items().all_items():
+            assert isinstance(defn.slot, BodySlot), defn.name
+
+    def test_a_misspelled_slot_is_refused_at_load(self) -> None:
+        with pytest.raises(ClassValidationError):
+            converter.structure(
+                {"name": "Hat of Doom", "slot": "hed"}, MagicItemDefinition
+            )
 
 
 class TestMagicItemsLoader:
@@ -128,7 +140,6 @@ class TestMonksBeltGate:
     """
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -310,7 +321,6 @@ class TestSpellResistanceNonStacking:
     """
 
     def _state(self) -> object:
-        from heroforge.ui.app_state import AppState
 
         state = AppState()
         state.load_rules()
@@ -356,7 +366,6 @@ class TestMagicItemsSort:
     """
 
     def _file_items(self, slot_file: str) -> list[tuple[str, dict]]:
-        import yaml
 
         path = RULES_DIR / "core" / "magic_items" / f"{slot_file}.yaml"
         with open(path) as f:

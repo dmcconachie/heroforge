@@ -38,12 +38,37 @@ from typing import TYPE_CHECKING
 
 import yaml
 
+from heroforge.engine.acfs import AcfDefinition
 from heroforge.engine.bonus import BonusPool
+from heroforge.engine.classes import ClassDefinition
+from heroforge.engine.conditions import ConditionDefinition
+from heroforge.engine.deities import DeityDefinition
+from heroforge.engine.derived_pools import get_compute
+from heroforge.engine.domains import DomainDefinition
+from heroforge.engine.effects import (
+    BuffCategory,
+    BuffDefinition,
+    build_buff_from_effects,
+)
+from heroforge.engine.equipment import (
+    ArmorDefinition,
+    MaterialDefinition,
+    WeaponDefinition,
+)
+from heroforge.engine.feats import build_feat_from_yaml
+from heroforge.engine.item_properties import ItemPropertyDefinition
+from heroforge.engine.magic_items import MagicItemDefinition
+from heroforge.engine.prerequisites import build_prereq_from_yaml
+from heroforge.engine.races import RaceDefinition
+from heroforge.engine.skills import SkillDefinition
+from heroforge.engine.spells import SpellEntry
 from heroforge.engine.stat import (
     StatNode,
     compute_ability_modifier,
     compute_sum,
 )
+from heroforge.engine.templates import build_template_from_yaml
+from heroforge.rules.core.gates import KnownCoreGate
 from heroforge.rules.core.pool_keys import PoolKey
 
 if TYPE_CHECKING:
@@ -437,13 +462,8 @@ class ConditionLoader:
 
         Returns list of condition names registered.
         """
-        from heroforge.engine.conditions import (
-            ConditionDefinition,
-        )
-        from heroforge.engine.effects import (
-            BuffCategory,
-            build_buff_from_effects,
-        )
+        # loader <- schema <- known <- rules <- loader.
+        # See docs/plans/engine-rules-import-cycle.md.
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -492,9 +512,6 @@ class ConditionLoader:
                 # Note-only condition (no stat
                 # effects); still needs a buff
                 # entry for the toggle UI.
-                from heroforge.engine.effects import (
-                    BuffDefinition,
-                )
 
                 note_buff = BuffDefinition(
                     name=defn.name,
@@ -545,9 +562,6 @@ class MagicItemLoader:
 
         Returns list of item names registered.
         """
-        from heroforge.engine.magic_items import (
-            MagicItemDefinition,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -611,8 +625,6 @@ class DerivedPoolsLoader:
         self.rules_dir = Path(rules_dir)
 
     def load(self, relative_path: str) -> dict:
-        from heroforge.engine.derived_pools import get_compute
-        from heroforge.rules.core.gates import KnownCoreGate
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -703,9 +715,6 @@ class TemplatesLoader:
         Load a templates YAML file into the registry.
         Returns list of template names registered.
         """
-        from heroforge.engine.templates import (
-            build_template_from_yaml,
-        )
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -772,9 +781,6 @@ class FeatsLoader:
 
         Returns list of feat names registered.
         """
-        from heroforge.engine.feats import (
-            build_feat_from_yaml,
-        )
 
         path = self.rules_dir / relative_path
         if not path.exists():
@@ -863,9 +869,6 @@ class ClassesLoader:
         prereq_checker: (PrerequisiteChecker | None) = None,
         buff_registry: BuffRegistry | None = None,
     ) -> list[str]:
-        from heroforge.engine.classes import (
-            ClassDefinition,
-        )
         from heroforge.rules.schema import converter
 
         dir_path = self.rules_dir / relative_path
@@ -927,10 +930,6 @@ class ClassesLoader:
         `Character._apply_class_feature_effects` and must
         NOT be wrapped in zombie BuffDefinitions.
         """
-        from heroforge.engine.effects import (
-            BuffCategory,
-            build_buff_from_effects,
-        )
 
         for feat in defn.class_features:
             if not feat.effects:
@@ -953,9 +952,6 @@ class ClassesLoader:
     def _build_prereq(self, decl: dict | None) -> "Prerequisite | None":
         if decl is None:
             return None
-        from heroforge.engine.prerequisites import (
-            build_prereq_from_yaml,
-        )
 
         return build_prereq_from_yaml(decl)
 
@@ -998,9 +994,6 @@ class RacesLoader:
         if not isinstance(data, dict):
             raise LoaderError(f"{path} must be a YAML mapping.")
 
-        from heroforge.engine.races import (
-            RaceDefinition,
-        )
         from heroforge.rules.schema import converter
 
         registered: list[str] = []
@@ -1039,9 +1032,6 @@ class SkillsLoader:
         relative_path: str,
         overwrite: bool = False,
     ) -> list[str]:
-        from heroforge.engine.skills import (
-            SkillDefinition,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1085,9 +1075,6 @@ class DomainsLoader:
         registry: "DomainRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.domains import (
-            DomainDefinition,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1121,7 +1108,6 @@ class AcfsLoader:
         registry: "AcfRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.acfs import AcfDefinition
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1185,7 +1171,6 @@ class DeitiesLoader:
         registry: "DeityRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.deities import DeityDefinition
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1227,9 +1212,6 @@ class EquipmentLoader:
         registry: "ArmorRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.equipment import (
-            ArmorDefinition,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1256,9 +1238,6 @@ class EquipmentLoader:
         registry: "WeaponRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.equipment import (
-            WeaponDefinition,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1285,9 +1264,6 @@ class EquipmentLoader:
         registry: "MaterialRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.equipment import (
-            MaterialDefinition,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1318,9 +1294,6 @@ class EquipmentLoader:
         registry: "ItemPropertyRegistry",
         relative_path: str,
     ) -> list[str]:
-        from heroforge.engine.item_properties import (
-            ItemPropertyDefinition,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path
@@ -1386,13 +1359,6 @@ class SpellCompendiumLoader:
         register buff definitions for spells with
         effects.
         """
-        from heroforge.engine.effects import (
-            BuffCategory,
-            build_buff_from_effects,
-        )
-        from heroforge.engine.spells import (
-            SpellEntry,
-        )
         from heroforge.rules.schema import converter
 
         path = self.rules_dir / relative_path

@@ -52,7 +52,11 @@ from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusType
 from heroforge.engine.classes import Proficiencies
-from heroforge.engine.enums import Ability
+from heroforge.engine.enums import (
+    Ability,
+    ArmorCategory,
+    WeaponCategory,
+)
 from heroforge.rules.core.pool_keys import PoolKey
 
 if TYPE_CHECKING:
@@ -83,10 +87,10 @@ _CATEGORY_FEATS = {
 
 @dataclass
 class _Merged:
-    armor: set[str] = field(default_factory=set)
+    armor: set[ArmorCategory] = field(default_factory=set)
     shields: bool = False
     tower_shields: bool = False
-    weapons: set[str] = field(default_factory=set)
+    weapons: set[WeaponCategory] = field(default_factory=set)
     weapon_names: set[str] = field(default_factory=set)
     weapon_familiarity: set[str] = field(default_factory=set)
 

@@ -26,6 +26,8 @@ if TYPE_CHECKING:
     from PyQt6.QtWidgets import QWidget
 
     from heroforge.ui.app_state import AppState
+from heroforge.engine.character import CharacterLevel
+from heroforge.rules.rules import get_rules
 
 
 class ClassDialog(QDialog):
@@ -110,8 +112,6 @@ class ClassDialog(QDialog):
         if not self._entries:
             self.reject()
             return
-        from heroforge.engine.character import CharacterLevel
-        from heroforge.rules.rules import get_rules
 
         class_reg = get_rules().classes
         levels: list[CharacterLevel] = []

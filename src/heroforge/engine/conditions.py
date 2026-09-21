@@ -19,6 +19,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from heroforge.engine.enums import SourceBook
+
 
 @dataclass(frozen=True)
 class ConditionDefinition:
@@ -38,7 +40,7 @@ class ConditionDefinition:
     name: str
     note: str = ""
     effects: list[dict] = field(default_factory=list)
-    source_book: str = "SRD"
+    source_book: SourceBook = SourceBook.SRD
     requires_caster_level: bool = False
 
 

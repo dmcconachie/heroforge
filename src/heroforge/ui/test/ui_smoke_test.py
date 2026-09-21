@@ -27,6 +27,9 @@ import pytest
 
 from heroforge.ui.app_state import AppState
 from heroforge.ui.main_window import MainWindow
+from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
+from heroforge.ui.sheets.sheet2_skills import Sheet2Skills
+from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
 # Force all tests in this module into a single xdist group so they
 # run in one worker process sharing the session-scoped QApplication.
@@ -81,20 +84,17 @@ class TestMainWindowSmoke:
 @pytest.mark.usefixtures("qapp")
 class TestSheet1Smoke:
     def test_sheet1_constructs(self, app_state: AppState) -> None:
-        from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
 
         sheet = Sheet1Summary(app_state)
         assert sheet is not None
 
     def test_sheet1_refresh(self, app_state: AppState) -> None:
-        from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
 
         sheet = Sheet1Summary(app_state)
         sheet.refresh()
 
     def test_sheet1_name_change_notifies(self, app_state: AppState) -> None:
         """Typing a name fires on_change with identity:name key."""
-        from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
 
         sheet = Sheet1Summary(app_state)
 
@@ -116,13 +116,11 @@ class TestSheet1Smoke:
 @pytest.mark.usefixtures("qapp")
 class TestSheet2Smoke:
     def test_sheet2_constructs(self, app_state: AppState) -> None:
-        from heroforge.ui.sheets.sheet2_skills import Sheet2Skills
 
         sheet = Sheet2Skills(app_state)
         assert sheet is not None
 
     def test_sheet2_refresh(self, app_state: AppState) -> None:
-        from heroforge.ui.sheets.sheet2_skills import Sheet2Skills
 
         sheet = Sheet2Skills(app_state)
         sheet.refresh()
@@ -136,13 +134,11 @@ class TestSheet2Smoke:
 @pytest.mark.usefixtures("qapp")
 class TestSheet3Smoke:
     def test_sheet3_constructs(self, app_state: AppState) -> None:
-        from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
         assert sheet is not None
 
     def test_sheet3_refresh(self, app_state: AppState) -> None:
-        from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
         sheet.refresh()
@@ -151,13 +147,11 @@ class TestSheet3Smoke:
         self, app_state: AppState
     ) -> None:
         """Typing in the filter field updates the feat list without error."""
-        from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
         sheet._filter_edit.setText("Dodge")
 
     def test_sheet3_filter_narrows_list(self, app_state: AppState) -> None:
-        from heroforge.ui.sheets.sheet3_feats import Sheet3Feats
 
         sheet = Sheet3Feats(app_state)
 

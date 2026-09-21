@@ -23,6 +23,8 @@ from heroforge.rules.loader import (
     SpellCompendiumLoader,
     validate_domain_spells,
 )
+from heroforge.rules.rules import get_rules
+from heroforge.rules.schema import converter
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -183,12 +185,10 @@ class TestCharacterDomains:
 
 class TestDeityRegistry:
     def test_loads_full_roster(self) -> None:
-        from heroforge.rules.rules import get_rules
 
         assert len(get_rules().deities) == 194
 
     def test_spot_check_entries(self) -> None:
-        from heroforge.rules.rules import get_rules
 
         reg = get_rules().deities
         istus = reg.get("Istus")
@@ -358,14 +358,12 @@ class TestDomainSchemaRejectsUnknownKeys:
     """
 
     def test_unknown_key_raises(self) -> None:
-        from heroforge.rules.schema import converter
 
         decl = {"name": "Bogus", "granted_powr": "typo"}
         with pytest.raises(ValueError, match="granted_powr"):
             converter.structure(decl, DomainDefinition)
 
     def test_known_keys_structure(self) -> None:
-        from heroforge.rules.schema import converter
 
         decl = {
             "name": "Animal",
@@ -450,7 +448,6 @@ class TestDomainResources:
 
     def test_all_declared_resources_load(self) -> None:
         """Every domain resource in the YAML is well-formed."""
-        from heroforge.rules.rules import get_rules
 
         named = {
             d.name: d.resource

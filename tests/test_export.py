@@ -27,6 +27,11 @@ if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.export.sheet_data import SheetData
     from heroforge.ui.app_state import AppState
+import re
+
+from heroforge.engine.character import CharacterLevel
+from heroforge.export.renderer import render_pdf
+from heroforge.ui.app_state import AppState
 
 RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
@@ -37,7 +42,6 @@ RULES_DIR = Path(__file__).parent.parent / "src" / "heroforge" / "rules"
 
 
 def make_state() -> AppState:
-    from heroforge.ui.app_state import AppState
 
     state = AppState()
     state.load_rules()
@@ -54,7 +58,6 @@ def full_char(state: AppState) -> Character:
     c.deity = "St. Cuthbert"
 
     apply_race(state.race_registry.require("Human"), c)
-    from heroforge.engine.character import CharacterLevel
 
     c.set_class_levels(
         [
@@ -271,7 +274,6 @@ class TestGatherSkills:
         assert climb.total == 9  # 6 + 3
 
     def test_class_skill_marked(self) -> None:
-        from heroforge.engine.character import CharacterLevel
 
         state = make_state()
         state.character.set_class_levels(
@@ -288,7 +290,6 @@ class TestGatherSkills:
         assert climb.class_skill is True  # Fighter class skill
 
     def test_non_class_skill_not_marked(self) -> None:
-        from heroforge.engine.character import CharacterLevel
 
         state = make_state()
         state.character.set_class_levels(
@@ -422,7 +423,6 @@ class TestRenderPdf:
         if state is None:
             state = make_state()
             full_char(state)
-        from heroforge.export.renderer import render_pdf
 
         data = gather(state.character, state)
         path = tmp_path / "sheet.pdf"
@@ -445,7 +445,6 @@ class TestRenderPdf:
 
     def test_pdf_has_at_least_two_pages(self, tmp_path: Path) -> None:
         """PDF should contain at least two pages."""
-        import re
 
         path, _ = self._make_pdf(tmp_path)
         content = path.read_bytes().decode("latin-1", errors="replace")
@@ -459,7 +458,6 @@ class TestRenderPdf:
     ) -> None:
         """A character with no name, class, or feats should still render."""
         state = make_state()
-        from heroforge.export.renderer import render_pdf
 
         data = gather(state.character, state)
         path = tmp_path / "blank.pdf"
@@ -480,7 +478,6 @@ class TestRenderPdf:
         """Active buffs appear in SheetData and PDF renders without error."""
         state = make_state()
         full_char(state)
-        from heroforge.export.renderer import render_pdf
 
         data = gather(state.character, state)
         # Verify Bless is in the data layer
@@ -490,7 +487,6 @@ class TestRenderPdf:
         assert path.stat().st_size > 5_000
 
     def test_multiclass_character_renders(self, tmp_path: Path) -> None:
-        from heroforge.engine.character import CharacterLevel
 
         state = make_state()
         c = state.character
@@ -511,7 +507,6 @@ class TestRenderPdf:
             for i in range(4)
         ]
         c.set_class_levels(levels)
-        from heroforge.export.renderer import render_pdf
 
         data = gather(c, state)
         path = tmp_path / "multi.pdf"
@@ -523,7 +518,6 @@ class TestRenderPdf:
         c = state.character
         c.name = "Half-Dragon Hero"
         apply_template(state.template_registry.require("Half-Dragon (Red)"), c)
-        from heroforge.export.renderer import render_pdf
 
         data = gather(c, state)
         path = tmp_path / "template.pdf"
@@ -533,7 +527,6 @@ class TestRenderPdf:
     def test_path_as_string_works(self, tmp_path: Path) -> None:
         """render_pdf should accept a string path as well as Path."""
         state = make_state()
-        from heroforge.export.renderer import render_pdf
 
         data = gather(state.character, state)
         path_str = str(tmp_path / "str_path.pdf")

@@ -22,6 +22,9 @@ from heroforge.ui.widgets.common import HRule, SectionHeader, StatDisplay
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
+from collections import defaultdict
+
+from heroforge.engine.bonus import BonusType
 
 
 class CombatStats(QWidget):
@@ -112,7 +115,6 @@ def _compute_touch(character: Character) -> int:
     Touch AC = 10 + DEX mod + dodge bonuses + deflection bonuses.
     Excludes armor, shield, natural armor.
     """
-    from heroforge.engine.bonus import BonusType
 
     ac_pool = character.get_pool("ac")
     if ac_pool is None:
@@ -132,7 +134,6 @@ def _compute_touch(character: Character) -> int:
         BonusType.COMPETENCE,
     }
     # Sum stacking types; take max of non-stacking per type
-    from collections import defaultdict
 
     stacking = 0
     typed: dict = defaultdict(list)
@@ -152,7 +153,6 @@ def _compute_flatfooted(character: Character) -> int:
     Flat-footed AC = 10 + armor + shield + natural armor + size + misc.
     Excludes DEX contribution and dodge bonuses.
     """
-    from heroforge.engine.bonus import BonusType
 
     ac_pool = character.get_pool("ac")
     if ac_pool is None:
@@ -161,8 +161,6 @@ def _compute_flatfooted(character: Character) -> int:
     flat = 10
     active = ac_pool.active_entries(character)
     excluded = {BonusType.DODGE}
-
-    from collections import defaultdict
 
     stacking = 0
     typed: dict = defaultdict(list)

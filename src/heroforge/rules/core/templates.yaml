@@ -42,7 +42,7 @@ Half-Celestial:
   source_book: MM
   cr_adjustment: varies
   la_adjustment: '+4'
-  type_change: outsider
+  type_change: Outsider
   ability_modifiers:
     - ability: str
       value: 4
@@ -99,7 +99,7 @@ Half-Fiend:
   source_book: MM
   cr_adjustment: varies
   la_adjustment: '+4'
-  type_change: outsider
+  type_change: Outsider
   ability_modifiers:
     - ability: str
       value: 4

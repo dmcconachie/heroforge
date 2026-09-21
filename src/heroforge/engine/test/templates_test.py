@@ -23,11 +23,14 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+import yaml
 
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character
+from heroforge.engine.enums import CreatureType
 from heroforge.engine.prerequisites import (
     CreatureTypePrereq,
+    FeatAvailability,
     PrerequisiteChecker,
 )
 from heroforge.engine.templates import (
@@ -40,6 +43,7 @@ from heroforge.engine.templates import (
     effective_type,
     remove_template,
 )
+from heroforge.rules.loader import LoaderError, TemplatesLoader
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -224,7 +228,6 @@ class TestApplyTemplate:
         c = fresh_char()
         base_ac = c.ac
         # Use a template with only natural armor to isolate
-        from heroforge.engine.templates import TemplateDefinition
 
         t = TemplateDefinition(
             name="Natural Only", natural_armor_bonus=3, ability_modifiers=[]
@@ -278,10 +281,6 @@ class TestApplyTemplate:
         c.set_ability_score("str", 10)
         # Half-Celestial doesn't change str_score wait it does, use Vampire
         # Vampire changes STR+6 but not INT directly
-        from heroforge.engine.templates import (
-            TemplateAbilityModifier,
-            TemplateDefinition,
-        )
 
         vampire_light = TemplateDefinition(
             name="Vampire Light",
@@ -459,6 +458,29 @@ class TestEffectiveType:
         assert "Good" in subs
         assert "Extraplanar" in subs
 
+    def test_a_half_celestial_reads_as_an_outsider(self) -> None:
+        """
+        Regression: templates.yaml said ``type_change:
+        outsider`` in lower case while every other template
+        said ``Dragon``/``Undead``. Creature type is compared
+        exactly, so the half-celestial and half-fiend failed
+        every Outsider-gated prerequisite.
+        """
+        reg = TemplateRegistry()
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
+        for name in ("Half-Celestial", "Half-Fiend"):
+            c = fresh_char("Human")
+            apply_template(reg.require(name), c)
+            assert effective_type(c) == CreatureType.OUTSIDER, name
+
+    def test_every_template_names_a_real_creature_type(self) -> None:
+        reg = TemplateRegistry()
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
+        for name in reg.all_names():
+            defn = reg.require(name)
+            if defn.type_change is not None:
+                assert isinstance(defn.type_change, CreatureType), name
+
 
 # ===========================================================================
 # Integration with prerequisite checking
@@ -476,7 +498,6 @@ class TestTemplatePrereqIntegration:
 
         c = fresh_char("Human")
         avail_before, _ = chk.feat_availability("Draconic Heritage", c)
-        from heroforge.engine.prerequisites import FeatAvailability
 
         assert avail_before == FeatAvailability.UNAVAILABLE
 
@@ -499,7 +520,6 @@ class TestTemplatePrereqIntegration:
 
         c = fresh_char("Human")
         avail_before, _ = chk.feat_availability("Enlarge Person Compatible", c)
-        from heroforge.engine.prerequisites import FeatAvailability
 
         assert avail_before == FeatAvailability.AVAILABLE
 
@@ -596,13 +616,7 @@ class TestBuildTemplateFromYaml:
 
 
 class TestTemplatesLoader:
-    from heroforge.rules.loader import TemplatesLoader
-
     def test_load_registers_all_templates(self) -> None:
-        import yaml
-
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import TemplatesLoader
 
         with open(RULES_DIR / "core" / "templates.yaml") as f:
             data = yaml.safe_load(f)
@@ -613,8 +627,6 @@ class TestTemplatesLoader:
         assert len(reg) == expected_count
 
     def test_load_returns_registered_names(self) -> None:
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
         names = TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
@@ -623,8 +635,6 @@ class TestTemplatesLoader:
         assert "Vampire" in names
 
     def test_half_celestial_ability_mods_loaded(self) -> None:
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
@@ -634,8 +644,6 @@ class TestTemplatesLoader:
         assert abilities["cha"] == 4
 
     def test_half_dragon_type_change_loaded(self) -> None:
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
@@ -643,8 +651,6 @@ class TestTemplatesLoader:
         assert hd.type_change == "Dragon"
 
     def test_vampire_grants_feats(self) -> None:
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
@@ -653,8 +659,6 @@ class TestTemplatesLoader:
         assert "Dodge" in vamp.grants_feats
 
     def test_load_missing_file_raises(self, tmp_path: Path) -> None:
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import LoaderError, TemplatesLoader
 
         with pytest.raises(LoaderError, match="not found"):
             TemplatesLoader(tmp_path).load(
@@ -662,13 +666,6 @@ class TestTemplatesLoader:
             )
 
     def test_load_raises_on_bad_yaml(self, tmp_path: Path) -> None:
-        from heroforge.engine.templates import (
-            TemplateRegistry,
-        )
-        from heroforge.rules.loader import (
-            LoaderError,
-            TemplatesLoader,
-        )
 
         core = tmp_path / "core"
         core.mkdir()
@@ -680,7 +677,6 @@ class TestTemplatesLoader:
             )
 
     def test_no_duplicate_names_in_yaml(self) -> None:
-        import yaml
 
         with open(RULES_DIR / "core" / "templates.yaml") as f:
             data = yaml.safe_load(f)
@@ -692,8 +688,6 @@ class TestTemplatesLoader:
 
     def test_loaded_template_applied_to_character(self) -> None:
         """End-to-end: load Half-Celestial from YAML and apply to character."""
-        from heroforge.engine.templates import TemplateRegistry
-        from heroforge.rules.loader import TemplatesLoader
 
         reg = TemplateRegistry()
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
@@ -707,4 +701,6 @@ class TestTemplatesLoader:
         # Half-Celestial: natural armor +1 AND
         # dex +2 (10→12, mod 0→1) → AC 12
         assert c.ac == 12
-        assert getattr(c, "_creature_type_override", None) == "outsider"
+        assert (
+            getattr(c, "_creature_type_override", None) is CreatureType.OUTSIDER
+        )

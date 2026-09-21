@@ -29,7 +29,12 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from heroforge.engine.classes import CastType
-from heroforge.engine.enums import Ability
+from heroforge.engine.enums import (
+    Ability,
+    Alignment,
+    CreatureSubtype,
+    CreatureType,
+)
 
 if TYPE_CHECKING:
     from typing import Any
@@ -242,7 +247,7 @@ class RacePrereq(Prerequisite):
 class AlignmentPrereq(Prerequisite):
     """Character alignment must be in the allowed list."""
 
-    allowed: list[str]  # e.g. ["lawful_good", "neutral_good", "chaotic_good"]
+    allowed: list[Alignment]
 
     def check(
         self,
@@ -355,7 +360,7 @@ class ClassFeaturePrereq(Prerequisite):
 class CreatureTypePrereq(Prerequisite):
     """Character's effective creature type must be in allowed list."""
 
-    allowed: list[str]
+    allowed: list[CreatureType]
 
     def check(
         self,
@@ -760,7 +765,7 @@ class CapabilityChecker:
         # Unknown feature: not present
         return False
 
-    def effective_creature_type(self, character: "Character") -> str:
+    def effective_creature_type(self, character: "Character") -> CreatureType:
         """
         Returns the character's effective creature type after templates.
         Falls back to race-derived type, then "Humanoid".
@@ -771,26 +776,32 @@ class CapabilityChecker:
             return override
 
         # Race-derived types
+        # NOTE: duplicates races.yaml's creature_type for
+        # the seven core races, and adds seven the rules
+        # files do not define. Should read the race
+        # registry instead.
         RACE_TYPES = {
-            "Human": "Humanoid",
-            "Elf": "Humanoid",
-            "Half-Elf": "Humanoid",
-            "Dwarf": "Humanoid",
-            "Gnome": "Humanoid",
-            "Halfling": "Humanoid",
-            "Half-Orc": "Humanoid",
-            "Orc": "Humanoid",
-            "Tiefling": "Outsider",
-            "Aasimar": "Outsider",
-            "Warforged": "Construct",
-            "Gnoll": "Humanoid",
-            "Goblin": "Humanoid",
-            "Kobold": "Humanoid",
+            "Human": CreatureType.HUMANOID,
+            "Elf": CreatureType.HUMANOID,
+            "Half-Elf": CreatureType.HUMANOID,
+            "Dwarf": CreatureType.HUMANOID,
+            "Gnome": CreatureType.HUMANOID,
+            "Halfling": CreatureType.HUMANOID,
+            "Half-Orc": CreatureType.HUMANOID,
+            "Orc": CreatureType.HUMANOID,
+            "Tiefling": CreatureType.OUTSIDER,
+            "Aasimar": CreatureType.OUTSIDER,
+            "Warforged": CreatureType.CONSTRUCT,
+            "Gnoll": CreatureType.HUMANOID,
+            "Goblin": CreatureType.HUMANOID,
+            "Kobold": CreatureType.HUMANOID,
         }
         race = getattr(character, "race", "")
-        return RACE_TYPES.get(race, "Humanoid")
+        return RACE_TYPES.get(race, CreatureType.HUMANOID)
 
-    def effective_subtypes(self, character: "Character") -> list[str]:
+    def effective_subtypes(
+        self, character: "Character"
+    ) -> list[CreatureSubtype]:
         """Returns the character's effective creature subtypes."""
         base = []
         race = getattr(character, "race", "")

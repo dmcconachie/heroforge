@@ -24,6 +24,7 @@ from heroforge.engine.classes import (
     CastType,
     SpellPreparation,
 )
+from heroforge.engine.defenses import EnergyType
 from heroforge.engine.enums import (
     Ability,
     Alignment,
@@ -31,6 +32,8 @@ from heroforge.engine.enums import (
     School,
     Size,
 )
+from heroforge.engine.resources import UseUnit
+from heroforge.rules.core.gates import KnownCoreGate
 from heroforge.rules.known import (
     KnownClass,
     KnownDomain,
@@ -108,7 +111,7 @@ class CombatSection:
     # bypass ("2/-", "5/magic") because which one helps
     # depends on what is attacking.
     damage_reduction: list[str] = field(default_factory=list)
-    energy_resistance: dict[str, int] = field(default_factory=dict)
+    energy_resistance: dict[EnergyType, int] = field(default_factory=dict)
     immunities: list[str] = field(default_factory=list)
     # Percentage chance to negate a critical hit or sneak
     # attack.
@@ -221,7 +224,7 @@ class EquipmentSection:
 @dataclass
 class FeatureUses:
     max: int
-    unit: str = "use"
+    unit: UseUnit = UseUnit.USE
 
 
 @dataclass
@@ -233,7 +236,7 @@ class ClassFeatureEntry:
     # A target-side condition the engine cannot evaluate.
     when: str = ""
     # Gate keys that must hold for the feature to apply.
-    gated_by: list[str] = field(default_factory=list)
+    gated_by: list[KnownCoreGate] = field(default_factory=list)
 
 
 # ---------------------------------------------------
@@ -246,7 +249,7 @@ class ResourceEntry:
     max_uses: int
     # "use" for most daily powers; "round" for pools like the
     # Travel domain's freedom of movement.
-    unit: str = "use"
+    unit: UseUnit = UseUnit.USE
 
 
 # ---------------------------------------------------

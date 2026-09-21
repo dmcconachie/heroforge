@@ -21,7 +21,13 @@ from heroforge.engine.bonus import (
     BonusEntry,
     BonusType,
 )
-from heroforge.engine.enums import Ability
+from heroforge.engine.enums import (
+    Ability,
+    CreatureSubtype,
+    CreatureType,
+    Size,
+    SourceBook,
+)
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
@@ -51,10 +57,10 @@ class RaceDefinition:
     """Complete description of a playable race."""
 
     name: str
-    source_book: str = "PHB"
-    creature_type: str = "Humanoid"
-    subtypes: list[str] = field(default_factory=list)
-    size: str = "Medium"
+    source_book: SourceBook = SourceBook.PHB
+    creature_type: CreatureType = CreatureType.HUMANOID
+    subtypes: list[CreatureSubtype] = field(default_factory=list)
+    size: Size = Size.MEDIUM
     base_speed: int = 30
     ability_modifiers: list[RaceAbilityMod] = field(default_factory=list)
     favored_class: str = "any"

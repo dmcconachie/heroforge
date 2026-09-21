@@ -46,6 +46,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 from dataclasses import dataclass, field
+from enum import StrEnum
 from typing import TYPE_CHECKING
 
 from heroforge.engine.effects import evaluate_formula
@@ -54,8 +55,49 @@ from heroforge.engine.item_properties import property_definition
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
 
-# What DR is written against when nothing bypasses it.
-NOTHING = "-"
+
+class EnergyType(StrEnum):
+    """
+    The five energy types damage can be dealt as.
+
+    "resistance 10 to acid, cold, electricity, fire, and sonic
+    damage" -- 3.0 to 3.5 update booklet, p. 17.
+    """
+
+    ACID = "acid"
+    COLD = "cold"
+    ELECTRICITY = "electricity"
+    FIRE = "fire"
+    SONIC = "sonic"
+
+
+class DrBypass(StrEnum):
+    """
+    What a weapon must be for DR not to apply.
+
+    NOTHING is the "-" of "DR 2/-": no weapon bypasses it.
+
+    Printed DR is sometimes a combination -- "10/magic and
+    silver", "15/cold iron or good" -- but only the atoms are
+    a closed set, so only the atoms are enumerated. Nothing in
+    the rules files needs a combination yet; the day one does
+    is the day to add a type that can hold one, rather than
+    reopening this to arbitrary text.
+    """
+
+    NOTHING = "-"
+    MAGIC = "magic"
+    EPIC = "epic"
+    SILVER = "silver"
+    COLD_IRON = "cold iron"
+    ADAMANTINE = "adamantine"
+    GOOD = "good"
+    EVIL = "evil"
+    LAWFUL = "lawful"
+    CHAOTIC = "chaotic"
+    BLUDGEONING = "bludgeoning"
+    PIERCING = "piercing"
+    SLASHING = "slashing"
 
 
 @dataclass(frozen=True)
@@ -63,10 +105,10 @@ class DamageReduction:
     """`amount`/`bypassed_by`, e.g. 5/magic or 2/-."""
 
     amount: int
-    bypassed_by: str = NOTHING
+    bypassed_by: DrBypass = DrBypass.NOTHING
 
     def __str__(self) -> str:
-        return f"{self.amount}/{self.bypassed_by}"
+        return f"{self.amount}/{self.bypassed_by.value}"
 
 
 @dataclass(frozen=True)
@@ -74,7 +116,7 @@ class Defenses:
     """Everything a character shrugs off, already reduced."""
 
     damage_reduction: tuple[DamageReduction, ...] = ()
-    energy_resistance: dict[str, int] = field(default_factory=dict)
+    energy_resistance: dict[EnergyType, int] = field(default_factory=dict)
     immunities: tuple[str, ...] = ()
     # Percentage chance to negate a critical hit or sneak
     # attack. Neither a bonus nor a reduction, but a
@@ -90,7 +132,7 @@ def best_damage_reduction(
 
     Sorted by bypass so the result is stable for the sheet.
     """
-    best: dict[str, int] = {}
+    best: dict[DrBypass, int] = {}
     for dr in entries:
         if dr.amount > best.get(dr.bypassed_by, 0):
             best[dr.bypassed_by] = dr.amount
@@ -115,7 +157,7 @@ def _read_block(
     block: dict,
     character: "Character",
     drs: list[DamageReduction],
-    resist: list[tuple[str, int]],
+    resist: list[tuple[EnergyType, int]],
     immune: set[str],
     fortify: list[int],
     parameter: str = "",
@@ -132,7 +174,12 @@ def _read_block(
             drs.append(
                 DamageReduction(
                     amount,
-                    _substitute(entry.get("bypassed_by", NOTHING), parameter),
+                    DrBypass(
+                        _substitute(
+                            entry.get("bypassed_by", DrBypass.NOTHING),
+                            parameter,
+                        )
+                    ),
                 )
             )
     for energy, raw in (block.get("energy_resistance", {}) or {}).items():
@@ -142,7 +189,9 @@ def _read_block(
             else int(raw)
         )
         if points > 0:
-            resist.append((_substitute(str(energy), parameter), points))
+            resist.append(
+                (EnergyType(_substitute(str(energy), parameter)), points)
+            )
     immune.update(
         _substitute(str(x), parameter)
         for x in block.get("immunities", ()) or ()
@@ -198,7 +247,7 @@ def collect_defenses(character: "Character") -> Defenses:
             armor.get("category", ""), 0
         )
         if amount > 0:
-            drs.append(DamageReduction(amount, NOTHING))
+            drs.append(DamageReduction(amount, DrBypass.NOTHING))
 
     for entry in character.equipment.get("worn", []) or []:
         item = rules.magic_items.get(entry["name"])
@@ -241,7 +290,7 @@ def collect_defenses(character: "Character") -> Defenses:
                     fortify,
                 )
 
-    best_resist: dict[str, int] = {}
+    best_resist: dict[EnergyType, int] = {}
     for energy, points in resist:
         if points > best_resist.get(energy, 0):
             best_resist[energy] = points

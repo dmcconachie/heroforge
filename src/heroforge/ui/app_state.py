@@ -18,6 +18,7 @@ from heroforge.engine.character import Character
 from heroforge.engine.classes import ClassRegistry
 from heroforge.engine.conditions import ConditionRegistry
 from heroforge.engine.deities import DeityRegistry
+from heroforge.engine.derived_pools import install_consumers
 from heroforge.engine.domains import DomainRegistry
 from heroforge.engine.effects import BuffRegistry
 from heroforge.engine.equipment import (
@@ -31,6 +32,7 @@ from heroforge.engine.prerequisites import PrerequisiteChecker
 from heroforge.engine.races import RaceRegistry
 from heroforge.engine.skills import (
     SkillRegistry,
+    compute_skill_total,
     register_skills_on_character,
 )
 from heroforge.engine.spells import SpellCompendium
@@ -144,8 +146,6 @@ class AppState:
         register_skills_on_character(self.character)
         dp = get_rules().derived_pools
         if dp:
-            from heroforge.engine.derived_pools import install_consumers
-
             install_consumers(self.character, dp)
 
     # ------------------------------------------------------------------
@@ -154,7 +154,6 @@ class AppState:
 
     def skill_total(self, skill_name: str) -> int:
         """Return the computed total for a named skill."""
-        from heroforge.engine.skills import compute_skill_total
 
         defn = get_rules().skills.get(skill_name)
         if defn is None:

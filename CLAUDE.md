@@ -35,9 +35,21 @@ ARCHITECTURE.md
 
 ## Conventions
 
-- All imports are at the top of the file unless there are very specific and
-  local reasons for doing otherwise.
+- All imports are at the top of the file. This includes test files, and it
+  includes an import needed by exactly one new test — `pytest`, `yaml`, `re`
+  and the like are never deferred. The only import allowed in a function body
+  is one that provably forms a circular import, and it carries a comment
+  naming the cycle: today that is `get_rules` (engine <- rules),
+  `rules.schema.converter` inside `persistence`, and `effects`/`gates` inside
+  `equipment`. Anything else goes at the top.
 - Never use `sys.path` hacks. The project is properly configured via 
   `pyproject.toml`; `uv run` handles everything.
 - Use `uv run pytest` to run tests — do not set env vars like `QT_QPA_PLATFORM` 
   on the command line.
+- Closed sets of values are a `StrEnum`, never bare strings. When adding a
+  field — especially one loaded from YAML — ask whether the value set is
+  closed. If it is (a wield class, a stance, a body slot, an energy type, a
+  size), define the enum beside the dataclass that owns it and type the field
+  with it. cattrs then rejects a bad value at load time instead of letting a
+  typo compare unequal forever. Bare `str` is for genuinely open text: names,
+  notes, descriptions, formulas, source books.

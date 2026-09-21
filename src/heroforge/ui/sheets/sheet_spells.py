@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 
     from heroforge.engine.effects import BuffDefinition
     from heroforge.ui.app_state import AppState
-
+from heroforge.engine.effects import BuffCategory
 
 # ---------------------------------------------------------------
 # Row widget
@@ -164,7 +164,6 @@ class SheetSpells(QWidget):
 
     def _populate(self) -> None:
         """Build spell rows grouped by source book."""
-        from heroforge.engine.effects import BuffCategory
 
         spells = self._state.buff_registry.by_category(BuffCategory.SPELL)
         spells.sort(key=lambda d: d.name)

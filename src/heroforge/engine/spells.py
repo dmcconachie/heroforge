@@ -24,13 +24,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from heroforge.engine.enums import SourceBook, SpellSchool
+
 
 @dataclass(frozen=True)
 class SpellEntry:
     """Single source of truth for one spell."""
 
     name: str
-    school: str = ""
+    school: SpellSchool = SpellSchool.NONE
     subschool: str = ""
     descriptor: str = ""
     level: dict[str, int] = field(default_factory=dict)
@@ -40,7 +42,7 @@ class SpellEntry:
     saving_throw: str = ""
     spell_resistance: str = ""
     description: str = ""
-    source_book: str = "SRD"
+    source_book: SourceBook = SourceBook.SRD
     # Buff effects (registered in BuffRegistry):
     effects: list[dict] = field(default_factory=list)
     note: str = ""

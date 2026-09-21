@@ -94,7 +94,16 @@ from heroforge.ui.app_state import AppState
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
-
+from heroforge.engine.classes import SpellPreparation
+from heroforge.engine.equipment import equipment_display_name
+from heroforge.engine.skills import compute_skill_total
+from heroforge.engine.spellcasting import (
+    domain_slots_per_day,
+    slots_per_day,
+    specialist_slots_per_day,
+    spell_save_dc,
+    spells_known,
+)
 
 # -----------------------------------------------------------
 # Pool breakdown helper
@@ -410,7 +419,6 @@ def _iteratives(c: "Character") -> Iteratives:
 def _skills(
     c: "Character",
 ) -> dict[KnownSkill, SkillEntry]:
-    from heroforge.engine.skills import compute_skill_total
     from heroforge.rules.rules import get_rules
 
     result: dict[KnownSkill, SkillEntry] = {}
@@ -539,14 +547,6 @@ def _class_features(
 def _spellcasting(
     c: "Character",
 ) -> dict[KnownClass, SpellcastingEntry]:
-    from heroforge.engine.classes import SpellPreparation
-    from heroforge.engine.spellcasting import (
-        domain_slots_per_day,
-        slots_per_day,
-        specialist_slots_per_day,
-        spell_save_dc,
-        spells_known,
-    )
     from heroforge.rules.rules import get_rules
 
     class_reg = get_rules().classes
@@ -691,7 +691,6 @@ def _special_qualities(c: "Character") -> list[str]:
 
 def _weapon_name(c: "Character", item: dict) -> str:
     """Display name, with any stance the weapon is being used in."""
-    from heroforge.engine.equipment import equipment_display_name
 
     name = equipment_display_name(
         base=item.get("base", ""),
@@ -817,7 +816,6 @@ def _weapon_iteratives(
 
 
 def _equipment(c: "Character") -> EquipmentSection:
-    from heroforge.engine.equipment import equipment_display_name
 
     eq = c.equipment
     section = EquipmentSection()

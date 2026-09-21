@@ -39,6 +39,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
+from heroforge.engine.enums import SourceBook
+
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
 
@@ -48,7 +50,7 @@ class AcfDefinition:
     """One alternative class feature."""
 
     name: str
-    source_book: str = ""
+    source_book: SourceBook = SourceBook.NONE
     # Classes that may take it; several appear in print
     # ("Cleric or paladin").
     classes: tuple[str, ...] = ()

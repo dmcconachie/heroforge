@@ -55,14 +55,16 @@ import re
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from heroforge.engine.bonus import BonusEntry
-from heroforge.engine.enums import Ability
+from heroforge.engine.bonus import BonusEntry, BonusType
+from heroforge.engine.enums import (
+    Ability,
+    SourceBook,
+)
 from heroforge.rules.core.pool_keys import PoolKey
 
 if TYPE_CHECKING:
     from typing import Any, Callable
 
-    from heroforge.engine.bonus import BonusType
     from heroforge.engine.character import Character
 
 
@@ -314,7 +316,7 @@ class BuffDefinition:
 
     name: str
     category: BuffCategory
-    source_book: str = "PHB"
+    source_book: SourceBook = SourceBook.PHB
     effects: list[BonusEffect] = field(default_factory=list)
     requires_caster_level: bool = False
     mutually_exclusive_with: list[str] = field(default_factory=list)
@@ -410,7 +412,7 @@ class BuffRegistry:
     def by_category(self, category: BuffCategory) -> list[BuffDefinition]:
         return [d for d in self._defs.values() if d.category == category]
 
-    def by_source_book(self, book: str) -> list[BuffDefinition]:
+    def by_source_book(self, book: SourceBook) -> list[BuffDefinition]:
         return [d for d in self._defs.values() if d.source_book == book]
 
     def __len__(self) -> int:
@@ -443,7 +445,6 @@ def pool_entries_from_effects(
     values are resolved at call time. Multi-target pool
     keys (attack_all, damage_all) are expanded.
     """
-    from heroforge.engine.bonus import BonusType
 
     if not effects_raw:
         return []
@@ -515,7 +516,7 @@ def build_buff_from_effects(
     name: str,
     category: BuffCategory,
     effects_raw: list[dict],
-    source_book: str = "SRD",
+    source_book: SourceBook = SourceBook.SRD,
     note: str = "",
     requires_caster_level: bool = False,
     mutually_exclusive_with: (list[str] | None) = None,
@@ -533,8 +534,6 @@ def build_buff_from_effects(
     """
     if not effects_raw and not size_steps:
         return None
-
-    from heroforge.engine.bonus import BonusType
 
     bt_map: dict[str, BonusType] = {bt.value: bt for bt in BonusType}
 

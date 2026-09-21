@@ -41,11 +41,18 @@ Public API:
 
 from __future__ import annotations
 
-import enum
 from dataclasses import dataclass, field
-from enum import StrEnum
 from typing import TYPE_CHECKING
 
+from heroforge.engine.effects import pool_entries_from_effects
+from heroforge.engine.enums import (
+    ArmorCategory,
+    DamageType,
+    SourceBook,
+    WeaponCategory,
+    WieldClass,
+)
+from heroforge.engine.gates import make_condition
 from heroforge.engine.item_properties import (
     adjust_for_properties,
     property_pool_entries,
@@ -58,40 +65,12 @@ if TYPE_CHECKING:
     from heroforge.engine.magic_items import (
         MagicItemDefinition,
     )
-
-
-class ArmorCategory(enum.Enum):
-    LIGHT = "light"
-    MEDIUM = "medium"
-    HEAVY = "heavy"
-    SHIELD = "shield"
-    TOWER_SHIELD = "tower_shield"
-
-
-class LoadCategory(enum.Enum):
-    LIGHT = "light"
-    MEDIUM = "medium"
-    HEAVY = "heavy"
-
+from heroforge.engine.bonus import BonusEntry, BonusType
 
 _SHIELD_CATS = {
     ArmorCategory.SHIELD,
     ArmorCategory.TOWER_SHIELD,
 }
-
-
-class WeaponCategory(enum.Enum):
-    SIMPLE = "simple"
-    MARTIAL = "martial"
-    EXOTIC = "exotic"
-
-
-class DamageType(StrEnum):
-    SLASHING = "slashing"
-    PIERCING = "piercing"
-    BLUDGEONING = "bludgeoning"
-    BLUDGEONING_AND_PIERCING = "bludgeoning and piercing"
-    PIERCING_OR_SLASHING = "piercing or slashing"
 
 
 @dataclass(frozen=True)
@@ -125,7 +104,7 @@ class WeaponEnd:
     damage_dice_small: str = ""
     critical_range: int = 0
     critical_multiplier: int = 0
-    damage_type: DamageType | str = ""
+    damage_type: DamageType = DamageType.SLASHING
 
 
 @dataclass(frozen=True)
@@ -140,15 +119,12 @@ class WeaponDefinition:
     damage_dice_small: str = ""
     critical_range: int = 20  # threat range start
     critical_multiplier: int = 2
-    damage_type: DamageType | str = ""
+    damage_type: DamageType = DamageType.SLASHING
     range_increment: int = 0  # 0 = melee
     weight: float = 0.0
     cost_gp: int = 0
     is_ranged: bool = False
-    # light / one_handed / two_handed / ranged (SRD weapons
-    # table). Determines Weapon Finesse eligibility and the
-    # two-weapon fighting penalty.
-    wield_class: str = ""
+    wield_class: WieldClass = WieldClass.ONE_HANDED
     # A double weapon may be used two-handed, attacking with
     # one end, or fought with as two weapons -- one end as a
     # one-handed weapon and the other as a light one
@@ -205,7 +181,7 @@ class MaterialDefinition:
     armor_damage_reduction: dict[str, int] = field(default_factory=dict)
     includes_masterwork: bool = False
     note: str = ""
-    source_book: str = ""
+    source_book: SourceBook = SourceBook.NONE
 
 
 class MaterialRegistry:
@@ -302,10 +278,6 @@ def equip_armor(
     properties: list[str] | None = None,
 ) -> None:
     """Wire armor bonuses into Character pools."""
-    from heroforge.engine.bonus import (
-        BonusEntry,
-        BonusType,
-    )
 
     acp = armor.armor_check_penalty
     max_dex = armor.max_dex_bonus
@@ -399,10 +371,6 @@ def equip_shield(
     properties: list[str] | None = None,
 ) -> None:
     """Wire shield bonuses into Character pools."""
-    from heroforge.engine.bonus import (
-        BonusEntry,
-        BonusType,
-    )
 
     acp = shield.armor_check_penalty
     asf = shield.arcane_spell_failure
@@ -501,10 +469,6 @@ def _apply_armor_speed(
     material: str,
 ) -> None:
     """Push speed penalty for medium/heavy armor."""
-    from heroforge.engine.bonus import (
-        BonusEntry,
-        BonusType,
-    )
 
     eff_cat = _effective_category(armor.category, material)
     if eff_cat in _LIGHT_CATS or eff_cat == ArmorCategory.LIGHT:
@@ -555,10 +519,6 @@ def _apply_acp(
     """Push armor check penalty into skill pools."""
     if penalty >= 0:
         return
-    from heroforge.engine.bonus import (
-        BonusEntry,
-        BonusType,
-    )
 
     for key in _ACP_SKILLS:
         pool = character._pools.get(key)
@@ -646,10 +606,6 @@ def equip_item(
     attach a condition lambda to their BonusEntry so the
     pool's aggregate() skips them when the gate is off.
     """
-    from heroforge.engine.effects import (
-        pool_entries_from_effects,
-    )
-    from heroforge.engine.gates import make_condition
 
     if not item.effects:
         return

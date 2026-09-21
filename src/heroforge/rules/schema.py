@@ -33,10 +33,13 @@ from heroforge.engine.classes import (
 )
 from heroforge.engine.deities import DeityDefinition
 from heroforge.engine.domains import DomainDefinition, DomainResource
-from heroforge.engine.enums import Ability, Alignment
+from heroforge.engine.enums import (
+    Ability,
+    Alignment,
+    DamageType,
+)
 from heroforge.engine.equipment import (
     ArmorDefinition,
-    DamageType,
     WeaponDefinition,
 )
 from heroforge.engine.persistence import (

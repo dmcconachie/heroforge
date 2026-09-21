@@ -22,10 +22,17 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+import yaml
 
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character, CharacterLevel
-from heroforge.engine.effects import BuffCategory, BuffRegistry, apply_buff
+from heroforge.engine.effects import (
+    BonusEffect,
+    BuffCategory,
+    BuffDefinition,
+    BuffRegistry,
+    apply_buff,
+)
 from heroforge.engine.feats import (
     FeatDefinition,
     FeatKind,
@@ -34,7 +41,14 @@ from heroforge.engine.feats import (
     build_feat_from_yaml,
     resolve_feat_effects,
 )
-from heroforge.engine.prerequisites import FeatAvailability, PrerequisiteChecker
+from heroforge.engine.prerequisites import (
+    FeatAvailability,
+    PrerequisiteChecker,
+    StatPrereq,
+)
+from heroforge.engine.skills import register_skills_on_character
+from heroforge.rules.loader import FeatsLoader, LoaderError
+from heroforge.rules.rules import get_rules
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -68,7 +82,6 @@ def loaded_registries() -> tuple[
     FeatRegistry, PrerequisiteChecker, BuffRegistry
 ]:
     """Return (feat_reg, prereq_chk, buff_reg) loaded from YAML."""
-    from heroforge.rules.loader import FeatsLoader
 
     feat_reg = FeatRegistry()
     prereq_chk = PrerequisiteChecker()
@@ -223,8 +236,6 @@ class TestResolveEffects:
 
 class TestSkillFocusSelection:
     def _char_with_skill_focus(self, selection: str) -> Character:
-        from heroforge.engine.skills import register_skills_on_character
-        from heroforge.rules.rules import get_rules
 
         c = Character()
         register_skills_on_character(c)
@@ -264,7 +275,6 @@ class TestSkillFocusSelection:
 
 class TestFeatDefinition:
     def _always_on(self) -> FeatDefinition:
-        from heroforge.engine.effects import BonusEffect, BuffDefinition
 
         buff = BuffDefinition(
             name="Dodge",
@@ -468,7 +478,6 @@ class TestBuildFeatFromYaml:
         assert defn.buff_definition is None  # built at activation time
 
     def test_prereqs_built(self) -> None:
-        from heroforge.engine.prerequisites import StatPrereq
 
         defn = build_feat_from_yaml(
             {
@@ -491,7 +500,6 @@ class TestBuildFeatFromYaml:
 
 class TestFeatsYamlStructure:
     def test_no_duplicate_names(self) -> None:
-        import yaml
 
         with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
@@ -500,7 +508,6 @@ class TestFeatsYamlStructure:
         assert len(names) == len(set(names))
 
     def test_all_kinds_valid(self) -> None:
-        import yaml
 
         valid = {"always_on", "conditional", "passive"}
         with open(RULES_DIR / "core" / "feats.yaml") as f:
@@ -520,9 +527,6 @@ class TestFeatsYamlStructure:
 
 class TestFeatsLoader:
     def test_load_registers_all_feats(self) -> None:
-        import yaml
-
-        from heroforge.rules.loader import FeatsLoader
 
         with open(RULES_DIR / "core" / "feats.yaml") as f:
             data = yaml.safe_load(f)
@@ -533,7 +537,6 @@ class TestFeatsLoader:
         assert len(feat_reg) == expected
 
     def test_load_returns_names(self) -> None:
-        from heroforge.rules.loader import FeatsLoader
 
         feat_reg = FeatRegistry()
         names = FeatsLoader(RULES_DIR).load(
@@ -615,7 +618,6 @@ class TestFeatsLoader:
         assert "Dodge" not in buff_reg
 
     def test_load_raises_on_missing_file(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import FeatsLoader, LoaderError
 
         with pytest.raises(LoaderError, match="not found"):
             FeatsLoader(tmp_path).load(
@@ -623,10 +625,6 @@ class TestFeatsLoader:
             )
 
     def test_load_raises_on_bad_yaml(self, tmp_path: Path) -> None:
-        from heroforge.rules.loader import (
-            FeatsLoader,
-            LoaderError,
-        )
 
         core = tmp_path / "core"
         core.mkdir()
@@ -898,7 +896,6 @@ class TestConditionalFeatActivation:
         c.toggle_buff("Power Attack", True)
 
         # Add Bless
-        from heroforge.engine.effects import BonusEffect, BuffDefinition
 
         bless = BuffDefinition(
             name="Bless",
@@ -1053,7 +1050,6 @@ class TestSelectionFeatIsolation:
 
     def test_two_skill_focus_selections_apply_separately(self) -> None:
         """Skill Focus is explicitly repeatable for different skills."""
-        from heroforge.engine.skills import register_skills_on_character
 
         c = fighter(1)
         register_skills_on_character(c)

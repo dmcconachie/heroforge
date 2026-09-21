@@ -42,6 +42,7 @@ if TYPE_CHECKING:
     from reportlab.pdfgen.canvas import Canvas
 
     from heroforge.export.sheet_data import SheetData
+from reportlab.platypus import KeepInFrame
 
 # ---------------------------------------------------------------------------
 # Colour palette
@@ -690,7 +691,6 @@ def render_pdf(sheet_data: SheetData, path: Path | str) -> None:
     right_col += _active_buffs_block(sheet_data, st)
 
     # Wrap each column in a sub-Table so they sit side by side
-    from reportlab.platypus import KeepInFrame
 
     COL_W = CONTENT_W / 2 - 4  # 4pt gutter
 

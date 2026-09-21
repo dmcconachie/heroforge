@@ -23,6 +23,7 @@ if TYPE_CHECKING:
     from PyQt6.QtWidgets import QWidget
 
     from heroforge.ui.app_state import AppState
+from heroforge.engine.races import apply_race, remove_race
 
 
 class RaceDialog(QDialog):
@@ -117,7 +118,6 @@ class RaceDialog(QDialog):
         if defn is None:
             self.reject()
             return
-        from heroforge.engine.races import apply_race, remove_race
 
         # Remove old race first
         old_race = self._state.character.race

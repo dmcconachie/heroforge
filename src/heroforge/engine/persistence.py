@@ -37,6 +37,7 @@ from heroforge.engine.spellcasting import (
     validate_specialization,
 )
 from heroforge.engine.weapons import (
+    Stance,
     register_weapons_on_character,
     validate_weapon_features,
 )
@@ -59,7 +60,17 @@ from heroforge.rules.known import (
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
     from heroforge.ui.app_state import AppState
+import re
 
+from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.derived_pools import install_consumers
+from heroforge.engine.equipment import equip_armor, equip_item, equip_shield
+from heroforge.engine.races import apply_race
+from heroforge.engine.skills import (
+    register_skills_on_character,
+    set_skill_ranks,
+)
+from heroforge.engine.templates import apply_template
 
 _KNOWN_DEITY_VALUES = frozenset(d.value for d in KnownDeity)
 
@@ -172,11 +183,10 @@ class WeaponSlotEntry:
     material: KnownMaterial | None = None
     properties: list[str] = field(default_factory=list)
     name: str = ""  # display name override
-    # How the weapon is being used for one full attack:
-    # two_handed, primary, off_hand, flurry, rapid_shot. All
+    # How the weapon is being used for one full attack. All
     # four mechanics are the same shape, so they share one
-    # closed vocabulary -- see weapons.STANCES.
-    stances: list[str] = field(default_factory=list)
+    # closed vocabulary -- see weapons.Stance.
+    stances: list[Stance] = field(default_factory=list)
     # Class features that designate this weapon, by feature
     # key (e.g. weapon_bond). Validated on load against the
     # features the character actually has.
@@ -290,6 +300,8 @@ def yaml_dump(data: object, stream: object = None) -> str:
 def save_character(character: "Character", path: Path | str) -> None:
     """Serialize a Character to a .char.yaml file."""
     path = Path(path)
+
+    # rules.schema imports this module's dataclasses.
     from heroforge.rules.schema import converter
 
     cf = _character_to_charfile(character)
@@ -381,7 +393,7 @@ def _character_to_charfile(
                     ),
                     properties=list(w.get("properties", [])),
                     features=list(w.get("features", [])),
-                    stances=list(w.get("stances", [])),
+                    stances=[Stance(x) for x in w.get("stances", [])],
                     name=w.get("name", ""),
                 )
             )
@@ -465,7 +477,6 @@ def _flatten_cattrs_error(e: BaseException) -> str:
 
 def _primary_favored_weapon(favored: str) -> str:
     """First favored weapon, stripped of '(...)' qualifiers and 'Any'."""
-    import re
 
     first = favored.split(" or ")[0].strip()
     first = re.sub(r"\s*\([^)]*\)", "", first).strip()
@@ -519,6 +530,8 @@ def load_character(
     Raises ValueError on unknown keys or names
     (via cattrs StrEnum validation).
     """
+
+    # rules.schema imports this module's dataclasses.
     from heroforge.rules.schema import converter
 
     path = Path(path)
@@ -540,18 +553,6 @@ def load_character(
             f"Invalid YAML in {path}: \n  - {deity!r} is not a valid KnownDeity"
         )
 
-    from heroforge.engine.character import (
-        Character,
-        CharacterLevel,
-    )
-    from heroforge.engine.races import apply_race
-    from heroforge.engine.skills import (
-        register_skills_on_character,
-        set_skill_ranks,
-    )
-    from heroforge.engine.templates import (
-        apply_template,
-    )
     from heroforge.rules.rules import get_rules
 
     rules = get_rules()
@@ -701,8 +702,6 @@ def load_character(
 
     # Derived pool consumers (monk AC formula, etc.).
     if rules.derived_pools:
-        from heroforge.engine.derived_pools import install_consumers
-
         install_consumers(c, rules.derived_pools)
 
     return c
@@ -713,11 +712,6 @@ def _load_equipment(
     c: "Character",
 ) -> None:
     """Apply equipment from parsed schema."""
-    from heroforge.engine.equipment import (
-        equip_armor,
-        equip_item,
-        equip_shield,
-    )
     from heroforge.rules.rules import get_rules
 
     rules = get_rules()

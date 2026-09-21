@@ -18,6 +18,36 @@ Public API:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import StrEnum
+
+from heroforge.engine.enums import SourceBook
+
+
+class BodySlot(StrEnum):
+    """
+    Where an item is worn, and what it competes with.
+
+    The eleven body slots of the Magic Item Compendium, plus
+    the three ways an item can occupy none of them: a tool is
+    held, a consumable is used up, and a slotless item just
+    works.
+    """
+
+    NONE = ""
+    HEAD = "head"
+    FACE = "face"
+    THROAT = "throat"
+    SHOULDERS = "shoulders"
+    BODY = "body"
+    TORSO = "torso"
+    ARMS = "arms"
+    HANDS = "hands"
+    RING = "ring"
+    WAIST = "waist"
+    FEET = "feet"
+    SLOTLESS = "slotless"
+    TOOL = "tool"
+    CONSUMABLE = "consumable"
 
 
 @dataclass(frozen=True)
@@ -33,7 +63,7 @@ class MagicItemDefinition:
                   value).  Passed through to
                   build_buff_from_effects() by the loader.
     source_book : Rulebook abbreviation (default "SRD").
-    slot        : Equipment slot (e.g. "ring", "cloak").
+    slot        : Body slot the item occupies.
     cost_gp     : Gold piece cost.
     defenses    : Damage reduction / energy resistance /
                   immunity block (see engine/defenses.py).
@@ -47,8 +77,8 @@ class MagicItemDefinition:
     name: str
     note: str = ""
     effects: list[dict] = field(default_factory=list)
-    source_book: str = "SRD"
-    slot: str = ""
+    source_book: SourceBook = SourceBook.SRD
+    slot: BodySlot = BodySlot.NONE
     cost_gp: int = 0
     defenses: dict = field(default_factory=dict)
     takes_parameter: bool = False

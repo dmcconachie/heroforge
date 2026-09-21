@@ -28,6 +28,12 @@ if ! uv run pytest; then
 fi
 
 echo ""
+echo "=== pyright ==="
+if ! uv run pyright; then
+    failures+=("pyright: test failures")
+fi
+
+echo ""
 if [ ${#failures[@]} -eq 0 ]; then
     echo "All checks passed."
 else

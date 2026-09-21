@@ -42,13 +42,19 @@ from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusType
 from heroforge.engine.effects import pool_entries_from_effects
-from heroforge.engine.enums import Ability
+from heroforge.engine.enums import (
+    Ability,
+    CreatureSubtype,
+    CreatureType,
+    SourceBook,
+)
 
 if TYPE_CHECKING:
     from typing import Any
 
     from heroforge.engine.character import Character
-
+from heroforge.engine.effects import evaluate_formula
+from heroforge.engine.prerequisites import CapabilityChecker
 
 # ---------------------------------------------------------------------------
 # TemplateAbilityModifier
@@ -104,12 +110,12 @@ class TemplateDefinition:
     """
 
     name: str
-    source_book: str = "MM"
+    source_book: SourceBook = SourceBook.MM
     cr_adjustment: str = "+0"
     la_adjustment: str = "+0"
-    type_change: str | None = None
-    subtype_add: list[str] = field(default_factory=list)
-    subtype_remove: list[str] = field(default_factory=list)
+    type_change: CreatureType | None = None
+    subtype_add: list[CreatureSubtype] = field(default_factory=list)
+    subtype_remove: list[CreatureSubtype] = field(default_factory=list)
     ability_modifiers: list[TemplateAbilityModifier] = field(
         default_factory=list
     )
@@ -234,8 +240,6 @@ def apply_template(
 
         # Resolve value (formula or int)
         if isinstance(mod.value, str):
-            from heroforge.engine.effects import evaluate_formula
-
             resolved = evaluate_formula(mod.value, character=character)
         else:
             resolved = mod.value
@@ -418,7 +422,6 @@ def effective_type(character: "Character") -> str:
         return type_override
 
     # Race-derived type (same logic as CapabilityChecker)
-    from heroforge.engine.prerequisites import CapabilityChecker
 
     return CapabilityChecker().effective_creature_type(character)
 
@@ -427,7 +430,6 @@ def effective_subtypes(character: "Character") -> list[str]:
     """
     Resolve the character's effective subtypes after all templates.
     """
-    from heroforge.engine.prerequisites import CapabilityChecker
 
     base = CapabilityChecker().effective_subtypes(character)
     template_subs = list(getattr(character, "_template_subtypes", []))
@@ -488,9 +490,15 @@ def build_template_from_yaml(
         source_book=decl.get("source_book", "MM"),
         cr_adjustment=str(decl.get("cr_adjustment", "+0")),
         la_adjustment=str(decl.get("la_adjustment", "+0")),
-        type_change=decl.get("type_change"),
-        subtype_add=decl.get("subtype_add", []),
-        subtype_remove=decl.get("subtype_remove", []),
+        type_change=(
+            CreatureType(decl["type_change"])
+            if decl.get("type_change")
+            else None
+        ),
+        subtype_add=[CreatureSubtype(x) for x in decl.get("subtype_add", [])],
+        subtype_remove=[
+            CreatureSubtype(x) for x in decl.get("subtype_remove", [])
+        ],
         ability_modifiers=ability_mods,
         natural_armor_bonus=int(decl.get("natural_armor_bonus", 0)),
         defenses=decl.get("defenses", {}),

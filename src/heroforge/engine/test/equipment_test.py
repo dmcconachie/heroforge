@@ -9,8 +9,10 @@ from pathlib import Path
 import pytest
 
 from heroforge.engine.character import Character
-from heroforge.engine.equipment import (
+from heroforge.engine.enums import (
     ArmorCategory,
+)
+from heroforge.engine.equipment import (
     ArmorDefinition,
     ArmorRegistry,
     WeaponRegistry,
@@ -23,6 +25,7 @@ from heroforge.engine.equipment import (
     unequip_item,
     unequip_shield,
 )
+from heroforge.engine.magic_items import MagicItemDefinition
 from heroforge.rules.loader import EquipmentLoader
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
@@ -233,9 +236,6 @@ class TestMaterialAdjustments:
 
 class TestEquipItem:
     def test_belt_of_strength(self) -> None:
-        from heroforge.engine.magic_items import (
-            MagicItemDefinition,
-        )
 
         belt = MagicItemDefinition(
             name="Belt of Giant Strength +4",
@@ -253,9 +253,6 @@ class TestEquipItem:
         assert c.get_ability_score("str") == 18
 
     def test_unequip_item(self) -> None:
-        from heroforge.engine.magic_items import (
-            MagicItemDefinition,
-        )
 
         belt = MagicItemDefinition(
             name="Belt of Giant Strength +4",
@@ -275,9 +272,6 @@ class TestEquipItem:
         assert c.get_ability_score("str") == 14
 
     def test_ring_of_protection(self) -> None:
-        from heroforge.engine.magic_items import (
-            MagicItemDefinition,
-        )
 
         ring = MagicItemDefinition(
             name="Ring of Protection +2",
@@ -294,9 +288,6 @@ class TestEquipItem:
         assert c.get("ac") == 12  # 10 + 2
 
     def test_item_no_effects(self) -> None:
-        from heroforge.engine.magic_items import (
-            MagicItemDefinition,
-        )
 
         item = MagicItemDefinition(name="Mundane Trinket")
         c = Character()

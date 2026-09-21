@@ -15,6 +15,12 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
+from heroforge.engine.effects import (
+    BuffCategory,
+    build_buff_from_effects,
+    evaluate_formula,
+)
+from heroforge.engine.resources import ResourceTracker, UseUnit
 
 
 @dataclass(frozen=True)
@@ -23,7 +29,7 @@ class DomainResource:
 
     name: str
     max_formula: str = "1"
-    unit: str = "use"
+    unit: UseUnit = UseUnit.USE
     # Stat effects the power confers while active. Present only
     # for powers whose benefit the engine can express; the buff
     # is registered under the resource's own name.
@@ -77,12 +83,6 @@ def refresh_domain_resources(character: "Character") -> None:
     dropping a domain drops its resource instead of stranding it.
     Each tracker starts full; spending is the caller's business.
     """
-    from heroforge.engine.effects import (
-        BuffCategory,
-        build_buff_from_effects,
-        evaluate_formula,
-    )
-    from heroforge.engine.resources import ResourceTracker
     from heroforge.rules.rules import get_rules
 
     registry = get_rules().domains

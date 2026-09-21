@@ -44,12 +44,22 @@ Public API:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import StrEnum
 from typing import TYPE_CHECKING
 
 from heroforge.engine.effects import pool_entries_from_effects
+from heroforge.engine.enums import SourceBook
 
 if TYPE_CHECKING:
     from heroforge.engine.bonus import BonusEntry
+
+
+class ItemPropertyKind(StrEnum):
+    """What a property can be put on."""
+
+    ARMOR = "armor"
+    SHIELD = "shield"
+    WEAPON = "weapon"
 
 
 @dataclass(frozen=True)
@@ -61,8 +71,8 @@ class ItemPropertyDefinition:
     # to apply a property to the wrong kind of item, because
     # the books themselves are loose about shields counting
     # as armour.
-    applies_to: str = "armor"
-    source_book: str = "DMG"
+    applies_to: ItemPropertyKind = ItemPropertyKind.ARMOR
+    source_book: SourceBook = SourceBook.DMG
     note: str = ""
     # Permanent stat contributions. Empty for everything that
     # is activated, reactive or conditional.

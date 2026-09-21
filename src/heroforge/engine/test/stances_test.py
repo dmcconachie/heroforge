@@ -28,10 +28,12 @@ from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.weapons import (
-    STANCES,
+    Stance,
     register_weapons_on_character,
     strength_damage_adjust,
+    two_weapon_penalty,
 )
+from heroforge.rules.rules import get_rules
 
 
 def _char(
@@ -56,14 +58,48 @@ def _weapons(c: Character) -> list:
     return gather_sheet(c, None).equipment.weapons
 
 
+_YAML = """
+identity:
+  name: Stancer
+  race: Human
+  alignment: lawful_neutral
+ability_scores: {{str: 16, dex: 14, con: 10, int: 10, wis: 10, cha: 10}}
+levels:
+  - {{level: 1, class: Fighter, hp_roll: 8}}
+equipment:
+  weapons:
+    - base: Longsword
+      stances: [{stance}]
+"""
+
+
 class TestTheVocabulary:
     def test_it_is_closed(self) -> None:
-        assert (
-            frozenset(
-                {"two_handed", "primary", "off_hand", "flurry", "rapid_shot"}
-            )
-            == STANCES
-        )
+        assert {s.value for s in Stance} == {
+            "two_handed",
+            "primary",
+            "off_hand",
+            "flurry",
+            "rapid_shot",
+        }
+
+    def test_a_misspelled_stance_is_refused_at_load(
+        self, tmp_path: Path
+    ) -> None:
+        """
+        A typo must not read as "no stance". The sheet would
+        print a quietly weaker weapon rather than fail.
+        """
+        path = tmp_path / "t.char.yaml"
+        path.write_text(_YAML.format(stance="two_hnded"))
+        with pytest.raises(Exception, match="two_hnded"):
+            load_character(path, None)
+
+    def test_a_spelled_stance_loads(self, tmp_path: Path) -> None:
+        path = tmp_path / "t.char.yaml"
+        path.write_text(_YAML.format(stance="two_handed"))
+        c = load_character(path, None)
+        assert strength_damage_adjust(c, c.equipment["weapons"][0]) == 1
 
 
 class TestTwoHanded:
@@ -252,7 +288,6 @@ class TestDoubleWeapons:
         light weapon, -4/-8 without the feat, not the -6/-10
         a heavier off-hand would cost.
         """
-        from heroforge.engine.weapons import two_weapon_penalty
 
         c = self._staff_pair()
         weapons = c.equipment["weapons"]
@@ -260,7 +295,6 @@ class TestDoubleWeapons:
         assert two_weapon_penalty(c, weapons[1], weapons) == -8
 
     def test_the_definition_knows_it_is_double(self) -> None:
-        from heroforge.rules.rules import get_rules
 
         assert get_rules().weapons.get("Quarterstaff").double
         assert not get_rules().weapons.get("Greatsword").double

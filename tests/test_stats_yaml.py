@@ -19,6 +19,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+import yaml
 
 from heroforge.engine.bonus import BonusPool
 from heroforge.engine.character import Character, CharacterLevel
@@ -59,7 +60,6 @@ class TestYamlStructure:
         Every compute strategy name used in stats.yaml must exist in
         the COMPUTE_STRATEGIES registry.
         """
-        import yaml
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
@@ -71,7 +71,6 @@ class TestYamlStructure:
         assert unknown == [], f"Unknown strategies: {unknown}"
 
     def test_no_duplicate_keys_in_yaml(self) -> None:
-        import yaml
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
@@ -81,7 +80,6 @@ class TestYamlStructure:
         )
 
     def test_every_declaration_has_a_key(self) -> None:
-        import yaml
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
@@ -89,7 +87,6 @@ class TestYamlStructure:
             assert "key" in decl, f"Declaration missing 'key': {decl}"
 
     def test_every_declaration_has_a_description(self) -> None:
-        import yaml
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
@@ -353,7 +350,6 @@ class TestLoaderStatValues:
 
 class TestYamlCoverage:
     def _get_keys(self) -> set[str]:
-        import yaml
 
         with open(RULES_DIR / "core" / "stats.yaml") as f:
             data = yaml.safe_load(f)
