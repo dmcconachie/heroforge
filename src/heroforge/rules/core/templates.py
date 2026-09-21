@@ -18,4 +18,5 @@ class KnownCoreTemplate(StrEnum):
     VAMPIRE = "Vampire"
     GHOST = "Ghost"
     LICH = "Lich"
-    LYCANTHROPE_WEREWOLF = "Lycanthrope (Werewolf)"
+    LYCANTHROPE_WEREWOLF_NATURAL = "Lycanthrope (Werewolf, Natural)"
+    LYCANTHROPE_WEREWOLF_AFFLICTED = "Lycanthrope (Werewolf, Afflicted)"

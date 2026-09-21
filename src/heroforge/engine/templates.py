@@ -44,6 +44,7 @@ Public API:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import StrEnum
 from typing import TYPE_CHECKING
 
 from heroforge.engine.bonus import BonusEntry, BonusType
@@ -87,6 +88,21 @@ class TemplateAbilityModifier:
 # ---------------------------------------------------------------------------
 
 
+class TemplateKind(StrEnum):
+    """
+    Whether a creature was born with a template or gained
+    it (MM pp. 31, 117).
+
+    The distinction decides when the template's ability
+    modifiers were in force: an inherited template applies
+    from 1st level, an acquired one only from the level it
+    was taken.
+    """
+
+    INHERITED = "inherited"
+    ACQUIRED = "acquired"
+
+
 @dataclass
 class TemplateDefinition:
     """
@@ -95,6 +111,10 @@ class TemplateDefinition:
     Attributes
     ----------
     name                : Unique template name.
+    kind                : Inherited (born with it) or acquired
+                          (gained later). Decides whether the
+                          ability modifiers count at levels
+                          before the template was applied.
     source_book         : e.g. "MM", "MM2"
     cr_adjustment       : e.g. "+1", "+2", "—" (display only)
     la_adjustment       : Level Adjustment as string, e.g. "+4"
@@ -116,6 +136,7 @@ class TemplateDefinition:
     """
 
     name: str
+    kind: TemplateKind
     source_book: SourceBook = SourceBook.MM
     cr_adjustment: str = "+0"
     la_adjustment: str = "+0"
@@ -206,7 +227,7 @@ class TemplateRegistry:
 # ---------------------------------------------------------------------------
 
 
-def _template_source_key(template_name: str) -> str:
+def template_source_key(template_name: str) -> str:
     """Stable pool source key for a template's contributions."""
     return f"template:{template_name}"
 
@@ -235,7 +256,7 @@ def apply_template(
 
     level: character level when template was applied.
     """
-    source_key = _template_source_key(defn.name)
+    source_key = template_source_key(defn.name)
 
     # --- Ability score bonuses -------------------------------------------
     for mod in defn.ability_modifiers:
@@ -347,7 +368,7 @@ def remove_template(
 
     Idempotent: safe to call if the template is not applied.
     """
-    source_key = _template_source_key(defn.name)
+    source_key = template_source_key(defn.name)
 
     # --- Ability score bonuses -------------------------------------------
     for mod in defn.ability_modifiers:
@@ -454,6 +475,22 @@ def effective_subtypes(character: "Character") -> list[CreatureSubtype]:
 # ---------------------------------------------------------------------------
 
 
+def _require_kind(decl: dict) -> TemplateKind:
+    """
+    Every template is inherited or acquired (MM pp. 31,
+    117), and which one decides whether its ability
+    modifiers count before the level it was applied. There
+    is no sensible default, so a template must say.
+    """
+    if "kind" not in decl:
+        name = decl.get("name", "<unnamed>")
+        raise ValueError(
+            f"Template {name!r} has no 'kind'. Give it "
+            f"'inherited' or 'acquired'."
+        )
+    return TemplateKind(decl["kind"])
+
+
 def build_template_from_yaml(
     decl: dict,
 ) -> TemplateDefinition:
@@ -462,6 +499,7 @@ def build_template_from_yaml(
 
     Expected structure:
       name: "Half-Celestial"
+      kind: inherited
       source_book: MM
       cr_adjustment: "+1"
       la_adjustment: "+4"
@@ -493,6 +531,7 @@ def build_template_from_yaml(
 
     return TemplateDefinition(
         name=decl["name"],
+        kind=_require_kind(decl),
         source_book=decl.get("source_book", "MM"),
         cr_adjustment=str(decl.get("cr_adjustment", "+0")),
         la_adjustment=str(decl.get("la_adjustment", "+0")),

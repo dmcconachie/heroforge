@@ -699,8 +699,36 @@ hits?" — cannot be a gate, and is recorded as
 `TemplateDefinition` models creature templates (Half-Celestial,
 etc.) with ability modifiers (bonus_type: racial, so they
 stack with racial ability mods), type/subtype changes,
-natural armor, granted feats, partial-application support,
-and an optional `ongoing_prereq`.
+natural armor, granted feats, and an optional
+`ongoing_prereq`.
+
+Every template declares a `TemplateKind`: **inherited** or
+**acquired**. The books state which for each one — "Celestial
+is an inherited template" (MM p. 31), "Ghost is an acquired
+template" (MM p. 117) — and the field is required, because
+there is no safe default.
+
+The distinction is mechanical, not descriptive. It decides
+when a template's ability modifiers were in force. An
+inherited template was always true of the creature, so it
+counts from 1st level; an acquired one counts only from
+`TemplateApplication.level`, the level it was taken. That is
+what stops a lich's +2 INT from retroactively buying skill
+points at 3rd level. `Character.int_mod_at_level()` applies
+the filter.
+
+Lycanthropy is the one template the books make both ways —
+inherited for natural lycanthropes, acquired for afflicted
+(MM p. 175) — so the data carries two entries rather than one
+template that cannot answer the question. The natural and
+afflicted forms differ in more than `kind` in the book; only
+`kind` is modelled so far.
+
+A template is always applied whole. "Uses all the base
+creature's statistics and abilities except as noted here" is
+the entire mechanism; there is no partial application.
+Effects may still *scale* with HD through a formula, which is
+how a lich's spell resistance is written.
 
 `apply_template()` / `remove_template()` wire effects into the
 Character. `effective_type()` and `effective_subtypes()` resolve

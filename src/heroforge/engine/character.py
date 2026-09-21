@@ -74,6 +74,10 @@ from heroforge.engine.stat import (
     compute_capped_dex,
     compute_sum,
 )
+from heroforge.engine.templates import (
+    TemplateKind,
+    template_source_key,
+)
 from heroforge.rules.core.pool_keys import PoolKey
 from heroforge.rules.rules import get_rules
 
@@ -1141,11 +1145,36 @@ class Character:
         """
         base = self._ability_scores[Ability.INT]
         racial = self._racial_ability_bonus(Ability.INT)
+        template = self._template_ability_bonus(Ability.INT, char_level)
         bumps = sum(
             lv.ability_bump == Ability.INT for lv in self.levels[:char_level]
         )
         inherent = self._inherent_bonus_at_level(Ability.INT, char_level)
-        return (base + racial + bumps + inherent - 10) // 2
+        return (base + racial + template + bumps + inherent - 10) // 2
+
+    def _template_ability_bonus(self, ability: Ability, char_level: int) -> int:
+        """
+        Template contributions to *ability* that were in
+        force at *char_level*.
+
+        An inherited template was always true of the
+        creature, so it counts from 1st level. An acquired
+        one counts only from the level it was taken.
+        """
+        pool = self.get_pool(f"{ability}_score")
+        if pool is None:
+            return 0
+        registry = get_rules().templates
+        total = 0
+        for app in self.templates:
+            defn = registry.get(app.template_name)
+            if defn is None:
+                continue
+            if defn.kind is TemplateKind.ACQUIRED and app.level > char_level:
+                continue
+            key = template_source_key(app.template_name)
+            total += sum(e.value for e in pool.entries_for(key))
+        return total
 
     def _racial_ability_bonus(self, ability: Ability) -> int:
         """

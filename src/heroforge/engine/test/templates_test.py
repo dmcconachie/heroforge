@@ -26,7 +26,7 @@ import pytest
 import yaml
 
 from heroforge.engine.bonus import BonusType
-from heroforge.engine.character import Character
+from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.enums import (
     Ability,
     CreatureSubtype,
@@ -41,6 +41,7 @@ from heroforge.engine.prerequisites import (
 from heroforge.engine.templates import (
     TemplateAbilityModifier,
     TemplateDefinition,
+    TemplateKind,
     TemplateRegistry,
     apply_template,
     build_template_from_yaml,
@@ -49,6 +50,7 @@ from heroforge.engine.templates import (
     remove_template,
 )
 from heroforge.rules.loader import LoaderError, TemplatesLoader
+from heroforge.rules.rules import get_rules
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -66,6 +68,7 @@ def fresh_char(race: str = "Human") -> Character:
 
 def half_celestial() -> TemplateDefinition:
     return TemplateDefinition(
+        kind=TemplateKind.INHERITED,
         name="Half-Celestial",
         source_book=SourceBook.MM,
         cr_adjustment="+1",
@@ -85,6 +88,7 @@ def half_celestial() -> TemplateDefinition:
 
 def half_dragon() -> TemplateDefinition:
     return TemplateDefinition(
+        kind=TemplateKind.INHERITED,
         name="Half-Dragon (Red)",
         source_book=SourceBook.MM,
         type_change=CreatureType.DRAGON,
@@ -100,7 +104,8 @@ def half_dragon() -> TemplateDefinition:
 
 def werewolf_template() -> TemplateDefinition:
     return TemplateDefinition(
-        name="Lycanthrope (Werewolf)",
+        kind=TemplateKind.INHERITED,
+        name="Lycanthrope (Werewolf, Natural)",
         source_book=SourceBook.MM,
         subtype_add=[CreatureSubtype.SHAPECHANGER],
         ability_modifiers=[
@@ -120,7 +125,7 @@ def werewolf_template() -> TemplateDefinition:
 
 class TestTemplateDefinition:
     def test_construction_defaults(self) -> None:
-        t = TemplateDefinition(name="Test")
+        t = TemplateDefinition(name="Test", kind=TemplateKind.INHERITED)
         assert t.source_book == "MM"
         assert t.type_change is None
         assert t.subtype_add == []
@@ -173,8 +178,16 @@ class TestTemplateRegistry:
 
     def test_overwrite_replaces(self) -> None:
         reg = TemplateRegistry()
-        t1 = TemplateDefinition(name="Half-Celestial", la_adjustment="+4")
-        t2 = TemplateDefinition(name="Half-Celestial", la_adjustment="+5")
+        t1 = TemplateDefinition(
+            name="Half-Celestial",
+            kind=TemplateKind.INHERITED,
+            la_adjustment="+4",
+        )
+        t2 = TemplateDefinition(
+            name="Half-Celestial",
+            kind=TemplateKind.INHERITED,
+            la_adjustment="+5",
+        )
         reg.register(t1)
         reg.register(t2, overwrite=True)
         assert reg.require("Half-Celestial").la_adjustment == "+5"
@@ -235,7 +248,10 @@ class TestApplyTemplate:
         # Use a template with only natural armor to isolate
 
         t = TemplateDefinition(
-            name="Natural Only", natural_armor_bonus=3, ability_modifiers=[]
+            kind=TemplateKind.INHERITED,
+            name="Natural Only",
+            natural_armor_bonus=3,
+            ability_modifiers=[],
         )
         apply_template(t, c)
         assert c.ac == base_ac + 3
@@ -288,6 +304,7 @@ class TestApplyTemplate:
         # Vampire changes STR+6 but not INT directly
 
         vampire_light = TemplateDefinition(
+            kind=TemplateKind.ACQUIRED,
             name="Vampire Light",
             ability_modifiers=[TemplateAbilityModifier(Ability.STR, 4)],
         )
@@ -377,6 +394,7 @@ class TestMultipleTemplates:
 
         hc = half_celestial()  # str+4, dex+2, con+4, int+2, wis+4, cha+4
         feral = TemplateDefinition(
+            kind=TemplateKind.INHERITED,
             name="Feral",
             ability_modifiers=[
                 TemplateAbilityModifier(Ability.STR, 4),
@@ -417,6 +435,7 @@ class TestMultipleTemplates:
         hc = half_celestial()  # adds Good, Extraplanar
 
         hf = TemplateDefinition(
+            kind=TemplateKind.INHERITED,
             name="Half-Fiend",
             subtype_add=[
                 CreatureSubtype.EVIL,
@@ -549,6 +568,7 @@ class TestBuildTemplateFromYaml:
         t = build_template_from_yaml(
             {
                 "name": "Test Template",
+                "kind": "inherited",
                 "source_book": "MM",
                 "cr_adjustment": "+1",
                 "la_adjustment": "+2",
@@ -563,6 +583,7 @@ class TestBuildTemplateFromYaml:
         t = build_template_from_yaml(
             {
                 "name": "Test",
+                "kind": "inherited",
                 "ability_modifiers": [
                     {"ability": "str", "value": 4, "bonus_type": "untyped"},
                     {"ability": "dex", "value": 2, "bonus_type": "enhancement"},
@@ -578,6 +599,7 @@ class TestBuildTemplateFromYaml:
         t = build_template_from_yaml(
             {
                 "name": "Half-Dragon",
+                "kind": "inherited",
                 "type_change": "Dragon",
                 "ability_modifiers": [],
             }
@@ -588,6 +610,7 @@ class TestBuildTemplateFromYaml:
         t = build_template_from_yaml(
             {
                 "name": "Test",
+                "kind": "inherited",
                 "subtype_add": ["Good", "Extraplanar"],
                 "ability_modifiers": [],
             }
@@ -599,6 +622,7 @@ class TestBuildTemplateFromYaml:
         t = build_template_from_yaml(
             {
                 "name": "Vampire",
+                "kind": "inherited",
                 "grants_feats": ["Alertness", "Dodge"],
                 "ability_modifiers": [],
             }
@@ -609,6 +633,7 @@ class TestBuildTemplateFromYaml:
         t = build_template_from_yaml(
             {
                 "name": "Test",
+                "kind": "inherited",
                 "ability_modifiers": [
                     {
                         "ability": "str",
@@ -715,3 +740,106 @@ class TestTemplatesLoader:
         assert (
             getattr(c, "_creature_type_override", None) is CreatureType.OUTSIDER
         )
+
+
+# ===========================================================================
+# Inherited vs acquired
+# ===========================================================================
+
+
+class TestTemplateKind:
+    """
+    Every template is inherited or acquired, and the books
+    say which: "Celestial is an inherited template" (MM
+    p. 31), "Ghost is an acquired template" (MM p. 117).
+
+    The difference is not cosmetic. An inherited template
+    was always true of the creature, so its ability
+    modifiers were in force at 1st level. An acquired one
+    arrives mid-career, so its modifiers count only from
+    the level it was taken — which is what keeps a lich's
+    +2 INT from retroactively buying skill points at 3rd.
+    """
+
+    @staticmethod
+    def _wizard(levels: int = 8) -> Character:
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 10)
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Wizard",
+                    hp_roll=4,
+                )
+                for i in range(levels)
+            ]
+        )
+        return c
+
+    def test_the_books_classification_is_in_the_data(self) -> None:
+        reg = get_rules().templates
+        assert reg.require("Half-Celestial").kind is TemplateKind.INHERITED
+        assert reg.require("Celestial Creature").kind is (
+            TemplateKind.INHERITED
+        )
+        assert reg.require("Lich").kind is TemplateKind.ACQUIRED
+        assert reg.require("Ghost").kind is TemplateKind.ACQUIRED
+        assert reg.require("Vampire").kind is TemplateKind.ACQUIRED
+
+    def test_every_template_declares_a_kind(self) -> None:
+        reg = get_rules().templates
+        for name in reg.all_names():
+            assert isinstance(reg.require(name).kind, TemplateKind), name
+
+    def test_lycanthropy_is_split_because_it_is_both(self) -> None:
+        """
+        "The lycanthrope template can be inherited (for
+        natural lycanthropes) or acquired (for afflicted
+        lycanthropes)" — MM p. 175. One template cannot be
+        both, so the data carries two.
+        """
+        reg = get_rules().templates
+        natural = reg.require("Lycanthrope (Werewolf, Natural)")
+        afflicted = reg.require("Lycanthrope (Werewolf, Afflicted)")
+        assert natural.kind is TemplateKind.INHERITED
+        assert afflicted.kind is TemplateKind.ACQUIRED
+
+    def test_acquired_int_is_not_retroactive(self) -> None:
+        """A lich's +2 INT does not reach levels before it."""
+        c = self._wizard()
+        apply_template(get_rules().templates.require("Lich"), c, level=8)
+        assert c.int_score == 12
+        assert c.int_mod_at_level(4) == 0
+        assert c.int_mod_at_level(8) == 1
+
+    def test_inherited_int_applies_from_first_level(self) -> None:
+        """A half-celestial was always a half-celestial."""
+        c = self._wizard()
+        apply_template(
+            get_rules().templates.require("Half-Celestial"), c, level=8
+        )
+        assert c.int_score == 12
+        assert c.int_mod_at_level(4) == 1
+        assert c.int_mod_at_level(8) == 1
+
+    def test_acquired_skill_points_change_only_from_that_level(self) -> None:
+        c = self._wizard()
+        apply_template(get_rules().templates.require("Lich"), c, level=8)
+        assert c.skill_points_for_level(4) == 2  # wizard 2 + 0
+        assert c.skill_points_for_level(8) == 3  # wizard 2 + 1
+
+    def test_kind_round_trips_through_yaml(self) -> None:
+        reg = TemplateRegistry()
+        TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
+        assert reg.require("Lich").kind is TemplateKind.ACQUIRED
+        assert reg.require("Half-Fiend").kind is TemplateKind.INHERITED
+
+    def test_an_unknown_kind_is_rejected(self) -> None:
+        with pytest.raises(ValueError, match="borrowed"):
+            build_template_from_yaml({"name": "Bogus", "kind": "borrowed"})
+
+    def test_a_template_without_a_kind_is_rejected(self) -> None:
+        with pytest.raises(ValueError, match="no 'kind'"):
+            build_template_from_yaml({"name": "Kindless"})
