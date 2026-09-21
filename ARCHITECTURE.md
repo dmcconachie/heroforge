@@ -1,15 +1,11 @@
 # HeroForge Anew — Architecture
 
 A D&D 3.5e character engine. Clean separation between the
-**rules engine** (pure Python), the **data layer** (YAML
-rulebook definitions) and the **export layer** (PDF via
-ReportLab).
+**rules engine** (pure Python) and the **data layer** (YAML
+rulebook definitions).
 
 The front end is `charsheet`, a CLI that reads a
-`.char.yaml` and emits the computed sheet as YAML. A PyQt6
-desktop UI lived under `ui/` and was removed on 2026-09-21
-to leave a clean slate; nothing outside it depended on Qt,
-and the engine never did.
+`.char.yaml` and emits the computed sheet as YAML.
 
 ---
 
@@ -17,7 +13,7 @@ and the engine never did.
 
 ```
 src/heroforge/
-├── engine/                 # Pure Python, zero GUI deps
+├── engine/                 # Pure Python, no I/O
 │   ├── bonus.py            # BonusType, BonusEntry, BonusPool
 │   ├── stat.py             # StatNode, StatGraph: lazy DAG
 │   ├── character.py        # Character, ChangeNotifier,
@@ -71,45 +67,41 @@ src/heroforge/
 │   │                       #   DeityRegistry
 │   └── resources.py        # ResourceTracker (uses/day)
 │
-├── rules/
-│   ├── rules.py            # Rules dataclass, get_rules(),
-│   │                       #   set_rules(), reset_rules()
-│   ├── schema.py           # cattrs Converter + hooks
-│   ├── loader.py           # StatsLoader,
-│   │                       #   ConditionLoader,
-│   │                       #   MagicItemLoader,
-│   │                       #   FeatsLoader, ClassesLoader,
-│   │                       #   RacesLoader, SkillsLoader,
-│   │                       #   TemplatesLoader,
-│   │                       #   EquipmentLoader,
-│   │                       #   DomainsLoader,
-│   │                       #   SpellCompendiumLoader
-│   ├── _gen_common.py      # enum_ident(), emit_member()
-│   │                       #   shared by YAML→StrEnum tools
-│   ├── _gen_magic_item_enums.py  # check-magic-items CLI
-│   ├── _gen_pool_keys.py   # check-pool-keys CLI
-│   └── core/               # YAML data files
-│       ├── stats.yaml
-│       ├── skills.yaml
-│       ├── pool_keys.py    # PoolKey StrEnum (generated)
-│       ├── classes/           # 1 YAML per class
-│       │                     #   (16 base + 15 prestige)
-│       ├── races.yaml        # 7 core races
-│       ├── feats.yaml        # 110 feats (alphabetical)
-│       ├── spells_level_0..9.yaml  # Spell compendium
-│       │                           #   (601 spells, 1
-│       │                           #   file per level)
-│       ├── conditions_srd.yaml  # 20 conditions
-│       ├── templates.yaml    # 12 creature templates
-│       ├── domains.yaml      # 22 cleric domains
-│       ├── deities.yaml      # 194 LG deities
-│       ├── armor.yaml        # 18 armor/shields
-│       ├── weapons.yaml      # 68 weapons (full SRD)
-│       └── magic_items.yaml  # ~70 magic items
-│
-└── export/
-    ├── sheet_data.py       # gather(): Character → SheetData
-    └── renderer.py         # render_pdf(): SheetData → PDF
+└── rules/
+    ├── rules.py            # Rules dataclass, get_rules(),
+    │                       #   set_rules(), reset_rules()
+    ├── schema.py           # cattrs Converter + hooks
+    ├── loader.py           # StatsLoader,
+    │                       #   ConditionLoader,
+    │                       #   MagicItemLoader,
+    │                       #   FeatsLoader, ClassesLoader,
+    │                       #   RacesLoader, SkillsLoader,
+    │                       #   TemplatesLoader,
+    │                       #   EquipmentLoader,
+    │                       #   DomainsLoader,
+    │                       #   SpellCompendiumLoader
+    ├── _gen_common.py      # enum_ident(), emit_member()
+    │                       #   shared by YAML→StrEnum tools
+    ├── _gen_magic_item_enums.py  # check-magic-items CLI
+    ├── _gen_pool_keys.py   # check-pool-keys CLI
+    └── core/               # YAML data files
+        ├── stats.yaml
+        ├── skills.yaml
+        ├── pool_keys.py    # PoolKey StrEnum (generated)
+        ├── classes/           # 1 YAML per class
+        │                     #   (16 base + 15 prestige)
+        ├── races.yaml        # 7 core races
+        ├── feats.yaml        # 110 feats (alphabetical)
+        ├── spells_level_0..9.yaml  # Spell compendium
+        │                           #   (601 spells, 1
+        │                           #   file per level)
+        ├── conditions_srd.yaml  # 20 conditions
+        ├── templates.yaml    # 12 creature templates
+        ├── domains.yaml      # 22 cleric domains
+        ├── deities.yaml      # 194 LG deities
+        ├── armor.yaml        # 18 armor/shields
+        ├── weapons.yaml      # 68 weapons (full SRD)
+        └── magic_items.yaml  # ~70 magic items
 
 Tests co-locate with the package they cover, under a
 per-subpackage `test/` directory (`foo_test.py`, Go-
@@ -147,7 +139,6 @@ tests/                          # pending placement / integration
   test_combat.py             # grapple/carrying capacity
   test_skill_allocation.py   # per-level skill budget
   test_class_features.py     # rage, inspire courage
-  test_export.py             # sheet_data + renderer
   test_stats_yaml.py
   test_spells_yaml.py
   test_spells_srd_yaml.py
@@ -249,9 +240,9 @@ All mutations go through public methods (`set_ability_score`,
 handle pool updates, stat invalidation, and change
 notification via `ChangeNotifier`.
 
-`ChangeNotifier` is a simple observer list — the UI subscribes
+`ChangeNotifier` is a simple observer list — a caller subscribes
 callbacks; the Character calls `notify(changed_keys)` on
-mutation. Keeps the engine decoupled from Qt signals.
+mutation. Keeps the engine decoupled from any caller.
 
 ## Layer 3b: Size (`engine/size.py`)
 
@@ -851,7 +842,7 @@ weapons, materials, derived pools, and the
 - `set_rules(r)` / `reset_rules()` let tests swap or clear
   the singleton.
 
-Engine and export code reads rules via `get_rules()` — there
+Engine code reads rules via `get_rules()` — there
 is no wiring of registry references onto `Character`. Tests
 isolate via the autouse fixture in the project-root
 `conftest.py`, which pointer-swaps a
@@ -890,7 +881,7 @@ The `ConditionLoader` reads `conditions_srd.yaml` (which
 uses a `conditions:` top-level key, not `spells:`),
 structures each entry as a `ConditionDefinition`, and
 also registers a `BuffDefinition` in the `BuffRegistry`
-via `build_buff_from_effects()` so the buff-toggle UI
+via `build_buff_from_effects()` so a buff-toggle caller
 keeps working.
 
 Magic items have their own domain:
@@ -1037,27 +1028,14 @@ no `!!python/` appears in any rendered sheet.
 
 ---
 
-## Export layer (`export/`)
-
-`sheet_data.py` defines `SheetData` and component dataclasses
-(`IdentityData`, `AbilityData`, `CombatData`, `SkillRow`,
-`FeatRow`, `BuffRow`). `gather()` extracts a complete
-display-ready snapshot from a Character.
-
-`renderer.py` takes a `SheetData` and writes a PDF via
-ReportLab.
-
----
-
 ## Key design constraints
 
-- The engine is testable headlessly and has no GUI
-  dependency. When a UI returns it imports the engine, never
-  the other way round — the removed PyQt6 layer had drifted
-  into two violations of this, and both were real bugs.
-- `export/` and `engine/sheet.py` answer the same question
-  the same way: both read `Character.touch_ac()` and
-  `.flatfooted_ac()` rather than keeping their own copies.
+- The engine has no front-end dependency and is testable
+  headlessly. A front end imports the engine, never the
+  other way round.
+- One answer per question. A caller that needs touch or
+  flat-footed AC reads `Character.touch_ac()` and
+  `.flatfooted_ac()` rather than keeping its own copy.
 - YAML data files contain **no Python code**. Formulas are
   strings evaluated in a sandboxed context.
 - Adding a new sourcebook = adding YAML files. No Python
@@ -1342,7 +1320,7 @@ ReportLab.
   are per-level tables rather than formulas, so they need
   the weapon-damage-table support noted below before they
   can become `values`.
-- **Conditional effects sheet panel** — UI that
+- **Conditional effects panel** — a front end that
   surfaces effects which only apply under specific
   conditions (gate state, spell target alignment,
   creature type, one-shot activation). Two

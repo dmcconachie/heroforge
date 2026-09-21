@@ -917,3 +917,78 @@ class TestIntModAtLevel:
         assert c.int_mod_at_level(4) == 1
         # Level 8: INT 14 → mod +2
         assert c.int_mod_at_level(8) == 2
+
+
+# ===========================================================================
+# Touch and flat-footed AC
+# ===========================================================================
+
+
+class TestTouchAndFlatFootedAc:
+    """
+    Touch AC drops armour, shield and natural armour but
+    keeps Dex and the deflection/dodge family. Flat-footed
+    AC drops Dex and dodge — unless uncanny dodge, which
+    "retains her Dexterity bonus to AC (if any) regardless
+    of being caught flat-footed" (DMG p. 195).
+    """
+
+    @staticmethod
+    def _char(class_name: str, level: int) -> Character:
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 14)  # +2 across the board
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name=class_name,
+                    hp_roll=10,
+                )
+                for i in range(level)
+            ]
+        )
+        return c
+
+    def test_touch_ac_keeps_dex(self) -> None:
+        c = self._char("Fighter", 1)
+        assert c.get("ac_dex_contribution") == 2
+        assert c.touch_ac() == 12
+
+    def test_touch_ac_drops_natural_armour(self) -> None:
+        c = self._char("Fighter", 1)
+        simple_buff(c, "Barkskin", "ac", 3, BonusType.NATURAL_ARMOR)
+        c.toggle_buff("Barkskin", True)
+        assert c.ac == 15
+        assert c.touch_ac() == 12  # natural armour excluded
+
+    def test_touch_ac_keeps_deflection(self) -> None:
+        c = self._char("Fighter", 1)
+        simple_buff(c, "Ring", "ac", 2, BonusType.DEFLECTION)
+        c.toggle_buff("Ring", True)
+        assert c.touch_ac() == 14
+
+    def test_touch_ac_drops_racial(self) -> None:
+        """
+        Racial AC is natural armour by another name, so it
+        is not one of the touch types even though it
+        stacks into normal AC.
+        """
+        c = self._char("Fighter", 1)
+        simple_buff(c, "A", "ac", 1, BonusType.RACIAL)
+        c.toggle_buff("A", True)
+        simple_buff(c, "B", "ac", 2, BonusType.RACIAL)
+        c.toggle_buff("B", True)
+        assert c.ac == 15  # both stack into normal AC
+        assert c.touch_ac() == 12  # neither reaches touch
+
+    def test_flatfooted_drops_dex_without_uncanny_dodge(self) -> None:
+        c = self._char("Fighter", 1)
+        assert c.has_class_feature("uncanny_dodge") is False
+        assert c.flatfooted_ac() == 10
+
+    def test_flatfooted_keeps_dex_with_uncanny_dodge(self) -> None:
+        """A barbarian has uncanny dodge from 2nd level."""
+        c = self._char("Barbarian", 5)
+        assert c.has_class_feature("uncanny_dodge") is True
+        assert c.flatfooted_ac() == c.ac == 12

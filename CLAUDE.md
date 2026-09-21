@@ -13,8 +13,8 @@ output YAML then you're not done.
 ## Project
 
 HeroForge Anew — a D&D 3.5e character engine in Python 3.12. The
-front end is the `charsheet` CLI; a PyQt6 desktop UI was removed
-on 2026-09-21. The rules for D&D 3.5e can be found at https://www.d20srd.org/
+front end is the `charsheet` CLI. The rules for D&D 3.5e can be
+found at https://www.d20srd.org/
 
 ## Build & Run
 

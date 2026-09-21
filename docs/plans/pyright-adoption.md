@@ -31,10 +31,6 @@ venvPath = "."
 venv = ".venv"
 ```
 
-`ui/` was excluded while it still existed, because the 13
-errors left there were one bug in code about to be deleted.
-The exclude went when the UI did, on 2026-09-21.
-
 Measured: basic 878, standard 880, strict 3805. Standard
 now; raising `src/heroforge` to strict is left for later —
 the extra 2925 are dominated by `Unknown` leaking out of
@@ -82,10 +78,6 @@ sites are handled individually.
 take `app_state`, all carry `# noqa: ARG001 # kept for API
 compat`, and none reads it. 151 errors are callers passing
 `None` to satisfy it.
-
-`export.gather` carried the same dead parameter and the
-same marker; it went too, which also removed `export/`'s
-`AppState` import.
 
 Deleted from every signature and all ~240 call sites. The
 `noqa`s go with them.
@@ -182,16 +174,4 @@ test:
   `Chaotic Good` where `Alignment` is `chaotic_good`. D3's
   coercion turned that into a load error, and
   `rules_test.py` now checks every alignment in the data.
-- **A UI crash.** `sheet_race.py` read
-  `partially_applicable` and `max_level`, which
-  `TemplateDefinition` has never had, so selecting any
-  template raised `AttributeError`. Left alone, then
-  deleted with the UI. If partial templates are ever
-  wanted, `templates.py`'s docstring still describes them
-  and the dataclass still lacks the fields.
 
-## Follow-on
-
-Two violations of the documented "no imports from `ui/`"
-rule turned up here and were fixed by the UI removal that
-followed — see `ui-removal.md`.

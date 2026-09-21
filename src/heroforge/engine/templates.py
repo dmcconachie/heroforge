@@ -13,7 +13,12 @@ modifications applied on top of a character's base race.  They can:
   - Grant spell-like abilities
   - Modify BAB and saves
   - Add feats
-  - For "partially applicable" templates: scale with a level parameter
+  - Scale any of the above with the character's HD, via a
+    formula on the effect (``min(35, character_level + 10)``
+    for a lich's spell resistance, say). A template is always
+    applied whole -- "uses all the base creature's statistics
+    and abilities except as noted here" (MM pp. 31, 117) --
+    so this is scaling inside one, not partial application.
 
 Templates are applied in order.  Multiple templates can stack (rare but
 legal — Half-Celestial Half-Dragon exists in the rules).
@@ -27,7 +32,8 @@ Design:
 
 Public API:
   TemplateDefinition   — data model for a template
-  TemplateApplication  — one applied template (with optional partial level)
+  TemplateApplication  — one applied template, and the
+                         character level it was taken at
   TemplateRegistry     — lookup
   apply_template()     — apply a template's effects to a Character
   remove_template()    — remove a template's effects from a Character

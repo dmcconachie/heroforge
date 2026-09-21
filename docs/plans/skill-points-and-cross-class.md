@@ -45,7 +45,7 @@ suggests, and they make the existing validator untrustworthy.
    a single class definition and misses this.
 
 5. **Nothing calls the validator.** `validate_skill_allocation`
-   has no production callers — not the loader, not the UI. Only
+   has no production callers — not the loader, nothing. Only
    `compute_skill_budget` is exercised, and only from
    `tests/test_skill_allocation.py`. Bad fixture data loads
    silently.
@@ -56,10 +56,6 @@ Any fix touches all of these, which read
 `ClassDefinition.class_skills` independently:
 
 - `src/heroforge/engine/skills.py:326`
-- `src/heroforge/export/sheet_data.py:261`
-
-(Two more call sites lived in the PyQt6 UI, removed
-2026-09-21. A rebuilt front end will need the same hook.)
 
 Worth consolidating before adding per-character inputs (domain
 granted class skills need the same hook — see the domains work).

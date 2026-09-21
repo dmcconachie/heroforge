@@ -91,7 +91,7 @@ tree. Suite at 1547 passing, ruff and yamllint clean.
 - **Step 0 — drufus golden.** Not a code regression: an
   incomplete fixture edit in `234e2af`.
 - **Step 1 — size.** `engine/size.py`, `size_steps` on buffs,
-  round-tripping through save/load and both UI paths,
+  round-tripping through save/load,
   cascades into AC / attack / grapple / Hide / carrying
   capacity / weapon damage dice. `damage_dice_small` added
   for all 63 weapons from PHB Table 7-5, every Medium value
