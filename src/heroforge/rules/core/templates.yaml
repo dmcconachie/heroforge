@@ -395,12 +395,6 @@ Lich:
   note: Spellcaster-only template; becomes Undead
 Lycanthrope (Werewolf, Natural):
   kind: inherited
-  defenses:
-    # MM p. 177: a natural lycanthrope in animal or hybrid
-    # form has DR 10/silver, an afflicted one 5/silver.
-    damage_reduction:
-      - amount: 10
-        bypassed_by: silver
   source_book: MM
   cr_adjustment: '+1'
   la_adjustment: '+3'
@@ -415,12 +409,19 @@ Lycanthrope (Werewolf, Natural):
       value: 2
       bonus_type: racial
   buffs:
-    - name: Werewolf Animal Form
+    - name: Werewolf Animal Form (Natural)
       note: >-
-        Wolf shape: Str +2, Dex +4, Con +4 and the wolf's
-        50 ft. speed (MM pp. 177-178).
+        Animal shape: Str +2, Dex +4, Con +4 and DR
+        10/silver, at the wolf's 50 ft. speed
+        (MM pp. 177-178).
       mutually_exclusive_with:
-        - Werewolf Hybrid Form
+        - Werewolf Hybrid Form (Natural)
+        - Werewolf Animal Form (Afflicted)
+        - Werewolf Hybrid Form (Afflicted)
+      defenses:
+        damage_reduction:
+          - amount: 10
+            bypassed_by: silver
       effects:
         - target: str_score
           bonus_type: racial
@@ -438,12 +439,19 @@ Lycanthrope (Werewolf, Natural):
           bonus_type: untyped
           value: 20
           source_label: werewolf_animal_form
-    - name: Werewolf Hybrid Form
+    - name: Werewolf Hybrid Form (Natural)
       note: >-
-        Hybrid shape: the same Str +2, Dex +4, Con +4, at
-        the base creature's speed (MM pp. 177-178).
+        Hybrid shape: Str +2, Dex +4, Con +4 and DR
+        10/silver, at the base creature's speed
+        (MM pp. 177-178).
       mutually_exclusive_with:
-        - Werewolf Animal Form
+        - Werewolf Animal Form (Natural)
+        - Werewolf Animal Form (Afflicted)
+        - Werewolf Hybrid Form (Afflicted)
+      defenses:
+        damage_reduction:
+          - amount: 10
+            bypassed_by: silver
       effects:
         - target: str_score
           bonus_type: racial
@@ -475,10 +483,6 @@ Lycanthrope (Werewolf, Natural):
 
 Lycanthrope (Werewolf, Afflicted):
   kind: acquired
-  defenses:
-    damage_reduction:
-      - amount: 5
-        bypassed_by: silver
   source_book: MM
   cr_adjustment: '+1'
   la_adjustment: '+2'
@@ -493,12 +497,19 @@ Lycanthrope (Werewolf, Afflicted):
       value: 2
       bonus_type: racial
   buffs:
-    - name: Werewolf Animal Form
+    - name: Werewolf Animal Form (Afflicted)
       note: >-
-        Wolf shape: Str +2, Dex +4, Con +4 and the wolf's
-        50 ft. speed (MM pp. 177-178).
+        Animal shape: Str +2, Dex +4, Con +4 and DR
+        5/silver, at the wolf's 50 ft. speed
+        (MM pp. 177-178).
       mutually_exclusive_with:
-        - Werewolf Hybrid Form
+        - Werewolf Animal Form (Natural)
+        - Werewolf Hybrid Form (Natural)
+        - Werewolf Hybrid Form (Afflicted)
+      defenses:
+        damage_reduction:
+          - amount: 5
+            bypassed_by: silver
       effects:
         - target: str_score
           bonus_type: racial
@@ -516,12 +527,19 @@ Lycanthrope (Werewolf, Afflicted):
           bonus_type: untyped
           value: 20
           source_label: werewolf_animal_form
-    - name: Werewolf Hybrid Form
+    - name: Werewolf Hybrid Form (Afflicted)
       note: >-
-        Hybrid shape: the same Str +2, Dex +4, Con +4, at
-        the base creature's speed (MM pp. 177-178).
+        Hybrid shape: Str +2, Dex +4, Con +4 and DR
+        5/silver, at the base creature's speed
+        (MM pp. 177-178).
       mutually_exclusive_with:
-        - Werewolf Animal Form
+        - Werewolf Animal Form (Natural)
+        - Werewolf Hybrid Form (Natural)
+        - Werewolf Animal Form (Afflicted)
+      defenses:
+        damage_reduction:
+          - amount: 5
+            bypassed_by: silver
       effects:
         - target: str_score
           bonus_type: racial

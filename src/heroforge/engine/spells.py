@@ -55,6 +55,11 @@ class SpellEntry:
     # Whole size categories the spell moves its target,
     # e.g. Enlarge Person +1, Reduce Person -1.
     size_steps: int = 0
+    # Damage reduction, energy resistance, immunities and
+    # fortification the spell confers while active --
+    # stoneskin, resist energy, death ward. Same shape as
+    # a magic item's.
+    defenses: dict = field(default_factory=dict)
 
 
 class SpellCompendium:

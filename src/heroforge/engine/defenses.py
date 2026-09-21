@@ -161,12 +161,23 @@ def _read_block(
     immune: set[str],
     fortify: list[int],
     parameter: str = "",
+    caster_level: int = 0,
 ) -> None:
-    """Accumulate one `defenses:` declaration."""
+    """
+    Accumulate one `defenses:` declaration.
+
+    *caster_level* feeds the formulas, so a buff can scale
+    with the caster who cast it -- resist energy is 10, 20
+    or 30 by caster level.
+    """
     for entry in block.get("damage_reduction", ()) or ():
         raw = entry.get("amount", 0)
         amount = (
-            evaluate_formula(raw, character=character)
+            evaluate_formula(
+                raw,
+                character=character,
+                caster_level=caster_level,
+            )
             if isinstance(raw, str)
             else int(raw)
         )
@@ -184,7 +195,11 @@ def _read_block(
             )
     for energy, raw in (block.get("energy_resistance", {}) or {}).items():
         points = (
-            evaluate_formula(raw, character=character)
+            evaluate_formula(
+                raw,
+                character=character,
+                caster_level=caster_level,
+            )
             if isinstance(raw, str)
             else int(raw)
         )
@@ -199,7 +214,11 @@ def _read_block(
     raw = block.get("fortification", 0)
     if raw:
         fortify.append(
-            evaluate_formula(raw, character=character)
+            evaluate_formula(
+                raw,
+                character=character,
+                caster_level=caster_level,
+            )
             if isinstance(raw, str)
             else int(raw)
         )
@@ -289,6 +308,22 @@ def collect_defenses(character: "Character") -> Defenses:
                     immune,
                     fortify,
                 )
+
+    for buff_name in character.active_buffs():
+        buff = rules.buffs.get(buff_name)
+        if buff is None or not buff.defenses:
+            continue
+        state = character.get_buff_state(buff_name)
+        _read_block(
+            buff.defenses,
+            character,
+            drs,
+            resist,
+            immune,
+            fortify,
+            str(state.parameter or "") if state else "",
+            state.caster_level or 0 if state else 0,
+        )
 
     best_resist: dict[EnergyType, int] = {}
     for energy, points in resist:

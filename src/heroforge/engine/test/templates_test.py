@@ -10,7 +10,8 @@ Covers:
   - apply_template(): ability score bonuses, natural armor, type changes,
     subtype changes, feat grants, idempotence
   - remove_template(): full revert
-  - Partial templates: level scaling
+  - TemplateKind: inherited applies from 1st level,
+    acquired only from the level it was taken
   - Multiple template stacking
   - effective_type() / effective_subtypes()
   - TemplatesLoader: YAML validation, registration, error paths
@@ -875,50 +876,70 @@ class TestLycanthropeFormBuffs:
         return c
 
     def test_humanoid_form_gets_only_the_wisdom(self) -> None:
-        c = self._werewolf()
+        kind = "Natural"
+        c = self._werewolf(kind)
         assert c.wis_score == 12
         assert c.str_score == 10
         assert c.dex_score == 10
         assert c.con_score == 10
 
     def test_animal_form_applies_the_physical_adjustments(self) -> None:
-        c = self._werewolf()
-        apply_buff(get_rules().buffs.require("Werewolf Animal Form"), c)
+        kind = "Natural"
+        c = self._werewolf(kind)
+        apply_buff(
+            get_rules().buffs.require(f"Werewolf Animal Form ({kind})"), c
+        )
         assert (c.str_score, c.dex_score, c.con_score) == (12, 14, 14)
         assert c.wis_score == 12
 
     def test_hybrid_form_applies_the_same_adjustments(self) -> None:
-        c = self._werewolf()
-        apply_buff(get_rules().buffs.require("Werewolf Hybrid Form"), c)
+        kind = "Natural"
+        c = self._werewolf(kind)
+        apply_buff(
+            get_rules().buffs.require(f"Werewolf Hybrid Form ({kind})"), c
+        )
         assert (c.str_score, c.dex_score, c.con_score) == (12, 14, 14)
 
     def test_animal_form_is_faster_than_hybrid(self) -> None:
         """Wolf form 50 ft., hybrid keeps the humanoid 30."""
-        base = self._werewolf()
+        kind = "Natural"
+        base = self._werewolf(kind)
         assert base.get("speed") == 30
 
-        animal = self._werewolf()
-        apply_buff(get_rules().buffs.require("Werewolf Animal Form"), animal)
+        animal = self._werewolf(kind)
+        apply_buff(
+            get_rules().buffs.require(f"Werewolf Animal Form ({kind})"), animal
+        )
         assert animal.get("speed") == 50
 
-        hybrid = self._werewolf()
-        apply_buff(get_rules().buffs.require("Werewolf Hybrid Form"), hybrid)
+        hybrid = self._werewolf(kind)
+        apply_buff(
+            get_rules().buffs.require(f"Werewolf Hybrid Form ({kind})"), hybrid
+        )
         assert hybrid.get("speed") == 30
 
-    def test_the_two_forms_are_mutually_exclusive(self) -> None:
+    def test_the_forms_are_mutually_exclusive(self) -> None:
+        """No creature is in two shapes at once."""
         reg = get_rules().buffs
-        animal = reg.require("Werewolf Animal Form")
-        hybrid = reg.require("Werewolf Hybrid Form")
-        assert "Werewolf Hybrid Form" in animal.mutually_exclusive_with
-        assert "Werewolf Animal Form" in hybrid.mutually_exclusive_with
+        animal = reg.require("Werewolf Animal Form (Natural)")
+        hybrid = reg.require("Werewolf Hybrid Form (Natural)")
+        assert (
+            "Werewolf Hybrid Form (Natural)" in animal.mutually_exclusive_with
+        )
+        assert (
+            "Werewolf Animal Form (Natural)" in hybrid.mutually_exclusive_with
+        )
 
-    def test_both_kinds_reach_the_same_forms(self) -> None:
+    def test_both_kinds_get_the_same_ability_adjustments(self) -> None:
         """
         Natural and afflicted differ in DR and level
         adjustment, not in what the shapes do to ability
-        scores, so they share the form buffs.
+        scores.
         """
         for kind in ("Natural", "Afflicted"):
             c = self._werewolf(kind)
-            apply_buff(get_rules().buffs.require("Werewolf Animal Form"), c)
+            apply_buff(
+                get_rules().buffs.require(f"Werewolf Animal Form ({kind})"),
+                c,
+            )
             assert (c.str_score, c.dex_score, c.con_score) == (12, 14, 14)

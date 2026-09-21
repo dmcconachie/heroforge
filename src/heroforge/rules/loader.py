@@ -775,6 +775,7 @@ class TemplatesLoader:
                 mutually_exclusive_with=list(
                     raw.get("mutually_exclusive_with", [])
                 ),
+                defenses=raw.get("defenses", {}),
             )
             if buff is not None:
                 with contextlib.suppress(ValueError):
@@ -980,6 +981,7 @@ class ClassesLoader:
                 note=feat.note,
                 requires_caster_level=(feat.requires_caster_level),
                 mutually_exclusive_with=list(feat.mutually_exclusive_with),
+                defenses=feat.defenses,
             )
             if buff is not None:
                 with contextlib.suppress(ValueError):
@@ -1426,7 +1428,7 @@ class SpellCompendiumLoader:
             # Dual registration: if the spell has
             # effects, also register a buff.
             if buff_registry is not None and (
-                entry.effects or entry.size_steps
+                entry.effects or entry.size_steps or entry.defenses
             ):
                 buff = build_buff_from_effects(
                     name=name,
@@ -1438,6 +1440,7 @@ class SpellCompendiumLoader:
                     mutually_exclusive_with=(entry.mutually_exclusive_with),
                     condition_key=(entry.condition_key),
                     size_steps=entry.size_steps,
+                    defenses=entry.defenses,
                 )
                 if buff is not None:
                     with contextlib.suppress(ValueError):

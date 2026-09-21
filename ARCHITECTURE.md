@@ -737,19 +737,14 @@ standing around as a human, a template may declare a
 `TemplatesLoader` registers each entry as a toggleable
 `BuffCategory.TEMPLATE` buff.
 
-The werewolf has two, mutually exclusive: *Werewolf Animal
-Form* and *Werewolf Hybrid Form*, both Str +2, Dex +4,
-Con +4 (MM p. 178), with the animal form also carrying the
-wolf's 50 ft. speed against the hybrid's 30. They are
-shared by the natural and afflicted entries, because the
-shapes do the same thing to ability scores whichever way
-the lycanthropy was contracted.
-
-Still unconditional: the damage reduction, which is also
-animal-and-hybrid-only. `collect_defenses` reads item
-properties, materials, worn items, templates and class
-features, but not buffs, so DR cannot move until a buff can
-carry a `defenses` block.
+The werewolf has four, mutually exclusive: animal and
+hybrid form for each kind. All four carry Str +2, Dex +4,
+Con +4 (MM p. 178); the animal forms also carry the wolf's
+50 ft. speed against the hybrid's 30, and each carries its
+kind's damage reduction, 10/silver natural against
+5/silver afflicted. A werewolf in humanoid form now has
+neither the physical adjustments nor the DR, which is what
+the book says.
 
 A template is always applied whole. "Uses all the base
 creature's statistics and abilities except as noted here" is
@@ -903,6 +898,33 @@ isolate via the autouse fixture in the project-root
 `conftest.py`, which pointer-swaps a
 session-scoped cached `Rules` around each test so YAML is
 parsed once per test run.
+
+### Buffs can carry defenses
+
+A `BuffDefinition` has a `defenses:` block in the same
+shape a magic item, template or class feature uses, and
+`collect_defenses` reads it for every buff the character
+currently has active. The block sees both the buff's
+`caster_level` and its `parameter`, so a spell can scale
+(`resist energy` is 10, 20 or 30 by caster level) and can
+name its energy type at cast time (`$parameter: 10`), the
+same way a ring of energy resistance names it at creation.
+
+A buff may be defenses-only. `stoneskin` grants damage
+reduction and no pool bonus at all, so
+`build_buff_from_effects` no longer treats "no effects" as
+"nothing to build".
+
+This is what a defensive spell needs. The spells YAML
+carries several entries still marked `note only` —
+*stoneskin*, *resist energy*, *death ward*, *mind blank*,
+*spell immunity* — which were blocked on exactly this and
+are now expressible. Three others are blocked on things
+that still do not exist: *blur*, *displacement* and
+*entropic shield* want a concealment / miss-chance field,
+which `Defenses` does not have, and *spider climb* and
+*overland flight* want movement modes, which are not
+defenses at all.
 
 `rules/schema.py` defines a pre-configured `cattrs.Converter`
 with `forbid_extra_keys=True` and custom structure hooks for

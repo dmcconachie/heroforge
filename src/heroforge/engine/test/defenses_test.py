@@ -21,6 +21,7 @@ from heroforge.engine.defenses import (
     best_damage_reduction,
     collect_defenses,
 )
+from heroforge.engine.effects import apply_buff
 from heroforge.engine.enums import Ability
 from heroforge.engine.equipment import equip_armor, equip_item
 from heroforge.engine.persistence import load_character
@@ -558,19 +559,34 @@ class TestLycanthropeNaturalVsAfflicted:
     """
 
     @staticmethod
-    def _templated(name: str) -> Character:
+    def _templated(kind: str, form: str = "") -> Character:
         c = _char(cls="Fighter", level=1)
-        apply_template(get_rules().templates.require(name), c)
+        apply_template(
+            get_rules().templates.require(f"Lycanthrope (Werewolf, {kind})"),
+            c,
+        )
+        if form:
+            apply_buff(
+                get_rules().buffs.require(f"Werewolf {form} Form ({kind})"),
+                c,
+            )
         return c
 
-    def test_natural_has_dr_10_silver(self) -> None:
-        d = collect_defenses(self._templated("Lycanthrope (Werewolf, Natural)"))
+    def test_humanoid_form_has_no_damage_reduction(self) -> None:
+        """The DR is animal-and-hybrid-only (MM p. 177)."""
+        d = collect_defenses(self._templated("Natural"))
+        assert d.damage_reduction == ()
+
+    def test_natural_has_dr_10_silver_in_animal_form(self) -> None:
+        d = collect_defenses(self._templated("Natural", "Animal"))
         assert d.damage_reduction == (DamageReduction(10, DrBypass.SILVER),)
 
-    def test_afflicted_has_dr_5_silver(self) -> None:
-        d = collect_defenses(
-            self._templated("Lycanthrope (Werewolf, Afflicted)")
-        )
+    def test_natural_has_dr_10_silver_in_hybrid_form(self) -> None:
+        d = collect_defenses(self._templated("Natural", "Hybrid"))
+        assert d.damage_reduction == (DamageReduction(10, DrBypass.SILVER),)
+
+    def test_afflicted_has_dr_5_silver_in_animal_form(self) -> None:
+        d = collect_defenses(self._templated("Afflicted", "Animal"))
         assert d.damage_reduction == (DamageReduction(5, DrBypass.SILVER),)
 
     def test_level_adjustments_differ(self) -> None:

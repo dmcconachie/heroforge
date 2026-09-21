@@ -327,6 +327,11 @@ class BuffDefinition:
     # Not a bonus, so it is not a BonusEffect: see
     # engine/size.py.
     size_steps: int = 0
+    # Damage reduction, energy resistance, immunities and
+    # fortification the buff confers while active. Same shape
+    # as a template's or a magic item's; read by
+    # engine/defenses.collect_defenses.
+    defenses: dict = field(default_factory=dict)
     # Derived (set by loader from condition_key):
     ongoing_condition: Callable | None = field(default=None, init=False)
 
@@ -521,17 +526,20 @@ def build_buff_from_effects(
     mutually_exclusive_with: (list[str] | None) = None,
     condition_key: str = "",
     size_steps: int = 0,
+    defenses: dict | None = None,
 ) -> BuffDefinition | None:
     """
     Build a BuffDefinition from raw effect dicts.
 
-    Returns None if there is nothing to build: no effects and
-    no size change.
+    Returns None if there is nothing to build: no effects,
+    no size change and no defenses. A buff may be defenses
+    only -- stoneskin grants damage reduction and no pool
+    bonus at all.
     Resolves BonusType enums and condition_keys.
     Raises ValueError on unknown bonus_type or
     condition_key.
     """
-    if not effects_raw and not size_steps:
+    if not effects_raw and not size_steps and not defenses:
         return None
 
     bt_map: dict[str, BonusType] = {bt.value: bt for bt in BonusType}
@@ -593,6 +601,7 @@ def build_buff_from_effects(
         note=note,
         condition_key=condition_key,
         size_steps=size_steps,
+        defenses=defenses or {},
     )
     if ongoing is not None:
         defn.ongoing_condition = ongoing
