@@ -140,7 +140,8 @@ class RaceRegistry:
 # apply_race / remove_race
 # -----------------------------------------------------------
 
-_RACE_SOURCE_KEY = "race:ability_mods"
+# Read by Character._racial_ability_bonus, so it is public.
+RACE_SOURCE_KEY = "race:ability_mods"
 _RACE_SPEED_KEY = "race:speed"
 
 
@@ -161,7 +162,7 @@ def apply_race(defn: RaceDefinition, character: "Character") -> None:
             bonus_type=mod.bonus_type,
             source=defn.name,
         )
-        pool.set_source(_RACE_SOURCE_KEY, [entry])
+        pool.set_source(RACE_SOURCE_KEY, [entry])
         character._graph.invalidate_pool(pool_key)
 
     character._race_size = defn.size
@@ -201,7 +202,7 @@ def remove_race(defn: RaceDefinition, character: "Character") -> None:
         pool_key = f"{mod.ability}_score"
         pool = character.get_pool(pool_key)
         if pool is not None:
-            pool.clear_source(_RACE_SOURCE_KEY)
+            pool.clear_source(RACE_SOURCE_KEY)
             character._graph.invalidate_pool(pool_key)
 
     character._race_base_speed = 30

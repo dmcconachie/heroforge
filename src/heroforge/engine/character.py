@@ -61,6 +61,7 @@ from heroforge.engine.enums import (
 )
 from heroforge.engine.feats import FeatKind
 from heroforge.engine.gates import make_condition
+from heroforge.engine.races import RACE_SOURCE_KEY
 from heroforge.engine.resources import ResourceTracker
 from heroforge.engine.size import net_size_steps, step_size
 from heroforge.engine.skills import max_skill_ranks
@@ -1128,16 +1129,34 @@ class Character:
 
     def int_mod_at_level(self, char_level: int) -> int:
         """
-        INT modifier using base + bumps/inherent up
-        to *char_level*.  Used for skill-point budgets
-        so that later INT changes are not retroactive.
+        INT modifier as it stood at *char_level*.
+
+        Base score, plus the racial modifier, plus only
+        those bumps and inherent bonuses taken at or before
+        *char_level* — so a later INT gain is not
+        retroactive when a skill-point budget is checked.
+
+        The racial modifier has no level: you are your race
+        from 1st level, so it counts at every level.
         """
         base = self._ability_scores[Ability.INT]
+        racial = self._racial_ability_bonus(Ability.INT)
         bumps = sum(
             lv.ability_bump == Ability.INT for lv in self.levels[:char_level]
         )
         inherent = self._inherent_bonus_at_level(Ability.INT, char_level)
-        return (base + bumps + inherent - 10) // 2
+        return (base + racial + bumps + inherent - 10) // 2
+
+    def _racial_ability_bonus(self, ability: Ability) -> int:
+        """
+        The race's own modifier to *ability*, read off the
+        score pool rather than the current total so that
+        buffs and templates are excluded.
+        """
+        pool = self.get_pool(f"{ability}_score")
+        if pool is None:
+            return 0
+        return sum(e.value for e in pool.entries_for(RACE_SOURCE_KEY))
 
     def set_level_ability_bump(
         self,

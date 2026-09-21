@@ -27,6 +27,8 @@ from heroforge.engine.character import (
     CharacterLevel,
 )
 from heroforge.engine.enums import Ability, CreatureType
+from heroforge.engine.races import RaceAbilityMod, RaceDefinition, apply_race
+from heroforge.rules.rules import get_rules
 
 # ===========================================================================
 # Helpers
@@ -992,3 +994,80 @@ class TestTouchAndFlatFootedAc:
         c = self._char("Barbarian", 5)
         assert c.has_class_feature("uncanny_dodge") is True
         assert c.flatfooted_ac() == c.ac == 12
+
+
+class TestRacialIntReachesPerLevelSkillPoints:
+    """
+    Regression: int_mod_at_level read the raw base score and
+    the level bumps, and ignored every pool-based source.
+    Racial ability modifiers are pool entries, so a race
+    with an INT modifier was invisible to the skill-point
+    budget — a half-orc (INT -2) got a point per level too
+    many, and a gray elf (INT +2) would get one too few.
+
+    The level filter still has to hold: a bump taken later
+    must not reach an earlier level.
+    """
+
+    @staticmethod
+    def _wizard(levels: int = 4) -> Character:
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 10)
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Wizard",
+                    hp_roll=4,
+                )
+                for i in range(levels)
+            ]
+        )
+        return c
+
+    @staticmethod
+    def _race_with_int(value: int) -> RaceDefinition:
+        """A stand-in race carrying only an INT modifier."""
+        return RaceDefinition(
+            name="Testfolk",
+            ability_modifiers=[
+                RaceAbilityMod(
+                    ability=Ability.INT,
+                    value=value,
+                    bonus_type=BonusType.RACIAL,
+                )
+            ],
+        )
+
+    def test_half_orc_int_penalty_counts(self) -> None:
+        c = self._wizard()
+        apply_race(get_rules().races.require("Half-Orc"), c)
+        assert c.int_score == 8
+        assert c.int_mod_at_level(4) == -1
+
+    def test_a_racial_int_bonus_counts(self) -> None:
+        """The gray elf shape, which the data does not yet have."""
+        c = self._wizard()
+        apply_race(self._race_with_int(2), c)
+        assert c.int_score == 12
+        assert c.int_mod_at_level(4) == 1
+
+    def test_skill_points_follow_the_racial_modifier(self) -> None:
+        plain = self._wizard()
+        assert plain.skill_points_for_level(4) == 2  # wizard 2 + 0
+
+        penalised = self._wizard()
+        apply_race(get_rules().races.require("Half-Orc"), penalised)
+        assert penalised.skill_points_for_level(4) == 1  # 2 - 1
+
+        gifted = self._wizard()
+        apply_race(self._race_with_int(2), gifted)
+        assert gifted.skill_points_for_level(4) == 3  # 2 + 1
+
+    def test_a_later_bump_is_still_not_retroactive(self) -> None:
+        c = self._wizard(levels=8)
+        apply_race(self._race_with_int(2), c)
+        c.set_level_ability_bump(8, Ability.INT)  # INT 12 -> 13
+        assert c.int_mod_at_level(4) == 1  # racial only
+        assert c.int_mod_at_level(8) == 1  # 13 is still +1
