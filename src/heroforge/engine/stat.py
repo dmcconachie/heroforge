@@ -70,7 +70,10 @@ class StatNode:
     inputs: list[str] = field(default_factory=list)
     # A compute may take either (bonus_total) or (inputs, bonus_total);
     # the graph dispatches based on declared arity.
-    compute: str | Callable[..., int] | None = field(default=None, repr=False)
+    # The loader resolves a YAML strategy name to the
+    # callable before constructing the node, so a str never
+    # reaches here; None is filled in by __post_init__.
+    compute: Callable[..., int] | None = field(default=None, repr=False)
     pools: list[str] = field(default_factory=list)
     description: str = ""
     sheet: int = 0
@@ -239,6 +242,8 @@ class StatGraph:
             if pk in self._pools
         )
 
+        # __post_init__ always leaves a callable behind.
+        assert node.compute is not None
         if node._takes_inputs:
             # Resolve declared inputs only when compute needs them.
             input_values: dict[str, int] = {

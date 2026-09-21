@@ -55,8 +55,11 @@ from heroforge.engine.enums import (
     Ability,
     Alignment,
     ArmorCategory,
+    CreatureType,
     LoadCategory,
+    Size,
 )
+from heroforge.engine.feats import FeatKind
 from heroforge.engine.gates import make_condition
 from heroforge.engine.resources import ResourceTracker
 from heroforge.engine.size import net_size_steps, step_size
@@ -272,14 +275,24 @@ class Character:
         # list of TemplateApplication objects (from engine/templates.py)
 
         # Template-derived character state (written by engine/templates.py)
-        self._creature_type_override: str | None = None
+        self._creature_type_override: CreatureType | None = None
+        self._size_override: Size | None = None
         self._template_subtypes: list = []
 
-        # Race-derived state (written by engine/classes_races.apply_race)
+        # Race-derived state (written by engine/classes_races.apply_race).
+        # None until a race is applied: a character with no
+        # race has no creature type or size, and saying so
+        # is better than defaulting to Humanoid/Medium here
+        # and having every reader believe it.
         self._race_base_speed: int = 30
-        self._race_creature_type: str = "Humanoid"
+        self._race_creature_type: CreatureType | None = None
+        self._race_size: Size | None = None
         self._race_subtypes: list = []
         self._race_favored_class: str = "any"
+
+        # Derived-pool consumer specs, installed by
+        # engine/derived_pools.install_consumers.
+        self._derived_consumer_specs: list[dict] = []
 
         self.notes: str = ""
 
@@ -953,7 +966,19 @@ class Character:
         return counts
 
     @property
-    def size(self) -> str:
+    def creature_type(self) -> CreatureType | None:
+        """
+        Current creature type, or None before a race is
+        applied.
+
+        A template that changes type outright wins over the
+        race's own type — a Lich is Undead whatever it used
+        to be.
+        """
+        return self._creature_type_override or self._race_creature_type
+
+    @property
+    def size(self) -> Size:
         """
         Current size category.
 
@@ -961,11 +986,11 @@ class Character:
         effects (Enlarge Person, Reduce Person, Righteous
         Might) move it by whole categories on top.
         """
-        base = getattr(self, "_size_override", None) or self._base_size
+        base = self._size_override or self._base_size
         steps = net_size_steps(self._active_size_steps())
         if steps == 0:
             return base
-        return step_size(base, steps).value
+        return step_size(base, steps)
 
     def _active_size_steps(self) -> list[int]:
         """Size steps contributed by every active buff."""
@@ -976,9 +1001,9 @@ class Character:
         ]
 
     @property
-    def _base_size(self) -> str:
+    def _base_size(self) -> Size:
         """Base size from race.  Defaults to Medium until race is loaded."""
-        return getattr(self, "_race_size", "Medium")
+        return self._race_size or Size.MEDIUM
 
     def attack_iteratives(self, melee: bool = True) -> list[int]:
         """
@@ -1450,24 +1475,26 @@ class Character:
         if defn is None:
             return
 
-        # Apply effects based on feat kind
-        # Compare kind using .value to handle FeatKind enum or plain string
-        kind_val = getattr(defn, "kind", None)
-        if hasattr(kind_val, "value"):
-            kind_val = kind_val.value
-
-        if kind_val == "always_on":
+        # Apply effects based on feat kind.
+        if defn.kind is FeatKind.ALWAYS_ON:
             # Selection feats (Skill Focus, Weapon Focus) build their
             # buff once the chosen skill/weapon is known; the choice
             # arrives via the `parameter` argument.
             if defn.has_selection:
-                buff = defn.build_buff_definition(selection=parameter)
+                buff = defn.build_buff_definition(
+                    selection=(
+                        str(parameter) if parameter is not None else None
+                    )
+                )
             else:
                 buff = defn.buff_definition
             if buff is not None:
                 self._apply_feat_pool_bonuses(key, buff)
 
-        elif kind_val == "conditional" and defn.buff_definition is not None:
+        elif (
+            defn.kind is FeatKind.CONDITIONAL
+            and defn.buff_definition is not None
+        ):
             # Register but do NOT activate — user toggles from Buffs panel
             pairs = defn.buff_definition.pool_entries(0, self)
             if key not in self._buff_states:
@@ -1504,15 +1531,11 @@ class Character:
         if defn is None:
             return
 
-        kind_val = getattr(defn, "kind", None)
-        if hasattr(kind_val, "value"):
-            kind_val = kind_val.value
-
         # Each instance owns its own pool source, so reverse them
         # one at a time using that instance's own selection.
         for entry in targets:
             key = feat_key_of(entry)
-            if kind_val == "always_on":
+            if defn.kind is FeatKind.ALWAYS_ON:
                 if defn.has_selection:
                     buff = defn.build_buff_definition(
                         selection=entry.get("parameter")
@@ -1521,7 +1544,7 @@ class Character:
                     buff = defn.buff_definition
                 if buff is not None:
                     self._remove_feat_pool_bonuses(key, buff)
-            elif kind_val == "conditional" and key in self._buff_states:
+            elif defn.kind is FeatKind.CONDITIONAL and key in self._buff_states:
                 self.toggle_buff(key, False)
                 del self._buff_states[key]
                 self._buff_entries.pop(key, None)

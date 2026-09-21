@@ -131,4 +131,5 @@ class TestSpellMetaSpotChecks:
     def test_specialty_school_can_be_matched(self) -> None:
         """The point of the data: schools are comparable to School."""
         fireball = get_rules().spells.get("Fireball")
+        assert fireball is not None
         assert fireball.school == School.EVOCATION

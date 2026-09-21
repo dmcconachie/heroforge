@@ -9,7 +9,16 @@ breakdown helper.  Each test is named to describe exactly what rule or
 behaviour it is verifying so failures are immediately actionable.
 """
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, cast
+
 import pytest
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from heroforge.engine.character import Character
 
 from heroforge.engine.bonus import (
     ALWAYS_STACKING,
@@ -28,7 +37,7 @@ def entry(
     value: int,
     btype: BonusType,
     source: str = "test",
-    condition: object = None,
+    condition: "Callable[[Character], bool] | None" = None,
 ) -> BonusEntry:
     return BonusEntry(
         value=value, bonus_type=btype, source=source, condition=condition
@@ -189,16 +198,28 @@ class TestAggregate:
 
     def test_active_condition_entry_is_included(self) -> None:
         char = self.MockChar(is_humanoid=True)
-        e = entry(2, BonusType.ENHANCEMENT, condition=lambda c: c.is_humanoid)
-        assert aggregate([e], char) == 2
+        e = entry(
+            2,
+            BonusType.ENHANCEMENT,
+            condition=lambda c: bool(getattr(c, "is_humanoid", False)),
+        )
+        assert aggregate([e], cast("Character", char)) == 2
 
     def test_inactive_condition_entry_is_excluded(self) -> None:
         char = self.MockChar(is_humanoid=False)
-        e = entry(2, BonusType.ENHANCEMENT, condition=lambda c: c.is_humanoid)
-        assert aggregate([e], char) == 0
+        e = entry(
+            2,
+            BonusType.ENHANCEMENT,
+            condition=lambda c: bool(getattr(c, "is_humanoid", False)),
+        )
+        assert aggregate([e], cast("Character", char)) == 0
 
     def test_conditional_entry_without_character_is_excluded(self) -> None:
-        e = entry(4, BonusType.MORALE, condition=lambda c: c.raging)
+        e = entry(
+            4,
+            BonusType.MORALE,
+            condition=lambda c: bool(getattr(c, "raging", False)),
+        )
         assert aggregate([e], character=None) == 0
 
     def test_conditional_wins_over_unconditional_same_type(self) -> None:
@@ -208,11 +229,11 @@ class TestAggregate:
                 4,
                 BonusType.ENHANCEMENT,
                 "Bull's Strength",
-                condition=lambda c: c.bs_active,
+                condition=lambda c: bool(getattr(c, "bs_active", False)),
             ),
             entry(2, BonusType.ENHANCEMENT, "Gauntlets"),
         ]
-        assert aggregate(entries, char) == 4
+        assert aggregate(entries, cast("Character", char)) == 4
 
     def test_conditional_loses_when_inactive(self) -> None:
         char = self.MockChar(bs_active=False)
@@ -221,11 +242,11 @@ class TestAggregate:
                 4,
                 BonusType.ENHANCEMENT,
                 "Bull's Strength",
-                condition=lambda c: c.bs_active,
+                condition=lambda c: bool(getattr(c, "bs_active", False)),
             ),
             entry(2, BonusType.ENHANCEMENT, "Gauntlets"),
         ]
-        assert aggregate(entries, char) == 2
+        assert aggregate(entries, cast("Character", char)) == 2
 
 
 # ===========================================================================
@@ -358,12 +379,15 @@ class TestBonusPool:
         char = C()
         p = pool()
         rage_e = entry(
-            4, BonusType.MORALE, "Rage", condition=lambda c: c.raging
+            4,
+            BonusType.MORALE,
+            "Rage",
+            condition=lambda c: bool(getattr(c, "raging", False)),
         )
         bless_e = entry(1, BonusType.MORALE, "Bless")
         p.set_source("Rage", [rage_e])
         p.set_source("Bless", [bless_e])
-        active = p.active_entries(char)
+        active = p.active_entries(cast("Character", char))
         assert rage_e in active
         assert bless_e in active
 
@@ -374,10 +398,17 @@ class TestBonusPool:
         char = C()
         p = pool()
         p.set_source(
-            "Rage", [entry(4, BonusType.MORALE, condition=lambda c: c.raging)]
+            "Rage",
+            [
+                entry(
+                    4,
+                    BonusType.MORALE,
+                    condition=lambda c: bool(getattr(c, "raging", False)),
+                )
+            ],
         )
-        assert p.active_entries(char) == []
-        assert p.total(char) == 0
+        assert p.active_entries(cast("Character", char)) == []
+        assert p.total(cast("Character", char)) == 0
 
     def test_repr_is_informative(self) -> None:
         p = BonusPool("ac")

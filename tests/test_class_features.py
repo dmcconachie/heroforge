@@ -16,6 +16,7 @@ from heroforge.engine.effects import (
     remove_buff,
 )
 from heroforge.engine.enums import (
+    Ability,
     ArmorCategory,
 )
 from heroforge.engine.equipment import (
@@ -49,9 +50,9 @@ class TestBarbarianRage:
     def test_rage_adds_str_con(self) -> None:
         reg = _load_class_buffs()
         c = Character()
-        c.set_ability_score("str", 16)
-        c.set_ability_score("con", 14)
-        rage = reg.get("Barbarian Rage")
+        c.set_ability_score(Ability.STR, 16)
+        c.set_ability_score(Ability.CON, 14)
+        rage = reg.require("Barbarian Rage")
         assert rage is not None
         apply_buff(rage, c)
         assert c.get("str_score") == 20  # 16+4
@@ -60,8 +61,8 @@ class TestBarbarianRage:
     def test_rage_will_bonus(self) -> None:
         reg = _load_class_buffs()
         c = Character()
-        c.set_ability_score("wis", 10)
-        rage = reg.get("Barbarian Rage")
+        c.set_ability_score(Ability.WIS, 10)
+        rage = reg.require("Barbarian Rage")
         apply_buff(rage, c)
         # Will save = base(0) + WIS(0) + morale(2)
         assert c.get("will_save") == 2
@@ -69,7 +70,7 @@ class TestBarbarianRage:
     def test_rage_ac_penalty(self) -> None:
         reg = _load_class_buffs()
         c = Character()
-        rage = reg.get("Barbarian Rage")
+        rage = reg.require("Barbarian Rage")
         base_ac = c.get("ac")
         apply_buff(rage, c)
         assert c.get("ac") == base_ac - 2
@@ -77,8 +78,8 @@ class TestBarbarianRage:
     def test_rage_remove(self) -> None:
         reg = _load_class_buffs()
         c = Character()
-        c.set_ability_score("str", 16)
-        rage = reg.get("Barbarian Rage")
+        c.set_ability_score(Ability.STR, 16)
+        rage = reg.require("Barbarian Rage")
         apply_buff(rage, c)
         remove_buff(rage, c)
         assert c.get("str_score") == 16
@@ -255,7 +256,7 @@ class TestPassiveFeaturesNotInBuffRegistry:
         state.load_rules()
         state.new_character()
         c = state.character
-        c.set_ability_score("cha", 14)
+        c.set_ability_score(Ability.CHA, 14)
         c.set_class_levels(
             [
                 CharacterLevel(
@@ -656,7 +657,7 @@ class TestMonkAcBreakdown:
 
         state = self._state()
         c = _make_monk(state, level=5, wis=14)
-        sheet = gather_sheet(c, state)  # type: ignore[arg-type]
+        sheet = gather_sheet(c)
         typed = sheet.combat.ac.typed
         # Wis 14 (+2 mod) + L5 monk bonus (+1) should
         # appear as two separate lines, not as

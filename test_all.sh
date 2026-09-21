@@ -22,15 +22,15 @@ if ! uv run yamllint .; then
 fi
 
 echo ""
-echo "=== pytest ==="
-if ! uv run pytest; then
-    failures+=("pytest: test failures")
-fi
-
-echo ""
 echo "=== pyright ==="
 if ! uv run pyright; then
     failures+=("pyright: test failures")
+fi
+
+echo ""
+echo "=== pytest ==="
+if ! uv run pytest; then
+    failures+=("pytest: test failures")
 fi
 
 echo ""

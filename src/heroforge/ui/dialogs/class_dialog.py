@@ -97,7 +97,9 @@ class ClassDialog(QDialog):
         for i, (cn, _) in enumerate(self._entries):
             if cn == name:
                 self._entries[i] = (name, level)
-                self._class_list.item(i).setText(f"{name} {level}")
+                row = self._class_list.item(i)
+                assert row is not None
+                row.setText(f"{name} {level}")
                 return
         self._entries.append((name, level))
         self._class_list.addItem(f"{name} {level}")

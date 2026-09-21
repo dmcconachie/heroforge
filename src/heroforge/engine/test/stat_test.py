@@ -16,12 +16,14 @@ Tests cover:
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 import pytest
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from heroforge.engine.character import Character
 
 from heroforge.engine.bonus import BonusEntry, BonusPool, BonusType
 from heroforge.engine.stat import (
@@ -42,7 +44,7 @@ from heroforge.engine.stat import (
 
 def simple_node(
     key: str,
-    base: int = 0,
+    base: int | None = 0,
     inputs: list[str] | None = None,
     pools: list[str] | None = None,
     compute: Callable | None = None,
@@ -424,7 +426,10 @@ class TestBonusPoolIntegration:
             "Rage",
             [
                 BonusEntry(
-                    4, BonusType.MORALE, "Rage", condition=lambda c: c.is_raging
+                    4,
+                    BonusType.MORALE,
+                    "Rage",
+                    condition=lambda c: bool(getattr(c, "is_raging", False)),
                 )
             ],
         )
@@ -440,7 +445,10 @@ class TestBonusPoolIntegration:
             "Rage",
             [
                 BonusEntry(
-                    4, BonusType.MORALE, "Rage", condition=lambda c: c.is_raging
+                    4,
+                    BonusType.MORALE,
+                    "Rage",
+                    condition=lambda c: bool(getattr(c, "is_raging", False)),
                 )
             ],
         )
@@ -448,7 +456,7 @@ class TestBonusPoolIntegration:
         g.register_node(simple_node("con_score", base=12, pools=["con_pool"]))
 
         char = MockCharacter(is_raging=True)
-        assert g.resolve("con_score", character=char) == 16
+        assert g.resolve("con_score", character=cast("Character", char)) == 16
 
     def test_conditional_bonus_excluded_when_inactive(self) -> None:
         g = StatGraph()
@@ -457,7 +465,10 @@ class TestBonusPoolIntegration:
             "Rage",
             [
                 BonusEntry(
-                    4, BonusType.MORALE, "Rage", condition=lambda c: c.is_raging
+                    4,
+                    BonusType.MORALE,
+                    "Rage",
+                    condition=lambda c: bool(getattr(c, "is_raging", False)),
                 )
             ],
         )
@@ -465,7 +476,7 @@ class TestBonusPoolIntegration:
         g.register_node(simple_node("con_score", base=12, pools=["con_pool"]))
 
         char = MockCharacter(is_raging=False)
-        assert g.resolve("con_score", character=char) == 12
+        assert g.resolve("con_score", character=cast("Character", char)) == 12
 
     def test_multiple_pools_on_one_node(self) -> None:
         g = StatGraph()
@@ -585,7 +596,9 @@ class TestComputeHelpers:
 
 
 class TestRealStatChains:
-    def _make_str_chain(self, base_str: int = 16) -> StatGraph:
+    def _make_str_chain(
+        self, base_str: int = 16
+    ) -> tuple[StatGraph, BonusPool, BonusPool]:
         """
         str_score → str_mod → attack_melee (simplified, no BAB)
         Demonstrates the canonical ability-score → modifier → downstream chain.

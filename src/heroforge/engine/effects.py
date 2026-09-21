@@ -58,6 +58,7 @@ from typing import TYPE_CHECKING
 from heroforge.engine.bonus import BonusEntry, BonusType
 from heroforge.engine.enums import (
     Ability,
+    CreatureType,
     SourceBook,
 )
 from heroforge.rules.core.pool_keys import PoolKey
@@ -505,10 +506,8 @@ def pool_entries_from_effects(
 
 # Condition keys map to Python callables.
 # The builder attaches these to BonusEffect.condition.
-CONDITION_REGISTRY: dict[str, object] = {
-    "humanoid_only": lambda char: (
-        getattr(char, "_race_type", "Humanoid") == "Humanoid"
-    ),
+CONDITION_REGISTRY: dict[str, "Callable[[Character], bool]"] = {
+    "humanoid_only": lambda char: char.creature_type == CreatureType.HUMANOID,
 }
 
 

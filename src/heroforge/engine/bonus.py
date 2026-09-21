@@ -31,6 +31,8 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from heroforge.engine.character import Character
 
 
@@ -102,7 +104,9 @@ class BonusEntry:
     value: int
     bonus_type: BonusType
     source: str = ""
-    condition: object = field(default=None, compare=False, hash=False)
+    condition: "Callable[[Character], bool] | None" = field(
+        default=None, compare=False, hash=False
+    )
 
     def is_active(self, character: "Character | None" = None) -> bool:
         if self.condition is None:

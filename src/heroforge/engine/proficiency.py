@@ -72,10 +72,10 @@ SHIELD_SRC = "nonproficient_shield"
 # What a feat grants. Armor Proficiency (Heavy) grants only
 # heavy: the chain is enforced by the feats' prerequisites,
 # not by implication here.
-_ARMOR_FEATS = {
-    "Armor Proficiency (Light)": "light",
-    "Armor Proficiency (Medium)": "medium",
-    "Armor Proficiency (Heavy)": "heavy",
+_ARMOR_FEATS: dict[str, ArmorCategory] = {
+    "Armor Proficiency (Light)": ArmorCategory.LIGHT,
+    "Armor Proficiency (Medium)": ArmorCategory.MEDIUM,
+    "Armor Proficiency (Heavy)": ArmorCategory.HEAVY,
 }
 
 _CATEGORY_FEATS = {
@@ -134,7 +134,7 @@ def character_proficiencies(character: "Character") -> _Merged:
             # weapon each.
             param = entry.get("parameter")
             if _CATEGORY_FEATS[name] == "simple" and not param:
-                merged.weapons.add("simple")
+                merged.weapons.add(WeaponCategory.SIMPLE)
             elif param:
                 merged.weapon_names.add(param)
 

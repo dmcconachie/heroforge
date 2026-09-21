@@ -20,6 +20,7 @@ import yaml
 from cattrs.errors import ClassValidationError
 
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.enums import Ability
 from heroforge.engine.equipment import equip_armor, unequip_armor
 from heroforge.engine.item_properties import (
     ItemPropertyDefinition,
@@ -33,6 +34,7 @@ from heroforge.engine.skills import (
     register_skills_on_character,
 )
 from heroforge.engine.weapons import register_weapons_on_character
+from heroforge.rules.known import KnownSkill
 from heroforge.rules.rules import get_rules
 from heroforge.rules.schema import converter
 
@@ -40,7 +42,7 @@ from heroforge.rules.schema import converter
 def _char(cls: str = "Rogue", level: int = 12) -> Character:
     c = Character(name="Sneak")
     register_skills_on_character(c)
-    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+    for ab in Ability:
         c.set_ability_score(ab, 10)
     c.levels = [
         CharacterLevel(character_level=i + 1, class_name=cls, hp_roll=6)
@@ -57,7 +59,7 @@ def _skill(c: Character, name: str) -> int:
 
 
 def _wear(c: Character, *properties: str) -> Character:
-    armor = get_rules().armor.get("Chain Shirt")
+    armor = get_rules().armor.require("Chain Shirt")
     equip_armor(c, armor, properties=list(properties))
     return c
 
@@ -189,7 +191,9 @@ class TestActivatedPropertiesAreNotWired:
 
     def test_they_still_show_on_the_sheet(self) -> None:
         c = _wear(_char(), "Blinking")
-        assert "Blinking" in gather_sheet(c, None).equipment.armor.properties
+        armor = gather_sheet(c).equipment.armor
+        assert armor is not None
+        assert "Blinking" in armor.properties
 
     @pytest.mark.parametrize(
         "prop",
@@ -218,30 +222,32 @@ class TestSpeedWeapon:
         return c
 
     def test_plain_weapon_iteratives(self) -> None:
-        w = gather_sheet(self._armed(), None).equipment.weapons[0]
+        w = gather_sheet(self._armed()).equipment.weapons[0]
         assert len(w.attack_iteratives) == 2
 
     def test_speed_adds_one_attack_at_the_top(self) -> None:
-        w = gather_sheet(self._armed("Speed"), None).equipment.weapons[0]
+        w = gather_sheet(self._armed("Speed")).equipment.weapons[0]
         assert len(w.attack_iteratives) == 3
         assert w.attack_iteratives[0] == w.attack_iteratives[1]
 
     def test_speed_is_not_a_bonus_on_the_line(self) -> None:
-        plain = gather_sheet(self._armed(), None).equipment.weapons[0]
-        fast = gather_sheet(self._armed("Speed"), None).equipment.weapons[0]
+        plain = gather_sheet(self._armed()).equipment.weapons[0]
+        fast = gather_sheet(self._armed("Speed")).equipment.weapons[0]
+        assert fast.attack is not None
+        assert plain.attack is not None
         assert fast.attack.total == plain.attack.total
 
 
 class TestDistance:
     """DMG p. 224: double the range increment."""
 
-    def _inc(self, *props: str) -> int:
+    def _inc(self, *props: str) -> int | None:
         c = _char()
         c.equipment["weapons"] = [
             {"base": "Longbow", "properties": list(props)}
         ]
         register_weapons_on_character(c)
-        return gather_sheet(c, None).equipment.weapons[0].range_inc
+        return gather_sheet(c).equipment.weapons[0].range_inc
 
     def test_plain_longbow(self) -> None:
         assert self._inc() == 100
@@ -359,9 +365,9 @@ equipment:
     def test_properties_survive_a_load(self, tmp_path: Path) -> None:
         path = tmp_path / "s.char.yaml"
         path.write_text(self.CHAR)
-        c = load_character(path, None)
-        sheet = gather_sheet(c, None)
-        assert sheet.skills["Hide"].typed["competence"] == 15
+        c = load_character(path)
+        sheet = gather_sheet(c)
+        assert sheet.skills[KnownSkill("Hide")].typed["competence"] == 15
         assert len(sheet.equipment.weapons[0].attack_iteratives) == 2
 
 
@@ -397,8 +403,7 @@ class TestPropertiesThatAdjustTheArmour:
 
     def test_it_reaches_the_dex_cap_on_ac(self) -> None:
         c = _char()
-        for ab in ("dex",):
-            c.set_ability_score(ab, 20)
+        c.set_ability_score(Ability.DEX, 20)
         _wear(c, "Nimbleness")
         # DEX +5 against a cap raised from 4 to 5.
         assert c.get("ac_dex_contribution") == 5

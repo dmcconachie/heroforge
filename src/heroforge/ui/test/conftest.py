@@ -19,4 +19,5 @@ def qapp() -> QApplication:
     app = QApplication.instance()
     if app is None:
         app = QApplication([])
+    assert isinstance(app, QApplication)
     return app

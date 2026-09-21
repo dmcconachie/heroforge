@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.enums import Ability
 from heroforge.engine.equipment import equip_armor
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
@@ -30,14 +31,14 @@ def _monk(
     level: int, weapon: str = "Unarmed Strike", flurry: bool = True
 ) -> Character:
     c = Character(name="Grasshopper")
-    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+    for ab in Ability:
         c.set_ability_score(ab, 10)
     c.levels = [
         CharacterLevel(character_level=i + 1, class_name="Monk", hp_roll=8)
         for i in range(level)
     ]
     c._invalidate_class_stats()
-    item = {"base": weapon}
+    item: dict[str, object] = {"base": weapon}
     if flurry:
         item["stances"] = ["flurry"]
     c.equipment["weapons"] = [item]
@@ -46,7 +47,7 @@ def _monk(
 
 
 def _sequence(c: Character) -> list[int]:
-    return gather_sheet(c, None).equipment.weapons[0].attack_iteratives
+    return gather_sheet(c).equipment.weapons[0].attack_iteratives
 
 
 # PHB Table 3-10, the Flurry of Blows Attack Bonus column, for
@@ -95,12 +96,14 @@ class TestThePenalty:
         belongs on the weapon's line and not only on the
         sequence -- the same reasoning as Rapid Shot's -2.
         """
-        weapon = gather_sheet(_monk(1), None).equipment.weapons[0]
+        weapon = gather_sheet(_monk(1)).equipment.weapons[0]
+        assert weapon.attack is not None
         assert weapon.attack.typed["flurry_of_blows"] == -2
         assert weapon.attack.total == weapon.attack_iteratives[0]
 
     def test_no_penalty_line_from_ninth(self) -> None:
-        weapon = gather_sheet(_monk(9), None).equipment.weapons[0]
+        weapon = gather_sheet(_monk(9)).equipment.weapons[0]
+        assert weapon.attack is not None
         assert "flurry_of_blows" not in weapon.attack.typed
 
 
@@ -124,7 +127,7 @@ class TestWhenItApplies:
     def test_not_while_armoured(self) -> None:
         """PHB: "When unarmored, a monk may strike with a flurry"."""
         c = _monk(20)
-        equip_armor(c, get_rules().armor.get("Chain Shirt"))
+        equip_armor(c, get_rules().armor.require("Chain Shirt"))
         register_weapons_on_character(c)
         assert not flurry_applies(c, c.equipment["weapons"][0])
 
@@ -134,7 +137,7 @@ class TestWhenItApplies:
             assert flurry_applies(c, c.equipment["weapons"][0]), weapon
 
     def test_the_stance_is_named_on_the_weapon(self) -> None:
-        name = gather_sheet(_monk(9), None).equipment.weapons[0].name
+        name = gather_sheet(_monk(9)).equipment.weapons[0].name
         assert "Flurry of Blows" in name
 
 
@@ -164,7 +167,7 @@ levels:
         )
         path = tmp_path / "m.char.yaml"
         path.write_text(body)
-        return load_character(path, None)
+        return load_character(path)
 
     def test_it_round_trips(self, tmp_path: Path) -> None:
         c = self._load(tmp_path, "Monk", "Unarmed Strike")

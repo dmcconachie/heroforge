@@ -10,7 +10,7 @@ can be swapped or tested without an AppState.
 
 Public API:
   SheetData         — dataclass carrying all page sections
-  gather(character, app_state) -> SheetData
+  gather(character) -> SheetData
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
-    from heroforge.ui.app_state import AppState
+from heroforge.engine.enums import Ability
 from heroforge.engine.skills import (
     class_skills_for_character,
     compute_skill_total,
@@ -123,10 +123,7 @@ class SheetData:
 # ---------------------------------------------------------------------------
 
 
-def gather(
-    character: "Character",
-    app_state: "AppState",  # noqa: ARG001  # kept for API compat
-) -> SheetData:
+def gather(character: "Character") -> SheetData:
     """
     Extract all display data from a Character into a SheetData.
     Pure function — no side effects.
@@ -149,12 +146,12 @@ def gather(
 
     # ── Abilities ────────────────────────────────────────────────────────
     _AB_LABELS = [
-        ("STR", "str"),
-        ("DEX", "dex"),
-        ("CON", "con"),
-        ("INT", "int"),
-        ("WIS", "wis"),
-        ("CHA", "cha"),
+        ("STR", Ability.STR),
+        ("DEX", Ability.DEX),
+        ("CON", Ability.CON),
+        ("INT", Ability.INT),
+        ("WIS", Ability.WIS),
+        ("CHA", Ability.CHA),
     ]
     for label, ab in _AB_LABELS:
         score = character.get_ability_score(ab)

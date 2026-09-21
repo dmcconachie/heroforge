@@ -15,6 +15,7 @@ from pathlib import Path
 import pytest
 
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.enums import Ability
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.weapons import (
@@ -26,7 +27,7 @@ from heroforge.rules.rules import get_rules
 
 def _slayer(*weapons: dict) -> Character:
     c = Character(name="Hunter")
-    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+    for ab in Ability:
         c.set_ability_score(ab, 12)
     c.levels = [
         CharacterLevel(character_level=i + 1, class_name="Rogue", hp_roll=6)
@@ -65,7 +66,7 @@ class TestItShowsOnTheWeapon:
             {"base": "Dagger", "features": ["weapon_bond"]},
             {"base": "Dagger"},
         )
-        weapons = gather_sheet(c, None).equipment.weapons
+        weapons = gather_sheet(c).equipment.weapons
         assert "Weapon Bond" in weapons[0].properties
         assert "Weapon Bond" not in weapons[1].properties
 
@@ -77,12 +78,12 @@ class TestItShowsOnTheWeapon:
                 "features": ["weapon_bond"],
             }
         )
-        props = gather_sheet(c, None).equipment.weapons[0].properties
+        props = gather_sheet(c).equipment.weapons[0].properties
         assert props == ["Sacred", "Weapon Bond"]
 
     def test_a_weapon_with_no_features_is_unchanged(self) -> None:
         c = _slayer({"base": "Dagger", "properties": ["Sacred"]})
-        props = gather_sheet(c, None).equipment.weapons[0].properties
+        props = gather_sheet(c).equipment.weapons[0].properties
         assert props == ["Sacred"]
 
     def test_the_helper_lists_them(self) -> None:
@@ -94,7 +95,7 @@ class TestValidation:
     def _load(self, tmp_path: Path, body: str) -> Character:
         path = tmp_path / "s.char.yaml"
         path.write_text(body)
-        return load_character(path, None)
+        return load_character(path)
 
     HEAD = """
 identity:
@@ -129,7 +130,7 @@ levels:
 """
         )
         c = self._load(tmp_path, body)
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert "Weapon Bond" in sheet.equipment.weapons[0].properties
 
     def test_a_feature_the_character_lacks_is_refused(

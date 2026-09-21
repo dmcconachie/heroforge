@@ -44,7 +44,7 @@ from pathlib import Path
 
 from heroforge.engine.character import Character
 from heroforge.engine.effects import apply_buff
-from heroforge.engine.enums import CreatureType
+from heroforge.engine.enums import Ability, CreatureType
 from heroforge.engine.races import (
     apply_race,
     remove_race,
@@ -76,7 +76,7 @@ def build_char(
     c = state.character
     # Set abilities BEFORE race (race adds bonuses)
     for ab, val in abilities.items():
-        c.set_ability_score(ab, val)
+        c.set_ability_score(Ability(ab), val)
     # Apply race
     race_defn = state.race_registry.require(race)
     if c.race:

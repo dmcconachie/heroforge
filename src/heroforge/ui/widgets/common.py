@@ -15,6 +15,7 @@ Reusable widgets used across all tabs.
 from __future__ import annotations
 
 from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QFocusEvent
 from PyQt6.QtWidgets import (
     QComboBox,
     QFrame,
@@ -290,6 +291,6 @@ class AutoCloseCombo(QComboBox):
     subclass listens for focusOut and hides the popup.
     """
 
-    def focusOutEvent(self, event: object) -> None:
+    def focusOutEvent(self, e: QFocusEvent | None) -> None:
         self.hidePopup()
-        super().focusOutEvent(event)  # type: ignore[arg-type]
+        super().focusOutEvent(e)

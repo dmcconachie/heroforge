@@ -20,7 +20,11 @@ Covers:
 
 from __future__ import annotations
 
+import pytest
+
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.classes import CastType
+from heroforge.engine.enums import Ability, Alignment, CreatureType
 from heroforge.engine.prerequisites import (
     AbilityPrereq,
     AlignmentPrereq,
@@ -34,6 +38,7 @@ from heroforge.engine.prerequisites import (
     FeatPrereq,
     NoneOfPrereq,
     PrereqResult,
+    Prerequisite,
     PrerequisiteChecker,
     ProficiencyPrereq,
     RacePrereq,
@@ -87,7 +92,10 @@ def fighter(n: int) -> Character:
     return c
 
 
-def make_checker(*feats_with_prereqs: object) -> PrerequisiteChecker:
+def make_checker(
+    *feats_with_prereqs: tuple[str, Prerequisite | None]
+    | tuple[str, Prerequisite | None, bool],
+) -> PrerequisiteChecker:
     """
     Create a PrerequisiteChecker and register feats.
     feats_with_prereqs: (name, prereq, snapshot=False) tuples.
@@ -128,21 +136,21 @@ class TestStatPrereq:
 class TestAbilityPrereq:
     def test_met_when_dex_sufficient(self) -> None:
         c = char()
-        c.set_ability_score("dex", 19)
-        result, _ = AbilityPrereq("dex", 19).check(c)
+        c.set_ability_score(Ability.DEX, 19)
+        result, _ = AbilityPrereq(Ability.DEX, 19).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_when_dex_insufficient(self) -> None:
         c = char()
-        c.set_ability_score("dex", 15)
-        result, details = AbilityPrereq("dex", 19).check(c)
+        c.set_ability_score(Ability.DEX, 15)
+        result, details = AbilityPrereq(Ability.DEX, 19).check(c)
         assert result == PrereqResult.UNMET
         assert "19" in details[0].need
 
     def test_str_prereq(self) -> None:
         c = char()
-        c.set_ability_score("str", 13)
-        result, _ = AbilityPrereq("str", 13).check(c)
+        c.set_ability_score(Ability.STR, 13)
+        result, _ = AbilityPrereq(Ability.STR, 13).check(c)
         assert result == PrereqResult.MET
 
 
@@ -227,13 +235,15 @@ class TestAlignmentPrereq:
     def test_met_for_lawful_good(self) -> None:
         c = char()
         c.alignment = "lawful_good"
-        result, _ = AlignmentPrereq(["lawful_good"]).check(c)
+        result, _ = AlignmentPrereq([Alignment.LAWFUL_GOOD]).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_for_chaotic_neutral(self) -> None:
         c = char()
         c.alignment = "chaotic_neutral"
-        result, _ = AlignmentPrereq(["lawful_good", "lawful_neutral"]).check(c)
+        result, _ = AlignmentPrereq(
+            [Alignment.LAWFUL_GOOD, Alignment.LAWFUL_NEUTRAL]
+        ).check(c)
         assert result == PrereqResult.UNMET
 
 
@@ -241,19 +251,19 @@ class TestCreatureTypePrereq:
     def test_met_for_humanoid(self) -> None:
         c = char()
         c.race = "Human"
-        result, _ = CreatureTypePrereq(["Humanoid"]).check(c)
+        result, _ = CreatureTypePrereq([CreatureType.HUMANOID]).check(c)
         assert result == PrereqResult.MET
 
     def test_unmet_for_wrong_type(self) -> None:
         c = char()
         c.race = "Warforged"
-        result, _ = CreatureTypePrereq(["Humanoid"]).check(c)
+        result, _ = CreatureTypePrereq([CreatureType.HUMANOID]).check(c)
         assert result == PrereqResult.UNMET
 
     def test_met_for_outsider(self) -> None:
         c = char()
         c.race = "Tiefling"
-        result, _ = CreatureTypePrereq(["Outsider"]).check(c)
+        result, _ = CreatureTypePrereq([CreatureType.OUTSIDER]).check(c)
         assert result == PrereqResult.MET
 
 
@@ -266,13 +276,13 @@ class TestAllOfPrereq:
     def test_met_when_all_children_met(self) -> None:
         c = fighter(6)
         c.feats = [{"name": "Point Blank Shot"}, {"name": "Precise Shot"}]
-        c.set_ability_score("dex", 19)
+        c.set_ability_score(Ability.DEX, 19)
         prereq = AllOfPrereq(
             [
                 StatPrereq("bab", 6),
                 FeatPrereq("Point Blank Shot"),
                 FeatPrereq("Precise Shot"),
-                AbilityPrereq("dex", 19),
+                AbilityPrereq(Ability.DEX, 19),
             ]
         )
         result, details = prereq.check(c)
@@ -288,13 +298,13 @@ class TestAllOfPrereq:
 
     def test_unmet_collects_all_failing_details(self) -> None:
         c = char()
-        c.set_ability_score("dex", 13)
-        c.set_ability_score("str", 13)
+        c.set_ability_score(Ability.DEX, 13)
+        c.set_ability_score(Ability.STR, 13)
         c.feats = []
         prereq = AllOfPrereq(
             [
-                AbilityPrereq("dex", 19),
-                AbilityPrereq("str", 19),
+                AbilityPrereq(Ability.DEX, 19),
+                AbilityPrereq(Ability.STR, 19),
                 FeatPrereq("Point Blank Shot"),
             ]
         )
@@ -430,47 +440,47 @@ class TestCapabilityCheckerSpellcasting:
     def test_wizard_5_can_cast_level_3(self) -> None:
         c = Character()
         c.set_class_levels(with_class("Wizard", 5))
-        assert self._cap().can_cast(c, 3, "arcane") is True
+        assert self._cap().can_cast(c, 3, CastType.ARCANE) is True
 
     def test_wizard_1_can_cast_level_1(self) -> None:
         c = Character()
         c.set_class_levels(with_class("Wizard", 1))
-        assert self._cap().can_cast(c, 1, "arcane") is True
+        assert self._cap().can_cast(c, 1, CastType.ARCANE) is True
 
     def test_fighter_cannot_cast(self) -> None:
         c = fighter(10)
-        assert self._cap().can_cast(c, 1, "either") is False
+        assert self._cap().can_cast(c, 1, CastType.EITHER) is False
 
     def test_paladin_4_can_cast_divine_1(self) -> None:
         c = Character()
         c.set_class_levels(with_class("Paladin", 4))
-        assert self._cap().can_cast(c, 1, "divine") is True
+        assert self._cap().can_cast(c, 1, CastType.DIVINE) is True
 
     def test_paladin_3_cannot_cast(self) -> None:
         """Paladin gets spells at level 4."""
         c = Character()
         c.set_class_levels(with_class("Paladin", 3))
-        assert self._cap().can_cast(c, 1, "divine") is False
+        assert self._cap().can_cast(c, 1, CastType.DIVINE) is False
 
     def test_cleric_1_can_cast_divine(self) -> None:
         c = Character()
         c.set_class_levels(with_class("Cleric", 1))
-        assert self._cap().can_cast(c, 1, "divine") is True
+        assert self._cap().can_cast(c, 1, CastType.DIVINE) is True
 
     def test_cleric_cannot_cast_arcane(self) -> None:
         c = Character()
         c.set_class_levels(with_class("Cleric", 10))
-        assert self._cap().can_cast(c, 1, "arcane") is False
+        assert self._cap().can_cast(c, 1, CastType.ARCANE) is False
 
     def test_either_accepts_arcane_caster(self) -> None:
         c = Character()
         c.set_class_levels(with_class("Sorcerer", 3))
-        assert self._cap().can_cast(c, 1, "either") is True
+        assert self._cap().can_cast(c, 1, CastType.EITHER) is True
 
     def test_either_accepts_divine_caster(self) -> None:
         c = Character()
         c.set_class_levels(with_class("Cleric", 3))
-        assert self._cap().can_cast(c, 1, "either") is True
+        assert self._cap().can_cast(c, 1, CastType.EITHER) is True
 
 
 # ===========================================================================
@@ -600,7 +610,7 @@ class TestFeatAvailabilityStates:
                     StatPrereq("bab", 11, label="BAB"),
                     FeatPrereq("Point Blank Shot"),
                     FeatPrereq("Precise Shot"),
-                    AbilityPrereq("dex", 19),
+                    AbilityPrereq(Ability.DEX, 19),
                 ]
             ),
         )
@@ -615,7 +625,7 @@ class TestFeatAvailabilityStates:
         → CHAIN_PARTIAL.
         """
         c = fighter(11)
-        c.set_ability_score("dex", 19)
+        c.set_ability_score(Ability.DEX, 19)
         c.feats = [{"name": "Point Blank Shot"}]  # has one, not the other
 
         chk = PrerequisiteChecker()
@@ -626,7 +636,7 @@ class TestFeatAvailabilityStates:
                     StatPrereq("bab", 11, label="BAB"),
                     FeatPrereq("Point Blank Shot"),
                     FeatPrereq("Precise Shot"),
-                    AbilityPrereq("dex", 19),
+                    AbilityPrereq(Ability.DEX, 19),
                 ]
             ),
         )
@@ -720,7 +730,7 @@ class TestPrcAvailability:
         c.race = "Elf"
         c.set_class_levels(with_class("Fighter", 6, bab=6))
         c.feats = [{"name": "Point Blank Shot"}, {"name": "Precise Shot"}]
-        c.set_ability_score("dex", 10)
+        c.set_ability_score(Ability.DEX, 10)
 
         chk = PrerequisiteChecker()
         chk.register_prc(
@@ -733,7 +743,7 @@ class TestPrcAvailability:
                     AnyOfPrereq(
                         [RacePrereq(["Elf"]), RacePrereq(["Half-Elf"])]
                     ),
-                    SpellcastingPrereq(1, "arcane"),
+                    SpellcastingPrereq(1, CastType.ARCANE),
                 ]
             ),
         )
@@ -762,7 +772,7 @@ class TestPrcAvailability:
                     AnyOfPrereq(
                         [RacePrereq(["Elf"]), RacePrereq(["Half-Elf"])]
                     ),
-                    SpellcastingPrereq(1, "arcane"),
+                    SpellcastingPrereq(1, CastType.ARCANE),
                 ]
             ),
         )
@@ -801,7 +811,9 @@ class TestOngoingViolations:
 
         chk = PrerequisiteChecker()
         chk.register_prc(
-            "Paladin", None, ongoing_prereq=AlignmentPrereq(["lawful_good"])
+            "Paladin",
+            None,
+            ongoing_prereq=AlignmentPrereq([Alignment.LAWFUL_GOOD]),
         )
         violations = chk.ongoing_violations(c)
         assert violations == []
@@ -813,7 +825,9 @@ class TestOngoingViolations:
 
         chk = PrerequisiteChecker()
         chk.register_prc(
-            "Paladin", None, ongoing_prereq=AlignmentPrereq(["lawful_good"])
+            "Paladin",
+            None,
+            ongoing_prereq=AlignmentPrereq([Alignment.LAWFUL_GOOD]),
         )
         violations = chk.ongoing_violations(c)
         assert len(violations) == 1
@@ -823,7 +837,9 @@ class TestOngoingViolations:
         c = fighter(5)  # no Paladin levels
         chk = PrerequisiteChecker()
         chk.register_prc(
-            "Paladin", None, ongoing_prereq=AlignmentPrereq(["lawful_good"])
+            "Paladin",
+            None,
+            ongoing_prereq=AlignmentPrereq([Alignment.LAWFUL_GOOD]),
         )
         violations = chk.ongoing_violations(c)
         assert violations == []
@@ -954,7 +970,7 @@ class TestBuildPrereqFromYaml:
         assert len(prereq.children) == 1
 
     def test_none_returns_none(self) -> None:
-        assert build_prereq_from_yaml(None) is None
+        assert build_prereq_from_yaml(None) is None  # type: ignore[arg-type]
         assert build_prereq_from_yaml({}) is None
 
     def test_unknown_key_returns_none(self) -> None:
@@ -1001,7 +1017,7 @@ class TestRealFeatChains:
                 [
                     FeatPrereq("Point Blank Shot"),
                     FeatPrereq("Precise Shot"),
-                    AbilityPrereq("dex", 19),
+                    AbilityPrereq(Ability.DEX, 19),
                     StatPrereq("bab", 11, label="BAB"),
                 ]
             ),
@@ -1040,7 +1056,7 @@ class TestRealFeatChains:
     def test_pbs_only_ips_is_chain_partial(self) -> None:
         """Has Point Blank Shot but not Precise Shot → CHAIN_PARTIAL for IPS."""
         c = fighter(11)
-        c.set_ability_score("dex", 19)
+        c.set_ability_score(Ability.DEX, 19)
         c.feats = [{"name": "Point Blank Shot"}]
         chk = self._archery_checker()
         avail, _ = chk.feat_availability("Improved Precise Shot", c)
@@ -1048,7 +1064,7 @@ class TestRealFeatChains:
 
     def test_full_chain_ips_available(self) -> None:
         c = fighter(11)
-        c.set_ability_score("dex", 19)
+        c.set_ability_score(Ability.DEX, 19)
         c.feats = [
             {"name": "Point Blank Shot"},
             {"name": "Precise Shot"},
@@ -1120,3 +1136,57 @@ class TestRealFeatChains:
             "Weapon Specialization (Longsword)", c4
         )
         assert avail == FeatAvailability.AVAILABLE
+
+
+class TestYamlBuilderCoercesToEnums:
+    """
+    Regression for D3: the builder passed YAML strings straight
+    into ``AlignmentPrereq.allowed: list[Alignment]`` and
+    ``CreatureTypePrereq.allowed: list[CreatureType]``. StrEnum
+    compares equal to its value so nothing misbehaved, but the
+    promised validation never happened — a misspelled alignment
+    produced a prerequisite that could never be met, silently.
+    """
+
+    def test_alignment_becomes_enum_members(self) -> None:
+        p = build_prereq_from_yaml({"alignment": "lawful_good"})
+        assert isinstance(p, AlignmentPrereq)
+        assert p.allowed == [Alignment.LAWFUL_GOOD]
+        assert all(isinstance(a, Alignment) for a in p.allowed)
+
+    def test_alignment_any_of_becomes_enum_members(self) -> None:
+        p = build_prereq_from_yaml(
+            {"alignment": {"any_of": ["lawful_good", "lawful_neutral"]}}
+        )
+        assert isinstance(p, AlignmentPrereq)
+        assert all(isinstance(a, Alignment) for a in p.allowed)
+
+    def test_misspelled_alignment_raises(self) -> None:
+        with pytest.raises(ValueError, match="lawful_goood"):
+            build_prereq_from_yaml({"alignment": "lawful_goood"})
+
+    def test_creature_type_becomes_enum_members(self) -> None:
+        p = build_prereq_from_yaml({"creature_type_is": "Humanoid"})
+        assert isinstance(p, CreatureTypePrereq)
+        assert p.allowed == [CreatureType.HUMANOID]
+        assert all(isinstance(t, CreatureType) for t in p.allowed)
+
+    def test_misspelled_creature_type_raises(self) -> None:
+        with pytest.raises(ValueError, match="Humanoyd"):
+            build_prereq_from_yaml({"creature_type_is": "Humanoyd"})
+
+
+class TestFeatWithoutPrerequisites:
+    """
+    Regression for D12: ``register_feat`` accepts
+    ``prereq=None`` ("no prerequisites") but stored it in a
+    ``dict[str, Prerequisite]``. None is a meaningful value
+    here, and the feat must stay available.
+    """
+
+    def test_feat_registered_with_no_prereq_is_available(self) -> None:
+        checker = PrerequisiteChecker()
+        checker.register_feat("Toughness", None)
+        avail, details = checker.feat_availability("Toughness", char())
+        assert avail == FeatAvailability.AVAILABLE
+        assert details == []

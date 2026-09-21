@@ -12,8 +12,8 @@ step.
 
 Public API:
   save_character(character, path)
-  load_character(path, app_state)
-  yaml_dump(data, stream)
+  load_character(path)
+  yaml_dump(data)
 """
 
 from __future__ import annotations
@@ -59,7 +59,6 @@ from heroforge.rules.known import (
 
 if TYPE_CHECKING:
     from heroforge.engine.character import Character
-    from heroforge.ui.app_state import AppState
 import re
 
 from heroforge.engine.character import Character, CharacterLevel
@@ -277,13 +276,12 @@ def _str_representer(dumper: yaml.Dumper, data: str) -> yaml.Node:
 _IndentDumper.add_representer(str, _str_representer)
 
 
-def yaml_dump(data: object, stream: object = None) -> str:
+def yaml_dump(data: object) -> str:
     """
     Dump YAML with indented sequences and stable
     key order."""
     return yaml.dump(
         data,
-        stream,
         Dumper=_IndentDumper,
         default_flow_style=False,
         allow_unicode=True,
@@ -307,7 +305,7 @@ def save_character(character: "Character", path: Path | str) -> None:
     cf = _character_to_charfile(character)
     data = converter.unstructure(cf)
     with open(path, "w") as f:
-        yaml_dump(data, f)
+        f.write(yaml_dump(data))
 
 
 def _character_to_charfile(
@@ -400,17 +398,7 @@ def _character_to_charfile(
 
     return CharFile(
         identity=identity,
-        ability_scores={
-            Ability(ab): c._ability_scores.get(ab, 10)
-            for ab in (
-                "str",
-                "dex",
-                "con",
-                "int",
-                "wis",
-                "cha",
-            )
-        },
+        ability_scores={ab: c._ability_scores.get(ab, 10) for ab in Ability},
         levels=levels,
         domains=[KnownDomain(d) for d in c.domains],
         acfs=[
@@ -520,10 +508,7 @@ def _apply_domain_effects(c: "Character", rules: object) -> None:
 # -----------------------------------------------------------
 
 
-def load_character(
-    path: Path | str,
-    app_state: "AppState",  # noqa: ARG001  # kept for API compat
-) -> "Character":
+def load_character(path: Path | str) -> "Character":
     """
     Deserialize a .char.yaml file into a Character.
 
@@ -581,7 +566,7 @@ def load_character(
         c.set_ability_score(ab, val)
 
     # Race (validated by KnownRace)
-    race_defn = rules.races.get(str(cf.identity.race))
+    race_defn = rules.races.require(str(cf.identity.race))
     apply_race(race_defn, c)
 
     # Levels (class validated by KnownClass)
@@ -657,7 +642,7 @@ def load_character(
     # Buffs (validated by KnownBuff)
     for buff_name, be in cf.buffs.items():
         name = str(buff_name)
-        buff_defn = rules.buffs.get(name)
+        buff_defn = rules.buffs.require(name)
         cl_val = be.caster_level if be.caster_level is not None else 0
         pairs = buff_defn.pool_entries(cl_val, c)
         c.register_buff_definition(name, pairs, size_steps=buff_defn.size_steps)
@@ -678,7 +663,7 @@ def load_character(
 
     # Templates (validated by KnownTemplate)
     for tpl_name, te in cf.templates.items():
-        tpl_defn = rules.templates.get(str(tpl_name))
+        tpl_defn = rules.templates.require(str(tpl_name))
         apply_template(tpl_defn, c, level=te.level)
 
     # DM overrides
@@ -718,7 +703,7 @@ def _load_equipment(
 
     if eq.armor is not None:
         base = str(eq.armor.base or eq.armor.name)
-        defn = rules.armor.get(base)
+        defn = rules.armor.require(base)
         equip_armor(
             c,
             defn,
@@ -730,7 +715,7 @@ def _load_equipment(
 
     if eq.shield is not None:
         base = str(eq.shield.base or eq.shield.name)
-        defn = rules.armor.get(base)
+        defn = rules.armor.require(base)
         equip_shield(
             c,
             defn,
@@ -742,7 +727,7 @@ def _load_equipment(
 
     for entry in eq.worn:
         item_name = entry.name
-        item_defn = rules.magic_items.get(str(item_name))
+        item_defn = rules.magic_items.require(str(item_name))
         equip_item(c, item_defn)
     if eq.worn:
         c.equipment["worn"] = [

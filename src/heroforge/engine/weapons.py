@@ -172,7 +172,11 @@ def _feat_entries(
         defn = registry.get(entry.get("name", ""))
         if not feat_applies_to_weapon(defn, entry.get("parameter"), item):
             continue
-        spec = defn.weapon_effects  # type: ignore[union-attr]
+        # feat_applies_to_weapon is False for a missing defn
+        # and for an empty weapon_effects block.
+        assert defn is not None
+        spec = defn.weapon_effects
+        assert spec is not None
         value = int(spec.get(which, 0))
         if not value:
             continue
@@ -851,7 +855,7 @@ def register_weapons_on_character(character: "Character") -> None:
 def _validate_stances(
     character: "Character",
     item: dict,
-    available: dict[str, str],
+    available: dict[str, Designation],
 ) -> None:
     """
     Check the stances one weapon slot declares.

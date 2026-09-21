@@ -171,7 +171,7 @@ def test_unknown_target_raises() -> None:
     """Constructing a BonusEffect with an unknown pool key must fail."""
     with pytest.raises((ValueError, KeyError)):
         BonusEffect(
-            target="definitely_not_a_real_pool",
+            target="definitely_not_a_real_pool",  # type: ignore[arg-type]
             bonus_type=BonusType.UNTYPED,
             value=1,
         )
@@ -193,7 +193,7 @@ def test_bonus_pool_accepts_pool_key() -> None:
     assert pool.stat_key == PoolKey.STR_SCORE
     # Dict lookups must work interchangeably.
     d = {PoolKey.STR_SCORE: "ok"}
-    assert d["str_score"] == "ok"
+    assert d["str_score"] == "ok"  # type: ignore[index]
 
 
 # ---------------------------------------------------------------------------

@@ -26,13 +26,14 @@ from heroforge.engine.character import (
     CharacterError,
     CharacterLevel,
 )
+from heroforge.engine.enums import Ability, CreatureType
 
 # ===========================================================================
 # Helpers
 # ===========================================================================
 
 
-def make_char(**kwargs: object) -> Character:
+def make_char(**kwargs: str) -> Character:
     return Character(**kwargs)
 
 
@@ -70,12 +71,12 @@ def fighter_levels(n: int) -> list[CharacterLevel]:
 class TestConstruction:
     def test_default_ability_scores_are_ten(self) -> None:
         c = make_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             assert c.get_ability_score(ab) == 10
 
     def test_default_ability_modifiers_are_zero(self) -> None:
         c = make_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             assert c.get_ability_modifier(ab) == 0
 
     def test_default_ac_is_ten(self) -> None:
@@ -123,34 +124,34 @@ class TestConstruction:
 class TestAbilityScores:
     def test_set_ability_score_updates_score(self) -> None:
         c = make_char()
-        c.set_ability_score("str", 18)
-        assert c.get_ability_score("str") == 18
+        c.set_ability_score(Ability.STR, 18)
+        assert c.get_ability_score(Ability.STR) == 18
 
     def test_set_ability_score_updates_modifier(self) -> None:
         c = make_char()
-        c.set_ability_score("str", 18)
+        c.set_ability_score(Ability.STR, 18)
         assert c.str_mod == 4
 
     def test_modifier_floors_correctly(self) -> None:
         c = make_char()
-        c.set_ability_score("str", 9)
+        c.set_ability_score(Ability.STR, 9)
         assert c.str_mod == -1
 
     def test_set_dex_updates_initiative(self) -> None:
         c = make_char()
-        c.set_ability_score("dex", 16)
+        c.set_ability_score(Ability.DEX, 16)
         assert c.initiative == 3
 
     def test_set_dex_updates_ac(self) -> None:
         c = make_char()
-        c.set_ability_score("dex", 14)
+        c.set_ability_score(Ability.DEX, 14)
         # AC = 10 + dex_mod(2) = 12
         assert c.ac == 12
 
     def test_set_con_updates_hp_max_with_levels(self) -> None:
         c = make_char()
         c.set_class_levels(fighter_levels(5))
-        c.set_ability_score("con", 14)
+        c.set_ability_score(Ability.CON, 14)
         # hp_from_rolls = 50 (5×10), con_mod=2, 5 levels → +10
         assert c.hp_max == 60
 
@@ -159,31 +160,31 @@ class TestAbilityScores:
     ) -> None:
         c = make_char()
         with pytest.raises(ValueError):
-            c.set_ability_score("luck", 12)
+            c.set_ability_score("luck", 12)  # type: ignore[arg-type]
 
     def test_set_ability_score_zero_raises(self) -> None:
         c = make_char()
         with pytest.raises(CharacterError):
-            c.set_ability_score("str", 0)
+            c.set_ability_score(Ability.STR, 0)
 
     def test_set_ability_score_above_99_raises(self) -> None:
         c = make_char()
         with pytest.raises(CharacterError):
-            c.set_ability_score("str", 100)
+            c.set_ability_score(Ability.STR, 100)
 
     def test_set_ability_score_boundary_1_valid(self) -> None:
         c = make_char()
-        c.set_ability_score("str", 1)
+        c.set_ability_score(Ability.STR, 1)
         assert c.str_mod == -5
 
     def test_set_ability_score_boundary_99_valid(self) -> None:
         c = make_char()
-        c.set_ability_score("str", 99)
+        c.set_ability_score(Ability.STR, 99)
         assert c.str_score == 99
 
     def test_convenience_properties_reflect_scores(self) -> None:
         c = make_char()
-        c.set_ability_score("wis", 16)
+        c.set_ability_score(Ability.WIS, 16)
         assert c.wis_score == 16
         assert c.wis_mod == 3
 
@@ -236,6 +237,7 @@ class TestBuffManagement:
         )
         c.toggle_buff("Divine Favor", True, caster_level=6)
         state = c.get_buff_state("Divine Favor")
+        assert state is not None
         assert state.caster_level == 6
         assert state.active is True
 
@@ -247,7 +249,9 @@ class TestBuffManagement:
         c.toggle_buff("Divine Favor", False)
         c.toggle_buff("Divine Favor", True)
         # CL should still be 9 from earlier
-        assert c.get_buff_state("Divine Favor").caster_level == 9
+        state = c.get_buff_state("Divine Favor")
+        assert state is not None
+        assert state.caster_level == 9
 
     def test_double_activate_is_idempotent(self) -> None:
         """
@@ -330,7 +334,7 @@ class TestBuffStatEffects:
     def test_buff_on_ability_score_cascades_to_modifier(self) -> None:
         """Bull's Strength (+4 enhancement to str_score) → str_mod increases."""
         c = make_char()
-        c.set_ability_score("str", 14)  # mod = 2
+        c.set_ability_score(Ability.STR, 14)  # mod = 2
         entry = BonusEntry(4, BonusType.ENHANCEMENT, "Bull's Strength")
         c.register_buff_definition("Bull's Strength", [("str_score", entry)])
 
@@ -343,7 +347,7 @@ class TestBuffStatEffects:
     def test_str_buff_cascades_to_melee_attack(self) -> None:
         """Bull's Strength raises STR → STR mod → melee attack."""
         c = make_char()
-        c.set_ability_score("str", 14)  # mod = 2
+        c.set_ability_score(Ability.STR, 14)  # mod = 2
         c.set_class_levels(fighter_levels(4))  # bab = 4
         # baseline attack: bab(4) + str_mod(2) = 6
         assert c.get("attack_melee") == 6
@@ -405,38 +409,34 @@ class TestBuffStatEffects:
         We model this as a condition on the BonusEntry.
         """
         c = make_char()
-        c._race_type = "Humanoid"  # normally set by race loader
+        c._race_creature_type = CreatureType.HUMANOID
 
         entry = BonusEntry(
             2,
             BonusType.ENHANCEMENT,
             "Enlarge Person",
-            condition=lambda char: (
-                getattr(char, "_race_type", "") == "Humanoid"
-            ),
+            condition=lambda char: char.creature_type == CreatureType.HUMANOID,
         )
         c.register_buff_definition("Enlarge Person", [("str_score", entry)])
         c.toggle_buff("Enlarge Person", True)
-        c.set_ability_score("str", 12)
+        c.set_ability_score(Ability.STR, 12)
 
         # Humanoid: condition True → +2 applies
         assert c.str_score == 14
 
     def test_conditional_buff_entry_excluded_when_condition_false(self) -> None:
         c = make_char()
-        c._race_type = "Undead"  # not humanoid
+        c._race_creature_type = CreatureType.UNDEAD
 
         entry = BonusEntry(
             2,
             BonusType.ENHANCEMENT,
             "Enlarge Person",
-            condition=lambda char: (
-                getattr(char, "_race_type", "") == "Humanoid"
-            ),
+            condition=lambda char: char.creature_type == CreatureType.HUMANOID,
         )
         c.register_buff_definition("Enlarge Person", [("str_score", entry)])
         c.toggle_buff("Enlarge Person", True)
-        c.set_ability_score("str", 12)
+        c.set_ability_score(Ability.STR, 12)
 
         # Not humanoid: condition False → +2 excluded
         assert c.str_score == 12
@@ -467,14 +467,14 @@ class TestClassLevels:
 
     def test_saves_include_ability_modifier(self) -> None:
         c = make_char()
-        c.set_ability_score("con", 14)  # con_mod = 2
+        c.set_ability_score(Ability.CON, 14)  # con_mod = 2
         c.set_class_levels(fighter_levels(4))
         # Fort: base(4) + con_mod(2) = 6
         assert c.fort == 6
 
     def test_hp_max_from_class_levels_and_con(self) -> None:
         c = make_char()
-        c.set_ability_score("con", 12)  # con_mod = 1
+        c.set_ability_score(Ability.CON, 12)  # con_mod = 1
         c.set_class_levels(fighter_levels(3))
         # rolls: 10+10+10 = 30; con_mod(1) × 3 levels = 3 → total 33
         assert c.hp_max == 33
@@ -526,13 +526,13 @@ class TestClassLevels:
 
     def test_attack_melee_includes_bab_and_str(self) -> None:
         c = make_char()
-        c.set_ability_score("str", 16)  # mod = 3
+        c.set_ability_score(Ability.STR, 16)  # mod = 3
         c.set_class_levels(fighter_levels(5))  # bab = 5
         assert c.get("attack_melee") == 8  # 5 + 3
 
     def test_attack_ranged_uses_dex(self) -> None:
         c = make_char()
-        c.set_ability_score("dex", 14)  # mod = 2
+        c.set_ability_score(Ability.DEX, 14)  # mod = 2
         c.set_class_levels(fighter_levels(4))  # bab = 4
         assert c.get("attack_ranged") == 6  # 4 + 2
 
@@ -585,7 +585,7 @@ class TestChangeNotification:
         c = make_char()
         received: list[set] = []
         c.on_change.subscribe(lambda keys: received.append(keys))
-        c.set_ability_score("str", 16)
+        c.set_ability_score(Ability.STR, 16)
         assert len(received) == 1
         assert "str_score" in received[0]
         assert "str_mod" in received[0]
@@ -625,7 +625,7 @@ class TestChangeNotification:
 
         c.on_change.subscribe(fn)
         c.on_change.unsubscribe(fn)
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         assert len(received) == 0
 
     def test_multiple_subscribers_all_notified(self) -> None:
@@ -633,7 +633,7 @@ class TestChangeNotification:
         received: list[set[str]] = [set(), set()]
         c.on_change.subscribe(lambda keys: received[0].update(keys))
         c.on_change.subscribe(lambda keys: received[1].update(keys))
-        c.set_ability_score("con", 14)
+        c.set_ability_score(Ability.CON, 14)
         assert received[0] and received[1]
         assert received[0] == received[1]
 
@@ -697,8 +697,8 @@ class TestFullScenario:
           ac         = 10 (no armour or DEX bonus beyond 0)
         """
         c = make_char(name="Test Fighter")
-        c.set_ability_score("str", 16)
-        c.set_ability_score("con", 14)
+        c.set_ability_score(Ability.STR, 16)
+        c.set_ability_score(Ability.CON, 14)
         c.set_class_levels(fighter_levels(5))
 
         bs_entry = BonusEntry(4, BonusType.ENHANCEMENT, "Bull's Strength")
@@ -765,60 +765,60 @@ def _char_with_levels(n: int) -> Character:
 class TestAbilityBumps:
     def test_bump_at_level_4_increases_score(self) -> None:
         c = _char_with_levels(4)
-        c.set_ability_score("str", 14)
-        c.set_level_ability_bump(4, "str")
-        assert c.get_ability_score("str") == 15
+        c.set_ability_score(Ability.STR, 14)
+        c.set_level_ability_bump(4, Ability.STR)
+        assert c.get_ability_score(Ability.STR) == 15
 
     def test_bumps_stack_across_levels(self) -> None:
         c = _char_with_levels(8)
-        c.set_ability_score("str", 14)
-        c.set_level_ability_bump(4, "str")
-        c.set_level_ability_bump(8, "str")
-        assert c.get_ability_score("str") == 16
+        c.set_ability_score(Ability.STR, 14)
+        c.set_level_ability_bump(4, Ability.STR)
+        c.set_level_ability_bump(8, Ability.STR)
+        assert c.get_ability_score(Ability.STR) == 16
 
     def test_bumps_to_different_abilities(self) -> None:
         c = _char_with_levels(8)
-        c.set_ability_score("str", 14)
-        c.set_ability_score("dex", 12)
-        c.set_level_ability_bump(4, "str")
-        c.set_level_ability_bump(8, "dex")
-        assert c.get_ability_score("str") == 15
-        assert c.get_ability_score("dex") == 13
+        c.set_ability_score(Ability.STR, 14)
+        c.set_ability_score(Ability.DEX, 12)
+        c.set_level_ability_bump(4, Ability.STR)
+        c.set_level_ability_bump(8, Ability.DEX)
+        assert c.get_ability_score(Ability.STR) == 15
+        assert c.get_ability_score(Ability.DEX) == 13
 
     def test_change_bump_updates_both_stats(self) -> None:
         c = _char_with_levels(4)
-        c.set_ability_score("str", 14)
-        c.set_ability_score("dex", 12)
-        c.set_level_ability_bump(4, "str")
-        assert c.get_ability_score("str") == 15
-        c.set_level_ability_bump(4, "dex")
-        assert c.get_ability_score("str") == 14
-        assert c.get_ability_score("dex") == 13
+        c.set_ability_score(Ability.STR, 14)
+        c.set_ability_score(Ability.DEX, 12)
+        c.set_level_ability_bump(4, Ability.STR)
+        assert c.get_ability_score(Ability.STR) == 15
+        c.set_level_ability_bump(4, Ability.DEX)
+        assert c.get_ability_score(Ability.STR) == 14
+        assert c.get_ability_score(Ability.DEX) == 13
 
     def test_remove_bump(self) -> None:
         c = _char_with_levels(4)
-        c.set_ability_score("str", 14)
-        c.set_level_ability_bump(4, "str")
-        assert c.get_ability_score("str") == 15
+        c.set_ability_score(Ability.STR, 14)
+        c.set_level_ability_bump(4, Ability.STR)
+        assert c.get_ability_score(Ability.STR) == 15
         c.set_level_ability_bump(4, None)
-        assert c.get_ability_score("str") == 14
+        assert c.get_ability_score(Ability.STR) == 14
 
     def test_bump_affects_modifier(self) -> None:
         c = _char_with_levels(4)
-        c.set_ability_score("str", 15)  # mod = 2
-        c.set_level_ability_bump(4, "str")
+        c.set_ability_score(Ability.STR, 15)  # mod = 2
+        c.set_level_ability_bump(4, Ability.STR)
         # 15 + 1 = 16 → mod = 3
-        assert c.get_ability_modifier("str") == 3
+        assert c.get_ability_modifier(Ability.STR) == 3
 
     def test_invalid_level_raises(self) -> None:
         c = _char_with_levels(4)
         with pytest.raises(CharacterError):
-            c.set_level_ability_bump(5, "str")
+            c.set_level_ability_bump(5, Ability.STR)
 
     def test_invalid_ability_raises(self) -> None:
         c = _char_with_levels(4)
         with pytest.raises(ValueError):
-            c.set_level_ability_bump(4, "foo")
+            c.set_level_ability_bump(4, "foo")  # type: ignore[arg-type]
 
 
 # ===========================================================================
@@ -829,40 +829,40 @@ class TestAbilityBumps:
 class TestInherentBumps:
     def test_inherent_increases_score(self) -> None:
         c = _char_with_levels(5)
-        c.set_ability_score("int", 14)
-        c.add_inherent_bump(5, "int", 1)
-        assert c.get_ability_score("int") == 15
+        c.set_ability_score(Ability.INT, 14)
+        c.add_inherent_bump(5, Ability.INT, 1)
+        assert c.get_ability_score(Ability.INT) == 15
 
     def test_inherent_does_not_stack(self) -> None:
         """Only the highest inherent bonus applies."""
         c = _char_with_levels(8)
-        c.set_ability_score("int", 14)
-        c.add_inherent_bump(3, "int", 1)
-        c.add_inherent_bump(7, "int", 2)
+        c.set_ability_score(Ability.INT, 14)
+        c.add_inherent_bump(3, Ability.INT, 1)
+        c.add_inherent_bump(7, Ability.INT, 2)
         # Only +2 applies, not +1 + +2
-        assert c.get_ability_score("int") == 16
+        assert c.get_ability_score(Ability.INT) == 16
 
     def test_inherent_capped_at_5(self) -> None:
         c = _char_with_levels(5)
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         with pytest.raises(CharacterError):
-            c.add_inherent_bump(5, "str", 6)
+            c.add_inherent_bump(5, Ability.STR, 6)
 
     def test_inherent_stacks_with_level_bump(self) -> None:
         c = _char_with_levels(8)
-        c.set_ability_score("str", 14)
-        c.set_level_ability_bump(4, "str")  # +1
-        c.add_inherent_bump(5, "str", 2)  # +2
+        c.set_ability_score(Ability.STR, 14)
+        c.set_level_ability_bump(4, Ability.STR)  # +1
+        c.add_inherent_bump(5, Ability.STR, 2)  # +2
         # 14 + 1 (bump) + 2 (inherent) = 17
-        assert c.get_ability_score("str") == 17
+        assert c.get_ability_score(Ability.STR) == 17
 
     def test_remove_inherent_bump(self) -> None:
         c = _char_with_levels(5)
-        c.set_ability_score("str", 14)
-        c.add_inherent_bump(5, "str", 2)
-        assert c.get_ability_score("str") == 16
-        c.remove_inherent_bump(5, "str")
-        assert c.get_ability_score("str") == 14
+        c.set_ability_score(Ability.STR, 14)
+        c.add_inherent_bump(5, Ability.STR, 2)
+        assert c.get_ability_score(Ability.STR) == 16
+        c.remove_inherent_bump(5, Ability.STR)
+        assert c.get_ability_score(Ability.STR) == 14
 
 
 # ===========================================================================
@@ -873,7 +873,7 @@ class TestInherentBumps:
 class TestIntModAtLevel:
     def test_base_int_only(self) -> None:
         c = _char_with_levels(4)
-        c.set_ability_score("int", 14)  # mod +2
+        c.set_ability_score(Ability.INT, 14)  # mod +2
         assert c.int_mod_at_level(1) == 2
         assert c.int_mod_at_level(4) == 2
 
@@ -881,8 +881,8 @@ class TestIntModAtLevel:
         self,
     ) -> None:
         c = _char_with_levels(4)
-        c.set_ability_score("int", 14)
-        c.set_level_ability_bump(4, "int")
+        c.set_ability_score(Ability.INT, 14)
+        c.set_level_ability_bump(4, Ability.INT)
         # Level 3: no bump yet → mod +2
         assert c.int_mod_at_level(3) == 2
         # Level 4: bump included → 15 → mod +2
@@ -892,8 +892,8 @@ class TestIntModAtLevel:
         self,
     ) -> None:
         c = _char_with_levels(4)
-        c.set_ability_score("int", 13)  # mod +1
-        c.set_level_ability_bump(4, "int")
+        c.set_ability_score(Ability.INT, 13)  # mod +1
+        c.set_level_ability_bump(4, Ability.INT)
         # Level 3: INT 13 → mod +1
         assert c.int_mod_at_level(3) == 1
         # Level 4: INT 14 → mod +2
@@ -901,8 +901,8 @@ class TestIntModAtLevel:
 
     def test_inherent_int_at_level(self) -> None:
         c = _char_with_levels(8)
-        c.set_ability_score("int", 13)  # mod +1
-        c.add_inherent_bump(5, "int", 1)
+        c.set_ability_score(Ability.INT, 13)  # mod +1
+        c.add_inherent_bump(5, Ability.INT, 1)
         # Level 4: no inherent yet → mod +1
         assert c.int_mod_at_level(4) == 1
         # Level 5: inherent +1 → INT 14 → mod +2
@@ -910,9 +910,9 @@ class TestIntModAtLevel:
 
     def test_multiple_int_bumps_accumulate(self) -> None:
         c = _char_with_levels(8)
-        c.set_ability_score("int", 12)  # mod +1
-        c.set_level_ability_bump(4, "int")  # +1
-        c.set_level_ability_bump(8, "int")  # +1
+        c.set_ability_score(Ability.INT, 12)  # mod +1
+        c.set_level_ability_bump(4, Ability.INT)  # +1
+        c.set_level_ability_bump(8, Ability.INT)  # +1
         # Level 4: INT 13 → mod +1
         assert c.int_mod_at_level(4) == 1
         # Level 8: INT 14 → mod +2

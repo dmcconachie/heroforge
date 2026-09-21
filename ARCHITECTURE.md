@@ -1030,6 +1030,27 @@ rules file first needs one, that is the moment to add a type
 that holds a combination rather than reopening the field to
 arbitrary text.
 
+**Type checking.** `pyright` runs over `src/`, `tests/`
+and `conftest.py` in `standard` mode, configured in
+`pyproject.toml` and wired into `test_all.sh`. It is the
+check that keeps the enum discipline above honest: a bare
+string passed where a `StrEnum` is declared is an error,
+not a value that quietly compares unequal. `src/heroforge/ui`
+is excluded pending the removal of the PyQt6 layer.
+
+Two things pyright cannot see, both deliberate:
+
+- `rules/known.py` builds its `Known*` enums with
+  `combine()` at import time, so they are values rather
+  than class declarations. `rules/known.pyi` declares the
+  classes — and no members, which are discovered from the
+  books — so annotations and constructors type-check
+  without a second copy of the data to drift.
+- `rules/core/pool_keys.py` is generated, and the
+  generator emits one literal `class PoolKey(StrEnum)`
+  rather than combining at import time, so `PoolKey.X` and
+  `list[PoolKey]` are both visible.
+
 **Serialisation hazard.** PyYAML cannot represent a
 `StrEnum`: it emits `!!python/object/apply` instead of the
 value. Nothing dumped by `yaml_dump` may carry an enum that
@@ -1124,9 +1145,14 @@ Reusable components in `widgets/`: `LabeledField`,
 ## Key design constraints
 
 - `engine/` has **zero imports from `ui/`**. The engine is
-  testable headlessly.
+  testable headlessly. *Currently violated:*
+  `engine/sheet.py` imports `AppState`, used only in
+  `main()` to force the rules load.
 - `export/` has **zero imports from `ui/`**. PDF output
   matches UI display because both use the same Character data.
+  *Currently violated:* `export/sheet_data.py` imports
+  `_compute_flatfooted` and `_compute_touch` from
+  `ui/widgets/combat_stats.py` at runtime.
 - YAML data files contain **no Python code**. Formulas are
   strings evaluated in a sandboxed context.
 - Adding a new sourcebook = adding YAML files. No Python

@@ -25,7 +25,7 @@ from cattrs.errors import ClassValidationError
 
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character
-from heroforge.engine.enums import CreatureSubtype, CreatureType, Size
+from heroforge.engine.enums import Ability, CreatureSubtype, CreatureType, Size
 from heroforge.engine.races import (
     RaceAbilityMod,
     RaceDefinition,
@@ -86,17 +86,17 @@ class TestTheVocabularies:
 
 class TestRaceDefinition:
     def test_medium_size_mod_zero(self) -> None:
-        r = RaceDefinition(name="Human", size="Medium")
+        r = RaceDefinition(name="Human", size=Size.MEDIUM)
         assert r.size_modifier == 0
         assert r.hide_modifier == 0
 
     def test_small_size_mod(self) -> None:
-        r = RaceDefinition(name="Gnome", size="Small")
+        r = RaceDefinition(name="Gnome", size=Size.SMALL)
         assert r.size_modifier == 1
         assert r.hide_modifier == 4
 
     def test_large_size_mod(self) -> None:
-        r = RaceDefinition(name="Giant", size="Large")
+        r = RaceDefinition(name="Giant", size=Size.LARGE)
         assert r.size_modifier == -1
         assert r.hide_modifier == -4
 
@@ -104,8 +104,8 @@ class TestRaceDefinition:
         r = RaceDefinition(
             name="Dwarf",
             ability_modifiers=[
-                RaceAbilityMod("con", 2, BonusType.UNTYPED),
-                RaceAbilityMod("cha", -2, BonusType.UNTYPED),
+                RaceAbilityMod(Ability.CON, 2, BonusType.UNTYPED),
+                RaceAbilityMod(Ability.CHA, -2, BonusType.UNTYPED),
             ],
         )
         assert len(r.ability_modifiers) == 2
@@ -120,14 +120,14 @@ class TestRaceDefinition:
 class TestApplyRace:
     def test_apply_race_sets_ability_bonuses(self) -> None:
         c = fresh_char()
-        c.set_ability_score("dex", 10)
-        c.set_ability_score("con", 10)
+        c.set_ability_score(Ability.DEX, 10)
+        c.set_ability_score(Ability.CON, 10)
 
         dwarf = RaceDefinition(
             name="Dwarf",
             ability_modifiers=[
-                RaceAbilityMod("con", 2, BonusType.UNTYPED),
-                RaceAbilityMod("cha", -2, BonusType.UNTYPED),
+                RaceAbilityMod(Ability.CON, 2, BonusType.UNTYPED),
+                RaceAbilityMod(Ability.CHA, -2, BonusType.UNTYPED),
             ],
         )
         apply_race(dwarf, c)
@@ -148,10 +148,12 @@ class TestApplyRace:
 
     def test_apply_race_is_idempotent(self) -> None:
         c = fresh_char()
-        c.set_ability_score("dex", 10)
+        c.set_ability_score(Ability.DEX, 10)
         elf = RaceDefinition(
             name="Elf",
-            ability_modifiers=[RaceAbilityMod("dex", 2, BonusType.UNTYPED)],
+            ability_modifiers=[
+                RaceAbilityMod(Ability.DEX, 2, BonusType.UNTYPED)
+            ],
         )
         apply_race(elf, c)
         dex_once = c.dex_score
@@ -162,10 +164,12 @@ class TestApplyRace:
         self,
     ) -> None:
         c = fresh_char()
-        c.set_ability_score("dex", 10)
+        c.set_ability_score(Ability.DEX, 10)
         elf = RaceDefinition(
             name="Elf",
-            ability_modifiers=[RaceAbilityMod("dex", 2, BonusType.UNTYPED)],
+            ability_modifiers=[
+                RaceAbilityMod(Ability.DEX, 2, BonusType.UNTYPED)
+            ],
         )
         apply_race(elf, c)
         assert c.dex_score == 12
@@ -186,21 +190,21 @@ class TestApplyRace:
 
     def test_human_has_no_ability_modifiers(self) -> None:
         c = fresh_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             c.set_ability_score(ab, 10)
         apply_race(RaceDefinition(name="Human"), c)
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             assert c.get_ability_score(ab) == 10
 
     def test_elf_dex_bonus_propagates_to_ac(self) -> None:
         c = fresh_char()
-        c.set_ability_score("dex", 10)
+        c.set_ability_score(Ability.DEX, 10)
         base_ac = c.ac
         elf = RaceDefinition(
             name="Elf",
             ability_modifiers=[
-                RaceAbilityMod("dex", 2, BonusType.UNTYPED),
-                RaceAbilityMod("con", -2, BonusType.UNTYPED),
+                RaceAbilityMod(Ability.DEX, 2, BonusType.UNTYPED),
+                RaceAbilityMod(Ability.CON, -2, BonusType.UNTYPED),
             ],
         )
         apply_race(elf, c)
@@ -250,15 +254,15 @@ class TestRacesLoader:
         reg = loaded_race_registry()
         d = reg.require("Dwarf")
         mods = {m.ability: m.value for m in d.ability_modifiers}
-        assert mods["con"] == 2
-        assert mods["cha"] == -2
+        assert mods[Ability.CON] == 2
+        assert mods[Ability.CHA] == -2
 
     def test_elf_dex_con_mods(self) -> None:
         reg = loaded_race_registry()
         e = reg.require("Elf")
         mods = {m.ability: m.value for m in e.ability_modifiers}
-        assert mods["dex"] == 2
-        assert mods["con"] == -2
+        assert mods[Ability.DEX] == 2
+        assert mods[Ability.CON] == -2
 
     def test_gnome_small_size(self) -> None:
         reg = loaded_race_registry()

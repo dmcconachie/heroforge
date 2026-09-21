@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 
 from heroforge.engine.character import Character, CharacterLevel
-from heroforge.engine.enums import Size
+from heroforge.engine.enums import Ability, Size
 from heroforge.engine.equipment import equip_item
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
@@ -23,9 +23,9 @@ from heroforge.engine.weapons import (
 from heroforge.rules.rules import get_rules
 
 
-def _monk(level: int, size: str = "Medium", cls: str = "Monk") -> Character:
+def _monk(level: int, size: Size = Size.MEDIUM, cls: str = "Monk") -> Character:
     c = Character(name="Grasshopper")
-    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+    for ab in Ability:
         c.set_ability_score(ab, 12)
     c.levels = [
         CharacterLevel(character_level=i + 1, class_name=cls, hp_roll=8)
@@ -39,7 +39,7 @@ def _monk(level: int, size: str = "Medium", cls: str = "Monk") -> Character:
 
 
 def _dice(c: Character) -> str:
-    return gather_sheet(c, None).equipment.weapons[0].damage_dice
+    return gather_sheet(c).equipment.weapons[0].damage_dice
 
 
 class TestTheTable:
@@ -87,14 +87,14 @@ class TestOnTheSheet:
         assert _dice(_monk(12)) == "2d6"
 
     def test_a_halfling_monk_uses_the_small_column(self) -> None:
-        assert _dice(_monk(12, size="Small")) == "1d10"
+        assert _dice(_monk(12, size=Size.SMALL)) == "1d10"
 
     def test_a_non_monk_gets_the_plain_weapon(self) -> None:
         # Unarmed Strike is 1d3 for anyone else.
         assert _dice(_monk(12, cls="Fighter")) == "1d3"
 
     def test_a_small_non_monk_still_resizes_normally(self) -> None:
-        assert _dice(_monk(12, size="Small", cls="Fighter")) == "1d2"
+        assert _dice(_monk(12, size=Size.SMALL, cls="Fighter")) == "1d2"
 
 
 class TestMonksBelt:
@@ -144,4 +144,4 @@ equipment:
     def test_damage_survives_a_load(self, tmp_path: Path) -> None:
         path = tmp_path / "m.char.yaml"
         path.write_text(self.CHAR)
-        assert _dice(load_character(path, None)) == "1d10"
+        assert _dice(load_character(path)) == "1d10"

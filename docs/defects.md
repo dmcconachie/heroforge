@@ -60,16 +60,6 @@ prerequisites, permanently available. D1 is this defect
 firing for real. The rules files are our own data, not a
 system boundary, so this should raise.
 
-### D3 — the builder does not coerce to the enums
-
-`AlignmentPrereq.allowed` is `list[Alignment]` and
-`CreatureTypePrereq.allowed` is `list[CreatureType]`, but
-the builder passes the raw YAML strings through. `StrEnum`
-compares equal to its value so nothing misbehaves today,
-but the annotations promise a validation that does not
-happen: a misspelled alignment yields a prerequisite that
-can never be met, silently.
-
 ### D4 — racial weapon familiarity contradicts `races.yaml`
 
 `CapabilityChecker._RACIAL_MARTIAL` disagrees with the
@@ -158,10 +148,3 @@ if race in {..., "Half-Elf", "Half-Orc", ...} and race not in {
 
 The two halves cancel, so those two races can never take
 the branch. Whatever was intended, this is not it.
-
-### D12 — `register_feat` stores `None` in a non-optional dict
-
-It accepts `prereq: Prerequisite | None` and assigns into
-`self._feat_prereqs: dict[str, Prerequisite]`. `None` is a
-meaningful value here ("no prerequisites"), so the
-annotation is simply wrong.

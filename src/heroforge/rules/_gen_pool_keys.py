@@ -26,6 +26,7 @@ from pathlib import Path
 import yaml
 
 from heroforge.rules._gen_common import check_or_fix, emit_header, emit_member
+from heroforge.rules.core.skills import KnownCoreSkill
 
 RULES_DIR = Path(__file__).parent
 CORE_DIR = RULES_DIR / "core"
@@ -76,13 +77,13 @@ def _render() -> str:
         description="Closed set of BonusPool identifiers used by the engine.",
         generator_file="_gen_pool_keys.py",
         toml_command="check-pool-keys",
-        extra_imports=[
-            ("heroforge.rules.combine_str_enum", "combine"),
-            ("heroforge.rules.core.skills", "KnownCoreSkill"),
-        ],
-        cls_name="_StatPoolKey",
+        cls_name="PoolKey",
     )
 
+    # Every member is spelled out rather than combined at
+    # import time: a StrEnum built by the functional API is a
+    # value, not a type, so `PoolKey.STR_SCORE` and
+    # `list[PoolKey]` are both invisible to a type checker.
     seen: set[str] = set()
     for val in _stat_pool_refs():
         ident = val.upper()
@@ -93,20 +94,14 @@ def _render() -> str:
         seen.add(ident)
         lines += emit_member(ident, val)
 
-    lines += [
-        "",
-        "",
-        "_SkillPoolKey = StrEnum(",
-        '    "SkillPoolKey",',
-        "    {",
-        '        f"SKILL_{skill.name}": f"skill_{skill.name.lower()}"',
-        "        for skill in KnownCoreSkill",
-        "    },",
-        ")",
-        "",
-        "",
-        'PoolKey = combine("PoolKey", _StatPoolKey, _SkillPoolKey)',
-    ]
+    for skill in KnownCoreSkill:
+        ident = f"SKILL_{skill.name}"
+        if ident in seen:
+            raise RuntimeError(
+                f"Duplicate PoolKey ident {ident!r} from skills.yaml"
+            )
+        seen.add(ident)
+        lines += emit_member(ident, f"skill_{skill.name.lower()}")
 
     return "\n".join(lines) + "\n"
 

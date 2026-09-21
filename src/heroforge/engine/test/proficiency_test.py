@@ -12,7 +12,7 @@ from cattrs.errors import ClassValidationError
 
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.classes import Proficiencies
-from heroforge.engine.enums import ArmorCategory, WeaponCategory
+from heroforge.engine.enums import Ability, ArmorCategory, WeaponCategory
 from heroforge.engine.equipment import (
     ArmorDefinition,
     WeaponDefinition,
@@ -40,7 +40,7 @@ from heroforge.rules.schema import converter
 def _char(class_name: str, race: str = "Human") -> Character:
     c = Character(name="Test")
     register_skills_on_character(c)
-    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+    for ab in Ability:
         c.set_ability_score(ab, 12)
     c.levels = [
         CharacterLevel(character_level=1, class_name=class_name, hp_roll=8)
@@ -57,8 +57,8 @@ def _weapon(name: str) -> WeaponDefinition | None:
     return get_rules().weapons.get(name)
 
 
-def _armor(name: str) -> ArmorDefinition | None:
-    return get_rules().armor.get(name)
+def _armor(name: str) -> ArmorDefinition:
+    return get_rules().armor.require(name)
 
 
 class TestClassProficiencyData:
@@ -221,12 +221,12 @@ class TestNonproficiencyPenalties:
 
     def test_proficient_wearer_takes_no_attack_penalty(self) -> None:
         c = self._in_full_plate("Fighter")
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert "nonproficient_armor" not in sheet.combat.attack_melee.typed
 
     def test_nonproficient_wearer_takes_the_check_penalty(self) -> None:
         c = self._in_full_plate("Rogue")
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         # Full plate's armor check penalty is -6.
         assert sheet.combat.attack_melee.typed["nonproficient_armor"] == -6
 
@@ -259,7 +259,7 @@ class TestNonproficiencyPenalties:
     def test_armor_and_shield_nonproficiency_stack(self) -> None:
         c = self._in_full_plate("Rogue")
         equip_shield(c, _armor("Heavy Steel Shield"))
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         typed = sheet.combat.attack_melee.typed
         # -6 from the plate, -2 from the shield.
         assert typed["nonproficient_armor"] == -6
@@ -269,15 +269,19 @@ class TestNonproficiencyPenalties:
         c = _char("Wizard")
         c.equipment["weapons"] = [{"base": "Longsword"}]
         register_weapons_on_character(c)
-        sheet = gather_sheet(c, None)
-        assert sheet.equipment.weapons[0].attack.typed["nonproficient"] == -4
+        sheet = gather_sheet(c)
+        attack = sheet.equipment.weapons[0].attack
+        assert attack is not None
+        assert attack.typed["nonproficient"] == -4
 
     def test_proficient_weapon_has_no_such_entry(self) -> None:
         c = _char("Fighter")
         c.equipment["weapons"] = [{"base": "Longsword"}]
         register_weapons_on_character(c)
-        sheet = gather_sheet(c, None)
-        assert "nonproficient" not in sheet.equipment.weapons[0].attack.typed
+        sheet = gather_sheet(c)
+        attack = sheet.equipment.weapons[0].attack
+        assert attack is not None
+        assert "nonproficient" not in attack.typed
 
 
 class TestProficiencyPersists:
@@ -303,9 +307,11 @@ equipment:
     ) -> None:
         path = tmp_path / "u.char.yaml"
         path.write_text(self.CHAR)
-        sheet = gather_sheet(load_character(path, None), None)
+        sheet = gather_sheet(load_character(path))
         assert sheet.combat.attack_melee.typed["nonproficient_armor"] == -6
-        assert sheet.equipment.weapons[0].attack.typed["nonproficient"] == -4
+        attack = sheet.equipment.weapons[0].attack
+        assert attack is not None
+        assert attack.typed["nonproficient"] == -4
 
 
 class TestNonproficiencyDoesNotDouble:
@@ -433,7 +439,7 @@ class TestRacialWeaponFamiliarity:
         dangling = {
             (race, name)
             for race in rules.races.all_names()
-            for name in rules.races.get(race).weapon_familiarity
+            for name in rules.races.require(race).weapon_familiarity
             if rules.weapons.get(name) is None
         }
         assert dangling == set()
@@ -443,7 +449,7 @@ class TestRacialWeaponFamiliarity:
         dangling = {
             (race, name)
             for race in rules.races.all_names()
-            for name in rules.races.get(race).weapon_proficiencies
+            for name in rules.races.require(race).weapon_proficiencies
             if rules.weapons.get(name) is None
         }
         assert dangling == set()

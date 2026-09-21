@@ -21,10 +21,11 @@ from heroforge.engine.acfs import (
     validate_acf_selection,
 )
 from heroforge.engine.character import Character, CharacterLevel
-from heroforge.engine.enums import School
+from heroforge.engine.enums import Ability, School
 from heroforge.engine.persistence import load_character, save_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.spellcasting import Specialization
+from heroforge.rules.known import KnownClass
 from heroforge.rules.rules import get_rules
 
 
@@ -33,7 +34,7 @@ def wizard(levels: int, spec: Specialization | None = None) -> Character:
     c.name = "ACF Wizard"
     c.race = "Human"
     c.alignment = "neutral"
-    c.set_ability_score("int", 16)
+    c.set_ability_score(Ability.INT, 16)
     c.set_class_levels(
         [
             CharacterLevel(
@@ -143,13 +144,13 @@ class TestFeatureReplacement:
         c.acfs = [{"name": "Spontaneous Divination", "level": 10}]
         keys = replaced_feature_keys(c)
         assert "bonus_feat_wizard_10" in keys
-        features = gather_sheet(c, None).class_features
+        features = gather_sheet(c).class_features
         assert not [f for f in features if f.startswith("bonus_feat_wizard_10")]
 
     def test_other_levels_untouched(self) -> None:
         c = wizard(10)
         c.acfs = [{"name": "Spontaneous Divination", "level": 10}]
-        features = gather_sheet(c, None).class_features
+        features = gather_sheet(c).class_features
         assert [f for f in features if f.startswith("bonus_feat_wizard_5")]
 
     def test_no_acfs_replaces_nothing(self) -> None:
@@ -173,15 +174,20 @@ class TestFocusedSpecialist:
         assert extra_prohibited_schools(wizard(5)) == 0
 
     def test_general_slots_reduced(self) -> None:
-        plain = gather_sheet(wizard(5), None).spellcasting["Wizard"]
-        foc = gather_sheet(focused_illusionist(), None).spellcasting["Wizard"]
+        plain = gather_sheet(wizard(5)).spellcasting[KnownClass("Wizard")]
+        foc = gather_sheet(focused_illusionist()).spellcasting[
+            KnownClass("Wizard")
+        ]
         for lvl, base in enumerate(plain.slots_per_day):
             if base is None:
                 continue
             assert foc.slots_per_day[lvl] == base - 1
 
     def test_three_specialty_slots_per_level(self) -> None:
-        foc = gather_sheet(focused_illusionist(), None).spellcasting["Wizard"]
+        foc = gather_sheet(focused_illusionist()).spellcasting[
+            KnownClass("Wizard")
+        ]
+        assert foc.specialist_slots_per_day is not None
         assert foc.specialist_slots_per_day[0] == 3
         assert foc.specialist_slots_per_day[1] == 3
 
@@ -197,7 +203,7 @@ class TestFocusedSpecialist:
         path = tmp_path / "bad.char.yaml"
         save_character(c, path)
         with pytest.raises(ValueError, match="3 prohibited"):
-            load_character(path, None)
+            load_character(path)
 
     def test_requires_specialist(self, tmp_path: Path) -> None:
         c = wizard(5)
@@ -205,7 +211,7 @@ class TestFocusedSpecialist:
         path = tmp_path / "bad.char.yaml"
         save_character(c, path)
         with pytest.raises(ValueError, match="specialist"):
-            load_character(path, None)
+            load_character(path)
 
 
 class TestAcfPersistence:
@@ -213,7 +219,7 @@ class TestAcfPersistence:
         c = focused_illusionist()
         path = tmp_path / "acf.char.yaml"
         save_character(c, path)
-        reloaded = load_character(path, None)
+        reloaded = load_character(path)
         assert reloaded.acfs == [{"name": "Focused Specialist", "level": 1}]
 
     def test_unknown_acf_rejected(self, tmp_path: Path) -> None:
@@ -232,7 +238,7 @@ class TestAcfPersistence:
             "    level: 1\n"
         )
         with pytest.raises(ValueError, match="Not An ACF"):
-            load_character(path, None)
+            load_character(path)
 
 
 class TestAcfRegistryBasics:

@@ -33,6 +33,7 @@ from heroforge.engine.effects import (
     BuffRegistry,
     apply_buff,
 )
+from heroforge.engine.enums import Ability
 from heroforge.engine.feats import (
     FeatDefinition,
     FeatKind,
@@ -47,8 +48,17 @@ from heroforge.engine.prerequisites import (
     StatPrereq,
 )
 from heroforge.engine.skills import register_skills_on_character
+from heroforge.rules.core.pool_keys import PoolKey
 from heroforge.rules.loader import FeatsLoader, LoaderError
 from heroforge.rules.rules import get_rules
+
+
+def _pool_total(c: Character, key: str) -> int:
+    """A pool the caller knows exists, with the check stated."""
+    pool = c.get_pool(key)
+    assert pool is not None, key
+    return pool.total(c)
+
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
@@ -252,20 +262,23 @@ class TestSkillFocusSelection:
     def test_chosen_skill_gets_plus_three(self) -> None:
         c = self._char_with_skill_focus("Knowledge (Religion)")
         pool = c.get_pool("skill_knowledge_religion")
+        assert pool is not None
         assert pool.total(c) == 3
 
     def test_chosen_skill_bonus_is_untyped(self) -> None:
         c = self._char_with_skill_focus("Knowledge (Religion)")
-        entries = c.get_pool("skill_knowledge_religion").entries_for(
-            "feat:Skill Focus (Knowledge (Religion))"
-        )
+        pool = c.get_pool("skill_knowledge_religion")
+        assert pool is not None
+        entries = pool.entries_for("feat:Skill Focus (Knowledge (Religion))")
         assert len(entries) == 1
         assert entries[0].value == 3
         assert entries[0].bonus_type == BonusType.UNTYPED
 
     def test_other_skills_unaffected(self) -> None:
         c = self._char_with_skill_focus("Knowledge (Religion)")
-        assert c.get_pool("skill_spellcraft").total(c) == 0
+        pool = c.get_pool("skill_spellcraft")
+        assert pool is not None
+        assert pool.total(c) == 0
 
 
 # ===========================================================================
@@ -279,7 +292,7 @@ class TestFeatDefinition:
         buff = BuffDefinition(
             name="Dodge",
             category=BuffCategory.FEAT,
-            effects=[BonusEffect("ac", BonusType.DODGE, 1)],
+            effects=[BonusEffect(PoolKey.AC, BonusType.DODGE, 1)],
         )
         defn = FeatDefinition(
             name="Dodge",
@@ -337,6 +350,7 @@ class TestFeatDefinition:
     def test_parameterized_build_buff_with_parameter_5(self) -> None:
         defn = self._conditional_parameterized()
         buff = defn.build_buff_definition(parameter=5)
+        assert buff is not None
         attack_eff = next(e for e in buff.effects if e.target == "attack_all")
         assert attack_eff.value == -5
 
@@ -355,7 +369,7 @@ class TestFeatRegistry:
     def test_register_and_get(self) -> None:
         reg = FeatRegistry()
         reg.register(self._make("Dodge", FeatKind.ALWAYS_ON))
-        assert reg.get("Dodge").kind == FeatKind.ALWAYS_ON
+        assert reg.require("Dodge").kind == FeatKind.ALWAYS_ON
 
     def test_require_unknown_raises(self) -> None:
         with pytest.raises(KeyError, match="No FeatDefinition"):
@@ -474,6 +488,7 @@ class TestBuildFeatFromYaml:
         )
         assert defn.kind == FeatKind.CONDITIONAL
         assert defn.is_parameterized
+        assert defn.parameter is not None
         assert defn.parameter.max_formula == "bab"
         assert defn.buff_definition is None  # built at activation time
 
@@ -576,12 +591,14 @@ class TestFeatsLoader:
         feat_reg, _, _ = loaded_registries()
         pa = feat_reg.require("Power Attack")
         assert pa.is_parameterized
+        assert pa.parameter is not None
         assert pa.parameter.max_formula == "bab"
 
     def test_combat_expertise_is_parameterized(self) -> None:
         feat_reg, _, _ = loaded_registries()
         ce = feat_reg.require("Combat Expertise")
         assert ce.is_parameterized
+        assert ce.parameter is not None
         assert "min" in ce.parameter.max_formula
 
     def test_passive_feats_have_no_buff(self) -> None:
@@ -832,6 +849,7 @@ class TestConditionalFeatActivation:
         buff = pa_defn.build_buff_definition(parameter=3)
         # Register via apply_buff with the parameterized buff
         c.feats.append({"name": "Power Attack"})
+        assert buff is not None
         pairs = buff.pool_entries(0, c)
         c.register_buff_definition("Power Attack", pairs)
         c.toggle_buff("Power Attack", True)
@@ -848,6 +866,7 @@ class TestConditionalFeatActivation:
         # Register with parameter=2
         buff_2 = pa_defn.build_buff_definition(parameter=2)
         c.feats.append({"name": "Power Attack"})
+        assert buff_2 is not None
         c.register_buff_definition("Power Attack", buff_2.pool_entries(0, c))
         c.toggle_buff("Power Attack", True)
         base_atk = c.get("attack_melee")
@@ -855,6 +874,7 @@ class TestConditionalFeatActivation:
 
         # Re-register with parameter=5
         buff_5 = pa_defn.build_buff_definition(parameter=5)
+        assert buff_5 is not None
         c._buff_entries["Power Attack"] = buff_5.pool_entries(0, c)
         c.toggle_buff("Power Attack", True)  # re-activate with new entries
 
@@ -868,7 +888,7 @@ class TestConditionalFeatActivation:
           attack penalty = -2, dodge AC bonus = +2.
         """
         c = fighter(4)
-        c.set_ability_score("int", 15)  # meets prereq
+        c.set_ability_score(Ability.INT, 15)  # meets prereq
         base_atk = c.get("attack_melee")
         base_ac = c.ac
         feat_reg, _, _ = loaded_registries()
@@ -876,6 +896,7 @@ class TestConditionalFeatActivation:
 
         buff = ce_defn.build_buff_definition(parameter=2)
         c.feats.append({"name": "Combat Expertise"})
+        assert buff is not None
         c.register_buff_definition("Combat Expertise", buff.pool_entries(0, c))
         c.toggle_buff("Combat Expertise", True)
 
@@ -892,6 +913,7 @@ class TestConditionalFeatActivation:
         pa_defn = feat_reg.require("Power Attack")
         buff = pa_defn.build_buff_definition(parameter=3)
         c.feats.append({"name": "Power Attack"})
+        assert buff is not None
         c.register_buff_definition("Power Attack", buff.pool_entries(0, c))
         c.toggle_buff("Power Attack", True)
 
@@ -899,8 +921,8 @@ class TestConditionalFeatActivation:
 
         bless = BuffDefinition(
             name="Bless",
-            category=None,
-            effects=[BonusEffect("attack_all", BonusType.MORALE, 1)],
+            category=BuffCategory.SPELL,
+            effects=[BonusEffect(PoolKey.ATTACK_ALL, BonusType.MORALE, 1)],
         )
         apply_buff(bless, c)
 
@@ -1126,7 +1148,7 @@ class TestWeaponSelectionFeatsSkipGenericPools:
     ) -> None:
         c = fighter(12)
         feat_reg, _, _ = loaded_registries()
-        before = {k: c.get_pool(k).total(c) for k in pool_keys}
+        before = {k: _pool_total(c, k) for k in pool_keys}
         c.add_feat(
             feat_name,
             feat_reg.require(feat_name),
@@ -1134,7 +1156,7 @@ class TestWeaponSelectionFeatsSkipGenericPools:
             source="character",
             parameter="Longsword",
         )
-        after = {k: c.get_pool(k).total(c) for k in pool_keys}
+        after = {k: _pool_total(c, k) for k in pool_keys}
         assert after == before
 
     @pytest.mark.parametrize(("feat_name", "_pools"), WEAPON_FEATS)

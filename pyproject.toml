@@ -44,3 +44,14 @@ addopts = [
 markers = [
     "xdist_group: group tests to run in the same xdist worker process",
 ]
+
+[tool.pyright]
+include = ["src", "tests", "conftest.py"]
+# The PyQt6 UI is slated for removal; it is not worth typing
+# code that is about to be deleted. Drop this exclude (and the
+# note in ARCHITECTURE.md) if the UI outlives the purge.
+exclude = ["src/heroforge/ui"]
+pythonVersion = "3.12"
+typeCheckingMode = "standard"
+venvPath = "."
+venv = ".venv"

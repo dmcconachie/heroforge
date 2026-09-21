@@ -72,12 +72,12 @@ def fighter_char(app_state: AppState) -> Character:
     c.alignment = "lawful_good"
     c.deity = "St. Cuthbert"
 
-    c.set_ability_score("str", 16)
-    c.set_ability_score("dex", 14)
-    c.set_ability_score("con", 14)
-    c.set_ability_score("int", 10)
-    c.set_ability_score("wis", 10)
-    c.set_ability_score("cha", 8)
+    c.set_ability_score(Ability.STR, 16)
+    c.set_ability_score(Ability.DEX, 14)
+    c.set_ability_score(Ability.CON, 14)
+    c.set_ability_score(Ability.INT, 10)
+    c.set_ability_score(Ability.WIS, 10)
+    c.set_ability_score(Ability.CHA, 8)
 
     apply_race(app_state.race_registry.require("Human"), c)
 
@@ -171,8 +171,8 @@ class TestSaveCharacter:
     def test_ability_scores_saved(self, tmp_path: Path) -> None:
         state = make_app_state()
         c = state.character
-        c.set_ability_score("str", 18)
-        c.set_ability_score("dex", 16)
+        c.set_ability_score(Ability.STR, 18)
+        c.set_ability_score(Ability.DEX, 16)
         path = tmp_path / "c.char.yaml"
         save_character(c, path)
         with open(path) as f:
@@ -260,7 +260,7 @@ class TestLoadCharacter:
         state = make_app_state()
         path = tmp_path / "c.char.yaml"
         save_character(character, path)
-        loaded = load_character(path, state)
+        loaded = load_character(path)
         state.set_character(loaded)
         return loaded, state
 
@@ -276,8 +276,8 @@ class TestLoadCharacter:
     def test_ability_scores_restored(self, tmp_path: Path) -> None:
         state = make_app_state()
         c = state.character
-        c.set_ability_score("str", 18)
-        c.set_ability_score("wis", 16)
+        c.set_ability_score(Ability.STR, 18)
+        c.set_ability_score(Ability.WIS, 16)
         loaded, _ = self._save_and_load(tmp_path, c)
         assert loaded.str_score == 18
         assert loaded.wis_score == 16
@@ -384,7 +384,7 @@ class TestLoadCharacter:
 
         state = make_app_state()
         c = state.character
-        c.set_ability_score("dex", 16)
+        c.set_ability_score(Ability.DEX, 16)
         c.levels = [
             CharacterLevel(
                 character_level=1,
@@ -455,9 +455,9 @@ class TestLoadCharacter:
             "templates: {}\n"
             "dm_overrides: []\nequipment: {}\n"
         )
-        state = make_app_state()
+        make_app_state()
         with pytest.raises(ValueError, match="Githzerai"):
-            load_character(path, state)
+            load_character(path)
 
     def test_unknown_buff_raises(self, tmp_path: Path) -> None:
         """Unknown buff raises ValueError."""
@@ -477,9 +477,9 @@ class TestLoadCharacter:
             "templates: {}\n"
             "dm_overrides: []\nequipment: {}\n"
         )
-        state = make_app_state()
+        make_app_state()
         with pytest.raises(ValueError, match="Homebrew Buff"):
-            load_character(path, state)
+            load_character(path)
 
 
 # ===========================================================================
@@ -529,7 +529,7 @@ class TestCattrsErrorFormatting:
         path = tmp_path / "bad.char.yaml"
         path.write_text(_BAD_YAML)
         with pytest.raises(ValueError) as exc_info:
-            load_character(path, make_app_state())
+            load_character(path)
         return str(exc_info.value)
 
     def test_duplicate_errors_listed_once(self, tmp_path: Path) -> None:
@@ -592,7 +592,7 @@ class TestRoundTrip:
         save_character(c, path)
 
         new_state = make_app_state()
-        loaded = load_character(path, new_state)
+        loaded = load_character(path)
         new_state.set_character(loaded)
 
         after = {
@@ -619,7 +619,7 @@ class TestRoundTrip:
         state = make_app_state()
         c = state.character
         apply_race(state.race_registry.require("Elf"), c)
-        c.set_ability_score("dex", 16)
+        c.set_ability_score(Ability.DEX, 16)
         c.levels = [
             CharacterLevel(
                 character_level=1,
@@ -654,7 +654,7 @@ class TestRoundTrip:
         save_character(c, path)
 
         new_state = make_app_state()
-        loaded = load_character(path, new_state)
+        loaded = load_character(path)
         new_state.set_character(loaded)
 
         assert new_state.skill_total("Hide") == before_hide
@@ -663,7 +663,7 @@ class TestRoundTrip:
     def test_template_effects_preserved(self, tmp_path: Path) -> None:
         state = make_app_state()
         c = state.character
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
 
         hc = state.template_registry.require("Half-Celestial")
 
@@ -674,8 +674,8 @@ class TestRoundTrip:
         path = tmp_path / "hc.char.yaml"
         save_character(c, path)
 
-        new_state = make_app_state()
-        loaded = load_character(path, new_state)
+        make_app_state()
+        loaded = load_character(path)
         assert loaded.str_score == before_str
 
 
@@ -689,7 +689,7 @@ class TestAbilityBumpRoundTrip:
 
         state = make_app_state()
         c = state.character
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         for i in range(1, 5):
             c.levels.append(
                 CharacterLevel(
@@ -699,20 +699,20 @@ class TestAbilityBumpRoundTrip:
                 )
             )
         c._invalidate_class_stats()
-        c.set_level_ability_bump(4, "str")
-        assert c.get_ability_score("str") == 15
+        c.set_level_ability_bump(4, Ability.STR)
+        assert c.get_ability_score(Ability.STR) == 15
 
         path = tmp_path / "bumps.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, make_app_state())
+        loaded = load_character(path)
         assert loaded.levels[3].ability_bump == "str"
-        assert loaded.get_ability_score("str") == 15
+        assert loaded.get_ability_score(Ability.STR) == 15
 
     def test_inherent_bumps_round_trips(self, tmp_path: Path) -> None:
 
         state = make_app_state()
         c = state.character
-        c.set_ability_score("int", 14)
+        c.set_ability_score(Ability.INT, 14)
         for i in range(1, 6):
             c.levels.append(
                 CharacterLevel(
@@ -722,15 +722,15 @@ class TestAbilityBumpRoundTrip:
                 )
             )
         c._invalidate_class_stats()
-        c.add_inherent_bump(5, "int", 2)
-        assert c.get_ability_score("int") == 16
+        c.add_inherent_bump(5, Ability.INT, 2)
+        assert c.get_ability_score(Ability.INT) == 16
 
         path = tmp_path / "inherent.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, make_app_state())
+        loaded = load_character(path)
 
         assert loaded.levels[4].inherent_bumps == {Ability.INT: 2}
-        assert loaded.get_ability_score("int") == 16
+        assert loaded.get_ability_score(Ability.INT) == 16
 
     def test_old_file_without_bumps_loads(self, tmp_path: Path) -> None:
         """
@@ -754,7 +754,7 @@ class TestAbilityBumpRoundTrip:
         path = tmp_path / "old.char.yaml"
         with open(path, "w") as f:
             yaml.dump(data, f)
-        loaded = load_character(path, make_app_state())
+        loaded = load_character(path)
         assert loaded.levels[0].ability_bump is None
         assert loaded.levels[0].inherent_bumps == {}
 
@@ -776,7 +776,7 @@ class TestEquipmentRoundTrip:
 
         path = tmp_path / "armor.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, make_app_state())
+        loaded = load_character(path)
         assert loaded.get("ac") == before_ac
 
     def test_mithral_armor_round_trips(self, tmp_path: Path) -> None:
@@ -792,25 +792,25 @@ class TestEquipmentRoundTrip:
 
         path = tmp_path / "mithral.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, make_app_state())
+        loaded = load_character(path)
         assert loaded.get("ac") == before_ac
         assert loaded.equipment["armor"]["armor_check_penalty"] == -3
 
     def test_worn_item_round_trips(self, tmp_path: Path) -> None:
         state = make_app_state()
         c = state.character
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
 
         belt = state.magic_item_registry.get("Belt of Giant Strength +4")
         assert belt is not None
         equip_item(c, belt)
         c.equipment.setdefault("worn", []).append({"name": belt.name})
-        assert c.get_ability_score("str") == 18
+        assert c.get_ability_score(Ability.STR) == 18
 
         path = tmp_path / "worn.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, make_app_state())
-        assert loaded.get_ability_score("str") == 18
+        loaded = load_character(path)
+        assert loaded.get_ability_score(Ability.STR) == 18
         worn = [w["name"] for w in loaded.equipment.get("worn", [])]
         assert "Belt of Giant Strength +4" in worn
 
@@ -828,7 +828,7 @@ class TestEquipmentRoundTrip:
 
         path = tmp_path / "weapons.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, make_app_state())
+        loaded = load_character(path)
         weapons = loaded.equipment.get("weapons", [])
         assert len(weapons) == 1
         assert weapons[0]["base"] == "Lance"
@@ -851,4 +851,4 @@ class TestEquipmentRoundTrip:
         with open(path, "w") as f:
             yaml.dump(data, f)
         with pytest.raises(ValueError, match="Alien Carapace"):
-            load_character(path, make_app_state())
+            load_character(path)

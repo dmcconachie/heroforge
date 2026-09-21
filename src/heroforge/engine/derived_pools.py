@@ -171,7 +171,7 @@ def refresh_derived_consumers(character: "Character") -> None:
     """
     Recompute every installed consumer's BonusEntry
     and re-register it on its target pool."""
-    specs = getattr(character, "_derived_consumer_specs", None)
+    specs = character._derived_consumer_specs
     if not specs:
         return
     for spec in specs:

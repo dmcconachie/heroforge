@@ -25,7 +25,13 @@ import yaml
 
 from heroforge.engine.bonus import BonusEntry, BonusType
 from heroforge.engine.character import Character, CharacterLevel
-from heroforge.engine.effects import BonusEffect, BuffDefinition, apply_buff
+from heroforge.engine.effects import (
+    BonusEffect,
+    BuffCategory,
+    BuffDefinition,
+    apply_buff,
+)
+from heroforge.engine.enums import Ability
 from heroforge.engine.skills import (
     SkillDefinition,
     SkillRegistry,
@@ -35,6 +41,7 @@ from heroforge.engine.skills import (
     set_skill_ranks,
 )
 from heroforge.rules.core.pool_keys import PoolKey
+from heroforge.rules.known import KnownSkill
 from heroforge.rules.loader import LoaderError, SkillsLoader
 from heroforge.ui.app_state import AppState
 
@@ -126,14 +133,14 @@ class TestSkillsYaml:
 class TestSkillRegistry:
     def test_register_and_get(self) -> None:
         reg = SkillRegistry()
-        defn = SkillDefinition("Hide", "dex")
+        defn = SkillDefinition("Hide", Ability.DEX)
         reg.register(defn)
         assert reg.get("Hide") is defn
 
     def test_get_by_pool_key(self) -> None:
 
         reg = SkillRegistry()
-        defn = SkillDefinition("Hide", "dex")
+        defn = SkillDefinition("Hide", Ability.DEX)
         reg.register(defn)
         assert reg.get_by_pool_key(PoolKey.SKILL_HIDE) is defn
 
@@ -146,9 +153,9 @@ class TestSkillRegistry:
 
     def test_duplicate_raises(self) -> None:
         reg = SkillRegistry()
-        reg.register(SkillDefinition("Hide", "dex"))
+        reg.register(SkillDefinition("Hide", Ability.DEX))
         with pytest.raises(ValueError, match="already registered"):
-            reg.register(SkillDefinition("Hide", "dex"))
+            reg.register(SkillDefinition("Hide", Ability.DEX))
 
     def test_all_skills_sorted(self) -> None:
         reg = loaded_skill_registry()
@@ -194,11 +201,11 @@ class TestSetSkillRanks:
     def test_set_ranks_updates_skills_dict(self) -> None:
         c, _ = char_with_skills()
         set_skill_ranks(c, "Hide", 5)
-        assert c.skills["Hide"] == 5
+        assert c.skills[KnownSkill("Hide")] == 5
 
     def test_set_ranks_updates_stat_total(self) -> None:
         c, _ = char_with_skills()
-        c.set_ability_score("dex", 14)  # mod +2
+        c.set_ability_score(Ability.DEX, 14)  # mod +2
         set_skill_ranks(c, "Hide", 6)
         assert c.get("skill_hide") == 8  # 6 + 2
 
@@ -210,13 +217,13 @@ class TestSetSkillRanks:
 
     def test_ranks_update_cascades_to_graph(self) -> None:
         c, _ = char_with_skills()
-        c.set_ability_score("wis", 14)  # mod +2
+        c.set_ability_score(Ability.WIS, 14)  # mod +2
         set_skill_ranks(c, "Listen", 4)
         assert c.get("skill_listen") == 6  # 4 ranks + 2 wis
 
     def test_int_skills_use_int_mod(self) -> None:
         c, _ = char_with_skills()
-        c.set_ability_score("int", 18)  # mod +4
+        c.set_ability_score(Ability.INT, 18)  # mod +4
         set_skill_ranks(c, "Spellcraft", 5)
         assert c.get("skill_spellcraft") == 9  # 5 + 4
 
@@ -229,7 +236,7 @@ class TestSetSkillRanks:
 class TestComputeSkillTotal:
     def test_basic_total_ranks_plus_ability(self) -> None:
         c, reg = char_with_skills()
-        c.set_ability_score("dex", 16)  # mod +3
+        c.set_ability_score(Ability.DEX, 16)  # mod +3
         set_skill_ranks(c, "Hide", 5)
         defn = reg.require("Hide")
         result = compute_skill_total(c, defn)
@@ -239,7 +246,7 @@ class TestComputeSkillTotal:
 
     def test_total_no_ranks(self) -> None:
         c, reg = char_with_skills()
-        c.set_ability_score("dex", 12)  # mod +1
+        c.set_ability_score(Ability.DEX, 12)  # mod +1
         defn = reg.require("Balance")
         result = compute_skill_total(c, defn)
         assert result.ranks == 0
@@ -251,6 +258,7 @@ class TestComputeSkillTotal:
         c, reg = char_with_skills()
 
         pool = c.get_pool("skill_hide")
+        assert pool is not None
         pool.set_source(
             "Stealthy", [BonusEntry(2, BonusType.UNTYPED, "Stealthy")]
         )
@@ -262,7 +270,7 @@ class TestComputeSkillTotal:
 
     def test_armor_check_penalty_applied(self) -> None:
         c, reg = char_with_skills()
-        c.set_ability_score("dex", 12)  # mod +1
+        c.set_ability_score(Ability.DEX, 12)  # mod +1
         set_skill_ranks(c, "Hide", 3)
         defn = reg.require("Hide")
         result = compute_skill_total(c, defn, armor_check_penalty=-4)
@@ -310,24 +318,24 @@ class TestSkillCascade:
     def test_ability_change_updates_skill_total(self) -> None:
         c, _ = char_with_skills()
         set_skill_ranks(c, "Hide", 4)
-        c.set_ability_score("dex", 10)  # mod 0
+        c.set_ability_score(Ability.DEX, 10)  # mod 0
         assert c.get("skill_hide") == 4
 
-        c.set_ability_score("dex", 18)  # mod +4
+        c.set_ability_score(Ability.DEX, 18)  # mod +4
         assert c.get("skill_hide") == 8  # 4 + 4
 
     def test_buff_ability_change_cascades_to_skill(self) -> None:
         """Bull's Strength raises STR → Climb and Swim totals update."""
 
         c, _ = char_with_skills()
-        c.set_ability_score("str", 12)  # mod +1
+        c.set_ability_score(Ability.STR, 12)  # mod +1
         set_skill_ranks(c, "Climb", 3)
         assert c.get("skill_climb") == 4  # 3 + 1
 
         bs = BuffDefinition(
             name="Bull's Strength",
-            category=None,
-            effects=[BonusEffect("str_score", BonusType.ENHANCEMENT, 4)],
+            category=BuffCategory.SPELL,
+            effects=[BonusEffect(PoolKey.STR_SCORE, BonusType.ENHANCEMENT, 4)],
         )
         apply_buff(bs, c)
         # str 12→16, mod +3; Climb = 3 + 3 = 6
@@ -335,13 +343,13 @@ class TestSkillCascade:
 
     def test_multiple_skills_same_ability(self) -> None:
         c, _ = char_with_skills()
-        c.set_ability_score("int", 14)  # mod +2
+        c.set_ability_score(Ability.INT, 14)  # mod +2
         set_skill_ranks(c, "Spellcraft", 5)
         set_skill_ranks(c, "Knowledge (Arcana)", 5)
         assert c.get("skill_spellcraft") == 7
         assert c.get("skill_knowledge_arcana") == 7
 
-        c.set_ability_score("int", 20)  # mod +5
+        c.set_ability_score(Ability.INT, 20)  # mod +5
         assert c.get("skill_spellcraft") == 10
         assert c.get("skill_knowledge_arcana") == 10
 
@@ -415,7 +423,7 @@ class TestAppStateSkills:
         state.load_rules()
         state.new_character()
         c = state.character
-        c.set_ability_score("dex", 16)
+        c.set_ability_score(Ability.DEX, 16)
         set_skill_ranks(c, "Hide", 5)
         assert state.skill_total("Hide") == 8  # 5 + 3
 
@@ -440,7 +448,7 @@ class TestSkillBudgetIntAtLevel:
     def test_int_bump_does_not_retroact(self) -> None:
 
         c = fresh_char()
-        c.set_ability_score("int", 12)  # mod +1
+        c.set_ability_score(Ability.INT, 12)  # mod +1
         for i in range(1, 5):
             c.levels.append(
                 CharacterLevel(
@@ -451,7 +459,7 @@ class TestSkillBudgetIntAtLevel:
             )
         c._invalidate_class_stats()
         # Bump INT at level 4
-        c.set_level_ability_bump(4, "int")
+        c.set_level_ability_bump(4, Ability.INT)
 
         # Level 1: INT 12 → mod +1, Fighter base 2
         # Budget: (2 + 1) * 4 = 12
@@ -466,7 +474,7 @@ class TestSkillBudgetIntAtLevel:
     def test_int_bump_crosses_threshold(self) -> None:
 
         c = fresh_char()
-        c.set_ability_score("int", 13)  # mod +1
+        c.set_ability_score(Ability.INT, 13)  # mod +1
         for i in range(1, 5):
             c.levels.append(
                 CharacterLevel(
@@ -476,7 +484,7 @@ class TestSkillBudgetIntAtLevel:
                 )
             )
         c._invalidate_class_stats()
-        c.set_level_ability_bump(4, "int")
+        c.set_level_ability_bump(4, Ability.INT)
 
         # Level 1: INT 13 → mod +1
         # Budget: (2 + 1) * 4 = 12

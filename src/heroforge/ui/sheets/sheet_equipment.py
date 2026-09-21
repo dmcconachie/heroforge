@@ -61,10 +61,13 @@ class SheetEquipment(QWidget):
 
         self._table = QTableWidget(len(EQUIPMENT_SLOTS), 3)
         self._table.setHorizontalHeaderLabels(["Slot", "Item Name", "Notes"])
-        self._table.verticalHeader().setVisible(False)
+        vhdr = self._table.verticalHeader()
+        assert vhdr is not None
+        vhdr.setVisible(False)
 
         # Column sizing
         header = self._table.horizontalHeader()
+        assert header is not None
         header.setSectionResizeMode(
             _COL_SLOT,
             QHeaderView.ResizeMode.ResizeToContents,

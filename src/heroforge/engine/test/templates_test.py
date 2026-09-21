@@ -27,7 +27,12 @@ import yaml
 
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character
-from heroforge.engine.enums import CreatureType
+from heroforge.engine.enums import (
+    Ability,
+    CreatureSubtype,
+    CreatureType,
+    SourceBook,
+)
 from heroforge.engine.prerequisites import (
     CreatureTypePrereq,
     FeatAvailability,
@@ -62,17 +67,17 @@ def fresh_char(race: str = "Human") -> Character:
 def half_celestial() -> TemplateDefinition:
     return TemplateDefinition(
         name="Half-Celestial",
-        source_book="MM",
+        source_book=SourceBook.MM,
         cr_adjustment="+1",
         la_adjustment="+4",
-        subtype_add=["Good", "Extraplanar"],
+        subtype_add=[CreatureSubtype.GOOD, CreatureSubtype.EXTRAPLANAR],
         ability_modifiers=[
-            TemplateAbilityModifier("str", 4),
-            TemplateAbilityModifier("dex", 2),
-            TemplateAbilityModifier("con", 4),
-            TemplateAbilityModifier("int", 2),
-            TemplateAbilityModifier("wis", 4),
-            TemplateAbilityModifier("cha", 4),
+            TemplateAbilityModifier(Ability.STR, 4),
+            TemplateAbilityModifier(Ability.DEX, 2),
+            TemplateAbilityModifier(Ability.CON, 4),
+            TemplateAbilityModifier(Ability.INT, 2),
+            TemplateAbilityModifier(Ability.WIS, 4),
+            TemplateAbilityModifier(Ability.CHA, 4),
         ],
         natural_armor_bonus=1,
     )
@@ -81,13 +86,13 @@ def half_celestial() -> TemplateDefinition:
 def half_dragon() -> TemplateDefinition:
     return TemplateDefinition(
         name="Half-Dragon (Red)",
-        source_book="MM",
-        type_change="Dragon",
+        source_book=SourceBook.MM,
+        type_change=CreatureType.DRAGON,
         ability_modifiers=[
-            TemplateAbilityModifier("str", 8),
-            TemplateAbilityModifier("con", 2),
-            TemplateAbilityModifier("int", 2),
-            TemplateAbilityModifier("cha", 2),
+            TemplateAbilityModifier(Ability.STR, 8),
+            TemplateAbilityModifier(Ability.CON, 2),
+            TemplateAbilityModifier(Ability.INT, 2),
+            TemplateAbilityModifier(Ability.CHA, 2),
         ],
         natural_armor_bonus=4,
     )
@@ -96,12 +101,12 @@ def half_dragon() -> TemplateDefinition:
 def werewolf_template() -> TemplateDefinition:
     return TemplateDefinition(
         name="Lycanthrope (Werewolf)",
-        source_book="MM",
-        subtype_add=["Shapechanger"],
+        source_book=SourceBook.MM,
+        subtype_add=[CreatureSubtype.SHAPECHANGER],
         ability_modifiers=[
-            TemplateAbilityModifier("str", 2),
-            TemplateAbilityModifier("con", 4),
-            TemplateAbilityModifier("wis", 2),
+            TemplateAbilityModifier(Ability.STR, 2),
+            TemplateAbilityModifier(Ability.CON, 4),
+            TemplateAbilityModifier(Ability.WIS, 2),
         ],
         natural_armor_bonus=2,
         grants_feats=["Iron Will"],
@@ -130,7 +135,7 @@ class TestTemplateDefinition:
         assert "Good" in t.subtype_add
 
     def test_ability_modifier_default_untyped(self) -> None:
-        m = TemplateAbilityModifier("str", 4)
+        m = TemplateAbilityModifier(Ability.STR, 4)
         assert m.bonus_type == BonusType.UNTYPED
 
 
@@ -203,7 +208,7 @@ class TestTemplateRegistry:
 class TestApplyTemplate:
     def test_ability_bonuses_applied(self) -> None:
         c = fresh_char()
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         t = half_celestial()
         apply_template(t, c)
         # str 14 + 4 = 18
@@ -211,7 +216,7 @@ class TestApplyTemplate:
 
     def test_all_six_ability_bonuses(self) -> None:
         c = fresh_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             c.set_ability_score(ab, 10)
 
         t = half_celestial()
@@ -269,7 +274,7 @@ class TestApplyTemplate:
     def test_apply_is_idempotent(self) -> None:
         """Applying same template twice gives same result as once."""
         c = fresh_char()
-        c.set_ability_score("str", 10)
+        c.set_ability_score(Ability.STR, 10)
         t = half_celestial()
         apply_template(t, c)
         str_once = c.str_score
@@ -278,13 +283,13 @@ class TestApplyTemplate:
 
     def test_apply_does_not_affect_unrelated_stats(self) -> None:
         c = fresh_char()
-        c.set_ability_score("str", 10)
+        c.set_ability_score(Ability.STR, 10)
         # Half-Celestial doesn't change str_score wait it does, use Vampire
         # Vampire changes STR+6 but not INT directly
 
         vampire_light = TemplateDefinition(
             name="Vampire Light",
-            ability_modifiers=[TemplateAbilityModifier("str", 4)],
+            ability_modifiers=[TemplateAbilityModifier(Ability.STR, 4)],
         )
         apply_template(vampire_light, c)
         # INT should be unchanged
@@ -299,14 +304,14 @@ class TestApplyTemplate:
 class TestRemoveTemplate:
     def test_remove_reverts_ability_bonuses(self) -> None:
         c = fresh_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             c.set_ability_score(ab, 10)
 
         t = half_celestial()
         apply_template(t, c)
         remove_template(t, c)
 
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             assert c.get_ability_score(ab) == 10, f"{ab} not reverted"
 
     def test_remove_reverts_natural_armor(self) -> None:
@@ -367,17 +372,17 @@ class TestMultipleTemplates:
     def test_two_templates_both_apply(self) -> None:
         """Half-Celestial + Feral template stacked."""
         c = fresh_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             c.set_ability_score(ab, 10)
 
         hc = half_celestial()  # str+4, dex+2, con+4, int+2, wis+4, cha+4
         feral = TemplateDefinition(
             name="Feral",
             ability_modifiers=[
-                TemplateAbilityModifier("str", 4),
-                TemplateAbilityModifier("dex", 4),
-                TemplateAbilityModifier("con", 2),
-                TemplateAbilityModifier("int", -2),
+                TemplateAbilityModifier(Ability.STR, 4),
+                TemplateAbilityModifier(Ability.DEX, 4),
+                TemplateAbilityModifier(Ability.CON, 2),
+                TemplateAbilityModifier(Ability.INT, -2),
             ],
             natural_armor_bonus=2,
         )
@@ -413,14 +418,17 @@ class TestMultipleTemplates:
 
         hf = TemplateDefinition(
             name="Half-Fiend",
-            subtype_add=["Evil", "Extraplanar"],  # Extraplanar again — no dup
+            subtype_add=[
+                CreatureSubtype.EVIL,
+                CreatureSubtype.EXTRAPLANAR,
+            ],  # Extraplanar again — no dup
         )
         apply_template(hc, c)
         apply_template(hf, c)
         subs = effective_subtypes(c)
-        assert "Good" in subs
-        assert "Evil" in subs
-        assert subs.count("Extraplanar") == 1  # no duplicate
+        assert CreatureSubtype.GOOD in subs
+        assert CreatureSubtype.EVIL in subs
+        assert subs.count(CreatureSubtype.EXTRAPLANAR) == 1
 
 
 # ===========================================================================
@@ -494,7 +502,9 @@ class TestTemplatePrereqIntegration:
         A feat requiring Dragon type should now be available.
         """
         chk = PrerequisiteChecker()
-        chk.register_feat("Draconic Heritage", CreatureTypePrereq(["Dragon"]))
+        chk.register_feat(
+            "Draconic Heritage", CreatureTypePrereq([CreatureType.DRAGON])
+        )
 
         c = fresh_char("Human")
         avail_before, _ = chk.feat_availability("Draconic Heritage", c)
@@ -515,7 +525,8 @@ class TestTemplatePrereqIntegration:
         """
         chk = PrerequisiteChecker()
         chk.register_feat(
-            "Enlarge Person Compatible", CreatureTypePrereq(["Humanoid"])
+            "Enlarge Person Compatible",
+            CreatureTypePrereq([CreatureType.HUMANOID]),
         )
 
         c = fresh_char("Human")
@@ -640,8 +651,8 @@ class TestTemplatesLoader:
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
         hc = reg.require("Half-Celestial")
         abilities = {m.ability: m.value for m in hc.ability_modifiers}
-        assert abilities["str"] == 4
-        assert abilities["cha"] == 4
+        assert abilities[Ability.STR] == 4
+        assert abilities[Ability.CHA] == 4
 
     def test_half_dragon_type_change_loaded(self) -> None:
 
@@ -693,7 +704,7 @@ class TestTemplatesLoader:
         TemplatesLoader(RULES_DIR).load(reg, "core/templates.yaml")
 
         c = fresh_char("Human")
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         hc = reg.require("Half-Celestial")
         apply_template(hc, c)
 

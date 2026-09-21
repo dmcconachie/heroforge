@@ -21,6 +21,7 @@ from heroforge.engine.defenses import (
     best_damage_reduction,
     collect_defenses,
 )
+from heroforge.engine.enums import Ability
 from heroforge.engine.equipment import equip_armor, equip_item
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
@@ -30,7 +31,7 @@ from heroforge.rules.rules import get_rules
 
 def _char(cls: str = "Barbarian", level: int = 1) -> Character:
     c = Character(name="Grim")
-    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+    for ab in Ability:
         c.set_ability_score(ab, 12)
     c.levels = [
         CharacterLevel(character_level=i + 1, class_name=cls, hp_roll=8)
@@ -42,7 +43,7 @@ def _char(cls: str = "Barbarian", level: int = 1) -> Character:
 
 def _wear(c: Character, *properties: str) -> Character:
     equip_armor(
-        c, get_rules().armor.get("Chain Shirt"), properties=list(properties)
+        c, get_rules().armor.require("Chain Shirt"), properties=list(properties)
     )
     return c
 
@@ -55,14 +56,16 @@ class TestDamageReduction:
     def test_barbarian_progression(self, level: int, amount: int) -> None:
         """PHB Table 3-3: 1/- at 7th, rising at 10/13/16/19."""
         d = collect_defenses(_char(level=level))
-        assert d.damage_reduction == (DamageReduction(amount, "-"),)
+        assert d.damage_reduction == (
+            DamageReduction(amount, DrBypass.NOTHING),
+        )
 
     def test_below_seventh_there_is_none(self) -> None:
         assert collect_defenses(_char(level=6)).damage_reduction == ()
 
     def test_invulnerability_gives_dr_against_magic(self) -> None:
         d = collect_defenses(_wear(_char(level=1), "Invulnerability"))
-        assert d.damage_reduction == (DamageReduction(5, "magic"),)
+        assert d.damage_reduction == (DamageReduction(5, DrBypass.MAGIC),)
 
     def test_different_bypasses_are_listed_separately(self) -> None:
         """
@@ -72,22 +75,22 @@ class TestDamageReduction:
         """
         d = collect_defenses(_wear(_char(level=10), "Invulnerability"))
         assert set(d.damage_reduction) == {
-            DamageReduction(2, "-"),
-            DamageReduction(5, "magic"),
+            DamageReduction(2, DrBypass.NOTHING),
+            DamageReduction(5, DrBypass.MAGIC),
         }
 
     def test_the_same_bypass_takes_the_best(self) -> None:
 
         got = best_damage_reduction(
             [
-                DamageReduction(5, "magic"),
-                DamageReduction(10, "magic"),
-                DamageReduction(2, "-"),
+                DamageReduction(5, DrBypass.MAGIC),
+                DamageReduction(10, DrBypass.MAGIC),
+                DamageReduction(2, DrBypass.NOTHING),
             ]
         )
         assert set(got) == {
-            DamageReduction(10, "magic"),
-            DamageReduction(2, "-"),
+            DamageReduction(10, DrBypass.MAGIC),
+            DamageReduction(2, DrBypass.NOTHING),
         }
 
 
@@ -168,15 +171,15 @@ class TestEnergyResistance:
 
 class TestOnTheSheet:
     def test_damage_reduction_reads_as_amount_slash_bypass(self) -> None:
-        sheet = gather_sheet(_char(level=10), None)
+        sheet = gather_sheet(_char(level=10))
         assert sheet.combat.damage_reduction == ["2/-"]
 
     def test_energy_resistance_is_a_mapping(self) -> None:
-        sheet = gather_sheet(_wear(_char(), "Fire Resistance"), None)
+        sheet = gather_sheet(_wear(_char(), "Fire Resistance"))
         assert sheet.combat.energy_resistance == {"fire": 10}
 
     def test_a_character_with_none_shows_none(self) -> None:
-        sheet = gather_sheet(_char(cls="Fighter", level=5), None)
+        sheet = gather_sheet(_char(cls="Fighter", level=5))
         assert sheet.combat.damage_reduction == []
         assert sheet.combat.energy_resistance == {}
         assert sheet.combat.immunities == []
@@ -208,7 +211,7 @@ levels:
     def test_defenses_survive_a_load(self, tmp_path: Path) -> None:
         path = tmp_path / "b.char.yaml"
         path.write_text(self.CHAR)
-        sheet = gather_sheet(load_character(path, None), None)
+        sheet = gather_sheet(load_character(path))
         assert sorted(sheet.combat.damage_reduction) == ["2/-", "5/magic"]
         assert sheet.combat.energy_resistance == {"fire": 30}
 
@@ -246,6 +249,7 @@ class TestWornItems:
 
     def test_the_item_declares_what_the_choice_is(self) -> None:
         item = get_rules().magic_items.get("Ring of Energy Resistance, Minor")
+        assert item is not None
         assert item.takes_parameter
         assert item.parameter_label == "energy type"
 
@@ -273,15 +277,15 @@ class TestTemplates:
 
     def test_half_fiend_adds_fire(self) -> None:
         d = collect_defenses(self._templated("Half-Fiend"))
-        assert d.energy_resistance["fire"] == 10
+        assert d.energy_resistance[EnergyType.FIRE] == 10
         assert "poison" in d.immunities
 
     def test_damage_reduction_scales_with_hit_dice(self) -> None:
         """MM: 5/magic at HD 11 or less, 10/magic at 12 or more."""
         low = collect_defenses(self._templated("Half-Celestial", 11))
         high = collect_defenses(self._templated("Half-Celestial", 12))
-        assert low.damage_reduction == (DamageReduction(5, "magic"),)
-        assert high.damage_reduction == (DamageReduction(10, "magic"),)
+        assert low.damage_reduction == (DamageReduction(5, DrBypass.MAGIC),)
+        assert high.damage_reduction == (DamageReduction(10, DrBypass.MAGIC),)
 
 
 class TestEnergyImmunity:
@@ -294,7 +298,7 @@ class TestEnergyImmunity:
     def _red_dragon(self) -> Character:
 
         c = _char(cls="Fighter", level=1)
-        apply_template(get_rules().templates.get("Half-Dragon (Red)"), c)
+        apply_template(get_rules().templates.require("Half-Dragon (Red)"), c)
         return c
 
     def test_fire_immunity_is_listed(self) -> None:
@@ -302,7 +306,7 @@ class TestEnergyImmunity:
         assert "fire" in d.immunities
 
     def test_it_reaches_the_sheet(self) -> None:
-        sheet = gather_sheet(self._red_dragon(), None)
+        sheet = gather_sheet(self._red_dragon())
         assert "fire" in sheet.combat.immunities
 
     def test_immunity_supersedes_resistance(self) -> None:
@@ -314,7 +318,7 @@ class TestEnergyImmunity:
 
         c = self._red_dragon()
         name = "Ring of Energy Resistance, Minor"
-        equip_item(c, get_rules().magic_items.get(name))
+        equip_item(c, get_rules().magic_items.require(name))
         c.equipment["worn"] = [{"name": name, "parameter": "fire"}]
         d = collect_defenses(c)
         assert "fire" in d.immunities
@@ -330,7 +334,7 @@ class TestArmourMaterialDamageReduction:
 
     def _in(self, armour: str, material: str) -> Character:
         c = _char(cls="Fighter", level=1)
-        equip_armor(c, get_rules().armor.get(armour), material=material)
+        equip_armor(c, get_rules().armor.require(armour), material=material)
         return c
 
     @pytest.mark.parametrize(
@@ -339,11 +343,13 @@ class TestArmourMaterialDamageReduction:
     )
     def test_adamantine_by_category(self, armour: str, amount: int) -> None:
         d = collect_defenses(self._in(armour, "Adamantine"))
-        assert d.damage_reduction == (DamageReduction(amount, "-"),)
+        assert d.damage_reduction == (
+            DamageReduction(amount, DrBypass.NOTHING),
+        )
 
     def test_starmetal_matches_adamantine(self) -> None:
         d = collect_defenses(self._in("Full Plate", "Starmetal"))
-        assert d.damage_reduction == (DamageReduction(3, "-"),)
+        assert d.damage_reduction == (DamageReduction(3, DrBypass.NOTHING),)
 
     def test_a_plain_material_grants_none(self) -> None:
         d = collect_defenses(self._in("Full Plate", "Mithral"))
@@ -356,11 +362,11 @@ class TestArmourMaterialDamageReduction:
         """
         c = _char(level=19)
         equip_armor(
-            c, get_rules().armor.get("Chain Shirt"), material="Adamantine"
+            c, get_rules().armor.require("Chain Shirt"), material="Adamantine"
         )
         # Barbarian 19 is DR 5/-; adamantine light armour is 1/-.
         assert collect_defenses(c).damage_reduction == (
-            DamageReduction(5, "-"),
+            DamageReduction(5, DrBypass.NOTHING),
         )
 
 
@@ -409,7 +415,7 @@ class TestCreatureTemplateTables:
             "cold": resist,
             "electricity": resist,
         }
-        expected = () if dr is None else (DamageReduction(dr, "magic"),)
+        expected = () if dr is None else (DamageReduction(dr, DrBypass.MAGIC),)
         assert d.damage_reduction == expected
 
     @pytest.mark.parametrize(
@@ -421,7 +427,7 @@ class TestCreatureTemplateTables:
     ) -> None:
         d = collect_defenses(self._templated("Fiendish Creature", level))
         assert d.energy_resistance == {"cold": resist, "fire": resist}
-        expected = () if dr is None else (DamageReduction(dr, "magic"),)
+        expected = () if dr is None else (DamageReduction(dr, DrBypass.MAGIC),)
         assert d.damage_reduction == expected
 
     def test_below_four_hit_dice_there_is_no_dr(self) -> None:
@@ -444,7 +450,7 @@ class TestFortification:
         c = _char(cls="Fighter", level=1)
         equip_armor(
             c,
-            get_rules().armor.get("Chain Shirt"),
+            get_rules().armor.require("Chain Shirt"),
             properties=list(properties),
         )
         return c
@@ -485,11 +491,11 @@ class TestFortification:
         assert collect_defenses(c).fortification == 100
 
     def test_it_reaches_the_sheet(self) -> None:
-        sheet = gather_sheet(self._wear("Fortification, Heavy"), None)
+        sheet = gather_sheet(self._wear("Fortification, Heavy"))
         assert sheet.combat.fortification == 100
 
     def test_it_is_omitted_when_there_is_none(self) -> None:
-        sheet = gather_sheet(self._wear(), None)
+        sheet = gather_sheet(self._wear())
         assert sheet.combat.fortification == 0
 
 
@@ -503,7 +509,7 @@ class TestTemplateSpellResistance:
     def _templated(self, name: str, level: int) -> Character:
 
         c = _char(cls="Fighter", level=level)
-        apply_template(get_rules().templates.get(name), c)
+        apply_template(get_rules().templates.require(name), c)
         return c
 
     @pytest.mark.parametrize(
@@ -530,7 +536,7 @@ class TestTemplateSpellResistance:
     def test_removing_the_template_removes_it(self) -> None:
 
         c = _char(cls="Fighter", level=5)
-        defn = get_rules().templates.get("Half-Celestial")
+        defn = get_rules().templates.require("Half-Celestial")
         apply_template(defn, c)
         assert c.get("sr") == 15
         remove_template(defn, c)

@@ -25,6 +25,7 @@ from pathlib import Path
 import pytest
 
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.enums import Ability
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.weapons import (
@@ -40,10 +41,10 @@ def _char(
     cls: str, level: int, *weapons: dict, strength: int = 16
 ) -> Character:
     c = Character(name="Stancer")
-    for ab in ("str", "dex", "con", "int", "wis", "cha"):
+    for ab in Ability:
         c.set_ability_score(ab, 10)
-    c.set_ability_score("str", strength)
-    c.set_ability_score("dex", 14)
+    c.set_ability_score(Ability.STR, strength)
+    c.set_ability_score(Ability.DEX, 14)
     c.levels = [
         CharacterLevel(character_level=i + 1, class_name=cls, hp_roll=8)
         for i in range(level)
@@ -55,7 +56,7 @@ def _char(
 
 
 def _weapons(c: Character) -> list:
-    return gather_sheet(c, None).equipment.weapons
+    return gather_sheet(c).equipment.weapons
 
 
 _YAML = """
@@ -93,12 +94,12 @@ class TestTheVocabulary:
         path = tmp_path / "t.char.yaml"
         path.write_text(_YAML.format(stance="two_hnded"))
         with pytest.raises(Exception, match="two_hnded"):
-            load_character(path, None)
+            load_character(path)
 
     def test_a_spelled_stance_loads(self, tmp_path: Path) -> None:
         path = tmp_path / "t.char.yaml"
         path.write_text(_YAML.format(stance="two_handed"))
-        c = load_character(path, None)
+        c = load_character(path)
         assert strength_damage_adjust(c, c.equipment["weapons"][0]) == 1
 
 
@@ -217,7 +218,7 @@ equipment:
         path = tmp_path / "c.char.yaml"
         body = self.HEAD.replace("WEAPON", weapon).replace("STANCES", stances)
         path.write_text(body)
-        load_character(path, None)
+        load_character(path)
 
     def test_two_handed_and_off_hand_conflict(self, tmp_path: Path) -> None:
         with pytest.raises(Exception, match="two_handed"):
@@ -296,8 +297,11 @@ class TestDoubleWeapons:
 
     def test_the_definition_knows_it_is_double(self) -> None:
 
-        assert get_rules().weapons.get("Quarterstaff").double
-        assert not get_rules().weapons.get("Greatsword").double
+        staff = get_rules().weapons.get("Quarterstaff")
+        greatsword = get_rules().weapons.get("Greatsword")
+        assert staff is not None and greatsword is not None
+        assert staff.double
+        assert not greatsword.double
 
     def test_a_non_double_two_hander_cannot_be_paired(
         self, tmp_path: Path
@@ -311,7 +315,7 @@ class TestDoubleWeapons:
         path = tmp_path / "g.char.yaml"
         path.write_text(body)
         with pytest.raises(Exception, match="Greatsword"):
-            load_character(path, None)
+            load_character(path)
 
 
 class TestFlurryAndTwoWeaponFighting:

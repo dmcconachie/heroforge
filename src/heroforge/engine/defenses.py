@@ -229,7 +229,7 @@ def collect_defenses(character: "Character") -> Defenses:
     from heroforge.rules.rules import get_rules
 
     drs: list[DamageReduction] = []
-    resist: list[tuple[str, int]] = []
+    resist: list[tuple[EnergyType, int]] = []
     immune: set[str] = set()
     fortify: list[int] = []
 
@@ -295,9 +295,11 @@ def collect_defenses(character: "Character") -> Defenses:
         if points > best_resist.get(energy, 0):
             best_resist[energy] = points
     # Immunity is total, so a resistance to the same energy
-    # adds nothing and would only clutter the sheet.
-    for energy in immune:
-        best_resist.pop(energy, None)
+    # adds nothing and would only clutter the sheet. Only some
+    # immunities name an energy — poison and sleep have no
+    # resistance entry to drop.
+    for name in immune & {e.value for e in EnergyType}:
+        best_resist.pop(EnergyType(name), None)
 
     return Defenses(
         damage_reduction=best_damage_reduction(drs),

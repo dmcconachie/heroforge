@@ -26,6 +26,7 @@ if TYPE_CHECKING:
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.effects import (
+    CONDITION_REGISTRY,
     BonusEffect,
     BuffCategory,
     BuffDefinition,
@@ -35,11 +36,15 @@ from heroforge.engine.effects import (
     evaluate_formula,
     remove_buff,
 )
+from heroforge.engine.enums import Ability, CreatureType, SourceBook
 from heroforge.engine.equipment import equip_item
+from heroforge.engine.races import apply_race
 from heroforge.engine.skills import (
     compute_skill_total,
     register_skills_on_character,
 )
+from heroforge.engine.templates import apply_template
+from heroforge.rules.core.pool_keys import PoolKey
 from heroforge.rules.rules import get_rules
 
 # ===========================================================================
@@ -58,13 +63,13 @@ def fighter(n: int) -> list[CharacterLevel]:
     ]
 
 
-def fresh_char(**kwargs: object) -> Character:
+def fresh_char(**kwargs: str) -> Character:
     c = Character(**kwargs)
     return c
 
 
 def simple_effect(
-    target: str = "attack_melee",
+    target: PoolKey = PoolKey.ATTACK_MELEE,
     value: int | str = 1,
     btype: BonusType = BonusType.MORALE,
     condition: Callable | None = None,
@@ -83,11 +88,11 @@ def simple_effect(
 def _cond_effect() -> BonusEffect:
     """BonusEffect with a humanoid-only condition."""
     eff = BonusEffect(
-        target="str_score",
+        target=PoolKey.STR_SCORE,
         bonus_type=BonusType.ENHANCEMENT,
         value=2,
     )
-    eff.condition = lambda char: getattr(char, "_race_type", "") == "Humanoid"
+    eff.condition = lambda char: char.creature_type == CreatureType.HUMANOID
     return eff
 
 
@@ -95,7 +100,7 @@ def simple_buff(
     name: str,
     effects: list[BonusEffect] | None = None,
     category: BuffCategory = BuffCategory.SPELL,
-    book: str = "PHB",
+    book: SourceBook = SourceBook.PHB,
 ) -> BuffDefinition:
     return BuffDefinition(
         name=name,
@@ -174,11 +179,11 @@ class TestEvaluateFormula:
 
     def test_ability_modifier_from_character(self) -> None:
         c = fresh_char()
-        c.set_ability_score("str", 18)  # mod = 4
+        c.set_ability_score(Ability.STR, 18)  # mod = 4
         assert evaluate_formula("str_mod", character=c) == 4
 
     def test_ability_modifiers_zero_without_character(self) -> None:
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             assert evaluate_formula(f"{ab}_mod") == 0
 
     def test_bab_from_character(self) -> None:
@@ -253,7 +258,7 @@ class TestBonusEffect:
 
     def test_to_bonus_entry_static(self) -> None:
         e = BonusEffect(
-            target="attack_melee",
+            target=PoolKey.ATTACK_MELEE,
             bonus_type=BonusType.MORALE,
             value=2,
             source_label="Bless",
@@ -265,7 +270,7 @@ class TestBonusEffect:
 
     def test_to_bonus_entry_formula(self) -> None:
         e = BonusEffect(
-            target="fort_save",
+            target=PoolKey.FORT_SAVE,
             bonus_type=BonusType.RESISTANCE,
             value="caster_level // 3",
             source_label="Resistance",
@@ -275,7 +280,7 @@ class TestBonusEffect:
 
     def test_to_bonus_entry_uses_source_label_over_parent_name(self) -> None:
         e = BonusEffect(
-            target="ac",
+            target=PoolKey.AC,
             bonus_type=BonusType.DEFLECTION,
             value=2,
             source_label="Custom Label",
@@ -284,7 +289,9 @@ class TestBonusEffect:
         assert entry.source == "Custom Label"
 
     def test_to_bonus_entry_falls_back_to_parent_name(self) -> None:
-        e = BonusEffect(target="ac", bonus_type=BonusType.DEFLECTION, value=2)
+        e = BonusEffect(
+            target=PoolKey.AC, bonus_type=BonusType.DEFLECTION, value=2
+        )
         entry = e.to_bonus_entry("Shield of Faith")
         assert entry.source == "Shield of Faith"
 
@@ -293,7 +300,7 @@ class TestBonusEffect:
             return c is not None
 
         e = BonusEffect(
-            target="str_score",
+            target=PoolKey.STR_SCORE,
             bonus_type=BonusType.ENHANCEMENT,
             value=2,
         )
@@ -336,7 +343,7 @@ class TestBuffDefinition:
 
     def test_pool_entries_single_effect(self) -> None:
         b = simple_buff(
-            "Bless", [BonusEffect("attack_melee", BonusType.MORALE, 1)]
+            "Bless", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)]
         )
         pairs = b.pool_entries()
         assert len(pairs) == 1
@@ -347,7 +354,7 @@ class TestBuffDefinition:
     def test_pool_entries_attack_all_expands(self) -> None:
         """attack_all should expand to attack_melee AND attack_ranged."""
         b = simple_buff(
-            "Haste", [BonusEffect("attack_all", BonusType.UNTYPED, 1)]
+            "Haste", [BonusEffect(PoolKey.ATTACK_ALL, BonusType.UNTYPED, 1)]
         )
         pairs = b.pool_entries()
         keys = [pk for pk, _ in pairs]
@@ -357,7 +364,8 @@ class TestBuffDefinition:
 
     def test_pool_entries_damage_all_expands(self) -> None:
         b = simple_buff(
-            "Inspire Courage", [BonusEffect("damage_all", BonusType.MORALE, 2)]
+            "Inspire Courage",
+            [BonusEffect(PoolKey.DAMAGE_ALL, BonusType.MORALE, 2)],
         )
         pairs = b.pool_entries()
         keys = [pk for pk, _ in pairs]
@@ -370,9 +378,9 @@ class TestBuffDefinition:
             name="Haste",
             category=BuffCategory.SPELL,
             effects=[
-                BonusEffect("attack_all", BonusType.UNTYPED, 1),
-                BonusEffect("ac", BonusType.DODGE, 1),
-                BonusEffect("speed", BonusType.UNTYPED, 30),
+                BonusEffect(PoolKey.ATTACK_ALL, BonusType.UNTYPED, 1),
+                BonusEffect(PoolKey.AC, BonusType.DODGE, 1),
+                BonusEffect(PoolKey.SPEED, BonusType.UNTYPED, 30),
             ],
         )
         pairs = b.pool_entries()
@@ -389,7 +397,9 @@ class TestBuffDefinition:
             category=BuffCategory.SPELL,
             effects=[
                 BonusEffect(
-                    "attack_all", BonusType.LUCK, "max(1, caster_level // 3)"
+                    PoolKey.ATTACK_ALL,
+                    BonusType.LUCK,
+                    "max(1, caster_level // 3)",
                 )
             ],
         )
@@ -402,7 +412,9 @@ class TestBuffDefinition:
             name="Test",
             category=BuffCategory.SPELL,
             effects=[
-                BonusEffect("ac", BonusType.DEFLECTION, "caster_level // 3")
+                BonusEffect(
+                    PoolKey.AC, BonusType.DEFLECTION, "caster_level // 3"
+                )
             ],
         )
         pairs = b.pool_entries(caster_level=0)
@@ -454,11 +466,11 @@ class TestBuffRegistry:
 
     def test_overwrite_replaces_definition(self) -> None:
         r = BuffRegistry()
-        b1 = simple_buff("Bless", book="PHB")
-        b2 = simple_buff("Bless", book="SpC")
+        b1 = simple_buff("Bless", book=SourceBook.PHB)
+        b2 = simple_buff("Bless", book=SourceBook.COMPLETE_ARCANE)
         r.register(b1)
         r.register(b2, overwrite=True)
-        assert r.require("Bless").source_book == "SpC"
+        assert r.require("Bless").source_book == SourceBook.COMPLETE_ARCANE
 
     def test_contains_operator(self) -> None:
         r = BuffRegistry()
@@ -491,11 +503,13 @@ class TestBuffRegistry:
 
     def test_by_source_book(self) -> None:
         r = BuffRegistry()
-        r.register(simple_buff("Bless", book="PHB"))
-        r.register(simple_buff("Conviction", book="SpC"))
-        r.register(simple_buff("Crown of Might", book="SpC"))
-        spc = r.by_source_book("SpC")
-        names = {b.name for b in spc}
+        r.register(simple_buff("Bless", book=SourceBook.PHB))
+        r.register(simple_buff("Conviction", book=SourceBook.COMPLETE_ARCANE))
+        r.register(
+            simple_buff("Crown of Might", book=SourceBook.COMPLETE_ARCANE)
+        )
+        arcane = r.by_source_book(SourceBook.COMPLETE_ARCANE)
+        names = {b.name for b in arcane}
         assert names == {"Conviction", "Crown of Might"}
 
 
@@ -508,7 +522,7 @@ class TestApplyRemoveBuff:
     def test_apply_buff_activates_on_character(self) -> None:
         c = fresh_char()
         b = simple_buff(
-            "Bless", [BonusEffect("attack_melee", BonusType.MORALE, 1)]
+            "Bless", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)]
         )
         apply_buff(b, c)
         assert c.is_buff_active("Bless")
@@ -518,7 +532,7 @@ class TestApplyRemoveBuff:
         c.set_class_levels(fighter(4))
         base = c.get("attack_melee")
         b = simple_buff(
-            "Bless", [BonusEffect("attack_melee", BonusType.MORALE, 1)]
+            "Bless", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)]
         )
         apply_buff(b, c)
         assert c.get("attack_melee") == base + 1
@@ -528,7 +542,7 @@ class TestApplyRemoveBuff:
         c.set_class_levels(fighter(4))
         base = c.get("attack_melee")
         b = simple_buff(
-            "Bless", [BonusEffect("attack_melee", BonusType.MORALE, 1)]
+            "Bless", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)]
         )
         apply_buff(b, c)
         remove_buff(b, c)
@@ -545,7 +559,7 @@ class TestApplyRemoveBuff:
         c = fresh_char()
         c.set_class_levels(fighter(4))
         b = simple_buff(
-            "Bless", [BonusEffect("attack_melee", BonusType.MORALE, 1)]
+            "Bless", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)]
         )
         apply_buff(b, c)
         val_once = c.get("attack_melee")
@@ -560,12 +574,16 @@ class TestApplyRemoveBuff:
             category=BuffCategory.SPELL,
             effects=[
                 BonusEffect(
-                    "attack_all", BonusType.LUCK, "max(1, caster_level // 3)"
+                    PoolKey.ATTACK_ALL,
+                    BonusType.LUCK,
+                    "max(1, caster_level // 3)",
                 )
             ],
         )
         apply_buff(b, c, caster_level=6)
-        assert c.get_buff_state("Divine Favor").caster_level == 6
+        state = c.get_buff_state("Divine Favor")
+        assert state is not None
+        assert state.caster_level == 6
         # attack bonus = BAB(0) + STR_mod(0) + luck(2) = 2
         assert c.get("attack_melee") == 2
 
@@ -578,7 +596,7 @@ class TestApplyRemoveBuff:
         b = BuffDefinition(
             name="Haste",
             category=BuffCategory.SPELL,
-            effects=[BonusEffect("attack_all", BonusType.UNTYPED, 1)],
+            effects=[BonusEffect(PoolKey.ATTACK_ALL, BonusType.UNTYPED, 1)],
         )
         apply_buff(b, c)
         assert c.get("attack_melee") == melee_base + 1
@@ -591,10 +609,10 @@ class TestApplyRemoveBuff:
         base = c.get("attack_melee")
 
         bless = simple_buff(
-            "Bless", [BonusEffect("attack_melee", BonusType.MORALE, 1)]
+            "Bless", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)]
         )
         prayer = simple_buff(
-            "Prayer", [BonusEffect("attack_melee", BonusType.MORALE, 2)]
+            "Prayer", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 2)]
         )
         apply_buff(bless, c)
         apply_buff(prayer, c)
@@ -605,8 +623,8 @@ class TestApplyRemoveBuff:
     def test_conditional_effect_via_apply(self) -> None:
         """Enlarge Person only works on humanoids."""
         c = fresh_char()
-        c._race_type = "Humanoid"
-        c.set_ability_score("str", 12)
+        c._race_creature_type = CreatureType.HUMANOID
+        c.set_ability_score(Ability.STR, 12)
 
         b = BuffDefinition(
             name="Enlarge Person",
@@ -618,8 +636,8 @@ class TestApplyRemoveBuff:
 
     def test_conditional_effect_inactive_on_wrong_type(self) -> None:
         c = fresh_char()
-        c._race_type = "Undead"
-        c.set_ability_score("str", 12)
+        c._race_creature_type = CreatureType.UNDEAD
+        c.set_ability_score(Ability.STR, 12)
 
         b = BuffDefinition(
             name="Enlarge Person",
@@ -632,7 +650,7 @@ class TestApplyRemoveBuff:
     def test_apply_returns_invalidated_keys(self) -> None:
         c = fresh_char()
         b = simple_buff(
-            "Bless", [BonusEffect("attack_melee", BonusType.MORALE, 1)]
+            "Bless", [BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)]
         )
         keys = apply_buff(b, c)
         assert len(keys) > 0
@@ -652,8 +670,8 @@ class TestRealBuffScenarios:
         bless = BuffDefinition(
             name="Bless",
             category=BuffCategory.SPELL,
-            source_book="PHB",
-            effects=[BonusEffect("attack_melee", BonusType.MORALE, 1)],
+            source_book=SourceBook.PHB,
+            effects=[BonusEffect(PoolKey.ATTACK_MELEE, BonusType.MORALE, 1)],
         )
         assert c.get("attack_melee") == 4
         apply_buff(bless, c)
@@ -668,13 +686,17 @@ class TestRealBuffScenarios:
         df = BuffDefinition(
             name="Divine Favor",
             category=BuffCategory.SPELL,
-            source_book="PHB",
+            source_book=SourceBook.PHB,
             effects=[
                 BonusEffect(
-                    "attack_all", BonusType.LUCK, "max(1, caster_level // 3)"
+                    PoolKey.ATTACK_ALL,
+                    BonusType.LUCK,
+                    "max(1, caster_level // 3)",
                 ),
                 BonusEffect(
-                    "damage_all", BonusType.LUCK, "max(1, caster_level // 3)"
+                    PoolKey.DAMAGE_ALL,
+                    BonusType.LUCK,
+                    "max(1, caster_level // 3)",
                 ),
             ],
         )
@@ -689,9 +711,11 @@ class TestRealBuffScenarios:
         sof = BuffDefinition(
             name="Shield of Faith",
             category=BuffCategory.SPELL,
-            source_book="PHB",
+            source_book=SourceBook.PHB,
             effects=[
-                BonusEffect("ac", BonusType.DEFLECTION, "2 + caster_level // 6")
+                BonusEffect(
+                    PoolKey.AC, BonusType.DEFLECTION, "2 + caster_level // 6"
+                )
             ],
         )
         assert c.ac == 10
@@ -705,10 +729,10 @@ class TestRealBuffScenarios:
         haste = BuffDefinition(
             name="Haste",
             category=BuffCategory.SPELL,
-            source_book="PHB",
+            source_book=SourceBook.PHB,
             effects=[
-                BonusEffect("attack_all", BonusType.UNTYPED, 1),
-                BonusEffect("ac", BonusType.DODGE, 1),
+                BonusEffect(PoolKey.ATTACK_ALL, BonusType.UNTYPED, 1),
+                BonusEffect(PoolKey.AC, BonusType.DODGE, 1),
             ],
         )
         melee_before = c.get("attack_melee")
@@ -722,15 +746,15 @@ class TestRealBuffScenarios:
     def test_bulls_strength_str_cascade(self) -> None:
         """Bull's Strength: +4 enhancement to STR → flows to melee attack."""
         c = fresh_char()
-        c.set_ability_score("str", 14)  # mod = 2
+        c.set_ability_score(Ability.STR, 14)  # mod = 2
         c.set_class_levels(fighter(5))  # bab = 5
         assert c.get("attack_melee") == 7  # 5 + 2
 
         bs = BuffDefinition(
             name="Bull's Strength",
             category=BuffCategory.SPELL,
-            source_book="PHB",
-            effects=[BonusEffect("str_score", BonusType.ENHANCEMENT, 4)],
+            source_book=SourceBook.PHB,
+            effects=[BonusEffect(PoolKey.STR_SCORE, BonusType.ENHANCEMENT, 4)],
         )
         apply_buff(bs, c)
         # str = 18, mod = 4, attack = 5 + 4 = 9
@@ -744,18 +768,18 @@ class TestRealBuffScenarios:
         (PHB actually calls Rage bonuses morale for STR/CON.)
         """
         c = fresh_char()
-        c.set_ability_score("str", 16)  # mod = 3
-        c.set_ability_score("con", 14)  # mod = 2
+        c.set_ability_score(Ability.STR, 16)  # mod = 3
+        c.set_ability_score(Ability.CON, 14)  # mod = 2
         c.set_class_levels(fighter(4))
 
         rage = BuffDefinition(
             name="Rage",
             category=BuffCategory.CLASS,
-            source_book="PHB",
+            source_book=SourceBook.PHB,
             effects=[
-                BonusEffect("str_score", BonusType.MORALE, 4),
-                BonusEffect("con_score", BonusType.MORALE, 4),
-                BonusEffect("ac", BonusType.UNTYPED, -2),
+                BonusEffect(PoolKey.STR_SCORE, BonusType.MORALE, 4),
+                BonusEffect(PoolKey.CON_SCORE, BonusType.MORALE, 4),
+                BonusEffect(PoolKey.AC, BonusType.UNTYPED, -2),
             ],
         )
         apply_buff(rage, c)
@@ -771,13 +795,13 @@ class TestRealBuffScenarios:
         shaken = BuffDefinition(
             name="Shaken",
             category=BuffCategory.CONDITION,
-            source_book="PHB",
+            source_book=SourceBook.PHB,
             effects=[
-                BonusEffect("attack_melee", BonusType.UNTYPED, -2),
-                BonusEffect("attack_ranged", BonusType.UNTYPED, -2),
-                BonusEffect("fort_save", BonusType.UNTYPED, -2),
-                BonusEffect("ref_save", BonusType.UNTYPED, -2),
-                BonusEffect("will_save", BonusType.UNTYPED, -2),
+                BonusEffect(PoolKey.ATTACK_MELEE, BonusType.UNTYPED, -2),
+                BonusEffect(PoolKey.ATTACK_RANGED, BonusType.UNTYPED, -2),
+                BonusEffect(PoolKey.FORT_SAVE, BonusType.UNTYPED, -2),
+                BonusEffect(PoolKey.REF_SAVE, BonusType.UNTYPED, -2),
+                BonusEffect(PoolKey.WILL_SAVE, BonusType.UNTYPED, -2),
             ],
         )
         apply_buff(shaken, c)
@@ -794,12 +818,12 @@ class TestRealBuffScenarios:
         ic = BuffDefinition(
             name="Inspire Courage",
             category=BuffCategory.CLASS,
-            effects=[BonusEffect("attack_all", BonusType.MORALE, 2)],
+            effects=[BonusEffect(PoolKey.ATTACK_ALL, BonusType.MORALE, 2)],
         )
         haste = BuffDefinition(
             name="Haste",
             category=BuffCategory.SPELL,
-            effects=[BonusEffect("attack_all", BonusType.UNTYPED, 1)],
+            effects=[BonusEffect(PoolKey.ATTACK_ALL, BonusType.UNTYPED, 1)],
         )
         apply_buff(ic, c)
         apply_buff(haste, c)
@@ -819,7 +843,7 @@ class TestSkillAllExpansion:
     def _character(self) -> Character:
         c = Character(name="T")
         register_skills_on_character(c)
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             c.set_ability_score(ab, 10)
         c.levels = [
             CharacterLevel(character_level=1, class_name="Fighter", hp_roll=10)
@@ -837,7 +861,7 @@ class TestSkillAllExpansion:
             category=BuffCategory.ITEM,
             effects=[
                 BonusEffect(
-                    target="skill_all",
+                    target=PoolKey.SKILL_ALL,
                     bonus_type=BonusType.COMPETENCE,
                     value=1,
                 )
@@ -858,7 +882,7 @@ class TestPaleGreenPrism:
     def _worn(self) -> Character:
         c = Character(name="T")
         register_skills_on_character(c)
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             c.set_ability_score(ab, 10)
         c.levels = [
             CharacterLevel(character_level=1, class_name="Fighter", hp_roll=10)
@@ -871,10 +895,74 @@ class TestPaleGreenPrism:
 
     def test_it_bonuses_skills(self) -> None:
         c = self._worn()
-        climb = get_rules().skills.get("Climb")
+        climb = get_rules().skills.require("Climb")
         assert compute_skill_total(c, climb).misc_bonus == 1
 
     def test_it_still_bonuses_attacks_and_saves(self) -> None:
         c = self._worn()
         assert c.get("attack_melee") == c.get("bab") + 1
         assert c.get("fort_save") == 2 + 1
+
+
+# ===========================================================================
+# humanoid_only — the shipped condition, not a local stand-in
+# ===========================================================================
+
+
+class TestHumanoidOnlyCondition:
+    """
+    Enlarge Person has "Target: One humanoid creature"
+    (PHB p. 226). The condition that enforces that is
+    CONDITION_REGISTRY["humanoid_only"], and it has to see
+    the creature type the rest of the engine agrees on —
+    including a type changed by a template.
+
+    Regression: the condition read ``_race_type``, which
+    nothing ever wrote (``races.py`` writes
+    ``_race_creature_type``), so it always fell back to its
+    "Humanoid" default and was true for every creature.
+    """
+
+    @staticmethod
+    def _char(template: str = "") -> Character:
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 12)
+        apply_race(get_rules().races.require("Human"), c)
+        if template:
+            apply_template(get_rules().templates.require(template), c)
+        return c
+
+    def test_human_is_humanoid(self) -> None:
+        c = self._char()
+        assert CONDITION_REGISTRY["humanoid_only"](c) is True
+
+    def test_lich_is_not_humanoid(self) -> None:
+        """A Lich's template changes its type to Undead."""
+        c = self._char("Lich")
+        assert c.creature_type == CreatureType.UNDEAD
+        assert CONDITION_REGISTRY["humanoid_only"](c) is False
+
+    def test_half_dragon_is_not_humanoid(self) -> None:
+        c = self._char("Half-Dragon (Red)")
+        assert c.creature_type == CreatureType.DRAGON
+        assert CONDITION_REGISTRY["humanoid_only"](c) is False
+
+    def test_enlarge_person_boosts_a_human(self) -> None:
+        c = self._char()
+        before = c.str_score
+        apply_buff(get_rules().buffs.require("Enlarge Person"), c)
+        assert c.str_score == before + 2
+
+    def test_enlarge_person_does_not_boost_a_lich(self) -> None:
+        c = self._char("Lich")
+        before = c.str_score
+        apply_buff(get_rules().buffs.require("Enlarge Person"), c)
+        assert c.str_score == before
+
+    def test_raceless_character_has_no_creature_type(self) -> None:
+        """
+        Nothing has populated it yet, and the type says so
+        rather than guessing Humanoid.
+        """
+        assert Character().creature_type is None

@@ -41,14 +41,14 @@ def swashbuckler(levels: int = 3) -> Character:
 def _round_trip(c: Character, tmp_path: Path) -> Character:
     path = tmp_path / "granted.char.yaml"
     save_character(c, path)
-    return load_character(path, None)
+    return load_character(path)
 
 
 class TestClassGrantedFeats:
     def test_swashbuckler_gains_weapon_finesse(self, tmp_path: Path) -> None:
         loaded = _round_trip(swashbuckler(), tmp_path)
         assert loaded.has_feat("Weapon Finesse")
-        assert "Weapon Finesse" in gather_sheet(loaded, None).feats
+        assert "Weapon Finesse" in gather_sheet(loaded).feats
 
     def test_not_written_to_the_character_file(self, tmp_path: Path) -> None:
         path = tmp_path / "granted.char.yaml"

@@ -107,6 +107,12 @@ class MagicItemRegistry:
     def get(self, name: str) -> MagicItemDefinition | None:
         return self._entries.get(name)
 
+    def require(self, name: str) -> MagicItemDefinition:
+        defn = self._entries.get(name)
+        if defn is None:
+            raise KeyError(f"No MagicItemDefinition for {name!r}.")
+        return defn
+
     def all_items(
         self,
     ) -> list[MagicItemDefinition]:

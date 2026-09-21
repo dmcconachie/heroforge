@@ -37,6 +37,7 @@ from heroforge.engine.enums import (
     Ability,
     Alignment,
     DamageType,
+    SourceBook,
 )
 from heroforge.engine.equipment import (
     ArmorDefinition,
@@ -47,6 +48,7 @@ from heroforge.engine.persistence import (
     CharLevelEntry,
     WornEntry,
 )
+from heroforge.engine.resources import UseUnit
 from heroforge.engine.sheet_schema import (
     AbilityEntry,
     ArmorDisplay,
@@ -115,7 +117,7 @@ converter.register_structure_hook(WornEntry, _structure_worn)
 # ---------------------------------------------------
 
 
-def _structure_ability_or_none(v: object, _: type) -> Ability | None:
+def _structure_skill_ability(v: object, _: type) -> Ability | None:
     if v is None or v == "none":
         return None
     return Ability(v)
@@ -127,7 +129,7 @@ converter.register_structure_hook(
         SkillDefinition,
         converter,
         ability=override(
-            struct_hook=_structure_ability_or_none,
+            struct_hook=_structure_skill_ability,
         ),
     ),
 )
@@ -262,7 +264,7 @@ def _structure_acf(val: object, _: type) -> AcfDefinition:
         raise ValueError(msg)
     return AcfDefinition(
         name=str(val["name"]),
-        source_book=str(val.get("source_book", "")),
+        source_book=SourceBook(val.get("source_book", "")),
         classes=tuple(val.get("classes", ())),
         levels=tuple(int(x) for x in val.get("levels", ())),
         requires=dict(val.get("requires", {})),
@@ -322,7 +324,7 @@ def _structure_domain_resource(raw: object) -> DomainResource | None:
     return DomainResource(
         name=str(raw["name"]),
         max_formula=str(raw.get("max_formula", "1")),
-        unit=str(raw.get("unit", "use")),
+        unit=UseUnit(raw.get("unit", "use")),
         effects=tuple(raw.get("effects", ())),
     )
 

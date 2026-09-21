@@ -23,6 +23,7 @@ import yaml
 
 from heroforge.engine.bonus import BonusPool
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.enums import Ability
 from heroforge.engine.stat import StatGraph
 from heroforge.rules.loader import COMPUTE_STRATEGIES, LoaderError, StatsLoader
 
@@ -271,13 +272,13 @@ class TestLoaderStatValues:
 
     def test_default_ability_scores_resolve_correctly(self) -> None:
         c = self._loaded_char()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             assert c.get(f"{ab}_score") == 10
             assert c.get(f"{ab}_mod") == 0
 
     def test_ability_score_change_propagates(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("str", 18)
+        c.set_ability_score(Ability.STR, 18)
         assert c.get("str_score") == 18
         assert c.get("str_mod") == 4
 
@@ -287,12 +288,12 @@ class TestLoaderStatValues:
 
     def test_dex_change_updates_ac(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("dex", 16)
+        c.set_ability_score(Ability.DEX, 16)
         assert c.get("ac") == 13  # 10 + 3
 
     def test_dex_change_updates_initiative(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("dex", 14)
+        c.set_ability_score(Ability.DEX, 14)
         assert c.get("initiative") == 2
 
     def test_bab_zero_before_levels(self) -> None:
@@ -306,31 +307,31 @@ class TestLoaderStatValues:
 
     def test_fort_save_with_class_and_con(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("con", 14)  # mod +2
+        c.set_ability_score(Ability.CON, 14)  # mod +2
         c.set_class_levels(fighter(4))  # base fort = 2 + 4//2 = 4
         assert c.get("fort_save") == 6
 
     def test_will_save_with_wis(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("wis", 16)  # mod +3
+        c.set_ability_score(Ability.WIS, 16)  # mod +3
         c.set_class_levels(fighter(3))  # poor will: 3//3 = 1
         assert c.get("will_save") == 4
 
     def test_hp_max_from_rolls_and_con(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("con", 12)  # mod +1
+        c.set_ability_score(Ability.CON, 12)  # mod +1
         c.set_class_levels(fighter(3))  # 30 hp rolls, +1×3 = 33
         assert c.get("hp_max") == 33
 
     def test_attack_melee_bab_plus_str(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("str", 16)  # mod +3
+        c.set_ability_score(Ability.STR, 16)  # mod +3
         c.set_class_levels(fighter(5))  # bab = 5
         assert c.get("attack_melee") == 8
 
     def test_attack_ranged_bab_plus_dex(self) -> None:
         c = self._loaded_char()
-        c.set_ability_score("dex", 14)  # mod +2
+        c.set_ability_score(Ability.DEX, 14)  # mod +2
         c.set_class_levels(fighter(4))  # bab = 4
         assert c.get("attack_ranged") == 6
 
@@ -357,7 +358,7 @@ class TestYamlCoverage:
 
     def test_all_six_ability_scores_declared(self) -> None:
         keys = self._get_keys()
-        for ab in ("str", "dex", "con", "int", "wis", "cha"):
+        for ab in Ability:
             assert f"{ab}_score" in keys
             assert f"{ab}_mod" in keys
 

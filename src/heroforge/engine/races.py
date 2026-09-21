@@ -169,8 +169,10 @@ def apply_race(defn: RaceDefinition, character: "Character") -> None:
     character._graph.invalidate_pool("speed")
     character._graph.invalidate("speed")
 
-    if not getattr(character, "_creature_type_override", None):
-        character._race_creature_type = defn.creature_type
+    # The race's own type, unconditionally. Precedence
+    # over a template override belongs to
+    # Character.creature_type, not here.
+    character._race_creature_type = defn.creature_type
 
     existing_subs = list(getattr(character, "_race_subtypes", []))
     for sub in defn.subtypes:
@@ -203,7 +205,7 @@ def remove_race(defn: RaceDefinition, character: "Character") -> None:
             character._graph.invalidate_pool(pool_key)
 
     character._race_base_speed = 30
-    character._race_size = "Medium"
+    character._race_size = None
     character._graph.invalidate("speed")
     character.race = ""
 

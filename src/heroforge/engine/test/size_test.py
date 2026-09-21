@@ -12,7 +12,7 @@ import pytest
 
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character, CharacterLevel
-from heroforge.engine.enums import Size
+from heroforge.engine.enums import Ability, CreatureType, Size
 from heroforge.engine.persistence import load_character, save_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.size import (
@@ -26,6 +26,7 @@ from heroforge.engine.size import (
 )
 from heroforge.engine.skills import compute_skill_total
 from heroforge.engine.weapons import register_weapons_on_character
+from heroforge.rules.core.pool_keys import PoolKey
 from heroforge.rules.rules import get_rules
 
 
@@ -139,6 +140,7 @@ class TestTinyIsOneStepBelowSmall:
         mismatched = []
         for name in sorted(reg._entries):
             defn = reg.get(name)
+            assert defn is not None  # iterating its own keys
             if defn.damage_dice in ("0", ""):
                 continue
             tiny = tiny_damage_dice(defn.damage_dice)
@@ -166,15 +168,18 @@ class TestDamageDiceForSize:
             damage_dice_for_size("1d8", "1d6", Size.HUGE)
 
 
-def _humanoid(size: str = "Medium") -> Character:
+def _humanoid(size: Size = Size.MEDIUM) -> Character:
     c = Character(name="Grunt")
-    c.set_ability_score("str", 14)
-    c.set_ability_score("dex", 14)
+    c.set_ability_score(Ability.STR, 14)
+    c.set_ability_score(Ability.DEX, 14)
     c.levels = [
         CharacterLevel(character_level=1, class_name="Fighter", hp_roll=10)
     ]
     c._invalidate_class_stats()
     c._race_size = size
+    # Enlarge/Reduce Person are humanoid-only, so the
+    # helper has to actually say so.
+    c._race_creature_type = CreatureType.HUMANOID
     return c
 
 
@@ -214,8 +219,8 @@ class TestSizeChangingBuffs:
         defn = get_rules().buffs.get("Enlarge Person")
         assert defn is not None
         by_target = {e.target: e for e in defn.effects}
-        assert by_target["str_score"].bonus_type is BonusType.SIZE
-        assert by_target["dex_score"].bonus_type is BonusType.SIZE
+        assert by_target[PoolKey.STR_SCORE].bonus_type is BonusType.SIZE
+        assert by_target[PoolKey.DEX_SCORE].bonus_type is BonusType.SIZE
 
 
 class TestSizeCascades:
@@ -254,7 +259,7 @@ class TestSizeReachesTheSheet:
     def test_identity_size_follows_an_active_buff(self) -> None:
         c = _humanoid()
         _activate(c, "Enlarge Person")
-        assert gather_sheet(c, None).identity.size is Size.LARGE
+        assert gather_sheet(c).identity.size is Size.LARGE
 
     def test_identity_size_follows_a_template_override(self) -> None:
         """
@@ -264,8 +269,8 @@ class TestSizeReachesTheSheet:
         """
         c = _humanoid()
         c.race = "Human"
-        c._size_override = "Large"
-        assert gather_sheet(c, None).identity.size is Size.LARGE
+        c._size_override = Size.LARGE
+        assert gather_sheet(c).identity.size is Size.LARGE
 
     def test_hide_carries_the_size_modifier(self) -> None:
         """
@@ -286,26 +291,26 @@ class TestSizeReachesTheSheet:
 
 
 class TestWeaponDamageBySize:
-    def _armed(self, size: str) -> "Character":
+    def _armed(self, size: Size) -> "Character":
         c = _humanoid(size)
         c.equipment["weapons"] = [{"base": "Greataxe"}]
         register_weapons_on_character(c)
         return c
 
     def test_medium_greataxe(self) -> None:
-        sheet = gather_sheet(self._armed("Medium"), None)
+        sheet = gather_sheet(self._armed(Size.MEDIUM))
         assert sheet.equipment.weapons[0].damage_dice == "1d12"
 
     def test_small_greataxe_uses_the_printed_small_value(self) -> None:
         """PHB Table 7-5: Greataxe Dmg (S) is 1d10, not 1d8."""
-        sheet = gather_sheet(self._armed("Small"), None)
+        sheet = gather_sheet(self._armed(Size.SMALL))
         assert sheet.equipment.weapons[0].damage_dice == "1d10"
 
     def test_enlarge_person_steps_the_die(self) -> None:
         """PHB Table 7-4: a Large greataxe deals 3d6."""
-        c = self._armed("Medium")
+        c = self._armed(Size.MEDIUM)
         _activate(c, "Enlarge Person")
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert sheet.equipment.weapons[0].damage_dice == "3d6"
 
 
@@ -343,10 +348,10 @@ equipment:
     def test_enlarge_person_survives_load(self, tmp_path: Path) -> None:
         path = tmp_path / "growth.char.yaml"
         path.write_text(self.CHAR)
-        c = load_character(path, None)
+        c = load_character(path)
 
         assert c.size == "Large"
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert sheet.identity.size is Size.LARGE
         assert sheet.equipment.weapons[0].damage_dice == "3d6"
 
@@ -354,8 +359,8 @@ equipment:
         src = tmp_path / "growth.char.yaml"
         src.write_text(self.CHAR)
         out = tmp_path / "out.char.yaml"
-        save_character(load_character(src, None), out)
+        save_character(load_character(src), out)
 
-        reloaded = load_character(out, None)
+        reloaded = load_character(out)
         assert reloaded.is_buff_active("Enlarge Person")
         assert reloaded.size == "Large"

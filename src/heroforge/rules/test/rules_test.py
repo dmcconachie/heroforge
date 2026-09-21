@@ -1,9 +1,11 @@
 """Tests for the Rules container and module-level accessor."""
 
+import re
 from pathlib import Path
 
 import pytest
 
+from heroforge.engine.enums import Alignment
 from heroforge.rules import rules as rules_module
 from heroforge.rules.rules import (
     Rules,
@@ -172,3 +174,43 @@ def test_book_dirs_real_rules_dir_includes_core_and_custom() -> None:
     books = book_dirs()
     assert books[0] == "core"
     assert books[-1] == "custom"
+
+
+def test_every_alignment_in_the_rules_is_a_valid_enum_member() -> None:
+    """
+    Regression for D3: two class files spelled alignments
+    "Chaotic Good" where Alignment is "chaotic_good", so
+    Wild Mage's and Hospitaler's entry requirements could
+    never be met. The builder now coerces, which turns a
+    misspelling into a load error — this catches it in the
+    data instead.
+    """
+    bad: list[str] = []
+    valid = {a.value for a in Alignment}
+    for path in (Path(rules_module.__file__).parent).rglob("*.yaml"):
+        for n, line in enumerate(path.read_text().split("\n"), start=1):
+            m = re.match(r"\s*(?:-\s*)?alignment:\s*(\S.*)$", line)
+            if m and m.group(1) not in valid:
+                bad.append(f"{path.name}:{n} {m.group(1)!r}")
+    assert bad == []
+
+
+def test_alignment_prereq_lists_are_valid_enum_members() -> None:
+    """The list form, as used by entry_prerequisites."""
+    valid = {a.value for a in Alignment}
+    bad: list[str] = []
+    for path in (Path(rules_module.__file__).parent).rglob("*.yaml"):
+        lines = path.read_text().split("\n")
+        for i, line in enumerate(lines):
+            if not re.match(r"\s*-?\s*alignment:\s*$", line):
+                continue
+            indent = len(line) - len(line.lstrip())
+            for nxt in lines[i + 1 :]:
+                if not nxt.strip():
+                    continue
+                if len(nxt) - len(nxt.lstrip()) <= indent:
+                    break
+                item = nxt.strip()
+                if item.startswith("- ") and item[2:] not in valid:
+                    bad.append(f"{path.name} {item[2:]!r}")
+    assert bad == []

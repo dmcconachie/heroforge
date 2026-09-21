@@ -23,6 +23,7 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
+from heroforge.engine.enums import Ability
 from heroforge.ui.widgets.ability_block import AbilityBlock
 from heroforge.ui.widgets.buff_panel import BuffPanel
 from heroforge.ui.widgets.combat_stats import CombatStats
@@ -167,10 +168,7 @@ class Sheet1Summary(QWidget):
         self._level_field.value = str(c.total_level)
 
         # Abilities
-        scores = {
-            ab: c.get_ability_score(ab)
-            for ab in ("str", "dex", "con", "int", "wis", "cha")
-        }
+        scores = {ab: c.get_ability_score(ab) for ab in Ability}
         self._abilities.set_all_scores(scores)
 
         # Combat
@@ -211,7 +209,7 @@ class Sheet1Summary(QWidget):
 
     def _on_ability_changed(self, ability: str, score: int) -> None:
         if not self._building:
-            self._state.character.set_ability_score(ability, score)
+            self._state.character.set_ability_score(Ability(ability), score)
             self._combat.refresh(self._state.character)
             self._melee_field.value = _signed(
                 self._state.character.get("attack_melee")

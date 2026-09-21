@@ -145,6 +145,12 @@ class ArmorRegistry:
     def get(self, name: str) -> ArmorDefinition | None:
         return self._entries.get(name)
 
+    def require(self, name: str) -> ArmorDefinition:
+        defn = self._entries.get(name)
+        if defn is None:
+            raise KeyError(f"No ArmorDefinition for {name!r}.")
+        return defn
+
     def all_armor(self) -> list[ArmorDefinition]:
         return [
             d for d in self._entries.values() if d.category not in _SHIELD_CATS

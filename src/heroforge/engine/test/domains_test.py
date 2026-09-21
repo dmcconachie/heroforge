@@ -14,9 +14,11 @@ from heroforge.engine.domains import (
     DomainRegistry,
     refresh_domain_resources,
 )
+from heroforge.engine.enums import Ability
 from heroforge.engine.persistence import load_character, save_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.spells import SpellCompendium, SpellEntry
+from heroforge.rules.known import KnownClass, KnownDomain
 from heroforge.rules.loader import (
     DomainsLoader,
     LoaderError,
@@ -147,7 +149,7 @@ class TestCharacterDomains:
         c = _cleric_with_domains(["Knowledge", "War"])
         path = tmp_path / "cleric.char.yaml"
         save_character(c, path)
-        reloaded = load_character(path, None)
+        reloaded = load_character(path)
         assert reloaded.domains == ["Knowledge", "War"]
 
     def test_saved_yaml_has_domains_key(self, tmp_path: Path) -> None:
@@ -167,19 +169,19 @@ class TestCharacterDomains:
             "  - Bogus\n"
         )
         with pytest.raises(ValueError, match="Bogus"):
-            load_character(path, None)
+            load_character(path)
 
     def test_sheet_emits_domains(self) -> None:
         c = _cleric_with_domains(["War"])
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert "War" in sheet.domains
-        entry = sheet.domains["War"]
+        entry = sheet.domains[KnownDomain("War")]
         assert "Weapon Focus" in entry.granted_power
         assert entry.domain_spells[1] == "Magic Weapon"
 
     def test_sheet_omits_domains_when_none(self) -> None:
         c = _cleric_with_domains([])
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert sheet.domains == {}
 
 
@@ -192,9 +194,11 @@ class TestDeityRegistry:
 
         reg = get_rules().deities
         istus = reg.get("Istus")
+        assert istus is not None
         assert istus.alignment == "neutral"
         assert "Knowledge" in istus.domains
         heironeous = reg.get("Heironeous")
+        assert heironeous is not None
         assert heironeous.alignment == "lawful_good"
         assert "War" in heironeous.domains
 
@@ -208,7 +212,7 @@ class TestDeityRegistry:
             "  deity: Zzyzx the Invented\n"
         )
         with pytest.raises(ValueError, match="Zzyzx the Invented"):
-            load_character(path, None)
+            load_character(path)
 
     def test_empty_deity_allowed(self, tmp_path: Path) -> None:
         path = tmp_path / "ok.char.yaml"
@@ -219,7 +223,7 @@ class TestDeityRegistry:
             "  alignment: neutral\n"
             "  deity: ''\n"
         )
-        loaded = load_character(path, None)  # must not raise
+        loaded = load_character(path)  # must not raise
         assert loaded.deity == ""
 
 
@@ -231,12 +235,12 @@ class TestWarDomainEffect:
         c.deity = deity
         path = tmp_path / "war.char.yaml"
         save_character(c, path)
-        return load_character(path, None)
+        return load_character(path)
 
     def test_grants_deity_specific_weapon_focus(self, tmp_path: Path) -> None:
         """The sheet shows the specific weapon, not the generic feat."""
         c = self._war_cleric("Heironeous", tmp_path)
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert "Weapon Focus (Battleaxe)" in sheet.feats
         assert "Weapon Focus" not in sheet.feats
 
@@ -246,12 +250,12 @@ class TestWarDomainEffect:
         feat and leaves no stale one behind.
         """
         c = self._war_cleric("Heironeous", tmp_path)
-        assert "Weapon Focus (Battleaxe)" in gather_sheet(c, None).feats
+        assert "Weapon Focus (Battleaxe)" in gather_sheet(c).feats
 
         c.deity = "Kord"
         path = tmp_path / "rededicated.char.yaml"
         save_character(c, path)
-        feats = gather_sheet(load_character(path, None), None).feats
+        feats = gather_sheet(load_character(path)).feats
         assert "Weapon Focus (Greatsword)" in feats
         assert "Weapon Focus (Battleaxe)" not in feats
 
@@ -263,7 +267,7 @@ class TestWarDomainEffect:
         not inflate the weapon-agnostic attack lines.
         """
         c = self._war_cleric("Heironeous", tmp_path)
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert "weapon_focus" not in sheet.combat.attack_melee.typed
         assert "weapon_focus" not in sheet.combat.attack_ranged.typed
 
@@ -279,8 +283,8 @@ class TestWarDomainEffect:
         c.deity = "Heironeous"
         path = tmp_path / "now.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, None)
-        sheet = gather_sheet(loaded, None)
+        loaded = load_character(path)
+        sheet = gather_sheet(loaded)
         assert not [f for f in sheet.feats if f.startswith("Weapon Focus")]
 
     def test_war_with_no_deity_no_crash(self, tmp_path: Path) -> None:
@@ -289,8 +293,8 @@ class TestWarDomainEffect:
         c.deity = ""
         path = tmp_path / "war.char.yaml"
         save_character(c, path)
-        loaded = load_character(path, None)  # must not raise
-        sheet = gather_sheet(loaded, None)
+        loaded = load_character(path)  # must not raise
+        sheet = gather_sheet(loaded)
         assert not [f for f in sheet.feats if f.startswith("Weapon Focus")]
 
 
@@ -321,22 +325,22 @@ class TestDomainSpellSlots:
 
     def test_cleric_with_domains_gets_domain_slots(self) -> None:
         c = self._cleric(1, ["Good", "War"])
-        entry = gather_sheet(c, None).spellcasting["Cleric"]
+        entry = gather_sheet(c).spellcasting[KnownClass("Cleric")]
         assert entry.domain_slots_per_day is not None
         assert entry.domain_slots_per_day[0] is None
         assert entry.domain_slots_per_day[1] == 1
 
     def test_general_allotment_unchanged_by_domains(self) -> None:
-        without = gather_sheet(self._cleric(5, []), None)
-        with_dom = gather_sheet(self._cleric(5, ["Good", "War"]), None)
+        without = gather_sheet(self._cleric(5, []))
+        with_dom = gather_sheet(self._cleric(5, ["Good", "War"]))
         assert (
-            with_dom.spellcasting["Cleric"].slots_per_day
-            == without.spellcasting["Cleric"].slots_per_day
+            with_dom.spellcasting[KnownClass("Cleric")].slots_per_day
+            == without.spellcasting[KnownClass("Cleric")].slots_per_day
         )
 
     def test_no_domains_no_domain_slots(self) -> None:
         c = self._cleric(5, [])
-        entry = gather_sheet(c, None).spellcasting["Cleric"]
+        entry = gather_sheet(c).spellcasting[KnownClass("Cleric")]
         assert entry.domain_slots_per_day is None
 
     def test_non_domain_caster_has_none(self) -> None:
@@ -346,7 +350,7 @@ class TestDomainSpellSlots:
             [CharacterLevel(character_level=1, class_name="Wizard", hp_roll=4)]
         )
         c.domains = ["Good"]  # nonsensical, but must not grant slots
-        entry = gather_sheet(c, None).spellcasting["Wizard"]
+        entry = gather_sheet(c).spellcasting[KnownClass("Wizard")]
         assert entry.domain_slots_per_day is None
 
 
@@ -436,7 +440,7 @@ class TestDomainResources:
 
     def test_sheet_emits_resources(self) -> None:
         c = self._cleric(7, ["Death", "Travel"])
-        sheet = gather_sheet(c, None)
+        sheet = gather_sheet(c)
         assert sheet.resources["Death Touch"].max_uses == 1
         fom = sheet.resources["Freedom of Movement"]
         assert fom.max_uses == 7
@@ -444,7 +448,7 @@ class TestDomainResources:
 
     def test_sheet_omits_resources_when_none(self) -> None:
         c = self._cleric(7, ["War"])
-        assert gather_sheet(c, None).resources == {}
+        assert gather_sheet(c).resources == {}
 
     def test_all_declared_resources_load(self) -> None:
         """Every domain resource in the YAML is well-formed."""
@@ -478,7 +482,7 @@ class TestDomainToggleableBuffs:
         c = Character()
         c.race = "Human"
         c.alignment = "neutral_good"
-        c.set_ability_score("str", 12)
+        c.set_ability_score(Ability.STR, 12)
         c.set_class_levels(
             [
                 CharacterLevel(
@@ -497,18 +501,18 @@ class TestDomainToggleableBuffs:
         c = self._cleric(6, ["Strength"])
         assert "Feat of Strength" in c._buff_states
         assert not c._buff_states["Feat of Strength"].active
-        assert c.get_ability_score("str") == 12
+        assert c.get_ability_score(Ability.STR) == 12
 
     def test_feat_of_strength_scales_with_cleric_level(self) -> None:
         c = self._cleric(6, ["Strength"])
         c.toggle_buff("Feat of Strength", True)
-        assert c.get_ability_score("str") == 18  # 12 + 6
+        assert c.get_ability_score(Ability.STR) == 18  # 12 + 6
 
     def test_feat_of_strength_toggles_off(self) -> None:
         c = self._cleric(6, ["Strength"])
         c.toggle_buff("Feat of Strength", True)
         c.toggle_buff("Feat of Strength", False)
-        assert c.get_ability_score("str") == 12
+        assert c.get_ability_score(Ability.STR) == 12
 
     def test_protective_ward_covers_all_saves(self) -> None:
         c = self._cleric(4, ["Protection"])

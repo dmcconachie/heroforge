@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 from heroforge.engine.character import Character, CharacterLevel
-from heroforge.engine.enums import School
+from heroforge.engine.enums import Ability, School
 from heroforge.engine.persistence import load_character, save_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.engine.spellcasting import (
@@ -18,6 +18,7 @@ from heroforge.engine.spellcasting import (
     specialist_slots_per_day,
     validate_specialization,
 )
+from heroforge.rules.known import KnownClass
 
 
 def wizard(levels: int, spec: Specialization | None = None) -> Character:
@@ -25,7 +26,7 @@ def wizard(levels: int, spec: Specialization | None = None) -> Character:
     c.name = "Test Wizard"
     c.race = "Human"
     c.alignment = "neutral"
-    c.set_ability_score("int", 16)
+    c.set_ability_score(Ability.INT, 16)
     c.set_class_levels(
         [
             CharacterLevel(
@@ -112,26 +113,27 @@ class TestSpecializationValidation:
 
 class TestSpecialistSheet:
     def test_sheet_reports_specialization(self) -> None:
-        entry = gather_sheet(wizard(5, illusionist()), None).spellcasting[
-            "Wizard"
+        entry = gather_sheet(wizard(5, illusionist())).spellcasting[
+            KnownClass("Wizard")
         ]
         assert entry.specialty_school == School.ILLUSION
         assert set(entry.prohibited_schools) == {
             School.ENCHANTMENT,
             School.NECROMANCY,
         }
+        assert entry.specialist_slots_per_day is not None
         assert entry.specialist_slots_per_day[1] == 1
 
     def test_generalist_has_no_specialist_fields(self) -> None:
-        entry = gather_sheet(wizard(5), None).spellcasting["Wizard"]
+        entry = gather_sheet(wizard(5)).spellcasting[KnownClass("Wizard")]
         assert entry.specialty_school is None
         assert entry.specialist_slots_per_day is None
         assert entry.prohibited_schools == []
 
     def test_specialization_does_not_change_general_slots(self) -> None:
-        plain = gather_sheet(wizard(5), None).spellcasting["Wizard"]
-        spec = gather_sheet(wizard(5, illusionist()), None).spellcasting[
-            "Wizard"
+        plain = gather_sheet(wizard(5)).spellcasting[KnownClass("Wizard")]
+        spec = gather_sheet(wizard(5, illusionist())).spellcasting[
+            KnownClass("Wizard")
         ]
         assert spec.slots_per_day == plain.slots_per_day
 
@@ -141,14 +143,14 @@ class TestSpecializationPersistence:
         c = wizard(5, illusionist())
         path = tmp_path / "spec.char.yaml"
         save_character(c, path)
-        reloaded = load_character(path, None)
+        reloaded = load_character(path)
         assert reloaded.specialization == illusionist()
 
     def test_generalist_round_trip(self, tmp_path: Path) -> None:
         c = wizard(5)
         path = tmp_path / "plain.char.yaml"
         save_character(c, path)
-        assert load_character(path, None).specialization is None
+        assert load_character(path).specialization is None
 
     def test_load_rejects_invalid(self, tmp_path: Path) -> None:
         path = tmp_path / "bad.char.yaml"
@@ -168,4 +170,4 @@ class TestSpecializationPersistence:
             "    - Necromancy\n"
         )
         with pytest.raises(ValueError, match="[Dd]ivination"):
-            load_character(path, None)
+            load_character(path)

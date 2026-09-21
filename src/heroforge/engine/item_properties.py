@@ -52,6 +52,7 @@ from heroforge.engine.enums import SourceBook
 
 if TYPE_CHECKING:
     from heroforge.engine.bonus import BonusEntry
+    from heroforge.engine.character import Character
 
 
 class ItemPropertyKind(StrEnum):
@@ -171,7 +172,7 @@ def property_definition(name: str) -> ItemPropertyDefinition | None:
 
 def property_pool_entries(
     names: list[str] | tuple[str, ...],
-    character: "object | None" = None,
+    character: "Character | None" = None,
 ) -> list[tuple[str, "BonusEntry"]]:
     """
     Expand a list of property names into pool entries.

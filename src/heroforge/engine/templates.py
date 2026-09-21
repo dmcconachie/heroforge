@@ -426,7 +426,7 @@ def effective_type(character: "Character") -> str:
     return CapabilityChecker().effective_creature_type(character)
 
 
-def effective_subtypes(character: "Character") -> list[str]:
+def effective_subtypes(character: "Character") -> list[CreatureSubtype]:
     """
     Resolve the character's effective subtypes after all templates.
     """

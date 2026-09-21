@@ -108,7 +108,7 @@ class _BuffRow(QWidget):
         # The buff was registered with a note containing "param" or
         # we check the feat registry if available
         state = character.get_buff_state(buff_name)
-        return state and state.parameter is not None
+        return state is not None and state.parameter is not None
 
     def _on_toggle(self, state: int) -> None:
         active = state == Qt.CheckState.Checked.value

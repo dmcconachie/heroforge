@@ -11,7 +11,7 @@ import yaml
 from cattrs.errors import ClassValidationError
 
 from heroforge.engine.character import Character, CharacterLevel
-from heroforge.engine.enums import ArmorCategory
+from heroforge.engine.enums import Ability, ArmorCategory
 from heroforge.engine.equipment import (
     ArmorDefinition,
     equip_armor,
@@ -111,7 +111,7 @@ class TestMagicItemEffects:
     def test_ability_enhancement(self) -> None:
         item_reg = _load_items()
         c = Character()
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         belt = item_reg.get("Belt of Giant Strength +4")
         assert belt is not None
         equip_item(c, belt)
@@ -139,20 +139,20 @@ class TestMonksBeltGate:
     from the derived_pools consumer formula).
     """
 
-    def _state(self) -> object:
+    def _state(self) -> AppState:
 
         state = AppState()
         state.load_rules()
         return state
 
     def _fighter(
-        self, state: object, level: int = 5, wis: int = 10
+        self, state: AppState, level: int = 5, wis: int = 10
     ) -> Character:
-        state.new_character()  # type: ignore[attr-defined]
-        c: Character = state.character  # type: ignore[attr-defined]
+        state.new_character()
+        c: Character = state.character
         c.race = "Human"
-        c.set_ability_score("dex", 10)
-        c.set_ability_score("wis", wis)
+        c.set_ability_score(Ability.DEX, 10)
+        c.set_ability_score(Ability.WIS, wis)
         c.set_class_levels(
             [
                 CharacterLevel(
@@ -165,12 +165,12 @@ class TestMonksBeltGate:
         )
         return c
 
-    def _monk(self, state: object, level: int, wis: int = 14) -> Character:
-        state.new_character()  # type: ignore[attr-defined]
-        c: Character = state.character  # type: ignore[attr-defined]
+    def _monk(self, state: AppState, level: int, wis: int = 14) -> Character:
+        state.new_character()
+        c: Character = state.character
         c.race = "Human"
-        c.set_ability_score("dex", 14)
-        c.set_ability_score("wis", wis)
+        c.set_ability_score(Ability.DEX, 14)
+        c.set_ability_score(Ability.WIS, wis)
         c.set_class_levels(
             [
                 CharacterLevel(
@@ -184,13 +184,17 @@ class TestMonksBeltGate:
         return c
 
     def _multiclass(
-        self, state: object, fighter_level: int, monk_level: int, wis: int = 14
+        self,
+        state: AppState,
+        fighter_level: int,
+        monk_level: int,
+        wis: int = 14,
     ) -> Character:
-        state.new_character()  # type: ignore[attr-defined]
-        c: Character = state.character  # type: ignore[attr-defined]
+        state.new_character()
+        c: Character = state.character
         c.race = "Human"
-        c.set_ability_score("dex", 14)
-        c.set_ability_score("wis", wis)
+        c.set_ability_score(Ability.DEX, 14)
+        c.set_ability_score(Ability.WIS, wis)
         levels: list[CharacterLevel] = [
             CharacterLevel(
                 character_level=i + 1,
@@ -209,8 +213,8 @@ class TestMonksBeltGate:
         c.set_class_levels(levels)
         return c
 
-    def _belt(self, state: object) -> object:
-        return state.magic_item_registry.get("Monk's Belt")  # type: ignore[attr-defined]
+    def _belt(self, state: AppState) -> MagicItemDefinition:
+        return state.magic_item_registry.require("Monk's Belt")
 
     # Non-monk cases -------------------------------------
 
@@ -320,7 +324,7 @@ class TestSpellResistanceNonStacking:
     highest applicable SR counts.
     """
 
-    def _state(self) -> object:
+    def _state(self) -> AppState:
 
         state = AppState()
         state.load_rules()
@@ -328,13 +332,13 @@ class TestSpellResistanceNonStacking:
 
     def test_two_sr_items_take_highest(self) -> None:
         state = self._state()
-        state.new_character()  # type: ignore[attr-defined]
-        c = state.character  # type: ignore[attr-defined]
+        state.new_character()
+        c = state.character
         c.race = "Human"
         # Robe of the Archmagi (SR 18) + Mantle of Spell
         # Resistance (SR 21) → SR 21, not 39.
         robe = state.magic_item_registry.get("Robe of the Archmagi")
-        mantle = state.magic_item_registry.get("Mantle of Spell Resistance")
+        mantle = state.magic_item_registry.require("Mantle of Spell Resistance")
         assert robe is not None
         assert mantle is not None
         equip_item(c, robe)
@@ -343,17 +347,17 @@ class TestSpellResistanceNonStacking:
 
     def test_single_sr_source(self) -> None:
         state = self._state()
-        state.new_character()  # type: ignore[attr-defined]
-        c = state.character  # type: ignore[attr-defined]
+        state.new_character()
+        c = state.character
         c.race = "Human"
-        mantle = state.magic_item_registry.get("Mantle of Spell Resistance")
+        mantle = state.magic_item_registry.require("Mantle of Spell Resistance")
         equip_item(c, mantle)
         assert c.get("sr") == 21
 
     def test_no_sr_sources(self) -> None:
         state = self._state()
-        state.new_character()  # type: ignore[attr-defined]
-        c = state.character  # type: ignore[attr-defined]
+        state.new_character()
+        c = state.character
         c.race = "Human"
         assert c.get("sr") == 0
 

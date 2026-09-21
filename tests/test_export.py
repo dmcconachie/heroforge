@@ -30,6 +30,7 @@ if TYPE_CHECKING:
 import re
 
 from heroforge.engine.character import CharacterLevel
+from heroforge.engine.enums import Ability
 from heroforge.export.renderer import render_pdf
 from heroforge.ui.app_state import AppState
 
@@ -78,7 +79,7 @@ def full_char(state: AppState) -> Character:
         ("wis", 10),
         ("cha", 8),
     ]:
-        c.set_ability_score(ab, score)
+        c.set_ability_score(Ability(ab), score)
 
     # Feats
     c.add_feat(
@@ -120,49 +121,49 @@ class TestGatherIdentity:
     def test_name(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.identity.name == "Aldric Vane"
 
     def test_player(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.identity.player == "Test Player"
 
     def test_race(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.identity.race == "Human"
 
     def test_class_str(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert "Fighter" in data.identity.class_str
         assert "6" in data.identity.class_str
 
     def test_level(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.identity.level == 6
 
     def test_alignment(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.identity.alignment == "lawful_good"
 
     def test_size_from_race(self) -> None:
         state = make_state()
         apply_race(state.race_registry.require("Gnome"), state.character)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.identity.size == "Small"
 
     def test_blank_character_identity(self) -> None:
         state = make_state()
-        data = gather(state.character, state)
+        data = gather(state.character)
         # Default character name is 'Unnamed'
         assert data.identity.name == "Unnamed"
         assert data.identity.level == 0
@@ -172,19 +173,19 @@ class TestGatherAbilities:
     def test_six_abilities_present(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert len(data.abilities) == 6
 
     def test_ability_names(self) -> None:
         state = make_state()
-        data = gather(state.character, state)
+        data = gather(state.character)
         names = [a.name for a in data.abilities]
         assert names == ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
 
     def test_ability_scores_match_character(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         c = state.character
         str_row = next(a for a in data.abilities if a.name == "STR")
         assert str_row.score == c.str_score
@@ -194,9 +195,9 @@ class TestGatherAbilities:
         """Racial bonus is part of effective score saved in SheetData."""
         state = make_state()
         c = state.character
-        c.set_ability_score("dex", 12)
+        c.set_ability_score(Ability.DEX, 12)
         apply_race(state.race_registry.require("Elf"), c)  # +2 DEX
-        data = gather(c, state)
+        data = gather(c)
         dex_row = next(a for a in data.abilities if a.name == "DEX")
         assert dex_row.score == 14  # 12 base + 2 racial
         assert dex_row.mod == 2
@@ -206,13 +207,13 @@ class TestGatherCombat:
     def test_ac_matches_character(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.combat.ac == state.character.ac
 
     def test_saves_match(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         c = state.character
         assert data.combat.fort == c.fort
         assert data.combat.ref == c.ref
@@ -221,26 +222,26 @@ class TestGatherCombat:
     def test_bab_matches(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.combat.bab == state.character.bab
 
     def test_attack_melee_matches(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.combat.attack_melee == state.character.get("attack_melee")
 
     def test_hp_max_matches(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.combat.hp_max == state.character.hp_max
 
     def test_touch_ac_excludes_armor(self) -> None:
         """Touch AC should be ≤ regular AC (no armor bonus)."""
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert data.combat.touch_ac <= data.combat.ac
 
 
@@ -248,28 +249,28 @@ class TestGatherSkills:
     def test_all_skills_present(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert len(data.skills) == len(state.skill_registry)
 
     def test_skill_names_sorted(self) -> None:
         state = make_state()
-        data = gather(state.character, state)
+        data = gather(state.character)
         names = [s.name for s in data.skills]
         assert names == sorted(names)
 
     def test_ranks_correct(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         climb = next(s for s in data.skills if s.name == "Climb")
         assert climb.ranks == 6
 
     def test_total_correct(self) -> None:
         state = make_state()
         c = state.character
-        c.set_ability_score("str", 16)  # mod +3
+        c.set_ability_score(Ability.STR, 16)  # mod +3
         set_skill_ranks(c, "Climb", 6)
-        data = gather(c, state)
+        data = gather(c)
         climb = next(s for s in data.skills if s.name == "Climb")
         assert climb.total == 9  # 6 + 3
 
@@ -285,7 +286,7 @@ class TestGatherSkills:
                 )
             ]
         )
-        data = gather(state.character, state)
+        data = gather(state.character)
         climb = next(s for s in data.skills if s.name == "Climb")
         assert climb.class_skill is True  # Fighter class skill
 
@@ -301,7 +302,7 @@ class TestGatherSkills:
                 )
             ]
         )
-        data = gather(state.character, state)
+        data = gather(state.character)
         spellcraft = next(s for s in data.skills if s.name == "Spellcraft")
         assert spellcraft.class_skill is False  # not a Fighter skill
 
@@ -310,7 +311,7 @@ class TestGatherFeats:
     def test_taken_feats_present(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         names = [f.name for f in data.feats]
         assert "Dodge" in names
         assert "Toughness" in names
@@ -319,7 +320,7 @@ class TestGatherFeats:
     def test_feat_count_matches_character(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert len(data.feats) == len(state.character.feats)
 
     def test_feat_note_included(self) -> None:
@@ -330,7 +331,7 @@ class TestGatherFeats:
             level=1,
             source="character",
         )
-        data = gather(state.character, state)
+        data = gather(state.character)
         dodge = next(f for f in data.feats if f.name == "Dodge")
         assert "dodge" in dodge.note.lower() or dodge.note != ""
 
@@ -338,12 +339,12 @@ class TestGatherFeats:
         state = make_state()
         hc = state.template_registry.require("Half-Celestial")
         apply_template(hc, state.character)
-        data = gather(state.character, state)
+        data = gather(state.character)
         # Half-Celestial grants no feats in the YAML actually;
         # use werewolf which grants Iron Will
         ww = state.template_registry.require("Lycanthrope (Werewolf)")
         apply_template(ww, state.character)
-        data = gather(state.character, state)
+        data = gather(state.character)
         iron_will = next((f for f in data.feats if f.name == "Iron Will"), None)
         if iron_will:
             assert True  # source may be set
@@ -353,7 +354,7 @@ class TestGatherBuffs:
     def test_active_buffs_listed(self) -> None:
         state = make_state()
         full_char(state)
-        data = gather(state.character, state)
+        data = gather(state.character)
         names = [b.name for b in data.active_buffs]
         assert "Bless" in names
 
@@ -363,7 +364,7 @@ class TestGatherBuffs:
         bless = state.buff_registry.require("Bless")
         pairs = bless.pool_entries(0, state.character)
         state.character.register_buff_definition("Bless", pairs)
-        data = gather(state.character, state)
+        data = gather(state.character)
         active_names = [b.name for b in data.active_buffs]
         assert "Bless" not in active_names
 
@@ -372,7 +373,7 @@ class TestGatherBuffs:
         bless = state.buff_registry.require("Bless")
         pairs = bless.pool_entries(0, state.character)
         state.character.register_buff_definition("Bless", pairs)
-        data = gather(state.character, state)
+        data = gather(state.character)
         all_names = [b.name for b in data.all_buffs]
         assert "Bless" in all_names
 
@@ -383,7 +384,7 @@ class TestGatherBuffs:
             state.character,
             caster_level=12,
         )
-        data = gather(state.character, state)
+        data = gather(state.character)
         sof = next(b for b in data.active_buffs if b.name == "Shield of Faith")
         assert sof.caster_level == 12
 
@@ -395,7 +396,7 @@ class TestGatherTemplates:
             state.template_registry.require("Half-Celestial"),
             state.character,
         )
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert any("Half-Celestial" in t for t in data.templates)
 
     def test_partial_template_shows_level(self) -> None:
@@ -405,7 +406,7 @@ class TestGatherTemplates:
             state.character,
             level=2,
         )
-        data = gather(state.character, state)
+        data = gather(state.character)
         assert any("level 2" in t for t in data.templates)
 
 
@@ -424,7 +425,7 @@ class TestRenderPdf:
             state = make_state()
             full_char(state)
 
-        data = gather(state.character, state)
+        data = gather(state.character)
         path = tmp_path / "sheet.pdf"
         render_pdf(data, path)
         return path, data
@@ -459,7 +460,7 @@ class TestRenderPdf:
         """A character with no name, class, or feats should still render."""
         state = make_state()
 
-        data = gather(state.character, state)
+        data = gather(state.character)
         path = tmp_path / "blank.pdf"
         render_pdf(data, path)
         assert path.exists()
@@ -479,7 +480,7 @@ class TestRenderPdf:
         state = make_state()
         full_char(state)
 
-        data = gather(state.character, state)
+        data = gather(state.character)
         # Verify Bless is in the data layer
         assert any(b.name == "Bless" for b in data.active_buffs)
         path = tmp_path / "buffs.pdf"
@@ -508,7 +509,7 @@ class TestRenderPdf:
         ]
         c.set_class_levels(levels)
 
-        data = gather(c, state)
+        data = gather(c)
         path = tmp_path / "multi.pdf"
         render_pdf(data, path)
         assert path.stat().st_size > 5_000
@@ -519,7 +520,7 @@ class TestRenderPdf:
         c.name = "Half-Dragon Hero"
         apply_template(state.template_registry.require("Half-Dragon (Red)"), c)
 
-        data = gather(c, state)
+        data = gather(c)
         path = tmp_path / "template.pdf"
         render_pdf(data, path)
         assert path.stat().st_size > 5_000
@@ -528,7 +529,7 @@ class TestRenderPdf:
         """render_pdf should accept a string path as well as Path."""
         state = make_state()
 
-        data = gather(state.character, state)
+        data = gather(state.character)
         path_str = str(tmp_path / "str_path.pdf")
         render_pdf(data, path_str)
         assert Path(path_str).exists()

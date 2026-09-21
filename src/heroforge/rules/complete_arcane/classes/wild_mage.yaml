@@ -20,9 +20,9 @@ Wild Mage:
   entry_prerequisites:
     all_of:
       - alignment:
-          - Chaotic Good
-          - Chaotic Neutral
-          - Chaotic Evil
+          - chaotic_good
+          - chaotic_neutral
+          - chaotic_evil
       - skill:
           name: Knowledge (The Planes)
           min_ranks: 4

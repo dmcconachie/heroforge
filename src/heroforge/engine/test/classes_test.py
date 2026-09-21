@@ -33,6 +33,7 @@ from heroforge.engine.classes import (
     bab_at_level,
     save_at_level,
 )
+from heroforge.engine.enums import Ability
 from heroforge.engine.races import RaceRegistry, apply_race, remove_race
 from heroforge.rules.loader import ClassesLoader, LoaderError, RacesLoader
 
@@ -204,7 +205,7 @@ class TestClassRegistry:
     def test_register_and_get(self) -> None:
         reg = ClassRegistry()
         reg.register(ClassDefinition(name="Fighter"))
-        assert reg.get("Fighter").name == "Fighter"
+        assert reg.require("Fighter").name == "Fighter"
 
     def test_require_unknown_raises(self) -> None:
         with pytest.raises(KeyError, match="No ClassDefinition"):
@@ -361,8 +362,8 @@ class TestCharacterIntegration:
         race_reg, _class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
-        c.set_ability_score("str", 14)
-        c.set_ability_score("con", 14)
+        c.set_ability_score(Ability.STR, 14)
+        c.set_ability_score(Ability.CON, 14)
 
         apply_race(race_reg.require("Dwarf"), c)
         assert c.con_score == 16  # 14 + 2 racial
@@ -436,7 +437,7 @@ class TestCharacterIntegration:
         race_reg, _class_reg, apply_race, _ = self._load_registries()
 
         c = fresh_char()
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         apply_race(race_reg.require("Half-Orc"), c)
         assert c.str_score == 16
 
@@ -505,8 +506,8 @@ class TestCharacterIntegration:
             remove_race,
         ) = self._load_registries()
         c = fresh_char()
-        c.set_ability_score("dex", 10)
-        c.set_ability_score("con", 10)
+        c.set_ability_score(Ability.DEX, 10)
+        c.set_ability_score(Ability.CON, 10)
 
         elf = race_reg.require("Elf")
         apply_race(elf, c)

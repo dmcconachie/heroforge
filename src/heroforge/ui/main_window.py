@@ -100,9 +100,11 @@ class MainWindow(QMainWindow):
 
     def _build_menu(self) -> None:
         menubar = self.menuBar()
+        assert menubar is not None
 
         # ── File ────────────────────────────────────────────────────────
         file_menu = menubar.addMenu("&File")
+        assert file_menu is not None
 
         new_action = QAction("&New Character", self)
         new_action.setShortcut(QKeySequence.StandardKey.New)
@@ -261,7 +263,7 @@ class MainWindow(QMainWindow):
         if not path:
             return
         try:
-            loaded = load_character(Path(path), self._state)
+            loaded = load_character(Path(path))
             self._unwire()
             self._state.set_character(loaded)
             self._current_path = Path(path)
@@ -325,17 +327,19 @@ class MainWindow(QMainWindow):
         if not path.endswith(".pdf"):
             path += ".pdf"
         try:
-            sheet_data = gather(self._state.character, self._state)
+            sheet_data = gather(self._state.character)
             render_pdf(sheet_data, path)
             self._status.showMessage(f"PDF exported to {Path(path).name}", 4000)
         except Exception as exc:
             QMessageBox.critical(self, "Export Failed", str(exc))
 
-    def closeEvent(self, event: QCloseEvent) -> None:
+    def closeEvent(self, a0: QCloseEvent | None) -> None:
+        if a0 is None:
+            return
         if self._modified and not self._confirm_discard():
-            event.ignore()
+            a0.ignore()
         else:
-            event.accept()
+            a0.accept()
 
     # ------------------------------------------------------------------
     # Helpers

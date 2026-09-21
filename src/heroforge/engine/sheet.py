@@ -10,8 +10,8 @@ shared cattrs converter so every enum emits as a plain
 string.
 
 Public API:
-  extract_sheet(path, app_state) -> Sheet
-  gather_sheet(character, app_state) -> Sheet
+  extract_sheet(path) -> Sheet
+  gather_sheet(character) -> Sheet
 
 CLI:
   uv run charsheet input.char.yaml [-o output.yaml]
@@ -43,6 +43,7 @@ from heroforge.engine.item_properties import (
     grants_extra_attack,
 )
 from heroforge.engine.persistence import load_character, yaml_dump
+from heroforge.engine.resources import UseUnit
 from heroforge.engine.sheet_schema import (
     AbilityEntry,
     ArmorDisplay,
@@ -62,6 +63,7 @@ from heroforge.engine.sheet_schema import (
     WeaponDisplay,
 )
 from heroforge.engine.weapons import (
+    Stance,
     attack_ability_override,
     flurry_applies,
     flurry_extra_attacks,
@@ -186,19 +188,13 @@ def _drop_zeros(d: dict[str, int]) -> dict[str, int]:
 # -----------------------------------------------------------
 
 
-def extract_sheet(
-    char_path: Path | str,
-    app_state: "AppState",
-) -> Sheet:
+def extract_sheet(char_path: Path | str) -> Sheet:
     """Load a .char.yaml and return the full sheet."""
-    char = load_character(Path(char_path), app_state)
-    return gather_sheet(char, app_state)
+    char = load_character(Path(char_path))
+    return gather_sheet(char)
 
 
-def gather_sheet(
-    character: "Character",
-    app_state: "AppState",  # noqa: ARG001  # kept for API compat
-) -> Sheet:
+def gather_sheet(character: "Character") -> Sheet:
     """Build a Sheet from a Character + loaded rules."""
     return Sheet(
         identity=_identity(character),
@@ -523,7 +519,7 @@ def _class_features(
                     max=evaluate_formula(
                         feat.uses.get("max", "0"), character=c
                     ),
-                    unit=feat.uses.get("unit", "use"),
+                    unit=UseUnit(feat.uses.get("unit", "use")),
                 )
             values = {
                 key: evaluate_formula(formula, character=c)
@@ -789,7 +785,7 @@ def _weapon_iteratives(
     if not c._graph.has_node(key) or not key.endswith("_attack"):
         return []
     base = c.get(key)
-    if has_stance(item, "off_hand"):
+    if has_stance(item, Stance.OFF_HAND):
         count = off_hand_attack_count(c)
         return [base - 5 * i for i in range(count)]
     bab = c.bab
@@ -903,7 +899,7 @@ def main() -> None:
     state = AppState()
     state.load_rules()
 
-    sheet = extract_sheet(args.input, state)
+    sheet = extract_sheet(args.input)
     out = yaml_dump(converter.unstructure(sheet))
 
     if args.output:

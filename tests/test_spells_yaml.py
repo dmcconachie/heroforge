@@ -27,6 +27,7 @@ from heroforge.engine.effects import (
     apply_buff,
     remove_buff,
 )
+from heroforge.engine.enums import Ability, CreatureType
 from heroforge.engine.spells import SpellCompendium
 from heroforge.rules.loader import SpellCompendiumLoader
 
@@ -60,7 +61,7 @@ def fighter(n: int) -> list[CharacterLevel]:
     ]
 
 
-def fresh_char(**kwargs: object) -> Character:
+def fresh_char(**kwargs: str) -> Character:
     return Character(**kwargs)
 
 
@@ -381,7 +382,7 @@ class TestLoadedSpellsOnCharacter:
     def test_bulls_strength_str_cascade(
         self,
     ) -> None:
-        self.char.set_ability_score("str", 14)
+        self.char.set_ability_score(Ability.STR, 14)
         base_atk = self.char.get("attack_melee")
         self._apply("Bull's Strength")
         # str 14->18, mod 2->4, attack +2
@@ -406,16 +407,16 @@ class TestLoadedSpellsOnCharacter:
         assert self.char.ac == base_ac
 
     def test_enlarge_person_humanoid(self) -> None:
-        self.char._race_type = "Humanoid"
-        self.char.set_ability_score("str", 14)
+        self.char._race_creature_type = CreatureType.HUMANOID
+        self.char.set_ability_score(Ability.STR, 14)
         self._apply("Enlarge Person")
         assert self.char.str_score == 16
 
     def test_enlarge_person_non_humanoid(
         self,
     ) -> None:
-        self.char._race_type = "Undead"
-        self.char.set_ability_score("str", 14)
+        self.char._race_creature_type = CreatureType.UNDEAD
+        self.char.set_ability_score(Ability.STR, 14)
         self._apply("Enlarge Person")
         assert self.char.str_score == 14
 

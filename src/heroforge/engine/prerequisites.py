@@ -840,10 +840,10 @@ class PrerequisiteChecker:
 
     def __init__(self) -> None:
         # feat_name → Prerequisite (the root of its prereq tree)
-        self._feat_prereqs: dict[str, Prerequisite] = {}
+        self._feat_prereqs: dict[str, Prerequisite | None] = {}
         # prc_name  → (entry_prereq, ongoing_prereq|None)
         self._prc_prereqs: dict[
-            str, tuple[Prerequisite, Prerequisite | None]
+            str, tuple[Prerequisite | None, Prerequisite | None]
         ] = {}
         # feat_name → bool (snapshot = only checked at acquisition time)
         self._feat_snapshot: dict[str, bool] = {}
@@ -1129,7 +1129,7 @@ def build_prereq_from_yaml(decl: dict[str, Any]) -> Prerequisite | None:
             allowed = allowed.get("any_of", [])
         elif isinstance(allowed, str):
             allowed = [allowed]
-        return AlignmentPrereq(allowed=allowed)
+        return AlignmentPrereq(allowed=[Alignment(a) for a in allowed])
 
     if "proficient_with" in decl:
         return ProficiencyPrereq(
@@ -1155,7 +1155,7 @@ def build_prereq_from_yaml(decl: dict[str, Any]) -> Prerequisite | None:
         allowed = ct.get("any_of", ct) if isinstance(ct, dict) else [ct]
         if isinstance(allowed, str):
             allowed = [allowed]
-        return CreatureTypePrereq(allowed=allowed)
+        return CreatureTypePrereq(allowed=[CreatureType(x) for x in allowed])
 
     # Unknown key — skip silently
     return None

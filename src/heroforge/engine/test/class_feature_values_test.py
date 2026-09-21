@@ -11,6 +11,7 @@ from pathlib import Path
 
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.effects import evaluate_formula
+from heroforge.engine.enums import Ability
 from heroforge.engine.persistence import load_character
 from heroforge.engine.sheet import gather_sheet
 from heroforge.rules.rules import get_rules
@@ -21,7 +22,7 @@ def _char(class_name: str, level: int, **abilities: int) -> Character:
     defaults = dict(str=12, dex=12, con=12, int=12, wis=12, cha=12)
     defaults.update(abilities)
     for ab, val in defaults.items():
-        c.set_ability_score(ab, val)
+        c.set_ability_score(Ability(ab), val)
     c.levels = [
         CharacterLevel(character_level=i + 1, class_name=class_name, hp_roll=8)
         for i in range(level)
@@ -32,7 +33,7 @@ def _char(class_name: str, level: int, **abilities: int) -> Character:
 
 
 def _features(c: Character) -> dict:
-    return gather_sheet(c, None).class_features
+    return gather_sheet(c).class_features
 
 
 class TestSmiteEvil:
@@ -148,7 +149,7 @@ levels:
     def test_values_survive_a_load(self, tmp_path: Path) -> None:
         path = tmp_path / "s.char.yaml"
         path.write_text(self.CHAR)
-        f = _features(load_character(path, None))["smite_evil"]
+        f = _features(load_character(path))["smite_evil"]
         assert f.uses.max == 2
         assert f.values["attack"] == 3
         assert f.values["damage"] == 5

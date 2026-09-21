@@ -56,6 +56,7 @@ class SheetClass(QWidget):
             ["Lvl", "Class", "HP Roll", "Skill Pts"]
         )
         hdr = self._table.horizontalHeader()
+        assert hdr is not None
         hdr.setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
         hdr.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         hdr.setSectionResizeMode(2, QHeaderView.ResizeMode.Fixed)
@@ -97,6 +98,7 @@ class SheetClass(QWidget):
             ["Skill", "Class?", "Pts", "Total"]
         )
         sh = self._skill_table.horizontalHeader()
+        assert sh is not None
         sh.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         sh.setSectionResizeMode(1, QHeaderView.ResizeMode.Fixed)
         sh.setSectionResizeMode(2, QHeaderView.ResizeMode.Fixed)

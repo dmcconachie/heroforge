@@ -10,6 +10,7 @@ import pytest
 
 from heroforge.engine.character import Character
 from heroforge.engine.enums import (
+    Ability,
     ArmorCategory,
 )
 from heroforge.engine.equipment import (
@@ -34,7 +35,7 @@ RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 @pytest.fixture()
 def char() -> Character:
     c = Character()
-    c.set_ability_score("dex", 16)  # +3 mod
+    c.set_ability_score(Ability.DEX, 16)  # +3 mod
     return c
 
 
@@ -248,9 +249,9 @@ class TestEquipItem:
             ],
         )
         c = Character()
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         equip_item(c, belt)
-        assert c.get_ability_score("str") == 18
+        assert c.get_ability_score(Ability.STR) == 18
 
     def test_unequip_item(self) -> None:
 
@@ -265,11 +266,11 @@ class TestEquipItem:
             ],
         )
         c = Character()
-        c.set_ability_score("str", 14)
+        c.set_ability_score(Ability.STR, 14)
         equip_item(c, belt)
-        assert c.get_ability_score("str") == 18
+        assert c.get_ability_score(Ability.STR) == 18
         unequip_item(c, belt.name)
-        assert c.get_ability_score("str") == 14
+        assert c.get_ability_score(Ability.STR) == 14
 
     def test_ring_of_protection(self) -> None:
 

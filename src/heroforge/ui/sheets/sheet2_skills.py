@@ -70,7 +70,9 @@ class Sheet2Skills(QWidget):
         skills = app_state.skill_registry.all_skills()
         self._table = QTableWidget(len(skills), len(_HEADERS))
         self._table.setHorizontalHeaderLabels(_HEADERS)
-        self._table.verticalHeader().setVisible(False)
+        vhdr = self._table.verticalHeader()
+        assert vhdr is not None
+        vhdr.setVisible(False)
         self._table.setEditTriggers(
             QAbstractItemView.EditTrigger.NoEditTriggers
         )
@@ -82,6 +84,7 @@ class Sheet2Skills(QWidget):
 
         # Column widths
         hdr = self._table.horizontalHeader()
+        assert hdr is not None
         hdr.setSectionResizeMode(QHeaderView.ResizeMode.Fixed)
         self._table.setColumnWidth(_COL_CS, 28)
         self._table.setColumnWidth(_COL_NAME, 180)
@@ -91,7 +94,9 @@ class Sheet2Skills(QWidget):
         self._table.setColumnWidth(_COL_TOTAL, 44)
 
         # Row height
-        self._table.verticalHeader().setDefaultSectionSize(22)
+        vhdr2 = self._table.verticalHeader()
+        assert vhdr2 is not None
+        vhdr2.setDefaultSectionSize(22)
 
         # Populate rows
         self._skill_list = skills

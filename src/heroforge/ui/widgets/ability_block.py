@@ -20,6 +20,7 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
+from heroforge.engine.enums import Ability
 from heroforge.ui.widgets.common import (
     CompactSpinBox,
     ModifierLabel,
@@ -101,7 +102,7 @@ class AbilityBlock(QWidget):
         self._mod_labels[ability].set_value(mod)
         self.ability_changed.emit(ability, value)
 
-    def set_score(self, ability: str, score: int) -> None:
+    def set_score(self, ability: Ability, score: int) -> None:
         """Update score display (called when character changes externally)."""
         spin = self._spinboxes.get(ability)
         if spin:
@@ -111,6 +112,6 @@ class AbilityBlock(QWidget):
             mod = (score - 10) // 2
             self._mod_labels[ability].set_value(mod)
 
-    def set_all_scores(self, scores: dict[str, int]) -> None:
+    def set_all_scores(self, scores: dict[Ability, int]) -> None:
         for ability, score in scores.items():
             self.set_score(ability, score)

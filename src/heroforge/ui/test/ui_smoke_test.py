@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import pytest
 
+from heroforge.engine.enums import Ability
 from heroforge.ui.app_state import AppState
 from heroforge.ui.main_window import MainWindow
 from heroforge.ui.sheets.sheet1_summary import Sheet1Summary
@@ -180,5 +181,5 @@ class TestNotifierWiring:
     def test_stat_change_does_not_crash_main_window(self) -> None:
         """Changing an ability score fires notifications through to the UI."""
         window = MainWindow()
-        window._state.character.set_ability_score("str", 18)
+        window._state.character.set_ability_score(Ability.STR, 18)
         _force_close(window)
