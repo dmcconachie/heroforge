@@ -541,3 +541,59 @@ class TestTemplateSpellResistance:
         assert c.get("sr") == 15
         remove_template(defn, c)
         assert c.get("sr") == 0
+
+
+class TestLycanthropeNaturalVsAfflicted:
+    """
+    The two forms of lycanthropy differ mechanically, not
+    just in how they were contracted (MM p. 177):
+
+      "An afflicted lycanthrope in animal or hybrid form
+       has damage reduction 5/silver. A natural lycanthrope
+       in animal or hybrid form has damage reduction
+       10/silver."
+
+    and their level adjustments differ too — "+2
+    (afflicted) or +3 (natural)".
+    """
+
+    @staticmethod
+    def _templated(name: str) -> Character:
+        c = _char(cls="Fighter", level=1)
+        apply_template(get_rules().templates.require(name), c)
+        return c
+
+    def test_natural_has_dr_10_silver(self) -> None:
+        d = collect_defenses(self._templated("Lycanthrope (Werewolf, Natural)"))
+        assert d.damage_reduction == (DamageReduction(10, DrBypass.SILVER),)
+
+    def test_afflicted_has_dr_5_silver(self) -> None:
+        d = collect_defenses(
+            self._templated("Lycanthrope (Werewolf, Afflicted)")
+        )
+        assert d.damage_reduction == (DamageReduction(5, DrBypass.SILVER),)
+
+    def test_level_adjustments_differ(self) -> None:
+        reg = get_rules().templates
+        natural = reg.require("Lycanthrope (Werewolf, Natural)")
+        afflicted = reg.require("Lycanthrope (Werewolf, Afflicted)")
+        assert natural.la_adjustment == "+3"
+        assert afflicted.la_adjustment == "+2"
+
+    def test_only_the_afflicted_must_roll_to_change_shape(self) -> None:
+        """
+        "natural lycanthropes have full control over this
+        power" (MM p. 177); the afflicted make a Control
+        Shape check. Display-only for now — there is no
+        form model — but the two must not read alike.
+        """
+        reg = get_rules().templates
+        natural = " ".join(
+            reg.require("Lycanthrope (Werewolf, Natural)").special_qualities
+        )
+        afflicted = " ".join(
+            reg.require("Lycanthrope (Werewolf, Afflicted)").special_qualities
+        )
+        assert "at will" in natural
+        assert "Control Shape" not in natural
+        assert "Control Shape" in afflicted

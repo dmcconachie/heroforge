@@ -391,6 +391,12 @@ Lich:
   note: Spellcaster-only template; becomes Undead
 Lycanthrope (Werewolf, Natural):
   kind: inherited
+  defenses:
+    # MM p. 177: a natural lycanthrope in animal or hybrid
+    # form has DR 10/silver, an afflicted one 5/silver.
+    damage_reduction:
+      - amount: 10
+        bypassed_by: silver
   source_book: MM
   cr_adjustment: '+1'
   la_adjustment: '+3'
@@ -409,19 +415,29 @@ Lycanthrope (Werewolf, Natural):
       bonus_type: racial
   natural_armor_bonus: 2
   special_qualities:
-    - Alternate Form (wolf and hybrid)
+    - Alternate Form (wolf and hybrid) at will
+    - Damage reduction 10/silver in animal or hybrid form
     - Lycanthropic Empathy (wolves and dire wolves)
     - Low-light vision
     - Scent
   grants_feats:
     - Iron Will
-  note: Humanoid (shapechanger); levels 1-3 control hybrid form access
+  note: >-
+    Humanoid (shapechanger). Natural lycanthrope: born to
+    it, changes form at will. The DR and the physical
+    ability adjustments apply in animal and hybrid form
+    only (MM p. 177); there is no form model yet, so they
+    are carried unconditionally here.
 
 Lycanthrope (Werewolf, Afflicted):
   kind: acquired
+  defenses:
+    damage_reduction:
+      - amount: 5
+        bypassed_by: silver
   source_book: MM
   cr_adjustment: '+1'
-  la_adjustment: '+3'
+  la_adjustment: '+2'
   type_change: null
   subtype_add:
     - Shapechanger
@@ -437,10 +453,20 @@ Lycanthrope (Werewolf, Afflicted):
       bonus_type: racial
   natural_armor_bonus: 2
   special_qualities:
-    - Alternate Form (wolf and hybrid)
+    - >-
+      Alternate Form (wolf and hybrid); involuntary under
+      the full moon and when damaged, and a Control Shape
+      check to change at will
+    - Damage reduction 5/silver in animal or hybrid form
     - Lycanthropic Empathy (wolves and dire wolves)
     - Low-light vision
     - Scent
   grants_feats:
     - Iron Will
-  note: Humanoid (shapechanger); levels 1-3 control hybrid form access
+  note: >-
+    Humanoid (shapechanger). Afflicted lycanthrope: caught
+    it, and changes involuntarily under the full moon and
+    when damaged unless a Control Shape check succeeds. The
+    DR and the physical ability adjustments apply in animal
+    and hybrid form only (MM p. 177); there is no form
+    model yet, so they are carried unconditionally here.

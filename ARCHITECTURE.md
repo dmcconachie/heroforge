@@ -720,9 +720,21 @@ the filter.
 Lycanthropy is the one template the books make both ways —
 inherited for natural lycanthropes, acquired for afflicted
 (MM p. 175) — so the data carries two entries rather than one
-template that cannot answer the question. The natural and
-afflicted forms differ in more than `kind` in the book; only
-`kind` is modelled so far.
+template that cannot answer the question. They differ in more
+than `kind`, and the rest is modelled too: level adjustment
++3 natural against +2 afflicted, and damage reduction
+10/silver against 5/silver (MM p. 177). Form control —
+natural lycanthropes change at will, the afflicted need a
+Control Shape check — is display text, because there is no
+form model.
+
+That gap is worth naming. Several of a lycanthrope's
+benefits apply *in animal or hybrid form only*: the damage
+reduction, and every physical ability adjustment (only the
+Wisdom +2 applies in all forms). Nothing here models what
+shape a creature is in, so those are carried
+unconditionally, which overstates a lycanthrope standing
+around in humanoid form.
 
 A template is always applied whole. "Uses all the base
 creature's statistics and abilities except as noted here" is
