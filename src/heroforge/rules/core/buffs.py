@@ -85,3 +85,5 @@ class KnownCoreBuff(StrEnum):
     TURNED = "Turned"
     UNHOLY_AURA = "Unholy Aura"
     VIRTUE = "Virtue"
+    WEREWOLF_ANIMAL_FORM = "Werewolf Animal Form"
+    WEREWOLF_HYBRID_FORM = "Werewolf Hybrid Form"

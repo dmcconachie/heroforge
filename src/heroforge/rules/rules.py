@@ -169,7 +169,11 @@ class Rules:
             f"{CORE}/conditions_srd.yaml",
         )
         SkillsLoader(rd).load(self.skills, f"{CORE}/skills.yaml")
-        TemplatesLoader(rd).load(self.templates, f"{CORE}/templates.yaml")
+        TemplatesLoader(rd).load(
+            self.templates,
+            f"{CORE}/templates.yaml",
+            buff_registry=self.buffs,
+        )
         RacesLoader(rd).load(self.races, f"{CORE}/races.yaml")
         DomainsLoader(rd).load(self.domains, f"{CORE}/domains.yaml")
         DeitiesLoader(rd).load(self.deities, f"{CORE}/deities.yaml")

@@ -125,6 +125,9 @@ class TemplateDefinition:
     ability_modifiers   : List of TemplateAbilityModifier entries.
     natural_armor_bonus : Flat bonus to natural armor AC (untyped, stacks
                           with racial natural armor as enhancement bonus).
+    buffs               : Toggleable buffs the template offers,
+                          e.g. a lycanthrope's animal and hybrid
+                          forms. Registered by TemplatesLoader.
     special_qualities   : List of strings (display only for now; full
                           implementation in a future phase).
     grants_feats        : List of feat names granted by the template.
@@ -155,6 +158,12 @@ class TemplateDefinition:
     # a template's spell resistance is written as
     # "min(35, character_level + 10)".
     effects: list[dict] = field(default_factory=list)
+    # Toggleable buffs the template makes available, same
+    # shape as a class feature's: {name, note, effects,
+    # mutually_exclusive_with}. A lycanthrope's animal and
+    # hybrid forms are the motivating case -- benefits that
+    # apply in some shapes and not others.
+    buffs: list[dict] = field(default_factory=list)
     special_qualities: list[str] = field(default_factory=list)
     grants_feats: list[str] = field(default_factory=list)
     note: str = ""
@@ -548,6 +557,7 @@ def build_template_from_yaml(
         natural_armor_bonus=int(decl.get("natural_armor_bonus", 0)),
         defenses=decl.get("defenses", {}),
         effects=decl.get("effects", []),
+        buffs=decl.get("buffs", []),
         special_qualities=decl.get("special_qualities", []),
         grants_feats=decl.get("grants_feats", []),
         note=decl.get("note", ""),

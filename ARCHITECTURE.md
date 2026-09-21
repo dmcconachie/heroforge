@@ -728,13 +728,28 @@ natural lycanthropes change at will, the afflicted need a
 Control Shape check — is display text, because there is no
 form model.
 
-That gap is worth naming. Several of a lycanthrope's
-benefits apply *in animal or hybrid form only*: the damage
-reduction, and every physical ability adjustment (only the
-Wisdom +2 applies in all forms). Nothing here models what
-shape a creature is in, so those are carried
-unconditionally, which overstates a lycanthrope standing
-around in humanoid form.
+Several of a lycanthrope's benefits apply *in animal or
+hybrid form only*, and only the Wisdom +2 applies in all
+forms (MM p. 177). Rather than carry the physical
+adjustments unconditionally and overstate a werewolf
+standing around as a human, a template may declare a
+`buffs:` block — the same shape as a class feature's — and
+`TemplatesLoader` registers each entry as a toggleable
+`BuffCategory.TEMPLATE` buff.
+
+The werewolf has two, mutually exclusive: *Werewolf Animal
+Form* and *Werewolf Hybrid Form*, both Str +2, Dex +4,
+Con +4 (MM p. 178), with the animal form also carrying the
+wolf's 50 ft. speed against the hybrid's 30. They are
+shared by the natural and afflicted entries, because the
+shapes do the same thing to ability scores whichever way
+the lycanthropy was contracted.
+
+Still unconditional: the damage reduction, which is also
+animal-and-hybrid-only. `collect_defenses` reads item
+properties, materials, worn items, templates and class
+features, but not buffs, so DR cannot move until a buff can
+carry a `defenses` block.
 
 A template is always applied whole. "Uses all the base
 creature's statistics and abilities except as noted here" is

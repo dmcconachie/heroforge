@@ -27,6 +27,7 @@ import yaml
 
 from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character, CharacterLevel
+from heroforge.engine.effects import apply_buff
 from heroforge.engine.enums import (
     Ability,
     CreatureSubtype,
@@ -38,6 +39,7 @@ from heroforge.engine.prerequisites import (
     FeatAvailability,
     PrerequisiteChecker,
 )
+from heroforge.engine.races import apply_race
 from heroforge.engine.templates import (
     TemplateAbilityModifier,
     TemplateDefinition,
@@ -843,3 +845,80 @@ class TestTemplateKind:
     def test_a_template_without_a_kind_is_rejected(self) -> None:
         with pytest.raises(ValueError, match="no 'kind'"):
             build_template_from_yaml({"name": "Kindless"})
+
+
+class TestLycanthropeFormBuffs:
+    """
+    A lycanthrope's physical adjustments are not
+    unconditional. "All lycanthropes gain +2 to Wisdom. In
+    addition, when in animal form, a lycanthrope's physical
+    ability scores improve according to its kind ... A
+    lycanthrope in hybrid form modifies its physical
+    ability scores by the same amount" (MM p. 177). The
+    werewolf's are Str +2, Dex +4, Con +4 (MM p. 178).
+
+    So the Wisdom stays on the template and the physical
+    ones live on a toggleable buff per form — animal form
+    at the wolf's 50 ft., hybrid at the base creature's 30.
+    """
+
+    @staticmethod
+    def _werewolf(kind: str = "Natural") -> Character:
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 10)
+        apply_race(get_rules().races.require("Human"), c)
+        apply_template(
+            get_rules().templates.require(f"Lycanthrope (Werewolf, {kind})"),
+            c,
+        )
+        return c
+
+    def test_humanoid_form_gets_only_the_wisdom(self) -> None:
+        c = self._werewolf()
+        assert c.wis_score == 12
+        assert c.str_score == 10
+        assert c.dex_score == 10
+        assert c.con_score == 10
+
+    def test_animal_form_applies_the_physical_adjustments(self) -> None:
+        c = self._werewolf()
+        apply_buff(get_rules().buffs.require("Werewolf Animal Form"), c)
+        assert (c.str_score, c.dex_score, c.con_score) == (12, 14, 14)
+        assert c.wis_score == 12
+
+    def test_hybrid_form_applies_the_same_adjustments(self) -> None:
+        c = self._werewolf()
+        apply_buff(get_rules().buffs.require("Werewolf Hybrid Form"), c)
+        assert (c.str_score, c.dex_score, c.con_score) == (12, 14, 14)
+
+    def test_animal_form_is_faster_than_hybrid(self) -> None:
+        """Wolf form 50 ft., hybrid keeps the humanoid 30."""
+        base = self._werewolf()
+        assert base.get("speed") == 30
+
+        animal = self._werewolf()
+        apply_buff(get_rules().buffs.require("Werewolf Animal Form"), animal)
+        assert animal.get("speed") == 50
+
+        hybrid = self._werewolf()
+        apply_buff(get_rules().buffs.require("Werewolf Hybrid Form"), hybrid)
+        assert hybrid.get("speed") == 30
+
+    def test_the_two_forms_are_mutually_exclusive(self) -> None:
+        reg = get_rules().buffs
+        animal = reg.require("Werewolf Animal Form")
+        hybrid = reg.require("Werewolf Hybrid Form")
+        assert "Werewolf Hybrid Form" in animal.mutually_exclusive_with
+        assert "Werewolf Animal Form" in hybrid.mutually_exclusive_with
+
+    def test_both_kinds_reach_the_same_forms(self) -> None:
+        """
+        Natural and afflicted differ in DR and level
+        adjustment, not in what the shapes do to ability
+        scores, so they share the form buffs.
+        """
+        for kind in ("Natural", "Afflicted"):
+            c = self._werewolf(kind)
+            apply_buff(get_rules().buffs.require("Werewolf Animal Form"), c)
+            assert (c.str_score, c.dex_score, c.con_score) == (12, 14, 14)

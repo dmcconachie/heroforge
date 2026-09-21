@@ -23,6 +23,10 @@
 #     ability             : str | dex | con | int | wis | cha
 #     value               : int or formula string
 #     bonus_type          : racial | enhancement | etc.
+#   buffs                 : list of toggleable buffs the
+#                           template offers, same shape as a
+#                           class feature's. Use for benefits
+#                           that apply only in some shapes.
 #   natural_armor_bonus   : int (0 = none)
 #   special_qualities     : list of strings (display; mechanics TBD)
 #   grants_feats          : list of feat names
@@ -404,15 +408,55 @@ Lycanthrope (Werewolf, Natural):
   subtype_add:
     - Shapechanger
   ability_modifiers:
-    - ability: str
-      value: 2
-      bonus_type: racial
-    - ability: con
-      value: 4
-      bonus_type: racial
+    # MM p. 177: "All lycanthropes gain +2 to Wisdom." The
+    # physical adjustments apply in animal or hybrid form
+    # only, so they live on the form buffs below.
     - ability: wis
       value: 2
       bonus_type: racial
+  buffs:
+    - name: Werewolf Animal Form
+      note: >-
+        Wolf shape: Str +2, Dex +4, Con +4 and the wolf's
+        50 ft. speed (MM pp. 177-178).
+      mutually_exclusive_with:
+        - Werewolf Hybrid Form
+      effects:
+        - target: str_score
+          bonus_type: racial
+          value: 2
+          source_label: werewolf_animal_form
+        - target: dex_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_animal_form
+        - target: con_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_animal_form
+        - target: speed
+          bonus_type: untyped
+          value: 20
+          source_label: werewolf_animal_form
+    - name: Werewolf Hybrid Form
+      note: >-
+        Hybrid shape: the same Str +2, Dex +4, Con +4, at
+        the base creature's speed (MM pp. 177-178).
+      mutually_exclusive_with:
+        - Werewolf Animal Form
+      effects:
+        - target: str_score
+          bonus_type: racial
+          value: 2
+          source_label: werewolf_hybrid_form
+        - target: dex_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_hybrid_form
+        - target: con_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_hybrid_form
   natural_armor_bonus: 2
   special_qualities:
     - Alternate Form (wolf and hybrid) at will
@@ -442,15 +486,55 @@ Lycanthrope (Werewolf, Afflicted):
   subtype_add:
     - Shapechanger
   ability_modifiers:
-    - ability: str
-      value: 2
-      bonus_type: racial
-    - ability: con
-      value: 4
-      bonus_type: racial
+    # MM p. 177: "All lycanthropes gain +2 to Wisdom." The
+    # physical adjustments apply in animal or hybrid form
+    # only, so they live on the form buffs below.
     - ability: wis
       value: 2
       bonus_type: racial
+  buffs:
+    - name: Werewolf Animal Form
+      note: >-
+        Wolf shape: Str +2, Dex +4, Con +4 and the wolf's
+        50 ft. speed (MM pp. 177-178).
+      mutually_exclusive_with:
+        - Werewolf Hybrid Form
+      effects:
+        - target: str_score
+          bonus_type: racial
+          value: 2
+          source_label: werewolf_animal_form
+        - target: dex_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_animal_form
+        - target: con_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_animal_form
+        - target: speed
+          bonus_type: untyped
+          value: 20
+          source_label: werewolf_animal_form
+    - name: Werewolf Hybrid Form
+      note: >-
+        Hybrid shape: the same Str +2, Dex +4, Con +4, at
+        the base creature's speed (MM pp. 177-178).
+      mutually_exclusive_with:
+        - Werewolf Animal Form
+      effects:
+        - target: str_score
+          bonus_type: racial
+          value: 2
+          source_label: werewolf_hybrid_form
+        - target: dex_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_hybrid_form
+        - target: con_score
+          bonus_type: racial
+          value: 4
+          source_label: werewolf_hybrid_form
   natural_armor_bonus: 2
   special_qualities:
     - >-

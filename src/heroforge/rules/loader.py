@@ -106,7 +106,10 @@ if TYPE_CHECKING:
     from heroforge.engine.skills import SkillRegistry
     from heroforge.engine.spells import SpellCompendium
     from heroforge.engine.stat import StatGraph
-    from heroforge.engine.templates import TemplateRegistry
+    from heroforge.engine.templates import (
+        TemplateDefinition,
+        TemplateRegistry,
+    )
 
 
 class LoaderError(Exception):
@@ -710,10 +713,15 @@ class TemplatesLoader:
         registry: TemplateRegistry,
         relative_path: str,
         overwrite: bool = False,
+        buff_registry: "BuffRegistry | None" = None,
     ) -> list[str]:
         """
         Load a templates YAML file into the registry.
         Returns list of template names registered.
+
+        A template may offer toggleable buffs — a
+        lycanthrope's animal and hybrid forms — which are
+        registered into *buff_registry* when one is given.
         """
 
         path = self.rules_dir / relative_path
@@ -737,12 +745,40 @@ class TemplatesLoader:
                 defn = build_template_from_yaml(decl)
                 registry.register(defn, overwrite=overwrite)
                 registered.append(defn.name)
+                if buff_registry is not None:
+                    self._register_template_buffs(defn, buff_registry)
             except (KeyError, ValueError) as e:
                 raise LoaderError(
                     f"Failed to load template {decl.get('name', '?')!r}: {e}"
                 ) from e
 
         return registered
+
+    @staticmethod
+    def _register_template_buffs(
+        defn: "TemplateDefinition",
+        buff_registry: "BuffRegistry",
+    ) -> None:
+        """
+        Register a BuffDefinition for each entry in a
+        template's ``buffs:`` block, so that benefits which
+        apply only in some shapes can be toggled rather
+        than carried unconditionally.
+        """
+        for raw in defn.buffs:
+            buff = build_buff_from_effects(
+                name=raw["name"],
+                category=BuffCategory.TEMPLATE,
+                effects_raw=list(raw.get("effects", [])),
+                source_book=defn.source_book,
+                note=raw.get("note", ""),
+                mutually_exclusive_with=list(
+                    raw.get("mutually_exclusive_with", [])
+                ),
+            )
+            if buff is not None:
+                with contextlib.suppress(ValueError):
+                    buff_registry.register(buff)
 
 
 # ---------------------------------------------------------------------------
