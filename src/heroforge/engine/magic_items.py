@@ -81,6 +81,9 @@ class MagicItemDefinition:
     slot: BodySlot = BodySlot.NONE
     cost_gp: int = 0
     defenses: dict = field(default_factory=dict)
+    # Movement modes granted, e.g. {"fly": 40}.
+    # See engine/movement.py.
+    movement: dict = field(default_factory=dict)
     takes_parameter: bool = False
     parameter_label: str = ""
     # Feats wearing this item confers, each optionally gated on

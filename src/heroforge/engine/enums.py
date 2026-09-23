@@ -33,6 +33,20 @@ class Alignment(StrEnum):
     CHAOTIC_EVIL = "chaotic_evil"
 
 
+class MovementMode(StrEnum):
+    """
+    How a creature moves. Land speed is a stat computed
+    through the speed pool; the rest a creature either has
+    or lacks, and two sources of one do not add.
+    """
+
+    LAND = "land"
+    CLIMB = "climb"
+    FLY = "fly"
+    SWIM = "swim"
+    BURROW = "burrow"
+
+
 class Save(StrEnum):
     FORT = "fort"
     REF = "ref"

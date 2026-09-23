@@ -28,6 +28,7 @@ from heroforge.engine.defenses import EnergyType
 from heroforge.engine.enums import (
     Ability,
     Alignment,
+    MovementMode,
     Save,
     School,
     Size,
@@ -110,6 +111,11 @@ class CombatSection:
     # What the character shrugs off. DR keeps one entry per
     # bypass ("2/-", "5/magic") because which one helps
     # depends on what is attacking.
+    # Every movement mode the creature has, at its best
+    # speed. Land is always present and mirrors `speed`;
+    # climb, fly, swim and burrow appear only when
+    # something grants them.
+    speeds: dict[MovementMode, int] = field(default_factory=dict)
     damage_reduction: list[str] = field(default_factory=list)
     energy_resistance: dict[EnergyType, int] = field(default_factory=dict)
     immunities: list[str] = field(default_factory=list)

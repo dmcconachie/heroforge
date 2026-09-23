@@ -89,6 +89,8 @@ combat:
     total: 8
     typed:
       base: 8
+  speeds:
+    land: 30
 attack_iteratives:
   melee:
     - 8

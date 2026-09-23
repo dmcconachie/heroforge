@@ -546,7 +546,18 @@ Spider Climb:
     Druid: 2
     Sorcerer: 2
     Wizard: 2
-  note: Climb speed 20 ft.; +8 racial bonus on Climb checks (note only)
+  note: >-
+    A climb speed of 20 ft., and no Climb checks needed to
+    traverse a vertical or horizontal surface (PHB p. 283).
+    The +8 on Climb comes with having a climb speed at all
+    (PHB p. 69), so it rides on the same buff.
+  movement:
+    climb: 20
+  effects:
+    - target: skill_climb
+      bonus_type: racial
+      value: 8
+      source_label: spider_climb
 Spike Growth:
   school: Transmutation
   level:

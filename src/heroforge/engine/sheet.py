@@ -42,6 +42,7 @@ from heroforge.engine.item_properties import (
     doubles_range_increment,
     grants_extra_attack,
 )
+from heroforge.engine.movement import collect_movement
 from heroforge.engine.persistence import load_character, yaml_dump
 from heroforge.engine.resources import UseUnit
 from heroforge.engine.sheet_schema import (
@@ -364,6 +365,7 @@ def _combat(c: "Character") -> CombatSection:
         bab=bab,
         initiative=initiative,
         speed=speed,
+        speeds=collect_movement(c),
         sr=c.get("sr"),
         saves=saves,
         attack_melee=_attack_breakdown(c, "attack_melee", Ability.STR),

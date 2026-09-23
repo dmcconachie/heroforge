@@ -214,7 +214,13 @@ Overland Flight:
   level:
     Sorcerer: 5
     Wizard: 5
-  note: Fly speed 40 ft. (good maneuverability); note only
+  note: >-
+    A fly speed of 40 ft. with average manoeuvrability
+    (PHB p. 259). The reduction to 30 ft. in medium or
+    heavy armour, or under a medium or heavy load, is not
+    modelled.
+  movement:
+    fly: 40
 Passwall:
   school: Transmutation
   level:

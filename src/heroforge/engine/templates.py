@@ -153,6 +153,9 @@ class TemplateDefinition:
     # Damage reduction / energy resistance / immunity.
     # See engine/defenses.py for the shape.
     defenses: dict = field(default_factory=dict)
+    # Movement modes granted while active, e.g.
+    # {"climb": 20}. See engine/movement.py.
+    movement: dict = field(default_factory=dict)
     # Ordinary pool contributions, same shape as a magic
     # item's or a class feature's. Values may be formulas, so
     # a template's spell resistance is written as

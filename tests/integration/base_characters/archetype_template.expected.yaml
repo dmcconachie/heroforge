@@ -103,6 +103,8 @@ combat:
     typed:
       base: 6
       str: 7
+  speeds:
+    land: 30
   immunities:
     - fire
     - paralysis

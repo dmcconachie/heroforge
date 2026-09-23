@@ -756,6 +756,37 @@ how a lich's spell resistance is written.
 Character. `effective_type()` and `effective_subtypes()` resolve
 the final creature type after all template layers.
 
+## Layer 9b: Movement (`engine/movement.py`)
+
+Land speed is a stat: it has a base, things add to it, and
+it resolves through the `speed` pool like any other number.
+The other modes are not. A creature either has a climb
+speed or it does not, and two sources of the same mode do
+not add — *spider climb* cast twice is still 20 feet, the
+same way two concealment effects are not 40%.
+
+So a mode is declared by a `movement:` block wherever a
+`defenses:` block may appear — buff, spell, template,
+magic item, class feature — and `collect_movement` takes
+the best source of each:
+
+```yaml
+movement:
+  climb: 20
+```
+
+`MovementMode` is the closed set: land, climb, fly, swim,
+burrow. Land always appears in the result and mirrors the
+`speed` pool; the rest appear only when something grants
+them. The sheet carries the lot as `combat.speeds`.
+
+Note what stays a normal effect: *spider climb*'s +8 on
+Climb checks is a skill bonus, so it is an ordinary
+`effects:` entry on the same buff. Only the mode itself
+needs the new block.
+
+---
+
 ## Layer 10: Persistence (`engine/persistence.py`)
 
 `save_character()` serializes to `.char.yaml` (version 2).
@@ -915,16 +946,13 @@ reduction and no pool bonus at all, so
 `build_buff_from_effects` no longer treats "no effects" as
 "nothing to build".
 
-This is what a defensive spell needs. The spells YAML
-carries several entries still marked `note only` —
-*stoneskin*, *resist energy*, *death ward*, *mind blank*,
-*spell immunity* — which were blocked on exactly this and
-are now expressible. Three others are blocked on things
-that still do not exist: *blur*, *displacement* and
-*entropic shield* want a concealment / miss-chance field,
-which `Defenses` does not have, and *spider climb* and
-*overland flight* want movement modes, which are not
-defenses at all.
+This is what a defensive spell needs, and ten spells that
+sat in the YAML as `note only` are implemented on the back
+of it: *stoneskin*, *resist energy*, *death ward*, *mind
+blank* and *spell immunity* through `defenses`, *blur*,
+*displacement* and *entropic shield* through concealment,
+and *spider climb* and *overland flight* through movement
+modes.
 
 `rules/schema.py` defines a pre-configured `cattrs.Converter`
 with `forbid_extra_keys=True` and custom structure hooks for

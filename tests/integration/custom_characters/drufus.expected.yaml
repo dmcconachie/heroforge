@@ -126,6 +126,8 @@ combat:
     typed:
       base: 17
       str: 5
+  speeds:
+    land: 30
   fortification: 100
 attack_iteratives:
   melee:

@@ -107,6 +107,8 @@ combat:
     typed:
       base: 20
       str: 9
+  speeds:
+    land: 40
   damage_reduction:
     - 5/-
 attack_iteratives:

@@ -165,6 +165,9 @@ class ClassFeature:
     # Damage reduction, resistance to energy and immunity.
     # See engine/defenses.py for the shape.
     defenses: dict = field(default_factory=dict)
+    # Movement modes granted, e.g. {"fly": 40}.
+    # See engine/movement.py.
+    movement: dict = field(default_factory=dict)
     # The feature attaches to one thing the character picks.
     # "weapon" is the only kind so far: an occult slayer bonds
     # one weapon. The designation is written on the weapon

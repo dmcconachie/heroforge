@@ -100,6 +100,8 @@ combat:
     typed:
       base: 16
       str: 2
+  speeds:
+    land: 30
 attack_iteratives:
   melee:
     - 18

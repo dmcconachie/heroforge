@@ -104,6 +104,8 @@ combat:
       base: 15
       str: -2
       size: -4
+  speeds:
+    land: 20
 attack_iteratives:
   melee:
     - 14

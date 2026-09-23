@@ -122,6 +122,8 @@ combat:
     typed:
       base: 10
       str: 8
+  speeds:
+    land: 20
   damage_reduction:
     - 10/magic
   energy_resistance:
