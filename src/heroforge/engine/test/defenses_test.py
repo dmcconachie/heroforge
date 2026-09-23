@@ -688,3 +688,59 @@ class TestDefensiveSpells:
         """
         with pytest.raises(ValueError):
             collect_defenses(self._cast("Resist Energy", caster_level=1))
+
+
+class TestConcealment:
+    """
+    Concealment is a miss chance, not a bonus: "Concealment
+    gives the subject of a successful attack a 20% chance
+    that the attacker missed" (PHB p. 152). Crucially,
+    "Multiple concealment conditions ... do not stack", so
+    the best source wins rather than the sum.
+
+    Entropic shield is the awkward one — its 20% applies
+    only to ranged attacks — so the aggregate carries a
+    general number and a ranged one.
+    """
+
+    @staticmethod
+    def _cast(*names: str) -> Character:
+        c = _char(cls="Fighter", level=1)
+        for n in names:
+            apply_buff(get_rules().buffs.require(n), c, caster_level=5)
+        return c
+
+    def test_nothing_cast_means_no_concealment(self) -> None:
+        d = collect_defenses(self._cast())
+        assert (d.concealment, d.concealment_ranged) == (0, 0)
+
+    def test_blur_is_20_against_everything(self) -> None:
+        d = collect_defenses(self._cast("Blur"))
+        assert (d.concealment, d.concealment_ranged) == (20, 20)
+
+    def test_displacement_is_50_against_everything(self) -> None:
+        d = collect_defenses(self._cast("Displacement"))
+        assert (d.concealment, d.concealment_ranged) == (50, 50)
+
+    def test_entropic_shield_is_ranged_only(self) -> None:
+        d = collect_defenses(self._cast("Entropic Shield"))
+        assert d.concealment == 0
+        assert d.concealment_ranged == 20
+
+    def test_concealment_does_not_stack(self) -> None:
+        """Blur and displacement together are still 50, not 70."""
+        d = collect_defenses(self._cast("Blur", "Displacement"))
+        assert (d.concealment, d.concealment_ranged) == (50, 50)
+
+    def test_general_concealment_covers_ranged_too(self) -> None:
+        """
+        Displacement's 50% beats entropic shield's 20% even
+        against arrows, because it applies to everything.
+        """
+        d = collect_defenses(self._cast("Displacement", "Entropic Shield"))
+        assert (d.concealment, d.concealment_ranged) == (50, 50)
+
+    def test_ranged_only_source_can_beat_the_general_one(self) -> None:
+        d = collect_defenses(self._cast("Blur", "Entropic Shield"))
+        assert d.concealment == 20
+        assert d.concealment_ranged == 20

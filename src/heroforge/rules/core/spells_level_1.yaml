@@ -267,7 +267,13 @@ Entropic Shield:
   school: Abjuration
   level:
     Cleric: 1
-  note: 20%% miss chance on ranged attacks against you (note only)
+  note: >-
+    A 20%% miss chance against ranged attacks that require
+    an attack roll (PHB p. 227). Attacks that simply work
+    at a distance, such as a dragon's breath, are
+    unaffected.
+  defenses:
+    concealment_ranged: 20
 Erase:
   school: Transmutation
   level:

@@ -139,7 +139,12 @@ Displacement:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
-  note: 50%% miss chance for attacks against you (note only)
+  note: >-
+    A 50%% miss chance against every attack, as total
+    concealment, though enemies can still target you
+    normally (PHB p. 221).
+  defenses:
+    concealment: 50
 Dominate Animal:
   school: Enchantment
   subschool: Compulsion

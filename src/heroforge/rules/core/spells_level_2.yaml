@@ -86,7 +86,12 @@ Blur:
     Bard: 2
     Sorcerer: 2
     Wizard: 2
-  note: 20%% miss chance for attacks against you (note only)
+  note: >-
+    Concealment, a 20%% miss chance against every attack
+    (PHB p. 211). True seeing defeats it; see invisibility
+    does not.
+  defenses:
+    concealment: 20
 Bull's Strength:
   school: Transmutation
   level:

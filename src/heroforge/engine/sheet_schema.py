@@ -116,6 +116,10 @@ class CombatSection:
     # Percentage chance to negate a critical hit or sneak
     # attack.
     fortification: int = 0
+    # Miss chance. Best source wins; general concealment
+    # covers ranged attacks as well as melee.
+    concealment: int = 0
+    concealment_ranged: int = 0
 
 
 @dataclass

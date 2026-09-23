@@ -374,6 +374,8 @@ def _combat(c: "Character") -> CombatSection:
         energy_resistance=dict(defenses.energy_resistance),
         immunities=list(defenses.immunities),
         fortification=defenses.fortification,
+        concealment=defenses.concealment,
+        concealment_ranged=defenses.concealment_ranged,
     )
 
 

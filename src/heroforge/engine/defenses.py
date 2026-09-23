@@ -122,6 +122,15 @@ class Defenses:
     # attack. Neither a bonus nor a reduction, but a
     # defensive number the player needs. Best source wins.
     fortification: int = 0
+    # Percentage chance an attack misses outright.
+    # "Multiple concealment conditions ... do not stack"
+    # (PHB p. 152), so these are the best source, not the
+    # sum. `concealment` applies to every attack;
+    # `concealment_ranged` is the number against ranged
+    # attacks specifically, which entropic shield raises on
+    # its own and which general concealment also covers.
+    concealment: int = 0
+    concealment_ranged: int = 0
 
 
 def best_damage_reduction(
@@ -160,6 +169,8 @@ def _read_block(
     resist: list[tuple[EnergyType, int]],
     immune: set[str],
     fortify: list[int],
+    conceal: list[int],
+    conceal_ranged: list[int],
     parameter: str = "",
     caster_level: int = 0,
 ) -> None:
@@ -211,6 +222,20 @@ def _read_block(
         _substitute(str(x), parameter)
         for x in block.get("immunities", ()) or ()
     )
+    for key, sink in (
+        ("concealment", conceal),
+        ("concealment_ranged", conceal_ranged),
+    ):
+        raw = block.get(key, 0)
+        if raw:
+            sink.append(
+                evaluate_formula(
+                    raw, character=character, caster_level=caster_level
+                )
+                if isinstance(raw, str)
+                else int(raw)
+            )
+
     raw = block.get("fortification", 0)
     if raw:
         fortify.append(
@@ -251,11 +276,22 @@ def collect_defenses(character: "Character") -> Defenses:
     resist: list[tuple[EnergyType, int]] = []
     immune: set[str] = set()
     fortify: list[int] = []
+    conceal: list[int] = []
+    conceal_ranged: list[int] = []
 
     for name in _equipped_property_names(character):
         defn = property_definition(str(name))
         if defn is not None and defn.defenses:
-            _read_block(defn.defenses, character, drs, resist, immune, fortify)
+            _read_block(
+                defn.defenses,
+                character,
+                drs,
+                resist,
+                immune,
+                fortify,
+                conceal,
+                conceal_ranged,
+            )
 
     rules = get_rules()
 
@@ -278,6 +314,8 @@ def collect_defenses(character: "Character") -> Defenses:
                 resist,
                 immune,
                 fortify,
+                conceal,
+                conceal_ranged,
                 entry.get("parameter", ""),
             )
 
@@ -291,6 +329,8 @@ def collect_defenses(character: "Character") -> Defenses:
                 resist,
                 immune,
                 fortify,
+                conceal,
+                conceal_ranged,
             )
 
     classes = rules.classes
@@ -307,6 +347,8 @@ def collect_defenses(character: "Character") -> Defenses:
                     resist,
                     immune,
                     fortify,
+                    conceal,
+                    conceal_ranged,
                 )
 
     for buff_name in character.active_buffs():
@@ -321,6 +363,8 @@ def collect_defenses(character: "Character") -> Defenses:
             resist,
             immune,
             fortify,
+            conceal,
+            conceal_ranged,
             str(state.parameter or "") if state else "",
             state.caster_level or 0 if state else 0,
         )
@@ -336,9 +380,15 @@ def collect_defenses(character: "Character") -> Defenses:
     for name in immune & {e.value for e in EnergyType}:
         best_resist.pop(EnergyType(name), None)
 
+    best_conceal = max(conceal, default=0)
+
     return Defenses(
         damage_reduction=best_damage_reduction(drs),
         energy_resistance={k: best_resist[k] for k in sorted(best_resist)},
         immunities=tuple(sorted(immune)),
         fortification=max(fortify, default=0),
+        concealment=best_conceal,
+        # General concealment applies to ranged attacks too,
+        # so the ranged number is never the lower of the two.
+        concealment_ranged=max(best_conceal, max(conceal_ranged, default=0)),
     )
