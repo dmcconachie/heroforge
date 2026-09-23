@@ -429,6 +429,29 @@ converter.register_structure_hook(
     _structure_material,
 )
 
+# int | str | None: a buff's parameter. Power Attack names a
+# number, resist energy names an energy type, spell immunity
+# names a spell, and an unparameterised buff names nothing.
+# cattrs cannot pick a branch of a three-way union on its own.
+
+
+def _structure_buff_parameter(val: object, _: type) -> int | str | None:
+    if val is None or val == "":
+        return None
+    if isinstance(val, bool):
+        msg = f"Buff parameter must be a number or a name, got {val!r}"
+        raise ValueError(msg)
+    if isinstance(val, int):
+        return val
+    return str(val)
+
+
+converter.register_structure_hook(
+    int | str | None,
+    _structure_buff_parameter,
+)
+
+
 # Ability | None: absent = None.
 
 

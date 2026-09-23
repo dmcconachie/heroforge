@@ -131,7 +131,7 @@ class BuffEntry:
 
     active: bool = False
     caster_level: int | None = None
-    parameter: int | None = None
+    parameter: int | str | None = None
     note: str = ""
 
 

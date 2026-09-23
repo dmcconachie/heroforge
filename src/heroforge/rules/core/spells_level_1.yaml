@@ -551,7 +551,17 @@ Resist Energy:
     Ranger: 1
     Sorcerer: 2
     Wizard: 2
-  note: Resist 10 points of chosen energy type per attack (note only)
+  note: >-
+    Energy resistance 10 against one chosen energy type,
+    rising to 20 at caster level 7 and 30 at 11 (PHB
+    p. 272). Name the energy when casting.
+  takes_parameter: true
+  parameter_label: energy type
+  defenses:
+    energy_resistance:
+      $parameter: >-
+        10 + 10 * (caster_level >= 7)
+        + 10 * (caster_level >= 11)
 Restoration (Lesser):
   school: Conjuration
   subschool: Healing

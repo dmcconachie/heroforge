@@ -140,7 +140,11 @@ class BuffState:
 
     active: bool
     caster_level: int | None = None  # None if buff doesn't scale with CL
-    parameter: int | None = None  # For parameterized feats (e.g. Power Attack)
+    # What the buff was told to apply to: a number for a
+    # parameterised feat (Power Attack), a name for a spell
+    # that picks a target when cast (resist energy's energy
+    # type, spell immunity's spell).
+    parameter: int | str | None = None
     note: str = ""  # optional DM/player annotation
 
 
@@ -1314,7 +1318,7 @@ class Character:
         buff_name: str,
         active: bool,
         caster_level: int | None = None,
-        parameter: int | None = None,
+        parameter: int | str | None = None,
     ) -> set[str]:
         """
         Activate or deactivate a buff.

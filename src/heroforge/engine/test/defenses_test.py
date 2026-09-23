@@ -613,3 +613,78 @@ class TestLycanthropeNaturalVsAfflicted:
         assert "at will" in natural
         assert "Control Shape" not in natural
         assert "Control Shape" in afflicted
+
+
+class TestDefensiveSpells:
+    """
+    Spells whose whole benefit is a defense. Each was
+    carried as `note only` until a buff could hold a
+    `defenses:` block.
+    """
+
+    @staticmethod
+    def _cast(
+        name: str, caster_level: int = 1, parameter: str = ""
+    ) -> Character:
+        c = _char(cls="Fighter", level=1)
+        apply_buff(
+            get_rules().buffs.require(name), c, caster_level=caster_level
+        )
+        if parameter:
+            c.toggle_buff(name, True, caster_level, parameter)
+        return c
+
+    def test_stoneskin_is_dr_10_adamantine(self) -> None:
+        """PHB p. 284: "damage reduction 10/adamantine"."""
+        d = collect_defenses(self._cast("Stoneskin", caster_level=7))
+        assert d.damage_reduction == (DamageReduction(10, DrBypass.ADAMANTINE),)
+
+    def test_resist_energy_names_its_type(self) -> None:
+        d = collect_defenses(
+            self._cast("Resist Energy", caster_level=1, parameter="fire")
+        )
+        assert d.energy_resistance == {EnergyType.FIRE: 10}
+
+    def test_resist_energy_scales_with_caster_level(self) -> None:
+        """
+        PHB p. 272: resistance 10, "increases to 20 points
+        at 7th level and to a maximum of 30 points at 11th".
+        """
+        for cl, expected in ((1, 10), (6, 10), (7, 20), (10, 20), (11, 30)):
+            d = collect_defenses(
+                self._cast("Resist Energy", caster_level=cl, parameter="cold")
+            )
+            assert d.energy_resistance == {EnergyType.COLD: expected}, cl
+
+    def test_death_ward_immunities(self) -> None:
+        """
+        PHB: "immune to all death spells, magical death
+        effects, energy drain, and any negative energy
+        effects".
+        """
+        d = collect_defenses(self._cast("Death Ward", caster_level=7))
+        assert set(d.immunities) == {
+            "death",
+            "energy drain",
+            "negative energy",
+        }
+
+    def test_mind_blank_immunity(self) -> None:
+        d = collect_defenses(self._cast("Mind Blank", caster_level=15))
+        assert "mind-affecting" in d.immunities
+
+    def test_spell_immunity_names_one_spell(self) -> None:
+        d = collect_defenses(
+            self._cast(
+                "Spell Immunity", caster_level=8, parameter="Magic Missile"
+            )
+        )
+        assert "Magic Missile" in d.immunities
+
+    def test_an_unnamed_energy_type_is_rejected(self) -> None:
+        """
+        Resist energy must be told which energy; a missing
+        parameter is a bad cast, not resistance to nothing.
+        """
+        with pytest.raises(ValueError):
+            collect_defenses(self._cast("Resist Energy", caster_level=1))

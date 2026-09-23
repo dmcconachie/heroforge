@@ -60,6 +60,13 @@ class SpellEntry:
     # stoneskin, resist energy, death ward. Same shape as
     # a magic item's.
     defenses: dict = field(default_factory=dict)
+    # The spell names something when it is cast -- resist
+    # energy picks an energy type, spell immunity picks a
+    # spell. Supplied as the buff's parameter and
+    # substituted for `$parameter`, exactly as a magic
+    # item's is.
+    takes_parameter: bool = False
+    parameter_label: str = ""
 
 
 class SpellCompendium:

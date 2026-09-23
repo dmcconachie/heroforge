@@ -158,8 +158,12 @@ Mind Blank:
     Sorcerer: 8
     Wizard: 8
   note: >-
-    Immune to divination and mental effects; +8 resistance vs mind- affecting
-    (note only)
+    Protected from everything that detects, influences or
+    reads emotions or thoughts, and from all mind-affecting
+    spells and effects (PHB p. 253).
+  defenses:
+    immunities:
+      - mind-affecting
 Moment of Prescience:
   school: Divination
   level:
