@@ -798,6 +798,13 @@ and it caps at twice the unhasted speed — so a dwarf's
 20 ft. becomes 40 rather than 50, and a 20 ft. climb speed
 likewise.
 
+The cap multiplies the creature's *normal* speed for that
+mode, meaning what it actually moves at before the bonus,
+not its racial base. Armour, load and a barbarian's fast
+movement have all already changed that number: a fighter in
+full plate hastes from 20 to 40, not 50, and a barbarian
+from 40 to 70, not 60.
+
 Land is the awkward one, because its bonuses live in the
 `speed` pool. A movement bonus to land is therefore
 aggregated *alongside* the pool's entries rather than added

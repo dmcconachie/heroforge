@@ -204,11 +204,19 @@ def collect_movement(
         extra, cap = _entries_for(character, mode)
         if not extra:
             continue
-        base = land_base if mode is MovementMode.LAND else speeds[mode]
-        entries = extra + (pool_entries if mode is MovementMode.LAND else [])
-        total = base + aggregate(entries, character)
+        # A cap multiplies the *normal* speed for the mode --
+        # what the creature moves at before this bonus. For
+        # land that is the speed already computed, armour,
+        # load and fast movement included; the racial base
+        # would be too generous in plate and too mean for a
+        # barbarian.
+        normal = speeds[mode]
+        if mode is MovementMode.LAND:
+            total = land_base + aggregate(pool_entries + extra, character)
+        else:
+            total = normal + aggregate(extra, character)
         if cap:
-            total = min(total, cap * base)
+            total = min(total, cap * normal)
         speeds[mode] = total
 
     return speeds

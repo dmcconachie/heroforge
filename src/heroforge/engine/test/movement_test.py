@@ -154,3 +154,66 @@ class TestHaste:
         speeds = collect_movement(c)
         assert speeds[MovementMode.LAND] == 60
         assert speeds[MovementMode.CLIMB] == 20
+
+
+class TestHasteCapUsesNormalSpeed:
+    """
+    "to a maximum of twice the subject's normal speed using
+    that form of movement" — normal speed is what the
+    creature actually moves at before the haste, not its
+    racial base. Armour, a heavy load and a barbarian's
+    fast movement have all already changed it.
+
+    Capping against the racial base gets it wrong in both
+    directions: too fast in armour, too slow for anything
+    that was already quick.
+    """
+
+    @staticmethod
+    def _fighter_in_full_plate() -> Character:
+        from heroforge.engine.equipment import equip_armor
+
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 10)
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1, class_name="Fighter", hp_roll=10
+                )
+                for i in range(5)
+            ]
+        )
+        equip_armor(c, get_rules().armor.require("Full Plate"))
+        return c
+
+    @staticmethod
+    def _barbarian() -> Character:
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 10)
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1,
+                    class_name="Barbarian",
+                    hp_roll=12,
+                )
+                for i in range(5)
+            ]
+        )
+        return c
+
+    def test_full_plate_slows_the_cap_too(self) -> None:
+        """Normal speed 20, so hasted is 40 and not 50."""
+        c = self._fighter_in_full_plate()
+        assert c.get("speed") == 20
+        apply_buff(get_rules().buffs.require("Haste"), c, caster_level=9)
+        assert collect_movement(c)[MovementMode.LAND] == 40
+
+    def test_fast_movement_raises_the_cap(self) -> None:
+        """Normal speed 40, so hasted is 70 and not 60."""
+        c = self._barbarian()
+        assert c.get("speed") == 40
+        apply_buff(get_rules().buffs.require("Haste"), c, caster_level=9)
+        assert collect_movement(c)[MovementMode.LAND] == 70
