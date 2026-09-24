@@ -484,6 +484,13 @@ def _apply_armor_speed(
             sp.clear_source(_ARMOR_SRC)
         return
 
+    if character._race_speed_unaffected_by_load:
+        # A dwarf keeps its speed in any armour (PHB p. 15).
+        sp = character._pools.get("speed")
+        if sp is not None:
+            sp.clear_source(_ARMOR_SRC)
+        return
+
     base_speed = character._race_base_speed
     penalty = _SPEED_PENALTY.get(base_speed, -10)
 

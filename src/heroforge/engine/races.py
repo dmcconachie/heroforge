@@ -62,6 +62,11 @@ class RaceDefinition:
     subtypes: list[CreatureSubtype] = field(default_factory=list)
     size: Size = Size.MEDIUM
     base_speed: int = 30
+    # Dwarves "can move at this speed even when wearing
+    # medium or heavy armor or when carrying a medium or
+    # heavy load (unlike other creatures, whose speed is
+    # reduced in such situations)" -- PHB p. 15.
+    speed_unaffected_by_load: bool = False
     ability_modifiers: list[RaceAbilityMod] = field(default_factory=list)
     favored_class: str = "any"
     la: int = 0
@@ -167,6 +172,7 @@ def apply_race(defn: RaceDefinition, character: "Character") -> None:
 
     character._race_size = defn.size
     character._race_base_speed = defn.base_speed
+    character._race_speed_unaffected_by_load = defn.speed_unaffected_by_load
     character._graph.invalidate_pool("speed")
     character._graph.invalidate("speed")
 
@@ -206,6 +212,7 @@ def remove_race(defn: RaceDefinition, character: "Character") -> None:
             character._graph.invalidate_pool(pool_key)
 
     character._race_base_speed = 30
+    character._race_speed_unaffected_by_load = False
     character._race_size = None
     character._graph.invalidate("speed")
     character.race = ""

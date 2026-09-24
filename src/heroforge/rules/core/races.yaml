@@ -9,6 +9,9 @@
 #   subtypes        : list of subtypes (e.g. [Human], [Elf], [Dwarf])
 #   size            : Small | Medium | Large
 #   base_speed      : int (ft per round)
+#   speed_unaffected_by_load : bool. True for dwarves, who
+#                     keep their speed in medium or heavy
+#                     armour and under a heavy load.
 #   ability_modifiers:
 #     - ability: str|dex|con|int|wis|cha
 #       value: int (positive or negative)
@@ -48,6 +51,7 @@ Human:
   low_light_vision: false
   darkvision: 0
 Dwarf:
+  speed_unaffected_by_load: true
   source_book: PHB
   creature_type: Humanoid
   subtypes:

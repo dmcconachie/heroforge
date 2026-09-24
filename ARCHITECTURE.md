@@ -805,6 +805,15 @@ movement have all already changed that number: a fighter in
 full plate hastes from 20 to 40, not 50, and a barbarian
 from 40 to 70, not 60.
 
+A 20 ft. race shows why the distinction has to hold twice
+over. A halfling in full plate takes the smaller −5 penalty
+a 20 ft. creature takes rather than the −10 a 30 ft. one
+does, so it moves at 15 and hastes to 30. A dwarf takes no
+penalty at all — `RaceDefinition.speed_unaffected_by_load`,
+"dwarves can move at this speed even when wearing medium or
+heavy armor or when carrying a medium or heavy load" (PHB
+p. 15) — so it moves at 20 and hastes to 40.
+
 Land is the awkward one, because its bonuses live in the
 `speed` pool. A movement bonus to land is therefore
 aggregated *alongside* the pool's entries rather than added

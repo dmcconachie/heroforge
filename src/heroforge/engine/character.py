@@ -294,6 +294,7 @@ class Character:
         # is better than defaulting to Humanoid/Medium here
         # and having every reader believe it.
         self._race_base_speed: int = 30
+        self._race_speed_unaffected_by_load: bool = False
         self._race_creature_type: CreatureType | None = None
         self._race_size: Size | None = None
         self._race_subtypes: list = []

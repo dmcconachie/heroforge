@@ -217,3 +217,60 @@ class TestHasteCapUsesNormalSpeed:
         assert c.get("speed") == 40
         apply_buff(get_rules().buffs.require("Haste"), c, caster_level=9)
         assert collect_movement(c)[MovementMode.LAND] == 70
+
+
+class TestSlowRacesInHeavyArmour:
+    """
+    A 20 ft. race in full plate is the case that separates
+    the racial base from the normal speed twice over: once
+    for the smaller armour penalty a 20 ft. creature takes,
+    and once for the dwarf, who takes none at all.
+
+    "Dwarf base land speed is 20 feet. However, dwarves can
+    move at this speed even when wearing medium or heavy
+    armor or when carrying a medium or heavy load (unlike
+    other creatures, whose speed is reduced in such
+    situations)" — PHB p. 15.
+    """
+
+    @staticmethod
+    def _plated(race: str) -> Character:
+        from heroforge.engine.equipment import equip_armor
+        from heroforge.engine.races import apply_race
+
+        c = Character()
+        for ab in Ability:
+            c.set_ability_score(ab, 10)
+        c.set_class_levels(
+            [
+                CharacterLevel(
+                    character_level=i + 1, class_name="Fighter", hp_roll=10
+                )
+                for i in range(5)
+            ]
+        )
+        apply_race(get_rules().races.require(race), c)
+        equip_armor(c, get_rules().armor.require("Full Plate"))
+        return c
+
+    def test_a_halfling_is_slowed_to_15(self) -> None:
+        """A 20 ft. base takes -5, not the -10 a 30 ft. does."""
+        assert self._plated("Halfling").get("speed") == 15
+
+    def test_a_gnome_is_slowed_to_15(self) -> None:
+        assert self._plated("Gnome").get("speed") == 15
+
+    def test_a_dwarf_is_not_slowed_at_all(self) -> None:
+        assert self._plated("Dwarf").get("speed") == 20
+
+    def test_a_hasted_halfling_in_plate_caps_at_30(self) -> None:
+        """Normal 15, so twice that, not twice the base 20."""
+        c = self._plated("Halfling")
+        apply_buff(get_rules().buffs.require("Haste"), c, caster_level=9)
+        assert collect_movement(c)[MovementMode.LAND] == 30
+
+    def test_a_hasted_dwarf_in_plate_caps_at_40(self) -> None:
+        """Never slowed, so normal is still 20 and twice is 40."""
+        c = self._plated("Dwarf")
+        apply_buff(get_rules().buffs.require("Haste"), c, caster_level=9)
+        assert collect_movement(c)[MovementMode.LAND] == 40
