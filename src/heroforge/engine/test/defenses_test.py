@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pytest
 
+from heroforge.engine.bonus import BonusType
 from heroforge.engine.character import Character, CharacterLevel
 from heroforge.engine.defenses import (
     DamageReduction,
@@ -744,3 +745,71 @@ class TestConcealment:
         d = collect_defenses(self._cast("Blur", "Entropic Shield"))
         assert d.concealment == 20
         assert d.concealment_ranged == 20
+
+
+class TestRighteousMight:
+    """
+    The data had this spell's bonus types as enhancement.
+    PHB: "you gain a +4 *size* bonus to Strength and a +2
+    *size* bonus to Constitution. You gain a +2 enhancement
+    bonus to your natural armor. You gain damage reduction
+    3/evil (if you normally channel positive energy) or
+    3/good ... At 12th level this ... becomes 6/evil or
+    6/good, and at 15th level it becomes 9/evil or 9/good".
+
+    The type is not cosmetic: size and enhancement stack
+    with each other, so calling it enhancement made it
+    vanish behind a bull's strength.
+    """
+
+    @staticmethod
+    def _cast(caster_level: int, channels: str = "evil") -> Character:
+        c = _char(cls="Cleric", level=caster_level)
+        apply_buff(
+            get_rules().buffs.require("Righteous Might"),
+            c,
+            caster_level=caster_level,
+        )
+        c.toggle_buff("Righteous Might", True, caster_level, channels)
+        return c
+
+    def test_strength_is_a_size_bonus(self) -> None:
+        c = self._cast(5)
+        pool = c.get_pool("str_score")
+        assert pool is not None
+        entries = [
+            e for e in pool.active_entries(c) if e.source == "Righteous Might"
+        ]
+        assert [e.bonus_type for e in entries] == [BonusType.SIZE]
+
+    def test_it_stacks_with_bulls_strength(self) -> None:
+        """
+        A size bonus and an enhancement bonus both apply;
+        as enhancement it would have been max(4, 4) = 4.
+        """
+        c = self._cast(5)
+        before = c.str_score
+        apply_buff(
+            get_rules().buffs.require("Bull's Strength"), c, caster_level=5
+        )
+        assert c.str_score == before + 4
+
+    def test_natural_armor(self) -> None:
+        c = self._cast(5)
+        pool = c.get_pool("ac")
+        assert pool is not None
+        assert any(
+            e.bonus_type is BonusType.NATURAL_ARMOR and e.value == 2
+            for e in pool.active_entries(c)
+        )
+
+    def test_damage_reduction_scales_and_names_its_bypass(self) -> None:
+        for cl, amount in ((5, 3), (11, 3), (12, 6), (14, 6), (15, 9)):
+            d = collect_defenses(self._cast(cl))
+            assert d.damage_reduction == (
+                DamageReduction(amount, DrBypass.EVIL),
+            ), cl
+
+    def test_a_negative_channeller_gets_the_other_bypass(self) -> None:
+        d = collect_defenses(self._cast(5, channels="good"))
+        assert d.damage_reduction == (DamageReduction(3, DrBypass.GOOD),)

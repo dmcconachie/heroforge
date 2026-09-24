@@ -165,8 +165,12 @@ Fire Shield:
     Sorcerer: 4
     Wizard: 4
   note: >-
-    '''''''Warm shield: resist cold 10, deal 1d6+1/CL fire to melee attackers.
-    Chill shield: resist fire 10, deal 1d6+1/CL cold. Note only.'''''''
+    Warm shield: half damage from cold-based attacks, and
+    1d6+1/CL fire to anyone striking you in melee. Chill
+    shield: half damage from fire, and 1d6+1/CL cold
+    (PHB p. 231). Neither half is modelled. Halved damage
+    is a fraction, and energy_resistance holds a flat
+    number; the damage to attackers has nowhere to go.
 Flame Strike:
   school: Evocation
   descriptor: Fire

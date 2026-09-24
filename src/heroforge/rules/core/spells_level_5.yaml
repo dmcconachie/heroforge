@@ -267,17 +267,32 @@ Righteous Might:
   level:
     Cleric: 5
   note: >-
-    One size category larger, +4 STR, +2 CON, natural armor. The bonus
-    types here are unverified against the book — the PHB extraction
-    carries only the summary line for this spell.
+    One size category larger, a +4 size bonus to STR and
+    +2 size to CON, +2 enhancement to natural armor, and
+    damage reduction 3/evil if you channel positive energy
+    or 3/good if negative -- 6 at caster level 12 and 9 at
+    15 (PHB). Name the bypass when casting. The size
+    modifier to AC and attacks follows from the size
+    change and is not listed separately.
   requires_caster_level: true
+  takes_parameter: true
+  parameter_label: damage reduction bypass
   size_steps: 1
+  defenses:
+    damage_reduction:
+      - amount: >-
+          3 + 3 * (caster_level >= 12)
+          + 3 * (caster_level >= 15)
+        bypassed_by: $parameter
   effects:
     - target: str_score
-      bonus_type: enhancement
+      bonus_type: size
       value: 4
     - target: con_score
-      bonus_type: enhancement
+      bonus_type: size
+      value: 2
+    - target: ac
+      bonus_type: natural_armor
       value: 2
 Leomund's Secret Chest:
   school: Conjuration
