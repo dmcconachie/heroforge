@@ -777,6 +777,7 @@ class TemplatesLoader:
                 ),
                 defenses=raw.get("defenses", {}),
                 movement=raw.get("movement", {}),
+                movement_bonus=raw.get("movement_bonus", []),
             )
             if buff is not None:
                 with contextlib.suppress(ValueError):
@@ -984,6 +985,7 @@ class ClassesLoader:
                 mutually_exclusive_with=list(feat.mutually_exclusive_with),
                 defenses=feat.defenses,
                 movement=feat.movement,
+                movement_bonus=feat.movement_bonus,
             )
             if buff is not None:
                 with contextlib.suppress(ValueError):
@@ -1434,6 +1436,7 @@ class SpellCompendiumLoader:
                 or entry.size_steps
                 or entry.defenses
                 or entry.movement
+                or entry.movement_bonus
             ):
                 buff = build_buff_from_effects(
                     name=name,
@@ -1447,6 +1450,7 @@ class SpellCompendiumLoader:
                     size_steps=entry.size_steps,
                     defenses=entry.defenses,
                     movement=entry.movement,
+                    movement_bonus=entry.movement_bonus,
                 )
                 if buff is not None:
                     with contextlib.suppress(ValueError):

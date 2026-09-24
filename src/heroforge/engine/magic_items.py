@@ -84,6 +84,9 @@ class MagicItemDefinition:
     # Movement modes granted, e.g. {"fly": 40}.
     # See engine/movement.py.
     movement: dict = field(default_factory=dict)
+    # Bonuses to modes the creature already has, e.g.
+    # haste's +30 to everything. See engine/movement.py.
+    movement_bonus: list[dict] = field(default_factory=list)
     takes_parameter: bool = False
     parameter_label: str = ""
     # Feats wearing this item confers, each optionally gated on

@@ -88,3 +88,69 @@ class TestSpellsThatGrantModes:
         c = _cast("Spider Climb")
         c.toggle_buff("Spider Climb", False)
         assert MovementMode.CLIMB not in collect_movement(c)
+
+
+class TestHaste:
+    """
+    "All of the hasted creature's modes of movement
+    (including land movement, burrow, climb, fly, and swim)
+    increase by 30 feet, to a maximum of twice the
+    subject's normal speed using that form of movement.
+    This increase counts as an enhancement bonus" (PHB,
+    haste).
+
+    Three things have to hold: it reaches every mode, the
+    cap bites on any mode slower than 30 ft., and being an
+    enhancement bonus it does not stack with another one.
+    """
+
+    def test_haste_speeds_up_land(self) -> None:
+        c = _cast("Haste")
+        assert collect_movement(c)[MovementMode.LAND] == 60
+
+    def test_haste_reaches_climb_and_fly(self) -> None:
+        c = _char()
+        for name in ("Spider Climb", "Overland Flight", "Haste"):
+            apply_buff(get_rules().buffs.require(name), c, caster_level=9)
+        speeds = collect_movement(c)
+        assert speeds[MovementMode.LAND] == 60
+        assert speeds[MovementMode.CLIMB] == 40  # 20 + 30 capped at 2x
+        assert speeds[MovementMode.FLY] == 70  # 40 + 30, under the cap
+
+    def test_the_cap_bites_on_a_slow_mode(self) -> None:
+        """A 20 ft. climb speed hastes to 40, not 50."""
+        c = _char()
+        for name in ("Spider Climb", "Haste"):
+            apply_buff(get_rules().buffs.require(name), c, caster_level=9)
+        assert collect_movement(c)[MovementMode.CLIMB] == 40
+
+    def test_the_cap_bites_on_a_slow_race(self) -> None:
+        """A dwarf's 20 ft. land speed hastes to 40, not 50."""
+        c = _char()
+        c._race_base_speed = 20
+        c._graph.invalidate_pool("speed")
+        c._graph.invalidate("speed")
+        apply_buff(get_rules().buffs.require("Haste"), c, caster_level=9)
+        assert collect_movement(c)[MovementMode.LAND] == 40
+
+    def test_haste_does_not_stack_with_expeditious_retreat(self) -> None:
+        """
+        Both are +30 enhancement bonuses to land speed, so
+        the better one applies once: 30 + 30 = 60, not 90.
+        """
+        c = _char()
+        for name in ("Expeditious Retreat", "Haste"):
+            apply_buff(get_rules().buffs.require(name), c, caster_level=9)
+        assert collect_movement(c)[MovementMode.LAND] == 60
+
+    def test_expeditious_retreat_alone_is_land_only(self) -> None:
+        """
+        "Your base land speed increases by 30 feet" — it
+        does not touch a climb speed.
+        """
+        c = _char()
+        for name in ("Spider Climb", "Expeditious Retreat"):
+            apply_buff(get_rules().buffs.require(name), c, caster_level=9)
+        speeds = collect_movement(c)
+        assert speeds[MovementMode.LAND] == 60
+        assert speeds[MovementMode.CLIMB] == 20

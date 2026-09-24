@@ -63,6 +63,9 @@ class SpellEntry:
     # Movement modes granted while active, e.g.
     # {"climb": 20}. See engine/movement.py.
     movement: dict = field(default_factory=dict)
+    # Bonuses to modes the creature already has, e.g.
+    # haste's +30 to everything. See engine/movement.py.
+    movement_bonus: list[dict] = field(default_factory=list)
     # The spell names something when it is cast -- resist
     # energy picks an energy type, spell immunity picks a
     # spell. Supplied as the buff's parameter and

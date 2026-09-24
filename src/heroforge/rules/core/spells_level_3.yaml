@@ -237,7 +237,17 @@ Haste:
     Bard: 3
     Sorcerer: 3
     Wizard: 3
-  note: +1 untyped attack, +1 dodge AC, +1 Reflex, speed bonus
+  note: >-
+    +1 on attack rolls, +1 dodge AC, +1 Reflex, and every
+    mode of movement up by 30 ft. to a maximum of twice
+    its normal speed, as an enhancement bonus (PHB). The
+    extra attack on a full attack is not modelled.
+  movement_bonus:
+    - modes: all
+      bonus: 30
+      bonus_type: enhancement
+      max_multiple: 2
+      source_label: haste
   effects:
     - target: attack_all
       bonus_type: untyped

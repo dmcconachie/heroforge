@@ -335,6 +335,9 @@ class BuffDefinition:
     # Movement modes granted while active, e.g.
     # {"climb": 20}. See engine/movement.py.
     movement: dict = field(default_factory=dict)
+    # Bonuses to modes the creature already has, e.g.
+    # haste's +30 to everything. See engine/movement.py.
+    movement_bonus: list[dict] = field(default_factory=list)
     # Derived (set by loader from condition_key):
     ongoing_condition: Callable | None = field(default=None, init=False)
 
@@ -531,6 +534,7 @@ def build_buff_from_effects(
     size_steps: int = 0,
     defenses: dict | None = None,
     movement: dict | None = None,
+    movement_bonus: list[dict] | None = None,
 ) -> BuffDefinition | None:
     """
     Build a BuffDefinition from raw effect dicts.
@@ -543,7 +547,13 @@ def build_buff_from_effects(
     Raises ValueError on unknown bonus_type or
     condition_key.
     """
-    if not effects_raw and not size_steps and not defenses and not movement:
+    if (
+        not effects_raw
+        and not size_steps
+        and not defenses
+        and not movement
+        and not movement_bonus
+    ):
         return None
 
     bt_map: dict[str, BonusType] = {bt.value: bt for bt in BonusType}
@@ -607,6 +617,7 @@ def build_buff_from_effects(
         size_steps=size_steps,
         defenses=defenses or {},
         movement=movement or {},
+        movement_bonus=movement_bonus or [],
     )
     if ongoing is not None:
         defn.ongoing_condition = ongoing

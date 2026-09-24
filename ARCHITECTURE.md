@@ -780,10 +780,38 @@ burrow. Land always appears in the result and mirrors the
 `speed` pool; the rest appear only when something grants
 them. The sheet carries the lot as `combat.speeds`.
 
+A `movement_bonus:` block adds to modes a creature already
+has, rather than granting one:
+
+```yaml
+movement_bonus:
+  - modes: all          # or [land], [climb, fly], ...
+    bonus: 30
+    bonus_type: enhancement
+    max_multiple: 2
+```
+
+which is *haste*. Three things fall out of the rule and all
+three are modelled: it reaches every mode, it is an
+enhancement bonus so it does not stack with another one,
+and it caps at twice the unhasted speed — so a dwarf's
+20 ft. becomes 40 rather than 50, and a 20 ft. climb speed
+likewise.
+
+Land is the awkward one, because its bonuses live in the
+`speed` pool. A movement bonus to land is therefore
+aggregated *alongside* the pool's entries rather than added
+after them; otherwise *haste* and *expeditious retreat*,
+both +30 enhancement, would both count. Backing the pool
+total out also yields the unmodified speed, which is what
+the cap multiplies.
+
 Note what stays a normal effect: *spider climb*'s +8 on
 Climb checks is a skill bonus, so it is an ordinary
-`effects:` entry on the same buff. Only the mode itself
-needs the new block.
+`effects:` entry on the same buff, and *expeditious
+retreat* and *longstrider* raise land speed only, so they
+stay plain `speed` pool entries. Only a mode itself, or a
+bonus crossing modes, needs the new blocks.
 
 ---
 

@@ -168,6 +168,9 @@ class ClassFeature:
     # Movement modes granted, e.g. {"fly": 40}.
     # See engine/movement.py.
     movement: dict = field(default_factory=dict)
+    # Bonuses to modes the creature already has, e.g.
+    # haste's +30 to everything. See engine/movement.py.
+    movement_bonus: list[dict] = field(default_factory=list)
     # The feature attaches to one thing the character picks.
     # "weapon" is the only kind so far: an occult slayer bonds
     # one weapon. The designation is written on the weapon

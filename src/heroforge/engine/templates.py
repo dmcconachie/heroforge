@@ -156,6 +156,9 @@ class TemplateDefinition:
     # Movement modes granted while active, e.g.
     # {"climb": 20}. See engine/movement.py.
     movement: dict = field(default_factory=dict)
+    # Bonuses to modes the creature already has, e.g.
+    # haste's +30 to everything. See engine/movement.py.
+    movement_bonus: list[dict] = field(default_factory=list)
     # Ordinary pool contributions, same shape as a magic
     # item's or a class feature's. Values may be formulas, so
     # a template's spell resistance is written as
